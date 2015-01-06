@@ -1,49 +1,86 @@
-section#itemPage section.reply {
-    margin: .5rem !important;
-    padding: .5rem;
-    background: #eaeaea;
-    display: inline-block;
-    font-size: 1rem;
-}
-section#itemPage section.reply span {
-    display: block;
-    margin: 0 0 .7rem 0;
-    font-size: 0.75rem;
-    color: #494949;
-}
-section#itemPage section.reply form {
-    display: block;
-}
-section#itemPage section.reply label {
-    display: block;
-    margin: 0 0 0 .2rem;
-    color: #494848;
-    font-size: 1rem;
-}
-section#itemPage section.reply form > textarea, section#itemPage section.reply form > input {
-    width: 100%;
-    display: block;
-    padding: .5rem;
-    margin: .2rem 0 .6rem;
-    -moz-box-sizing: border-box;
-    border: 1px solid #6891C8;
-    border-radius: 0.5em;
-}
-section#itemPage section.reply form > textarea {
-    height: 6rem;
-    resize: none;
-}
-section#itemPage section.reply form > input {
-    height: 2.3rem;
-}
-section#itemPage section.reply div.replySubmit {
-    display: block;
-    text-align: center;
-}
-section#itemPage section.reply form small{
-    color: #FF0000;
-    display: block;
-    margin: -0.5rem 0 0.5rem;
-    font-size: 0.75rem;
-    padding: 0.25rem 0 0 0.5rem;
+.items_reply_view {
+    section.reply {
+        padding: .75rem .5rem;
+        display: inline-block;
+        font-size: 1rem;
+        width: 95%;
+
+        span {
+            display: block;
+            margin: 0 0 .7rem 0;
+            font-size: 0.75rem;
+            color: #494949;
+        }
+
+        form {
+            display: block;
+            textarea, input {
+                width: 100%;
+                display: block;
+                padding: .5rem;
+                margin: .2rem 0 .6rem;
+                -moz-box-sizing: border-box;
+                border: 1px solid #B1B1B1;
+                border-radius: 0.5em;
+                color: #B1B1B1;
+                &::-webkit-input-placeholder {
+                   color: #B1B1B1;
+                }
+
+                &:-moz-placeholder {
+                   color: #B1B1B1;
+                }
+
+                &::-moz-placeholder {
+                   color: #B1B1B1;
+                }
+
+                &:-ms-input-placeholder {
+                   color: #B1B1B1;
+                }
+            }
+
+            textarea {
+                height: 6rem;
+                resize: none;
+            }
+
+            input {
+                height: 2.3rem;
+            }
+
+            small {
+                color: #FF0000;
+                display: block;
+                margin: -0.5rem 0 0.5rem;
+                font-size: 0.75rem;
+                padding: 0.25rem 0 0 0.5rem;
+            }
+
+            .btnCenter {
+                text-align: center;
+                .btns {
+                    background: #A8B301;
+                    border: 1px solid #8c9603;
+                    width: auto;
+                    padding: .5rem 2rem;
+                    font-weight: 800;
+                    font-size: 14px;
+                }
+            }
+        }
+
+        label {
+            display: block;
+            margin: 0 0 0 .2rem;
+            color: #000
+            font-size: .85rem;
+            font-weight: 800;
+        }
+
+        .replySubmit {
+            display: block;
+            text-align: center;
+        }
+    }
 }

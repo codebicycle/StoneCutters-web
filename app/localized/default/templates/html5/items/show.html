@@ -1,15 +1,10 @@
 <section id="itemPage" data-qa="item">
-    <input type="hidden" value="{{ dictionary["postingerror.InvalidEmail"] }}" name="errMsgMail" class="errMsgMail">
-    <input type="hidden" value="{{ dictionary["postingerror.PleaseCompleteThisField"] }}" name="errMsgMandatory" class="errMsgMandatory">
-    <input type="hidden" value="{{ dictionary["comments.YourMessageHasBeenSent"] }}" name="msgSend" class="msgSend">
-    <input type="hidden" value="{{ dictionary["itemheader.AddedFavorites"] }}" name="addFav" class="addFav" >
-    <input type="hidden" value="{{ dictionary["itemheader.RemovedFavorites"] }}" name="removeFav" class="removeFav" >
 
     <section class="nav">
         <span>1 de 2122 ads</span>
         <div class="links">
-            <a href="">Previo</a>
-            <a href="">Next</a>
+            <a href="{{ item.metadata.seo.prevItem.itemUrl | link }}">{{ dictionary["listingpageitemslisting.Previous"] }} </a>
+            <a href="{{ item.metadata.seo.nextItem.itemUrl | link }}">{{ dictionary["itemslisting.Next"] }} </a>
         </div>
     </section>
 
@@ -66,7 +61,7 @@
     </section>
 
     <section class="detail">
-        <h3>Ad Details</h3>
+        <h3>{{ dictionary["itemslisting.NewAdDetails"] }}</h3>
         <p>{{ item.descriptionReplace }}</p>
     </section>
 
@@ -82,7 +77,6 @@
             <span> {{ item.phone if item.phone }}</span>
         {% endif %}
             <span>
-                In
                 {% if item.location.neighborhoodName %}
                     {{ item.location.neighborhoodName if item.location.neighborhoodName }}
                 {% else %}
@@ -119,18 +113,12 @@
 
         {% if item.email and not item.phone %}
             <div class="action email trackMe fullWidth" data-tracking="Reply-ClickEmail" data-qa="reply-button" >
-                <div>
+                <a href="{{ ['iid-', item.id, '/reply'] | join('') | link }}">
                     <span>{{ dictionary["replymessage.Email"] }}</span>
-                </div>
+                </a>
             </div>
         {% elif item.email and item.phone %}
             {% if device.uriSchemeTel and device.uriSchemeSms %}
-                <div class="action email trackMe" data-tracking="Reply-ClickEmail" data-qa="reply-button" >
-                    <div>
-                        <span>{{ dictionary["replymessage.Email"] }}</span>
-                    </div>
-                    <p class="separator"></p>
-                </div>
                 <div class="action call trackMe" data-tracking="Reply-ClickCall" >
                     <a href="tel:{{ item.phone }}">
                         <span>{{ dictionary["misc.Call"] }}</span>
@@ -141,36 +129,42 @@
                     <a href="sms:{{ item.phone }}">
                         <span>{{ dictionary["itempagepostcomment.Sms"] }}</span>
                     </a>
-                </div>
-            {% elif device.uriSchemeTel and not device.uriSchemeSms %}
-                <div class="action email trackMe midWidth" data-tracking="Reply-ClickEmail" data-qa="reply-button" >
-                    <div>
-                        <span>{{ dictionary["replymessage.Email"] }}</span>
-                    </div>
                     <p class="separator"></p>
                 </div>
+                <div class="action email trackMe" data-tracking="Reply-ClickEmail" data-qa="reply-button" >
+                    <a href="{{ ['iid-', item.id, '/reply'] | join('') | link }}">
+                        <span>{{ dictionary["replymessage.Email"] }}</span>
+                    </a>
+                </div>
+            {% elif device.uriSchemeTel and not device.uriSchemeSms %}
                 <div class="action call trackMe midWidth" data-tracking="Reply-ClickCall" >
                     <a href="tel:{{ item.phone }}">
                         <span>{{ dictionary["misc.Call"] }}</span>
                     </a>
-                </div>
-            {% elif device.uriSchemeSms and not device.uriSchemeTel %}
-                <div class="action email trackMe midWidth" data-tracking="Reply-ClickEmail" data-qa="reply-button" >
-                    <div>
-                        <span>{{ dictionary["replymessage.Email"] }}</span>
-                    </div>
                     <p class="separator"></p>
                 </div>
+                <div class="action email trackMe midWidth" data-tracking="Reply-ClickEmail" data-qa="reply-button" >
+                    <a href="{{ ['iid-', item.id, '/reply'] | join('') | link }}">
+                        <span>{{ dictionary["replymessage.Email"] }}</span>
+                    </a>
+                </div>
+            {% elif device.uriSchemeSms and not device.uriSchemeTel %}
                 <div class="action sms trackMe midWidth" data-tracking="Reply-ClickSms" >
                     <a href="sms:{{ item.phone }}">
                         <span>{{ dictionary["itempagepostcomment.Sms"] }}</span>
                     </a>
+                    <p class="separator"></p>
+                </div>
+                <div class="action email trackMe midWidth" data-tracking="Reply-ClickEmail" data-qa="reply-button" >
+                    <a href="{{ ['iid-', item.id, '/reply'] | join('') | link }}">
+                        <span>{{ dictionary["replymessage.Email"] }}</span>
+                    </a>
                 </div>
             {% else %}
                 <div class="action email trackMe fullWidth" data-tracking="Reply-ClickEmail" data-qa="reply-button" >
-                    <div>
+                    <a href="{{ ['iid-', item.id, '/reply'] | join('') | link }}">
                         <span>{{ dictionary["replymessage.Email"] }}</span>
-                    </div>
+                    </a>
                 </div>
             {% endif %}
         {% elif item.phone and not item.email %}

@@ -11,13 +11,19 @@ module.exports = Base.extend({
     wapAttributes: {
         cellpadding: 0
     },
+    getTemplateData: function() {
+        var data = Base.prototype.getTemplateData.call(this);
+        data.category_name = this.options.category_name;
+
+        return _.extend({}, data, {});
+    },
     postRender: function() {
         var that = this;
-
+        console.log('river pa');
         var marginActions = $('section.actions').height() + $('section.actions > span').height() + 15;
         $('.footer_footer_view').css('margin-bottom', marginActions + 'px');
 
-        that.messages = {'errMsgMail': this.$('.errMsgMail').val(), 'errMsgMandatory': this.$('.errMsgMandatory').val(), 'msgSend': this.$('.msgSend').val().replace(/<br \/>/g,''), 'addFav': this.$('.addFav').val(), 'removeFav': this.$('.removeFav').val()};
+        //that.messages = {'errMsgMail': this.$('.errMsgMail').val(), 'errMsgMandatory': this.$('.errMsgMandatory').val(), 'msgSend': this.$('.msgSend').val().replace(/<br \/>/g,''), 'addFav': this.$('.addFav').val(), 'removeFav': this.$('.removeFav').val()};
 
         var galery = this.$('.swiper-container').swiper({
             mode:'horizontal',
@@ -32,9 +38,9 @@ module.exports = Base.extend({
             preventLinks:false
         });
         this.$(window).on('resize', this.resize).trigger('resize');
-        this.$( '.actions .email' ).click(function() {
+        /*this.$( '.actions .email' ).click(function() {
             $('html, body').animate({scrollTop: $('.reply').offset().top}, 400);
-        });
+        });*/
         this.$('section#itemPage section.onePicture .slide div').click(function(e) {
             e.preventDefault();
             $('body').addClass('noscroll');
@@ -167,14 +173,14 @@ module.exports = Base.extend({
             }
         };
 
-        this.$('form#replyForm').on('change', 'input.name , input.email , textarea.message', function (e) {
+        /*this.$('form#replyForm').on('change', 'input.name , input.email , textarea.message', function (e) {
             var value = $(this).val();
             var field = $(this).attr('class');
 
             if(that.isEmpty(value,field) && field == 'email'){
                 that.isEmail(value,field);
             }
-        });
+        });*/
         this.attachTrackMe(function(category, action) {
             var itemId = $('.itemId').val();
             var itemCategory = $('.itemCategory').val();
