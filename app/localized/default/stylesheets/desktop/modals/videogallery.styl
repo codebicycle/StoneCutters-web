@@ -43,11 +43,21 @@
                             height: 90px;
                             margin-bottom: 1px;
 
-                            a {
+                            .video {
                                 background: $white;
                                 clear-fix();
                                 display: block;
                                 position: relative;
+                                &:not(.active):hover {
+                                    opacity: .85;
+                                    cursor: pointer;
+                                }
+                                &.active {
+                                    cursor: default;
+                                    &:hover {
+                                        color: $blue;
+                                    }
+                                }
                             }
                         }
                     }

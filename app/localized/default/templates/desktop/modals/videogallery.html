@@ -7,26 +7,21 @@
 {% endblock %}
 
 {% block content %}
-    {% for video in videos %}
-        {% if loop.first %}
-            <div class="video-content">
-                <iframe width="635" height="390" frameborder="0" allowfullscreen="" id="video-container-iframe" src="http://www.youtube.com/embed/{{ video.id }}"></iframe>
-            </div>
-
-            <div class="video-thumbnails">
-                <ul class="content">
-
-        {% endif %}
-                    <li {{ 'class="hide"' if loop.first }}>
-                        <a data-video-item="{{ video.id }}" href="#">
-                            <span class="video-title">{{ video.title }}</span>
-                            <span class="icon-play"></span>
-                            <img alt="{{ video.title }}" src="http://img.youtube.com/vi/{{ video.id }}/default.jpg" />
-                        </a>
-                    </li>
-                {{ '</ul>' if loop.last }}
-    {% endfor %}
-
+    <div class="video-content">
+        <iframe width="635" height="390" frameborder="0" allowfullscreen="" id="video-container-iframe" src="http://www.youtube.com/embed/{{ videos[0].id }}"></iframe>
+    </div>
+    <div class="video-thumbnails">
+        <ul class="content">
+        {% for video in videos %}
+            <li>
+                <a data-video-item="{{ video.id }}" class="video{{ ' active' if loop.first }}" href="#">
+                    <span class="video-title">{{ video.title }}</span>
+                    <span class="icon-play"></span>
+                    <img alt="{{ video.title }}" src="http://img.youtube.com/vi/{{ video.id }}/default.jpg" />
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
         <div class="social-share">
             <p>{{ dictionary["defaulthtmlhead.ShareThisVideo"] }}:</p>
             <ul>
