@@ -17,6 +17,7 @@ module.exports = Base.extend({
         var categories = data.categories;
         var currentState = {};
         var countryMapStyle = config.get('countryMapStyle');
+        var videos = config.get(['videos', location.url]);
         var testimonials = config.get(['testimonials', location.url]);
         var countryMapClass;
 
@@ -40,6 +41,7 @@ module.exports = Base.extend({
             categories: categories,
             countryMapClass: countryMapClass,
             testimonials: testimonials,
+            videos: videos,
             selectedLanguage: selectedLanguage,
             currentState: {
                 hostname: currentState.hostname,
