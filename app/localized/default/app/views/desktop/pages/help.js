@@ -92,10 +92,12 @@ module.exports = Base.extend({
         };
         var emailRegExp = /^[_a-zA-Z0-9-]+(\.[_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*(\.[a-zA-Z]{2,6})$/;
         var valid = true;
+        var spinner = this.$('[data-contact-form] .spinner');
+        var submit = this.$('[data-contact-form] [type="submit"]');
         var value;
 
-        $('[data-contact-form] .spinner').removeClass('hide');
-        $('[data-contact-form] [type="submit"]').addClass('hide');
+        spinner.removeClass('hide');
+        submit.addClass('hide');
 
         $(fields).each( function() {
             value = $(this).val();
@@ -120,6 +122,8 @@ module.exports = Base.extend({
                     $('[data-captcha-verification] .error').addClass('hide');
                 } else {
                     $('[data-captcha-verification] .error').text(message.empty).removeClass('hide');
+                    spinner.addClass('hide');
+                    submit.removeClass('hide');
                 }
             })
             .fail(function(x) {
@@ -127,8 +131,8 @@ module.exports = Base.extend({
             });
         }
         else {
-            this.$('[data-contact-form] .spinner').addClass('hide');
-            this.$('[data-contact-form] [type="submit"]').removeClass('hide');
+            spinner.addClass('hide');
+            submit.removeClass('hide');
         }
     },
     captchaCallback: function(captchaResponse){
