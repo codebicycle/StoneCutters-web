@@ -1,7 +1,10 @@
 <section id="marketing-top">
     {% view 'categories/partials/country-area' %}
-    {% view '/marketing/bannervideo' %}
-    {#% include (template + '/marketing/marketing-box-sell.html') %#}
+    {% if videos %}
+        {% view '/marketing/bannervideo' %}
+    {% else %}
+        {% include (template + '/marketing/marketing-box-sell.html') %}
+    {% endif %}
 </section>
 
 <section id="category-tree">
@@ -13,5 +16,7 @@
 {% endif %}
 
 {% include (template + '/modals/location.html') %}
-{% include (template + '/modals/videogallery.html') %}
+{% if videos %}
+    {% include (template + '/modals/videogallery.html') %}
+{% endif %}
 {% view 'partials/tracking' %}
