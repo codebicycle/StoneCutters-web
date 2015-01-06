@@ -17,20 +17,36 @@
         <div class="inner" style="margin:0">
             <div id="form-feature">
                 <h5>{{ dictionary["itemslisting.FeatureOnlinePayment"] }}</h5>
-                <div class="feat_block_disabled ">
+------------------------------------------------------------------------------------------------------------------------------------------------------
+                <div class="feature-ad-details">
+                    {% for section in featureAd.get('sections') %}
+                        {% if section.enabled %}
+                            <p class="fad-section-{{ section.sectionId }}">
+                                <input type="checkbox" name="fad-section-{{ section.sectionId }}-enabled" id="fad-section-{{ section.sectionId }}-enabled" value="{{ section.sectionId }}">
+                                <label for="fad-section-{{ section.sectionId }}-enabled">
+                                    {% if section.enabled %}
+                                    {{ dictionary["featured_listings.TopListingsAndSearchResults"] }}
+                                </label>
+                                <br>
+                            </p>
+                        {% endif %}
+                    {% endfor %}
                     <p class="feat_block_left">
                         <input type="checkbox" name="featured_0" id="f-hp" value="10" disabled="">
                         <label for="f-lp">{{ dictionary["featured_listings.TopListingsAndSearchResults"] }}</label>
                         <br>
                         {{ dictionary["featured_listings.UnableToFeature_NoImages"] }}
                     </p>
-                    <div class="feat_price" display="'show:none;'">
+-------------------------------
+                    <div class="feat_price">
                         <a class="olx-ui-button button-pending-ad" href="{{ ['/myolx/edititem?editid=', item.id, '&sk=', sk] | join('') | link }}">{{ dictionary["edititem_submitbutton.EditIt"] }}</a>
                     </div>
                 </div>
+------------------------------------------------------------------------------
                 <div id="featureFormSubmit">
                     <input id="featureFormSubmitButton" type="button" class="olx-ui-button disabled" disabled="disabled" value='{{ dictionary["itemslisting.FeatureYourAd"] }}'>
                 </div>
+------------------------------------------------------------------------------------------------------------------------------------------------------
             </div>
         </div>
         <div class="footnote2">

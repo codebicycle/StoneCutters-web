@@ -12,7 +12,6 @@ module.exports = Base.extend({
         'click .open-modal': 'onOpenModal'
     },
     onOpenModal: function(event) {
-        console.log('OPEN MODAL');
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();
@@ -26,4 +25,4 @@ module.exports = Base.extend({
     }
 });
 
-module.exports.id = 'post/featuread';
+module.exports.id = 'post/feature_ad';

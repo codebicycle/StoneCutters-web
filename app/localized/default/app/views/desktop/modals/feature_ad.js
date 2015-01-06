@@ -8,4 +8,4 @@ module.exports = Base.extend({
     idModal: 'featuread-modal'
 });
 
-module.exports.id = 'modals/featuread';
+module.exports.id = 'modals/feature_ad';

@@ -371,7 +371,7 @@ function success(params, callback) {
         var findFeatureAds = function(done, item, relateds) {
             this.app.fetch({
                 featuread: {
-                    model : 'Featuread',
+                    model : 'Feature_ad',
                     params: {
                         id: item.get('id'),
                         locate: this.app.session.get('selectedLanguage')
