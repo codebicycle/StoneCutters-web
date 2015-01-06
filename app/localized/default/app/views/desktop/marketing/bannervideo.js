@@ -13,7 +13,6 @@ module.exports = Base.extend({
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();
-        console.log('aca');
         $('#video-gallery-modal').trigger('show');
     },
     onCloseModal: function(event) {
