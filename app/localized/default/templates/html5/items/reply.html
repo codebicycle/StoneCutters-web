@@ -15,6 +15,7 @@
         <label>{{ dictionary["itemgeneraldetails.Phone"] }}</label>
         <input type="number" class="phone" name="phone" placeholder="Escribe tu teléfono">
         <input type="hidden" class="itemId" name="itemId" value="{{ item.id }}">
+        <input type="hidden" class="itemSlug" name="itemSlug" value="{{ item.slug }}">
 
         <input type="hidden" class="itemCategory" value="{{ item.category.id }}">
         <input type="hidden" class="itemSubcategory" value="{{ item.category.parentId }}">

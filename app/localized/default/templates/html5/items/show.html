@@ -246,9 +246,10 @@
     </div>
 </div>
 
-<div id="msgCont" class="msgCont">
-    <div class="msgCont-wrapper">
-        <div class="msgCont-container" data-qa="reply-message-sent"></div>
+<div class="msg-resulted">
+    <div class="msg-container" data-qa="reply-message-sent">
+        <span>{{ (dictionary["comments.YourMessageHasBeenSent"] | replace('<br />','')) }}</span>
+        <div class="msg-bg"></div>
     </div>
 </div>
 

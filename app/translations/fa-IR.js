@@ -122,6 +122,7 @@ module.exports = {
     'itemslisting.LowestFirst': '\u067E\u0627\u06CC\u06CC\u0646 \u062A\u0631\u06CC\u0646 \u0642\u06CC\u0645\u062A ',
     'lostform.GoToBrandHomePage': '\u0628\u0647 \u0635\u0641\u062D\u0647 \u0627\u0635\u0644\u06CC OLX\u0628\u0631\u0648\u06CC\u062F',
     'listingpageitemslisting.Previous': '\u0642\u0628\u0644\u06CC',
+    'itemslisting.SelectAll': '\u0627\u0646\u062A\u062E\u0627\u0628 \u0647\u0645\u0647',
     'loginbox.Password': '\u0631\u0645\u0632 \u0639\u0628\u0648\u0631',
     'posting_removedsurvey.WarningAdToBeRemoved': '\u0622\u06AF\u0647\u06CC \u0634\u0645\u0627 \u0627\u0632 OLX\u062D\u0630\u0641 \u0634\u062F\u0647 \u0627\u0633\u062A ',
     'itemslisting.HighestFirst': '\u0628\u0627\u0644\u0627\u062A\u0631\u06CC\u0646 \u0642\u06CC\u0645\u062A ',

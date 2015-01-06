@@ -10,6 +10,7 @@ module.exports = Base.extend({
     messages: {},
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
+
         return _.extend({}, data, {});
     },
     postRender: function() {
@@ -22,14 +23,11 @@ module.exports = Base.extend({
         that.messages = {
             'errMsgMail': data.dictionary['postingerror.InvalidEmail'],
             'errMsgMandatory': data.dictionary['postingerror.PleaseCompleteThisField'],
-            'msgSend': data.dictionary['comments.YourMessageHasBeenSent'],
             'addedFav': data.dictionary['itemheader.AddedFavorites'],
             'removedFav': data.dictionary['itemheader.RemovedFavorites'],
             'addFav': data.dictionary['itemgeneraldetails.addFavorites'],
             'removeFav': data.dictionary['item.RemoveFromFavorites']
         };
-        that.messages.msgSend.replace(/<br \/>/g,'');
-        //this.messages = that.messages;
     },
     events: {
         'click #replyForm .submit': 'sendReply'
@@ -38,30 +36,30 @@ module.exports = Base.extend({
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();
-        console.log(this.messages);
+
         var message = $('.message').val();
         var email = $('.email').val();
         var name = $('.name').val();
         var phone = $('.phone').val();
         var itemId = $('.itemId').val();
+        var itemSlug = $('.itemSlug').val();
         var url = [];
+
         url.push('/items/');
         url.push(itemId);
         url.push('/reply');
         url = helpers.common.fullizeUrl(url.join(''), this.app);
-        //$('.loading').show();
+
         var validate = function(done) {
             if (this.validForm(message, email)) {
-                console.log('si');
                 done();
             }
             else {
-                console.log('no');
                 done.abort();
-                always();
                 trackFail();
             }
         }.bind(this);
+
         var post = function(done) {
             $.ajax({
                 type: 'POST',
@@ -75,30 +73,29 @@ module.exports = Base.extend({
                 }
             })
             .done(done)
-            .fail(done.fail)
-            .always(always);
+            .fail(done.fail);
         }.bind(this);
+
         var success = function(done, data) {
-            //var $msg = $('.msgCont .msgCont-wrapper .msgCont-container');
-            //$('.loading').hide();
             var params;
+            var newUrl;
+
             params = {
                 sent: true
             };
-            console.log('loading hide success');
-            //$('body').removeClass('noscroll');
+            newUrl = {
+                slug: itemSlug
+            };
+            newUrl = helpers.common.slugToUrl(newUrl);
+
             $('.message').val('');
             $('.name').val('');
             $('.email').val('');
             $('.phone').val('');
-            //$msg.text(this.messages.msgSend);
-            //$('.msgCont').addClass('visible');
-            //setTimeout(function(){
-                //$('.msgCont').removeClass('visible');
-            helpers.common.redirect.call(this.App.router, 'iid-' + itemId , params, {
+
+            helpers.common.redirect.call(this.app.router, newUrl , params, {
                 status: 200
             });
-            //}, 3000);
             done(data);
         }.bind(this);
         var trackEvent = function(done, data) {
@@ -136,10 +133,6 @@ module.exports = Base.extend({
             var location = this.app.session.get('location');
             var platform = this.app.session.get('platform');
             statsd.increment([location.name, 'reply', 'error', platform]);
-        }.bind(this);
-        var always = function() {
-            //$('.loading').hide();
-            console.log('loading hide');
         }.bind(this);
 
         asynquence().or(fail)

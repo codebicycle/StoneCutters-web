@@ -26,8 +26,8 @@ module.exports = {
     },
     localization: {
         wap: ['www.olx.com.br', 'www.olx.fr', 'www.olx.es', 'www.olx.in', 'www.olx.co.za', 'www.olx.ir', 'www.jaovat.com', 'www.olx.hn'],
-        html4: ['www.olx.com.br', 'www.olx.fr', 'www.olx.es', 'www.olx.in', 'www.olx.co.za', 'www.olx.ir', 'www.jaovat.com', 'www.olx.hn'],
-        html5: ['www.olx.com.br', 'www.olx.fr', 'www.olx.es', 'www.olx.in', 'www.olx.co.za', 'www.olx.ir', 'www.jaovat.com', 'www.olx.hn'],
+        html4: ['www.olx.com.br', 'www.olx.fr', 'www.olx.es', 'www.olx.in', 'www.olx.co.za', 'www.olx.ir', 'www.jaovat.com', 'www.olx.hn', 'www.olx.com.ng'],
+        html5: ['www.olx.com.br', 'www.olx.fr', 'www.olx.es', 'www.olx.in', 'www.olx.co.za', 'www.olx.ir', 'www.jaovat.com', 'www.olx.hn', 'www.olx.com.ng'],
         desktop: ['www.olx.com.bo', 'www.jaovat.com']
     },
     icons: {
@@ -402,7 +402,9 @@ module.exports = {
             'www.olx.fr': 'olx.com',
             'www.olx.es': 'olx.com',
             'www.olx.cl': 'olx.com',
-            'www.olx.com.mx': 'olx.com'
+            'www.olx.com.mx': 'olx.com',
+            'www.olx.com.bo': 'olx.com',
+            'www.olx.com.py': 'olx.com'
         },
         support: {
             'default': 'support',

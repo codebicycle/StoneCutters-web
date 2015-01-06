@@ -6,27 +6,27 @@
         &.nav {
             background: #EFEFEF;
             border-bottom: 1px solid #ccc;
+            margin-bottom: 0 !important;
             overflow: hidden;
             padding: 10px;
-            margin-bottom: 0 !important;
             span {
-                float: left;
                 color: #550C90;
-                line-height: 2;
+                float: left;
                 font-size: 14px;
+                line-height: 2;
             }
             .links {
-                float: right;
-                border-radius: 5px;
                 background: #FFF;
+                border-radius: 5px;
                 border: 1px solid #D4D4D4;
                 box-shadow: 0 1px 0 rgba(0,0,0,.2);
+                float: right;
                 padding: 5px 10px;
                 a {
                     color: #0096CF;
                     font-size: 13px;
-                    padding: 0 10px;
                     font-weight: 700;
+                    padding: 0 10px;
 
                     &:first-child {
                         background: transparent url(imageUrl/images/html5/flecha_home_left.png) no-repeat left center;
@@ -43,38 +43,38 @@
             padding: 0 .5rem;
             h1 {
                 color: #303030;
-                width: 100%;
-                margin: .5rem 0;
                 font-size: 1.25rem;
                 font-weight: normal;
+                margin: .5rem 0;
+                width: 100%;
             }
             .date {
-                display: block;
-                margin: .5rem 0 0;
-                font-size: 0.6875rem;
                 color: #B1B1B1;
+                display: block;
+                font-size: 0.6875rem;
+                margin: .5rem 0 0;
             }
             .price {
+                color: #ff7700;
                 float: left;
                 font-size: 1.5rem;
                 font-weight: 700;
-                color: #ff7700;
                 line-height: 1;
             }
         }
 
         &.noPicture {
-            padding: .5rem;
-            color: #fff;
             background: #d1d1d1;
+            color: #fff;
             margin: 0 !important;
+            padding: .5rem;
 
             span {
-                width: 1.25rem;
-                height: 0.9375rem;
-                float: left;
-                margin: .1rem .5rem 0 0;
                 background: url(imageUrl/images/html5/itemPageSprite.png) no-repeat -104px 0;
+                float: left;
+                height: 0.9375rem;
+                margin: .1rem .5rem 0 0;
+                width: 1.25rem;
             }
         }
 
@@ -89,31 +89,31 @@
                 }
 
                 div {
-                    position: absolute;
-                    top: 0;
-                    right: 0;
-                    bottom: 0;
-                    left: 0;
                     background-position: center;
                     background-repeat: no-repeat;
                     background-size: cover;
+                    bottom: 0;
                     cursor: pointer;
+                    left: 0;
+                    position: absolute;
+                    right: 0;
+                    top: 0;
                 }
             }
         }
 
         &.optionals {
-            padding: 0 .5rem;
             margin: .75rem 0;
+            padding: 0 .5rem;
             ul {
-                float: left;
                 color: #494949;
+                float: left;
                 font-size: .75rem;
 
                 li {
                     display: inline-block;
-                    margin: 0 0.375rem 0.375rem 0;
                     font-size: 13px;
+                    margin: 0 0.375rem 0.375rem 0;
                 }
             }
         }
@@ -123,8 +123,8 @@
             color: #2A2929;
             padding: 10px;
             h3 {
-                padding: 0 0 3px 0;
                 margin: 0;
+                padding: 0 0 3px 0;
             }
             p {
                 font-size: 14px;
@@ -132,28 +132,28 @@
         }
 
         &.map {
+            margin: 10px auto !important;
             overflow: hidden;
             width: 96%;
-            margin: 10px auto !important;
             .profile {
                 background-color: #A8B301;
+                background-position: right;
+                background-repeat: no-repeat;
                 color: #fff;
                 display: inline-block;
                 width: 100%;
-                background-repeat: no-repeat;
-                background-position: right;
                 span {
                     display: block;
-                    margin-left: 10px;
                     font-size: 13px;
+                    margin-left: 10px;
                     &:last-child {
                         margin: 0 10px 10px 10px;
                     }
                 }
                 strong {
                     display: block;
-                    margin: 10px 10px 0 10px;
                     font-size: 1.03rem;
+                    margin: 10px 10px 0 10px;
                 }
             }
         }
@@ -163,25 +163,25 @@
             overflow: hidden;
             padding: 15px 10px 0 10px;
             .btnshare {
-                border-radius: 5px;
                 background: #FFF;
+                border-radius: 5px;
                 border: 1px solid #D4D4D4;
                 box-shadow: 0 1px 0 rgba(0,0,0,.2);
-                padding: 6px 10px 6px 25px;
                 color: #000;
                 display: block;
                 float: left;
                 font-size: 14px;
+                padding: 6px 10px 6px 25px;
                 width: 36%;
                 &.fav{
-                    margin-right: 10px;
                     background: url(imageUrl/images/html5/favorite_itempage.png) no-repeat 5px center;
+                    margin-right: 10px;
                     text-overflow: ellipsis;
                     white-space: nowrap;
                 }
                 &.share {
-                    float: right;
                     background: url(imageUrl/images/html5/share_itempage.png) no-repeat 5px center;
+                    float: right;
                 }
                 &.remove {
 
@@ -190,31 +190,30 @@
         }
 
         &.actions {
-            width: 96%;
+            background: #fff;
+            bottom: 0;
+            left: 7px;
             margin: 0 !important;
             position: fixed;
-            left: 7px;
-            bottom: 0;
-            background: #fff;
-            z-index: 10;
             right: 10px;
-
+            width: 96%;
+            z-index: 10;
 
             .action {
+                cursor: pointer;
+                float: left;
                 position: relative;
                 width: 33.3% !important;
-                float: left;
-                cursor: pointer;
                 z-index: 10;
 
                 .separator {
-                    width: 1px;
-                    height: 100%;
                     background: url(imageUrl/images/html5/linea_divisoria.png) right center no-repeat;
                     display: block;
+                    height: 100%;
                     position: absolute;
                     right: 1px;
                     top: 0;
+                    width: 1px;
                 }
 
                 &.email {
@@ -226,23 +225,23 @@
                     padding-top: 50%!important;
                 }
                 div, a {
-                    position: absolute;
-                    top: 0;
-                    left: 0;
-                    bottom: 0;
-                    right: 0;
-                    background-repeat: no-repeat;
-                    background-position: center 20%;
                     background-color: #FF7700;
+                    background-position: center 20%;
+                    background-repeat: no-repeat;
                     background-size: 32%;
+                    bottom: 0;
+                    left: 0;
+                    position: absolute;
+                    right: 0;
+                    top: 0;
                     span {
-                        width: 100%;
-                        position: absolute;
-                        left: 0;
                         bottom: .1em;
-                        text-align: center;
                         color: #fff;
                         font-size: .8em;
+                        left: 0;
+                        position: absolute;
+                        text-align: center;
+                        width: 100%;
                     }
                 }
                 &.call {
@@ -306,20 +305,52 @@
         }
     }
 
-
+    .msg-resulted {
+        display: none;
+        left: 5%;
+        position: absolute;
+        right: 5%;
+        top: 20%;
+        width: 90%;
+        z-index: 9;
+        &.visible {
+            display: block;
+        }
+        .msg-container {
+            span {
+                color: #fff;
+                display: block;
+                padding: 20px 0;
+                position: relative;
+                text-align: center;
+                z-index: 10;
+            }
+            .msg-bg {
+                background: #000;
+                border-radius: 5px;
+                display: block;
+                height: 100%;
+                left: 0;
+                opacity: .90;
+                position: absolute;
+                top: 0;
+                width: 100%;
+            }
+        }
+    }
 
 
     /*----Slide comon css----*/
     .swiper-container, .swiper-containerRA {
-        margin:0 auto;
-        position:relative;
-        overflow:hidden;
-        -webkit-backface-visibility:hidden;
         -moz-backface-visibility:hidden;
         -ms-backface-visibility:hidden;
         -o-backface-visibility:hidden;
-        backface-visibility:hidden;
+        -webkit-backface-visibility:hidden;
         /* Fix of Webkit flickering */
+        backface-visibility:hidden;
+        margin:0 auto;
+        overflow:hidden;
+        position:relative;
         z-index:1;
     }
     .swiper-container, .swiper-containerRA, .swiper-container .swiper-slide, .swiper-containerRA .swiper-slide, {width: 100%; height: auto!important;}
@@ -379,33 +410,33 @@
     .galCont.visible {display: block;}
     .swiper-container-gal, .swiper-container-gal .swiper-slide {width: 100%; height: 100%;}
     .galCont .title{
-        width: 100%;
-        position: absolute;
-        left: 0;
-        top: 0;
-        background: #000;
-        border-bottom: 1px solid #42403f;
-        color: #ffffff;
-        font-size: 13px;
-        font-family: "Lucida Grande", Helvetica, Arial,Verdana, sans-serif;
-        text-align: center;
-        display: block;
-        padding: 13px; z-index: 100;
         -moz-box-sizing: border-box;
         -webkit-box-sizing: border-box;
+        background: #000;
+        border-bottom: 1px solid #42403f;
         box-sizing: border-box;
+        color: #ffffff;
+        display: block;
+        font-family: "Lucida Grande", Helvetica, Arial,Verdana, sans-serif;
+        font-size: 13px;
+        left: 0;
+        padding: 13px; z-index: 100;
+        position: absolute;
+        text-align: center;
+        top: 0;
+        width: 100%;
     }
     .swiper-container-gal .swiper-slide , #galContOne .galCont-container {float: left; background-position: center center; background-repeat: no-repeat; background-size: contain;}
     .galCont .galActions{width: 100%; height: 20px; position: absolute; left: 0; bottom: 0;
         background: #000000;
         border-top: 1px solid #42403f;
         color: #ffffff;
-        font-size: 13px;
-        font-family: "Lucida Grande", Helvetica, Arial,Verdana, sans-serif;
-        text-align: center;
-        height: 44px;
         display: table;
+        font-family: "Lucida Grande", Helvetica, Arial,Verdana, sans-serif;
+        font-size: 13px;
+        height: 44px;
         table-layout: fixed; z-index: 100;
+        text-align: center;
     }
     .galActions > div{
         display: table-cell; outline: none; -webkit-tap-highlight-color:  rgba(255, 255, 255, 0); -webkit-user-select: none;
@@ -430,18 +461,18 @@
     .galActions > div.nextDis > span{background-position: -134px -84px;}
 
     .swiper-container-gal {
-        height: 100% !important;
-        text-align: center;
-        width: 100%;
-        margin:0;
-        position:relative;
-        overflow:hidden;
-        -webkit-backface-visibility:hidden;
         -moz-backface-visibility:hidden;
         -ms-backface-visibility:hidden;
         -o-backface-visibility:hidden;
-        backface-visibility:hidden;
+        -webkit-backface-visibility:hidden;
         /* Fix of Webkit flickering */
+        backface-visibility:hidden;
+        height: 100% !important;
+        margin:0;
+        overflow:hidden;
+        position:relative;
+        text-align: center;
+        width: 100%;
         z-index:1;
     }
 

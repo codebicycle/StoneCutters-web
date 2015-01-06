@@ -19,11 +19,21 @@ module.exports = Base.extend({
     },
     postRender: function() {
         var that = this;
-        console.log('river pa');
+        var data = Base.prototype.getTemplateData.call(this);
         var marginActions = $('section.actions').height() + $('section.actions > span').height() + 15;
+        var msgSent;
+        var $msg;
+
         $('.footer_footer_view').css('margin-bottom', marginActions + 'px');
 
-        //that.messages = {'errMsgMail': this.$('.errMsgMail').val(), 'errMsgMandatory': this.$('.errMsgMandatory').val(), 'msgSend': this.$('.msgSend').val().replace(/<br \/>/g,''), 'addFav': this.$('.addFav').val(), 'removeFav': this.$('.removeFav').val()};
+        msgSent = helpers.common.getUrlParameters('sent', data.url, true);
+        $msg = this.$('.msg-resulted');
+        if (msgSent && msgSent == 'true') {
+            $msg.addClass('visible');
+            setTimeout(function(){
+                $msg.removeClass('visible');
+            }, 3000);
+        }
 
         var galery = this.$('.swiper-container').swiper({
             mode:'horizontal',
@@ -38,9 +48,6 @@ module.exports = Base.extend({
             preventLinks:false
         });
         this.$(window).on('resize', this.resize).trigger('resize');
-        /*this.$( '.actions .email' ).click(function() {
-            $('html, body').animate({scrollTop: $('.reply').offset().top}, 400);
-        });*/
         this.$('section#itemPage section.onePicture .slide div').click(function(e) {
             e.preventDefault();
             $('body').addClass('noscroll');
