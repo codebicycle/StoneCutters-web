@@ -21,7 +21,7 @@
                         <a data-video-item="{{ video.id }}" href="#">
                             <span class="video-title">{{ video.title }}</span>
                             <span class="icon-play"></span>
-                            <img alt="OLX. Vender es fácil - Sillón" src="http://img.youtube.com/vi/{{ video.id }}/default.jpg" />
+                            <img alt="{{ video.title }}" src="http://img.youtube.com/vi/{{ video.id }}/default.jpg" />
                         </a>
                     </li>
                 {{ '</ul>' if loop.last }}
