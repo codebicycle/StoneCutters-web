@@ -115,6 +115,22 @@ module.exports = {
             }
         ]
     },
+    videos: {
+        'www.olx.com.uy': [
+            {
+                title: 'OLX Uruguay - Celular - Vender es fácil',
+                id: '29QoFeoJldU'
+            },
+            {
+                title: 'OLX Uruguay - Bicicleta - Vender es fácil',
+                id: 'Z3wwfLdLgj8'
+            },
+            {
+                title: 'OLX Uruguay - Auto - Vender es fácil',
+                id: 'rhJVT5fDkWU'
+            }
+        ]
+    },
     socials: {
         'www.olx.com.co': [
             {
@@ -402,7 +418,9 @@ module.exports = {
             'www.olx.fr': 'olx.com',
             'www.olx.es': 'olx.com',
             'www.olx.cl': 'olx.com',
-            'www.olx.com.mx': 'olx.com'
+            'www.olx.com.mx': 'olx.com',
+            'www.olx.com.bo': 'olx.com',
+            'www.olx.com.py': 'olx.com'
         },
         support: {
             'default': 'support',
