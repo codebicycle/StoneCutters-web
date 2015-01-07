@@ -43,11 +43,27 @@
                             height: 90px;
                             margin-bottom: 1px;
 
-                            a {
-                                background: $white;
+                            .video {
+                                background: $greyBoxBg;
                                 clear-fix();
                                 display: block;
                                 position: relative;
+                                &:not(.active):hover {
+                                    background: $white;
+                                    cursor: pointer;
+                                    span {
+                                        text-decoration: underline;
+                                    }
+                                }
+                                &.active {
+                                    outline: 1px solid $greyStrong;
+                                    background: $white;
+                                    cursor: default;
+                                    color: $black;
+                                    &:hover {
+                                        color: $black;
+                                    }
+                                }
                             }
                         }
                     }
