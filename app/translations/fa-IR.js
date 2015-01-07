@@ -190,6 +190,7 @@ module.exports = {
     'contact_us.ContactMobileAdvertising': '\u0641\u0631\u0635\u062A \u0647\u0627\u06CC \u062A\u0628\u0644\u06CC\u063A\u0627\u062A\u06CC',
     'contact_us.ContactLegalIssues': '\u0645\u0633\u0627\u0626\u0644 \u062D\u0642\u0648\u0642\u06CC ',
     'contact_us.ContactFeedSupport': '\u06CC\u06A9 \u0641\u06CC\u062F \u0628\u0647 OLX\u0627\u0631\u0633\u0627\u0644 \u06A9\u0646\u06CC\u062F',
+    'supportform.VerificationCode': '\u06A9\u062F \u062A\u0627\u06CC\u06CC\u062F:',
     'countryoptions.ChangeCity': '\u062A\u063A\u06CC\u06CC\u0631 \u0634\u0647\u0631',
     'countryoptions.EnterCity': '\u0646\u0627\u0645 \u06CC\u06A9 \u0634\u0647\u0631 \u0631\u0627 \u0648\u0627\u0631\u062F \u06A9\u0646\u06CC\u062F',
     'defaultfooter.change': '\u062A\u063A\u06CC\u06CC\u0631',

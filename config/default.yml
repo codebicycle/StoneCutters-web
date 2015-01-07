@@ -100,14 +100,47 @@ emails:
     secret: 6LcjQf8SAAAAADIPSryjN9TVSsgIrVSPADI-nC2a
   zendesk:
     default:
-      subdomain: olxar1419002989
+      subdomain: olxla
       brand_id: 195655
       email: gonzalo.aizpun@olx.com
       password: olx2014
     www.olx.co.cr:
       subdomain: olxcr
       brand_id: 300699
+    www.olx.it:
+      subdomain: olxmilk
+      brand_id: 304905
+    www.olx.ae:
+      subdomain: olxmilk
+      brand_id: 304905
+    www.olx.fr:
+      subdomain: olxmilk
+      brand_id: 304905
+    www.olx.es:
+      subdomain: olxmilk
+      brand_id: 304905
+    www.olx.cl:
+      subdomain: olxmilk
+      brand_id: 304905
     www.olx.com:
+      subdomain: olxmilk
+      brand_id: 304905
+    www.olx.com.mx:
+      subdomain: olxmilk
+      brand_id: 304905
+    www.olx.com.eg:
+      subdomain: olxmilk
+      brand_id: 304905
+    www.olxtunisie.com:
+      subdomain: olxmilk
+      brand_id: 304905
+    www.jaovat.com:
+      subdomain: olxmilk
+      brand_id: 304905
+    www.olx.com.bo:
+      subdomain: olxmilk
+      brand_id: 304905
+    www.olx.com.py:
       subdomain: olxmilk
       brand_id: 304905
     www.olx.com.ar:

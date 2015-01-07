@@ -153,6 +153,7 @@ module.exports = Base.extend({
     sendForm: function(){
         var url = "/secure/send";
         var data = {
+            area: this.$('[name="area"]').val(),
             subject: this.$('[name="subject"]').val(),
             email: this.$('[name="email"]').val(),
             name: this.$('[name="name"]').val(),
