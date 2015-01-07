@@ -52,9 +52,13 @@ function help(params, callback) {
     helpers.controllers.control.call(this, params, controller);
 
     function controller() {
+        var platform = this.app.session.get('platform');
+        var location = this.app.session.get('location');
+
         // Delete this callback
         callback(null, {
-                active: params.active
+            active: params.active,
+            isContactEnabled: helpers.features.isEnabled.call(this, 'contactForm', platform, location.url)
         });
         /*
             TODO [MOB-4717] Help.
