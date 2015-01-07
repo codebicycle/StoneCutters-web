@@ -1,0 +1,107 @@
+.marketing-box-sell {
+    float: right;
+    padding-top: 19px;
+    width: 356px;
+    height: 360px;
+    position: relative;
+    p {
+        font-size: $xl;
+        margin: 0;
+        text-align: center;
+    }
+    .subtitle {
+        font-size: $l;
+        line-height: 1;
+        padding: 6px 0 10px;
+        strong {
+            background: url(imageUrl/images/desktop/underline.gif) center bottom no-repeat;
+            display: inline-block;
+            margin-bottom: 20px;
+            padding-bottom: 8px;
+        }
+    }
+    .stuff {
+        background: url(imageUrl/images/desktop/stuff.png) no-repeat center;
+        display: block;
+        height: 131px;
+        left: 0;
+        position: absolute;
+        width: 100%;
+        z-index: 100;
+    }
+    .description {
+        clear-fix();
+        background: #f5f5f5;
+        position: absolute;
+        bottom: 0;
+        .icons {
+            -moz-box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+            color: $greyStrong;
+            float: left;
+            width: 33%;
+            text-align: center;
+            &::before {
+                font-size: $xl;
+            }
+            span {
+                display: block;
+            }
+            p {
+                font-size: $xs;
+                padding-top: 10px;
+            }
+        }
+    }
+
+    &.language-en, &.language-es {
+        .stuff {
+            top: 120px;
+        }
+        .description {
+            padding: 75px 0 20px;
+        }
+    }
+    &.language-en {
+        .description {
+            .icons {
+                padding: 0 9px;
+            }
+        }
+    }
+    &.language-es {
+        .description {
+            .icons {
+                padding: 0 16px;
+            }
+        }
+    }
+    &.language-fr {
+        .stuff {
+            top: 125px;
+        }
+    }
+    &.language-it {
+        .stuff {
+            top: 115px;
+        }
+    }
+    &.language-fr, &.language-it {
+        .description {
+            padding: 80px 0 15px;
+            .icons.icon-time {
+                padding: 0 10px;
+            }
+            .icons.icon-envelope {
+                padding: 0 18px;
+            }
+            .icons.icon-chat {
+                padding: 0;
+            }
+        }
+        p.title {
+            padding: 0 15px;
+        }
+    }
+}

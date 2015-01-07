@@ -250,7 +250,7 @@ module.exports = function trackingRouter(app, dataAdapter) {
         app.get('/tracking/event.gif', handler);
 
         function analyticsTracking(ctx, host) {
-            if (!tracking.analytics.isServerEnabled.call(ctx)) {
+            if (!tracking.analytics.isServerEnabled.call(ctx, null, 'event')) {
                 return;
             }
             var params = _.extend({
@@ -268,7 +268,7 @@ module.exports = function trackingRouter(app, dataAdapter) {
         }
 
         function atiTracking(ctx) {
-            if (!tracking.ati.isServerEnabled.call(ctx)) {
+            if (!tracking.ati.isServerEnabled.call(ctx, null, 'event')) {
                 return;
             }
             var location = ctx.app.session.get('location');

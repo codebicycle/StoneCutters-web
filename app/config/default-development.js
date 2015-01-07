@@ -24,7 +24,7 @@ module.exports = {
         wap: ['www.olx.com.br', 'www.olx.fr', 'www.olx.es', 'www.olx.in', 'www.olx.co.za', 'www.olx.ir', 'www.jaovat.com', 'www.olx.hn'],
         html4: ['www.olx.com.br', 'www.olx.fr', 'www.olx.es', 'www.olx.in', 'www.olx.co.za', 'www.olx.ir', 'www.jaovat.com', 'www.olx.hn', 'www.olx.com.ng'],
         html5: ['www.olx.com.br', 'www.olx.fr', 'www.olx.es', 'www.olx.in', 'www.olx.co.za', 'www.olx.ir', 'www.jaovat.com', 'www.olx.hn', 'www.olx.com.ng'],
-        desktop: ['www.olx.com.bo', 'www.jaovat.com', 'www.olx.co.cr', 'www.olx.com.pa']
+        desktop: ['www.olx.com.bo', 'www.jaovat.com']
     },
     icons: {
         wap: [],
@@ -108,6 +108,22 @@ module.exports = {
                 name: 'Raúl de La Paz',
                 testimonial: '¡Publiqué un celular a la mañana y al día siguiente ya lo había vendido!',
                 image: '/images/desktop/raul.jpg',
+            }
+        ]
+    },
+    videos: {
+        'www.olx.com.uy': [
+            {
+                title: 'OLX Uruguay - Celular - Vender es fácil',
+                id: '29QoFeoJldU'
+            },
+            {
+                title: 'OLX Uruguay - Bicicleta - Vender es fácil',
+                id: 'Z3wwfLdLgj8'
+            },
+            {
+                title: 'OLX Uruguay - Auto - Vender es fácil',
+                id: 'rhJVT5fDkWU'
             }
         ]
     },
@@ -343,7 +359,9 @@ module.exports = {
             'www.olx.fr': 'olx.com',
             'www.olx.es': 'olx.com',
             'www.olx.cl': 'olx.com',
-            'www.olx.com.mx': 'olx.com'
+            'www.olx.com.mx': 'olx.com',
+            'www.olx.com.bo': 'olx.com',
+            'www.olx.com.py': 'olx.com'
         },
         support: {
             'default': 'support',

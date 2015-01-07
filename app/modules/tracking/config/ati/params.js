@@ -95,7 +95,6 @@ module.exports = {
         process: true,
         names: {
             page_name: 'contact_seller_done',
-            category: 'reply',
             ad_category: '',
             ad_subcategory: '',
             ad_id: '',
@@ -103,7 +102,9 @@ module.exports = {
             poster_id: '0',
             poster_type: 'registered_no',
             posting_to_action: '',
-            action_type: 'message_sent'
+            action_type: 'message_sent',
+            geo1: '',
+            geo2: ''
         }
     },
     'items#reply': {
@@ -249,7 +250,6 @@ module.exports = {
         process: true,
         names: {
             page_name: 'posting_success',
-            category: 'posting',
             ad_category: '',
             ad_subcategory: '',
             ad_id: '',
@@ -259,7 +259,9 @@ module.exports = {
             poster_type: 'registered_no',
             funnel_page: 'posting_success',
             funnel_category: '',
-            funnel_subcategory: ''
+            funnel_subcategory: '',
+            geo1: '',
+            geo2: ''
         }
     },
     'post#edit': {
