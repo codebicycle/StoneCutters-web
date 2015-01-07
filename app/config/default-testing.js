@@ -108,6 +108,20 @@ module.exports = {
                 testimonial: '¡Publiqué un celular a la mañana y al día siguiente ya lo había vendido!',
                 image: '/images/desktop/raul.jpg',
             }
+        ],
+        'www.olx.co.cr': [
+            {
+                title: 'OLX Costa Rica - Bicicleta - Vender es fácil',
+                id: 'iYUX408RQq4'
+            },
+            {
+                title: 'OLX Costa Rica - Anteojos - Vender es fácil',
+                id: 'Mrfetr0kAoI'
+            },
+            {
+                title: 'OLX Costa Rica - Poker - Vender es fácil',
+                id: 'Yf5i1HOwd70'
+            }
         ]
     },
     videos: {
