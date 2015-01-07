@@ -312,6 +312,12 @@ module.exports = {
                 worldwide: true,
                 countries: []
             }
+        },
+        desktop: {
+            contactForm: {
+                worldwide: false,
+                countries: ['www.olx.com.bo']
+            }
         }
     },
     seo: {

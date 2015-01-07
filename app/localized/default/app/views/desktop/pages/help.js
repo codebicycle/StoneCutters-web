@@ -40,7 +40,7 @@ module.exports = Base.extend({
             async: true,
             defer: true
         });
-        $('head').append(recaptcha);
+        this.$el.append(recaptcha);
 
     },
     helpToggleContent: function(event) {
