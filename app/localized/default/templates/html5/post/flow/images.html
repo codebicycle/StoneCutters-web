@@ -7,28 +7,28 @@
     <input type="file" name="images[5]" id="file6" accept="image/*" />
 
     <ul class="fileUpload">
-        <li class="imgCont trackMe" data-tracking="Posting-ClickUploadPicture" data-input="file1">
-            <div class="image"></div>
+        <li class="imgCont trackMe{{ " loaded" if item.get('images')[0] }}" data-tracking="Posting-ClickUploadPicture" data-input="file1">
+            <div class="image {{ " fill" if item.get('images')[0] }}" {{ ("style='background-image: url(" + item.get('images')[0].thumbnail + ");'") if item.get('images')[0] }}></div>
             <span class="remove"></span>
         </li>
-        <li class="imgCont trackMe" data-tracking="Posting-ClickUploadPicture" data-input="file2">
-            <div class="image"></div>
+        <li class="imgCont trackMe{{ " loaded" if item.get('images')[1] }}" data-tracking="Posting-ClickUploadPicture" data-input="file2">
+            <div class="image{{ " fill" if item.get('images')[1] }}" {{ ("style='background-image: url(" + item.get('images')[1].thumbnail + ");'") if item.get('images')[1] }}></div>
             <span class="remove"></span>
         </li>
-        <li class="imgCont trackMe" data-tracking="Posting-ClickUploadPicture" data-input="file3">
-            <div class="image"></div>
+        <li class="imgCont trackMe{{ " loaded" if item.get('images')[2] }}" data-tracking="Posting-ClickUploadPicture" data-input="file3">
+            <div class="image{{ " fill" if item.get('images')[2] }}" {{ ("style='background-image: url(" + item.get('images')[2].thumbnail + ");'") if item.get('images')[2] }}></div>
             <span class="remove"></span>
         </li>
-        <li class="imgCont trackMe" data-tracking="Posting-ClickUploadPicture" data-input="file4">
-            <div class="image"></div>
+        <li class="imgCont trackMe{{ " loaded" if item.get('images')[3] }}" data-tracking="Posting-ClickUploadPicture" data-input="file4">
+            <div class="image{{ " fill" if item.get('images')[3] }}" {{ ("style='background-image: url(" + item.get('images')[3].thumbnail + ");'") if item.get('images')[3] }}></div>
             <span class="remove"></span>
         </li>
-        <li class="imgCont trackMe" data-tracking="Posting-ClickUploadPicture" data-input="file5">
-            <div class="image"></div>
+        <li class="imgCont trackMe{{ " loaded" if item.get('images')[4] }}" data-tracking="Posting-ClickUploadPicture" data-input="file5">
+            <div class="image{{ " fill" if item.get('images')[4] }}" {{ ("style='background-image: url(" + item.get('images')[4].thumbnail + ");'") if item.get('images')[4] }}></div>
             <span class="remove"></span>
         </li>
-        <li class="imgCont trackMe" data-tracking="Posting-ClickUploadPicture" data-input="file6">
-            <div class="image"></div>
+        <li class="imgCont trackMe{{ " loaded" if item.get('images')[5] }}" data-tracking="Posting-ClickUploadPicture" data-input="file6">
+            <div class="image{{ " fill" if item.get('images')[5] }}" {{ ("style='background-image: url(" + item.get('images')[5].thumbnail + ");'") if item.get('images')[5] }}></div>
             <span class="remove"></span>
         </li>
     </ul>
