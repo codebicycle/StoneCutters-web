@@ -31,7 +31,7 @@ function flow(params, callback) {
         var prepare = function(done) {
             if ((!isPostingFlow && !isDesktop) && (!siteLocation || siteLocation.indexOf('www.') === 0)) {
                 done.abort();
-                return helpers.common.redirect.call(this, '/location?target=posting', null, {
+                return helpers.common.redirect.call(this, '/location?target=' + (itemId ? 'myolx/edititem/' + itemId : 'posting'), null, {
                     status: 302
                 });
             }
@@ -67,7 +67,7 @@ function flow(params, callback) {
                     }
                 };
             }
-            if ((isDesktop || isPostingFlow) && itemId) {
+            if (itemId) {
                 data.item = {
                     model: 'Item',
                     params: {
@@ -87,8 +87,8 @@ function flow(params, callback) {
             }
 
             this.app.fetch(data, {
-                readFromCache: !this.app.session.get('isServer'),
-                store: true
+                /*readFromCache: !this.app.session.get('isServer'),
+                store: true*/
             }, done.errfcb);
         }.bind(this);
 
@@ -106,6 +106,12 @@ function flow(params, callback) {
                     return;
                 }
                 postingController(res.postingSession, res.cities, res.item, res.fields);
+            }
+            else if (itemId) {
+                if (redirect(res.item)) {
+                    return;
+                }
+                postingFormController(res.postingSession, res.item, res.fields);
             }
             else {
                 postingCategoriesController();
@@ -173,11 +179,26 @@ function flow(params, callback) {
         var postingFlowController = function(postingSession, item, fields) {
             callback(null, 'post/flow/index', {
                 postingSession: postingSession.get('postingSession'),
-                include: ['item'],
+                include: ['item', 'fields'],
                 item: item || new Item({}, {
                     app: this.app
                 }),
                 fields: fields
+            }, false);
+        }.bind(this);
+
+        var postingFormController = function(postingSession, item, fields) {
+            item.set(_.object(_.map(item.get('optionals'), function each(optional) {
+                return optional.name;
+            }), _.map(item.get('optionals'), function each(optional) {
+                return optional.id || optional.value;
+            })));
+            callback(null, 'post/form', {
+                postingSession: postingSession.get('postingSession'),
+                form: {
+                    values: item.toJSON()
+                },
+                fields: fields.get('fields')
             }, false);
         }.bind(this);
 
@@ -199,7 +220,7 @@ function flow(params, callback) {
         var promise = asynquence().or(error)
             .then(prepare);
 
-        if (isPostingFlow || isDesktop) {
+        if (isPostingFlow || isDesktop || itemId) {
             promise.then(fetch);
         }
         promise.val(success);

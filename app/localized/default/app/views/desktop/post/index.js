@@ -25,7 +25,6 @@ module.exports = Base.extend({
     tagName: 'main',
     id: 'posting-view',
     className: 'posting-view',
-    form: {},
     pendingValidations: [],
     errors: {},
     formErrors: [],
@@ -46,7 +45,6 @@ module.exports = Base.extend({
     },
     initialize: function() {
         Base.prototype.initialize.call(this);
-        this.form = {};
         this.pendingValidations = [];
         this.errors = {};
         this.formErrors = [];
@@ -63,8 +61,7 @@ module.exports = Base.extend({
             this.$('#posting-categories-view').trigger('editCategory', [this.item.get('category')]);
             this.$('#field-location').trigger('change');
         }
-        else{
-
+        else {
             this.dictionary = translations[this.app.session.get('selectedLanguage') || 'en-US'];
             if (this.isValid === undefined || this.isValid === null) {
                 this.errors['category.parentId'] = this.dictionary["postingerror.PleaseSelectCategory"];
@@ -82,7 +79,6 @@ module.exports = Base.extend({
                 this.$('#posting-locations-view').trigger('formRendered');
             }
         }
-
         this.app.router.once('action:end', this.onStart);
         this.app.router.once('action:start', this.onEnd);
     },
@@ -100,8 +96,6 @@ module.exports = Base.extend({
 
         this.item.get('category').parentId = subcategory.parentId;
         this.item.get('category').id = subcategory.id;
-        //this.item.set('category.parentId', subcategory.parentId);
-        //this.item.set('category.id', subcategory.id);
         delete this.errors['category.parentId'];
         delete this.errors['category.id'];
         _.each(this.pendingValidations, function eachValidation($field) {
@@ -294,11 +288,21 @@ module.exports = Base.extend({
         event.stopPropagation();
         event.stopImmediatePropagation();
 
+        this.$('#posting-contact-view').trigger('disablePost');
+        this.formErrors = [];
+        this.item.set('languageId', this.app.session.get('languageId'));
+        this.item.set('platform', this.app.session.get('platform'));
+        this.item.set('ipAddress', this.app.session.get('ip'));
+
+        asynquence().or(fail.bind(this))
+            .then(post.bind(this))
+            .val(success.bind(this));
+
         function post(done) {
             this.item.post(done);
         }
 
-        function success(response) {
+        function success() {
             var category = 'Posting';
             var action = 'PostingSuccess';
 
@@ -312,14 +316,14 @@ module.exports = Base.extend({
             });
         }
 
-        function fail(_errors, track) {
+        function fail(errors) {
             // TODO: Improve error handling
-            if (_errors) {
-                if (_errors.responseText) {
-                    _errors = JSON.parse(_errors.responseText);
+            if (errors) {
+                if (errors.responseText) {
+                    errors = JSON.parse(errors.responseText);
                 }
-                if (_.isArray(_errors)) {
-                    _.each(_errors, function eachError(error) {
+                if (_.isArray(errors)) {
+                    _.each(errors, function eachError(error) {
                         if (error.selector === 'main') {
                             this.formErrors.push(error.message);
                         } else {
@@ -336,15 +340,6 @@ module.exports = Base.extend({
                 this.$el.trigger('error');
             }
         }
-
-        this.$('#posting-contact-view').trigger('disablePost');
-        this.formErrors = [];
-        this.item.set('languageId', this.app.session.get('languageId'));
-        this.item.set('platform', this.app.session.get('platform'));
-        this.item.set('ipAddress', this.app.session.get('ip'));
-        asynquence().or(fail.bind(this))
-            .then(post.bind(this))
-            .val(success.bind(this));
     },
     getItem: function() {
         this.item = this.item || (this.options.item && this.options.item.toJSON ? this.options.item : new Item(this.options.item || {}, {

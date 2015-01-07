@@ -9,24 +9,36 @@ module.exports = Base.extend({
     className: 'post_flow_description_view disabled',
     tagName: 'section',
     id: 'description',
-    fields: [],
-    form: {
-        values: {}
-    },
-    initialize: function() {
-        Base.prototype.initialize.call(this);
-        this.fields = [];
-        this.form = {
-            values: {}
-        };
-    },
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
+        var item = this.parentView.getItem ? this.parentView.getItem() :  undefined;
 
         return _.extend({}, data, {
             fields: this.fields || [],
-            form: this.form
+            form: item ? {
+                values: _.object(_.map(this.fields || [], function each(field) {
+                    return field.name;
+                }, this), _.map(this.fields, function each(field) {
+                    if (field.name !== 'priceC') {
+                        return item.get(field.name);
+                    }
+                    if (item.get('price') && item.get('price').amount) {
+                        return item.get('price').amount;
+                    }
+                    return item.get('price');
+                }, this))
+            } : {}
         });
+    },
+    postRender: function() {
+        var field = _.find(this.fields || [], function each(field) {
+            return field.name === 'priceType';
+        }, this);
+
+        if (field && field.value && field.value.key && field.value.key !== this.parentView.getItem().get('priceType')) {
+            this.parentView.getItem().set('priceType', field.value.key);
+            this.render();
+        }
     },
     events: {
         'show': 'onShow',
@@ -34,7 +46,6 @@ module.exports = Base.extend({
         'fieldsChange': 'onFieldsChange',
         'change': 'onChange',
         'submit': 'onSubmit',
-        'restart': 'onRestart',
         'priceTypeChange': 'onPriceTypeChange'
     },
     onShow: function(event, categoryId) {
@@ -55,20 +66,19 @@ module.exports = Base.extend({
         this.fields.forEach(function each(field) {
             var $field = this.$('[name=' + field.name + ']');
 
-            field.value = $field.val();
             if ($field.hasClass('error')) {
                 errors[field.name] = field.label; // Check for translation since we are just passing the field label as error
             }
         }.bind(this));
         this.$el.addClass('disabled');
-        this.parentView.$el.trigger('descriptionSubmit', [this.fields, errors]);
+        this.parentView.$el.trigger('descriptionSubmit', [errors]);
     },
-    onFieldsChange: function(event, fields) {
+    onFieldsChange: function(event) {
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();
 
-        this.fields = fields;
+        this.fields = this.parentView.getFields().productDescription;
         this.render();
     },
     onChange: function(event) {
@@ -77,14 +87,15 @@ module.exports = Base.extend({
         event.stopImmediatePropagation();
 
         var $field = $(event.target);
+        var name = $field.attr('name');
 
-        if ($field.attr('name') === 'priceType') {
+        if (name === 'priceType') {
             this.$el.trigger('priceTypeChange', [$field.val()]);
         }
         else {
             $field.val(this.cleanValue($field.val()));
         }
-        this.form.values[$field.attr('name')] = $field.val();
+        this.parentView.getItem().set(name !== 'priceC' ? name : 'price', $field.val());
     },
     onSubmit: function(event) {
         event.preventDefault();
@@ -123,16 +134,6 @@ module.exports = Base.extend({
             statsd.increment([location, 'posting', 'invalid', this.app.session.get('platform'), 'priceC']);
         }
         return !failed;
-    },
-    onRestart: function(event) {
-        event.preventDefault();
-        event.stopPropagation();
-        event.stopImmediatePropagation();
-
-        this.fields = [];
-        this.form = {
-            values: {}
-        };
     },
     onPriceTypeChange: function(event, value) {
         event.preventDefault();

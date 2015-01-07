@@ -11,12 +11,14 @@ module.exports = Base.extend({
     url: '/items/:id',
     defaults: {
         category: {},
+        optionals: [],
         images: []
     },
     shortTitle: shortTitle,
     shortDescription: shortDescription,
     getLocation: getLocation,
     checkSlug: checkSlug,
+    indexOfOptional: indexOfOptional,
     parse: parse,
     validate: validate,
     post: post,
@@ -83,6 +85,9 @@ function shortDescription() {
 function getLocation() {
     var location = this.get('location');
 
+    if (!location) {
+        return location;
+    }
     if (location.children) {
         location = location.children[0];
         if (location.children) {
@@ -101,6 +106,17 @@ function checkSlug(itemSlug, urlSlug) {
         }
     }
     return false;
+}
+
+function indexOfOptional(name) {
+    var index;
+
+    _.each(this.get('optionals'), function each(optional, i) {
+        if (optional.name === name) {
+            index = i;
+        }
+    }, this);
+    return index;
 }
 
 function parse(item, options) {
@@ -281,14 +297,26 @@ function toData(includeImages) {
     delete data.category;
     if (typeof data.location !== 'string') {
         try {
-            data.location = this.get('location').children[0].children[0].url;
+            data.location = this.getLocation().url;
         }
         catch(err) {
             delete data.location;
         }
     }
+    if (_.isObject(data.price)) {
+        data.price = data.price.amount;
+    }
+    if (this.get('optionals')) {
+        _.each(this.get('optionals'), function each(optional) {
+            this.set(optional.name, optional.id || optional.value);
+        }, this);
+        this.unset('optionals');
+    }
     if (includeImages && images && images.length) {
         data.images = images.join(',');
+    }
+    else {
+        delete data.images;
     }
     delete data.date;
     delete data.metadata;
@@ -296,6 +324,13 @@ function toData(includeImages) {
     delete data.user;
     delete data.slug;
     delete data.priceTypeData;
+    delete data.additionalLocation;
+    _.each(Object.keys(data), function each(key) {
+        if (data[key] === undefined || data[key] === null) {
+            delete data[key];
+        }
+    }, this);
+    console.log(data);
     return data;
 }
 
