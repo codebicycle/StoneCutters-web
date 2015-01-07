@@ -204,15 +204,20 @@
             <p>{{ dictionary["supportform.FillForm"] }}</p>
             <form id="contactForm" data-contact-form action="">
                 <fieldset>
-                    <label for="subject">{{ dictionary["supportform.Subject"] }}</label>
-                    <select name="subject">
-                        <option value="ContactSupportTeam">{{ dictionary["contact_us.ContactSupportTeam"] }}</option>
-                        <option value="ContactPartnership">{{ dictionary["contact_us.ContactPartnership"] }}</option>
-                        <option value="ContactPress">{{ dictionary["contact_us.ContactPress"] }}</option>
-                        <option value="ContactMobileAdvertising">{{ dictionary["contact_us.ContactMobileAdvertising"] }}</option>
-                        <option value="ContactLegalIssues">{{ dictionary["contact_us.ContactLegalIssues"] }}</option>
-                        <option value="ContactFeedSupport">{{ dictionary["contact_us.ContactFeedSupport"] | replace('<<BRAND>>','OLX') }}</option>
+                    <label for="area">{{ dictionary["supportform.Department"] }}</label>
+                    <select name="area">
+                        <option value="support">{{ dictionary["contact_us.ContactSupportTeam"] }}</option>
+                        <option value="partnership">{{ dictionary["contact_us.ContactPartnership"] }}</option>
+                        <option value="press">{{ dictionary["contact_us.ContactPress"] }}</option>
+                        <option value="mobile">{{ dictionary["contact_us.ContactMobileAdvertising"] }}</option>
+                        <option value="legal">{{ dictionary["contact_us.ContactLegalIssues"] }}</option>
+                        <option value="feeds">{{ dictionary["contact_us.ContactFeedSupport"] | replace('<<BRAND>>','OLX') }}</option>
                     </select>
+                    <span class="error hide subject"></span>
+                </fieldset>
+                <fieldset>
+                    <label for="subject">{{ dictionary["supportform.Subject"] }}</label>
+                    <input type="text" name="subject" value="" maxlength="200">
                     <span class="error hide subject"></span>
                 </fieldset>
                 <fieldset>

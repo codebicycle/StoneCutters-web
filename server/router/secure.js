@@ -5,14 +5,14 @@ module.exports = function itemRouter(app, dataAdapter) {
     var restler = require('restler');
     var asynquence = require('asynquence');
     var utils = require('../../shared/utils');
-    var config = require('../../shared/config');
+    var config = require('../config');
     var formidable = require('../modules/formidable');
 
     (function recaptcha() {
         app.get('/secure/recaptcha', handler);
 
         function handler(req, res) {
-            var secretKey = config.get(['recaptcha', 'secretKey']);
+            var secretKey = config.get(['emails', 'captcha', 'secret']);
             var response = req.param('response');
             var remoteIp = req.param('remoteip');
 
@@ -30,22 +30,23 @@ module.exports = function itemRouter(app, dataAdapter) {
         app.post('/secure/send', handler);
 
         function handler(req, res) {
-            var zendesk = config.get(['mails', 'zendesk', 'default']);
-            var key = config.get(['zendeskEncoded', 'key']);
+            var location = req.rendrApp.session.get('location');
+            var zendesk = _.defaults({}, config.get(['emails', 'zendesk', location.url], {}), config.get(['emails', 'zendesk', 'default']));
 
             function parse(done) {
                 formidable.parse(req, done.errfcb);
             }
 
             function submit(done, data) {
-/*                restler.post('https://' + zendesk.subdomain + '.zendesk.com/api/v2/tickets.json', {
+                restler.post('https://' + zendesk.subdomain + '.zendesk.com/api/v2/tickets.json', {
                     data: {
                         ticket: {
                             requester: {
                                 name: data.name,
                                 email: data.email
                             },
-                            subject: data.subject,
+                            brand_id: zendesk.brand_id,
+                            subject: '[' + data.area + '] ' + data.subject,
                             comment: {
                                 body: data.message
                             }
@@ -59,8 +60,7 @@ module.exports = function itemRouter(app, dataAdapter) {
                 })
                 .on('fail', function onFail(err, response) {
                     done.fail(err);
-                });*/
-                done();
+                });
             }
 
             function success(data) {
