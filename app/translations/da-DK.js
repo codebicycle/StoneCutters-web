@@ -12,6 +12,7 @@ module.exports = {
     'countryoptions.Home_SelectState': 'V\xE6lg en stat',
     'countryoptions.OtherCities': 'Andre byer',
     'countryoptions.SelectACity': 'V\xE6lg en by',
+    'countryoptions.SelectANeighborhood': 'V\xE6lg naboomr\xE5de',
     'defaultfooter.About OLX': 'Om OLX',
     'defaultfooter.Back': 'Tilbage',
     'defaultfooter.change': 'skift',

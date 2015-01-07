@@ -12,6 +12,7 @@ module.exports = {
     'countryoptions.Home_SelectState': 'Piliin ang lungsod',
     'countryoptions.OtherCities': 'Ibang mga Lungsod',
     'countryoptions.SelectACity': 'Pumili ng lungsod.',
+    'countryoptions.SelectANeighborhood': 'Pumili ng kalapit-bahayan',
     'defaultfooter.About OLX': 'Tungkol sa OLX',
     'defaultfooter.Back': 'Bumalik',
     'defaultfooter.change': 'baguhin',

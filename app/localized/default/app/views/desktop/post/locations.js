@@ -50,7 +50,8 @@ module.exports = Base.extend({
     events: {
         'formRendered': 'onFormRendered',
         'change #field-state': 'onStateChange',
-        'change #field-location': 'onCityChange'
+        'change #field-location': 'onCityChange',
+        'change #field-neighborhood': 'onNeighborhoodChange'
     },
     addEmptyOption: function(list, text) {
         list.unshift({
@@ -76,6 +77,10 @@ module.exports = Base.extend({
 
         var $field = $(event.target);
         var $firstOption = $field.find('option').first();
+        var $neighborhoods = this.$('#field-neighborhood');
+
+        $neighborhoods.parents('.field-wrapper').addClass('hide');
+        $neighborhoods.empty().attr('required', false);
 
         if ($firstOption.attr('value') === '') {
             $firstOption.remove();
@@ -118,10 +123,20 @@ module.exports = Base.extend({
             var options = response.neighborhoods.toJSON();
             if (options.length) {
                 $neighborhoods.removeAttr('disabled').empty();
+                $neighborhoods.attr('required', true);
+
+                options.unshift({
+                    id: '',
+                    name: translations[this.app.session.get('selectedLanguage') || 'en-US']['countryoptions.SelectANeighborhood']
+                });
                 _.each(options, function each(neighborhood) {
                     $neighborhoods.append('<option value="' + neighborhood.id + '">' + neighborhood.name + '</option>');
                 }.bind(this));
                 $neighborhoods.parents('.field-wrapper').removeClass('hide');
+            }
+            else {
+                $neighborhoods.parents('.field-wrapper').addClass('hide');
+                $neighborhoods.empty().attr('required', false);
             }
 
             this.parentView.$el.trigger('fieldSubmit', [$field]);
@@ -130,6 +145,15 @@ module.exports = Base.extend({
         asynquence().or(error)
             .then(fetch)
             .val(success);
+    },
+    onNeighborhoodChange: function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+
+        var $field = $(event.target);
+        this.parentView.$el.trigger('fieldSubmit', [$field]);
+
     },
     getCities: function(state) {
         var options;
