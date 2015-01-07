@@ -8,10 +8,12 @@ module.exports = Base.extend({
     tagName: 'main',
     id: 'pages-help-view',
     className: 'pages-help-view',
+    fields: [],
     events: {
         'click .help-toggle-content': 'helpToggleContent',
         'click .question .icons': 'helpToggleQuestion',
-        'submit [data-contact-form]': 'submitForm'
+        'submit [data-contact-form]': 'submitForm',
+        'click [data-reply] span': 'submitAgain'
     },
 
     getTemplateData: function() {
@@ -78,7 +80,7 @@ module.exports = Base.extend({
         event.stopImmediatePropagation();
 
         var data = Base.prototype.getTemplateData.call(this);
-        var fields = [
+        this.fields = [
             this.$('[name="subject"]'),
             this.$('[name="name"]'),
             this.$('[name="email"]'),
@@ -93,21 +95,27 @@ module.exports = Base.extend({
         var emailRegExp = /^[_a-zA-Z0-9-]+(\.[_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*(\.[a-zA-Z]{2,6})$/;
         var valid = true;
         var spinner = this.$('[data-contact-form] .spinner');
-        var submit = this.$('[data-contact-form] [type="submit"]');
+        var submit = this.$('[data-contact-form] [data-submit]');
         var value;
+        var fieldset;
 
         spinner.removeClass('hide');
         submit.addClass('hide');
+        this.$('fieldset.error').removeClass('error');
 
-        $(fields).each( function() {
+        $(this.fields).each( function() {
             value = $(this).val();
+            fieldset = $(this).parent();
+
             if (value === '') {
                 $(this).siblings('.error').text(message.empty).removeClass('hide');
+                fieldset.addClass('error');
                 valid = false;
             } 
             else if ($(this).selector == '[name="email"]' && 
                     !emailRegExp.test(value)) {
                 $(this).siblings('.error').text(message.invalidEmail).removeClass('hide');
+                fieldset.addClass('error');
                 valid = false;
             }
             else {
@@ -165,11 +173,25 @@ module.exports = Base.extend({
             data: data,
             success: function onSuccess(data) {
                 this.$('[data-contact-form] .spinner').addClass('hide');
-                this.$('[data-contact-form] [type="submit"]').removeClass('hide');
+                this.$('[data-contact-form] [data-submit]').addClass('hide');
+                this.$('[data-contact-form] [data-reply="success"]').removeClass('hide');
+                $(this.fields).each(function() {
+                    this.val('');
+                });
                 if (!data.send) {
-                    // TODO Handle error
+                    this.$('[data-contact-form] [data-reply="error"]').removeClass('hide');
                 }
             }.bind(this)
         });
+    },
+    submitAgain: function(){
+        var type = event.currentTarget.dataset.reply;
+        this.$('[data-contact-form] [data-submit]').removeClass('hide');
+        if (type === "error") {
+            this.$('[data-contact-form] [data-reply="error"]').addClass('hide');
+        } 
+        else {
+            this.$('[data-contact-form] [data-reply="success"]').addClass('hide');
+        }
     }
 });
