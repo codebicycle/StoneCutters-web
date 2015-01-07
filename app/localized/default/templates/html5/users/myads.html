@@ -11,7 +11,7 @@
         <ul class="item-listing">
             {% for item in items.toJSON() %}
                 <li>
-                    <a href="#" class="edit {{ item.id }}" data-itemUrl="{{ item | slugToUrl | link }}" data-itemId="{{ item.id }}" {{ 'data-editable="true"' if item.status == 'ready'}}>
+                    <a href="#" class="edit {{ item.id }}" data-itemUrl="{{ item | slugToUrl | link }}" data-itemSlug="{{ item.slug }}" data-itemId="{{ item.id }}" {{ 'data-editable="true"' if item.status == 'ready' or item.status == 'pending' }}>
                         {% if item.status == 'pending' %}
                             <p class="status pending">{{ dictionary["itemslisting.PendingAd"] }}</p>
                         {% elif item.status == 'rejected' %}
@@ -45,7 +45,7 @@
             <div>
                 <ul>
                     <li><a href="" class="viewItem">{{ dictionary["postingtitle.viewListing"] }}</a></li>
-                    <li><a href="{{ '/myolx/edititem/[[itemId]]' | link }}" class="editItem">{{ dictionary["myolx.EditListing"] }}</a></li>
+                    <li><a href="{{ '/myolx/edititem/[[itemId]]' }}" class="editItem">{{ dictionary["myolx.EditListing"] }}</a></li>
                     <li><a href="" class="deleteItem">{{ dictionary["confirmremoveitem.Delete"] }}</a></li>
                 </ul>
             </div>
@@ -62,7 +62,7 @@
             <h4>{{ dictionary["confirmremoveitem.Delete"] }}</h4>
             <div>
                 <ul>
-                    <li><a href="{{ '/myolx/deleteitem/[[itemId]]' | link }}" class="deleteItemConfirm">{{ dictionary["messages_site_class.30"] }}</a></li>
+                    <li><a href="{{ '/myolx/deleteitem/[[itemId]]' | link({location: 'www.olx.com.py'}) }}" class="deleteItemConfirm">{{ dictionary["messages_site_class.30"] }}</a></li>
                     <li><a href="#" class="popup-close">{{ dictionary["confirmremoveitem.Cancel"] }}</a></li>
                 </ul>
             </div>
