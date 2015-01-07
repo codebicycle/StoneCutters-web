@@ -5,44 +5,54 @@ var _ = require('underscore');
 var asynquence = require('asynquence');
 var helpers = require('../../../../../../helpers');
 var statsd = require('../../../../../../../shared/statsd')();
+var translations = require('../../../../../../../shared/translations');
 
 module.exports = Base.extend({
     className: 'items_show_view',
     wapAttributes: {
         cellpadding: 0
     },
-    getTemplateData: function() {
-        var data = Base.prototype.getTemplateData.call(this);
-        data.category_name = this.options.category_name;
-
-        return _.extend({}, data, {});
+    initialize: function() {
+        this.dictionary = translations[this.app.session.get('selectedLanguage') || 'en-US'];
     },
     postRender: function() {
         var that = this;
-        var data = Base.prototype.getTemplateData.call(this);
         var marginActions = $('section.actions').height() + $('section.actions > span').height() + 15;
-        var msgSent;
-        var $msg;
+        var url = this.app.session.get('url');
+        var msgSent = helpers.common.getUrlParameters('sent', url, true);
+        var $msg = this.$('.msg-resulted');
+        var galery;
+        var relatedAds;
+        var mySwiperGal = '';
+        var messages;
+
+        this.dictionary = translations[this.app.session.get('selectedLanguage') || 'en-US'];
+        that.messages = {
+            'msgSend': this.dictionary['comments.YourMessageHasBeenSent'].replace(/<br \/>/g,''),
+            'addedFav': this.dictionary['itemheader.AddedFavorites'],
+            'removedFav': this.dictionary['itemheader.RemovedFavorites'],
+            'addFav': this.dictionary['itemgeneraldetails.addFavorites'],
+            'removeFav': this.dictionary['item.RemoveFromFavorites']
+        };
 
         $('.footer_footer_view').css('margin-bottom', marginActions + 'px');
 
-        msgSent = helpers.common.getUrlParameters('sent', data.url, true);
-        $msg = this.$('.msg-resulted');
         if (msgSent && msgSent == 'true') {
+            $msg.find('span').text(that.messages.msgSend);
             $msg.addClass('visible');
             setTimeout(function(){
                 $msg.removeClass('visible');
             }, 3000);
         }
 
-        var galery = this.$('.swiper-container').swiper({
+        galery = this.$('.swiper-container').swiper({
             mode:'horizontal',
             loop: true,
             pagination: '.slidePagination',
             paginationClickable: true,
             initialSlide: 0
         });
-        var relatedAds = this.$('.swiper-containerRA').swiper({
+        relatedAds = this.$('.swiper-containerRA').swiper({
             mode:'horizontal',
             slidesPerView: 3,
             preventLinks:false
@@ -59,7 +69,7 @@ module.exports = Base.extend({
             $('.galCont').removeClass('visible');
             $('body').removeClass('noscroll');
         });
-        var mySwiperGal = '';
+
         this.$('section.swiper-container').click(function(e) {
             e.preventDefault();
             $('body').addClass('noscroll');
@@ -112,8 +122,10 @@ module.exports = Base.extend({
                 var user = that.app.session.get('user');
                 var itemId = $this.data('itemid');
                 var url = [];
-                var $msg = $('.msgCont .msgCont-wrapper .msgCont-container');
-                $msg.text($this.hasClass('add') ? that.messages.addFav : that.messages.removeFav);
+                var $msg = $('.msg-resulted');
+
+
+                $msg.find('span').text($this.hasClass('add') ? that.messages.addedFav : that.messages.removedFav);
 
                 url.push('/users/');
                 url.push(user.userId);
@@ -132,12 +144,13 @@ module.exports = Base.extend({
                     json: true,
                     done: function() {
                         $this.toggleClass('add remove');
+                        $this.text($this.hasClass('add') ? that.messages.addFav : that.messages.removeFav);
                         $this.attr('data-qa', $this.attr('data-qa') == 'add-favorite' ? 'remove-favorite' : 'add-favorite');
 
-                        $('.msgCont').addClass('visible');
+                        $msg.addClass('visible');
                         setTimeout(function(){
-                            $('.msgCont').removeClass('visible');
-                            $msg.text('');
+                            $msg.removeClass('visible');
+                            $msg.find('span').text('');
                         }, 3000);
                     },
                     fail: function() {
@@ -180,55 +193,13 @@ module.exports = Base.extend({
             }
         };
 
-        /*this.$('form#replyForm').on('change', 'input.name , input.email , textarea.message', function (e) {
-            var value = $(this).val();
-            var field = $(this).attr('class');
-
-            if(that.isEmpty(value,field) && field == 'email'){
-                that.isEmail(value,field);
-            }
-        });*/
-        this.attachTrackMe(function(category, action) {
-            var itemId = $('.itemId').val();
-            var itemCategory = $('.itemCategory').val();
-            var itemSubcategory = $('.itemSubcategory').val();
-            if (action === 'ClickReply') {
-                var message = $('.message').val();
-                var email = $('.email').val();
-                var name = $('.name').val();
-                var location = this.app.session.get('location').abbreviation.toLowerCase();
-
-                if (!that.validForm(message, email)) {
-                    action += '_Error';
-                    if (!that.isEmpty(email, 'email')){
-                        action += 'EmailEmpty';
-                        statsd.increment([location, 'reply', 'error', this.app.session.get('platform'), 'EmailEmpty']);
-                    }
-                    else if (!that.isEmail(email, 'email')) {
-                        action += 'EmailWrong';
-                        statsd.increment([location, 'reply', 'error', this.app.session.get('platform'), 'EmailWrong']);
-                    }
-                    if (!that.isEmpty(message, 'message')) {
-                        action += 'MessageEmpty';
-                        statsd.increment([location, 'reply', 'error', this.app.session.get('platform'), 'MessageEmpty']);
-                    }
-                    if (!that.isEmpty(name, 'name')) {
-                        action += 'NameEmpty';
-                    }
-                }
-            }
-            return {
-                action: action,
-                custom: [category, itemCategory, itemSubcategory, action, itemId].join('::')
-            };
-        }.bind(this));
     },
     remove: function() {
         $(window).off('resize', this.resize);
         Base.prototype.remove.apply(this, arguments);
     },
     resize: function() {
-        $('section#itemPage').css('margin-bottom' , ($('#actions').height()+20)+'px');
+        $('section#itemPage').css('margin-bottom' , ($('.actions').height()+20)+'px');
         var paginationCount = $('.slidePagination span').length + 2;
         var windowSize = $(window).width();
         var paginationWidth = windowSize / paginationCount;
@@ -247,5 +218,3 @@ module.exports = Base.extend({
         $('.slidePagination span').css('margin' , '0 '+paginationMargin+'px');
     }
 });
-
-module.exports.id = 'items/show';

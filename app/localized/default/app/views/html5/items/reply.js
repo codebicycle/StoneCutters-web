@@ -22,12 +22,43 @@ module.exports = Base.extend({
         var data = Base.prototype.getTemplateData.call(this);
         that.messages = {
             'errMsgMail': data.dictionary['postingerror.InvalidEmail'],
-            'errMsgMandatory': data.dictionary['postingerror.PleaseCompleteThisField'],
-            'addedFav': data.dictionary['itemheader.AddedFavorites'],
-            'removedFav': data.dictionary['itemheader.RemovedFavorites'],
-            'addFav': data.dictionary['itemgeneraldetails.addFavorites'],
-            'removeFav': data.dictionary['item.RemoveFromFavorites']
+            'errMsgMandatory': data.dictionary['postingerror.PleaseCompleteThisField']
         };
+
+        this.attachTrackMe(function(category, action) {
+            var itemId = $('.itemId').val();
+            var itemCategory = $('.itemCategory').val();
+            var itemSubcategory = $('.itemSubcategory').val();
+            if (action === 'ClickReply') {
+                var message = $('.message').val();
+                var email = $('.email').val();
+                var name = $('.name').val();
+                var location = this.app.session.get('location').abbreviation.toLowerCase();
+
+                if (!that.validForm(message, email)) {
+                    action += '_Error';
+                    if (!that.isEmpty(email, 'email')){
+                        action += 'EmailEmpty';
+                        statsd.increment([location, 'reply', 'error', this.app.session.get('platform'), 'EmailEmpty']);
+                    }
+                    else if (!that.isEmail(email, 'email')) {
+                        action += 'EmailWrong';
+                        statsd.increment([location, 'reply', 'error', this.app.session.get('platform'), 'EmailWrong']);
+                    }
+                    if (!that.isEmpty(message, 'message')) {
+                        action += 'MessageEmpty';
+                        statsd.increment([location, 'reply', 'error', this.app.session.get('platform'), 'MessageEmpty']);
+                    }
+                    if (!that.isEmpty(name, 'name')) {
+                        action += 'NameEmpty';
+                    }
+                }
+            }
+            return {
+                action: action,
+                custom: [category, itemCategory, itemSubcategory, action, itemId].join('::')
+            };
+        }.bind(this));
     },
     events: {
         'click #replyForm .submit': 'sendReply'

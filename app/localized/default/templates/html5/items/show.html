@@ -99,7 +99,7 @@
                 {% set favLink = (['/login?redirect=/items/', item.id, '/favorite'] | join('') | link) %}
             {% endif %}
         {% endif %}
-        <a data-itemId="{{ item.id }}" class="btnshare fav {{ favClass }}" href=" {{ favLink }}" data-qa="{{ favClass }}-favorite" >{{ favText }}</a>
+        <a data-itemId="{{ item.id }}" class="btnshare fav {{ favClass }}" href="{{ favLink }}" data-qa="{{ favClass }}-favorite" >{{ favText }}</a>
 
         <a href="#share" data-tracking="ItemPage-ClickShare" class="btnshare share trackMe">{{ dictionary["item.ShareAd"] }}</a>
     </section>
