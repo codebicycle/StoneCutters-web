@@ -188,7 +188,7 @@
                     font-size: $s;
                     padding: 10px;
                     resize: none;
-                    width: 350px;
+                    width: 455px;
                 }
                 input[type="text"] {
                     height: 20px;
@@ -201,11 +201,22 @@
                 }
                 select {
                     background: $white;
-                    width: 372px;
+                    width: 477px;
                 }
                 label[for="message"] {
                     margin-top: 8px;
                     vertical-align: top;
+                }
+                
+                &.error {
+                    label {
+                        color: $red;
+                    }
+                    select,
+                    input,
+                    textarea {
+                        border-color: $red;
+                    }
                 }
             }
             .verification {
@@ -223,6 +234,38 @@
             }
             span.spinner {
                 margin-left: 125px;
+            }
+            .replyResult {
+                box($yellowSuccess, $yellowSuccess, 3px, 10px 10px 10px 50px, solid, 0);
+                color: $black;
+                font-size: $s;
+                margin-left: 123px;
+                position: relative;
+                width: 420px;
+
+                &:before {
+                    color: $green;
+                    font-size: $l;
+                    left: 20px;
+                    position: absolute;
+                    top: 14px;
+                }
+
+                span {
+                    color: $blue;
+                    cursor: pointer;
+                    display: block;
+                    padding-top: 3px;
+                    &:hover {
+                        text-decoration: underline;
+                    }
+                }
+                &.fail {
+                    background: $pink;
+                    &:before {
+                        color: $red;
+                    }
+                }
             }
         }
     }

@@ -15,7 +15,7 @@
         </li>
         {% if isContactEnabled %}
             <li {{ 'class="selected"' if active == 'contact' }}>
-                <a class="help-toggle-content icons icon-chat" data-help-content="contact" href="#">{{ dictionary["misc.ContactUs"] }}</a>
+                <a class="help-toggle-content icons icon-chat" data-help-content="contact" href="#">{{ dictionary["contact_us.ContactBrand"] | replace('<<BRAND>>','OLX') }}</a>
             </li>
         {% endif %}
         <li>
@@ -202,10 +202,9 @@
             </div>
         </div>
     </div>
-
     {% if isContactEnabled %}
         <div id="contact" class="help-content-display" {{ 'style="display:block"' if active == 'contact' }}>
-            <h3 class="title">{{ dictionary["misc.ContactUs"] }}</h3>
+            <h3 class="title">{{ dictionary["contact_us.ContactBrand"] | replace('<<BRAND>>','OLX') }}</h3>
             <div class="contact">
                 <p>{{ dictionary["supportform.FillForm"] }}</p>
                 <form id="contactForm" data-contact-form action="">
@@ -250,15 +249,19 @@
 
                     <span class="spinner hide"></span>
 
-                    <fieldset>
+                    <fieldset data-submit >
                         <label for="submit">
                             <input type="submit" value="{{ dictionary["supportform.Submit"] }}" >
                         </label>
                     </fieldset>
-                    <p class="replySuccess icons icon-check hide">
-                        {{ dictionary["item.YourMessageHasBeenSent"] }}
-                        <span>{{ dictionary["replymessage.SendAnotherMessage"] }} </span>
+                    <p class="replyResult fail icons icon-close hide" data-reply="error" >
+                        Hay un error al tratar de completar la operación.
+                        <span>Intenta nuevamente</span>
                     </p>
+                     <p class="replyResult success icons icon-check hide" data-reply="success" >
+                         {{ dictionary["item.YourMessageHasBeenSent"] }}
+                         <span>{{ dictionary["replymessage.SendAnotherMessage"] }} </span>
+                     </p>
                 </form>
             </div>
         </div>
