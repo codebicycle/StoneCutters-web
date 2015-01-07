@@ -221,18 +221,19 @@ module.exports = Base.extend({
         this.$('#image').addClass('pending');
         this.$el.trigger('change');
     },
-    onImagesLoadEnd: function(event, image, orientation) {
+    onImagesLoadEnd: function(event) {
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();
 
         var $container = this.$('#image');
         var $image = this.$('#imagesDisplay');
+        var image = this.parentView.getItem().get('images')[0];
 
         if (image) {
             $container.removeClass('pending').addClass('fill');
-            $image.removeAttr('class').addClass('r' + orientation).css({
-                'background-image': 'url(' + image + ')'
+            $image.removeAttr('class').addClass('r' + image.orientation).css({
+                'background-image': 'url(' + image.url + ')'
             });
         }
         else {

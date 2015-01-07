@@ -193,12 +193,20 @@ function flow(params, callback) {
             }), _.map(item.get('optionals'), function each(optional) {
                 return optional.id || optional.value;
             })));
+            item.set('priceType', item.get('priceTypeData').type);
             callback(null, 'post/form', {
+                itemId: item.get('id'),
                 postingSession: postingSession.get('postingSession'),
                 form: {
                     values: item.toJSON()
                 },
-                fields: fields.get('fields')
+                fields: fields.get('fields'),
+                category: {
+                    id: item.get('category').parentId
+                },
+                subcategory: {
+                    id: item.get('category').id
+                }
             }, false);
         }.bind(this);
 

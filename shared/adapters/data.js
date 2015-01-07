@@ -103,7 +103,7 @@ DataAdapter.prototype.serverRequest = function(req, api, options, callback) {
                     return fail(err, res);
                 }
             }
-            if (body && body.itemProperties === null){
+            if (body && body.itemProperties === null) {
                 body.itemProperties = {};
             }
             logger.log('%s %d %s %s', api.method.toUpperCase(), res.statusCode, api.url, elapsed);

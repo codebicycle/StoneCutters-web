@@ -120,24 +120,23 @@ module.exports = function(app, dataAdapter) {
             }
 
             function post(done, _item, images) {
-                Object.keys(images).forEach(function each(key) {
-                    images[key] = restler.file(images[key].path, null, images[key].size, null, images[key].type);
-                    statsd.increment([location.name, 'posting', 'image', platform]);
-                });
-                Object.keys(_item).forEach(function each(key) {
-                    if (typeof _item[key] === 'string' && !_item[key]) {
-                        delete _item[key];
-                    }
-                    if (_item.id && !key.indexOf('image.')) {
-                        if (!_item['del.' + key]) {
-                            images[_item[key]] = _item[key];
-                        }
-                        delete _item[key];
-                        delete _item['del.' + key];
-                    }
-                });
                 item = new Item(_.extend(_item, {
-                    images: images,
+                    images: _.map(_.filter(Object.keys(_item), function each(key) {
+                        if (key.indexOf('image.')) {
+                            return false;
+                        }
+                        if (_item['del.' + key]) {
+                            delete _item[key];
+                            delete _item['del.' + key];
+                            return false;
+                        }
+                        return true;
+                    }), function each(key) {
+                        return _item[key];
+                    }).concat(_.map(images, function each(image) {
+                        statsd.increment([location.name, 'posting', 'image', platform]);
+                        return restler.file(image.path, null, image.size, null, image.type);
+                    })),
                     ipAddress: req.ip,
                     location: req.rendrApp.session.get('siteLocation'),
                     languageId: req.rendrApp.session.get('languageId'),

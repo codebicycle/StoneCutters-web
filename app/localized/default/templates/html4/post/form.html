@@ -56,6 +56,9 @@
         <input type="hidden" name="postingSession" value="{{postingSession}}">
         <input type="hidden" name="category.parentId" value="{{category.id}}">
         <input type="hidden" name="category.id" value="{{subcategory.id}}">
+        {% if itemId %}
+            <input type="hidden" name="id" value="{{itemId}}">
+        {% endif %}
         <div class="formField">
             <h3>
                 {{ dictionary["itemslisting.NavigatorByLocation"] }}: {{location.current.name}}<br>

@@ -234,7 +234,7 @@ module.exports = Base.extend({
     onImagesLoadStart: function(event) {
         this.$('#posting-contact-view').trigger('disablePost');
     },
-    onImagesLoadEnd: function(event, images) {
+    onImagesLoadEnd: function(event) {
         this.$('#posting-contact-view').trigger((this.isValid) ? 'enablePost' : 'disablePost');
     },
     onBeforeUnload: function(event) {
