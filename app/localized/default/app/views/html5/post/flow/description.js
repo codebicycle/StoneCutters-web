@@ -39,6 +39,7 @@ module.exports = Base.extend({
             this.parentView.getItem().set('priceType', field.value.key);
             this.render();
         }
+        this.$el.trigger('priceTypeChange');
     },
     events: {
         'show': 'onShow',
@@ -88,14 +89,16 @@ module.exports = Base.extend({
 
         var $field = $(event.target);
         var name = $field.attr('name');
+        var value = $field.val();
 
+        if (name !== 'priceType') {
+            value = this.cleanValue($field.val());
+            $field.val(value);
+        }
+        this.parentView.getItem().set(name !== 'priceC' ? name : 'price', value);
         if (name === 'priceType') {
-            this.$el.trigger('priceTypeChange', [$field.val()]);
+            this.$el.trigger('priceTypeChange');
         }
-        else {
-            $field.val(this.cleanValue($field.val()));
-        }
-        this.parentView.getItem().set(name !== 'priceC' ? name : 'price', $field.val());
     },
     onSubmit: function(event) {
         event.preventDefault();
@@ -135,13 +138,14 @@ module.exports = Base.extend({
         }
         return !failed;
     },
-    onPriceTypeChange: function(event, value) {
+    onPriceTypeChange: function(event) {
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();
 
         var $currency = this.$('select[name=currency_type]');
         var $price = this.$('input[name=priceC]');
+        var value = this.parentView.getItem().get('priceType');
 
         if (value === 'FIXED' || value === 'NEGOTIABLE') {
             $currency.removeAttr('disabled');

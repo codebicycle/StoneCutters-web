@@ -294,7 +294,6 @@ function toData(includeImages) {
 
     data['category.parentId'] = data['category.parentId'] || (this.get('category') || {}).parentId;
     data['category.id'] = data['category.id'] || (this.get('category') || {}).id;
-    delete data.category;
     if (typeof data.location !== 'string') {
         try {
             data.location = this.getLocation().url;
@@ -303,14 +302,19 @@ function toData(includeImages) {
             delete data.location;
         }
     }
-    if (_.isObject(data.price)) {
-        data.price = data.price.amount;
+    if (data.price) {
+        data.priceC = data.price;
     }
-    if (this.get('optionals')) {
-        _.each(this.get('optionals'), function each(optional) {
-            this.set(optional.name, optional.id || optional.value);
+    if (_.isObject(data.priceC)) {
+        data.priceC = data.priceC.amount;
+    }
+    if (data.priceC) {
+        data.priceC = parseFloat(data.priceC);
+    }
+    if (data.optionals) {
+        _.each(data.optionals, function each(optional) {
+            data[optional.name] = optional.id || optional.value;
         }, this);
-        this.unset('optionals');
     }
     if (includeImages && images && images.length) {
         data.images = images.join(',');
@@ -318,10 +322,15 @@ function toData(includeImages) {
     else {
         delete data.images;
     }
+    delete data.category;
+    delete data.price;
+    delete data.optionals;
     delete data.date;
     delete data.metadata;
     delete data.status;
     delete data.user;
+    delete data.hasEmail;
+    delete data.isFeed;
     delete data.slug;
     delete data.priceTypeData;
     delete data.additionalLocation;
@@ -330,7 +339,6 @@ function toData(includeImages) {
             delete data[key];
         }
     }, this);
-    console.log(data);
     return data;
 }
 

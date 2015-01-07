@@ -42,7 +42,7 @@ module.exports = Base.extend({
         }, this.onExit.bind(this));
         this.app.router.once('action:end', this.onStart);
         this.app.router.once('action:start', this.onEnd);
-        this.attachTrackMe(function(category, action) {
+        this.attachTrackMe(function trackMe(category, action) {
             return {
                 custom: [category, this.getItem().get('category').parentId || '-', this.getItem().get('category').id || '-', action].join('::')
             };
