@@ -91,12 +91,45 @@ module.exports = Base.extend({
 
         var $field = $(event.target);
         var $firstOption = $field.find('option').first();
+        var $neighborhoods = this.$('#field-neighborhood');
+        var url = $field.val();
 
         if ($firstOption.attr('value') === '') {
             $firstOption.remove();
         }
 
-        this.parentView.$el.trigger('fieldSubmit', [$field]);
+        var fetch = function(done) {
+            this.app.fetch({
+                neighborhoods: {
+                    collection: 'Neighborhoods',
+                    params: {
+                        location: url,
+                        languageId: this.app.session.get('languages')._byId[this.app.session.get('selectedLanguage')].id
+                    }
+                }
+            }, done.errfcb);
+        }.bind(this);
+
+        var error = function(error) {
+            console.log(error); // TODO: HANDLE ERRORS
+        }.bind(this);
+
+        var success = function(response) {
+            var options = response.neighborhoods.toJSON();
+            if (options.length) {
+                $neighborhoods.removeAttr('disabled').empty();
+                _.each(options, function each(neighborhood) {
+                    $neighborhoods.append('<option value="' + neighborhood.id + '">' + neighborhood.name + '</option>');
+                }.bind(this));
+                $neighborhoods.parents('.field-wrapper').removeClass('hide');
+            }
+
+            this.parentView.$el.trigger('fieldSubmit', [$field]);
+        }.bind(this);
+
+        asynquence().or(error)
+            .then(fetch)
+            .val(success);
     },
     getCities: function(state) {
         var options;
