@@ -45,7 +45,8 @@ module.exports = function itemRouter(app, dataAdapter) {
                                 name: data.name,
                                 email: data.email
                             },
-                            subject: data.subject,
+                            brand_id: zendesk.brand_id,
+                            subject: '[' + data.area + '] ' + data.subject,
                             comment: {
                                 body: data.message
                             }
