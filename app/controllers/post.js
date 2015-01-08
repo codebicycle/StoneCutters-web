@@ -230,7 +230,7 @@ function flow(params, callback) {
             item.set('priceType', item.get('priceTypeData').type);
             item.set('priceC', item.get('price').amount);
             callback(null, 'post/form', {
-                itemId: item.get('id'),
+                item: item,
                 postingSession: postingSession.get('postingSession'),
                 form: {
                     values: item.toJSON(),

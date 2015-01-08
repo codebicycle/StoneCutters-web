@@ -9,15 +9,23 @@
             <a href="{{ '/posting' | link }}">{{ dictionary["defaultheader.change"] }}</a>
         </h4>
         {% include (template + '/post/helpNumber.html') %}
-        <div class="formField">
-            <label>{{ dictionary["posting_fields_1.photos"] }}: <small>{{ dictionary["posting_photos.UpTo5XMore"] }}</small></label>
-            <div class="imgHolder">
-                <input id="file1" type="file" name="images[0]" />
+        {% if item and item.has('images') %}
+            <div class="images">
+                {% for image in item.get('images') %}
+                    <div class="imageCont" style="background-image: url({{ image.thumbnail }});"></div>
+                {% endfor %}
             </div>
-            <div class="imgHolder">
-                <input id="file2" type="file" name="images[1]" />
+        {% else %}
+            <div class="formField">
+                <label>{{ dictionary["posting_fields_1.photos"] }}: <small>{{ dictionary["posting_photos.UpTo5XMore"] }}</small></label>
+                <div class="imgHolder">
+                    <input id="file1" type="file" name="images[0]" />
+                </div>
+                <div class="imgHolder">
+                    <input id="file2" type="file" name="images[1]" />
+                </div>
             </div>
-        </div>
+        {% endif %}
 
         {% for field in fields.productDescription %}
             {% if  field.name == 'description' %}
@@ -56,8 +64,8 @@
         <input type="hidden" name="postingSession" value="{{postingSession}}">
         <input type="hidden" name="category.parentId" value="{{category.id}}">
         <input type="hidden" name="category.id" value="{{subcategory.id}}">
-        {% if itemId %}
-            <input type="hidden" name="id" value="{{itemId}}">
+        {% if item %}
+            <input type="hidden" name="id" value="{{ item.get('id') }}">
         {% endif %}
         <div class="formField">
             <h3>
