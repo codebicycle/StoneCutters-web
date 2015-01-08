@@ -766,7 +766,7 @@ module.exports = {
         }
     },
     //Ghana+
-    'www.olx.gh': {
+    'www.olx.com.gh': {
         'default': {
             siteId: 533994,
             logServer: 'logw309',
