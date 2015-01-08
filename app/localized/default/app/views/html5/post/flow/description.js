@@ -81,6 +81,7 @@ module.exports = Base.extend({
 
         this.fields = this.parentView.getFields().productDescription;
         this.render();
+        this.$el.trigger('priceTypeChange');
     },
     onChange: function(event) {
         event.preventDefault();
@@ -143,9 +144,9 @@ module.exports = Base.extend({
         event.stopPropagation();
         event.stopImmediatePropagation();
 
-        var $currency = this.$('select[name=currency_type]');
-        var $price = this.$('input[name=priceC]');
-        var value = this.parentView.getItem().get('priceType');
+        var $currency = this.$('[name=currency_type]');
+        var $price = this.$('[name=priceC]');
+        var value = this.parentView.getItem().get('priceType') || this.$('[name=priceType]').val();
 
         if (value === 'FIXED' || value === 'NEGOTIABLE') {
             $currency.removeAttr('disabled');

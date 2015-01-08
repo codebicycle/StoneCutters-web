@@ -88,9 +88,9 @@ function getLocation() {
     if (!location) {
         return location;
     }
-    if (location.children) {
+    if (location.children && location.children.length) {
         location = location.children[0];
-        if (location.children) {
+        if (location.children && location.children.length) {
             location = location.children[0];
         }
     }
