@@ -207,9 +207,10 @@
                     margin-top: 8px;
                     vertical-align: top;
                 }
-                
+
                 &.error {
-                    label {
+                    label,
+                    .label {
                         color: $red;
                     }
                     select,
@@ -236,7 +237,7 @@
                 margin-left: 125px;
             }
             .replyResult {
-                box($yellowSuccess, $yellowSuccess, 3px, 10px 10px 10px 50px, solid, 0);
+                box($pink, $pinkBorder, 3px, 10px 10px 10px 50px, solid, 0);
                 color: $black;
                 font-size: $s;
                 margin-left: 123px;
@@ -244,7 +245,7 @@
                 width: 420px;
 
                 &:before {
-                    color: $green;
+                    color: $red;
                     font-size: $l;
                     left: 20px;
                     position: absolute;
@@ -260,10 +261,17 @@
                         text-decoration: underline;
                     }
                 }
-                &.fail {
-                    background: $pink;
+                &.success {
+                    background: $greenLight;
+                    border-color: $greenBorder;
+                    height: 40px;
+                    margin-left: 3px;
+                    padding: 20px 10px 0 48px;
+                    width: 553px;
+
                     &:before {
-                        color: $red;
+                        top: 17px;
+                        color: $green;
                     }
                 }
             }

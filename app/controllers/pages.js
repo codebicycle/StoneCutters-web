@@ -55,9 +55,20 @@ function help(params, callback) {
         var platform = this.app.session.get('platform');
         var location = this.app.session.get('location');
 
+        var tab = 'new-olx';
+        var active = params.active;
+        var isContactEnabled = helpers.features.isEnabled.call(this, 'contactForm', platform, location.url);
+
+        if (active && !isContactEnabled) {
+            tab = 'faq';
+        } else if (active) {
+            tab = 'contact';
+        }
+
         // Delete this callback
         callback(null, {
             active: params.active,
+            tab: tab,
             isContactEnabled: helpers.features.isEnabled.call(this, 'contactForm', platform, location.url)
         });
         /*
