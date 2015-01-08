@@ -160,7 +160,7 @@ module.exports = function(app, dataAdapter) {
             function fail(err, track) {
                 var url = req.headers.referer || '/posting';
 
-                if (!track && !Array.isArray(err)) {
+                if (!track && err && !Array.isArray(err)) {
                     console.log('[OLX_DEBUG]', 'post', err instanceof Error ? err.stack : err);
                 }
                 formidable.error(req, url.split('?').shift(), err, item.toJSON(), function redirect(url) {
