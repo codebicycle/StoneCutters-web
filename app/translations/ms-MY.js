@@ -436,6 +436,7 @@ module.exports = {
     'misc.WithPicsOnly': 'Ads with photos only',
     'contact_us.ContactBrand': 'Hubungi OLX',
     'featured_listings.ClickHereToReadOurTermsOfService': 'Sila klik di sini untuk membaca Syarat-syarat Perkhidmatan kami.',
+    'featured_listings.Feature': 'Tampilkan',
     'featured_listings.FeatureYourListingForUp20TimesVisibility': '<<LINK_FEATURED_LISTINGS>>Tampilkan iklan anda<</LINK_FEATURED_LISTINGS>> sehingga 20 kali lebih terserlah dan senang dilihat!',
     'featured_listings.OffensivePornographicSpamAdsWillNotBeFeaturedOrReimbursed': 'Iklan yang mengandungi perkataan  kesat, pornografi, spam (iklan yang sama), berpotensi menjadi suatu penipuan atau melanggar hak cipta tidak akan ditampilkan dan bayaran tidak akan dikembalikan.',
     'featured_listings.TopListingsAndSearchResults': 'Bahagian Atas Penyenaraian dan Keputusan Carian',

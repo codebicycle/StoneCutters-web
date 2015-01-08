@@ -436,6 +436,7 @@ module.exports = {
     'misc.WithPicsOnly': 'Ads with photos only',
     'contact_us.ContactBrand': 'Contacte-nos OLX',
     'featured_listings.ClickHereToReadOurTermsOfService': 'Clique aqui para ler nossas Termos do Servi\xE7o',
+    'featured_listings.Feature': 'Destacar',
     'featured_listings.FeatureYourListingForUp20TimesVisibility': '<<LINK_FEATURED_LISTINGS>>Destaque o seu an\xFAncio<</LINK_FEATURED_LISTINGS>> at\xE9 vinte vezes a visibilidade!',
     'featured_listings.OffensivePornographicSpamAdsWillNotBeFeaturedOrReimbursed': 'An\xFAncios que s\xE3o ofensivos, pornogr\xE1ficos, spam (entradas duplicadas), poss\xEDveis golpes ou infrinjam leis de direitos autorais n\xE3o seram destacados e o pagamento n\xE3o ser\xE1 reembolsado.',
     'featured_listings.TopListingsAndSearchResults': 'Top de an\xFAncios e resultados de pesquisa',

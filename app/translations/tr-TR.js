@@ -436,6 +436,7 @@ module.exports = {
     'misc.WithPicsOnly': 'Ads with photos only',
     'contact_us.ContactBrand': '\u0130leti\u015Fime ge\xE7 OLX',
     'featured_listings.ClickHereToReadOurTermsOfService': 'Kullan\u0131m \u015Eartlar\u0131n\u0131 okumak i\xE7in buraya t\u0131klay\u0131n.',
+    'featured_listings.Feature': 'Vitrin \u0130lan\u0131 Olarak Yay\u0131nla',
     'featured_listings.FeatureYourListingForUp20TimesVisibility': '20 kereye kadar daha fazla g\xF6r\xFCnt\xFClenme i\xE7in <<LINK_FEATURED_LISTINGS>>\u0130lan\u0131n\u0131z\u0131 vitrine ta\u015F\u0131y\u0131n<</LINK_FEATURED_LISTINGS>>!',
     'featured_listings.OffensivePornographicSpamAdsWillNotBeFeaturedOrReimbursed': 'Taciz edici, pornografik, spam (ayn\u0131 ilan\u0131 ayn\u0131 anda birka\xE7 kere yay\u0131nlama), potansiyel doland\u0131r\u0131c\u0131l\u0131k i\xE7eren ya da telif haklar\u0131n\u0131 ihlal edici ilanlar, vitrin ilan\u0131 yap\u0131lmaz ve bu tarz ilanlarda geri \xF6deme yap\u0131lmaz.',
     'featured_listings.TopListingsAndSearchResults': '\u0130lanlar\u0131n ve Arama Sonu\xE7lar\u0131n\u0131n En \xDCst\xFCne',

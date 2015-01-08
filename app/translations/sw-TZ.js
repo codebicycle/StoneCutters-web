@@ -436,6 +436,7 @@ module.exports = {
     'misc.WithPicsOnly': 'Matangazo yaliyo na picha tu',
     'contact_us.ContactBrand': 'Wasiliana na OLX',
     'featured_listings.ClickHereToReadOurTermsOfService': 'Bonyeza hapa ili kusoma Masharti yetu ya Huduma.',
+    'featured_listings.Feature': 'Onyesha',
     'featured_listings.FeatureYourListingForUp20TimesVisibility': '<<LINK_FEATURED_LISTINGS>>Onyesha tangazo lako<</LINK_FEATURED_LISTINGS>> kwa hadi muonekano wa mara 20!',
     'featured_listings.OffensivePornographicSpamAdsWillNotBeFeaturedOrReimbursed': 'Matangazo ambayo ni ya kukera, ponografia, barua taka  (matangazo maradufu), uwezekano wa kashfa au inavunja hakimiliki haitaonyeshwa na malipo haitarejeshwa.',
     'featured_listings.TopListingsAndSearchResults': 'Machapisho ya Juu na Matokeo ya Utafutaji',

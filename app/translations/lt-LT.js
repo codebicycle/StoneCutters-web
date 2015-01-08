@@ -436,6 +436,7 @@ module.exports = {
     'misc.WithPicsOnly': 'Ads with photos only',
     'contact_us.ContactBrand': 'Susisiekite su OLX',
     'featured_listings.ClickHereToReadOurTermsOfService': 'Spustel\u0117kite \u010Dia, kad perskaitytum\u0117te m\u016Bs\u0173 paslaug\u0173 teisines s\u0105lygas.',
+    'featured_listings.Feature': 'Ypatyb\u0117',
     'featured_listings.FeatureYourListingForUp20TimesVisibility': '<<LINK_FEATURED_LISTINGS>>Reklamuokite savo s\u0105ra\u0161\u0105<</LINK_FEATURED_LISTINGS>>, padidindami jo matomum\u0105 iki 20 kart\u0173!',
     'featured_listings.OffensivePornographicSpamAdsWillNotBeFeaturedOrReimbursed': '\u012E\u017Eeid\u017Eiantys, pornografiniai, nepageidaujami reklaminiai skelbimai (nukopijuoti skelbimai), potencial\u016Bs nepageidaujami reklaminiai skelbimai arba autori\u0173 teisi\u0173 pa\u017Eeidimai nebus reklamuojami ir u\u017E juos sumok\u0117tas mokestis nebus atlygintas.',
     'featured_listings.TopListingsAndSearchResults': 'Pirmieji s\u0105ra\u0161uose esantys ir paie\u0161kos rezultatai',

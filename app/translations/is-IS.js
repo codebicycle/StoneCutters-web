@@ -436,6 +436,7 @@ module.exports = {
     'misc.WithPicsOnly': 'Ads with photos only',
     'contact_us.ContactBrand': 'Hafa samband vi\xF0 OLX',
     'featured_listings.ClickHereToReadOurTermsOfService': 'Smelltu h\xE9r til a\xF0 lesa \xFEj\xF3nustuskilm\xE1lana.',
+    'featured_listings.Feature': 'S\xE9rbirting',
     'featured_listings.FeatureYourListingForUp20TimesVisibility': '<<LINK_FEATURED_LISTINGS>>S\xE9rbirtu augl\xFDsingarnar \xFE\xEDnar<</LINK_FEATURED_LISTINGS>> til a\xF0 f\xE1 allt a\xF0 20 sinnum fleiri innlit!',
     'featured_listings.OffensivePornographicSpamAdsWillNotBeFeaturedOrReimbursed': 'Augl\xFDsingar sem eru m\xF3\xF0gandi, kl\xE1mfengnar, til ama (fj\xF6ldaaugl\xFDsingar), hugsanlega til ama e\xF0a brj\xF3ta \xE1 h\xF6fundarr\xE9tti ver\xF0a ekki s\xE9rbirtar og ekki ver\xF0ur endurgreitt fyrir \xFE\xE6r.',
     'featured_listings.TopListingsAndSearchResults': 'Efst \xE1 augl\xFDsingas\xED\xF0um og leitarni\xF0urst\xF6\xF0um',

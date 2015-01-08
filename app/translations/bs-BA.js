@@ -436,6 +436,7 @@ module.exports = {
     'misc.WithPicsOnly': 'Ads with photos only',
     'contact_us.ContactBrand': 'Kontaktirajte OLX',
     'featured_listings.ClickHereToReadOurTermsOfService': 'Kliknite ovdje da pro\u010Ditate na\u0161e Uslove kori\u0161tenja usluge.',
+    'featured_listings.Feature': 'Istaknuto',
     'featured_listings.FeatureYourListingForUp20TimesVisibility': '<<LINK_FEATURED_LISTINGS>>Istaknite svoj oglas<</LINK_FEATURED_LISTINGS>> radi i do 20 puta ve\u0107e vidljivosti!',
     'featured_listings.OffensivePornographicSpamAdsWillNotBeFeaturedOrReimbursed': 'Oglasi uvredljivog i pornografskog sadr\u017Eaja, ne\u017Eeljena po\u0161ta (duplicirani oglasi), potencijalna ne\u017Eeljena po\u0161ta ili koji sadr\u017Ee kr\u0161enje autorskih prava ne\u0107e biti istaknuti i za nih se ne\u0107e se izvr\u0161iti povrat upla\u0107enih sredstava.',
     'featured_listings.TopListingsAndSearchResults': 'Glavni oglasi i Rezultati pretrage',

@@ -436,6 +436,7 @@ module.exports = {
     'misc.WithPicsOnly': 'Ads with photos only',
     'contact_us.ContactBrand': 'Ota yhteytt\xE4 yhti\xF6\xF6n OLX',
     'featured_listings.ClickHereToReadOurTermsOfService': 'Lue palveluehtomme napsauttamalla t\xE4st\xE4.',
+    'featured_listings.Feature': 'Toiminto',
     'featured_listings.FeatureYourListingForUp20TimesVisibility': '<<LINK_FEATURED_LISTINGS>>N\xE4yt\xE4 listauksesi<</LINK_FEATURED_LISTINGS>> jopa 20 kertaa enemm\xE4n!',
     'featured_listings.OffensivePornographicSpamAdsWillNotBeFeaturedOrReimbursed': 'Loukkaavia, pornografisia, roskapostia sis\xE4lt\xE4vi\xE4 (ilmoituksien kopiot), mahdollisia huijauksia sis\xE4lt\xE4vi\xE4 tai tekij\xE4noikeuksia loukkaavia ilmoituksia ei julkaista eik\xE4 niiden maksua palauteta.',
     'featured_listings.TopListingsAndSearchResults': 'Listauksien k\xE4rki ja hakutulokset',

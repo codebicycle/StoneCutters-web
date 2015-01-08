@@ -436,6 +436,7 @@ module.exports = {
     'misc.WithPicsOnly': 'Ads with photos only',
     'contact_us.ContactBrand': 'Kontaktujte OLX',
     'featured_listings.ClickHereToReadOurTermsOfService': 'Podm\xEDnky pou\u017Eit\xED zobrazte klepnut\xEDm sem.',
+    'featured_listings.Feature': 'Prezentovat',
     'featured_listings.FeatureYourListingForUp20TimesVisibility': '<<LINK_FEATURED_LISTINGS>>Prezentujte sv\u016Fj inzer\xE1t<</LINK_FEATURED_LISTINGS>> a zv\u011Bt\u0161ete jeho viditelnost a\u017E 20x !',
     'featured_listings.OffensivePornographicSpamAdsWillNotBeFeaturedOrReimbursed': 'Nebudou zobrazeny inzer\xE1ty, kter\xE9 jsou ur\xE1\u017Eliv\xE9, pornografick\xE9, podvodn\xE9 (duplicitn\xED inzer\xE1ty), potenci\xE1ln\u011B podvodn\xE9 nebo kter\xE9 poru\u0161uj\xED autorsk\xE1 pr\xE1va; platby za takov\xE9 inzer\xE1ty nebudou vr\xE1ceny.',
     'featured_listings.TopListingsAndSearchResults': 'Horn\xED \u010D\xE1st str\xE1nky inzer\xE1t\u016F a v\xFDsledk\u016F hled\xE1n\xED',

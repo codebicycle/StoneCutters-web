@@ -436,6 +436,7 @@ module.exports = {
     'misc.WithPicsOnly': 'Ads with photos only',
     'contact_us.ContactBrand': 'V\xF5tke \xFChendust OLX',
     'featured_listings.ClickHereToReadOurTermsOfService': 'Teenindustingimuste lugemiseks kl\xF5psake siia.',
+    'featured_listings.Feature': 'Esilet\xF5stetud',
     'featured_listings.FeatureYourListingForUp20TimesVisibility': '<<LINK_FEATURED_LISTINGS>>T\xF5stke oma kuulutus esile<</LINK_FEATURED_LISTINGS>>ja kuulutuse n\xE4htavus suureneb kuni 20 korda!',
     'featured_listings.OffensivePornographicSpamAdsWillNotBeFeaturedOrReimbursed': 'Esile ei t\xF5steta solvavat, pornograafilist, r\xE4mpsposti (korduvaid kuulutusi), potentsiaalset pettust ja autori\xF5igusi rikkuvat sisu sisaldavaid kuulutusi ning selliste kuulutuste eest makstud raha ei tagastata.',
     'featured_listings.TopListingsAndSearchResults': 'Esimesena kuulutuste loendis ja otsingutulemustes ',

@@ -436,6 +436,7 @@ module.exports = {
     'misc.WithPicsOnly': 'Ads with photos only',
     'contact_us.ContactBrand': 'L\xE9pjen kapcsolatba az OLX-szel',
     'featured_listings.ClickHereToReadOurTermsOfService': 'Kattintson ide, \xE9s olvassa el a Szolg\xE1ltat\xE1si felt\xE9teleinket.',
+    'featured_listings.Feature': 'Kiemel\xE9s',
     'featured_listings.FeatureYourListingForUp20TimesVisibility': '<<LINK_FEATURED_LISTINGS>>Emelje ki hirdet\xE9s\xE9t<</LINK_FEATURED_LISTINGS>> ak\xE1r 20-szoros l\xE1that\xF3s\xE1g\xE9rt!',
     'featured_listings.OffensivePornographicSpamAdsWillNotBeFeaturedOrReimbursed': 'S\xE9rt\u0151, pornografikus rekl\xE1mok, lev\xE9lszemetek (ism\xE9telt rekl\xE1mok), potenci\xE1lis csal\xE1sok vagy a szerz\u0151i jogot s\xE9rt\u0151 hirdet\xE9sek nem jelenhetek meg a kiemeltek k\xF6z\xF6tt, \xE9s az ilyenek d\xEDj\xE1t nem t\xE9r\xEDtj\xFCk vissza.',
     'featured_listings.TopListingsAndSearchResults': 'Listavezet\xE9s \xE9s a Keres\xE9si eredm\xE9nyek',

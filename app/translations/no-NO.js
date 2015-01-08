@@ -436,6 +436,7 @@ module.exports = {
     'misc.WithPicsOnly': 'Ads with photos only',
     'contact_us.ContactBrand': 'Kontakt OLX',
     'featured_listings.ClickHereToReadOurTermsOfService': 'Klikk her for \xE5 lese v\xE5re brukervilk\xE5r.',
+    'featured_listings.Feature': 'Funksjon',
     'featured_listings.FeatureYourListingForUp20TimesVisibility': '<<LINK_FEATURED_LISTINGS>>Fremhev din annonse<</LINK_FEATURED_LISTINGS>> for \xE5 \xF8ke synligheten opptil 20 ganger!',
     'featured_listings.OffensivePornographicSpamAdsWillNotBeFeaturedOrReimbursed': 'Annonser som kan virke st\xF8tende, pornografiske, spam (duplikate annonser), og annonser som mistenkes som fors\xF8k p\xE5 svindel eller som bryter lover om opphavsrett vil ikke bli presentert og penger vil ikke bli refundert.',
     'featured_listings.TopListingsAndSearchResults': '\xD8verst p\xE5 annonselister og s\xF8keresultater',

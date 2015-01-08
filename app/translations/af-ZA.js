@@ -436,6 +436,7 @@ module.exports = {
     'misc.WithPicsOnly': 'Advts. met slegs foto\'s',
     'contact_us.ContactBrand': 'Kontak OLX',
     'featured_listings.ClickHereToReadOurTermsOfService': 'Klik hier vir ons Diensvoorwaardes.',
+    'featured_listings.Feature': 'Glanspunt',
     'featured_listings.FeatureYourListingForUp20TimesVisibility': '<<LINK_FEATURED_LISTINGS>>Vertoon jou glansadvt.<</LINK_FEATURED_LISTINGS>> vir 20 keer meer sigbaarheid!',
     'featured_listings.OffensivePornographicSpamAdsWillNotBeFeaturedOrReimbursed': 'Advts. wat aanstootlik, pornografies, spam (duplikaatadvts.) of potensi\xEBle swendelary is, of wat kopieregte skend sal nie vertoon word nie en betaling sal nie terugbetaal word nie.',
     'featured_listings.TopListingsAndSearchResults': 'Topadvertensies en Soekresultate',

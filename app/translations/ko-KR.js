@@ -436,6 +436,7 @@ module.exports = {
     'misc.WithPicsOnly': 'Ads with photos only',
     'contact_us.ContactBrand': 'OLX \uC5F0\uB77D\uCC98',
     'featured_listings.ClickHereToReadOurTermsOfService': '\uC774\uACF3\uC5D0 \uD074\uB9AD\uD558\uC5EC \uC57D\uC815\uC870\uAC74\uC744 \uCC38\uC870\uD558\uC138\uC694.',
+    'featured_listings.Feature': '\uD2B9\uC9D5',
     'featured_listings.FeatureYourListingForUp20TimesVisibility': '\uB208\uC5D0 \uB74C \uC218 \uC788\uAC8C 20\uBC30\uC758 \uD6A8\uACFC\uB97C \uAC00\uC838\uC624\uB294<<LINK_FEATURED_LISTINGS>>\uADC0\uD558\uC758 \uBAA9\uB85D\uC11C\uB97C \uD2B9\uC0C9\uD654\uD558\uC138\uC694<</LINK_FEATURED_LISTINGS>>!',
     'featured_listings.OffensivePornographicSpamAdsWillNotBeFeaturedOrReimbursed': '\uBD88\uCF8C\uC131, \uC678\uC124\uC131, \uC2A4\uD338(2\uC911 \uAD11\uACE0), \uC7A0\uC7AC\uC801 \uC2A4\uCEA0 \uD639\uC740 \uD310\uAD8C \uCE68\uD574\uC758 \uAD11\uACE0\uB294 \uAC8C\uC7AC\uD560 \uC218 \uC5C6\uC73C\uBA70 \uC9C0\uBD88\uBC18\uD658\uC774 \uC774\uB8E8\uC5B4\uC9C8 \uC218 \uC5C6\uC2B5\uB2C8\uB2E4. ',
     'featured_listings.TopListingsAndSearchResults': '\uBAA9\uB85D\uC11C\uC640 \uAC80\uC0C9 \uACB0\uACFC\uC758 \uC0C1\uB2E8',

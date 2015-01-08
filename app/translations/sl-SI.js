@@ -436,6 +436,7 @@ module.exports = {
     'misc.WithPicsOnly': 'Ads with photos only',
     'contact_us.ContactBrand': 'Stik z OLX',
     'featured_listings.ClickHereToReadOurTermsOfService': 'Kliknite tukaj, da bi prebrali na\u0161e Pogoje storitev.',
+    'featured_listings.Feature': 'Predstava',
     'featured_listings.FeatureYourListingForUp20TimesVisibility': '<<LINK_FEATURED_LISTINGS>>Predstavite svoj oglas<</LINK_FEATURED_LISTINGS>> in pove\u010Dajte vidnost do 20-krat!',
     'featured_listings.OffensivePornographicSpamAdsWillNotBeFeaturedOrReimbursed': 'Oglasi, ki so \u017Ealjivi, pornografski, vsiljena po\u0161ta (podvojeni oglasi), mogo\u010De prevare ali ki kr\u0161ijo avtorske pravice, ne bodo predstavljeni in pla\u010Dilo zanje ne bo povrnjeno.',
     'featured_listings.TopListingsAndSearchResults': 'Na vrhu objav in pri rezultatih iskanja',

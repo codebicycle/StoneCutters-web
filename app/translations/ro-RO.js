@@ -436,6 +436,7 @@ module.exports = {
     'misc.WithPicsOnly': 'Ads with photos only',
     'contact_us.ContactBrand': 'Contacta\u0163i OLX',
     'featured_listings.ClickHereToReadOurTermsOfService': 'Face\u0163i click aici pentru a citi Termenii de furnizare a serviciilor.',
+    'featured_listings.Feature': 'Eviden\u0163iere',
     'featured_listings.FeatureYourListingForUp20TimesVisibility': '<<LINK_FEATURED_LISTINGS>>Eviden\u0163ia\u0163i-v\u0103 listarea<</LINK_FEATURED_LISTINGS>> pentru o vizibilitate de 20 de ori mai mare!',
     'featured_listings.OffensivePornographicSpamAdsWillNotBeFeaturedOrReimbursed': 'Anun\u0163urile ofensive, pornografice, spam (list\u0103ri duble), poten\u0163iale scam-uri sau cele care \xEEncalc\u0103 drepturile de autor nu vor fi prezentate \u015Fi plata nu va fi rambursat\u0103.',
     'featured_listings.TopListingsAndSearchResults': '\xCEnceputul list\u0103rilor \u015Fi rezultatelor c\u0103ut\u0103rii',

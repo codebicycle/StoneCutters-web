@@ -436,6 +436,7 @@ module.exports = {
     'misc.WithPicsOnly': 'Ads with photos only',
     'contact_us.ContactBrand': '\u8054\u7CFBOLX',
     'featured_listings.ClickHereToReadOurTermsOfService': '\u70B9\u51FB\u8FD9\u91CC\u4EE5\u4FBF\u9605\u8BFB\u6211\u4EEC\u7684\u4F7F\u7528\u6761\u6B3E.',
+    'featured_listings.Feature': '\u7CBE\u9009',
     'featured_listings.FeatureYourListingForUp20TimesVisibility': '<<LINK_FEATURED_LISTINGS>>\u7CBE\u9009\u60A8\u7684\u5E7F\u544A<</LINK_FEATURED_LISTINGS>> \u63D0\u9AD8\u53EF\u89C1\u5EA6\u9AD8\u8FBE20\u500D.',
     'featured_listings.OffensivePornographicSpamAdsWillNotBeFeaturedOrReimbursed': '\u5177\u6709\u653B\u51FB\u6027\u3001\u8272\u60C5\u6210\u5206\u3001\u5783\u573E\u5E7F\u544A(\u91CD\u590D\u5185\u5BB9)\u3001\u6709\u6B3A\u8BC8\u53EF\u80FD\u3001\u6216\u4FB5\u72AF\u7248\u6743\u7684\u5E7F\u544A\u5C06\u4E0D\u88AB\u520A\u767B\u800C\u4E14\u652F\u4ED8\u7684\u8D39\u7528\u4E0D\u4E88\u9000\u6B3E.',
     'featured_listings.TopListingsAndSearchResults': '\u7F6E\u9876\u5E7F\u544A\u548C\u641C\u7D22\u7ED3\u679C',

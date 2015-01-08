@@ -436,6 +436,7 @@ module.exports = {
     'misc.WithPicsOnly': 'C\xE1c rao v\u1EB7t ch\u1EC9 c\xF3 \u1EA3nh',
     'contact_us.ContactBrand': 'Li\xEAn h\u1EC7 OLX',
     'featured_listings.ClickHereToReadOurTermsOfService': 'B\u1EA5m v\xE0o \u0111\xE2y \u0111\u1EC3 \u0111\u1ECDc \u0110i\u1EC1u Kho\u1EA3n D\u1ECBch V\u1EE5.',
+    'featured_listings.Feature': 'Ti\xEAu bi\u1EC3u',
     'featured_listings.FeatureYourListingForUp20TimesVisibility': '<<LINK_FEATURED_LISTINGS>>L\xE0m n\u1ED5i b\u1EADt rao v\u1EB7t c\u1EE7a b\u1EA1n<</LINK_FEATURED_LISTINGS>> t\u0103ng th\xEAm 20 l\u1EA7n m\u1EE9c \u0111\u1ED9 hi\u1EC3n th\u1ECB!',
     'featured_listings.OffensivePornographicSpamAdsWillNotBeFeaturedOrReimbursed': 'Qu\u1EA3ng c\xE1o mang t\xEDnh x\xFAc ph\u1EA1m, khi\xEAu d\xE2m, spam (qu\u1EA3ng c\xE1o nhi\u1EC1u t\u1EA7ng), scam ti\u1EC1m \u1EA9n ho\u1EB7c vi ph\u1EA1m b\u1EA3n quy\u1EC1n s\u1EBD kh\xF4ng \u0111\u01B0\u1EE3c hi\u1EC3n th\u1ECB v\xE0 ti\u1EC1n qu\u1EA3ng c\xE1o s\u1EBD kh\xF4ng \u0111\u01B0\u1EE3c tr\u1EA3 l\u1EA1i.',
     'featured_listings.TopListingsAndSearchResults': '\u0110\u1EE9ng \u0111\u1EA7u c\xE1c Rao v\u1EB7t v\xE0 K\u1EBFt qu\u1EA3 t\xECm ki\u1EBFm',

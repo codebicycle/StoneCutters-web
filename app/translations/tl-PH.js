@@ -436,6 +436,7 @@ module.exports = {
     'misc.WithPicsOnly': 'Ads with photos only',
     'contact_us.ContactBrand': 'Makipag-ugnay sa OLX',
     'featured_listings.ClickHereToReadOurTermsOfService': 'I-click ito para mabasa ang aming mga Alituntunin sa Serbisyo.',
+    'featured_listings.Feature': 'Tampok',
     'featured_listings.FeatureYourListingForUp20TimesVisibility': '<<LINK_FEATURED_LISTINGS>>Itampok ang iyong patalastas<</LINK_FEATURED_LISTINGS>> ng hanggang 20 beses na visibility!',
     'featured_listings.OffensivePornographicSpamAdsWillNotBeFeaturedOrReimbursed': 'Hindi itatampok at hindi ibabalik ang bayad ng mga patalastas na nakaka-insulto, may kalaswaan, spam (may katulad na patalastas), malamang na panloloko o lumalabag sa mga copyright.',
     'featured_listings.TopListingsAndSearchResults': 'Una sa mga Talaan at mga Resulta ng Paghahanap',

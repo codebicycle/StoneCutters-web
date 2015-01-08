@@ -436,6 +436,7 @@ module.exports = {
     'misc.WithPicsOnly': 'Ads with photos only',
     'contact_us.ContactBrand': 'Contact met OLX',
     'featured_listings.ClickHereToReadOurTermsOfService': 'Klik hier om onze voorwaarden te lezen.',
+    'featured_listings.Feature': 'Als topper plaatsen',
     'featured_listings.FeatureYourListingForUp20TimesVisibility': '<<LINK_FEATURED_LISTINGS>>Plaats je advertentie als topper<</LINK_FEATURED_LISTINGS>> en profiteer van een twintig keer betere zichtbaarheid.',
     'featured_listings.OffensivePornographicSpamAdsWillNotBeFeaturedOrReimbursed': 'Advertenties die inbreuk maken op auteursrechten of die aanstootgevende inhoud, pornografisch materiaal, spam (dubbele advertenties) of potenti\xEBle oplichtingspraktijken bevatten, worden niet als topper geplaatst. Het betaalde bedrag wordt niet terugbetaald.',
     'featured_listings.TopListingsAndSearchResults': 'Rubrieks- en zoektopper',

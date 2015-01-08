@@ -436,6 +436,7 @@ module.exports = {
     'misc.WithPicsOnly': 'Ads with photos only',
     'contact_us.ContactBrand': 'Kontakte Nou OLX',
     'featured_listings.ClickHereToReadOurTermsOfService': 'Klike la pou li R\xE8gleman pou S\xE8vis nou.',
+    'featured_listings.Feature': 'Spesyal',
     'featured_listings.FeatureYourListingForUp20TimesVisibility': '<<LINK_FEATURED_LISTINGS>>Prezante Anons ou<</LINK_FEATURED_LISTINGS>>pou yo ka w\xE8 li jiska 20 fwa plis ank\xF2!',
     'featured_listings.OffensivePornographicSpamAdsWillNotBeFeaturedOrReimbursed': 'Anons ki ofansiv, montre p\xF2no, "spam", kapab zak malon\xE8t ou vyole dwa sou kopye pap par\xE8t sou anons speyal epi nou pap ranbouse peman an. ',
     'featured_listings.TopListingsAndSearchResults': 'T\xE8t Rezilta Anons lan ak Rech\xE8ch',

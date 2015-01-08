@@ -436,6 +436,7 @@ module.exports = {
     'misc.WithPicsOnly': 'Solo anuncios con fotos',
     'contact_us.ContactBrand': 'Comun\xEDcate con OLX.',
     'featured_listings.ClickHereToReadOurTermsOfService': 'Haz clic aqu\xED para leer nuestros T\xE9rminos de uso.',
+    'featured_listings.Feature': 'Destacar',
     'featured_listings.FeatureYourListingForUp20TimesVisibility': '<<LINK_FEATURED_LISTINGS>>Destaca tu anuncio<</LINK_FEATURED_LISTINGS>> para que tenga hasta 20 veces m\xE1s visibilidad.',
     'featured_listings.OffensivePornographicSpamAdsWillNotBeFeaturedOrReimbursed': 'No se reembolsar\xE1 el monto abonado ni se destacar\xE1n los anuncios que sean ofensivos, pornogr\xE1ficos, fraudulentos, que infrinjan derechos de copyright o que sean duplicados (hayan sido publicados por el mismo usuario en m\xE1s de una categor\xEDa de clasificaci\xF3n o foro o en m\xE1s de un \xE1rea metropolitana).',
     'featured_listings.TopListingsAndSearchResults': 'Parte superior del Listado de anuncios y Resultados de b\xFAsqueda',
