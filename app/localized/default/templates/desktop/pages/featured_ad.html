@@ -1,0 +1,13 @@
+{% if result == 'ok' %}
+<aside id="notification-message" class="notification-message icons icon-check">
+    {{ dictionary["featured_listings.YourAdWillBeFeaturedSoon"] }}
+    <p>
+        {% set itemLink = (item.slug.replace(domain, fullDomain)) %}
+        <a href="{{ itemLink }}">{{ itemLink }}</a>
+    </p>
+</aside>
+{% else %}
+TODO Handle error
+{% endif %}
+
+{% view 'partials/tracking' %}

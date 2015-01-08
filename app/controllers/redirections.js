@@ -13,7 +13,8 @@ var phpRedirections = {
     login: 'login',
     switch_domain: '',
     myolx: 'myolx/myadslisting',
-    yourads: 'myolx/myadslisting'
+    yourads: 'myolx/myadslisting',
+    featured_ad: 'featured_ad'
 };
 var phpPaths = Object.keys(phpRedirections);
 

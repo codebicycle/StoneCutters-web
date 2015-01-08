@@ -14,45 +14,79 @@
                 <a href="{{ '/featured_listings' | link }}" target="_blank">Como posso colocar os meus anúncios em destaque?</a>
             </small>
         </h2>
-        <div class="inner" style="margin:0">
-            <div id="form-feature">
-                <h5>{{ dictionary["itemslisting.FeatureOnlinePayment"] }}</h5>
-------------------------------------------------------------------------------------------------------------------------------------------------------
-                <div class="feature-ad-details">
-                    {% for section in featureAd.get('sections') %}
-                        {% if section.enabled %}
-                            <p class="fad-section-{{ section.sectionId }}">
-                                <input type="checkbox" name="fad-section-{{ section.sectionId }}-enabled" id="fad-section-{{ section.sectionId }}-enabled" value="{{ section.sectionId }}">
-                                <label for="fad-section-{{ section.sectionId }}-enabled">
-                                    {% if section.enabled %}
-                                    {{ dictionary["featured_listings.TopListingsAndSearchResults"] }}
-                                </label>
-                                <br>
+        <div class="feature-ad-form">
+            <h5>{{ dictionary["itemslisting.FeatureOnlinePayment"] }}</h5>
+            {% if featureAd.has('errors') and featureAd.get('errors').length != 0 %}
+                <div class="feature-ad-errors">
+                    {% for error in featureAd.get('errors') %}
+                        <span class="fad-error">{{ error }}</span>
+                    {% endfor %}
+                </div>
+            {% endif %}
+            <div class="feature-ad-details">
+                {% for section in featureAd.get('sections') %}
+                    <p class="fad-section-{{ section.sectionId }}-form">
+                        <input type="checkbox" name="fad-section-{{ section.sectionId }}-check" id="fad-section-{{ section.sectionId }}-check" value="{{ section.sectionId }}" class="fad-check" {% if section.enabled %}data-id="{{ section.sectionId }}" data-payment="{{ section.paymentProviderId }}" data-concept="{{ section.conceptId }}" data-item="{{ item.id }}"{% else %}disabled=""{% endif %}>
+                        <label for="fad-section-{{ section.sectionId }}-check">
+                            {% if section.sectionId == '4' %}
+                                {{ dictionary["featured_listings_emails.HomePage"] }}
+                            {% elif section.sectionId == '3' %}
+                                {{ dictionary["featured_listings.TopListingsAndSearchResults"] }}
+                            {% endif %}
+                        </label>
+                        <br>
+                        {% if section.enabled and section.weeks %}
+                            <select id="fad-section-{{ section.sectionId }}-weeks" name="fad-section-{{ section.sectionId }}-weeks">
+                                {% for week in (1 | rangeToArray(section.weeks)) %}
+                                    <option value="{{ week }}">
+                                        {{ week }}
+                                        {% if week == 1 %}
+                                            {{ dictionary["messages_date_format.week"] }}
+                                        {% else %}
+                                            {{ dictionary["messages_date_format.WEEKS"] }}
+                                        {% endif %}
+                                    </option>
+                                {% endfor %}
+                            </select>
+                        {% endif %}
+                    </p>
+                    {% if section.enabled %}
+                        <p class="fad-section-{{ section.sectionId }}-price">
+                            <span>{{ section.price.displayPrice }}</span>
+                            <br>
+                            <small>{{ dictionary["itemslisting.PerWeek"] }}</small>
+                        </p>
+                    {% else %}
+                        {% if section.errors and section.errors.length != 0 %}
+                            <p class="fad-section-{{ section.sectionId }}-errors">
+                                {% for error in section.errors %}
+                                    <span class="fad-error">{{ error }}</span>
+                                {% endfor %}
                             </p>
                         {% endif %}
-                    {% endfor %}
-                    <p class="feat_block_left">
-                        <input type="checkbox" name="featured_0" id="f-hp" value="10" disabled="">
-                        <label for="f-lp">{{ dictionary["featured_listings.TopListingsAndSearchResults"] }}</label>
-                        <br>
-                        {{ dictionary["featured_listings.UnableToFeature_NoImages"] }}
-                    </p>
--------------------------------
-                    <div class="feat_price">
-                        <a class="olx-ui-button button-pending-ad" href="{{ ['/myolx/edititem?editid=', item.id, '&sk=', sk] | join('') | link }}">{{ dictionary["edititem_submitbutton.EditIt"] }}</a>
+                    {% endif %}
+                {% endfor %}
+                {% if not item.images or item.images.length == 0 %}
+                    <div class="fad-message">
+                        {% if not item.price or item.price.amount == 0 %}
+                            {{ dictionary["featured_listings.UnableToFeature_NoImages_NoPrice"] }}
+                        {% else %}
+                            {{ dictionary["featured_listings.UnableToFeature_NoImages"] }}
+                        {% endif %}
                     </div>
+                {% endif %}
+                <div class="fad-edit">
+                    <a href="{{ ['/myolx/edititem?editid=', item.id, '&sk=', sk] | join('') | link }}">{{ dictionary["edititem_submitbutton.EditIt"] }}</a>
                 </div>
-------------------------------------------------------------------------------
-                <div id="featureFormSubmit">
-                    <input id="featureFormSubmitButton" type="button" class="olx-ui-button disabled" disabled="disabled" value='{{ dictionary["itemslisting.FeatureYourAd"] }}'>
-                </div>
-------------------------------------------------------------------------------------------------------------------------------------------------------
+            </div>
+            <div class="fad-submit">
+                <input id="fad-submit" type="button" value='{{ dictionary["itemslisting.FeatureYourAd"] }}' {# if not someSectionEnabled %}disabled=""{% endif #} >
             </div>
         </div>
-        <div class="footnote2">
-            <p class="termsOfService">
+        <div class="feature-ad-footer">
+            <p class="feature-ad-terms">
                 {{ dictionary["featured_listings.OffensivePornographicSpamAdsWillNotBeFeaturedOrReimbursed"] }}
-                <a target="_blank" href="{{ '/featured_listings' | link }}">
+                <a target="_blank" href="{{ '/featured_listings' | link }}" data-pass-thru="true" >
                     {{ dictionary["featured_listings.ClickHereToReadOurTermsOfService"] }}
                 </a>
             </p>

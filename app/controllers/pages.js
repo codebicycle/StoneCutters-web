@@ -22,7 +22,8 @@ module.exports = {
     allstates: middlewares(allstates),
     sitemap: middlewares(sitemap),
     sitemapByDate: middlewares(sitemapByDate),
-    featured_listings: middlewares(featuredListings)
+    featured_listings: middlewares(featuredListings),
+    featured_ad: middlewares(featuredAd)
 };
 
 function terms(params, callback) {
@@ -292,6 +293,85 @@ function featuredListings(params, callback) {
 
         asynquence().or(error)
             .then(redirect)
+            .val(success);
+    }
+}
+
+function featuredAd(params, callback) {
+    helpers.controllers.control.call(this, params, controller);
+
+    function controller() {
+        var result = params.fa_status;
+        var user = this.app.session.get('user');
+        var securityKey = params.sk;
+        var itemId = params.id;
+        var siteLocation = this.app.session.get('siteLocation');
+        var languages = this.app.session.get('languages');
+        var anonymousItem;
+
+        var redirect = function(done) {
+            var platform = this.app.session.get('platform');
+
+            if (platform !== 'desktop') {
+                return done.fail();
+            }
+            done();
+        }.bind(this);
+
+        var prepare = function(done) {
+            if (user) {
+                params.token = user.token;
+            }
+            else if (typeof window !== 'undefined' && localStorage) {
+                anonymousItem = localStorage.getItem('anonymousItem');
+                anonymousItem = (!anonymousItem ? {} : JSON.parse(anonymousItem));
+                if (securityKey) {
+                    anonymousItem[params.id] = securityKey;
+                    localStorage.setItem('anonymousItem', JSON.stringify(anonymousItem));
+                }
+                else {
+                    securityKey = anonymousItem[params.id];
+                }
+            }
+            params.languageId = languages._byId[this.app.session.get('selectedLanguage')].id;
+            delete params.sk;
+            done();
+        }.bind(this);
+
+        var fetch = function(done) {
+            this.app.fetch({
+                item: {
+                    model: 'Item',
+                    params: params
+                }
+            }, {
+                readFromCache: false
+            }, done.errfcb);
+        }.bind(this);
+
+        var checkItem = function(done, res) {
+            if (!res.item) {
+                return done.fail(null, {});
+            }
+            done(res.item);
+        }.bind(this);
+
+        var success = function(item) {
+            callback(null, {
+                item: item.toJSON(),
+                result: result
+            });
+        }.bind(this);
+
+        var error = function(err, res) {
+            return helpers.common.error.call(this, err, res, callback);
+        }.bind(this);
+
+        asynquence().or(error)
+            .then(redirect)
+            .then(prepare)
+            .then(fetch)
+            .then(checkItem)
             .val(success);
     }
 }
