@@ -70,10 +70,9 @@ module.exports = {
     'items#staticSearch': {
         process: true,
         names: {
-            page_name: 'expired_category',
+            page_name: 'staticsearch_keyword',
             category: 'listing',
             subcategory: 'expired_subCategory',
-            keyword: '',
             page_nb: 0
         }
     },
