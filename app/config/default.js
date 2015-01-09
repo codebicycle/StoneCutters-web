@@ -460,7 +460,7 @@ module.exports = {
         }
     },
     newrelic: {
-        enabled: false,
+        enabled: true,
         licenseKey: 'ee506f8b9b',
         applicationId: '4149642'
     }
