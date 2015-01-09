@@ -428,7 +428,7 @@ module.exports = {
     'misc.ViewOptions': 'Voir les options',
     'misc.WantToGoBack': 'Etes-vous certain de vouloir revenir en arri\xE8re?',
     'misc.WithPicsOnly': 'Annonces avec photos seulement',
-    'contact_us.ContactBrand': 'Contactez OLX',
+    'contact_us.ContactBrand': 'Contacter OLX',
     'partnership.IfYouHaveLotsOfListingsToSubmitUseAFeed': 'Si vous souhaitez soumettre un grand nombre d\'annonces \xE0 OLX, vous pouvez utiliser un fichier de format XML ou CSV. Nous les publierons gratuitement et ces annonces seront mises \xE0 jour r\xE9guli\xE8rement.',
     'business_directory.Map': 'Carte',
     'optionals.opt-138-323-translation-location': 'Location',
