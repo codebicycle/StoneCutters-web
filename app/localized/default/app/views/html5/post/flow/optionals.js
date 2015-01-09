@@ -10,37 +10,24 @@ module.exports = Base.extend({
     className: 'post_flow_optionals_view disabled',
     tagName: 'section',
     id: 'optionals',
-    allFields: [],
-    fields: [],
-    form: {
-        values: {}
-    },
-    selected: {},
-    initialize: function() {
-        Base.prototype.initialize.call(this);
-        this.allFields = [];
-        this.fields = [];
-        this.form = {
-            values: {}
-        };
-        this.selected = {};
-    },
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
-        var category = (data.categories.search ? data.categories : this.parentView.options.categories).search(this.selected.id) || {};
-        var subcategory = (data.categories.search ? data.categories : this.parentView.options.categories).search(this.selected.subId) || {};
+        var categories = data.categories.search ? data.categories : this.parentView.getCategories();
+        var item = this.parentView.getItem ? this.parentView.getItem() :  undefined;
+        var category = item ? categories.search(item.get('category').parentId) : undefined;
+        var subcategory = item ? categories.search(item.get('category').id) : undefined;
 
-        if (category.toJSON) {
-            category = category.toJSON();
-        }
-        if (subcategory.toJSON) {
-            subcategory = subcategory.toJSON();
-        }
         return _.extend({}, data, {
             fields: this.fields || [],
-            category: category,
-            subcategory: subcategory,
-            form: this.form
+            category: category ? category.toJSON() : {},
+            subcategory: subcategory ? subcategory.toJSON() : {},
+            form: {
+                values: item ? _.object(_.map(item.get('optionals'), function each(optional) {
+                    return optional.name;
+                }, this), _.map(item.get('optionals'), function each(optional) {
+                    return optional.id || optional.value;
+                }, this)) : {}
+            }
         });
     },
     postRender: function() {
@@ -48,12 +35,12 @@ module.exports = Base.extend({
             return;
         }
         this.firstRender = false;
-        this.fields.forEach(function each(field) {
+        _.each(this.fields || [], function each(field) {
             if (!field.related) {
                 return;
             }
             this.$('[name="' + field.name + '"]').trigger('change');
-        }.bind(this));
+        }, this);
     },
     events: {
         'show': 'onShow',
@@ -62,8 +49,7 @@ module.exports = Base.extend({
         'click .changeSubcategory': 'onChangeSubcategoryClick',
         'fieldsChange': 'onFieldsChange',
         'change': 'onChange',
-        'submit': 'onSubmit',
-        'restart': 'onRestart'
+        'submit': 'onSubmit'
     },
     onShow: function(event) {
         event.preventDefault();
@@ -78,26 +64,15 @@ module.exports = Base.extend({
         event.stopPropagation();
         event.stopImmediatePropagation();
 
-        var errors = {};
-
-        this.fields.forEach(function each(field) {
-            var $field = this.$('[name="' + field.name + '"]');
-
-            field.value = $field.val();
-            if ($field.hasClass('error')) {
-                errors[field.name] = field.label;
-            }
-        }.bind(this));
         this.$el.addClass('disabled');
-        this.parentView.$el.trigger('optionalsSubmit', [this.fields, errors]);
     },
     onChangeCategoryClick: function(event) {
         this.parentView.$el.trigger('flow', [this.id, 'categories']);
     },
     onChangeSubcategoryClick: function(event) {
-        this.parentView.$el.trigger('flow', [this.id, 'subcategories', this.selected]);
+        this.parentView.$el.trigger('flow', [this.id, 'subcategories']);
     },
-    onFieldsChange: function(event, fields, categoryId, subcategoryId, firstRender) {
+    onFieldsChange: function(event, firstRender) {
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();
@@ -105,27 +80,21 @@ module.exports = Base.extend({
         var show = !this.$el.hasClass('disabled');
         var related = [];
         var names = [];
+        var name;
 
         this.firstRender = !!firstRender;
-        this.selected = {
-            id: categoryId,
-            subId: subcategoryId
-        };
-        this.allFields = fields;
-        fields.forEach(function each(field) {
+        this.parentView.getFields().categoryAttributes.forEach(function each(field) {
             names.push(field.name);
             if (field.related) {
                 related.push(field.related);
             }
         });
-        this.fields = fields.filter(function each(field) {
+        this.fields = this.parentView.getFields().categoryAttributes.filter(function each(field) {
             return !_.contains(related, field.name) || field.fieldType !== 'combobox' || (field.values && field.values.length);
         });
-        for (var name in this.form.values) {
-            if (!_.contains(names, name)) {
-                delete this.form.values[name];
-            }
-        }
+        this.parentView.getItem().set('optionals', _.filter(this.parentView.getItem().get('optionals'), function each(optional) {
+            return _.contains(names, optional.name);
+        }, this));
         this.render();
         if (show) {
             this.$el.trigger('show');
@@ -139,48 +108,52 @@ module.exports = Base.extend({
         var $loading = $('body > .loading');
         var $field = $(event.target);
         var name = $field.attr('name');
-        var field = _.find(this.fields, function each(field) {
+        var field = _.clone(_.find(this.fields, function each(field) {
             return field.name === name;
-        });
+        }));
+        var index = this.parentView.item.indexOfOptional(field.name);
 
-        var fetch = function(done) {
-            $loading.show();
-            helpers.dataAdapter.get(this.app.req, '/items/fields/' + encodeURIComponent(field.related) + '/' + this.form.values[field.name] + '/subfields', {
-                query: {
-                    intent: 'post',
-                    location: this.app.session.get('siteLocation'),
-                    categoryId: this.selected.subId,
-                    languageId: this.app.session.get('languages')._byId[this.app.session.get('selectedLanguage')].id
-                }
-            }, done.errfcb);
-        }.bind(this);
-
-        var success = function(res, body) {
-            always();
-            this.$el.trigger('fieldsChange', [this.allFields.map(function each(field) {
-                if (field.name !== body.subfield.name) {
-                    return field;
-                }
-                return body.subfield;
-            }), this.selected.id, this.selected.subId]);
-        }.bind(this);
-
-        var error = function(err) {
-            always();
-            console.log(err); // TODO: HANDLE ERRORS
-        }.bind(this);
-
-        var always = function() {
-            $loading.hide();
-        }.bind(this);
-
-        this.form.values[field.name] = $field.val();
+        field.value = $field.val();
+        if (index === undefined) {
+            index = this.parentView.item.get('optionals').length;
+        }
+        this.parentView.item.get('optionals')[index] = field;
         if (!field.related) {
             return;
         }
-        asynquence().or(error)
-            .then(fetch)
-            .val(success);
+        asynquence().or(error.bind(this))
+            .then(fetch.bind(this))
+            .val(success.bind(this));
+
+        function fetch(done) {
+            $loading.show();
+            helpers.dataAdapter.get(this.app.req, '/items/fields/' + encodeURIComponent(field.related) + '/' + field.value + '/subfields', {
+                query: {
+                    intent: 'post',
+                    location: this.app.session.get('siteLocation'),
+                    categoryId: this.parentView.getItem().get('category').id,
+                    languageId: this.app.session.get('languages')._byId[this.app.session.get('selectedLanguage')].id
+                }
+            }, done.errfcb);
+        }
+
+        function success(res, body) {
+            var index;
+
+            $loading.hide();
+            _.each(this.parentView.getFields().categoryAttributes, function each(field, i) {
+                if (field.name === body.subfield.name) {
+                    index = i;
+                }
+            }, this);
+            this.parentView.getFields().categoryAttributes[index] = body.subfield;
+            this.$el.trigger('fieldsChange');
+        }
+
+        function error(err) {
+            $loading.hide();
+            console.log(err); // TODO: HANDLE ERRORS
+        }
     },
     onSubmit: function(event) {
         event.preventDefault();
@@ -188,19 +161,6 @@ module.exports = Base.extend({
         event.stopImmediatePropagation();
 
         this.parentView.$el.trigger('flow', [this.id, '']);
-    },
-    onRestart: function(event) {
-        event.preventDefault();
-        event.stopPropagation();
-        event.stopImmediatePropagation();
-
-        this.allFields = [];
-        this.fields = [];
-        this.form = {
-            values: {}
-        };
-        this.selected = {};
-        this.render();
     }
 });
 
