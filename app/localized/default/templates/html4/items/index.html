@@ -3,6 +3,7 @@
 {% from macros import Breadcrumb, BreadcrumbHome %}
 {% set link = (breadcrumb | link) %}
 {{ Breadcrumb(dictionary, link, subcategory.trName) }}
+{{ 'HOLAAAAAA' | log }}
 <div id="itemListing">
     {% if meta.total == 0 %}
         <div class="emtyList">
