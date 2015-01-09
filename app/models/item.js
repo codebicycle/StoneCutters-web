@@ -1,7 +1,8 @@
 'use strict';
 
-var Base = require('../bases/model');
+var _ = require('underscore');
 var asynquence = require('asynquence');
+var Base = require('../bases/model');
 var helpers = require('../helpers');
 
 module.exports = Base.extend({
@@ -12,7 +13,8 @@ module.exports = Base.extend({
     getLocation: getLocation,
     checkSlug: checkSlug,
     parse: parse,
-    remove: remove
+    remove: remove,
+    load: load
 });
 
 module.exports.id = 'Item';
@@ -110,4 +112,74 @@ function remove(reason, comment, done) {
         this.set('status', 'closed');
         this.errfcb(done)(err);
     }
+}
+
+function load(options, done) {
+    function configure(_done) {
+        if (_.isFunction(options)) {
+            done = options;
+            options = {};
+        }
+        _done();
+    }
+    
+    function prepare(done) {
+        var user = this.app.session.get('user');
+        var languages = this.app.session.get('languages');
+        var params = _.clone(this.toJSON());
+        var anonymousItem;
+
+        if (user) {
+            params.token = user.token;
+        }
+        else if (typeof window !== 'undefined' && localStorage) {
+            anonymousItem = localStorage.getItem('anonymousItem');
+            anonymousItem = (!anonymousItem ? {} : JSON.parse(anonymousItem));
+            if (this.has('securityKey')) {
+                anonymousItem[params.id] = this.get('securityKey');
+                localStorage.setItem('anonymousItem', JSON.stringify(anonymousItem));
+            }
+            else {
+                this.set('securityKey', anonymousItem[params.id]);
+            }
+        }
+        params.languageId = languages._byId[this.app.session.get('selectedLanguage')].id;
+        delete params.securityKey;
+        done(params);
+    }
+
+    function fetch(done, params) {
+        this.app.fetch({
+            item: {
+                model: 'Item',
+                params: params
+            }
+        }, {
+            readFromCache: false
+        }, this.errfcb(done));
+    }
+
+    function check(done, res) {
+        if (!res.item) {
+            return done.fail(null, {});
+        }
+        done(res.item);
+    }
+
+    function success(item) {
+        this.set(item.toJSON());
+        console.log(this.toJSON());
+        done(this);
+    }
+
+    function error(err) {
+        done.fail(err);
+    }
+
+    asynquence().or(error.bind(this))
+        .then(configure.bind(this))
+        .then(prepare.bind(this))
+        .then(fetch.bind(this))
+        .then(check.bind(this))
+        .val(success.bind(this));
 }

@@ -7,6 +7,7 @@ var helpers = require('../helpers');
 var tracking = require('../modules/tracking');
 var config = require('../../shared/config');
 var countriesTerms = ['www.olx.cl', 'www.olx.com.uy', 'www.olx.com.py', 'www.olx.com.bo', 'www.olx.com.pe', 'www.olx.com.ve', 'www.olx.com.co', 'www.olx.com.ec', 'www.olx.com.pa', 'www.olx.co.cr', 'www.olx.com.ni', 'www.olx.hn', 'www.olx.com.sv', 'www.olx.com.gt', 'www.olx.com.mx'];
+var Item = require('../models/item');
 
 if (typeof window === 'undefined') {
     var statsdModule = '../../server/modules/statsd';
@@ -302,12 +303,7 @@ function featuredAd(params, callback) {
 
     function controller() {
         var result = params.fa_status;
-        var user = this.app.session.get('user');
-        var securityKey = params.sk;
-        var itemId = params.id;
-        var siteLocation = this.app.session.get('siteLocation');
-        var languages = this.app.session.get('languages');
-        var anonymousItem;
+        var item;
 
         var redirect = function(done) {
             var platform = this.app.session.get('platform');
@@ -319,6 +315,13 @@ function featuredAd(params, callback) {
         }.bind(this);
 
         var prepare = function(done) {
+            var user = this.app.session.get('user');
+            var languages = this.app.session.get('languages');
+            var params = {
+                id: id
+            };
+            var anonymousItem;
+
             if (user) {
                 params.token = user.token;
             }
@@ -329,16 +332,12 @@ function featuredAd(params, callback) {
                     anonymousItem[params.id] = securityKey;
                     localStorage.setItem('anonymousItem', JSON.stringify(anonymousItem));
                 }
-                else {
-                    securityKey = anonymousItem[params.id];
-                }
             }
             params.languageId = languages._byId[this.app.session.get('selectedLanguage')].id;
-            delete params.sk;
-            done();
+            done(params);
         }.bind(this);
 
-        var fetch = function(done) {
+        var fetch = function(done, params) {
             this.app.fetch({
                 item: {
                     model: 'Item',
@@ -346,10 +345,10 @@ function featuredAd(params, callback) {
                 }
             }, {
                 readFromCache: false
-            }, done.errfcb);
+            }, this.errfcb(done));
         }.bind(this);
 
-        var checkItem = function(done, res) {
+        var check = function(done, res) {
             if (!res.item) {
                 return done.fail(null, {});
             }
@@ -371,7 +370,7 @@ function featuredAd(params, callback) {
             .then(redirect)
             .then(prepare)
             .then(fetch)
-            .then(checkItem)
+            .then(check)
             .val(success);
     }
 }
