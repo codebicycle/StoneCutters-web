@@ -233,8 +233,12 @@ function flow(params, callback) {
             }), _.map(item.get('optionals'), function each(optional) {
                 return optional.id || optional.value;
             })));
-            item.set('priceType', item.get('priceTypeData').type);
-            item.set('priceC', item.get('price').amount);
+            if (item.has('priceTypeData')) {
+                item.set('priceType', item.get('priceTypeData').type);
+            }
+            if (item.has('price')) {
+                item.set('priceC', item.get('price').amount);
+            }
             callback(null, 'post/form', {
                 item: item,
                 postingSession: postingSession.get('postingSession'),
@@ -247,7 +251,8 @@ function flow(params, callback) {
                     id: item.get('category').parentId
                 },
                 subcategory: {
-                    id: item.get('category').id
+                    id: item.get('category').id,
+                    trName: item.get('category').name
                 }
             }, false);
         }
