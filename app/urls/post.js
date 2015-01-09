@@ -16,7 +16,7 @@ module.exports = {
     'post#flow': {
         url :'posting'
     },
-    'post#edit': {
+    'post#flow#edit': {
         url: 'myolx/edititem/:itemId'
     }
 };

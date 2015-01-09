@@ -7,7 +7,6 @@ if [ "$(whoami)" != "root" ]; then
 fi
 
 CURRENT=${PWD##*/}
-SMAUG="190.210.62.60"
 
 if [ "$CURRENT" != "environments" ]
 then
@@ -30,6 +29,5 @@ fi
 cp empty /etc/hosts;
 
 sed -i "s/{LOCAL}/$LOCAL/g" '/etc/hosts';
-sed -i "s/{SMAUG}/$SMAUG/g" '/etc/hosts';
 
 echo 'Moved to Live'
