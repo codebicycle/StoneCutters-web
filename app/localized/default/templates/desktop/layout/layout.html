@@ -18,6 +18,7 @@
         <script>function init() {
             $LAB
                 .script("{{ [jsDir, 'common', 'libs.js'] | join('/') | static }}")
+                .script("{{ [jsDir, 'common', 'translations', 'en-US.js'] | join('/') | static }}")
                 {% for language in languages -%}
                     {% if language != 'en-US' %}
                         .script("{{ [jsDir, 'common', 'translations', (language + '.js')] | join('/') | static }}")
