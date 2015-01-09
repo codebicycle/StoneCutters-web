@@ -9,12 +9,17 @@ var config = require('../../shared/config');
 
 module.exports = {
     flow: middlewares(flow),
+    flowMarketing: middlewares(flowMarketing),
     subcategories: middlewares(subcategories),
     form: middlewares(form),
     success: middlewares(success),
     edit: middlewares(edit)
 };
 
+function flowMarketing(params, callback) {
+    params.marketing = true;
+    return flow.call(this, params, callback);
+}
 function flow(params, callback) {
     helpers.controllers.control.call(this, params, controller);
 
@@ -103,7 +108,8 @@ function flow(params, callback) {
             callback(null, 'post/index', {
                 postingSession: postingSession.get('postingSession'),
                 cities: cities,
-                currentLocation: currentLocation
+                currentLocation: currentLocation,
+                marketing: params.marketing
             }, false);
         }.bind(this);
 
