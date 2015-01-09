@@ -1,5 +1,8 @@
 'use strict';
 
+var _ = require('underscore');
+var config = require('./grunt/config/translations');
+
 module.exports = function(grunt) {
     require('./grunt')(grunt);
 
@@ -8,8 +11,6 @@ module.exports = function(grunt) {
     grunt.registerTask('template', ['copy:templates', 'nunjucks']);
 
     grunt.registerTask('javascript', ['browserify', 'uglify']);
-
-    grunt.registerTask('translate', ['exec:removeTranslations', 'translations', 'browserify:translations', 'uglify:common']);
 
     grunt.registerTask('sprites', ['sprite', 'copy:sprites']);
 
@@ -36,4 +37,8 @@ module.exports = function(grunt) {
     grunt.registerTask('cover', ['jshint:tests', 'exec:removeCoverage', 'jscoverage', 'coverage']);
 
     grunt.registerTask('localize', ['localization']);
+
+    grunt.registerTask('translate', ['exec:removeTranslations', 'translations'].concat(_.map(config.languages, function each(language) {
+        return 'browserify:translations-' + language;
+    })).concat(['uglify:common']));
 };

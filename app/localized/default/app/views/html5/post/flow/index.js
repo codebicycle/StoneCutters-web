@@ -33,7 +33,7 @@ module.exports = Base.extend({
         Base.prototype.initialize.call(this);
         this.errors = {};
         this.currentViewName = 'hub';
-        this.dictionary = translations[this.app.session.get('selectedLanguage') || 'en-US'] || translations['es-ES'];
+        this.dictionary = translations.get(this.app.session.get('selectedLanguage'));
     },
     postRender: function() {
         $(window).on('beforeunload', this.onBeforeUnload);

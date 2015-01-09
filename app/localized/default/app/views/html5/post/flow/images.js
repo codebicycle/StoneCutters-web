@@ -32,7 +32,7 @@ module.exports = Base.extend({
         event.stopPropagation();
         event.stopImmediatePropagation();
 
-        this.parentView.$el.trigger('headerChange', [translations[this.app.session.get('selectedLanguage') || 'en-US']['item.AddPhotos'], this.id]);
+        this.parentView.$el.trigger('headerChange', [translations.get(this.app.session.get('selectedLanguage'))['item.AddPhotos'], this.id]);
         this.$el.removeClass('disabled');
     },
     onHide: function(event) {

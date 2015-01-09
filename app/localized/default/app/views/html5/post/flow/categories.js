@@ -26,7 +26,7 @@ module.exports = Base.extend({
         event.stopPropagation();
         event.stopImmediatePropagation();
 
-        this.parentView.$el.trigger('headerChange', [translations[this.app.session.get('selectedLanguage') || 'en-US']['misc.ChooseACategory_Mob'], this.id]);
+        this.parentView.$el.trigger('headerChange', [translations.get(this.app.session.get('selectedLanguage'))['misc.ChooseACategory_Mob'], this.id]);
         this.$el.removeClass('disabled');
     },
     onHide: function(event) {
@@ -50,7 +50,7 @@ module.exports = Base.extend({
             delete this.parentView.item.get('category').name;
         }
         this.parentView.item.get('category').parentId = id;
-        this.parentView.$el.trigger('categorySubmit', [translations[this.app.session.get('selectedLanguage') || 'en-US']['postingerror.PleaseSelectCategory'], translations[this.app.session.get('selectedLanguage') || 'en-US']['postingerror.PleaseSelectSubcategory']]);
+        this.parentView.$el.trigger('categorySubmit', [translations.get(this.app.session.get('selectedLanguage'))['postingerror.PleaseSelectCategory'], translations.get(this.app.session.get('selectedLanguage'))['postingerror.PleaseSelectSubcategory']]);
         this.parentView.$el.trigger('flow', [this.id, 'subcategories']);
     }
 });

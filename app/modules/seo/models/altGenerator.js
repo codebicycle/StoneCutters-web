@@ -80,7 +80,7 @@ function generate () {
 }
 
 function getMessagePictureOf() {
-    var dictionary = translations[this.app.session.get('selectedLanguage') || 'en-US'];
+    var dictionary = translations.get(this.app.session.get('selectedLanguage'));
     var message = dictionary['itemgeneraldetails.PicturesOf'] || '';
     return message;
 }
