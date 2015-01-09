@@ -183,6 +183,84 @@ module.exports = {
                 title: 'OLX Colombia - Poker - Vender es fácil',
                 id: 'KuwFa8fSuiM'
             }
+        ],
+        'www.olx.com.pe': [
+            {
+                title: 'OLX Peru - Cristian Rivero - Garage',
+                id: '8vBPKNFEEiE'
+            },
+            {
+                title: 'OLX Peru - Cristian Rivero - Cafetera',
+                id: '2YEmhQWMc9M'
+            },
+            {
+                title: 'OLX Perú - Poker - Vender es fácil',
+                id: 'y7DhaMzv_04'
+            }
+        ],
+        'www.olx.com.ve': [
+            {
+                title: 'OLX Venezuela - Comercial Sofá Cama - Vender es fácil',
+                id: 'WbAe36zlQRw'
+            },
+            {
+                title: 'En OLX todos pueden vender',
+                id: 'H5ajG5UFEH0'
+            },
+            {
+                title: 'OLX Venezuela - Comercial Raqueta de tenis - Vender es fácil',
+                id: 'HrIK2dtJ7j8'
+            }
+        ],
+        'www.olx.com.sv': [
+            {
+                title: 'OLX El Salvador - Bicicleta - Vender es fácil',
+                id: 'Z3jhkKNOLFI'
+            },
+            {
+                title: 'OLX El Salvador - Anteojos - Vender es fácil',
+                id: 'KhrU7vBfs2A'
+            },
+            {
+                title: 'OLX El Salvador - Poker - Vender es fácil',
+                id: 'H73aGTFe9D4'
+            }
+        ],
+        'www.olx.com.gt': [
+            {
+                title: 'OLX Guatemala - Celular - Vender es fácil',
+                id: 'dnV4aZ-VNbk'
+            },
+            {
+                title: 'OLX Guatemala - Bicicleta - Vender es fácil',
+                id: 'CR_qESz3amY'
+            },
+            {
+                title: 'OLX Guatemala - Lentes - Vender es fácil',
+                id: 'N-ubaP5z_mY'
+            },
+            {
+                title: 'OLX Guatemala - Colita Celular - Vender es fácil',
+                id: 'iwDNQzqXuHU'
+            },
+            {
+                title: 'OLX Guatemala - Colita Lentes - Vender es fácil',
+                id: 'am6_9EzmX8o'
+            }
+        ],
+        'www.olx.com.pa': [
+            {
+                title: 'OLX Panama - Bicicleta - Vender es fácil',
+                id: 'rXfzHDejpRs'
+            },
+            {
+                title: 'OLX Panama - Anteojos - Vender es fácil',
+                id: 'eEyfckF_Xgs'
+            },
+            {
+                title: 'OLX Panamá - Poker - Vender es fácil',
+                id: 'm0sDSvsBEf0'
+            }
         ]
     },
     socials: {
