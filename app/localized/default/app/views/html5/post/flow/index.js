@@ -33,7 +33,7 @@ module.exports = Base.extend({
         Base.prototype.initialize.call(this);
         this.errors = {};
         this.currentViewName = 'hub';
-        this.dictionary = translations[this.app.session.get('selectedLanguage') || 'en-US'] || translations['es-ES'];
+        this.dictionary = translations.get(this.app.session.get('selectedLanguage'));
     },
     postRender: function() {
         $(window).on('beforeunload', this.onBeforeUnload);
@@ -241,6 +241,7 @@ module.exports = Base.extend({
         var category = 'Posting';
         var action = 'DropSection';
         var item = this.getItem();
+        var location = item.getLocation() || this.app.session.get('location').current || this.app.session.get('location');
         var status = [];
 
         status.push('section:' + this.currentViewName);
@@ -249,8 +250,8 @@ module.exports = Base.extend({
         status.push('title:' + (item.get('item') ? 1 : 0));
         status.push('description:' + (item.get('description') ? 1 : 0));
         status.push('email:' + (item.get('email') ? 1 : 0));
-        status.push('state:' + (item.getLocation().url ? 1 : 0));
-        status.push('city:' + (item.getLocation().url ? 1 : 0));
+        status.push('state:' + (location.url ? 1 : 0));
+        status.push('city:' + (location.url ? 1 : 0));
         status.push('pictures:' + item.get('images').length);
 
         this.track({

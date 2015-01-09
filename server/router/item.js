@@ -122,7 +122,7 @@ module.exports = function(app, dataAdapter) {
             function post(done, _item, images) {
                 item = new Item(_.extend(_item, {
                     images: _.map(_.filter(Object.keys(_item), function each(key) {
-                        if (key.indexOf('image.')) {
+                        if (key.indexOf('images[')) {
                             return false;
                         }
                         if (_item['del.' + key]) {

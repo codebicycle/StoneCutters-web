@@ -4,7 +4,7 @@ module.exports = function itemRouter(app, dataAdapter) {
     var _ = require('underscore');
     var utils = require('../../shared/utils');
     var marketing = require('../../app/helpers/marketing');
-    var translations = require('../../app/translations');
+    var translations = require('../../shared/translations');
 
     (function esi() {
         app.get('/esi', handler);
@@ -45,7 +45,7 @@ module.exports = function itemRouter(app, dataAdapter) {
                 for (key in info) {
                     data['marketing_' + key] = info[key];
                 }
-                dictionary = translations[req.rendrApp.session.get('selectedLanguage') || 'en-US'] || translations['es-ES'];
+                dictionary = translations.get(req.rendrApp.session.get('selectedLanguage'));
                 data.marketing_forOsKey = dictionary[data.marketing_forOsKey];
                 data.marketing_freeInKey = dictionary[data.marketing_freeInKey];
             }

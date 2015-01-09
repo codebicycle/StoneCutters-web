@@ -10,12 +10,17 @@ var config = require('../../shared/config');
 
 module.exports = {
     flow: middlewares(flow),
+    flowMarketing: middlewares(flowMarketing),
     subcategories: middlewares(subcategories),
     form: middlewares(form),
     success: middlewares(success),
     edit: middlewares(edit)
 };
 
+function flowMarketing(params, callback) {
+    params.marketing = true;
+    return flow.call(this, params, callback);
+}
 function flow(params, callback) {
     helpers.controllers.control.call(this, params, controller);
 
@@ -206,7 +211,8 @@ function flow(params, callback) {
                 item: item || new Item({}, {
                     app: this.app
                 }),
-                fields: fields
+                fields: fields,
+                marketing: params.marketing
             }, false);
         }
 
@@ -227,8 +233,12 @@ function flow(params, callback) {
             }), _.map(item.get('optionals'), function each(optional) {
                 return optional.id || optional.value;
             })));
-            item.set('priceType', item.get('priceTypeData').type);
-            item.set('priceC', item.get('price').amount);
+            if (item.has('priceTypeData')) {
+                item.set('priceType', item.get('priceTypeData').type);
+            }
+            if (item.has('price')) {
+                item.set('priceC', item.get('price').amount);
+            }
             callback(null, 'post/form', {
                 item: item,
                 postingSession: postingSession.get('postingSession'),
@@ -241,7 +251,8 @@ function flow(params, callback) {
                     id: item.get('category').parentId
                 },
                 subcategory: {
-                    id: item.get('category').id
+                    id: item.get('category').id,
+                    trName: item.get('category').name
                 }
             }, false);
         }

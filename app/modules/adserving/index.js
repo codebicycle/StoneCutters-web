@@ -31,6 +31,11 @@ function getSettings() {
     };
     var configAD;
     var query;
+    var languageCode = {
+        default : 'es',
+        available : ['es', 'en', 'pt', 'it', 'fr'],
+        reg : '[langcode]'
+    };
 
     if (configSlot.enabled) {
         configAD = utils.get(configAdServing, type, {});
@@ -44,6 +49,7 @@ function getSettings() {
                 channel: createChannels.call(this, type),
                 hl: this.app.session.get('selectedLanguage').split('-').shift()
             });
+            configAD.params.adIconUrl = configAD.params.adIconUrl.replace(languageCode.reg, _.contains(languageCode.available, configAD.options.hl) ? configAD.options.hl : languageCode.default);
 
             _.extend(settings, {
                 enabled: true,
