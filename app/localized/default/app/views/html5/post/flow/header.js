@@ -16,8 +16,7 @@ module.exports = Base.extend({
     events: {
         'click .logo': 'onLogoClick',
         'change': 'onChange',
-        'click #back': 'onBackClick',
-        'restart': 'onRestart'
+        'click #back': 'onBackClick'
     },
     onLogoClick: function(event) {
         if (this.parentView.edited && !confirm(translations[this.app.session.get('selectedLanguage') || 'en-US']['misc.WantToGoBack'])) { // Now find a better translation
@@ -56,11 +55,6 @@ module.exports = Base.extend({
         event.stopImmediatePropagation();
 
         this.parentView.$el.trigger('flow', [this.$el.data('current'), this.$el.data('back'), this.data]);
-    },
-    onRestart: function(event) {
-        event.preventDefault();
-        event.stopPropagation();
-        event.stopImmediatePropagation();
     }
 });
 

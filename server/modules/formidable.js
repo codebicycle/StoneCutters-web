@@ -100,7 +100,7 @@ function error(req, url, err, values, callback) {
         errors = {};
         if (err.forEach) {
             err.forEach(function each(error) {
-                if (typeof errors[error.selector] === 'undefined') {
+                if (errors[error.selector] === undefined) {
                     errors[error.selector] = [];
                 }
                 errors[error.selector].push(error.message);

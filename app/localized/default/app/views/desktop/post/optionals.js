@@ -79,7 +79,7 @@ module.exports = Base.extend({
                 query: {
                     intent: 'post',
                     location: this.app.session.get('siteLocation'),
-                    categoryId: this.parentView.form['category.id'],
+                    categoryId: this.parentView.item.get('category').id,
                     languageId: this.app.session.get('languages')._byId[this.app.session.get('selectedLanguage')].id
                 },
             }, done.errfcb);

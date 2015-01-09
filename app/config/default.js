@@ -458,5 +458,10 @@ module.exports = {
             'www.olx.com.ng': 'support-ng',
             'www.olx.com.ke': 'support-ke'
         }
+    },
+    newrelic: {
+        enabled: true,
+        licenseKey: 'ee506f8b9b',
+        applicationId: '4149642'
     }
 };
