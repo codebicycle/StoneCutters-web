@@ -44,6 +44,7 @@ module.exports = Base.extend({
         if (typeof this.parentView.getItem().get('email') === 'boolean' && user) {
             this.parentView.getItem().set('email', user.email || true);
         }
+        this.$('[name=email]').change();
     },
     events: {
         'show': 'onShow',
