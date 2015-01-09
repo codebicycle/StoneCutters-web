@@ -18,9 +18,9 @@
         <script>function init() {
             $LAB
                 .script("{{ [jsDir, 'common', 'libs.js'] | join('/') | static }}")
-                .script("{{ [jsDir, 'common', 'translations', 'en-EN.js'] | join('/') | static }}")
+                .script("{{ [jsDir, 'common', 'translations', 'en-US.js'] | join('/') | static }}")
                 {% for language in languages -%}
-                    {% if language != 'en-EN' %}
+                    {% if language != 'en-US' %}
                         .script("{{ [jsDir, 'common', 'translations', (language + '.js')] | join('/') | static }}")
                     {% endif %}
                 {%- endfor %}
