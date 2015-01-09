@@ -31,7 +31,7 @@ module.exports = {
                     adIconSpacingAbove: 4,
                     adIconSpacingBefore: 6,
                     adIconSpacingAfter: 15,
-                    adIconUrl: 'http://afs.googleusercontent.com/olx/olx_pt.png'
+                    adIconUrl: 'http://afs.googleusercontent.com/olx/olx_[langcode].png?nc'
                 },
                 excludedCategories: []
             }
@@ -53,7 +53,7 @@ module.exports = {
                     adIconSpacingAbove: 4,
                     adIconSpacingBefore: 6,
                     adIconSpacingAfter: 15,
-                    adIconUrl: 'http://afs.googleusercontent.com/olx/olx_pt.png'
+                    adIconUrl: 'http://afs.googleusercontent.com/olx/olx_[langcode].png?nc'
                 },
                 excludedCategories: []
             }
