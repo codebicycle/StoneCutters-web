@@ -1,0 +1,64 @@
+#marketing-banner {
+    clear-fix();
+    height: 190px;
+    margin: 0 0 40px;
+    position: relative;
+
+    .title, .subtitle {
+        text-transform: uppercase;
+        display: block;
+        margin: 0;
+        text-align: center;
+        width: 425px;
+    }
+    .title {
+        color: $orange;
+        font-size: $xl;
+        font-weight: bold;
+        padding: 40px 0 5px;
+    }
+    .subtitle {
+        color: $black;
+        font-size: $l;
+        span {
+            background: url(imageUrl/images/desktop/underline.png) center bottom no-repeat;
+            color: $violet;
+            display: inline-block;
+            margin-bottom: 20px;
+            padding-bottom: 8px;
+        }
+    }
+    .image {
+        bottom: 0;
+        position: absolute;
+        right: 10px;
+        z-index: 10;
+    }
+    .select {
+        background: $violet;
+        bottom: 0;
+        box-sizing: border-box;
+        color: $white;
+        font-size: $m;
+        left: 0;
+        padding: 10px 0;
+        position: absolute;
+        width: 100%;
+        span {
+            display: block;
+            width: 430px;
+            text-align: center;
+        }
+        &:after {
+            left: 190px;
+            bottom: -51px;
+            arrow($violet transparent transparent, 25px 26px 26px);
+        }
+    }
+    &.language-fr {
+        .title {
+            padding: 15px 45px 5px;
+            box-sizing: border-box;
+        }
+    }
+}

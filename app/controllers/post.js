@@ -10,12 +10,17 @@ var config = require('../../shared/config');
 
 module.exports = {
     flow: middlewares(flow),
+    flowMarketing: middlewares(flowMarketing),
     subcategories: middlewares(subcategories),
     form: middlewares(form),
     success: middlewares(success),
     edit: middlewares(edit)
 };
 
+function flowMarketing(params, callback) {
+    params.marketing = true;
+    return flow.call(this, params, callback);
+}
 function flow(params, callback) {
     helpers.controllers.control.call(this, params, controller);
 
@@ -206,7 +211,8 @@ function flow(params, callback) {
                 item: item || new Item({}, {
                     app: this.app
                 }),
-                fields: fields
+                fields: fields,
+                marketing: params.marketing
             }, false);
         }
 
