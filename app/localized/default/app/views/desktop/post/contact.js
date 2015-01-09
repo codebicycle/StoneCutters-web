@@ -14,7 +14,8 @@ module.exports = Base.extend({
         'enablePost': 'onEnablePost',
         'click [data-modal-close]': 'onCloseModal',
         'click .open-modal': 'onOpenModal',
-        'click [data-modal-shadow]': 'onCloseModal'
+        'click [data-modal-shadow]': 'onCloseModal',
+        'fieldsChange': 'onFieldsChange'
     },
     onChange: function(event) {
         event.preventDefault();
@@ -40,6 +41,13 @@ module.exports = Base.extend({
         event.stopPropagation();
         event.stopImmediatePropagation();
         $('#modal-terms-view').trigger('hide');
+    },
+    onFieldsChange: function(event, email) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+
+        $('input[name="email"]').val(email).trigger('change');
     }
 });
 

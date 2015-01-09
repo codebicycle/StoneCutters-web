@@ -19,7 +19,6 @@ module.exports = Base.extend({
         'contactChange': 'onContactChange',
         'change': 'onChange',
         'click #post:not(".opaque")': 'onSubmit',
-        'restart': 'onRestart',
         'imagesLoadStart': 'onImagesLoadStart',
         'imagesLoadEnd': 'onImagesLoadEnd'
     },
@@ -75,7 +74,7 @@ module.exports = Base.extend({
             $step.siblings().addClass('opaque');
         }
         if (id) {
-            var category = this.parentView.options.categories.get(id);
+            var category = this.parentView.getCategories().get(id);
             var categoryName = category.get('trName');
 
             $categorySummary.addClass('success').text(categoryName);
@@ -104,7 +103,7 @@ module.exports = Base.extend({
         }
         this.$el.trigger('change');
     },
-    onDescriptionChange: function(event, fields, errors) {
+    onDescriptionChange: function(event, errors) {
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();
@@ -114,23 +113,25 @@ module.exports = Base.extend({
         var $descriptionSummary = this.$('#descriptionSummary').removeClass('success error');
         var failed = false;
 
-        fields.forEach(function each(field) {
+        _.each(this.parentView.getFields().productDescription, function each(field) {
+            var value = this.parentView.getItem().get(field.name);
+
             if (field.name === 'title') {
-                if (errors[field.name] || !field.value) {
+                if (errors[field.name] || !value) {
                     failed = true;
                     $titleSummary.addClass('error').text(errors[field.name] || field.label); // Check for translation since we are just passing the field label as error
                 }
                 else {
-                    $titleSummary.addClass('success').text(field.value);
+                    $titleSummary.addClass('success').text(value);
                 }
             }
             else if (field.name === 'description') {
-                if (errors[field.name] || !field.value) {
+                if (errors[field.name] || !value) {
                     failed = true;
                     $descriptionSummary.addClass('error').text(errors[field.name] || field.label); // Check for translation since we are just passing the field label as error
                 }
                 else {
-                    $descriptionSummary.addClass('success').text(field.value);
+                    $descriptionSummary.addClass('success').text(value);
                 }
             }
             else if (field.name === 'priceC') {
@@ -138,7 +139,7 @@ module.exports = Base.extend({
                     failed = true;
                 }
             }
-        });
+        }, this);
         if (failed) {
             $step.addClass('error');
         }
@@ -147,24 +148,29 @@ module.exports = Base.extend({
         }
         this.$el.trigger('change');
     },
-    onContactChange: function(event, fields, city, errors, cityError) {
+    onContactChange: function(event, errors, cityError) {
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();
 
+        var item = this.parentView.getItem();
+        var location = item.getLocation();
+        var user = this.app.session.get('user');
         var $step = this.$('#step-contact').removeClass('success error');
         var $emailSummary = this.$('#emailSummary').removeClass('success error');
         var $locationSummary = this.$('#locationSummary').removeClass('success error');
         var failed = false;
 
-        fields.forEach(function each(field) {
+        _.each(this.parentView.getFields().contactInformation, function each(field) {
+            var value = item.get(field.name);
+
             if (field.name === 'email') {
-                if (errors[field.name] || !field.value) {
+                if (errors[field.name] || !value) {
                     failed = true;
                     $emailSummary.addClass('error').text(errors[field.name] || field.label); // Check for translation since we are just passing the field label as error
                 }
                 else {
-                    $emailSummary.addClass('success').text(field.value);
+                    $emailSummary.addClass('success').text(typeof value === 'boolean' ? (user ? user.email : '') : value);
                 }
             }
             else if (field.name === 'phone') {
@@ -172,13 +178,13 @@ module.exports = Base.extend({
                     failed = true;
                 }
             }
-        });
-        if (!city || !city.url) {
+        }, this);
+        if (!location || !location.url) {
             failed = true;
             $locationSummary.addClass('error').text(cityError);
         }
         else {
-            $locationSummary.addClass('success').text(city.name);
+            $locationSummary.addClass('success').text(location.name);
         }
         if (failed) {
             $step.addClass('error');
@@ -207,11 +213,6 @@ module.exports = Base.extend({
 
         this.parentView.$el.trigger('submit');
     },
-    onRestart: function(event) {
-        event.preventDefault();
-        event.stopPropagation();
-        event.stopImmediatePropagation();
-    },
     onImagesLoadStart: function(event) {
         event.preventDefault();
         event.stopPropagation();
@@ -220,18 +221,19 @@ module.exports = Base.extend({
         this.$('#image').addClass('pending');
         this.$el.trigger('change');
     },
-    onImagesLoadEnd: function(event, image, orientation) {
+    onImagesLoadEnd: function(event) {
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();
 
         var $container = this.$('#image');
         var $image = this.$('#imagesDisplay');
+        var image = this.parentView.getItem().get('images')[0];
 
         if (image) {
             $container.removeClass('pending').addClass('fill');
-            $image.removeAttr('class').addClass('r' + orientation).css({
-                'background-image': 'url(' + image + ')'
+            $image.removeAttr('class').addClass('r' + image.orientation).css({
+                'background-image': 'url(' + image.url + ')'
             });
         }
         else {

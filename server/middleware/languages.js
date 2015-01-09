@@ -78,6 +78,9 @@ module.exports = function(dataAdapter, excludedUrls) {
                 req.rendrApp.session.persist({
                     selectedLanguage: selectedLanguage
                 });
+                req.rendrApp.session.update({
+                    languageId: languages.get(selectedLanguage).get('id')
+                });
                 done(languages, selectedLanguage);
             }
 

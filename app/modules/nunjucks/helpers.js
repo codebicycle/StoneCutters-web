@@ -42,6 +42,11 @@ module.exports = function(nunjucks) {
         return count.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
     }
 
+    function editSlug(slug, itemId) {
+        slug = slug.replace(slug.split(/\/+/g)[2], 'myolx/edititem/' + itemId );
+        return slug;
+    }
+
     function log() {
         console.log.apply(console, arguments);
     }
@@ -68,6 +73,7 @@ module.exports = function(nunjucks) {
         encode: encode,
         'static': statics,
         countFormat: countFormat,
+        editSlug: editSlug,
         slugToUrl: helpers.common.slugToUrl,
         hijri: helpers.hijri,
         persianDigits: helpers.numbers.toPersian,
