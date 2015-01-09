@@ -276,8 +276,19 @@ module.exports = (function() {
     function getUrlParameters(parameter, staticURL, decode) {
         var currentLocation = (staticURL.length)? staticURL : window.location.search;
         var parr;
-        var parArr = currentLocation.split("?")[1].split("&");
+        var paramOne = currentLocation.split("?");
+        var paramTwo;
+        var parArr = [];
         var returnBool = true;
+
+        if (paramOne.length == 2) {
+            paramTwo = paramOne[1].split('&');
+            if (paramTwo.length > 1) {
+                parArr = paramTwo;
+            } else {
+                parArr.push(paramOne[1]);
+            }
+        }
 
         for(var i = 0; i < parArr.length; i++) {
             parr = parArr[i].split("=");

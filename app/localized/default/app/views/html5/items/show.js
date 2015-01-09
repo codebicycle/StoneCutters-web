@@ -17,7 +17,7 @@ module.exports = Base.extend({
     },
     postRender: function() {
         var that = this;
-        var marginActions = $('section.actions').height() + $('section.actions > span').height() + 15;
+        var marginActions = $('section.actions').height() + $('section.actions > span').height() + 20;
         var url = this.app.session.get('url');
         var msgSent = helpers.common.getUrlParameters('sent', url, true);
         var $msg = this.$('.msg-resulted');
@@ -25,6 +25,8 @@ module.exports = Base.extend({
         var relatedAds;
         var mySwiperGal = '';
         var messages;
+        var updateNavPosition;
+        var galeryNavigator;
 
         this.dictionary = translations[this.app.session.get('selectedLanguage') || 'en-US'];
         that.messages = {
@@ -46,12 +48,31 @@ module.exports = Base.extend({
         }
 
         galery = this.$('.swiper-container').swiper({
-            mode:'horizontal',
-            loop: true,
-            pagination: '.slidePagination',
-            paginationClickable: true,
-            initialSlide: 0
+            onSlideChangeStart: function(){
+                updateNavPosition();
+            }
         });
+        galeryNavigator = $('.swiper-nav').swiper({
+            visibilityFullFit: true,
+            slidesPerView:'auto',
+            onSlideClick: function(){
+                galery.swipeTo( galeryNavigator.clickedSlideIndex );
+            }
+        });
+        updateNavPosition = function(){
+            $('.swiper-nav .active-nav').removeClass('active-nav');
+            var activeNav = $('.swiper-nav .swiper-slide').eq(galery.activeIndex).addClass('active-nav');
+            if (!activeNav.hasClass('swiper-slide-visible')) {
+                if (activeNav.index()>galeryNavigator.activeIndex) {
+                    var thumbsPerNav = Math.floor(galeryNavigator.width/activeNav.width())-1;
+                    galeryNavigator.swipeTo(activeNav.index()-thumbsPerNav);
+                }
+                else {
+                    galeryNavigator.swipeTo(activeNav.index());
+                }
+            }
+        };
+
         relatedAds = this.$('.swiper-containerRA').swiper({
             mode:'horizontal',
             slidesPerView: 3,

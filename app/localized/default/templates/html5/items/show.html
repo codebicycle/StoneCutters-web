@@ -1,13 +1,5 @@
 <section id="itemPage" data-qa="item">
 
-    <section class="nav">
-        <span>1 de 2122 ads</span>
-        <div class="links">
-            <a href="{{ item.metadata.seo.prevItem.itemUrl | link }}">{{ dictionary["listingpageitemslisting.Previous"] }} </a>
-            <a href="{{ item.metadata.seo.nextItem.itemUrl | link }}">{{ dictionary["itemslisting.Next"] }} </a>
-        </div>
-    </section>
-
     <section class="title">
         <span class="date">
             {{ item.date.since.day if item.date.since.day }}
@@ -45,6 +37,18 @@
             </div>
             <div class="slidePagination"></div>
         </section>
+        <div class="swiper-container swiper-nav">
+            <div class="swiper-wrapper">
+                {% for image in item.images %}
+                <div class="swiper-slide {{ 'active-nav' if loop.index == 1 else '' }}" data-url="{{ image.url }}">
+                    <div class="smallslide">
+                        <div class="img" style="background-image: url('{{ image.smallUrl }}');"></div>
+                        <div class="bg"></div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
     {% endif %}
 
     <section class="optionals">
@@ -105,11 +109,20 @@
     </section>
     {% endif %}
 
+    <section class="nav">
+        <span></span>
+        <div class="links">
+            <a href="{{ item.metadata.seo.prevItem.itemUrl | link }}">{{ dictionary["listingpageitemslisting.Previous"] }} </a>
+            <a href="{{ item.metadata.seo.nextItem.itemUrl | link }}">{{ dictionary["itemslisting.Next"] }} </a>
+        </div>
+    </section>
+
 </section>
 
 {% if item.status.contactable %}
     <section class="actions">
         <div class="background"></div>
+        <div class="actionscontent">
 
         {% if item.email and not item.phone %}
             <div class="action email trackMe fullWidth" data-tracking="Reply-ClickEmail" data-qa="reply-button" >
@@ -194,6 +207,7 @@
             {% endif %}
         {% endif %}
         <div class="clear"></div>
+        </div>
     </section>
 {% endif %}
 
