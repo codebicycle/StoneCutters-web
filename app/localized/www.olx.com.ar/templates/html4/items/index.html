@@ -3,7 +3,7 @@
 {% from macros import Breadcrumb, BreadcrumbHome %}
 {% set link = (breadcrumb | link) %}
 {{ Breadcrumb(dictionary, link, subcategory.trName) }}
-{{ 'CHAUUUUUU' | log }}
+{{ 'localizado!' | log }}
 <div id="itemListing">
     {% if meta.total == 0 %}
         <div class="emtyList">
@@ -22,6 +22,40 @@
         <div class="nearbyStore">                
             <h3>Stores nearby your location:</h3>
             <a class="mapLink" href="map.html">view on map</a>
+
+            <div id="map-canvas" width="100%" height="50px"></div>            
+            <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDvCh0uJ8GnZVKOctZCDcDQjewPKZC_NhY"></script>
+            <script type="text/javascript">
+            function initialize() {
+                // VARIABLES DE LOS PUNTOS
+                
+                var centerPoint = {lat: -1.2846139, lng: 36.82417}
+                var shops = [            
+                    {coord: {lat: -1.2846139, lng: 36.82417}, title: "store 1"},           
+                    {coord: {lat: -1.283863, lng: 36.8219545}, title: "store 2"},
+                    {coord: {lat: -1.2846139, lng: 36.82546}, title: "store 3"},
+                    {coord: {lat: -1.283863, lng: 36.8215545}, title: "store 4"},
+                ]
+                // FIN DE PUNTOS
+
+                var mapOptions = {
+                    center: centerPoint,
+                    zoom: 16
+                };
+                var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+                for (var i in shops) {
+                    var shop = shops[i];
+                    new google.maps.Marker({
+                        position: shop.coord,
+                        map: map,
+                        title: shop.title
+                    })
+                }
+            }
+            google.maps.event.addDomListener(window, 'load', initialize);
+
+            </script>            
+
             <a href="soon.html">
                 <h2>Bike Solutions</h2>
                 <span class="location">Ambala Rd, Nairobi, Kenya</span>
@@ -98,14 +132,6 @@
                             <li><a class="email" href="soon.html">eMail</a></li>
                             <li><a class="sms" href="soon.html">sms</a></li>
                         </ul>
-                    </div>
-                </li>
-
-                <li class="spamLikeAd">                    
-                    <div class="shopAdInfo">                        
-                        <a href="soon.html">
-                            <span class="storeSign">store</span><h2>Find Bicycles and accesories on <strong>Mike's bikes</strong> in OLX.</h2>
-                        </a>                        
                     </div>
                 </li>
 
