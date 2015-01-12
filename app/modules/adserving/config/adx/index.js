@@ -1,5 +1,5 @@
 'use strict';
-// ADX Ads Default Config
+
 module.exports = {
     enabled: false,
     options: {

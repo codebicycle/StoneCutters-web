@@ -1,5 +1,5 @@
 'use strict';
-// AFC Ads Default Config
+
 module.exports = {
     enabled: true,
     options: {
