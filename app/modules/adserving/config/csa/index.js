@@ -44,5 +44,10 @@ module.exports = {
         lines: 3,
         longerHeadlines: true,
         domainLinkAboveDescription: false
+    },
+    language: {
+        'default': 'es',
+        list: ['es', 'en', 'pt', 'it', 'fr'],
+        pattern: '[langcode]'
     }
 };

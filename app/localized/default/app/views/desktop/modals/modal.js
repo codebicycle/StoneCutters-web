@@ -35,6 +35,7 @@ module.exports = Base.extend({
         if (!$target.hasClass('active')) {
             var videoId = $target.data('video-item');
             var videoUrl = "http://www.youtube.com/embed/" + videoId;
+            var videoShareUrl = "https://www.youtube.com/watch?v=iYUX408RQq4" + videoId;
             var videoTitle = $target.find('.video-title').text();
             var $videosList = $('.video[data-video-item]');
 
@@ -42,7 +43,7 @@ module.exports = Base.extend({
             $target.addClass('active');
 
             $('.social-share a').each(function(){
-                $(this).attr('data-share-url', videoUrl);
+                $(this).attr('data-share-url', videoShareUrl);
                 $(this).attr('data-share-title', videoTitle);
             });
 

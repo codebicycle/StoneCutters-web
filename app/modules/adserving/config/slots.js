@@ -25,7 +25,7 @@ module.exports = {
             adIconSpacingAbove: 4,
             adIconSpacingBefore: 6,
             adIconSpacingAfter: 15,
-            adIconUrl: 'http://afs.googleusercontent.com/olx/olx_pt.png'
+            adIconUrl: 'http://afs.googleusercontent.com/olx/olx_[langcode].png'
         },
         excludedCategories: []
     },
@@ -43,7 +43,7 @@ module.exports = {
             adIconSpacingAbove: 4,
             adIconSpacingBefore: 6,
             adIconSpacingAfter: 15,
-            adIconUrl: 'http://afs.googleusercontent.com/olx/olx_pt.png'
+            adIconUrl: 'http://afs.googleusercontent.com/olx/olx_[langcode].png'
         },
         excludedCategories: []
     },
@@ -53,11 +53,11 @@ module.exports = {
         location: 'Side',
         params: {
             number: 1,
-            media: "flash, image",
+            media: 'flash, image',
             width: '160',
             height: '600'
         },
-        excludedCategories: [0]
+        excludedCategories: []
     },
     slot_top_item: {
         enabled: true,
@@ -77,7 +77,7 @@ module.exports = {
         location: 'Side',
         params: {
             number: 1,
-            media: "flash, image",
+            media: 'flash, image',
             width: '300',
             height: '250'
         },

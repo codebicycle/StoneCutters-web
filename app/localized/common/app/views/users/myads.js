@@ -18,14 +18,19 @@ module.exports = Base.extend({
             e.preventDefault();
             var element = $(this);
             var itemId = element.attr('data-itemId');
+            var itemSlug = element.attr('data-itemSlug');
             var itemUrl = element.attr('data-itemUrl');
             var itemEditable = element.attr('data-editable');
             var $edit = $('.editItem');
             var href;
 
+            itemSlug = itemSlug.split(/\/+/g)[1];
+
             if (itemEditable) {
                 href = $edit.attr('href');
-                $edit.attr('href', href.replace('[[itemId]]', itemId));
+                href = href.replace('[[itemId]]', itemId);
+                href += '?location=' + itemSlug;
+                $edit.attr('href', href);
                 $('.deleteItemConfirm').data("itemId", itemId);
                 $('.deleteItem').parent('li').removeClass('hide');
                 $edit.parent('li').removeClass('hide');
@@ -41,8 +46,9 @@ module.exports = Base.extend({
             e.preventDefault();
             var $edit = $('.editItem');
             var href = $edit.attr('href');
-
-            $edit.attr('href', href.replace(/\/[0-9]+\?/, '/[[itemId]]?'));
+            href = href.replace(/\/[0-9]+\?/, '/[[itemId]]?');
+            href = href.substring(0, href.indexOf('?'));
+            $edit.attr('href', href);
             $('.viewItem').attr("href", '#');
             $('#edit').removeClass('visible');
         });

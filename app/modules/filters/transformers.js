@@ -32,7 +32,7 @@ function kilometers(filter, options) {
         return filter;
     }
 
-    dictionary = translations[options.app.session.get('selectedLanguage') || 'en-US'];
+    dictionary = translations.get(options.app.session.get('selectedLanguage'));
     filter.set({
         otherType: 'LIST',
         list: [
@@ -94,7 +94,7 @@ function checkRangeValue(filter, options) {
     var dictionary;
 
     if (!filter.has('value')) {
-        dictionary = translations[options.app.session.get('selectedLanguage') || 'en-US'];
+        dictionary = translations.get(options.app.session.get('selectedLanguage'));
         filter.set('value', [{
             id: 'from',
             value: dictionary['misc.Min'],
@@ -131,7 +131,7 @@ function checkDescription(filter, options, key) {
     var dictionary;
 
     if (!filter.has('description')) {
-        dictionary = translations[options.app.session.get('selectedLanguage') || 'en-US'];
+        dictionary = translations.get(options.app.session.get('selectedLanguage'));
         filter.set('description', dictionary[key], {
             unset: false
         });
