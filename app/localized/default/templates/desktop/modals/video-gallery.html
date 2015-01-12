@@ -1,0 +1,52 @@
+{% extends (template + '/modals/modal.html') %}
+
+{% block id %}video-modal{% endblock %}
+
+{% block title %}
+    <span class="modal-title">{{ dictionary["misc.SellingIsEasy"] }} </span><span class="modal-title">{{ dictionary["misc.PostFreeOn"] | replace('<<BRAND>>','OLX') }} </span>
+{% endblock %}
+
+{% block content %}
+    <div class="video-content">
+        <iframe width="635" height="390" frameborder="0" allowfullscreen="" id="video-container-iframe" src="http://www.youtube.com/embed/FmYRXopMdow"></iframe>
+    </div>
+    <div class="video-thumbnails">
+        <ul class="content">
+            <li style="display: none">
+                <a data-video-item="FmYRXopMdow" href="#">
+                    <span class="video-title">OLX. Vender es fácil - Sillón</span>
+                    <span class="icon-play"></span>
+                    <img alt="OLX. Vender es fácil - Sillón" src="http://img.youtube.com/vi/FmYRXopMdow/default.jpg" />
+                </a>
+            </li>
+            <li>
+                <a data-video-item="XAbGc_JDWdU" href="#">
+                    <span class="video-title">OLX. Vender es fácil - Raqueta</span>
+                    <span class="icon-play"></span>
+                    <img alt="OLX. Vender es fácil - Raqueta" src="http://img.youtube.com/vi/XAbGc_JDWdU/default.jpg" />
+                </a>
+            </li>
+            <li>
+                <a data-video-item="Y2b76k1TFz4" href="#">
+                    <span class="video-title">OLX. Vender es fácil - Smartphone</span>
+                    <span class="icon-play"></span>
+                    <img alt="OLX. Vender es fácil - Raqueta" src="http://img.youtube.com/vi/Y2b76k1TFz4/default.jpg" />
+                </a>
+            </li>
+        </ul>
+        <div class="social-share">
+            <p>{{ dictionary["defaulthtmlhead.ShareThisVideo"] }}:</p>
+            <ul>
+                <li>
+                    <a data-share-facebook data-share-url="http://www.youtube.com/embed/FmYRXopMdow" class="icons icon-facebook" href="#"></a>
+                </li>
+                <li>
+                    <a data-share-twitter data-share-url="http://www.youtube.com/embed/FmYRXopMdow" data-share-title="OLX. Vender es fácil - Sillón" class="icons icon-twitter" href="#"></a>
+                </li>
+                <li>
+                    <a data-share-gplus data-share-url="http://www.youtube.com/embed/FmYRXopMdow" class="icons icon-googleplus" href="#"></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+{% endblock %}

@@ -20,7 +20,8 @@ module.exports = Base.extend({
             head: this.app.seo.get('head'),
             clientId: this.app.session.get('clientId'),
             icons: (~icons.indexOf(country) ? country : 'default'),
-            smartBanner: smartBanner
+            smartBanner: smartBanner,
+            newrelic: config.get(['newrelic'], {})
         });
     }
 });

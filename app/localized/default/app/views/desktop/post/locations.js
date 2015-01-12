@@ -55,7 +55,7 @@ module.exports = Base.extend({
     addEmptyOption: function(list, text) {
         list.unshift({
             key: '',
-            value: translations[this.app.session.get('selectedLanguage') || 'en-US'][text]
+            value: translations.get(this.app.session.get('selectedLanguage'))[text]
         });
     },
     onFormRendered: function(event) {
@@ -125,7 +125,7 @@ module.exports = Base.extend({
             });
             options.unshift({
                 key: '',
-                value: translations[this.app.session.get('selectedLanguage') || 'en-US']['countryoptions.Home_SelectCity']
+                value: translations.get(this.app.session.get('selectedLanguage'))['countryoptions.Home_SelectCity']
             });
             done(options);
         }.bind(this);

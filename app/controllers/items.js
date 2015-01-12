@@ -866,6 +866,10 @@ function staticSearch(params, callback) {
                 return helpers.common.redirect.call(this, '/q/-');
             }
             if (params && params.filters) {
+                if (params.filters === '-ig') {
+                    done.abort();
+                    return helpers.common.redirect.call(this, this.app.session.get('path').replace('/-ig', '/'));
+                }
                 url = [];
                 url.push('/nf/');
                 url.push(params.search);

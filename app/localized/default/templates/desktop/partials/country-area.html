@@ -1,0 +1,21 @@
+<div class="country-area {{ countryMapClass }}">
+    <a class="open-modal" data-modal="location-modal" rel="nofollow" href="#">
+        <img src="{{ ('/images/desktop/home_maps/' + location.abbreviation | lower + '.gif') | static }}" alt="Mapa de {{ location.name }}" />
+    </a>
+    <div class="content-description">
+        <h2 class="title">{{ dictionary["misc.BuyWhatYouWant"] }}</h2>
+        <p class="cities-title icons icon-pin">{{ dictionary["misc.FindAdsCity"] }}</p>
+        <ul class="list-cities">
+            {% for city in location.metadata.seo.topLocations.firstLevel.entities %}
+                {% if loop.index < 7 %}
+                    <li>
+                        <a title="{{ city.anchor }}" href="{{ '/nf/all-results' | link({location: city.url}) }}">{{ city.anchor }}</a>
+                    </li>
+                {% endif %}
+            {% endfor %}
+            <li>
+                <a class="open-modal" title="{{ dictionary["misc.OtherPlaces_EM"] }}" data-modal="location-modal" href="#" data-qa="other-places-link">{{ dictionary["misc.OtherPlaces_EM"] }}</a>
+            </li>
+        </ul>
+    </div>
+</div>
