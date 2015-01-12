@@ -143,6 +143,9 @@ function processOptions(params, options) {
     if(!_.isUndefined(params.subcategory) && options.subcategory) {
         params.subcategory = standarizeName(options.subcategory.name);
     }
+    if(params.page_name === 'staticsearch_keyword'){
+        params.page_name = 'staticsearch_' + options.keyword;
+    }
     if(params.page_name === 'expired_category' && options.category) {
         if (options.subcategory) {
             params.page_name = 'listing_' + standarizeName(options.subcategory.name);

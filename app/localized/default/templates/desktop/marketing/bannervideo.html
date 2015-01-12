@@ -1,5 +1,9 @@
-<div data-modal="video-modal" class="banner-video open-modal">
-    <img src="{{ '/images/desktop/tvadbannerFuton.jpg' | static }}" alt="video" />
-    <p class="title">{{ dictionary["defaulthtmlhead.HaveYouSeenThis"] }} </p>
-    <p class="subtitle">{{ dictionary["defaulthtmlhead.CheckOutOurNewTvAd"] }} </p>
+<div class="banner-video">
+    <p class="title">{{ dictionary["misc.Sell-Unused"] }}</p>
+    <p class="subtitle">{{ dictionary["misc.Free-NoCommission"] }}</p>
+    <div data-modal="video-modal" class="have-see open-modal image-{{ location.abbreviation | lower }}">
+        <p class="title">{{ dictionary["defaulthtmlhead.HaveYouSeenThis"] }}</p>
+        <p class="subtitle">{{ dictionary["defaulthtmlhead.CheckOutOurNewTvAd"] }}</p>
+    </div>
 </div>
+{% view 'modals/videogallery' %}

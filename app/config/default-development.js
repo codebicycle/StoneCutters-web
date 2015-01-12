@@ -27,9 +27,9 @@ module.exports = {
         desktop: ['www.olx.com.bo', 'www.jaovat.com']
     },
     icons: {
-        wap: ['www.olx.com.ar', 'www.olx.com.bd', 'www.olx.com.br', 'www.olx.cm', 'www.olx.com.co', 'www.olx.com.ec', 'www.olx.com.sv', 'www.olx.com.gh', 'www.olx.com.gt', 'www.olx.in', 'www.olx.co.ke', 'www.olx.com.ng', 'www.olx.com.pe', 'www.olx.sn', 'www.olx.co.za', 'www.olx.com.ve', 'www.olx.com.pk', 'www.olx.co.ug', 'www.olx.com.uy', 'www.olx.ir'],
-        html4: ['www.olx.com.ar', 'www.olx.com.bd', 'www.olx.com.br', 'www.olx.cm', 'www.olx.com.co', 'www.olx.com.ec', 'www.olx.com.sv', 'www.olx.com.gh', 'www.olx.com.gt', 'www.olx.in', 'www.olx.co.ke', 'www.olx.com.ng', 'www.olx.com.pe', 'www.olx.sn', 'www.olx.co.za', 'www.olx.com.ve', 'www.olx.com.pk', 'www.olx.co.ug', 'www.olx.com.uy', 'www.olx.ir'],
-        html5: ['www.olx.com.ar', 'www.olx.com.bd', 'www.olx.com.br', 'www.olx.cm', 'www.olx.com.co', 'www.olx.com.ec', 'www.olx.com.sv', 'www.olx.com.gh', 'www.olx.com.gt', 'www.olx.in', 'www.olx.co.ke', 'www.olx.com.ng', 'www.olx.com.pe', 'www.olx.sn', 'www.olx.co.za', 'www.olx.com.ve', 'www.olx.com.pk', 'www.olx.co.ug', 'www.olx.com.uy', 'www.olx.ir']
+        wap: [],
+        html4: [],
+        html5: []
     },
     categoryTree: {
         'www.olx.com.bo': {
@@ -108,6 +108,36 @@ module.exports = {
                 name: 'Raúl de La Paz',
                 testimonial: '¡Publiqué un celular a la mañana y al día siguiente ya lo había vendido!',
                 image: '/images/desktop/raul.jpg',
+            }
+        ]
+    },
+    videos: {
+        'www.olx.com.uy': [
+            {
+                title: 'OLX Uruguay - Celular - Vender es fácil',
+                id: '29QoFeoJldU'
+            },
+            {
+                title: 'OLX Uruguay - Bicicleta - Vender es fácil',
+                id: 'Z3wwfLdLgj8'
+            },
+            {
+                title: 'OLX Uruguay - Auto - Vender es fácil',
+                id: 'rhJVT5fDkWU'
+            }
+        ],
+        'www.olx.co.cr': [
+            {
+                title: 'OLX Costa Rica - Bicicleta - Vender es fácil',
+                id: 'iYUX408RQq4'
+            },
+            {
+                title: 'OLX Costa Rica - Anteojos - Vender es fácil',
+                id: 'Mrfetr0kAoI'
+            },
+            {
+                title: 'OLX Costa Rica - Poker - Vender es fácil',
+                id: 'Yf5i1HOwd70'
             }
         ]
     },

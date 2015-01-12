@@ -1,5 +1,6 @@
 <meta charset="utf-8" />
 <title>{{ head.title }}</title>
+{% include (template + "/partials/newrelic.html") %}
 {% for metatag in head.metatags %}
     <meta name="{{metatag.metaname if metatag.metaname else metatag.name}}" content="{{metatag.content}}" />
 {% endfor %}

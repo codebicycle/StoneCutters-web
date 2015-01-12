@@ -9,24 +9,37 @@ module.exports = Base.extend({
     className: 'post_flow_description_view disabled',
     tagName: 'section',
     id: 'description',
-    fields: [],
-    form: {
-        values: {}
-    },
-    initialize: function() {
-        Base.prototype.initialize.call(this);
-        this.fields = [];
-        this.form = {
-            values: {}
-        };
-    },
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
+        var item = this.parentView.getItem ? this.parentView.getItem() :  undefined;
 
         return _.extend({}, data, {
             fields: this.fields || [],
-            form: this.form
+            form: item ? {
+                values: _.object(_.map(this.fields || [], function each(field) {
+                    return field.name;
+                }, this), _.map(this.fields, function each(field) {
+                    if (field.name !== 'priceC') {
+                        return item.get(field.name);
+                    }
+                    if (item.get('price') && item.get('price').amount) {
+                        return item.get('price').amount;
+                    }
+                    return item.get('price');
+                }, this))
+            } : {}
         });
+    },
+    postRender: function() {
+        var field = _.find(this.fields || [], function each(field) {
+            return field.name === 'priceType';
+        }, this);
+
+        if (field && field.value && field.value.key && field.value.key !== this.parentView.getItem().get('priceType')) {
+            this.parentView.getItem().set('priceType', field.value.key);
+            this.render();
+        }
+        this.$el.trigger('priceTypeChange');
     },
     events: {
         'show': 'onShow',
@@ -34,7 +47,6 @@ module.exports = Base.extend({
         'fieldsChange': 'onFieldsChange',
         'change': 'onChange',
         'submit': 'onSubmit',
-        'restart': 'onRestart',
         'priceTypeChange': 'onPriceTypeChange'
     },
     onShow: function(event, categoryId) {
@@ -55,21 +67,21 @@ module.exports = Base.extend({
         this.fields.forEach(function each(field) {
             var $field = this.$('[name=' + field.name + ']');
 
-            field.value = $field.val();
             if ($field.hasClass('error')) {
                 errors[field.name] = field.label; // Check for translation since we are just passing the field label as error
             }
         }.bind(this));
         this.$el.addClass('disabled');
-        this.parentView.$el.trigger('descriptionSubmit', [this.fields, errors]);
+        this.parentView.$el.trigger('descriptionSubmit', [errors]);
     },
-    onFieldsChange: function(event, fields) {
+    onFieldsChange: function(event) {
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();
 
-        this.fields = fields;
+        this.fields = this.parentView.getFields().productDescription;
         this.render();
+        this.$el.trigger('priceTypeChange');
     },
     onChange: function(event) {
         event.preventDefault();
@@ -77,14 +89,17 @@ module.exports = Base.extend({
         event.stopImmediatePropagation();
 
         var $field = $(event.target);
+        var name = $field.attr('name');
+        var value = $field.val();
 
-        if ($field.attr('name') === 'priceType') {
-            this.$el.trigger('priceTypeChange', [$field.val()]);
+        if (name !== 'priceType') {
+            value = this.cleanValue($field.val());
+            $field.val(value);
         }
-        else {
-            $field.val(this.cleanValue($field.val()));
+        this.parentView.getItem().set(name !== 'priceC' ? name : 'price', value);
+        if (name === 'priceType') {
+            this.$el.trigger('priceTypeChange');
         }
-        this.form.values[$field.attr('name')] = $field.val();
     },
     onSubmit: function(event) {
         event.preventDefault();
@@ -124,23 +139,14 @@ module.exports = Base.extend({
         }
         return !failed;
     },
-    onRestart: function(event) {
+    onPriceTypeChange: function(event) {
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();
 
-        this.fields = [];
-        this.form = {
-            values: {}
-        };
-    },
-    onPriceTypeChange: function(event, value) {
-        event.preventDefault();
-        event.stopPropagation();
-        event.stopImmediatePropagation();
-
-        var $currency = this.$('select[name=currency_type]');
-        var $price = this.$('input[name=priceC]');
+        var $currency = this.$('[name=currency_type]');
+        var $price = this.$('[name=priceC]');
+        var value = this.parentView.getItem().get('priceType') || this.$('[name=priceType]').val();
 
         if (value === 'FIXED' || value === 'NEGOTIABLE') {
             $currency.removeAttr('disabled');
