@@ -361,6 +361,7 @@ module.exports = {
     'misc.All-Location': 'All <<LOCATION>>',
     'misc.AllAds_Mob': 'All ads',
     'misc.AllSet_Mob': 'Valmis!',
+    'misc.AlreadyAccount': 'If you already have an account, <<LINK>>  click here to log in<</LINK>>',
     'misc.BackToStart_Mob': 'Tagasi algusse',
     'misc.Brand': 'Mark',
     'misc.BrandFor_Mob': 'OLX OS (e.g. Android, Blackberry, etc.) jaoks',

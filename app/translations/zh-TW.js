@@ -361,6 +361,7 @@ module.exports = {
     'misc.All-Location': 'All <<LOCATION>>',
     'misc.AllAds_Mob': 'All ads',
     'misc.AllSet_Mob': '\u6E96\u5099\u5C31\u7DD2\uFF01',
+    'misc.AlreadyAccount': 'If you already have an account, <<LINK>>  click here to log in<</LINK>>',
     'misc.BackToStart_Mob': '\u8FD4\u56DE\u5230\u958B\u59CB',
     'misc.Brand': '\u54C1\u724C',
     'misc.BrandFor_Mob': '\u79FB\u52D5OLX',

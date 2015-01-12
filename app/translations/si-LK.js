@@ -361,6 +361,7 @@ module.exports = {
     'misc.All-Location': 'All <<LOCATION>>',
     'misc.AllAds_Mob': 'All ads',
     'misc.AllSet_Mob': '\u0DC3\u0DD2\u0DBA\u0DBD\u0DCA\u0DBD \u0DC3\u0D9A\u0DC3\u0DB1 \u0DBD\u0DAF\u0DD2!',
+    'misc.AlreadyAccount': 'If you already have an account, <<LINK>>  click here to log in<</LINK>>',
     'misc.BackToStart_Mob': '\u0D86\u0DB4\u0DC3\u0DD4 \u0D86\u0DBB\u0DB8\u0DCA\u0DB7\u0DBA \u0DC0\u0DD9\u0DAD',
     'misc.Brand': '\u0DC3\u0DB1\u0DCA\u0DB1\u0DCF\u0DB8\u0DBA',
     'misc.BrandFor_Mob': '(fill the word here) \u0DC3\u0DB3\u0DC4\u0DCF OLX',

@@ -361,6 +361,7 @@ module.exports = {
     'misc.All-Location': 'All <<LOCATION>>',
     'misc.AllAds_Mob': 'All ads',
     'misc.AllSet_Mob': 'Allt til rei\xF0u!',
+    'misc.AlreadyAccount': 'If you already have an account, <<LINK>>  click here to log in<</LINK>>',
     'misc.BackToStart_Mob': 'Aftur \xE1 upphafss\xED\xF0u',
     'misc.Brand': 'V\xF6rumerki',
     'misc.BrandFor_Mob': 'OLX fyrir',

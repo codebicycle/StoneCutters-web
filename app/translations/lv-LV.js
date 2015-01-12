@@ -361,6 +361,7 @@ module.exports = {
     'misc.All-Location': 'All <<LOCATION>>',
     'misc.AllAds_Mob': 'All ads',
     'misc.AllSet_Mob': 'Viss gatavs!',
+    'misc.AlreadyAccount': 'If you already have an account, <<LINK>>  click here to log in<</LINK>>',
     'misc.BackToStart_Mob': 'Atpaka\u013C uz s\u0101kumu',
     'misc.Brand': 'Z\u012Bmols',
     'misc.BrandFor_Mob': 'OLX priek\u0161:',
