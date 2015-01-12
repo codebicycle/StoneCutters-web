@@ -92,6 +92,7 @@ module.exports = {
     'messages_user_management_current_ads.EditMyListing': 'Mijn advertentie bewerken',
     'topcities.SelectLocation': 'Kies een locatie',
     'unexistingitem.ListingUnavailable': 'Deze advertentie is niet meer beschikbaar',
+    'adsense.SponsoredLinks': 'Gesponsorde koppelingen',
     'landingbody.EmailAddress': 'E-mailadres',
     'landingbody.ForgotPassword': 'Wachtwoord vergeten?',
     'landingbody.SubmitRegistration': 'Registratie verzenden',
