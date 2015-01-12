@@ -12,6 +12,7 @@ fi
 IP="127.0.0.1"
 ENV="Development"
 SMAUG="190.210.62.60"
+SPAMHANDLER="162.242.207.113"
 
 # Help
 # ---------------------------------------------------------------------------------------
@@ -26,7 +27,7 @@ usage() {
 
 # Arguments
 # ---------------------------------------------------------------------------------------
-while getopts ":i:e:s:" o; do
+while getopts ":i:e:s:h:" o; do
     case "${o}" in
         i)
             IP=${OPTARG}
@@ -36,6 +37,9 @@ while getopts ":i:e:s:" o; do
             ;;
         s)
             SMAUG=${OPTARG}
+            ;;
+        h)
+            SPAMHANDLER=${OPTARG}
             ;;
         *)
             usage
@@ -81,10 +85,12 @@ then
 	sed -i .bkp "s/{IP}/$IP/g" '/etc/hosts';
 	sed -i .bkp "s/{LOCAL}/$LOCAL/g" '/etc/hosts';
     sed -i .bkp "s/{SMAUG}/$SMAUG/g" '/etc/hosts';
+    sed -i .bkp "s/{SPAMHANDLER}/$SPAMHANDLER/g" '/etc/hosts';
 else
 	sed -i "s/{IP}/$IP/g" '/etc/hosts';
 	sed -i "s/{LOCAL}/$LOCAL/g" '/etc/hosts';
     sed -i "s/{SMAUG}/$SMAUG/g" '/etc/hosts';
+    sed -i "s/{SPAMHANDLER}/$SPAMHANDLER/g" '/etc/hosts';
 fi
 
 echo "Moved to $ENV"

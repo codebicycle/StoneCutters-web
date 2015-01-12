@@ -4,7 +4,7 @@
 {% endif %}
 <section id="itemListing">
     {% if meta.total == 0 %}
-        <div class="emtyList">
+        <div class="emtyList" data-qa="no-results-found">
             <div></div>
             <p>
                 {% block noResultsMsg %}

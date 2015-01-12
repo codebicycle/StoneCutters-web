@@ -21,15 +21,15 @@ module.exports = {
         type: 'development'
     },
     localization: {
-        wap: ['www.olx.com.br', 'www.olx.fr', 'www.olx.es', 'www.olx.in', 'www.olx.co.za', 'www.olx.ir', 'www.jaovat.com'],
-        html4: ['www.olx.com.br', 'www.olx.fr', 'www.olx.es', 'www.olx.in', 'www.olx.co.za', 'www.olx.ir', 'www.jaovat.com'],
-        html5: ['www.olx.com.br', 'www.olx.fr', 'www.olx.es', 'www.olx.in', 'www.olx.co.za', 'www.olx.ir', 'www.jaovat.com'],
-        desktop: ['www.olx.com.bo', 'www.jaovat.com', 'www.olx.co.cr']
+        wap: ['www.olx.com.br', 'www.olx.fr', 'www.olx.es', 'www.olx.in', 'www.olx.co.za', 'www.olx.ir', 'www.jaovat.com', 'www.olx.hn'],
+        html4: ['www.olx.com.br', 'www.olx.fr', 'www.olx.es', 'www.olx.in', 'www.olx.co.za', 'www.olx.ir', 'www.jaovat.com', 'www.olx.hn', 'www.olx.com.ng'],
+        html5: ['www.olx.com.br', 'www.olx.fr', 'www.olx.es', 'www.olx.in', 'www.olx.co.za', 'www.olx.ir', 'www.jaovat.com', 'www.olx.hn', 'www.olx.com.ng'],
+        desktop: ['www.olx.com.bo', 'www.jaovat.com']
     },
     icons: {
-        wap: ['www.olx.com.ar', 'www.olx.com.bd', 'www.olx.com.br', 'www.olx.cm', 'www.olx.com.co', 'www.olx.com.ec', 'www.olx.com.sv', 'www.olx.com.gh', 'www.olx.com.gt', 'www.olx.in', 'www.olx.co.ke', 'www.olx.com.ng', 'www.olx.com.pe', 'www.olx.sn', 'www.olx.co.za', 'www.olx.com.ve', 'www.olx.com.pk', 'www.olx.co.ug', 'www.olx.com.uy', 'www.olx.ir'],
-        html4: ['www.olx.com.ar', 'www.olx.com.bd', 'www.olx.com.br', 'www.olx.cm', 'www.olx.com.co', 'www.olx.com.ec', 'www.olx.com.sv', 'www.olx.com.gh', 'www.olx.com.gt', 'www.olx.in', 'www.olx.co.ke', 'www.olx.com.ng', 'www.olx.com.pe', 'www.olx.sn', 'www.olx.co.za', 'www.olx.com.ve', 'www.olx.com.pk', 'www.olx.co.ug', 'www.olx.com.uy', 'www.olx.ir'],
-        html5: ['www.olx.com.ar', 'www.olx.com.bd', 'www.olx.com.br', 'www.olx.cm', 'www.olx.com.co', 'www.olx.com.ec', 'www.olx.com.sv', 'www.olx.com.gh', 'www.olx.com.gt', 'www.olx.in', 'www.olx.co.ke', 'www.olx.com.ng', 'www.olx.com.pe', 'www.olx.sn', 'www.olx.co.za', 'www.olx.com.ve', 'www.olx.com.pk', 'www.olx.co.ug', 'www.olx.com.uy', 'www.olx.ir']
+        wap: [],
+        html4: [],
+        html5: []
     },
     categoryTree: {
         'www.olx.com.bo': {
@@ -111,6 +111,146 @@ module.exports = {
             }
         ]
     },
+    videos: {
+        'www.olx.com.uy': [
+            {
+                title: 'OLX Uruguay - Celular - Vender es fácil',
+                id: '29QoFeoJldU'
+            },
+            {
+                title: 'OLX Uruguay - Bicicleta - Vender es fácil',
+                id: 'Z3wwfLdLgj8'
+            },
+            {
+                title: 'OLX Uruguay - Auto - Vender es fácil',
+                id: 'rhJVT5fDkWU'
+            }
+        ],
+        'www.olx.co.cr': [
+            {
+                title: 'OLX Costa Rica - Bicicleta - Vender es fácil',
+                id: 'iYUX408RQq4'
+            },
+            {
+                title: 'OLX Costa Rica - Anteojos - Vender es fácil',
+                id: 'Mrfetr0kAoI'
+            },
+            {
+                title: 'OLX Costa Rica - Poker - Vender es fácil',
+                id: 'Yf5i1HOwd70'
+            }
+        ]
+    },
+    socials: {
+        'www.olx.com.co': [
+            {
+                name: 'facebook',
+                link: 'https://www.facebook.com/OLXcolombia'
+            },
+            {
+                name: 'twitter',
+                link: 'https://twitter.com/olx_colombia'
+            },
+            {
+                name: 'youtube',
+                link: 'https://www.youtube.com/user/OLXcolombia'
+            }
+        ],
+        'www.olx.co.cr': [
+            {
+                name: 'facebook',
+                link: 'https://www.facebook.com/OLXCostaRica'
+            },
+            {
+                name: 'twitter',
+                link: 'https://twitter.com/olx_costarica'
+            },
+            {
+                name: 'youtube',
+                link: 'https://www.youtube.com/user/OLXcostarica'
+            }
+        ],
+        'www.olx.com.ec': [
+            {
+                name: 'facebook',
+                link: 'https://www.facebook.com/OLXEcuador'
+            },
+            {
+                name: 'twitter',
+                link: 'https://twitter.com/OLX_Ecuador'
+            },
+            {
+                name: 'youtube',
+                link: 'https://www.youtube.com/user/OLXecuador'
+            }
+        ],
+        'www.olx.com.sv': [
+            {
+                name: 'facebook',
+                link: 'https://www.facebook.com/OLXElSalvador'
+            },
+            {
+                name: 'twitter',
+                link: 'https://twitter.com/OLX_ElSalvador'
+            },
+            {
+                name: 'youtube',
+                link: 'https://www.youtube.com/user/OLXelsalvador'
+            }
+        ],
+        'www.olx.com.gt': [
+            {
+                name: 'facebook',
+                link: 'https://www.facebook.com/OLXGuatemala'
+            },
+            {
+                name: 'twitter',
+                link: 'https://twitter.com/OLX_Guatemala'
+            },
+            {
+                name: 'youtube',
+                link: 'https://www.youtube.com/user/OLXguatemala'
+            }
+        ],
+        'www.olx.com.pa': [
+            {
+                name: 'facebook',
+                link: 'https://www.facebook.com/pages/OLX-Panama/209969112487961'
+            },
+            {
+                name: 'youtube',
+                link: 'https://www.youtube.com/user/OLXpanama'
+            }
+        ],
+        'www.olx.com.pe': [
+            {
+                name: 'facebook',
+                link: 'https://www.facebook.com/OLXperu'
+            },
+            {
+                name: 'twitter',
+                link: 'https://twitter.com/OLX_Peru'
+            },
+            {
+                name: 'youtube',
+                link: 'https://www.youtube.com/user/OLXperu'
+            }
+        ],
+        'www.olx.com.ve': [
+            {
+                name: 'facebook',
+                link: 'https://www.facebook.com/OLXvenezuela'
+            },
+            {
+                name: 'twitter',
+                link: 'https://twitter.com/OLX_Venezuela'
+            },
+            {
+                name: 'youtube',
+                link: 'https://www.youtube.com/user/OLXvenezuela'
+            }
+        ]
+    },
     countryMapStyle: {
         special: ['www.olx.com.pa', 'www.olx.hn', 'www.olx.com.mx'],
     },
@@ -169,8 +309,8 @@ module.exports = {
                 countries: ['www.olx.ir']
             },
             interstitialByADX: {
-                worldwide: false,
-                countries: ['www.olx.com.py']
+                worldwide: true,
+                countries: []
             },
             autoLocation: {
                 worldwide: true,
@@ -183,8 +323,8 @@ module.exports = {
         },
         html4: {
             interstitialByADX: {
-                worldwide: false,
-                countries: ['www.olx.com.py']
+                worldwide: true,
+                countries: []
             }
         }
     },
@@ -233,7 +373,9 @@ module.exports = {
             'www.olx.fr': 'olx.com',
             'www.olx.es': 'olx.com',
             'www.olx.cl': 'olx.com',
-            'www.olx.com.mx': 'olx.com'
+            'www.olx.com.mx': 'olx.com',
+            'www.olx.com.bo': 'olx.com',
+            'www.olx.com.py': 'olx.com'
         },
         support: {
             'default': 'support',

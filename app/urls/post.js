@@ -7,6 +7,9 @@ module.exports = {
     'post#success': {
         url: 'posting/success/:itemId'
     },
+    'post#flowMarketing': {
+        url :'posting/landing_mo'
+    },
     'post#form': {
         url: 'posting/:categoryId/:subcategoryId'
     },
@@ -16,7 +19,7 @@ module.exports = {
     'post#flow': {
         url :'posting'
     },
-    'post#edit': {
+    'post#flow#edit': {
         url: 'myolx/edititem/:itemId'
     }
 };

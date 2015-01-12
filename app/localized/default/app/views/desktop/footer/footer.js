@@ -1,6 +1,7 @@
 'use strict';
 
 var Base = require('../../../../../common/app/bases/view').requireView('footer/footer');
+var config = require('../../../../../../../shared/config');
 var _ = require('underscore');
 
 module.exports = Base.extend({
@@ -10,11 +11,13 @@ module.exports = Base.extend({
     firstRender: true,
     events: {
         'click [data-footer-slidedown]': 'slideDownContent',
-        'click [data-footer-slide]': 'slideFooter'
+        'click [data-footer-tab]': 'slideFooter',
+        'click [data-footer-content] ul li': 'cleanClases'
     },
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
         var location = this.app.session.get('location');
+        var socials = config.get(['socials', location.url]);
         var states = data.states;
         var currentState = {};
         var selectedLanguage = this.app.session.get('selectedLanguage').split('-')[0];
@@ -29,6 +32,7 @@ module.exports = Base.extend({
 
         return _.extend({}, data, {
             selectedLanguage: selectedLanguage,
+            socials: socials,
             currentState: {
                 hostname: currentState.hostname,
                 name: currentState.name
@@ -38,7 +42,7 @@ module.exports = Base.extend({
     postRender: function() {
         if (this.firstRender) {
             $('body').on('click', function(event){
-                var $slide = $('.footer-slide');
+                var $slide = this.$('[data-footer-content]');
 
                 if (!$slide.hasClass('open')) {
                     return;
@@ -50,52 +54,52 @@ module.exports = Base.extend({
             this.firstRender = false;
        }
     },
+    cleanClases: function() {
+        this.$('[data-footer-tab]').removeClass('active');
+        this.$('[data-footer-content].open').removeClass('open').hide();
+    },
     slideDownContent: function(event) {
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();
 
-        var $slide = $('.footer-slide.open');
-        var $select = $('.select li.active');
+        var $slideOpen = this.$('[data-footer-content].open');
+        var $tabs = this.$('[data-footer-tab]');
 
-        $slide.addClass('onTransition');
-        $slide.removeClass('open');
-        $slide.slideToggle('slow', function() {
-            $select.removeClass('active');
-            $slide.removeClass('onTransition');
-        });
+        $tabs.removeClass('active');
+        $slideOpen.removeClass('open');
+        $slideOpen.slideUp('slow');
     },
     slideFooter: function(event) {
-        event.preventDefault();
-        event.stopPropagation();
-        event.stopImmediatePropagation();
+        var $currentTab = $(event.currentTarget);
+        var $currentSlide = $currentTab.siblings('[data-footer-content]');
+        var $tabs = this.$('[data-footer-tab]');
+        var $slides = this.$('[data-footer-content]');
+        var isActive = $currentSlide.hasClass('open');
 
-        var $current = $(event.currentTarget);
-        var $currentSlide = $('.' + $current.data('footer-slide'));
-        var $slide = $('.footer-slide');
-        var $select = $('.select li');
+        $slides.stop(true, true);
 
-        if(!$select.parent().hasClass('onTransition')){
-            if($slide.hasClass('open') && !$currentSlide.hasClass('open')) {
-                $select.parent().addClass('onTransition');
-                $slide.filter('.open').slideToggle('slow', function() {
-                    $slide.filter('.open').toggleClass('open');
-                    $select.removeClass('active');
-                    $current.parent().addClass('active');
-                    $currentSlide.slideToggle('slow', function() {
-                        $currentSlide.toggleClass('open');
-                        $select.parent().removeClass('onTransition');
-                    });
-                });
-            }
-            else {
-                $select.parent().addClass('onTransition');
+        if ($slides.hasClass('open') && !$currentSlide.hasClass('open')) {
+            $slides.filter('.open').slideToggle('slow', function() {
+                $slides.find('.open').toggleClass('open');
+                $tabs.find('.active').removeClass('active');
+                $currentTab.addClass('active');
                 $currentSlide.slideToggle('slow', function() {
-                    $current.parent().toggleClass('active');
                     $currentSlide.toggleClass('open');
-                    $select.parent().removeClass('onTransition');
                 });
-            }
+            });
+        }
+        else {
+            $currentSlide.slideToggle('slow', function() {
+                if (isActive) {
+                    $currentTab.removeClass('active');
+                    $currentSlide.removeClass('open');
+                }
+                else {
+                    $currentTab.addClass('active');
+                    $currentSlide.addClass('open');
+                }
+            });
         }
     }
 });

@@ -9,7 +9,6 @@ module.exports = {
     bedrooms: bedrooms,
     surface: surface,
     year: year,
-    neighborhood: neighborhood,
     carbrand: carbrand,
     carmodel: carmodel
 };
@@ -33,7 +32,7 @@ function kilometers(filter, options) {
         return filter;
     }
 
-    dictionary = translations[options.app.session.get('selectedLanguage') || 'en-US'];
+    dictionary = translations.get(options.app.session.get('selectedLanguage'));
     filter.set({
         otherType: 'LIST',
         list: [
@@ -73,13 +72,6 @@ function year(filter, options) {
     return filter;
 }
 
-function neighborhood(filter, options) {
-    if (options.app.session.get('platform') === 'desktop') {
-        return;
-    }
-    return filter;
-}
-
 function carbrand(filter, options) {
     filter = checkSelectValue(filter, options);
     filter = checkDescription(filter, options, 'misc.Brand');
@@ -102,7 +94,7 @@ function checkRangeValue(filter, options) {
     var dictionary;
 
     if (!filter.has('value')) {
-        dictionary = translations[options.app.session.get('selectedLanguage') || 'en-US'];
+        dictionary = translations.get(options.app.session.get('selectedLanguage'));
         filter.set('value', [{
             id: 'from',
             value: dictionary['misc.Min'],
@@ -139,7 +131,7 @@ function checkDescription(filter, options, key) {
     var dictionary;
 
     if (!filter.has('description')) {
-        dictionary = translations[options.app.session.get('selectedLanguage') || 'en-US'];
+        dictionary = translations.get(options.app.session.get('selectedLanguage'));
         filter.set('description', dictionary[key], {
             unset: false
         });

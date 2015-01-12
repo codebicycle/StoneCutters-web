@@ -22,12 +22,12 @@
                         </li>
                     {% endfor %}
                 </ul>
-            {% elif filter.type == 'SELECT' %}
+            {% elif filter.type == 'SELECT' and filter.name != 'neighborhood' %}
                 <span class="title filter-title" data-filter-name="{{ filter.name }}" data-filter-type="{{ filter.type }}">{{ filter.description }}<span class="icons icon-arrow-up"></span></span>
                 <div class="filter check-box {{ filter.name }}">
                     {% for value in filter.value %}
                         <label>
-                            <input type="checkbox" value="{{ value.id }}" data-filter-name="{{ filter.name }}"  data-filter-type="{{ filter.type }}" {{ 'checked' if filters.has(filter.name, value.id) }}>
+                            <input type="checkbox" value="{{ value.id }}" data-filter-name="{{ filter.name }}" data-filter-type="{{ filter.type }}" {{ 'checked' if filters.has(filter.name, value.id) }}>
                             {{ value.value }} <span class="count">{{ value.count }}</span>
                         </label>
                         {% endfor %}

@@ -41,8 +41,8 @@ module.exports = {
                 data.browserName = browserName;
             break;
         }
-        if (useADX) {
-            data.link = 'http://ad-x.co.uk/API/click/olxinc789048jo/am5543eccbc236fa';
+        if (data.link && useADX) {
+            data.link = 'http://ad-x.co.uk/API/click/olxinc789048jo/am5549427d4c29a6';
         }
         return data;
 

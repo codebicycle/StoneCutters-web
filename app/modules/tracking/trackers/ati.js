@@ -34,18 +34,18 @@ function isEnabled(page) {
     if (enabled) {
         enabled = isPlatformEnabled.call(this, config.getForMarket(location.url, ['tracking', 'trackers', 'ati', 'platforms']));
     }
-    if (enabled) {
+    if (enabled && page) {
         enabled = !!utils.get(configTracking, ['ati', 'params', page]);
     }
     return enabled;
 }
 
-function isTypeEnabled(page, type) {
+function isTypeEnabled(page, type, typeTracking) {
     var location = this.app.session.get('location');
     var enabled = isEnabled.call(this, page);
 
     if (enabled) {
-        enabled = config.getForMarket(location.url, ['tracking', 'trackers', 'ati', type, 'enabled'], true);
+        enabled = config.getForMarket(location.url, ['tracking', 'trackers', 'ati', type, typeTracking || 'enabled'], true);
     }
     if (enabled) {
         enabled = isPlatformEnabled.call(this, config.getForMarket(location.url, ['tracking', 'trackers', 'ati', type, 'platforms']));
@@ -53,12 +53,12 @@ function isTypeEnabled(page, type) {
     return enabled;
 }
 
-function isServerEnabled(page) {
-    return isTypeEnabled.call(this, page, 'server');
+function isServerEnabled(page, type) {
+    return isTypeEnabled.call(this, page, 'server', type);
 }
 
-function isClientEnabled(page) {
-    return isTypeEnabled.call(this, page, 'client');
+function isClientEnabled(page, type) {
+    return isTypeEnabled.call(this, page, 'client', type);
 }
 
 function standarizeName(name) {
@@ -142,6 +142,9 @@ function processOptions(params, options) {
     }
     if(!_.isUndefined(params.subcategory) && options.subcategory) {
         params.subcategory = standarizeName(options.subcategory.name);
+    }
+    if(params.page_name === 'staticsearch_keyword'){
+        params.page_name = 'staticsearch_' + options.keyword;
     }
     if(params.page_name === 'expired_category' && options.category) {
         if (options.subcategory) {
