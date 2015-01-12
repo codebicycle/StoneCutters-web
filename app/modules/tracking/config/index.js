@@ -5,5 +5,6 @@ module.exports = {
     ati: require('./ati'),
     analytics: require('./analytics'),
     keyade: require('./keyade'),
-    hydra: require('./hydra')
+    hydra: require('./hydra'),
+    tagmanager: require('./tagmanager')
 };

@@ -6,6 +6,7 @@ var analytics = require('./trackers/analytics');
 var hydra = require('./trackers/hydra');
 var serverSide = require('./trackers/serverSide');
 var keyade = require('./trackers/keyade');
+var tagmanager = require('./trackers/tagmanager');
 var utils = require('../../../shared/utils');
 var esi = require('../esi');
 
@@ -79,6 +80,13 @@ var trackers = {
 
                 ctx.urls.push(url);
             }
+        }
+    },
+    tagmanager: function(ctx, page, query) {
+        if (tagmanager.isEnabled.call(this, page)) {
+            _.extend(ctx.params, {
+                tagmanager: tagmanager.getParams.call(this, page, query)
+            });
         }
     }
 };

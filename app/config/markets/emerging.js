@@ -56,6 +56,10 @@ module.exports = {
             hydra: {
                 enabled: true,
                 platforms: ['desktop']
+            },
+            tagmanager: {
+                enabled: true,
+                platforms: ['desktop']
             }
         }
     }
