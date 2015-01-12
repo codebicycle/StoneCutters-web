@@ -73,7 +73,7 @@ module.exports = Base.extend({
             $('body > .loading').hide();
             this.parentView.parentView.fields = res.fields;
             this.parentView.parentView.item.get('category').id = id;
-            this.parentView.$el.trigger('subcategorySubmit', [translations[this.app.session.get('selectedLanguage') || 'en-US']['postingerror.PleaseSelectSubcategory']]);
+            this.parentView.$el.trigger('subcategorySubmit', [translations.get(this.app.session.get('selectedLanguage'))['postingerror.PleaseSelectSubcategory']]);
             this.parentView.$el.trigger('flow', [this.$el.attr('id'), res.fields.get('fields').categoryAttributes.length ? 'optionals' : '']);
         }.bind(this);
 

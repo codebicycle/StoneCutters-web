@@ -158,7 +158,7 @@ function validate(done) {
 
 function postImages(done) {
     var newImages = _.filter(this.get('images'), function each(image) {
-        return !image.id;
+        return typeof image !== 'string' && !image.id;
     }, this);
 
     if (!newImages.length) {
@@ -299,7 +299,7 @@ function toData(includeImages) {
     }
     if (includeImages && data.images && data.images.length) {
         data.images = _.map(data.images, function each(image) {
-            return image.id;
+            return typeof image === 'string' ? image : image.id;
         }).join(',');
     }
     else {

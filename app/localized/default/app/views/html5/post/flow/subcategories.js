@@ -17,7 +17,7 @@ module.exports = Base.extend({
         event.stopPropagation();
         event.stopImmediatePropagation();
 
-        this.parentView.$el.trigger('headerChange', [translations[this.app.session.get('selectedLanguage') || 'en-US']['misc.ChooseASubcategory_Mob'], this.id, 'categories']);
+        this.parentView.$el.trigger('headerChange', [translations.get(this.app.session.get('selectedLanguage'))['misc.ChooseASubcategory_Mob'], this.id, 'categories']);
         this.$el.removeClass('disabled');
         this.$('#category-' + this.parentView.item.get('category').parentId).trigger('show');
     },

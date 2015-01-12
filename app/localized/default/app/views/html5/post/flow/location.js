@@ -39,7 +39,7 @@ module.exports = Base.extend({
         event.stopPropagation();
         event.stopImmediatePropagation();
 
-        this.parentView.$el.trigger('headerChange', [translations[this.app.session.get('selectedLanguage') || 'en-US']['countryoptions.Home_SelectCity'], this.id, 'contact']);
+        this.parentView.$el.trigger('headerChange', [translations.get(this.app.session.get('selectedLanguage'))['countryoptions.Home_SelectCity'], this.id, 'contact']);
         this.$el.removeClass('disabled');
     },
     onHide: function(event) {
@@ -49,7 +49,7 @@ module.exports = Base.extend({
 
         this.firstRender = true;
         this.render();
-        this.parentView.$el.trigger('locationSubmit', [translations[this.app.session.get('selectedLanguage') || 'en-US']['postingerror.InvalidLocation']]);
+        this.parentView.$el.trigger('locationSubmit', [translations.get(this.app.session.get('selectedLanguage'))['postingerror.InvalidLocation']]);
     },
     onClickCity: function(event) {
         event.preventDefault();

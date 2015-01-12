@@ -57,7 +57,7 @@ module.exports = Base.extend({
             template: template,
             siteLocation: this.app.session.get('siteLocation'),
             location: this.app.session.get('location'),
-            dictionary: translations[this.app.session.get('selectedLanguage') || 'en-US'],
+            dictionary: translations.get(this.app.session.get('selectedLanguage')),
             referer: this.app.session.get('referer'),
             url: this.app.session.get('url'),
             path: this.app.session.get('path'),

@@ -6,26 +6,28 @@
     <form id="postingForm" action="{{ '/post' | link }}" method="POST" enctype="multipart/form-data">
         <h4 class="title" >
             {{ dictionary["itemslisting.Category"] }} {{ subcategory.trName }}
-            <a href="{{ '/posting' | link }}">{{ dictionary["defaultheader.change"] }}</a>
+            {% if not item or not item.get('id') %}
+                <a href="{{ '/posting' | link }}">{{ dictionary["defaultheader.change"] }}</a>
+            {% endif %}
         </h4>
         {% include (template + '/post/helpNumber.html') %}
-        {% if item and item.has('images') %}
-            <div class="images">
-                {% for image in item.get('images') %}
-                    <div class="imageCont" style="background-image: url({{ image.thumbnail }});"></div>
-                {% endfor %}
-            </div>
-        {% else %}
-            <div class="formField">
-                <label>{{ dictionary["posting_fields_1.photos"] }}: <small>{{ dictionary["posting_photos.UpTo5XMore"] }}</small></label>
-                <div class="imgHolder">
-                    <input id="file1" type="file" name="images[0]" />
+        <div class="formField">
+            <label>{{ dictionary["posting_fields_1.photos"] }}: <small>{{ dictionary["posting_photos.UpTo5XMore"] }}</small></label>
+            {% if item and item.has('images') %}
+                <div class="images">
+                    {% for image in item.get('images') %}
+                        <div class="imageCont" style="background-image: url({{ image.thumbnail }});"></div>
+                        <input type="hidden" name="images[{{ loop.index0 }}]" value="{{ image.id }}">
+                    {% endfor %}
                 </div>
-                <div class="imgHolder">
-                    <input id="file2" type="file" name="images[1]" />
-                </div>
+            {% endif %}
+            <div class="imgHolder">
+                <input id="file1" type="file" name="images[{{ 0 if not item else item.get('images').length }}]" />
             </div>
-        {% endif %}
+            <div class="imgHolder">
+                <input id="file2" type="file" name="images[{{ 1 if not item else (item.get('images').length + 1) }}]" />
+            </div>
+        </div>
 
         {% for field in fields.productDescription %}
             {% if  field.name == 'description' %}

@@ -56,7 +56,7 @@ module.exports = Base.extend({
         event.stopPropagation();
         event.stopImmediatePropagation();
 
-        this.parentView.$el.trigger('headerChange', [translations[this.app.session.get('selectedLanguage') || 'en-US']['misc.ChooseACategory_Mob'], this.id, '']);
+        this.parentView.$el.trigger('headerChange', [translations.get(this.app.session.get('selectedLanguage'))['misc.ChooseACategory_Mob'], this.id, '']);
         this.$el.removeClass('disabled');
     },
     onHide: function(event) {

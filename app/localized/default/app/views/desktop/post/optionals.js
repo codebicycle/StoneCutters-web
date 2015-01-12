@@ -47,7 +47,7 @@ module.exports = Base.extend({
             if (field.values) {
                 field.values.unshift({
                     key: '',
-                    value: translations[this.app.session.get('selectedLanguage') || 'en-US']['misc.SelectAnOption_BR']
+                    value: translations.get(this.app.session.get('selectedLanguage'))['misc.SelectAnOption_BR']
                 });
             }
         }.bind(this));
@@ -90,7 +90,7 @@ module.exports = Base.extend({
             options = body.subfield.values;
             options.unshift({
                 key: '',
-                value: translations[this.app.session.get('selectedLanguage') || 'en-US']['misc.SelectAnOption_BR']
+                value: translations.get(this.app.session.get('selectedLanguage'))['misc.SelectAnOption_BR']
             });
             _.each(options, function each(option) {
                 $field.append('<option value="' + option.key + '">' + option.value + '</option>');
