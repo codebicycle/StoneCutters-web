@@ -5,6 +5,7 @@ var helpers = require('../../../../../../helpers');
 var tracking = require('../../../../../../modules/tracking');
 var _ = require('underscore');
 var asynquence = require('asynquence');
+var User = require('../../../../../../models/user');
 
 module.exports = Base.extend({
     tagName: 'section',
@@ -12,7 +13,8 @@ module.exports = Base.extend({
     className: 'posting-categories-view field-wrapper',
     events: {
         'click .posting-categories-list a.category': 'onCategoryClick',
-        'click .child-categories-list a': 'onSubCategoryClick'
+        'click .child-categories-list a': 'onSubCategoryClick',
+        'editCategory': 'onEditCategory'
     },
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
@@ -21,7 +23,11 @@ module.exports = Base.extend({
             categories: data.categories.toJSON()
         });
     },
-    onSubCategoryClick: function(event) {
+    onEditCategory: function(event, category) {
+        this.$('.posting-categories-list a[data-id=' + category.parentId + ']').trigger('click', ['edit']);
+        this.$('.child-categories-list a[data-id=' + category.id + ']').trigger('click', ['edit']);
+    },
+    onSubCategoryClick: function(event, intent) {
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();
@@ -29,6 +35,26 @@ module.exports = Base.extend({
         var subcategory = $(event.currentTarget);
         var subcategoryId = subcategory.data('id');
         var categoryId = subcategory.parents('.subcategories').siblings('.category').data('id');
+        var user = this.app.session.get('user');
+        var params = {};
+
+        intent = intent ? 'edit' : 'post';
+        if (intent === 'post') {
+            params = {
+                intent: intent,
+                location: this.app.session.get('siteLocation'),
+                categoryId: subcategoryId,
+                languageId: this.app.session.get('languages')._byId[this.app.session.get('selectedLanguage')].id
+            };
+        }
+        else {
+            params = {
+                intent: intent,
+                itemId: this.parentView.item.get('id'),
+                languageId: this.app.session.get('languages')._byId[this.app.session.get('selectedLanguage')].id,
+                token: user.token
+            };
+        }
 
         $('a.category').removeClass('select');
         $('a.subcategory').removeClass('select icon-check');
@@ -41,12 +67,7 @@ module.exports = Base.extend({
             this.app.fetch({
                 fields: {
                     model: 'Field',
-                    params: {
-                        intent: 'post',
-                        location: this.app.session.get('siteLocation'),
-                        categoryId: subcategoryId,
-                        languageId: this.app.session.get('languages')._byId[this.app.session.get('selectedLanguage')].id
-                    }
+                    params: params
                 }
             }, {
                 readFromCache: false

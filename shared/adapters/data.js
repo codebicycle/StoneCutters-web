@@ -103,7 +103,7 @@ DataAdapter.prototype.serverRequest = function(req, api, options, callback) {
                     return fail(err, res);
                 }
             }
-            if (body && body.itemProperties === null){
+            if (body && body.itemProperties === null) {
                 body.itemProperties = {};
             }
             logger.log('%s %d %s %s', api.method.toUpperCase(), res.statusCode, api.url, elapsed);
@@ -342,12 +342,21 @@ DataAdapter.prototype.apiDefaults = function(api) {
 };
 
 DataAdapter.prototype.ajaxParams = function(api, options) {
+    var data;
+
     _.extend(api, options);
     if (api.query) {
         api.url = utils.params(api.url, api.query);
     }
     if (utils.endsWith(window.location.hostname, '.olx.ir')) {
         api.url = api.url.replace(HOST, HOST_IRIS);
+    }
+    if (api.data && api.multipart) {
+        data = new FormData();
+        Object.keys(api.data).forEach(function each(key) {
+            data.append(key, api.data[key]);
+        });
+        api.data = data;
     }
     return api;
 };

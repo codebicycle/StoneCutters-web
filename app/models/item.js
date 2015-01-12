@@ -4,15 +4,30 @@ var _ = require('underscore');
 var asynquence = require('asynquence');
 var Base = require('../bases/model');
 var helpers = require('../helpers');
+var statsd = require('../../shared/statsd')();
 
 module.exports = Base.extend({
     idAttribute: 'id',
     url: '/items/:id',
+    defaults: {
+        category: {},
+        optionals: [],
+        images: []
+    },
     shortTitle: shortTitle,
     shortDescription: shortDescription,
     getLocation: getLocation,
     checkSlug: checkSlug,
+    indexOfOptional: indexOfOptional,
     parse: parse,
+    validate: validate,
+    post: post,
+    postFields: postFields,
+    postImages: postImages,
+    logValidation: logValidation,
+    logPost: logPost,
+    logPostImages: logPostImages,
+    toData: toData,
     remove: remove,
     load: load
 });
@@ -71,9 +86,12 @@ function shortDescription() {
 function getLocation() {
     var location = this.get('location');
 
-    if (location.children) {
+    if (!location) {
+        return location;
+    }
+    if (location.children && location.children.length) {
         location = location.children[0];
-        if (location.children) {
+        if (location.children && location.children.length) {
             location = location.children[0];
         }
     }
@@ -91,11 +109,221 @@ function checkSlug(itemSlug, urlSlug) {
     return false;
 }
 
-function parse(resp, options) {
-    if (resp && resp.date) {
-        resp.date.since = helpers.timeAgo(resp.date);
+function indexOfOptional(name) {
+    var index;
+
+    _.each(this.get('optionals'), function each(optional, i) {
+        if (optional.name === name) {
+            index = i;
+        }
+    }, this);
+    return index;
+}
+
+function parse(item, options) {
+    if (item && item.date) {
+        item.date.since = helpers.timeAgo(item.date);
+    }
+    if (item.priceC && this.app.session.get('location').url === 'www.olx.ir') {
+        item.priceC = helpers.numbers.toLatin(item.priceC);
     }
     return Base.prototype.parse.apply(this, arguments);
+}
+
+function post(done) {
+    asynquence().or(done.fail || done)
+        .then(this.validate.bind(this))
+        .then(this.postImages.bind(this))
+        .then(this.postFields.bind(this))
+        .val(done);
+}
+
+function validate(done) {
+    var platform = this.app.session.get('platform');
+
+    helpers.dataAdapter.post(this.app.req, '/items', {
+        data: this.toData(),
+        query: {
+            intent: 'validate',
+            postingSession: this.get('postingSession'),
+            languageId: this.app.session.get('languageId'),
+            platform: platform
+        }
+    }, callback.bind(this));
+
+    function callback(err, response, errors) {
+        this.logValidation(!this.get('id') ? 'posting' : 'editing', response.statusCode, err || errors);
+        this.errfcb(done)(err || errors, response);
+    }
+}
+
+function postImages(done) {
+    var newImages = _.filter(this.get('images'), function each(image) {
+        return typeof image !== 'string' && !image.id;
+    }, this);
+
+    if (!newImages.length) {
+        return this.errfcb(done)();
+    }
+    helpers.dataAdapter.post(this.app.req, '/images', {
+        query: {
+            postingSession: this.get('postingSession'),
+            platform: this.app.session.get('platform'),
+            url: this.get('location')
+        },
+        data: newImages,
+        multipart: true,
+        cache: false,
+        dataType: 'json',
+        processData: false,
+        contentType: false
+    }, callback.bind(this));
+
+    function callback(err, response, ids) {
+        this.logPostImages(!this.get('id') ? 'posting' : 'editing', response.statusCode, err);
+        if (!err) {
+            _.each(newImages, function each(image, i) {
+                image.id = ids[i];
+            });
+        }
+        this.errfcb(done)(err, response);
+    }
+}
+
+function postFields(done) {
+    var id = this.get('id');
+    var sk = this.get('sk');
+    var user = this.app.session.get('user');
+    var query = {
+        postingSession: this.get('postingSession'),
+        languageId: this.app.session.get('languageId'),
+        platform: this.app.session.get('platform')
+    };
+    var data;
+
+    if (!id) {
+        query.intent = 'create';
+    }
+    if (user) {
+        query.token = user.token;
+    }
+    else if (id && sk) {
+        query.securityKey = sk;
+        this.unset('sk');
+    }
+    data = this.toData(true);
+    helpers.dataAdapter.post(this.app.req, '/items' + (!id ? '' : ['', id, 'edit'].join('/')), {
+        data: data,
+        query: query
+    }, callback.bind(this));
+
+    function callback(err, response, item) {
+        if (!err && item) {
+            this.set(item);
+        }
+        this.logPost(!id ? 'posting' : 'editing', response.statusCode, err);
+        this.errfcb(done)(err, response, item);
+    }
+}
+
+function logValidation(type, statusCode, errors) {
+    var platform = this.app.session.get('platform');
+    var locale = this.app.session.get('location').abbreviation.toLowerCase();
+
+    if (!errors) {
+        return statsd.increment([locale, 'posting', 'success', 'validation', platform]);
+    }
+    if (statusCode != 200) {
+        return statsd.increment([locale, 'posting', 'error', 'validation', statusCode, platform]);
+    }
+    errors.forEach(function each(error) {
+        statsd.increment([locale, 'posting', 'error', 'validation', statusCode, error.selector, platform]);
+    });
+}
+
+function logPostImages(type, statusCode, errors) {
+    var platform = this.app.session.get('platform');
+    var locale = this.app.session.get('location').abbreviation.toLowerCase();
+
+    if (statusCode == 200) {
+        return statsd.increment([locale, 'posting', 'success', 'images', platform]);
+    }
+    if (statusCode != 400) {
+        return statsd.increment([locale, 'posting', 'error', 'images', statusCode, platform]);
+    }
+    errors.forEach(function each(error) {
+        statsd.increment([locale, 'posting', 'error', 'images', statusCode, error.selector, platform]);
+    });
+}
+
+function logPost(type, statusCode, errors) {
+    var platform = this.app.session.get('platform');
+    var locale = this.app.session.get('location').abbreviation.toLowerCase();
+
+    if (statusCode == 200) {
+        return statsd.increment([locale, type, 'success', platform]);
+    }
+    if (statusCode != 400) {
+        return statsd.increment([locale, type, 'error', 'post', statusCode, platform]);
+    }
+    errors.forEach(function each(error) {
+        statsd.increment([locale, type, 'error', 'post', statusCode, error.selector, platform]);
+    });
+}
+
+function toData(includeImages) {
+    var data = this.toJSON();
+
+    data['category.parentId'] = data['category.parentId'] || (this.get('category') || {}).parentId;
+    data['category.id'] = data['category.id'] || (this.get('category') || {}).id;
+    if (typeof data.location !== 'string') {
+        try {
+            data.location = this.getLocation().url;
+        }
+        catch(err) {
+            delete data.location;
+        }
+    }
+    if (data.price) {
+        data.priceC = data.price;
+    }
+    if (_.isObject(data.priceC)) {
+        data.priceC = data.priceC.amount;
+    }
+    if (data.priceC) {
+        data.priceC = parseFloat(data.priceC);
+    }
+    if (data.optionals) {
+        _.each(data.optionals, function each(optional) {
+            data[optional.name] = optional.id || optional.value;
+        }, this);
+    }
+    if (includeImages && data.images && data.images.length) {
+        data.images = _.map(data.images, function each(image) {
+            return typeof image === 'string' ? image : image.id;
+        }).join(',');
+    }
+    else {
+        delete data.images;
+    }
+    delete data.category;
+    delete data.price;
+    delete data.optionals;
+    delete data.date;
+    delete data.metadata;
+    delete data.status;
+    delete data.user;
+    delete data.hasEmail;
+    delete data.isFeed;
+    delete data.slug;
+    delete data.priceTypeData;
+    delete data.additionalLocation;
+    _.each(Object.keys(data), function each(key) {
+        if (data[key] === undefined || data[key] === null || (typeof data[key] === 'string' && !data[key])) {
+            delete data[key];
+        }
+    }, this);
+    return data;
 }
 
 function remove(reason, comment, done) {

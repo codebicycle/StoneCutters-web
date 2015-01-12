@@ -9,42 +9,37 @@ module.exports = Base.extend({
     className: 'post_flow_location_view cities-links disabled',
     id: 'location',
     tagName: 'section',
-    selected: {},
     firstRender: true,
     initialize: function() {
         Base.prototype.initialize.call(this);
-        this.selected = {};
         this.firstRender = true;
     },
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
+        var states = this.parentView.getStates ? this.parentView.getStates() : data.states;
 
-        this.cities = this.firstRender ? (data.topCities.toJSON ? data.topCities : this.parentView.options.topCities) : this.cities;
         return _.extend({}, data, {
-            cities: this.cities.toJSON(),
-            states: this.firstRender ? (data.states.toJSON ? data.states : this.parentView.options.states).toJSON() : [],
+            cities: this.cities ? this.cities.toJSON() : data.topCities.toJSON(),
+            states: this.firstRender ? (states ? states.toJSON() : []) : [],
             firstRender: this.firstRender
         });
     },
     postRender: function() {
-        var data = Base.prototype.getTemplateData.call(this);
-
-        this.cities = this.cities || (data.topCities.toJSON ? data.topCities : this.parentView.options.topCities);
+        this.cities = this.cities || this.parentView.getTopCities();
     },
     events: {
         'show': 'onShow',
         'hide': 'onHide',
         'click .city': 'onClickCity',
         'click .state': 'onClickState',
-        'submit': 'onSubmit',
-        'restart': 'onRestart'
+        'submit': 'onSubmit'
     },
     onShow: function(event) {
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();
 
-        this.parentView.$el.trigger('headerChange', [translations[this.app.session.get('selectedLanguage') || 'en-US']['countryoptions.Home_SelectCity'], this.id, 'contact']);
+        this.parentView.$el.trigger('headerChange', [translations.get(this.app.session.get('selectedLanguage'))['countryoptions.Home_SelectCity'], this.id, 'contact']);
         this.$el.removeClass('disabled');
     },
     onHide: function(event) {
@@ -54,7 +49,7 @@ module.exports = Base.extend({
 
         this.firstRender = true;
         this.render();
-        this.parentView.$el.trigger('locationSubmit', [this.selected, translations[this.app.session.get('selectedLanguage') || 'en-US']['postingerror.InvalidLocation']]);
+        this.parentView.$el.trigger('locationSubmit', [translations.get(this.app.session.get('selectedLanguage'))['postingerror.InvalidLocation']]);
     },
     onClickCity: function(event) {
         event.preventDefault();
@@ -63,7 +58,7 @@ module.exports = Base.extend({
 
         var $city = $(event.currentTarget);
 
-        this.selected = this.cities.get($city.data('url')).toJSON();
+        this.parentView.getItem().set('location', this.cities.get($city.data('url')).toJSON());
         this.parentView.$el.trigger('flow', [this.id, 'contact']);
     },
     onClickState: function(event) {
@@ -113,13 +108,6 @@ module.exports = Base.extend({
         event.stopImmediatePropagation();
 
         this.parentView.$el.trigger('flow', [this.id, 'contact']);
-    },
-    onRestart: function(event) {
-        event.preventDefault();
-        event.stopPropagation();
-        event.stopImmediatePropagation();
-
-        this.selected = {};
     }
 });
 
