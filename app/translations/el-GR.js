@@ -360,6 +360,7 @@ module.exports = {
     'misc.All-Location': 'All <<LOCATION>>',
     'misc.AllAds_Mob': 'All ads',
     'misc.AllSet_Mob': '\u038C\u03BB\u03B1 \u03B5\u03BD\u03C4\u03AC\u03BE\u03B5\u03B9!',
+    'misc.AlreadyAccount': 'If you already have an account, <<LINK>>  click here to log in<</LINK>>',
     'misc.BackToStart_Mob': '\u0395\u03C0\u03B9\u03C3\u03C4\u03C1\u03BF\u03C6\u03AE \u03C3\u03C4\u03B7\u03BD \u03B1\u03C1\u03C7\u03AE',
     'misc.Brand': '\u039C\u03AC\u03C1\u03BA\u03B1',
     'misc.BrandFor_Mob': 'OLX \u03B3\u03B9\u03B1',
