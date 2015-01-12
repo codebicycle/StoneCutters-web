@@ -1,0 +1,121 @@
+{% view 'locations/select' %}
+{% view 'partials/search' %}
+{% from macros import Breadcrumb, BreadcrumbHome %}
+{% set link = (breadcrumb | link) %}
+{{ Breadcrumb(dictionary, link, subcategory.trName) }}
+{{ 'CHAUUUUUU' | log }}
+<div id="itemListing">
+    {% if meta.total == 0 %}
+        <div class="emtyList">
+            <div></div>
+            <p>
+                {% if location.current.name %}
+                    {{ dictionary["listingpageitemslisting.ZeroResultsPage"] | replace('<<CATEGORY>>', '<strong>' + category.trName + ', ' + subcategory.trName + '</strong>') | replace('<<REGION>>',location.current.name)}}
+                {% else %}
+                    {{ dictionary["listingpageitemslisting.ZeroResultsPage"] | replace('<<CATEGORY>>', '<strong>' + category.trName + ', ' + subcategory.trName + '</strong>') | replace('<<REGION>>',location.name)}}
+                {% endif %}
+            </p>
+            <a class="btns orange" href="{{ '/' | link }}" >{{ dictionary["registrationconfirmsuccesstext.Browse"] | replace('<<BRAND>>','OLX') }}</a>
+        </div>
+    {% else %}
+
+        <div class="nearbyStore">                
+            <h3>Stores nearby your location:</h3>
+            <a class="mapLink" href="map.html">view on map</a>
+            <a href="soon.html">
+                <h2>Bike Solutions</h2>
+                <span class="location">Ambala Rd, Nairobi, Kenya</span>
+                <span class="description">New and used bikes. Biking accessories</span>
+            </a>
+        </div>
+
+        <ul class="itemListing recommendedShop">
+            <li>
+                <div class="itemInfo">
+                    <a href="soon.html">
+                        <div class="centerCont shopAds">
+                            <h3>Mustapha's bicycles</h3>
+                            <span>Bicycles, cyclist's accesories and pro clothing. Mountain bike, BMX, racing, urban bikes</span>
+                        </div>
+                    </a>
+                </div>
+            </li>
+        </ul>
+
+        <ul class="itemListing">
+            {% for item in items %}
+                <li>
+                    <a href="{{ item | slugToUrl | link }}">
+                        <div class="imageCont" style="background-image: url({{ item.thumbnail if item.thumbnail else ('/images/html4/noPhoto.png' | static) }});"></div>
+                    </a>
+                    <div class="itemInfo">
+                        <p class="itemPrice">{{ item.price.displayPrice }}</p>
+                        <span>{{ item.date.since.day if item.date.since.day }} {{ dictionary[item.date.since.dictionary] }}{{ (', ' + item.date.since.hour) if item.date.since.hour }}</span>
+                        <div class="centerCont">
+                            <a href="{{ item | slugToUrl | link }}">
+                                <h2>{{ item.title }}</h2>
+                            </a>
+                        </div>
+                        <span>{{ item.displayLocation }}</span>
+                    </div>                    
+                </li>
+
+                <li class="adLikeStore">
+                    <a href="soon.html">
+                        <div class="imageCont" style="background-image: url({{ item.thumbnail if item.thumbnail else ('/images/html4/noPhoto.png' | static) }});"></div>
+                        <div class="storePic">Store</div>
+                    </a>
+                    <div class="itemInfo">
+                        <div class="centerCont">
+                            <a href="soon.html">
+                                <h2>{{ item.title }}</h2>
+                            </a>
+                        </div>
+                        <span>{{ item.displayLocation }}</span>
+                        <em>New and used bikes and biking accesories in Bike Central</em>
+                    </div>
+                </li>
+
+                <li class="callsToActionAd">
+                    <a href="soon.html">
+                        <div class="imageCont" style="background-image: url(http://images01.olx-st.com/ui/73/58/48/t_1417780281_757925046_1.jpg);"></div>
+                    </a>
+                    <div class="itemInfo">
+                        <p class="itemPrice">Ksh12500</p>
+                        <span> Today, 13:51</span><span>{{ item.displayLocation }}</span>
+                        <div class="centerCont">
+                            <a href="soon.html">
+                                <h2>{{ item.title }}</h2>
+                            </a>
+                        </div>
+                    </div>                    
+                    <div class="callsToAction">
+                        <span class="storeName">
+                            Mike's bikes is <strong>open now!</strong>
+                        </span>
+                        <ul >
+                            <li><a class="call" href="soon.html">Call</a></li>
+                            <li><a class="email" href="soon.html">eMail</a></li>
+                            <li><a class="sms" href="soon.html">sms</a></li>
+                        </ul>
+                    </div>
+                </li>
+
+                <li class="spamLikeAd">                    
+                    <div class="shopAdInfo">                        
+                        <a href="soon.html">
+                            <span class="storeSign">store</span><h2>Find Bicycles and accesories on <strong>Mike's bikes</strong> in OLX.</h2>
+                        </a>                        
+                    </div>
+                </li>
+
+            {% endfor %}            
+        </ul>        
+        {% if paginator and paginator.isEnabled() %}
+            {% include (template + '/items/pagination.html') %}
+        {% endif %}
+    {% endif %}
+</div>
+{{ BreadcrumbHome(dictionary, link, ('/' | link)) }}
+
+{% view 'partials/tracking' %}
