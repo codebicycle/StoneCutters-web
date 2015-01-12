@@ -359,6 +359,7 @@ module.exports = {
     'misc.All-Location': 'All <<LOCATION>>',
     'misc.AllAds_Mob': 'All ads',
     'misc.AllSet_Mob': 'Her \u015Fey tamam!',
+    'misc.AlreadyAccount': 'If you already have an account, <<LINK>>  click here to log in<</LINK>>',
     'misc.BackToStart_Mob': 'Ba\u015Flang\u0131ca d\xF6n',
     'misc.Brand': 'Marka',
     'misc.BrandFor_Mob': 'OLX:',

@@ -359,6 +359,7 @@ module.exports = {
     'misc.All-Location': 'All <<LOCATION>>',
     'misc.AllAds_Mob': 'All ads',
     'misc.AllSet_Mob': '\uC900\uBE44 \uC644\uB8CC!',
+    'misc.AlreadyAccount': 'If you already have an account, <<LINK>>  click here to log in<</LINK>>',
     'misc.BackToStart_Mob': '\uCC98\uC74C\uC73C\uB85C \uB418\uB3CC\uC544\uAC00\uAE30',
     'misc.Brand': '\uBE0C\uB79C\uB4DC',
     'misc.BrandFor_Mob': 'OLX\uC758',

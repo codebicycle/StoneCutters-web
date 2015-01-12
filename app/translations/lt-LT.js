@@ -359,6 +359,7 @@ module.exports = {
     'misc.All-Location': 'All <<LOCATION>>',
     'misc.AllAds_Mob': 'All ads',
     'misc.AllSet_Mob': 'Viskas sutvarkyta!',
+    'misc.AlreadyAccount': 'If you already have an account, <<LINK>>  click here to log in<</LINK>>',
     'misc.BackToStart_Mob': 'Atgal \u012F prad\u017Ei\u0105',
     'misc.Brand': 'Prek\u0117s \u017Eenklas',
     'misc.BrandFor_Mob': 'OLX, skirtas',

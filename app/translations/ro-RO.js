@@ -359,6 +359,7 @@ module.exports = {
     'misc.All-Location': 'All <<LOCATION>>',
     'misc.AllAds_Mob': 'All ads',
     'misc.AllSet_Mob': 'Totul este \xEEn ordine!',
+    'misc.AlreadyAccount': 'If you already have an account, <<LINK>>  click here to log in<</LINK>>',
     'misc.BackToStart_Mob': '\xCEnapoi la \xEEnceput',
     'misc.Brand': 'Marca',
     'misc.BrandFor_Mob': 'OLX pentru',

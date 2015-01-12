@@ -359,6 +359,7 @@ module.exports = {
     'misc.All-Location': 'All <<LOCATION>>',
     'misc.AllAds_Mob': 'Todos os an\xFAncios',
     'misc.AllSet_Mob': 'Pronto!',
+    'misc.AlreadyAccount': 'If you already have an account, <<LINK>>  click here to log in<</LINK>>',
     'misc.BackToStart_Mob': 'Voltar ao in\xEDcio.',
     'misc.Brand': 'Marca',
     'misc.BrandFor_Mob': 'OLX para',
