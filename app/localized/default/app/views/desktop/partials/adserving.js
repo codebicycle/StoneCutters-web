@@ -13,14 +13,20 @@ module.exports = Base.extend({
     },
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
+        var adserving;
 
         this._checkAdServing();
+        adserving = {
+            enabled : this.adServing.isSlotEnabled(),
+            slotname: this.adServing.get('slotname')
+        };
+
+        if (adserving.enabled) {
+            adserving.classname = 'ads-' + this.adServing.get('type').toLowerCase();
+        }
+
         return _.extend({}, data, {
-            adserving: {
-                enabled : this.adServing.isSlotEnabled(),
-                slotname: this.adServing.get('slotname'),
-                classname: 'ads-' + this.adServing.get('type').toLowerCase()
-            }
+            adserving: adserving
         });
     },
     postRender: function() {

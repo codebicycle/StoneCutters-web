@@ -94,11 +94,11 @@ function isSlotEnabled() {
     var status;
 
     if (enabled) {
-        enabled = this.config.enabled;
+        enabled = this.config.enabled || false;
         if (enabled) {
             category = getCategoryId.call(this);
 
-            if (category) {
+            if (category && this.config.excludedCategories) {
                 enabled = !_.contains(this.config.excludedCategories, category);
             }
         }

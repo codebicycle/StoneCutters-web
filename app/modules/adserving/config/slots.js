@@ -48,19 +48,19 @@ module.exports = {
         excludedCategories: []
     },
     slot_side_listing: {
-        enabled: true,
+        enabled: false,
         type: 'AFC',
         location: 'Side',
         params: {
             number: 1,
-            media: 'flash, image',
+            media: "flash, image",
             width: '160',
             height: '600'
         },
-        excludedCategories: []
+        excludedCategories: [0]
     },
     slot_top_item: {
-        enabled: true,
+        enabled: false,
         type: 'AFC',
         location: 'Top',
         params: {
@@ -72,19 +72,19 @@ module.exports = {
         excludedCategories: []
     },
     slot_side_item: {
-        enabled: true,
+        enabled: false,
         type: 'AFC',
         location: 'Side',
         params: {
             number: 1,
-            media: 'flash, image',
+            media: "flash, image",
             width: '300',
             height: '250'
         },
         excludedCategories: []
     },
     slot_bottom_item: {
-        enabled: true,
+        enabled: false,
         type: 'AFC',
         location: 'Bottom',
         params: {
