@@ -1,7 +1,7 @@
 <section id="marketing-top">
     {% view 'categories/partials/country-area' %}
     {% if videos %}
-        {% view '/marketing/bannervideo' %}
+        {% view 'marketing/bannervideo' %}
     {% else %}
         {% include (template + '/marketing/marketing-box-sell.html') %}
     {% endif %}

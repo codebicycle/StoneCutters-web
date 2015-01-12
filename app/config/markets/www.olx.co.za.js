@@ -9,5 +9,8 @@ module.exports = {
             myFavs: 15,
             myMsgs: 15
         }
+    },
+    post_banner: {
+        image: 'post-africa'
     }
 };

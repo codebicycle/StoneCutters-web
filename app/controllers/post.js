@@ -5,37 +5,58 @@ var asynquence = require('asynquence');
 var middlewares = require('../middlewares');
 var helpers = require('../helpers');
 var tracking = require('../modules/tracking');
+var Item = require('../models/item');
 var config = require('../../shared/config');
 
 module.exports = {
     flow: middlewares(flow),
+    flowMarketing: middlewares(flowMarketing),
     subcategories: middlewares(subcategories),
     form: middlewares(form),
     success: middlewares(success),
     edit: middlewares(edit)
 };
 
+function flowMarketing(params, callback) {
+    params.marketing = true;
+    return flow.call(this, params, callback);
+}
 function flow(params, callback) {
     helpers.controllers.control.call(this, params, controller);
 
     function controller() {
+        var user = this.app.session.get('user');
         var siteLocation = this.app.session.get('siteLocation');
         var location = this.app.session.get('location');
         var isPostingFlow = helpers.features.isEnabled.call(this, 'postingFlow');
         var platform = this.app.session.get('platform');
         var isDesktop = platform === 'desktop';
+        var itemId = params.itemId;
 
-        var prepare = function(done) {
+        var promise = asynquence().or(error.bind(this))
+            .then(prepare.bind(this));
+
+        if (isPostingFlow || isDesktop || itemId) {
+            promise
+                .then(fetch.bind(this))
+                .then(parse.bind(this));
+        }
+        promise.val(success.bind(this));
+
+        function prepare(done) {
             if ((!isPostingFlow && !isDesktop) && (!siteLocation || siteLocation.indexOf('www.') === 0)) {
                 done.abort();
-                return helpers.common.redirect.call(this, '/location?target=posting', null, {
+                return helpers.common.redirect.call(this, '/location?target=' + (itemId ? 'myolx/edititem/' + itemId : 'posting'), null, {
                     status: 302
                 });
             }
+            if (user) {
+                params.token = user.token;
+            }
             done();
-        }.bind(this);
+        }
 
-        var fetch = function(done) {
+        function fetch(done) {
             var data = {};
             var locationUrl;
 
@@ -61,28 +82,109 @@ function flow(params, callback) {
                     }
                 };
             }
+            if (itemId) {
+                data.item = {
+                    model: 'Item',
+                    params: {
+                        id: itemId,
+                        languageId: this.app.session.get('languages')._byId[this.app.session.get('selectedLanguage')].id
+                    }
+                };
+                data.fields = {
+                    model: 'Field',
+                    params: {
+                        intent: 'edit',
+                        itemId: itemId,
+                        languageId: this.app.session.get('languages')._byId[this.app.session.get('selectedLanguage')].id,
+                        token: params.token
+                    }
+                };
+            }
 
             this.app.fetch(data, {
-                readFromCache: !this.app.session.get('isServer'),
-                store: true
+                readFromCache: !this.app.session.get('isServer')
             }, done.errfcb);
-        }.bind(this);
+        }
 
-        var success = function(res) {
+        function parse(done, res) {
+            if (!res.item || !res.fields) {
+                return done(res);
+            }
+            _.each(res.fields.get('fields'), function each(fields) {
+                _.each(fields, function each(field) {
+                    var index;
+
+                    if (!field.value) {
+                        return;
+                    }
+                    if (res.item.get(field.name) !== undefined) {
+                        return res.item.set(field.name, field.value.key || field.value.value);
+                    }
+                    index = res.item.indexOfOptional(field.name);
+                    if (index === undefined) {
+                        return;
+                    }
+                    res.item.get('optionals')[index].value = field.value.key || field.value.value;
+                });
+            }, this);
+            done(res);
+        }
+
+        function success(res) {
             this.app.seo.addMetatag('robots', 'noindex, nofollow');
             this.app.seo.addMetatag('googlebot', 'noindex, nofollow');
             if (isPostingFlow) {
-                postingFlowController(res.postingSession);
+                if (redirect.call(this, res.item)) {
+                    return;
+                }
+                postingFlowController.call(this, res.postingSession, res.item, res.fields);
             }
             else if (isDesktop) {
-                postingController(res.postingSession, res.cities);
+                if (redirect.call(this, res.item)) {
+                    return;
+                }
+                postingController.call(this, res.postingSession, res.cities, res.item, res.fields);
+            }
+            else if (itemId) {
+                if (redirect.call(this, res.item)) {
+                    return;
+                }
+                postingFormController.call(this, res.postingSession, res.item, res.fields);
             }
             else {
-                postingCategoriesController();
+                postingCategoriesController.call(this);
             }
-        }.bind(this);
+        }
 
-        var postingController = function(postingSession, cities) {
+        function redirect(item) {
+            var protocol = this.app.session.get('protocol');
+            var host = this.app.session.get('host');
+            var shortHost = this.app.session.get('shortHost');
+            var url = this.app.session.get('url');
+            var user = this.app.session.get('user');
+
+            if (!item) {
+                return false;
+            }
+            if (item.get('status') && !item.get('status').editable) {
+                helpers.common.redirect.call(this, '/iid-' + itemId);
+                return true;
+            }
+            if (!user || !user.userId || (item.get('user') && item.get('user').id != user.userId)) {
+                helpers.common.redirect.call(this, '/iid-' + itemId, null, {
+                    status: 302
+                });
+                return true;
+            }
+            if (item.getLocation().url && item.getLocation().url !== siteLocation) {
+                helpers.common.redirect.call(this, [protocol, '://', host.replace(shortHost, item.getLocation().url), url].join(''), null, {
+                    pushState: false
+                });
+                return true;
+            }
+        }
+
+        function postingController(postingSession, cities, item, fields) {
             var currentLocation = {};
 
             tracking.setPage('desktop_step1');
@@ -103,32 +205,71 @@ function flow(params, callback) {
             callback(null, 'post/index', {
                 postingSession: postingSession.get('postingSession'),
                 cities: cities,
-                currentLocation: currentLocation
+                currentLocation: currentLocation,
+                include: ['item'],
+                item: item || new Item({}, {
+                    app: this.app
+                }),
+                fields: fields,
+                marketing: params.marketing
             }, false);
-        }.bind(this);
+        }
 
-        var postingFlowController = function(postingSession) {
+        function postingFlowController(postingSession, item, fields) {
             callback(null, 'post/flow/index', {
-                postingSession: postingSession.get('postingSession')
+                postingSession: postingSession.get('postingSession'),
+                include: ['item', 'fields'],
+                item: item || new Item({}, {
+                    app: this.app
+                }),
+                fields: fields
             }, false);
-        }.bind(this);
+        }
 
-        var postingCategoriesController = function() {
+        function postingFormController(postingSession, item, fields) {
+            item.set(_.object(_.map(item.get('optionals'), function each(optional) {
+                return optional.name;
+            }), _.map(item.get('optionals'), function each(optional) {
+                return optional.id || optional.value;
+            })));
+            if (item.has('priceTypeData')) {
+                item.set('priceType', item.get('priceTypeData').type);
+            }
+            if (item.has('price')) {
+                item.set('priceC', item.get('price').amount);
+            }
+            callback(null, 'post/form', {
+                item: item,
+                postingSession: postingSession.get('postingSession'),
+                form: {
+                    values: item.toJSON(),
+                    errors: (this.app.session.get('form') || {}).errors
+                },
+                fields: fields.get('fields'),
+                category: {
+                    id: item.get('category').parentId
+                },
+                subcategory: {
+                    id: item.get('category').id,
+                    trName: item.get('category').name
+                }
+            }, false);
+        }
+
+        function postingCategoriesController() {
             tracking.setPage('categories');
             callback(null, 'post/categories', {});
-        }.bind(this);
-
-        var error = function(err) {
-            helpers.common.error.call(this, err, {}, callback);
-        }.bind(this);
-
-        var promise = asynquence().or(error)
-            .then(prepare);
-
-        if (isPostingFlow || isDesktop) {
-            promise.then(fetch);
         }
-        promise.val(success);
+
+        function error(err) {
+            if (itemId && err.status === 400) {
+                return helpers.common.redirect.call(this, '/');
+            }
+            if (itemId && err.status === 401) {
+                return helpers.common.redirect.call(this, '/iid-' + itemId);
+            }
+            helpers.common.error.call(this, err, {}, callback);
+        }
     }
 }
 

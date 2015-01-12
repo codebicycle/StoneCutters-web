@@ -1,6 +1,7 @@
 'use strict';
 
 var Base = require('../../../../../../common/app/bases/view');
+var translations = require('../../../../../../../../shared/translations');
 var asynquence = require('asynquence');
 var _ = require('underscore');
 
@@ -39,7 +40,6 @@ module.exports = Base.extend({
         event.stopImmediatePropagation();
 
         this.$el.addClass('disabled');
-        this.parentView.$el.trigger('subcategorySubmit', [subcategory, 'postingerror.PleaseSelectSubcategory']);
     },
     onClickSubcategory: function(event) {
         event.preventDefault();
@@ -70,19 +70,11 @@ module.exports = Base.extend({
         }.bind(this);
 
         var success = function(res) {
-            var hasOptionals = !!res.fields.get('fields').categoryAttributes.length;
-
             $('body > .loading').hide();
-            if (hasOptionals) {
-                this.parentView.$el.trigger('stepChange', ['categories', 'optionals']);
-            }
-            else {
-                this.parentView.$el.trigger('stepChange', ['optionals', 'categories']);
-            }
-            this.parentView.$el.trigger('flow', [this.$el.attr('id'), hasOptionals ? 'optionals' : '', {
-                id: id,
-                fields: res.fields
-            }]);
+            this.parentView.parentView.fields = res.fields;
+            this.parentView.parentView.item.get('category').id = id;
+            this.parentView.$el.trigger('subcategorySubmit', [translations.get(this.app.session.get('selectedLanguage'))['postingerror.PleaseSelectSubcategory']]);
+            this.parentView.$el.trigger('flow', [this.$el.attr('id'), res.fields.get('fields').categoryAttributes.length ? 'optionals' : '']);
         }.bind(this);
 
         asynquence().or(error)

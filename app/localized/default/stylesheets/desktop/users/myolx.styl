@@ -156,7 +156,7 @@
                 .title {
                     color: $blue;
                     font-size: 20px;
-                    font-weight: bold;
+                    font-weight: normal;
                     margin: 0;
                 }
 
@@ -173,7 +173,7 @@
                 .text {
                     color: $greyStrong;
                     font-size: 14px;
-                    min-height: 65px;
+                    min-height: 47px;
                 }
             }
 
@@ -303,11 +303,25 @@
             font-size: 14px;
             float: left;
             line-height: 1.5;
-            box-shadow(0 1px 0 rgba(255,255,255,0.2) inset)
+            text-shadow: none;
+            border-color: $greyBorders;
+            background: $greyBoxBg;
+            background: -moz-linear-gradient(top, $greyBoxBg 0%, #f1f1f1 100%);
+            background: -ms-linear-gradient(top, $greyBoxBg 0%,#f1f1f1 100%);
+            background: linear-gradient(to bottom, $greyBoxBg 0%,#f1f1f1 100%);
 
             &:before {
                 line-height: 1.5;
-                margin: -2px 5px 0;
+                margin: -2px 5px 0 2px;
+            }
+            
+            &:hover {
+                color: fontcolor;
+                border-color: $greyStrong;
+                background: $greyBoxBg;
+                background: -moz-linear-gradient(top,  #f6f6f6 0%,$greyBoxBg 100%);
+                background: -ms-linear-gradient(top, #f6f6f6 0%,$greyBoxBg 100%);
+                background: linear-gradient(to bottom, #f6f6f6 0%,$greyBoxBg 100%);
             }
         }
         .orange {
