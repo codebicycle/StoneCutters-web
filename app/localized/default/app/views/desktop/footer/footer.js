@@ -17,7 +17,7 @@ module.exports = Base.extend({
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
         var location = this.app.session.get('location');
-        var socials = config.get(['socials', location.url]);
+        var socials = config.getForMarket(location.url, ['socials'], '');
         var states = data.states;
         var currentState = {};
         var selectedLanguage = this.app.session.get('selectedLanguage').split('-')[0];

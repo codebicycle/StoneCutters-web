@@ -360,6 +360,7 @@ module.exports = {
     'misc.All-Location': '<<LOCATION>> yote',
     'misc.AllAds_Mob': 'Matangazo yote',
     'misc.AllSet_Mob': 'Zote ziko sawa!',
+    'misc.AlreadyAccount': 'If you already have an account, <<LINK>>  click here to log in<</LINK>>',
     'misc.BackToStart_Mob': 'Rejea mpaka mwanzo',
     'misc.Brand': 'Chapa',
     'misc.BrandFor_Mob': 'OLX ya',
