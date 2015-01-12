@@ -360,6 +360,7 @@ module.exports = {
     'misc.All-Location': 'T\u1EA5t c\u1EA3 <<LOCATION>>',
     'misc.AllAds_Mob': 'T\u1EA5t c\u1EA3 rao v\u1EB7t',
     'misc.AllSet_Mob': 'T\u1EA5t c\u1EA3 \u0111\xE3 xong!',
+    'misc.AlreadyAccount': 'If you already have an account, <<LINK>>  click here to log in<</LINK>>',
     'misc.BackToStart_Mob': 'Quay l\u1EA1i \u0111\u1EC3 b\u1EAFt \u0111\u1EA7u',
     'misc.Brand': 'Nh\xE3n hi\u1EC7u',
     'misc.BrandFor_Mob': 'OLX cho',
