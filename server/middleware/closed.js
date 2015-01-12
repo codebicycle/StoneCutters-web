@@ -6,7 +6,7 @@ module.exports = function(dataAdapter, excludedUrls) {
         var path = require('path');
         var _ = require('underscore');
         var closedPath = path.resolve('server/templates/closed.html');
-        var translations = require('../../app/translations');
+        var translations = require('../../shared/translations');
 
         return function middleware(req, res, next) {
             if (req.path !== '/closed') {
@@ -16,7 +16,7 @@ module.exports = function(dataAdapter, excludedUrls) {
                 var template = _.template(html);
 
                 res.send(template({
-                    dictionary: translations[req.rendrApp.session.get('selectedLanguage')]
+                    dictionary: translations.get(req.rendrApp.session.get('selectedLanguage'))
                 }));
             });
         };

@@ -17,9 +17,10 @@ module.exports = Base.extend({
         var categories = data.categories;
         var currentState = {};
         var countryMapStyle = config.get('countryMapStyle');
-        var videos = config.get(['videos', location.url]);
+        var videos = config.getForMarket(location.url, ['videos'], '');
         var testimonials = config.get(['testimonials', location.url]);
         var countryMapClass;
+
 
         categories = helpers.common.categoryOrder(categories, location.url);
 

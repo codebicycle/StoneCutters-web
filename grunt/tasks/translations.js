@@ -155,15 +155,8 @@ module.exports = function(grunt) {
 
         function getDictionaries(done) {
             var promise = asynquence().or(done.fail);
-            var index = "'use strict';\n\nmodule.exports = {";
-            var j = 0;
 
             languages.forEach(function each(language) {
-                if (j) {
-                    index += ',';
-                }
-                index += "\n    '" + language + "': require('./" + language + "')";
-                j++;
                 promise.then(eachDictionary);
 
                 function eachDictionary(next) {
@@ -187,9 +180,6 @@ module.exports = function(grunt) {
                     });
                 }
             });
-            index += '\n};\n';
-            grunt.file.write('app/translations/index.js', index);
-            console.log('\nFile "app/translations/index.js" created');
             promise.val(done);
         }
 

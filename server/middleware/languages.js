@@ -81,6 +81,11 @@ module.exports = function(dataAdapter, excludedUrls) {
                 req.rendrApp.session.update({
                     languageId: languages.get(selectedLanguage).get('id')
                 });
+                res.locals({
+                    languages: languages.map(function each(language) {
+                        return language.get('locale');
+                    })
+                });
                 done(languages, selectedLanguage);
             }
 
