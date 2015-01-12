@@ -865,6 +865,28 @@ function staticSearch(params, callback) {
                 done.abort();
                 return helpers.common.redirect.call(this, '/q/-');
             }
+            if (params && params.filters) {
+                if (params.filters === '-ig') {
+                    done.abort();
+                    return helpers.common.redirect.call(this, this.app.session.get('path').replace('/-ig', '/'));
+                }
+                url = [];
+                url.push('/nf/');
+                url.push(params.search);
+                if (params.catId) {
+                    url.pop();
+                    url.push('des-cat-');
+                    url.push(params.catId);
+                    url.push('/');
+                    url.push(params.search);
+                }
+                if (params.filters && params.filters !== 'undefined') {
+                    url.push('/-');
+                    url.push(params.filters);
+                }
+                done.abort();
+                return helpers.common.redirect.call(this, url.join(''));
+            }
             done();
         }.bind(this);
 

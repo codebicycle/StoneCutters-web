@@ -88,9 +88,9 @@ function getLocation() {
     if (!location) {
         return location;
     }
-    if (location.children) {
+    if (location.children && location.children.length) {
         location = location.children[0];
-        if (location.children) {
+        if (location.children && location.children.length) {
             location = location.children[0];
         }
     }
@@ -152,35 +152,17 @@ function validate(done) {
 
     function callback(err, response, errors) {
         this.logValidation(!this.get('id') ? 'posting' : 'editing', response.statusCode, err || errors);
-        (done.errfcb || done)(err || errors, response);
+        this.errfcb(done)(err || errors, response);
     }
 }
 
 function postImages(done) {
-    var images = this.get('images');
-    var newImages = {};
-    var oldImages = [];
+    var newImages = _.filter(this.get('images'), function each(image) {
+        return typeof image !== 'string' && !image.id;
+    }, this);
 
-    if (!images || Array.isArray(images)) {
-        this.set('images', _.map(images || oldImages, function each(image) {
-            return typeof image === 'string' ? image : image.id;
-        }));
-        return (done.errfcb || done)(undefined, undefined, images || oldImages);
-    }
-    Object.keys(_.omit(images, 'length')).forEach(function each(key) {
-        if (typeof images[key] === 'string') {
-            oldImages.push(images[key]);
-        }
-        else if (images[key].id) {
-            oldImages.push(images[key].id);
-        }
-        else {
-            newImages[key] = images[key];
-        }
-    });
-    if (_.isEmpty(newImages)) {
-        this.set('images', oldImages);
-        return (done.errfcb || done)(undefined, undefined, oldImages);
+    if (!newImages.length) {
+        return this.errfcb(done)();
     }
     helpers.dataAdapter.post(this.app.req, '/images', {
         query: {
@@ -196,14 +178,14 @@ function postImages(done) {
         contentType: false
     }, callback.bind(this));
 
-    function callback(err, response, newImages) {
-        var images = oldImages.concat(newImages);
-
-        this.logPostImages(!this.get('id') ? 'posting' : 'editing', response.statusCode, newImages);
+    function callback(err, response, ids) {
+        this.logPostImages(!this.get('id') ? 'posting' : 'editing', response.statusCode, err);
         if (!err) {
-            this.set('images', images);
+            _.each(newImages, function each(image, i) {
+                image.id = ids[i];
+            });
         }
-        (done.errfcb || done)(err, response, images);
+        this.errfcb(done)(err, response);
     }
 }
 
@@ -239,7 +221,7 @@ function postFields(done) {
             this.set(item);
         }
         this.logPost(!id ? 'posting' : 'editing', response.statusCode, err);
-        (done.errfcb || done)(err, response, item);
+        this.errfcb(done)(err, response, item);
     }
 }
 
@@ -290,7 +272,6 @@ function logPost(type, statusCode, errors) {
 
 function toData(includeImages) {
     var data = this.toJSON();
-    var images = this.get('images');
 
     data['category.parentId'] = data['category.parentId'] || (this.get('category') || {}).parentId;
     data['category.id'] = data['category.id'] || (this.get('category') || {}).id;
@@ -316,8 +297,10 @@ function toData(includeImages) {
             data[optional.name] = optional.id || optional.value;
         }, this);
     }
-    if (includeImages && images && images.length) {
-        data.images = images.join(',');
+    if (includeImages && data.images && data.images.length) {
+        data.images = _.map(data.images, function each(image) {
+            return typeof image === 'string' ? image : image.id;
+        }).join(',');
     }
     else {
         delete data.images;
@@ -335,7 +318,7 @@ function toData(includeImages) {
     delete data.priceTypeData;
     delete data.additionalLocation;
     _.each(Object.keys(data), function each(key) {
-        if (data[key] === undefined || data[key] === null) {
+        if (data[key] === undefined || data[key] === null || (typeof data[key] === 'string' && !data[key])) {
             delete data[key];
         }
     }, this);

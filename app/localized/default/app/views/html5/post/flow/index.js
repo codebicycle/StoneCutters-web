@@ -33,7 +33,7 @@ module.exports = Base.extend({
         Base.prototype.initialize.call(this);
         this.errors = {};
         this.currentViewName = 'hub';
-        this.dictionary = translations[this.app.session.get('selectedLanguage') || 'en-US'] || translations['es-ES'];
+        this.dictionary = translations.get(this.app.session.get('selectedLanguage'));
     },
     postRender: function() {
         $(window).on('beforeunload', this.onBeforeUnload);
@@ -48,14 +48,13 @@ module.exports = Base.extend({
             };
         }.bind(this));
         if (this.getItem().has('id')) {
-            console.log(this.item.toJSON());
-            console.log(this.getFields());
             this.$el.trigger('categorySubmit', {
                 id: this.item.get('category').parentId
             });
             this.$el.trigger('subcategorySubmit');
             this.$el.trigger('descriptionSubmit', [{}, true]);
             this.$el.trigger('contactSubmit', [{}, '', true]);
+            this.$('#hub').trigger('imagesLoadEnd');
         }
         this.getCategories();
     },
@@ -242,7 +241,7 @@ module.exports = Base.extend({
         var category = 'Posting';
         var action = 'DropSection';
         var item = this.getItem();
-        var images = item.get('images') || [];
+        var location = item.getLocation() || this.app.session.get('location').current || this.app.session.get('location');
         var status = [];
 
         status.push('section:' + this.currentViewName);
@@ -251,9 +250,9 @@ module.exports = Base.extend({
         status.push('title:' + (item.get('item') ? 1 : 0));
         status.push('description:' + (item.get('description') ? 1 : 0));
         status.push('email:' + (item.get('email') ? 1 : 0));
-        status.push('state:' + (item.getLocation().url ? 1 : 0));
-        status.push('city:' + (item.getLocation().url ? 1 : 0));
-        status.push('pictures:' + (images ? (_.isString(images) ? images.split(',') : images).length : 0));
+        status.push('state:' + (location.url ? 1 : 0));
+        status.push('city:' + (location.url ? 1 : 0));
+        status.push('pictures:' + item.get('images').length);
 
         this.track({
             category: category,
@@ -270,28 +269,12 @@ module.exports = Base.extend({
 
         this.$('#hub').trigger('imagesLoadStart');
     },
-    onImagesLoadEnd: function(event, images) {
-        /*event.preventDefault();
+    onImagesLoadEnd: function(event) {
+        event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();
 
-        var ids = [];
-        var files = [];
-        var orientations = [];
-
-        Object.keys(images).sort().forEach(function each(image) {
-            ids.push(images[image].id);
-            files.push(images[image].file);
-            orientations.push(images[image].orientation);
-        });
-        if (ids.length) {
-            this.form._images = ids;
-        }
-        else {
-            delete this.form._images;
-            delete this.form.images;
-        }
-        this.$('#hub').trigger('imagesLoadEnd', [files.shift(), orientations.shift()]);*/
+        this.$('#hub').trigger('imagesLoadEnd');
     },
     onCategoryReset: function(event) {
         this.$('#hub').trigger('stepChange', ['optionals', 'categories']);

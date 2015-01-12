@@ -48,7 +48,7 @@ module.exports = Base.extend({
         this.pendingValidations = [];
         this.errors = {};
         this.formErrors = [];
-        this.dictionary = translations[this.app.session.get('selectedLanguage') || 'en-US'];
+        this.dictionary = translations.get(this.app.session.get('selectedLanguage'));
     },
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
@@ -62,7 +62,7 @@ module.exports = Base.extend({
             this.$('#field-location').trigger('change');
         }
         else {
-            this.dictionary = translations[this.app.session.get('selectedLanguage') || 'en-US'];
+            this.dictionary = translations.get(this.app.session.get('selectedLanguage'));
             if (this.isValid === undefined || this.isValid === null) {
                 this.errors['category.parentId'] = this.dictionary["postingerror.PleaseSelectCategory"];
                 this.errors['category.id'] = this.dictionary["postingerror.PleaseSelectSubcategory"];
@@ -234,7 +234,7 @@ module.exports = Base.extend({
     onImagesLoadStart: function(event) {
         this.$('#posting-contact-view').trigger('disablePost');
     },
-    onImagesLoadEnd: function(event, images) {
+    onImagesLoadEnd: function(event) {
         this.$('#posting-contact-view').trigger((this.isValid) ? 'enablePost' : 'disablePost');
     },
     onBeforeUnload: function(event) {

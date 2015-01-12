@@ -54,7 +54,7 @@ module.exports = Base.extend({
         event.stopPropagation();
         event.stopImmediatePropagation();
 
-        this.parentView.$el.trigger('headerChange', [translations[this.app.session.get('selectedLanguage') || 'en-US']['misc.DescribeYourAd_Mob'], this.id]);
+        this.parentView.$el.trigger('headerChange', [translations.get(this.app.session.get('selectedLanguage'))['misc.DescribeYourAd_Mob'], this.id]);
         this.$el.removeClass('disabled');
     },
     onHide: function(event) {
@@ -81,6 +81,7 @@ module.exports = Base.extend({
 
         this.fields = this.parentView.getFields().productDescription;
         this.render();
+        this.$el.trigger('priceTypeChange');
     },
     onChange: function(event) {
         event.preventDefault();
@@ -121,19 +122,19 @@ module.exports = Base.extend({
         if ($title.val().length < 10) {
             failed = true;
             this.$el.addClass('error');
-            $title.addClass('error').after('<small class="error">' + translations[this.app.session.get('selectedLanguage') || 'en-US']['misc.TitleCharacters_Mob'].replace('<<NUMBER>>', ' 10 ') + '</small>');
+            $title.addClass('error').after('<small class="error">' + translations.get(this.app.session.get('selectedLanguage'))['misc.TitleCharacters_Mob'].replace('<<NUMBER>>', ' 10 ') + '</small>');
             statsd.increment([location, 'posting', 'invalid', this.app.session.get('platform'), 'title']);
         }
         if ($description.val().length < 10) {
             failed = true;
             this.$el.addClass('error');
-            $description.addClass('error').after('<small class="error">' + translations[this.app.session.get('selectedLanguage') || 'en-US']['misc.DescriptionCharacters_Mob'].replace('<<NUMBER>>', ' 10 ') + '</small>');
+            $description.addClass('error').after('<small class="error">' + translations.get(this.app.session.get('selectedLanguage'))['misc.DescriptionCharacters_Mob'].replace('<<NUMBER>>', ' 10 ') + '</small>');
             statsd.increment([location, 'posting', 'invalid', this.app.session.get('platform'), 'description']);
         }
         if ($priceType.val() === 'FIXED' && $priceC.val() < 1) {
             failed = true;
             this.$el.addClass('error');
-            $priceC.addClass('error').after('<small class="error">' + translations[this.app.session.get('selectedLanguage') || 'en-US']["postingerror.PleaseEnterANumericalValue"] + '</small>');
+            $priceC.addClass('error').after('<small class="error">' + translations.get(this.app.session.get('selectedLanguage'))["postingerror.PleaseEnterANumericalValue"] + '</small>');
             statsd.increment([location, 'posting', 'invalid', this.app.session.get('platform'), 'priceC']);
         }
         return !failed;
@@ -143,9 +144,9 @@ module.exports = Base.extend({
         event.stopPropagation();
         event.stopImmediatePropagation();
 
-        var $currency = this.$('select[name=currency_type]');
-        var $price = this.$('input[name=priceC]');
-        var value = this.parentView.getItem().get('priceType');
+        var $currency = this.$('[name=currency_type]');
+        var $price = this.$('[name=priceC]');
+        var value = this.parentView.getItem().get('priceType') || this.$('[name=priceType]').val();
 
         if (value === 'FIXED' || value === 'NEGOTIABLE') {
             $currency.removeAttr('disabled');

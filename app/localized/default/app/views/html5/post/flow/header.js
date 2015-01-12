@@ -19,7 +19,7 @@ module.exports = Base.extend({
         'click #back': 'onBackClick'
     },
     onLogoClick: function(event) {
-        if (this.parentView.edited && !confirm(translations[this.app.session.get('selectedLanguage') || 'en-US']['misc.WantToGoBack'])) { // Now find a better translation
+        if (this.parentView.edited && !confirm(translations.get(this.app.session.get('selectedLanguage'))['misc.WantToGoBack'])) { // Now find a better translation
             event.preventDefault();
             event.stopPropagation();
             event.stopImmediatePropagation();
