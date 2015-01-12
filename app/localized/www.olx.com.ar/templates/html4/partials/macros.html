@@ -1,0 +1,184 @@
+{% macro Breadcrumb(dictionary, link, title='', suffix='', heading=true) %}
+    <div class="breadcrumb">
+        <a href="{{link}}" class="arrow">{{dictionary["defaultfooter.Back"]}}</a>
+        {% if heading %}
+            {% set tag = 'h1' %}
+        {% else %}
+            {% set tag = 'strong' %}
+        {% endif %}
+        {{ (['<', tag, '>', title, '</', tag, '>'] | join) if title }}{{suffix}}
+    </div>
+{% endmacro %}
+
+{% macro BreadcrumbHome(dictionary, link, home) %}
+    {{ Breadcrumb(dictionary, link, '', ['<a class="arrow home" href="', home, '">', dictionary["defaultfooter.Home"], '</a>'] | join) }}
+{% endmacro %}
+
+{% macro Errors(errors) %}
+    <div class="messages errors">
+        {% for field, messages in errors %}
+            {% for message in messages %}
+                <span>{{ ([field, ': '] | join | title) if field != 'main' }}{{ message }}</span><br/>
+            {% endfor %}
+        {% endfor %}
+    </div>
+{% endmacro %}
+
+{% macro ErrorsPosting(errors, dictionary) %}
+    <div class="messages errors">
+        {% for field, messages in errors %}
+            {% for message in messages %}
+
+                {% if field == 'priceC' %}
+                    <span>{{ dictionary["posting_fields_1.price"] }}: {{ message }}</span><br/>
+                {% elif field ==  'contactName' %}
+                    <span>{{ dictionary["itemslisting.NewContactName"] }}: {{ message }}</span><br/>
+                {% elif field ==  'phone' %}
+                    <span>{{ dictionary["posting_fields_1.phoneNumber"] }}: {{ message }}</span><br/>
+                {% else %}
+                    <span>{{ dictionary["posting_fields_1."+field] }}: {{ message }}</span><br/>
+                {% endif %}
+
+            {% endfor %}
+        {% endfor %}
+    </div>
+{% endmacro %}
+
+{% macro FieldText(label, name, mandatory, form, user) %}
+    <div class="formField">
+        <label>{{ '* ' if mandatory == 'true' }}{{label}}</label>
+        <input type="text" name="{{name}}" id="text-{{name}}"
+        {% if name == 'email' %}
+            value="{{ user.email if (user and user.email) else '' }}"
+        {% elif (form and form.values and form.values[name]) or (name == 'name' and user)%}
+            value="{{ form.values[name] if form.values[name] else user.username }}"
+        {% endif %}>
+    </div>
+{% endmacro %}
+
+{% macro FieldTextArea(label, name, mandatory, form, user) %}
+    <div class="formField">
+        <label>{{ '* ' if mandatory == 'true' }}{{label}}</label>
+        <textarea id="text-{{name}}" name="{{name}}" class="textarea">{% if form and form.values and form.values[name] %}{{ form.values[name] }}{% endif %}</textarea>
+    </div>
+{% endmacro %}
+
+{% macro FieldCombobox(label, name, mandatory, form, user, values) %}
+    <div class="formField">
+        {% if values.length == 1 %}
+            <label>{{label}} <strong>{{ values[0].value }}</strong></label>
+            <input type="hidden" id="select-{{name}}" name="{{name}}" value="{{ values[0].key }}">
+        {% else %}
+            <label>{{label}}</label>
+            <select id="select-{{name}}" name="{{name}}">
+                {% for value in values %}
+                    <option value="{{value.key}}"{% if form and form.values and form.values[name] and form.values[name] == value.key %} selected="selected"{% endif %}>{{value.value}}</option>
+                {% endfor %}
+            </select>
+        {% endif %}
+    </div>
+{% endmacro %}
+
+{% macro NearByStore(name, location, description) %}
+<div class="nearbyStore">                
+            <h3>Stores nearby your location:</h3>
+            <a class="mapLink" href="map.html">view on map</a>
+
+            <div id="map-canvas" width="100%" height="50px"></div>            
+            <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDvCh0uJ8GnZVKOctZCDcDQjewPKZC_NhY"></script>
+            <script type="text/javascript">
+                // TODO: MOVE TO javascript files
+            function initialize() {
+                // VARIABLES DE LOS PUNTOS
+                var centerPoint = {lat: -1.2846139, lng: 36.82417}
+                var shops = [            
+                    {coord: {lat: -1.2846139, lng: 36.82417}, title: "store 1"},           
+                    {coord: {lat: -1.283863, lng: 36.8219545}, title: "store 2"},
+                    {coord: {lat: -1.2846139, lng: 36.82546}, title: "store 3"},
+                    {coord: {lat: -1.283863, lng: 36.8215545}, title: "store 4"},
+                ]
+                // FIN DE PUNTOS
+
+                var mapOptions = {
+                    center: centerPoint,
+                    zoom: 16
+                };
+                var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+                for (var i in shops) {
+                    var shop = shops[i];
+                    new google.maps.Marker({
+                        position: shop.coord,
+                        map: map,
+                        title: shop.title
+                    })
+                }
+            }
+            google.maps.event.addDomListener(window, 'load', initialize);
+
+            </script>            
+
+            <a href="soon.html">
+                <h2>{{ name }}</h2>
+                <span class="location">{{ location }}</span>
+                <span class="description">{{ description }}</span>
+            </a>
+        </div>
+{% endmacro %}
+
+{% macro RecommendedShop(name, description) %}
+<ul class="itemListing recommendedShop">
+    <li>
+        <div class="itemInfo">
+            <a href="soon.html">
+                <div class="centerCont shopAds">
+                    <h3>{{ name }}</h3>
+                    <span>{{ description }}</span>
+                </div>
+            </a>
+        </div>
+    </li>
+</ul>
+{% endmacro %}
+
+{% macro AdLikeStore(description, item) %}
+<li class="adLikeStore">
+    <a href="soon.html">
+        <div class="imageCont" style="background-image: url({{ item.thumbnail if item.thumbnail else ('/images/html4/noPhoto.png' | static) }});"></div>
+        <div class="storePic">Store</div>
+    </a>
+    <div class="itemInfo">
+        <div class="centerCont">
+            <a href="soon.html">
+                <h2>{{ item.title }}</h2>
+            </a>
+        </div>
+        <span>{{ item.displayLocation }}</span>
+        <em>{{ description }}</em>
+    </div>
+</li>
+{% endmacro %}
+
+{% macro CallsToAction(name, image, price, date, location, title) %}
+<li class="callsToActionAd">
+    <a href="soon.html">
+        <div class="imageCont" style="background-image: url({{ image }});"></div>
+    </a>
+    <div class="itemInfo">
+        <p class="itemPrice">{{ price }}</p>
+        <span> {{ date }}</span><span>{{ location }}</span>
+        <div class="centerCont">
+            <a href="soon.html">
+                <h2>{{ title }}</h2>
+            </a>
+        </div>
+    </div>                    
+    <div class="callsToAction">
+        <span class="storeName">{{ name }}</span>
+        <ul >
+            <li><a class="call" href="soon.html">Call</a></li>
+            <li><a class="email" href="soon.html">eMail</a></li>
+            <li><a class="sms" href="soon.html">sms</a></li>
+        </ul>
+    </div>
+</li>
+{% endmacro %}
