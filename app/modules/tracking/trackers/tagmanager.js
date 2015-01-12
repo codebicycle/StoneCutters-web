@@ -6,7 +6,7 @@ var utils = require('../../../../shared/utils');
 var tagmanager = utils.get(configTracking, ['tagmanager'], []);
 
 function isEnabled() {
-    return typeof tagmanager[this.app.session.get('location').url] !== 'underfined';
+    return typeof tagmanager[this.app.session.get('location').url] !== 'undefined';
 }
 
 function getParams(params, options) {
