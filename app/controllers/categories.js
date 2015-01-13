@@ -170,6 +170,10 @@ function handleItems(params, promise, gallery) {
             items: {
                 collection: 'Items',
                 params: params
+            },
+            shops: {
+                collection: 'Shops',
+                params: params
             }
         }, {
             readFromCache: false
@@ -212,10 +216,10 @@ function handleItems(params, promise, gallery) {
             done.abort();
             return helpers.common.redirect.call(this, [url, '-p-', realPage, gallery].join(''));
         }
-        done(res.items);
+        done(res.items, res.shops);
     }.bind(this);
 
-    var success = function(done, items) {
+    var success = function(done, items, shops) {
         var meta = items.meta;
         var dataPage = {
             category: category.get('id')
@@ -240,7 +244,6 @@ function handleItems(params, promise, gallery) {
             tracking.addParam('subcategory', subcategory.toJSON());
         }
         tracking.addParam('page', query.page);
-
         done({
             type: 'items',
             category: category.toJSON(),
@@ -249,6 +252,7 @@ function handleItems(params, promise, gallery) {
             relatedAds: query.relatedAds,
             meta: meta,
             items: items.toJSON(),
+            shops: shops !== undefined ? shops.toJSON() : [],
             filters: items.filters,
             paginator: items.paginator
         });

@@ -47,6 +47,7 @@ DataAdapter.prototype.serverRequest = function(req, api, options, callback) {
             callback = options;
             options = {};
         }
+        var isShops = api.path != undefined && api.path.indexOf("/shops") > -1;
         api = this.apiDefaults(api, req);
         api = _.extend(api, options);
         if (req.rendrApp.session) {
@@ -59,6 +60,8 @@ DataAdapter.prototype.serverRequest = function(req, api, options, callback) {
         }
         if (utils.endsWith(req.host, '.olx.ir')) {
             api.url = api.url.replace(HOST, HOST_IRIS);
+        } else if (isShops) {
+            api.url = api.url.replace(HOST, "localhost:3500");
         }
         done();
     }

@@ -1,6 +1,6 @@
 {% view 'locations/select' %}
 {% view 'partials/search' %}
-{% from macros import Breadcrumb, BreadcrumbHome, NearByStore, RecommendedShop, AdLikeStore, CallsToAction %}
+{% from macros import Breadcrumb, BreadcrumbHome, NearByStore, AdLikeStore, CallsToAction %}
 {% set link = (breadcrumb | link) %}
 {{ Breadcrumb(dictionary, link, subcategory.trName) }}
 {{ 'localizado!' | log }}
@@ -21,8 +21,6 @@
 
         {{ NearByStore('Bike Solutions', 'Ambala Rd, Nairobi, Kenya', 'New and used bikes. Biking accessories') }}
         
-        {{ RecommendedShop("Mustapha's bicycles", "Bicycles, cyclist's accesories and pro clothing. Mountain bike, BMX, racing, urban bikes") }}
-
         <ul class="itemListing">
             {% for item in items %}
                 <li>

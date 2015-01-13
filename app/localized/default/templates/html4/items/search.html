@@ -11,8 +11,44 @@
             <a class="btns orange" href="{{ '/' | link }}" >{{ dictionary["registrationconfirmsuccesstext.Browse"] | replace('<<BRAND>>','OLX') }}</a>
         </div>
     {% else %}
+
+    <div class="nearbyStore">                
+            <h3>Tiendas cerca tuyo:</h3>
+            <div id="map-canvas"></div>            
+            <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDvCh0uJ8GnZVKOctZCDcDQjewPKZC_NhY"></script>
+            <script type="text/javascript">
+            function initialize() {
+                // VARIABLES DE LOS PUNTOS              
+                var centerPoint = {lat: -34.5548957, lng: -58.4459911}
+                var shops = [            
+                    {coord: {lat: -34.5548957, lng: -58.4459911}, title: "store 1"}                               
+                ]
+                // FIN DE PUNTOS
+
+
+                var mapOptions = {
+                    center: centerPoint,
+                    zoom: 16
+                };
+                var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+                for (var i in shops) {
+                    var shop = shops[i];
+                    new google.maps.Marker({
+                        position: shop.coord,
+                        map: map,
+                        title: shop.title
+                    })
+                }
+            }
+            google.maps.event.addDomListener(window, 'load', initialize);
+
+            </script>                        
+        </div>
+
+
         <ul class="itemListing">
             {% for item in items %}
+
                 <li>
                     <a href="{{ item | slugToUrl | link }}" data-qa="list-item">
                         <div class="imageCont" style="background-image: url({{ item.thumbnail if item.thumbnail else ('/images/html4/noPhoto.png' | static) }});"></div>
@@ -26,6 +62,47 @@
                             </a>
                         </div>
                         <span>{{ item.displayLocation }}</span>
+                    </div>
+                </li>
+
+                <li class="adLikeStore">
+                    <a href="soon.html">
+                        <div class="imageCont" style="background-image: url({{ item.thumbnail if item.thumbnail else ('/images/html4/noPhoto.png' | static) }});"></div>
+                        <div class="storePic">Store</div>
+                    </a>
+                    <div class="itemInfo">
+                        <div class="centerCont">
+                            <a href="soon.html">
+                                <h2>{{ item.title }}</h2>
+                            </a>
+                        </div>
+                        <span>{{ item.displayLocation }}</span>
+                        <em>New and used bikes and biking accesories in Bike Central</em>
+                    </div>
+                </li>
+
+                <li class="callsToActionAd">
+                    <a href="soon.html">
+                        <div class="imageCont" style="background-image: url({{ item.thumbnail if item.thumbnail else ('/images/html4/noPhoto.png' | static) }});"></div>
+                    </a>
+                    <div class="itemInfo">
+                        <p class="itemPrice">Ksh12500</p>
+                        <span> Today, 13:51</span><span>{{ item.displayLocation }}</span>
+                        <div class="centerCont">
+                            <a href="soon.html">
+                                <h2>{{ item.title }}</h2>
+                            </a>
+                        </div>
+                    </div>                    
+                    <div class="callsToAction">
+                        <span class="storeName">
+                            Mike's bikes is <strong>open now!</strong>
+                        </span>
+                        <ul >
+                            <li><a class="call" href="soon.html">Call</a></li>
+                            <li><a class="email" href="soon.html">eMail</a></li>
+                            <li><a class="sms" href="soon.html">sms</a></li>
+                        </ul>
                     </div>
                 </li>
             {% endfor %}
