@@ -92,6 +92,7 @@ module.exports = {
     'messages_user_management_current_ads.EditMyListing': 'Redigeer My Lysting',
     'topcities.SelectLocation': 'Kies \'n Plek',
     'unexistingitem.ListingUnavailable': 'Hierdie lysting is nie meer beskikbaar nie',
+    'adsense.SponsoredLinks': 'Geborgde Skakels',
     'landingbody.EmailAddress': 'E-posadres',
     'landingbody.ForgotPassword': 'Wagwoord vergeet?',
     'landingbody.SubmitRegistration': 'Dien Registrasie In',

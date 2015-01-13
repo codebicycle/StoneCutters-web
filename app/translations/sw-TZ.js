@@ -92,6 +92,7 @@ module.exports = {
     'messages_user_management_current_ads.EditMyListing': 'Hariri Tangazo Langu',
     'topcities.SelectLocation': 'Chagua Mahali',
     'unexistingitem.ListingUnavailable': 'Tangazo hili halipatikani tena',
+    'adsense.SponsoredLinks': 'Viungo Vilivyofadhiliwa',
     'landingbody.EmailAddress': 'Email Address',
     'landingbody.ForgotPassword': 'Forgot password?',
     'landingbody.SubmitRegistration': 'Wasilisha Usajili',
