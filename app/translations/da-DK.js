@@ -92,6 +92,7 @@ module.exports = {
     'messages_user_management_current_ads.EditMyListing': 'Rediger min annonce',
     'topcities.SelectLocation': 'V\xE6lg placering',
     'unexistingitem.ListingUnavailable': 'Denne annonce er ikke l\xE6ngere tilg\xE6ngelig',
+    'adsense.SponsoredLinks': 'Sponsorede links',
     'landingbody.EmailAddress': 'Email Address',
     'landingbody.ForgotPassword': 'Glemt password?',
     'landingbody.SubmitRegistration': 'Send registrering',

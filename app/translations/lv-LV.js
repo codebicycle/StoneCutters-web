@@ -92,6 +92,7 @@ module.exports = {
     'messages_user_management_current_ads.EditMyListing': 'Redi\u0123\u0113t manu sludin\u0101jumu',
     'topcities.SelectLocation': 'Atlasiet vietu',
     'unexistingitem.ListingUnavailable': '\u0160is sludin\u0101jums vairs nav pieejams',
+    'adsense.SponsoredLinks': 'Sponsor\u0113tas saites',
     'landingbody.EmailAddress': 'E-pasta adrese',
     'landingbody.ForgotPassword': 'Esat aizmirsis paroli?',
     'landingbody.SubmitRegistration': 'Apstiprin\u0101t re\u0123istr\u0101ciju',
