@@ -148,8 +148,7 @@ module.exports = {
 
         if (params.editid) {
             url = utils.removeParams(this.app.session.get('url'), 'editid');
-            url = url.replace('.php', ('/' + params.editid));
-            return helpers.common.redirect.call(this, url);
+            return helpers.common.redirect.call(this, url.replace('.php', ('/' + params.editid)));
         }
         helpers.common.redirect.call(this, '/');
     }),
