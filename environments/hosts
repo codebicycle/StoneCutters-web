@@ -6,7 +6,7 @@
 #190.210.62.60      api-v2.olx.com    #production
 
 #SPAMHANDLER
-{SPAMHANDLER}       sh.care.olx.com   #environment 
+{SPAMHANDLER}       sh.care.olx.com   #environment
 #162.242.207.113    sh.care.olx.com   #production
 
 #ARWEN

@@ -92,6 +92,7 @@ module.exports = {
     'messages_user_management_current_ads.EditMyListing': 'Edytuj moje og\u0142oszenie',
     'topcities.SelectLocation': 'Wybierz lokalizacj\u0119',
     'unexistingitem.ListingUnavailable': 'Og\u0142oszenie niedost\u0119pne ',
+    'adsense.SponsoredLinks': 'Linki sponosorowane',
     'landingbody.EmailAddress': 'Adres e-mail',
     'landingbody.ForgotPassword': 'Zapomnia\u0142e\u015B has\u0142o?',
     'landingbody.SubmitRegistration': 'Formularz rejestracji',

@@ -92,6 +92,7 @@ module.exports = {
     'messages_user_management_current_ads.EditMyListing': 'Upravit m\u016Fj z\xE1znam',
     'topcities.SelectLocation': 'Vyberte m\xEDsto',
     'unexistingitem.ListingUnavailable': 'Z\xE1znam u\u017E nen\xED k dispozici.',
+    'adsense.SponsoredLinks': 'Sponzorovan\xE9 odkazy',
     'landingbody.EmailAddress': 'E-mailov\xE1 adresa',
     'landingbody.ForgotPassword': 'Zapomn\u011Bli jste heslo?',
     'landingbody.SubmitRegistration': 'Odeslat registraci',

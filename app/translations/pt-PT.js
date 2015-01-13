@@ -92,6 +92,7 @@ module.exports = {
     'messages_user_management_current_ads.EditMyListing': 'Editar o meu An\xFAncio',
     'topcities.SelectLocation': 'Selecione um Local',
     'unexistingitem.ListingUnavailable': 'Este an\xFAncio j\xE1 n\xE3o se encontra dispon\xEDvel',
+    'adsense.SponsoredLinks': 'Hiperliga\xE7\xF5es patrocinadas',
     'landingbody.EmailAddress': 'Endere\xE7o de E-mail',
     'landingbody.ForgotPassword': 'Esqueceu-se do seu Senha ?',
     'landingbody.SubmitRegistration': 'Enviar Registro',
