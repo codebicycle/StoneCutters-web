@@ -3,6 +3,9 @@ module.exports = {
         order: [830, 800, 811, 806, 362, 815, 859, 16, 821],
         columns: [3, 2, 2]
     },
+    adserving: {
+        enabled: false
+    },
     post_banner: {
         image: 'post-africa'
     }

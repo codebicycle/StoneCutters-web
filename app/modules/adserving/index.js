@@ -15,7 +15,7 @@ function initialize(attrs, options) {
     options = options || {};
     this.app = options.app;
     this.categories = new Categories(options.categories);
-    this.config = utils.get(configAdServing, ['slots', attrs.slotname], {});
+    this.config = getConfig.call(this);
     this.set('type', this.config.type);
 }
 
@@ -30,7 +30,6 @@ function getSettings() {
         slotname : slotname
     };
     var configType;
-    var query;
 
     if (this.config.enabled) {
         configType = utils.get(configAdServing, type, {});
@@ -185,6 +184,65 @@ function getCategoryForChannel() {
         }
     }
     return name;
+}
+
+function getGroupType(location) {
+    var types = utils.get(configAdServing, ['groups', 'types'], {});
+    var type;
+
+    _.each(types, function each(countries, group) {
+        if (_.contains(countries, location)) {
+            type = group;
+        }
+    });
+    return type;
+}
+
+function getCustomType() {
+    var type = getCategoryId.call(this);
+
+    if (!type) {
+        type = this.app.session.get('currentRoute').action;
+    }
+    return type;
+}
+
+function getSlotConfig(slotname, typeGroup) {
+    var configDefault = utils.get(configAdServing, ['groups', 'slots', slotname, 'default'], {});
+    var config = utils.get(configAdServing, ['groups', 'slots', slotname, typeGroup], {});
+
+    config = _.defaults({}, config, configDefault);
+    config.params = _.defaults({}, config.params, configDefault.params);
+    return config;
+}
+
+function getGroupConfig(slotname, typeGroup, typeSlot) {
+    var configType = utils.get(configAdServing, ['groups', 'config', typeGroup, typeSlot], {});
+    var config = _.clone(configType['default'][slotname]);
+    var type = getCustomType.call(this);
+    var configCustom;
+
+    if (configType.customs) {
+        configCustom = _.find(configType.customs, function find(custom) {
+            return _.contains(custom.categories, type);
+        });
+        if (configCustom && configCustom[slotname]) {
+            config = _.defaults({}, configCustom[slotname], config);
+            config.params = _.defaults({}, configCustom[slotname].params || {}, config.params);
+        }
+    }
+    return config;
+}
+
+function getConfig() {
+    var typeGroup = getGroupType(this.app.session.get('location').url);
+    var slotname = this.get('slotname');
+    var configDefault = getSlotConfig(slotname, typeGroup);
+    var config = getGroupConfig.call(this, slotname, typeGroup, configDefault.type);
+
+    config = _.defaults({}, config, configDefault);
+    config.params = _.defaults({}, config.params, configDefault.params);
+    return config;
 }
 
 
