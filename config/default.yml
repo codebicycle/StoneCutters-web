@@ -67,6 +67,8 @@ middleware:
       - /force/html5
       - /force/desktop
       - /secure
+      - /secure/recaptcha
+      - /secure/send
 
 uglify:
   enabled: false

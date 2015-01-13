@@ -69,7 +69,7 @@ function help(params, callback) {
         callback(null, {
             active: params.active,
             tab: tab,
-            isContactEnabled: helpers.features.isEnabled.call(this, 'contactForm', platform, location.url)
+            isContactEnabled: isContactEnabled
         });
         /*
             TODO [MOB-4717] Help.
