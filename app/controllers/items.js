@@ -632,6 +632,11 @@ function success(params, callback) {
 }
 
 function searchfilterig(params, callback) {
+    var platform = this.app.session.get('platform');
+
+    if (platform !== 'desktop') {
+        return helpers.common.error.call(this, null, {}, callback);
+    }
     params['f.hasimage'] = true;
     searchfilter.call(this, params, callback, '-ig');
 }
@@ -642,6 +647,11 @@ function searchfilter(params, callback, gallery) {
 }
 
 function searchig(params, callback) {
+    var platform = this.app.session.get('platform');
+
+    if (platform !== 'desktop') {
+        return helpers.common.error.call(this, null, {}, callback);
+    }
     params['f.hasimage'] = true;
     search.call(this, params, callback, '-ig');
 }
