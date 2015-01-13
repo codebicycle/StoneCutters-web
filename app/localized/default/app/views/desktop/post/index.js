@@ -56,12 +56,21 @@ module.exports = Base.extend({
         return _.extend({}, data);
     },
     postRender: function() {
+        var paramCategory;
+
         $(window).on('beforeunload', this.onBeforeUnload);
         if (this.getItem().has('id')) {
             this.$('#posting-categories-view').trigger('editCategory', [this.item.get('category')]);
             this.$('#field-location').trigger('change');
         }
         else {
+            if (this.getUrlParam('cat') !== undefined) {
+                paramCategory = {
+                    parentCategory: this.getUrlParam('cat'),
+                    subCategory: this.getUrlParam('subcat')
+                };
+                this.$('#posting-categories-view').trigger('setQueryCategory', paramCategory);
+            }
             this.dictionary = translations.get(this.app.session.get('selectedLanguage'));
             if (this.isValid === undefined || this.isValid === null) {
                 this.errors['category.parentId'] = this.dictionary["postingerror.PleaseSelectCategory"];
@@ -346,6 +355,18 @@ module.exports = Base.extend({
             app: this.app
         }));
         return this.item;
+    },
+    getUrlParam: function(param) {
+        var url = window.location.search.substring(1);
+        var query = url.split('&');
+        for (var i = 0; i < query.length; i++) 
+        {
+            var paramName = query[i].split('=');
+            if (paramName[0] == param) 
+            {
+                return paramName[1];
+            }
+        }
     }
 });
 

@@ -14,7 +14,9 @@ module.exports = Base.extend({
     events: {
         'click .posting-categories-list a.category': 'onCategoryClick',
         'click .child-categories-list a': 'onSubCategoryClick',
-        'editCategory': 'onEditCategory'
+        'editCategory': 'onEditCategory',
+        'setQueryCategory': 'onSetQueryCategory'
+
     },
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
@@ -26,6 +28,12 @@ module.exports = Base.extend({
     onEditCategory: function(event, category) {
         this.$('.posting-categories-list a[data-id=' + category.parentId + ']').trigger('click', ['edit']);
         this.$('.child-categories-list a[data-id=' + category.id + ']').trigger('click', ['edit']);
+    },
+    onSetQueryCategory: function(event, category) {
+        this.$('.posting-categories-list a[data-id=' + category.parentCategory + ']').trigger('click');
+        if (category.subCategory) {
+            this.$('.child-categories-list a[data-id=' + category.subCategory + ']').trigger('click');
+        }
     },
     onSubCategoryClick: function(event, intent) {
         event.preventDefault();
