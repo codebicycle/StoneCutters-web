@@ -143,7 +143,6 @@ module.exports = {
         });
     },
     editphp: middlewares(function editphp(params, callback) {
-        var id;
         var url;
 
         if (params.editid) {
