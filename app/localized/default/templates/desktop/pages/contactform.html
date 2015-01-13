@@ -50,8 +50,8 @@
                 </label>
             </fieldset>
             <p class="replyResult fail icons icon-close hide" data-reply="error" >
-                Se produjo un error al tratar de completar la operación.
-                <span>Por favor intenta nuevamente</span>
+                {{ dictionary["buynow.FatalError"] }}
+                <span>{{ dictionary["postingerror.PleaseTryAgain"] }}</span>
             </p>
              <p class="replyResult success icons icon-check hide" data-reply="success" >
                  {{ dictionary["item.YourMessageHasBeenSent"] }}

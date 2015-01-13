@@ -258,6 +258,7 @@ module.exports = {
     'register_mail.Username': 'gebruikersnaam',
     'sitemap_map.see_all_cities': '[Zie alle steden in <<STATE>>]',
     'sitemap_map.Sitemap': 'Siteoverzicht',
+    'buynow.FatalError': 'Er is een fout opgetreden bij het afronden van het proces.',
     'registerheader.Register': 'Registreren',
     'itemcomments.CommentsFormName': 'Naam:',
     'replymessage.Email': 'e-mail',

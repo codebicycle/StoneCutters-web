@@ -258,6 +258,7 @@ module.exports = {
     'register_mail.Username': '\u0627\u0633\u0645 \u0627\u0644\u0645\u0633\u062A\u062E\u062F\u0645',
     'sitemap_map.see_all_cities': '[See all <<STATE>> cities]',
     'sitemap_map.Sitemap': 'Sitemap',
+    'buynow.FatalError': 'There is an error trying to complete the operation.',
     'registerheader.Register': '\u0633\u062C\u064D\u0644',
     'itemcomments.CommentsFormName': '\u0627\u0633\u0645 ',
     'replymessage.Email': ' Email \u0639\u0646\u0648\u0627\u0646 ',
