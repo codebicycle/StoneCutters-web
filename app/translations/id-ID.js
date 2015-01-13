@@ -47,6 +47,7 @@ module.exports = {
     'itemslisting.FreeClassifieds': 'Iklan baris gratis',
     'itemslisting.HighestFirst': 'Harga Tertinggi Dahulu',
     'itemslisting.LowestFirst': 'Harga Terendah Dahulu',
+    'itemslisting.More': 'Lebih',
     'itemslisting.NavigatorByCategory': 'Kategori',
     'itemslisting.NavigatorByLocation': 'Lokasi',
     'itemslisting.NewContactName': 'Nama kontak',

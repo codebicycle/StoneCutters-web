@@ -47,6 +47,7 @@ module.exports = {
     'itemslisting.FreeClassifieds': 'ilmaiset ilmoitukset',
     'itemslisting.HighestFirst': 'Korkein hinta ensin',
     'itemslisting.LowestFirst': 'Alhaisin hinta ensin',
+    'itemslisting.More': 'Lis\xE4\xE4',
     'itemslisting.NavigatorByCategory': 'Kategoria',
     'itemslisting.NavigatorByLocation': 'Sijainti',
     'itemslisting.NewContactName': 'Yhteyshenkil\xF6n nimi',

@@ -47,6 +47,7 @@ module.exports = {
     'itemslisting.FreeClassifieds': '\u0627\u0639\u0644\u0627\u0646 \u0645\u062C\u0627\u0646\u064A ',
     'itemslisting.HighestFirst': '\u0633\u0639\u0631 : \u0627\u0648\u0644 \u0627\u0644\u0627\u0642\u0635\u0649',
     'itemslisting.LowestFirst': '\u0633\u0639\u0631 : \u0627\u0648\u0644 \u0627\u0644\u0627\u062F\u0646\u0649 ',
+    'itemslisting.More': 'More',
     'itemslisting.NavigatorByCategory': '\u0645\u0631\u062A\u0628\u0629',
     'itemslisting.NavigatorByLocation': '\u0645\u0648\u0642\u0639',
     'itemslisting.NewContactName': 'Contact name',

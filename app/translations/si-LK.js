@@ -47,6 +47,7 @@ module.exports = {
     'itemslisting.FreeClassifieds': '\u0DB1\u0DDC\u0DB8\u0DD2\u0DBD\u0DDA \u0DBD\u0DD4\u0DC4\u0DD4\u0DAC\u0DD4 \u0DAF\u0DD0\u0DB1\u0DCA\u0DC0\u0DD3\u0DB8\u0DCA',
     'itemslisting.HighestFirst': '\u0D89\u0DC4\u0DC5\u0DB8 \u0DB8\u0DD2\u0DBD \u0DB4\u0DC5\u0DB8\u0DD4\u0DC0',
     'itemslisting.LowestFirst': '\u0D85\u0DA9\u0DD4\u0DB8 \u0DB8\u0DD2\u0DBD \u0DB4\u0DC5\u0DB8\u0DD4\u0DC0',
+    'itemslisting.More': '\u0DAD\u0DC0',
     'itemslisting.NavigatorByCategory': '\u0D9A\u0DCF\u0DAB\u0DCA\u0DA9\u0DBA',
     'itemslisting.NavigatorByLocation': '\u0DC3\u0DCA\u0DAE\u0DCF\u0DB1\u0DBA',
     'itemslisting.NewContactName': '\u0DC3\u0DB6\u0DAF\u0DAD\u0DCF \u0DB1\u0DB8',

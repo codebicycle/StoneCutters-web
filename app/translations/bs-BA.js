@@ -47,6 +47,7 @@ module.exports = {
     'itemslisting.FreeClassifieds': 'Besplatni oglasi',
     'itemslisting.HighestFirst': 'Prvo najvi\u0161e cijene',
     'itemslisting.LowestFirst': 'Prvo najni\u017Ee cijene',
+    'itemslisting.More': 'Jo\u0161',
     'itemslisting.NavigatorByCategory': 'Kategorija',
     'itemslisting.NavigatorByLocation': 'Lokacija',
     'itemslisting.NewContactName': 'Ime kontakta',

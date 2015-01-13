@@ -47,6 +47,7 @@ module.exports = {
     'itemslisting.FreeClassifieds': 'Gratis advertenties',
     'itemslisting.HighestFirst': 'Hoogste prijs eerst',
     'itemslisting.LowestFirst': 'Laagste prijs eerst',
+    'itemslisting.More': 'Meer',
     'itemslisting.NavigatorByCategory': 'Rubriek',
     'itemslisting.NavigatorByLocation': 'Locatie',
     'itemslisting.NewContactName': 'Naam contactpersoon',

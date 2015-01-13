@@ -47,6 +47,7 @@ module.exports = {
     'itemslisting.FreeClassifieds': 'Kostenlose Kleinanzeigen.',
     'itemslisting.HighestFirst': 'Preis: h\xF6chste Betr\xE4ge zuerst',
     'itemslisting.LowestFirst': 'Preis: niedrigste Betr&#228;ge zuerst',
+    'itemslisting.More': 'Mehr',
     'itemslisting.NavigatorByCategory': 'Kategorie',
     'itemslisting.NavigatorByLocation': 'Location',
     'itemslisting.NewContactName': 'Name Kontaktperson',

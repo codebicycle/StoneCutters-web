@@ -47,6 +47,7 @@ module.exports = {
     'itemslisting.FreeClassifieds': 'Anun\u0163uri publicitare gratuite',
     'itemslisting.HighestFirst': 'Pre\u0163ul cel mai scump mai \xEEnt\xE2i',
     'itemslisting.LowestFirst': 'Pre\u0163ul cel mai ieftin mai \xEEnt\xE2i',
+    'itemslisting.More': 'Mai mult',
     'itemslisting.NavigatorByCategory': 'Categorie',
     'itemslisting.NavigatorByLocation': 'Loca\u0163ie',
     'itemslisting.NewContactName': 'Nume de contact',

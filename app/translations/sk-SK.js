@@ -47,6 +47,7 @@ module.exports = {
     'itemslisting.FreeClassifieds': 'Bezplatn\xE9 inzer\xE1ty',
     'itemslisting.HighestFirst': 'Za\u010Da\u0165 najvy\u0161\u0161ou ponukou',
     'itemslisting.LowestFirst': 'Za\u010Da\u0165 najni\u017E\u0161ou ponukou',
+    'itemslisting.More': '\u010Eal\u0161ie',
     'itemslisting.NavigatorByCategory': 'Kateg\xF3ria',
     'itemslisting.NavigatorByLocation': 'Miesto',
     'itemslisting.NewContactName': 'Kontaktn\xE9 meno',

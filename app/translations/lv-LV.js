@@ -47,6 +47,7 @@ module.exports = {
     'itemslisting.FreeClassifieds': 'Bezmaksas sludin\u0101jumi',
     'itemslisting.HighestFirst': 'Augst\u0101k\u0101 cena vispirms',
     'itemslisting.LowestFirst': 'Zem\u0101k\u0101 cena vispirms',
+    'itemslisting.More': 'Vair\u0101k',
     'itemslisting.NavigatorByCategory': 'Kategorija',
     'itemslisting.NavigatorByLocation': 'Atra\u0161an\u0101s vieta',
     'itemslisting.NewContactName': 'Kontakta v\u0101rds',

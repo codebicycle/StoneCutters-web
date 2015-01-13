@@ -47,6 +47,7 @@ module.exports = {
     'itemslisting.FreeClassifieds': 'Nemokami klasifikuoti skelbimai',
     'itemslisting.HighestFirst': 'Auk\u0161\u010Diausia kaina pirmiausiai',
     'itemslisting.LowestFirst': 'Ma\u017Eiausia kaina pirmiausiai',
+    'itemslisting.More': 'Daugiau',
     'itemslisting.NavigatorByCategory': 'Kategorija',
     'itemslisting.NavigatorByLocation': 'Vieta',
     'itemslisting.NewContactName': 'Kontaktinis asmuo',

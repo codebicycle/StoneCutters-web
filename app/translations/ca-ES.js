@@ -47,6 +47,7 @@ module.exports = {
     'itemslisting.FreeClassifieds': 'Classificats gratu\xEFts',
     'itemslisting.HighestFirst': 'El Preu M\xE9s Alt Primer',
     'itemslisting.LowestFirst': 'El Preu M\xE9s Baix Primer',
+    'itemslisting.More': 'M\xE9s',
     'itemslisting.NavigatorByCategory': 'Categoria',
     'itemslisting.NavigatorByLocation': 'Ubicaci\xF3',
     'itemslisting.NewContactName': 'Nom de contacte',

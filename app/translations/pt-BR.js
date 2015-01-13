@@ -47,6 +47,7 @@ module.exports = {
     'itemslisting.FreeClassifieds': 'An\xFAncios gr\xE1tis',
     'itemslisting.HighestFirst': 'Maior pre\xE7o',
     'itemslisting.LowestFirst': 'Menor pre\xE7o',
+    'itemslisting.More': 'Mais',
     'itemslisting.NavigatorByCategory': 'Categoria',
     'itemslisting.NavigatorByLocation': 'Localiza\xE7\xE3o',
     'itemslisting.NewContactName': 'Nome de contato',

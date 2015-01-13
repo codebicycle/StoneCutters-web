@@ -2,7 +2,7 @@
     overflow: hidden;
     background: #DDD;
 
-    a {
+    a.item-list, .my-ads {
         background: #FFF;
         border-bottom: 1px solid #ECECEC;
         display: block;
@@ -10,7 +10,8 @@
         overflow: hidden;
         padding: 7px;
         position: relative;
-
+    }
+    a.item-list {
         &:active {
             background-color: #F6F6F6;
         }
@@ -57,7 +58,7 @@
         line-height: 1;
         text-align: right;
     }
-    
+
     .status {
         color: #FFF;
         font-size: 12px;

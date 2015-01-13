@@ -7,7 +7,7 @@
         <ul class="item-listing">
             {% for item in favorites %}
                 <li>
-                    <a href="#" class="favoritePopup" data-itemUrl="{{ item | slugToUrl | link }}" data-itemId="{{ item.id }}">
+                    <a href="#" class="favoritePopup item-list" data-itemUrl="{{ item | slugToUrl | link }}" data-itemId="{{ item.id }}">
                         <div {% if item.thumbnail %} style="background-image:url({{ item.thumbnail }});" {% endif %} data-fullimg="{{ item.fullImage }}" class="image{{ ' filled' if item.thumbnail }}"></div>
                         <p class="datetime">
                             {{ item.date.since.day if item.date.since.day }} {{ dictionary[item.date.since.dictionary] }}{{ (', ' + item.date.since.hour) if item.date.since.hour }}
@@ -15,8 +15,8 @@
                                 {{ dictionary["crm_new_version.RenameCategory_3"] }} {{ item.displayLocation }}
                             {% endif %}
                         </p>
-                        <h2 class="title">{{ item.title }}</h2>            
-                        <div class="price">{{ item.price.displayPrice }}</div>            
+                        <h2 class="title">{{ item.title }}</h2>
+                        <div class="price">{{ item.price.displayPrice }}</div>
                     </a>
                 </li>
             {% endfor %}

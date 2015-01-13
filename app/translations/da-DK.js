@@ -47,6 +47,7 @@ module.exports = {
     'itemslisting.FreeClassifieds': 'gratis annoncer',
     'itemslisting.HighestFirst': 'H\xF8jeste pris f\xF8rst',
     'itemslisting.LowestFirst': 'Laveste pris f\xF8rst',
+    'itemslisting.More': 'Mere',
     'itemslisting.NavigatorByCategory': 'Kategori',
     'itemslisting.NavigatorByLocation': 'Sted',
     'itemslisting.NewContactName': 'Kontaktnavn',
