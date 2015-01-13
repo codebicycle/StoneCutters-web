@@ -61,7 +61,7 @@ DataAdapter.prototype.serverRequest = function(req, api, options, callback) {
         if (utils.endsWith(req.host, '.olx.ir')) {
             api.url = api.url.replace(HOST, HOST_IRIS);
         } else if (isShops) {
-            api.url = api.url.replace(HOST, "localhost:3500");
+            api.url = api.url.replace(HOST, "10.4.12.12:3500");
         }
         done();
     }
