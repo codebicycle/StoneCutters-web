@@ -3,7 +3,6 @@
 {% from macros import Breadcrumb, BreadcrumbHome, NearByStore, AdLikeStore, CallsToAction %}
 {% set link = (breadcrumb | link) %}
 {{ Breadcrumb(dictionary, link, subcategory.trName) }}
-{{ shops | log }}
 <div id="itemListing">
     {% if meta.total == 0 %}
         <div class="emtyList">
