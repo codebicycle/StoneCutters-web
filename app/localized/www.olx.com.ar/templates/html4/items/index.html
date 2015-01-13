@@ -3,7 +3,7 @@
 {% from macros import Breadcrumb, BreadcrumbHome, NearByStore, AdLikeStore, CallsToAction %}
 {% set link = (breadcrumb | link) %}
 {{ Breadcrumb(dictionary, link, subcategory.trName) }}
-{{ 'localizado!' | log }}
+{{ shops | log }}
 <div id="itemListing">
     {% if meta.total == 0 %}
         <div class="emtyList">
@@ -19,7 +19,7 @@
         </div>
     {% else %}
 
-        {{ NearByStore('Bike Solutions', 'Ambala Rd, Nairobi, Kenya', 'New and used bikes. Biking accessories') }}
+        {{ NearByStore(shops) }}
         
         <ul class="itemListing">
             {% for item in items %}

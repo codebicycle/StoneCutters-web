@@ -89,8 +89,10 @@
     function initialize() {
         // VARIABLES DE LOS PUNTOS              
         var centerPoint = {lat: -34.5548957, lng: -58.4459911}
-        var shops = [            
-            {coord: {lat: -34.5548957, lng: -58.4459911}, title: "store 1"}                               
+        var shops = [
+        {% for shop in shops %}
+            {coord: {"lat": {{ shop.location.lat }}, "lng": {{ shop.location.lng }}}, title: "{{ shop.name }}"},                       
+        {% endfor %}            
         ]
         // FIN DE PUNTOS
 
