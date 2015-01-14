@@ -62,6 +62,7 @@ module.exports = Base.extend({
     onFormRendered: function(event) {
         var $states = $('#field-state');
         var $cities = $('#field-location');
+        var $neighborhoods = $('#field-neighborhood');
 
         if ($states.val()) {
             this.parentView.$el.trigger('fieldSubmit', [$states]);
@@ -69,6 +70,18 @@ module.exports = Base.extend({
         if ($cities.val()) {
             this.parentView.$el.trigger('fieldSubmit', [$cities]);
         }
+        /*
+        if ($neighborhoods.val()) {
+            this.parentView.$el.trigger('fieldSubmit', [{
+                name: [$neighborhoods.attr('name'), 'id'].join('.'),
+                value: $neighborhoods.val()
+            }]);
+            this.parentView.$el.trigger('fieldSubmit', [{
+                name: [$neighborhoods.attr('name'), 'name'].join('.'),
+                value: $neighborhoods.find(':selected').text()
+            }]);
+        }
+        */
     },
     onStateChange: function(event) {
         event.preventDefault();
@@ -112,6 +125,10 @@ module.exports = Base.extend({
                         languageId: this.app.session.get('languages')._byId[this.app.session.get('selectedLanguage')].id
                     }
                 }
+            }, {
+                readFromCache: false,
+                writeToCache: false,
+                store: false
             }, done.errfcb);
         }.bind(this);
 
@@ -123,20 +140,22 @@ module.exports = Base.extend({
             var options = response.neighborhoods.toJSON();
             if (options.length) {
                 $neighborhoods.removeAttr('disabled').empty();
-                $neighborhoods.attr('required', true);
 
                 options.unshift({
                     id: '',
-                    name: translations[this.app.session.get('selectedLanguage') || 'en-US']['countryoptions.SelectANeighborhood']
+                    name: translations.get(this.app.session.get('selectedLanguage'))['countryoptions.SelectANeighborhood']
                 });
                 _.each(options, function each(neighborhood) {
+                    if (!neighborhood.name) {
+                        console.log(neighborhood);
+                    }
                     $neighborhoods.append('<option value="' + neighborhood.id + '">' + neighborhood.name + '</option>');
                 }.bind(this));
                 $neighborhoods.parents('.field-wrapper').removeClass('hide');
             }
             else {
                 $neighborhoods.parents('.field-wrapper').addClass('hide');
-                $neighborhoods.empty().attr('required', false);
+
             }
 
             this.parentView.$el.trigger('fieldSubmit', [$field]);
@@ -152,7 +171,15 @@ module.exports = Base.extend({
         event.stopImmediatePropagation();
 
         var $field = $(event.target);
-        this.parentView.$el.trigger('fieldSubmit', [$field]);
+
+        this.parentView.$el.trigger('fieldSubmit', [{
+            name: [$field.attr('name'), 'id'].join('.'),
+            value: $field.val()
+        }]);
+        this.parentView.$el.trigger('fieldSubmit', [{
+            name: [$field.attr('name'), 'name'].join('.'),
+            value: $field.find(':selected').text()
+        }]);
 
     },
     getCities: function(state) {
