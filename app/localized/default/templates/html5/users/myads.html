@@ -28,7 +28,7 @@
                 {#{ item.date.since.day if item.date.since.day }} {{ dictionary[item.date.since.dictionary] }}{{ (', ' + item.date.since.hour) if item.date.since.hour }#}
                 <li class="my-ads {{ status }}">
                     <a class="btnfilter edit" href="#">{{ dictionary["showactivelistings.Edit"] }}</a>
-                    <a class="btnfilter more" href="#">{{ dictionary["itemslisting.More"] }}</a>
+                    <a class="btnfilter more" href="#" data-action="more" data-id="{{ item.id }}">{{ dictionary["itemslisting.More"] }}</a>
                     <div {% if item.thumbnail %} style="background-image:url({{ item.thumbnail }});" {% endif %} data-fullimg="{{ item.fullImage }}" class="image{{ ' filled' if item.thumbnail }}"></div>
                     <p class="datetime">{{ statustxt }}</p>
                     <h2 class="title">{{ item.title }}</h2>
@@ -36,7 +36,11 @@
                 </li>
             {% endfor %}
         </ul>
-        <div class="actions">lalala</div>
+        <div class="actions hide" data-action="actions">
+            <a href="#" class="action view">Ver</a>
+            <a href="#" class="action help">{{ dictionary["biderrorheader.Help"] }}</a>
+            <a href="#" class="action delete">{{ dictionary["confirmremoveitem.Delete"] }}</a>
+        </div>
     {% else %}
         <div class="emtyList">
             {{ dictionary["myolx.YouCurrentlyHaveNoActiveListings"] }}

@@ -12,7 +12,7 @@ module.exports = Base.extend({
         return _.extend({}, data, {
             breadcrumb: breadcrumb.get.call(this, data)
         });
-    },
+    }/*,
     postRender: function() {
         $('.edit').click(function(e) {
             e.preventDefault();
@@ -74,7 +74,7 @@ module.exports = Base.extend({
             $('#delete').removeClass('visible');
             $('.' + itemId).trigger('click');
         });
-    }
+    }*/
 });
 
 module.exports.id = 'users/myads';
