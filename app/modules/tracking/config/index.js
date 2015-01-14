@@ -6,5 +6,7 @@ module.exports = {
     analytics: require('./analytics'),
     keyade: require('./keyade'),
     hydra: require('./hydra'),
-    tagmanager: require('./tagmanager')
+    tagmanager: require('./tagmanager'),
+    allpages: require('./allpages'),
+    facebook: require('./facebook')
 };

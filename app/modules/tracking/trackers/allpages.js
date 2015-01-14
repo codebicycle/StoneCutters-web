@@ -16,19 +16,19 @@ function isPlatformEnabled(platforms) {
 
 function isEnabled() {
     var location = this.app.session.get('location');
-    var enabled = config.getForMarket(location.url, ['tracking', 'trackers', 'tagmanager', 'enabled'], true);
+    var enabled = config.getForMarket(location.url, ['tracking', 'trackers', 'allpages', 'enabled'], true);
 
     if (enabled) {
-        enabled = isPlatformEnabled.call(this, config.getForMarket(location.url, ['tracking', 'trackers', 'tagmanager', 'platforms']));
+        enabled = isPlatformEnabled.call(this, config.getForMarket(location.url, ['tracking', 'trackers', 'allpages', 'platforms']));
     }
     if (enabled) {
-        enabled = !!utils.get(configTracking, ['tagmanager', location.url]);
+        enabled = !!utils.get(configTracking, ['allpages', this.app.session.get('location').url]);
     }
     return enabled;
 }
 
-function getParams(params, options) {
-    return utils.get(configTracking, ['tagmanager', this.app.session.get('location').url], {});
+function getParams(page, options) {
+    return utils.get(configTracking, ['allpages', this.app.session.get('location').url], {});
 }
 
 module.exports = {

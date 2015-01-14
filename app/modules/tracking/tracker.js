@@ -3,35 +3,27 @@
 var _ = require('underscore');
 var ati = require('./trackers/ati');
 var analytics = require('./trackers/analytics');
-var hydra = require('./trackers/hydra');
 var serverSide = require('./trackers/serverSide');
 var keyade = require('./trackers/keyade');
-var tagmanager = require('./trackers/tagmanager');
 var utils = require('../../../shared/utils');
 var esi = require('../esi');
 
-var trackers = {
-    ati: function(ctx, page, query) {
-        if (ati.isEnabled.call(this, page)) {
-            _.extend(ctx.params, {
-                ati: ati.getParams.call(this, page, query)
-            });
+var trackers = {};
+
+_.each('ati analytics hydra tagmanager allpages facebook'.split(' '), function each(tracker) {
+    var root = this;
+
+    if (!root[tracker]) {
+        root[tracker] = require('./trackers/' + tracker);
+    }
+    trackers[tracker] = function track(ctx, page, query) {
+        if (root[tracker].isEnabled.call(this, page)) {
+            ctx.params[tracker] = root[tracker].getParams.call(this, page, query);
         }
-    },
-    analytics: function(ctx, page, query) {
-        if (analytics.isEnabled.call(this, page)) {
-            _.extend(ctx.params, {
-                analytics: analytics.getParams.call(this, page, query)
-            });
-        }
-    },
-    hydra: function(ctx, page, query) {
-        if (hydra.isEnabled.call(this, page)) {
-            _.extend(ctx.params, {
-                hydra: hydra.getParams.call(this, page, query)
-            });
-        }
-    },
+    };
+}, this);
+
+_.extend(trackers, {
     serverSide: function(ctx, page, query) {
         var url;
 
@@ -81,15 +73,8 @@ var trackers = {
                 ctx.urls.push(url);
             }
         }
-    },
-    tagmanager: function(ctx, page, query) {
-        if (tagmanager.isEnabled.call(this, page)) {
-            _.extend(ctx.params, {
-                tagmanager: tagmanager.getParams.call(this, page, query)
-            });
-        }
     }
-};
+});
 
 function getPageName(page) {
     if (~page.indexOf('#')) {
