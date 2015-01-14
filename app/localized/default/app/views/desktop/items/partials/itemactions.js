@@ -77,6 +77,7 @@ module.exports = Base.extend({
             user = new User(_.extend(data, {
                 location: this.app.session.get('siteLocation'),
                 country: this.app.session.get('location').name,
+                isocode: this.app.session.get('location').abbreviation,
                 languageId: this.app.session.get('languages')._byId[this.app.session.get('selectedLanguage')].id,
                 platform: this.app.session.get('platform')
             }), {

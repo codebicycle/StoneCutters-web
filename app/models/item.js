@@ -227,40 +227,40 @@ function postFields(done) {
 
 function logValidation(type, statusCode, errors) {
     var platform = this.app.session.get('platform');
-    var locale = this.app.session.get('location').abbreviation.toLowerCase();
+    var locale = this.app.session.get('location').abbreviation;
 
     if (!errors) {
-        return statsd.increment([locale, 'posting', 'success', 'validation', platform]);
+        return statsd.increment([locale, type, 'success', 'validation', platform]);
     }
     if (statusCode != 200) {
-        return statsd.increment([locale, 'posting', 'error', 'validation', statusCode, platform]);
+        return statsd.increment([locale, type, 'error', 'validation', statusCode, platform]);
     }
     errors.forEach(function each(error) {
-        statsd.increment([locale, 'posting', 'error', 'validation', statusCode, error.selector, platform]);
+        statsd.increment([locale, type, 'error', 'validation', statusCode, error.selector, platform]);
     });
 }
 
 function logPostImages(type, statusCode, errors) {
     var platform = this.app.session.get('platform');
-    var locale = this.app.session.get('location').abbreviation.toLowerCase();
+    var locale = this.app.session.get('location').abbreviation;
 
     if (statusCode == 200) {
-        return statsd.increment([locale, 'posting', 'success', 'images', platform]);
+        return statsd.increment([locale, type, 'success', 'images', platform]);
     }
     if (statusCode != 400) {
-        return statsd.increment([locale, 'posting', 'error', 'images', statusCode, platform]);
+        return statsd.increment([locale, type, 'error', 'images', statusCode, platform]);
     }
     errors.forEach(function each(error) {
-        statsd.increment([locale, 'posting', 'error', 'images', statusCode, error.selector, platform]);
+        statsd.increment([locale, type, 'error', 'images', statusCode, error.selector, platform]);
     });
 }
 
 function logPost(type, statusCode, errors) {
     var platform = this.app.session.get('platform');
-    var locale = this.app.session.get('location').abbreviation.toLowerCase();
+    var locale = this.app.session.get('location').abbreviation;
 
     if (statusCode == 200) {
-        return statsd.increment([locale, type, 'success', platform]);
+        return statsd.increment([locale, type, 'success', 'post', platform]);
     }
     if (statusCode != 400) {
         return statsd.increment([locale, type, 'error', 'post', statusCode, platform]);

@@ -1,17 +1,24 @@
 {% include (template + "/items/itembreadcrumb.html") %}
 
-<section id="item-page" data-qa="item" >
-    {% include (template + "/items/itemcontent.html") %}
+{% view 'partials/adserving', 'slot_top_item' %}
 
+<section id="item-page" data-qa="item" >
+    <div class="item-main-wrapper">
+        {% include (template + "/items/itemcontent.html") %}
+
+        {% view 'partials/adserving', 'slot_bottom_item' %}
+
+        {% if seo %}
+            {% set seoFrom = "item" %}
+            {% include (template + "/partials/seobox.html") %}
+        {% endif %}
+    </div>
     <aside class="side-column">
         {% include (template + "/items/itemprice.html") %}
 
         {% view 'items/partials/contactform' %}
-    </aside>
 
-    {% if seo %}
-        {% set seoFrom = "item" %}
-        {% include (template + "/partials/seobox.html") %}
-    {% endif %}
+        {% view 'partials/adserving', 'slot_side_item' %}
+    </aside>
 </section>
 {% view 'partials/tracking' %}

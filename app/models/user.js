@@ -65,14 +65,14 @@ function login(done) {
 
     var success = function(res) {
         if (!this.has('new')) {
-            statsd.increment([this.get('country'), 'login', 'success', this.get('platform')]);
+            statsd.increment([this.get('isocode'), 'login', 'success', this.get('platform')]);
         }
         done();
     }.bind(this);
 
     var error = function(err) {
         if (!this.has('new')) {
-            statsd.increment([this.get('country'), 'login', 'error', err.statusCode, this.get('platform')]);
+            statsd.increment([this.get('isocode'), 'login', 'error', err.statusCode, this.get('platform')]);
         }
         done.fail(err);
     }.bind(this);
@@ -100,12 +100,12 @@ function lostpassword(done) {
     }.bind(this);
 
     var success = function() {
-        statsd.increment([this.get('country'), 'lostpassword', 'success', this.get('platform')]);
+        statsd.increment([this.get('isocode'), 'lostpassword', 'success', this.get('platform')]);
         done();
     }.bind(this);
 
     var error = function(err) {
-        statsd.increment([this.get('country'), 'lostpassword', 'error', err.statusCode, this.get('platform')]);
+        statsd.increment([this.get('isocode'), 'lostpassword', 'error', err.statusCode, this.get('platform')]);
         done.fail(err);
     }.bind(this);
 
@@ -139,12 +139,12 @@ function register(done) {
     }.bind(this);
 
     var success = function(res) {
-        statsd.increment([this.get('country'), 'register', 'success', this.get('platform')]);
+        statsd.increment([this.get('isocode'), 'register', 'success', this.get('platform')]);
         done();
     }.bind(this);
 
     var error = function(err) {
-        statsd.increment([this.get('country'), 'register', 'error', err.statusCode, this.get('platform')]);
+        statsd.increment([this.get('isocode'), 'register', 'error', err.statusCode, this.get('platform')]);
         done.fail(err);
     }.bind(this);
 
@@ -170,12 +170,12 @@ function registerConfirm(done) {
 
     var success = function(res, body) {
       this.set(body);
-      statsd.increment([this.get('country'), 'register','confirm', 'success', this.get('platform')]);
+      statsd.increment([this.get('isocode'), 'register','confirm', 'success', this.get('platform')]);
       done(true);
     }.bind(this);
 
     var error = function(err) {
-      statsd.increment([this.get('country'), 'register','confirm', 'error', err.statusCode, this.get('platform')]);
+      statsd.increment([this.get('isocode'), 'register','confirm', 'error', err.statusCode, this.get('platform')]);
       done.fail(err);
     }.bind(this);
 
@@ -205,12 +205,12 @@ function reply(done, data) {
     }.bind(this);
 
     var success = function(res, reply) {
-        statsd.increment([this.get('country'), 'reply', 'success', this.get('platform')]);
+        statsd.increment([this.get('isocode'), 'reply', 'success', this.get('platform')]);
         done(reply);
     }.bind(this);
 
     var error = function(err) {
-        statsd.increment([this.get('country'), 'reply', 'error', err.statusCode, this.get('platform')]);
+        statsd.increment([this.get('isocode'), 'reply', 'error', err.statusCode, this.get('platform')]);
         done.fail(err);
     }.bind(this);
 
