@@ -135,7 +135,7 @@ module.exports = Base.extend({
             $priceC.addClass('error').after('<small class="error">' + translations.get(language)["postingerror.PleaseEnterANumericalValue"] + '</small>');
         }
         failed.forEach(function each(field) {
-            var locale = this.app.session.get('location').abbreviation;
+            var locale = this.app.session.get('location').abbreviation.toLowerCase();
             var type = this.parentView.getItem().get('id') ? 'editing' : 'posting';
             var platform = this.app.session.get('platform');
 

@@ -34,7 +34,7 @@ DataAdapter.prototype.request = function(req, api, options, callback) {
 
 DataAdapter.prototype.serverRequest = function(req, api, options, callback) {
     var location = req.rendrApp.session ? req.rendrApp.session.get('location') : null;
-    var locale = location ? location.abbreviation : 'all';
+    var locale = location ? location.name : 'all';
     var start = new Date().getTime();
     var elapsed;
     var key;
@@ -167,7 +167,7 @@ DataAdapter.prototype.serverRequest = function(req, api, options, callback) {
 
 DataAdapter.prototype.clientRequest = function(req, api, options, callback) {
     var location = window.App && window.App.session && _.isFunction(window.App.session.get) ? window.App.session.get('location') : null;
-    var locale = location ? location.abbreviation : 'all';
+    var locale = location ? location.name : 'all';
     var start = new Date().getTime();
     var elapsed;
     var succeeded;

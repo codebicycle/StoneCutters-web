@@ -158,7 +158,7 @@ module.exports = Base.extend({
             this.$el.addClass('error');
         }
         failed.forEach(function each(field) {
-            var locale = this.app.session.get('location').abbreviation;
+            var locale = this.app.session.get('location').abbreviation.toLowerCase();
             var type = this.parentView.getItem().get('id') ? 'editing' : 'posting';
             var platform = this.app.session.get('platform');
 
