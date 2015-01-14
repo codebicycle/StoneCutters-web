@@ -829,7 +829,7 @@ function search(params, callback, gallery) {
                 }
             });
 
-            callback(null, {
+            callback(null, ['items/search', gallery.replace('-', '')].join(''), {
                 items: items.toJSON(),
                 meta: items.meta,
                 filters: items.filters,
