@@ -106,7 +106,7 @@ module.exports = {
         desktop: {
             contactForm: {
                 worldwide: false,
-                countries: ['www.olx.com.bo']
+                countries: ['www.olx.co.cr']
             }
         }
     },
