@@ -3,6 +3,7 @@
 {% from macros import Breadcrumb, BreadcrumbHome, NearByStore, AdLikeStore, CallsToAction %}
 {% set link = (breadcrumb | link) %}
 {{ Breadcrumb(dictionary, link, subcategory.trName) }}
+
 <div id="itemListing">
     {% if meta.total == 0 %}
         <div class="emtyList">
@@ -38,9 +39,9 @@
                     </div>                    
                 </li>
 
-                {{ AdLikeStore("New and used bikes and biking accesories in Bike Central", item) }}
+                {{ AdLikeStore(shops[0]) }}
                 
-                {{ CallsToAction("Mike's bikes is <strong>open now!</strong>", "http://images01.olx-st.com/ui/73/58/48/t_1417780281_757925046_1.jpg", "Ksh12500", "Today, 13:51", location.current.name, "Bike") }}
+                {{ CallsToAction(shops[0]) }}
             {% endfor %}            
         </ul>        
         {% if paginator and paginator.isEnabled() %}

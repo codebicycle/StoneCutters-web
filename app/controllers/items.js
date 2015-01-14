@@ -753,6 +753,10 @@ function search(params, callback, gallery) {
                 items: {
                     collection: 'Items',
                     params: params
+                },
+                shops: {
+                    collection: 'Shops',
+                    params: params
                 }
             }, {
                 readFromCache: false
@@ -795,10 +799,10 @@ function search(params, callback, gallery) {
                 done.abort();
                 return helpers.common.redirect.call(this, [url, '/-p-', realPage, gallery].join(''));
             }
-            done(res.items);
+            done(res.items, res.shops);
         }.bind(this);
 
-        var success = function(items) {
+        var success = function(items, shops) {
             var _category = category ? category.toJSON() : undefined;
             var _subcategory = subcategory ? subcategory.toJSON() : undefined;
 
@@ -828,6 +832,7 @@ function search(params, callback, gallery) {
                 filters: items.filters,
                 paginator: items.paginator,
                 search: query.search,
+                shops: shops !== undefined ? shops.toJSON() : [],
                 category: category
             });
         }.bind(this);
@@ -1071,6 +1076,10 @@ function allresults(params, callback, gallery) {
                 items: {
                     collection: 'Items',
                     params: params
+                },
+                shops: {
+                    collection: 'Shops',
+                    params: params
                 }
             }, {
                 readFromCache: false
@@ -1114,10 +1123,10 @@ function allresults(params, callback, gallery) {
                 done.abort();
                 return helpers.common.redirect.call(this, url + '-p-' + realPage);
             }
-            done(res.items);
+            done(res.items, res.shops);
         }.bind(this);
 
-        var success = function(items) {
+        var success = function(items, shops) {
             var meta = items.meta;
 
             this.app.seo.setContent(items.meta);
@@ -1130,6 +1139,7 @@ function allresults(params, callback, gallery) {
                 categories: this.dependencies.categories.toJSON(),
                 items: items.toJSON(),
                 meta: meta,
+                shops: shops !== undefined ? shops.toJSON() : [],
                 filters: items.filters,
                 paginator: items.paginator
             });

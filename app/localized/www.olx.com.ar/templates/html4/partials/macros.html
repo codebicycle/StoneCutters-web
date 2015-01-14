@@ -128,42 +128,43 @@
 </div> 
 {% endmacro %}
 
-{% macro AdLikeStore(description, item) %}
+{% macro AdLikeStore(shop) %}
 
 <li class="adLikeStore">
     <a href="soon.html">
-        <div class="imageCont" style="background-image: url({{ item.thumbnail if item.thumbnail else ('/images/html4/noPhoto.png' | static) }});"></div>
+        <div class="imageCont" style="background-image: url({{ shop.image }});"></div>
         <div class="storePic">Store</div>
     </a>
     <div class="itemInfo">
         <div class="centerCont">
             <a href="soon.html">
-                <h2>{{ item.title }}</h2>
+                <h2>{{ shop.name }}</h2>
             </a>
         </div>
-        <span>{{ item.displayLocation }}</span>
-        <em>{{ description }}</em>
+        <span>{{ shop.items[0].location }}</span>
+        <em>{{ shop.extra }}</em>
     </div>
 </li>
 {% endmacro %}
 
-{% macro CallsToAction(name, image, price, date, location, title) %}
+{% macro CallsToAction(shop) %}
+{% set item = shop.items[0] %}
 <li class="callsToActionAd">
     <a href="soon.html">
-        <div class="imageCont" style="background-image: url({{ image }});"></div>
+        <div class="imageCont" style="background-image: url({{ item.image }});"></div>
     </a>
     <div class="itemInfo">
-        <p class="itemPrice">{{price}}</p>
-        <span> {{date}}</span><span>{{ location }}</span>
+        <p class="itemPrice">{{ item.price }}</p>
+        <span> {{ item.date }}</span><span>{{ item.location }}</span>
         <div class="centerCont">
             <a href="soon.html">
-                <h2>{{ title }}</h2>
+                <h2>{{ item.title }}</h2>
             </a>
         </div>
     </div>                    
     <div class="callsToAction">
         <span class="storeName">
-            {{ title }}
+            {{ shop.name }}
         </span>
         <ul >
             <li><a class="call" href="soon.html">Call</a></li>

@@ -3,6 +3,8 @@
 {% from macros import Breadcrumb, BreadcrumbHome, NearByStore, AdLikeStore, CallsToAction %}
 {% set link = (breadcrumb | link) %}
 {{ Breadcrumb(dictionary, link, dictionary["listingpageitemslisting.ResultsForNew4"] | replace('<<KEYWORD>>', search) | replace('<<NUMBER>>', meta.total)) }}
+
+{{ shops | log }}
 <div id="itemListing">
     {% if meta.total == 0 %}
         <div class="emtyList" data-qa="no-results-found">
@@ -12,8 +14,8 @@
         </div>
     {% else %}
 
-        {{ NearByStore('Tienda Móvil', 'Buenos Aires, Argentina', 'Smartphones y tablets nuevos y usados en Tienda Móvil') }}
-
+        {{ NearByStore(shops) }}
+        
         <ul class="itemListing">
             {% for item in items %}
 
@@ -33,10 +35,10 @@
                     </div>
                 </li>
 
-                {{ AdLikeStore("Smartphones y tablets nuevos y usados en Tienda Móvil", item) }}
+               {{ AdLikeStore(shops[0]) }}
                 
-                {{ CallsToAction("Tienda Móvil <strong>está abierto ahora!</strong>", "http://images01.olx-st.com/ui/73/58/48/t_1417780281_757925046_1.jpg", "$7000", "Today, 13:51", location.current.name, "Tienda Móvil") }}
-
+                {{ CallsToAction(shops[0]) }}
+                
             {% endfor %}
         </ul>
         {% if paginator and paginator.isEnabled() %}
