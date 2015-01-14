@@ -80,97 +80,101 @@
 {% endmacro %}
 
 {% macro NearByStore(shops) %}
+{% if shops %}
+    <div class="nearbyStore">                
+        <h3>Tiendas cerca tuyo:</h3>
+        <div id="map-canvas"></div>            
+        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDvCh0uJ8GnZVKOctZCDcDQjewPKZC_NhY"></script>
+        <script type="text/javascript">
+        function initialize() {
+            // VARIABLES DE LOS PUNTOS              
+            var address = "minones 2177, ciudad autonoma de buenos aires, argentina";
+            new google.maps.Geocoder().geocode({"address": address}, function (results, status) {
+                var centerPoint = results[0].geometry.location;
+                var shops = [
+                {% for shop in shops %}
+                    {coord: {"lat": {{ shop.location.lat }}, "lng": {{ shop.location.lng }}}, title: "{{ shop.name }}"},                       
+                {% endfor %}            
+                ]
+                var mapOptions = {
+                    zoom: 16, 
+                    center: centerPoint
+                };
+                var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+                for (var i in shops) {
+                    var shop = shops[i];
+                    new google.maps.Marker({
+                        position: shop.coord,
+                        map: map,
+                        title: shop.title
+                    })
+                }
+                // FIN DE PUNTOS
+                if (navigator.geolocation) {
+                     navigator.geolocation.getCurrentPosition(function (position) {
+                    console.log("loading");
 
-<div class="nearbyStore">                
-    <h3>Tiendas cerca tuyo:</h3>
-    <div id="map-canvas"></div>            
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDvCh0uJ8GnZVKOctZCDcDQjewPKZC_NhY"></script>
-    <script type="text/javascript">
-    function initialize() {
-        // VARIABLES DE LOS PUNTOS              
-        var address = "minones 2177, ciudad autonoma de buenos aires, argentina";
-        new google.maps.Geocoder().geocode({"address": address}, function (results, status) {
-            var centerPoint = results[0].geometry.location;
-            var shops = [
-            {% for shop in shops %}
-                {coord: {"lat": {{ shop.location.lat }}, "lng": {{ shop.location.lng }}}, title: "{{ shop.name }}"},                       
-            {% endfor %}            
-            ]
-            var mapOptions = {
-                zoom: 16, 
-                center: centerPoint
-            };
-            var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-            for (var i in shops) {
-                var shop = shops[i];
-                new google.maps.Marker({
-                    position: shop.coord,
-                    map: map,
-                    title: shop.title
-                })
-            }
-            // FIN DE PUNTOS
-            if (navigator.geolocation) {
-                 navigator.geolocation.getCurrentPosition(function (position) {
-                console.log("loading");
+                         initialLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+                         map.setCenter(initialLocation);
+                     }, function(error) {
+                        console.log(error);
+                     });
+                 }
+            });
+        }
+        google.maps.event.addDomListener(window, 'load', initialize);
 
-                     initialLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-                     map.setCenter(initialLocation);
-                 }, function(error) {
-                    console.log(error);
-                 });
-             }
-        });
-    }
-    google.maps.event.addDomListener(window, 'load', initialize);
-
-    </script>                        
-</div> 
+        </script>                        
+    </div>
+{% endif %}
 {% endmacro %}
 
 {% macro AdLikeStore(shop) %}
-
-<li class="adLikeStore">
-    <a href="soon.html">
-        <div class="imageCont" style="background-image: url({{ shop.image }});"></div>
-        <div class="storePic">Store</div>
-    </a>
-    <div class="itemInfo">
-        <div class="centerCont">
-            <a href="soon.html">
-                <h2>{{ shop.name }}</h2>
-            </a>
+{% if shop %}
+    <li class="adLikeStore">
+        <a href="soon.html">
+            <div class="imageCont" style="background-image: url({{ shop.image }});"></div>
+            <div class="storePic">Store</div>
+        </a>
+        <div class="itemInfo">
+            <div class="centerCont">
+                <a href="soon.html">
+                    <h2>{{ shop.name }}</h2>
+                </a>
+            </div>
+            <span>{{ shop.items[0].location }}</span>
+            <em>{{ shop.extra }}</em>
         </div>
-        <span>{{ shop.items[0].location }}</span>
-        <em>{{ shop.extra }}</em>
-    </div>
-</li>
+    </li>
+{% endif %}
 {% endmacro %}
 
 {% macro CallsToAction(shop) %}
-{% set item = shop.items[0] %}
-<li class="callsToActionAd">
-    <a href="soon.html">
-        <div class="imageCont" style="background-image: url({{ item.image }});"></div>
-    </a>
-    <div class="itemInfo">
-        <p class="itemPrice">{{ item.price }}</p>
-        <span> {{ item.date }}</span><span>{{ item.location }}</span>
-        <div class="centerCont">
-            <a href="soon.html">
-                <h2>{{ item.title }}</h2>
-            </a>
+{% if shop %}
+    {% set item = shop.items[0] %}
+    <li class="callsToActionAd">
+        <a href="soon.html">
+            <div class="imageCont" style="background-image: url({{ item.image }});"></div>
+        </a>
+        <div class="itemInfo">
+            <p class="itemPrice">{{ item.price }}</p>
+            <span> {{ item.date }}</span><span>{{ item.location }}</span>
+            <div class="centerCont">
+                <a href="soon.html">
+                    <h2>{{ item.title }}</h2>
+                </a>
+            </div>
+        </div>                    
+        <div class="callsToAction">
+            <span class="storeName">
+                {{ shop.name }}
+            </span>
+            <ul >
+                <li><a class="call" href="soon.html">Call</a></li>
+                <li><a class="email" href="soon.html">eMail</a></li>
+                <li><a class="sms" href="soon.html">sms</a></li>
+            </ul>
         </div>
-    </div>                    
-    <div class="callsToAction">
-        <span class="storeName">
-            {{ shop.name }}
-        </span>
-        <ul >
-            <li><a class="call" href="soon.html">Call</a></li>
-            <li><a class="email" href="soon.html">eMail</a></li>
-            <li><a class="sms" href="soon.html">sms</a></li>
-        </ul>
-    </div>
-</li>
+    </li>
+{% endif %}
 {% endmacro %}

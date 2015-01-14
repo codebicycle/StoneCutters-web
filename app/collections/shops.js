@@ -4,6 +4,7 @@ var Base = require('../bases/collection');
 var _ = require('underscore');
 var Shop = require('../models/shop');
 var helpers = require('../helpers');
+
 module.exports = Base.extend({
     model: Shop,
     initialize: function() {
@@ -26,7 +27,6 @@ module.exports = Base.extend({
         return [];
     },
     paginate: function (url, query, options) {
-        
     },
     fetch: function(options) {
         options = options || {};

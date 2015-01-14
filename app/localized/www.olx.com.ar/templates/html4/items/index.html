@@ -38,10 +38,12 @@
                         <span>{{ item.displayLocation }}</span>
                     </div>                    
                 </li>
-
-                {{ AdLikeStore(shops[0]) }}
-                
-                {{ CallsToAction(shops[0]) }}
+                {% set shop = shopsAdmin.getShop() %}
+                {% if shop %}
+                    {{ AdLikeStore(shop) }}
+                {% else %}
+                    {{ CallsToAction(shopsAdmin.getShop()) }}
+                {% endif %}
             {% endfor %}            
         </ul>        
         {% if paginator and paginator.isEnabled() %}

@@ -7,6 +7,7 @@ var middlewares = require('../middlewares');
 var helpers = require('../helpers');
 var tracking = require('../modules/tracking');
 var Paginator = require('../modules/paginator');
+var ShopsAdmin = require('../modules/shopsadmin');
 var Seo = require('../modules/seo');
 var config = require('../../shared/config');
 var utils = require('../../shared/utils');
@@ -216,10 +217,15 @@ function handleItems(params, promise, gallery) {
             done.abort();
             return helpers.common.redirect.call(this, [url, '-p-', realPage, gallery].join(''));
         }
+
         done(res.items, res.shops);
     }.bind(this);
 
     var success = function(done, items, shops) {
+        var shopsAdmin = new ShopsAdmin();
+        shopsAdmin.setShops(shops.toJSON());
+
+
         var meta = items.meta;
         var dataPage = {
             category: category.get('id')
@@ -253,6 +259,7 @@ function handleItems(params, promise, gallery) {
             meta: meta,
             items: items.toJSON(),
             shops: shops !== undefined ? shops.toJSON() : [],
+            shopsAdmin: shopsAdmin,
             filters: items.filters,
             paginator: items.paginator
         });

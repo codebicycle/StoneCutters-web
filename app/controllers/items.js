@@ -11,6 +11,7 @@ var Filters = require('../modules/filters');
 var config = require('../../shared/config');
 var utils = require('../../shared/utils');
 var Item = require('../models/item');
+var ShopsAdmin = require('../modules/shopsadmin');
 
 module.exports = {
     show: middlewares(show),
@@ -803,6 +804,9 @@ function search(params, callback, gallery) {
         }.bind(this);
 
         var success = function(items, shops) {
+            var shopsAdmin = new ShopsAdmin();
+            shopsAdmin.setShops(shops.toJSON());
+
             var _category = category ? category.toJSON() : undefined;
             var _subcategory = subcategory ? subcategory.toJSON() : undefined;
 
@@ -833,6 +837,7 @@ function search(params, callback, gallery) {
                 paginator: items.paginator,
                 search: query.search,
                 shops: shops !== undefined ? shops.toJSON() : [],
+                shopsAdmin: shopsAdmin,
                 category: category
             });
         }.bind(this);
@@ -1127,6 +1132,9 @@ function allresults(params, callback, gallery) {
         }.bind(this);
 
         var success = function(items, shops) {
+            var shopsAdmin = new ShopsAdmin();
+            shopsAdmin.setShops(shops.toJSON());
+
             var meta = items.meta;
 
             this.app.seo.setContent(items.meta);
@@ -1140,6 +1148,7 @@ function allresults(params, callback, gallery) {
                 items: items.toJSON(),
                 meta: meta,
                 shops: shops !== undefined ? shops.toJSON() : [],
+                shopsAdmin: shopsAdmin,
                 filters: items.filters,
                 paginator: items.paginator
             });
