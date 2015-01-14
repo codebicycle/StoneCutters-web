@@ -808,7 +808,6 @@ function search(params, callback, gallery) {
         var success = function(items) {
             var _category = category ? category.toJSON() : undefined;
             var _subcategory = subcategory ? subcategory.toJSON() : undefined;
-            var view = 'items/search';
 
             this.app.seo.setContent(items.meta);
             if (items.meta.total < 5) {
@@ -830,11 +829,7 @@ function search(params, callback, gallery) {
                 }
             });
 
-            if (platform === 'desktop' && gallery) {
-                view += gallery.replace('-', '');
-            }
-
-            callback(null, view, {
+            callback(null,  {
                 items: items.toJSON(),
                 meta: items.meta,
                 filters: items.filters,
@@ -1157,7 +1152,6 @@ function allresults(params, callback, gallery) {
 
         var success = function(items) {
             var meta = items.meta;
-            var view = 'items/allresults';
 
             this.app.seo.setContent(items.meta);
             this.app.seo.addMetatag('robots', 'noindex, nofollow');
@@ -1165,11 +1159,7 @@ function allresults(params, callback, gallery) {
 
             tracking.addParam('page_nb', meta.totalPages);
 
-            if (platform === 'desktop' && gallery) {
-                view += gallery.replace('-', '');
-            }
-
-            callback(null, view, {
+            callback(null, {
                 categories: this.dependencies.categories.toJSON(),
                 items: items.toJSON(),
                 meta: meta,

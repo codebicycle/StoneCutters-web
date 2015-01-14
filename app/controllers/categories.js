@@ -92,13 +92,7 @@ function show(params, callback, gallery) {
         }.bind(this);
 
         var success = function(_result) {
-            var view = 'categories/show';
-
-            if (platform === 'desktop' && gallery) {
-                view += gallery.replace('-', '');
-            }
-
-            callback(null, view, _result);
+            callback(null, _result);
         }.bind(this);
 
         var error = function(err, res) {
