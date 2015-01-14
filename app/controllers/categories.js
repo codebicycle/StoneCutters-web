@@ -65,8 +65,8 @@ function show(params, callback, gallery) {
         }.bind(this);
 
         var router = function(done) {
-            var platform = this.app.session.get('platform');
             var category = this.dependencies.categories.get(params.catId);
+            var platform = this.app.session.get('platform');
             var subcategory;
 
             if (!category) {
