@@ -78,6 +78,14 @@ module.exports = function(dataAdapter, excludedUrls) {
                 req.rendrApp.session.persist({
                     selectedLanguage: selectedLanguage
                 });
+                req.rendrApp.session.update({
+                    languageId: languages.get(selectedLanguage).get('id')
+                });
+                res.locals({
+                    languages: languages.map(function each(language) {
+                        return language.get('locale');
+                    })
+                });
                 done(languages, selectedLanguage);
             }
 
@@ -96,7 +104,7 @@ module.exports = function(dataAdapter, excludedUrls) {
             }
 
             function fail(err) {
-                statsd.increment([location.name, 'middleware', 'languages', 'error']);
+                statsd.increment([location.abbreviation, 'middleware', 'languages', 'error']);
                 res.status(500).sendfile(errorPath);
             }
 

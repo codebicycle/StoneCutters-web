@@ -54,6 +54,7 @@ function register(params, callback) {
             user = new User({
               languageId: languages._byId[this.app.session.get('selectedLanguage')].id,
               country: this.app.session.get('location').name,
+              isocode: this.app.session.get('location').isocode,
               username: params.username,
               hash: params.hash,
               platform: platform,
@@ -118,8 +119,10 @@ function lostpassword(params, callback) {
     function controller() {
         var platform = this.app.session.get('platform');
 
-        if (platform === 'wap') {
-            return helpers.common.redirect.call(this, '/');
+        if (platform !== 'desktop') {
+            return helpers.common.redirect.call(this, '/', null, {
+               status: 302
+           });
         }
         callback(null, {
             form: this.form,

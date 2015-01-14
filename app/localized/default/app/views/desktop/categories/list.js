@@ -16,18 +16,11 @@ module.exports = Base.extend({
         var states = data.states;
         var categories = data.categories;
         var currentState = {};
-        var countryMapStyle = config.get('countryMapStyle');
-        var videos = config.get(['videos', location.url]);
-        var testimonials = config.get(['testimonials', location.url]);
-        var countryMapClass;
+        var countryMapClass = config.getForMarket(location.url, ['countryMapStyle'], '');
+        var videos = config.getForMarket(location.url, ['videos'], '');
+        var testimonials = config.getForMarket(location.url, ['testimonials'], '');
 
         categories = helpers.common.categoryOrder(categories, location.url);
-
-        _.each(countryMapStyle, function each(country, style){
-            if (_.contains(country,location.url)){
-                countryMapClass = style;
-            }
-        });
 
         if(location.children.length) {
             _.each(states, function each(state, i){

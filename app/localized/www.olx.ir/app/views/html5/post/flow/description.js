@@ -42,7 +42,7 @@ module.exports = Base.extend({
         event.stopPropagation();
         event.stopImmediatePropagation();
 
-        this.parentView.$el.trigger('headerChange', [translations[this.app.session.get('selectedLanguage') || 'en-US']['misc.DescribeYourAd_Mob'], this.id]);
+        this.parentView.$el.trigger('headerChange', [translations.get(this.app.session.get('selectedLanguage'))['misc.DescribeYourAd_Mob'], this.id]);
         this.$el.removeClass('disabled');
     },
     onHide: function(event) {
@@ -100,29 +100,33 @@ module.exports = Base.extend({
         var $description = this.$('textarea[name=description]').removeClass('error');
         var $priceType = this.$('select[name=priceType]');
         var $priceC = this.$('input[name=priceC]').removeClass('error');
-        var failed = false;
-        var location = this.app.session.get('location').abbreviation.toLowerCase();
+        var language = this.app.session.get('selectedLanguage');
+        var failed = [];
 
         this.$el.removeClass('error').find('small').remove();
         if ($title.val().length < 10) {
-            failed = true;
+            failed.push('title');
             this.$el.addClass('error');
-            $title.addClass('error').after('<small class="error">' + translations[this.app.session.get('selectedLanguage') || 'en-US']['misc.TitleCharacters_Mob'].replace('<<NUMBER>>', ' ۰۱ ') + '</small>');
-            statsd.increment([location, 'posting', 'invalid', this.app.session.get('platform'), 'title']);
+            $title.addClass('error').after('<small class="error">' + translations.get(language)['misc.TitleCharacters_Mob'].replace('<<NUMBER>>', ' ۰۱ ') + '</small>');
         }
         if ($description.val().length < 10) {
-            failed = true;
+            failed.push('description');
             this.$el.addClass('error');
-            $description.addClass('error').after('<small class="error">' + translations[this.app.session.get('selectedLanguage') || 'en-US']['misc.DescriptionCharacters_Mob'].replace('<<NUMBER>>', ' ۰۱ ') + '</small>');
-            statsd.increment([location, 'posting', 'invalid', this.app.session.get('platform'), 'description']);
+            $description.addClass('error').after('<small class="error">' + translations.get(language)['misc.DescriptionCharacters_Mob'].replace('<<NUMBER>>', ' ۰۱ ') + '</small>');
         }
         if ($priceType.val() === 'FIXED' && $priceC.val() < 1) {
-            failed = true;
+            failed.push('priceC');
             this.$el.addClass('error');
-            $priceC.addClass('error').after('<small class="error">' + translations[this.app.session.get('selectedLanguage') || 'en-US']["postingerror.PleaseEnterANumericalValue"] + '</small>');
-            statsd.increment([location, 'posting', 'invalid', this.app.session.get('platform'), 'priceC']);
+            $priceC.addClass('error').after('<small class="error">' + translations.get(language)["postingerror.PleaseEnterANumericalValue"] + '</small>');
         }
-        return !failed;
+        failed.forEach(function each(field) {
+            var locale = this.app.session.get('location').abbreviation;
+            var type = this.parentView.getItem().get('id') ? 'editing' : 'posting';
+            var platform = this.app.session.get('platform');
+
+            statsd.increment([locale, type, 'error', 'validation', 200, field, platform]);
+        });
+        return !failed.length;
     },
     onRestart: function(event) {
         event.preventDefault();

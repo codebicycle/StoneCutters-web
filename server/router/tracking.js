@@ -8,7 +8,7 @@ module.exports = function trackingRouter(app, dataAdapter) {
     var utils = require('../../shared/utils');
     var tracking = require('../../app/modules/tracking');
     var env = config.get(['environment', 'type'], 'development');
-    var image = 'R0lGODlhAQABAPAAAP39/QAAACH5BAgAAAAALAAAAAABAAEAAAICRAEAOw==';
+    var gif = new Buffer('R0lGODlhAQABAPAAAP39/QAAACH5BAgAAAAALAAAAAABAAEAAAICRAEAOw==', 'base64');
 
     function prepare(options, params) {
         options = _.defaults(options, {
@@ -46,13 +46,13 @@ module.exports = function trackingRouter(app, dataAdapter) {
 
         restler.request(url, options)
             .on('success', function success() {
-                statsd.increment([req.query.locNm, 'tracking', type, tracker, platform, 'success']);
+                statsd.increment([req.query.locIso, 'tracking', type, tracker, platform, 'success']);
             })
             .on('fail', function error() {
-                statsd.increment([req.query.locNm, 'tracking', type, tracker, platform, 'error']);
+                statsd.increment([req.query.locIso, 'tracking', type, tracker, platform, 'error']);
             })
             .on('error', function fail() {
-                statsd.increment([req.query.locNm, 'tracking', type, tracker, platform, 'fail']);
+                statsd.increment([req.query.locIso, 'tracking', type, tracker, platform, 'fail']);
             });
     }
 
@@ -80,18 +80,18 @@ module.exports = function trackingRouter(app, dataAdapter) {
             var hitCount = req.rendrApp.session.get('hitCount');
             var clientId = req.rendrApp.session.get('clientId');
 
-            statsd.increment([req.query.locNm, 'pageview', platform]);
-            statsd.increment([req.query.locNm, 'devices', osName, platform]);
+            statsd.increment([req.query.locIso, 'pageview', platform]);
+            statsd.increment([req.query.locIso, 'devices', osName, platform]);
             if (!hitCount) {
-                statsd.increment([req.query.locNm, 'sessions', platform, 'error']);
+                statsd.increment([req.query.locIso, 'sessions', platform, 'error']);
             }
             else {
-                // statsd.increment([req.query.locNm, 'sessions', platform, 'average', clientId]);
+                // statsd.increment([req.query.locIso, 'sessions', platform, 'average', clientId]);
                 if (hitCount > 1) {
-                    statsd.increment([req.query.locNm, 'sessions', platform, 'recurrent']);
+                    statsd.increment([req.query.locIso, 'sessions', platform, 'recurrent']);
                 }
                 else {
-                    statsd.increment([req.query.locNm, 'sessions', platform, 'new']);
+                    statsd.increment([req.query.locIso, 'sessions', platform, 'new']);
                 }
             }
         }
@@ -193,7 +193,7 @@ module.exports = function trackingRouter(app, dataAdapter) {
             }
             bot = isBot(userAgent, platform, osName, osVersion);
             if (bot) {
-                statsd.increment([req.query.locNm, 'bot', bot, platform]);
+                statsd.increment([req.query.locIso, 'bot', bot, platform]);
                 return false;
             }
             if (req.query.custom) {
@@ -215,7 +215,6 @@ module.exports = function trackingRouter(app, dataAdapter) {
         }
 
         function handler(req, res) {
-            var gif = new Buffer(image, 'base64');
             var platform = req.rendrApp.session.get('platform') || utils.defaults.platform;
             var host = req.host;
             var page = req.query.page;
@@ -224,25 +223,27 @@ module.exports = function trackingRouter(app, dataAdapter) {
                 app: req.rendrApp
             };
 
+            res.on('finish', function onResponseFinish() {
+                if (!check(req)) {
+                    return;
+                }
+
+                graphiteTracking(req);
+                if (req.rendrApp.session.get('internet.org')) {
+                    host = host.replace('olx', 'olx-internet-org');
+                    page = '/internet.org' + page;
+                }
+                analyticsTracking(ctx, host, page);
+                if (req.query.locUrl !== 'www.olx.com.co') {
+                    return atiTracking(ctx);
+                }
+                atiTrackingColombia(ctx);
+            });
+
             res.set('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-age=0, max-stale=0, post-check=0, pre-check=0');
             res.set('Content-Type', 'image/gif');
             res.set('Content-Length', gif.length);
             res.end(gif);
-
-            if (!check(req)) {
-                return;
-            }
-
-            graphiteTracking(req);
-            if (req.rendrApp.session.get('internet.org')) {
-                host = host.replace('olx', 'olx-internet-org');
-                page = '/internet.org' + page;
-            }
-            analyticsTracking(ctx, host, page);
-            if (req.query.locUrl !== 'www.olx.com.co') {
-                return atiTracking(ctx);
-            }
-            atiTrackingColombia(ctx);
         }
     })();
 
@@ -305,7 +306,7 @@ module.exports = function trackingRouter(app, dataAdapter) {
             }
             bot = isBot(userAgent, platform, osName, osVersion);
             if (bot) {
-                statsd.increment([req.query.locNm, 'bot', bot, platform]);
+                statsd.increment([req.query.locIso, 'bot', bot, platform]);
                 return false;
             }
             location = req.rendrApp.session.get('location');
@@ -317,26 +318,27 @@ module.exports = function trackingRouter(app, dataAdapter) {
         }
 
         function handler(req, res) {
-            var gif = new Buffer(image, 'base64');
             var host = req.host;
             var ctx = {
                 req: req,
                 app: req.rendrApp
             };
 
+            res.on('finish', function onResponseFinish() {
+                if (!check(req)) {
+                    return;
+                }
+                if (req.rendrApp.session.get('internet.org')) {
+                    host = host.replace('olx', 'olx-internet-org');
+                }
+                analyticsTracking(ctx, host);
+                atiTracking(ctx);
+            });
+
             res.set('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-age=0, max-stale=0, post-check=0, pre-check=0');
             res.set('Content-Type', 'image/gif');
             res.set('Content-Length', gif.length);
             res.end(gif);
-
-            if (!check(req)) {
-                return;
-            }
-            if (req.rendrApp.session.get('internet.org')) {
-                host = host.replace('olx', 'olx-internet-org');
-            }
-            analyticsTracking(ctx, host);
-            atiTracking(ctx);
         }
     })();
 
@@ -344,19 +346,20 @@ module.exports = function trackingRouter(app, dataAdapter) {
         app.get('/tracking/statsd.gif', handler);
 
         function handler(req, res) {
-            var gif = new Buffer(image, 'base64');
             var metric = req.param('metric');
             var value = req.param('value');
+
+            res.on('finish', function onResponseFinish() {
+                if (!metric) {
+                    return;
+                }
+                statsd.increment(metric, value);
+            });
 
             res.set('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-age=0, max-stale=0, post-check=0, pre-check=0');
             res.set('Content-Type', 'image/gif');
             res.set('Content-Length', gif.length);
             res.end(gif);
-
-            if (!metric) {
-                return;
-            }
-            statsd.increment(metric, value);
         }
     })();
 

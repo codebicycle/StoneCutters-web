@@ -22,6 +22,9 @@ module.exports = {
         },
         'items#staticSearch': {
             name: 'StaticSearch'
+        },
+        'items#show': {
+            name: 'Item'
         }
     }
 };

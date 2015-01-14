@@ -11,7 +11,7 @@ module.exports = function(dataAdapter, excludedUrls) {
         var utils = require('../../shared/utils');
         var errorPath = path.resolve('server/templates/error.html');
         var closedPath = path.resolve('server/templates/closed.html');
-        var translations = require('../../app/translations');
+        var translations = require('../../shared/translations');
 
         return function middleware(req, res, next) {
             if (_.contains(excludedUrls.all, req.path)) {
@@ -111,11 +111,11 @@ module.exports = function(dataAdapter, excludedUrls) {
                         var template = _.template(html);
 
                         res.send(template({
-                            dictionary: translations['en-US']
+                            dictionary: translations.get('en-US')
                         }));
                     });
                 }
-                statsd.increment(['Unknown Location', 'middleware', 'location', 'error']);
+                statsd.increment(['all', 'middleware', 'location', 'error']);
                 res.status(500).sendfile(errorPath);
             }
 

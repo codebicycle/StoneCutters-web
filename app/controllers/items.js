@@ -78,6 +78,13 @@ function show(params, callback) {
                 item.set('id', item.get('itemId'));
                 item.unset('itemId');
             }
+            if (_.isEmpty(item.get('category'))) {
+                item.set('category', {
+                    id: item.get('categoryId'),
+                    name: item.get('categoryName'),
+                    parentId: item.get('parentCategoryId')
+                });
+            }
             if (!item.get('location')) {
                 item.set('location', this.app.session.get('location'));
             }
@@ -269,6 +276,7 @@ function show(params, callback) {
         }.bind(this);
 
         var error = function(err, res) {
+            console.log(err.stack);
             return helpers.common.error.call(this, err, res, callback);
         }.bind(this);
 
@@ -487,7 +495,7 @@ function reply(params, callback) {
         var redirect = function(done) {
             var platform = this.app.session.get('platform');
 
-            if (platform === 'desktop') {
+            if (platform === 'html5' || platform === 'desktop') {
                 return done.fail();
             }
             done();
@@ -516,7 +524,7 @@ function reply(params, callback) {
             }
             var platform = this.app.session.get('platform');
 
-            if (platform === 'desktop') {
+            if (platform === 'html5' || platform === 'desktop') {
                 return done.fail();
             }
             done(resItem.item);
@@ -822,7 +830,7 @@ function search(params, callback, gallery) {
                 }
             });
 
-            callback(null, ['items/search', gallery.replace('-', '')].join(''), {
+            callback(null, {
                 items: items.toJSON(),
                 meta: items.meta,
                 filters: items.filters,
@@ -884,6 +892,31 @@ function staticSearch(params, callback) {
                     subcategory = category;
                     category = categories.get(subcategory.get('parentId'));
                 }
+            }
+            done();
+        }.bind(this);
+
+        var check = function(done) {
+            if (params && params.filters) {
+                if (params.filters === '-ig') {
+                    done.abort();
+                    return helpers.common.redirect.call(this, this.app.session.get('path').replace('/-ig', '/'));
+                }
+                url = [];
+                url.push('/nf/');
+                url.push(params.search);
+                if (params.catId) {
+                    url.pop();
+                    url.push(helpers.common.slugToUrl((subcategory || category).toJSON()));
+                    url.push('/');
+                    url.push(params.search);
+                }
+                if (params.filters && params.filters !== 'undefined') {
+                    url.push('/');
+                    url.push(params.filters);
+                }
+                done.abort();
+                return helpers.common.redirect.call(this, url.join(''));
             }
             done();
         }.bind(this);
@@ -1011,6 +1044,7 @@ function staticSearch(params, callback) {
         asynquence().or(error)
             .then(redirect)
             .then(configure)
+            .then(check)
             .then(prepare)
             .then(findItems)
             .then(filters)

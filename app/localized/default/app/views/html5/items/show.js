@@ -13,7 +13,8 @@ module.exports = Base.extend({
         cellpadding: 0
     },
     initialize: function() {
-        this.dictionary = translations[this.app.session.get('selectedLanguage') || 'en-US'];
+        //this.dictionary = translations[this.app.session.get('selectedLanguage') || 'en-US'];
+        this.dictionary = translations.get(this.app.session.get('selectedLanguage'));
     },
     postRender: function() {
         var that = this;
@@ -28,7 +29,8 @@ module.exports = Base.extend({
         var updateNavPosition;
         var galeryNavigator;
 
-        this.dictionary = translations[this.app.session.get('selectedLanguage') || 'en-US'];
+        //this.dictionary = translations[this.app.session.get('selectedLanguage') || 'en-US'];
+        this.dictionary = translations.get(this.app.session.get('selectedLanguage'));
         that.messages = {
             'msgSend': this.dictionary['comments.YourMessageHasBeenSent'].replace(/<br \/>/g,''),
             'addedFav': this.dictionary['itemheader.AddedFavorites'],
@@ -194,8 +196,6 @@ module.exports = Base.extend({
             $(this).parents('.popup').removeClass('visible');
         });
 
-
-
         //window History
         window.onpopstate = function(e) {
             var $galCont = $('#galCont');
@@ -213,7 +213,6 @@ module.exports = Base.extend({
                 $('body').removeClass('noscroll');
             }
         };
-
     },
     remove: function() {
         $(window).off('resize', this.resize);

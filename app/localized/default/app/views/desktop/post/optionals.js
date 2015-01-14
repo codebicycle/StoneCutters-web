@@ -47,7 +47,7 @@ module.exports = Base.extend({
             if (field.values) {
                 field.values.unshift({
                     key: '',
-                    value: translations[this.app.session.get('selectedLanguage') || 'en-US']['misc.SelectAnOption_BR']
+                    value: translations.get(this.app.session.get('selectedLanguage'))['misc.SelectAnOption_BR']
                 });
             }
         }.bind(this));
@@ -79,7 +79,7 @@ module.exports = Base.extend({
                 query: {
                     intent: 'post',
                     location: this.app.session.get('siteLocation'),
-                    categoryId: this.parentView.form['category.id'],
+                    categoryId: this.parentView.item.get('category').id,
                     languageId: this.app.session.get('languages')._byId[this.app.session.get('selectedLanguage')].id
                 },
             }, done.errfcb);
@@ -90,7 +90,7 @@ module.exports = Base.extend({
             options = body.subfield.values;
             options.unshift({
                 key: '',
-                value: translations[this.app.session.get('selectedLanguage') || 'en-US']['misc.SelectAnOption_BR']
+                value: translations.get(this.app.session.get('selectedLanguage'))['misc.SelectAnOption_BR']
             });
             _.each(options, function each(option) {
                 $field.append('<option value="' + option.key + '">' + option.value + '</option>');

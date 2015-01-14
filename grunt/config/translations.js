@@ -63,6 +63,12 @@ module.exports = {
         'itemslisting.NewlyListed',
         'itemslisting.HighestFirst',
         'itemslisting.LowestFirst',
-        'itemslisting.ContactSeller'
+        'itemslisting.ContactSeller',
+        'adsense.SponsoredLinks',
+        'comments.YourMessageHasBeenSent',
+        'itemheader.AddedFavorites',
+        'itemheader.RemovedFavorites',
+        'itemgeneraldetails.addFavorites',
+        'item.RemoveFromFavorites'
     ]
 };

@@ -11,29 +11,40 @@ module.exports = Base.extend({
     className: 'post_flow_contact_view disabled',
     tagName: 'section',
     id: 'contact',
-    fields: [],
-    form: {
-        values: {}
-    },
-    initialize: function() {
-        Base.prototype.initialize.call(this);
-        this.fields = [];
-        this.form = {
-            values: {}
-        };
-    },
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
+        var item = this.parentView.getItem ? this.parentView.getItem() : undefined;
+        var current = this.app.session.get('location').current || {};
+        var user = this.app.session.get('user');
 
-        this.city = this.city || this.app.session.get('location').current;
         return _.extend({}, data, {
             fields: this.fields || [],
-            form: this.form,
-            location: this.city || {}
+            form: item ? {
+                values: _.object(_.map(this.fields || [], function each(field) {
+                    return field.name;
+                }, this), _.map(this.fields, function each(field) {
+                    var value = item.get(field.name);
+
+                    if (field.name === 'email' && typeof value === 'boolean' && user) {
+                        value = user.email;
+                    }
+                    return value;
+                }, this))
+            } : {},
+            location: item ? item.getLocation() || current : current
         });
     },
     postRender: function() {
-        this.city = this.city || this.app.session.get('location').current;
+        var current = this.app.session.get('location').current;
+        var user = this.app.session.get('user');
+
+        if (!this.parentView.getItem().getLocation() && current) {
+            this.parentView.getItem().set('location', current);
+        }
+        if (typeof this.parentView.getItem().get('email') === 'boolean' && user) {
+            this.parentView.getItem().set('email', user.email || true);
+        }
+        this.$('[name=email]').change();
     },
     events: {
         'show': 'onShow',
@@ -42,15 +53,14 @@ module.exports = Base.extend({
         'change': 'onChange',
         'click .location': 'onLocationClick',
         'locationChange': 'onLocationChange',
-        'submit': 'onSubmit',
-        'restart': 'onRestart'
+        'submit': 'onSubmit'
     },
     onShow: function(event, categoryId) {
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();
 
-        this.parentView.$el.trigger('headerChange', [translations[this.app.session.get('selectedLanguage') || 'en-US']['misc.ContactDetails_Mob'], this.id]);
+        this.parentView.$el.trigger('headerChange', [translations.get(this.app.session.get('selectedLanguage'))['misc.ContactDetails_Mob'], this.id]);
         this.$el.removeClass('disabled');
     },
     onHide: function(event) {
@@ -59,26 +69,26 @@ module.exports = Base.extend({
         event.stopImmediatePropagation();
 
         var errors = {};
-        this.fields.forEach(function each(field) {
+
+        _.each(this.fields, function each(field) {
             var $field = this.$('[name=' + field.name + ']');
 
-            field.value = $field.val();
             if (field.name == 'email' && $field.hasClass('error')) {
                 errors[field.name] = field.label; // Check for translation since we are just passing the field label as error
             }
             if (field.name == 'phone' && $field.hasClass('error')) {
                 errors[field.name] = field.label; // Check for translation since we are just passing the field label as error
             }
-        }.bind(this));
+        }, this);
         this.$el.addClass('disabled');
-        this.parentView.$el.trigger('contactSubmit', [this.fields, this.city || {}, errors, translations[this.app.session.get('selectedLanguage') || 'en-US']['postingerror.InvalidLocation']]);
+        this.parentView.$el.trigger('contactSubmit', [errors, translations.get(this.app.session.get('selectedLanguage'))['postingerror.InvalidLocation']]);
     },
-    onFieldsChange: function(event, fields) {
+    onFieldsChange: function(event) {
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();
 
-        this.fields = fields;
+        this.fields = this.parentView.getFields().contactInformation;
         this.render();
     },
     onChange: function(event) {
@@ -89,7 +99,7 @@ module.exports = Base.extend({
         var $field = $(event.target);
 
         $field.val(this.cleanValue($field.val()));
-        this.form.values[$field.attr('name')] = $field.val();
+        this.parentView.getItem().set($field.attr('name'), $field.val());
     },
     onLocationClick: function(event) {
         event.preventDefault();
@@ -98,14 +108,13 @@ module.exports = Base.extend({
 
         this.parentView.$el.trigger('flow', [this.id, 'location']);
     },
-    onLocationChange: function(event, city, error) {
+    onLocationChange: function(event, error) {
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();
 
         var show = !this.$el.hasClass('disabled');
 
-        this.city = city.url ? city : this.app.session.get('location').current;
         this.render();
         if (show) {
             this.$el.trigger('show');
@@ -125,43 +134,37 @@ module.exports = Base.extend({
         var $phone = this.$('input[name=phone]').removeClass('error');
         var $email = this.$('input[name=email]').removeClass('error');
         var $location = this.$('.location').removeClass('error');
-        var failed = false;
-        var location = this.app.session.get('location').abbreviation.toLowerCase();
+        var language = this.app.session.get('selectedLanguage');
+        var failed = [];
 
         this.$el.removeClass('error').find('small').remove();
         if (!$contactName.val().length) {
-            failed = true;
-            $contactName.addClass('error').after('<small class="error">' + translations[this.app.session.get('selectedLanguage') || 'en-US']['misc.EnterNameForBuyers_Mob'] + '</small>');
-            statsd.increment([location, 'posting', 'invalid', this.app.session.get('platform'), 'contactName']);
+            failed.push('contactName');
+            $contactName.addClass('error').after('<small class="error">' + translations.get(language)['misc.EnterNameForBuyers_Mob'] + '</small>');
         }
         if ($phone.val() !== '' && !rPhone.test($phone.val())) {
-            failed = true;
-            $phone.addClass('error').after('<small class="error">' + translations[this.app.session.get('selectedLanguage') || 'en-US']['misc.PhoneNumberNotValid'] + '</small>');
+            failed.push('phone');
+            $phone.addClass('error').after('<small class="error">' + translations.get(language)['misc.PhoneNumberNotValid'] + '</small>');
         }
         if (!rEmail.test($email.val())) {
-            failed = true;
-            $email.addClass('error').after('<small class="error">' + translations[this.app.session.get('selectedLanguage') || 'en-US']['postingerror.InvalidEmail'] + '</small>');
-            statsd.increment([location, 'posting', 'invalid', this.app.session.get('platform'), 'email']);
+            failed.push('email');
+            $email.addClass('error').after('<small class="error">' + translations.get(language)['postingerror.InvalidEmail'] + '</small>');
         }
-        if (!this.city) {
-            failed = true;
-            $location.addClass('error').after('<small class="error">' + translations[this.app.session.get('selectedLanguage') || 'en-US']['misc.AdNeedsLocation_Mob'] + '</small>');
-            statsd.increment([location, 'posting', 'invalid', this.app.session.get('platform'), 'city']);
+        if (!this.parentView.getItem().getLocation()) {
+            failed.push('city');
+            $location.addClass('error').after('<small class="error">' + translations.get(language)['misc.AdNeedsLocation_Mob'] + '</small>');
         }
-        if (failed) {
+        if (failed.length) {
             this.$el.addClass('error');
         }
-        return !failed;
-    },
-    onRestart: function(event) {
-        event.preventDefault();
-        event.stopPropagation();
-        event.stopImmediatePropagation();
+        failed.forEach(function each(field) {
+            var locale = this.app.session.get('location').abbreviation;
+            var type = this.parentView.getItem().get('id') ? 'editing' : 'posting';
+            var platform = this.app.session.get('platform');
 
-        this.fields = [];
-        this.form = {
-            values: {}
-        };
+            statsd.increment([locale, type, 'error', 'validation', 200, field, platform]);
+        });
+        return !failed.length;
     },
     cleanValue: function(value) {
         value = value.replace(/\s{2,}/g, ' ');
