@@ -25,7 +25,7 @@ var Client = function(options) {
         }
         metric = metric.toLowerCase();
         logger.log('Incrementing metric: ' + metric + ' by ' + (value || 1));
-        statsD.increment(metric, value);
+        statsD.increment(hostname + '.' + metric, value);
     }
 
     function gauge(metric, value) {
@@ -37,7 +37,7 @@ var Client = function(options) {
         }
         metric = metric.toLowerCase();
         logger.log('Gauging metric: ' + metric + ' by ' + (value || 1));
-        statsD.gauge(metric, value);
+        statsD.gauge(hostname + '.' + metric, value);
     }
 
     return {
@@ -50,7 +50,6 @@ module.exports = function() {
     if (config.enabled) {
         if (!client) {
             logger.log('Creating new StatsD client');
-            config.client.prefix += hostname + '.';
             client = new Client(config.client);
         }
     }
