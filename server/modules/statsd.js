@@ -56,12 +56,8 @@ module.exports = function() {
     }
     else {
         client = {
-            increment: function(metric, value) {
-                logger.log('increment', metric, value);
-            },
-            gauge: function(metric, value) {
-                logger.log('gauge', metric, value);
-            }
+            increment: function(metric, value) {},
+            gauge: function(metric, value) {}
         };
     }
     return client;
