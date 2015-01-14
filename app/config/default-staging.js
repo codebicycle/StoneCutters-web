@@ -102,6 +102,12 @@ module.exports = {
                 worldwide: true,
                 countries: []
             }
+        },
+        desktop: {
+            contactForm: {
+                worldwide: false,
+                countries: ['www.olx.com.bo']
+            }
         }
     },
     seo: {
@@ -220,6 +226,5 @@ module.exports = {
             'www.olx.com.ng': 'support-ng',
             'www.olx.com.ke': 'support-ke'
         }
-
     }
 };
