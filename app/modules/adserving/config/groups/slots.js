@@ -58,6 +58,7 @@ module.exports = {
             enabled: false,
             type: 'AFC',
             location: 'Side',
+            seo: 1,
             params: {
                 number: 1,
                 media: 'flash, image',
@@ -68,6 +69,54 @@ module.exports = {
         },
         group2: {
             type: 'ADX'
+        }
+    },
+    slot_side_item: {
+        'default': {
+            enabled: true,
+            type: 'AFC',
+            location: 'Side',
+            seo: 1,
+            params: {
+                number: 1,
+                media: 'flash, image',
+                width: '300',
+                height: '250'
+            },
+            excludedCategories: []
+        },
+        group2: {
+            type: 'ADX'
+        }
+    },
+    slot_top_item: {
+        'default': {
+            enabled: true,
+            type: 'AFC',
+            location: 'Top',
+            seo: 1,
+            params: {
+                number: 3,
+                media: 'text',
+                width: '728',
+                height: '90'
+            },
+            excludedCategories: []
+        }
+    },
+    slot_bottom_item: {
+        'default': {
+            enabled: true,
+            type: 'AFC',
+            location: 'Bottom',
+            seo: 1,
+            params: {
+                number: 5,
+                media: 'text',
+                width: '728',
+                height: '90'
+            },
+            excludedCategories: []
         }
     }
 };
