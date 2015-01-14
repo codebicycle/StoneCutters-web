@@ -119,8 +119,10 @@ function lostpassword(params, callback) {
     function controller() {
         var platform = this.app.session.get('platform');
 
-        if (platform === 'wap') {
-            return helpers.common.redirect.call(this, '/');
+        if (platform !== 'desktop') {
+            return helpers.common.redirect.call(this, '/', null, {
+               status: 302
+           });
         }
         callback(null, {
             form: this.form,
