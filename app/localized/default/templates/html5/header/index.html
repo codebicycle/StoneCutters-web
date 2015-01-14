@@ -23,11 +23,5 @@
     </ul>
 </header>
 {% if user %}
-    <menu id="myOlx"{{ ' class="disabled"' if postingFlow }}>
-        <ul class="header-links" >
-            <li><a href="{{ '/myolx/myadslisting' | link }}" class="header-link" data-qa="my-ads-link" >{{ dictionary["myolx.MyAds"] }}</a></li>
-            <li><a href="{{ '/myolx/favoritelisting' | link }}" class="header-link" data-qa="my-favorites-link" >{{ dictionary["myolx.MyFavorites"] }}</a></li>
-            <li><a href="{{ '/logout' | link }}" class="header-link" data-qa="logout-link" >{{ dictionary["myolx.SignOut"] }}</a></li>
-        </ul>
-    </menu>
+    {% include (template + '/header/usernav.html') %}
 {% endif %}
