@@ -13,7 +13,6 @@ module.exports = Base.extend({
         cellpadding: 0
     },
     initialize: function() {
-        //this.dictionary = translations[this.app.session.get('selectedLanguage') || 'en-US'];
         this.dictionary = translations.get(this.app.session.get('selectedLanguage'));
     },
     postRender: function() {
@@ -29,7 +28,6 @@ module.exports = Base.extend({
         var updateNavPosition;
         var galeryNavigator;
 
-        //this.dictionary = translations[this.app.session.get('selectedLanguage') || 'en-US'];
         this.dictionary = translations.get(this.app.session.get('selectedLanguage'));
         that.messages = {
             'msgSend': this.dictionary['comments.YourMessageHasBeenSent'].replace(/<br \/>/g,''),
