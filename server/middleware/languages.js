@@ -104,7 +104,7 @@ module.exports = function(dataAdapter, excludedUrls) {
             }
 
             function fail(err) {
-                statsd.increment([location.name, 'middleware', 'languages', 'error']);
+                statsd.increment([location.abbreviation, 'middleware', 'languages', 'error']);
                 res.status(500).sendfile(errorPath);
             }
 

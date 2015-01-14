@@ -54,6 +54,7 @@ function register(params, callback) {
             user = new User({
               languageId: languages._byId[this.app.session.get('selectedLanguage')].id,
               country: this.app.session.get('location').name,
+              isocode: this.app.session.get('location').isocode,
               username: params.username,
               hash: params.hash,
               platform: platform,

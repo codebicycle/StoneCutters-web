@@ -154,7 +154,7 @@ module.exports = {
         if (_.contains(phpPaths, params.path)) {
             return helpers.common.redirect.call(this, this.app.session.get('url').replace(params.path + '.php', phpRedirections[params.path]));
         }
-        statsd.increment(['redirections', 'php', this.app.session.get('path')]);
+        statsd.increment([this.app.session.get('location').abbreviation, 'redirections', 'php', this.app.session.get('path')]);
         helpers.common.redirect.call(this, '/');
     },
     allresultsig: function(params, callback) {
@@ -244,22 +244,18 @@ module.exports = {
     staticSearchMobile: function(params, callback) {
         helpers.common.redirect.call(this, this.app.session.get('url').replace('/s/', '/q/'));
     },
-    pictures: middlewares(function pictures(params, callback) {
-        statsd.increment(['redirections', 'seo', 'pictures']);
-        helpers.controllers.control.call(this, params, controller);
-
-        function controller() {
-            helpers.common.redirect.call(this, this.app.session.get('url').replace('/pictures/', ''));
-        }
-    }),
+    pictures: function(params, callback) {
+        statsd.increment([this.app.session.get('location').abbreviation, 'redirections', 'seo', 'pictures']);
+        helpers.common.redirect.call(this, this.app.session.get('url').replace('/pictures/', ''));
+    },
     users: function(params, callback) {
-        statsd.increment(['redirections', 'seo', 'users']);
+        statsd.increment([this.app.session.get('location').abbreviation, 'redirections', 'seo', 'users']);
         helpers.common.redirect.call(this, '/', null, {
             status: 302
         });
     },
     userlistings: function(params, callback) {
-        statsd.increment(['redirections', 'seo', 'userlistings']);
+        statsd.increment([this.app.session.get('location').abbreviation, 'redirections', 'seo', 'userlistings']);
         helpers.common.redirect.call(this, '/');
     }
 };

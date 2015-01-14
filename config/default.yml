@@ -36,9 +36,6 @@ memwatch:
 cron:
   enabled: true
 
-statsD:
-  enabled: false
-
 formidable:
   uploadDir: /tmp
   keepExtensions: true
