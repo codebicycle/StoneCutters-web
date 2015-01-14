@@ -3,9 +3,7 @@
 var _ = require('underscore');
 var helpers = require('../helpers');
 var middlewares = require('../middlewares');
-var SECOND = 1000;
-var MINUTE = 60 * SECOND;
-var HOUR = 60 * MINUTE;
+var utils = require('../../shared/utils');
 var phpRedirections = {
     index: '',
     posting: 'posting',
@@ -137,19 +135,22 @@ module.exports = {
             olx_mobile_full_site_redirect: true,
             siteLocation: location
         }, {
-            maxAge: 2 * HOUR
+            maxAge: 2 * utils.HOUR
         });
         helpers.common.redirect.call(this, 'http://' + siteLocation, null, {
             status: 302,
             pushState: false
         });
     },
-    editphp: function(params, callback) {
+    editphp: middlewares(function editphp(params, callback) {
+        var url;
+
         if (params.editid) {
-            return helpers.common.redirect.call(this, '/iid-' + params.editid);
+            url = utils.removeParams(this.app.session.get('url'), 'editid');
+            return helpers.common.redirect.call(this, url.replace('.php', ('/' + params.editid)));
         }
         helpers.common.redirect.call(this, '/');
-    },
+    }),
     php: function(params, callback) {
         if (_.contains(phpPaths, params.path)) {
             return helpers.common.redirect.call(this, this.app.session.get('url').replace(params.path + '.php', phpRedirections[params.path]));

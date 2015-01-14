@@ -92,6 +92,7 @@ module.exports = {
     'messages_user_management_current_ads.EditMyListing': 'A hirdet\xE9sem szerkeszt\xE9se',
     'topcities.SelectLocation': 'Jel\xF6lj\xF6n meg egy helysz\xEDnt',
     'unexistingitem.ListingUnavailable': 'A hirdet\xE9s m\xE1r nem el\xE9rhet\u0151',
+    'adsense.SponsoredLinks': 'Szponzor\xE1lt hivatkoz\xE1sok',
     'landingbody.EmailAddress': 'E-mail c\xEDm',
     'landingbody.ForgotPassword': 'Elfelejtette a jelszav\xE1t?',
     'landingbody.SubmitRegistration': 'Regisztr\xE1ci\xF3 elk\xFCld\xE9se',
