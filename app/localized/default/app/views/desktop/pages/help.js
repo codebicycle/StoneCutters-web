@@ -30,7 +30,6 @@ module.exports = Base.extend({
             }
         });
     },
-
     helpToggleContent: function(event) {
         event.preventDefault();
         var element = $(event.currentTarget);
@@ -60,5 +59,4 @@ module.exports = Base.extend({
                 find('.question-content').slideToggle();
         }
     }
-
 });

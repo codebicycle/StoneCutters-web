@@ -52,9 +52,24 @@ function help(params, callback) {
     helpers.controllers.control.call(this, params, controller);
 
     function controller() {
+        var platform = this.app.session.get('platform');
+        var location = this.app.session.get('location');
+
+        var tab = 'new-olx';
+        var active = params.active;
+        var isContactEnabled = helpers.features.isEnabled.call(this, 'contactForm', platform, location.url);
+
+        if (active && !isContactEnabled) {
+            tab = 'faq';
+        } else if (active) {
+            tab = 'contact';
+        }
+
         // Delete this callback
         callback(null, {
-                active: params.active
+            active: params.active,
+            tab: tab,
+            isContactEnabled: isContactEnabled
         });
         /*
             TODO [MOB-4717] Help.
@@ -132,10 +147,10 @@ function error(params, callback) {
         if (this.app.session.get('isServer')) {
             this.app.req.res.status(404);
             if (this.app.session.get('path') !== '/500') {
-                statsd.increment(['All', 'errors', 404]);
+                statsd.increment(['all', 'errors', 404]);
             }
             else {
-                statsd.increment(['All', 'errors', 500]);
+                statsd.increment(['all', 'errors', 500]);
             }
         }
         if (err) {

@@ -21,9 +21,9 @@ module.exports = function pagesRouter(app, dataAdapter) {
         app.get('/health', handler);
 
         function handler(req, res) {
-            statsd.gauge([hostname, 'all', 'health'], 1);
+            statsd.gauge(['all', 'health'], 1);
             if (!isNaN(version)) {
-                statsd.gauge([hostname, 'all', 'version'], version);
+                statsd.gauge(['all', 'version'], version);
             }
             res.header('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-age=0, max-stale=0, post-check=0, pre-check=0');
             res.json({

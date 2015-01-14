@@ -63,6 +63,7 @@ module.exports = {
         'itemgeneraldetails.PicturesOf',
         'itemslisting.NewlyListed',
         'itemslisting.HighestFirst',
-        'itemslisting.LowestFirst'
+        'itemslisting.LowestFirst',
+        'adsense.SponsoredLinks'
     ]
 };

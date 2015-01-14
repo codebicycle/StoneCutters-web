@@ -22,6 +22,7 @@ module.exports = function userRouter(app) {
                 user = new User(_.extend(data, {
                     location: req.rendrApp.session.get('siteLocation'),
                     country: req.rendrApp.session.get('location').name,
+                    isocode: req.rendrApp.session.get('location').abbreviation,
                     languageId: req.rendrApp.session.get('languages')._byId[req.rendrApp.session.get('selectedLanguage')].id,
                     platform: req.rendrApp.session.get('platform')
                 }), {
@@ -87,6 +88,7 @@ module.exports = function userRouter(app) {
                 user = new User(_.extend(data, {
                     location: req.rendrApp.session.get('siteLocation'),
                     country: req.rendrApp.session.get('location').name,
+                    isocode: req.rendrApp.session.get('location').abbreviation,
                     languageId: req.rendrApp.session.get('languages')._byId[req.rendrApp.session.get('selectedLanguage')].id,
                     platform: req.rendrApp.session.get('platform')
                 }), {
@@ -146,6 +148,7 @@ module.exports = function userRouter(app) {
                     'new': true,
                     location: req.rendrApp.session.get('siteLocation'),
                     country: location.name,
+                    isocode: location.abbreviation,
                     languageId: req.rendrApp.session.get('languages')._byId[req.rendrApp.session.get('selectedLanguage')].id,
                     platform: platform
                 }), {
@@ -157,7 +160,7 @@ module.exports = function userRouter(app) {
             function validate(done) {
                 if (!user.get('agreeTerms')) {
                     res.redirect(301, utils.link('/register?agreeTerms=0', req.rendrApp));
-                    statsd.increment([location.name, 'register', 'error', 'terms', platform]);
+                    statsd.increment([location.abbreviation, 'register', 'error', 'terms', platform]);
                     return end();
                 }
                 done(user);
@@ -218,6 +221,7 @@ module.exports = function userRouter(app) {
                     'new': true,
                     location: req.rendrApp.session.get('siteLocation'),
                     country: location.name,
+                    isocode: location.abbreviation,
                     languageId: req.rendrApp.session.get('languages')._byId[req.rendrApp.session.get('selectedLanguage')].id,
                     platform: platform,
                     identityType: 1,
@@ -231,7 +235,7 @@ module.exports = function userRouter(app) {
             function validate(done) {
                 if (!user.get('agreeTerms')) {
                     res.redirect(301, utils.link('/register?agreeTerms=0', req.rendrApp));
-                    statsd.increment([location.name, 'register', 'error', 'terms', platform]);
+                    statsd.increment([location.abbreviation, 'register', 'error', 'terms', platform]);
                     return end();
                 }
                 done(user);

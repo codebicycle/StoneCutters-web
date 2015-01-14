@@ -1,9 +1,13 @@
 {% view 'items/partials/breadcrumb' %}
 <div class="wrapper-main">
-    <nav id="listing-nav">
-        {% view 'categories/partials/subcategories' %}
-        {% view 'items/partials/filters' %}
-    </nav>
+    <aside class="listing-side">
+        <nav id="listing-nav">
+            {% view 'categories/partials/subcategories' %}
+            {% view 'items/partials/filters' %}
+        </nav>
+        {% view 'partials/adserving', 'slot_side_listing' %}
+    </aside>
+
     <section id='listing-items'>
         {% view 'items/partials/locations' %}
         {% include (template + '/items/listig.html') %}

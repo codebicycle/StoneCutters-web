@@ -46,6 +46,9 @@ header#topBar > ul > li.logOut a {
 }
 header#topBar > ul > li.logIn span {
 	background-image: url(imageUrl/images/html5/userLogIn.png);
+	&.active {
+		background-color: #345c93;
+	}
 }
 header#topBar > ul > li.logInMsg span {
 	background-image: url(imageUrl/images/html5/userLogInMsg.png);
@@ -84,43 +87,4 @@ header#topBar .topBarFilters {
 		vertical-align: middle;
 		font-size: 1rem;
 	}
-}
-menu#myOlx {
-	display: none;
-	font-size: 0.9375rem;
-}
-menu#myOlx.translate {
-	display: block;
-}
-menu#myOlx ul {
-	padding: 0 .8rem;
-	background: #294b79;
-}
-menu#myOlx ul li {
-	display: block;
-	position: relative;
-	border-bottom: 1px solid #ccc;
-}
-menu#myOlx ul li:last-child {
-	border:none;
-}
-menu#myOlx ul li a {
-	display: block;
-	padding: 0.6875rem 0.9375rem;
-	color: #fff;
-}
-menu#myOlx ul li span {
-	position: absolute;
-	right: 0;
-	top: .5625rem;
-	padding: .25rem .5rem;
-	border: 1px solid #FFFFFF;
-	border-radius: 0.375rem;
-	background: #4275ba;
-	font-weight: bold;
-	font-size: 0.6875rem;
-	color:#fff;
-}
-menu#myOlx ul li span:before {
-	content:"+";
 }

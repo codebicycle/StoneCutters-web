@@ -46,13 +46,13 @@ module.exports = function trackingRouter(app, dataAdapter) {
 
         restler.request(url, options)
             .on('success', function success() {
-                statsd.increment([req.query.locNm, 'tracking', type, tracker, platform, 'success']);
+                statsd.increment([req.query.locIso, 'tracking', type, tracker, platform, 'success']);
             })
             .on('fail', function error() {
-                statsd.increment([req.query.locNm, 'tracking', type, tracker, platform, 'error']);
+                statsd.increment([req.query.locIso, 'tracking', type, tracker, platform, 'error']);
             })
             .on('error', function fail() {
-                statsd.increment([req.query.locNm, 'tracking', type, tracker, platform, 'fail']);
+                statsd.increment([req.query.locIso, 'tracking', type, tracker, platform, 'fail']);
             });
     }
 
@@ -80,18 +80,18 @@ module.exports = function trackingRouter(app, dataAdapter) {
             var hitCount = req.rendrApp.session.get('hitCount');
             var clientId = req.rendrApp.session.get('clientId');
 
-            statsd.increment([req.query.locNm, 'pageview', platform]);
-            statsd.increment([req.query.locNm, 'devices', osName, platform]);
+            statsd.increment([req.query.locIso, 'pageview', platform]);
+            statsd.increment([req.query.locIso, 'devices', osName, platform]);
             if (!hitCount) {
-                statsd.increment([req.query.locNm, 'sessions', platform, 'error']);
+                statsd.increment([req.query.locIso, 'sessions', platform, 'error']);
             }
             else {
-                // statsd.increment([req.query.locNm, 'sessions', platform, 'average', clientId]);
+                // statsd.increment([req.query.locIso, 'sessions', platform, 'average', clientId]);
                 if (hitCount > 1) {
-                    statsd.increment([req.query.locNm, 'sessions', platform, 'recurrent']);
+                    statsd.increment([req.query.locIso, 'sessions', platform, 'recurrent']);
                 }
                 else {
-                    statsd.increment([req.query.locNm, 'sessions', platform, 'new']);
+                    statsd.increment([req.query.locIso, 'sessions', platform, 'new']);
                 }
             }
         }
@@ -193,7 +193,7 @@ module.exports = function trackingRouter(app, dataAdapter) {
             }
             bot = isBot(userAgent, platform, osName, osVersion);
             if (bot) {
-                statsd.increment([req.query.locNm, 'bot', bot, platform]);
+                statsd.increment([req.query.locIso, 'bot', bot, platform]);
                 return false;
             }
             if (req.query.custom) {
@@ -306,7 +306,7 @@ module.exports = function trackingRouter(app, dataAdapter) {
             }
             bot = isBot(userAgent, platform, osName, osVersion);
             if (bot) {
-                statsd.increment([req.query.locNm, 'bot', bot, platform]);
+                statsd.increment([req.query.locIso, 'bot', bot, platform]);
                 return false;
             }
             location = req.rendrApp.session.get('location');
