@@ -34,6 +34,7 @@ module.exports = function(app, dataAdapter) {
                 reply = data;
                 user = new User({
                     country: req.rendrApp.session.get('location').name,
+                    isocode: req.rendrApp.session.get('location').abbreviation,
                     languageId: req.rendrApp.session.get('languages')._byId[req.rendrApp.session.get('selectedLanguage')].id,
                     platform: req.rendrApp.session.get('platform')
                 }, {
@@ -94,6 +95,7 @@ module.exports = function(app, dataAdapter) {
             var platform = req.rendrApp.session.get('platform');
             var newImages;
             var item;
+            var editing;
 
             function parse(done) {
                 formidable.parse(req, {
@@ -101,9 +103,10 @@ module.exports = function(app, dataAdapter) {
                 }, callback);
 
                 function callback(err, _item, _images) {
+                    editing = !!_item.id;
                     if (err === 'aborted') {
                         done.abort();
-                        statsd.increment([location.abbreviation.toLowerCase(), 'post', 'error', 'aborted', platform]);
+                        statsd.increment([location.abbreviation, editing ? 'editing' : 'posting', 'error', 'abort', platform]);
                         return fail(err, 'aborted');
                     }
                     newImages = _.clone(_images);
@@ -134,7 +137,7 @@ module.exports = function(app, dataAdapter) {
                     }), function each(key) {
                         return _item[key];
                     }).concat(_.map(images, function each(image) {
-                        statsd.increment([location.name, 'posting', 'image', platform]);
+                        statsd.increment([location.abbreviation, 'posting', 'image', platform]);
                         return restler.file(image.path, null, image.size, null, image.type);
                     })),
                     ipAddress: req.ip,
@@ -163,7 +166,7 @@ module.exports = function(app, dataAdapter) {
                 if (!track && err && !Array.isArray(err)) {
                     console.log('[OLX_DEBUG]', 'post', err instanceof Error ? err.stack : err);
                 }
-                formidable.error(req, url.split('?').shift(), err, item.toJSON(), function redirect(url) {
+                formidable.error(req, url.split('?').shift(), err, item ? item.toJSON() : {}, function redirect(url) {
                     res.redirect(utils.link(url, req.rendrApp));
                     clean();
                 });
@@ -174,7 +177,7 @@ module.exports = function(app, dataAdapter) {
                     return;
                 }
                 Object.keys(newImages).forEach(function each(key) {
-                    statsd.increment([location.name, 'posting', 'delete_image', platform]);
+                    statsd.increment([location.abbreviation, 'posting', 'delete_image', platform]);
                     fs.unlink(newImages[key].path, utils.noop);
                 });
             }
@@ -204,13 +207,13 @@ module.exports = function(app, dataAdapter) {
         function redirect(item) {
             var url = '/location?target=posting/' + item['category.parentId'] + '/' + item['category.id'];
 
-            statsd.increment([location.name, 'posting', 'location', platform]);
+            statsd.increment([location.abbreviation, 'posting', 'success', 'location', platform]);
             res.redirect(utils.link(url, req.rendrApp));
             clean();
         }
 
         function error(err) {
-            statsd.increment([location.name, 'posting', 'error_location', platform]);
+            statsd.increment([location.abbreviation, 'posting', 'error', 'location', platform]);
             res.redirect(utils.link('/location?target=posting', req.rendrApp));
             clean();
         }
@@ -222,7 +225,7 @@ module.exports = function(app, dataAdapter) {
                 return;
             }
             for (field in images) {
-                statsd.increment([location.name, 'posting', 'delete_image', platform]);
+                statsd.increment([location.abbreviation, 'posting', 'delete_image', platform]);
                 fs.unlink(images[field].path, callback);
             }
 
@@ -284,7 +287,7 @@ module.exports = function(app, dataAdapter) {
                 var url = req.headers.referer || '/';
 
                 res.redirect(utils.link(url.split('?').shift(), req.rendrApp));
-                statsd.increment([location.name, 'search', 'error', platform]);
+                statsd.increment([location.abbreviation, 'search', 'error', platform]);
             }
 
             asynquence().or(error)
