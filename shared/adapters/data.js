@@ -34,7 +34,6 @@ DataAdapter.prototype.request = function(req, api, options, callback) {
 
 DataAdapter.prototype.serverRequest = function(req, api, options, callback) {
     var location = req.rendrApp.session ? req.rendrApp.session.get('location') : null;
-    var locale = location ? location.abbreviation : 'all';
     var start = new Date().getTime();
     var elapsed;
     var key;
@@ -108,7 +107,9 @@ DataAdapter.prototype.serverRequest = function(req, api, options, callback) {
                 body.itemProperties = {};
             }
             logger.log('%s %d %s %s', api.method.toUpperCase(), res.statusCode, api.url, elapsed);
-            statsd.increment([locale, 'sockets', api.url.split('//')[1].split('/').shift().replace(rGraphite, '-'), 'success', res.statusCode]);
+            if (location) {
+                statsd.increment([location.name, 'sockets', api.url.split('//')[1].split('/').shift().replace(rGraphite, '-'), 'success', res.statusCode]);
+            }
             done(null, res, body);
         }
 
@@ -130,7 +131,10 @@ DataAdapter.prototype.serverRequest = function(req, api, options, callback) {
                 });
             }
             logger.error('%s %d %s %j %s', api.method.toUpperCase(), res.statusCode, api.url, err, elapsed);
-            statsd.increment([locale, 'sockets', api.url.split('//')[1].split('/').shift().replace(rGraphite, '-'), 'error', res.statusCode]);
+            if (location) {
+                statsd.increment([location.name, 'sockets', api.url.split('//')[1].split('/').shift().replace(rGraphite, '-'), 'error', res.statusCode]);
+            }
+            statsd.increment(['smaug', 'error', res.statusCode]);
             err.statusCode = res.statusCode;
             done(err, res);
         }
@@ -167,7 +171,6 @@ DataAdapter.prototype.serverRequest = function(req, api, options, callback) {
 
 DataAdapter.prototype.clientRequest = function(req, api, options, callback) {
     var location = window.App && window.App.session && _.isFunction(window.App.session.get) ? window.App.session.get('location') : null;
-    var locale = location ? location.abbreviation : 'all';
     var start = new Date().getTime();
     var elapsed;
     var succeeded;
@@ -209,7 +212,9 @@ DataAdapter.prototype.clientRequest = function(req, api, options, callback) {
                 body.itemProperties = {};
             }
             logger.log('%s %d %s %s', api.type.toUpperCase(), res.status, api.url, elapsed);
-            statsd.increment([locale, 'sockets', api.url.split('//')[1].split('/').shift().replace(rGraphite, '-'), 'success', res.status]);
+            if (location) {
+                statsd.increment([location.name, 'sockets', api.url.split('//')[1].split('/').shift().replace(rGraphite, '-'), 'success', res.status]);
+            }
             succeeded.apply(this, arguments);
             done(null, {
                 readyState: res.readyState,
@@ -232,7 +237,10 @@ DataAdapter.prototype.clientRequest = function(req, api, options, callback) {
                 });
             }
             logger.error('%s %d %s %j %s', api.type.toUpperCase(), res.status, api.url, err, elapsed);
-            statsd.increment([locale, 'sockets', api.url.split('//')[1].split('/').shift().replace(rGraphite, '-'), 'error', res.status]);
+            if (location) {
+                statsd.increment([location.name, 'sockets', api.url.split('//')[1].split('/').shift().replace(rGraphite, '-'), 'error', res.status]);
+            }
+            statsd.increment(['smaug', 'error', res.status]);
             failed.apply(this, arguments);
             done(err, {
                 readyState: res.readyState,

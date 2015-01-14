@@ -238,7 +238,7 @@ module.exports = Base.extend({
                 var location = this.app.session.get('location');
                 var platform = this.app.session.get('platform');
 
-                statsd.increment([location.abbreviation, 'reply', 'success', platform]);
+                statsd.increment([location.name, 'reply', 'success', platform]);
                 done();
             }.bind(this);
 
@@ -253,7 +253,7 @@ module.exports = Base.extend({
                 var location = this.app.session.get('location');
                 var platform = this.app.session.get('platform');
 
-                statsd.increment([location.abbreviation, 'reply', 'error', platform]);
+                statsd.increment([location.name, 'reply', 'error', platform]);
             }.bind(this);
 
             var always = function() {
@@ -300,21 +300,21 @@ module.exports = Base.extend({
                 var message = $('.message').val();
                 var email = $('.email').val();
                 var name = $('.name').val();
-                var locale = this.app.session.get('location').abbreviation;
+                var location = this.app.session.get('location').abbreviation.toLowerCase();
 
                 if (!that.validForm(message, email)) {
                     action += '_Error';
                     if (!that.isEmpty(email, 'email')){
                         action += 'EmailEmpty';
-                        statsd.increment([locale, 'reply', 'error', this.app.session.get('platform'), 'EmailEmpty']);
+                        statsd.increment([location, 'reply', 'error', this.app.session.get('platform'), 'EmailEmpty']);
                     }
                     else if (!that.isEmail(email, 'email')) {
                         action += 'EmailWrong';
-                        statsd.increment([locale, 'reply', 'error', this.app.session.get('platform'), 'EmailWrong']);
+                        statsd.increment([location, 'reply', 'error', this.app.session.get('platform'), 'EmailWrong']);
                     }
                     if (!that.isEmpty(message, 'message')) {
                         action += 'MessageEmpty';
-                        statsd.increment([locale, 'reply', 'error', this.app.session.get('platform'), 'MessageEmpty']);
+                        statsd.increment([location, 'reply', 'error', this.app.session.get('platform'), 'MessageEmpty']);
                     }
                     if (!that.isEmpty(name, 'name')) {
                         action += 'NameEmpty';
