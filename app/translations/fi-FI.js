@@ -92,6 +92,7 @@ module.exports = {
     'messages_user_management_current_ads.EditMyListing': 'Muokkaa omaa ilmoitusta',
     'topcities.SelectLocation': 'Valitse Sijainti',
     'unexistingitem.ListingUnavailable': 'Ilmoitus ei ole en\xE4\xE4 n\xE4ht\xE4viss\xE4',
+    'adsense.SponsoredLinks': 'Sponsoroidut linkit',
     'landingbody.EmailAddress': 'S\xE4hk\xF6postiosoite',
     'landingbody.ForgotPassword': 'Unohditko salasanasi?',
     'landingbody.SubmitRegistration': 'L\xE4het\xE4 rekister\xF6intitiedot',
