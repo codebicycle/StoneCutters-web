@@ -21,14 +21,16 @@
                 // VARIABLES DE LOS PUNTOS              
                 var centerPoint = {lat: -34.5548957, lng: -58.4459911}
                 var shops = [            
-                    {coord: {lat: -34.5548957, lng: -58.4459911}, title: "store 1"}                               
+                    {coord: {lat: -34.5548957, lng: -58.4459911}, title: "tienda 1",
+                    lat: -34.5548957, lng: -58.4459911}, title: "tienda 2",
+                    lat: -34.5548957, lng: -58.4459911}, title: "tienda 3"}                               
                 ]
                 // FIN DE PUNTOS
 
 
                 var mapOptions = {
                     center: centerPoint,
-                    zoom: 16
+                    zoom: 14
                 };
                 var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
                 for (var i in shops) {
