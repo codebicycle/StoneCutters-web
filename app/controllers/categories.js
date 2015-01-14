@@ -40,7 +40,6 @@ function showig(params, callback) {
     if (platform !== 'desktop') {
         return helpers.common.error.call(this, null, {}, callback);
     }
-
     params['f.hasimage'] = true;
     show.call(this, params, callback, '-ig');
 }
@@ -52,7 +51,6 @@ function show(params, callback, gallery) {
     }, controller);
 
     function controller() {
-        var platform = this.app.session.get('platform');
 
         var redirect = function(done){
             var categoryId = Seo.isCategoryDeprecated(params.catId);
@@ -67,6 +65,7 @@ function show(params, callback, gallery) {
         }.bind(this);
 
         var router = function(done) {
+            var platform = this.app.session.get('platform');
             var category = this.dependencies.categories.get(params.catId);
             var subcategory;
 
