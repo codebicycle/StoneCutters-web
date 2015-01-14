@@ -494,7 +494,7 @@ function reply(params, callback) {
         var redirect = function(done) {
             var platform = this.app.session.get('platform');
 
-            if (platform === 'html5' || platform === 'desktop') {
+            if (platform === 'desktop') {
                 return done.fail();
             }
             done();
@@ -523,7 +523,7 @@ function reply(params, callback) {
             }
             var platform = this.app.session.get('platform');
 
-            if (platform === 'html5' || platform === 'desktop') {
+            if (platform === 'desktop') {
                 return done.fail();
             }
             done(resItem.item);
