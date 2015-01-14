@@ -36,6 +36,7 @@ function getParams(page, options) {
     params.r = esi.esify.call(this, '$rand()', Math.round(Math.random() * 1000000));
     params.referer = esi.esify.call(this, '$url_encode($(HTTP_REFERER|\'-\'))', (this.app.session.get('referer') || '-'));
     params.locNm = location.name;
+    params.locIso = location.abbreviation;
     params.locId = location.id;
     params.locUrl = location.url;
 
