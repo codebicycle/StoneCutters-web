@@ -240,5 +240,12 @@ module.exports = {
         enabled: true,
         licenseKey: 'ee506f8b9b',
         applicationId: '4149642'
+    },
+    terms: {
+        wap: ['www.jaovat.com', 'www.olx.com.fr'],
+        html4: ['www.jaovat.com', 'www.olx.com.fr'],
+        html5: ['www.jaovat.com', 'www.olx.com.fr'],
+        desktop: ['www.jaovat.com']
+        // 'www.olx.cl', 'www.olx.com.uy', 'www.olx.com.py', 'www.olx.com.bo', 'www.olx.com.pe', 'www.olx.com.ve', 'www.olx.com.co', 'www.olx.com.ec', 'www.olx.com.pa', 'www.olx.co.cr', 'www.olx.com.ni', 'www.olx.hn', 'www.olx.com.sv', 'www.olx.com.gt', 'www.olx.com.mx'
     }
 };
