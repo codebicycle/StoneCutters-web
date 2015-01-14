@@ -56,7 +56,6 @@ module.exports = Base.extend({
                 this.createIframeAFC(settings.params, settings.options);
                 break;
         }
-        console.log(settings);
     },
     _includeCsaLib: function() {
         var id = 'gads-lib';
@@ -121,7 +120,7 @@ module.exports = Base.extend({
             ifrScripts.push('google_max_num_ads =  ' + params.number + ';');
             ifrScripts.push('google_hints = "' + options.query + '";');
             ifrScripts.push('google_ad_section = "title body";');
-            ifrScripts.push('google_ad_request_done = function(r){ window.parent.AFCrender(r, "' + slotname + '", "' + boxTitle + '"); };');
+            ifrScripts.push('google_ad_request_done = function(r){ console.log("loaded ' + slotname + '"); window.parent.AFCrender(r, "' + slotname + '", "' + boxTitle + '"); };');
 
             domIfr.write('<script type="text/javascript">' + ifrScripts.join('\n') + '</script><script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>');
         }).appendTo('#' + slotname);

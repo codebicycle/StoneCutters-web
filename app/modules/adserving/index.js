@@ -188,7 +188,7 @@ function getCategoryForChannel() {
 
 function getGroupType(location) {
     var types = utils.get(configAdServing, ['groups', 'types'], {});
-    var type;
+    var type = 'default';
 
     _.each(types, function each(countries, group) {
         if (_.contains(countries, location)) {

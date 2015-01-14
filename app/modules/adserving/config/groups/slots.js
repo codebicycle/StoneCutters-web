@@ -55,7 +55,7 @@ module.exports = {
     },
     slot_side_listing: {
         'default': {
-            enabled: false,
+            enabled: true,
             type: 'AFC',
             location: 'Side',
             seo: 1,
@@ -66,28 +66,11 @@ module.exports = {
                 height: '600'
             },
             excludedCategories: []
-        },
-        group2: {
-            type: 'ADX'
         }
-    },
-    slot_side_item: {
-        'default': {
-            enabled: true,
-            type: 'AFC',
-            location: 'Side',
-            seo: 1,
-            params: {
-                number: 1,
-                media: 'flash, image',
-                width: '300',
-                height: '250'
-            },
-            excludedCategories: []
-        },
-        group2: {
-            type: 'ADX'
-        }
+        // },
+        // group2: {
+        //     type: 'ADX'
+        // }
     },
     slot_top_item: {
         'default': {
@@ -117,6 +100,24 @@ module.exports = {
                 height: '90'
             },
             excludedCategories: []
+        }
+    },
+    slot_side_item: {
+        'default': {
+            enabled: true,
+            type: 'AFC',
+            location: 'Side',
+            seo: 1,
+            params: {
+                number: 1,
+                media: 'flash, image',
+                width: '300',
+                height: '250'
+            },
+            excludedCategories: []
+        },
+        group2: {
+            type: 'ADX'
         }
     }
 };
