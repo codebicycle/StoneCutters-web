@@ -30,14 +30,14 @@ module.exports = function itemRouter(app, dataAdapter) {
         app.post('/secure/send', handler);
 
         function handler(req, res) {
-            var location = req.rendrApp.session.get('location');
-            var zendesk = _.defaults({}, config.get(['emails', 'zendesk', location.url], {}), config.get(['emails', 'zendesk', 'default']));
 
             function parse(done) {
                 formidable.parse(req, done.errfcb);
             }
 
             function submit(done, data) {
+                var zendesk = _.defaults({}, config.get(['emails', 'zendesk', data.location], {}), config.get(['emails', 'zendesk', 'default']));
+
                 restler.post('https://' + zendesk.subdomain + '.zendesk.com/api/v2/tickets.json', {
                     data: {
                         ticket: {
