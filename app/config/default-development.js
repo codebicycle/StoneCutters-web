@@ -21,10 +21,10 @@ module.exports = {
         type: 'development'
     },
     localization: {
-        wap: ['www.olx.com.br', 'www.olx.fr', 'www.olx.es', 'www.olx.co.za', 'www.olx.ir', 'www.jaovat.com', 'www.olx.hn'],
-        html4: ['www.olx.com.br', 'www.olx.fr', 'www.olx.es', 'www.olx.co.za', 'www.olx.ir', 'www.jaovat.com', 'www.olx.hn'],
-        html5: ['www.olx.com.br', 'www.olx.fr', 'www.olx.es', 'www.olx.ir', 'www.jaovat.com', 'www.olx.hn'],
-        desktop: ['www.olx.com.bo', 'www.jaovat.com']
+        wap: ['www.olx.com.br', 'www.olx.co.za', 'www.olx.ir', 'www.olx.hn'],
+        html4: ['www.olx.com.br', 'www.olx.co.za', 'www.olx.ir', 'www.olx.hn'],
+        html5: ['www.olx.com.br', 'www.olx.ir', 'www.olx.hn'],
+        desktop: ['www.olx.com.bo']
     },
     icons: {
         wap: [],
@@ -175,7 +175,12 @@ module.exports = {
             'default':'legal',
             'www.olx.com.ng': 'support-ng',
             'www.olx.com.ke': 'support-ke'
-        }
-
+        },
+    },
+    terms: {
+        wap: ['www.jaovat.com', 'www.olx.fr', 'www.olx.com.br', 'www.olx.es', 'www.olx.ir', 'www.olx.cl', 'www.olx.com.uy', 'www.olx.com.py', 'www.olx.com.pe', 'www.olx.com.ve', 'www.olx.com.co', 'www.olx.com.ec', 'www.olx.com.pa', 'www.olx.co.cr', 'www.olx.com.ni', 'www.olx.hn', 'www.olx.com.sv', 'www.olx.com.gt', 'www.olx.com.mx'],
+        html4: ['www.jaovat.com', 'www.olx.fr', 'www.olx.com.br', 'www.olx.es', 'www.olx.ir', 'www.olx.cl', 'www.olx.com.uy', 'www.olx.com.py', 'www.olx.com.pe', 'www.olx.com.ve', 'www.olx.com.co', 'www.olx.com.ec', 'www.olx.com.pa', 'www.olx.co.cr', 'www.olx.com.ni', 'www.olx.hn', 'www.olx.com.sv', 'www.olx.com.gt', 'www.olx.com.mx'],
+        html5: ['www.jaovat.com', 'www.olx.fr', 'www.olx.com.br', 'www.olx.es', 'www.olx.ir', 'www.olx.cl', 'www.olx.com.uy', 'www.olx.com.py', 'www.olx.com.pe', 'www.olx.com.ve', 'www.olx.com.co', 'www.olx.com.ec', 'www.olx.com.pa', 'www.olx.co.cr', 'www.olx.com.ni', 'www.olx.hn', 'www.olx.com.sv', 'www.olx.com.gt', 'www.olx.com.mx'],
+        desktop: ['www.jaovat.com', 'www.olx.com.bo', 'www.olx.cl', 'www.olx.com.uy', 'www.olx.com.py', 'www.olx.com.pe', 'www.olx.com.ve', 'www.olx.com.co', 'www.olx.com.ec', 'www.olx.com.pa', 'www.olx.co.cr', 'www.olx.com.ni', 'www.olx.hn', 'www.olx.com.sv', 'www.olx.com.gt', 'www.olx.com.mx']
     }
 };
