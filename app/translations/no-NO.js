@@ -12,6 +12,7 @@ module.exports = {
     'countryoptions.Home_SelectState': 'Velg en stat',
     'countryoptions.OtherCities': 'Andre byer',
     'countryoptions.SelectACity': 'Velg en by',
+    'countryoptions.SelectANeighborhood': 'Velg et nabolag',
     'defaultfooter.About OLX': 'Om OLX',
     'defaultfooter.Back': 'Tilbake',
     'defaultfooter.change': 'endre',

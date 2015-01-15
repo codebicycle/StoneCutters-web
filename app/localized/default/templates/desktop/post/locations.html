@@ -25,3 +25,17 @@
 } %}
 
 {{ Field(citiesField) }}
+
+{% set neighborhoodsField = {
+    isOptional: "false",
+    name: "neighborhood",
+    mandatory: "false",
+    label: 'Barrios',
+    values: neighborhoods,
+    fieldType: "combobox",
+    dataType: "select",
+    hide: true,
+    force: true
+} %}
+
+{{ Field(neighborhoodsField) }}
