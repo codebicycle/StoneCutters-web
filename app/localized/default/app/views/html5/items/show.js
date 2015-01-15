@@ -106,7 +106,7 @@ module.exports = Base.extend({
 
                 });
             }else{
-                mySwiperGal.swipeTo(galery.activeLoopIndex,500);
+                mySwiperGal.swipeTo(galery.activeLoopIndex,750);
             }
         });
         this.$('.galActions .next').click(function(e) {

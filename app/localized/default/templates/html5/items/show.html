@@ -111,9 +111,13 @@
 
     <section class="nav">
         <span></span>
-        <div class="links">
-            <a href="{{ item.metadata.seo.prevItem.itemUrl | link }}">{{ dictionary["listingpageitemslisting.Previous"] }} </a>
-            <a href="{{ item.metadata.seo.nextItem.itemUrl | link }}">{{ dictionary["itemslisting.Next"] }} </a>
+        <div class="links {{ 'twice' if (item.metadata.seo.prevItem and item.metadata.seo.nextItem) }}">
+            {% if item.metadata.seo.prevItem %}
+                <a href="{{ item.metadata.seo.prevItem.itemUrl | link }}">{{ dictionary["listingpageitemslisting.Previous"] }} </a>
+            {% endif %}
+            {% if item.metadata.seo.nextItem %}
+                <a href="{{ item.metadata.seo.nextItem.itemUrl | link }}">{{ dictionary["itemslisting.Next"] }} </a>
+            {% endif %}
         </div>
     </section>
 
@@ -217,7 +221,7 @@
         <div class="galCont-container swiper-container-gal" style="background-image: url('{{ item.images[0].url }}');"></div>
         <div class="galActions">
             <div class="close"><span></span></div>
-            <div class="playDis"><span></span></div>
+            <!--<div class="playDis"><span></span></div>-->
             <div class="prevDis"><span></span></div>
             <div class="nextDis"><span></span></div>
         </div>
@@ -235,7 +239,7 @@
         </div>
         <div class="galActions">
             <div class="close"><span></span></div>
-            <div class="pause"><span></span></div>
+            <!--<div class="pause"><span></span></div>-->
             <div class="prev"><span></span></div>
             <div class="next"><span></span></div>
         </div>
