@@ -168,7 +168,7 @@ function allstates(params, callback) {
                 return helpers.common.error.call(this, null, {}, callback);
             }
 
-            if (location.current && location.current.url && !~location.current.url.indexOf('wwww.')) {
+            if (location.current && location.current.url && !~location.current.url.indexOf('www.')) {
                 url = [protocol, '://', host.replace(shortHost, siteLocation), '/all-states'].join('');
                 return helpers.common.redirect.call(this, url);
             }
