@@ -5,20 +5,26 @@ var ati = require('./trackers/ati');
 var analytics = require('./trackers/analytics');
 var serverSide = require('./trackers/serverSide');
 var keyade = require('./trackers/keyade');
+var hydra = require('./trackers/hydra');
+var tagmanager = require('./trackers/tagmanager');
+var allpages = require('./trackers/allpages');
+var facebook = require('./trackers/facebook');
 var utils = require('../../../shared/utils');
 var esi = require('../esi');
 
-var trackers = {};
+var trackers = {
+    ati: ati,
+    analytics: analytics,
+    hydra: hydra,
+    tagmanager: tagmanager,
+    allpages: allpages,
+    facebook: facebook
+};
 
-_.each('ati analytics hydra tagmanager allpages facebook'.split(' '), function each(tracker) {
-    var root = this;
-
-    if (!root[tracker]) {
-        root[tracker] = require('./trackers/' + tracker);
-    }
-    trackers[tracker] = function track(ctx, page, query) {
-        if (root[tracker].isEnabled.call(this, page)) {
-            ctx.params[tracker] = root[tracker].getParams.call(this, page, query);
+_.each(trackers, function each(tracker, name) {
+    trackers[name] = function track(ctx, page, query) {
+        if (tracker.isEnabled.call(this, page)) {
+            ctx.params[name] = tracker.getParams.call(this, page, query);
         }
     };
 }, this);
