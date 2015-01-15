@@ -134,37 +134,33 @@ module.exports = Base.extend({
         var $phone = this.$('input[name=phone]').removeClass('error');
         var $email = this.$('input[name=email]').removeClass('error');
         var $location = this.$('.location').removeClass('error');
-        var language = this.app.session.get('selectedLanguage');
-        var failed = [];
+        var failed = false;
+        var location = this.app.session.get('location').abbreviation.toLowerCase();
 
         this.$el.removeClass('error').find('small').remove();
         if (!$contactName.val().length) {
-            failed.push('contactName');
-            $contactName.addClass('error').after('<small class="error">' + translations.get(language)['misc.EnterNameForBuyers_Mob'] + '</small>');
+            failed = true;
+            $contactName.addClass('error').after('<small class="error">' + translations.get(this.app.session.get('selectedLanguage'))['misc.EnterNameForBuyers_Mob'] + '</small>');
+            statsd.increment([location, 'posting', 'invalid', this.app.session.get('platform'), 'contactName']);
         }
         if ($phone.val() !== '' && !rPhone.test($phone.val())) {
-            failed.push('phone');
-            $phone.addClass('error').after('<small class="error">' + translations.get(language)['misc.PhoneNumberNotValid'] + '</small>');
+            failed = true;
+            $phone.addClass('error').after('<small class="error">' + translations.get(this.app.session.get('selectedLanguage'))['misc.PhoneNumberNotValid'] + '</small>');
         }
         if (!rEmail.test($email.val())) {
-            failed.push('email');
-            $email.addClass('error').after('<small class="error">' + translations.get(language)['postingerror.InvalidEmail'] + '</small>');
+            failed = true;
+            $email.addClass('error').after('<small class="error">' + translations.get(this.app.session.get('selectedLanguage'))['postingerror.InvalidEmail'] + '</small>');
+            statsd.increment([location, 'posting', 'invalid', this.app.session.get('platform'), 'email']);
         }
         if (!this.parentView.getItem().getLocation()) {
-            failed.push('city');
-            $location.addClass('error').after('<small class="error">' + translations.get(language)['misc.AdNeedsLocation_Mob'] + '</small>');
+            failed = true;
+            $location.addClass('error').after('<small class="error">' + translations.get(this.app.session.get('selectedLanguage'))['misc.AdNeedsLocation_Mob'] + '</small>');
+            statsd.increment([location, 'posting', 'invalid', this.app.session.get('platform'), 'city']);
         }
-        if (failed.length) {
+        if (failed) {
             this.$el.addClass('error');
         }
-        failed.forEach(function each(field) {
-            var locale = this.app.session.get('location').abbreviation;
-            var type = this.parentView.getItem().get('id') ? 'editing' : 'posting';
-            var platform = this.app.session.get('platform');
-
-            statsd.increment([locale, type, 'error', 'validation', 200, field, platform]);
-        });
-        return !failed.length;
+        return !failed;
     },
     cleanValue: function(value) {
         value = value.replace(/\s{2,}/g, ' ');

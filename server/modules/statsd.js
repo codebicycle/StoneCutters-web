@@ -5,10 +5,9 @@ var config = require('../config').get('statsD', {
         host: 'graphite-server',
         port: 8125,
         cacheDns: true,
-        prefix: 'application.webapp.'
+        prefix: 'application.mobile.webapp.'
     }
 });
-var hostname = require('os').hostname();
 var StatsD = require('node-statsd').StatsD;
 var logger = require('../../shared/logger')('statsD');
 var client;
@@ -17,27 +16,19 @@ var Client = function(options) {
     var statsD = new StatsD(config.client);
 
     function increment(metric, value) {
-        if (!metric) {
-            return;
-        }
         if (Array.isArray(metric)) {
             metric = metric.join('.');
         }
-        metric = metric.toLowerCase();
         logger.log('Incrementing metric: ' + metric + ' by ' + (value || 1));
-        statsD.increment(hostname + '.' + metric, value);
+        statsD.increment(metric, value);
     }
 
     function gauge(metric, value) {
-        if (!metric) {
-            return;
-        }
         if (Array.isArray(metric)) {
             metric = metric.join('.');
         }
-        metric = metric.toLowerCase();
         logger.log('Gauging metric: ' + metric + ' by ' + (value || 1));
-        statsD.gauge(hostname + '.' + metric, value);
+        statsD.gauge(metric, value);
     }
 
     return {
@@ -55,8 +46,8 @@ module.exports = function() {
     }
     else {
         client = {
-            increment: function(metric, value) {},
-            gauge: function(metric, value) {}
+            increment: function() {},
+            gauge: function() {}
         };
     }
     return client;
