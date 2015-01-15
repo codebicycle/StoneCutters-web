@@ -84,6 +84,9 @@ module.exports = {
                 height: '90'
             },
             excludedCategories: []
+        },
+        group1: {
+            enabled: false
         }
     },
     slot_bottom_item: {
@@ -114,6 +117,9 @@ module.exports = {
                 height: '250'
             },
             excludedCategories: []
+        },
+        group1: {
+            enabled: false
         },
         group2: {
             type: 'ADX'
