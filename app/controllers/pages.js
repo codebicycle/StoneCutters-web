@@ -50,9 +50,24 @@ function help(params, callback) {
     helpers.controllers.control.call(this, params, controller);
 
     function controller() {
+        var platform = this.app.session.get('platform');
+        var location = this.app.session.get('location');
+
+        var tab = 'new-olx';
+        var active = params.active;
+        var isContactEnabled = helpers.features.isEnabled.call(this, 'contactForm', platform, location.url);
+
+        if (active && !isContactEnabled) {
+            tab = 'faq';
+        } else if (active) {
+            tab = 'contact';
+        }
+
         // Delete this callback
         callback(null, {
-                active: params.active
+            active: params.active,
+            tab: tab,
+            isContactEnabled: isContactEnabled
         });
         /*
             TODO [MOB-4717] Help.
