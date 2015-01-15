@@ -21,7 +21,7 @@
 
                 <li>
                     <a href="{{ item | slugToUrl | link }}" data-qa="list-item">
-                        <div class="imageCont" style="background-image: url({{ item.thumbnail if item.thumbnail else ('/images/html4/noPhoto.png' | static) }}); background-size: 90% 90%;"></div>
+                        <div class="imageCont" style="background: transparent  url({{ item.thumbnail if item.thumbnail else ('/images/html4/noPhoto.png' | static) }}) center no-repeat 90%;"></div>
                     </a>
                     <div class="itemInfo">
                         <p class="itemPrice">{{ item.price.displayPrice }}</p>
