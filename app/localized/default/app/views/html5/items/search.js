@@ -1,26 +1,26 @@
 'use strict';
 
-var Base = require('../../../../../common/app/bases/view').requireView('categories/show');
-var helpers = require('../../../../../../helpers');
+var Base = require('../../../../../common/app/bases/view').requireView('items/search');
 var _ = require('underscore');
+var helpers = require('../../../../../../helpers');
 
 module.exports = Base.extend({
-    id: 'categories_showig_view',
-    className: 'categories_showig_view',
+    className: 'items_search_view',
+    regexpFindPage: /-p-[0-9]+/,
+    regexpReplacePage: /(-p-[0-9]+)/,
+    regexpReplaceCategory: /([a-zA-Z0-9-]+-cat-[0-9]+)/,
+    regexpFindNeighborhood: /-neighborhood_[0-9_]+/,
 
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
         var link = this.refactorPath(this.app.session.get('path'));
-        console.log('llega');
-        //delete data.nav.listAct;
+
         return _.extend({}, data, {
-            items: data.items,
             nav: {
-                linkig: helpers.common.linkig.call(this, link, null, 'showig'),
-                listAct: 'active',
+                link: link,
+                linkig: helpers.common.linkig.call(this, link, null, 'searchig'),
                 current: 'show'
-            },
-            filtersEnabled: helpers.features.isEnabled.call(this, 'listingFilters')
+            }
         });
     },
     cleanPage: function(path) {
@@ -38,5 +38,3 @@ module.exports = Base.extend({
         return path;
     }
 });
-
-module.exports.id = 'categories/show';

@@ -5,19 +5,22 @@
 	overflow: hidden;
 	padding: 0 0 0.5rem 0;
 	width: 100%;
-	span {
+	.count_ads {
 		color: #4a148c;
 	    display: block;
 	    float: left;
 	    font-family: Arial;
-	    font-size: 1rem;
+	    font-size: .9rem;
 	    font-weight: normal;
-	    line-height: 2.2;
 	    margin: 0 0 0 10px;
 	    overflow: hidden;
-	    text-overflow: ellipsis;
-	    white-space: nowrap;
-	    width: 34%;
+	    width: 20%;
+	    padding-top: 1px;
+	    span {
+	    	display: block;
+	    	text-overflow: ellipsis;
+	    	white-space: nowrap;
+	    }
 	}
 	.btnsort {
 		background: #fff url(imageUrl/images/html5/icon_flechas.png) 10px center no-repeat;
@@ -27,12 +30,23 @@
 		background: #fff url(imageUrl/images/html5/icon_filter.png) 10px center no-repeat;
 		margin-right: 10px;
 	}
+	.withouttext{
+		padding: 15px;
+		margin-right: 10px;
+		&.showig{
+			background: #fff url(imageUrl/images/html5/view_listing.png) center center no-repeat;
+		}
+		&.show {
+			background: #fff url(imageUrl/images/html5/view_gallery.png) center center no-repeat;
+		}
+	}
 }
 
 @media (max-width : 279px) {
 	.filter_order {
 		span {
 			line-height: 1.2;
+			width: 100%
 		}
 	}
 }
