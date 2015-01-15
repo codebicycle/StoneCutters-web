@@ -69,6 +69,7 @@ module.exports = Base.extend({
         }
         if ($cities.val()) {
             this.parentView.$el.trigger('fieldSubmit', [$cities]);
+            this.$('#field-location').trigger('change');
         }
         /*
         if ($neighborhoods.val()) {
