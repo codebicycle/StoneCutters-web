@@ -59,7 +59,8 @@ module.exports = Base.extend({
         var paramCategory;
 
         $(window).on('beforeunload', this.onBeforeUnload);
-        if (this.getItem().has('id')) {
+        this.editing = !!this.getItem().has('id');
+        if (this.editing) {
             this.$('#posting-categories-view').trigger('editCategory', [this.item.get('category')]);
             this.$('#field-location').trigger('change');
         }
@@ -314,15 +315,18 @@ module.exports = Base.extend({
         function success() {
             var category = 'Posting';
             var action = 'PostingSuccess';
+            var successPage = this.editing ? '/edititem/success/' : '/posting/success/';
 
             this.track({
                 category: category,
                 action: action,
                 custom: [category, this.item.get('category').parentId || '-', this.item.get('category').id || '-', action, this.item.get('id')].join('::')
             });
-            helpers.common.redirect.call(this.app.router, '/posting/success/' + this.item.get('id') + '?sk=' + this.item.get('securityKey'), null, {
+
+            helpers.common.redirect.call(this.app.router, successPage + this.item.get('id') + '?sk=' + this.item.get('securityKey'), null, {
                 status: 200
             });
+
         }
 
         function fail(errors) {

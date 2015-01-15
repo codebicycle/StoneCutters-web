@@ -10,7 +10,6 @@ module.exports = Base.extend({
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
         var location = this.app.session.get('location');
-
         var categories = config.getForMarket(location.url, ['successPage', 'keepPosting'], '');
 
         return _.extend({}, data, {

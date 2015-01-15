@@ -1,42 +1,8 @@
 <aside id="notification-message" class="notification-message icons icon-time">
     <h4>{{ dictionary["posting_step4.WellDoneAdCreated"] }}</h4>
-    <p>{{ dictionary["posting_fields_1.IfAdApprovedYouWillReceiveEmailConfirmation"] }}</p>
+    <p>{{ dictionary["posting_fields_1.IfAdApprovedYouWillReceiveEmailConfirmation"] }} <a href="{{ '/myolx/myadslisting' | link }}">{{ dictionary["widgets.ViewAllMyAdsOnOlx"] }}</a></p>
 </aside>
 
 {% view 'post/keepposting' %}
-
-<section id="item-preview" class="item-preview" data-qa="item">
-    <section class="item-preview-content">
-        <div class="header-edit">
-            <p>{{ dictionary["posting_photos.NeedChangeAd"] }} </p>
-            {# TODO: We are not having this feature for Bolivian launch
-            <a href="#" class="icons icon-edit" title="{{ dictionary['messages_site_class.ClickEdit'] }}">{{ dictionary["posting_publishbutton.EditYourAd_ZA"] }} </a> #}
-        </div>
-        <div class="wrapper">
-            <h1 class="item-title">{{ item.title }}</h1>
-            {% view 'items/partials/iteminfo' %}
-            {% view 'items/partials/imagegallery' %}
-            {% include (template + "/items/itemprice.html") %}
-            {% view 'items/partials/itemdescription' %}
-            {% if item.coordinates %}
-                {% view 'items/partials/itemlocation' %}
-            {% endif %}
-        </div>
-    </section>{# item-preview-content #}
-
-    <aside class="side-column">
-        <div class="header-edit">
-            <p>{{ dictionary["postingheader.ContactDetails"] }} </p>
-            {# TODO: We are not having this feature for Bolivian launch
-            <a href="#" class="icons icon-edit" title="{{ dictionary['messages_site_class.ClickEdit'] }}">{{ dictionary["posting_publishbutton.EditYourAd_ZA"] }} </a> #}
-        </div>
-        <div class="user-info">
-            <p class="icons icon-user user-name">{{ item.contactName }}</p>
-            {% if item.phone %}
-                <p class="icons icon-phone user-phone">{{ item.phone }}</p>
-            {% endif %}
-        </div>
-    </aside>{# right-column #}
-</section>{# item-preview #}
 
 {% view 'partials/tracking' %}
