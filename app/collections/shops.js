@@ -31,8 +31,7 @@ module.exports = Base.extend({
     fetch: function(options) {
         options = options || {};
 
-        //options.data = options.data || {};
-        options.data = {};
+        options.data = options.data || {};
         _.defaults(options.data, this.defaultParams || {});
         this.params = options.data;
 
