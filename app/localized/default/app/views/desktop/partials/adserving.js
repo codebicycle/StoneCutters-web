@@ -2,6 +2,7 @@
 
 var Base = require('../../../../../common/app/bases/view');
 var _ = require('underscore');
+var asynquence = require('asynquence');
 var AdServing = require('../../../../../../modules/adserving');
 var translations = require('../../../../../../../shared/translations');
 
@@ -35,6 +36,7 @@ module.exports = Base.extend({
             return;
         }
         var settings = this.adServing.getSettings();
+        var slotname = this.adServing.get('slotname');
         var type = this.adServing.get('type');
 
         if (type === 'CSA' || type === 'AFC') {
@@ -53,11 +55,13 @@ module.exports = Base.extend({
                 this.createIframeADX(settings.params, settings.options);
                 break;
             case 'AFC':
-                window.tuvieja = (window.tuvieja || (window.tuvieja = 1000)) * 2;
-                setTimeout(function(){
+                window.afcQueue = (window.afcQueue || {
+                    promise: asynquence()
+                });
+                window.afcQueue.promise.then(function(done) {
+                    window.afcQueue[slotname] = done;
                     this.createIframeAFC(settings.params, settings.options);
-                }.bind(this), window.tuvieja);
-
+                }.bind(this));
                 break;
         }
     },
@@ -124,7 +128,7 @@ module.exports = Base.extend({
             ifrScripts.push('google_max_num_ads =  ' + params.number + ';');
             ifrScripts.push('google_hints = "' + options.query + '";');
             ifrScripts.push('google_ad_section = "title body";');
-            ifrScripts.push('google_ad_request_done = function(r){ console.log("loaded ' + slotname + '"); window.parent.AFCrender(r, "' + slotname + '", "' + boxTitle + '"); };');
+            ifrScripts.push('google_ad_request_done = function(r){ window.parent.afcQueue["' + slotname + '"](); window.parent.AFCrender(r, "' + slotname + '", "' + boxTitle + '"); };');
 
             domIfr.write('<script type="text/javascript">' + ifrScripts.join('\n') + '</script><script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>');
         }).appendTo('#' + slotname);

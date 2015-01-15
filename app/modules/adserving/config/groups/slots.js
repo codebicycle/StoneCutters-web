@@ -66,11 +66,10 @@ module.exports = {
                 height: '600'
             },
             excludedCategories: []
+        },
+        group2: {
+            type: 'ADX'
         }
-        // },
-        // group2: {
-        //     type: 'ADX'
-        // }
     },
     slot_top_item: {
         'default': {
