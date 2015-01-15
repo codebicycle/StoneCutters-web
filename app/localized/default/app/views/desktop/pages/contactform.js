@@ -116,7 +116,8 @@ module.exports = Base.extend({
             subject: this.$('[name="subject"]').val(),
             email: this.$('[name="email"]').val(),
             name: this.$('[name="name"]').val(),
-            message: this.$('[name="message"]').val()
+            message: this.$('[name="message"]').val(),
+            location: this.app.session.get('location').url
         };
 
         return $.ajax({
