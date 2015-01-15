@@ -97,6 +97,7 @@ module.exports = Base.extend({
                 return field.name === body.subfield.name;
             }, this);
             var $wrapper = $field.empty().parents('.field-wrapper');
+            var value = field.value || {};
 
             _.extend(field, body.subfield);
             if (!field.values.length) {
@@ -110,7 +111,7 @@ module.exports = Base.extend({
                 value: translations.get(this.app.session.get('selectedLanguage'))['misc.SelectAnOption_BR']
             });
             _.each(field.values, function each(option) {
-                $field.append('<option value="' + option.key + '">' + option.value + '</option>');
+                $field.append('<option value="' + option.key + '"' + (value.key === option.key ? ' selected' : '') + '>' + option.value + '</option>');
             });
             $field.parent().siblings('label').text(field.label);
             $field.attr('name', field.name);

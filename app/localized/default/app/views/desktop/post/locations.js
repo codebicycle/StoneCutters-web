@@ -65,24 +65,14 @@ module.exports = Base.extend({
         var $neighborhoods = $('#field-neighborhood');
 
         if ($states.val()) {
-            this.parentView.$el.trigger('fieldSubmit', [$states]);
+            $states.trigger('change');
         }
         if ($cities.val()) {
-            this.parentView.$el.trigger('fieldSubmit', [$cities]);
-            this.$('#field-location').trigger('change');
+            $cities.trigger('change');
         }
-        /*
         if ($neighborhoods.val()) {
-            this.parentView.$el.trigger('fieldSubmit', [{
-                name: [$neighborhoods.attr('name'), 'id'].join('.'),
-                value: $neighborhoods.val()
-            }]);
-            this.parentView.$el.trigger('fieldSubmit', [{
-                name: [$neighborhoods.attr('name'), 'name'].join('.'),
-                value: $neighborhoods.find(':selected').text()
-            }]);
+            $neighborhoods.trigger('change');
         }
-        */
     },
     onStateChange: function(event) {
         event.preventDefault();
@@ -139,6 +129,11 @@ module.exports = Base.extend({
 
         var success = function(response) {
             var options = response.neighborhoods.toJSON();
+            var location = this.parentView.parentView.getItem().getLocation() || {};
+
+            if (location.children && location.children[0] && location.children[0].type === 'neighborhood') {
+                location = location.children[0];
+            }
             if (options.length) {
                 $neighborhoods.removeAttr('disabled').empty();
 
@@ -147,16 +142,14 @@ module.exports = Base.extend({
                     name: translations.get(this.app.session.get('selectedLanguage'))['countryoptions.SelectANeighborhood']
                 });
                 _.each(options, function each(neighborhood) {
-                    if (!neighborhood.name) {
-                        console.log(neighborhood);
-                    }
-                    $neighborhoods.append('<option value="' + neighborhood.id + '">' + neighborhood.name + '</option>');
-                }.bind(this));
+                    $neighborhoods.append('<option value="' + neighborhood.id + '"' + (location.id === neighborhood.id ? ' selected' : '') + '>' + neighborhood.name + '</option>');
+                }, this);
                 $neighborhoods.parents('.field-wrapper').removeClass('hide');
             }
             else {
                 $neighborhoods.parents('.field-wrapper').addClass('hide');
-
+                this.parentView.parentView.getItem().unset('neighborhood.id');
+                this.parentView.parentView.getItem().unset('neighborhood.name');
             }
 
             this.parentView.$el.trigger('fieldSubmit', [$field]);
