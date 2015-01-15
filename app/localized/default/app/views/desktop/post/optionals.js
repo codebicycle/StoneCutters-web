@@ -28,30 +28,38 @@ module.exports = Base.extend({
             if ($field.val()) {
                 $field.trigger('change');
             }
+            if ($field.hasClass('type-select') && !$field.find('option').length) {
+                $field.parents('.field-wrapper').hide();
+            }
         });
     },
     events: {
         'fieldsChange': 'onFieldsChange',
         'change': 'onChange'
     },
-    onFieldsChange: function(event, fields, categoryId, subcategoryId, firstRender) {
+    onFieldsChange: function(event, fields) {
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();
 
-        this.fields = _.each(fields, function each(field) {
-            if (field.fieldType === 'combobox' && !field.values) {
+        _.each(this.fields || [], function each(field) {
+            this.parentView.getItem().unset(field.name);
+        }, this);
+        this.fields = _.map(fields, function each(field) {
+            if (field.fieldType !== 'combobox') {
+                return field;
+            }
+            if (!field.values) {
                 field.values = [];
             }
-
-            if (field.values) {
+            if (field.values.length) {
                 field.values.unshift({
                     key: '',
                     value: translations.get(this.app.session.get('selectedLanguage'))['misc.SelectAnOption_BR']
                 });
             }
-        }.bind(this));
-        this.fields = fields;
+            return field;
+        }, this);
         this.render();
     },
     onChange: function(event) {
@@ -71,7 +79,6 @@ module.exports = Base.extend({
         this.parentView.$el.trigger('fieldSubmit', [$field]);
     },
     getRelatedFieldValues: function(related, value) {
-        var options;
         var $field = this.$('[name="' + related + '"]');
 
         var fetch = function(done) {
@@ -86,15 +93,28 @@ module.exports = Base.extend({
         }.bind(this);
 
         var success = function(res, body) {
-            $field.removeAttr('disabled').empty();
-            options = body.subfield.values;
-            options.unshift({
+            var field = _.find(this.fields, function each(field) {
+                return field.name === body.subfield.name;
+            }, this);
+            var $wrapper = $field.empty().parents('.field-wrapper');
+
+            _.extend(field, body.subfield);
+            if (!field.values.length) {
+                $field.attr('disabled', 'disabled');
+                $wrapper.hide();
+                return;
+            }
+            $field.removeAttr('disabled');
+            field.values.unshift({
                 key: '',
                 value: translations.get(this.app.session.get('selectedLanguage'))['misc.SelectAnOption_BR']
             });
-            _.each(options, function each(option) {
+            _.each(field.values, function each(option) {
                 $field.append('<option value="' + option.key + '">' + option.value + '</option>');
             });
+            $field.parent().siblings('label').text(field.label);
+            $field.attr('name', field.name);
+            $wrapper.show();
         }.bind(this);
 
         var error = function(err) {
