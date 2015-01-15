@@ -1,22 +1,27 @@
 <div class="help-navigation">
     <h3 class="title">{{ dictionary["misc.NeedHelp"] }}</h3>
     <ul>
-        <li {{ 'class="selected"' if not active }} >
+        <li {{ 'class="selected"' if tab == 'new-olx' }} >
             <a class="help-toggle-content icons icon-user" data-help-content="new-olx" href="#">{{ dictionary["help.NewToBrand"] }}</a>
         </li>
         <li>
             <a class="help-toggle-content icons icon-list" data-help-content="ads" href="#">{{ dictionary["itemslisting.Classifieds"] }}</a>
         </li>
-        <li {{ 'class="selected"' if active == 'contact' }} >
+        <li {{ 'class="selected"' if tab == 'faq' }} >
             <a class="help-toggle-content icons icon-question" data-help-content="faqs" href="#">{{ dictionary["misc.FrequentQuestions"] }}</a>
         </li>
+        {% if isContactEnabled %}
+            <li {{ 'class="selected"' if tab == 'contact' }}>
+                <a class="help-toggle-content icons icon-chat" data-help-content="contact" href="#">{{ dictionary["contact_us.ContactBrand"] | replace('<<BRAND>>','OLX') }}</a>
+            </li>
+        {% endif %}
         <li>
             <a class="help-toggle-content icons icon-more" data-help-content="more-suggestions" href="#">{{ dictionary["help.MoreGuidelines"] }}</a>
         </li>
     </ul>
 </div>
 <div class="help-content">
-    <div id="new-olx" class="help-content-display" {{ 'style="display:block"' if not active }}>
+    <div id="new-olx" class="help-content-display" {{ 'style="display:block"' if tab == 'new-olx' }}>
         <h3 class="title">{{ dictionary["help.NewToBrand"] }}</h3>
         <div class="faqs">
             <div class="question">
@@ -134,7 +139,7 @@
         </div>
     </div>
 
-    <div id="faqs" class="help-content-display" {{ 'style="display:block"' if active == 'contact' }}>
+    <div id="faqs" class="help-content-display" {{ 'style="display:block"' if tab == 'faq' }}>
         <h3 class="title">{{ dictionary["misc.FrequentQuestions"] }}</h3>
         <div class="faqs">
             <div class="question">
@@ -185,15 +190,19 @@
                     </p>
                 </div>
             </div>
-            <div class="question  {{ "faq-open" if active == 'contact' }}">
-                <h4 class="icons {{ "icon-arrow-down" if active == 'contact' else "icon-arrow-right" }}" >{{ dictionary["misc.HowToContact"] }}</h4>
-                <div class="question-content" {{ 'style="display:block"' if active == 'contact' }}>
+            <div class="question  {{ "faq-open" if active == 'faq' }}">
+                <h4 class="icons {{ "icon-arrow-down" if active == 'faq' else "icon-arrow-right" }}" >{{ dictionary["misc.HowToContact"] }}</h4>
+                <div class="question-content" {{ 'style="display:block"' if active == 'faq' }}>
                     <p>{{ dictionary["misc.TechQuestions"] }} <a href="mailTo:{{ mails.support }}">{{ dictionary["misc.ClickHere"] }}</a></p>
                     <p>{{ dictionary["misc.LegalQuestions"] }} <a href="mailTo:{{ mails.legal }}">{{ dictionary["misc.ClickHere"] }}</a></p>
                 </div>
             </div>
         </div>
     </div>
+    {% if isContactEnabled %}
+        {% view 'pages/contactform' %}
+    {% endif %}
+
     <div id="more-suggestions" class="help-content-display">
         <h3 class="title">{{ dictionary["help.MoreGuidelines"] }}</h3>
         <div class="faqs">

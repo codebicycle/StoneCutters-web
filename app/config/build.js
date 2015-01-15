@@ -1,3 +1,1 @@
-module.exports = {
-    revision: 'none'
-};
+module.exports={revision:"test1234"};
