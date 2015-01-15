@@ -46,8 +46,8 @@ module.exports = function() {
     }
     else {
         client = {
-            increment: function(metric, value) {},
-            gauge: function(metric, value) {}
+            increment: function() {},
+            gauge: function() {}
         };
     }
     return client;
