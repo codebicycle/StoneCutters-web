@@ -58,8 +58,20 @@ module.exports = {
                 platforms: ['desktop']
             },
             tagmanager: {
-                enabled: true,
+                enabled: false,
                 platforms: ['desktop']
+            },
+            facebook: {
+                enabled: false,
+                platforms: ['html4', 'html5']
+            },
+            allpages: {
+                enabled: false,
+                platforms: ['html4', 'html5']
+            },
+            keyade: {
+                enabled: true,
+                platforms: ['wap', 'html4', 'html5', 'desktop']
             }
         }
     }
