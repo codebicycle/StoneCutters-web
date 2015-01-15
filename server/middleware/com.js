@@ -29,7 +29,7 @@ module.exports = function(dataAdapter, excludedUrls) {
                 }
             });
             if (!countryCode) {
-                statsd.increment(['all', 'middleware', 'com', 'miss']);
+                statsd.increment(['Unknown Location', 'middleware', 'com', 'miss']);
                 return next();
             }
 
@@ -71,7 +71,7 @@ module.exports = function(dataAdapter, excludedUrls) {
                 if (origin.length > 1) {
                     host += ':' + origin[1];
                 }
-                statsd.increment([country.abbreviation, 'middleware', 'com', 'redirection']);
+                statsd.increment([country.name, 'middleware', 'com', 'redirection']);
                 res.header('Cache-Control', 'no-cache, no-store');
                 res.redirect(host + req.originalUrl);
             }

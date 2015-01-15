@@ -238,7 +238,7 @@ module.exports = Base.extend({
                 var location = this.app.session.get('location');
                 var platform = this.app.session.get('platform');
 
-                statsd.increment([location.abbreviation, 'reply', 'success', platform]);
+                statsd.increment([location.name, 'reply', 'success', platform]);
                 done();
             }.bind(this);
 
@@ -253,7 +253,7 @@ module.exports = Base.extend({
                 var location = this.app.session.get('location');
                 var platform = this.app.session.get('platform');
 
-                statsd.increment([location.abbreviation, 'reply', 'error', platform]);
+                statsd.increment([location.name, 'reply', 'error', platform]);
             }.bind(this);
 
             var always = function() {
@@ -300,7 +300,7 @@ module.exports = Base.extend({
                 var message = $('.message').val();
                 var email = $('.email').val();
                 var name = $('.name').val();
-                var locale = this.app.session.get('location').abbreviation;
+                var locale = this.app.session.get('location').abbreviation.toLowerCase();
 
                 if (!that.validForm(message, email)) {
                     action += '_Error';
