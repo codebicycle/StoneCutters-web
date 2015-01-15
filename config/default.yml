@@ -2,7 +2,7 @@
 environment: development
 
 server:
-  port: 3030
+  port: 80
   maxSockets:
     http: 500
     https: 500
