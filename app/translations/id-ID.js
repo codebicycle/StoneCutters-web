@@ -12,6 +12,7 @@ module.exports = {
     'countryoptions.Home_SelectState': 'Pilih negara bagian',
     'countryoptions.OtherCities': 'Kota lainnya',
     'countryoptions.SelectACity': 'Pilih kota',
+    'countryoptions.SelectANeighborhood': 'Pilih lingkungan',
     'defaultfooter.About OLX': 'Tentang OLX',
     'defaultfooter.Back': 'Kembali',
     'defaultfooter.change': 'ubah',
