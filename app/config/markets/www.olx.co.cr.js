@@ -33,7 +33,7 @@ module.exports = {
     tracking: {
         trackers: {
             hydra: {
-                enabled: false
+                enabled: true
             }
         }
     }
