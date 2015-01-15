@@ -7,13 +7,17 @@ var _ = require('underscore');
 
 module.exports = Base.extend({
     events: {
-        'click [data-action=more]': 'showActions'
+        'click [data-action=more]': 'showActions',
+        'click [data-action=delete]': 'deleteItem'
     },
-    getTemplateData: function() {
-        var data = Base.prototype.getTemplateData.call(this);
+    postRender: function() {
+        var $messages = $('#messages');
 
-        //data.items = data.items || this.parentView.items;
-        return data;
+        if ($messages.length) {
+            setTimeout(function(){
+                $messages.slideUp();
+            }, 3000);
+        }
     },
     showActions: function(event) {
         event.preventDefault();
@@ -23,23 +27,33 @@ module.exports = Base.extend({
         var $target = $(event.currentTarget);
         var $buttons = $('.my-ads .btnfilter[data-action=more]');
         var $actions = $('.actions[data-action=actions]');
+        var $view = $('.action[data-action=view]');
+        var $deleteItem = $('.action[data-action=delete]');
         var targetPosition = $target.parent().position().top;
         var actionsPosition = $actions.position().top;
         var newPosition = targetPosition + $target.parent().height();
         var itemId = $target.data('id');
+        var itemUrl = $target.data('itemurl');
+        var href = $deleteItem.attr('href');
 
         if ($actions.hasClass('hide')) {
             $target.addClass('active');
-            $actions.removeClass('hide');
             $actions.css('top', newPosition);
+            $view.attr('href', itemUrl);
+            $deleteItem.attr('href', href.replace('[[itemId]]', itemId));
+            $actions.removeClass('hide');
         }
         else if (actionsPosition == newPosition) {
             $actions.addClass('hide');
             $target.removeClass('active');
+            $deleteItem.attr('href', href.replace(/\/[0-9]+\?/, '/[[itemId]]?'));
+            $view.attr('href', '');
         }
         else {
             $buttons.removeClass('active');
             $target.addClass('active');
+            $view.attr('href', itemUrl);
+            $deleteItem.attr('href', href.replace('[[itemId]]', itemId));
             $actions.css('top', newPosition);
         }
     }
