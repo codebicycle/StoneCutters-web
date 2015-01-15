@@ -4,6 +4,7 @@
 {% set link = (breadcrumb | link) %}
 {{ Breadcrumb(dictionary, link, dictionary["listingpageitemslisting.ResultsForNew4"] | replace('<<KEYWORD>>', search) | replace('<<NUMBER>>', meta.total)) }}
 
+{{ shops | log }}
 <div id="itemListing">
     {% if meta.total == 0 %}
         <div class="emtyList" data-qa="no-results-found">
@@ -16,12 +17,11 @@
         {{ NearByStore(shops) }}
         
         <ul class="itemListing">
-            {% set nextShop = 0 %}
             {% for item in items %}
 
                 <li>
                     <a href="{{ item | slugToUrl | link }}" data-qa="list-item">
-                        <div class="imageCont" style="background-image: url({{ item.thumbnail if item.thumbnail else ('/images/html4/noPhoto.png' | static) }});"></div>
+                        <div class="imageCont" style="background-image: url({{ item.thumbnail if item.thumbnail else ('/images/html4/noPhoto.png' | static) }}); background-size: 90% 90%;"></div>
                     </a>
                     <div class="itemInfo">
                         <p class="itemPrice">{{ item.price.displayPrice }}</p>
@@ -35,12 +35,10 @@
                     </div>
                 </li>
 
-               {% set shop = shopsAdmin.getShop() %}
-                {% if shop %}
-                    {{ AdLikeStore(shop) }}
-                {% else %}
-                    {{ CallsToAction(shopsAdmin.getShop()) }}
-                {% endif %}
+               {{ AdLikeStore(shops[0]) }}
+                
+                {{ CallsToAction(shops[0]) }}
+                
             {% endfor %}
         </ul>
         {% if paginator and paginator.isEnabled() %}
