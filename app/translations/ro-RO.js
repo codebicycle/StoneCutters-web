@@ -12,6 +12,7 @@ module.exports = {
     'countryoptions.Home_SelectState': 'Alege un stat',
     'countryoptions.OtherCities': 'Alte ora\u015Fe',
     'countryoptions.SelectACity': 'Selecta\u0163i un ora\u015F',
+    'countryoptions.SelectANeighborhood': 'Alege un cartier',
     'defaultfooter.About OLX': 'Despre OLX',
     'defaultfooter.Back': '\xCEnapoi',
     'defaultfooter.change': 'modificare',

@@ -12,6 +12,7 @@ module.exports = {
     'countryoptions.Home_SelectState': 'Izberite zvezno dr\u017Eavo',
     'countryoptions.OtherCities': 'Drugi kraji',
     'countryoptions.SelectACity': 'Izberite kraj',
+    'countryoptions.SelectANeighborhood': 'Izberite sosesko',
     'defaultfooter.About OLX': 'O storitvi OLX',
     'defaultfooter.Back': 'Nazaj',
     'defaultfooter.change': 'spremeni',

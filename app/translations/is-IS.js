@@ -12,6 +12,7 @@ module.exports = {
     'countryoptions.Home_SelectState': 'Veldu fylki',
     'countryoptions.OtherCities': 'A\xF0rar borgir',
     'countryoptions.SelectACity': 'Velja borg',
+    'countryoptions.SelectANeighborhood': 'Veldu hverfi',
     'defaultfooter.About OLX': 'Um OLX',
     'defaultfooter.Back': 'Til baka',
     'defaultfooter.change': 'breyta',

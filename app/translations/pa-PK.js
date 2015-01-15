@@ -12,6 +12,7 @@ module.exports = {
     'countryoptions.Home_SelectState': '\u0A15\u0A4B\u0A08 \u0A30\u0A3E\u0A1C \u0A1A\u0A41\u0A23\u0A4B',
     'countryoptions.OtherCities': '\u0A26\u0A42\u0A1C\u0A47 \u0A36\u0A39\u0A3F\u0A30',
     'countryoptions.SelectACity': '\u0A36\u0A39\u0A3F\u0A30 \u0A1A\u0A41\u0A23\u0A4B',
+    'countryoptions.SelectANeighborhood': '\u0A15\u0A4B\u0A08 \u0A17\u0A41\u0A06\u0A02\u0A22 \u0A1A\u0A41\u0A23\u0A4B',
     'defaultfooter.About OLX': 'OLX \u0A2C\u0A3E\u0A30\u0A47',
     'defaultfooter.Back': '\u0A2A\u0A3F\u0A71\u0A1B\u0A47',
     'defaultfooter.change': '\u0A2C\u0A26\u0A32\u0A4B',

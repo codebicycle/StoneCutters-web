@@ -12,6 +12,7 @@ module.exports = {
     'countryoptions.Home_SelectState': 'Valige osariik',
     'countryoptions.OtherCities': 'Muud linnad',
     'countryoptions.SelectACity': 'Valige linn',
+    'countryoptions.SelectANeighborhood': 'Vali l\xE4hipiirkond',
     'defaultfooter.About OLX': 'OLX-ist',
     'defaultfooter.Back': 'Tagasi',
     'defaultfooter.change': 'muuda',

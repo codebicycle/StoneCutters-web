@@ -12,6 +12,7 @@ module.exports = {
     'countryoptions.Home_SelectState': 'B\xF6lge se\xE7in',
     'countryoptions.OtherCities': 'Di\u011Fer \u015Eehirler',
     'countryoptions.SelectACity': '\u015Eehir se\xE7in',
+    'countryoptions.SelectANeighborhood': 'Kom\u015Fu Bir Yer Se\xE7in',
     'defaultfooter.About OLX': 'OLX Hakk\u0131nda',
     'defaultfooter.Back': 'Geri',
     'defaultfooter.change': 'de\u011Fi\u015Ftir',

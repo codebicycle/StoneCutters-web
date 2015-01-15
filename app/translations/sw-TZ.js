@@ -12,6 +12,7 @@ module.exports = {
     'countryoptions.Home_SelectState': 'Chagua jimbo',
     'countryoptions.OtherCities': 'Miji Mingine',
     'countryoptions.SelectACity': 'Chagua mji',
+    'countryoptions.SelectANeighborhood': 'Chagua kitongoji',
     'defaultfooter.About OLX': 'Kuhusu OLX',
     'defaultfooter.Back': 'Nyuma',
     'defaultfooter.change': 'Badilisha',

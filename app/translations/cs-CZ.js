@@ -12,6 +12,7 @@ module.exports = {
     'countryoptions.Home_SelectState': 'Vyberte kraj',
     'countryoptions.OtherCities': 'Ostatn\xED m\u011Bsta',
     'countryoptions.SelectACity': 'Vyberte m\u011Bsto',
+    'countryoptions.SelectANeighborhood': 'Vyberte \u010Dtvr\u0165',
     'defaultfooter.About OLX': 'Informace o webu OLX',
     'defaultfooter.Back': 'Zp\u011Bt',
     'defaultfooter.change': 'zm\u011Bnit',
