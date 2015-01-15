@@ -4,6 +4,7 @@ var _ = require('underscore');
 var configTracking = require('../config');
 var config = require('../../../../shared/config');
 var utils = require('../../../../shared/utils');
+var common = require('./common');
 
 function isPlatformEnabled(platforms) {
     var enabled = true;
@@ -27,8 +28,11 @@ function isEnabled() {
     return enabled;
 }
 
-function getParams(params, options) {
-    return utils.get(configTracking, ['tagmanager', this.app.session.get('location').url], {});
+function getParams(page, options) {
+    var params = utils.get(configTracking, ['tagmanager', this.app.session.get('location').url], {});
+
+    params.pageName = common.getPageName.call(this, page, options);
+    return params;
 }
 
 module.exports = {
