@@ -109,6 +109,12 @@ module.exports = {
                 worldwide: true,
                 countries: []
             }
+        },
+        desktop: {
+            contactForm: {
+                worldwide: false,
+                countries: ['www.olx.co.cr']
+            }
         }
     },
     seo: {
@@ -181,6 +187,6 @@ module.exports = {
             'default':'legal',
             'www.olx.com.ng': 'support-ng',
             'www.olx.com.ke': 'support-ke'
-        },
+        }
     }
 };
