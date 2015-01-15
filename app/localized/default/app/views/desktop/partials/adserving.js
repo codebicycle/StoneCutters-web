@@ -53,7 +53,11 @@ module.exports = Base.extend({
                 this.createIframeADX(settings.params, settings.options);
                 break;
             case 'AFC':
-                this.createIframeAFC(settings.params, settings.options);
+                window.tuvieja = (window.tuvieja || (window.tuvieja = 1000)) * 2;
+                setTimeout(function(){
+                    this.createIframeAFC(settings.params, settings.options);
+                }.bind(this), window.tuvieja);
+
                 break;
         }
     },

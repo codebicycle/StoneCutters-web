@@ -37,7 +37,7 @@ window.AFCrender = function AFCrender(gads, slotname, boxTitle) {
         default:
             return;
     }
-    $('#' + slotname).append(render.render());
+    $('#' + slotname).html(render.render());
 };
 
 function AFCImageRender() {};
