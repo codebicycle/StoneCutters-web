@@ -143,6 +143,139 @@
                 }
             }
         }
+
+        .contact {
+            margin: 20px;
+            fieldset,
+            div {
+                border: 0 none;
+                font-size: $s;
+                span {
+                    display: block;
+                    font-size: $xs;
+                    margin: 5px 0 0 115px;
+                    &.notification {
+                        color: $greyStrong;
+                        &::before {
+                            margin: -3px 3px 0 0;
+                        }
+                    }
+                    &.error {
+                        color: $red;
+                        &.hide {
+                            display: none;
+                        }
+                    }
+                }
+                &.error {
+                    textarea,
+                    select,
+                    input[type="text"] {
+                        border-color: $red;
+                    }
+                }
+                label {
+                    display: inline-block;
+                    margin-right: 10px;
+                    text-align: right;
+                    width: 100px;
+                }
+                input[type="text"],
+                select,
+                textarea {
+                    border-radius(3px);
+                    border: 1px solid $greyBorders;
+                    font-size: $s;
+                    padding: 10px;
+                    resize: none;
+                    width: 455px;
+                }
+                input[type="text"] {
+                    height: 20px;
+                }
+                input[type="submit"] {
+                    action-button($orange, $white, 3px, padding = 10px 0);
+                    font-size: $l;
+                    margin-left: 115px;
+                    width: 100px;
+                }
+                select {
+                    background: $white;
+                    width: 477px;
+                }
+                label[for="message"] {
+                    margin-top: 8px;
+                    vertical-align: top;
+                }
+
+                &.error {
+                    label,
+                    .label {
+                        color: $red;
+                    }
+                    select,
+                    input,
+                    textarea {
+                        border-color: $red;
+                    }
+                }
+            }
+            .verification {
+                margin: 5px 10px 10px;
+                p {
+                    display: inline-block;
+                    margin: 8px 10px 0 0;
+                    text-align: right;
+                    vertical-align: top;
+                    width: 100px;
+                }
+                div {
+                    display: inline-block;
+                }
+            }
+            span.spinner {
+                margin-left: 125px;
+            }
+            .replyResult {
+                box($pink, $pinkBorder, 3px, 10px 10px 10px 50px, solid);
+                color: $black;
+                font-size: $s;
+                margin-left: 123px;
+                position: relative;
+                width: 420px;
+
+                &:before {
+                    color: $red;
+                    font-size: $l;
+                    left: 20px;
+                    position: absolute;
+                    top: 14px;
+                }
+
+                span {
+                    color: $blue;
+                    cursor: pointer;
+                    display: block;
+                    padding-top: 3px;
+                    &:hover {
+                        text-decoration: underline;
+                    }
+                }
+                &.success {
+                    background: $greenLight;
+                    border-color: $greenBorder;
+                    height: 40px;
+                    margin-left: 3px;
+                    padding: 20px 10px 0 48px;
+                    width: 553px;
+
+                    &:before {
+                        top: 17px;
+                        color: $green;
+                    }
+                }
+            }
+        }
     }
 
 }
