@@ -38,5 +38,15 @@ module.exports = {
                 name: 'Teléfonos'
             }
         ]
+    },
+    tracking: {
+        trackers: {
+            hydra: {
+                enabled: false
+            },
+            tagmanager: {
+                enabled: true
+            }
+        }
     }
 };

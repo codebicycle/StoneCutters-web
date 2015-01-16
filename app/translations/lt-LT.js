@@ -12,6 +12,7 @@ module.exports = {
     'countryoptions.Home_SelectState': 'Pasirinkite valstij\u0105',
     'countryoptions.OtherCities': 'Kiti miestai',
     'countryoptions.SelectACity': 'Pasirinkite miest\u0105',
+    'countryoptions.SelectANeighborhood': 'Pasirinkti artimiausi\u0105 vietov\u0119',
     'defaultfooter.About OLX': 'Apie OLX',
     'defaultfooter.Back': 'Atgal',
     'defaultfooter.change': 'keisti',

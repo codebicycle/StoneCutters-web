@@ -12,6 +12,7 @@ module.exports = {
     'countryoptions.Home_SelectState': 'Izv\u0113lieties \u0161tatu',
     'countryoptions.OtherCities': 'Citas pils\u0113tas',
     'countryoptions.SelectACity': 'Izv\u0113lieties pils\u0113tu',
+    'countryoptions.SelectANeighborhood': 'Izv\u0113lieties apkaimi',
     'defaultfooter.About OLX': 'Par OLX',
     'defaultfooter.Back': 'Atpaka\u013C',
     'defaultfooter.change': 'main\u012Bt',

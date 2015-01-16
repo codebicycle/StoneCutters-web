@@ -12,6 +12,7 @@ module.exports = {
     'countryoptions.Home_SelectState': 'Kies \'n staat',
     'countryoptions.OtherCities': 'Ander Stede',
     'countryoptions.SelectACity': 'Kies \'n stad',
+    'countryoptions.SelectANeighborhood': 'Kies \'n omgewing',
     'defaultfooter.About OLX': 'Meer oor OLX',
     'defaultfooter.Back': 'Terug',
     'defaultfooter.change': 'verander',

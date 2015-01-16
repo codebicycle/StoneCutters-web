@@ -12,6 +12,7 @@ module.exports = {
     'countryoptions.Home_SelectState': 'Valitse osavaltio',
     'countryoptions.OtherCities': 'Muut paikkakunnat',
     'countryoptions.SelectACity': 'Valitse kaupunki',
+    'countryoptions.SelectANeighborhood': 'Valitse kaupunginosa',
     'defaultfooter.About OLX': 'Tietoa OLX:st\xE4',
     'defaultfooter.Back': 'Takaisin',
     'defaultfooter.change': 'muuta',

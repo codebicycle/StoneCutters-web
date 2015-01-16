@@ -20,5 +20,12 @@ module.exports = {
                 name: 'Phones'
             }
         ]
+    },
+    tracking: {
+        trackers: {
+            allpages: {
+                enabled: true
+            }
+        }
     }
 };

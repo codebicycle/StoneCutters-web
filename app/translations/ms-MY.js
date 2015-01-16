@@ -12,6 +12,7 @@ module.exports = {
     'countryoptions.Home_SelectState': 'Pilih negeri',
     'countryoptions.OtherCities': 'Bandar Lain',
     'countryoptions.SelectACity': 'Pilih bandar',
+    'countryoptions.SelectANeighborhood': 'Pilih kejiranan ',
     'defaultfooter.About OLX': 'Tentang OLX',
     'defaultfooter.Back': 'Undur',
     'defaultfooter.change': 'tukar',

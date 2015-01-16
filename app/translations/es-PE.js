@@ -12,6 +12,7 @@ module.exports = {
     'countryoptions.Home_SelectState': 'Seleccione un estado',
     'countryoptions.OtherCities': 'Otras provincias',
     'countryoptions.SelectACity': 'Elige una provincia',
+    'countryoptions.SelectANeighborhood': 'Selecciona un distrito',
     'defaultfooter.About OLX': 'Acerca de OLX',
     'defaultfooter.Back': 'Volver',
     'defaultfooter.change': 'cambiar',
