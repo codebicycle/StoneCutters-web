@@ -17,7 +17,6 @@ module.exports = Base.extend({
 
         return _.extend({}, data, {
             nav: {
-                link: link,
                 linkig: helpers.common.linkig.call(this, link, null, 'searchig'),
                 current: 'show'
             }

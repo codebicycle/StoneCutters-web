@@ -19,7 +19,8 @@ module.exports = Base.extend({
             nav: {
                 linkig: link.replace('-ig', ''),
                 current: 'showig'
-            }
+            },
+            filtersEnabled: helpers.features.isEnabled.call(this, 'listingFilters')
         });
     },
     cleanPage: function(path) {
