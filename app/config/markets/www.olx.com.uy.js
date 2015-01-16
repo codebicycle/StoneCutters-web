@@ -16,5 +16,15 @@ module.exports = {
                 title: 'OLX Uruguay - Auto - Vender es fácil',
                 id: 'rhJVT5fDkWU'
             }
-        ]
+        ],
+    tracking: {
+        trackers: {
+            hydra: {
+                enabled: false
+            },
+            tagmanager: {
+                enabled: true
+            }
+        }
+    }
 };
