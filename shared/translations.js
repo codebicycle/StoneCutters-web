@@ -2,6 +2,7 @@
 
 var defaultLocale = 'en-US';
 var defaultDictionary = {};
+var dictionaries = {};
 
 try {
     defaultDictionary = require('../app/translations/' + defaultLocale);
@@ -10,12 +11,14 @@ catch (e) {}
 
 module.exports = {
     get: function(locale) {
-        var dictionary;
+        var file = '../app/translations/' + (locale || defaultLocale);
 
         try {
-            dictionary = require('../app/translations/' + (locale || defaultLocale));
+            dictionaries[file] = dictionaries[file] || require(file);
         }
-        catch(e) {}
-        return dictionary || defaultDictionary;
+        catch(e) {
+            dictionaries[file] = defaultDictionary;
+        }
+        return dictionaries[file];
     }
 };

@@ -168,6 +168,10 @@ function allstates(params, callback) {
     function controller() {
         var location = this.app.session.get('location');
         var siteLocation = location.url;
+        var shortHost = this.app.session.get('shortHost');
+        var protocol = this.app.session.get('protocol');
+        var host = this.app.session.get('host');
+        var url;
 
         var redirect = function(done) {
             var platform = this.app.session.get('platform');
@@ -176,6 +180,12 @@ function allstates(params, callback) {
                 done.abort();
                 return helpers.common.error.call(this, null, {}, callback);
             }
+
+            if (location.current && location.current.url && !~location.current.url.indexOf('www.')) {
+                url = [protocol, '://', host.replace(shortHost, siteLocation), '/all-states'].join('');
+                return helpers.common.redirect.call(this, url);
+            }
+
             done();
         }.bind(this);
 
