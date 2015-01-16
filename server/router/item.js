@@ -96,6 +96,10 @@ module.exports = function(app, dataAdapter) {
             var item;
             var editing;
 
+            if (!req.headers['content-type']) {
+                console.log('[OLX_DEBUG]', 'no-content-type', location.url, platform, req.rendrApp.session.get('osName'));
+            }
+
             function parse(done) {
                 formidable.parse(req, {
                     acceptFiles: true
@@ -105,7 +109,7 @@ module.exports = function(app, dataAdapter) {
                     editing = !!(_item && _item.id);
                     if (err === 'aborted') {
                         done.abort();
-                        statsd.increment([location.abbreviation.toLowerCase(), editing ? 'editing' : 'posting', 'error', 'abort', platform]);
+                        statsd.increment([location.abbreviation, editing ? 'editing' : 'posting', 'error', 'abort', platform]);
                         return fail(err, 'aborted');
                     }
                     newImages = _.clone(_images);
@@ -163,7 +167,7 @@ module.exports = function(app, dataAdapter) {
                 var url = req.headers.referer || '/posting';
 
                 if (!track && err && !Array.isArray(err)) {
-                    console.log('[OLX_DEBUG]', 'post', err instanceof Error ? err.stack : err);
+                    console.log('[OLX_DEBUG]', 'post', err instanceof Error ? JSON.stringify(err.stack) : err);
                 }
                 formidable.error(req, url.split('?').shift(), err, item ? item.toJSON() : {}, function redirect(url) {
                     res.redirect(utils.link(url, req.rendrApp));
