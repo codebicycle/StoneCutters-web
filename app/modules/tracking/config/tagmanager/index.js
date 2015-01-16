@@ -9,5 +9,8 @@ module.exports = {
     },
     'www.olx.co.za': {
         id: 'GTM-56LHQ2'
+    },
+    'www.olx.com.uy': {
+        id: 'GTM-KJCF97'
     }
 };
