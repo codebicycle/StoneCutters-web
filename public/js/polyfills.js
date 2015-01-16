@@ -26,3 +26,15 @@
     };
   }
 })();
+
+(function() {
+    'use strict';
+
+    if(typeof console === 'undefined') {
+        console = {
+            log: function() {},
+            error: function() {},
+            warn: function() {}
+        };
+    }
+})();
