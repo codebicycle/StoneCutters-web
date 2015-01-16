@@ -12,5 +12,12 @@ module.exports = {
     },
     post_banner: {
         image: 'post-africa'
+    },
+    tracking: {
+        trackers: {
+            tagmanager: {
+                enabled: true
+            }
+        }
     }
 };

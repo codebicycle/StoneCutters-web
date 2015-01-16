@@ -921,7 +921,7 @@ function staticSearch(params, callback) {
         }.bind(this);
 
         var prepare = function(done) {
-            Paginator.prepare(this.app, params);
+            Paginator.prepare(this.app, params, 'static');
             query = _.clone(params);
             params.categoryId = params.catId;
             delete params.search;

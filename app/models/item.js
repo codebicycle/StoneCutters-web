@@ -227,7 +227,7 @@ function postFields(done) {
 
 function logValidation(type, statusCode, errors) {
     var platform = this.app.session.get('platform');
-    var locale = this.app.session.get('location').abbreviation;
+    var locale = this.app.session.get('location').abbreviation.toLowerCase();
 
     if (!errors) {
         return statsd.increment([locale, type, 'success', 'validation', platform]);
@@ -242,7 +242,7 @@ function logValidation(type, statusCode, errors) {
 
 function logPostImages(type, statusCode, errors) {
     var platform = this.app.session.get('platform');
-    var locale = this.app.session.get('location').abbreviation;
+    var locale = this.app.session.get('location').abbreviation.toLowerCase();
 
     if (statusCode == 200) {
         return statsd.increment([locale, type, 'success', 'images', platform]);
@@ -257,7 +257,7 @@ function logPostImages(type, statusCode, errors) {
 
 function logPost(type, statusCode, errors) {
     var platform = this.app.session.get('platform');
-    var locale = this.app.session.get('location').abbreviation;
+    var locale = this.app.session.get('location').abbreviation.toLowerCase();
 
     if (statusCode == 200) {
         return statsd.increment([locale, type, 'success', 'post', platform]);

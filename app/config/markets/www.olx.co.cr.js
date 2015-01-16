@@ -34,6 +34,9 @@ module.exports = {
         trackers: {
             hydra: {
                 enabled: false
+            },
+            tagmanager: {
+                enabled: true
             }
         }
     }

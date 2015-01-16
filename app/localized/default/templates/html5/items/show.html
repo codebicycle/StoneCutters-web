@@ -113,10 +113,10 @@
         <span></span>
         <div class="links {{ 'twice' if (item.metadata.seo.prevItem and item.metadata.seo.nextItem) }}">
             {% if item.metadata.seo.prevItem %}
-                <a href="{{ item.metadata.seo.prevItem.itemUrl | link }}">{{ dictionary["listingpageitemslisting.Previous"] }} </a>
+                <a class="first" href="{{ item.metadata.seo.prevItem.itemUrl | link }}">{{ dictionary["listingpageitemslisting.Previous"] }} </a>
             {% endif %}
             {% if item.metadata.seo.nextItem %}
-                <a href="{{ item.metadata.seo.nextItem.itemUrl | link }}">{{ dictionary["itemslisting.Next"] }} </a>
+                <a class="second" href="{{ item.metadata.seo.nextItem.itemUrl | link }}">{{ dictionary["itemslisting.Next"] }} </a>
             {% endif %}
         </div>
     </section>

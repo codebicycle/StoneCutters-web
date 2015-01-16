@@ -248,7 +248,7 @@ module.exports = (function() {
         }
         if (this.app.session.get('isServer')) {
             this.app.req.res.status(status);
-            statsd.increment([this.app.session.get('location').abbreviation, 'errors', 400]);
+            statsd.increment([this.app.session.get('location').name, 'errors', 400]);
         }
         this.app.seo.reset(this.app, {
             page: ['pages', 'error']

@@ -33,10 +33,10 @@
                     font-weight: 700;
                     padding: 0 10px;
 
-                    &:first-child {
+                    &.first {
                         background: transparent url(imageUrl/images/html5/flecha_home_left.png) no-repeat left center;
                     }
-                    &:last-child {
+                    &.second {
                         background: transparent url(imageUrl/images/html5/flecha_home.png) no-repeat right center;
                     }
                 }
@@ -190,6 +190,9 @@
                 &.share {
                     background: url(imageUrl/images/html5/share_itempage.png) no-repeat 5px center;
                     float: right;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                    overflow: hidden;
                 }
                 &.remove {
 
@@ -526,8 +529,6 @@
         height: 55px !important;
         text-align: center;
         position: relative;
-        /*margin-right: 5px;
-        border: 2px solid transparent;*/
     }
     .swiper-nav .swiper-slide {
         -webkit-transition: 300ms;
@@ -563,34 +564,25 @@
         opacity: 0;
         background: transparent;
     }
-    /*.swiper-nav .swiper-slide .smallslide {
-        width: 50px;
-        height: 50px;
-    }
-    .swiper-nav .swiper-slide .smallslide .img {
-        height: 50px;
-        width: 50px;
-        background-position: center center;
-        background-repeat: no-repeat;
-        background-size: cover;
-    }
-    .swiper-nav .swiper-slide .smallslide .bg {
-        width: 100%;
-        background: #fff;
-        height: 100%;
-        position: absolute;
-        top: 0;
-        left: 0;
-        opacity: .65;
-    }
-    .swiper-nav .active-nav .smallslide .bg {
-        opacity: 0;
-        background: transparent;
-    }*/
     .swiper-nav img {
         margin-top: 10px;
-        /*width: 40px;
-        height: 40px;*/
     }
 
+}
+@media (max-width : 319px) {
+    .contentshare {
+        .btnshare {
+            width: 84% !important;
+            display: block !important;
+            &.fav {
+                margin-right: 0 !important;
+            }
+            &.share {
+                margin-top: 5px;
+            }
+        }
+    }
+    .nav {
+        margin-top: 15px !important;
+    }
 }

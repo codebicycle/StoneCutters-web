@@ -6,7 +6,6 @@ var middlewares = require('../middlewares');
 var helpers = require('../helpers');
 var tracking = require('../modules/tracking');
 var config = require('../../shared/config');
-var countriesTerms = ['www.olx.cl', 'www.olx.com.uy', 'www.olx.com.py', 'www.olx.com.bo', 'www.olx.com.pe', 'www.olx.com.ve', 'www.olx.com.co', 'www.olx.com.ec', 'www.olx.com.pa', 'www.olx.co.cr', 'www.olx.com.ni', 'www.olx.hn', 'www.olx.com.sv', 'www.olx.com.gt', 'www.olx.com.mx'];
 
 if (typeof window === 'undefined') {
     var statsdModule = '../../server/modules/statsd';
@@ -31,12 +30,11 @@ function terms(params, callback) {
     function controller() {
         var platform = this.app.session.get('platform');
         var location = this.app.session.get('location');
-        var view = 'pages/terms';
+        var terms = _.contains(config.get(['terms', platform]), location.url) ? location.url : 'default';
 
-        if (_.contains(countriesTerms, location.url)) {
-            view += 'es';
-        }
-        callback(null, view, {});
+        callback(null, {
+            terms: terms
+        });
     }
 }
 
@@ -52,9 +50,24 @@ function help(params, callback) {
     helpers.controllers.control.call(this, params, controller);
 
     function controller() {
+        var platform = this.app.session.get('platform');
+        var location = this.app.session.get('location');
+
+        var tab = 'new-olx';
+        var active = params.active;
+        var isContactEnabled = helpers.features.isEnabled.call(this, 'contactForm', platform, location.url);
+
+        if (active && !isContactEnabled) {
+            tab = 'faq';
+        } else if (active) {
+            tab = 'contact';
+        }
+
         // Delete this callback
         callback(null, {
-                active: params.active
+            active: params.active,
+            tab: tab,
+            isContactEnabled: isContactEnabled
         });
         /*
             TODO [MOB-4717] Help.
@@ -132,10 +145,10 @@ function error(params, callback) {
         if (this.app.session.get('isServer')) {
             this.app.req.res.status(404);
             if (this.app.session.get('path') !== '/500') {
-                statsd.increment(['all', 'errors', 404]);
+                statsd.increment(['All', 'errors', 404]);
             }
             else {
-                statsd.increment(['all', 'errors', 500]);
+                statsd.increment(['All', 'errors', 500]);
             }
         }
         if (err) {
@@ -155,6 +168,10 @@ function allstates(params, callback) {
     function controller() {
         var location = this.app.session.get('location');
         var siteLocation = location.url;
+        var shortHost = this.app.session.get('shortHost');
+        var protocol = this.app.session.get('protocol');
+        var host = this.app.session.get('host');
+        var url;
 
         var redirect = function(done) {
             var platform = this.app.session.get('platform');
@@ -163,6 +180,12 @@ function allstates(params, callback) {
                 done.abort();
                 return helpers.common.error.call(this, null, {}, callback);
             }
+
+            if (location.current && location.current.url && !~location.current.url.indexOf('www.')) {
+                url = [protocol, '://', host.replace(shortHost, siteLocation), '/all-states'].join('');
+                return helpers.common.redirect.call(this, url);
+            }
+
             done();
         }.bind(this);
 
