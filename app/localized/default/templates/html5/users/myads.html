@@ -27,10 +27,12 @@
                 {% endif %}
                 {#{ item.date.since.day if item.date.since.day }} {{ dictionary[item.date.since.dictionary] }}{{ (', ' + item.date.since.hour) if item.date.since.hour }#}
                 <li class="my-ads {{ status }}">
-                    {% if (status == 'ready' or status == 'pending') %}
+                    {% if (status == 'ready' or status == 'pending' or status == 'rejected') %}
                         <a class="btnfilter edit" href="{{ item.slug.replace(domain, fullDomain) | editSlug(item.id) }}">{{ dictionary["showactivelistings.Edit"] }}</a>
                     {% endif %}
-                    <a class="btnfilter more" href="#" data-action="more" data-itemUrl="{{ item | slugToUrl | link }}" data-id="{{ item.id }}" >{{ dictionary["itemslisting.More"] }}</a>
+                    {% if status != 'deleted' %}
+                        <a class="btnfilter more" href="#" data-action="more" data-itemUrl="{{ item | slugToUrl | link }}" data-id="{{ item.id }}" >{{ dictionary["itemslisting.More"] }}</a>
+                    {% endif %}
                     <div {% if item.thumbnail %} style="background-image:url({{ item.thumbnail }});" {% endif %} data-fullimg="{{ item.fullImage }}" class="image{{ ' filled' if item.thumbnail }}"></div>
                     <p class="datetime">{{ statustxt }}</p>
                     <h2 class="title">{{ item.title }}</h2>
@@ -47,6 +49,9 @@
         <div class="emtyList">
             {{ dictionary["myolx.YouCurrentlyHaveNoActiveListings"] }}
         </div>
+    {% endif %}
+    {% if paginator and paginator.isEnabled() %}
+        {% include (template + '/items/pagination.html') %}
     {% endif %}
 </section>
 
