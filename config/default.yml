@@ -38,6 +38,7 @@ cron:
 
 statsD:
   enabled: false
+  debug: true
 
 formidable:
   uploadDir: /tmp

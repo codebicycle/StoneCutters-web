@@ -347,7 +347,7 @@ module.exports = function trackingRouter(app, dataAdapter) {
                 if (!metric) {
                     return;
                 }
-                statsd.increment(metric, value);
+                statsd.increment(metric.split('.'), value);
             });
 
             res.set('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-age=0, max-stale=0, post-check=0, pre-check=0');
