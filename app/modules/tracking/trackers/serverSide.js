@@ -43,6 +43,7 @@ function getParams(page, options) {
     params.locNm = location.name;
     params.locId = location.id;
     params.locUrl = location.url;
+    params.locIso = location.abbreviation;
 
     if (analyticsEnabled) {
         analyticsParams = options.analyticsParams || analytics.getParams.call(this, page, options.query);

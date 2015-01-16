@@ -1,0 +1,11 @@
+{% if tracking.params and tracking.params.analytics %}
+<script id="ga-lib">
+    (function() {
+        var ga = document.createElement('script');
+        ga.type = 'text/javascript';
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        ga.async = true;
+        document.getElementById('ga-lib').parentNode.appendChild(ga);
+    })();
+</script>
+{% endif %}
