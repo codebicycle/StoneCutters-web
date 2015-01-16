@@ -12,22 +12,29 @@ var StatsD = require('node-statsd').StatsD;
 var logger = require('../../shared/logger')('statsD');
 var client;
 
+var PLACEHOLDER = '<<separator>>';
+var SEPARATOR = '.';
+var SPACE = '_';
+var DOT = '+';
+
+var rSeparator = new RegExp(PLACEHOLDER, 'g');
+var rSpace = / /g;
+var rDot = /\./g;
+
 var Client = function(options) {
     var statsD = new StatsD(config.client);
 
     function increment(metric, value) {
-        if (Array.isArray(metric)) {
-            metric = metric.join('.');
+        if (!(metric = stringify(metric))) {
+            return;
         }
-        logger.log('Incrementing metric: ' + metric + ' by ' + (value || 1));
         statsD.increment(metric, value);
     }
 
     function gauge(metric, value) {
-        if (Array.isArray(metric)) {
-            metric = metric.join('.');
+        if (!(metric = stringify(metric))) {
+            return;
         }
-        logger.log('Gauging metric: ' + metric + ' by ' + (value || 1));
         statsD.gauge(metric, value);
     }
 
@@ -46,9 +53,21 @@ module.exports = function() {
     }
     else {
         client = {
-            increment: function() {},
-            gauge: function() {}
+            increment: stringify,
+            gauge: stringify
         };
     }
     return client;
 };
+
+function stringify(metric, value) {
+    if (!metric) {
+        return;
+    }
+    if (Array.isArray(metric)) {
+        metric = metric.join(PLACEHOLDER);
+    }
+    metric = metric.toLowerCase().replace(rSpace, SPACE).replace(rDot, DOT).replace(rSeparator, SEPARATOR);
+    logger.log(metric + ': ' + (value || 1));
+    return metric;
+}
