@@ -6,7 +6,6 @@
         <small>{{ dictionary["wap_posting_step4.PostingDetails"] }}</small>
     </td>
 </tr>
-{% include (template + '/post/helpNumber.html') %}
 <tr>
     <td>
         {% if form and form.errors %}{{ ErrorsPosting(form.errors, dictionary) }}{% endif %}

@@ -56,6 +56,22 @@ module.exports = {
             hydra: {
                 enabled: true,
                 platforms: ['desktop']
+            },
+            tagmanager: {
+                enabled: false,
+                platforms: ['desktop']
+            },
+            facebook: {
+                enabled: false,
+                platforms: ['html4', 'html5']
+            },
+            allpages: {
+                enabled: false,
+                platforms: ['html4', 'html5']
+            },
+            keyade: {
+                enabled: true,
+                platforms: ['wap', 'html4', 'html5', 'desktop']
             }
         }
     }
