@@ -165,7 +165,7 @@ module.exports = function(app, dataAdapter) {
                 if (!track && err && !Array.isArray(err)) {
                     console.log('[OLX_DEBUG]', 'post', err instanceof Error ? err.stack : err);
                 }
-                formidable.error(req, url.split('?').shift(), err, item.toJSON(), function redirect(url) {
+                formidable.error(req, url.split('?').shift(), err, item ? item.toJSON() : {}, function redirect(url) {
                     res.redirect(utils.link(url, req.rendrApp));
                     clean();
                 });
