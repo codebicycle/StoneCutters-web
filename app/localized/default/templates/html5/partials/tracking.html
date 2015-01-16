@@ -9,5 +9,7 @@
 
     {% include (template + '/partials/tracking/facebook.html') %}
 
+    {% include (template + '/partials/tracking/analytics.html') %}
+
     <div id="tracking-data" data-params='{% json tracking.params %}'></div>
 {% endif %}
