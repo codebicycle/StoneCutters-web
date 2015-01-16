@@ -27,14 +27,25 @@ module.exports = Base.extend({
         var $target = $(event.currentTarget);
         var $buttons = $('.my-ads .btnfilter[data-action=more]');
         var $actions = $('.actions[data-action=actions]');
+        var $renews = $('.action[data-action=renews]');
         var $view = $('.action[data-action=view]');
         var $deleteItem = $('.action[data-action=delete]');
+        var status = $target.parent().data('status');
         var targetPosition = $target.parent().position().top;
         var actionsPosition = $actions.position().top;
         var newPosition = targetPosition + $target.parent().height();
         var itemId = $target.data('id');
         var itemUrl = $target.data('itemurl');
         var href = $deleteItem.attr('href');
+
+        if (status === 'expired') {
+            $view.addClass('hide');
+            $renews.removeClass('hide');
+        }
+        else {
+            $view.removeClass('hide');
+            $renews.addClass('hide');
+        }
 
         if ($actions.hasClass('hide')) {
             $target.addClass('active');

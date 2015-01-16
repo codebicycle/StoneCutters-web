@@ -26,6 +26,9 @@
             {{ dictionary["myolx.YouCurrentlyHaveNoFavoriteListings"] }}
         </div>
     {% endif %}
+    {% if paginator and paginator.isEnabled() %}
+        {% include (template + '/items/pagination.html') %}
+    {% endif %}
 </section>
 <div id="favoritePopup" class="popup">
     <div class="popup-wrapper">

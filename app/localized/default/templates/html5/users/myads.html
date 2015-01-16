@@ -26,7 +26,7 @@
                     {% set statustxt = dictionary["misc.Pending_BR"] %}
                 {% endif %}
                 {#{ item.date.since.day if item.date.since.day }} {{ dictionary[item.date.since.dictionary] }}{{ (', ' + item.date.since.hour) if item.date.since.hour }#}
-                <li class="my-ads {{ status }}">
+                <li class="my-ads {{ status }}" data-status="{{ status }}">
                     {% if (status == 'ready' or status == 'pending' or status == 'rejected') %}
                         <a class="btnfilter edit" href="{{ item.slug.replace(domain, fullDomain) | editSlug(item.id) }}">{{ dictionary["showactivelistings.Edit"] }}</a>
                     {% endif %}
@@ -41,6 +41,7 @@
             {% endfor %}
         </ul>
         <div class="actions hide" data-action="actions">
+            <a href="#" class="action renews hide" data-action="renews">Republicar</a>
             <a href="#" class="action view" data-action="view">Ver</a>
             <a href="{{ '/help' | link }}" class="action help">{{ dictionary["biderrorheader.Help"] }}</a>
             <a href="{{ '/myolx/deleteitem/[[itemId]]' | link }}" class="action delete" data-action="delete" >{{ dictionary["confirmremoveitem.Delete"] }}</a>
