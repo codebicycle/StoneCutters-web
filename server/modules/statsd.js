@@ -68,6 +68,8 @@ function stringify(metric, value) {
         metric = metric.join(PLACEHOLDER);
     }
     metric = metric.toLowerCase().replace(rSpace, SPACE).replace(rDot, DOT).replace(rSeparator, SEPARATOR);
-    logger.log(metric + ': ' + (value || 1));
+    if (config.enabled || config.debug) {
+        logger.log(metric + ': ' + (value || 1));
+    }
     return metric;
 }

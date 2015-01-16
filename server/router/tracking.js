@@ -9,6 +9,7 @@ module.exports = function trackingRouter(app, dataAdapter) {
     var tracking = require('../../app/modules/tracking');
     var env = config.get(['environment', 'type'], 'development');
     var gif = new Buffer('R0lGODlhAQABAPAAAP39/QAAACH5BAgAAAAALAAAAAABAAEAAAICRAEAOw==', 'base64');
+    var devices = ['Android', 'iOS'];
 
     function prepare(options, params) {
         options = _.defaults(options, {
@@ -76,17 +77,15 @@ module.exports = function trackingRouter(app, dataAdapter) {
 
         function graphiteTracking(req) {
             var platform = req.rendrApp.session.get('platform');
-            var osName = req.rendrApp.session.get('osName') || 'Others';
+            var osName = req.rendrApp.session.get('osName');
             var hitCount = req.rendrApp.session.get('hitCount');
             var clientId = req.rendrApp.session.get('clientId');
 
-            statsd.increment([req.query.locNm, 'pageview', platform]);
-            statsd.increment([req.query.locNm, 'devices', osName, platform]);
+            statsd.increment([req.query.locNm, 'pageview', _.contains(devices, osName) ? osName : 'others', platform]);
             if (!hitCount) {
                 statsd.increment([req.query.locNm, 'sessions', platform, 'error']);
             }
             else {
-                // statsd.increment([req.query.locNm, 'sessions', platform, 'average', clientId]);
                 if (hitCount > 1) {
                     statsd.increment([req.query.locNm, 'sessions', platform, 'recurrent']);
                 }
@@ -185,10 +184,8 @@ module.exports = function trackingRouter(app, dataAdapter) {
 
             if (!location) {
                 if (!siteLocation) {
-                    /* console.log('[OLX_DEBUG]', 'no session or urlLoc', '|', userAgent, '|', req.originalUrl); */
                     return false;
                 }
-                /* console.log('[OLX_DEBUG]', 'no session', '|', userAgent, '|', req.originalUrl); */
                 return false;
             }
             bot = isBot(userAgent, platform, osName, osVersion);
@@ -202,7 +199,6 @@ module.exports = function trackingRouter(app, dataAdapter) {
                 }
                 catch (err) {}
                 if (platformUrl !== 'wap' && platformUrl !== 'html4' && platformUrl !== 'html5') {
-                    /* console.log('[OLX_DEBUG]', 'ati', platform, platformUrl, userAgent, host, req.originalUrl); */
                     return false;
                 }
             }
@@ -298,10 +294,8 @@ module.exports = function trackingRouter(app, dataAdapter) {
 
             if (!location) {
                 if (!siteLocation) {
-                    /* console.log('[OLX_DEBUG]', 'no session or urlLoc', '|', userAgent, '|', req.originalUrl); */
                     return false;
                 }
-                /* console.log('[OLX_DEBUG]', 'no session', '|', userAgent, '|', req.originalUrl); */
                 return false;
             }
             bot = isBot(userAgent, platform, osName, osVersion);
