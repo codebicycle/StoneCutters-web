@@ -5,12 +5,12 @@
         <div class="categories-best-selling">
             {% for category in keepPostingCat %}
                 {% if category.category and category.subcategory %}
-                    {% set postingLink = '/posting?cat='+category.category+'&subcat='+category.category %}
+                    {% set postingLink = '/posting?cat='+category.category+'&subcat='+category.subcategory %}
                 {% else %}
                     {% set postingLink = '/posting?cat='+category.category %}
                 {% endif %}
                 <a href="{{ postingLink | link }}" class="module">
-                    <article class="icons icon-cat-{{ category.category }}">
+                    <article class="icons icon-cat-{{ category.icon }}">
                         <p>Publicar en <strong>{{ category.name }}</strong></p>
                     </article>
                 </a>

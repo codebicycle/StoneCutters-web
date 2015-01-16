@@ -1,29 +1,23 @@
 module.exports = {
-    categoryTree: {
-        columns: [2, 2, 2]
-    },
-    post_banner: {
-        image: 'post-africa'
-    },
     successPage: {
         keepPosting: [
             {
                 category: '806',
                 subcategory: '807',
                 icon: '806',
-                name: 'Meubles et Jardin'
+                name: 'Furniture'
             },
             {
                 category: '815',
                 subcategory: '817',
                 icon: '815',
-                name: 'Mode'
+                name: 'Fashion'
             },
             {
-                category: '800',
-                subcategory: '870',
+                category: '830',
+                subcategory: '831',
                 icon: '830',
-                name: 'Téléphones Portables'
+                name: 'Phones'
             }
         ]
     }

@@ -5,16 +5,22 @@ module.exports = {
     successPage: {
         keepPosting: [
             {
-                category: '16',
-                name: 'Viviendas - Locales'
+                category: '185',
+                subcategory: '228',
+                icon: '806',
+                name: 'Hogar y Jardín'
             },
             {
-                category: '362',
-                name: 'Motor'
+                category: '185',
+                subcategory: '366',
+                icon: '800',
+                name: 'Electrónica'
             },
             {
-                category: '190',
-                name: 'Trabajo'
+                category: '185',
+                subcategory: '219',
+                icon: '830',
+                name: 'Móviles'
             }
         ]
     },

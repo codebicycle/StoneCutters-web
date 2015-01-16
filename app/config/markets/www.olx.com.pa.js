@@ -14,17 +14,39 @@ module.exports = {
         }
     ],
     videos: [
+        {
+            title: 'OLX Panama - Bicicleta - Vender es fácil',
+            id: 'rXfzHDejpRs'
+        },
+        {
+            title: 'OLX Panama - Anteojos - Vender es fácil',
+            id: 'eEyfckF_Xgs'
+        },
+        {
+            title: 'OLX Panamá - Poker - Vender es fácil',
+            id: 'm0sDSvsBEf0'
+        }
+    ],
+    successPage: {
+        keepPosting: [
             {
-                title: 'OLX Panama - Bicicleta - Vender es fácil',
-                id: 'rXfzHDejpRs'
+                category: '185',
+                subcategory: '228',
+                icon: '806',
+                name: 'Hogar y Jardín'
             },
             {
-                title: 'OLX Panama - Anteojos - Vender es fácil',
-                id: 'eEyfckF_Xgs'
+                category: '185',
+                subcategory: '366',
+                icon: '800',
+                name: 'Electrónica'
             },
             {
-                title: 'OLX Panamá - Poker - Vender es fácil',
-                id: 'm0sDSvsBEf0'
+                category: '185',
+                subcategory: '219',
+                icon: '830',
+                name: 'Móviles'
             }
         ]
+    }
 };
