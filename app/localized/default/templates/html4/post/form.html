@@ -10,7 +10,6 @@
                 <a href="{{ '/posting' | link }}">{{ dictionary["defaultheader.change"] }}</a>
             {% endif %}
         </h4>
-        {% include (template + '/post/helpNumber.html') %}
         <div class="formField">
             <label>{{ dictionary["posting_fields_1.photos"] }}: <small>{{ dictionary["posting_photos.UpTo5XMore"] }}</small></label>
             {% if item and item.has('images') %}

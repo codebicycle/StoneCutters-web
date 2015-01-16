@@ -5,5 +5,11 @@
 
     {% include (template + '/partials/tracking/ati.html') %}
 
+    {% include (template + '/partials/tracking/tagmanager.html') %}
+
+    {% include (template + '/partials/tracking/allpages.html') %}
+
+    {% include (template + '/partials/tracking/facebook.html') %}
+
     <div id="tracking-data" data-params='{% json tracking.params %}'></div>
 {% endif %}

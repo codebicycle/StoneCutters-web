@@ -2,8 +2,6 @@
 <html>
     {% view 'layout/head' %}
     <body>
-        {% set googleTagManager = template + "/google/tagmanager.html" %}
-        {% include googleTagManager %}
         {% set bar = template + "/layout/bar.html" %}
         {% include bar %}
         {% view 'header/index' %}
@@ -11,6 +9,5 @@
         {% view 'footer/downloadapp' %}
         {% view 'footer/languages' %}
         {% view 'footer/footer' %}
-        {% include (template + "/pixels/allpages.html") %}
     </body>
 </html>

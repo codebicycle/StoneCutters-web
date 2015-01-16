@@ -6,7 +6,6 @@ var middlewares = require('../middlewares');
 var helpers = require('../helpers');
 var tracking = require('../modules/tracking');
 var config = require('../../shared/config');
-var countriesTerms = ['www.olx.cl', 'www.olx.com.uy', 'www.olx.com.py', 'www.olx.com.bo', 'www.olx.com.pe', 'www.olx.com.ve', 'www.olx.com.co', 'www.olx.com.ec', 'www.olx.com.pa', 'www.olx.co.cr', 'www.olx.com.ni', 'www.olx.hn', 'www.olx.com.sv', 'www.olx.com.gt', 'www.olx.com.mx'];
 
 if (typeof window === 'undefined') {
     var statsdModule = '../../server/modules/statsd';
@@ -31,12 +30,11 @@ function terms(params, callback) {
     function controller() {
         var platform = this.app.session.get('platform');
         var location = this.app.session.get('location');
-        var view = 'pages/terms';
+        var terms = _.contains(config.get(['terms', platform]), location.url) ? location.url : 'default';
 
-        if (_.contains(countriesTerms, location.url)) {
-            view += 'es';
-        }
-        callback(null, view, {});
+        callback(null, {
+            terms: terms
+        });
     }
 }
 
