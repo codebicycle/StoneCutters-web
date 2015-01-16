@@ -28,11 +28,13 @@
 })();
 
 (function() {
-	'use strict';
+    'use strict';
 
-	if(typeof console === 'undefined' || typeof console.log === 'undefined' || typeof console.error === 'undefined') {
-		console = {
-			log: function() {}
-		};
-	}
+    if(typeof console === 'undefined') {
+        console = {
+            log: function() {},
+            error: function() {},
+            warn: function() {}
+        };
+    }
 })();
