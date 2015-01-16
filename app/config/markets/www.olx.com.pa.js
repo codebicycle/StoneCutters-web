@@ -26,12 +26,5 @@ module.exports = {
             title: 'OLX Panamá - Poker - Vender es fácil',
             id: 'm0sDSvsBEf0'
         }
-    ],
-    tracking: {
-        trackers: {
-            tagmanager: {
-                enabled: true
-            }
-        }
-    }
+    ]
 };
