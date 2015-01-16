@@ -7,7 +7,7 @@ module.exports = function trackingRouter(app, dataAdapter) {
     var config = require('../../shared/config');
     var utils = require('../../shared/utils');
     var tracking = require('../../app/modules/tracking');
-    var env = config.get(['environment', 'type'], 'development');lo
+    var env = config.get(['environment', 'type'], 'development');
     var gif = new Buffer('R0lGODlhAQABAPAAAP39/QAAACH5BAgAAAAALAAAAAABAAEAAAICRAEAOw==', 'base64');
     var devices = ['Android', 'iOS'];
 
