@@ -8,7 +8,6 @@ module.exports = Base.extend({
     className: 'items_search_view',
     regexpFindPage: /-p-[0-9]+/,
     regexpReplacePage: /(-p-[0-9]+)/,
-    regexpReplaceCategory: /([a-zA-Z0-9-]+-cat-[0-9]+)/,
     regexpFindNeighborhood: /-neighborhood_[0-9_]+/,
 
     getTemplateData: function() {

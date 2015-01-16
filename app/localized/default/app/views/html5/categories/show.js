@@ -11,8 +11,7 @@ module.exports = Base.extend({
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
         var link = this.refactorPath(this.app.session.get('path'));
-        console.log('llega');
-        //delete data.nav.listAct;
+
         return _.extend({}, data, {
             items: data.items,
             nav: {

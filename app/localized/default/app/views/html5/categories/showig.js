@@ -21,9 +21,6 @@ module.exports = Base.extend({
 
         });
     },
-    postRender: function() {
-        console.log('postRender IG');
-    },
     cleanPage: function(path) {
         if (path.match(this.regexpFindPage)) {
             path = path.replace(this.regexpReplacePage, '');
