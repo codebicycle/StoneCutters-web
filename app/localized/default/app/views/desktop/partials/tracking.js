@@ -85,7 +85,7 @@ module.exports = Base.extend({
             return;
         }
 
-        this._checkAnalyticsLib();
+        // this._checkAnalyticsLib();
 
         window._gaq.push(function track() {
             var host = tracking.params.analytics.host;
