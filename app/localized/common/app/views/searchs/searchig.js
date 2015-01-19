@@ -1,11 +1,11 @@
 'use strict';
 
-var Base = require('../../bases/view');
 var _ = require('underscore');
+var Base = require('../../bases/view');
 var helpers = require('../../../../../helpers');
 
 module.exports = Base.extend({
-    className: 'items_searchig_view',
+    className: 'searchs_searchig_view',
     wapAttributes: {
         cellpadding: 0
     },
@@ -15,4 +15,4 @@ module.exports = Base.extend({
 
 });
 
-module.exports.id = 'items/searchig';
+module.exports.id = 'searchs/searchig';

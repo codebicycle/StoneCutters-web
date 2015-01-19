@@ -1,11 +1,11 @@
 'use strict';
 
-var Base = require('../../../../../common/app/bases/view').requireView('items/allresults', null, 'desktop');
 var _ = require('underscore');
+var Base = require('../../../../../common/app/bases/view').requireView('searchs/allresults', null, 'desktop');
 
 module.exports = Base.extend({
-    id: 'items-allresultsig-view',
-    className: 'items-allresultsig-view',
+    id: 'searchs-allresultsig-view',
+    className: 'searchs-allresultsig-view',
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
         var link = 'nf/all-results-ig';
@@ -22,4 +22,4 @@ module.exports = Base.extend({
     }
 });
 
-module.exports.id = 'items/allresultsig';
+module.exports.id = 'searchs/allresultsig';
