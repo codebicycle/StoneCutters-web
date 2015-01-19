@@ -64,9 +64,8 @@ module.exports = Base.extend({
             return;
         }
 
-        // this._checkAnalyticsLib();
+        this._checkAnalyticsLib();
 
-        window._gaq = window._gaq || [];
         window._gaq.push(function track() {
             var tracker = this._getAnalyticsTracker('UA-5247560-17', tracking.params.analytics);
             var osName = tracking.params.analytics.osName;
@@ -128,7 +127,7 @@ module.exports = Base.extend({
         var $ga;
 
         window._gaq = window._gaq || [];
-        if (!$('#' + id).length) {
+/*        if (!$('#' + id).length) {
             $ga = $('<script></script>');
             $ga.attr({
                 type: 'text/javascript', 
@@ -138,6 +137,7 @@ module.exports = Base.extend({
             });
             $('head').append($ga);
         }
+*/
     },
     _getAnalyticsTracker: function(id, options) {
         if (!window.analyticsTracker) {
