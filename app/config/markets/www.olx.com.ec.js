@@ -14,17 +14,39 @@ module.exports = {
         }
     ],
     videos: [
+        {
+            title: 'OLX Ecuador - Comercial Sofá Cama - Vender es fácil',
+            id: 'XlLozB_JfRk'
+        },
+        {
+            title: 'En OLX todos pueden vender',
+            id: 'HYFEkS-fhRA'
+        },
+        {
+            title: 'OLX Ecuador - Comercial Smartphone - Vender es fácil',
+            id: 'Ui3-Mows0KM'
+        }
+    ],
+    successPage: {
+        keepPosting: [
             {
-                title: 'OLX Ecuador - Comercial Sofá Cama - Vender es fácil',
-                id: 'XlLozB_JfRk'
+                category: '806',
+                subcategory: '807',
+                icon: '806',
+                name: 'Muebles'
             },
             {
-                title: 'En OLX todos pueden vender',
-                id: 'HYFEkS-fhRA'
+                category: '815',
+                subcategory: '817',
+                icon: '815',
+                name: 'Moda'
             },
             {
-                title: 'OLX Ecuador - Comercial Smartphone - Vender es fácil',
-                id: 'Ui3-Mows0KM'
+                category: '830',
+                subcategory: '831',
+                icon: '830',
+                name: 'Teléfonos'
             }
         ]
+    }
 };
