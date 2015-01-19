@@ -4,19 +4,41 @@ module.exports = {
         columns: [3, 3, 2]
     },
     videos: [
+        {
+            title: 'OLX Uruguay - Celular - Vender es fácil',
+            id: '29QoFeoJldU'
+        },
+        {
+            title: 'OLX Uruguay - Bicicleta - Vender es fácil',
+            id: 'Z3wwfLdLgj8'
+        },
+        {
+            title: 'OLX Uruguay - Auto - Vender es fácil',
+            id: 'rhJVT5fDkWU'
+        }
+    ],
+    successPage: {
+        keepPosting: [
             {
-                title: 'OLX Uruguay - Celular - Vender es fácil',
-                id: '29QoFeoJldU'
+                category: '806',
+                subcategory: '807',
+                icon: '806',
+                name: 'Muebles'
             },
             {
-                title: 'OLX Uruguay - Bicicleta - Vender es fácil',
-                id: 'Z3wwfLdLgj8'
+                category: '815',
+                subcategory: '817',
+                icon: '815',
+                name: 'Moda'
             },
             {
-                title: 'OLX Uruguay - Auto - Vender es fácil',
-                id: 'rhJVT5fDkWU'
+                category: '830',
+                subcategory: '831',
+                icon: '830',
+                name: 'Teléfonos'
             }
-        ],
+        ]
+    },
     tracking: {
         trackers: {
             hydra: {

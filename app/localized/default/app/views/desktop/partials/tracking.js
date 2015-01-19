@@ -85,7 +85,7 @@ module.exports = Base.extend({
             return;
         }
 
-        // this._checkAnalyticsLib();
+        this._checkAnalyticsLib();
 
         window._gaq.push(function track() {
             var host = tracking.params.analytics.host;
@@ -135,7 +135,7 @@ module.exports = Base.extend({
         var $ga;
 
         window._gaq = window._gaq || [];
-        if (!$('#' + id).length) {
+/*        if (!$('#' + id).length) {
             $ga = $('<script></script>');
             $ga.attr({
                 type: 'text/javascript',
@@ -145,6 +145,7 @@ module.exports = Base.extend({
             });
             $('head').append($ga);
         }
+*/
     },
     _getAnalyticsTracker: function(options) {
         if (!window.analyticsTracker) {

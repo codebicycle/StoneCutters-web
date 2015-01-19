@@ -18,17 +18,39 @@ module.exports = {
         }
     ],
     videos: [
+        {
+            title: 'OLX El Salvador - Bicicleta - Vender es fácil',
+            id: 'Z3jhkKNOLFI'
+        },
+        {
+            title: 'OLX El Salvador - Anteojos - Vender es fácil',
+            id: 'KhrU7vBfs2A'
+        },
+        {
+            title: 'OLX El Salvador - Poker - Vender es fácil',
+            id: 'H73aGTFe9D4'
+        }
+    ],
+    successPage: {
+        keepPosting: [
             {
-                title: 'OLX El Salvador - Bicicleta - Vender es fácil',
-                id: 'Z3jhkKNOLFI'
+                category: '806',
+                subcategory: '807',
+                icon: '806',
+                name: 'Muebles'
             },
             {
-                title: 'OLX El Salvador - Anteojos - Vender es fácil',
-                id: 'KhrU7vBfs2A'
+                category: '815',
+                subcategory: '817',
+                icon: '815',
+                name: 'Moda'
             },
             {
-                title: 'OLX El Salvador - Poker - Vender es fácil',
-                id: 'H73aGTFe9D4'
+                category: '830',
+                subcategory: '831',
+                icon: '830',
+                name: 'Teléfonos'
             }
         ]
+    }
 };
