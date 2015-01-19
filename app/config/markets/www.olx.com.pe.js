@@ -17,17 +17,39 @@ module.exports = {
         }
     ],
     videos: [
+        {
+            title: 'OLX Peru - Cristian Rivero - Garage',
+            id: '8vBPKNFEEiE'
+        },
+        {
+            title: 'OLX Peru - Cristian Rivero - Cafetera',
+            id: '2YEmhQWMc9M'
+        },
+        {
+            title: 'OLX Perú - Poker - Vender es fácil',
+            id: 'y7DhaMzv_04'
+        }
+    ],
+    successPage: {
+        keepPosting: [
             {
-                title: 'OLX Peru - Cristian Rivero - Garage',
-                id: '8vBPKNFEEiE'
+                category: '806',
+                subcategory: '807',
+                icon: '806',
+                name: 'Muebles'
             },
             {
-                title: 'OLX Peru - Cristian Rivero - Cafetera',
-                id: '2YEmhQWMc9M'
+                category: '815',
+                subcategory: '817',
+                icon: '815',
+                name: 'Moda'
             },
             {
-                title: 'OLX Perú - Poker - Vender es fácil',
-                id: 'y7DhaMzv_04'
+                category: '830',
+                subcategory: '831',
+                icon: '830',
+                name: 'Teléfonos'
             }
         ]
+    }
 };
