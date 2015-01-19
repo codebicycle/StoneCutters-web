@@ -1090,6 +1090,10 @@ function allresults(params, callback, gallery) {
 
             params.seo = this.app.seo.isEnabled();
             params.languageId = languages._byId[this.app.session.get('selectedLanguage')].id;
+            if (platform === 'html5') {
+                params['f.hasimage'] = true;
+            }
+
             Paginator.prepare(this.app, params);
             query = _.clone(params);
 
