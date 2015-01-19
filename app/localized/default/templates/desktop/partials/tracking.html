@@ -5,5 +5,7 @@
 
     {% include (template + '/partials/tracking/tagmanager.html') %}
 
+    {% include (template + '/partials/tracking/analytics.html') %}
+
     <div id="tracking-data" data-params='{% json tracking.params %}'></div>
 {% endif %}

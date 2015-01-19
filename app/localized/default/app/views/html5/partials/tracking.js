@@ -64,7 +64,7 @@ module.exports = Base.extend({
             return;
         }
 
-        this._checkAnalyticsLib();
+        // this._checkAnalyticsLib();
 
         window._gaq = window._gaq || [];
         window._gaq.push(function track() {
@@ -103,6 +103,8 @@ module.exports = Base.extend({
         this._fireTrack(data, options);
     },
     _fireTrack: function(data, callback, options) {
+        var location = this.app.session.get('location');
+
         if (callback && !_.isFunction(callback)) {
             options = callback;
             callback = $.noop;
@@ -113,7 +115,8 @@ module.exports = Base.extend({
             global: false,
             cache: false,
             data: _.defaults(data, {
-                locUrl: this.app.session.get('location').url,
+                locUrl: location.url,
+                locIso: location.abbreviation,
                 url: helpers.common.static.call(this, '/images/common/gif1x1.gif')
             }),
             always: (callback || $.noop)
