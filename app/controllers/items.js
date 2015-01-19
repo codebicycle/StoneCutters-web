@@ -1090,7 +1090,7 @@ function allresults(params, callback, gallery) {
 
             params.seo = this.app.seo.isEnabled();
             params.languageId = languages._byId[this.app.session.get('selectedLanguage')].id;
-            if (platform === 'html5') {
+            if (platform != 'desktop') {
                 params['f.hasimage'] = true;
             }
 
