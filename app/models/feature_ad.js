@@ -17,7 +17,11 @@ var FeatureAd = Base.extend({
 });
 
 FeatureAd.isEnabled = function isEnabled(app) {
-    return config.getForMarket(location.url, ['featured', 'enabled'], false);
+    return FeatureAd.isLocationEnabled(app.session.get('location').url);
+};
+
+FeatureAd.isLocationEnabled = function isLocationEnabled(location) {
+    return config.getForMarket(location, ['featured', 'enabled'], false);
 };
 
 module.exports = FeatureAd;

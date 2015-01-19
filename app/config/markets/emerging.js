@@ -76,6 +76,13 @@ module.exports = {
         }
     },
     featured: {
-        enabled: false
+        enabled: false,
+        ads: {
+            quantity: {
+                total: 6,
+                top: 3,
+                bottom: 3
+            }
+        }
     }
 };

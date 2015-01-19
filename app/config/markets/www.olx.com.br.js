@@ -23,6 +23,13 @@ module.exports = {
         }
     },
     featured: {
-        enabled: true
+        enabled: true,
+        ads: {
+            quantity: {
+                total: 2,
+                top: 1,
+                bottom: 1
+            }
+        }
     }
 };

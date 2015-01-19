@@ -275,6 +275,9 @@ function myads(params, callback) {
 
             items.each(function eachItem(item) {
                 promise.then(function getFeatured(next) {
+                    if (item.has('location') && !FeatureAd.isLocationEnabled(item.get('location').url)) {
+                        return done(items);
+                    }
                     this.app.fetch({
                         featuread: {
                             model : 'Feature_ad',
@@ -315,15 +318,16 @@ function myads(params, callback) {
                     viewname: 'myads'
                 });
             }
+            this.app.seo.addMetatag('robots', 'noindex, nofollow');
+            this.app.seo.addMetatag('googlebot', 'noindex, nofollow');
             callback(null, view, data);
         }.bind(this);
 
         var error = function(err, res) {
+            console.log(err.stack);
             return helpers.common.error.call(this, err, res, callback);
         }.bind(this);
 
-        this.app.seo.addMetatag('robots', 'noindex, nofollow');
-        this.app.seo.addMetatag('googlebot', 'noindex, nofollow');
 
         asynquence().or(error)
             .then(redirect)
