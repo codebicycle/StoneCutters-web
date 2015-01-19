@@ -240,7 +240,6 @@ function handleItems(params, promise, gallery) {
             tracking.addParam('subcategory', subcategory.toJSON());
         }
         tracking.addParam('page', query.page);
-
         done({
             type: 'items',
             category: category.toJSON(),
@@ -250,7 +249,8 @@ function handleItems(params, promise, gallery) {
             meta: meta,
             items: items.toJSON(),
             filters: items.filters,
-            paginator: items.paginator
+            paginator: items.paginator,
+            hasItemsWithImages: items.hasImages()
         });
     }.bind(this);
 
