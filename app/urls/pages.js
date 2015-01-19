@@ -27,11 +27,5 @@ module.exports = {
     },
     'pages#interstitial': {
         url: 'interstitial'
-    },
-    'pages#featured_listings': {
-        url: 'featured_listings'
-    },
-    'pages#featured_ad': {
-        url: 'featured_ad'
     }
 };

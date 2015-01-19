@@ -1,0 +1,21 @@
+{% if tracking.params and tracking.params.facebook %}
+<script id="facebook-lib" >
+    (function() {
+        var _fbq = window._fbq || (window._fbq = []);
+
+        if (!_fbq.loaded) {
+            var fbds = document.createElement('script');
+            fbds.async = true;
+            fbds.src = '//connect.facebook.net/en_US/fbds.js';
+            var s = document.getElementById('facebook-lib');
+            s.parentNode.insertBefore(fbds, s);
+            _fbq.loaded = true;
+        }
+    })();
+    window._fbq = window._fbq || [];
+    window._fbq.push(['track', '{{ tracking.params.facebook.id }}', {{ tracking.params.facebook.params }}]);
+</script>
+<noscript>
+    <img height="1" width="1" alt="" style="display:none" src="https://www.facebook.com/tr?ev={{ tracking.params.facebook.id }}&amp;cd[value]={{ tracking.params.facebook.params.value }}&amp;cd[currency]={{ tracking.params.facebook.params.currency }}&amp;noscript=1" />
+</noscript>
+{% endif %}

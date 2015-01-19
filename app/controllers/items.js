@@ -78,6 +78,13 @@ function show(params, callback) {
                 item.set('id', item.get('itemId'));
                 item.unset('itemId');
             }
+            if (_.isEmpty(item.get('category'))) {
+                item.set('category', {
+                    id: item.get('categoryId'),
+                    name: item.get('categoryName'),
+                    parentId: item.get('parentCategoryId')
+                });
+            }
             if (!item.get('location')) {
                 item.set('location', this.app.session.get('location'));
             }
@@ -914,7 +921,7 @@ function staticSearch(params, callback) {
         }.bind(this);
 
         var prepare = function(done) {
-            Paginator.prepare(this.app, params);
+            Paginator.prepare(this.app, params, 'static');
             query = _.clone(params);
             params.categoryId = params.catId;
             delete params.search;

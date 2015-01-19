@@ -92,10 +92,11 @@ module.exports = Base.extend({
         function success() {
             this.$('[data-fav]').attr('data-user', true).data('user', true).click();
             this.app.trigger('login', user);
-            this.app.router.navigate(this.app.session.get('url'), {
+            this.app.router.navigate(this.app.session.get('path'), {
                 trigger: true,
                 replace: true
             });
+            $('#modal-addfavorites-view').trigger('hide');
         }
 
         function error(err) {

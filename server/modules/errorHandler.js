@@ -36,7 +36,7 @@ exports = module.exports = function errorHandler() {
             console.error(err.stack || err);
         }
         if (isRedirection(req.rendrApp)) {
-            statsd.increment(['All', 'errors', 503]);
+            statsd.increment(['all', 'errors', 503]);
             return res.status(500).sendfile(errorPath);
         }
         if (~accept.indexOf('html')) {
@@ -61,12 +61,12 @@ exports = module.exports = function errorHandler() {
             }
             var json = JSON.stringify({ error: error });
 
-            statsd.increment(['All', 'errors', 'json']);
+            statsd.increment(['all', 'errors', 'json']);
             res.setHeader('Content-Type', 'application/json');
             res.end(json);
         }
         else {
-            statsd.increment(['All', 'errors', 'plain']);
+            statsd.increment(['all', 'errors', 'plain']);
             res.setHeader('Content-Type', 'text/plain');
             res.end(config.get(['error', 'detail'], true) ? err.stack : err.toString());
         }

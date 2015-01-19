@@ -1,0 +1,115 @@
+'use strict';
+
+var _ = require('underscore');
+var asynquence = require('asynquence');
+var middlewares = require('../middlewares');
+var helpers = require('../helpers');
+
+module.exports = {
+    featured_listings: middlewares(featuredListings),
+    featured_ad: middlewares(featuredAd)
+};
+
+function featuredListings(params, callback) {
+    helpers.controllers.control.call(this, params, controller);
+
+    function controller() {
+        var redirect = function(done) {
+            var platform = this.app.session.get('platform');
+
+            if (platform !== 'desktop') {
+                return done.fail();
+            }
+            done();
+        }.bind(this);
+
+        var success = function() {
+            callback(null, {});
+        }.bind(this);
+
+        var error = function(err, res) {
+            return helpers.common.error.call(this, err, res, callback);
+        }.bind(this);
+
+        asynquence().or(error)
+            .then(redirect)
+            .val(success);
+    }
+}
+
+function featuredAd(params, callback) {
+    helpers.controllers.control.call(this, params, controller);
+
+    function controller() {
+        var result = params.fa_status;
+        var item;
+
+        var redirect = function(done) {
+            var platform = this.app.session.get('platform');
+
+            if (platform !== 'desktop') {
+                return done.fail();
+            }
+            done();
+        }.bind(this);
+
+        var prepare = function(done) {
+            var user = this.app.session.get('user');
+            var languages = this.app.session.get('languages');
+            var params = {
+                id: id
+            };
+            var anonymousItem;
+
+            if (user) {
+                params.token = user.token;
+            }
+            else if (typeof window !== 'undefined' && localStorage) {
+                anonymousItem = localStorage.getItem('anonymousItem');
+                anonymousItem = (!anonymousItem ? {} : JSON.parse(anonymousItem));
+                if (securityKey) {
+                    anonymousItem[params.id] = securityKey;
+                    localStorage.setItem('anonymousItem', JSON.stringify(anonymousItem));
+                }
+            }
+            params.languageId = languages._byId[this.app.session.get('selectedLanguage')].id;
+            done(params);
+        }.bind(this);
+
+        var fetch = function(done, params) {
+            this.app.fetch({
+                item: {
+                    model: 'Item',
+                    params: params
+                }
+            }, {
+                readFromCache: false
+            }, this.errfcb(done));
+        }.bind(this);
+
+        var check = function(done, res) {
+            if (!res.item) {
+                return done.fail(null, {});
+            }
+            done(res.item);
+        }.bind(this);
+
+        var success = function(item) {
+            callback(null, {
+                item: item.toJSON(),
+                result: result
+            });
+        }.bind(this);
+
+        var error = function(err, res) {
+            return helpers.common.error.call(this, err, res, callback);
+        }.bind(this);
+
+        asynquence().or(error)
+            .then(redirect)
+            .then(prepare)
+            .then(fetch)
+            .then(check)
+            .val(success);
+    }
+}
