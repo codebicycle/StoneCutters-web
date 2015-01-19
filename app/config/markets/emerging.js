@@ -74,5 +74,8 @@ module.exports = {
                 platforms: ['wap', 'html4', 'html5', 'desktop']
             }
         }
+    },
+    featured: {
+        enabled: false
     }
 };

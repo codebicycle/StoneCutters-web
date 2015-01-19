@@ -57,7 +57,7 @@
                 <p class="icons icon-phone user-phone">{{ item.phone }}</p>
             {% endif %}
         </div>
-        {% if featureAd %}
+        {% if item.featured and item.featured.isEnabled() %}
             {% view 'post/feature_ad' %}
         {% endif %}
     </aside><!-- right-column -->

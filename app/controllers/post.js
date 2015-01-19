@@ -6,6 +6,7 @@ var middlewares = require('../middlewares');
 var helpers = require('../helpers');
 var tracking = require('../modules/tracking');
 var Item = require('../models/item');
+var FeatureAd = require('../models/feature_ad');
 var config = require('../../shared/config');
 
 module.exports = {
@@ -509,7 +510,10 @@ function success(params, callback) {
             }.bind(this));
         }.bind(this);
 
-        var findFeatureAds = function(done, item, relateds) {
+        var findFeatured = function(done, item, relateds) {
+            if (!FeatureAd.isEnabled(this.app)) {
+                return done(item, relateds);
+            }
             this.app.fetch({
                 featuread: {
                     model : 'Feature_ad',
@@ -524,11 +528,12 @@ function success(params, callback) {
                 if (err) {
                     res = {};
                 }
-                done(item, relateds, res.featuread);
+                item.set('featured', res.featuread);
+                done(item, relateds);
             }.bind(this));
         }.bind(this);
 
-        var success = function(_item, _relatedItems, _featuread) {
+        var success = function(_item, _relatedItems) {
             var item = _item.toJSON();
             var subcategory = this.dependencies.categories.search(item.category.id);
             var category;
@@ -551,8 +556,7 @@ function success(params, callback) {
                 sk: securityKey,
                 category: category.toJSON(),
                 subcategory: subcategory.toJSON(),
-                relatedItems: _relatedItems,
-                featureAd: _featuread
+                relatedItems: _relatedItems
             });
         }.bind(this);
 
@@ -565,7 +569,7 @@ function success(params, callback) {
             .then(findItem)
             .then(checkItem)
             .then(findRelatedItems)
-            .then(findFeatureAds)
+            .then(findFeatured)
             .val(success);
     }
 }

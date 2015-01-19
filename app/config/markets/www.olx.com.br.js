@@ -21,5 +21,8 @@ module.exports = {
                 enabled: true
             }
         }
+    },
+    featured: {
+        enabled: true
     }
 };
