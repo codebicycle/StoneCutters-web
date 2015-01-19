@@ -52,6 +52,7 @@ module.exports = {
         'messages_item_page.CATEGORY_REGION',
         'countryoptions.Home_SelectState',
         'countryoptions.Home_SelectCity',
+        'countryoptions.SelectANeighborhood',
         'itemdescription.mileage',
         'itemdescription.bathrooms',
         'itemdescription.bedrooms',
@@ -62,6 +63,7 @@ module.exports = {
         'itemgeneraldetails.PicturesOf',
         'itemslisting.NewlyListed',
         'itemslisting.HighestFirst',
-        'itemslisting.LowestFirst'
+        'itemslisting.LowestFirst',
+        'adsense.SponsoredLinks'
     ]
 };

@@ -102,8 +102,7 @@ function flow(params, callback) {
             }
 
             this.app.fetch(data, {
-                /*readFromCache: !this.app.session.get('isServer'),
-                store: true*/
+                readFromCache: !this.app.session.get('isServer')
             }, done.errfcb);
         }
 
