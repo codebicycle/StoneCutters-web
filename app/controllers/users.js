@@ -4,11 +4,8 @@ var _ = require('underscore');
 var asynquence = require('asynquence');
 var middlewares = require('../middlewares');
 var helpers = require('../helpers');
-var tracking = require('../modules/tracking');
-var config = require('../../shared/config');
 var Paginator = require('../modules/paginator');
 var User = require('../models/user');
-var Item = require('../models/item');
 
 module.exports = {
     register: middlewares(register),
@@ -20,8 +17,7 @@ module.exports = {
     myads: middlewares(myads),
     favorites: middlewares(favorites),
     messages: middlewares(messages),
-    readmessages: middlewares(readmessages),
-    buyfeaturedad: middlewares(buyFeaturedAd)
+    readmessages: middlewares(readmessages)
 };
 
 function register(params, callback) {
@@ -567,104 +563,6 @@ function readmessages(params, callback) {
         asynquence().or(error)
             .then(prepare)
             .then(fetch)
-            .val(success);
-    }
-}
-
-function buyFeaturedAd(params, callback) {
-    helpers.controllers.control.call(this, params, controller);
-
-    function controller() {
-        var id = params.id;
-        var securityKey = params.sk;
-        var item;
-
-        var redirect = function(done) {
-            var platform = this.app.session.get('platform');
-
-            if (platform !== 'desktop') {
-                return done.fail();
-            }
-            done();
-        }.bind(this);
-
-        var prepare = function(done) {
-            var user = this.app.session.get('user');
-            var languages = this.app.session.get('languages');
-            var params = {
-                id: id
-            };
-            var anonymousItem;
-
-            if (user) {
-                params.token = user.token;
-            }
-            else if (typeof window !== 'undefined' && localStorage) {
-                anonymousItem = localStorage.getItem('anonymousItem');
-                anonymousItem = (!anonymousItem ? {} : JSON.parse(anonymousItem));
-                if (securityKey) {
-                    anonymousItem[params.id] = securityKey;
-                    localStorage.setItem('anonymousItem', JSON.stringify(anonymousItem));
-                }
-            }
-            params.languageId = languages._byId[this.app.session.get('selectedLanguage')].id;
-            done(params);
-        }.bind(this);
-
-        var fetch = function(done, params) {
-            this.app.fetch({
-                item: {
-                    model: 'Item',
-                    params: params
-                }
-            }, {
-                readFromCache: false
-            }, this.errfcb(done));
-        }.bind(this);
-
-        var check = function(done, res) {
-            if (!res.item) {
-                return done.fail(null, {});
-            }
-            done(res.item);
-        }.bind(this);
-
-        var findFeatureAds = function(done, item) {
-            this.app.fetch({
-                featuread: {
-                    model : 'Feature_ad',
-                    params: {
-                        id: item.get('id'),
-                        locate: this.app.session.get('selectedLanguage')
-                    }
-                }
-            }, {
-                readFromCache: false
-            }, function afterFetch(err, res) {
-                if (err) {
-                    res = {};
-                }
-                done(item, res.featuread);
-            }.bind(this));
-        }.bind(this);
-
-        var success = function(item, featureAd) {
-            callback(null, {
-                item: item.toJSON(),
-                featureAd: featureAd
-            });
-        }.bind(this);
-
-        var error = function(err, res) {
-            return helpers.common.error.call(this, err, res, callback);
-        }.bind(this);
-
-        asynquence().or(error)
-            .then(redirect)
-            .then(prepare)
-            .then(fetch)
-            .then(check)
-            .then(findFeatureAds)
             .val(success);
     }
 }
