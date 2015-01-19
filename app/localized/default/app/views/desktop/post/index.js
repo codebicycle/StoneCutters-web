@@ -70,7 +70,7 @@ module.exports = Base.extend({
                     parentCategory: this.getUrlParam('cat'),
                     subCategory: this.getUrlParam('subcat')
                 };
-                this.$('#posting-categories-view').trigger('setQueryCategory', paramCategory);
+                this.$('#posting-categories-view').trigger('getQueryCategory', paramCategory);
             }
             this.dictionary = translations.get(this.app.session.get('selectedLanguage'));
             if (this.isValid === undefined || this.isValid === null) {

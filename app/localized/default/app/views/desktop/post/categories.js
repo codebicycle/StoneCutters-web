@@ -15,7 +15,7 @@ module.exports = Base.extend({
         'click .posting-categories-list a.category': 'onCategoryClick',
         'click .child-categories-list a': 'onSubCategoryClick',
         'editCategory': 'onEditCategory',
-        'setQueryCategory': 'onSetQueryCategory'
+        'getQueryCategory': 'onGetQueryCategory'
 
     },
     getTemplateData: function() {
@@ -29,7 +29,7 @@ module.exports = Base.extend({
         this.$('.posting-categories-list a[data-id=' + category.parentId + ']').trigger('click', ['edit']);
         this.$('.child-categories-list a[data-id=' + category.id + ']').trigger('click', ['edit']);
     },
-    onSetQueryCategory: function(event, category) {
+    onGetQueryCategory: function(event, category) {
         this.$('.posting-categories-list a[data-id=' + category.parentCategory + ']').trigger('click');
         if (category.subCategory) {
             this.$('.child-categories-list a[data-id=' + category.subCategory + ']').trigger('click');
