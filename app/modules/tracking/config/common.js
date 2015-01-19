@@ -28,6 +28,7 @@ module.exports = {
         'post#form': '[category-name]/[subcategory-id]/post_form/[rendering]',
         'post#success': 'posting_success',
         'post#edit': 'edititem',
+        'post#editsuccess': 'edititem_success',
         'users#register': 'register',
         'users#login': 'login',
         'users#myads': 'myolx/myolx',
