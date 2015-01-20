@@ -130,11 +130,7 @@ var rules = {
             return '/' + helpers.common.slugToUrl(this.item);
         }
     },
-<<<<<<< Updated upstream
-    searchs: {
-=======
-    searches:
->>>>>>> Stashed changes
+    searches: {
         allresults: function() {
             var page = this.page || this.app.session.get('page') || 0;
             var state = {
