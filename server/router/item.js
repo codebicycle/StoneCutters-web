@@ -43,6 +43,9 @@ module.exports = function(app, dataAdapter) {
             }
 
             function submit(done) {
+                if (reply.email && ~reply.email.indexOf('@yopmail.com')) {
+                    console.log('[OLX_DEBUG]', 'email:', reply.email, ' | ', 'name:', reply.name, ' | ', 'phone:', reply.phone, ' | ', 'message:', reply.message);
+                }
                 user.reply(done, _.extend({}, reply, {
                     id: itemId
                 }));
