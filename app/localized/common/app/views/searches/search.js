@@ -2,11 +2,10 @@
 
 var _ = require('underscore');
 var Base = require('../../bases/view');
-var helpers = require('../../../../../helpers');
 var breadcrumb = require('../../../../../modules/breadcrumb');
 
 module.exports = Base.extend({
-    className: 'searchs_statics_view',
+    className: 'searches_search_view',
     wapAttributes: {
         cellpadding: 0
     },
@@ -14,10 +13,9 @@ module.exports = Base.extend({
         var data = Base.prototype.getTemplateData.call(this);
 
         return _.extend({}, data, {
-            breadcrumb: breadcrumb.get.call(this, data),
-            filtersEnabled: helpers.features.isEnabled.call(this, 'listingFilters')
+            breadcrumb: breadcrumb.get.call(this, data)
         });
     }
 });
 
-module.exports.id = 'searchs/statics';
+module.exports.id = 'searches/search';

@@ -218,7 +218,7 @@ function search(params, callback, gallery) {
                 }
             });
 
-            callback(null, ['searchs/search', gallery.replace('-', '')].join(''), {
+            callback(null, ['searches/search', gallery.replace('-', '')].join(''), {
                 items: items.toJSON(),
                 meta: items.meta,
                 filters: items.filters,
