@@ -55,13 +55,7 @@ module.exports = Base.extend({
                 this.createIframeADX(settings.params, settings.options);
                 break;
             case 'AFC':
-                window.afcQueue = (window.afcQueue || {
-                    promise: asynquence()
-                });
-                window.afcQueue.promise.then(function(done) {
-                    window.afcQueue[slotname] = done;
-                    this.createIframeAFC(settings.params, settings.options);
-                }.bind(this));
+                this.createIframeAFC(settings.params, settings.options);
                 break;
         }
     },
@@ -101,12 +95,13 @@ module.exports = Base.extend({
             ifrScripts.push('google_ad_slot = "' + params.slotId + '";');
             ifrScripts.push('google_ad_width = "' + params.width + '";');
             ifrScripts.push('google_ad_height = "' + params.height + '";');
+            ifrScripts.push('google_page_url = "' + (window.top.location.href || '') + '";');
 
             domIfr.write('<script type="text/javascript">' + ifrScripts.join('\n') + '</script><script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script><style>body{margin:0;}</style>');
         }).appendTo('#' + slotname);
     },
     createIframeAFC: function(params, options) {
-        var slotname = this.adServing.get('slotname');
+        var slotname = params.container;
         var boxTitle = this.dictionary['adsense.SponsoredLinks'];
 
         $('<iframe></iframe>')
@@ -128,7 +123,9 @@ module.exports = Base.extend({
             ifrScripts.push('google_max_num_ads =  ' + params.number + ';');
             ifrScripts.push('google_hints = "' + options.query + '";');
             ifrScripts.push('google_ad_section = "title body";');
-            ifrScripts.push('google_ad_request_done = function(r){ window.parent.afcQueue["' + slotname + '"](); window.parent.AFCrender(r, "' + slotname + '", "' + boxTitle + '"); };');
+            ifrScripts.push('google_page_url = "' + (window.top.location.href || '') + '";');
+            ifrScripts.push('google_ad_request_done = function(r){ window.parent.AFCrender(r, "' + slotname + '", "' + boxTitle + '"); };');
+            ifrScripts.push('document.write("&nbsp;");');
 
             domIfr.write('<script type="text/javascript">' + ifrScripts.join('\n') + '</script><script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>');
         }).appendTo('#' + slotname);
