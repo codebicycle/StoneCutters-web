@@ -7,9 +7,9 @@
     </div>
 {% endif %}
 <section id="myads">
-    {% if myAds.length %}
+    {% if items.length %}
         <ul class="item-listing">
-            {% for item in myAds %}
+            {% for item in items.toJSON() %}
                 <li>
                     <a href="#" class="edit {{ item.id }}" data-itemUrl="{{ item | slugToUrl | link }}" data-itemId="{{ item.id }}" {{ 'data-editable="true"' if item.status == 'ready'}}>
                         {% if item.status == 'pending' %}

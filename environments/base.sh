@@ -3,14 +3,17 @@
 # Validate permissions (sudo)
 # ---------------------------------------------------------------------------------------
 if [ "$(whoami)" != "root" ]; then
-	echo "Sorry, you are not root (sudo)."
-	exit 1
+    echo "Sorry, you are not root (sudo)."
+    exit 1
 fi
 
 # Constants
 # ---------------------------------------------------------------------------------------
 IP="127.0.0.1"
 ENV="Development"
+SMAUG="190.210.62.60"
+SPAMHANDLER="162.242.207.113"
+EXTBKP=""
 
 # Help
 # ---------------------------------------------------------------------------------------
@@ -25,13 +28,19 @@ usage() {
 
 # Arguments
 # ---------------------------------------------------------------------------------------
-while getopts ":i:e:" o; do
+while getopts ":i:e:s:h:" o; do
     case "${o}" in
         i)
             IP=${OPTARG}
             ;;
         e)
             ENV=${OPTARG}
+            ;;
+        s)
+            SMAUG=${OPTARG}
+            ;;
+        h)
+            SPAMHANDLER=${OPTARG}
             ;;
         *)
             usage
@@ -46,7 +55,7 @@ CURRENT=${PWD##*/}
 
 if [ "$CURRENT" != "environments" ]
 then
-	cd 'environments'
+    cd 'environments'
 fi
 
 # Host alias
@@ -56,29 +65,38 @@ LOCAL=${LOCAL_AUXI:0};
 
 if [ "$LOCAL" == "" ]
 then
-	echo "Couldnt read your host alias from /etc/sudoers. Check the line LOCAL=developXX"
-	exit 1;
+    echo "Couldnt read your host alias from /etc/sudoers. Check the line LOCAL=developXX"
+    exit 1;
 fi
 
 # Host backup
 # ---------------------------------------------------------------------------------------
 if [ ! -f /etc/hosts_bkp_arwen ]
 then
-	cp /etc/hosts /etc/hosts_bkp_arwen
+    cp /etc/hosts /etc/hosts_bkp_arwen
 fi
 
-cp hosts /etc/hosts;
+if [ "$ENV" != "Live" ]
+then
+   cp hosts /etc/hosts;
+else
+   cp empty /etc/hosts;
+fi
 
 # Host replace
 # ---------------------------------------------------------------------------------------
 # Check if Mac OS
 if [[ "$OSTYPE" == "darwin"* ]]
 then
-	sed -i .bkp "s/{IP}/$IP/g" '/etc/hosts';
-	sed -i .bkp "s/{LOCAL}/$LOCAL/g" '/etc/hosts';
-else
-	sed -i "s/{IP}/$IP/g" '/etc/hosts';
-	sed -i "s/{LOCAL}/$LOCAL/g" '/etc/hosts';
+    EXTBKP=".bkp"
+fi
+
+sed -i $EXTBKP "s/{LOCAL}/$LOCAL/g" '/etc/hosts';
+if [ "$ENV" != "Live" ]
+then
+    sed -i $EXTBKP "s/{IP}/$IP/g" '/etc/hosts';
+    sed -i $EXTBKP "s/{SMAUG}/$SMAUG/g" '/etc/hosts';
+    sed -i $EXTBKP "s/{SPAMHANDLER}/$SPAMHANDLER/g" '/etc/hosts';
 fi
 
 echo "Moved to $ENV"

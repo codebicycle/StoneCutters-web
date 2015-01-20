@@ -6,7 +6,6 @@ var URLParser = require('url');
 module.exports = Base.extend({
     className: 'app_view',
     events: {
-        'click [data-video-item]': 'changeVideo',
         'click [data-share-facebook]': 'openFacebook',
         'click [data-share-twitter]': 'openTwitter',
         'click [data-share-gplus]': 'openGplus'
@@ -43,13 +42,6 @@ module.exports = Base.extend({
             this.app.router.redirectTo(href);
         }
     },
-    changeVideo: function(event) {
-        event.preventDefault();
-        event.stopPropagation();
-        event.stopImmediatePropagation();
-        this._changeIframeConfig(event);
-
-    },
     openFacebook: function(event) {
         event.preventDefault();
         event.stopPropagation();
@@ -74,22 +66,6 @@ module.exports = Base.extend({
         var shareUrl = event.currentTarget.dataset.shareUrl,
             url = "https://plus.google.com/share?url=" + shareUrl;
             this._openWindow(url);
-    },
-    _changeIframeConfig: function (event) {
-            var thisElement = $(event.currentTarget),
-                urlVideo = thisElement.attr('data-video-item'),
-                urlVideoFull = "http://www.youtube.com/embed/" + urlVideo,
-                videoTitle = thisElement.find('.video-title').text();
-            thisElement.parent().siblings().show();
-            thisElement.parent().hide();
-
-            // Change share buttons data
-            $('.social-share a').each(function(){
-                $(this).attr('data-share-url', urlVideoFull);
-                $(this).attr('data-share-title', videoTitle);
-            });
-
-            $("#video-container-iframe").attr("src", urlVideoFull);
     },
     _openWindow: function (url) {
         var width =  626,

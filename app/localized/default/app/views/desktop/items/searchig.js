@@ -8,9 +8,11 @@ module.exports = Base.extend({
     className: 'items-searchig-view',
     regexpFindGallery: /-ig/,
     regexpReplaceGallery: /(-ig)/,
+    regexpFindNeighborhood: /-neighborhood_[0-9_]+/,
+
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
-        var link = this.cleanPage(this.app.session.get('path'));
+        var link = this.refactorPath(this.app.session.get('path'));
 
         delete data.nav.listAct;
         return _.extend({}, data, {
@@ -25,6 +27,14 @@ module.exports = Base.extend({
     cleanPage: function(path) {
         if (path.match(this.regexpFindPage)) {
             path = path.replace(this.regexpReplacePage, '');
+        }
+        return path.replace(/\/\//g, '/');
+    },
+    refactorPath: function(path) {
+        path = this.cleanPage(path);
+        path = path.replace(this.regexpFindNeighborhood, '');
+        if (path.slice(path.length - 1) === '/') {
+            path = path.substring(0, path.length - 1);
         }
         return path;
     }

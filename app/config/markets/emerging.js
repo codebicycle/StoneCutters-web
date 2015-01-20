@@ -33,7 +33,8 @@ module.exports = {
                 enabled: true,
                 server: {
                     enabled: true,
-                    platforms: ['html5', 'html4', 'wap']
+                    platforms: ['html5', 'html4', 'wap'],
+                    event: true
                 },
                 client: {
                     enabled: true,
@@ -44,7 +45,8 @@ module.exports = {
                 enabled: true,
                 server: {
                     enabled: true,
-                    platforms: ['html5', 'html4', 'wap']
+                    platforms: ['html5', 'html4', 'wap'],
+                    event: true
                 },
                 client: {
                     enabled: true,
@@ -54,6 +56,22 @@ module.exports = {
             hydra: {
                 enabled: true,
                 platforms: ['desktop']
+            },
+            tagmanager: {
+                enabled: false,
+                platforms: ['desktop']
+            },
+            facebook: {
+                enabled: false,
+                platforms: ['html4', 'html5']
+            },
+            allpages: {
+                enabled: false,
+                platforms: ['html4', 'html5']
+            },
+            keyade: {
+                enabled: true,
+                platforms: ['wap', 'html4', 'html5', 'desktop']
             }
         }
     }

@@ -6,6 +6,12 @@ var asynquence = require('asynquence');
 var _ = require('underscore');
 var translations = require('../../../../../../../../shared/translations');
 var statsd = require('../../../../../../../../shared/statsd')();
+var Item = require('../../../../../../../models/item');
+var Field = require('../../../../../../../models/field');
+var Categories = require('../../../../../../../collections/categories');
+var Cities = require('../../../../../../../collections/cities');
+var States = require('../../../../../../../collections/states');
+
 window.URL = window.URL || window.webkitURL;
 
 function onpopstate(event) {
@@ -22,14 +28,12 @@ function onpopstate(event) {
 }
 
 module.exports = Base.extend({
-    form: {},
     errors: {},
     initialize: function() {
         Base.prototype.initialize.call(this);
-        this.form = {};
         this.errors = {};
         this.currentViewName = 'hub';
-        this.dictionary = translations[this.app.session.get('selectedLanguage') || 'en-US'] || translations['es-ES'];
+        this.dictionary = translations.get(this.app.session.get('selectedLanguage'));
     },
     postRender: function() {
         $(window).on('beforeunload', this.onBeforeUnload);
@@ -38,11 +42,21 @@ module.exports = Base.extend({
         }, this.onExit.bind(this));
         this.app.router.once('action:end', this.onStart);
         this.app.router.once('action:start', this.onEnd);
-        this.attachTrackMe(function(category, action) {
+        this.attachTrackMe(function trackMe(category, action) {
             return {
-                custom: [category, this.form['category.parentId'] || '-', this.form['category.id'] || '-', action].join('::')
+                custom: [category, this.getItem().get('category').parentId || '-', this.getItem().get('category').id || '-', action].join('::')
             };
         }.bind(this));
+        if (this.getItem().has('id')) {
+            this.$el.trigger('categorySubmit', {
+                id: this.item.get('category').parentId
+            });
+            this.$el.trigger('subcategorySubmit');
+            this.$el.trigger('descriptionSubmit', [{}, true]);
+            this.$el.trigger('contactSubmit', [{}, '', true]);
+            this.$('#hub').trigger('imagesLoadEnd');
+        }
+        this.getCategories();
     },
     onBeforeUnload: function(event) {
         return ' ';
@@ -59,15 +73,12 @@ module.exports = Base.extend({
     events: {
         'flow': 'onFlow',
         'headerChange': 'onHeaderChange',
-        'stepChange': 'onStepChange',
         'categorySubmit': 'onCategorySubmit',
         'subcategorySubmit': 'onSubcategorySubmit',
-        'optionalsSubmit': 'onOptionalsSubmit',
         'descriptionSubmit': 'onDescriptionSubmit',
         'contactSubmit': 'onContactSubmit',
         'locationSubmit': 'onLocationSubmit',
         'submit': 'onSubmit',
-        'restart': 'onRestart',
         'trackEventNext': 'onNext',
         'exit': 'onExit',
         'imagesLoadStart': 'onImagesLoadStart',
@@ -79,21 +90,14 @@ module.exports = Base.extend({
     },
     changeSelectValue: function(event){
         var select = $(event.target);
-        var options = select.children().length;
-        var nextValue;
 
-        if (options == 2) {
+        if (select.children().length === 2) {
             event.preventDefault();
             event.stopPropagation();
             event.stopImmediatePropagation();
 
-            nextValue = select.find('option:not(:selected)').val();
-
-            select.val(nextValue);
-
-            if (select.attr('name') === 'priceType') {
-                this.$('#description').trigger('priceTypeChange', [select.val()]);
-            }
+            select.val(select.find('option:not(:selected)').val());
+            select.trigger('change');
         }
 
     },
@@ -124,93 +128,53 @@ module.exports = Base.extend({
 
         this.$('header').trigger('change', [title, current, back || 'hub', data]);
     },
-    onStepChange: function(event, before, after) {
+    onCategorySubmit: function(event, error, subError) {
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();
 
-        this.$('#hub').trigger('stepChange', [before, after]);
-    },
-    onCategorySubmit: function(event, category, error, subError) {
-        event.preventDefault();
-        event.stopPropagation();
-        event.stopImmediatePropagation();
-
-        if (this.form['category.parentId'] !== category.id) {
-            delete this.form['category.id'];
-        }
-        this.form['category.parentId'] = category.id;
         this.errors['category.parentId'] = error;
         this.errors['category.id'] = subError;
-        this.$('#hub').trigger('categoryChange', [this.form['category.parentId'], this.form['category.id'], this.errors['category.parentId'], this.errors['category.id']]);
+        this.$('#hub').trigger('categoryChange', [this.item.get('category').parentId, this.item.get('category').id, this.errors['category.parentId'], this.errors['category.id']]);
     },
-    onSubcategorySubmit: function(event, subcategory, error) {
+    onSubcategorySubmit: function(event, error) {
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();
 
-        this.form['category.id'] = subcategory.id;
         this.errors['category.id'] = error;
-        this.$('#hub').trigger('categoryChange', [this.form['category.parentId'], this.form['category.id'], this.errors['category.parentId'], this.errors['category.id']]);
-        if (subcategory.fields) {
-            this.$('#optionals').trigger('fieldsChange', [subcategory.fields.get('fields').categoryAttributes, this.form['category.parentId'], this.form['category.id'], true]);
-            this.$('#description').trigger('fieldsChange', [subcategory.fields.get('fields').productDescription]);
-            this.$('#contact').trigger('fieldsChange', [subcategory.fields.get('fields').contactInformation]);
+        this.$('#hub').trigger('categoryChange', [this.item.get('category').parentId, this.item.get('category').id, this.errors['category.parentId'], this.errors['category.id']]);
+        this.$('#hub').trigger('stepChange', this.getFields().categoryAttributes.length ? ['categories', 'optionals'] : ['optionals', 'categories']);
+        this.$('#optionals').trigger('fieldsChange', true);
+        this.$('#description').trigger('fieldsChange');
+        this.$('#contact').trigger('fieldsChange');
+    },
+    onDescriptionSubmit: function(event, errors, notTrack) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+
+        this.$('#hub').trigger('descriptionChange', [errors]);
+        if (!notTrack) {
+            this.$el.trigger('trackEventNext', ['ClickDescribeAdNext']);
         }
     },
-    onOptionalsSubmit: function(event, fields, errors) {
+    onContactSubmit: function(event, errors, cityError, notTrack) {
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();
 
-        fields.forEach(function each(field) {
-            if (field.value) {
-                this.form[field.name] = field.value;
-            }
-            else {
-                delete this.form[field.name];
-            }
-        }.bind(this));
+        this.$('#hub').trigger('contactChange', [errors, cityError]);
+        if (!notTrack) {
+            this.$el.trigger('trackEventNext', ['ClickContactInfoNext']);
+        }
     },
-    onDescriptionSubmit: function(event, fields, errors) {
+    onLocationSubmit: function(event, error) {
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();
 
-        fields.forEach(function each(field) {
-            if (field.value) {
-                this.form[field.name] = field.value;
-            }
-            else {
-                delete this.form[field.name];
-            }
-        }.bind(this));
-        this.$('#hub').trigger('descriptionChange', [fields, errors]);
-        this.$el.trigger('trackEventNext', ['ClickDescribeAdNext']);
-    },
-    onContactSubmit: function(event, fields, city, errors, cityError) {
-        event.preventDefault();
-        event.stopPropagation();
-        event.stopImmediatePropagation();
-
-        fields.forEach(function each(field) {
-            if (field.value) {
-                this.form[field.name] = field.value;
-            }
-            else {
-                delete this.form[field.name];
-            }
-        }.bind(this));
-        this.form.location = city.url;
-        this.$('#hub').trigger('contactChange', [fields, city, errors, cityError]);
-        this.$el.trigger('trackEventNext', ['ClickContactInfoNext']);
-    },
-    onLocationSubmit: function(event, city, error) {
-        event.preventDefault();
-        event.stopPropagation();
-        event.stopImmediatePropagation();
-
-        this.$('#contact').trigger('locationChange', [city, error]);
+        this.$('#contact').trigger('locationChange', [error]);
     },
     onSubmit: function(event) {
         event.preventDefault();
@@ -218,121 +182,51 @@ module.exports = Base.extend({
         event.stopImmediatePropagation();
 
         var $loading = $('body > .loading').show();
-        var query = {
-            postingSession: this.options.postingsession || this.options.postingSession
-        };
-        var user = this.app.session.get('user');
 
-        var validate = function(done) {
-            query.intent = 'validate';
-            helpers.dataAdapter.post(this.app.req, '/items', {
-                query: query,
-                data: this.form
-            }, done);
-        }.bind(this);
+        this.item.set('languageId', this.app.session.get('languageId'));
+        this.item.set('platform', this.app.session.get('platform'));
+        this.item.set('ipAddress', this.app.session.get('ip'));
+        this.$('#errors').trigger('hide');
 
-        var check = function(done, err, res, body) {
-            if (err) {
-                return done.fail(err);
-            }
-            if (body) {
-                done.abort();
-                return fail(body, 'invalid');
-            }
-            done(res, body);
-        }.bind(this);
+        asynquence().or(fail.bind(this))
+            .then(post.bind(this))
+            .val(success.bind(this));
 
-        var post = function(done) {
-            query.intent = 'create';
-            helpers.dataAdapter.post(this.app.req, '/items', {
-                query: query,
-                data: this.form
-            }, done.errfcb);
-        }.bind(this);
+        function post(done) {
+            this.item.post(done);
+        }
 
-        var trackEvent = function(done, res, item) {
+        function success() {
             var category = 'Posting';
             var action = 'PostingSuccess';
 
             this.track({
                 category: category,
                 action: action,
-                custom: [category, this.form['category.parentId'] || '-', this.form['category.id'] || '-', action, item.id].join('::')
+                custom: [category, this.item.get('category').parentId || '-', this.item.get('category').id || '-', action, this.item.get('id')].join('::')
             });
-            done(item);
-        }.bind(this);
-
-        var trackGraphite = function(done, res, item) {
-            var location = this.app.session.get('location');
-            var platform = this.app.session.get('platform');
-
-            statsd.increment([location.name, 'posting', 'success', platform]);
-            done(item);
-        }.bind(this);
-
-        var success = function(item) {
             this.app.router.once('action:end', always);
-            helpers.common.redirect.call(this.app.router, '/posting/success/' + item.id + '?sk=' + item.securityKey, null, {
+            helpers.common.redirect.call(this.app.router, '/posting/success/' + this.item.get('id') + '?sk=' + this.item.get('securityKey'), null, {
                 status: 200
             });
-        }.bind(this);
+        }
 
-        var fail = function(err, track) {
+        function fail(errors) {
             // TODO: Improve error handling
-            var location = this.app.session.get('location').abbreviation.toLowerCase();
+            if (errors) {
+                if (errors.responseText) {
+                    errors = JSON.parse(errors.responseText);
+                }
+                if (_.isArray(errors)) {
+                    this.$el.trigger('errors', [errors]);
+                }
+            }
             always();
-            if (err) {
-                if (err.responseText) {
-                    err = JSON.parse(err.responseText);
-                }
-                if (_.isArray(err)) {
-                    this.$el.trigger('errors', [err]);
-                }
-            }
-            if (track !== 'invalid') {
-                return statsd.increment([this.app.session.get('location').name, 'posting', track || 'error', this.app.session.get('platform')]);
-            }
+        }
 
-            _.uniq(err.map(function each(error) {
-                return error.selector;
-            })).forEach(function each(selector) {
-                statsd.increment([location, 'posting', track, this.app.session.get('platform'), selector.replace(/[.\s]+/g, '_')]);
-            }.bind(this));
-
-        }.bind(this);
-
-        var always = function() {
+        function always() {
             $loading.hide();
-        }.bind(this);
-
-        this.$('#errors').trigger('hide');
-
-        if (user) {
-            query.token = user.token;
         }
-        this.form.languageId = this.app.session.get('languages')._byId[this.app.session.get('selectedLanguage')].id;
-        this.form.platform = this.app.session.get('platform');
-        this.form.ipAddress = this.app.session.get('ip');
-        if (this.form._images) {
-            this.form.images = this.form._images.join(',');
-        }
-        asynquence().or(fail)
-            .then(validate)
-            .then(check)
-            .then(post)
-            .gate(trackEvent, trackGraphite)
-            .val(success);
-    },
-    onRestart: function(event) {
-        event.preventDefault();
-        event.stopPropagation();
-        event.stopImmediatePropagation();
-
-        this.form = {};
-        this.errors = {};
-        this.childViews.forEach(function each(view) {
-            view.$el.trigger('restart');
-        });
     },
     onNext: function(event, action) {
         var category = 'Posting';
@@ -340,29 +234,30 @@ module.exports = Base.extend({
         this.track({
             category: category,
             action: action,
-            custom: [category, this.form['category.parentId'] || '-', this.form['category.id'] || '-', action].join('::')
+            custom: [category, this.getItem().get('category').parentId || '-', this.getItem().get('category').id || '-', action].join('::')
         });
     },
     onExit: function(event) {
         var category = 'Posting';
         var action = 'DropSection';
-        var images = this.form.images;
+        var item = this.getItem();
+        var location = item.getLocation() || this.app.session.get('location').current || this.app.session.get('location');
         var status = [];
 
         status.push('section:' + this.currentViewName);
-        status.push('category:' + (this.form['category.parentId'] ? 1 : 0));
-        status.push('subcategory:' + (this.form['category.id'] ? 1 : 0));
-        status.push('title:' + (this.form.title ? 1 : 0));
-        status.push('description:' + (this.form.description ? 1 : 0));
-        status.push('email:' + (this.form.email ? 1 : 0));
-        status.push('state:' + (this.form.location ? 1 : 0));
-        status.push('city:' + (this.form.location ? 1 : 0));
-        status.push('pictures:' + (images ? (_.isString(images) ? images.split(',') : images).length : 0));
+        status.push('category:' + (item.get('category').parentId ? 1 : 0));
+        status.push('subcategory:' + (item.get('category').id ? 1 : 0));
+        status.push('title:' + (item.get('item') ? 1 : 0));
+        status.push('description:' + (item.get('description') ? 1 : 0));
+        status.push('email:' + (item.get('email') ? 1 : 0));
+        status.push('state:' + (location.url ? 1 : 0));
+        status.push('city:' + (location.url ? 1 : 0));
+        status.push('pictures:' + item.get('images').length);
 
         this.track({
             category: category,
             action: action,
-            custom: [category, this.form['category.parentId'] || '-', this.form['category.id'] || '-', action].concat(status).join('::')
+            custom: [category, item.get('category').parentId || '-', item.get('category').id || '-', action].concat(status).join('::')
         }, {
             async: (event.data && !_.isUndefined(event.data.async) ? event.data.async : true)
         });
@@ -374,33 +269,15 @@ module.exports = Base.extend({
 
         this.$('#hub').trigger('imagesLoadStart');
     },
-    onImagesLoadEnd: function(event, images) {
+    onImagesLoadEnd: function(event) {
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();
 
-        var ids = [];
-        var files = [];
-        var orientations = [];
-
-        Object.keys(images).sort().forEach(function each(image) {
-            ids.push(images[image].id);
-            files.push(images[image].file);
-            orientations.push(images[image].orientation);
-        });
-        if (ids.length) {
-            this.form._images = ids;
-        }
-        else {
-            delete this.form._images;
-            delete this.form.images;
-        }
-        this.$('#hub').trigger('imagesLoadEnd', [files.shift(), orientations.shift()]);
+        this.$('#hub').trigger('imagesLoadEnd');
     },
     onCategoryReset: function(event) {
-        this.$el.trigger('stepChange', ['optionals', 'categories']);
-        this.$('#subcategories').trigger('restart');
-        this.$('#optionals').trigger('restart');
+        this.$('#hub').trigger('stepChange', ['optionals', 'categories']);
     },
     onErrors: function(event, errors) {
         event.preventDefault();
@@ -408,5 +285,35 @@ module.exports = Base.extend({
         event.stopImmediatePropagation();
 
         this.$('#errors').trigger('show', [errors]);
+    },
+    getItem: function() {
+        this.item = this.item || (this.options.item && this.options.item.toJSON ? this.options.item : new Item(this.options.item || {}, {
+            app: this.app
+        }));
+        return this.item;
+    },
+    getFields: function() {
+        this.fields = this.fields || (this.options.fields && this.options.fields.toJSON ? this.options.fields : new Field(this.options.fields || {}, {
+            app: this.app
+        }));
+        return this.fields.get('fields');
+    },
+    getCategories: function() {
+        this.categories = this.categories || (this.options.categories && this.options.categories.toJSON ? this.options.categories : new Categories(this.options.categories || {}, {
+            app: this.app
+        }));
+        return this.categories;
+    },
+    getTopCities: function() {
+        this.topCities = this.topCities || (this.options.topCities && this.options.topCities.toJSON ? this.options.topCities : new Cities(this.options.topCities || {}, {
+            app: this.app
+        }));
+        return this.topCities;
+    },
+    getStates: function() {
+        this.states = this.states || (this.options.states && this.options.states.toJSON ? this.options.states : new States(this.options.states || {}, {
+            app: this.app
+        }));
+        return this.states;
     }
 });

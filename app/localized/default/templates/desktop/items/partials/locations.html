@@ -1,4 +1,4 @@
-<ul class="locations-tabs {{ 'locations-empty' if filters and not (filters.has('city') or filters.has('state')) }}" >
+<ul class="locations-tabs{{ ' locations-empty' if location.current and location.current.type == 'city' }}{{ ' locations-neighborhood' if filters.has('neighborhood') }}" >
     <li>
     {% if location.children | length == 0 %}
         {{ location.name }}
@@ -21,20 +21,64 @@
 </ul>
 {% if filters %}
     {% for filter in filters.toJSON() %}
-        {% if filter.name == 'state' or filter.name == 'city' %}
+        {% if filter.name == 'state' or (filter.name == 'city' and location.current and location.current.type != 'city') %}
             <ul class="locations-list">
                 {% for value in filter.value %}
-                    <li><a href="{{ nav.link | linkig({location: value.id}) }}" rel="nofollow">{{ value.value }} <span>{{ value.count | countFormat }}</span></a></li>
-                {% endfor %}
-                {# {% for neighborhood in filters.get('neighborhood').get('value') %}
-                    <li>
-                        <label>
-                            <input type="checkbox" value="{{neighborhood.id}}" rel="{{ neighborhood.value }}" >
-                            {{ neighborhood.value }} <span>{{ neighborhood.count | countFormat }}</span>
-                        </label>
+                    <li class="locations">
+                        <a href="{{ nav.link | linkig({location: value.id}) }}" rel="nofollow">{{ value.value }} <span>{{ value.count | countFormat }}</span></a>
                     </li>
-                {% endfor %} #}
+                {% endfor %}
             </ul>
+        {% endif %}
+        {% if filters.has('neighborhood') and filter.name == 'neighborhood' %}
+            <div class="neighborhood">
+                <div class="neighborhood-first{{ ' hide' if filters.isActive(filter.name) }}">
+                    <div class="actions">
+                        <span class="filter-btn"  rel="nofollow" data-action="slide" >{{ dictionary["listingpageitemslisting.FilterByNeighborhood"] }}</span>
+                    </div>
+                </div>
+                {% if filters.isActive(filter.name) %}
+                    <div class="active-neighborhoods">
+                        <ul>
+                            {% for neighborhood in filters.get('neighborhood').get('value') %}
+                                {% if filters.has(filter.name, neighborhood.id) %}
+                                    <li class="active-neighborhood" data-action="removeNeighborhood" data-id="{{neighborhood.id}}">{{ neighborhood.value }}<span class="icons icon-close"></span></li>
+                                {% endif %}
+                            {% endfor %}
+                        </ul>
+                        <div class="actions">
+                            <span class="filter-btn"  rel="nofollow" data-action="selectMore" >{{ dictionary["optionals.SelectMoreNeighborhoods"] }}</span>
+                        </div>
+                    </div>
+                {% endif %}
+                <div class="neighborhood-list hide">
+                    <ul class="visible-neighborhoods">
+                        <li class="locations select-all">
+                            <label>
+                                <input type="checkbox" value="select-all" rel="select-all" data-action="selectAll" >
+                                {{ dictionary["itemslisting.SelectAll"] }}
+                            </label>
+                        </li>
+                        {% for neighborhood in filters.get('neighborhood').get('value') %}
+                            <li class="locations neighborhoods">
+                                <label>
+                                    <input type="checkbox" value="{{neighborhood.id}}" rel="{{ neighborhood.value }}" {{ 'checked' if filters.has(filter.name, neighborhood.id) }} >
+                                    {{ neighborhood.value }} <span>{{ neighborhood.count | countFormat }}</span>
+                                    {{ '</ul><ul class="hidden-neighborhoods">' if loop.index == 8 }}
+                                </label>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                    <div class="actions">
+                        <span class="filter-btn"  rel="nofollow" data-action="filter" >{{ dictionary["listingpageitemslisting.FilterByNeighborhood"] }}</span>
+                        <span class="cancel-btn" rel="nofollow" data-action="cancel">{{ dictionary["wap_posting_step4.Cancel"] }}</span>
+                        {% if filters.get('neighborhood').get('value').length > 8 %}
+                            <span class="see more icons icon-arrow-down" data-action="see">{{ dictionary["misc.SeeMore"] }}</span>
+                            <span class="see less hide icons icon-arrow-up" data-action="see">{{ dictionary["misc.SeeLess"] }}</span>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
         {% endif %}
     {% endfor %}
 {% endif %}

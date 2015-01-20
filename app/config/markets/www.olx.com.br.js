@@ -9,5 +9,17 @@ module.exports = {
             myFavs: 15,
             myMsgs: 15
         }
+    },
+    tracking: {
+        trackers: {
+            ati: {
+                server: {
+                    enabled: false
+                }
+            },
+            facebook: {
+                enabled: true
+            }
+        }
     }
 };

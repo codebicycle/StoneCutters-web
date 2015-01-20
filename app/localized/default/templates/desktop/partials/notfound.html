@@ -1,4 +1,4 @@
-<section id="notfound">
+<section id="notfound" data-qa="no-results-found">
     <img width="349" height="173" src="{{ '/images/desktop/couch.jpg' | static }}" alt="" />
     {% if items %}
         <p class="message">
@@ -26,6 +26,10 @@
                     {{ category.trName }}
                 </a>
             </li>
+            {% if loop.length > 7 and loop.index == 6  %}
+                </ul>
+                <ul class="category-list">
+            {% endif %}
         {% endfor %}
     </ul>
 </section>

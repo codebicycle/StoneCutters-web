@@ -42,12 +42,12 @@
     </div>
 </div>
 <ul class="my-items">
-    {% if myAds | length == 0 %}
+    {% if items.length == 0 %}
         <li class="item empty">
             {{ dictionary["netvibes_myolx.content.NoActiveListings"] }}
         </li>
     {% endif %}
-    {% for item in myAds %}
+    {% for item in items.toJSON() %}
         {% set status = 'ready' %}
         {% set statustxt = dictionary["listingpageitemslisting.Posted"] %}
         {% if item.status == 'expired' %}
@@ -90,27 +90,26 @@
                     {% endif %}
                 </h3>
                 <div class="tips">
-                    <span>0  {{ dictionary["myolx.Messages"] }}</span>
-                    <span>0 {{ dictionary["netvibes_myolx.content.Views"] }} </span>
+                    <span>{{ item.messages }} {{ dictionary["myolx.Messages"] }}</span>
+                    <span>{{ item.visits }} {{ dictionary["netvibes_myolx.content.Views"] }}</span>
                     <span>{{ dictionary["misc.SinceDate"] | replace('<<DATE>>', item.date.timestamp | date("MMM DD, YYYY")) }}</span>
                 </div>
                 <div class="text">
                     {{ item.message }}
                 </div>
                 <div class="buttons">
-                    {% if (status == 'ready' or status == 'pending') %}
-                        <!-- TODO: We are not having this feature for Bolivian launch
-                        <a href="{{ ('/myolx/edititem/'+ item.id) | link }}" class="btn icons icon-edit">{{ dictionary["showactivelistings.Edit"] }} </a> -->
+                    {% if (status == 'ready' or status == 'pending' or status == 'rejected') %}
+                        <a href="{{ item.slug.replace(domain, fullDomain) | editSlug(item.id) }}" class="btn icons icon-edit">{{ dictionary["showactivelistings.Edit"] }} </a>
                         {% if (status == 'ready') %}
                             <a data-idd="{{ item.id }}" data-img="{{ item.thumbnailLarge }}" data-title="{{ item.title }}" href="{{ ('/myolx/deleteitem/'+ item.id) | link }}" class="btn icons icon-trash btndelete">{{ dictionary["confirmremoveitem.Delete"] }} </a>
                         {% endif %}
                     {% endif %}
-                    {% if (status == 'rejected' or status == 'expired' or status == 'deleted') %}
+                    {# falta implementar #}
+                    {#% if (status == 'rejected' or status == 'expired' or status == 'deleted') %}
                         {% if status == 'expired' %}
                             <a href="" class="btn icons icon-repulish">{{ dictionary["myolx.Republish"] }}</a>
                         {% endif %}
-                        <a href="" data-idd="{{ item.id }}" class="btn icons icon-trash btndelforever">{{ dictionary["netvibes_myolx.content.RemoveListing"] }}</a>
-                    {% endif %}
+                    {% endif %#}
                 </div>
             </div>
             <div class="price">

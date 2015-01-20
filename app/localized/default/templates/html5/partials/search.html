@@ -6,7 +6,7 @@
     {% if (currentRoute.action != 'list' and currentRoute.action != 'success') %}
         {% if location.children[0].children[0].name %}
             {% set city = location.children[0].children[0].name %}
-        {% elif location.children[0].children[0] %}
+        {% elif location.children[0].name %}
             {% set city = location.children[0].name %}
         {% endif %}
         <a href="/location?target={{ path | replace('/', '', 1) }}"  class="btnfilter btnlocation">{{ city if city else location.name }}</a>

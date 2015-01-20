@@ -38,15 +38,34 @@
 
                     .content {
                         ul-reset();
+                        height: 300px;
+                        overflow: auto;
 
                         li {
                             height: 90px;
                             margin-bottom: 1px;
 
-                            a {
-                                background: #fff;
+                            .video {
+                                background: $greyBoxBg;
                                 clear-fix();
+                                display: block;
                                 position: relative;
+                                &:not(.active):hover {
+                                    background: $white;
+                                    cursor: pointer;
+                                    span {
+                                        text-decoration: underline;
+                                    }
+                                }
+                                &.active {
+                                    outline: 1px solid $greyStrong;
+                                    background: $white;
+                                    cursor: default;
+                                    color: $black;
+                                    &:hover {
+                                        color: $black;
+                                    }
+                                }
                             }
                         }
                     }
@@ -56,7 +75,14 @@
                         float: left;
                         font-size: $xs;
                         padding: 10px;
-                        width: 104px;
+                        width: 90px;
+                    }
+                    .icons.icon-play {
+                        color: $white;
+                        position: absolute;
+                        right: 47px;
+                        top: 28px;
+                        font-size: $xl;
                     }
 
                     img {
@@ -70,7 +96,7 @@
                         text-align: center;
                         width: 100%;
                         p {
-                            color: #fff;
+                            color: $white;
                             font-weight: bold;
                         }
 
@@ -86,9 +112,9 @@
                         a {
                             background: $white;
                             circle(28px);
-                            color: #ab0;
+                            color: $green;
                             display: block;
-                            font-size: 1.692rem;
+                            font-size: $m;
                             line-height: 28px;
                             text-align: center;
                         }

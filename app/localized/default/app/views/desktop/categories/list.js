@@ -12,20 +12,15 @@ module.exports = Base.extend({
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
         var location = this.app.session.get('location');
+        var selectedLanguage = this.app.session.get('selectedLanguage').split('-')[0];
         var states = data.states;
         var categories = data.categories;
         var currentState = {};
-        var countryMapStyle = config.get('countryMapStyle');
-        var testimonials = config.get(['testimonials', location.url]);
-        var countryMapClass;
+        var countryMapClass = config.getForMarket(location.url, ['countryMapStyle'], '');
+        var videos = config.getForMarket(location.url, ['videos'], '');
+        var testimonials = config.getForMarket(location.url, ['testimonials'], '');
 
         categories = helpers.common.categoryOrder(categories, location.url);
-
-        _.each(countryMapStyle, function each(country, style){
-            if (_.contains(country,location.url)){
-                countryMapClass = style;
-            }
-        });
 
         if(location.children.length) {
             _.each(states, function each(state, i){
@@ -39,6 +34,8 @@ module.exports = Base.extend({
             categories: categories,
             countryMapClass: countryMapClass,
             testimonials: testimonials,
+            videos: videos,
+            selectedLanguage: selectedLanguage,
             currentState: {
                 hostname: currentState.hostname,
                 name: currentState.name

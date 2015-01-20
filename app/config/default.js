@@ -25,75 +25,21 @@ module.exports = {
         imagePath: 'http://images[[basenumber]].olx-st.com/mobile-webapp'
     },
     localization: {
-        wap: ['www.olx.com.br', 'www.olx.fr', 'www.olx.es', 'www.olx.in', 'www.olx.co.za', 'www.olx.ir', 'www.jaovat.com'],
-        html4: ['www.olx.com.br', 'www.olx.fr', 'www.olx.es', 'www.olx.in', 'www.olx.co.za', 'www.olx.ir', 'www.jaovat.com'],
-        html5: ['www.olx.com.br', 'www.olx.fr', 'www.olx.es', 'www.olx.in', 'www.olx.co.za', 'www.olx.ir', 'www.jaovat.com'],
-        desktop: ['www.olx.com.bo', 'www.jaovat.com']
+        wap: ['www.olx.com.br', 'www.olx.co.za', 'www.olx.ir', 'www.olx.hn'],
+        html4: ['www.olx.com.br', 'www.olx.co.za', 'www.olx.ir', 'www.olx.hn'],
+        html5: ['www.olx.com.br', 'www.olx.ir', 'www.olx.hn'],
+        desktop: ['www.olx.com.bo']
     },
     icons: {
         wap: ['www.olx.com.ar', 'www.olx.com.bd', 'www.olx.com.br', 'www.olx.cm', 'www.olx.com.co', 'www.olx.com.ec', 'www.olx.com.sv', 'www.olx.com.gh', 'www.olx.com.gt', 'www.olx.in', 'www.olx.co.ke', 'www.olx.com.ng', 'www.olx.com.pe', 'www.olx.sn', 'www.olx.co.za', 'www.olx.com.ve', 'www.olx.com.pk', 'www.olx.co.ug', 'www.olx.com.uy', 'www.olx.ir'],
         html4: ['www.olx.com.ar', 'www.olx.com.bd', 'www.olx.com.br', 'www.olx.cm', 'www.olx.com.co', 'www.olx.com.ec', 'www.olx.com.sv', 'www.olx.com.gh', 'www.olx.com.gt', 'www.olx.in', 'www.olx.co.ke', 'www.olx.com.ng', 'www.olx.com.pe', 'www.olx.sn', 'www.olx.co.za', 'www.olx.com.ve', 'www.olx.com.pk', 'www.olx.co.ug', 'www.olx.com.uy', 'www.olx.ir'],
         html5: ['www.olx.com.ar', 'www.olx.com.bd', 'www.olx.com.br', 'www.olx.cm', 'www.olx.com.co', 'www.olx.com.ec', 'www.olx.com.sv', 'www.olx.com.gh', 'www.olx.com.gt', 'www.olx.in', 'www.olx.co.ke', 'www.olx.com.ng', 'www.olx.com.pe', 'www.olx.sn', 'www.olx.co.za', 'www.olx.com.ve', 'www.olx.com.pk', 'www.olx.co.ug', 'www.olx.com.uy', 'www.olx.ir']
     },
-    categoryTree: {
-        'www.olx.com.bo': {
-            order: [185, 186, 362, 187, 16, 191, 190]
-        },
-        'www.olx.com.py': {
-            order: [185, 186, 362, 187, 16, 191, 190]
-        },
-        'www.olx.com.ni': {
-            order: [185, 186, 362, 187, 16, 191, 190]
-        },
-        'www.olx.hn': {
-            order: [185, 186, 362, 187, 16, 191, 190]
-        },
-        'www.olx.co.cr': {
-            order: [185, 186, 362, 187, 16, 191, 190]
-        },
-        'www.olx.com.pa': {
-            order: [185, 186, 362, 187, 16, 191, 190]
-        },
-        'www.olx.co.tz': {
-            order: [185, 187, 186, 191, 16, 362, 190],
-            columns: [2, 2, 2],
-        },
-        'www.olx.co.ug': {
-            order: [830, 800, 811, 806, 362, 815, 859, 16, 821],
-            columns: [3, 2, 2],
-        },
-        'www.olx.com.gh': {
-            order: [830, 800, 811, 806, 815, 362, 859, 16, 821],
-            columns: [3, 2, 2],
-        },
-        'www.olx.sn': {
-            columns: [2, 2, 2],
-        },
-        'www.olx.com.uy': {
-            order: [830, 800, 811, 815, 853, 362, 859, 806, 821 ,16],
-            columns: [3, 3, 2],
-        },
-        'www.olx.cm': {
-            order: [800, 806, 815, 859, 600, 362, 16, 821],
-            columns: [2, 2, 2],
-        }
-    },
-    testimonials: {
-        'www.olx.com.bo': [
-            {
-                name: 'María de Santa Cruz',
-                testimonial: 'Vendí una bicicleta que ya no usaba, ¡lo mejor fue que no pagué comisión!',
-                image: '/images/desktop/maria.jpg',
-            },
-            {
-                name: 'Raúl de La Paz',
-                testimonial: '¡Publiqué un celular a la mañana y al día siguiente ya lo había vendido!',
-                image: '/images/desktop/raul.jpg',
-            }
-        ]
-    },
-    countryMapStyle: {
-        special: ['www.olx.com.pa', 'www.olx.hn'],
+    terms: {
+        wap: ['www.jaovat.com', 'www.olx.fr', 'www.olx.com.br', 'www.olx.es', 'www.olx.ir', 'www.olx.cl', 'www.olx.com.uy', 'www.olx.com.py', 'www.olx.com.pe', 'www.olx.com.ve', 'www.olx.com.co', 'www.olx.com.ec', 'www.olx.com.pa', 'www.olx.co.cr', 'www.olx.com.ni', 'www.olx.hn', 'www.olx.com.sv', 'www.olx.com.gt', 'www.olx.com.mx', 'www.olx.com.bo'],
+        html4: ['www.jaovat.com', 'www.olx.fr', 'www.olx.com.br', 'www.olx.es', 'www.olx.ir', 'www.olx.cl', 'www.olx.com.uy', 'www.olx.com.py', 'www.olx.com.pe', 'www.olx.com.ve', 'www.olx.com.co', 'www.olx.com.ec', 'www.olx.com.pa', 'www.olx.co.cr', 'www.olx.com.ni', 'www.olx.hn', 'www.olx.com.sv', 'www.olx.com.gt', 'www.olx.com.mx', 'www.olx.com.bo'],
+        html5: ['www.jaovat.com', 'www.olx.fr', 'www.olx.com.br', 'www.olx.es', 'www.olx.ir', 'www.olx.cl', 'www.olx.com.uy', 'www.olx.com.py', 'www.olx.com.pe', 'www.olx.com.ve', 'www.olx.com.co', 'www.olx.com.ec', 'www.olx.com.pa', 'www.olx.co.cr', 'www.olx.com.ni', 'www.olx.hn', 'www.olx.com.sv', 'www.olx.com.gt', 'www.olx.com.mx', 'www.olx.com.bo'],
+        desktop: ['www.jaovat.com', 'www.olx.com.bo', 'www.olx.cl', 'www.olx.com.uy', 'www.olx.com.py', 'www.olx.com.pe', 'www.olx.com.ve', 'www.olx.com.co', 'www.olx.com.ec', 'www.olx.com.pa', 'www.olx.co.cr', 'www.olx.com.ni', 'www.olx.hn', 'www.olx.com.sv', 'www.olx.com.gt', 'www.olx.com.mx', 'www.olx.com.bo']
     },
     disablePostingButton: {
         wap: ['home', 'post', 'location'],
@@ -143,15 +89,15 @@ module.exports = {
         html5: {
             postingFlow: {
                 worldwide: true,
-                countries: ['www.olx.ir']
-            },
-            listingFilters: {
-                worldwide: false,
                 countries: []
             },
+            listingFilters: {
+                worldwide: true,
+                countries: ['www.olx.ir']
+            },
             interstitialByADX: {
-                worldwide: false,
-                countries: ['www.olx.com.ar', , 'www.olx.cl']
+                worldwide: true,
+                countries: []
             },
             autoLocation: {
                 worldwide: true,
@@ -164,8 +110,14 @@ module.exports = {
         },
         html4: {
             interstitialByADX: {
+                worldwide: true,
+                countries: []
+            }
+        },
+        desktop: {
+            contactForm: {
                 worldwide: false,
-                countries: ['www.olx.com.ar', 'www.olx.cl']
+                countries: ['www.olx.co.cr']
             }
         }
     },
@@ -269,7 +221,9 @@ module.exports = {
             'www.olx.fr': 'olx.com',
             'www.olx.es': 'olx.com',
             'www.olx.cl': 'olx.com',
-            'www.olx.com.mx': 'olx.com'
+            'www.olx.com.mx': 'olx.com',
+            'www.olx.com.bo': 'olx.com',
+            'www.olx.com.py': 'olx.com'
         },
         support: {
             'default': 'support',
@@ -293,5 +247,10 @@ module.exports = {
             'www.olx.com.ng': 'support-ng',
             'www.olx.com.ke': 'support-ke'
         }
+    },
+    newrelic: {
+        enabled: true,
+        licenseKey: 'ee506f8b9b',
+        applicationId: '4149642'
     }
 };

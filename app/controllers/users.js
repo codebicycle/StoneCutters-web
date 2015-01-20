@@ -7,6 +7,7 @@ var helpers = require('../helpers');
 var tracking = require('../modules/tracking');
 var config = require('../../shared/config');
 var Paginator = require('../modules/paginator');
+var User = require('../models/user');
 
 module.exports = {
     register: middlewares(register),
@@ -30,19 +31,70 @@ function register(params, callback) {
         var platform = this.app.session.get('platform');
         var user;
 
-        if (platform === 'wap') {
-            return helpers.common.redirect.call(this, '/');
-        }
-        user = this.app.session.get('user');
-        if (user) {
-            return helpers.common.redirect.call(this, '/', null, {
-                status: 302
+        var redirect = function(done) {
+          if (platform === 'wap') {
+              done.abort();
+              return helpers.common.redirect.call(this, '/');
+          }
+          user = this.app.session.get('user');
+          if (user) {
+              done.abort();
+              return helpers.common.redirect.call(this, '/', null, {
+                  status: 302
+              });
+          }
+          done();
+        }.bind(this);
+
+        var check = function(done) {
+          var languages;
+
+          if (params.hash && params.username) {
+            languages = this.app.session.get('languages');
+            user = new User({
+              languageId: languages._byId[this.app.session.get('selectedLanguage')].id,
+              country: this.app.session.get('location').name,
+              username: params.username,
+              hash: params.hash,
+              platform: platform,
+              noMD5: true
+            }, {
+              app: this.app
             });
-        }
-        callback(null, {
-            form: this.form,
-            agreeTerms: params.agreeTerms
-        });
+            return user.registerConfirm(done);
+          }
+          done(false);
+        }.bind(this);
+
+        var login = function(done, isConfirm) {
+          if (isConfirm) {
+            return user.login(done);
+          }
+          done(false);
+        }.bind(this);
+
+        var success = function(isLogin) {
+          if (isLogin !== false) {
+            return helpers.common.redirect.call(this, '/', null, {
+              status: 302
+            });
+          }
+          callback(null, {
+              form: this.form,
+              agreeTerms: params.agreeTerms
+          });
+        }.bind(this);
+
+        var error = function(err, res) {
+          return helpers.common.error.call(this, err, res, callback);
+        }.bind(this);
+
+        asynquence().or(error)
+        .then(redirect)
+        .then(check)
+        .then(login)
+        .val(success);
+
     }
 }
 
@@ -66,8 +118,10 @@ function lostpassword(params, callback) {
     function controller() {
         var platform = this.app.session.get('platform');
 
-        if (platform === 'wap') {
-            return helpers.common.redirect.call(this, '/');
+        if (platform !== 'desktop') {
+            return helpers.common.redirect.call(this, '/', null, {
+               status: 302
+           });
         }
         callback(null, {
             form: this.form,
@@ -153,7 +207,6 @@ function myads(params, callback) {
 
     function controller() {
         var page = params ? params.page : undefined;
-        var myAds;
         var deleted;
         var _params;
         var user;
@@ -175,7 +228,6 @@ function myads(params, callback) {
 
         var prepare = function(done) {
             Paginator.prepare(this.app, params, 'myAds');
-            myAds = params.myAds;
             deleted = params.deleted;
             delete params.deleted;
             _params = _.extend({}, params, {
@@ -184,13 +236,12 @@ function myads(params, callback) {
                 languageId: this.app.session.get('languages')._byId[this.app.session.get('selectedLanguage')].id,
                 item_type: 'myAds'
             });
-
             done();
         }.bind(this);
 
         var findAds = function(done) {
             this.app.fetch({
-                myAds: {
+                items: {
                     collection: 'Items',
                     params: _params
                 }
@@ -199,14 +250,7 @@ function myads(params, callback) {
             }, done.errfcb);
         }.bind(this);
 
-        var check = function(done, res) {
-            if (!res.myAds) {
-                return done.fail(null, res);
-            }
-            done(res.myAds);
-        }.bind(this);
-
-        var paginate = function(done, myAds) {
+        var paginate = function(done, response) {
             var url = '/myolx/myadslisting';
             var realPage;
 
@@ -214,25 +258,24 @@ function myads(params, callback) {
                 done.abort();
                 return helpers.common.redirect.call(this, url);
             }
-            realPage = myAds.paginate([url, '[page]'].join(''), params, {
+            realPage = response.items.paginate([url, '[page]'].join(''), params, {
                 page: page
             });
             if (realPage) {
                 done.abort();
                 return helpers.common.redirect.call(this, [url, '-p-', realPage].join(''));
             }
-            done(myAds);
+            done(response.items);
         }.bind(this);
 
-        var success = function(_myAds) {
-            var myAds = _myAds.toJSON();
+        var success = function(items) {
             var platform = this.app.session.get('platform');
             var view = 'users/myads';
             var data = {
-                myAdsMetadata: _myAds.meta,
-                myAds: myAds,
+                include: ['items'],
+                items: items,
                 deleted: deleted,
-                paginator: _myAds.paginator
+                paginator: items.paginator
             };
 
             if (platform === 'desktop') {
@@ -255,7 +298,6 @@ function myads(params, callback) {
             .then(redirect)
             .then(prepare)
             .then(findAds)
-            .then(check)
             .then(paginate)
             .val(success);
     }

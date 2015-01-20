@@ -5,7 +5,7 @@
 {{ Breadcrumb(dictionary, link, dictionary["listingpageitemslisting.ResultsForNew4"] | replace('<<KEYWORD>>', search) | replace('<<NUMBER>>', meta.total)) }}
 <div id="itemListing">
     {% if meta.total == 0 %}
-        <div class="emtyList">
+        <div class="emtyList" data-qa="no-results-found">
             <div></div>
             <p>{{ dictionary["misc.NoResults"] }}</p>
             <a class="btns orange" href="{{ '/' | link }}" >{{ dictionary["registrationconfirmsuccesstext.Browse"] | replace('<<BRAND>>','OLX') }}</a>

@@ -1,11 +1,12 @@
 'use strict';
 
 var Base = require('../../../../../common/app/bases/view');
+var Item = require('../../../../../../models/item');
 var helpers = require('../../../../../../helpers');
 var _ = require('underscore');
 var asynquence = require('asynquence');
-var statsd = require('../../../../../../../shared/statsd')();
 var translations = require('../../../../../../../shared/translations');
+var Item = require('../../../../../../models/item');
 
 function onpopstate(event) {
     var $loading = $('body > .loading');
@@ -24,7 +25,6 @@ module.exports = Base.extend({
     tagName: 'main',
     id: 'posting-view',
     className: 'posting-view',
-    form: {},
     pendingValidations: [],
     errors: {},
     formErrors: [],
@@ -45,11 +45,10 @@ module.exports = Base.extend({
     },
     initialize: function() {
         Base.prototype.initialize.call(this);
-        this.form = {};
         this.pendingValidations = [];
         this.errors = {};
         this.formErrors = [];
-        this.dictionary = translations[this.app.session.get('selectedLanguage') || 'en-US'];
+        this.dictionary = translations.get(this.app.session.get('selectedLanguage'));
     },
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
@@ -57,30 +56,38 @@ module.exports = Base.extend({
         return _.extend({}, data);
     },
     postRender: function() {
-        $(window).on('beforeunload', this.onBeforeUnload);
-        this.dictionary = translations[this.app.session.get('selectedLanguage') || 'en-US'];
-        if (this.isValid === undefined || this.isValid === null) {
-            if (!this.form['category.parentId']) {
-                this.errors['category.parentId'] = this.dictionary["postingerror.PleaseSelectCategory"];
-            }
-            if (!this.form['category.id']) {
-                this.errors['category.id'] = this.dictionary["postingerror.PleaseSelectSubcategory"];
-            }
-            if (!this.form.state) {
-                this.errors.state = this.dictionary["countryoptions.Home_SelectState"];
-            }
-            if (!this.form.location) {
-                this.errors.location = this.dictionary["countryoptions.Home_SelectCity"];
-            }
-            this.$('[required]').each(function eachRequiredField(index, field) {
-                var $field = $(field);
+        var paramCategory;
 
-                if ($field.attr('name') !== 'state' && $field.attr('name') !== 'location') {
-                    this.errors[$field.attr('name')] = this.dictionary["postingerror.PleaseCompleteThisField"];
-                }
-            }.bind(this));
-            this.$el.trigger('errorsUpdate');
-            this.$('#posting-locations-view').trigger('formRendered');
+        $(window).on('beforeunload', this.onBeforeUnload);
+        this.editing = !!this.getItem().has('id');
+        if (this.editing) {
+            this.$('#posting-categories-view').trigger('editCategory', [this.item.get('category')]);
+            this.$('#field-location').trigger('change');
+        }
+        else {
+            if (this.getUrlParam('cat') !== undefined) {
+                paramCategory = {
+                    parentCategory: this.getUrlParam('cat'),
+                    subCategory: this.getUrlParam('subcat')
+                };
+                this.$('#posting-categories-view').trigger('getQueryCategory', paramCategory);
+            }
+            this.dictionary = translations.get(this.app.session.get('selectedLanguage'));
+            if (this.isValid === undefined || this.isValid === null) {
+                this.errors['category.parentId'] = this.dictionary["postingerror.PleaseSelectCategory"];
+                this.errors['category.id'] = this.dictionary["postingerror.PleaseSelectSubcategory"];
+                this.errors.state = this.dictionary["countryoptions.Home_SelectState"];
+                this.errors.location = this.dictionary["countryoptions.Home_SelectCity"];
+                this.$('[required]').each(function eachRequiredField(index, field) {
+                    var $field = $(field);
+
+                    if ($field.attr('name') !== 'state' && $field.attr('name') !== 'location') {
+                        this.errors[$field.attr('name')] = this.dictionary["postingerror.PleaseCompleteThisField"];
+                    }
+                }.bind(this));
+                this.$el.trigger('errorsUpdate');
+                this.$('#posting-locations-view').trigger('formRendered');
+            }
         }
         this.app.router.once('action:end', this.onStart);
         this.app.router.once('action:start', this.onEnd);
@@ -95,12 +102,10 @@ module.exports = Base.extend({
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();
+        var email = subcategory.fields.contactInformation[2].value ? subcategory.fields.contactInformation[2].value.value : '';
 
-        if (this.form['category.id'] === subcategory.id) {
-            return;
-        }
-        this.form['category.parentId'] = subcategory.parentId;
-        this.form['category.id'] = subcategory.id;
+        this.item.get('category').parentId = subcategory.parentId;
+        this.item.get('category').id = subcategory.id;
         delete this.errors['category.parentId'];
         delete this.errors['category.id'];
         _.each(this.pendingValidations, function eachValidation($field) {
@@ -114,6 +119,9 @@ module.exports = Base.extend({
                 return !(field.name === 'title' || field.name === 'description');
             })
         ]);
+        if (email) {
+            this.$('#posting-contact-view').trigger('fieldsChange', [email]);
+        }
         if (!this.edited) {
             this.handleBack();
         }
@@ -124,7 +132,7 @@ module.exports = Base.extend({
         event.stopImmediatePropagation();
 
         if (location) {
-            this.form.location = location;
+            this.item.set('location', location);
             delete this.errors.location;
             this.$el.trigger('errorsUpdate');
         }
@@ -139,7 +147,7 @@ module.exports = Base.extend({
 
         var $field;
         var shouldValidateField = false;
-        var canValidateFields = this.form['category.id'] && this.form['category.parentId'];
+        var canValidateFields = this.item.has('category');
 
         if (field instanceof window.jQuery) {
             $field = field;
@@ -159,10 +167,10 @@ module.exports = Base.extend({
             }
         }
         if (field.value) {
-            this.form[field.name] = field.value;
+            this.item.set(field.name, field.value);
         }
         else {
-            delete this.form[field.name];
+            this.item.unset(field.name);
         }
         if (!this.edited) {
             this.handleBack();
@@ -199,8 +207,8 @@ module.exports = Base.extend({
         }
         else {
             data = {
-                'category.id': this.form['category.id'],
-                'category.parentId': this.form['category.parentId'],
+                'category.id': this.item.get('category').id,
+                'category.parentId': this.item.get('category').parentId,
                 'location': this.app.session.get('location').url,
                 'languageId': this.app.session.get('languages')._byId[this.app.session.get('selectedLanguage')].id
             };
@@ -236,10 +244,7 @@ module.exports = Base.extend({
     onImagesLoadStart: function(event) {
         this.$('#posting-contact-view').trigger('disablePost');
     },
-    onImagesLoadEnd: function(event, images) {
-        this.form._images = Object.keys(images).map(function each(image) {
-            return images[image].id;
-        });
+    onImagesLoadEnd: function(event) {
         this.$('#posting-contact-view').trigger((this.isValid) ? 'enablePost' : 'disablePost');
     },
     onBeforeUnload: function(event) {
@@ -283,7 +288,7 @@ module.exports = Base.extend({
         event.stopImmediatePropagation();
 
         _.each(['currency_type', 'priceC', 'priceType'], function clean(field) {
-            delete this.form[field];
+            this.item.unset(field);
             delete this.errors[field];
         }.bind(this));
         this.$el.trigger('errorsUpdate');
@@ -293,72 +298,45 @@ module.exports = Base.extend({
         event.stopPropagation();
         event.stopImmediatePropagation();
 
-        var query = {
-            postingSession: this.options.postingsession
-        };
-        var user = this.app.session.get('user');
+        this.$('#posting-contact-view').trigger('disablePost');
+        this.formErrors = [];
+        this.item.set('languageId', this.app.session.get('languageId'));
+        this.item.set('platform', this.app.session.get('platform'));
+        this.item.set('ipAddress', this.app.session.get('ip'));
 
-        var validate = function(done) {
-            query.intent = 'validate';
-            helpers.dataAdapter.post(this.app.req, '/items', {
-                query: query,
-                data: this.form
-            }, done);
-        }.bind(this);
+        asynquence().or(fail.bind(this))
+            .then(post.bind(this))
+            .val(success.bind(this));
 
-        var check = function(done, err, response, body) {
-            if (response.status !== 'success') {
-                return done.fail(body);
-            }
-            if (body) {
-                done.abort();
-                return fail(body, 'invalid');
-            }
-            done();
-        }.bind(this);
+        function post(done) {
+            this.item.post(done);
+        }
 
-        var post = function(done) {
-            query.intent = 'create';
-            helpers.dataAdapter.post(this.app.req, '/items', {
-                query: query,
-                data: this.form
-            }, done.errfcb);
-        }.bind(this);
-
-        var trackEvent = function(done, res, item) {
+        function success() {
             var category = 'Posting';
             var action = 'PostingSuccess';
+            var successPage = this.editing ? '/edititem/success/' : '/posting/success/';
 
             this.track({
                 category: category,
                 action: action,
-                custom: [category, this.form['category.parentId'] || '-', this.form['category.id'] || '-', action, item.id].join('::')
+                custom: [category, this.item.get('category').parentId || '-', this.item.get('category').id || '-', action, this.item.get('id')].join('::')
             });
-            done(item);
-        }.bind(this);
 
-        var trackGraphite = function(done, res, item) {
-            var location = this.app.session.get('location');
-            var platform = this.app.session.get('platform');
-
-            statsd.increment([location.name, 'posting', 'success', platform]);
-            done(item);
-        }.bind(this);
-
-        var success = function(item) {
-            helpers.common.redirect.call(this.app.router, '/posting/success/' + item.id + '?sk=' + item.securityKey, null, {
+            helpers.common.redirect.call(this.app.router, successPage + this.item.get('id') + '?sk=' + this.item.get('securityKey'), null, {
                 status: 200
             });
-        }.bind(this);
 
-        var fail = function(_errors, track) {
+        }
+
+        function fail(errors) {
             // TODO: Improve error handling
-            if (_errors) {
-                if (_errors.responseText) {
-                    _errors = JSON.parse(_errors.responseText);
+            if (errors) {
+                if (errors.responseText) {
+                    errors = JSON.parse(errors.responseText);
                 }
-                if (_.isArray(_errors)) {
-                    _.each(_errors, function eachError(error) {
+                if (_.isArray(errors)) {
+                    _.each(errors, function eachError(error) {
                         if (error.selector === 'main') {
                             this.formErrors.push(error.message);
                         } else {
@@ -374,33 +352,25 @@ module.exports = Base.extend({
                 }
                 this.$el.trigger('error');
             }
-            trackFail(track);
-        }.bind(this);
-
-        var trackFail = function(track) {
-            var location = this.app.session.get('location');
-            var platform = this.app.session.get('platform');
-
-            statsd.increment([location.name, 'posting', track || 'error', platform]);
-        }.bind(this);
-
-        this.$('#posting-contact-view').trigger('disablePost');
-        this.formErrors = [];
-        if (user) {
-            query.token = user.token;
         }
-        this.form.languageId = this.app.session.get('languages')._byId[this.app.session.get('selectedLanguage')].id;
-        this.form.platform = this.app.session.get('platform');
-        this.form.ipAddress = this.app.session.get('ip');
-        if (this.form._images) {
-            this.form.images = this.form._images.join(',');
+    },
+    getItem: function() {
+        this.item = this.item || (this.options.item && this.options.item.toJSON ? this.options.item : new Item(this.options.item || {}, {
+            app: this.app
+        }));
+        return this.item;
+    },
+    getUrlParam: function(param) {
+        var url = window.location.search.substring(1);
+        var query = url.split('&');
+        for (var i = 0; i < query.length; i++) 
+        {
+            var paramName = query[i].split('=');
+            if (paramName[0] == param) 
+            {
+                return paramName[1];
+            }
         }
-        asynquence().or(fail)
-            .then(validate)
-            .then(check)
-            .then(post)
-            .gate(trackEvent, trackGraphite)
-            .val(success);
     }
 });
 

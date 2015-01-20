@@ -12,13 +12,6 @@ module.exports = function(grunt) {
                 alias: ['node_modules/rendr-nunjucks/index.js:rendr-nunjucks', 'node_modules/nunjucks/browser/nunjucks-slim.js:nunjucks', 'public/js/lib/jquery.js:jquery', 'node_modules/sixpack-client/sixpack.js:sixpack-client', 'node_modules/underscore/underscore.js:underscore'],
                 external: ['url', 'querystring']
             }
-        },
-        translations: {
-            src: ['app/translations/**/*.js'],
-            dest: 'public/js/src/common/translations.js',
-            options: {
-                alias: ['app/translations/index.js:../app/translations']
-            }
         }
     };
 
@@ -68,7 +61,6 @@ module.exports = function(grunt) {
     })();
 
     (function browserifyApps() {
-        
         compile('default');
         environments.forEach(function(environment) {
             var localization = utils.getLocalization(grunt, {}, environment);
@@ -98,7 +90,6 @@ module.exports = function(grunt) {
                         'jquery',
                         'nunjucks',
                         'underscore',
-                        '../app/translations',
                         '../app/config'
                     ]
                 }
@@ -111,7 +102,7 @@ module.exports = function(grunt) {
                 if (subdir) {
                     parts = subdir.split('/');
                 }
-                if ((parts[0] === 'localized' && parts[1] && parts[1] !== 'common' && parts[1] !== 'default' && parts[1] !== location) || parts[0] === 'translations' || parts[0] === 'config' || filename.split('.').pop() !== 'js') {
+                if ((parts[0] === 'localized' && parts[1] && parts[1] !== 'common' && parts[1] !== 'default' && parts[1] !== location) || parts[0] === 'config' || parts[0] === 'translations' || filename.split('.').pop() !== 'js') {
                     return;
                 }
                 browserify[target].files[target].unshift(abspath);
@@ -121,6 +112,20 @@ module.exports = function(grunt) {
                 return file.slice(4);
             });
         }
+    })();
+
+    (function browserifyTranslations() {
+        grunt.file.recurse('app/translations', function callback(abspath, rootdir, subdir, filename) {
+            var language = filename.split('.').shift();
+
+            browserify['translations-' + language] = {
+                src: [abspath],
+                dest: 'public/js/src/common/translations/' + filename,
+                options: {
+                    alias: [abspath + ':../app/translations/' + language]
+                }
+            };
+        });
     })();
 
     return browserify;

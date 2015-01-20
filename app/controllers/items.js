@@ -78,6 +78,13 @@ function show(params, callback) {
                 item.set('id', item.get('itemId'));
                 item.unset('itemId');
             }
+            if (_.isEmpty(item.get('category'))) {
+                item.set('category', {
+                    id: item.get('categoryId'),
+                    name: item.get('categoryName'),
+                    parentId: item.get('parentCategoryId')
+                });
+            }
             if (!item.get('location')) {
                 item.set('location', this.app.session.get('location'));
             }
@@ -888,8 +895,33 @@ function staticSearch(params, callback) {
             done();
         }.bind(this);
 
+        var check = function(done) {
+            if (params && params.filters) {
+                if (params.filters === '-ig') {
+                    done.abort();
+                    return helpers.common.redirect.call(this, this.app.session.get('path').replace('/-ig', '/'));
+                }
+                url = [];
+                url.push('/nf/');
+                url.push(params.search);
+                if (params.catId) {
+                    url.pop();
+                    url.push(helpers.common.slugToUrl((subcategory || category).toJSON()));
+                    url.push('/');
+                    url.push(params.search);
+                }
+                if (params.filters && params.filters !== 'undefined') {
+                    url.push('/');
+                    url.push(params.filters);
+                }
+                done.abort();
+                return helpers.common.redirect.call(this, url.join(''));
+            }
+            done();
+        }.bind(this);
+
         var prepare = function(done) {
-            Paginator.prepare(this.app, params);
+            Paginator.prepare(this.app, params, 'static');
             query = _.clone(params);
             params.categoryId = params.catId;
             delete params.search;
@@ -918,7 +950,7 @@ function staticSearch(params, callback) {
                 items: {
                     collection: 'Items',
                     params: _.extend(params, {
-                        item_type: 'staticSearch',
+                        item_type: 'static',
                         seo: this.app.seo.isEnabled()
                     })
                 }
@@ -1011,6 +1043,7 @@ function staticSearch(params, callback) {
         asynquence().or(error)
             .then(redirect)
             .then(configure)
+            .then(check)
             .then(prepare)
             .then(findItems)
             .then(filters)
@@ -1057,6 +1090,10 @@ function allresults(params, callback, gallery) {
 
             params.seo = this.app.seo.isEnabled();
             params.languageId = languages._byId[this.app.session.get('selectedLanguage')].id;
+            if (platform !== 'desktop') {
+                params['f.hasimage'] = true;
+            }
+
             Paginator.prepare(this.app, params);
             query = _.clone(params);
 

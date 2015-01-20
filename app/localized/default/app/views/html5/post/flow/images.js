@@ -10,11 +10,11 @@ module.exports = Base.extend({
     className: 'post_flow_images_view disabled',
     id: 'images',
     tagName: 'section',
-    selected: {},
     pending: 0,
-    initialize: function() {
-        Base.prototype.initialize.call(this);
-        this.selected = {};
+    postRender: function() {
+        _.each(this.parentView.getItem().get('images').slice(0, 6), function each(image, i) {
+            this.showImage(i, image);
+        }, this);
     },
     events: {
         'show': 'onShow',
@@ -24,7 +24,6 @@ module.exports = Base.extend({
         'click input[type=file]': 'onInputClick',
         'change form': 'onChange',
         'submit form': 'onSubmit',
-        'restart': 'onRestart',
         'imageLoadStart': 'onImageLoadStart',
         'imageLoadEnd': 'onImageLoadEnd'
     },
@@ -33,7 +32,7 @@ module.exports = Base.extend({
         event.stopPropagation();
         event.stopImmediatePropagation();
 
-        this.parentView.$el.trigger('headerChange', [translations[this.app.session.get('selectedLanguage') || 'en-US']['item.AddPhotos'], this.id]);
+        this.parentView.$el.trigger('headerChange', [translations.get(this.app.session.get('selectedLanguage'))['item.AddPhotos'], this.id]);
         this.$el.removeClass('disabled');
     },
     onHide: function(event) {
@@ -62,10 +61,12 @@ module.exports = Base.extend({
         var $remove = $(event.currentTarget);
         var $container = $remove.parent().removeClass('loaded');
         var $image = $container.find('.image').removeClass('fill').removeAttr('style');
-        var $input = this.$('#' + $container.data('input')).val('');
+        var input = $container.data('input');
+        var $input = this.$('#' + input).val('');
 
-        delete this.selected[$input.attr('name')];
-        this.parentView.$el.trigger('imagesLoadEnd', [this.selected]);
+        this.parentView.getItem().get('images').splice(input.replace('file', ''), 1);
+        this.render();
+        this.$el.trigger('show');
     },
     onInputClick: function(event) {
         event.stopPropagation();
@@ -77,77 +78,37 @@ module.exports = Base.extend({
         event.stopImmediatePropagation();
 
         var $input = $(event.target);
-        var $container = this.$('[data-input=' + $input.attr('id') + ']');
+        var input = $input.attr('id');
+        var index = input.replace('file', '');
+        var $container = this.$('[data-input=' + input + ']').addClass('loading');
         var $image = $container.children('.image');
-        var imageUrl = window.URL.createObjectURL(event.target.files[0]);
-        var image = new window.Image();
+        var image = event.target.files[0];
 
-        image.src = imageUrl;
+        asynquence().or(fail.bind(this))
+            .then(post.bind(this))
+            .then(success.bind(this))
+            .val(done.bind(this));
 
-        image.onload = function() {
+        function post(done) {
+            this.$el.trigger('imageLoadStart');
+            this.parentView.getItem().get('images')[index] = image;
+            this.parentView.getItem().postImages(done);
+        }
 
-            window.URL.revokeObjectURL(this.src);
+        function success(done) {
+            this.showImage(index, image, done);
+        }
 
-            var exif = function(done) {
-                EXIF.getData(image);
-                done();
-            }.bind(this);
-
-            var post = function(done) {
-                var data = new FormData();
-
-                this.$el.trigger('imageLoadStart');
-                $container.addClass('loading');
-                data.append(0, event.target.files[0]);
-                helpers.dataAdapter.post(this.app.req, '/images', {
-                    query: {
-                        postingSession: this.parentView.options.postingsession || this.parentView.options.postingSession,
-                        url: this.app.session.get('location').url
-                    },
-                    data: data,
-                    multipart: true,
-                    cache: false,
-                    dataType: 'json',
-                    processData: false,
-                    contentType: false
-                }, done.errfcb);
-            }.bind(this);
-
-            var success = function(done, res, body) {
-                this.selected[$input.attr('name')] = {
-                    id: body.shift(),
-                    file: imageUrl,
-                    orientation: 1
-                };
-                done();
-            }.bind(this);
-
-            var display = function() {
-                var orientation = EXIF.getTag(image, 'Orientation');
-                var cssClass = 'fill r' + (orientation || 1);
-
-                if (orientation) {
-                    this.selected[$input.attr('name')].orientation = orientation;
-                }
-                $image.addClass(cssClass).css({
-                    'background-image': 'url(' + imageUrl + ')'
-                });
-                $container.removeClass('loading').addClass('loaded');
-                this.$el.trigger('imageLoadEnd');
-            }.bind(this);
-
-            asynquence().or(image.onerror)
-                .then(exif)
-                .then(post)
-                .then(success)
-                .val(display);
-        }.bind(this);
-
-        image.onerror = function(err) {
+        function done() {
             this.$el.trigger('imageLoadEnd');
-            delete this.selected[$input.attr('name')];
+            $container.removeClass('loading');
+        }
+
+        function fail(err) {
+            this.$el.trigger('imageLoadEnd');
+            this.parentView.getItem().get('images').splice(index, 1);
             $input.val('');
-        }.bind(this);
+        }
     },
     onSubmit: function(event) {
         event.preventDefault();
@@ -155,13 +116,6 @@ module.exports = Base.extend({
         event.stopImmediatePropagation();
 
         this.parentView.$el.trigger('flow', [this.id]);
-    },
-    onRestart: function(event) {
-        event.preventDefault();
-        event.stopPropagation();
-        event.stopImmediatePropagation();
-
-        this.selected = {};
     },
     onImageLoadStart: function(event) {
         event.preventDefault();
@@ -178,8 +132,26 @@ module.exports = Base.extend({
         event.stopImmediatePropagation();
 
         if (--this.pending === 0) {
-            this.parentView.$el.trigger('imagesLoadEnd', [this.selected]);
+            this.parentView.$el.trigger('imagesLoadEnd');
         }
+    },
+    showImage: function(index, file, callback) {
+        var image = new window.Image();
+        var $container = this.$('[data-input=file' + index + ']');
+        var $image = $container.children('.image');
+
+        image.src = file.url = file.url || window.URL.createObjectURL(file);
+        image.onerror = image.onload = function(event) {
+            EXIF.getData(this);
+            file.orientation = EXIF.getTag(this, 'Orientation') || 1;
+            $image.addClass('fill r' + file.orientation).css({
+                'background-image': 'url(' + this.src + ')'
+            });
+            $container.addClass('loaded');
+            if (callback) {
+                callback();
+            }
+        };
     }
 });
 

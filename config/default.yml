@@ -67,6 +67,9 @@ middleware:
       - /force/html4
       - /force/html5
       - /force/desktop
+      - /secure
+      - /secure/recaptcha
+      - /secure/send
 
 uglify:
   enabled: false
@@ -94,3 +97,85 @@ redirect:
 
 migrated:
     - www.olx.com.bo
+
+emails:
+  captcha:
+    secret: 6LcjQf8SAAAAADIPSryjN9TVSsgIrVSPADI-nC2a
+  zendesk:
+    default:
+      subdomain: olxla
+      brand_id: 195655
+      email: gonzalo.aizpun@olx.com
+      password: olx2014
+    www.olx.co.cr:
+      subdomain: olxcr
+      brand_id: 300699
+    www.olx.it:
+      subdomain: olxmilk
+      brand_id: 304905
+    www.olx.ae:
+      subdomain: olxmilk
+      brand_id: 304905
+    www.olx.fr:
+      subdomain: olxmilk
+      brand_id: 304905
+    www.olx.es:
+      subdomain: olxmilk
+      brand_id: 304905
+    www.olx.cl:
+      subdomain: olxmilk
+      brand_id: 304905
+    www.olx.com:
+      subdomain: olxmilk
+      brand_id: 304905
+    www.olx.com.mx:
+      subdomain: olxmilk
+      brand_id: 304905
+    www.olx.com.eg:
+      subdomain: olxmilk
+      brand_id: 304905
+    www.olxtunisie.com:
+      subdomain: olxmilk
+      brand_id: 304905
+    www.jaovat.com:
+      subdomain: olxmilk
+      brand_id: 304905
+    www.olx.com.bo:
+      subdomain: olxmilk
+      brand_id: 304905
+    www.olx.com.py:
+      subdomain: olxmilk
+      brand_id: 304905
+    www.olx.com.ar:
+      subdomain: olxar
+      brand_id: 304755
+    www.olx.com.co:
+      subdomain: olxco
+      brand_id: 304915
+    www.olx.com.ec:
+      subdomain: olxec
+      brand_id: 304925
+    www.olx.com.gt:
+      subdomain: olxgt
+      brand_id: 304935
+    www.olx.com.ni:
+      subdomain: olxni
+      brand_id: 300719
+    www.olx.com.pa:
+      subdomain: olxpa
+      brand_id: 304945
+    www.olx.com.pe:
+      subdomain: olxpe
+      brand_id: 304955
+    www.olx.com.sv:
+      subdomain: olxsv
+      brand_id: 304965
+    www.olx.com.uy:
+      subdomain: olxuy
+      brand_id: 300729
+    www.olx.com.ve:
+      subdomain: olxve
+      brand_id: 300739
+    www.olx.hn:
+      subdomain: olxhn
+      brand_id: 304975

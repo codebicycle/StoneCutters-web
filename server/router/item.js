@@ -10,6 +10,7 @@ module.exports = function(app, dataAdapter) {
     var formidable = require('../modules/formidable');
     var statsd  = require('../modules/statsd')();
     var User = require('../../app/models/user');
+    var Item = require('../../app/models/item');
     var helpers = require('../../app/helpers');
 
     (function reply() {
@@ -42,6 +43,9 @@ module.exports = function(app, dataAdapter) {
             }
 
             function submit(done) {
+                if (reply.email && ~reply.email.indexOf('@yopmail.com')) {
+                    console.log('[OLX_DEBUG]', 'ip:', req.rendrApp.session.get('ip'), ' | ', 'email:', reply.email, ' | ', 'name:', reply.name, ' | ', 'phone:', reply.phone, ' | ', 'message:', reply.message);
+                }
                 user.reply(done, _.extend({}, reply, {
                     id: itemId
                 }));
@@ -89,38 +93,31 @@ module.exports = function(app, dataAdapter) {
         app.post('/post', handler);
 
         function handler(req, res, next) {
-            var siteLocation = req.rendrApp.session.get('siteLocation');
             var location = req.rendrApp.session.get('location');
             var platform = req.rendrApp.session.get('platform');
-            var languages = req.rendrApp.session.get('languages');
-            var language = languages._byId[req.rendrApp.session.get('selectedLanguage')];
+            var newImages;
             var item;
-            var images;
-            var oldImages = [];
+            var editing;
+
+            if (!req.headers['content-type']) {
+                console.log('[OLX_DEBUG]', 'no-content-type', location.url, platform, req.rendrApp.session.get('osName'));
+            }
 
             function parse(done) {
-                function callback(err) {
-                    if (err === 'aborted') {
-                        done.abort();
-                        return fail(err, 'aborted');
-                    }
-                    done.errfcb.apply(null, Array.prototype.slice.call(arguments, 0));
-                }
-
                 formidable.parse(req, {
                     acceptFiles: true
                 }, callback);
-            }
 
-            function log(done, _item, _images) {
-                var field;
-
-                if (_images && typeof _images === 'object' && Object.keys(_images).length) {
-                    for (field in _images) {
-                        statsd.increment([location.name, 'posting', 'image', platform]);
+                function callback(err, _item, _images) {
+                    editing = !!(_item && _item.id);
+                    if (err === 'aborted') {
+                        done.abort();
+                        statsd.increment([location.abbreviation, editing ? 'editing' : 'posting', 'error', 'abort', platform]);
+                        return fail(err, 'aborted');
                     }
+                    newImages = _.clone(_images);
+                    done.errfcb.apply(null, Array.prototype.slice.call(arguments, 0));
                 }
-                done(_item, _images);
             }
 
             function checkWapChangeLocation(done, _item, _images) {
@@ -131,171 +128,72 @@ module.exports = function(app, dataAdapter) {
                 done(_item, _images);
             }
 
-            function validate(done, _item, _images) {
-                function callback(err, response, body) {
-                    if (err) {
-                        return done.fail(err);
-                    }
-                    if (body) {
-                        done.abort();
-                        return fail(body, 'invalid');
-                    }
-                    done(response, body);
-                }
-
-                if (_item.priceC) {
-                    _item.priceC = helpers.numbers.toLatin(_item.priceC);
-                }
-
-                item = _item;
-                images = _images;
-                item.ipAddress = req.ip;
-                item.location = siteLocation;
-                item.languageId = language.id;
-                item.platform = platform;
-                for (var key in item) {
-                    if (typeof item[key] === 'string' && !item[key]) {
-                        delete item[key];
-                    }
-                    if (item.id && !key.indexOf('image.')) {
-                        if (!item['del.' + key]) {
-                            oldImages.push(item[key]);
+            function post(done, _item, images) {
+                item = new Item(_.extend(_item, {
+                    images: _.map(_.filter(Object.keys(_item), function each(key) {
+                        if (key.indexOf('images[')) {
+                            return false;
                         }
-                        delete item[key];
-                        delete item['del.' + key];
-                    }
-                }
-                dataAdapter.post(req, '/items', {
-                    query: {
-                        intent: 'validate',
-                        postingSession: item.postingSession,
-                        languageId: language.id,
-                        platform: platform
-                    },
-                    data: item
-                }, callback);
-            }
-
-            function postImages(done) {
-                var data = {};
-                var image;
-
-                function callback(err, response, _images) {
-                    if (err) {
-                        done.abort();
-                        if (response.statusCode === 400) {
-                            return fail(err, 'invalid_images');
+                        if (_item['del.' + key]) {
+                            delete _item[key];
+                            delete _item['del.' + key];
+                            return false;
                         }
-                        return fail(err, 'error_images');
-                    }
-                    done(response, _images);
-                }
-
-                if (!images || typeof images !== 'object' || !Object.keys(images).length) {
-                    return done([]);
-                }
-                for (image in images) {
-                    data[image] = restler.file(images[image].path, null, images[image].size, null, images[image].type);
-                }
-                dataAdapter.post(req, '/images', {
-                    query: {
-                        postingSession: item.postingSession,
-                        url: req.rendrApp.session.get('siteLocation'),
-                        platform: platform
-                    },
-                    data: data,
-                    multipart: true
-                }, callback);
-            }
-
-            function post(done, response, _images) {
-                var query = {
-                    postingSession: item.postingSession,
-                    languageId: language.id,
+                        return true;
+                    }), function each(key) {
+                        return _item[key];
+                    }).concat(_.map(images, function each(image) {
+                        statsd.increment([location.abbreviation, 'posting', 'upload', 'store', platform]);
+                        return restler.file(image.path, null, image.size, null, image.type);
+                    })),
+                    ipAddress: req.ip,
+                    location: req.rendrApp.session.get('siteLocation'),
+                    languageId: req.rendrApp.session.get('languageId'),
                     platform: platform
-                };
-                var user = req.rendrApp.session.get('user');
-
-                if (!item.id) {
-                    query.intent = 'create';
-                }
-                if (user) {
-                    query.token = user.token;
-                }
-                else if (item.id && item.sk) {
-                    query.securityKey = item.sk;
-                    delete item.sk;
-                }
-                if (_images && _images.length) {
-                    item.images = _images;
-                }
-                if (oldImages && oldImages.length) {
-                    item.images = (item.images ? item.images.concat(oldImages) : oldImages);
-                }
-                if (item.images) {
-                    item.images = item.images.join(',');
-                }
-                dataAdapter.post(req, '/items' + (item.id ? '/' + item.id + '/edit' : ''), {
-                    query: query,
-                    data: item
-                }, done.errfcb);
-            }
-
-            function store(done, res, item) {
-                req.rendrApp.session.persist({
-                    itemId: item.id
+                }), {
+                    app: req.rendrApp
                 });
-                done(item);
+                item.post(done);
             }
 
-            function success(item) {
-                var url = '/posting/success/' + item.id + '?sk=' + item.securityKey;
+            function success(done) {
+                var url = '/posting/success/' + item.get('id') + '?sk=' + item.get('securityKey');
 
+                req.rendrApp.session.persist({
+                    itemId: item.get('id')
+                });
                 res.redirect(utils.link(url, req.rendrApp));
-                statsd.increment([location.name, 'posting', 'success', platform]);
-                clean();
+                done();
             }
 
             function fail(err, track) {
                 var url = req.headers.referer || '/posting';
 
-                if (!track || track === 'error') {
-                    console.log('[OLX_DEBUG]', 'post', err.stack);
+                if (!track && err && !Array.isArray(err)) {
+                    console.log('[OLX_DEBUG]', 'post', err instanceof Error ? JSON.stringify(err.stack) : err);
                 }
-                statsd.increment([location.name, 'posting', track || 'error', platform]);
-                formidable.error(req, url.split('?').shift(), err, item, function redirect(url) {
+                formidable.error(req, url.split('?').shift(), err, item ? item.toJSON() : {}, function redirect(url) {
                     res.redirect(utils.link(url, req.rendrApp));
                     clean();
                 });
             }
 
             function clean() {
-                var field;
-
-                if (!images || typeof images !== 'object' || !Object.keys(images).length) {
+                if (!newImages || typeof newImages !== 'object' || !Object.keys(newImages).length) {
                     return;
                 }
-                for (field in images) {
-                    statsd.increment([location.name, 'posting', 'delete_image', platform]);
-                    fs.unlink(images[field].path, callback);
-                }
-
-                function callback(err) {
-                    if (err) {
-                        return console.log('[OLX_DEBUG]', 'tmp', err);
-                    }
-                }
+                Object.keys(newImages).forEach(function each(key) {
+                    statsd.increment([location.abbreviation, 'posting', 'upload', 'delete', platform]);
+                    fs.unlink(newImages[key].path, utils.noop);
+                });
             }
 
             asynquence().or(fail)
                 .then(parse)
-                .then(log)
                 .then(checkWapChangeLocation)
-                .then(validate)
-                .then(postImages)
                 .then(post)
-                .then(store)
-                .val(success);
+                .then(success)
+                .val(clean);
         }
     })();
 
@@ -315,13 +213,13 @@ module.exports = function(app, dataAdapter) {
         function redirect(item) {
             var url = '/location?target=posting/' + item['category.parentId'] + '/' + item['category.id'];
 
-            statsd.increment([location.name, 'posting', 'location', platform]);
+            statsd.increment([location.abbreviation, 'posting', 'success', 'location', platform]);
             res.redirect(utils.link(url, req.rendrApp));
             clean();
         }
 
         function error(err) {
-            statsd.increment([location.name, 'posting', 'error_location', platform]);
+            statsd.increment([location.abbreviation, 'posting', 'error', 'location', platform]);
             res.redirect(utils.link('/location?target=posting', req.rendrApp));
             clean();
         }
@@ -333,7 +231,7 @@ module.exports = function(app, dataAdapter) {
                 return;
             }
             for (field in images) {
-                statsd.increment([location.name, 'posting', 'delete_image', platform]);
+                statsd.increment([location.abbreviation, 'posting', 'upload', 'delete', platform]);
                 fs.unlink(images[field].path, callback);
             }
 

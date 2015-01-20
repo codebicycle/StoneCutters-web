@@ -185,20 +185,13 @@ tab-arrow(position, bgColor, borderColor, borderWidth, size, zIndex)
             margin-top: - (borderWidth + size);
             border-right-color: borderColor;
 
-btn-close(bgcolor, color, hoverbgcolor, hovercolor)
+btn-close(color, hovercolor)
     color: color;
-    background-color: bgcolor;
-    border-radius: 50%;
     font-size: remify(8px);
-    line-height: 1.2;
-    text-align: center;
-    padding: 2px;
     position: absolute;
-    width: 12px;
-    height: 11px;
     &:hover
-        background-color: hoverbgcolor;
-        color: hovercolor;
+        &::before
+            color: hovercolor;
 
 transition(t)
     vendor('transition', t)
@@ -286,7 +279,6 @@ text-wrap()
     white-space: pre-wrap;
     word-wrap: break-word;
     white-space: -webkit-pre-wrap;
-    word-break: break-all;
     white-space: normal;
 
 cursive(color, size)
