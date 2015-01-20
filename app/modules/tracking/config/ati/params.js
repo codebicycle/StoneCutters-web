@@ -31,7 +31,7 @@ module.exports = {
             category: 'static'
         }
     },
-    'items#search': {
+    'searchs#search': {
         process: true,
         names: {
             page_name: 'listing_all',
@@ -40,7 +40,7 @@ module.exports = {
             page_nb: 0
         }
     },
-    'items#searchig': {
+    'searchs#searchig': {
         process: true,
         names: {
             page_name: 'listing_all',
@@ -49,7 +49,7 @@ module.exports = {
             page_nb: 0
         }
     },
-    'items#searchfilter': {
+    'searchs#filter': {
         process: true,
         names: {
             page_name: 'listing_all',
@@ -58,7 +58,7 @@ module.exports = {
             page_nb: 0
         }
     },
-    'items#searchfilterig': {
+    'searchs#filterig': {
         process: true,
         names: {
             page_name: 'listing_all',
@@ -67,7 +67,7 @@ module.exports = {
             page_nb: 0
         }
     },
-    'items#staticSearch': {
+    'searchs#statics': {
         process: true,
         names: {
             page_name: 'staticsearch_keyword',
@@ -76,14 +76,14 @@ module.exports = {
             page_nb: 0
         }
     },
-    'items#allresults': {
+    'searchs#allresults': {
         process: true,
         names: {
             page_name: 'listing_all',
             category: 'listing'
         }
     },
-    'items#allresultsig': {
+    'searchs#allresultsig': {
         process: true,
         names: {
             page_name: 'listing_all',

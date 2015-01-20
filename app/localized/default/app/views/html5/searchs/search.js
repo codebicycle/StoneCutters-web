@@ -1,15 +1,12 @@
 'use strict';
 
-var Base = require('../../bases/view');
 var _ = require('underscore');
-var helpers = require('../../../../../helpers');
-var breadcrumb = require('../../../../../modules/breadcrumb');
+var Base = require('../../../../../common/app/bases/view').requireView('searchs/search');
+var helpers = require('../../../../../../helpers');
+var breadcrumb = require('../../../../../../modules/breadcrumb');
 
 module.exports = Base.extend({
-    className: 'items_search_view',
-    wapAttributes: {
-        cellpadding: 0
-    },
+    className: 'searchs_search_view',
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
 
@@ -65,4 +62,4 @@ module.exports = Base.extend({
     }
 });
 
-module.exports.id = 'items/search';
+module.exports.id = 'searchs/search';
