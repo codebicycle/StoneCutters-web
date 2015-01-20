@@ -240,6 +240,7 @@ function handleItems(params, promise, gallery) {
             tracking.addParam('subcategory', subcategory.toJSON());
         }
         tracking.addParam('page', query.page);
+
         done({
             type: 'items',
             category: category.toJSON(),
