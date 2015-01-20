@@ -25,7 +25,7 @@ Sixpack.prototype.experiments = function() {
     var experiments = {};
 
     _.each(Object.keys(config.experiments), function each(key) {
-        var experiment = config.experiments[key];
+        var experiment = _.clone(config.experiments[key]);
 
         if (this.enabled && experiment.enabled && _.contains(experiment.platforms, this.platform)) {
             delete experiment.enabled;
@@ -48,7 +48,12 @@ Sixpack.prototype.participateOne = function(experiment) {
 };
 
 Sixpack.prototype.participate = function(experiment, done) {
-    this.session.participate(this.name(experiment), _.values(experiment.alternatives), callback.bind(this));
+    if (!experiment.force) {
+        this.session.participate(this.name(experiment), _.values(experiment.alternatives), callback.bind(this));
+    }
+    else {
+        this.session.participate(this.name(experiment), _.values(experiment.alternatives), experiment.force, callback.bind(this));
+    }
 
     function callback(err, res) {
         if (err || res.status !== 'ok') {

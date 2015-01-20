@@ -19,6 +19,9 @@ module.exports = function(dataAdapter, excludedUrls) {
                 platform: req.rendrApp.session.get('platform')
             });
 
+            _.each(sixpack.experiments, function each(experiment) {
+                experiment.force = req.param('sixpack-force-' + experiment.name);
+            });
             sixpack.participateAll(callback);
 
             function callback(err) {

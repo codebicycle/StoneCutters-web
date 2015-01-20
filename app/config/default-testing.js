@@ -1,4 +1,14 @@
+'use strict';
+
+var utils = require('../../shared/utils');
+
 module.exports = {
+    sixpack: {
+        enabled: true,
+        host: 'http://sixpack.olx-testing.com',
+        timeout: utils.SECOND,
+        experiments: require('./experiments/development')
+    },
     smaug: {
         protocol: 'http',
         host: 'api-v2.olx.com',

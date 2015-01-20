@@ -15,7 +15,7 @@ module.exports = Base.extend({
             platform: this.app.session.get('platform'),
             experiments: this.app.session.get('experiments')
         });
-        var sixpackClass = sixpack.className(sixpack.experiments.html5HeaderPostButtonColor);
+        var sixpackClass = sixpack.className(sixpack.experiments.html5HeaderPostButton);
 
         return className + (sixpackClass ? ' ' : '') + sixpackClass;
     },
@@ -81,7 +81,7 @@ module.exports = Base.extend({
             experiments: this.app.session.get('experiments')
         });
 
-        sixpack.convert(sixpack.experiments.html5HeaderPostButtonColor);
+        sixpack.convert(sixpack.experiments.html5HeaderPostButton);
     },
     onLoginClick: function(event) {
         event.preventDefault();
