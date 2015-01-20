@@ -15,10 +15,6 @@ function list(params, callback) {
     return Base.prototype.action.call(this, List, arguments);
 }
 
-function show(params, callback) {
-    return Base.prototype.action.call(this, Show, arguments);
-}
-
 function showig(params, callback) {
     var platform = this.app.session.get('platform');
 
@@ -26,7 +22,11 @@ function showig(params, callback) {
         return helpers.common.error.call(this, null, {}, callback);
     }
     params['f.hasimage'] = true;
-    return show(params, callback, '-ig']);
+    return show.call(this, params, callback, '-ig');
 }
 
-module.exports = (new Categories()).actions;
+function show(params, callback, gallery) {
+    return Base.prototype.action.call(this, Show, arguments);
+}
+
+module.exports = Categories;

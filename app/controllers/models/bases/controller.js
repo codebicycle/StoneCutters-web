@@ -8,8 +8,13 @@ Backbone.noConflict();
 Base = Backbone.Model;
 
 Controller = Backbone.Model.extend({
-    action: action    
+    initialize: initialize,
+    action: action
 });
+
+function initialize(attrs, options) {
+    this.on('preAction', this.preAction.bind());
+}
 
 function action(Model, args) {
     var model = new Model({
