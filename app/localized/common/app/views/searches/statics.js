@@ -1,12 +1,12 @@
 'use strict';
 
-var Base = require('../../bases/view');
 var _ = require('underscore');
+var Base = require('../../bases/view');
 var helpers = require('../../../../../helpers');
 var breadcrumb = require('../../../../../modules/breadcrumb');
 
 module.exports = Base.extend({
-    className: 'items_staticsearch_view',
+    className: 'searches_statics_view',
     wapAttributes: {
         cellpadding: 0
     },
@@ -20,4 +20,4 @@ module.exports = Base.extend({
     }
 });
 
-module.exports.id = 'items/staticsearch';
+module.exports.id = 'searches/statics';
