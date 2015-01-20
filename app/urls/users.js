@@ -16,8 +16,26 @@ module.exports = {
     'users#logout': {
         url: 'logout'
     },
+    'users#userprofile': {
+        urls: [
+            'users/:username',
+            '/^\/users\/.*/'
+        ]
+    },
     'users#myolx': {
         url: 'myolx'
+    },
+    'users#configuration': {
+        url: 'myolx/configuration'
+    },
+    'users#edituserprofile': {
+        url: 'myolx/edituserprofile'
+    },
+    'users#editpersonalinfo': {
+        url: 'myolx/editpersonalinfo'
+    },
+    'users#emailsnotification': {
+        url: 'myolx/emailsnotification'
     },
     'users#myads': {
         urls: [

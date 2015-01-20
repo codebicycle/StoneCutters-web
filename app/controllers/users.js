@@ -19,7 +19,12 @@ module.exports = {
     myads: middlewares(myads),
     favorites: middlewares(favorites),
     messages: middlewares(messages),
-    readmessages: middlewares(readmessages)
+    readmessages: middlewares(readmessages),
+    configuration: middlewares(configuration),
+    userprofile: middlewares(userprofile),
+    edituserprofile: middlewares(edituserprofile),
+    editpersonalinfo: middlewares(editpersonalinfo),
+    emailsnotification: middlewares(emailsnotification)
 };
 
 function register(params, callback) {
@@ -566,5 +571,134 @@ function readmessages(params, callback) {
             .then(prepare)
             .then(fetch)
             .val(success);
+    }
+}
+function configuration(params, callback) {
+    helpers.controllers.control.call(this, params, controller);
+
+    function controller() {
+        var platform = this.app.session.get('platform');
+        var user;
+
+        if (platform !== 'desktop') {
+            return helpers.common.redirect.call(this, '/');
+        }
+
+        user = this.app.session.get('user');
+
+        if (!user) {
+            return helpers.common.redirect.call(this, '/login', null, {
+                status: 302
+            });
+        }
+
+        callback(null, 'users/myolx', {
+            viewname: 'configuration'
+        });
+    }
+}
+
+function userprofile(params, callback) {
+    helpers.controllers.control.call(this, params, controller);
+    function controller() {
+        var platform = this.app.session.get('platform');
+        var user;
+
+        if (platform !== 'desktop') {
+            return helpers.common.redirect.call(this, '/');
+        }
+
+        user = this.app.session.get('user');
+
+        if (!user) {
+            return helpers.common.redirect.call(this, '/login', null, {
+                status: 302
+            });
+        }
+
+        if (user.username !== params.username) {
+            return helpers.common.redirect.call(this, '/', null, {
+                status: 302
+            });
+        }
+
+        callback(null, 'users/myolx', {
+            viewname: 'userprofile'
+        });
+    }
+}
+
+function edituserprofile(params, callback) {
+    helpers.controllers.control.call(this, params, controller);
+
+    function controller() {
+        var platform = this.app.session.get('platform');
+        var user;
+
+        if (platform !== 'desktop') {
+            return helpers.common.redirect.call(this, '/');
+        }
+
+        user = this.app.session.get('user');
+
+        if (!user) {
+            return helpers.common.redirect.call(this, '/login', null, {
+                status: 302
+            });
+        }
+
+        callback(null, 'users/myolx', {
+            viewname: 'edituserprofile'
+        });
+    }
+}
+
+function editpersonalinfo(params, callback) {
+    helpers.controllers.control.call(this, params, controller);
+
+    function controller() {
+        var platform = this.app.session.get('platform');
+        var user;
+
+        if (platform !== 'desktop') {
+            return helpers.common.redirect.call(this, '/');
+        }
+
+        user = this.app.session.get('user');
+
+        if (!user) {
+            return helpers.common.redirect.call(this, '/login', null, {
+                status: 302
+            });
+        }
+
+        callback(null, 'users/myolx', {
+            viewname: 'editpersonalinfo'
+        });
+    }
+}
+
+function emailsnotification(params, callback) {
+    helpers.controllers.control.call(this, params, controller);
+
+    function controller() {
+        var platform = this.app.session.get('platform');
+        var user;
+
+        if (platform !== 'desktop') {
+            return helpers.common.redirect.call(this, '/');
+        }
+
+        user = this.app.session.get('user');
+
+        if (!user) {
+            return helpers.common.redirect.call(this, '/login', null, {
+                status: 302
+            });
+        }
+
+        callback(null, 'users/myolx', {
+            viewname: 'emailsnotification'
+        });
     }
 }
