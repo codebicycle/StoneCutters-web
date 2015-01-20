@@ -106,7 +106,6 @@ module.exports = Base.extend({
         }
         return has;
     }
-
 });
 
 module.exports.id = 'Items';
