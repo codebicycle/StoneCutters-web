@@ -6,6 +6,7 @@ var Item = require('../models/item');
 var helpers = require('../helpers');
 var Filters = require('../modules/filters');
 var Paginator = require('../modules/paginator');
+var config = require('../../shared/config');
 
 module.exports = Base.extend({
     model: Item,
@@ -93,7 +94,32 @@ module.exports = Base.extend({
         _.extend(this.params, this.filters.smaugize());
 
         return Base.prototype.fetch.apply(this, arguments);
+    },
+    addFeaturedAds: function(items) {
+        if (items) {
+            addFeaturedAdsItems(this, items, {
+                position: 'top',
+                method: 'unshift'
+            });
+            addFeaturedAdsItems(this, items, {
+                position: 'bottom',
+                method: 'push'
+            });
+        }
     }
 });
+
+function addFeaturedAdsItems(items, models, options) {
+    var location = items.app.session.get('location');
+    var position = config.getForMarket(location.url, ['featured', 'ads', 'quantity', options.position], 1);
+    var item;
+    var i;
+
+    for (i = 0; i < position; i++) {
+        item = models.shift();
+        item.set('isFeaturedAd', true);
+        items[options.method].call(items, item);
+    }
+}
 
 module.exports.id = 'Items';

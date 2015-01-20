@@ -8,6 +8,7 @@ var helpers = require('../helpers');
 var tracking = require('../modules/tracking');
 var Paginator = require('../modules/paginator');
 var Seo = require('../modules/seo');
+var FeatureAd = require('../models/feature_ad');
 var config = require('../../shared/config');
 var utils = require('../../shared/utils');
 
@@ -165,7 +166,27 @@ function handleItems(params, promise, gallery) {
         done();
     }.bind(this);
 
-    var fetch = function(done) {
+    var fetchFeatured = function(done) {
+        if (!FeatureAd.isEnabled(this.app)) {
+            return done();
+        }
+        var location = this.app.session.get('location');
+
+        this.app.fetch({
+            items: {
+                collection: 'Items',
+                params: _.extend({}, params, {
+                    featuredAds: true,
+                    pageSize: config.getForMarket(location.url, ['featured', 'ads', 'quantity', 'total'], 2),
+                    offset: 0
+                })
+            }
+        }, {
+            readFromCache: false
+        }, done.errfcb);
+    }.bind(this);
+
+    var fetch = function(done, res) {
         this.app.fetch({
             items: {
                 collection: 'Items',
@@ -173,7 +194,15 @@ function handleItems(params, promise, gallery) {
             }
         }, {
             readFromCache: false
-        }, done.errfcb);
+        }, function afterFetch(err, response) {
+            if (err) {
+                return done.fail(err);
+            }
+            if (response.items && res) {
+                response.items.addFeaturedAds(res.items);
+            }
+            done(response);
+        });
     }.bind(this);
 
     var filters = function(done, res) {
@@ -257,6 +286,7 @@ function handleItems(params, promise, gallery) {
     promise.then(configure);
     promise.then(redirect);
     promise.then(prepare);
+    promise.then(fetchFeatured);
     promise.then(fetch);
     promise.then(filters);
     promise.then(paginate);

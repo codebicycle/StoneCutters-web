@@ -14,7 +14,7 @@
                 {% endif %}
                 <span>{{ item.seo.references[0].anchor }}</span>
             </div><!--
-            --><p class="items-price">
+            --><p class="items-price{{ ' icons icon-feature' if item.isFeaturedAd }}">
                 {{ item.price.displayPrice }}
             </p><!--
             --><p class="items-date">
