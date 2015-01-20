@@ -1,12 +1,12 @@
 'use strict';
 
 var _ = require('underscore');
-var Base = require('../../../../../common/app/bases/view').requireView('searchs/search');
+var Base = require('../../../../../common/app/bases/view').requireView('searches/search');
 var helpers = require('../../../../../../helpers');
 var breadcrumb = require('../../../../../../modules/breadcrumb');
 
 module.exports = Base.extend({
-    className: 'searchs_search_view',
+    className: 'searches_search_view',
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
 
@@ -62,4 +62,4 @@ module.exports = Base.extend({
     }
 });
 
-module.exports.id = 'searchs/search';
+module.exports.id = 'searches/search';

@@ -5,7 +5,7 @@ var Base = require('../../bases/view');
 var breadcrumb = require('../../../../../modules/breadcrumb');
 
 module.exports = Base.extend({
-    className: 'searchs_search_view',
+    className: 'searches_allresultsig_view',
     wapAttributes: {
         cellpadding: 0
     },
@@ -18,4 +18,4 @@ module.exports = Base.extend({
     }
 });
 
-module.exports.id = 'searchs/search';
+module.exports.id = 'searches/allresultsig';

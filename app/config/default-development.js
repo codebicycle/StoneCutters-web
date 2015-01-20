@@ -66,7 +66,7 @@ module.exports = {
                     'Edge-Control': '!no-store,max-age=600s'
                 }
             },
-            searchs: {
+            searches: {
                 search: {
                     'Cache-Control': 'no-cache=Set-Cookie,max-age=600,s-maxage=600',
                     'Edge-Control': '!no-store,max-age=600s'

@@ -6,7 +6,7 @@ var helpers = require('../../../../../helpers');
 var breadcrumb = require('../../../../../modules/breadcrumb');
 
 module.exports = Base.extend({
-    className: 'searchs_allresults_view',
+    className: 'searches_statics_view',
     wapAttributes: {
         cellpadding: 0
     },
@@ -20,4 +20,4 @@ module.exports = Base.extend({
     }
 });
 
-module.exports.id = 'searchs/allresults';
+module.exports.id = 'searches/statics';

@@ -1,17 +1,17 @@
 'use strict';
 
 var _ = require('underscore');
-var Base = require('../../../../../common/app/bases/view').requireView('searchs/statics');
+var Base = require('../../../../../common/app/bases/view').requireView('searches/search');
 var helpers = require('../../../../../../helpers');
 
 module.exports = Base.extend({
-    id: 'searchs-statics-view',
-    className: 'searchs-statics-view',
+    id: 'searches-search-view',
+    className: 'searches-search-view',
     tagName: 'main',
     order: ['parentcategory','pricerange', 'carbrand', 'condition', 'kilometers', 'year', 'bedrooms', 'bathrooms', 'surface', 'state', 'city', 'neighborhood'],
     regexpFindPage: /-p-[0-9]+/,
     regexpReplacePage: /(-p-[0-9]+)/,
-    regexpReplaceCategory: /(c-[0-9]+)/,
+    regexpReplaceCategory: /([a-zA-Z0-9-]+-cat-[0-9]+)/,
     regexpFindNeighborhood: /-neighborhood_[0-9_]+/,
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
@@ -19,11 +19,13 @@ module.exports = Base.extend({
 
         this.filters = data.filters;
         this.filters.order = this.order;
-        _.each(data.items, this.processItem, data);
 
         return _.extend({}, data, {
+            items: data.items,
             nav: {
-                link: link
+                link: link,
+                linkig: helpers.common.linkig.call(this, link, null, 'searchig'),
+                listAct: 'active',
             }
         });
     },
@@ -40,14 +42,7 @@ module.exports = Base.extend({
             path = path.substring(0, path.length - 1);
         }
         return path;
-    },
-    processItem: function(item) {
-        var regexp = new RegExp(this.search, 'gi');
-        var replace = ['<strong>', this.search, '</strong>'].join('');
-
-        item.description = item.description.replace(regexp, replace);
-        item.title = item.title.replace(regexp, replace);
     }
 });
 
-module.exports.id = 'searchs/statics';
+module.exports.id = 'searches/search';

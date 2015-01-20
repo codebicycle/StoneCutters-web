@@ -1,11 +1,11 @@
 'use strict';
 
 var _ = require('underscore');
-var Base = require('../../../../../common/app/bases/view').requireView('searchs/search', null, 'desktop');
+var Base = require('../../../../../common/app/bases/view').requireView('searches/search', null, 'desktop');
 
 module.exports = Base.extend({
-    id: 'searchs-searchig-view',
-    className: 'searchs-searchig-view',
+    id: 'searches-searchig-view',
+    className: 'searches-searchig-view',
     regexpFindGallery: /-ig/,
     regexpReplaceGallery: /(-ig)/,
     regexpFindNeighborhood: /-neighborhood_[0-9_]+/,
@@ -39,4 +39,4 @@ module.exports = Base.extend({
     }
 });
 
-module.exports.id = 'searchs/searchig';
+module.exports.id = 'searches/searchig';

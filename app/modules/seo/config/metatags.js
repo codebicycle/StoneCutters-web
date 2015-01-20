@@ -19,7 +19,7 @@ module.exports = {
         // On listing size < 5 -> robots = 'noindex, follow'
         items: {}
     },
-    searchs: {
+    searches: {
         // On listing size < 5 -> robots = 'noindex, follow'
         search: {}
     },

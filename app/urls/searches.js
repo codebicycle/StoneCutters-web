@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = {
-    'searchs#statics': {
+    'searches#statics': {
         urls: [
             'q/:search/c-:catId([0-9]+)/-p-:page([0-9]+)/-:filters([a-zA-Z0-9_\\-\\.]+)',
             'q/:search/c-:catId([0-9]+)/-p-:page([0-9]+)',
@@ -13,7 +13,7 @@ module.exports = {
             'q/:search'
         ]
     },
-    'searchs#allresultsig': {
+    'searches#allresultsig': {
         urls: [
             'all-results-p-:page([0-9]+)-ig/-:filters([a-zA-Z0-9_\\-\\.]+)',
             'all-results-p-:page([0-9]+)-ig',
@@ -25,7 +25,7 @@ module.exports = {
             'nf/all-results-ig'
         ]
     },
-    'searchs#allresults': {
+    'searches#allresults': {
         urls: [
             'all-results-p-:page([0-9]+)/-:filters([a-zA-Z0-9_\\-\\.]+)',
             'all-results-p-:page([0-9]+)',
@@ -37,7 +37,7 @@ module.exports = {
             'nf/all-results'
         ]
     },
-    'searchs#searchig': {
+    'searches#searchig': {
         urls: [
             'search/:search/-p-:page([0-9]+)-ig/-:filters([a-zA-Z0-9_\\-\\.]+)',
             'search/:search/-p-:page([0-9]+)-ig',
@@ -49,7 +49,7 @@ module.exports = {
             'nf/search/:search/-ig'
         ]
     },
-    'searchs#search': {
+    'searches#search': {
         urls: [
             'search/:search/-p-:page([0-9]+)/-:filters([a-zA-Z0-9_\\-\\.]+)',
             'search/:search/-p-:page([0-9]+)',
@@ -61,7 +61,7 @@ module.exports = {
             'nf/search/?:search?'
         ]
     },
-    'searchs#filterig': {
+    'searches#filterig': {
         urls: [
             ':title-cat-:catId([0-9]+)/:search/-p-:page([0-9]+)-ig/-:filters([a-zA-Z0-9_\\-\\.]+)',
             ':title-cat-:catId([0-9]+)/:search/-p-:page([0-9]+)-ig',
@@ -89,7 +89,7 @@ module.exports = {
             'nf/cat-:catId([0-9]+)/:search/-ig'
         ]
     },
-    'searchs#filter': {
+    'searches#filter': {
         urls: [
             ':title-cat-:catId([0-9]+)/:search/-p-:page([0-9]+)/-:filters([a-zA-Z0-9_\\-\\.]+)',
             ':title-cat-:catId([0-9]+)/:search/-p-:page([0-9]+)',
