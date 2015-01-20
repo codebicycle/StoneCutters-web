@@ -67,8 +67,8 @@
                 }
 
                 .icon-close {
-                    btn-close($black, #e83030);
-                    display: block;
+                    btn-close($black, $red);
+                    display: none;
                     font-size: remify(17px);
                     line-height: remify(17px);
                     top: 8px;
@@ -76,7 +76,7 @@
                     transition(250ms);
                 }
 
-                .overlay-image {
+                &:hover .overlay-image, &:hover .icon-close {
                     display: block;
                 }
             }
