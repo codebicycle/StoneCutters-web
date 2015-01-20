@@ -8,7 +8,8 @@ var statsd = require('../../shared/statsd')();
 var utils = require('../../shared/utils');
 
 module.exports = Base.extend({
-    url: '/users',
+    url: '/users/:userId/profile',
+    parse: parse,
     getUsernameOrEmail: getUsernameOrEmail,
     login: login,
     lostpassword: lostpassword,
@@ -18,6 +19,10 @@ module.exports = Base.extend({
 });
 
 module.exports.id = 'User';
+
+function parse(response) {
+    return response.profile;
+}
 
 function getUsernameOrEmail() {
     return this.get('usernameOrEmail') || this.get('username') || this.get('email');
