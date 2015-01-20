@@ -36,12 +36,9 @@ ul.itemListing li .itemInfo .centerCont a h2 {
 .shopAds,
 ul.itemListing li.callsToActionAd,
 .adLikeStore,
-.nearbyStore{
-	border: 2px solid #FFD479; /*!important*/
-	border-bottom: 3px solid #ffd479;
-	width: auto;
-	/*background-color:#FFF6E2;*/
-	background-color:#E7F6FF;
+.nearbyStore{	
+	width: auto;		
+	background-color:#F1F5F8 !important
 }
 
 
@@ -50,7 +47,8 @@ ul.itemListing li.callsToActionAd,
 	padding:.5em .5em .75em;		
 }
 
-.shopAds h2,.shopAds h3 {
+.shopAds h2,
+.shopAds h3 {
 	font-size:.75em;
 	margin:.75em .25em 0;
 	color:#666
@@ -67,7 +65,8 @@ ul.itemListing li.callsToActionAd,
 	color:#FF7800
 }
 
-#home .shopAds a span,#home .shopAds a strong {
+#home .shopAds a span,
+#home .shopAds a strong {
 	
 }
 
@@ -78,14 +77,13 @@ ul.itemListing li.callsToActionAd,
 }
 
 #home .shopAds a strong {
-	position:relative;
-	top:-2px;
-	margin-right:1em;
-	padding:.35em .5em .25em;
-	border-radius:4px;
-	font-size:.85em;
-	background-color:#FF7800;
-	color:#fff
+	position: relative;
+	bottom: 4px;
+	padding: 0.25em 0.35em 0.1em;
+	font-size: 75%;
+	border-radius: 2px;
+	background-color: rgba(255, 221, 199, 0.98);
+	font-weight: normal;	
 }
 
 ul.itemListing li.spamLikeAd {
@@ -133,11 +131,8 @@ ul.itemListing li.callsToActionAd {
 .callsToActionAd .callsToAction {
 	position:relative;
 	width:100%;
-	margin:0;
-	padding-bottom:1em;
-	padding-top:3px;
-	font-size:.75em;
-	border-bottom:1px solid #e7e7e7
+	margin:0;	
+	font-size:.75em;	
 }
 
 .callsToActionAd .callsToAction span.storeName,
@@ -147,51 +142,61 @@ ul.itemListing li.callsToActionAd {
 }
 
 .callsToActionAd .callsToAction span.storeName {
-	min-height:1em;
-	padding-top:3px;
-	padding-left:3px;
-	font-style:italic;
-	color:#ff7c28;
-	text-align:left
+	display: inline-block;
+	min-width: 15em;
+	min-height: 1em;
+	padding-top: 3px;
+	padding-left: 22px;
+	font-style: italic;
+	font-size: 11px;
+	color: #666;
+	text-align: left;
+	text-overflow: ellipsis;
+	background: url(imageUrl/images/html4/icons/www.olx.com.ar/storeIcon.png) 3px center no-repeat transparent;
+}
+
+.callsToActionAd .callsToAction span.storeName strong{
+	color:#FF7C28
 }
 
 .callsToActionAd .callsToAction ul {
 	position:absolute;
-	bottom:16px;
-	right:0;
-	width:50%;
+	bottom:8px;
+	right:3px;
+	width:100px;
 	height:2em
 }
 
 .callsToActionAd .callsToAction ul li {
-	float:right;
+	float:left;
 	width:24px !important;
-	margin:0 6px;
+	margin:0 4px;
 	border-bottom:none
 }
 
 .callsToActionAd .callsToAction ul li a.call,
 .callsToActionAd .callsToAction ul li a.email,
 .callsToActionAd .callsToAction ul li a.sms {
-	padding:4px 0 10px 18px;
+	padding:4px 10px 10px 18px;
 	color:#666;
-	text-indent:-1000000px;
-	border:none
+	text-indent:-100000px;
+	border:1px solid #d1d1d1;
+	border-radius: 3px	
 }
 
 .callsToActionAd .callsToAction ul li a.call {
-	background:url(imageUrl/images/html4/icons/www.olx.com.ar/phone.png) no-repeat scroll 0 0 transparent;
-	background-size: 100%
+	background:url(imageUrl/images/html4/icons/www.olx.com.ar/phone.png) no-repeat scroll center center #fff;
+	background-size: 60%
 }
 
 .callsToActionAd .callsToAction ul li a.email {
-	background:url(imageUrl/images/html4/icons/www.olx.co.ke/mail.png) no-repeat scroll 0 -2px transparent;
-	background-size: 100%
+	background:url(imageUrl/images/html4/icons/www.olx.co.ke/mail.png) no-repeat scroll center 3px #fff;
+	background-size: 60%
 }
 
 .callsToActionAd .callsToAction ul li a.sms {
-	background:url(imageUrl/images/html4/icons/www.olx.co.ke/sms2.png) no-repeat scroll 0 2px transparent;
-	background-size: 100%
+	background:url(imageUrl/images/html4/icons/www.olx.co.ke/sms2.png) no-repeat scroll center 7px #fff;
+	background-size: 60%
 }
 
 ul.itemListing.recommendedShop {
@@ -237,22 +242,19 @@ ul.itemListing.recommendedShop li .itemInfo span:last-child {
 }
 
 li.adLikeStore .itemInfo em {
-	font-size:.75em;
-	width:100%;
 	display:inline-block;
-	font-weight:700;
+	width:100%;		
+	font-size:11px;
+	line-height: 12px;
 	font-style:normal;
+	font-weight:bold;	
+	text-overflow: clip ellipsis;
 	color:#666
-}
-
-.adLikeStore {
-	background-color:#E7F6FF;
 }
 
 .nearbyStore {
 	margin: -.5em 0 0.5em;
 	padding: .5em 0 0;
-	background-color:#E7F6FF;
 	border-left: none;
 	border-right: none;
 	border-top: none;
@@ -281,7 +283,8 @@ a.mapLink {
 	color:#fff
 }
 
-.nearbyStore span.location,.nearbyStore span.description {
+.nearbyStore span.location,
+.nearbyStore span.description {
 	font-size:.7em;
 	display:inline-block;
 	color:#333
@@ -299,7 +302,8 @@ a.mapLink {
 	margin:0
 }
 
-.stores ul.itemListing li,.stores ul.itemListing li .itemInfo {
+.stores ul.itemListing li,
+.stores ul.itemListing li .itemInfo {
 	height:auto;
 	min-height:0
 }
