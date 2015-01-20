@@ -1,19 +1,18 @@
 'use strict';
 
-var Base = require('../../../../../common/app/bases/view').requireView('items/staticsearch');
 var _ = require('underscore');
+var Base = require('../../../../../common/app/bases/view').requireView('searches/statics');
 var helpers = require('../../../../../../helpers');
 
 module.exports = Base.extend({
-    id: 'items-staticsearch-view',
-    className: 'items-staticsearch-view',
+    id: 'searches-statics-view',
+    className: 'searches-statics-view',
     tagName: 'main',
     order: ['parentcategory','pricerange', 'carbrand', 'condition', 'kilometers', 'year', 'bedrooms', 'bathrooms', 'surface', 'state', 'city', 'neighborhood'],
     regexpFindPage: /-p-[0-9]+/,
     regexpReplacePage: /(-p-[0-9]+)/,
     regexpReplaceCategory: /(c-[0-9]+)/,
     regexpFindNeighborhood: /-neighborhood_[0-9_]+/,
-
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
         var link = this.refactorPath(this.app.session.get('path'));
@@ -50,3 +49,5 @@ module.exports = Base.extend({
         item.title = item.title.replace(regexp, replace);
     }
 });
+
+module.exports.id = 'searches/statics';
