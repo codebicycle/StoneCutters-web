@@ -1,0 +1,21 @@
+{% if keepPostingCat %}
+    <aside id="notification-keep-posting" class="notification-keep-posting">
+        <h3 class="title">Continúa <span class="highlight">publicando</span></h3>
+        <p class="message icons icon-arrow"><span class="highlight">{{ dictionary["crm_new_version.SomethingElseToPost"] }} </span>{{ dictionary["defaultheader.PostAFreeAd"] }}.</p>
+        <div class="categories-best-selling">
+            {% for category in keepPostingCat %}
+                {% if category.category and category.subcategory %}
+                    {% set postingLink = '/posting?cat='+category.category+'&subcat='+category.subcategory %}
+                {% else %}
+                    {% set postingLink = '/posting?cat='+category.category %}
+                {% endif %}
+                <a href="{{ postingLink | link }}" class="module">
+                    <article class="icons icon-cat-{{ category.icon }}">
+                        <p>Publicar en <strong>{{ category.name }}</strong></p>
+                    </article>
+                </a>
+            {% endfor %}
+            <a href="{{ '/posting' | link }}" class="posting" role="button">{{ dictionary["defaultheader2.Post"] }}<span>{{ dictionary["posting_selector.SelectCategory"] }} </span></a>
+        </div>
+    </aside>
+{% endif %}
