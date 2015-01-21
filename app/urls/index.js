@@ -3,6 +3,7 @@
 var _ = require('underscore');
 
 var redirections = require('./redirections');
+var searches = require('./searches');
 var items = require('./items');
 var pages = require('./pages');
 var featured = require('./featured');
@@ -25,6 +26,7 @@ _.extend(urls, featured);
 _.extend(urls, users);
 _.extend(urls, post);
 _.extend(urls, categories);
+_.extend(urls, searches);
 _.extend(urls, items);
 
 // Handler 404
