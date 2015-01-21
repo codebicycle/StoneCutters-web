@@ -42,9 +42,7 @@ function action(done) {
 }
 
 function success(data) {
-    var callback = this.get('callback');
-
-    callback(null, data || {});
+    this.get('callback')(null, data || {});
 }
 
 function error(err, res) {
