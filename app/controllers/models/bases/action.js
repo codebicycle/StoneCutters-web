@@ -11,26 +11,33 @@ Backbone.noConflict();
 Base = Backbone.Model;
 
 Action = Backbone.Model.extend({
+    initialize: initialize,
+    control: control,
+    redirection: redirection,
     action: action,
-    redirect: redirect,
-    prepare: prepare,
     success: success,
-    error: error
+    error: error,
+    redirect: redirect
 });
 
-function action(params, callback) {
-    var promise = asynquence().or(this.error.bind(this));
-
-    promise.then(this.redirect.bind(this));
-    promise.then(this.prepare.bind(this));
-    promise.val(this.success.bind(this));
+function initialize(attrs, options) {
+    this.currentRoute = options.currentRoute;
+    this.app = options.app;
+    this.redirectTo = options.redirectTo;
 }
 
-function redirect(done) {
+function control() {
+    asynquence().or(this.error.bind(this))
+        .then(this.redirection.bind(this))
+        .then(this.action.bind(this))
+        .val(this.success.bind(this));
+}
+
+function redirection(done) {
     (done || _.noop)();
 }
 
-function prepare(done) {
+function action(done) {
     (done || _.noop)();
 }
 
@@ -41,7 +48,11 @@ function success(data) {
 }
 
 function error(err, res) {
-    helpers.common.error.call(this, err, res, this.get('callback'));
+    helpers.common.error.call(this, err || null, res || {}, this.get('callback'));
+}
+
+function redirect(url, parameters, options) {
+    return helpers.common.redirect.call(this, url, parameters, options);
 }
 
 module.exports = Action;

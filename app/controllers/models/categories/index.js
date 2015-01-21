@@ -1,9 +1,9 @@
 'use strict';
 
 var Base = require('../bases/controller');
-var List = require('./models/list');
-var Show = require('./models/show');
-var ShowIg = require('./models/showig');
+var List = require('./actions/list');
+var Show = require('./actions/show');
+var ShowIg = require('./actions/showig');
 
 var Categories = Base.extend({
     list: list,
@@ -12,21 +12,15 @@ var Categories = Base.extend({
 });
 
 function list(params, callback) {
-    return Base.prototype.action.call(this, List, arguments);
+    return Base.prototype.control.call(this, List, arguments);
+}
+
+function show(params, callback) {
+    return Base.prototype.control.call(this, Show, arguments);
 }
 
 function showig(params, callback) {
-    var platform = this.app.session.get('platform');
-
-    if (platform !== 'desktop') {
-        return helpers.common.error.call(this, null, {}, callback);
-    }
-    params['f.hasimage'] = true;
-    return show.call(this, params, callback, '-ig');
+    return Base.prototype.control.call(this, ShowIg, arguments.concat(['-ig']));
 }
 
-function show(params, callback, gallery) {
-    return Base.prototype.action.call(this, Show, arguments);
-}
-
-module.exports = Categories;
+module.exports = new Categories();

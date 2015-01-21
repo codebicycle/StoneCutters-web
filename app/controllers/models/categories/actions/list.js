@@ -4,10 +4,10 @@ var Base = require('../../bases/action');
 var config = require('../../../../../shared/config');
 
 var List = Base.extend({
-    prepare: prepare
+    action: action
 });
 
-function prepare(done) {
+function action(done) {
     var location = this.app.session.get('location');
     var icons = config.get(['icons', this.app.session.get('platform')], []);
 

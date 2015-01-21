@@ -12,29 +12,30 @@ var config = require('../../../../../shared/config');
 var utils = require('../../../../../shared/utils');
 
 var Show = Base.extend({
-    redirect: redirect,
-    prepare: prepare
+    redirection: redirection,
+    action: action
 });
 
-function redirect(done){
+function redirection(done){
     var params = this.get('params');
     var categoryId = Seo.isCategoryDeprecated(params.catId);
 
     if (categoryId) {
         done.abort();
-        return helpers.common.redirect.call(this, ['/cat-', categoryId, this.get('gallery')].join(''));
+        return this.redirect(['/cat-', categoryId, this.get('gallery')].join(''));
     }
     done();
 }
 
-function prepare(done) {
+function action(done) {
     var promise = asynquence().or(done.fail);
     var params = this.get('params');
     var category = this.dependencies.categories.get(params.catId);
     var platform = this.app.session.get('platform');
-    var gallery = this.get('gallery');
     var options = {
-        promise: promise
+        promise: promise,
+        gallery: this.get('gallery'),
+        category: category
     };
     var subcategory;
 
@@ -44,19 +45,16 @@ function prepare(done) {
         });
         if (!category) {
             done.abort();
-            return helpers.common.redirect.call(this, '/');
+            return this.redirect('/');
         }
         subcategory = category.get('children').get(params.catId);
         handleItems.call(this, params, _.extend(options, {
-            gallery: gallery,
             category: category,
             subcategory: subcategory
         }));
     }
     else if (platform === 'desktop') {
-        handleItems.call(this, params, _.extend(options, {
-            gallery: gallery
-        }));
+        handleItems.call(this, params, options);
     }
     else {
         handleShow.call(this, params, options);
@@ -86,7 +84,7 @@ function handleItems(params, options) {
         done();
     }.bind(this);
 
-    var redirect = function(done) {
+    var redirection = function(done) {
         var platform = this.app.session.get('platform');
         var slug = helpers.common.slugToUrl((subcategory || category).toJSON());
 
@@ -95,17 +93,17 @@ function handleItems(params, options) {
         if (slug.indexOf(params.title + '-cat-')) {
             done.abort();
             if (page === undefined || isNaN(page) || page <= 1) {
-                return helpers.common.redirect.call(this, [url, gallery].join(''));
+                return this.redirect([url, gallery].join(''));
             }
-            return helpers.common.redirect.call(this, [url, '-p-', page, gallery].join(''));
+            return this.redirect([url, '-p-', page, gallery].join(''));
         }
         if ((params.filters && params.filters !== 'undefined') && !utils.startsWith(path, starts)) {
             done.abort();
-            return helpers.common.redirect.call(this, [starts, path, URLParser.parse(this.app.session.get('url')).search || ''].join(''));
+            return this.redirect([starts, path, URLParser.parse(this.app.session.get('url')).search || ''].join(''));
         }
         else if ((!params.filters || params.filters === 'undefined') && utils.startsWith(path, starts)) {
             done.abort();
-            return helpers.common.redirect.call(this, [path.replace(starts, ''), URLParser.parse(this.app.session.get('url')).search || ''].join(''));
+            return this.redirect([path.replace(starts, ''), URLParser.parse(this.app.session.get('url')).search || ''].join(''));
         }
         done();
     }.bind(this);
@@ -151,7 +149,7 @@ function handleItems(params, options) {
         if (filter !== _filters) {
             done.abort();
             url = [path.split('/-').shift(), (_filters ? '/' + _filters : ''), URLParser.parse(url).search || ''].join('');
-            return helpers.common.redirect.call(this, url);
+            return this.redirect(url);
         }
         done(res);
     }.bind(this);
@@ -161,7 +159,7 @@ function handleItems(params, options) {
 
         if (page == 1) {
             done.abort();
-            return helpers.common.redirect.call(this, [url, gallery].join(''));
+            return this.redirect([url, gallery].join(''));
         }
         realPage = res.items.paginate([url, '[page][gallery][filters]'].join(''), query, {
             page: page,
@@ -169,7 +167,7 @@ function handleItems(params, options) {
         });
         if (realPage) {
             done.abort();
-            return helpers.common.redirect.call(this, [url, '-p-', realPage, gallery].join(''));
+            return this.redirect([url, '-p-', realPage, gallery].join(''));
         }
         done(res.items);
     }.bind(this);
@@ -214,7 +212,7 @@ function handleItems(params, options) {
     }.bind(this);
 
     promise.then(configure);
-    promise.then(redirect);
+    promise.then(redirection);
     promise.then(prepare);
     promise.then(fetch);
     promise.then(filters);
@@ -236,12 +234,12 @@ function handleShow(params, options) {
         done();
     }.bind(this);
 
-    var redirect = function(done) {
+    var redirection = function(done) {
         var slug = helpers.common.slugToUrl(category.toJSON());
 
         if (!category.checkSlug(slug, params.title)) {
             done.abort();
-            return helpers.common.redirect.call(this, '/' + slug);
+            return this.redirect('/' + slug);
         }
         done();
     }.bind(this);
@@ -265,7 +263,7 @@ function handleShow(params, options) {
     }.bind(this);
 
     promise.then(configure);
-    promise.then(redirect);
+    promise.then(redirection);
     promise.then(success);
 }
 
