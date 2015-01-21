@@ -2,7 +2,6 @@
 
 var Base = require('../../../../../common/app/bases/view');
 var _ = require('underscore');
-var asynquence = require('asynquence');
 var AdServing = require('../../../../../../modules/adserving');
 var translations = require('../../../../../../../shared/translations');
 

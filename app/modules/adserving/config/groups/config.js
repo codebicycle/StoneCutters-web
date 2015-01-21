@@ -4,14 +4,38 @@ module.exports = {
     'default': {
         CSA: {
             'default': {
-                slot_top_listing: {
+                slot_top_listing_gallery: {
+                    seo: 1,
                     params: {
                         number: 3
                     }
                 },
-                slot_bottom_listing: {
+                slot_top_listing: {
+                    seo: 1,
                     params: {
-                        number: 3
+                        number: 3,
+                        fontSizeTitle: 18,
+                        adIconLocation: 'ad-left',
+                        adIconWidth: 143,
+                        adIconHeight: 112,
+                        adIconSpacingAbove: 4,
+                        adIconSpacingBefore: 6,
+                        adIconSpacingAfter: 15,
+                        adIconUrl: 'http://afs.googleusercontent.com/olx/olx_[langcode].png'
+                    }
+                },
+                slot_bottom_listing: {
+                    seo: 0,
+                    params: {
+                        number: 3,
+                        fontSizeTitle: 18,
+                        adIconLocation: 'ad-left',
+                        adIconWidth: 143,
+                        adIconHeight: 112,
+                        adIconSpacingAbove: 4,
+                        adIconSpacingBefore: 6,
+                        adIconSpacingAfter: 15,
+                        adIconUrl: 'http://afs.googleusercontent.com/olx/olx_[langcode].png'
                     }
                 }
             }
@@ -19,27 +43,39 @@ module.exports = {
         AFC: {
             'default': {
                 slot_side_listing: {
+                    seo: 1,
                     params: {
                         number: 1,
-                        media: 'flash, image'
+                        media: 'flash, image',
+                        width: '160',
+                        height: '600'
                     }
                 },
                 slot_side_item: {
+                    seo: 1,
                     params: {
                         number: 1,
-                        media: 'flash, image'
+                        media: 'flash, image',
+                        width: '300',
+                        height: '250'
                     }
                 },
                 slot_top_item: {
+                    seo: 1,
                     params: {
                         number: 3,
-                        media: 'text'
+                        media: 'text',
+                        width: '728',
+                        height: '90'
                     }
                 },
                 slot_bottom_item: {
+                    seo: 1,
                     params: {
                         number: 5,
-                        media: 'text'
+                        media: 'text',
+                        width: '728',
+                        height: '90'
                     }
                 }
             }
@@ -47,18 +83,6 @@ module.exports = {
     },
     'www.olx.com.ar': {
         CSA: {
-            'default': {
-                slot_top_listing: {
-                    params: {
-                        number: 3
-                    }
-                },
-                slot_bottom_listing: {
-                    params: {
-                        number: 3
-                    }
-                }
-            },
             customs: [{
                 categories: [800, 806, 815, 830, 853, 859],
                 slot_top_listing: {
@@ -86,29 +110,20 @@ module.exports = {
         },
         AFC: {
             'default': {
-                slot_bottom_item: {
-                    params: {
-                        number: 5,
-                        media: 'text'
-                    }
+                slot_side_listing: {
+                    enabled: false
+                },
+                slot_side_item: {
+                    enabled: false
+                },
+                slot_top_item: {
+                    enabled: false
                 }
             }
         }
     },
     'www.olx.com.co': {
         CSA: {
-            'default': {
-                slot_top_listing: {
-                    params: {
-                        number: 3
-                    }
-                },
-                slot_bottom_listing: {
-                    params: {
-                        number: 3
-                    }
-                }
-            },
             customs: [{
                 categories: [800, 806, 815, 830, 859],
                 slot_top_listing: {
@@ -136,29 +151,20 @@ module.exports = {
         },
         AFC: {
             'default': {
-                slot_bottom_item: {
-                    params: {
-                        number: 5,
-                        media: 'text'
-                    }
+                slot_side_listing: {
+                    enabled: false
+                },
+                slot_side_item: {
+                    enabled: false
+                },
+                slot_top_item: {
+                    enabled: false
                 }
             }
         }
     },
     'group1': {
         CSA: {
-            'default': {
-                slot_top_listing: {
-                    params: {
-                        number: 3
-                    }
-                },
-                slot_bottom_listing: {
-                    params: {
-                        number: 3
-                    }
-                }
-            },
             customs: [{
                 categories: [185, 800, 806, 815, 830, 853, 859],
                 slot_top_listing: {
@@ -186,11 +192,14 @@ module.exports = {
         },
         AFC: {
             'default': {
-                slot_bottom_item: {
-                    params: {
-                        number: 5,
-                        media: 'text'
-                    }
+                slot_side_listing: {
+                    enabled: false
+                },
+                slot_side_item: {
+                    enabled: false
+                },
+                slot_top_item: {
+                    enabled: false
                 }
             }
         }
@@ -206,22 +215,6 @@ module.exports = {
                 slot_bottom_listing: {
                     params: {
                         number: 3
-                    }
-                }
-            }
-        },
-        ADX: {
-            'default': {
-                slot_side_listing: {
-                    params: {
-                        number: 1,
-                        media: 'flash, image'
-                    }
-                },
-                slot_side_item: {
-                    params: {
-                        number: 1,
-                        media: 'flash, image'
                     }
                 }
             }

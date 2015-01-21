@@ -31,6 +31,7 @@ function getSettings() {
     };
     var configType;
 
+
     if (this.config.enabled) {
         configType = utils.get(configAdServing, type, {});
 
@@ -88,27 +89,11 @@ function createChannels(type) {
 }
 
 function isSlotEnabled() {
-    var enabled = this.isEnabled();
-    var category;
-    var status;
-
-    if (enabled) {
-        enabled = this.config.enabled || false;
-        if (enabled) {
-            category = getCategoryId.call(this);
-
-            if (category && this.config.excludedCategories) {
-                enabled = !_.contains(this.config.excludedCategories, category);
-            }
-        }
-    }
-    return enabled;
+    return this.isEnabled() && this.config.enabled;
 }
 
 function isEnabled() {
-    var location = this.app.session.get('location');
-
-    return config.getForMarket(location.url, ['adserving', 'enabled'], true);
+    return config.getForMarket(this.app.session.get('location').url, ['adserving', 'enabled'], false);
 }
 
 function getSearchQuery() {
@@ -207,28 +192,33 @@ function getCustomType() {
     return type;
 }
 
+function extendConfig(config, defaults) {
+    config = _.defaults({}, config, defaults);
+    config.params = _.defaults({}, config.params || {}, defaults.params || {});
+    return config;
+}
+
 function getSlotConfig(slotname, typeGroup) {
     var configDefault = utils.get(configAdServing, ['groups', 'slots', slotname, 'default'], {});
     var config = utils.get(configAdServing, ['groups', 'slots', slotname, typeGroup], {});
 
-    config = _.defaults({}, config, configDefault);
-    config.params = _.defaults({}, config.params, configDefault.params);
-    return config;
+    return extendConfig(config, configDefault);
 }
 
 function getGroupConfig(slotname, typeGroup, typeSlot) {
+    var configTypeDefault = utils.get(configAdServing, ['groups', 'config', 'default', typeSlot, 'default', slotname], {});
     var configType = utils.get(configAdServing, ['groups', 'config', typeGroup, typeSlot], {});
-    var config = _.clone(configType['default'][slotname]);
+    var config = utils.get(configType, ['default', slotname], {});
     var type = getCustomType.call(this);
     var configCustom;
 
+    config = extendConfig(config, configTypeDefault);
     if (configType.customs) {
         configCustom = _.find(configType.customs, function find(custom) {
             return _.contains(custom.categories, type);
         });
         if (configCustom && configCustom[slotname]) {
-            config = _.defaults({}, configCustom[slotname], config);
-            config.params = _.defaults({}, configCustom[slotname].params || {}, config.params);
+            config = extendConfig(configCustom[slotname], config);
         }
     }
     return config;
@@ -240,11 +230,8 @@ function getConfig() {
     var configDefault = getSlotConfig(slotname, typeGroup);
     var config = getGroupConfig.call(this, slotname, typeGroup, configDefault.type);
 
-    config = _.defaults({}, config, configDefault);
-    config.params = _.defaults({}, config.params, configDefault.params);
-    return config;
+    return extendConfig(config, configDefault);
 }
-
 
 module.exports = Base.extend({
     initialize: initialize,
