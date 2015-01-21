@@ -7,8 +7,7 @@ module.exports = {
         name: 'header-post-button',
         alternatives: {
             TEXT: 'text',
-            ICON: 'icon',
-            BOTH: 'both'
+            ICON: 'icon'
         }
     }
 };

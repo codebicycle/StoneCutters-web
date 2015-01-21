@@ -8,7 +8,6 @@ module.exports = {
         alternatives: {
             TEXT: 'text',
             ICON: 'icon',
-            BOTH: 'both'
         }
     }
 };
