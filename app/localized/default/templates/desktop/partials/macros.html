@@ -1,37 +1,29 @@
-{% macro FieldText(label, name, mandatory, advice, form) %}
-    <fieldset class="wrapper">
-        <label for="{{ label }}" class="posting-label">{{ '* ' if mandatory == 'true' }}{{ label }}</label>
-        <div class="wrapper-inputs">
-            <input id="text-{{name}}" class="text-field" type="text" placeholder="{{label}}" {{ 'required' if mandatory == 'true' }} name="{{name}}"
-            {% if form and form.values and form.values[name] %} value="{{ form.values[name] }}" {% endif %} />
-            {{ ('<small class="advice">' + advice + '</small>') if advice }}
+{% macro Field(hint = false, field) %}
+    <fieldset class="field-wrapper{{ ' hide' if field.hide }}">
+        {% if field.label and field.fieldType != 'checkbox' %}
+            <label for="field-{{ field.name }}" class="field-label">{% if field.mandatory == true or field.mandatory == 'true' %}* {% endif %}{{ field.label }}</label>
+        {% endif %}
+        <div class="field-controls">
+            {% if field.fieldType == 'text' and field.name == 'description' %}
+                {{ Textarea(name = field.name, required = field.mandatory, value = field.value) }}
+            {% elif field.fieldType == 'text' or field.fieldType == 'password' %}
+                {% set type = field.fieldType or 'text' %}
+                {{ TextInput(type = type, name = field.name, required = field.mandatory, value = field.value) }}
+            {% elif field.fieldType == 'combobox' %}
+                {% set selected = field.value.key or field.selected %}
+                {{ Select(name = field.name, required = field.mandatory, options = field.values, selected = selected, related = field.related) }}
+            {% elif field.fieldType == 'radio' %}
+                {% set selected = field.value.key or field.selected %}
+                {{ Radio(name = field.name, required = field.mandatory, options = field.values, selected = selected, related = field.related) }}
+            {% elif field.fieldType == 'checkbox' %}
+                {{ Checkbox(type = field.fieldType, name = field.name, required = field.mandatory, value = field.value, label = field.label) }}
+            {% endif %}
+            {% if hint %}
+                <small class="{{ 'icons icon-lock ' if field.name == 'email' }}hint message">{{ hint }}</small>
+            {% endif %}
         </div>
     </fieldset>
 {% endmacro %}
-
-{% macro FieldTextArea(label, name, mandatory, form) %}
-    <fieldset class="wrapper">
-        <label for="{{name}}" class="posting-label">{{ '* ' if mandatory == 'true' }}{{ label }}</label>
-        <div class="wrapper-inputs">
-            <textarea id="{{name}}" class="text-field" rows="12" {{ 'required' if mandatory == 'true' }} name="{{name}}">{% if form and form.values and form.values[name] %}{{ form.values[name] }}{% endif %}</textarea>
-        </div>
-    </fieldset>
-{% endmacro %}
-
-{% macro FieldCombobox(label, name, mandatory, values, form) %}
-    <fieldset class="wrapper">
-        <label for="{{label}}" class="posting-label">{{label}}</label>
-        <div class="wrapper-inputs">
-            <select id="{{name}}" class="text-field select-field" name="{{name}}">
-                {% for value in values %}
-                    <option value="{{value.key}}"{% if form and form.values and form.values[name] and form.values[name] == value.key %} selected="selected"{% endif %}>{{value.value}}</option>
-                {% endfor %}
-            </select>
-        </div>
-    </fieldset>
-{% endmacro %}
-
-{# NEW FIELDS #}
 
 {% macro TextInput(type = 'text', name = '', placeholder = false, required = false, validate = true, value = false) %}
     <input
@@ -96,27 +88,6 @@
     </select>
 {% endmacro %}
 
-{% macro Field(hint = false, field) %}
-    <fieldset class="field-wrapper{{ ' hide' if field.hide }}">
-        {% if field.label %}<label for="field-{{ field.name }}" class="field-label">{% if field.mandatory == true or field.mandatory == 'true' %}* {% endif %}{{ field.label }}</label>{% endif %}
-        <div class="field-controls">
-            {% if field.fieldType == 'text' and field.name == 'description' %}
-                {{ Textarea(name = field.name, required = field.mandatory, value = field.value) }}
-            {% elif field.fieldType == 'text' %}
-                {% set type = field.type or 'text' %}
-                {{ TextInput(type = type, name = field.name, required = field.mandatory, value = field.value) }}
-            {% elif field.fieldType == 'combobox' %}
-                {% set selected = field.value.key or field.selected %}
-                {{ Select(name = field.name, required = field.mandatory, options = field.values, selected = selected, related = field.related) }}
-
-            {% endif %}
-            {% if hint %}
-                <small class="{{ 'icons icon-lock ' if field.name == 'email' }}hint message">{{ hint }}</small>
-            {% endif %}
-        </div>
-    </fieldset>
-{% endmacro %}
-
 {% macro PriceField(label = '', name = '', mandatory = '', hint = false, fields) %}
     <fieldset class="field-wrapper">
         {% if label %}<label for="field-{{ name }}" class="field-label">{% if mandatory == true or mandatory == 'true' %}* {% endif %}{{ label }}</label>{% endif %}
@@ -133,4 +104,15 @@
             {% endif %}
         </div>
     </fieldset>
+{% endmacro %}
+
+{% macro Radio(name = '', required = false, options, selected, related) %}
+    {% for option in options %}
+        <input type="radio" name="{{ name }}" value="{{ option.key }}" {{ 'checked' if selected == option.key }}>
+        <span>{{ option.value }}</span>
+    {% endfor %}
+{% endmacro %}
+
+{% macro Checkbox(type = 'checkbox', name = '', required = false, validate = true, value = false, label = '') %}
+    <input type="checkbox" {{ 'checked' if value }} value="1" name="{{ name }}">{{ label }}
 {% endmacro %}

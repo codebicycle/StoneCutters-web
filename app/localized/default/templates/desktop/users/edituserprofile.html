@@ -1,1 +1,88 @@
-edituserprofile.html
+{% from macros import Field %}
+
+{% set statesField = {
+    isOptional: false,
+    name: "state",
+    mandatory: true,
+    label: dictionary["defaultheader.Location"],
+    values: states,
+    fieldType: "combobox",
+    dataType: "select",
+    selected: profile.location.state
+} %}
+{{ Field(statesField) }}
+
+{% set cityField = {
+    isOptional: false,
+    name: "city",
+    mandatory: true,
+    label: '.',
+    values: 'cities',
+    fieldType: "combobox",
+    dataType: "select",
+    selected: profile.location.city
+} %}
+{{ Field(cityField) }}
+
+{% set nameField = {
+    isOptional: false,
+    name: "username",
+    mandatory: true,
+    label: dictionary["comments.CommentsFormName"],
+    fieldType: "text",
+    dataType: "string",
+    value: profile.username
+} %}
+{{ Field(nameField) }}
+
+{% set genderField = {
+    isOptional: false,
+    name: "gender",
+    mandatory: true,
+    label: dictionary["item.sex"],
+    values: [ { key: 'M', value: ' Masculino' }, { key: 'F', value: ' Femenino' } ],
+    fieldType: "radio",
+    dataType: "radio",
+    selected: profile.gender
+} %}
+
+{{ Field(genderField) }}
+
+{% set aboutMeField = {
+    dataType: "string",
+    fieldType: "text",
+    isOptional: true,
+    label: dictionary["usersprofile.AboutMe"],
+    mandatory: false,
+    name: "aboutMe",
+    value: profile.aboutMe
+} %}
+{{ Field(aboutMeField) }}
+
+{% set interestsField = {
+    dataType: "string",
+    fieldType: "text",
+    isOptional: true,
+    label: dictionary["usersprofile.Interests"],
+    mandatory: false,
+    name: "interest",
+    value: profile.interest
+} %}
+{{ Field(interestsField) }}
+
+{% set webField = {
+    isOptional: true,
+    name: "webSite",
+    mandatory: false,
+    label: dictionary["usersprofile.MyWebsite"],
+    fieldType: "text",
+    dataType: "string",
+    value: profile.webSite
+} %}
+{{ Field(webField) }}
+
+
+<fieldset class="seller-post">
+    <input type="submit" value="{{ dictionary["alertstitle.SaveProfile"] }}" class="posting" data-qa="submit-button" />
+    <a href="{{ '/myolx/configuration' | link }}">{{ dictionary["wap_posting_step4.Cancel"] }}</a>
+</fieldset>

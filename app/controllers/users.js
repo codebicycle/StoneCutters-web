@@ -706,24 +706,60 @@ function edituserprofile(params, callback) {
     helpers.controllers.control.call(this, params, controller);
 
     function controller() {
-        var platform = this.app.session.get('platform');
-        var user;
+        var _params;
+        var user = this.app.session.get('user');
 
-        if (platform !== 'desktop') {
-            return helpers.common.redirect.call(this, '/');
-        }
+        var redirect = function(done) {
+            var platform = this.app.session.get('platform');
 
-        user = this.app.session.get('user');
+            if (platform !== 'desktop') {
+                return helpers.common.redirect.call(this, '/');
+            }
 
-        if (!user) {
-            return helpers.common.redirect.call(this, '/login', null, {
-                status: 302
+            if (!user) {
+                return helpers.common.redirect.call(this, '/login', null, {
+                    status: 302
+                });
+            }
+
+            done();
+        }.bind(this);
+
+        var prepare = function(done) {
+
+            _params = _.extend({
+                token: user.token,
+                userId: user.userId
+            }, params);
+            done();
+        }.bind(this);
+
+        var fetch = function(done) {
+            this.app.fetch({
+                profile: {
+                    model: 'User',
+                    params: _params
+                }
+            }, {
+                readFromCache: false
+            }, done.errfcb);
+        }.bind(this);
+
+        var success = function(response) {
+            callback(null, 'users/myolx', {
+                profile: response.profile.toJSON(),
+                viewname: 'edituserprofile'
             });
-        }
+        }.bind(this);
 
-        callback(null, 'users/myolx', {
-            viewname: 'edituserprofile'
-        });
+        var error = function(err, res) {
+            return helpers.common.error.call(this, err, res, callback);
+        }.bind(this);
+
+        asynquence().or(error)
+            .then(prepare)
+            .then(fetch)
+            .val(success);
     }
 }
 
@@ -756,23 +792,59 @@ function emailsnotification(params, callback) {
     helpers.controllers.control.call(this, params, controller);
 
     function controller() {
-        var platform = this.app.session.get('platform');
-        var user;
+        var _params;
+        var user = this.app.session.get('user');
 
-        if (platform !== 'desktop') {
-            return helpers.common.redirect.call(this, '/');
-        }
+        var redirect = function(done) {
+            var platform = this.app.session.get('platform');
 
-        user = this.app.session.get('user');
+            if (platform !== 'desktop') {
+                return helpers.common.redirect.call(this, '/');
+            }
 
-        if (!user) {
-            return helpers.common.redirect.call(this, '/login', null, {
-                status: 302
+            if (!user) {
+                return helpers.common.redirect.call(this, '/login', null, {
+                    status: 302
+                });
+            }
+
+            done();
+        }.bind(this);
+
+        var prepare = function(done) {
+
+            _params = _.extend({
+                token: user.token,
+                userId: user.userId
+            }, params);
+            done();
+        }.bind(this);
+
+        var fetch = function(done) {
+            this.app.fetch({
+                profile: {
+                    model: 'User',
+                    params: _params
+                }
+            }, {
+                readFromCache: false
+            }, done.errfcb);
+        }.bind(this);
+
+        var success = function(response) {
+            callback(null, 'users/myolx', {
+                profile: response.profile.toJSON(),
+                viewname: 'emailsnotification'
             });
-        }
+        }.bind(this);
 
-        callback(null, 'users/myolx', {
-            viewname: 'emailsnotification'
-        });
+        var error = function(err, res) {
+            return helpers.common.error.call(this, err, res, callback);
+        }.bind(this);
+
+        asynquence().or(error)
+            .then(prepare)
+            .then(fetch)
+            .val(success);
     }
 }

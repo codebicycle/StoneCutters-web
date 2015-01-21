@@ -1,12 +1,15 @@
-{{ profile.username }}<br>
-{{ profile.interest }}<br>
-{{ profile.aboutMe }}<br>
-{{ profile.gender }}<br>
-{{ profile.webSite }}<br>
-{{ profile.location.neighborhood }}<br>
-{{ profile.location.city }}<br>
-{{ profile.location.state }}<br>
-{{ profile.location.country }}<br>
+{{ dictionary["usersprofile.UsernamesProfile"] | replace('<<USERNAME>>', profile.username) }}
+
+{{user|log}}
+{{ dictionary["messages_email_register.Username"] }} - {{ profile.username }}<br>
+{{ dictionary["comments.CommentsFormName"] }} - <br>
+{{ dictionary["defaultheader.Location"] }} - {{ profile.location.neighborhood }}, {{ profile.location.city }}, {{ profile.location.state }}, {{ profile.location.country }}<br>
+{{ dictionary["usersprofile.MyWebsite"] }} - {{ profile.webSite }}<br>
+{{ dictionary["usersprofile.AboutMe"] }} - {{ profile.aboutMe }}<br>
+{{ profile.interest }}
+{{ dictionary["item.sex"] }} - {{ profile.gender }}<br>
 {{ profile.configuration.sendBulletin }}<br>
 {{ profile.configuration.sendTips }}<br>
 {{ profile.configuration.showAds }}
+{{ dictionary["usersprofile.UsernamesAds"] | replace('<<USERNAME>>', profile.username) }}
+{{ dictionary["usersprofile.ViewAllUsernamesAds"] | replace('<<USERNAME>>', profile.username) }}

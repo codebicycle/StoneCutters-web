@@ -1,1 +1,40 @@
-editpersonalinfo
+{{ dictionary["register_form.EditMyInfo"] }}
+
+{% from macros import Field %}
+
+{% set nameField = {
+    isOptional: false,
+    name: "email",
+    mandatory: true,
+    label: dictionary["seccion-35.559"],
+    fieldType: "text",
+    dataType: "string",
+    value: user.email
+} %}
+{{ Field(nameField) }}
+
+{% set webField = {
+    isOptional: true,
+    name: "password",
+    mandatory: false,
+    label: dictionary["lostform.CurrentPassword"],
+    fieldType: "password",
+    dataType: "string"
+} %}
+{{ Field(webField) }}
+
+{% set webField = {
+    isOptional: true,
+    name: "password",
+    mandatory: false,
+    label: dictionary["lostform.NewPassword"],
+    fieldType: "password",
+    dataType: "string"
+} %}
+{{ Field(webField) }}
+
+
+<fieldset class="seller-post">
+    <input type="submit" value="{{ dictionary["register_form.Save"] }}" class="posting" data-qa="submit-button" />
+    <a href="{{ '/myolx/configuration' | link }}">{{ dictionary["wap_posting_step4.Cancel"] }}</a>
+</fieldset>

@@ -1,1 +1,41 @@
-emailsnotification
+{% from macros import Field %}
+{{ dictionary["emailsnotificationbody.Alerts"] }}
+{% set sendBulletinField = {
+    isOptional: false,
+    name: "chkMailGroup_1",
+    mandatory: true,
+    label: dictionary["emailsnotificationbody.Group1"],
+    fieldType: "checkbox",
+    dataType: "checkbox",
+    value: profile.configuration.sendBulletin
+} %}
+{{ Field(sendBulletinField) }}
+
+{% set sendTipsField = {
+    isOptional: false,
+    name: "chkMailGroup_2",
+    mandatory: true,
+    label: dictionary["emailsnotificationbody.Group2"],
+    fieldType: "checkbox",
+    dataType: "checkbox",
+    value: profile.configuration.sendTips
+} %}
+{{ Field(sendTipsField) }}
+
+{{ dictionary["usersprofile.MyProfile"] }}
+
+{% set showAdsField = {
+    isOptional: false,
+    name: "showads",
+    mandatory: true,
+    label: dictionary["usersprofile.ShowMyAdsOnMyProfile"],
+    fieldType: "checkbox",
+    dataType: "checkbox",
+    value: profile.configuration.showAds
+} %}
+{{ Field(showAdsField) }}
+
+<fieldset class="seller-post">
+    <input type="submit" value="{{ dictionary["emailsnotificationbody.SaveSettings"] }}" class="posting" data-qa="submit-button" />
+    <a href="{{ '/myolx/configuration' | link }}">{{ dictionary["wap_posting_step4.Cancel"] }}</a>
+</fieldset>
