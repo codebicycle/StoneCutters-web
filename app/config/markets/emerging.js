@@ -77,11 +77,38 @@ module.exports = {
     },
     featured: {
         enabled: false,
-        ads: {
-            quantity: {
-                total: 6,
-                top: 3,
-                bottom: 3
+        quantity: {
+            total: 6,
+            top: 3,
+            bottom: 3
+        },
+        section: {
+            'categories#list': {
+                enabled: false
+            },
+            'categories#show': {
+                enabled: true
+            },
+            'searches#filterig': {
+                enabled: true
+            },
+            'searches#filter': {
+                enabled: true
+            },
+            'searches#searchig': {
+                enabled: true
+            },
+            'searches#search': {
+                enabled: true
+            },
+            'searches#statics': {
+                enabled: true
+            },
+            'searches#allresultsig': {
+                enabled: true
+            },
+            'searches#allresults': {
+                enabled: true
             }
         }
     }

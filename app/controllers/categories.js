@@ -175,11 +175,7 @@ function handleItems(params, promise, gallery) {
         this.app.fetch({
             items: {
                 collection: 'Items',
-                params: _.extend({}, params, {
-                    featuredAds: true,
-                    pageSize: config.getForMarket(location.url, ['featured', 'ads', 'quantity', 'total'], 2),
-                    offset: 0
-                })
+                params: _.extend({}, params, FeatureAd.getParams(this.app))
             }
         }, {
             readFromCache: false
@@ -198,7 +194,7 @@ function handleItems(params, promise, gallery) {
             if (err) {
                 return done.fail(err);
             }
-            if (response.items && res) {
+            if (response && response.items && res && res.items) {
                 response.items.addFeaturedAds(res.items);
             }
             done(response);

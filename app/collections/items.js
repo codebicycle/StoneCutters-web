@@ -111,11 +111,16 @@ module.exports = Base.extend({
 
 function addFeaturedAdsItems(items, models, options) {
     var location = items.app.session.get('location');
-    var position = config.getForMarket(location.url, ['featured', 'ads', 'quantity', options.position], 1);
+    var currentRoute = items.app.session.get('currentRoute');
+    var section = [currentRoute.controller, currentRoute.action].join('#');
+    var position = config.getForMarket(location.url, ['featured', 'section', section, 'quantity', options.position]);
     var item;
     var i;
 
-    for (i = 0; i < position; i++) {
+    if (!position) {;
+        position = config.getForMarket(location.url, ['featured', 'quantity', options.position], 1);
+    }
+    for (i = 0; i < position && models.length; i++) {
         item = models.shift();
         item.set('isFeaturedAd', true);
         items[options.method].call(items, item);

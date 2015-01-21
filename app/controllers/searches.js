@@ -7,6 +7,7 @@ var middlewares = require('../middlewares');
 var helpers = require('../helpers');
 var tracking = require('../modules/tracking');
 var Paginator = require('../modules/paginator');
+var FeatureAd = require('../models/feature_ad');
 var config = require('../../shared/config');
 var utils = require('../../shared/utils');
 
@@ -144,7 +145,27 @@ function search(params, callback, gallery) {
             done();
         }.bind(this);
 
-        var fetch = function(done) {
+        var fetchFeatured = function(done) {
+            if (!FeatureAd.isEnabled(this.app)) {
+                return done();
+            }
+            var location = this.app.session.get('location');
+
+            this.app.fetch({
+                items: {
+                    collection: 'Items',
+                    params: _.extend({}, params, {
+                        featuredAds: true,
+                        pageSize: config.getForMarket(location.url, ['featured', 'ads', 'quantity', 'total'], 2),
+                        offset: 0
+                    })
+                }
+            }, {
+                readFromCache: false
+            }, done.errfcb);
+        }.bind(this);
+
+        var fetch = function(done, res) {
             this.app.fetch({
                 items: {
                     collection: 'Items',
@@ -152,7 +173,15 @@ function search(params, callback, gallery) {
                 }
             }, {
                 readFromCache: false
-            }, done.errfcb);
+            }, function afterFetch(err, response) {
+                if (err) {
+                    return done.fail(err);
+                }
+                if (response && response.items && res && res.items) {
+                    response.items.addFeaturedAds(res.items);
+                }
+                done(response);
+            });
         }.bind(this);
 
         var filters = function(done, res) {
@@ -238,6 +267,7 @@ function search(params, callback, gallery) {
             .then(configure)
             .then(check)
             .then(prepare)
+            .then(fetchFeatured)
             .then(fetch)
             .then(filters)
             .then(paginate)
@@ -331,21 +361,50 @@ function statics(params, callback) {
                     }
                 });
             }
+            _.extend(params, {
+                item_type: 'static',
+                seo: this.app.seo.isEnabled()
+            });
             done();
         }.bind(this);
 
-        var findItems = function(done) {
+        var fetchFeatured = function(done) {
+            if (!FeatureAd.isEnabled(this.app)) {
+                return done();
+            }
+            var location = this.app.session.get('location');
+
             this.app.fetch({
                 items: {
                     collection: 'Items',
-                    params: _.extend(params, {
-                        item_type: 'static',
-                        seo: this.app.seo.isEnabled()
+                    params: _.extend({}, params, {
+                        featuredAds: true,
+                        pageSize: config.getForMarket(location.url, ['featured', 'ads', 'quantity', 'total'], 2),
+                        offset: 0
                     })
                 }
             }, {
                 readFromCache: false
             }, done.errfcb);
+        }.bind(this);
+
+        var fetch = function(done, res) {
+            this.app.fetch({
+                items: {
+                    collection: 'Items',
+                    params: params
+                }
+            }, {
+                readFromCache: false
+            }, function afterFetch(err, response) {
+                if (err) {
+                    return done.fail(err);
+                }
+                if (response && response.items && res && res.items) {
+                    response.items.addFeaturedAds(res.items);
+                }
+                done(response);
+            });
         }.bind(this);
 
         var filters = function(done, res) {
@@ -434,7 +493,8 @@ function statics(params, callback) {
             .then(configure)
             .then(check)
             .then(prepare)
-            .then(findItems)
+            .then(fetchFeatured)
+            .then(fetch)
             .then(filters)
             .then(paginate)
             .val(success);
@@ -492,7 +552,27 @@ function allresults(params, callback, gallery) {
             done();
         }.bind(this);
 
-        var fetch = function(done) {
+        var fetchFeatured = function(done) {
+            if (!FeatureAd.isEnabled(this.app)) {
+                return done();
+            }
+            var location = this.app.session.get('location');
+
+            this.app.fetch({
+                items: {
+                    collection: 'Items',
+                    params: _.extend({}, params, {
+                        featuredAds: true,
+                        pageSize: config.getForMarket(location.url, ['featured', 'ads', 'quantity', 'total'], 2),
+                        offset: 0
+                    })
+                }
+            }, {
+                readFromCache: false
+            }, done.errfcb);
+        }.bind(this);
+
+        var fetch = function(done, res) {
             this.app.fetch({
                 items: {
                     collection: 'Items',
@@ -500,7 +580,15 @@ function allresults(params, callback, gallery) {
                 }
             }, {
                 readFromCache: false
-            }, done.errfcb);
+            }, function afterFetch(err, response) {
+                if (err) {
+                    return done.fail(err);
+                }
+                if (response && response.items && res && res.items) {
+                    response.items.addFeaturedAds(res.items);
+                }
+                done(response);
+            });
         }.bind(this);
 
         var filters = function(done, res) {
@@ -568,6 +656,7 @@ function allresults(params, callback, gallery) {
         asynquence().or(error)
             .then(redirect)
             .then(prepare)
+            .then(fetchFeatured)
             .then(fetch)
             .then(filters)
             .then(paginate)

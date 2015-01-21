@@ -16,12 +16,34 @@ var FeatureAd = Base.extend({
     }
 });
 
+function getSection(app) {
+    var currentRoute = app.session.get('currentRoute');
+
+    return [currentRoute.controller, currentRoute.action].join('#');
+}
+
 FeatureAd.isEnabled = function isEnabled(app) {
-    return FeatureAd.isLocationEnabled(app.session.get('location').url);
+    var location = app.session.get('location');
+    var enabled = FeatureAd.isLocationEnabled(location.url);
+
+    if (enabled) {
+        enabled = config.getForMarket(location.url, ['featured', 'section', getSection(app), 'enabled'], false);
+    }
+    return enabled;
 };
 
 FeatureAd.isLocationEnabled = function isLocationEnabled(location) {
     return config.getForMarket(location, ['featured', 'enabled'], false);
+};
+
+FeatureAd.getParams = function getParams(app) {
+    var pageSize = config.getForMarket(location.url, ['featured', 'section', getSection(app), 'quantity', 'total']);
+
+    return {
+        featuredAds: true,
+        pageSize: pageSize || config.getForMarket(location.url, ['featured', 'quantity', 'total'], 2),
+        offset: 0
+    };
 };
 
 module.exports = FeatureAd;

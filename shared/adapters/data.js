@@ -89,8 +89,6 @@ DataAdapter.prototype.serverRequest = function(req, api, options, callback) {
     }
 
     function request(done) {
-        console.log('\n', utils.params(api.url, api.query), '\n', api.url, '\n', api.query, '\n');
-
         restler.request(api.url, api)
             .on('success', success)
             .on('fail', fail)
