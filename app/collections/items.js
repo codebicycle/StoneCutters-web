@@ -93,6 +93,18 @@ module.exports = Base.extend({
         _.extend(this.params, this.filters.smaugize());
 
         return Base.prototype.fetch.apply(this, arguments);
+    },
+    hasImages: function() {
+        var has = false;
+        var filter;
+
+        if (this.filters && this.filters.has('hasimage')) {
+            filter = this.filters.get('hasimage').get('value');
+            if (filter && filter.length === 1 && filter[0].id == 'true') {
+                has = true;
+            }
+        }
+        return has;
     }
 });
 
