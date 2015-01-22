@@ -84,7 +84,9 @@ module.exports = {
         },
         section: {
             'categories#list': {
-                enabled: false
+                quantity: {
+                    total: 6
+                }
             }
         }
     }

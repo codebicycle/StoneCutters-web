@@ -25,11 +25,6 @@ module.exports = {
         ]
     },
     featured: {
-        enabled: true,
-        section: {
-            'categories#list': {
-                enabled: true
-            }
-        }
+        enabled: true
     }
 };

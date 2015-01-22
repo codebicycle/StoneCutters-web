@@ -22,16 +22,51 @@ function list(params, callback) {
     helpers.controllers.control.call(this, params, controller);
 
     function controller() {
-        var platform = this.app.session.get('platform');
-        var icons = config.get(['icons', platform], []);
         var location = this.app.session.get('location');
-        var country = location.url;
+        var languages = this.app.session.get('languages');
 
-        this.app.seo.setContent(this.dependencies.categories.meta);
-        callback(null, {
-            icons: (~icons.indexOf(country)) ? country.split('.') : 'default'.split('.'),
-            location: location
-        });
+        var prepare = function(done) {
+            params.seo = this.app.seo.isEnabled();
+            params.languageId = languages._byId[this.app.session.get('selectedLanguage')].id;
+            Paginator.prepare(this.app, params);
+            done();
+        }.bind(this);
+
+        var fetch = function(done) {
+            if (!FeatureAd.isEnabled(this.app)) {
+                return done();
+            }
+            this.app.fetch({
+                items: {
+                    collection: 'Items',
+                    params: _.extend({}, params, FeatureAd.getParams(this.app))
+                }
+            }, {
+                readFromCache: false
+            }, done.errfcb);
+        }.bind(this);
+
+        var success = function(res) {
+            var platform = this.app.session.get('platform');
+            var icons = config.get(['icons', platform], []);
+            var country = location.url;
+
+            this.app.seo.setContent(this.dependencies.categories.meta);
+            callback(null, {
+                icons: (~icons.indexOf(country)) ? country.split('.') : 'default'.split('.'),
+                location: location,
+                items: res ? res.items : undefined 
+            });
+        }.bind(this);
+
+        var error = function(err, res) {
+            return helpers.common.error.call(this, err, res, callback);
+        }.bind(this);
+
+        asynquence().or(error)
+            .then(prepare)
+            .then(fetch)
+            .val(success);
     }
 }
 
