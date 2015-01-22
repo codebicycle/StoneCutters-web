@@ -207,7 +207,8 @@ function handleItems(params, options) {
             meta: meta,
             items: items.toJSON(),
             filters: items.filters,
-            paginator: items.paginator
+            paginator: items.paginator,
+            hasItemsWithImages: items.hasImages()
         });
     }.bind(this);
 
