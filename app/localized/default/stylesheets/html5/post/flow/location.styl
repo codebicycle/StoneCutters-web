@@ -1,24 +1,24 @@
 .post_flow_location_view {
-	
+
 	.popup {
-		
+
 		display: block;
 
 		.popup-wrapper {
-			
+
 			display: block;
 
 			.popup-container {
-				
+
 				height: 100%;
-				-moz-transform: scale(1); 
-	            -webkit-transform: scale(1); 
+				-moz-transform: scale(1);
+	            -webkit-transform: scale(1);
 	            transform: scale(1);
 
-	            > div {
-	            	
+	            .content {
+
 	            	height: 100%;
-	            	
+
 	            	ul a:before {
 
 	            		display: none;
@@ -28,20 +28,53 @@
 	            }
 
 	            a {
-	            	
+
 	            	text-decoration: none;
-	            
+
+	            }
+
+	            &.nbh {
+	            	padding-top: 0;
+	            	position: relative;
+	            	.content {
+	            		margin-top: 0;
+	            		border-width: 4.5rem 0 3.75rem;
+	            	}
+	            	.return {
+	            		padding: 10px 14px;
+	            		color: #fff;
+	            		width: 100%;
+	            		position: absolute;
+	            		left: 0;
+	            		background: #4275ba;
+		            	a {
+							border-radius: .5em;
+							background: #335c93 url(imageUrl/images/html5/back.png) no-repeat center;
+							border: 1px solid #294b78;
+							float: left;
+							width: 30px;
+							height: 30px;
+							display: block;
+		            	}
+		            	span {
+							padding: 6px 10px;
+							display: block;
+							float: left;
+							line-height: 1.4;
+							font-weight: 700;
+		            	}
+		            }
 	            }
 			}
-			
+
 			footer {
-				
+
 				border: none;
-			
+
 			}
-		
+
 		}
-	
+
 	}
 
 }
