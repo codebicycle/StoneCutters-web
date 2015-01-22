@@ -64,6 +64,8 @@ module.exports = {
         'itemslisting.NewlyListed',
         'itemslisting.HighestFirst',
         'itemslisting.LowestFirst',
-        'adsense.SponsoredLinks'
+        'adsense.SponsoredLinks',
+        'misc.Age',
+        'misc.Max'
     ]
 };
