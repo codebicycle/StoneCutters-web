@@ -1,10 +1,13 @@
 'use strict';
 
 module.exports = {
+    'featured#ads': {
+        url: 'featured_ad'
+    },
     'featured#listings': {
         url: 'featured_listings'
     },
-    'featured#ads': {
-        url: 'featured_ad'
+    'featured#purchase': {
+        url: 'myolx/buyfeaturedad'
     }
 };

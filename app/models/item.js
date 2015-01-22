@@ -396,7 +396,6 @@ function load(options, done) {
 
     function success(item) {
         this.set(item.toJSON());
-        console.log(this.toJSON());
         done(this);
     }
 

@@ -60,7 +60,7 @@ function ads(params, callback) {
                 }
             }, {
                 readFromCache: false
-            }, this.errfcb(done));
+            }, done.errfcb);
         }.bind(this);
 
         var check = function(done, res) {
@@ -165,7 +165,7 @@ function purchase(params, callback) {
                 }
             }, {
                 readFromCache: false
-            }, this.errfcb(done));
+            }, done.errfcb);
         }.bind(this);
 
         var check = function(done, res) {
@@ -190,14 +190,14 @@ function purchase(params, callback) {
                 if (err) {
                     res = {};
                 }
-                done(item, res.featuread);
+                item.featured = res.featuread;
+                done(item);
             }.bind(this));
         }.bind(this);
 
-        var success = function(item, featureAd) {
+        var success = function(item) {
             callback(null, {
-                item: item.toJSON(),
-                featureAd: featureAd
+                item: item
             });
         }.bind(this);
 
