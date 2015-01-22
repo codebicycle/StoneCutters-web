@@ -62,6 +62,7 @@ function show(params, callback) {
             var item = new Item(properties, {
                 app: this.app
             });
+
             if (!item.get('id')) {
                 item.set('id', item.get('itemId'));
                 item.unset('itemId');
@@ -162,6 +163,7 @@ function show(params, callback) {
             }
             if (response.item.get('location').url !== this.app.session.get('location').url) {
                 url = [protocol, '://', platform, '.', response.item.get('location').url.replace('www.', 'm.'), '/', slug].join('');
+
                 done.abort();
                 return helpers.common.redirect.call(this, url, null, {
                     pushState: false,
@@ -227,6 +229,7 @@ function show(params, callback) {
                 this.app.seo.addMetatag('robots', 'noindex, nofollow');
                 this.app.seo.addMetatag('googlebot', 'noindex, nofollow');
             }
+
             if (platform !== 'desktop' && siteLocation && !~siteLocation.indexOf('www.')) {
                 url = helpers.common.removeParams(this.app.session.get('url'), 'location');
                 this.app.seo.addMetatag('canonical', helpers.common.fullizeUrl(url, this.app));
@@ -240,12 +243,14 @@ function show(params, callback) {
                     subcategory: (subcategory ? subcategory.id : undefined)
                 }
             });
+
             if (item.purged) {
                 view = 'items/unavailable';
             }
             else if (item.status.deprecated) {
                 view = 'items/expired';
             }
+
             callback(null, view, {
                 item: item,
                 pos: Number(params.pos) || 0,
@@ -264,11 +269,11 @@ function show(params, callback) {
         }.bind(this);
 
         asynquence().or(error)
-        .then(prepare)
-        .then(fetch)
-        .then(check)
-        .then(fetchRelateds)
-        .val(success);
+            .then(prepare)
+            .then(fetch)
+            .then(check)
+            .then(fetchRelateds)
+            .val(success);
     }
 }
 
@@ -351,9 +356,11 @@ function gallery(params, callback) {
             if (subcategory.has('parentId')) {
                 category = this.dependencies.categories.get(subcategory.get('parentId'));
             }
+
             tracking.addParam('item', item);
             tracking.addParam('category', category.toJSON());
             tracking.addParam('subcategory', subcategory.toJSON());
+
             callback(null, {
                 item: item,
                 pos: pos
@@ -365,17 +372,17 @@ function gallery(params, callback) {
         }.bind(this);
 
         asynquence().or(error)
-        .then(redirect)
-        .then(prepare)
-        .then(fetch)
-        .then(check)
-        .val(success);
+            .then(redirect)
+            .then(prepare)
+            .then(fetch)
+            .then(check)
+            .val(success);
     }
 }
 
 function map(params, callback) {
-
     helpers.controllers.control.call(this, params, controller);
+
     function controller() {
         var user = this.app.session.get('user');
         var itemId = params.itemId;
@@ -384,6 +391,7 @@ function map(params, callback) {
 
         var redirect = function(done) {
             var platform = this.app.session.get('platform');
+
             if (platform === 'desktop') {
                 return done.fail();
             }
@@ -418,6 +426,7 @@ function map(params, callback) {
             var item = resItem.item.toJSON();
             var slug = helpers.common.slugToUrl(item);
             var platform = this.app.session.get('platform');
+
             if (platform !== 'html4') {
                 done.abort();
                 return helpers.common.redirect.call(this, ('/' + slug));
@@ -434,11 +443,13 @@ function map(params, callback) {
             var subcategory = this.dependencies.categories.search(_item.get('category').id);
             var category;
             var parentId;
+
             if (!subcategory) {
                 return error();
             }
             parentId = subcategory.get('parentId');
             category = parentId ? this.dependencies.categories.get(parentId) : subcategory;
+
             tracking.addParam('item', _item.toJSON());
             tracking.addParam('category', category.toJSON());
             tracking.addParam('subcategory', subcategory.toJSON());
@@ -452,11 +463,11 @@ function map(params, callback) {
         }.bind(this);
 
         asynquence().or(error)
-        .then(redirect)
-        .then(prepare)
-        .then(findItem)
-        .then(checkItem)
-        .val(success);
+            .then(redirect)
+            .then(prepare)
+            .then(findItem)
+            .then(checkItem)
+            .val(success);
     }
 }
 
@@ -471,6 +482,7 @@ function reply(params, callback) {
 
         var redirect = function(done) {
             var platform = this.app.session.get('platform');
+
             if (platform === 'html5' || platform === 'desktop') {
                 return done.fail();
             }
@@ -516,8 +528,10 @@ function reply(params, callback) {
             }
             parentId = subcategory.get('parentId');
             category = parentId ? this.dependencies.categories.get(parentId) : subcategory;
+
             this.app.seo.addMetatag('robots', 'noindex, nofollow');
             this.app.seo.addMetatag('googlebot', 'noindex, nofollow');
+
             tracking.addParam('item', item);
             tracking.addParam('category', category.toJSON());
             tracking.addParam('subcategory', subcategory.toJSON());
@@ -532,11 +546,11 @@ function reply(params, callback) {
         }.bind(this);
 
         asynquence().or(error)
-        .then(redirect)
-        .then(prepare)
-        .then(findItem)
-        .then(checkItem)
-        .val(success);
+            .then(redirect)
+            .then(prepare)
+            .then(findItem)
+            .then(checkItem)
+            .val(success);
     }
 }
 
@@ -582,9 +596,11 @@ function success(params, callback) {
             }
             parentId = subcategory.get('parentId');
             category = parentId ? this.dependencies.categories.get(parentId) : subcategory;
+
             tracking.addParam('item', item);
             tracking.addParam('category', category.toJSON());
             tracking.addParam('subcategory', subcategory.toJSON());
+
             callback(null, {
                 item: item
             });
@@ -595,12 +611,13 @@ function success(params, callback) {
         }.bind(this);
 
         asynquence().or(error)
-        .then(prepare)
-        .then(findItem)
-        .then(checkItem)
-        .val(success);
+            .then(prepare)
+            .then(findItem)
+            .then(checkItem)
+            .val(success);
     }
 }
+
 function favorite(params, callback) {
     var user;
     var intent;
@@ -616,6 +633,7 @@ function favorite(params, callback) {
         user = this.app.session.get('user');
         if (!user) {
             url = helpers.common.params('/login', 'redirect', (params.redirect || '/des-iid-' + params.itemId));
+
             done.abort();
             return helpers.common.redirect.call(this, url, null, {
                 status: 302
@@ -636,6 +654,7 @@ function favorite(params, callback) {
 
     var success = function() {
         var url = (params.redirect || '/des-iid-' + params.itemId);
+
         url = helpers.common.params(url, 'favorite', (intent || 'add'));
         helpers.common.redirect.call(this, url, null, {
             status: 302
@@ -649,9 +668,9 @@ function favorite(params, callback) {
     }.bind(this);
 
     asynquence().or(error)
-    .then(prepare)
-    .then(add)
-    .val(success);
+        .then(prepare)
+        .then(add)
+        .val(success);
 }
 
 function deleteItem(params, callback) {
@@ -698,9 +717,9 @@ function deleteItem(params, callback) {
     }.bind(this);
 
     asynquence().or(error)
-    .then(prepare)
-    .then(remove)
-    .val(success);
+        .then(prepare)
+        .then(remove)
+        .val(success);
 }
 
 function filter(params, callback) {
@@ -722,6 +741,7 @@ function filter(params, callback) {
             params.offset = 0;
             params.pageSize = 0;
             params.languageId = this.app.session.get('languages')._byId[this.app.session.get('selectedLanguage')].id;
+
             if (params.search) {
                 params.searchTerm = params.search;
                 delete params.search;
@@ -765,10 +785,10 @@ function filter(params, callback) {
         }.bind(this);
 
         asynquence().or(error)
-        .then(redirect)
-        .then(prepare)
-        .then(find)
-        .val(success);
+            .then(redirect)
+            .then(prepare)
+            .then(find)
+            .val(success);
     }
 }
 
@@ -799,7 +819,7 @@ function sort(params, callback) {
         }.bind(this);
 
         asynquence().or(error)
-        .then(redirect)
-        .val(success);
+            .then(redirect)
+            .val(success);
     }
 }
