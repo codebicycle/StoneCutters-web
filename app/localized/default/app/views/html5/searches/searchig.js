@@ -1,6 +1,6 @@
 'use strict';
 
-var Base = require('../../../../../common/app/bases/view').requireView('items/search');
+var Base = require('../../../../../common/app/bases/view').requireView('searches/search');
 var _ = require('underscore');
 var helpers = require('../../../../../../helpers');
 
@@ -16,9 +16,10 @@ module.exports = Base.extend({
 
         return _.extend({}, data, {
             nav: {
-                linkig: helpers.common.linkig.call(this, link, null, 'searchig'),
-                current: 'show'
-            }
+                linkig: link.replace('-ig', ''),
+                current: 'showig'
+            },
+            filtersEnabled: helpers.features.isEnabled.call(this, 'listingFilters')
         });
     },
     cleanPage: function(path) {

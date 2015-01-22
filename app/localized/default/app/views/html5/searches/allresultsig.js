@@ -1,6 +1,6 @@
 'use strict';
 
-var Base = require('../../../../../common/app/bases/view').requireView('items/allresults');
+var Base = require('../../../../../common/app/bases/view').requireView('searches/allresults');
 var _ = require('underscore');
 var helpers = require('../../../../../../helpers');
 
@@ -12,9 +12,11 @@ module.exports = Base.extend({
 
         return _.extend({}, data, {
             nav: {
-                linkig: helpers.common.linkig.call(this, link, null, 'allresultsig'),
-                current: 'show'
-            }
+                linkig: link,
+                current: 'showig'
+            },
+            filtersEnabled: helpers.features.isEnabled.call(this, 'listingFilters')
         });
     }
 });
+module.exports.id = 'searches/allresults';
