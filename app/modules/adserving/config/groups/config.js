@@ -203,31 +203,5 @@ module.exports = {
                 }
             }
         }
-    },
-    'group2': {
-        CSA: {
-            'default': {
-                slot_top_listing: {
-                    params: {
-                        number: 3
-                    }
-                },
-                slot_bottom_listing: {
-                    params: {
-                        number: 3
-                    }
-                }
-            }
-        },
-        AFC: {
-            'default': {
-                slot_bottom_item: {
-                    params: {
-                        number: 5,
-                        media: 'text'
-                    }
-                }
-            }
-        }
     }
 };
