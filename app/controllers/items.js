@@ -252,6 +252,7 @@ function show(params, callback) {
             }
 
             callback(null, view, {
+                include: ['item'],
                 item: item,
                 pos: Number(params.pos) || 0,
                 sk: securityKey,

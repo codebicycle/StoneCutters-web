@@ -1,14 +1,22 @@
 <form>
     <div class="popup">
         <div class="popup-wrapper">
-            <div class="popup-container">
-                <div>
-                    <div class="popup-title">{% if firstRender %}{{ dictionary["popularsearchesbody.PopularCities"] }}{% else %}{{ dictionary["defaultheader.Cities"] }}{% endif %}</div>
-                    <ul>
-                        {% for city in cities %}
-                            <li class="city" data-url="{{ city.url }}" data-qa="city-name" ><a>{{ city.name }}</a></li>
-                        {% endfor %}
-                    </ul>
+            <div class="popup-container {{ 'nbh' if neighborhoods and neighborhoods.length }}">
+                {% if neighborhoods and neighborhoods.length %}
+                <div class="return" style="">
+                        <a href="" class="changecity"></a>
+                        <span>Cambiar Ciudad</span>
+                </div>
+                {% endif %}
+                <div class="content">
+                    {% if cities and cities.length %}
+                        <div class="popup-title">{% if firstRender %}{{ dictionary["popularsearchesbody.PopularCities"] }}{% else %}{{ dictionary["defaultheader.Cities"] }}{% endif %}</div>
+                        <ul>
+                            {% for city in cities %}
+                                <li class="city" data-url="{{ city.url }}" data-qa="city-name" ><a>{{ city.name }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
 
                     {% if states and states.length %}
                         <div class="popup-title">{{ dictionary["misc.States"] }}</div>
@@ -16,6 +24,16 @@
                             <ul>
                                 {% for state in states %}
                                     <li class="state" data-url="{{ state.url }}"><a>{{ state.name }}</a></li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    {% endif %}
+                    {% if neighborhoods and neighborhoods.length %}
+                        <div class="popup-title">Barrios</div>
+                        <div>
+                            <ul>
+                                {% for neighborhood in neighborhoods %}
+                                    <li class="neighborhood" data-id="{{ neighborhood.id }}" data-name="{{ neighborhood.name }}"><a>{{ neighborhood.name }}</a></li>
                                 {% endfor %}
                             </ul>
                         </div>

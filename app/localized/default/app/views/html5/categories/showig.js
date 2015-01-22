@@ -1,25 +1,24 @@
 'use strict';
 
-var Base = require('../../../../../common/app/bases/view').requireView('searches/search');
-var _ = require('underscore');
+var Base = require('../../../../../common/app/bases/view').requireView('categories/show');
 var helpers = require('../../../../../../helpers');
+var _ = require('underscore');
 
 module.exports = Base.extend({
-    className: 'items_search_view',
-    regexpFindPage: /-p-[0-9]+/,
-    regexpReplacePage: /(-p-[0-9]+)/,
-    regexpFindNeighborhood: /-neighborhood_[0-9_]+/,
-
+    className: 'categories_show_view_ig',
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
         var link = this.refactorPath(this.app.session.get('path'));
 
         return _.extend({}, data, {
+            items: data.items,
             nav: {
-                linkig: helpers.common.linkig.call(this, link, null, 'searchig'),
-                current: 'show'
+                linkig: link.replace('-ig', ''),
+                galeryAct: 'active',
+                current: 'showig'
             },
             filtersEnabled: helpers.features.isEnabled.call(this, 'listingFilters')
+
         });
     },
     cleanPage: function(path) {
@@ -37,4 +36,5 @@ module.exports = Base.extend({
         return path;
     }
 });
-module.exports.id = 'searches/search';
+
+module.exports.id = 'categories/show';
