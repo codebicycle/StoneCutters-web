@@ -31,7 +31,6 @@ function getSettings() {
     };
     var configType;
 
-
     if (this.config.enabled) {
         configType = utils.get(configAdServing, type, {});
 

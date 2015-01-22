@@ -35,7 +35,6 @@ module.exports = Base.extend({
             return;
         }
         var settings = this.adServing.getSettings();
-        var slotname = this.adServing.get('slotname');
         var type = this.adServing.get('type');
 
         if (type === 'CSA' || type === 'AFC') {
