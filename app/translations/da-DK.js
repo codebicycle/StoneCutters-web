@@ -236,7 +236,6 @@ module.exports = {
     'contactseller_form.AttachPicture': 'Vedh\xE6ft et billede:',
     'contactseller_form.Close': 'Luk',
     'contactseller_form.ReplyToListing': 'Svar p\xE5 annonce',
-    'contactseller_form.ViewFullSite': 'Se hele sitet.',
     'register_form.245': 'Ny brugertilmelding',
     'register_form.termsAgreeB': 'Vilk\xE5r og betingelser',
     'itempagepostcomment.CommentPosted': 'Din kommentar er indrykket.',

@@ -236,7 +236,6 @@ module.exports = {
     'contactseller_form.AttachPicture': 'Mag-attach ng litrato',
     'contactseller_form.Close': 'Isara',
     'contactseller_form.ReplyToListing': 'Sumagot sa Listahan',
-    'contactseller_form.ViewFullSite': 'Tingnan ang full site',
     'register_form.245': 'Pagrehistro ng Bagong User',
     'register_form.termsAgreeB': 'Kasunduan at Kondisyon',
     'itempagepostcomment.CommentPosted': 'Ang iyong komento ay nailathala na nang maayos.',

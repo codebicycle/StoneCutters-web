@@ -236,7 +236,6 @@ module.exports = {
     'contactseller_form.AttachPicture': '\u9644\u52A0\u5716\u7247\uFF1A',
     'contactseller_form.Close': '\u95DC\u9589',
     'contactseller_form.ReplyToListing': '\u56DE\u8986\u4FE1\u606F',
-    'contactseller_form.ViewFullSite': '\u6AA2\u8996\u5B8C\u6574\u7DB2\u7AD9',
     'register_form.245': '\u65B0\u7528\u6236\u8A3B\u518A',
     'register_form.termsAgreeB': '\u898F\u7AE0\u8207\u689D\u4EF6',
     'itempagepostcomment.CommentPosted': '\u60A8\u7684\u8A55\u8AD6\u5DF2\u6210\u529F\u63D0\u4EA4\u3002',

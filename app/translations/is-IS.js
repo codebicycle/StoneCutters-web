@@ -236,7 +236,6 @@ module.exports = {
     'contactseller_form.AttachPicture': 'Hengja mynd vi\xF0:',
     'contactseller_form.Close': 'Loka',
     'contactseller_form.ReplyToListing': 'Svara augl\xFDsingu',
-    'contactseller_form.ViewFullSite': 'Opna heildar\xFAtg\xE1fu',
     'register_form.245': 'N\xFDskr\xE1ning notanda',
     'register_form.termsAgreeB': 'Skilyr\xF0i og skilm\xE1lar',
     'itempagepostcomment.CommentPosted': 'T\xF3kst a\xF0 skr\xE1 athugasemd',

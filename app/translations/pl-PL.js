@@ -236,7 +236,6 @@ module.exports = {
     'contactseller_form.AttachPicture': 'Do\u0142\u0105cz Zdj\u0119cie',
     'contactseller_form.Close': 'Zamknij',
     'contactseller_form.ReplyToListing': 'Odpowiedz na og\u0142oszenie',
-    'contactseller_form.ViewFullSite': 'Zobacz pe\u0142ny serwis',
     'register_form.245': 'Rejestracja nowego u\u017Cytkownika',
     'register_form.termsAgreeB': 'zasady i warunki',
     'itempagepostcomment.CommentPosted': 'Komentarz zosta\u0142 dodany.',

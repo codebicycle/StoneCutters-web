@@ -236,7 +236,6 @@ module.exports = {
     'contactseller_form.AttachPicture': 'Prilo\u017Eite sliku:',
     'contactseller_form.Close': 'Zatvori',
     'contactseller_form.ReplyToListing': 'Odgovor na oglas',
-    'contactseller_form.ViewFullSite': 'Pogledaj zvani\u010Dnu stranicu',
     'register_form.245': 'Registracija novog korisnika',
     'register_form.termsAgreeB': 'Uvjetima i odredbama uporabe',
     'itempagepostcomment.CommentPosted': 'Komentar uspje\u0161no poslan.',

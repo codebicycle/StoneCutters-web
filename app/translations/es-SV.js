@@ -236,7 +236,6 @@ module.exports = {
     'contactseller_form.AttachPicture': 'Adjuntar Imagen:',
     'contactseller_form.Close': 'Cerrar',
     'contactseller_form.ReplyToListing': 'Contactar al anunciante',
-    'contactseller_form.ViewFullSite': 'Ver sitio completo',
     'register_form.245': 'Registro de Usuario Nuevo',
     'register_form.termsAgreeB': 'Terminos y Condiciones',
     'itempagepostcomment.CommentPosted': 'Su comentario ha sido publicado con \xE9xito.',

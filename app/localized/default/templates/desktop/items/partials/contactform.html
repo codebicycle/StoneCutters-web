@@ -49,7 +49,6 @@
 </form>
 <div class="disclaimer">
     <p>
-        {{ dictionary["item.ClickAgreeTermsZA"] | replace('<<LINK>> condiciones de uso<</LINK>>.','') }}
-        <a rel="nofollow" href="/terms" target="_blank">{{ dictionary["defaultfooter.Terms of use"] }}</a>
+        {{ dictionary["item.ClickAgreeTermsZA"] | replace('<<LINK>>','<a rel="nofollow" href="/terms" target="_blank">') | replace('<</LINK>>','</a>') }}
     </p>
 </div>

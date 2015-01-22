@@ -236,7 +236,6 @@ module.exports = {
     'contactseller_form.AttachPicture': 'Resim Ekle:',
     'contactseller_form.Close': 'Kapat',
     'contactseller_form.ReplyToListing': '\u0130lana Yan\u0131t Ver',
-    'contactseller_form.ViewFullSite': 'Sitenin tamam\u0131n\u0131 g\xF6r\xFCnt\xFCle',
     'register_form.245': 'Yeni \xDCye Kayd\u0131',
     'register_form.termsAgreeB': 'H\xFCk\xFCm ve \u015Eartlar\u0131n\u0131',
     'itempagepostcomment.CommentPosted': 'Yorum ba\u015Far\u0131l\u0131 bir \u015Fekilde yolland\u0131.',

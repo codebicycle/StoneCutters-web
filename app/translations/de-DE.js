@@ -236,7 +236,6 @@ module.exports = {
     'contactseller_form.AttachPicture': 'Bild anh\xE4ngen:',
     'contactseller_form.Close': 'Schlie\xDFen',
     'contactseller_form.ReplyToListing': 'Auf Kleinanzeige antworten',
-    'contactseller_form.ViewFullSite': 'Komplette Seite ansehen',
     'register_form.245': 'Registrierung eines neuen Benutzers',
     'register_form.termsAgreeB': 'Nutzungsbedingungen',
     'itempagepostcomment.CommentPosted': 'Ihr Kommentar wurde ver\xF6ffentlicht.',
