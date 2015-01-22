@@ -230,7 +230,6 @@ module.exports = {
     'contactseller_form.AttachPicture': 'Adjunta una Imatge:',
     'contactseller_form.Close': 'Tanca',
     'contactseller_form.ReplyToListing': 'Respon a l\'anunci',
-    'contactseller_form.ViewFullSite': 'Veure p\xE0gina completa',
     'register_form.245': 'Registre de nou usuari',
     'register_form.termsAgreeB': 'les condicions generals',
     'itempagepostcomment.CommentPosted': 'Comentari publicat correctament.',
