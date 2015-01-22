@@ -19,10 +19,11 @@ module.exports = {
         // On listing size < 5 -> robots = 'noindex, follow'
         items: {}
     },
-    items: {
+    searches: {
         // On listing size < 5 -> robots = 'noindex, follow'
-        search: {},
-
+        search: {}
+    },
+    items: {
         // Title: On title + ' - ' + city + ' | OLX' > 70 characters -> is cut
         // description: On title + ' - ' + category + ' ' + city > 130 characters -> is cut
         show: {

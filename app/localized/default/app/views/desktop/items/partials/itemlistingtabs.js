@@ -51,7 +51,7 @@ module.exports = Base.extend({
         var currentRoute = this.app.session.get('currentRoute');
         var category;
 
-        if (currentRoute.action === 'staticSearch') {
+        if (currentRoute.action === 'statics') {
             path = path.replace('/q/', '/nf/search/');
             if (path.match(/\/c-[0-9]+/)) {
                 category = path.replace(/.*\/(c-[0-9]+).*/, '$1');
