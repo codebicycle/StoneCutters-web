@@ -44,15 +44,14 @@
 <header class="breadcrumb">
     {{ dictionary["myolx.MyAds"] }}
 </header>
-{# {% if deleted %} #}
-    <div id="messages" class="hide">
-        <span>{{ dictionary["myolx.TheAdHasBeenDeleted"] }}</span>
-    </div>
-{# {% endif %} #}
+<div id="messages" class="hide">
+    <span>{{ dictionary["myolx.TheAdHasBeenDeleted"] }}</span>
+</div>
 <section id="myads">
     {% if items.length %}
         <ul class="item-listing">
             {% for item in items %}
+                {{ item|log }}
                 {% set status = 'ready' %}
                 {% set statustxt = dictionary["listingpageitemslisting.Posted"] %}
                 {% if item.status == 'expired' %}
@@ -70,7 +69,7 @@
                 {% endif %}
                 {#{ item.date.since.day if item.date.since.day }} {{ dictionary[item.date.since.dictionary] }}{{ (', ' + item.date.since.hour) if item.date.since.hour }#}
                 <li class="my-ads {{ status }}" data-status="{{ status }}">
-                    {% if (status == 'ready' or status == 'pending' or status == 'rejected') %}
+                    {% if item.editable %}
                         <a class="btnfilter edit" href="{{ item.slug.replace(domain, fullDomain) | editSlug(item.id) }}">{{ dictionary["showactivelistings.Edit"] }}</a>
                     {% endif %}
                     {% if status != 'deleted' %}
