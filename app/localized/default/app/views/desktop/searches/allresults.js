@@ -1,12 +1,12 @@
 'use strict';
 
-var Base = require('../../../../../common/app/bases/view').requireView('items/allresults');
 var _ = require('underscore');
+var Base = require('../../../../../common/app/bases/view').requireView('searches/allresults');
 var helpers = require('../../../../../../helpers');
 
 module.exports = Base.extend({
-    id: 'items-allresults-view',
-    className: 'items-allresults-view',
+    id: 'searches-allresults-view',
+    className: 'searches-allresults-view',
     tagName: 'main',
     order: ['state', 'city', 'neighborhood'],
     regexpFindPage: /-p-[0-9]+/,
@@ -24,3 +24,5 @@ module.exports = Base.extend({
         });
     }
 });
+
+module.exports.id = 'searches/allresults';
