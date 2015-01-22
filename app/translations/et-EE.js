@@ -230,7 +230,6 @@ module.exports = {
     'contactseller_form.AttachPicture': 'Manustage pilt:',
     'contactseller_form.Close': 'Sulge',
     'contactseller_form.ReplyToListing': 'Vastake kuulutusele',
-    'contactseller_form.ViewFullSite': 'Vaata kogu saiti',
     'register_form.245': 'Uue kasutajana registreerumine',
     'register_form.termsAgreeB': 'Tingimused',
     'itempagepostcomment.CommentPosted': 'Kommentaar edukalt postitatud.',

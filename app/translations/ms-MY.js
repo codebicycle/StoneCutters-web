@@ -230,7 +230,6 @@ module.exports = {
     'contactseller_form.AttachPicture': 'Lampirkan Gambar:',
     'contactseller_form.Close': 'Tutup',
     'contactseller_form.ReplyToListing': 'Jawab Penyenaraian',
-    'contactseller_form.ViewFullSite': 'Lihat laman penuh',
     'register_form.245': 'Pendaftaran Pengguna Baru',
     'register_form.termsAgreeB': 'Terma dan Syarat',
     'itempagepostcomment.CommentPosted': 'Komen berjaya disiarkan.',
