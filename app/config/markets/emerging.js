@@ -85,30 +85,6 @@ module.exports = {
         section: {
             'categories#list': {
                 enabled: false
-            },
-            'categories#show': {
-                enabled: true
-            },
-            'searches#filterig': {
-                enabled: true
-            },
-            'searches#filter': {
-                enabled: true
-            },
-            'searches#searchig': {
-                enabled: true
-            },
-            'searches#search': {
-                enabled: true
-            },
-            'searches#statics': {
-                enabled: true
-            },
-            'searches#allresultsig': {
-                enabled: true
-            },
-            'searches#allresults': {
-                enabled: true
             }
         }
     }

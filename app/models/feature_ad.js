@@ -27,7 +27,7 @@ FeatureAd.isEnabled = function isEnabled(app) {
     var enabled = FeatureAd.isLocationEnabled(location.url);
 
     if (enabled) {
-        enabled = config.getForMarket(location.url, ['featured', 'section', getSection(app), 'enabled'], false);
+        enabled = config.getForMarket(location.url, ['featured', 'section', getSection(app), 'enabled'], true);
     }
     return enabled;
 };
@@ -37,6 +37,7 @@ FeatureAd.isLocationEnabled = function isLocationEnabled(location) {
 };
 
 FeatureAd.getParams = function getParams(app) {
+    var location = app.session.get('location');
     var pageSize = config.getForMarket(location.url, ['featured', 'section', getSection(app), 'quantity', 'total']);
 
     return {

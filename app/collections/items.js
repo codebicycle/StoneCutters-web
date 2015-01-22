@@ -117,7 +117,7 @@ function addFeaturedAdsItems(items, models, options) {
     var item;
     var i;
 
-    if (!position) {;
+    if (!position) {
         position = config.getForMarket(location.url, ['featured', 'quantity', options.position], 1);
     }
     for (i = 0; i < position && models.length; i++) {
