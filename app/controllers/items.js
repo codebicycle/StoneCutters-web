@@ -511,6 +511,7 @@ function reply(params, callback) {
                 return done.fail(null, {});
             }
             var platform = this.app.session.get('platform');
+
             if (platform === 'html5' || platform === 'desktop') {
                 return done.fail();
             }
@@ -535,6 +536,7 @@ function reply(params, callback) {
             tracking.addParam('item', item);
             tracking.addParam('category', category.toJSON());
             tracking.addParam('subcategory', subcategory.toJSON());
+
             callback(null, {
                 item: item,
                 form: this.form
