@@ -237,7 +237,6 @@ module.exports = {
     'contactseller_form.AttachPicture': 'Melampirkan Gambar:',
     'contactseller_form.Close': 'Tutup',
     'contactseller_form.ReplyToListing': 'Membalas Iklan',
-    'contactseller_form.ViewFullSite': 'Lihat situs lengkap',
     'register_form.245': 'Pendaftaran Pengguna Baru',
     'register_form.termsAgreeB': 'Syarat dan Ketentuan',
     'itempagepostcomment.CommentPosted': 'Komentar telah terpasang dengan baik.',

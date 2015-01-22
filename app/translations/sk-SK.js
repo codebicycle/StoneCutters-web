@@ -237,7 +237,6 @@ module.exports = {
     'contactseller_form.AttachPicture': 'Pripoji\u0165 obr\xE1zok:',
     'contactseller_form.Close': 'Zatvori\u0165',
     'contactseller_form.ReplyToListing': 'Odpoveda\u0165 na ozn\xE1menie',
-    'contactseller_form.ViewFullSite': 'Zobrazi\u0165 cel\xFA str\xE1nku',
     'register_form.245': 'Registr\xE1cia nov\xE9ho pou\u017E\xEDvate\u013Ea',
     'register_form.termsAgreeB': 'Zmluvn\xFDmi podmienkami',
     'itempagepostcomment.CommentPosted': 'Pozn\xE1mka bola \xFAspe\u0161ne uverejnen\xE1.',

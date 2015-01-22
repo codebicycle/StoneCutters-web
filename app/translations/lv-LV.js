@@ -237,7 +237,6 @@ module.exports = {
     'contactseller_form.AttachPicture': 'Pievienot att\u0113lu:',
     'contactseller_form.Close': 'Aizv\u0113rt',
     'contactseller_form.ReplyToListing': 'Atbild\u0113t uz sludin\u0101jumu',
-    'contactseller_form.ViewFullSite': 'Apskatiet pilno vietni',
     'register_form.245': 'Jauna lietot\u0101ja re\u0123istr\u0101cija',
     'register_form.termsAgreeB': 'Noteikumi un nosac\u012Bjumi',
     'itempagepostcomment.CommentPosted': 'Koment\u0101rs public\u0113ts.',

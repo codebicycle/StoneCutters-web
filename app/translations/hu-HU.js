@@ -237,7 +237,6 @@ module.exports = {
     'contactseller_form.AttachPicture': 'K\xE9p csatol\xE1sa:',
     'contactseller_form.Close': 'Bez\xE1r\xE1s',
     'contactseller_form.ReplyToListing': 'V\xE1lasz a hirdet\xE9sre',
-    'contactseller_form.ViewFullSite': 'Teljes honlap megtekint\xE9se',
     'register_form.245': '\xDAj felhaszn\xE1l\xF3 regisztr\xE1l\xE1sa',
     'register_form.termsAgreeB': 'Szerz\u0151d\xE9si felt\xE9teleivel',
     'itempagepostcomment.CommentPosted': 'A megjegyz\xE9s sikeresen elk\xFCldve.',

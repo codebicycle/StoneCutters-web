@@ -237,7 +237,6 @@ module.exports = {
     'contactseller_form.AttachPicture': 'Bifoga en bild:',
     'contactseller_form.Close': 'St\xE4ng',
     'contactseller_form.ReplyToListing': 'Svara p\xE5 annons',
-    'contactseller_form.ViewFullSite': 'Visa hela webbplatsen',
     'register_form.245': 'Registrering av ny anv\xE4ndare',
     'register_form.termsAgreeB': 'Anv\xE4ndarvillkoren',
     'itempagepostcomment.CommentPosted': 'Kommentar framg\xE5ngsrikt upplagd.',

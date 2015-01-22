@@ -237,7 +237,6 @@ module.exports = {
     'contactseller_form.AttachPicture': 'P\u0159ilo\u017Eit obr\xE1zek:',
     'contactseller_form.Close': 'Zav\u0159\xEDt',
     'contactseller_form.ReplyToListing': 'Odpov\u011Bd\u011Bt na z\xE1znam',
-    'contactseller_form.ViewFullSite': 'Prohl\xED\u017Eet \xFAplnou verzi str\xE1nky',
     'register_form.245': 'Registrace nov\xE9ho u\u017Eivatele',
     'register_form.termsAgreeB': 'podm\xEDnkami',
     'itempagepostcomment.CommentPosted': 'Koment\xE1\u0159 byl \xFAsp\u011B\u0161n\u011B odesl\xE1n.',
