@@ -11,7 +11,7 @@ var statsd = require('../../../../../../../../shared/statsd')();
 var rEmail = /^[_a-zA-Z0-9-]+(\.[_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*(\.[a-zA-Z]{2,6})$/;
 
 module.exports = Base.extend({
-    className: 'item-contact-form',
+    className: 'reply',
     id: 'item-contact-form',
     tagName: 'section',
     postRender: function() {
@@ -24,16 +24,14 @@ module.exports = Base.extend({
             app: this.app
         });
         this.$el.trigger('reset');
-        this.$spinner = this.$('.spinner');
-        this.$submit = this.$('.submit');
-        this.$success = this.$('.replySuccess');
+        this.$spinner = $('.loading');
+        this.$success = this.parentView.$('.msgCont');
         this.$fields = this.$('textarea, input:not([type=submit], [type=hidden])');
     },
     events: {
         'blur textarea, input:not([type=submit], [type=hidden])': 'onBlur',
         'submit': 'onSubmit',
-        'reset': 'onReset',
-        'click .replySuccess': 'onReplySuccessClick'
+        'reset': 'onReset'
     },
     onBlur: function(event) {
         event.preventDefault();
@@ -51,9 +49,7 @@ module.exports = Base.extend({
         event.stopPropagation();
         event.stopImmediatePropagation();
 
-        this.$spinner.removeClass('hide');
-        this.$submit.addClass('hide');
-        this.$success.addClass('hide');
+        this.$spinner.show();
         asynquence().or(fail.bind(this))
             .then(validate.bind(this))
             .then(submit.bind(this))
@@ -79,14 +75,16 @@ module.exports = Base.extend({
 
         function success(reply) {
             event.target.reset();
-            this.$spinner.addClass('hide');
-            this.$success.removeClass('hide');
+            this.$spinner.hide();
+            this.$success.addClass('visible').find('.msgCont-container').text(this.dictionary['comments.YourMessageHasBeenSent'].replace(/<br \/>/g,''));
+            setTimeout(function onTimeout() {
+                this.$success.removeClass('visible');
+            }.bind(this), 3000);
             this.trackSuccess(reply);
         }
 
         function fail(err) {
-            this.$spinner.addClass('hide');
-            this.$submit.removeClass('hide');
+            this.$spinner.hide();
         }
     },
     onReset: function(event) {
@@ -94,20 +92,11 @@ module.exports = Base.extend({
             id: this.$('[name=itemId]').val()
         };
     },
-    onReplySuccessClick: function(event) {
-        event.preventDefault();
-        event.stopPropagation();
-        event.stopImmediatePropagation();
-
-        this.$success.addClass('hide');
-        this.$submit.removeClass('hide');
-    },
     trackSuccess: function(reply) {
         var item = this.parentView.getItem();
         var categories = this.parentView.getCategories();
         var subcategory = categories.search(item.get('category').id);
         var category = categories.search(item.get('category').parentId) || subcategory;
-        var url;
 
         tracking.reset();
         tracking.setPage('items#success');
@@ -119,7 +108,7 @@ module.exports = Base.extend({
         this.track({
             category: 'Reply',
             action: 'ReplySuccess',
-            custom: ['Reply', this.$('.itemCategory').val(), this.$('.itemSubcategory').val(), 'ReplySuccess', this.reply.id].join('::')
+            custom: ['Reply', item.get('category').parentId, item.get('category').id, 'ReplySuccess', this.reply.id].join('::')
         });
     },
     validate: function(field) {
@@ -137,23 +126,15 @@ module.exports = Base.extend({
         return !isEmpty;
     },
     isEmpty: function (name, value) {
-        var isValid = !!value;
-
-        this.setError(isValid, name, this.dictionary['postingerror.PleaseCompleteThisField']);
-        return !isValid;
+        return !this.setError(!!value, name, this.dictionary['postingerror.PleaseCompleteThisField']);
     },
     isEmail: function(name, value) {
-        var isValid = rEmail.test(value);
-
-        this.setError(isValid, name, this.dictionary['postingerror.InvalidEmailAddress']);
-        return isValid;
+        return this.setError(rEmail.test(value), name, this.dictionary['postingerror.InvalidEmailAddress']);
     },
     setError: function (isValid, name, text) {
-        $('span.' + name).text(text).toggleClass('hide', isValid);
-        $('fieldset.' + name).toggleClass('error', !isValid);
-        $('fieldset.' + name + ' span.icons').toggleClass('icon-attention', !isValid);
+        this.$('small.' + name).text(isValid ? '' : text).toggleClass('hide', isValid);
         return isValid;
     }
 });
 
-module.exports.id = 'items/partials/contactform';
+module.exports.id = 'items/partials/reply';
