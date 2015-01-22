@@ -33,12 +33,12 @@ module.exports = Base.extend({
         this.app.router.appView.on('sort:end', this.show.bind(this));
         this.app.router.appView.on('location:start', this.hide.bind(this));
         this.app.router.appView.on('location:end', this.show.bind(this));
-        /*this.app.router.appView.on('login:start', this.hide.bind(this));
+        this.app.router.appView.on('login:start', this.hide.bind(this));
         this.app.router.appView.on('login:end', this.show.bind(this));
         this.app.router.appView.on('register:start', this.hide.bind(this));
         this.app.router.appView.on('register:end', this.show.bind(this));
         this.app.router.appView.on('lostpassword:start', this.hide.bind(this));
-        this.app.router.appView.on('lostpassword:end', this.show.bind(this));*/
+        this.app.router.appView.on('lostpassword:end', this.show.bind(this));
         this.attachTrackMe();
     },
     hideFooter: function() {
@@ -46,10 +46,10 @@ module.exports = Base.extend({
 
         return (currentRoute.action === 'filter' ||
                 currentRoute.action === 'sort' ||
-                currentRoute.action === 'location'/* ||
+                currentRoute.action === 'location' ||
                 currentRoute.action === 'login' ||
                 currentRoute.action === 'lostpassword' ||
-                currentRoute.action === 'register'*/);
+                currentRoute.action === 'register');
     },
     changeLocation: function (e, siteLocation) {
         this.$('.footer-links .footer-link').each(function(i, link) {
