@@ -3,15 +3,24 @@
 var Base = require('../../../../../../common/app/bases/view');
 var translations = require('../../../../../../../../shared/translations');
 var _ = require('underscore');
+var config = require('../../../../../../../../shared/config');
 
 module.exports = Base.extend({
     className: 'post_flow_hub_view',
     id: 'hub',
     tagName: 'section',
+    getTemplateData: function() {
+        var data = Base.prototype.getTemplateData.call(this);
+
+        return _.extend({}, data, {
+            imagesTemplate: data.template + '/post/flow/hub/images.' + config.getForMarket(this.app.session.get('location').url, ['posting', 'flow', 'hub', 'images'], 'default') + '.html'
+        });
+    },
     events: {
         'show': 'onShow',
         'hide': 'onHide',
         'click #image': 'onImageClick',
+        'click .images .action': 'onImageClick',
         'stepChange': 'onStepChange',
         'click .step:not(".opaque")': 'onStepClick',
         'categoryChange': 'onCategoryChange',

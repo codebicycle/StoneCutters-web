@@ -24,7 +24,121 @@
 
 	counter-reset: index;
 
-	header {
+	.images {
+		
+		position: relative;
+		overflow: hidden;
+	
+		&.compact {
+
+			padding: 10px;
+
+			.action {
+
+				overflow: hidden;
+				display: table;
+				table-layout: fixed;
+				width: 100%;
+
+			}
+			
+			.display {
+
+				position: relative;
+				display: table-cell;
+				width: 100px;
+				height: 100px;
+				font-size: 0;
+				line-height: 0;
+				vertical-align: bottom;
+				border-right: solid 10px #FFF;
+				background-color: red;
+
+			}
+			
+			.ammount {
+
+				position: absolute;
+				right: 0;
+				bottom: 0;
+				float: right;
+				width: 2rem;
+				height: 2rem;
+				background: rgba(0, 0, 0, .5);
+				color: #FFF;
+				font-size: 1rem;
+				line-height: 2rem;
+				font-weight: bold;
+				text-align: center;
+
+			}
+			
+			.text {
+
+				display: table-cell;
+				vertical-align: middle;
+				background: #DDD;
+				border: thin dashed #999;
+				text-align: center;
+				
+				> span {
+
+					display: table;
+					width: 100%;
+					
+					&:before {
+
+						content: url(imageUrl/images/html5/post/flow/camera_icon_02.png);
+						display: table-cell;
+						padding: 0 10px;
+						font-size: 0;
+						line-height: 0;
+						text-align: right;
+						vertical-align: middle;
+
+					}
+					
+					span {
+
+						display: table-cell;
+						padding-right: 10px;
+						text-align: left;
+						vertical-align: middle;
+
+					}
+
+				}
+
+			}
+			
+			.hint {
+
+				padding: .25rem .5rem;
+				margin-top: 10px;
+				background-color: #666;
+				color: #FFF;
+				text-align: center;
+				font-size: .8125rem;
+				line-height: 1em;
+				
+				&:before {
+
+					content: url(imageUrl/images/html5/post/flow/exclamation_icon.png);
+					display: inline-block;
+					margin-right: .5rem;
+					font-size: 0;
+					line-height: 0;
+					vertical-align: top;
+
+				}
+
+			}
+
+		}
+
+	}
+
+	header.dissss {
 
 		position: relative;
 		overflow: hidden;
