@@ -230,7 +230,6 @@ module.exports = {
     'contactseller_form.AttachPicture': 'Prilo\u017Ei fotografijo:',
     'contactseller_form.Close': 'Zapri',
     'contactseller_form.ReplyToListing': 'Odgovori na objavo',
-    'contactseller_form.ViewFullSite': 'Poglej celotno spletno mesto',
     'register_form.245': 'Registracija novega uporabnika',
     'register_form.termsAgreeB': 'pogoji in dolo\u010Dili',
     'itempagepostcomment.CommentPosted': 'Komentar je bil uspe\u0161no objavljen.',

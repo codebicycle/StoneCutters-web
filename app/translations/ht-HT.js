@@ -230,7 +230,6 @@ module.exports = {
     'contactseller_form.AttachPicture': 'Ajoute yon Foto:',
     'contactseller_form.Close': 'F\xE8men',
     'contactseller_form.ReplyToListing': 'Reponn anons sa a',
-    'contactseller_form.ViewFullSite': 'Gade sit konpl\xE8 a',
     'register_form.245': 'Enskripsyon pou nouvo manm',
     'register_form.termsAgreeB': 'Regleman ',
     'itempagepostcomment.CommentPosted': 'K\xF2mante an te poste san pwobl\xE8m.',

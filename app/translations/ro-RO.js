@@ -230,7 +230,6 @@ module.exports = {
     'contactseller_form.AttachPicture': 'Ata\u015Fa\u0163i o imagine:',
     'contactseller_form.Close': '\xCEnchide',
     'contactseller_form.ReplyToListing': 'R\u0103spunde la Listare',
-    'contactseller_form.ViewFullSite': 'Vizualizare site complet',
     'register_form.245': '\xCEnregistrarea Noului Utilizator',
     'register_form.termsAgreeB': 'Termeni \u015Fi Condi\u0163ii',
     'itempagepostcomment.CommentPosted': 'Comentariu publicat cu succes. ',

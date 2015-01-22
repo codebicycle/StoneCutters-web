@@ -6,13 +6,16 @@ var Base = require('../../../../../../common/app/bases/view');
 var User = require('../../../../../../../models/user');
 var tracking = require('../../../../../../../modules/tracking');
 var helpers = require('../../../../../../../helpers');
+var translations = require('../../../../../../../../shared/translations');
 var statsd = require('../../../../../../../../shared/statsd')();
+var rEmail = /^[_a-zA-Z0-9-]+(\.[_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*(\.[a-zA-Z]{2,6})$/;
 
 module.exports = Base.extend({
     className: 'item-contact-form',
     id: 'item-contact-form',
     tagName: 'section',
     postRender: function() {
+        this.dictionary = translations.get(this.app.session.get('selectedLanguage'));
         this.user = new User(_.extend({
             country: this.app.session.get('location').abbreviation,
             languageId: this.app.session.get('languageId'),
@@ -21,10 +24,13 @@ module.exports = Base.extend({
             app: this.app
         });
         this.$el.trigger('reset');
+        this.$spinner = this.$('.spinner');
+        this.$submit = this.$('.submit');
+        this.$success = this.$('.replySuccess');
+        this.$fields = this.$('textarea, input:not([type=submit], [type=hidden])');
     },
     events: {
-        'blur input': 'onBlur',
-        'blur textarea': 'onBlur',
+        'blur textarea, input:not([type=submit], [type=hidden])': 'onBlur',
         'submit': 'onSubmit',
         'reset': 'onReset',
         'click .replySuccess': 'onReplySuccessClick'
@@ -45,12 +51,27 @@ module.exports = Base.extend({
         event.stopPropagation();
         event.stopImmediatePropagation();
 
-        var $spinner = this.$('.spinner').removeClass('hide');
-
-        this.$('.submit').addClass('hide');
+        this.$spinner.removeClass('hide');
+        this.$submit.addClass('hide');
+        this.$success.addClass('hide');
         asynquence().or(fail.bind(this))
+            .then(validate.bind(this))
             .then(submit.bind(this))
             .val(success.bind(this));
+
+        function validate(done) {
+            var hasErrors = false;
+
+            _.each(this.$fields, function each(field) {
+                var isValid = this.validate($(field));
+
+                hasErrors = hasErrors || !isValid;
+            }, this);
+            if (hasErrors) {
+                return done.fail();
+            }
+            done();
+        }
 
         function submit(done) {
             this.user.reply(done, this.reply);
@@ -58,14 +79,14 @@ module.exports = Base.extend({
 
         function success(reply) {
             event.target.reset();
-            $spinner.addClass('hide');
-            this.$('.replySuccess').removeClass('hide');
+            this.$spinner.addClass('hide');
+            this.$success.removeClass('hide');
             this.trackSuccess(reply);
         }
 
         function fail(err) {
-            $spinner.addClass('hide');
-            this.$('.submit').removeClass('hide');
+            this.$spinner.addClass('hide');
+            this.$submit.removeClass('hide');
         }
     },
     onReset: function(event) {
@@ -78,8 +99,8 @@ module.exports = Base.extend({
         event.stopPropagation();
         event.stopImmediatePropagation();
 
-        this.$('.replySuccess').addClass('hide');
-        this.$('.submit').removeClass('hide');
+        this.$success.addClass('hide');
+        this.$submit.removeClass('hide');
     },
     trackSuccess: function(reply) {
         var item = this.parentView.getItem();
@@ -104,44 +125,34 @@ module.exports = Base.extend({
     validate: function(field) {
         var name = field.attr('name');
         var value = field.val();
-        var isEmpty = this.isEmpty(name, value);
+        var isEmpty;
 
+        if (name === 'phone') {
+            return true;
+        }
+        isEmpty = this.isEmpty(name, value);
         if (!isEmpty && name === 'email') {
             return this.isEmail(name, value);
         }
         return !isEmpty;
     },
     isEmpty: function (name, value) {
-        if (!value) {
-            this.$('span.' + name).text('Por favor complete este campo.').removeClass('hide');
-            this.$('fieldset.' + name).addClass('error');
-            this.$('fieldset.' + name + ' span.icons').addClass('icon-attention');
-            return true;
-        }
-        this.$('span.' + name).addClass('hide');
-        this.$('fieldset.' + name).removeClass('error');
-        this.$('fieldset.' + name + ' span.icons').removeClass('icon-attention');
+        var isValid = !!value;
+
+        this.setError(isValid, name, this.dictionary['postingerror.PleaseCompleteThisField']);
+        return !isValid;
     },
     isEmail: function(name, value) {
-        var expression = /^[_a-zA-Z0-9-]+(\.[_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*(\.[a-zA-Z]{2,6})$/;
+        var isValid = rEmail.test(value);
 
-        if (value && expression.test(value)) {
-            this.$('span.' + name).addClass('hide');
-            this.$('fieldset.' + name).removeClass('error');
-            this.$('fieldset.' + name + ' span.icons').removeClass('icon-attention');
-            return true;
-        }
-        this.$('span.' + name).text('La dirección de correo electrónico es inválida.').removeClass('hide');
-        this.$('fieldset.' + name).addClass('error');
-        this.$('fieldset.' + name + ' span.icons').addClass('icon-attention');
+        this.setError(isValid, name, this.dictionary['postingerror.InvalidEmailAddress']);
+        return isValid;
     },
-    showSubmit: function(event) {
-        event.preventDefault();
-        event.stopPropagation();
-        event.stopImmediatePropagation();
-
-        $('.replySuccess').addClass('hide');
-        $('#replyForm .submit').removeClass('hide');
+    setError: function (isValid, name, text) {
+        $('span.' + name).text(text).toggleClass('hide', isValid);
+        $('fieldset.' + name).toggleClass('error', !isValid);
+        $('fieldset.' + name + ' span.icons').toggleClass('icon-attention', !isValid);
+        return isValid;
     }
 });
 

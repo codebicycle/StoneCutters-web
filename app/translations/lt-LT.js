@@ -230,7 +230,6 @@ module.exports = {
     'contactseller_form.AttachPicture': 'Prisegti nuotrauk\u0105:',
     'contactseller_form.Close': 'U\u017Edaryti',
     'contactseller_form.ReplyToListing': 'Atsakyti \u012F skelbim\u0105',
-    'contactseller_form.ViewFullSite': 'Rodyti visavert\u0119 tinklaviet\u0117s versij\u0105',
     'register_form.245': 'Naujo vartotojo registracija',
     'register_form.termsAgreeB': 's\u0105lygomis ir nuostatomis',
     'itempagepostcomment.CommentPosted': 'Komentaras paskelbtas s\u0117kmingai.',
