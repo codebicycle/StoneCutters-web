@@ -1,15 +1,58 @@
+<header id="topBar" class="hide">
+    <div class="topBarFilters">
+        <a class="filter-btns blue btncanceldelete" data-tracking="">{{ dictionary["posting_changecategorymod.Cancel"] }}</a><strong class="title">{{ dictionary["seccion-30.478"] }}</strong>
+    </div>
+</header>
+<section id="formdeleteitem" class="hide">
+    <div class="confirmdelete">
+        <h4 class="subtitle">{{ dictionary["posting_removedsurvey.WarningAdToBeRemoved"] }} </h4>
+        <div class="itemdelete">
+            <figure class="image">
+                <img src="" alt="" class="thumbnail">
+                <span class="withoutimg"></span>
+            </figure>
+            <div class="description">
+                {{ item.title }}
+            </div>
+        </div>
+        <h5>{{ dictionary["posting_removedsurvey.RemovedAdSurvey"] }} </h5>
+        <form action="{{ '/myolx/deleteitem' | link }}" class="formdelete" method="POST">
+            <div class="reason">
+                <input type="radio" name="close_reason" value="1" required id="close_reason1">
+                <label for="close_reason1">{{ dictionary["posting_removedsurvey.RemovedAdSurveyAnswer1"] }} </label>
+            </div>
+            <div class="reason">
+                <input type="radio" name="close_reason" value="2" required id="close_reason2">
+                <label for="close_reason2">{{ dictionary["posting_removedsurvey.RemovedAdSurveyAnswer2"] }} </label>
+            </div>
+            <div class="reason">
+                <input type="radio" name="close_reason" value="3" required id="close_reason3">
+                <label for="close_reason3">{{ dictionary["posting_removedsurvey.RemovedAdSurveyAnswer3"] }} </label>
+            </div>
+            <div class="reason">
+                <input type="radio" name="close_reason" value="4" required id="close_reason4">
+                <label for="close_reason4">{{ dictionary["posting_optionallist.other"] }}</label>
+                <input type="text" name="close_comment" class="text" id="close_reason5">
+            </div>
+            <input type="hidden" name="idd" id="idd" value="">
+            <div class="buttons deleteitem">
+                <button type="submit" class="btn accept">{{ dictionary["seccion-30.478"] }}</button>
+            </div>
+        </form>
+    </div>
+</section>
 <header class="breadcrumb">
     {{ dictionary["myolx.MyAds"] }}
 </header>
-{% if deleted %}
-    <div id="messages">
+{# {% if deleted %} #}
+    <div id="messages" class="hide">
         <span>{{ dictionary["myolx.TheAdHasBeenDeleted"] }}</span>
     </div>
-{% endif %}
+{# {% endif %} #}
 <section id="myads">
     {% if items.length %}
         <ul class="item-listing">
-            {% for item in items.toJSON() %}
+            {% for item in items %}
                 {% set status = 'ready' %}
                 {% set statustxt = dictionary["listingpageitemslisting.Posted"] %}
                 {% if item.status == 'expired' %}
@@ -37,15 +80,22 @@
                     <p class="datetime">{{ statustxt }}</p>
                     <h2 class="title">{{ item.title }}</h2>
                     <div class="price">{{ item.price.displayPrice }}</div>
+                    {% if status != 'deleted' %}
+                        <div class="actions hide">
+                            {# <a href="#" class="action renews hide" data-action="renews">Republicar</a> #}
+                            {% if status == 'ready' %}
+                                <a href="#" class="action view" data-action="view">Ver</a>
+                                <a href="{{ '/help' | link }}" class="action help">{{ dictionary["biderrorheader.Help"] }}</a>
+                                <a data-idd="{{ item.id }}" data-img="{{ item.thumbnailLarge }}" data-title="{{ item.title }}" class="action delete" data-action="delete" >{{ dictionary["confirmremoveitem.Delete"] }}</a>
+                            {% else %}
+                                <a href="{{ '/help' | link }}" class="action help">{{ dictionary["biderrorheader.Help"] }}</a>
+                            {% endif %}
+                        </div>
+                    {% endif %}
                 </li>
             {% endfor %}
         </ul>
-        <div class="actions hide" data-action="actions">
-            <a href="#" class="action renews hide" data-action="renews">Republicar</a>
-            <a href="#" class="action view" data-action="view">Ver</a>
-            <a href="{{ '/help' | link }}" class="action help">{{ dictionary["biderrorheader.Help"] }}</a>
-            <a href="{{ '/myolx/deleteitem/[[itemId]]' | link }}" class="action delete" data-action="delete" >{{ dictionary["confirmremoveitem.Delete"] }}</a>
-        </div>
+        <div class="actions-show hide" data-action="actions"></div>
     {% else %}
         <div class="emtyList">
             {{ dictionary["myolx.YouCurrentlyHaveNoActiveListings"] }}

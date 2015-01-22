@@ -1,23 +1,40 @@
 'use strict';
 
-var Base = require('../../../../../common/app/bases/view').requireView('users/myads');
-var asynquence = require('asynquence');
-var helpers = require('../../../../../../helpers');
 var _ = require('underscore');
+var asynquence = require('asynquence');
+var Base = require('../../../../../common/app/bases/view').requireView('users/myads');
+var helpers = require('../../../../../../helpers');
+var Items = require('../../../../../../collections/items');
 
 module.exports = Base.extend({
     events: {
         'click [data-action=more]': 'showActions',
-        'click [data-action=delete]': 'deleteItem'
+        'click [data-action=delete]': 'onDeleteClick',
+        'click .btncanceldelete': 'onCancelDeleteClick',
+        'submit .formdelete': 'onDelete'
     },
+    getTemplateData: function() {
+        var data = Base.prototype.getTemplateData.call(this);
+
+        data.items = this.items && this.items.toJSON ? this.items.toJSON() : this.items || data.items && data.items.toJSON ? data.items.toJSON() : data.items;
+
+        return data;
+    },
+    deleted: false,
     postRender: function() {
         var $messages = $('#messages');
 
-        if ($messages.length) {
+        if (this.deleted) {
+            $messages.removeClass('hide');
+
             setTimeout(function(){
                 $messages.slideUp();
             }, 3000);
         }
+
+        this.items = this.items || this.options.items && this.options.items.toJSON ? this.options.items : new Items(this.options.items || {}, {
+            app: this.app
+        });
     },
     showActions: function(event) {
         event.preventDefault();
@@ -26,49 +43,25 @@ module.exports = Base.extend({
 
         var $target = $(event.currentTarget);
         var $buttons = $('.my-ads .btnfilter[data-action=more]');
-        var $actions = $('.actions[data-action=actions]');
-        var $renews = $('.action[data-action=renews]');
-        var $view = $('.action[data-action=view]');
-        var $deleteItem = $('.action[data-action=delete]');
-        var status = $target.parent().data('status');
+        var $action = $target.parent().find('.actions').html();
+        var $actions = $('.actions-show[data-action=actions]');
         var targetPosition = $target.parent().position().top;
-        var actionsPosition = $actions.position().top;
-        var newPosition = targetPosition + $target.parent().height();
-        var itemId = $target.data('id');
-        var itemUrl = $target.data('itemurl');
-        var href = $deleteItem.attr('href');
+        var newPosition = targetPosition + $target.parent().height() + 12;
 
-        if (status === 'expired') {
-            $view.addClass('hide');
-            $renews.removeClass('hide');
-        }
-        else {
-            $view.removeClass('hide');
-            $renews.addClass('hide');
-        }
+        $actions.html($action);
+        $actions.css('top', newPosition);
 
-        if ($actions.hasClass('hide')) {
-            $target.addClass('active');
-            $actions.css('top', newPosition);
-            $view.attr('href', itemUrl);
-            $deleteItem.attr('href', href.replace('[[itemId]]', itemId));
-            $actions.removeClass('hide');
-        }
-        else if (actionsPosition == newPosition) {
+        if ($target.hasClass('active')) {
             $actions.addClass('hide');
             $target.removeClass('active');
-            $deleteItem.attr('href', href.replace(/\/[0-9]+\?/, '/[[itemId]]?'));
-            $view.attr('href', '');
         }
         else {
             $buttons.removeClass('active');
             $target.addClass('active');
-            $view.attr('href', itemUrl);
-            $deleteItem.attr('href', href.replace('[[itemId]]', itemId));
-            $actions.css('top', newPosition);
+            $actions.removeClass('hide');
         }
-    }
-    /*onDeleteClick: function(event) {
+    },
+    onDeleteClick: function(event) {
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();
@@ -87,38 +80,53 @@ module.exports = Base.extend({
             this.$('.confirmdelete .image .withoutimg').show();
         }
         this.$('.confirmdelete .description').text(itemTitle);
-        this.$('.my-items').hide();
-        this.$('.formdeleteitem').find('#idd').val(itemId);
-        this.$('.formdeleteitem').show();
+        this.$('#myads').hide();
+        $('.breadcrumb').hide();
+        $('.header_index_view').hide();
+        $('.footer_footer_view').addClass('disabled');
+        this.$('#formdeleteitem').find('#idd').val(itemId);
+        this.$('#topBar').show();
+        this.$('#formdeleteitem').show();
     },
     onCancelDeleteClick: function(event) {
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();
 
-        $('.formdeleteitem').hide();
-        $('.my-items').show();
+        this.$('#formdeleteitem').hide();
+        this.$('#topBar').hide();
+        $('.breadcrumb').show();
+        $('#myads').show();
+        $('.header_index_view').show();
+        $('.footer_footer_view').removeClass('disabled');
     },
     onDelete: function(event) {
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();
 
-        asynquence().or(success.bind(this)) // TODO: Improve error handling
-            .then(remove.bind(this))
-            .val(success.bind(this));
-
         function remove(done) {
             var id = this.$('.formdelete #idd').val();
-            var item = this.parentView.items.get(id);
+            var item = this.items.get(id);
             var reason = this.$('.formdelete input[name="close_reason"]:checked').val();
             var comment = this.$('.formdelete input[name="close_comment"]').val();
 
             item.remove(reason, comment, done);
         }
 
-        function success() {
+        function success(e) {
+            var $header = $('.header_index_view');
+            var $footer = $('.footer_footer_view');
+            var $messages = $('#messages');
+
+            this.deleted = true;
             this.render();
+            $header.show();
+            $footer.removeClass('disabled');
+            $messages.addClass('deleted');
         }
-    }*/
+        asynquence().or(success.bind(this)) // TODO: Improve error handling
+            .then(remove.bind(this))
+            .val(success.bind(this));
+    }
 });
