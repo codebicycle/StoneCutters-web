@@ -7,7 +7,9 @@ var ShowIg = Base.extend({
 });
 
 function redirection(done) {
-    if (this.app.session.get('platform') !== 'desktop') {
+    var platform = this.app.session.get('platform');
+
+    if (platform !== 'desktop' && platform !== 'html5') {
         done.abort();
         return this.error();
     }

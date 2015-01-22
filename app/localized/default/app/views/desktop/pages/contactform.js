@@ -5,8 +5,9 @@ var _ = require('underscore');
 
 module.exports = Base.extend({
     id: 'contact-form',
-    fields: [],
     events: {
+        'blur input:not([type="submit"])' : 'validateField',
+        'blur textarea' : 'validateField',
         'submit [data-contact-form]': 'submitForm',
         'click [data-reply="error"] span': 'submitAgain'
     },
@@ -23,56 +24,75 @@ module.exports = Base.extend({
         this.$el.append(recaptcha);
 
     },
-    submitForm: function(event) {
-        event.preventDefault();
-        event.stopPropagation();
-        event.stopImmediatePropagation();
-
+    getMessages: function() {
         var data = Base.prototype.getTemplateData.call(this);
-        this.fields = [
-            this.$('[name="subject"]'),
-            this.$('[name="name"]'),
-            this.$('[name="email"]'),
-            this.$('[name="message"]')
-        ];
-        var message = {
+        var messages = {
             'empty': data.dictionary["postingerror.PleaseCompleteThisField"],
             'invalidEmail': data.dictionary["postingerror.InvalidEmail"],
             'wrongCode': data.dictionary["supportform.VerificationCodeError"],
             'thankYou': data.dictionary["supportform.ThankYou"]
         };
+
+        return messages;
+    },
+    getFields: function(){
+        var fields = [
+            this.$('[name="subject"]'),
+            this.$('[name="name"]'),
+            this.$('[name="email"]'),
+            this.$('[name="message"]')
+        ];
+        return fields;
+    },
+    validateField: function(event){
+        var messages = this.getMessages();
         var emailRegExp = /^[_a-zA-Z0-9-]+(\.[_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*(\.[a-zA-Z]{2,6})$/;
+        var field = event.target;
+        var value = event.target.value;
+        var fieldset = event.target.parentNode;
+
+        if (value === '') {
+            $(fieldset).find('.error').text(messages.empty).removeClass('hide');
+            $(fieldset).addClass('error');
+        } 
+        else if (field.name == 'email' && 
+                !emailRegExp.test(value)) {
+            $(fieldset).find('.error').text(messages.invalidEmail).removeClass('hide');
+            $(fieldset).addClass('error');
+        }
+        else {
+            $(fieldset).find('.error').addClass('hide');
+            $(fieldset).removeClass('error');
+        }
+    },
+    validateForm: function(){
+        var fields = this.getFields();
+        var messages = this.getMessages();
         var valid = true;
-        var spinner = this.$('[data-contact-form] .spinner');
-        var submit = this.$('[data-contact-form] [data-submit]');
-        var value;
-        var fieldset;
 
-        spinner.removeClass('hide');
-        submit.addClass('hide');
-        this.$('fieldset.error').removeClass('error');
-
-        $(this.fields).each( function() {
-            value = $(this).val();
-            fieldset = $(this).parent();
-
-            if (value === '') {
-                $(this).siblings('.error').text(message.empty).removeClass('hide');
-                fieldset.addClass('error');
+        $(fields).each( function() {
+            if ($(this).val() === '') {
+                $(this).siblings('.error').text(messages.empty).removeClass('hide');
+                $(this).parent().addClass('error');
                 valid = false;
-            } 
-            else if ($(this).selector == '[name="email"]' && 
-                    !emailRegExp.test(value)) {
-                $(this).siblings('.error').text(message.invalidEmail).removeClass('hide');
-                fieldset.addClass('error');
-                valid = false;
-            }
-            else {
-                $(this).siblings('.error').addClass('hide');
             }
         });
 
-        if (valid) {
+        return valid;
+    },
+    submitForm: function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+
+        var messages = this.getMessages();
+        var spinner = this.$('[data-contact-form] .spinner');
+        var submit = this.$('[data-contact-form] [data-submit]');
+
+        spinner.removeClass('hide');
+        submit.addClass('hide');
+
+        if (this.validateForm()) {
             this.captchaCallback(this.$('#g-recaptcha-response').val())
             .done(function(result) {
                 if (result.success) {
@@ -80,7 +100,7 @@ module.exports = Base.extend({
                     $('[data-captcha-verification] .error').addClass('hide');
                     return this.sendForm();
                 }
-                $('[data-captcha-verification] .error').text(message.empty).removeClass('hide');
+                $('[data-captcha-verification] .error').text(messages.empty).removeClass('hide');
                 $('[data-captcha-verification]').addClass('error');
                 spinner.addClass('hide');
                 submit.removeClass('hide');
@@ -119,6 +139,7 @@ module.exports = Base.extend({
             message: this.$('[name="message"]').val(),
             location: this.app.session.get('location').url
         };
+        var fields = this.getFields();
 
         return $.ajax({
             type: 'POST',
@@ -128,7 +149,7 @@ module.exports = Base.extend({
                 if (data.send) {
                     this.submitSuccess();
 
-                    $(this.fields).each(function() {
+                    $(fields).each(function() {
                         this.val('');
                     });
                 }

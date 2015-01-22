@@ -230,7 +230,6 @@ module.exports = {
     'contactseller_form.AttachPicture': '\uC0AC\uC9C4 \uCCA8\uBD80\uD558\uAE30:',
     'contactseller_form.Close': '\uB2EB\uAE30',
     'contactseller_form.ReplyToListing': '\uC81C\uD488\uBAA9\uB85D\uC11C\uC5D0 \uC751\uB2F5\uD558\uAE30',
-    'contactseller_form.ViewFullSite': '\uC815\uC2DD \uD648\uD398\uC774\uC9C0 \uBCF4\uAE30',
     'register_form.245': '\uC0C8 \uC0AC\uC6A9\uC790 \uB4F1\uB85D',
     'register_form.termsAgreeB': '\uC57D\uC815\uC870\uAC74',
     'itempagepostcomment.CommentPosted': '\uC758\uACAC\uB780\uC774 \uC81C\uCD9C\uB418\uC5C8\uC2B5\uB2C8\uB2E4.',
