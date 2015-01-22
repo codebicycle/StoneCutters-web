@@ -172,7 +172,7 @@ module.exports = Base.extend({
         var currentRoute = this.app.session.get('currentRoute');
         var url;
 
-        if (currentRoute.action === 'staticSearch') {
+        if (currentRoute.action === 'statics') {
             url = ['/nf', replace];
             url.push(path.replace('/q/', '').split('/').shift());
             return url.join('');
@@ -184,7 +184,7 @@ module.exports = Base.extend({
         var currentRoute = this.app.session.get('currentRoute');
         var category;
 
-        if (currentRoute.action === 'staticSearch') {
+        if (currentRoute.action === 'statics') {
             path = path.replace('/q/', '/nf/search/');
             if (path.match(/\/c-[0-9]+/)) {
                 category = path.replace(/.*\/(c-[0-9]+).*/, '$1');

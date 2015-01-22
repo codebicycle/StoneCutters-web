@@ -11,14 +11,15 @@
             position: relative;
             vertical-align: top;
             a.icon-close {
-                btn-close($greyStrong, $yellow, $black, $yellow)
+                btn-close($greyStrong, $black);
+                font-size: remify(16px);
                 right: 7px;
-                top: 11px;
+                top: 7px;
                 &.state {
-                    color: $yellow;
+                    color: $greyStrong;
                 }
                 &.city {
-                    color: $white;
+                    color: $greyStrong;
                 }
             }
         }
@@ -44,7 +45,7 @@
                 background: $white;
                 border: 1px solid $greyBorders;
                 .icon-close {
-                    color: $white;
+                    color: $greyStrong;
                 }
                 &:last-child {
                     padding-bottom: 10px;

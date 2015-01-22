@@ -1,26 +1,31 @@
 'use strict';
 
-var Base = require('../../../../../common/app/bases/view').requireView('items/search', null, 'desktop');
 var _ = require('underscore');
+var Base = require('../../../../../common/app/bases/view').requireView('searches/search');
+var helpers = require('../../../../../../helpers');
 
 module.exports = Base.extend({
-    id: 'items-searchig-view',
-    className: 'items-searchig-view',
-    regexpFindGallery: /-ig/,
-    regexpReplaceGallery: /(-ig)/,
+    id: 'searches-search-view',
+    className: 'searches-search-view',
+    tagName: 'main',
+    order: ['parentcategory','pricerange', 'carbrand', 'condition', 'kilometers', 'year', 'bedrooms', 'bathrooms', 'surface', 'state', 'city', 'neighborhood'],
+    regexpFindPage: /-p-[0-9]+/,
+    regexpReplacePage: /(-p-[0-9]+)/,
+    regexpReplaceCategory: /([a-zA-Z0-9-]+-cat-[0-9]+)/,
     regexpFindNeighborhood: /-neighborhood_[0-9_]+/,
-
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
         var link = this.refactorPath(this.app.session.get('path'));
 
-        delete data.nav.listAct;
+        this.filters = data.filters;
+        this.filters.order = this.order;
+
         return _.extend({}, data, {
+            items: data.items,
             nav: {
-                link: link.replace(/\/?-ig/, ''),
-                linkig: link,
-                galeryAct: 'active',
-                current: 'searchig'
+                link: link,
+                linkig: helpers.common.linkig.call(this, link, null, 'searchig'),
+                listAct: 'active',
             }
         });
     },
@@ -40,4 +45,4 @@ module.exports = Base.extend({
     }
 });
 
-module.exports.id = 'items/searchig';
+module.exports.id = 'searches/search';

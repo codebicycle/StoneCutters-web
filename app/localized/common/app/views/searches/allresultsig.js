@@ -1,11 +1,11 @@
 'use strict';
 
-var Base = require('../../bases/view');
 var _ = require('underscore');
+var Base = require('../../bases/view');
 var breadcrumb = require('../../../../../modules/breadcrumb');
 
 module.exports = Base.extend({
-    className: 'items_allresultsig_view',
+    className: 'searches_allresultsig_view',
     wapAttributes: {
         cellpadding: 0
     },
@@ -18,4 +18,4 @@ module.exports = Base.extend({
     }
 });
 
-module.exports.id = 'items/allresultsig';
+module.exports.id = 'searches/allresultsig';
