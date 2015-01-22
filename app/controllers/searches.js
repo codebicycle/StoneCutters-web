@@ -38,7 +38,7 @@ function filter(params, callback, gallery) {
 function searchig(params, callback) {
     var platform = this.app.session.get('platform');
 
-    if (platform !== 'desktop') {
+    if (platform !== 'desktop' && platform !== 'html5') {
         return helpers.common.error.call(this, null, {}, callback);
     }
     params['f.hasimage'] = true;

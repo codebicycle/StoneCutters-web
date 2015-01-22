@@ -16,8 +16,8 @@ module.exports = Base.extend({
 
         return _.extend({}, data, {
             nav: {
-                linkig: helpers.common.linkig.call(this, link, null, 'searchig'),
-                current: 'show'
+                linkig: link.replace('-ig', ''),
+                current: 'showig'
             },
             filtersEnabled: helpers.features.isEnabled.call(this, 'listingFilters')
         });
@@ -37,4 +37,3 @@ module.exports = Base.extend({
         return path;
     }
 });
-module.exports.id = 'searches/search';
