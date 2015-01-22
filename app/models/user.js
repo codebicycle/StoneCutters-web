@@ -1,8 +1,9 @@
 'use strict';
 
-var Base = require('../bases/model');
+var _ = require('underscore');
 var crypto = require('crypto');
 var asynquence = require('asynquence');
+var Base = require('../bases/model');
 var dataAdapter = require('../helpers/dataAdapter');
 var statsd = require('../../shared/statsd')();
 var utils = require('../../shared/utils');
@@ -190,7 +191,13 @@ function registerConfirm(done) {
 }
 
 function reply(done, data) {
-    var prepare = function(done) {
+    asynquence().or(fail.bind(this))
+        .then(prepare.bind(this))
+        .then(submit.bind(this))
+        .then(check.bind(this))
+        .val(success.bind(this));
+
+    function prepare(done) {
         var query = {
             languageId: this.get('languageId'),
             platform: this.get('platform')
@@ -199,28 +206,36 @@ function reply(done, data) {
         if (data.token) {
             query.token = data.token;
         }
+        _.each(data, function each(value, key) {
+            if (!value) {
+                delete data[key];
+            }
+        });
         done(query);
-    }.bind(this);
+    }
 
-    var submit = function(done, query) {
+    function submit(done, query) {
         dataAdapter.post(this.app.req, '/items/' + data.id + '/messages', {
             data: data,
             query: query
         }, done.errfcb);
-    }.bind(this);
+    }
 
-    var success = function(res, reply) {
+    function check(done, response, body) {
+        if (body.id) {
+            return done(body);
+        }
+        body.statusCode = response.statusCode;
+        return done.fail(body);
+    }
+
+    function success(reply) {
         statsd.increment([this.get('country'), 'reply', 'success', this.get('platform')]);
         done(reply);
-    }.bind(this);
+    }
 
-    var error = function(err) {
+    function fail(err) {
         statsd.increment([this.get('country'), 'reply', 'error', err.statusCode, this.get('platform')]);
         done.fail(err);
-    }.bind(this);
-
-    asynquence().or(error)
-        .then(prepare)
-        .then(submit)
-        .val(success);
+    }
 }
