@@ -16,6 +16,9 @@ module.exports = {
                 server: {
                     enabled: false
                 }
+            },
+            facebook: {
+                enabled: true
             }
         }
     }

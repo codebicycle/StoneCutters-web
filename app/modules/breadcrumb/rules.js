@@ -86,9 +86,10 @@ var rules = {
 
             if (fragment) {
                 switch (fragment.name) {
+                    case 'allresults':
+                    case 'allresultsig':
                     case 'search':
-                        breadcrumb = fragment.url;
-                        break;
+                    case 'searchig':
                     case 'item-listing':
                         breadcrumb = fragment.url;
                         break;
@@ -127,6 +128,49 @@ var rules = {
         },
         success: function() {
             return '/' + helpers.common.slugToUrl(this.item);
+        }
+    },
+    searches: {
+        allresults: function() {
+            var page = this.page || this.app.session.get('page') || 0;
+            var state = {
+                name: 'allresults',
+                page: page
+            };
+            var breadcrumb;
+
+            if (page === 1) {
+                navigation.clear.call(this);
+                saveNavigation(this, state);
+                return '/';
+            }
+            saveNavigation(this, state);
+            breadcrumb = '/nf/all-results';
+            if ((page - 1) > 1) {
+                breadcrumb += '-p-' + (page - 1);
+            }
+            return breadcrumb;
+        },
+        allresultsig: function() {
+            var page = this.page || this.app.session.get('page') || 0;
+            var state = {
+                name: 'allresultsig',
+                page: page
+            };
+            var breadcrumb;
+
+            if (page === 1) {
+                navigation.clear.call(this);
+                saveNavigation(this, state);
+                return '/';
+            }
+            saveNavigation(this, state);
+            breadcrumb = '/nf/all-results';
+            if ((page - 1) > 1) {
+                breadcrumb += '-p-' + (page - 1);
+            }
+            breadcrumb += '-ig';
+            return breadcrumb;
         },
         search: function() {
             var page = this.page || this.app.session.get('page') || 0;
@@ -149,7 +193,29 @@ var rules = {
             }
             return breadcrumb;
         },
-        searchfilter: function() {
+        searchig: function() {
+            var page = this.page || this.app.session.get('page') || 0;
+            var state = {
+                name: 'searchig',
+                search: this.search,
+                page: page
+            };
+            var breadcrumb;
+
+            if (page === 1) {
+                navigation.clear.call(this);
+                saveNavigation(this, state);
+                return '/';
+            }
+            saveNavigation(this, state);
+            breadcrumb = '/nf/search/' + this.search;
+            if ((page - 1) > 1) {
+                breadcrumb += '/-p-' + (page - 1);
+            }
+            breadcrumb += '-ig';
+            return breadcrumb;
+        },
+        filter: function() {
             var page = this.page || this.app.session.get('page') || 0;
             var state = {
                 name: 'search'
@@ -166,6 +232,26 @@ var rules = {
             if ((page - 1) > 1) {
                 breadcrumb += '/-p-' + (page - 1);
             }
+            return breadcrumb;
+        },
+        filterig: function() {
+            var page = this.page || this.app.session.get('page') || 0;
+            var state = {
+                name: 'searchig'
+            };
+            var breadcrumb;
+
+            if (page === 1) {
+                navigation.clear.call(this);
+                saveNavigation(this, state);
+                return '/';
+            }
+            saveNavigation(this, state);
+            breadcrumb = '/nf/desc-cat-' + (this.subcategory || this.category).id + '/' + this.search;
+            if ((page - 1) > 1) {
+                breadcrumb += '/-p-' + (page - 1);
+            }
+            breadcrumb += '-ig';
             return breadcrumb;
         }
     },
