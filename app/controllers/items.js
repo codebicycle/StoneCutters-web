@@ -1,4 +1,5 @@
 'use strict';
+
 var _ = require('underscore');
 var asynquence = require('asynquence');
 var middlewares = require('../middlewares');
@@ -6,6 +7,7 @@ var helpers = require('../helpers');
 var tracking = require('../modules/tracking');
 var Filters = require('../modules/filters');
 var Item = require('../models/item');
+
 module.exports = {
     show: middlewares(show),
     gallery: middlewares(gallery),
@@ -17,8 +19,10 @@ module.exports = {
     filter: middlewares(filter),
     sort: middlewares(sort)
 };
+
 function show(params, callback) {
     helpers.controllers.control.call(this, params, controller);
+
     function controller() {
         var user = this.app.session.get('user');
         var securityKey = params.sk;
@@ -29,6 +33,7 @@ function show(params, callback) {
         var languages = this.app.session.get('languages');
         var platform = this.app.session.get('platform');
         var anonymousItem;
+
         var prepare = function(done) {
             if (user) {
                 params.token = user.token;
@@ -52,6 +57,7 @@ function show(params, callback) {
             delete params.sk;
             done();
         }.bind(this);
+
         var buildItemPurged = function(properties) {
             var item = new Item(properties, {
                 app: this.app
@@ -97,6 +103,7 @@ function show(params, callback) {
             }
             return item;
         }.bind(this);
+
         var fetch = function(done) {
             this.app.fetch({
                 item: {
@@ -126,6 +133,7 @@ function show(params, callback) {
                 done(res);
             }.bind(this));
         }.bind(this);
+
         var check = function(done, response) {
             if (!response.item) {
                 return done.fail(null, {});
@@ -136,6 +144,7 @@ function show(params, callback) {
             var shortHost = this.app.session.get('shortHost');
             var itemLocation = response.item.getLocation().url || response.item.get('location').url;
             var url;
+
             if (platform === 'desktop' && itemLocation && itemLocation !== this.app.session.get('siteLocation')) {
                 url = [protocol, '://', host.replace(shortHost, itemLocation), '/', slug].join('');
                 done.abort();
@@ -163,6 +172,7 @@ function show(params, callback) {
             }
             done(response.item);
         }.bind(this);
+
         var fetchRelateds = function(done, item) {
             this.app.fetch({
                 relatedItems: {
@@ -189,12 +199,14 @@ function show(params, callback) {
                 done(item, response.relatedItems);
             }.bind(this));
         }.bind(this);
+
         var success = function(_item, relatedItems) {
             var item = _item.toJSON();
             var subcategory = this.dependencies.categories.search(_item.get('category').id);
             var view = 'items/show';
             var category;
             var url;
+
             if (!subcategory) {
                 item.purged = true;
             }
@@ -246,9 +258,11 @@ function show(params, callback) {
                 categories: this.dependencies.categories.toJSON()
             });
         }.bind(this);
+
         var error = function(err, res) {
             return helpers.common.error.call(this, err, res, callback);
         }.bind(this);
+
         asynquence().or(error)
         .then(prepare)
         .then(fetch)
@@ -257,21 +271,26 @@ function show(params, callback) {
         .val(success);
     }
 }
+
 function gallery(params, callback) {
     helpers.controllers.control.call(this, params, controller);
+
     function controller() {
         var user = this.app.session.get('user');
         var itemId = params.itemId;
         var slugUrl = params.title;
         var pos = Number(params.pos) || 0;
         var siteLocation = this.app.session.get('siteLocation');
+
         var redirect = function(done) {
             var platform = this.app.session.get('platform');
+
             if (platform === 'desktop') {
                 return done.fail();
             }
             done();
         }.bind(this);
+
         var prepare = function(done) {
             if (user) {
                 params.token = user.token;
@@ -281,6 +300,7 @@ function gallery(params, callback) {
             delete params.title;
             done();
         }.bind(this);
+
         var fetch = function(done) {
             this.app.fetch({
                 item: {
@@ -291,6 +311,7 @@ function gallery(params, callback) {
                 readFromCache: false
             }, done.errfcb);
         }.bind(this);
+
         var check = function(done, res) {
             if (!res.item) {
                 return done.fail(null, {});
@@ -298,6 +319,7 @@ function gallery(params, callback) {
             var item = res.item.toJSON();
             var slug = helpers.common.slugToUrl(item);
             var platform = this.app.session.get('platform');
+
             if (platform !== 'html4') {
                 done.abort();
                 return helpers.common.redirect.call(this, ('/' + slug));
@@ -316,10 +338,12 @@ function gallery(params, callback) {
             }
             done(res.item);
         }.bind(this);
+
         var success = function(_item) {
             var item = _item.toJSON();
             var subcategory = this.dependencies.categories.search(_item.get('category').id);
             var category;
+
             if (!subcategory) {
                 return error();
             }
@@ -335,9 +359,11 @@ function gallery(params, callback) {
                 pos: pos
             });
         }.bind(this);
+
         var error = function(err, res) {
             return helpers.common.error.call(this, err, res, callback);
         }.bind(this);
+
         asynquence().or(error)
         .then(redirect)
         .then(prepare)
@@ -346,13 +372,16 @@ function gallery(params, callback) {
         .val(success);
     }
 }
+
 function map(params, callback) {
+
     helpers.controllers.control.call(this, params, controller);
     function controller() {
         var user = this.app.session.get('user');
         var itemId = params.itemId;
         var slugUrl = params.title;
         var siteLocation = this.app.session.get('siteLocation');
+
         var redirect = function(done) {
             var platform = this.app.session.get('platform');
             if (platform === 'desktop') {
@@ -360,6 +389,7 @@ function map(params, callback) {
             }
             done();
         }.bind(this);
+
         var prepare = function(done) {
             if (user) {
                 params.token = user.token;
@@ -369,6 +399,7 @@ function map(params, callback) {
             delete params.title;
             done();
         }.bind(this);
+
         var findItem = function(done) {
             this.app.fetch({
                 item: {
@@ -379,6 +410,7 @@ function map(params, callback) {
                 readFromCache: false
             }, done.errfcb);
         }.bind(this);
+
         var checkItem = function(done, resItem) {
             if (!resItem.item) {
                 return done.fail(null, {});
@@ -396,6 +428,7 @@ function map(params, callback) {
             }
             done(resItem.item);
         }.bind(this);
+
         var success = function(_item) {
             var item = _item.toJSON();
             var subcategory = this.dependencies.categories.search(_item.get('category').id);
@@ -413,9 +446,11 @@ function map(params, callback) {
                 item: _item.toJSON()
             });
         }.bind(this);
+
         var error = function(err, res) {
             return helpers.common.error.call(this, err, res, callback);
         }.bind(this);
+
         asynquence().or(error)
         .then(redirect)
         .then(prepare)
@@ -424,13 +459,16 @@ function map(params, callback) {
         .val(success);
     }
 }
+
 function reply(params, callback) {
     helpers.controllers.control.call(this, params, {
         isForm: true
     }, controller);
+
     function controller() {
         var itemId = params.itemId;
         var siteLocation = this.app.session.get('siteLocation');
+
         var redirect = function(done) {
             var platform = this.app.session.get('platform');
             if (platform === 'html5' || platform === 'desktop') {
@@ -438,11 +476,13 @@ function reply(params, callback) {
             }
             done();
         }.bind(this);
+
         var prepare = function(done) {
             params.id = params.itemId;
             delete params.itemId;
             done();
         }.bind(this);
+
         var findItem = function(done) {
             this.app.fetch({
                 item: {
@@ -453,6 +493,7 @@ function reply(params, callback) {
                 readFromCache: false
             }, done.errfcb);
         }.bind(this);
+
         var checkItem = function(done, resItem) {
             if (!resItem.item) {
                 return done.fail(null, {});
@@ -463,11 +504,13 @@ function reply(params, callback) {
             }
             done(resItem.item);
         }.bind(this);
+
         var success = function(_item) {
             var item = _item.toJSON();
             var subcategory = this.dependencies.categories.search(item.category.id);
             var category;
             var parentId;
+
             if (!subcategory) {
                 return error();
             }
@@ -483,9 +526,11 @@ function reply(params, callback) {
                 form: this.form
             });
         }.bind(this);
+
         var error = function(err, res) {
             return helpers.common.error.call(this, err, res, callback);
         }.bind(this);
+
         asynquence().or(error)
         .then(redirect)
         .then(prepare)
@@ -494,16 +539,20 @@ function reply(params, callback) {
         .val(success);
     }
 }
+
 function success(params, callback) {
     helpers.controllers.control.call(this, params, controller);
+
     function controller() {
         var itemId = params.itemId;
         var siteLocation = this.app.session.get('siteLocation');
+
         var prepare = function(done) {
             params.id = params.itemId;
             delete params.itemId;
             done();
         }.bind(this);
+
         var findItem = function(done) {
             this.app.fetch({
                 item: {
@@ -514,17 +563,20 @@ function success(params, callback) {
                 readFromCache: false
             }, done.errfcb);
         }.bind(this);
+
         var checkItem = function(done, resItem) {
             if (!resItem.item) {
                 return done.fail(null, {});
             }
             done(resItem.item);
         }.bind(this);
+
         var success = function(_item) {
             var item = _item.toJSON();
             var subcategory = this.dependencies.categories.search(item.category.id);
             var category;
             var parentId;
+
             if (!subcategory) {
                 return error();
             }
@@ -537,9 +589,11 @@ function success(params, callback) {
                 item: item
             });
         }.bind(this);
+
         var error = function(err, res) {
             return helpers.common.error.call(this, err, res, callback);
         }.bind(this);
+
         asynquence().or(error)
         .then(prepare)
         .then(findItem)
@@ -550,9 +604,11 @@ function success(params, callback) {
 function favorite(params, callback) {
     var user;
     var intent;
+
     var prepare = function(done) {
         var platform = this.app.session.get('platform');
         var url;
+
         if (platform === 'wap') {
             done.abort();
             return helpers.common.redirect.call(this, '/');
@@ -568,6 +624,7 @@ function favorite(params, callback) {
         intent = !params.intent || params.intent === 'undefined' ? undefined : params.intent;
         done();
     }.bind(this);
+
     var add = function(done) {
         helpers.dataAdapter.post(this.app.req, '/users/' + user.userId + '/favorites/' + params.itemId + (intent ? '/' + intent : ''), {
             query: {
@@ -576,6 +633,7 @@ function favorite(params, callback) {
             }
         }, done.errfcb);
     }.bind(this);
+
     var success = function() {
         var url = (params.redirect || '/des-iid-' + params.itemId);
         url = helpers.common.params(url, 'favorite', (intent || 'add'));
@@ -583,21 +641,26 @@ function favorite(params, callback) {
             status: 302
         });
     }.bind(this);
+
     var error = function() {
         helpers.common.redirect.call(this, params.redirect || '/des-iid-' + params.itemId, null, {
             status: 302
         });
     }.bind(this);
+
     asynquence().or(error)
     .then(prepare)
     .then(add)
     .val(success);
 }
+
 function deleteItem(params, callback) {
     var user;
     var itemId;
+
     var prepare = function(done) {
         var platform = this.app.session.get('platform');
+
         if (platform === 'wap') {
             done.abort();
             return helpers.common.redirect.call(this, '/');
@@ -612,6 +675,7 @@ function deleteItem(params, callback) {
         itemId = !params.itemId || params.itemId === 'undefined' ? undefined : params.itemId;
         done();
     }.bind(this);
+
     var remove = function(done) {
         helpers.dataAdapter.post(this.app.req, ('/items/' + itemId + '/delete'), {
             query: {
@@ -620,25 +684,31 @@ function deleteItem(params, callback) {
             }
         }, done.errfcb);
     }.bind(this);
+
     var success = function() {
         helpers.common.redirect.call(this, '/myolx/myadslisting?deleted=true', null, {
             status: 302
         });
     }.bind(this);
+
     var error = function() {
         helpers.common.redirect.call(this, '/myolx/myadslisting', null, {
             status: 302
         });
     }.bind(this);
+
     asynquence().or(error)
     .then(prepare)
     .then(remove)
     .val(success);
 }
+
 function filter(params, callback) {
     helpers.controllers.control.call(this, params, controller);
+
     function controller() {
         var platform = this.app.session.get('platform');
+
         var redirect = function(done) {
             if (platform !== 'html5') {
                 done.abort();
@@ -646,6 +716,7 @@ function filter(params, callback) {
             }
             done();
         }.bind(this);
+
         var prepare = function(done) {
             params.location = this.app.session.get('siteLocation');
             params.offset = 0;
@@ -667,6 +738,7 @@ function filter(params, callback) {
             delete params.filters;
             done();
         }.bind(this);
+
         var find = function(done) {
             this.app.fetch({
                 items: {
@@ -679,6 +751,7 @@ function filter(params, callback) {
                 done(res.items.filters);
             }.bind(this));
         }.bind(this);
+
         var success = function(filters) {
             this.app.seo.addMetatag('robots', 'noindex, nofollow');
             this.app.seo.addMetatag('googlebot', 'noindex, nofollow');
@@ -686,9 +759,11 @@ function filter(params, callback) {
                 filters: filters
             });
         }.bind(this);
+
         var error = function(err, res) {
             return helpers.common.error.call(this, err, res, callback);
         }.bind(this);
+
         asynquence().or(error)
         .then(redirect)
         .then(prepare)
@@ -696,10 +771,13 @@ function filter(params, callback) {
         .val(success);
     }
 }
+
 function sort(params, callback) {
     helpers.controllers.control.call(this, params, controller);
+
     function controller() {
         var platform = this.app.session.get('platform');
+
         var redirect = function(done) {
             if (platform !== 'html5') {
                 done.abort();
@@ -707,6 +785,7 @@ function sort(params, callback) {
             }
             done();
         }.bind(this);
+
         var success = function(options) {
             this.app.seo.addMetatag('robots', 'noindex, nofollow');
             this.app.seo.addMetatag('googlebot', 'noindex, nofollow');
@@ -714,9 +793,11 @@ function sort(params, callback) {
                 sorts: Filters.sorts()
             });
         }.bind(this);
+
         var error = function(err, res) {
             return helpers.common.error.call(this, err, res, callback);
         }.bind(this);
+
         asynquence().or(error)
         .then(redirect)
         .val(success);
