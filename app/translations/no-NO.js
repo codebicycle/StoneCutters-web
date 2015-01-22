@@ -230,7 +230,6 @@ module.exports = {
     'contactseller_form.AttachPicture': 'Legg ved et bilde:',
     'contactseller_form.Close': 'Steng',
     'contactseller_form.ReplyToListing': 'Svar p\xE5 annonsen',
-    'contactseller_form.ViewFullSite': 'Vis komplett nettside',
     'register_form.245': 'Ny bruker registrering',
     'register_form.termsAgreeB': 'Brukervilk\xE5rene',
     'itempagepostcomment.CommentPosted': 'Kommentaren ble satt inn.',
