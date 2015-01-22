@@ -69,7 +69,7 @@
                 {#{ item.date.since.day if item.date.since.day }} {{ dictionary[item.date.since.dictionary] }}{{ (', ' + item.date.since.hour) if item.date.since.hour }#}
                 <li class="my-ads {{ status }}" data-status="{{ status }}">
                     {% if item.editable %}
-                        <a class="btnfilter edit" href="{{ item.slug.replace(domain, fullDomain) | editSlug(item.id) }}">{{ dictionary["showactivelistings.Edit"] }}</a>
+                        <a class="btnfilter edit trackMe" data-tracking="Myolx-ClickEdit" href="{{ item.slug.replace(domain, fullDomain) | editSlug(item.id) }}">{{ dictionary["showactivelistings.Edit"] }}</a>
                     {% endif %}
                     {% if status != 'deleted' %}
                         <a class="btnfilter more" href="#" data-action="more" data-itemUrl="{{ item | slugToUrl | link }}" data-id="{{ item.id }}" >{{ dictionary["itemslisting.More"] }}</a>
@@ -82,11 +82,11 @@
                         <div class="actions hide">
                             {# <a href="#" class="action renews hide" data-action="renews">Republicar</a> #}
                             {% if status == 'ready' %}
-                                <a href="#" class="action view" data-action="view">Ver</a>
-                                <a href="{{ '/help' | link }}" class="action help">{{ dictionary["biderrorheader.Help"] }}</a>
-                                <a data-idd="{{ item.id }}" data-img="{{ item.thumbnailLarge }}" data-title="{{ item.title }}" class="action delete" data-action="delete" >{{ dictionary["confirmremoveitem.Delete"] }}</a>
+                                <a href="#" class="action view trackMe" data-tracking="Myolx-ClickSee" data-action="view">Ver</a>
+                                <a href="{{ '/help' | link }}" class="action help trackMe" data-tracking="Myolx-ClickHelp">{{ dictionary["biderrorheader.Help"] }}</a>
+                                <a data-idd="{{ item.id }}" data-img="{{ item.thumbnailLarge }}" data-title="{{ item.title }}" class="action delete trackMe" data-tracking="Myolx-ClickRemoveAd" data-action="delete" >{{ dictionary["confirmremoveitem.Delete"] }}</a>
                             {% else %}
-                                <a href="{{ '/help' | link }}" class="action help">{{ dictionary["biderrorheader.Help"] }}</a>
+                                <a href="{{ '/help' | link }}" class="action help trackMe" data-tracking="Myolx-ClickHelp">{{ dictionary["biderrorheader.Help"] }}</a>
                             {% endif %}
                         </div>
                     {% endif %}
