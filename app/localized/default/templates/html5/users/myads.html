@@ -51,7 +51,6 @@
     {% if items.length %}
         <ul class="item-listing">
             {% for item in items %}
-                {{ item|log }}
                 {% set status = 'ready' %}
                 {% set statustxt = dictionary["listingpageitemslisting.Posted"] %}
                 {% if item.status == 'expired' %}
