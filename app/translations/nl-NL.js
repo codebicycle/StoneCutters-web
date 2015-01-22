@@ -237,7 +237,6 @@ module.exports = {
     'contactseller_form.AttachPicture': 'Foto toevoegen',
     'contactseller_form.Close': 'Sluiten',
     'contactseller_form.ReplyToListing': 'Reageer op advertentie',
-    'contactseller_form.ViewFullSite': 'Bekijk volledige site',
     'register_form.245': 'Registratie nieuwe gebruiker',
     'register_form.termsAgreeB': 'Gebruiksvoorwaarden',
     'itempagepostcomment.CommentPosted': 'Opmerking geplaatst.',

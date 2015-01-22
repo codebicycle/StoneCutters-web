@@ -2,6 +2,7 @@
 
 var Base = require('../../../../../../common/app/bases/view');
 var helpers = require('../../../../../../../helpers');
+var translations = require('../../../../../../../../shared/translations');
 var statsd = require('../../../../../../../../shared/statsd')();
 var asynquence = require('asynquence');
 
@@ -14,6 +15,10 @@ module.exports = Base.extend({
         'blur textarea': 'validateField',
         'submit': 'submitForm',
         'click .replySuccess span': 'showSubmit'
+    },
+    initialize: function() {
+        Base.prototype.initialize.call(this);
+        this.dictionary = translations.get(this.app.session.get('selectedLanguage'));
     },
     showSubmit: function(event) {
         event.preventDefault();
@@ -152,33 +157,33 @@ module.exports = Base.extend({
             this.isEmail(value, field);
         }
     },
-    isEmpty: function (value,field) {
-        if(value === ''){
-            $('span.' + field).text('Por favor complete este campo.').removeClass('hide');
-            $('fieldset.' + field).addClass('error');
-            $('fieldset.' + field + ' span.icons').addClass('icon-attention');
-            return false;
-        }else{
-            $('span.' + field).addClass('hide');
-            $('fieldset.' + field).removeClass('error');
-            $('fieldset.' + field + ' span.icons').removeClass('icon-attention');
-            return true;
-        }
+    isEmpty: function (value, field) {
+        var hasError = (value === '');
+
+        return this.setError({
+            field: field,
+            hasError: hasError,
+            text: this.dictionary['postingerror.PleaseCompleteThisField']
+        });
     },
-    isEmail: function (value,field) {
+    isEmail: function (value, field) {
         var expression = /^[_a-zA-Z0-9-]+(\.[_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*(\.[a-zA-Z]{2,6})$/;
-        if(!expression.test(value)){
-            $('span.' + field).text('La dirección de correo electrónico es inválida.').removeClass('hide');
-            $('fieldset.' + field).addClass('error');
-            $('fieldset.' + field + ' span.icons').addClass('icon-attention');
-            return false;
-        }else{
-            $('span.' + field).addClass('hide');
-            $('fieldset.' + field).removeClass('error');
-            $('fieldset.' + field + ' span.icons').removeClass('icon-attention');
-            return true;
-        }
-    }
+        var hasError = !expression.test(value);
+
+        return this.setError({
+            field: field,
+            hasError: hasError,
+            text: this.dictionary['postingerror.InvalidEmailAddress']
+        });
+    },
+    setError: function (params) {
+        var hasError = params.hasError;
+
+        $('span.' + params.field).text(params.text).toggleClass('hide', !hasError);
+        $('fieldset.' + params.field).toggleClass('error', hasError);
+        $('fieldset.' + params.field + ' span.icons').toggleClass('icon-attention', hasError);
+        return !hasError;
+    },
 });
 
 module.exports.id = 'items/partials/contactform';
