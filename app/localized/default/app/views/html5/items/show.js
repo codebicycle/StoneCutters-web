@@ -34,11 +34,11 @@ module.exports = Base.extend({
             preventLinks:false
         });
         this.$(window).on('resize', this.resize).trigger('resize');
-        this.$( '.actions .email' ).click(function() {
+        this.$( '.actions .email' ).click(function onClick() {
             $('html, body').animate({
                 scrollTop: this.$('.reply').offset().top
             }, 400);
-        });
+        }.bind(this));
         this.$('section#itemPage section#onePicture .slide div').click(function(e) {
             e.preventDefault();
             $('body').addClass('noscroll');
