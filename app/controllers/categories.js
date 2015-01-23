@@ -55,7 +55,7 @@ function list(params, callback) {
             callback(null, {
                 icons: (~icons.indexOf(country)) ? country.split('.') : 'default'.split('.'),
                 location: location,
-                items: res ? res.items : undefined 
+                items: res ? res.items.toJSON() : undefined
             });
         }.bind(this);
 
