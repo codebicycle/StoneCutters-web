@@ -9,7 +9,6 @@ module.exports = Base.extend({
     className: 'items-locations',
     id: 'items-locations',
     tagName: 'nav',
-    animateTime: 500,
     events: {
         'click [data-action=slide]': 'filterSlide',
         'click [data-action=filter]': 'filter',
@@ -109,7 +108,7 @@ module.exports = Base.extend({
         event.stopImmediatePropagation();
 
         var $target = $(event.currentTarget);
-        var $neighborhoodList = $('.neighborhood-list .hidden-neighborhoods');
+        var $neighborhoodList = $('.hidden-locations');
         var $see = $('.see');
 
         $neighborhoodList.slideToggle();

@@ -11,10 +11,7 @@
             <img src="{{ item.images[0].thumbnail }}" alt="{{ item.title }}">
         {% endif %}
     </figure>
-
-
-
-    <h3><span class="label">{{ dictionary["item.Ended_New"] }}</span>{{ item.title }}</h3>
+    <h3><span class="label">{{ dictionary["item.Ended_New"] }}</span>{{ item.title | truncate( 70, True, '...') }}</h3>
     <div class="description">{{ item.description | truncate( 200, True, '...') }} </div>
 </div>
 
