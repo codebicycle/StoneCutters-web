@@ -25,7 +25,7 @@
             </div>
         </section>
     {% else %}
-        <section class="swiper-container">
+        <section class="swiper-container zd-gallery">
             <div class="swiper-wrapper">
                 {% for image in item.images %}
                     <div class="swiper-slide">
@@ -107,6 +107,32 @@
 
         <a href="#share" data-tracking="ItemPage-ClickShare" class="btnshare share trackMe">{{ dictionary["item.ShareAd"] }}</a>
     </section>
+    {% endif %}
+
+    {% if relatedItems.length %}
+        <div class="relatedAds">
+            <h3>{{ dictionary["itemgeneraldetails.OtherRelatedListings"] | replace(':','') }}</h3>
+            <section class="swiper-container swiper-related">
+                <div class="swiper-wrapper">
+                    {% for relatedItem in relatedItems %}
+                        {% if relatedItem.thumbnail %}
+                            <div class="swiper-slide">
+                                <div class="smallslide trackMe" data-itemId="{{ relatedItem.id }}" data-tracking="ItemPage-ClickRelatedAdImg" >
+                                    <a href="{{ relatedItem | slugToUrl | link }}">
+                                        <div class="bg" style="background-image: url('{{ relatedItem.thumbnail }}');"></div>
+                                        <div class="text">
+                                            <div class="bgopacity"></div>
+                                            <h6>{{ relatedItem.title }}</h6>
+                                            <span>{{ relatedItem.price.displayPrice }}</span>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </section>
+        </div>
     {% endif %}
 
     <section class="nav">

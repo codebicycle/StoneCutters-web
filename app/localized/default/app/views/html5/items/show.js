@@ -73,9 +73,9 @@ module.exports = Base.extend({
             }
         };
 
-        relatedAds = this.$('.swiper-containerRA').swiper({
-            mode:'horizontal',
-            slidesPerView: 3,
+        relatedAds = this.$('.swiper-related').swiper({
+            visibilityFullFit: true,
+            slidesPerView: 'auto',
             preventLinks:false
         });
         this.$(window).on('resize', this.resize).trigger('resize');
@@ -91,7 +91,7 @@ module.exports = Base.extend({
             $('body').removeClass('noscroll');
         });
 
-        this.$('section.swiper-container').click(function(e) {
+        this.$('.zd-gallery').click(function(e) {
             e.preventDefault();
             $('body').addClass('noscroll');
             history.pushState(null, "", window.location.pathname);

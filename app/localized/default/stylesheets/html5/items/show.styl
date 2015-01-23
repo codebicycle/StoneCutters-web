@@ -12,7 +12,7 @@
             overflow: hidden;
             padding: 10px;
             text-align: center;
-            margin-top: 30px;
+            margin-top: 20px;
             span {
                 color: #550C90;
                 float: left;
@@ -314,6 +314,14 @@
             }
         }
 
+        .relatedAds {
+            margin: 10px 0;
+            h3 {
+                margin: 0 10px 0 10px;
+                padding: 0;
+            }
+        }
+
         @media screen and (orientation:landscape) {
             .actions {
                 .action:before{
@@ -366,7 +374,7 @@
 
 
     /*----Slide comon css----*/
-    .swiper-container, .swiper-containerRA {
+    .swiper-container{
         -moz-backface-visibility:hidden;
         -ms-backface-visibility:hidden;
         -o-backface-visibility:hidden;
@@ -378,8 +386,8 @@
         position:relative;
         z-index:1;
     }
-    .swiper-container, .swiper-containerRA, .swiper-container .swiper-slide, .swiper-containerRA .swiper-slide, {width: 100%; height: auto!important;}
-    .swiper-container .swiper-wrapper, .swiper-containerRA .swiper-wrapper{
+    .swiper-container, .swiper-container .swiper-slide {width: 100%; height: auto!important;}
+    .swiper-container .swiper-wrapper{
         height: auto!important;
         position:relative;
         width:100%;
@@ -566,6 +574,79 @@
     }
     .swiper-nav img {
         margin-top: 10px;
+    }
+
+
+    .swiper-related {
+        height: 82px;
+        width: 95%;
+        margin-top: 7px;
+    }
+    .swiper-related .swiper-wrapper {
+        position:relative;
+        width:100%;
+        margin: 0 auto;
+    }
+    .swiper-related .swiper-slide {
+        width: 88px;
+        height: 82px !important;
+        text-align: center;
+        position: relative;
+        -webkit-transition: 300ms;
+        -moz-transition: 300ms;
+        -ms-transition: 300ms;
+        -o-transition: 300ms;
+        transition: 300ms;
+    }
+    .swiper-related .swiper-slide .smallslide {
+        float: left;
+        height: 82px;
+        width: 82px;
+    }
+    .swiper-related .swiper-slide .smallslide a {
+        display: block;
+        width: 100%;
+        height: 100%;
+        position: relative;
+    }
+    .swiper-related .swiper-slide .smallslide a .bg{
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        width: 100%;
+        height: 100%;
+    }
+    .swiper-related .swiper-slide .smallslide a .text {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        text-align: left;
+        line-height: 1;
+    }
+    .swiper-related .swiper-slide .smallslide a .text .bgopacity{
+        background: #000;
+        opacity: .6;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        left: 0;
+    }
+    .swiper-related .swiper-slide .smallslide a .text h6{
+        color: #fff;
+        font-size: 10px;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+        padding: 4px 4px 0 5px;
+        position: relative;
+    }
+    .swiper-related .swiper-slide .smallslide a .text span{
+        color: #ff7700;
+        font-size: 12px;
+        padding: 0 4px 3px 5px;
+        font-weight: 700;
+        position: relative;
+        display: block;
     }
 
 }
