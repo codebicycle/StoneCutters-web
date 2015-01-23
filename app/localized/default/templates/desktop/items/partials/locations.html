@@ -22,13 +22,22 @@
 {% if filters %}
     {% for filter in filters.toJSON() %}
         {% if filter.name == 'state' or (filter.name == 'city' and location.current and location.current.type != 'city') %}
-            <ul class="locations-list">
-                {% for value in filter.value %}
-                    <li class="locations">
-                        <a href="{{ nav.link | linkig({location: value.id}) }}" rel="nofollow">{{ value.value }} <span>{{ value.count | countFormat }}</span></a>
-                    </li>
-                {% endfor %}
-            </ul>
+            <div class="locations-list">
+                <ul class="visible-locations">
+                    {% for value in filter.value %}
+                        <li class="locations">
+                            <a href="{{ nav.link | linkig({location: value.id}) }}" rel="nofollow">{{ value.value }} <span>{{ value.count | countFormat }}</span></a>
+                        </li>
+                        {{ '</ul><ul class="hidden-locations">' if loop.index == 12 and filter.value.length > 16 }}
+                    {% endfor %}
+                </ul>
+                {% if filter.value.length > 16 %}
+                    <div class="actions">
+                        <span class="see more icons icon-arrow-down" data-action="see">{{ dictionary["misc.SeeMore"] }}</span>
+                        <span class="see less hide icons icon-arrow-up" data-action="see">{{ dictionary["misc.SeeLess"] }}</span>
+                    </div>
+                {% endif %}
+            </div>
         {% endif %}
         {% if filters.has('neighborhood') and filter.name == 'neighborhood' %}
             <div class="neighborhood">
@@ -64,7 +73,7 @@
                                 <label>
                                     <input type="checkbox" value="{{neighborhood.id}}" rel="{{ neighborhood.value }}" {{ 'checked' if filters.has(filter.name, neighborhood.id) }} >
                                     {{ neighborhood.value }} <span>{{ neighborhood.count | countFormat }}</span>
-                                    {{ '</ul><ul class="hidden-neighborhoods">' if loop.index == 8 }}
+                                    {{ '</ul><ul class="hidden-locations">' if loop.index == 8 }}
                                 </label>
                             </li>
                         {% endfor %}
