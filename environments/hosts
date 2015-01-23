@@ -220,6 +220,7 @@
 {IP}  html5.m.olx.co.cr         # Costa Rica
 {IP}  www.olx.co.cr         # Costa Rica
 {IP}  olx.co.cr         # Costa Rica
+{IP}  nicoya.olx.co.cr         # Costa Rica
 
 {IP}  m.olx.com.ec        # Ecuador
 {IP}  wap.m.olx.com.ec        # Ecuador
@@ -644,6 +645,7 @@
 {IP}  html5.m.olx.ae            # United Arab Emirates
 {IP}  www.olx.ae            # United Arab Emirates
 {IP}  olx.ae            # United Arab Emirates
+{IP}  dubaicity.olx.ae            # United Arab Emirates
 
 {IP}  m.olx.com.uy        # Uruguay
 {IP}  wap.m.olx.com.uy        # Uruguay

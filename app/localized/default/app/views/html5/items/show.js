@@ -1,23 +1,25 @@
 'use strict';
 
-var Base = require('../../../../../common/app/bases/view').requireView('items/show');
 var _ = require('underscore');
 var asynquence = require('asynquence');
+var Base = require('../../../../../common/app/bases/view').requireView('items/show');
+var Categories = require('../../../../../../collections/categories');
+var Item = require('../../../../../../models/item');
 var helpers = require('../../../../../../helpers');
 var statsd = require('../../../../../../../shared/statsd')();
 
 module.exports = Base.extend({
     className: 'items_show_view',
-    wapAttributes: {
-        cellpadding: 0
-    },
     postRender: function() {
         var that = this;
 
         var marginActions = $('section.actions').height() + $('section.actions > span').height() + 15;
         $('.footer_footer_view').css('margin-bottom', marginActions + 'px');
 
-        that.messages = {'errMsgMail': this.$('.errMsgMail').val(), 'errMsgMandatory': this.$('.errMsgMandatory').val(), 'msgSend': this.$('.msgSend').val().replace(/<br \/>/g,''), 'addFav': this.$('.addFav').val(), 'removeFav': this.$('.removeFav').val()};
+        that.messages = {
+            'addFav': this.$('.addFav').val(),
+            'removeFav': this.$('.removeFav').val()
+        };
 
         var galery = this.$('.swiper-container').swiper({
             mode:'horizontal',
@@ -32,9 +34,11 @@ module.exports = Base.extend({
             preventLinks:false
         });
         this.$(window).on('resize', this.resize).trigger('resize');
-        this.$( '.actions .email' ).click(function() {
-            $('html, body').animate({scrollTop: $('.reply').offset().top}, 400);
-        });
+        this.$( '.actions .email' ).click(function onClick() {
+            $('html, body').animate({
+                scrollTop: this.$('.reply').offset().top
+            }, 400);
+        }.bind(this));
         this.$('section#itemPage section#onePicture .slide div').click(function(e) {
             e.preventDefault();
             $('body').addClass('noscroll');
@@ -147,125 +151,6 @@ module.exports = Base.extend({
             $(this).parents('.popup').removeClass('visible');
         });
 
-        this.$('#replyForm .submit').click(function onSubmit(e) {
-            e.preventDefault();
-            var message = $('.message').val();
-            var email = $('.email').val();
-            var name = $('.name').val();
-            var phone = $('.phone').val();
-            var itemId = $('.itemId').val();
-            var errMsgMail = $('.errMsgMail').val();
-            var errMsgMandatory = $('.errMsgMandatory').val();
-            var msgSend = $('.msgSend').val();
-            var url = [];
-
-            url.push('/items/');
-            url.push(itemId);
-            url.push('/reply');
-            url = helpers.common.fullizeUrl(url.join(''), this.app);
-            $('.loading').show();
-
-            var validate = function(done) {
-                if (this.validForm(message, email)) {
-                    done();
-                }
-                else {
-                    done.abort();
-                    always();
-                    trackFail();
-                }
-            }.bind(this);
-
-            var post = function(done) {
-                $.ajax({
-                    type: 'POST',
-                    url: helpers.common.link(url, this.app),
-                    cache: false,
-                    data: {
-                        message: message,
-                        email: email,
-                        name:name,
-                        phone:phone
-                    }
-                })
-                .done(done)
-                .fail(done.fail)
-                .always(always);
-            }.bind(this);
-
-            var success = function(done, data) {
-                var $msg = $('.msgCont .msgCont-wrapper .msgCont-container');
-
-                $('.loading').hide();
-                $('body').removeClass('noscroll');
-                $('.message').val('');
-                $('.name').val('');
-                $('.email').val('');
-                $('.phone').val('');
-                $msg.text(this.messages.msgSend);
-                $('.msgCont').addClass('visible');
-                setTimeout(function(){
-                    $('.msgCont').removeClass('visible');
-                }, 3000);
-                done(data);
-            }.bind(this);
-
-            var trackEvent = function(done, data) {
-                var category = $('.itemCategory').val();
-                var subcategory = $('.itemSubcategory').val();
-
-                this.track({
-                    category: 'Reply',
-                    action: 'ReplySuccess',
-                    custom: ['Reply', category, subcategory, 'ReplySuccess', itemId].join('::')
-                });
-                done();
-            }.bind(this);
-
-            var trackTracking = function(done, data) {
-                var $view = $('#partials-tracking-view');
-                var tracking;
-
-                tracking = $('<div></div>').append(data);
-                tracking = $('#partials-tracking-view', tracking);
-                if (tracking.length) {
-                    $view.trigger('updateHtml', tracking.html());
-                }
-                done();
-            }.bind(this);
-
-            var trackGraphite = function(done) {
-                var location = this.app.session.get('location');
-                var platform = this.app.session.get('platform');
-
-                statsd.increment([location.name, 'reply', 'success', platform]);
-                done();
-            }.bind(this);
-
-            var fail = function(data) {
-                var messages = JSON.parse(data.responseText);
-
-                $('small.email').text(messages[0].message).removeClass('hide');
-                trackFail();
-            }.bind(this);
-
-            var trackFail = function() {
-                var location = this.app.session.get('location');
-                var platform = this.app.session.get('platform');
-
-                statsd.increment([location.name, 'reply', 'error', platform]);
-            }.bind(this);
-
-            var always = function() {
-                $('.loading').hide();
-            }.bind(this);
-
-            asynquence().or(fail)
-                .then(validate)
-                .then(post)
-                .gate(success, trackEvent, trackTracking, trackGraphite);
-        }.bind(this));
-
         //window History
         window.onpopstate = function(e) {
             var $galCont = $('#galCont');
@@ -284,43 +169,11 @@ module.exports = Base.extend({
             }
         };
 
-        this.$('form#replyForm').on('change', 'input.name , input.email , textarea.message', function (e) {
-            var value = $(this).val();
-            var field = $(this).attr('class');
-
-            if(that.isEmpty(value,field) && field == 'email'){
-                that.isEmail(value,field);
-            }
-        });
         this.attachTrackMe(function(category, action) {
             var itemId = $('.itemId').val();
             var itemCategory = $('.itemCategory').val();
             var itemSubcategory = $('.itemSubcategory').val();
-            if (action === 'ClickReply') {
-                var message = $('.message').val();
-                var email = $('.email').val();
-                var name = $('.name').val();
-                var location = this.app.session.get('location').abbreviation.toLowerCase();
 
-                if (!that.validForm(message, email)) {
-                    action += '_Error';
-                    if (!that.isEmpty(email, 'email')){
-                        action += 'EmailEmpty';
-                        statsd.increment([location, 'reply', 'error', this.app.session.get('platform'), 'EmailEmpty']);
-                    }
-                    else if (!that.isEmail(email, 'email')) {
-                        action += 'EmailWrong';
-                        statsd.increment([location, 'reply', 'error', this.app.session.get('platform'), 'EmailWrong']);
-                    }
-                    if (!that.isEmpty(message, 'message')) {
-                        action += 'MessageEmpty';
-                        statsd.increment([location, 'reply', 'error', this.app.session.get('platform'), 'MessageEmpty']);
-                    }
-                    if (!that.isEmpty(name, 'name')) {
-                        action += 'NameEmpty';
-                    }
-                }
-            }
             return {
                 action: action,
                 custom: [category, itemCategory, itemSubcategory, action, itemId].join('::')
@@ -341,40 +194,6 @@ module.exports = Base.extend({
         $('.slidePagination span').css('width' , paginationWidth+'px');
         $('.slidePagination span').css('margin' , '0 '+paginationMargin+'px');
     },
-    validForm: function (message, email) {
-        var valMail = true;
-        var valMsg = true;
-
-        valMail = this.isEmpty(email,'email');
-        if(valMail){
-            valMail = this.isEmail(email,'email');
-        }
-
-        valMsg = this.isEmpty(message,'message');
-
-        return (valMail && valMsg);
-    },
-    isEmail: function (value,field) {
-
-        var expression = /^[_a-zA-Z0-9-]+(\.[_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*(\.[a-zA-Z]{2,6})$/;
-        if(!expression.test(value)){
-            $('small.'+field).text(this.messages.errMsgMail).removeClass('hide');
-            return false;
-        }else{
-            $('small.'+field).removeClass('hide').empty();
-            return true;
-        }
-
-    },
-    isEmpty: function (value,field) {
-        if(value === ''){
-            $('small.'+field).text(this.messages.errMsgMandatory).removeClass('hide');
-            return false;
-        }else{
-            $('small.'+field).addClass('hide').empty();
-            return true;
-        }
-    },
     paginationSize: function () {
         var paginationCount = $('.slidePagination span').length + 1;
         var windowSize = $(window).width();
@@ -383,6 +202,18 @@ module.exports = Base.extend({
         paginationWidth = paginationWidth - paginationMargin;
         $('.slidePagination span').css('width' , paginationWidth+'px');
         $('.slidePagination span').css('margin' , '0 '+paginationMargin+'px');
+    },
+    getItem: function() {
+        this.item = this.item || (this.options.item && this.options.item.toJSON ? this.options.item : new Item(this.options.item || {}, {
+            app: this.app
+        }));
+        return this.item;
+    },
+    getCategories: function() {
+        this.categories = this.categories || (this.options.categories && this.options.categories.toJSON ? this.options.categories : new Categories(this.options.categories || {}, {
+            app: this.app
+        }));
+        return this.categories;
     }
 });
 

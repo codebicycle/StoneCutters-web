@@ -1,7 +1,8 @@
 {% for item in items %}
-    <li>
+    <li class="{{ nav.current }}">
         <a href="{{ item | slugToUrl | link }}" data-qa="list-item">
-            <div {% if item.thumbnail %} style="background-image:url({{ item.thumbnail }});" {% endif %} data-fullimg="{{ item.fullImage }}" class="image{{ ' filled' if item.thumbnail }}"></div>
+            <div {% if item.thumbnail %} style="background-image:url({{ item.thumbnail if nav.current == 'show' else item.fullImage }});" {% endif %} data-fullimg="{{ item.fullImage }}" class="image{{ ' filled' if item.thumbnail }} {{ 'showig' if nav.current == 'showig' }}">
+            </div>
             <p class="datetime">
                 {{ item.date.since.day if item.date.since.day }} {{ dictionary[item.date.since.dictionary] }}{{ (', ' + item.date.since.hour) if item.date.since.hour }}
                 {% if item.displayLocation %}
