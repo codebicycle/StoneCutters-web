@@ -14,7 +14,8 @@ module.exports = {
     subcategories: middlewares(subcategories),
     form: middlewares(form),
     success: middlewares(success),
-    edit: middlewares(edit)
+    edit: middlewares(edit),
+    editsuccess: middlewares(editsuccess)
 };
 
 function flowMarketing(params, callback) {
@@ -730,6 +731,125 @@ function edit(params, callback) {
             .then(checkItem)
             .gate(findPostingSession, findFields)
             .then(checkFields)
+            .val(success);
+    }
+}
+
+function editsuccess(params, callback) {
+    helpers.controllers.control.call(this, params, controller);
+
+    function controller() {
+        var user = this.app.session.get('user');
+        var securityKey = params.sk;
+        var itemId = params.itemId;
+        var siteLocation = this.app.session.get('siteLocation');
+        var languages = this.app.session.get('languages');
+        var anonymousItem;
+
+        var prepare = function(done) {
+            if (user) {
+                params.token = user.token;
+            }
+            else if (typeof window !== 'undefined' && localStorage) {
+                anonymousItem = localStorage.getItem('anonymousItem');
+                anonymousItem = (!anonymousItem ? {} : JSON.parse(anonymousItem));
+                if (securityKey) {
+                    anonymousItem[params.itemId] = securityKey;
+                    localStorage.setItem('anonymousItem', JSON.stringify(anonymousItem));
+                }
+                else {
+                    securityKey = anonymousItem[params.itemId];
+                }
+            }
+            params.id = params.itemId;
+            params.languageId = languages._byId[this.app.session.get('selectedLanguage')].id;
+            delete params.itemId;
+            delete params.title;
+            delete params.sk;
+            done();
+        }.bind(this);
+
+        var findItem = function(done) {
+            this.app.fetch({
+                item: {
+                    model: 'Item',
+                    params: params
+                }
+            }, {
+                readFromCache: false
+            }, done.errfcb);
+        }.bind(this);
+
+        var checkItem = function(done, resItem) {
+            if (!resItem.item) {
+                return done.fail(null, {});
+            }
+            done(resItem.item);
+        }.bind(this);
+
+        var findRelatedItems = function(done, _item) {
+            this.app.fetch({
+                relatedItems: {
+                    collection : 'Items',
+                    params: {
+                        location: siteLocation,
+                        offset: 0,
+                        pageSize: 10,
+                        relatedAds: itemId
+                    }
+                }
+            }, {
+                readFromCache: false
+            }, function afterFetch(err, res) {
+                if (err) {
+                    err = null;
+                    res = {
+                        relatedItems: []
+                    };
+                }
+                else {
+                    res.relatedItems = res.relatedItems.toJSON();
+                }
+                done(_item, res.relatedItems);
+            }.bind(this));
+        }.bind(this);
+
+        var success = function(_item, _relatedItems) {
+            var item = _item.toJSON();
+            var subcategory = this.dependencies.categories.search(item.category.id);
+            var category;
+            var parentId;
+
+            if (!subcategory) {
+                return error();
+            }
+            parentId = subcategory.get('parentId');
+            category = parentId ? this.dependencies.categories.get(parentId) : subcategory;
+
+            tracking.addParam('item', item);
+            tracking.addParam('category', category.toJSON());
+            tracking.addParam('subcategory', subcategory.toJSON());
+            this.app.seo.addMetatag('robots', 'noindex, nofollow');
+            this.app.seo.addMetatag('googlebot', 'noindex, nofollow');
+            callback(null, {
+                user: user,
+                item: item,
+                sk: securityKey,
+                category: category.toJSON(),
+                subcategory: subcategory.toJSON(),
+                relatedItems: _relatedItems
+            });
+        }.bind(this);
+
+        var error = function(err, res) {
+            return helpers.common.error.call(this, err, res, callback);
+        }.bind(this);
+
+        asynquence().or(error)
+            .then(prepare)
+            .then(findItem)
+            .then(checkItem)
+            .then(findRelatedItems)
             .val(success);
     }
 }
