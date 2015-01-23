@@ -668,3 +668,6 @@
 {IP}  html5.m.jaovat.com        # Jaovat - Vietnam
 {IP}  www.jaovat.com        # Jaovat - Vietnam
 {IP}  jaovat.com        # Jaovat - Vietnam
+
+#IPSTATICS
+{IPSTATICS} images01.olx-st.com images02.olx-st.com images03.olx-st.com images04.olx-st.com
