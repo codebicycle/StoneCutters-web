@@ -82,11 +82,11 @@
                         <div class="actions hide">
                             {# <a href="#" class="action renews hide" data-action="renews">Republicar</a> #}
                             {% if status == 'ready' %}
-                                <a href="#" class="action view trackMe" data-tracking="Myolx-ClickSee" data-action="view">Ver</a>
-                                <a href="{{ '/help' | link }}" class="action help trackMe" data-tracking="Myolx-ClickHelp">{{ dictionary["biderrorheader.Help"] }}</a>
-                                <a data-idd="{{ item.id }}" data-img="{{ item.thumbnailLarge }}" data-title="{{ item.title }}" class="action delete trackMe" data-tracking="Myolx-ClickRemoveAd" data-action="delete" >{{ dictionary["confirmremoveitem.Delete"] }}</a>
+                                <a class="action view trackMe" data-tracking="Myolx-ClickSee" href="{{ item | slugToUrl | link }}" data-action="view">Ver</a>
+                                <a class="action help trackMe" data-tracking="Myolx-ClickHelp" href="{{ '/help' | link }}">{{ dictionary["biderrorheader.Help"] }}</a>
+                                <a class="action delete trackMe" data-tracking="Myolx-ClickRemoveAd" data-idd="{{ item.id }}" data-img="{{ item.thumbnailLarge }}" data-title="{{ item.title }}" data-action="delete" >{{ dictionary["confirmremoveitem.Delete"] }}</a>
                             {% else %}
-                                <a href="{{ '/help' | link }}" class="action help trackMe" data-tracking="Myolx-ClickHelp">{{ dictionary["biderrorheader.Help"] }}</a>
+                                <a class="action help trackMe" data-tracking="Myolx-ClickHelp" href="{{ '/help' | link }}">{{ dictionary["biderrorheader.Help"] }}</a>
                             {% endif %}
                         </div>
                     {% endif %}

@@ -5,6 +5,7 @@ var asynquence = require('asynquence');
 var Base = require('../../../../../common/app/bases/view').requireView('users/myads');
 var helpers = require('../../../../../../helpers');
 var Items = require('../../../../../../collections/items');
+var tracking = require('../../../../../../modules/tracking');
 
 module.exports = Base.extend({
     events: {
@@ -35,6 +36,7 @@ module.exports = Base.extend({
         this.items = this.items || this.options.items && this.options.items.toJSON ? this.options.items : new Items(this.options.items || {}, {
             app: this.app
         });
+        this.attachTrackMe();
     },
     showActions: function(event) {
         event.preventDefault();
@@ -60,6 +62,7 @@ module.exports = Base.extend({
             $target.addClass('active');
             $actions.removeClass('hide');
         }
+        this.attachTrackMe();
     },
     onDeleteClick: function(event) {
         event.preventDefault();
