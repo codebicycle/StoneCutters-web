@@ -4,7 +4,6 @@
     {% set link = (breadcrumb | link) %}
     {{ Breadcrumb(dictionary, link, category.trName) }}
 <section id="subCategories" class="list">
-    
     <ul>
         {% for subcategory in category.children.toJSON() %}
             <li>
