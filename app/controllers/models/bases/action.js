@@ -46,6 +46,7 @@ function success(data) {
 }
 
 function error(err, res) {
+    console.log('ERROR 0', err, err.stack);
     helpers.common.error.call(this, err || null, res || {}, this.get('callback'));
 }
 

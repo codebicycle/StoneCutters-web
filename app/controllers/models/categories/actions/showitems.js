@@ -1,43 +1,44 @@
 'use strict';
 
 var _ = require('underscore');
-var asynquence = require('asynquence');
 var URLParser = require('url');
 var Base = require('../../bases/action');
 var helpers = require('../../../../helpers');
 var tracking = require('../../../../modules/tracking');
 var Paginator = require('../../../../modules/paginator');
-var Seo = require('../../../../modules/seo');
-var config = require('../../../../../shared/config');
 var utils = require('../../../../../shared/utils');
 
 var ShowItems = Base.extend({
+    initialize: initialize,
+    control: control,
+    configure: configure,
     redirection: redirection,
-    action: action
+    prepare: prepare,
+    fetch: fetch,
+    filters: filters,
+    paginate: paginate,
+    success: success
 });
 
 function initialize(attrs, options) {
-    var params = options.params;
-    var promise = options.promise;
-    var gallery = options.gallery;
-    var category = options.category;
-    var subcategory = options.subcategory;
-    var page = params ? params.page : undefined;
-    var languages = this.app.session.get('languages');
-    var path = this.app.session.get('path');
-    var starts = '/nf';
-    var query;
-    var url;
+    Base.prototype.initialize.apply(this, arguments);
+
+    var params = this.get('params');
+
+    this.promise = options.promise;
+    this.category = options.category;
+    this.subcategory = options.subcategory;
+    this.page = params ? params.page : undefined;
 }
 
 function control() {
-    promise.then(configure);
-    promise.then(redirection);
-    promise.then(prepare);
-    promise.then(fetch);
-    promise.then(filters);
-    promise.then(paginate);
-    promise.then(success);
+    this.promise.then(this.configure.bind(this));
+    this.promise.then(this.redirection.bind(this));
+    this.promise.then(this.prepare.bind(this));
+    this.promise.then(this.fetch.bind(this));
+    this.promise.then(this.filters.bind(this));
+    this.promise.then(this.paginate.bind(this));
+    this.promise.then(this.success.bind(this));
 }
 
 function configure(done) {
@@ -51,17 +52,19 @@ function configure(done) {
 }
 
 function redirection(done) {
+    var path = this.app.session.get('path');
     var platform = this.app.session.get('platform');
-    var slug = helpers.common.slugToUrl((subcategory || category).toJSON());
-
-    url = ['/', slug].join('');
+    var slug = helpers.common.slugToUrl((this.subcategory || this.category).toJSON());
+    var params = this.get('params');
+    var url = ['/', slug].join('');
+    var starts = '/nf';
 
     if (slug.indexOf(params.title + '-cat-')) {
         done.abort();
-        if (page === undefined || isNaN(page) || page <= 1) {
-            return this.redirect([url, gallery].join(''));
+        if (this.page === undefined || isNaN(this.page) || this.page <= 1) {
+            return this.redirect([url, this.get('gallery')].join(''));
         }
-        return this.redirect([url, '-p-', page, gallery].join(''));
+        return this.redirect([url, '-p-', this.page, this.get('gallery')].join(''));
     }
     if ((params.filters && params.filters !== 'undefined') && !utils.startsWith(path, starts)) {
         done.abort();
@@ -71,13 +74,15 @@ function redirection(done) {
         done.abort();
         return this.redirect([path.replace(starts, ''), URLParser.parse(this.app.session.get('url')).search || ''].join(''));
     }
-    done();
+    done(params);
 }
 
-function prepare(done) {
+function prepare(done, params) {
+    var languages = this.app.session.get('languages');
+
     Paginator.prepare(this.app, params);
 
-    query = _.clone(params);
+    this.query = _.clone(params);
     params.categoryId = params.catId;
     params.seo = this.app.seo.isEnabled();
     params.languageId = languages._byId[this.app.session.get('selectedLanguage')].id;
@@ -85,10 +90,10 @@ function prepare(done) {
     delete params.title;
     delete params.page;
     delete params.filters;
-    done();
+    done(params);
 }
 
-function fetch(done) {
+function fetch(done, params) {
     this.app.fetch({
         items: {
             collection: 'Items',
@@ -101,13 +106,14 @@ function fetch(done) {
 
 function filters(done, res) {
     var url = this.app.session.get('url');
+    var path = this.app.session.get('path');
     var filter;
     var _filters;
 
     if (!res.items) {
         return done.fail(null, {});
     }
-    filter = query.filters;
+    filter = this.query.filters;
     if (!filter || filter === 'undefined') {
         return done(res);
     }
@@ -121,19 +127,21 @@ function filters(done, res) {
 }
 
 function paginate(done, res) {
+    var slug = helpers.common.slugToUrl((this.subcategory || this.category).toJSON());
+    var url = ['/', slug].join('');
     var realPage;
 
-    if (page == 1) {
+    if (this.page == 1) {
         done.abort();
-        return this.redirect([url, gallery].join(''));
+        return this.redirect([url, this.get('gallery')].join(''));
     }
-    realPage = res.items.paginate([url, '[page][gallery][filters]'].join(''), query, {
-        page: page,
-        gallery: gallery
+    realPage = res.items.paginate([url, '[page][gallery][filters]'].join(''), this.query, {
+        page: this.page,
+        gallery: this.get('gallery')
     });
     if (realPage) {
         done.abort();
-        return this.redirect([url, '-p-', realPage, gallery].join(''));
+        return this.redirect([url, '-p-', realPage, this.get('gallery')].join(''));
     }
     done(res.items);
 }
@@ -141,11 +149,11 @@ function paginate(done, res) {
 function success(done, items) {
     var meta = items.meta;
     var dataPage = {
-        category: category.get('id')
+        category: this.category.get('id')
     };
 
-    if (subcategory) {
-        dataPage.subcategory = subcategory.get('id');
+    if (this.subcategory) {
+        dataPage.subcategory = this.subcategory.get('id');
     }
     this.app.session.update({
         dataPage: dataPage
@@ -158,71 +166,24 @@ function success(done, items) {
     }
 
     tracking.setPage('listing');
-    tracking.addParam('category', category.toJSON());
-    if (subcategory) {
-        tracking.addParam('subcategory', subcategory.toJSON());
+    tracking.addParam('category', this.category.toJSON());
+    if (this.subcategory) {
+        tracking.addParam('subcategory', this.subcategory.toJSON());
     }
-    tracking.addParam('page', query.page);
+    tracking.addParam('page', this.query.page);
 
     done({
         type: 'items',
-        category: category.toJSON(),
-        subcategory: (subcategory || category).toJSON(),
-        currentCategory: (subcategory ? subcategory.toJSON() : category.toJSON()),
-        relatedAds: query.relatedAds,
+        category: this.category.toJSON(),
+        subcategory: (this.subcategory || this.category).toJSON(),
+        currentCategory: (this.subcategory ? this.subcategory.toJSON() : this.category.toJSON()),
+        relatedAds: this.query.relatedAds,
         meta: meta,
         items: items.toJSON(),
         filters: items.filters,
         paginator: items.paginator,
         hasItemsWithImages: items.hasImages()
     });
-}
-
-function handleShow(params, options) {
-    var category = options.category;
-    var promise = options.promise;
-
-    var configure = function(done) {
-        var currentRouter = ['categories', 'subcategories'];
-
-        this.app.seo.reset(this.app, {
-            page: currentRouter
-        });
-        helpers.controllers.changeHeaders.call(this, {}, currentRouter);
-        done();
-    }.bind(this);
-
-    var redirection = function(done) {
-        var slug = helpers.common.slugToUrl(category.toJSON());
-
-        if (!category.checkSlug(slug, params.title)) {
-            done.abort();
-            return this.redirect('/' + slug);
-        }
-        done();
-    }.bind(this);
-
-    var success = function(done) {
-        this.app.session.update({
-            dataPage: {
-                category: category.get('id')
-            }
-        });
-
-        this.app.seo.addMetatag('title', category.get('trName'));
-        this.app.seo.addMetatag('description', category.get('trName'));
-
-        tracking.addParam('category', category.toJSON());
-
-        done({
-            type: 'categories',
-            category: category.toJSON()
-        });
-    }.bind(this);
-
-    promise.then(configure);
-    promise.then(redirection);
-    promise.then(success);
 }
 
 module.exports = ShowItems;
