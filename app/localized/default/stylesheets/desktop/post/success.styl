@@ -131,19 +131,27 @@
         }
 
         .featured-ads {
-            box($greyBoxBg, $greyBorders, 3px 3px 3px 3px, 20px, solid, 1px);
+            box($yellowSuccess, $yellowBorders, 3px 3px 3px 3px, 20px, solid, 1px);
             margin-top: 20px;
+            position: relative;
 
             .featured-ads-title {
-                margin: 0;
+                margin: 10px 0 0;
+                font-size: $m;
+                color: $black;
+                font-weight: bold;
             }
-
-            .featured-ads-tip {
-                height: 61px;
-                background-image: url(imageUrl/images/desktop/destacar.png);
-                position: absolute;
-                margin: -26px 0 0 225px;
-                width: 61px;
+            
+            .icon-feature {
+                green-star()
+                top: -8px;
+                margin-left: -32px;
+            }
+            
+            em {
+                ribbon($green, $white)
+                top: 11px;
+                padding-left: 22px;
             }
 
             ul {
