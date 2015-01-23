@@ -2,7 +2,7 @@
 <div class="featuredad-home">
     <h3>{{ dictionary["widgets.Featured_listings"] }}</h3>
     <ul class="featuredad-content">
-        {% for item in items %}
+        {% for item in items.toJSON() %}
             <li>
                 <i class="icons icon-feature"></i>
                 <a href="{{ item.slug }}">
