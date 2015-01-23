@@ -1,6 +1,10 @@
 'use strict';
 
+var _ = require('underscore');
+var asynquence = require('asynquence');
 var Base = require('../../bases/action');
+var FeatureAd = require('../../../../models/feature_ad');
+var Paginator = require('../../../../modules/paginator');
 var config = require('../../../../../shared/config');
 
 var List = Base.extend({
@@ -20,8 +24,8 @@ function fetch(done) {
     if (!FeatureAd.isEnabled(this.app)) {
         return done();
     }
-
     var languages = this.app.session.get('languages');
+    var params = this.get('params');
 
     params.seo = this.app.seo.isEnabled();
     params.languageId = languages._byId[this.app.session.get('selectedLanguage')].id;

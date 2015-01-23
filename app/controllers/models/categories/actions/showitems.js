@@ -6,6 +6,7 @@ var Base = require('../../bases/action');
 var helpers = require('../../../../helpers');
 var tracking = require('../../../../modules/tracking');
 var Paginator = require('../../../../modules/paginator');
+var FeatureAd = require('../../../../models/feature_ad');
 var utils = require('../../../../../shared/utils');
 
 var ShowItems = Base.extend({
