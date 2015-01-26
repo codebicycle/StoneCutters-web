@@ -29,7 +29,7 @@ module.exports = function(dataAdapter, excludedUrls) {
 
             function success(done, response, body) {
                 if (!body) {
-                    console.log('[OLX_DEBUG]', 'middleware', 'platform', JSON.stringify(response));
+                    console.log('[OLX_DEBUG]', 'middleware', 'platform', userAgent, JSON.stringify(response));
                 }
                 if (req.cookies && req.cookies.forcedPlatform) {
                     body.web_platform = req.cookies.forcedPlatform;
