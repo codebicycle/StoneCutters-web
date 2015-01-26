@@ -2,8 +2,6 @@
 <html>
     {% view 'layout/head' %}
     <body>
-        {% set googleTagManager = template + "/google/tagmanager.html" %}
-        {% include googleTagManager %}
         <div id="progressBar"></div>
         {% include (template + '/layout/bar.html') %}
         <div id="wrapper" class="wrapper-main">
@@ -18,7 +16,12 @@
         <script>function init() {
             $LAB
                 .script("{{ [jsDir, 'common', 'libs.js'] | join('/') | static }}")
-                .script("{{ [jsDir, 'common', 'translations.js'] | join('/') | static }}")
+                .script("{{ [jsDir, 'common', 'translations', 'en-US.js'] | join('/') | static }}")
+                {% for language in languages -%}
+                    {% if language != 'en-US' %}
+                        .script("{{ [jsDir, 'common', 'translations', (language + '.js')] | join('/') | static }}")
+                    {% endif %}
+                {%- endfor %}
                 .script("{{ [jsDir, 'common', ((['config-', environment, '.js'] | join('')) if (environment != 'production') else 'config.js')] | join('/') | static }}")
                 .script("{{ [jsDir, directory, 'templates', 'desktop', 'templates.js'] | join('/') | static }}").wait()
                 .script("{{ [jsDir, directory, 'app.js'] | join('/') | static }}").wait(function wait() {

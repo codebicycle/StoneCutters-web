@@ -115,7 +115,7 @@ Seo = Backbone.Model.extend({
         if (!value) {
             return;
         }
-        var dictionary = translations[this.app.session.get('selectedLanguage') || 'en-US'];
+        var dictionary = translations.get(this.app.session.get('selectedLanguage'));
         var location = this.app.session.get('location');
         var region = (location.current || location).name;
         var message = dictionary['messages_item_page.CATEGORY_REGION'] || '';

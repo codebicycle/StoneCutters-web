@@ -11,14 +11,15 @@
             position: relative;
             vertical-align: top;
             a.icon-close {
-                btn-close($greyStrong, $yellow, $black, $yellow)
+                btn-close($greyStrong, $black);
+                font-size: remify(16px);
                 right: 7px;
-                top: 11px;
+                top: 7px;
                 &.state {
-                    color: $yellow;
+                    color: $greyStrong;
                 }
                 &.city {
-                    color: $white;
+                    color: $greyStrong;
                 }
             }
         }
@@ -44,7 +45,7 @@
                 background: $white;
                 border: 1px solid $greyBorders;
                 .icon-close {
-                    color: $white;
+                    color: $greyStrong;
                 }
                 &:last-child {
                     padding-bottom: 10px;
@@ -60,9 +61,23 @@
         }
     }
     .locations-list {
-        box($yellow, $yellowBorders, 0 3px 3px 3px, 10px);
-
+        box($yellow, $yellowBorders, 0 3px 3px 3px, 0);
+        ul {
+            &.visible-locations {
+                padding: 10px 10px 0 10px;
+                display: block;
+            }
+        }
+        .actions {
+            display: block;
+            height: 20px;
+            padding: 0 10px 10px;
+            .see {
+                margin: 0;
+            }
+        }
     }
+
     .locations {
         display: inline-block;
         font-size: $xs;
@@ -94,10 +109,10 @@
                     border-color: $black;
                 }
                 .icons {
-                    font-size: remify(8px);
+                    font-size: remify(12px);
                     position: absolute;
                     right: 5px;
-                    top: 5px;
+                    top: 3px;
                 }
             }
         }
@@ -106,10 +121,6 @@
                 &.visible-neighborhoods {
                     padding: 10px 10px 0 10px;
                     display: block;
-                }
-                &.hidden-neighborhoods {
-                    padding: 0 10px;
-                    display: none;
                 }
             }
             .actions {
@@ -132,8 +143,10 @@
             }
         }
         .actions {
-            display: block;
             padding: 10px;
+            .see {
+                margin: 10px 0 0 0;
+            }
         }
         .cancel-btn, .filter-btn {
             cursor: pointer;
@@ -151,12 +164,15 @@
             action-button($green, $white, 3px, 10px);
             font-weight: bold;
         }
+
+    }
+    .actions {
+        display: block;
         .see {
             color: $blue;
             cursor: pointer;
             float: right;
             font-size: $xs;
-            margin: 10px 0 0 0;
             padding: 0 20px 0 0;
             position: relative;
             &:before {
@@ -165,5 +181,9 @@
                 top: 1px;
             }
         }
+    }
+    .hidden-locations {
+        padding: 0 10px;
+        display: none;
     }
 }

@@ -68,9 +68,13 @@ module.exports = Base.extend({
         event.stopPropagation();
         event.stopImmediatePropagation();
 
+        var $current = $(event.currentTarget);
+
+        $current.toggleClass('active');
         this.$('#myOlx').slideToggle();
     },
     onMenuClick: function(event) {
+        this.$('.logIn .btns.blue.active').toggleClass('active');
         this.$('#myOlx').slideUp();
     },
     onCancelFilter: function(event) {
@@ -131,6 +135,7 @@ module.exports = Base.extend({
     },
     onPostingFlowStart: function() {
         this.$('#topBar, #myOlx').addClass('disabled');
+        this.$('#myOlx').css('display', 'none');
     },
     onPostingFlowEnd: function() {
         this.app.router.once('action:end', this.onPostingFlowAfter.bind(this));

@@ -10,7 +10,8 @@ module.exports = {
     surface: surface,
     year: year,
     carbrand: carbrand,
-    carmodel: carmodel
+    carmodel: carmodel,
+    age: age
 };
 
 function buildKilometerRange(to, label, dictionary) {
@@ -32,7 +33,7 @@ function kilometers(filter, options) {
         return filter;
     }
 
-    dictionary = translations[options.app.session.get('selectedLanguage') || 'en-US'];
+    dictionary = translations.get(options.app.session.get('selectedLanguage'));
     filter.set({
         otherType: 'LIST',
         list: [
@@ -53,6 +54,7 @@ function bathrooms(filter, options) {
     filter = checkDescription(filter, options, 'itemdescription.bathrooms');
     return filter;
 }
+
 
 function bedrooms(filter, options) {
     filter = checkRangeValue(filter, options);
@@ -90,11 +92,29 @@ function carmodel(filter, options) {
     return filter;
 }
 
+function age(filter, options) {
+    var dictionary = translations.get(options.app.session.get('selectedLanguage'));
+
+    filter = checkDescription(filter, options, 'misc.Age');
+    filter.set('value', [{
+            id: 'from',
+            value: '18',
+            count: 0
+        }, {
+            id: 'to',
+            value: dictionary['misc.Max'],
+            count: 0
+        }], {
+            unset: false
+        });
+    return filter;
+}
+
 function checkRangeValue(filter, options) {
     var dictionary;
 
     if (!filter.has('value')) {
-        dictionary = translations[options.app.session.get('selectedLanguage') || 'en-US'];
+        dictionary = translations.get(options.app.session.get('selectedLanguage'));
         filter.set('value', [{
             id: 'from',
             value: dictionary['misc.Min'],
@@ -129,9 +149,8 @@ function checkSelectValue(filter, options) {
 
 function checkDescription(filter, options, key) {
     var dictionary;
-
     if (!filter.has('description')) {
-        dictionary = translations[options.app.session.get('selectedLanguage') || 'en-US'];
+        dictionary = translations.get(options.app.session.get('selectedLanguage'));
         filter.set('description', dictionary[key], {
             unset: false
         });

@@ -1,0 +1,18 @@
+{% view 'items/partials/breadcrumb' %}
+<div class="wrapper-main">
+    <aside class="listing-side">
+        <nav id="listing-nav">
+            {% view 'items/partials/filters' %}
+        </nav>
+        {% view 'partials/adserving', 'slot_side_listing' %}
+    </aside>
+
+    <section id='listing-items'>
+        {% view 'items/partials/locations' %}
+        {% include (template + '/items/listig.html') %}
+        {% if paginator and paginator.isEnabled() %}
+            {% include (template + '/items/pagination.html') %}
+        {% endif %}
+    </section>
+</div>
+{% view 'partials/tracking' %}

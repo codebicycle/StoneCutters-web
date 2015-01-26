@@ -1,43 +1,16 @@
 <label for="images" class="field-label">{{ dictionary["photos.AddAndSellFaster"] }}</label>
-<input type="file" name="images[0]" id="file0" class="image-input-file" accept="image/*" />
-<input type="file" name="images[1]" id="file1" class="image-input-file" accept="image/*" />
-<input type="file" name="images[2]" id="file2" class="image-input-file" accept="image/*" />
-<input type="file" name="images[3]" id="file3" class="image-input-file" accept="image/*" />
-<input type="file" name="images[4]" id="file4" class="image-input-file" accept="image/*" />
-<input type="file" name="images[5]" id="file5" class="image-input-file" accept="image/*" />
-<input type="file" name="images[6]" id="file6" class="image-input-file" accept="image/*" />
-
+{%- for i in range(0, 7) -%}
+	<input type="file" name="images[{{ i }}]" id="file{{ i }}" class="image-input-file" accept="image/*" />
+{%- endfor -%}
 <div class="field-controls">
 	<ul class="file-upload">
-	    <li class="image-cont track-me first-img" data-tracking="Posting-ClickUploadPicture" data-input="file0">
-	        <div class="image icons icon-addpicture"></div>
-	        <span class="remove icons icon-close"></span>
-	    </li><!--
-	    --><li class="image-cont track-me" data-tracking="Posting-ClickUploadPicture" data-input="file1">
-	        <div class="image icons icon-addpicture"></div>
-	        <span class="remove icons icon-close"></span>
-	    </li><!--
-	    --><li class="image-cont track-me" data-tracking="Posting-ClickUploadPicture" data-input="file2">
-	        <div class="image icons icon-addpicture"></div>
-	        <span class="remove icons icon-close"></span>
-	    </li><!--
-	    --><li class="image-cont track-me" data-tracking="Posting-ClickUploadPicture" data-input="file3">
-	        <div class="image icons icon-addpicture"></div>
-	        <span class="remove icons icon-close"></span>
-	    </li>
-	    <li class="image-cont track-me" data-tracking="Posting-ClickUploadPicture" data-input="file4">
-	        <div class="image icons icon-addpicture"></div>
-	        <span class="remove icons icon-close"></span>
-	    </li><!--
-	    --><li class="image-cont track-me" data-tracking="Posting-ClickUploadPicture" data-input="file5">
-	        <div class="image icons icon-addpicture"></div>
-	        <span class="remove icons icon-close"></span>
-	    </li><!--
-	    --><li class="image-cont track-me" data-tracking="Posting-ClickUploadPicture" data-input="file6">
-	        <div class="image icons icon-addpicture"></div>
-	        <span class="remove icons icon-close"></span>
-	    </li><!--
-	    -->
+		{%- for i in range(0, 7) -%}
+		    <li class="image-cont track-me{{ " first-img" if loop.first }}{{ " loaded" if item.get('images')[i] }}" data-tracking="Posting-ClickUploadPicture" data-input="file{{ i }}">
+		        <div class="image{{ " fill r1" if item.get('images')[i] else " icons icon-addpicture" }}" {{ ("style='background-image: url(" + item.get('images')[i].thumbnail + ");'") if item.get('images')[i] }}></div>
+		        <div class="overlay-image"></div>
+		        <span class="remove icons icon-close"></span>
+		    </li>
+		{%- endfor -%}
 	</ul>
 	<small class="hint message">{{ dictionary["posting_photos.AcceptedFormats"] }} {{ dictionary["postingerror.MaximumAllowedSizeForUploadedFilesIsNumber"] | replace('<<NUMBER>>', '20') }} </small>
 </div>

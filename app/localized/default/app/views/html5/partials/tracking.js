@@ -66,7 +66,6 @@ module.exports = Base.extend({
 
         this._checkAnalyticsLib();
 
-        window._gaq = window._gaq || [];
         window._gaq.push(function track() {
             var tracker = this._getAnalyticsTracker('UA-5247560-17', tracking.params.analytics);
             var osName = tracking.params.analytics.osName;
@@ -103,6 +102,8 @@ module.exports = Base.extend({
         this._fireTrack(data, options);
     },
     _fireTrack: function(data, callback, options) {
+        var location = this.app.session.get('location');
+
         if (callback && !_.isFunction(callback)) {
             options = callback;
             callback = $.noop;
@@ -113,7 +114,8 @@ module.exports = Base.extend({
             global: false,
             cache: false,
             data: _.defaults(data, {
-                locUrl: this.app.session.get('location').url,
+                locUrl: location.url,
+                locIso: location.abbreviation,
                 url: helpers.common.static.call(this, '/images/common/gif1x1.gif')
             }),
             always: (callback || $.noop)
@@ -125,7 +127,7 @@ module.exports = Base.extend({
         var $ga;
 
         window._gaq = window._gaq || [];
-        if (!$('#' + id).length) {
+/*        if (!$('#' + id).length) {
             $ga = $('<script></script>');
             $ga.attr({
                 type: 'text/javascript', 
@@ -135,6 +137,7 @@ module.exports = Base.extend({
             });
             $('head').append($ga);
         }
+*/
     },
     _getAnalyticsTracker: function(id, options) {
         if (!window.analyticsTracker) {

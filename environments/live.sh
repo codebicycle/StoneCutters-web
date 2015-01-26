@@ -1,35 +1,11 @@
 #!/bin/bash
 
-# Validate permissions (sudo)
-if [ "$(whoami)" != "root" ]; then
-	echo "Sorry, you are not root (sudo)."
-	exit 1
-fi
-
+DIR="base"
 CURRENT=${PWD##*/}
-SMAUG="190.210.62.60"
 
 if [ "$CURRENT" != "environments" ]
 then
-	cd 'environments'
+    DIR="environments/base"
 fi
 
-LOCAL_AUXI=$(cat /etc/sudoers | grep 'LOCAL' | head -n1 | awk '{print $3}');
-LOCAL=${LOCAL_AUXI:0};
-
-if [ "$LOCAL" == "" ]; then
-	echo "Couldnt read your host alias from /etc/sudoers. Check the line LOCAL=developXX"
-	exit 1;
-fi
-
-if [ ! -f /etc/hosts_bkp_arwen ]
-then
-	cp /etc/hosts /etc/hosts_bkp_arwen
-fi
-
-cp empty /etc/hosts;
-
-sed -i "s/{LOCAL}/$LOCAL/g" '/etc/hosts';
-sed -i "s/{SMAUG}/$SMAUG/g" '/etc/hosts';
-
-echo 'Moved to Live'
+echo "`./$DIR.sh -e Live`"

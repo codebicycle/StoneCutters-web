@@ -7,16 +7,21 @@ var analytics = require('./analytics');
 var ati = require('./ati');
 var esi = require('../../esi');
 
+function isPlatformEnabled(platforms) {
+    var enabled = true;
+
+    if (platforms && !_.contains(platforms, this.app.session.get('platform'))) {
+        enabled = false;
+    }
+    return enabled;
+}
+
 function isEnabled(page) {
     var location = this.app.session.get('location');
     var enabled = config.getForMarket(location.url, ['tracking', 'trackers', 'serverSide', 'enabled'], true);
-    var platforms;
 
     if (enabled) {
-        platforms = config.getForMarket(location.url, ['tracking', 'trackers', 'serverSide', 'platforms']);
-        if (platforms && !_.contains(platforms, this.app.session.get('platform'))) {
-            enabled = false;
-        }
+        enabled = isPlatformEnabled.call(this, config.getForMarket(location.url, ['tracking', 'trackers', 'serverSide', 'platforms']));
     }
     return enabled;
 }
@@ -38,6 +43,7 @@ function getParams(page, options) {
     params.locNm = location.name;
     params.locId = location.id;
     params.locUrl = location.url;
+    params.locIso = location.abbreviation;
 
     if (analyticsEnabled) {
         analyticsParams = options.analyticsParams || analytics.getParams.call(this, page, options.query);
