@@ -229,8 +229,6 @@ module.exports = (function() {
     }
 
     function redirect(url, parameters, options) {
-        var siteLocation = this.app.session.get('siteLocation');
-
         options = (options || {});
         url = utils.link(url, this.app, options.query);
         if (parameters) {
