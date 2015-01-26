@@ -1,3 +1,6 @@
+{% if banner %}
+    {% include banner %}
+{% endif %}
 <header id="topBar"{{ ' class="disabled"' if postingFlow }}>
     <div class="topBarFilters hide">
         <a href="#" class="filter-btns blue trackMe" data-tracking="">{{ dictionary["posting_changecategorymod.Cancel"] }}</a><strong class="title"></strong>

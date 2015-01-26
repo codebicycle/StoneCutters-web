@@ -12,11 +12,14 @@ module.exports = Base.extend({
     },
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
+        var location = this.app.session.get('location');
+        var banner = config.get(['migration', location.url, 'banner'], false);
 
         return _.extend({}, data, {
             user: this.app.session.get('user'),
             postButton: this.isPostButtonEnabled(),
-            postLink: this.getPostLink()
+            postLink: this.getPostLink(),
+            banner: banner ? data.template + '/partials/migration/banner-' + location.abbreviation.toLowerCase() + '.html' : false
         });
     },
     getPostLink: function() {
