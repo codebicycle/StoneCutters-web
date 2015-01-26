@@ -46,7 +46,7 @@ module.exports = function(dataAdapter, excludedUrls) {
                 device.osVersion = '0';
             }
             marketing = {
-                osName: (device.osName || 'Others'),
+                osName: (device.isBrowser ? 'browser' : (device.osName || 'Others')),
                 osVersion: parseFloat(String(device.osVersion).replace('_','.'))
             };
             if (device.browserName) {

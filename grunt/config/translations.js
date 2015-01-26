@@ -70,6 +70,9 @@ module.exports = {
         'itemheader.AddedFavorites',
         'itemheader.RemovedFavorites',
         'itemgeneraldetails.addFavorites',
-        'item.RemoveFromFavorites'
+        'item.RemoveFromFavorites',
+        'adsense.SponsoredLinks',
+        'misc.Age',
+        'misc.Max'
     ]
 };

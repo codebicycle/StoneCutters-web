@@ -1,8 +1,10 @@
 'use strict';
 
-var Base = require('../../../../../common/app/bases/view').requireView('items/show');
 var _ = require('underscore');
 var asynquence = require('asynquence');
+var Base = require('../../../../../common/app/bases/view').requireView('items/show');
+var Categories = require('../../../../../../collections/categories');
+var Item = require('../../../../../../models/item');
 var helpers = require('../../../../../../helpers');
 var statsd = require('../../../../../../../shared/statsd')();
 var translations = require('../../../../../../../shared/translations');
@@ -47,7 +49,7 @@ module.exports = Base.extend({
             }, 3000);
         }
 
-        galery = this.$('.swiper-container').swiper({
+        galery = this.$('.zd-gallery').swiper({
             onSlideChangeStart: function(){
                 updateNavPosition();
             }
@@ -76,9 +78,11 @@ module.exports = Base.extend({
         relatedAds = this.$('.swiper-related').swiper({
             visibilityFullFit: true,
             slidesPerView: 'auto',
-            preventLinks:false
+            preventLinks:false,
+            mode:'horizontal'
         });
         this.$(window).on('resize', this.resize).trigger('resize');
+
         this.$('section#itemPage section.onePicture .slide div').click(function(e) {
             e.preventDefault();
             $('body').addClass('noscroll');
@@ -234,5 +238,17 @@ module.exports = Base.extend({
         paginationWidth = paginationWidth - paginationMargin;
         $('.slidePagination span').css('width' , paginationWidth+'px');
         $('.slidePagination span').css('margin' , '0 '+paginationMargin+'px');
+    },
+    getItem: function() {
+        this.item = this.item || (this.options.item && this.options.item.toJSON ? this.options.item : new Item(this.options.item || {}, {
+            app: this.app
+        }));
+        return this.item;
+    },
+    getCategories: function() {
+        this.categories = this.categories || (this.options.categories && this.options.categories.toJSON ? this.options.categories : new Categories(this.options.categories || {}, {
+            app: this.app
+        }));
+        return this.categories;
     }
 });

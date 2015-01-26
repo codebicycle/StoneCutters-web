@@ -47,13 +47,13 @@ module.exports = function trackingRouter(app, dataAdapter) {
 
         restler.request(url, options)
             .on('success', function success() {
-                statsd.increment([req.query.locNm, 'tracking', type, tracker, platform, 'success']);
+                statsd.increment([req.query.locIso || 'all', 'tracking', type, tracker, platform, 'success']);
             })
             .on('fail', function error() {
-                statsd.increment([req.query.locNm, 'tracking', type, tracker, platform, 'error']);
+                statsd.increment([req.query.locIso || 'all', 'tracking', type, tracker, platform, 'error']);
             })
             .on('error', function fail() {
-                statsd.increment([req.query.locNm, 'tracking', type, tracker, platform, 'fail']);
+                statsd.increment([req.query.locIso || 'all', 'tracking', type, tracker, platform, 'fail']);
             });
     }
 
@@ -81,16 +81,16 @@ module.exports = function trackingRouter(app, dataAdapter) {
             var hitCount = req.rendrApp.session.get('hitCount');
             var clientId = req.rendrApp.session.get('clientId');
 
-            statsd.increment([req.query.locNm, 'pageview', _.contains(devices, osName) ? osName : 'others', platform]);
+            statsd.increment([req.query.locIso || 'all', 'pageview', _.contains(devices, osName) ? osName : 'others', platform]);
             if (!hitCount) {
-                statsd.increment([req.query.locNm, 'sessions', platform, 'error']);
+                statsd.increment([req.query.locIso || 'all', 'sessions', platform, 'error']);
             }
             else {
                 if (hitCount > 1) {
-                    statsd.increment([req.query.locNm, 'sessions', platform, 'recurrent']);
+                    statsd.increment([req.query.locIso || 'all', 'sessions', platform, 'recurrent']);
                 }
                 else {
-                    statsd.increment([req.query.locNm, 'sessions', platform, 'new']);
+                    statsd.increment([req.query.locIso || 'all', 'sessions', platform, 'new']);
                 }
             }
         }
@@ -190,7 +190,7 @@ module.exports = function trackingRouter(app, dataAdapter) {
             }
             bot = isBot(userAgent, platform, osName, osVersion);
             if (bot) {
-                statsd.increment([req.query.locNm, 'bot', bot, platform]);
+                statsd.increment([req.query.locIso || 'all', 'bot', bot, platform]);
                 return false;
             }
             if (req.query.custom) {
@@ -300,7 +300,7 @@ module.exports = function trackingRouter(app, dataAdapter) {
             }
             bot = isBot(userAgent, platform, osName, osVersion);
             if (bot) {
-                statsd.increment([req.query.locNm, 'bot', bot, platform]);
+                statsd.increment([req.query.locIso || 'all', 'bot', bot, platform]);
                 return false;
             }
             location = req.rendrApp.session.get('location');
@@ -347,7 +347,7 @@ module.exports = function trackingRouter(app, dataAdapter) {
                 if (!metric) {
                     return;
                 }
-                statsd.increment(metric, value);
+                statsd.increment(metric.split('.'), value);
             });
 
             res.set('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-age=0, max-stale=0, post-check=0, pre-check=0');

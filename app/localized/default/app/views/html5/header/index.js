@@ -137,6 +137,7 @@ module.exports = Base.extend({
     },
     onPostingFlowStart: function() {
         this.$('#topBar, #myOlx').addClass('disabled');
+        this.$('#myOlx').css('display', 'none');
     },
     onPostingFlowEnd: function() {
         this.app.router.once('action:end', this.onPostingFlowAfter.bind(this));
