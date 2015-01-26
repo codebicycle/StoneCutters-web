@@ -620,6 +620,7 @@ function success(params, callback) {
             .val(success);
     }
 }
+
 function favorite(params, callback) {
     var user;
     var intent;

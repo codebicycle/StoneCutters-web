@@ -22,7 +22,7 @@ module.exports = {
     },
     localization: {
         wap: ['www.olx.com.br', 'www.olx.co.za', 'www.olx.ir', 'www.olx.hn'],
-        html4: ['www.olx.com.ar', 'www.olx.com.br', 'www.olx.co.za', 'www.olx.ir', 'www.olx.hn'],
+        html4: ['www.olx.com.br', 'www.olx.co.za', 'www.olx.ir', 'www.olx.co.ke', 'www.olx.hn'],
         html5: ['www.olx.com.br', 'www.olx.ir', 'www.olx.hn'],
         desktop: ['www.olx.com.bo']
     },
