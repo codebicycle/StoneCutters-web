@@ -1,0 +1,8 @@
+<span class="title">{{ dictionary["misc.Categories"] }}</span>
+<ul class="sub-categories parentcategory">
+    {% for category in categories %}
+        <li>
+            <a href="{{ category.slug | link }}">{{ category.trName }} <span class="count">{{ category.counter | countFormat }}</span></a>
+        </li>
+    {% endfor %}
+</ul>

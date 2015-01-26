@@ -395,6 +395,7 @@ module.exports = {
     'misc.BuyWhatYouWant': 'Kauptu \xFEa\xF0 sem \xFE\xFA vilt',
     'misc.ByPublishingYouAgreeTerms': 'Me\xF0 birtingu augl\xFDsingar sam\xFEykkir \xFE\xFA <<LINK_TO_TERMS_AND_CONDITIONS>> skilm\xE1la <</ LINK_TO_TERMS_AND_CONDITIONS>> OLX.',
     'misc.Call': 'Hringja',
+    'misc.Categories': 'Flokkar',
     'misc.ChooseACategory_Mob': 'Velja flokk',
     'misc.ChooseASubcategory_Mob': 'Velja undirflokk',
     'misc.ClickHere': 'Click here',

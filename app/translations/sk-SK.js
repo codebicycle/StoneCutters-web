@@ -395,6 +395,7 @@ module.exports = {
     'misc.BuyWhatYouWant': 'Nakupujte, \u010Do len chcete',
     'misc.ByPublishingYouAgreeTerms': 'Uverejnen\xEDm inzer\xE1tu s\xFAhlas\xEDte so <<LINK_TO_TERMS_AND_CONDITIONS>> Zmluvn\xFDmi podmienkami <</ LINK_TO_TERMS_AND_CONDITIONS>> OLX.',
     'misc.Call': 'Vola\u0165',
+    'misc.Categories': 'Kateg\xF3rie',
     'misc.ChooseACategory_Mob': 'Zvoli\u0165 kateg\xF3riu',
     'misc.ChooseASubcategory_Mob': 'Zvoli\u0165 podkateg\xF3riu',
     'misc.ClickHere': 'Click here',

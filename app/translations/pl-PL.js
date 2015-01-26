@@ -395,6 +395,7 @@ module.exports = {
     'misc.BuyWhatYouWant': 'Kupuj, co chcesz',
     'misc.ByPublishingYouAgreeTerms': 'Publikacja og\u0142oszenia jest jednoznaczna z akceptacj\u0105 <<LINK_TO_TERMS_AND_CONDITIONS>>Regulaminu<</ LINK_TO_TERMS_AND_CONDITIONS>> OLX.',
     'misc.Call': 'Zadzwo\u0144',
+    'misc.Categories': 'Kategorie',
     'misc.ChooseACategory_Mob': 'Wybierz kategori\u0119',
     'misc.ChooseASubcategory_Mob': 'Wybierz podkategori\u0119',
     'misc.ClickHere': 'Click here',

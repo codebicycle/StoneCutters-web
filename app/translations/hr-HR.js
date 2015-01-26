@@ -395,6 +395,7 @@ module.exports = {
     'misc.BuyWhatYouWant': 'Kupite \u0161to \u017Eelite',
     'misc.ByPublishingYouAgreeTerms': 'Objavom oglasa sla\u017Eete se i prihvatate <<LINK_TO_TERMS_AND_CONDITIONS>> Uvjete i zahtjeve <</ LINK_TO_TERMS_AND_CONDITIONS>> stranice OLX.',
     'misc.Call': 'Pozovi',
+    'misc.Categories': 'Kategorije',
     'misc.ChooseACategory_Mob': 'Izaberi kategoriju',
     'misc.ChooseASubcategory_Mob': 'Izaberi podkategoriju',
     'misc.ClickHere': 'Click here',

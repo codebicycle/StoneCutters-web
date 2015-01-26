@@ -395,6 +395,7 @@ module.exports = {
     'misc.BuyWhatYouWant': 'Bilhin ang gusto ninyo',
     'misc.ByPublishingYouAgreeTerms': 'Sa pamamagitan ng pagpaskil ng isang anunsyo, sumasang-ayon ka at tinatanggap mo ang <<LINK_TO_TERMS_AND_CONDITIONS>> Mga Tuntunin at Kondisyon <</ LINK_TO_TERMS_AND_CONDITIONS>> ng OLX.',
     'misc.Call': 'Tumawag',
+    'misc.Categories': 'Mga Kategorya',
     'misc.ChooseACategory_Mob': 'Pumili ng kategorya',
     'misc.ChooseASubcategory_Mob': 'Pumili ng sub-kategorya',
     'misc.ClickHere': 'Click here',

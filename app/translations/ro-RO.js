@@ -395,6 +395,7 @@ module.exports = {
     'misc.BuyWhatYouWant': 'Cump\u0103ra\u0163i ceea ce dori\u0163i',
     'misc.ByPublishingYouAgreeTerms': 'Prin publicarea unui anun\u0163 sunte\u0163i de acord cu \u015Fi accepta\u0163i <<LINK_TO_TERMS_AND_CONDITIONS>> Termenii \u015Fi condi\u0163iile <</ LINK_TO_TERMS_AND_CONDITIONS>> aplicate de OLX.',
     'misc.Call': 'Suna\u0163i',
+    'misc.Categories': 'Categorii',
     'misc.ChooseACategory_Mob': 'Alege\u0163i o categorie',
     'misc.ChooseASubcategory_Mob': 'Alege\u0163i o subcategorie',
     'misc.ClickHere': 'Click here',

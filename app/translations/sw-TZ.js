@@ -395,6 +395,7 @@ module.exports = {
     'misc.BuyWhatYouWant': 'Nunua kile unachotaka',
     'misc.ByPublishingYouAgreeTerms': 'Kwa kuchapisha tangazo, unakiri na kukubali Sheria na Masharti ya <<LINK_TO_TERMS_AND_CONDITIONS>> ya <</ LINK_TO_TERMS_AND_CONDITIONS>> of OLX.',
     'misc.Call': 'Piga simu',
+    'misc.Categories': 'Kategoria',
     'misc.ChooseACategory_Mob': 'Chagua kundi',
     'misc.ChooseASubcategory_Mob': 'Chagua kundi dogo',
     'misc.ClickHere': 'Bonyeza hapa',

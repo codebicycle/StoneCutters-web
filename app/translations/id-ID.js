@@ -395,6 +395,7 @@ module.exports = {
     'misc.BuyWhatYouWant': 'Beli apa yang Anda inginkan',
     'misc.ByPublishingYouAgreeTerms': 'Dengan menerbitkan iklan, Anda setuju dan menerima <<LINK_TO_TERMS_AND_CONDITIONS>> Syarat dan Ketentuan <</ LINK_TO_TERMS_AND_CONDITIONS>> dari OLX.',
     'misc.Call': 'Telepon',
+    'misc.Categories': 'Kategori',
     'misc.ChooseACategory_Mob': 'Pilih kategori',
     'misc.ChooseASubcategory_Mob': 'Pilih subkategori',
     'misc.ClickHere': 'Click here',
