@@ -10,6 +10,7 @@ var Paginator = require('../modules/paginator');
 var config = require('../../shared/config');
 var utils = require('../../shared/utils');
 var ShopsAdmin = require('../modules/shopsadmin');
+var config = require('../../shared/config');
 
 module.exports = {
     filterig: middlewares(filterig),
@@ -146,16 +147,21 @@ function search(params, callback, gallery) {
         }.bind(this);
 
         var fetch = function(done) {
-            this.app.fetch({
+            var collections = {
                 items: {
                     collection: 'Items',
                     params: params
-                },
-                shops: {
+                } 
+            };
+            var location = this.app.session.get('location').url;
+            var useShops = config.getForMarket(location, ['useShops'], false);
+            if (useShops) {
+                collections.shops = {
                     collection: 'Shops',
-                    params: params
-                }
-            }, {
+                    params: params,
+                };
+            }
+            this.app.fetch(collections, {
                 readFromCache: false
             }, done.errfcb);
         }.bind(this);
@@ -200,8 +206,6 @@ function search(params, callback, gallery) {
         }.bind(this);
 
         var success = function(items, shops) {
-            var shopsAdmin = new ShopsAdmin();
-            shopsAdmin.setShops(shops.toJSON());
             var _category = category ? category.toJSON() : undefined;
             var _subcategory = subcategory ? subcategory.toJSON() : undefined;
 
@@ -225,6 +229,10 @@ function search(params, callback, gallery) {
                 }
             });
 
+            var shopsAdmin = new ShopsAdmin();
+            if (shops) {
+                shopsAdmin.setShops(shops.toJSON());
+            }
             callback(null, ['searches/search', gallery.replace('-', '')].join(''), {
                 items: items.toJSON(),
                 shops: shops !== undefined ? shops.toJSON() : [],

@@ -13,7 +13,8 @@
 
 ul.itemListing li {
 	height:auto;
-	min-height:90px
+	min-height:90px;
+	width: auto !important;
 }
 
 ul.itemListing li .itemInfo {
@@ -32,15 +33,22 @@ ul.itemListing li .itemInfo .centerCont a h2 {
 	text-overflow:ellipsis
 }
 
-.shopAds {
-	margin:0;
-	padding:.5em .5em .75em;
-	box-shadow:inset 0 -1px 3px rgba(0,0,0,0.1);
-	border-bottom:1px solid #e7e7e7;
-	background-color:#FFF6E2
+.shopAds,
+ul.itemListing li.callsToActionAd,
+.adLikeStore,
+.nearbyStore{	
+	width: auto;		
+	background-color:#f7f7f7 !important
 }
 
-.shopAds h2,.shopAds h3 {
+
+.shopAds {
+	margin:0;
+	padding:.5em .5em .75em;		
+}
+
+.shopAds h2,
+.shopAds h3 {
 	font-size:.75em;
 	margin:.75em .25em 0;
 	color:#666
@@ -57,7 +65,8 @@ ul.itemListing li .itemInfo .centerCont a h2 {
 	color:#FF7800
 }
 
-#home .shopAds a span,#home .shopAds a strong {
+#home .shopAds a span,
+#home .shopAds a strong {
 	
 }
 
@@ -68,14 +77,13 @@ ul.itemListing li .itemInfo .centerCont a h2 {
 }
 
 #home .shopAds a strong {
-	position:relative;
-	top:-2px;
-	margin-right:1em;
-	padding:.35em .5em .25em;
-	border-radius:4px;
-	font-size:.85em;
-	background-color:#FF7800;
-	color:#fff
+	position: relative;
+	bottom: 4px;
+	padding: 0.25em 0.35em 0.1em;
+	font-size: 75%;
+	border-radius: 2px;
+	background-color: rgba(255, 221, 199, 0.98);
+	font-weight: normal;	
 }
 
 ul.itemListing li.spamLikeAd {
@@ -84,7 +92,7 @@ ul.itemListing li.spamLikeAd {
 
 ul.itemListing li.spamLikeAd .shopAdInfo {
 	margin:0;
-	padding:.75em .5em;
+	padding:.75em .5em;	
 	background-color:#FFF6E2
 }
 
@@ -117,66 +125,80 @@ ul.itemListing li .itemInfo span:last-child {
 
 ul.itemListing li.callsToActionAd {
 	height:120px;
-	position:relative;
-	background-color:#FFF6E2
+	position:relative;	
 }
 
 .callsToActionAd .callsToAction {
 	position:relative;
 	width:100%;
-	margin:0;
-	padding-bottom:1em;
-	padding-top:3px;
-	font-size:.75em;
-	border-bottom:1px solid #e7e7e7
+	margin:0;	
+	font-size:.75em;	
 }
 
-.callsToActionAd .callsToAction span.storeName,.callsToActionAd .callsToAction ul {
+.callsToActionAd .callsToAction span.storeName,
+.callsToActionAd .callsToAction ul {
 	display:block;
 	width:100%
 }
 
 .callsToActionAd .callsToAction span.storeName {
-	min-height:1em;
-	padding-top:3px;
-	padding-left:3px;
-	font-style:italic;
-	color:#ff7c28;
-	text-align:left
+	display: inline-block;
+	min-width: 15em;
+	max-width:150px;
+	min-height: 1em;
+	padding-top: 3px;
+	padding-left: 22px;
+	font-style: italic;
+	font-size: 11px;
+	color: #666;
+	text-align: left;
+	text-overflow: ellipsis;
+	background: url(imageUrl/images/html4/icons/www.olx.com.ar/storeIcon.png) 3px center no-repeat transparent;
+}
+
+.callsToActionAd .callsToAction span.storeName strong{
+	color:#9546C8;
+	font-weight: normal
 }
 
 .callsToActionAd .callsToAction ul {
 	position:absolute;
-	bottom:7px;
-	right:0;
-	width:50%;
-	height:1.5em
+	bottom:8px;
+	right:3px;
+	width:100px;
+	height:2em
 }
 
 .callsToActionAd .callsToAction ul li {
-	float:right;
-	width:24px;
-	margin:0 2px;
+	float:left;
+	width:24px !important;
+	margin:0 4px;
 	border-bottom:none
 }
 
-.callsToActionAd .callsToAction ul li a.call,.callsToActionAd .callsToAction ul li a.email,.callsToActionAd .callsToAction ul li a.sms {
-	padding:4px 0 4px 18px;
+.callsToActionAd .callsToAction ul li a.call,
+.callsToActionAd .callsToAction ul li a.email,
+.callsToActionAd .callsToAction ul li a.sms {
+	padding:4px 10px 10px 18px;
 	color:#666;
-	text-indent:-1000000px;
-	border:none
+	text-indent:-100000px;
+	border:1px solid #ddd;
+	border-radius: 3px	
 }
 
 .callsToActionAd .callsToAction ul li a.call {
-	background:url(imageUrl/images/html4/icons/www.olx.co.ke/phone.png) no-repeat scroll 0 0 transparent
+	background:url(imageUrl/images/html4/icons/www.olx.com.ar/phone.png) no-repeat scroll center center #fff;
+	background-size: 60%
 }
 
 .callsToActionAd .callsToAction ul li a.email {
-	background:url(imageUrl/images/html4/icons/www.olx.co.ke/mail.png) no-repeat scroll 0 -2px transparent
+	background:url(imageUrl/images/html4/icons/www.olx.co.ke/mail.png) no-repeat scroll center 3px #fff;
+	background-size: 60%
 }
 
 .callsToActionAd .callsToAction ul li a.sms {
-	background:url(imageUrl/images/html4/icons/www.olx.co.ke/sms2.png) no-repeat scroll 0 2px transparent
+	background:url(imageUrl/images/html4/icons/www.olx.co.ke/sms2.png) no-repeat scroll center 7px #fff;
+	background-size: 60%
 }
 
 ul.itemListing.recommendedShop {
@@ -213,43 +235,40 @@ ul.itemListing.recommendedShop li .itemInfo span:last-child {
 }
 
 .storePic {
-	width:50px;
+	width:35%;
+	max-width: 150px;
 	height:50px;
 	z-index:9999999;
 	position:absolute;
-	background:transparent url(imageUrl/images/html4/icons/www.olx.co.ke/storeFlag.png) 0 0 no-repeat;
+	background:transparent url(imageUrl/images/html4/icons/www.olx.com.ar/storeFlag2.png) 0 0 no-repeat;
 	text-indent:-10000px
 }
 
 li.adLikeStore .itemInfo em {
-	font-size:.75em;
-	width:100%;
 	display:inline-block;
-	font-weight:700;
+	width:100%;		
+	font-size:11px;
+	line-height: 12px;
 	font-style:normal;
+	font-weight:bold;	
+	text-overflow: clip ellipsis;
 	color:#666
 }
 
-.adLikeStore {
-	background-color:#FFF6E2
-}
-
 .nearbyStore {
-	margin-top:.75em;
-	padding:.5em;
-	background-color:#FFF6E2;
-	border-top:1px solid #e7e7e7;
-	border-bottom:1px solid #ccc;
-	box-shadow:0 -1px 3px rgba(0,0,0,0.1) inset
+	margin: -.5em 0 0.5em;
+	padding: .5em 0 0;
+	border-left: none;
+	border-right: none;
+	border-top: none;
 }
 
 .nearbyStore h3 {
-	margin-bottom:.75em;
-	padding-bottom:.25em;
-	border-bottom:1px solid #e7e7e7;
-	color:#666;
-	font-size:.8em;
-	font-style:italic
+	text-align: center;
+	padding:0.25em 0 .35em;
+	border-bottom:1px solid #8900D0;
+	color:#8900D0;
+	font-size:.7em;	
 }
 
 .nearbyStore h2 {
@@ -260,14 +279,15 @@ li.adLikeStore .itemInfo em {
 
 a.mapLink {
 	float:right;
-	background-color:#ff7800;
+	background-color:#E7F6FF;
 	padding:.3em .5em;
 	font-size:.6em;
 	border-radius:3px;
 	color:#fff
 }
 
-.nearbyStore span.location,.nearbyStore span.description {
+.nearbyStore span.location,
+.nearbyStore span.description {
 	font-size:.7em;
 	display:inline-block;
 	color:#333
@@ -285,7 +305,8 @@ a.mapLink {
 	margin:0
 }
 
-.stores ul.itemListing li,.stores ul.itemListing li .itemInfo {
+.stores ul.itemListing li,
+.stores ul.itemListing li .itemInfo {
 	height:auto;
 	min-height:0
 }
@@ -303,4 +324,9 @@ a.mapLink {
 	padding:1em;
 	border-radius:3px;
 	border:2px solid #ff7800
+}
+
+#map-canvas{
+	width: 100%;
+	height: 100px;
 }

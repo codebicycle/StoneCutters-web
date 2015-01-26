@@ -8,6 +8,7 @@ var tracking = require('../../../../modules/tracking');
 var Paginator = require('../../../../modules/paginator');
 var utils = require('../../../../../shared/utils');
 var ShopsAdmin = require('../../../../modules/shopsadmin');
+var config = require('../../../../../shared/config');
 
 var ShowItems = Base.extend({
     initialize: initialize,
@@ -95,16 +96,21 @@ function prepare(done, params) {
 }
 
 function fetch(done, params) {
-    this.app.fetch({
+    var collections = {
         items: {
             collection: 'Items',
             params: params
-        },
-        shops: {
+        } 
+    };
+    var location = this.app.session.get('location').url;
+    var useShops = config.getForMarket(location, ['useShops'], false);
+    if (useShops) {
+        collections.shops = {
             collection: 'Shops',
             params: params,
-        }
-    }, {
+        };
+    }
+    this.app.fetch(collections, {
         readFromCache: false
     }, done.errfcb);
 }
@@ -152,8 +158,6 @@ function paginate(done, res) {
 }
 
 function success(done, items, shops) {
-    var shopsAdmin = new ShopsAdmin();
-    shopsAdmin.setShops(shops.toJSON());
     var meta = items.meta;
     var dataPage = {
         category: this.category.get('id')
@@ -179,6 +183,10 @@ function success(done, items, shops) {
     }
     tracking.addParam('page', this.query.page);
 
+    var shopsAdmin = new ShopsAdmin();
+    if (shops) {
+        shopsAdmin.setShops(shops.toJSON());
+    }
     done({
         type: 'items',
         category: this.category.toJSON(),

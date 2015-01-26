@@ -2,29 +2,25 @@
 {% view 'partials/search' %}
 {% from macros import Breadcrumb, BreadcrumbHome, NearByStore, AdLikeStore, CallsToAction %}
 {% set link = (breadcrumb | link) %}
-{{ Breadcrumb(dictionary, link, subcategory.trName) }}
+{{ Breadcrumb(dictionary, link, dictionary["listingpageitemslisting.ResultsForNew4"] | replace('<<KEYWORD>>', search) | replace('<<NUMBER>>', meta.total)) }}
+
 <div id="itemListing">
     {% if meta.total == 0 %}
-        <div class="emtyList">
+        <div class="emtyList" data-qa="no-results-found">
             <div></div>
-            <p>
-                {% if location.current.name %}
-                    {{ dictionary["listingpageitemslisting.ZeroResultsPage"] | replace('<<CATEGORY>>', '<strong>' + category.trName + ', ' + subcategory.trName + '</strong>') | replace('<<REGION>>',location.current.name)}}
-                {% else %}
-                    {{ dictionary["listingpageitemslisting.ZeroResultsPage"] | replace('<<CATEGORY>>', '<strong>' + category.trName + ', ' + subcategory.trName + '</strong>') | replace('<<REGION>>',location.name)}}
-                {% endif %}
-            </p>
+            <p>{{ dictionary["misc.NoResults"] }}</p>
             <a class="btns orange" href="{{ '/' | link }}" >{{ dictionary["registrationconfirmsuccesstext.Browse"] | replace('<<BRAND>>','OLX') }}</a>
         </div>
     {% else %}
 
-         {{ NearByStore(shops) }}
-
+        {{ NearByStore(shops) }}
+        
         <ul class="itemListing">
             {% for item in items %}
+
                 <li>
-                    <a href="{{ item | slugToUrl | link }}">
-                        <div class="imageCont" style="background-image: url({{ item.thumbnail if item.thumbnail else ('/images/html4/noPhoto.png' | static) }});"></div>
+                    <a href="{{ item | slugToUrl | link }}" data-qa="list-item">
+                        <div class="imageCont" style="background: transparent  url({{ item.thumbnail if item.thumbnail else ('/images/html4/noPhoto.png' | static) }}) center no-repeat 90%;"></div>
                     </a>
                     <div class="itemInfo">
                         <p class="itemPrice">{{ item.price.displayPrice }}</p>
@@ -35,16 +31,18 @@
                             </a>
                         </div>
                         <span>{{ item.displayLocation }}</span>
-                    </div>                    
+                    </div>
                 </li>
-                {% set shop = shopsAdmin.getShop() %}
+
+               {% set shop = shopsAdmin.getShop() %}
                 {% if shop %}
                     {{ AdLikeStore(shop) }}
                 {% else %}
                     {{ CallsToAction(shopsAdmin.getShop()) }}
                 {% endif %}
-            {% endfor %}            
-        </ul>        
+                
+            {% endfor %}
+        </ul>
         {% if paginator and paginator.isEnabled() %}
             {% include (template + '/items/pagination.html') %}
         {% endif %}
