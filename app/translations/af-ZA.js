@@ -175,7 +175,7 @@ module.exports = {
     'posting_fields_1.description': 'Beskrywing',
     'posting_fields_1.email': 'E-pos',
     'posting_fields_1.Email_address_not_shared': 'Jou e-posadres bly konfidensieel',
-    'posting_fields_1.IfAdApprovedYouWillReceiveEmailConfirmation': 'As dit goedgekeur word, sal jy per e-pos bevestiging ontvang met \'n verbinding na jou advt.',
+    'posting_fields_1.IfAdApprovedYouWillReceiveEmailConfirmation': 'Indien dit goedgekeur word, sal jy \'n e-pos- bevestiging ontvang met \'n skakel na jou advt.',
     'posting_fields_1.phoneNumber': 'Telefoonnommer',
     'posting_fields_1.photos': 'Foto\'s',
     'posting_fields_1.Please_Choose': 'Kies asseblief:',

@@ -107,6 +107,12 @@ module.exports = {
                 worldwide: true,
                 countries: []
             }
+        },
+        desktop: {
+            hermes: {
+                worldwide: false,
+                countries: ['www.olx.com.py']
+            }  
         }
     },
     seo: {

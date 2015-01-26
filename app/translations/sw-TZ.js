@@ -175,7 +175,7 @@ module.exports = {
     'posting_fields_1.description': 'Maelezo',
     'posting_fields_1.email': 'Barua pepe',
     'posting_fields_1.Email_address_not_shared': 'Anwani yako ya barua pepe itashirikishwa',
-    'posting_fields_1.IfAdApprovedYouWillReceiveEmailConfirmation': 'Kama itaidhinishwa utapokea barua pepe ya uthibitisho na kiungo kwa tangazo lako.',
+    'posting_fields_1.IfAdApprovedYouWillReceiveEmailConfirmation': 'Kama itaidhinishwa utapokea barua pepe ya uthibitisho iliyo na kiungo kwa tangazo lako.',
     'posting_fields_1.phoneNumber': 'Namba ya simu',
     'posting_fields_1.photos': 'Picha',
     'posting_fields_1.Please_Choose': 'Tafadhali chagua:',

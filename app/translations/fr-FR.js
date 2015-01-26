@@ -175,7 +175,7 @@ module.exports = {
     'posting_fields_1.description': 'Description',
     'posting_fields_1.email': 'Votre Email',
     'posting_fields_1.Email_address_not_shared': 'Votre email ne sera pas communiqu\xE9',
-    'posting_fields_1.IfAdApprovedYouWillReceiveEmailConfirmation': 'Si votre annonce est approuv\xE9e, vous recevrez un email de confirmation contenant un lien direct vers cette annonce.',
+    'posting_fields_1.IfAdApprovedYouWillReceiveEmailConfirmation': 'Si elle est approuv\xE9e, vous recevrez un email de confirmation avec un lien vers cette annonce.',
     'posting_fields_1.phoneNumber': 'Num\xE9ro de t\xE9l\xE9phone',
     'posting_fields_1.photos': 'Photos',
     'posting_fields_1.Please_Choose': 'Veuillez choisir :',

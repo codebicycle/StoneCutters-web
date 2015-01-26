@@ -25,8 +25,8 @@ module.exports = function(nunjucks) {
         return encodeURIComponent(text);
     }
 
-    function date(timestamp, complete) {
-        var _date = new Date(timestamp);
+    function date(timestamp, complete, epoc) {
+        var _date = new Date(epoc ? timestamp*1000 : timestamp);
         var month;
 
         complete = complete || false;
