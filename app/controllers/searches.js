@@ -9,6 +9,7 @@ var tracking = require('../modules/tracking');
 var Paginator = require('../modules/paginator');
 var config = require('../../shared/config');
 var utils = require('../../shared/utils');
+var ShopsAdmin = require('../modules/shopsadmin');
 
 module.exports = {
     filterig: middlewares(filterig),
@@ -149,6 +150,10 @@ function search(params, callback, gallery) {
                 items: {
                     collection: 'Items',
                     params: params
+                },
+                shops: {
+                    collection: 'Shops',
+                    params: params
                 }
             }, {
                 readFromCache: false
@@ -191,10 +196,12 @@ function search(params, callback, gallery) {
                 done.abort();
                 return helpers.common.redirect.call(this, [url, '/-p-', realPage, gallery].join(''));
             }
-            done(res.items);
+            done(res.items, res.shops);
         }.bind(this);
 
-        var success = function(items) {
+        var success = function(items, shops) {
+            var shopsAdmin = new ShopsAdmin();
+            shopsAdmin.setShops(shops.toJSON());
             var _category = category ? category.toJSON() : undefined;
             var _subcategory = subcategory ? subcategory.toJSON() : undefined;
 
@@ -220,6 +227,8 @@ function search(params, callback, gallery) {
 
             callback(null, ['searches/search', gallery.replace('-', '')].join(''), {
                 items: items.toJSON(),
+                shops: shops !== undefined ? shops.toJSON() : [],
+                shopsAdmin: shopsAdmin,
                 meta: items.meta,
                 filters: items.filters,
                 paginator: items.paginator,

@@ -7,6 +7,7 @@ var helpers = require('../../../../helpers');
 var tracking = require('../../../../modules/tracking');
 var Paginator = require('../../../../modules/paginator');
 var utils = require('../../../../../shared/utils');
+var ShopsAdmin = require('../../../../modules/shopsadmin');
 
 var ShowItems = Base.extend({
     initialize: initialize,
@@ -98,6 +99,10 @@ function fetch(done, params) {
         items: {
             collection: 'Items',
             params: params
+        },
+        shops: {
+            collection: 'Shops',
+            params: params,
         }
     }, {
         readFromCache: false
@@ -143,10 +148,12 @@ function paginate(done, res) {
         done.abort();
         return this.redirect([url, '-p-', realPage, this.get('gallery')].join(''));
     }
-    done(res.items);
+    done(res.items, res.shops);
 }
 
-function success(done, items) {
+function success(done, items, shops) {
+    var shopsAdmin = new ShopsAdmin();
+    shopsAdmin.setShops(shops.toJSON());
     var meta = items.meta;
     var dataPage = {
         category: this.category.get('id')
@@ -180,6 +187,8 @@ function success(done, items) {
         relatedAds: this.query.relatedAds,
         meta: meta,
         items: items.toJSON(),
+        shops: shops !== undefined ? shops.toJSON() : [],
+        shopsAdmin: shopsAdmin,
         filters: items.filters,
         paginator: items.paginator,
         hasItemsWithImages: items.hasImages()
