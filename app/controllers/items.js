@@ -163,6 +163,7 @@ function show(params, callback) {
             }
             if (response.item.get('location').url !== this.app.session.get('location').url) {
                 url = [protocol, '://', platform, '.', response.item.get('location').url.replace('www.', 'm.'), '/', slug].join('');
+
                 done.abort();
                 return helpers.common.redirect.call(this, url, null, {
                     pushState: false,
@@ -228,6 +229,7 @@ function show(params, callback) {
                 this.app.seo.addMetatag('robots', 'noindex, nofollow');
                 this.app.seo.addMetatag('googlebot', 'noindex, nofollow');
             }
+
             if (platform !== 'desktop' && siteLocation && !~siteLocation.indexOf('www.')) {
                 url = helpers.common.removeParams(this.app.session.get('url'), 'location');
                 this.app.seo.addMetatag('canonical', helpers.common.fullizeUrl(url, this.app));
@@ -288,6 +290,7 @@ function gallery(params, callback) {
 
         var redirect = function(done) {
             var platform = this.app.session.get('platform');
+
             if (platform === 'desktop') {
                 return done.fail();
             }
