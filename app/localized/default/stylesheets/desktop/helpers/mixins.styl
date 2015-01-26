@@ -296,3 +296,26 @@ green-star()
    position: relative;
    top: -1px;
    z-index: 2000;
+
+ribbon(bgcolor, color)
+    background: bgcolor;
+    color: color;
+    font-size: 12px;
+    font-weight: bold;
+    left: 0;
+    padding: 4px 20px 4px 30px;
+    position: absolute;
+    text-transform: uppercase;
+    font-style: normal;
+
+    &:after {
+        border-color: $green transparent $green $green;
+        border-style: solid;
+        border-width: 11px;
+        bottom: 0;
+        content: " ";
+        height: 0;
+        position: absolute;
+        right: -10px;
+        width: 0;
+    }
