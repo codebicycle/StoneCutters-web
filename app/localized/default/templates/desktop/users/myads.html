@@ -104,7 +104,9 @@
                         {% endif %}
                         {% if (status == 'ready') %}
                             <a data-idd="{{ item.id }}" data-img="{{ item.thumbnailLarge }}" data-title="{{ item.title }}" href="{{ ('/myolx/deleteitem/'+ item.id) | link }}" class="btn icons icon-trash btndelete">{{ dictionary["confirmremoveitem.Delete"] }} </a>
-                            <a data-idd="{{ item.id }}" data-img="{{ item.thumbnailLarge }}" data-title="{{ item.title }}" href="{{ ('/myolx/buyfeaturedad?id='+ item.id) | link }}" class="btn icons icon-feature btnfeaturedad">{{ dictionary["featured_listings.Feature"] }} </a>
+                            {% if item.featured and item.featured.isEnabled() %}
+                                <a data-idd="{{ item.id }}" data-img="{{ item.thumbnailLarge }}" data-title="{{ item.title }}" href="{{ ('/myolx/buyfeaturedad?id='+ item.id) | link }}" class="btn icons icon-feature btnfeaturedad">{{ dictionary["featured_listings.Feature"] }} </a>
+                            {% endif %}
                         {% endif %}
                     {% endif %}
                     {# falta implementar #}

@@ -1,11 +1,12 @@
 'use strict';
 
-var Base = require('../bases/collection');
 var _ = require('underscore');
+var Base = require('../bases/collection');
 var Item = require('../models/item');
 var helpers = require('../helpers');
 var Filters = require('../modules/filters');
 var Paginator = require('../modules/paginator');
+var config = require('../../shared/config');
 
 module.exports = Base.extend({
     model: Item,
@@ -94,6 +95,18 @@ module.exports = Base.extend({
 
         return Base.prototype.fetch.apply(this, arguments);
     },
+    addFeaturedAds: function(items) {
+        if (items) {
+            addFeaturedAdsItems(this, items, {
+                position: 'top',
+                method: 'unshift'
+            });
+            addFeaturedAdsItems(this, items, {
+                position: 'bottom',
+                method: 'push'
+            });
+        }
+    },
     hasImages: function() {
         var has = false;
         var filter;
@@ -107,5 +120,23 @@ module.exports = Base.extend({
         return has;
     }
 });
+
+function addFeaturedAdsItems(items, models, options) {
+    var location = items.app.session.get('location');
+    var currentRoute = items.app.session.get('currentRoute');
+    var section = [currentRoute.controller, currentRoute.action].join('#');
+    var position = config.getForMarket(location.url, ['featured', 'section', section, 'quantity', options.position]);
+    var item;
+    var i;
+
+    if (!position) {
+        position = config.getForMarket(location.url, ['featured', 'quantity', options.position], 1);
+    }
+    for (i = 0; i < position && models.length; i++) {
+        item = models.shift();
+        item.set('isFeaturedAd', true);
+        items[options.method].call(items, item);
+    }
+}
 
 module.exports.id = 'Items';

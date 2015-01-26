@@ -6,6 +6,7 @@ var Base = require('../../bases/action');
 var helpers = require('../../../../helpers');
 var tracking = require('../../../../modules/tracking');
 var Paginator = require('../../../../modules/paginator');
+var FeatureAd = require('../../../../models/feature_ad');
 var utils = require('../../../../../shared/utils');
 
 var ShowItems = Base.extend({
@@ -14,6 +15,7 @@ var ShowItems = Base.extend({
     configure: configure,
     redirection: redirection,
     prepare: prepare,
+    fetchFeatured: fetchFeatured,
     fetch: fetch,
     filters: filters,
     paginate: paginate,
@@ -25,9 +27,6 @@ function initialize(attrs, options) {
 
     var params = this.get('params');
 
-    this.promise = options.promise;
-    this.category = options.category;
-    this.subcategory = options.subcategory;
     this.page = params ? params.page : undefined;
 }
 
@@ -35,6 +34,7 @@ function control() {
     this.promise.then(this.configure.bind(this));
     this.promise.then(this.redirection.bind(this));
     this.promise.then(this.prepare.bind(this));
+    this.promise.then(this.fetchFeatured.bind(this));
     this.promise.then(this.fetch.bind(this));
     this.promise.then(this.filters.bind(this));
     this.promise.then(this.paginate.bind(this));
@@ -93,7 +93,28 @@ function prepare(done, params) {
     done(params);
 }
 
-function fetch(done, params) {
+function fetchFeatured(done, params) {
+    if (!FeatureAd.isEnabled(this.app)) {
+        return done(params);
+    }
+    var location = this.app.session.get('location');
+
+    this.app.fetch({
+        items: {
+            collection: 'Items',
+            params: _.extend({}, params, FeatureAd.getParams(this.app))
+        }
+    }, {
+        readFromCache: false
+    }, function afterFetch(err, res, body) {
+        if (err) {
+            return done.fail(err);
+        }
+        done(params, res);
+    }.bind(this));
+}
+
+function fetch(done, params, res) {
     this.app.fetch({
         items: {
             collection: 'Items',
@@ -101,7 +122,15 @@ function fetch(done, params) {
         }
     }, {
         readFromCache: false
-    }, done.errfcb);
+    }, function afterFetch(err, response) {
+        if (err) {
+            return done.fail(err);
+        }
+        if (response && response.items && res && res.items) {
+            response.items.addFeaturedAds(res.items);
+        }
+        done(response);
+    });
 }
 
 function filters(done, res) {

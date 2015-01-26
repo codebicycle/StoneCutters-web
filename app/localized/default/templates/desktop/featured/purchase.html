@@ -1,4 +1,4 @@
-{% if featureAd %}
+{% if item.featured and item.featured.isEnabled() %}
     <div id="feature-ad">
         <h2>
             {{ dictionary["featured_listings.FeatureYourListingForUp20TimesVisibility"] | replace('<<LINK_FEATURED_LISTINGS>>', '<span>') | replace('<</LINK_FEATURED_LISTINGS>>', '</span>') }}
@@ -8,17 +8,17 @@
         </h2>
         <div class="feature-ad-form">
             <h5>{{ dictionary["itemslisting.FeatureOnlinePayment"] }}</h5>
-            {% if featureAd.has('errors') and featureAd.get('errors').length != 0 %}
+            {% if item.featured.has('errors') and item.featured.get('errors').length != 0 %}
                 <div class="feature-ad-errors">
-                    {% for error in featureAd.get('errors') %}
+                    {% for error in item.featured.get('errors') %}
                         <span class="fad-error">{{ error }}</span>
                     {% endfor %}
                 </div>
             {% endif %}
             <div class="feature-ad-details">
-                {% for section in featureAd.get('sections') %}
+                {% for section in item.featured.get('sections') %}
                     <p class="fad-section-{{ section.sectionId }}-form">
-                        <input type="checkbox" name="fad-section-{{ section.sectionId }}-check" id="fad-section-{{ section.sectionId }}-check" value="{{ section.sectionId }}" class="fad-check" {% if section.enabled %}data-id="{{ section.sectionId }}" data-payment="{{ section.paymentProviderId }}" data-concept="{{ section.conceptId }}" data-item="{{ item.id }}"{% else %}disabled=""{% endif %}>
+                        <input type="checkbox" name="fad-section-{{ section.sectionId }}-check" id="fad-section-{{ section.sectionId }}-check" value="{{ section.sectionId }}" class="fad-check" {% if section.enabled %}data-id="{{ section.sectionId }}" data-payment="{{ section.paymentProviderId }}" data-concept="{{ section.conceptId }}" data-item="{{ item.get('id') }}"{% else %}disabled=""{% endif %}>
                         <label for="fad-section-{{ section.sectionId }}-check">
                             {% if section.sectionId == '4' %}
                                 {{ dictionary["featured_listings_emails.HomePage"] }}
@@ -58,9 +58,9 @@
                         {% endif %}
                     {% endif %}
                 {% endfor %}
-                {% if not item.images or item.images.length == 0 %}
+                {% if not item.has('images') or item.get('images').length == 0 %}
                     <div class="fad-message">
-                        {% if not item.price or item.price.amount == 0 %}
+                        {% if not item.has('price') or item.get('price').amount == 0 %}
                             {{ dictionary["featured_listings.UnableToFeature_NoImages_NoPrice"] }}
                         {% else %}
                             {{ dictionary["featured_listings.UnableToFeature_NoImages"] }}
@@ -68,7 +68,7 @@
                     </div>
                 {% endif %}
                 <div class="fad-edit">
-                    <a href="{{ ['/myolx/edititem?editid=', item.id, '&sk=', sk] | join('') | link }}">{{ dictionary["edititem_submitbutton.EditIt"] }}</a>
+                    <a href="{{ ['/myolx/edititem?editid=', item.get('id'), '&sk=', sk] | join('') | link }}">{{ dictionary["edititem_submitbutton.EditIt"] }}</a>
                 </div>
             </div>
             <div class="fad-submit">

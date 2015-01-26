@@ -23,5 +23,8 @@ module.exports = {
                 name: 'Téléphones Portables'
             }
         ]
+    },
+    featured: {
+        enabled: true
     }
 };

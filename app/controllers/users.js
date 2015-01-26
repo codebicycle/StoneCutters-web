@@ -6,6 +6,7 @@ var middlewares = require('../middlewares');
 var helpers = require('../helpers');
 var Paginator = require('../modules/paginator');
 var User = require('../models/user');
+var FeatureAd = require('../models/feature_ad');
 
 module.exports = {
     register: middlewares(register),
@@ -266,6 +267,41 @@ function myads(params, callback) {
             done(response.items);
         }.bind(this);
 
+        var findFeatured = function(done, items) {
+            if (!FeatureAd.isEnabled(this.app)) {
+                return done(items);
+            }
+            var promise = asynquence().or(done.fail);
+
+            items.each(function eachItem(item) {
+                promise.then(function getFeatured(next) {
+                    if (item.has('location') && !FeatureAd.isLocationEnabled(item.get('location').url)) {
+                        return done(items);
+                    }
+                    this.app.fetch({
+                        featuread: {
+                            model : 'Feature_ad',
+                            params: {
+                                id: item.get('id'),
+                                locate: this.app.session.get('selectedLanguage')
+                            }
+                        }
+                    }, {
+                        readFromCache: false
+                    }, function afterFetch(err, res) {
+                        if (err) {
+                            res = {};
+                        }
+                        item.set('featured', res.featuread);
+                        next();
+                    }.bind(this));
+                }.bind(this));
+            }, this);
+            promise.val(function findFeaturedSuccess() {
+                done(items);
+            });
+        }.bind(this);
+
         var success = function(items) {
             var platform = this.app.session.get('platform');
             var view = 'users/myads';
@@ -282,6 +318,8 @@ function myads(params, callback) {
                     viewname: 'myads'
                 });
             }
+            this.app.seo.addMetatag('robots', 'noindex, nofollow');
+            this.app.seo.addMetatag('googlebot', 'noindex, nofollow');
             callback(null, view, data);
         }.bind(this);
 
@@ -289,14 +327,13 @@ function myads(params, callback) {
             return helpers.common.error.call(this, err, res, callback);
         }.bind(this);
 
-        this.app.seo.addMetatag('robots', 'noindex, nofollow');
-        this.app.seo.addMetatag('googlebot', 'noindex, nofollow');
 
         asynquence().or(error)
             .then(redirect)
             .then(prepare)
             .then(findAds)
             .then(paginate)
+            .then(findFeatured)
             .val(success);
     }
 }
