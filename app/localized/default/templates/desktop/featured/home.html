@@ -7,7 +7,7 @@
                 <a href="{{ item.slug }}">
                     <figure class="items-image {{ 'icons icon-photo' if not item.thumbnail }}">
                         {% if item.thumbnail %}
-                            <img src="{{ item.thumbnail }}" alt="{{ item.title }}">
+                            <img src="{{ item.thumbnail }}" alt="{{ item.title }}" />
                         {% endif %}
                     </figure>
                     <h3>{{ item.title | truncate( 40, True) }}</h3>
