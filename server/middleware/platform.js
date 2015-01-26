@@ -98,7 +98,6 @@ module.exports = function(dataAdapter, excludedUrls) {
                 url.push(subHost);
                 url.push(req.originalUrl);
                 url = url.join('');
-                url = "http://html4.m.olx.com.ar/";
                 if (session.siteLocation) {
                     url = utils.params(url, 'location', session.siteLocation);
                 }
