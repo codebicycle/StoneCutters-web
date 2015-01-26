@@ -300,18 +300,20 @@ green-star()
 ribbon(bgcolor, color)
     background: bgcolor;
     color: color;
-    font-size: 12px;
+    font-size: 10px;
     font-weight: bold;
     left: 0;
-    padding: 4px 20px 4px 30px;
+    padding: 0 20px 0 30px;
     position: absolute;
+    height: 20px;
+    line-height:19px;
     text-transform: uppercase;
     font-style: normal;
 
     &:after {
         border-color: $green transparent $green $green;
         border-style: solid;
-        border-width: 11px;
+        border-width: 10px;
         bottom: 0;
         content: " ";
         height: 0;
