@@ -28,6 +28,9 @@ module.exports = function(dataAdapter, excludedUrls) {
             }
 
             function success(done, response, body) {
+                if (!body) {
+                    console.log('[OLX_DEBUG]', 'middleware', 'platform', userAgent, JSON.stringify(response));
+                }
                 if (req.cookies && req.cookies.forcedPlatform) {
                     body.web_platform = req.cookies.forcedPlatform;
                 }
@@ -105,7 +108,7 @@ module.exports = function(dataAdapter, excludedUrls) {
             }
 
             function fail(err) {
-                statsd.increment(['Unknown Location', 'middleware', 'platform', 'error']);
+                statsd.increment(['all', 'middleware', 'platform', 'error']);
                 res.status(500).sendfile(errorPath);
             }
 

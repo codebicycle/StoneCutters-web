@@ -3,7 +3,7 @@
 var Base = require('../../bases/view');
 
 module.exports = Base.extend({
-    className: 'pages_featured_ad_view'
+    className: 'featured_ads_view'
 });
 
-module.exports.id = 'pages/featured_ad';
+module.exports.id = 'featured/ads';

@@ -20,7 +20,8 @@ function show(params, callback) {
 }
 
 function showig(params, callback) {
-    return Base.prototype.control.call(this, ShowIg, arguments.concat(['-ig']));
+    arguments[arguments.length] = '-ig';
+    return Base.prototype.control.call(this, ShowIg, arguments);
 }
 
 module.exports = new Categories();

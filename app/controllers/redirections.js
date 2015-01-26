@@ -12,6 +12,7 @@ var phpRedirections = {
     switch_domain: '',
     myolx: 'myolx/myadslisting',
     yourads: 'myolx/myadslisting',
+    buyfeaturedad: 'myolx/buyfeaturedad',
     featured_ad: 'featured_ad'
 };
 var phpPaths = Object.keys(phpRedirections);
