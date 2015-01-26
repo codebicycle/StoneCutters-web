@@ -105,7 +105,8 @@ module.exports = function(dataAdapter, excludedUrls) {
             }
 
             function fail(err) {
-                statsd.increment(['Unknown Location', 'middleware', 'platform', 'error']);
+                console.log('[OLX_DEBUG]', 'middleware', 'platform', err);
+                statsd.increment(['all', 'middleware', 'platform', 'error']);
                 res.status(500).sendfile(errorPath);
             }
 
