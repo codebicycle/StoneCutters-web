@@ -149,8 +149,6 @@ function search(params, callback, gallery) {
             if (!FeatureAd.isEnabled(this.app)) {
                 return done();
             }
-            var location = this.app.session.get('location');
-
             this.app.fetch({
                 items: {
                     collection: 'Items',
@@ -368,8 +366,6 @@ function statics(params, callback) {
             if (!FeatureAd.isEnabled(this.app)) {
                 return done();
             }
-            var location = this.app.session.get('location');
-
             this.app.fetch({
                 items: {
                     collection: 'Items',
@@ -548,8 +544,6 @@ function allresults(params, callback, gallery) {
             if (!FeatureAd.isEnabled(this.app)) {
                 return done();
             }
-            var location = this.app.session.get('location');
-
             this.app.fetch({
                 items: {
                     collection: 'Items',
