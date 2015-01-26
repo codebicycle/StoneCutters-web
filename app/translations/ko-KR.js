@@ -380,6 +380,7 @@ module.exports = {
     'misc.BuyWhatYouWant': '\uC6D0\uD558\uB294 \uAC83\uC744',
     'misc.ByPublishingYouAgreeTerms': '\uADC0\uD558\uB294 \uAD11\uACE0\uB97C \uAC8C\uC2DC\uD568\uC73C\uB85C\uC368 OLX\uC758 <<LINK_TO_TERMS_AND_CONDITIONS>>\uC774\uC6A9\uC57D\uAD00<</ LINK_TO_TERMS_AND_CONDITIONS>>\uC5D0 \uB3D9\uC758\uD569\uB2C8\uB2E4.',
     'misc.Call': '\uD1B5\uD654\uD558\uAE30',
+    'misc.Categories': '\uCE74\uD14C\uACE0\uB9AC',
     'misc.ChooseACategory_Mob': '\uCE74\uD14C\uACE0\uB9AC \uC120\uD0DD',
     'misc.ChooseASubcategory_Mob': '\uD558\uC704 \uCE74\uD14C\uACE0\uB9AC \uC120\uD0DD',
     'misc.ClickHere': 'Click here',

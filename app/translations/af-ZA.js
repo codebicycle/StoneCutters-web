@@ -380,6 +380,7 @@ module.exports = {
     'misc.BuyWhatYouWant': 'Koop wat jy wil',
     'misc.ByPublishingYouAgreeTerms': 'Met die publisering van \'n advt., stem u in tot en aanvaar u die <<LINK_TO_TERMS_AND_CONDITIONS>> Bepalings en Voorwaardes <</ LINK_TO_TERMS_AND_CONDITIONS>> van OLX.',
     'misc.Call': 'Bel',
+    'misc.Categories': 'Kategorie\xEB',
     'misc.ChooseACategory_Mob': 'Kies \'n kategorie.',
     'misc.ChooseASubcategory_Mob': 'Kies \'n subkategorie.',
     'misc.ClickHere': 'Klik hier',

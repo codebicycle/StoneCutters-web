@@ -37,6 +37,20 @@ module.exports = {
                         adIconSpacingAfter: 15,
                         adIconUrl: 'http://afs.googleusercontent.com/olx/olx_[langcode].png'
                     }
+                },
+                slot_noresult_listing: {
+                    seo: 10,
+                    params: {
+                        number: 10,
+                        fontSizeTitle: 18,
+                        adIconLocation: 'ad-left',
+                        adIconWidth: 143,
+                        adIconHeight: 112,
+                        adIconSpacingAbove: 4,
+                        adIconSpacingBefore: 6,
+                        adIconSpacingAfter: 15,
+                        adIconUrl: 'http://afs.googleusercontent.com/olx/olx_[langcode].png'
+                    }
                 }
             }
         },

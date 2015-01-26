@@ -73,6 +73,10 @@ function createChannels(type) {
     var configChannel;
     var pageChannel;
 
+    if (slotname === 'slot_noresult_listing' && currentRoute.controller === 'searches' && currentRoute.action === 'search') {
+        currentRoute.action = 'noresult';
+    }
+
     configChannel = utils.get(configAdServing, ['channels', 'page', [currentRoute.controller, currentRoute.action].join('#')], {});
     pageChannel = getCategoryForChannel.call(this);
 

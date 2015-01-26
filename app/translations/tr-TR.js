@@ -380,6 +380,7 @@ module.exports = {
     'misc.BuyWhatYouWant': '\u0130stedi\u011Finizi al\u0131n',
     'misc.ByPublishingYouAgreeTerms': 'Bir ilan yay\u0131nlayarak OLX markas\u0131n\u0131n <<LINK_TO_TERMS_AND_CONDITIONS>>H\xFCk\xFCm ve Ko\u015Fullar<</ LINK_TO_TERMS_AND_CONDITIONS>>\'\u0131n\u0131 kabul etmi\u015F say\u0131l\u0131rs\u0131n\u0131z.',
     'misc.Call': 'Ara',
+    'misc.Categories': 'Kategoriler',
     'misc.ChooseACategory_Mob': 'Bir kategori se\xE7in',
     'misc.ChooseASubcategory_Mob': 'Bir alt kategori se\xE7in',
     'misc.ClickHere': 'Click here',

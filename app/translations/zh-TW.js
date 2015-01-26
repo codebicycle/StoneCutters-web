@@ -380,6 +380,7 @@ module.exports = {
     'misc.BuyWhatYouWant': '\u8CFC\u8CB7\u60F3\u8981\u7684\u7269\u54C1',
     'misc.ByPublishingYouAgreeTerms': '\u53EA\u8981\u60A8\u767C\u4F48\u5EE3\u544A\uFF0C\u5C31\u8868\u660E\u60A8\u540C\u610F\u5E76\u63A5\u53D7OLX\u7684<<LINK_TO_TERMS_AND_CONDITIONS>>\u689D\u6B3E\u548C\u689D\u4EF6<</ LINK_TO_TERMS_AND_CONDITIONS>>\u3002',
     'misc.Call': '\u547C\u53EB',
+    'misc.Categories': '\u985E\u5225',
     'misc.ChooseACategory_Mob': '\u9078\u64C7\u985E\u5225',
     'misc.ChooseASubcategory_Mob': '\u9078\u64C7\u5B50\u985E\u5225',
     'misc.ClickHere': 'Click here',
