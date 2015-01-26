@@ -98,17 +98,18 @@
                     {{ item.message }}
                 </div>
                 <div class="buttons">
-                    {% if (status == 'ready' or status == 'pending') %}
-                        <a href="{{ item.slug.replace(domain, fullDomain) | editSlug(item.id) }}" class="btn icons icon-edit">{{ dictionary["showactivelistings.Edit"] }} </a>
-                        {% if (status == 'ready') %}
-                            <a data-idd="{{ item.id }}" data-img="{{ item.thumbnailLarge }}" data-title="{{ item.title }}" href="{{ ('/myolx/deleteitem/'+ item.id) | link }}" class="btn icons icon-trash btndelete">{{ dictionary["confirmremoveitem.Delete"] }} </a>
-                        {% endif %}
+                    {% if item.editable %}
+                        <a href="{{ item.slug.replace(domain, fullDomain) | editSlug(item.id) }}" class="btn icons icon-edit">{{ dictionary["showactivelistings.Edit"] }}</a>
                     {% endif %}
-                    {% if (status == 'rejected' or status == 'expired' or status == 'deleted') %}
+                    {% if (status == 'ready') %}
+                        <a data-idd="{{ item.id }}" data-img="{{ item.thumbnailLarge }}" data-title="{{ item.title }}" href="{{ ('/myolx/deleteitem/'+ item.id) | link }}" class="btn icons icon-trash btndelete">{{ dictionary["confirmremoveitem.Delete"] }} </a>
+                    {% endif %}
+                    {# falta implementar #}
+                    {#% if (status == 'rejected' or status == 'expired' or status == 'deleted') %}
                         {% if status == 'expired' %}
                             <a href="" class="btn icons icon-repulish">{{ dictionary["myolx.Republish"] }}</a>
                         {% endif %}
-                    {% endif %}
+                    {% endif %#}
                 </div>
             </div>
             <div class="price">

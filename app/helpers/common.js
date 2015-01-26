@@ -229,8 +229,6 @@ module.exports = (function() {
     }
 
     function redirect(url, parameters, options) {
-        var siteLocation = this.app.session.get('siteLocation');
-
         options = (options || {});
         url = utils.link(url, this.app, options.query);
         if (parameters) {
@@ -248,7 +246,7 @@ module.exports = (function() {
         }
         if (this.app.session.get('isServer')) {
             this.app.req.res.status(status);
-            statsd.increment([this.app.session.get('location').name, 'errors', 400]);
+            statsd.increment([this.app.session.get('location').abbreviation, 'errors', 400]);
         }
         this.app.seo.reset(this.app, {
             page: ['pages', 'error']

@@ -223,6 +223,8 @@
 {IP}  html5.m.olx.co.cr         # Costa Rica
 {IP}  www.olx.co.cr         # Costa Rica
 {IP}  olx.co.cr         # Costa Rica
+{IP}  nicoya.olx.co.cr         # Costa Rica
+{IP}  canas.olx.co.cr         # Costa Rica
 
 {IP}  m.olx.com.ec        # Ecuador
 {IP}  wap.m.olx.com.ec        # Ecuador
@@ -345,6 +347,7 @@
 {IP}  html5.m.olx.com.pa        # Panama
 {IP}  www.olx.com.pa        # Panama
 {IP}  olx.com.pa        # Panama
+{IP}  monagrillo.olx.com.pa        # Panama
 
 {IP}  m.olx.com.py        # Paraguay
 {IP}  wap.m.olx.com.py        # Paraguay
@@ -647,6 +650,7 @@
 {IP}  html5.m.olx.ae            # United Arab Emirates
 {IP}  www.olx.ae            # United Arab Emirates
 {IP}  olx.ae            # United Arab Emirates
+{IP}  dubaicity.olx.ae            # United Arab Emirates
 
 {IP}  m.olx.com.uy        # Uruguay
 {IP}  wap.m.olx.com.uy        # Uruguay
@@ -669,3 +673,6 @@
 {IP}  html5.m.jaovat.com        # Jaovat - Vietnam
 {IP}  www.jaovat.com        # Jaovat - Vietnam
 {IP}  jaovat.com        # Jaovat - Vietnam
+
+#IPSTATICS
+{IPSTATICS} images01.olx-st.com images02.olx-st.com images03.olx-st.com images04.olx-st.com

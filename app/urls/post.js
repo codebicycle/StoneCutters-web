@@ -21,5 +21,8 @@ module.exports = {
     },
     'post#flow#edit': {
         url: 'myolx/edititem/:itemId'
-    }
+    },
+    'post#editsuccess': {
+        url: 'edititem/success/:itemId'
+    },
 };

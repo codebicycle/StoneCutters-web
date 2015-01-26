@@ -3,34 +3,33 @@
 var _ = require('underscore');
 var ati = require('./trackers/ati');
 var analytics = require('./trackers/analytics');
-var hydra = require('./trackers/hydra');
 var serverSide = require('./trackers/serverSide');
 var keyade = require('./trackers/keyade');
+var hydra = require('./trackers/hydra');
+var tagmanager = require('./trackers/tagmanager');
+var allpages = require('./trackers/allpages');
+var facebook = require('./trackers/facebook');
 var utils = require('../../../shared/utils');
 var esi = require('../esi');
 
 var trackers = {
-    ati: function(ctx, page, query) {
-        if (ati.isEnabled.call(this, page)) {
-            _.extend(ctx.params, {
-                ati: ati.getParams.call(this, page, query)
-            });
+    ati: ati,
+    analytics: analytics,
+    hydra: hydra,
+    tagmanager: tagmanager,
+    allpages: allpages,
+    facebook: facebook
+};
+
+_.each(trackers, function each(tracker, name) {
+    trackers[name] = function track(ctx, page, query) {
+        if (tracker.isEnabled.call(this, page)) {
+            ctx.params[name] = tracker.getParams.call(this, page, query);
         }
-    },
-    analytics: function(ctx, page, query) {
-        if (analytics.isEnabled.call(this, page)) {
-            _.extend(ctx.params, {
-                analytics: analytics.getParams.call(this, page, query)
-            });
-        }
-    },
-    hydra: function(ctx, page, query) {
-        if (hydra.isEnabled.call(this, page)) {
-            _.extend(ctx.params, {
-                hydra: hydra.getParams.call(this, page, query)
-            });
-        }
-    },
+    };
+}, this);
+
+_.extend(trackers, {
     serverSide: function(ctx, page, query) {
         var url;
 
@@ -81,7 +80,7 @@ var trackers = {
             }
         }
     }
-};
+});
 
 function getPageName(page) {
     if (~page.indexOf('#')) {

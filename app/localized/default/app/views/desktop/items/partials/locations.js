@@ -9,7 +9,6 @@ module.exports = Base.extend({
     className: 'items-locations',
     id: 'items-locations',
     tagName: 'nav',
-    animateTime: 500,
     events: {
         'click [data-action=slide]': 'filterSlide',
         'click [data-action=filter]': 'filter',
@@ -109,7 +108,7 @@ module.exports = Base.extend({
         event.stopImmediatePropagation();
 
         var $target = $(event.currentTarget);
-        var $neighborhoodList = $('.neighborhood-list .hidden-neighborhoods');
+        var $neighborhoodList = $('.hidden-locations');
         var $see = $('.see');
 
         $neighborhoodList.slideToggle();
@@ -181,7 +180,7 @@ module.exports = Base.extend({
         var currentRoute = this.app.session.get('currentRoute');
         var category;
 
-        if (currentRoute.action === 'staticSearch') {
+        if (currentRoute.action === 'statics') {
             path = path.replace('/q/', '/nf/search/');
             if (path.match(/\/c-[0-9]+/)) {
                 category = path.replace(/.*\/(c-[0-9]+).*/, '$1');

@@ -56,12 +56,22 @@ module.exports = Base.extend({
         return _.extend({}, data);
     },
     postRender: function() {
+        var paramCategory;
+
         $(window).on('beforeunload', this.onBeforeUnload);
-        if (this.getItem().has('id')) {
+        this.editing = !!this.getItem().has('id');
+        if (this.editing) {
             this.$('#posting-categories-view').trigger('editCategory', [this.item.get('category')]);
             this.$('#field-location').trigger('change');
         }
         else {
+            if (this.getUrlParam('cat') !== undefined) {
+                paramCategory = {
+                    parentCategory: this.getUrlParam('cat'),
+                    subCategory: this.getUrlParam('subcat')
+                };
+                this.$('#posting-categories-view').trigger('getQueryCategory', paramCategory);
+            }
             this.dictionary = translations.get(this.app.session.get('selectedLanguage'));
             if (this.isValid === undefined || this.isValid === null) {
                 this.errors['category.parentId'] = this.dictionary["postingerror.PleaseSelectCategory"];
@@ -92,7 +102,12 @@ module.exports = Base.extend({
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();
-        var email = subcategory.fields.contactInformation[2].value ? subcategory.fields.contactInformation[2].value.value : '';
+
+        var field = _.find(subcategory.fields.contactInformation, function each(field) {
+            return field.name === 'email';
+        });
+        var email = field.value ? field.value.value : '';
+
 
         this.item.get('category').parentId = subcategory.parentId;
         this.item.get('category').id = subcategory.id;
@@ -305,15 +320,18 @@ module.exports = Base.extend({
         function success() {
             var category = 'Posting';
             var action = 'PostingSuccess';
+            var successPage = this.editing ? '/edititem/success/' : '/posting/success/';
 
             this.track({
                 category: category,
                 action: action,
                 custom: [category, this.item.get('category').parentId || '-', this.item.get('category').id || '-', action, this.item.get('id')].join('::')
             });
-            helpers.common.redirect.call(this.app.router, '/posting/success/' + this.item.get('id') + '?sk=' + this.item.get('securityKey'), null, {
+
+            helpers.common.redirect.call(this.app.router, successPage + this.item.get('id') + '?sk=' + this.item.get('securityKey'), null, {
                 status: 200
             });
+
         }
 
         function fail(errors) {
@@ -346,6 +364,18 @@ module.exports = Base.extend({
             app: this.app
         }));
         return this.item;
+    },
+    getUrlParam: function(param) {
+        var url = window.location.search.substring(1);
+        var query = url.split('&');
+        for (var i = 0; i < query.length; i++)
+        {
+            var paramName = query[i].split('=');
+            if (paramName[0] == param)
+            {
+                return paramName[1];
+            }
+        }
     }
 });
 

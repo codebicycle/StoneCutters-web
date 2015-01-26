@@ -37,7 +37,7 @@ function list(params, callback) {
 function showig(params, callback) {
     var platform = this.app.session.get('platform');
 
-    if (platform !== 'desktop') {
+    if (platform !== 'desktop' && platform !== 'html5') {
         return helpers.common.error.call(this, null, {}, callback);
     }
     params['f.hasimage'] = true;
@@ -250,7 +250,8 @@ function handleItems(params, promise, gallery) {
             meta: meta,
             items: items.toJSON(),
             filters: items.filters,
-            paginator: items.paginator
+            paginator: items.paginator,
+            hasItemsWithImages: items.hasImages()
         });
     }.bind(this);
 

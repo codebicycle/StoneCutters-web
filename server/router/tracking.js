@@ -9,6 +9,7 @@ module.exports = function trackingRouter(app, dataAdapter) {
     var tracking = require('../../app/modules/tracking');
     var env = config.get(['environment', 'type'], 'development');
     var gif = new Buffer('R0lGODlhAQABAPAAAP39/QAAACH5BAgAAAAALAAAAAABAAEAAAICRAEAOw==', 'base64');
+    var devices = ['Android', 'iOS'];
 
     function prepare(options, params) {
         options = _.defaults(options, {
@@ -46,13 +47,13 @@ module.exports = function trackingRouter(app, dataAdapter) {
 
         restler.request(url, options)
             .on('success', function success() {
-                statsd.increment([req.query.locNm, 'tracking', type, tracker, platform, 'success']);
+                statsd.increment([req.query.locIso || 'all', 'tracking', type, tracker, platform, 'success']);
             })
             .on('fail', function error() {
-                statsd.increment([req.query.locNm, 'tracking', type, tracker, platform, 'error']);
+                statsd.increment([req.query.locIso || 'all', 'tracking', type, tracker, platform, 'error']);
             })
             .on('error', function fail() {
-                statsd.increment([req.query.locNm, 'tracking', type, tracker, platform, 'fail']);
+                statsd.increment([req.query.locIso || 'all', 'tracking', type, tracker, platform, 'fail']);
             });
     }
 
@@ -76,22 +77,20 @@ module.exports = function trackingRouter(app, dataAdapter) {
 
         function graphiteTracking(req) {
             var platform = req.rendrApp.session.get('platform');
-            var osName = req.rendrApp.session.get('osName') || 'Others';
+            var osName = req.rendrApp.session.get('osName');
             var hitCount = req.rendrApp.session.get('hitCount');
             var clientId = req.rendrApp.session.get('clientId');
 
-            statsd.increment([req.query.locNm, 'pageview', platform]);
-            statsd.increment([req.query.locNm, 'devices', osName, platform]);
+            statsd.increment([req.query.locIso || 'all', 'pageview', _.contains(devices, osName) ? osName : 'others', platform]);
             if (!hitCount) {
-                statsd.increment([req.query.locNm, 'sessions', platform, 'error']);
+                statsd.increment([req.query.locIso || 'all', 'sessions', platform, 'error']);
             }
             else {
-                // statsd.increment([req.query.locNm, 'sessions', platform, 'average', clientId]);
                 if (hitCount > 1) {
-                    statsd.increment([req.query.locNm, 'sessions', platform, 'recurrent']);
+                    statsd.increment([req.query.locIso || 'all', 'sessions', platform, 'recurrent']);
                 }
                 else {
-                    statsd.increment([req.query.locNm, 'sessions', platform, 'new']);
+                    statsd.increment([req.query.locIso || 'all', 'sessions', platform, 'new']);
                 }
             }
         }
@@ -185,15 +184,13 @@ module.exports = function trackingRouter(app, dataAdapter) {
 
             if (!location) {
                 if (!siteLocation) {
-                    /* console.log('[OLX_DEBUG]', 'no session or urlLoc', '|', userAgent, '|', req.originalUrl); */
                     return false;
                 }
-                /* console.log('[OLX_DEBUG]', 'no session', '|', userAgent, '|', req.originalUrl); */
                 return false;
             }
             bot = isBot(userAgent, platform, osName, osVersion);
             if (bot) {
-                statsd.increment([req.query.locNm, 'bot', bot, platform]);
+                statsd.increment([req.query.locIso || 'all', 'bot', bot, platform]);
                 return false;
             }
             if (req.query.custom) {
@@ -202,7 +199,6 @@ module.exports = function trackingRouter(app, dataAdapter) {
                 }
                 catch (err) {}
                 if (platformUrl !== 'wap' && platformUrl !== 'html4' && platformUrl !== 'html5') {
-                    /* console.log('[OLX_DEBUG]', 'ati', platform, platformUrl, userAgent, host, req.originalUrl); */
                     return false;
                 }
             }
@@ -298,15 +294,13 @@ module.exports = function trackingRouter(app, dataAdapter) {
 
             if (!location) {
                 if (!siteLocation) {
-                    /* console.log('[OLX_DEBUG]', 'no session or urlLoc', '|', userAgent, '|', req.originalUrl); */
                     return false;
                 }
-                /* console.log('[OLX_DEBUG]', 'no session', '|', userAgent, '|', req.originalUrl); */
                 return false;
             }
             bot = isBot(userAgent, platform, osName, osVersion);
             if (bot) {
-                statsd.increment([req.query.locNm, 'bot', bot, platform]);
+                statsd.increment([req.query.locIso || 'all', 'bot', bot, platform]);
                 return false;
             }
             location = req.rendrApp.session.get('location');
@@ -353,7 +347,7 @@ module.exports = function trackingRouter(app, dataAdapter) {
                 if (!metric) {
                     return;
                 }
-                statsd.increment(metric, value);
+                statsd.increment(metric.split('.'), value);
             });
 
             res.set('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-age=0, max-stale=0, post-check=0, pre-check=0');

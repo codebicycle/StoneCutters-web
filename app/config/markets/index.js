@@ -25,9 +25,11 @@ module.exports = {
     'www.olx.co.ke': require('./www.olx.co.ke'),
     'www.olx.com.gh': require('./www.olx.com.gh'),
     'www.olx.co.ug': require('./www.olx.co.ug'),
+    'www.olx.com.ng': require('./www.olx.com.ng'),
     'www.olx.it': require('./www.olx.it'),
     'www.olx.es': require('./www.olx.es'),
     'www.olx.fr': require('./www.olx.fr'),
     'www.olx.in': require('./www.olx.in'),
-    'www.olx.ir': require('./www.olx.ir')
+    'www.olx.ir': require('./www.olx.ir'),
+    'www.olx.ae': require('./www.olx.ae')
 };
