@@ -13,6 +13,7 @@ IP="127.0.0.1"
 ENV="Development"
 SMAUG="190.210.62.60"
 SPAMHANDLER="162.242.207.113"
+IPSTATICS="108.171.171.65"
 EXTBKP=""
 
 # Help
@@ -28,7 +29,7 @@ usage() {
 
 # Arguments
 # ---------------------------------------------------------------------------------------
-while getopts ":i:e:s:h:" o; do
+while getopts ":i:e:s:h:t:" o; do
     case "${o}" in
         i)
             IP=${OPTARG}
@@ -41,6 +42,9 @@ while getopts ":i:e:s:h:" o; do
             ;;
         h)
             SPAMHANDLER=${OPTARG}
+            ;;
+        t)
+            IPSTATICS=${OPTARG}
             ;;
         *)
             usage
@@ -97,6 +101,7 @@ then
     sed -i $EXTBKP "s/{IP}/$IP/g" '/etc/hosts';
     sed -i $EXTBKP "s/{SMAUG}/$SMAUG/g" '/etc/hosts';
     sed -i $EXTBKP "s/{SPAMHANDLER}/$SPAMHANDLER/g" '/etc/hosts';
+    sed -i $EXTBKP "s/{IPSTATICS}/$IPSTATICS/g" '/etc/hosts';
 fi
 
 echo "Moved to $ENV"
