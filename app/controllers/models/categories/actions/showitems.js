@@ -25,9 +25,6 @@ function initialize(attrs, options) {
 
     var params = this.get('params');
 
-    this.promise = options.promise;
-    this.category = options.category;
-    this.subcategory = options.subcategory;
     this.page = params ? params.page : undefined;
 }
 

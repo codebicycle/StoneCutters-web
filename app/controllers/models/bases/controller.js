@@ -4,13 +4,7 @@ var _ = require('underscore');
 var Backbone = require('backbone');
 var middlewares = require('../../../middlewares');
 var helpers = require('../../../helpers');
-var Controller;
-var Base;
-
-Backbone.noConflict();
-Base = Backbone.Model;
-
-Controller = Backbone.Model.extend({
+var Controller = Backbone.Model.extend({
     control: control
 });
 

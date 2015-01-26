@@ -30,6 +30,11 @@ function action(done) {
     var platform = this.app.session.get('platform');
     var options = {
         app: this.app,
+        currentRoute: this.currentRoute,
+        redirectTo: this.redirectTo,
+        dependencies: this.dependencies,
+        include: this.include,
+        form: this.form,
         promise: promise,
         category: category
     };
