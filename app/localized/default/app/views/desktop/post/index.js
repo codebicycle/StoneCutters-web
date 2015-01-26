@@ -102,7 +102,12 @@ module.exports = Base.extend({
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();
-        var email = subcategory.fields.contactInformation[2].value ? subcategory.fields.contactInformation[2].value.value : '';
+
+        var field = _.find(subcategory.fields.contactInformation, function each(field) {
+            return field.name === 'email';
+        });
+        var email = field.value ? field.value.value : '';
+
 
         this.item.get('category').parentId = subcategory.parentId;
         this.item.get('category').id = subcategory.id;
@@ -363,10 +368,10 @@ module.exports = Base.extend({
     getUrlParam: function(param) {
         var url = window.location.search.substring(1);
         var query = url.split('&');
-        for (var i = 0; i < query.length; i++) 
+        for (var i = 0; i < query.length; i++)
         {
             var paramName = query[i].split('=');
-            if (paramName[0] == param) 
+            if (paramName[0] == param)
             {
                 return paramName[1];
             }
