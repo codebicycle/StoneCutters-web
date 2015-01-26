@@ -4,7 +4,7 @@ var templateSettings = {
   interpolate: /\{\{\=(.+?)\}\}/g,
   evaluate: /\{\{(.+?)\}\}/g,
   escape: /\{\{\-(.+?)\}\}/g
-}
+};
 
 window.AFCrender = function AFCrender(gads, slotname, boxTitle) {
     if (gads.length == 0) {

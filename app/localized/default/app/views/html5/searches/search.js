@@ -1,65 +1,40 @@
 'use strict';
 
-var _ = require('underscore');
 var Base = require('../../../../../common/app/bases/view').requireView('searches/search');
+var _ = require('underscore');
 var helpers = require('../../../../../../helpers');
-var breadcrumb = require('../../../../../../modules/breadcrumb');
 
 module.exports = Base.extend({
-    className: 'searches_search_view',
+    className: 'items_search_view',
+    regexpFindPage: /-p-[0-9]+/,
+    regexpReplacePage: /(-p-[0-9]+)/,
+    regexpFindNeighborhood: /-neighborhood_[0-9_]+/,
+
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
+        var link = this.refactorPath(this.app.session.get('path'));
 
         return _.extend({}, data, {
-            breadcrumb: breadcrumb.get.call(this, data),
+            nav: {
+                linkig: helpers.common.linkig.call(this, link, null, 'searchig'),
+                current: 'show'
+            },
             filtersEnabled: helpers.features.isEnabled.call(this, 'listingFilters')
         });
     },
-    postRender: function() {
-       var listingView = 'listView';
-
-        if (typeof window !== 'undefined' && localStorage) {
-            listingView = localStorage.getItem('listingView');
+    cleanPage: function(path) {
+        if (path.match(this.regexpFindPage)) {
+            path = path.replace(this.regexpReplacePage, '');
         }
-        else {
-            listingView = this.app.session.get('listingView');
+        return path.replace(/\/\//g, '/');
+    },
+    refactorPath: function(path) {
+        path = this.cleanPage(path);
+        path = path.replace(this.regexpFindNeighborhood, '');
+        if (path.slice(path.length - 1) === '/') {
+            path = path.substring(0, path.length - 1);
         }
-        if (listingView == 'galView') {
-            switchView();
-        }
-        $('.switchView').click((function onClick(e) {
-            switchView();
-            var current = ($('.gallery-list').length === 0 ? 'listView' : 'galView');
-
-            if (typeof window !== 'undefined' && localStorage) {
-                localStorage.setItem('listingView', current);
-            }
-            else {
-                this.app.session.persist({
-                    listingView: current
-                });
-            }
-        }).bind(this));
-
-        function loadImages(url , $this) {
-            var newImg = new Image();
-
-            newImg.src = url;
-            newImg.onload = function() {
-                $this.css('background-image', 'url(' + url + ')');
-            };
-        }
-
-        function switchView() {
-            $('section#itemListing ul').toggleClass('gallery-list');
-            $('.switchView').toggleClass('gallery');
-            $('.filled').each(function() {
-                var $this = $(this);
-
-                loadImages($this.attr('data-fullimg') , $this);
-            });
-        }
+        return path;
     }
 });
-
 module.exports.id = 'searches/search';

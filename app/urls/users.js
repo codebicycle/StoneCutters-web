@@ -42,8 +42,5 @@ module.exports = {
     },
     'users#deleteitem': {
         url: 'myolx/deleteitem'
-    },
-    'users#buyfeaturedad': {
-        url: 'myolx/buyfeaturedad'
     }
 };

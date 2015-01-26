@@ -1,4 +1,4 @@
-<header id="location">    
+<header id="location">
 	<span class="locationtext">{{ dictionary["itemslisting.NavigatorByLocation"] }}</span>
     {% if heading %}
         {% set tag = 'h1' %}
@@ -8,9 +8,9 @@
 
 	<{{ tag }}>
 		{% if location.current and location.current.type != 'country' %}
-			<a href="{{ '/location' | link }}" data-qa="change-city" >{{location.current.name}}</a>
+			<a href="{{ '/location' | link }}" data-qa="change-city" class="trackMe" data-tracking="Home-ClickLocation">{{location.current.name}}</a>
 		{% else %}
-			<a href="{{ '/location' | link }}" data-qa="select-city" >{{location.name}}</a>
+			<a href="{{ '/location' | link }}" data-qa="select-city" class="trackMe" data-tracking="Home-ClickLocation">{{location.name}}</a>
 		{% endif %}
 	</{{ tag }}>
 </header>

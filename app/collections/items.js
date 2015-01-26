@@ -1,7 +1,7 @@
 'use strict';
 
-var Base = require('../bases/collection');
 var _ = require('underscore');
+var Base = require('../bases/collection');
 var Item = require('../models/item');
 var helpers = require('../helpers');
 var Filters = require('../modules/filters');
@@ -106,6 +106,18 @@ module.exports = Base.extend({
                 method: 'push'
             });
         }
+    },
+    hasImages: function() {
+        var has = false;
+        var filter;
+
+        if (this.filters && this.filters.has('hasimage')) {
+            filter = this.filters.get('hasimage').get('value');
+            if (filter && filter.length === 1 && filter[0].id == 'true') {
+                has = true;
+            }
+        }
+        return has;
     }
 });
 

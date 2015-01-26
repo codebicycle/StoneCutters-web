@@ -35,7 +35,9 @@ module.exports = Base.extend({
             
             url = ['/items/', itemId, '/featurable/preorder?languageCode=', this.app.session.get('selectedLanguage')].join('');
             done(url, {
-                returnToUrl: helpers.common.link('/featured_ad', this.app),
+                returnToUrl: helpers.common.fullizeUrl(helpers.common.link('/featured_ad', this.app, {
+                    id: itemId
+                }), this.app),
                 location: this.app.session.get('siteLocation'),
                 countryIso: this.app.session.get('location').abbreviation,
                 paymentProviderId: $feature.data('payment'),

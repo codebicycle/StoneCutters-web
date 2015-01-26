@@ -39,8 +39,6 @@
         <label for="submit">
             <input type="submit" value="{{ dictionary["misc.SendEmail"] }} " id="submit" class="olx-ui-button orange" data-qa="reply-send-button" >
         </label>
-        <input type="hidden" class="hide itemCategory" value="{{ item.category.id }}">
-        <input type="hidden" class="hide itemSubcategory" value="{{ item.category.parentId }}">
     </fieldset>
     <p class="replySuccess icons icon-check hide" data-qa="reply-message-sent">
         {{ dictionary["item.YourMessageHasBeenSent"] }}
@@ -49,7 +47,6 @@
 </form>
 <div class="disclaimer">
     <p>
-        {{ dictionary["item.ClickAgreeTermsZA"] | replace('<<LINK>> condiciones de uso<</LINK>>.','') }}
-        <a rel="nofollow" href="/terms" target="_blank">{{ dictionary["defaultfooter.Terms of use"] }}</a>
+        {{ dictionary["item.ClickAgreeTermsZA"] | replace('<<LINK>>','<a rel="nofollow" href="/terms" target="_blank">') | replace('<</LINK>>','</a>') }}
     </p>
 </div>

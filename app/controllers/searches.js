@@ -39,7 +39,7 @@ function filter(params, callback, gallery) {
 function searchig(params, callback) {
     var platform = this.app.session.get('platform');
 
-    if (platform !== 'desktop') {
+    if (platform !== 'desktop' && platform !== 'html5') {
         return helpers.common.error.call(this, null, {}, callback);
     }
     params['f.hasimage'] = true;
@@ -154,11 +154,7 @@ function search(params, callback, gallery) {
             this.app.fetch({
                 items: {
                     collection: 'Items',
-                    params: _.extend({}, params, {
-                        featuredAds: true,
-                        pageSize: config.getForMarket(location.url, ['featured', 'ads', 'quantity', 'total'], 2),
-                        offset: 0
-                    })
+                    params: _.extend({}, params, FeatureAd.getParams(this.app))
                 }
             }, {
                 readFromCache: false
@@ -377,11 +373,7 @@ function statics(params, callback) {
             this.app.fetch({
                 items: {
                     collection: 'Items',
-                    params: _.extend({}, params, {
-                        featuredAds: true,
-                        pageSize: config.getForMarket(location.url, ['featured', 'ads', 'quantity', 'total'], 2),
-                        offset: 0
-                    })
+                    params: _.extend({}, params, FeatureAd.getParams(this.app))
                 }
             }, {
                 readFromCache: false
@@ -561,11 +553,7 @@ function allresults(params, callback, gallery) {
             this.app.fetch({
                 items: {
                     collection: 'Items',
-                    params: _.extend({}, params, {
-                        featuredAds: true,
-                        pageSize: config.getForMarket(location.url, ['featured', 'ads', 'quantity', 'total'], 2),
-                        offset: 0
-                    })
+                    params: _.extend({}, params, FeatureAd.getParams(this.app))
                 }
             }, {
                 readFromCache: false
