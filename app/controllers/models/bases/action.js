@@ -4,13 +4,7 @@ var _ = require('underscore');
 var Backbone = require('backbone');
 var asynquence = require('asynquence');
 var helpers = require('../../../helpers');
-var Action;
-var Base;
-
-Backbone.noConflict();
-Base = Backbone.Model;
-
-Action = Backbone.Model.extend({
+var Action = Backbone.Model.extend({
     initialize: initialize,
     control: control,
     redirection: redirection,
@@ -21,9 +15,7 @@ Action = Backbone.Model.extend({
 });
 
 function initialize(attrs, options) {
-    this.currentRoute = options.currentRoute;
-    this.app = options.app;
-    this.redirectTo = options.redirectTo;
+    _.extend(this, options || {});
 }
 
 function control() {
