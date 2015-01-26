@@ -6,8 +6,9 @@
         {% include (template + '/marketing/marketing-box-sell.html') %}
     {% endif %}
 </section>
-
-{% include (template + '/featured/home.html') %}
+{% if items %}
+	{% include (template + '/featured/home.html') %}
+{% endif %}
 
 <section id="category-tree">
     {% include (template + '/partials/categorytree.html') %}
