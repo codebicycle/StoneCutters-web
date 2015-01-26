@@ -7,14 +7,17 @@
                     <img src="{{ item.thumbnail }}" alt="{{ item.title }}">
                 {% endif %}
             </figure><!--
-            --><div class="items-info">
-                <h3>{{ item.title }}</h3><br>
+            --><div class="items-info {{'featuredad' if item.isFeaturedAd}}">
+                {% if item.isFeaturedAd %}
+                    <i class="icons icon-feature"></i><em>{{ dictionary["misc.FeaturedAd _BR"] }}</em>
+                {% endif %}
+                <h3>{{ item.title }}</h3>
                 {% if isStaticSearch %}
                     <div class="description">{{ item.description | truncate( 200, True, '...') }} </div>
                 {% endif %}
                 <span>{{ item.seo.references[0].anchor }}</span>
             </div><!--
-            --><p class="items-price{{ ' icons icon-feature' if item.isFeaturedAd }}">
+            --><p class="items-price">
                 {{ item.price.displayPrice }}
             </p><!--
             --><p class="items-date">
