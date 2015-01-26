@@ -4,7 +4,8 @@ var Base = require('../bases/collection');
 var _ = require('underscore');
 var Shop = require('../models/shop');
 var helpers = require('../helpers');
-
+var config = require('../config');
+var HOST = config.get(['mario', 'host'], 'mario.apps.olx.com');
 module.exports = Base.extend({
     model: Shop,
     initialize: function() {
@@ -36,6 +37,7 @@ module.exports = Base.extend({
         this.params = options.data;
 
         _.extend(this.params, {});
+        arguments[0].host = HOST;
         return Base.prototype.fetch.apply(this, arguments);
     }
 });
