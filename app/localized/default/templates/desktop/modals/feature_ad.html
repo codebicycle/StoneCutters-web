@@ -7,7 +7,6 @@
 {% endblock %}
 
 {% block content %}
-    {% if item.featured and item.featured.isEnabled() %}
     <div id="feature-ad">
         <h2>
             {{ dictionary["featured_listings.FeatureYourListingForUp20TimesVisibility"] | replace('<<LINK_FEATURED_LISTINGS>>', '<span>') | replace('<</LINK_FEATURED_LISTINGS>>', '</span>') }}
@@ -92,7 +91,4 @@
             </p>
         </div>
     </div>
-{% else %}
-TODO Handle not feature ad
-{% endif %}
 {% endblock %}

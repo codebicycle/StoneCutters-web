@@ -7,8 +7,8 @@
                     <img src="{{ item.thumbnail }}" alt="{{ item.title }}">
                 {% endif %}
             </figure><!--
-            --><div class="items-info {{'featuredad' if item.isFeaturedAd}}">
-                {% if item.isFeaturedAd %}
+            --><div class="items-info {{'featuredad' if item.isFeatured}}">
+                {% if item.isFeatured %}
                     <i class="icons icon-feature"></i><em>{{ dictionary["misc.FeaturedAd _BR"] }}</em>
                 {% endif %}
                 <h3>{{ item.title }}</h3>

@@ -34,9 +34,9 @@ function list(params, callback) {
             Paginator.prepare(this.app, params);
 
             this.app.fetch({
-                items: {
-                    collection: 'Items',
-                    params: _.extend({}, params, FeatureAd.getParams(this.app))
+                featureads: {
+                    collection: 'FeatureAds',
+                    params: params
                 }
             }, {
                 readFromCache: false
@@ -52,7 +52,7 @@ function list(params, callback) {
             this.app.seo.setContent(this.dependencies.categories.meta);
             callback(null, {
                 icons: (~icons.indexOf(country)) ? country.split('.') : 'default'.split('.'),
-                items: res ? res.items : undefined 
+                items: res ? res.featureads : undefined 
             });
         }.bind(this);
 
@@ -202,9 +202,9 @@ function handleItems(params, promise, gallery) {
             return done();
         }
         this.app.fetch({
-            items: {
-                collection: 'Items',
-                params: _.extend({}, params, FeatureAd.getParams(this.app))
+            featureads: {
+                collection: 'FeatureAds',
+                params: _.clone(params)
             }
         }, {
             readFromCache: false
@@ -223,8 +223,8 @@ function handleItems(params, promise, gallery) {
             if (err) {
                 return done.fail(err);
             }
-            if (response && response.items && res && res.items) {
-                response.items.addFeaturedAds(res.items);
+            if (response && res && res.featureads) {
+                res.featureads.mergeTo(response.items);
             }
             done(response);
         });

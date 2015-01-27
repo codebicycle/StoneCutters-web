@@ -150,9 +150,9 @@ function search(params, callback, gallery) {
                 return done();
             }
             this.app.fetch({
-                items: {
-                    collection: 'Items',
-                    params: _.extend({}, params, FeatureAd.getParams(this.app))
+                featureads: {
+                    collection: 'FeatureAds',
+                    params: _.clone(params)
                 }
             }, {
                 readFromCache: false
@@ -171,8 +171,8 @@ function search(params, callback, gallery) {
                 if (err) {
                     return done.fail(err);
                 }
-                if (response && response.items && res && res.items) {
-                    response.items.addFeaturedAds(res.items);
+                if (response && res && res.featureads) {
+                    res.featureads.mergeTo(response.items);
                 }
                 done(response);
             });
@@ -367,9 +367,9 @@ function statics(params, callback) {
                 return done();
             }
             this.app.fetch({
-                items: {
-                    collection: 'Items',
-                    params: _.extend({}, params, FeatureAd.getParams(this.app))
+                featureads: {
+                    collection: 'FeatureAds',
+                    params: _.clone(params)
                 }
             }, {
                 readFromCache: false
@@ -388,8 +388,8 @@ function statics(params, callback) {
                 if (err) {
                     return done.fail(err);
                 }
-                if (response && response.items && res && res.items) {
-                    response.items.addFeaturedAds(res.items);
+                if (response && res && res.featureads) {
+                    res.featureads.mergeTo(response.items);
                 }
                 done(response);
             });
@@ -545,9 +545,9 @@ function allresults(params, callback, gallery) {
                 return done();
             }
             this.app.fetch({
-                items: {
-                    collection: 'Items',
-                    params: _.extend({}, params, FeatureAd.getParams(this.app))
+                featureads: {
+                    collection: 'FeatureAds',
+                    params: _.clone(params)
                 }
             }, {
                 readFromCache: false
@@ -566,8 +566,8 @@ function allresults(params, callback, gallery) {
                 if (err) {
                     return done.fail(err);
                 }
-                if (response && response.items && res && res.items) {
-                    response.items.addFeaturedAds(res.items);
+                if (response && res && res.featureads) {
+                    res.featureads.mergeTo(response.items);
                 }
                 done(response);
             });
