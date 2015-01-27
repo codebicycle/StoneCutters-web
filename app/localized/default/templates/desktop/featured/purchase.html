@@ -17,6 +17,7 @@
             {% endif %}
             <div class="feature-ad-details">
                 {% for section in item.featured.get('sections') %}
+                <div class="fad-content">
                     <p class="fad-section-{{ section.sectionId }}-form">
                         <input type="checkbox" name="fad-section-{{ section.sectionId }}-check" id="fad-section-{{ section.sectionId }}-check" value="{{ section.sectionId }}" class="fad-check" {% if section.enabled %}data-id="{{ section.sectionId }}" data-payment="{{ section.paymentProviderId }}" data-concept="{{ section.conceptId }}" data-item="{{ item.get('id') }}"{% else %}disabled=""{% endif %}>
                         <label for="fad-section-{{ section.sectionId }}-check">
@@ -26,7 +27,7 @@
                                 {{ dictionary["featured_listings.TopListingsAndSearchResults"] }}
                             {% endif %}
                         </label>
-                        <br>
+
                         {% if section.enabled and section.weeks %}
                             <select id="fad-section-{{ section.sectionId }}-weeks" name="fad-section-{{ section.sectionId }}-weeks">
                                 {% for week in (1 | rangeToArray(section.weeks)) %}
@@ -45,7 +46,6 @@
                     {% if section.enabled %}
                         <p class="fad-section-{{ section.sectionId }}-price">
                             <span>{{ section.price.displayPrice }}</span>
-                            <br>
                             <small>{{ dictionary["itemslisting.PerWeek"] }}</small>
                         </p>
                     {% else %}
@@ -57,6 +57,7 @@
                             </p>
                         {% endif %}
                     {% endif %}
+                </div>
                 {% endfor %}
                 {% if not item.has('images') or item.get('images').length == 0 %}
                     <div class="fad-message">
@@ -67,22 +68,22 @@
                         {% endif %}
                     </div>
                 {% endif %}
+            </div>
+            <div class="fad-submit">
+                <div class="feature-ad-terms">
+                    {{ dictionary["terms.BeforeSubmitting"] | replace('<<LINK_TERMS_USE>>', (['<a target="_blank" href="', ('/featured_listings' | link), '" data-pass-thru="true" >'] | join(''))) | replace('<</LINK_TERMS_USE>>', '</a>') }}
+                </div>
+                <input id="fad-submit" type="button" value='{{ dictionary["itemslisting.FeatureYourAd"] }}' {# if not someSectionEnabled %}disabled=""{% endif #} >
                 <div class="fad-edit">
                     <a href="{{ ['/myolx/edititem?editid=', item.get('id'), '&sk=', sk] | join('') | link }}">{{ dictionary["edititem_submitbutton.EditIt"] }}</a>
                 </div>
-            </div>
-            <div class="fad-submit">
-                <input id="fad-submit" type="button" value='{{ dictionary["itemslisting.FeatureYourAd"] }}' {# if not someSectionEnabled %}disabled=""{% endif #} >
-                <span class="feature-ad-terms">
-                    {{ dictionary["terms.BeforeSubmitting"] | replace('<<LINK_TERMS_USE>>', (['<a target="_blank" href="', ('/featured_listings' | link), '" data-pass-thru="true" >'] | join(''))) | replace('<</LINK_TERMS_USE>>', '</a>') }}
-                </span>
+                <div class="feature-ad-return">
+                    <a href="{{ '/myolx/myadslisting' | link }}">{{ dictionary["myolxactionpanel.BackMyOlx"] }}</a>
+                </div>
             </div>
             <p class="fad-error hide">
                 {{ dictionary["postingerror.PleaseSelectAtLeastOneOption"] }}
             </p>
-        </div>
-        <div class="feature-ad-return">
-            <a href="{{ '/myolx/myadslisting' | link }}">{{ dictionary["myolxactionpanel.BackMyOlx"] }}</a>
         </div>
     </div>
 {% else %}

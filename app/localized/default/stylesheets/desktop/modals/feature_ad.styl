@@ -1,23 +1,30 @@
 #featuread-modal {
     .modal-container {
-        width: 550px;
+        width: 720px;
         .modal-header {
             padding: 10px 20px;
             .modal-title {
                 font-size: $xl;
             }
-            .icon-close {
-                margin: 5px 10px 0 0;
-            }
         }
         .modal-content {
             min-height: 400px;
             padding: 10px 20px;
+            #feature-ad {
+                h2 {
+                    font-size: $m;
+                    small {
+                        display: block;
+                        font-weight: normal;
+                    }
+                }
+            }
             .fad-edit {
-                padding: 25px 0;
+                padding: 0;
                 a {
                     border-radius();
                     action-button($greyStrong, $white, 3px, 10px 20px);
+                    display: block;
                     font-size: $m;
                     font-weight: bold;
                     line-height: 1;

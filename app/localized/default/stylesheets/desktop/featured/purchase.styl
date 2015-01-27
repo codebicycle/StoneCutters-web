@@ -1,24 +1,111 @@
 .featured-purchase-page {
-    .fad-edit {
-        padding: 25px 0;
-        a {
-            border-radius();
-            action-button($greyStrong, $white, 3px, 10px 20px);
-            font-size: $m;
-            font-weight: bold;
-            line-height: 1;
+    box();
+    padding: 20px;
+
+    h2 {
+        border-bottom: 1px solid $greyBorders;
+        font-size: $l;
+        font-weight: normal;
+        margin: 0;
+        padding-bottom: 15px;
+        small {
+            font-size: $s;
         }
     }
-    .fad-submit {
-        input {
-            border-radius();
-            action-button($orange, $white, 3px, 10px 20px);
+}
+
+#feature-ad {
+    h5 {
+        margin: 22px 0 30px;
+        font-size: $m;
+        font-weight: normal;
+    }
+    .fad-error {
+        color: $red;
+    }
+}
+.feature-ad-details {
+    .fad-content {
+        p {
+            margin: 0;
+            label {
+                padding-bottom: 10px;
+            }
+        }
+        clear-fix();
+        background: $greyPageBg;
+        border-radius: 3px;
+        padding: 15px;
+        margin-bottom: 4px;
+
+        .fad-section-4-errors {
+            margin-top: 10px;
+        }
+    }
+    .fad-section-3-price,
+    .fad-section-3-form {
+        display: block;
+        float: left;
+        width: 50%;
+        select {
+            display: block;
+            margin-top: 10px;
+        }
+    }
+    .fad-section-3-price {
+        text-align: right;
+        span {
             font-size: $m;
             font-weight: bold;
-            line-height: 1;
         }
+        small {
+            display: block;
+            font-size: $xs;
+        }
+    }
+}
+.fad-edit {
+    margin: 0 10px;
+    a {
+        border-radius();
+        action-button($greyStrong, $white, 3px, 10px 20px);
+        font-size: $m;
+        font-weight: bold;
+        line-height: 1;
+        display: block;
+    }
+}
+.fad-submit {
+    clear-fix();
+    padding-top: 20px;
+    input {
+        border-radius();
+        action-button($orange, $white, 3px, 10px 20px);
+        font-size: $m;
+        font-weight: bold;
+        line-height: 1;
+    }
+    .feature-ad-terms {
+        float: left;
+        line-height: 40px;
+    }
+    .feature-ad-return,
+    .fad-edit,
+    .fad-submit,
+    #fad-submit {
+        float: right;
+    }
+    .feature-ad-return {
+        font-size: $xs;
+
+    }
+    .fad-edit {
+        padding: 0;
     }
     .feature-ad-terms {
         font-size: $xs;
+    }
+    .feature-ad-return {
+        line-height: 40px;
     }
 }
