@@ -4,9 +4,8 @@ var Base = require('../bases/collection');
 var _ = require('underscore');
 var Shop = require('../models/shop');
 var helpers = require('../helpers');
-var config = require('../config');
-//var HOST = config.get(['mario', 'host'], 'mario.apps.olx.com');
-var HOST = "10.4.12.60:3500";
+var config = require('../../shared/config');
+var HOST = config.get(['mario', 'host'], 'luigi.apps.olx.com');
 module.exports = Base.extend({
     model: Shop,
     initialize: function() {

@@ -80,7 +80,7 @@
     </div>
 {% endmacro %}
 
-{% macro NearByStore(shops) %}
+{% macro NearByStore(shops, location, center) %}
 {% if shops.length %}
     <div class="nearbyStore">                
         <h3>Tiendas cerca tuyo:</h3>
@@ -88,40 +88,35 @@
         <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDvCh0uJ8GnZVKOctZCDcDQjewPKZC_NhY"></script>
         <script type="text/javascript">
         function initialize() {
-            // VARIABLES DE LOS PUNTOS              
-            var address = "minones 2177, ciudad autonoma de buenos aires, argentina";
-            new google.maps.Geocoder().geocode({"address": address}, function (results, status) {
-                var centerPoint = results[0].geometry.location;
-                var shops = [
-                {% for shop in shops %}
-                    {coord: {"lat": {{ shop.location.lat }}, "lng": {{ shop.location.lng }}}, title: "{{ shop.name }}"},                       
-                {% endfor %}            
-                ]
-                var mapOptions = {
-                    zoom: 16, 
-                    center: centerPoint
-                };
-                var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-                for (var i in shops) {
-                    var shop = shops[i];
-                    new google.maps.Marker({
-                        position: shop.coord,
-                        map: map,
-                        title: shop.title
-                    })
-                }
-                // FIN DE PUNTOS
-                if (navigator.geolocation) {
-                     navigator.geolocation.getCurrentPosition(function (position) {
-                    console.log("loading");
+            var shops = [
+            {% for shop in shops %}
+                {coord: {"lat": {{ shop.location.lat }}, "lng": {{ shop.location.lng }}}, title: "{{ shop.name }}"},                       
+            {% endfor %}            
+            ]
+            var mapOptions = {
+                zoom: 16, 
+                center: {{ center }}
+            };
+            var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+            for (var i in shops) {
+                var shop = shops[i];
+                new google.maps.Marker({
+                    position: shop.coord,
+                    map: map,
+                    title: shop.title
+                })
+            }
+            // FIN DE PUNTOS
+            if (navigator.geolocation) {
+                 navigator.geolocation.getCurrentPosition(function (position) {
+                console.log("loading");
 
-                         initialLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-                         map.setCenter(initialLocation);
-                     }, function(error) {
-                        console.log(error);
-                     });
-                 }
-            });
+                     initialLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+                     map.setCenter(initialLocation);
+                 }, function(error) {
+                    console.log(error);
+                 });
+             }
         }
         google.maps.event.addDomListener(window, 'load', initialize);
 

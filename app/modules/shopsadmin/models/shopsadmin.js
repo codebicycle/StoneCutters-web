@@ -26,9 +26,37 @@ function getShop() {
     return shop;
 }
 
+function getCenter() {
+    var minLat = 91;
+    var maxLat = -91;
+    var minLng = 181;
+    var maxLng = -181;
+
+    var shops = this.get("shops");
+    for (var j in shops) {
+        var shopLocation = shops[j].location;
+        if (shopLocation.lat > maxLat) {
+            maxLat = shopLocation.lat;
+        }
+        if (shopLocation.lat < minLat) {
+            minLat = shopLocation.lat;
+        }
+        if (shopLocation.lng > maxLng) {
+            maxLng = shopLocation.lng;
+        }
+        if (shopLocation.lng < minLng) {
+            minLng = shopLocation.lng;
+        }
+    }
+    var lat = (maxLat + minLat) / 2;
+    var lng = (maxLng + minLng) / 2;
+    return JSON.stringify({"lat": lat, "lng": lng});
+}
+
 module.exports = Base.extend({
     setShops: setShops,
-    getShop: getShop
+    getShop: getShop,
+    getCenter: getCenter
 });
 
 module.exports.id = 'ShopsAdmin';

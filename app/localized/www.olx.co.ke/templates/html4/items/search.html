@@ -13,7 +13,7 @@
         </div>
     {% else %}
 
-        {{ NearByStore(shops) }}
+        {{ NearByStore(shops, shopsAdmin.getCenter()) }}
         
         <ul class="itemListing">
             {% for item in items %}
