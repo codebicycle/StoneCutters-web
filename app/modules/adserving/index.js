@@ -69,16 +69,13 @@ function createChannels(type) {
     var countryCode = this.app.session.get('location').abbreviation;
     var prefix = configType.options.channel.replace('[countrycode]', countryCode);
     var currentRoute = this.app.session.get('currentRoute');
-    var currentRouteAction;
+    var currentRouteAction = currentRoute.action;
     var channels = [];
     var configChannel;
     var pageChannel;
 
     if (slotname === 'slot_noresult_listing' && currentRoute.controller === 'searches' && currentRoute.action === 'search') {
         currentRouteAction = 'noresult';
-    }
-    else {
-        currentRouteAction = currentRoute.action;
     }
 
     configChannel = utils.get(configAdServing, ['channels', 'page', [currentRoute.controller, currentRouteAction].join('#')], {});
