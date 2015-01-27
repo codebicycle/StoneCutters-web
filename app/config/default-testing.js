@@ -194,5 +194,25 @@ module.exports = {
         enabled: true,
         licenseKey: 'ee506f8b9b',
         applicationId: '3915768'
+    },
+    migration: {
+        /*
+            Stages:
+                1: "Inform"     -> Initial process. Inform about the upcoming actions
+                2. "Transfer"   -> Stop adding new content. Transfer user actions to new site
+                3. "Close"      -> Close site. Redirect all traffic to new site
+        */
+        'www.olx.com.mx': {
+            stage: 1,
+            banner: true
+        },
+        'www.olx.cl': {
+            stage: 1,
+            banner: true
+        },
+        'www.olx.com.bd': {
+            stage: 1,
+            banner: true
+        }
     }
 };
