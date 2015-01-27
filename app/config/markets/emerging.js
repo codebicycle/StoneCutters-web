@@ -72,6 +72,10 @@ module.exports = {
             keyade: {
                 enabled: true,
                 platforms: ['wap', 'html4', 'html5', 'desktop']
+            },
+            ninja: {
+                enabled: false,
+                platforms: ['desktop']
             }
         }
     }
