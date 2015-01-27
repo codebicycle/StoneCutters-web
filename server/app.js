@@ -26,15 +26,12 @@ module.exports = function appUseConf(done) {
 
     function expressConfiguration() {
         server.expressApp.disable('x-powered-by');
-        if (environment !== 'development') {
-            server.expressApp.use(express.compress());
-        }
+        server.expressApp.use(express.compress());
         server.expressApp.use(express.static(__dirname + '/../public'));
         server.expressApp.use(express.cookieParser());
     }
 
     function rendrConfiguration(rendrApp) {
-        //rendrApp.use(middleware.cookies());
         rendrApp.use(middleware.analytics());
         rendrApp.use(middleware.localstorageiframe());
         rendrApp.use(middleware.manifest());
@@ -52,6 +49,8 @@ module.exports = function appUseConf(done) {
         rendrApp.use(middleware.templates());
         rendrApp.use(middleware.internetOrg());
         rendrApp.use(middleware.dependencies());
+        rendrApp.use(middleware.securityPOST());
+        rendrApp.use(middleware.securityGET());
     }
 
     server.expressApp.configure(expressConfiguration);
