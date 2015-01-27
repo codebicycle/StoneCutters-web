@@ -83,6 +83,7 @@
             </figure>
             <div class="description">
                 <h3 class="title">
+                    {{ ' <i class="icons icon-feature"></i>' if item.isFeatured }}
                     {% if (status == 'ready') %}
                         <a href="{{ item | slugToUrl | link }}">{{ item.title }}</a>
                     {% else %}
