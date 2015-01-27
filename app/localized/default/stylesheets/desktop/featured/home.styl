@@ -55,13 +55,15 @@
                 }
 
                 .items-image {
-                    display: block;
-                    vertical-align: top;
-                    margin: 0;
                     border: 1px solid $greyBorders;
-                    width: 141px;
+                    display: block;
                     height: 110px;
+                    line-height: 95px;
+                    margin: 0;
                     position: relative;
+                    text-align: center;
+                    vertical-align: top;
+                    width: 141px;
                     img {
                         bottom: 0;
                         left: 0;
@@ -71,6 +73,10 @@
                         position: absolute;
                         right: 0;
                         top: 0;
+                    }
+                    &.icon-photo {
+                        color: $greyBorders;
+                        font-size: remify(64px);
                     }
                 }
             }
