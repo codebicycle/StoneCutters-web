@@ -17,7 +17,7 @@ smaug:
   protocol: http
   host: api-v2.olx.com
 mario:
-  host: localhost:3500
+  host: luigi.apps.olx.com
 session:
   secret: VWaB5TfjGPNWXJATbr6BK3Hy
 
