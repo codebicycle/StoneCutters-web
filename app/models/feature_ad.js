@@ -8,12 +8,7 @@ var FeatureAd = Base.extend({
     idAttribute: 'id',
     url: '/items/:id/isFeaturable',
     isEnabled: function() {
-        var enabled = FeatureAd.isEnabled(this.app);
-
-        if (enabled) {
-            enabled = this.get('enabled') || false;
-        }
-        return enabled;
+        return FeatureAd.isEnabled(this.app);
     }
 });
 

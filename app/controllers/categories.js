@@ -197,7 +197,7 @@ function handleItems(params, promise, gallery) {
         done();
     }.bind(this);
 
-    function fetchFeatured(done) {
+    var fetchFeatured = function(done) {
         if (!FeatureAd.isEnabled(this.app)) {
             return done();
         }
@@ -209,7 +209,7 @@ function handleItems(params, promise, gallery) {
         }, {
             readFromCache: false
         }, done.errfcb);
-    }
+    }.bind(this);
 
     var fetch = function(done, res) {
         this.app.fetch({
