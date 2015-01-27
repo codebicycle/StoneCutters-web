@@ -1,13 +1,14 @@
 {% if result %}
-    <aside id="notification-message" class="notification-message icons icon-check">
-        {{ dictionary["featured_listings.YourAdWillBeFeaturedSoon"] }}
-        <p>
-            {% set itemLink = (item.slug.replace(domain, fullDomain)) %}
-            <a href="{{ itemLink }}">{{ itemLink }}</a>
-        </p>
+    <aside id="notification-message" class="notification-message icons icon-feature">
+        <h4>{{ dictionary["featured_listings.YourAdWillBeFeaturedSoon"] }}</h4>
+        <p>{% set itemLink = (item.slug.replace(domain, fullDomain)) %} <a href="{{ itemLink }}">{{ itemLink }}</a></p>
     </aside>
+    {% view 'post/keepposting' %}
 {% else %}
-TODO Handle error
+    <aside id="notification-message" class="notification-message error icons icon-feature">
+        <h4>{{ dictionary["featured_listings.TheTransactionFailed"] }}<br>{{ dictionary["featured_listings_emails.YouHaveNotBeenCharged"] }}</h4>
+    </aside>
 {% endif %}
+
 
 {% view 'partials/tracking' %}
