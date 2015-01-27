@@ -10,7 +10,8 @@ module.exports = {
     surface: surface,
     year: year,
     carbrand: carbrand,
-    carmodel: carmodel
+    carmodel: carmodel,
+    age: age
 };
 
 function buildKilometerRange(to, label, dictionary) {
@@ -54,6 +55,7 @@ function bathrooms(filter, options) {
     return filter;
 }
 
+
 function bedrooms(filter, options) {
     filter = checkRangeValue(filter, options);
     filter = checkDescription(filter, options, 'itemdescription.bedrooms');
@@ -87,6 +89,24 @@ function carmodel(filter, options) {
     }
     filter = checkSelectValue(filter, options);
     filter = checkDescription(filter, options, 'itemdescriptionwiki.model');
+    return filter;
+}
+
+function age(filter, options) {
+    var dictionary = translations.get(options.app.session.get('selectedLanguage'));
+
+    filter = checkDescription(filter, options, 'misc.Age');
+    filter.set('value', [{
+            id: 'from',
+            value: '18',
+            count: 0
+        }, {
+            id: 'to',
+            value: dictionary['misc.Max'],
+            count: 0
+        }], {
+            unset: false
+        });
     return filter;
 }
 
@@ -129,7 +149,6 @@ function checkSelectValue(filter, options) {
 
 function checkDescription(filter, options, key) {
     var dictionary;
-
     if (!filter.has('description')) {
         dictionary = translations.get(options.app.session.get('selectedLanguage'));
         filter.set('description', dictionary[key], {
