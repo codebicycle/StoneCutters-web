@@ -4,7 +4,7 @@
         {% for item in items.toJSON() %}
             <li>
                 <i class="icons icon-feature"></i>
-                <a href="{{ item.slug }}">
+                <a href="{{ item.slug.replace(domain, fullDomain) }}">
                     <figure class="items-image {{ 'icons icon-photo' if not item.thumbnail }}">
                         {% if item.thumbnail %}
                             <img src="{{ item.thumbnail }}" alt="{{ item.title }}" />
