@@ -6,7 +6,7 @@
         {% include (template + '/marketing/marketing-box-sell.html') %}
     {% endif %}
 </section>
-{% if items %}
+{% if items and items.length > 0 %}
 	{% include (template + '/featured/home.html') %}
 {% endif %}
 
