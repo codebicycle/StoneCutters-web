@@ -380,6 +380,7 @@ module.exports = {
     'misc.BuyWhatYouWant': 'Kupite, kar \u017Eelite',
     'misc.ByPublishingYouAgreeTerms': 'Z objavo oglasa se strinjate in sprejemate <<LINK_TO_TERMS_AND_CONDITIONS>> Dolo\u010Dbe in pogoje <</ LINK_TO_TERMS_AND_CONDITIONS>> za OLX.',
     'misc.Call': 'Pokli\u010Di',
+    'misc.Categories': 'Categories',
     'misc.ChooseACategory_Mob': 'Izberite kategorijo',
     'misc.ChooseASubcategory_Mob': 'Izberite podkategorijo',
     'misc.ClickHere': 'Click here',

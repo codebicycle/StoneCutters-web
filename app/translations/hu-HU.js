@@ -380,6 +380,7 @@ module.exports = {
     'misc.BuyWhatYouWant': 'V\xE1s\xE1roljon, amit csak akar',
     'misc.ByPublishingYouAgreeTerms': 'B\xE1rmely hirdet\xE9s felad\xE1s\xE1val egyidej\u0171leg elfogadja az <<LINK_TO_TERMS_AND_CONDITIONS>> \xC1ltal\xE1nos Szerz\u0151d\xE9si Felt\xE9teleket <</ LINK_TO_TERMS_AND_CONDITIONS>> (OLX).',
     'misc.Call': 'H\xEEv\xE1s',
+    'misc.Categories': 'Kateg\xF3ri\xE1k',
     'misc.ChooseACategory_Mob': 'V\xE1lasszon kateg\xF3ri\xE1t',
     'misc.ChooseASubcategory_Mob': 'V\xE1lasszon alkateg\xF3ri\xE1t',
     'misc.ClickHere': 'Click here',

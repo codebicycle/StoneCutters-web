@@ -380,6 +380,7 @@ module.exports = {
     'misc.BuyWhatYouWant': 'Per\xF2 el que vols',
     'misc.ByPublishingYouAgreeTerms': 'En publicar aquest anunci, acceptes els <<LINK_TO_TERMS_AND_CONDITIONS>> Termes i condicions <</ LINK_TO_TERMS_AND_CONDITIONS>> de OLX.',
     'misc.Call': 'Telefonar',
+    'misc.Categories': 'Categories',
     'misc.ChooseACategory_Mob': 'Escull una categoria',
     'misc.ChooseASubcategory_Mob': 'Escull una subcategoria',
     'misc.ClickHere': 'Click here',

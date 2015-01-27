@@ -380,6 +380,7 @@ module.exports = {
     'misc.BuyWhatYouWant': '\u8CB4\u65B9\u306E\u6B32\u3057\u3044\u3082\u306E\u3092\u8CFC\u5165\u4E0B\u3055\u3044\u3002',
     'misc.ByPublishingYouAgreeTerms': '\u5E83\u544A\u3092\u516C\u958B\u3059\u308B\u3053\u3068\u3067<<LINK_TO_TERMS_AND_CONDITIONS>> \u3054\u5229\u7528\u898F\u683C\u306B\u540C\u610F\u3001\u53D7\u8AFE\u3055\u308C\u308B\u4E8B\u306B\u306A\u308A\u307E\u3059OLX\u306E <</ LINK_TO_TERMS_AND_CONDITIONS>>.',
     'misc.Call': '\u96FB\u8A71\u3057\u3066\u4E0B\u3055\u3044\u3002',
+    'misc.Categories': '\u30AB\u30C6\u30B4\u30EA\u30FC',
     'misc.ChooseACategory_Mob': '\u30AB\u30C6\u30B4\u30EA\u3092\u9078\u629E\u3057\u3066\u4E0B\u3055\u3044',
     'misc.ChooseASubcategory_Mob': '\u30B5\u30D6\u30AB\u30C6\u30B4\u30EA\u3092\u9078\u629E\u3057\u3066\u4E0B\u3055\u3044',
     'misc.ClickHere': 'Click here',

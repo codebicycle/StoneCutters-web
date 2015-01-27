@@ -380,6 +380,7 @@ module.exports = {
     'misc.BuyWhatYouWant': 'Achte sa ou vle',
     'misc.ByPublishingYouAgreeTerms': 'Depi ou pibliye yon anons, ou dak\xF2 epi ou aksepte <<LINK_TO_TERMS_AND_CONDITIONS>> Regleman ak Kondisyon<</ LINK_TO_TERMS_AND_CONDITIONS>>  OLX yo.',
     'misc.Call': 'Rele',
+    'misc.Categories': 'Kategori',
     'misc.ChooseACategory_Mob': 'Chwazi yon kategori',
     'misc.ChooseASubcategory_Mob': 'Chwazi yon dezy\xE8m kategori',
     'misc.ClickHere': 'Click here',
