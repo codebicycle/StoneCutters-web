@@ -16,6 +16,12 @@
 {IP}  html5.m.olx.com           # United States
 {IP}  www.olx.com           # United States
 {IP}  olx.com           # United States
+{IP}  lasvegas.olx.com # United States
+{IP}  yonkers.olx.com # United States
+{IP}  sacramento.olx.com # United States
+{IP}  norfolk-virginia.olx.com # United States
+{IP}  fortmeade-maryland.olx.com # United States
+{IP}  farrwest.olx.com # United States
 
 {IP}  m.olx.com.ar        # Argentina
 {IP}  wap.m.olx.com.ar        # Argentina
@@ -287,6 +293,7 @@
 {IP}  html5.m.olx.it            # Italy
 {IP}  www.olx.it            # Italy
 {IP}  olx.it            # Italy
+{IP}  milano.olx.it # Italy
 
 {IP}  m.olx.ir			# Iran
 {IP}  wap.m.olx.ir		# Iran
@@ -604,6 +611,9 @@
 {IP}  html5.m.olx.es            # Spain
 {IP}  www.olx.es            # Spain
 {IP}  olx.es            # Spain
+{IP}  gava.olx.es # Spain
+{IP}  getafe.olx.es # Spain
+{IP}  ciudadzaragoza.olx.es # Spain
 
 {IP}  m.olx.lk            # Sri Lanka
 {IP}  wap.m.olx.lk            # Sri Lanka
