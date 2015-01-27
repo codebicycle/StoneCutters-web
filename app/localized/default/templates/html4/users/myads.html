@@ -13,26 +13,33 @@
                 <li>
                     <a href="{{ item | slugToUrl | link }}">
                         <div class="imageCont" style="background-image: url({{ item.thumbnail if item.thumbnail else ('/images/html4/noPhoto.png' | static) }});"></div>
-                    </a>
-                    <div class="itemInfo">
-                        <p class="itemPrice">{{ item.price.displayPrice }}</p>
-                        {% if item.status == 'pending' %}
-                            <span class="status pending">{{ dictionary["itemslisting.PendingAd"] }}</span>
-                        {% elif item.status == 'rejected' %}
-                            <span class="status rejected">{{ dictionary["misc.RejectedAd_Caps"] }}</span>
-                        {% elif item.status == 'ready' %}
-                            <span class="status ready">{{ item.date.since.day if item.date.since.day }} {{ dictionary[item.date.since.dictionary] }}{{ (', ' + item.date.since.hour) if item.date.since.hour }}</span>
-                        {% endif %}
-                        <div class="centerCont">
-                            <a href="{{ item | slugToUrl | link }}">
-                                <h2>{{ item.title }}</h2>
-                            </a>
+                        <div class="itemInfo">
+                            {% set status = 'ready' %}
+                            {% set statustxt = dictionary["listingpageitemslisting.Posted"] %}
+                            {% if item.status == 'expired' %}
+                                {% set status = 'expired' %}
+                                {% set statustxt = dictionary["misc.Expired"] %}
+                            {% elif item.status == 'closed' %}
+                                {% set status = 'deleted' %}
+                                {% set statustxt = dictionary["misc.Removed"] %}
+                            {% elif item.status == 'rejected' %}
+                                {% set status = 'rejected' %}
+                                {% set statustxt = dictionary["item.Rejected"] %}
+                            {% elif item.status == 'pending' %}
+                                {% set status = 'pending' %}
+                                {% set statustxt = dictionary["misc.Pending_BR"] %}
+                            {% endif %}
+                            <span class="status {{ status }}">{{ statustxt }}</span>
+                            <h2 class="title">{{ item.title }}</h2>
+                            <p class="itemPrice">{{ item.price.displayPrice }}</p>
                         </div>
-                        {% if item.status == 'ready' %}
-                            <a href="{{ ['/myolx/edititem/', item.id] | join('') | link }}" class="action">{{ dictionary["showactivelistings.Edit"] }}</a>
-                            <a href="{{ ['/myolx/deleteitem/', item.id] | join('') | link }}" class="action">{{ dictionary["confirmremoveitem.Delete"] }}</a>
-                        {% endif %}
-                    </div>
+                    </a>
+                    {% if item.status == 'ready' %}
+                        <div class="actions">
+                            <a href="{{ ['/myolx/edititem/', item.id] | join('') | link }}" class="action edit">{{ dictionary["showactivelistings.Edit"] }}</a>
+                            <a href="{{ ['/myolx/deleteitem/', item.id] | join('') | link }}" class="action delete">{{ dictionary["confirmremoveitem.Delete"] }}</a>
+                        </div>
+                    {% endif %}
                 </li>
             {% endfor %}
         </ul>

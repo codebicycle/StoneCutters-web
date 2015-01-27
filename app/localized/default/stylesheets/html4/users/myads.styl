@@ -1,21 +1,95 @@
-#myads ul.itemListing a.action {
-	float: right;
-	margin: 0 8px 0 0;
-	color: #4A7AD0;
-	font-size: 12px;
-}
-#myads ul.itemListing li .itemInfo span.status {
-	padding: 3px 6px;
-	color: #ffffff;
-	font-size: 12px;
-}
-#myads ul.itemListing li .itemInfo span.status.rejected {
-	background: red;
-}
-#myads ul.itemListing li .itemInfo span.status.pending {
-	background: orange;
-}
-#myads ul.itemListing li .itemInfo span.status.ready {
-	color: #666666;
-	padding: 3px 0;
+// #myads ul.itemListing a.action {
+// 	float: right;
+// 	margin: 0 8px 0 0;
+// 	color: #4A7AD0;
+// 	font-size: 12px;
+// }
+// #myads ul.itemListing li .itemInfo span.status {
+// 	padding: 3px 6px;
+// 	color: #ffffff;
+// 	font-size: 12px;
+// }
+// #myads ul.itemListing li .itemInfo span.status.rejected {
+// 	background: red;
+// }
+// #myads ul.itemListing li .itemInfo span.status.pending {
+// 	background: orange;
+// }
+// #myads ul.itemListing li .itemInfo span.status.ready {
+// 	color: #666666;
+// 	padding: 3px 0;
+// }
+
+#myads {
+	margin-bottom: 20px;
+	overflow: hidden;
+
+    .itemListing {
+        li {
+            float: left;
+            background: #fff;
+            height: auto;
+        	position: relative;
+            .title,
+			.status {
+				margin-top: 5px;
+			}
+			.status {
+				font-size: 14px;
+				font-weight: bold;
+            	width: 44%;
+				&.ready {
+			        color: #aab20a;
+			    }
+			    &.expired,
+			    &.deleted {
+			        color: #000;
+			    }
+			    &.rejected {
+			        color: #d51f36;
+			    }
+			    &.pending {
+			        color: #f2b520;
+			    }
+			}
+            .itemInfo {
+            	float: left;
+            	width: 40%;
+			}
+            .title,
+            .itemPrice {
+            	float: left;
+            	width: 100%;
+            }
+            .title {
+            	font-size: 14px;
+            	height: 34px;
+            	color: #000;
+            	overflow: hidden;
+            }
+            .itemPrice {
+            	color: #b0b0b0;
+				font-weight: bold;
+				margin-top: 6px;
+            }
+            .actions {
+            	float: left;
+            	.action {
+					position: absolute;
+					text-align: center;
+					font-size: 13px;
+					font-weight: bold;
+					border: 1px solid #dedede;
+					padding: 5px;
+					width: 50px;
+					&.delete {
+						bottom: 5px;
+					}
+					&.edit {
+						bottom: 40px;
+					}
+            	}
+            }
+        }
+    }
 }
