@@ -58,16 +58,18 @@ function setDefaultParams(params, options) {
 }
 
 function setCustomParams(params,options) {
-    var item = this.app.session.get('item');
-
     params.pageNumber = options.page;  
+    params.resultSetType = '';
+    params.resultSetFormat = '';
+    params.searchString = params.search;   
+    params.pageNumber = options.page;
 
-    if (item) {
-        params.itemId = item.id;
-        params.sellerId = item.user.id;
+    if (options.item) {
+        params.itemId = options.item.id;
+        params.sellerId = options.item.user.id;
         params.sellerType = 'private';
-        params.imagesCount = item.images.length;
-        params.creationDate = item.date.timestamp;   
+        params.imagesCount = options.item.images.length;
+        params.creationDate = options.item.date.timestamp;   
     }
 
 }
