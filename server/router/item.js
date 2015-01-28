@@ -123,11 +123,11 @@ module.exports = function(app, dataAdapter) {
                         if (_item.neighborhood !== '') {
                             var aux = _item.neighborhood.split('-');
 
-                            _item['neighborhood.id']=aux[0];
-                            _item['neighborhood.name']=aux[1];
+                            _item['neighborhood.id'] = aux[0];
+                            _item['neighborhood.name'] = aux[1];
                         } else {
-                            _item['neighborhood.id']='';
-                            _item['neighborhood.name']='';
+                            _item['neighborhood.id'] = '';
+                            _item['neighborhood.name'] = '';
                         }
                     }
 
