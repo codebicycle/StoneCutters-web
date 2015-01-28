@@ -27,7 +27,7 @@
                 {% for section in item.featured.get('sections') %}
                 <div class="fad-content">
                     <p class="fad-section-{{ section.sectionId }}-form form">
-                        <input type="checkbox" name="fad-section-{{ section.sectionId }}-check" id="fad-section-{{ section.sectionId }}-check" value="{{ section.sectionId }}" class="fad-check" {% if section.enabled %}data-id="{{ section.sectionId }}" data-payment="{{ section.paymentProviderId }}" data-concept="{{ section.conceptId }}" data-item="{{ item.id }}"{% else %}disabled=""{% endif %}>
+                        <input type="radio" name="fad-section-check" id="fad-section-{{ section.sectionId }}-check" value="{{ section.sectionId }}" class="fad-check" {% if section.enabled %}data-id="{{ section.sectionId }}" data-payment="{{ section.paymentProviderId }}" data-concept="{{ section.conceptId }}" data-item="{{ item.id }}"{% else %}disabled=""{% endif %}>
                         <label for="fad-section-{{ section.sectionId }}-check">
                             {% if section.sectionId == '4' %}
                                 {{ dictionary["featured_listings_emails.HomePage"] }}
