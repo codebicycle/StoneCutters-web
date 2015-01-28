@@ -274,6 +274,27 @@ module.exports = (function() {
        return output;
     }
 
+    function dateDiff(start, end) {
+        var miliseconds = (new Date(end)).getTime() - (new Date(start)).getTime();
+        var seconds = miliseconds / 1000;
+        var minutes = Math.floor(seconds / 60);
+        var hours = Math.floor(minutes / 60);
+        var days = Math.floor(hours / 24);
+        var out = [];
+
+        minutes = minutes - hours*60;
+        hours = hours - days*24;
+
+        out.push(days);
+        out.push(this.dictionary['messages_date_format.day' + (hours > 1 ? 's_n' : '')] + ',');
+        out.push(hours);
+        out.push(this.dictionary['messages_date_format.hour' + (hours > 1 ? 's_n' : '')]);
+        out.push(this.dictionary['messages_date_format.and']);
+        out.push(minutes);
+        out.push(this.dictionary['messages_date_format.minute' + (minutes > 1 ? 's_n' : '')]);
+        return out.join(' ');
+    }
+
     return {
         slugToUrl: slugToUrl,
         link: utils.link,
@@ -285,6 +306,7 @@ module.exports = (function() {
         redirect: redirect,
         error: error,
         serializeFormJSON: serializeFormJSON,
-        'static': statics
+        'static': statics,
+        dateDiff: dateDiff
     };
 })();
