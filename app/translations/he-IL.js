@@ -50,6 +50,7 @@ module.exports = {
     'itemslisting.FreeClassifieds': '\u05DE\u05D5\u05D3\u05E2\u05D5\u05EA \u05DC\u05D5\u05D7 \u05D1\u05D7\u05D9\u05E0\u05DD',
     'itemslisting.HighestFirst': '\u05D4\u05DE\u05D7\u05D9\u05E8 \u05D4\u05D2\u05D1\u05D5\u05D4 \u05D1\u05D9\u05D5\u05EA\u05E8 \u05E7\u05D5\u05D3\u05DD',
     'itemslisting.LowestFirst': '\u05D4\u05DE\u05D7\u05D9\u05E8 \u05D4\u05E0\u05DE\u05D5\u05DA \u05D1\u05D9\u05D5\u05EA\u05E8 \u05E7\u05D5\u05D3\u05DD',
+    'itemslisting.More': '\u05E2\u05D5\u05D3',
     'itemslisting.NavigatorByCategory': '\u05E7\u05D8\u05D2\u05D5\u05E8\u05D9\u05D4',
     'itemslisting.NavigatorByLocation': '\u05DE\u05D9\u05E7\u05D5\u05DD',
     'itemslisting.NewContactName': '\u05E9\u05DD \u05D0\u05D9\u05E9 \u05E7\u05E9\u05E8',

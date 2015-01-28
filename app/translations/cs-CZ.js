@@ -50,6 +50,7 @@ module.exports = {
     'itemslisting.FreeClassifieds': 'Bezplatn\xE9 inzer\xE1ty',
     'itemslisting.HighestFirst': 'Nejd\u0159\xEDve nejvy\u0161\u0161\xED cena',
     'itemslisting.LowestFirst': 'Nejd\u0159\xEDve nejni\u017E\u0161\xED cena',
+    'itemslisting.More': 'V\xEDce',
     'itemslisting.NavigatorByCategory': 'Kategorie',
     'itemslisting.NavigatorByLocation': 'M\xEDsto',
     'itemslisting.NewContactName': 'Jm\xE9no pro kontakt',

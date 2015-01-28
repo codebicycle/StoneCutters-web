@@ -50,6 +50,7 @@ module.exports = {
     'itemslisting.FreeClassifieds': 'Rao v\u1EB7t mi\u1EC5n ph\xED',
     'itemslisting.HighestFirst': 'Gi\xE1 cao nh\u1EA5t ban \u0111\u1EA7u',
     'itemslisting.LowestFirst': 'Gi\xE1 th\u1EA5p nh\u1EA5t ban \u0111\u1EA7u',
+    'itemslisting.More': 'Th\xEAm',
     'itemslisting.NavigatorByCategory': 'H\u1EA1ng m\u1EE5c',
     'itemslisting.NavigatorByLocation': '\u0110\u1ECBa \u0111i\u1EC3m',
     'itemslisting.NewContactName': 'T\xEAn li\xEAn l\u1EA1c',

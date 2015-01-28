@@ -50,6 +50,7 @@ module.exports = {
     'itemslisting.FreeClassifieds': 'Anons Gratis',
     'itemslisting.HighestFirst': 'Pri ki pi wo yo avan',
     'itemslisting.LowestFirst': 'Pri ki pi ba yo avan',
+    'itemslisting.More': 'Plis ank\xF2',
     'itemslisting.NavigatorByCategory': 'Kategori',
     'itemslisting.NavigatorByLocation': 'Kote',
     'itemslisting.NewContactName': 'Kontak Non',

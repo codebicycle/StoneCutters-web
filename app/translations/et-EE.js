@@ -50,6 +50,7 @@ module.exports = {
     'itemslisting.FreeClassifieds': 'Tasuta kuulutused',
     'itemslisting.HighestFirst': 'K\xF5rgeim hind esimesena',
     'itemslisting.LowestFirst': 'Madalaim hind esimesena',
+    'itemslisting.More': 'Rohkem',
     'itemslisting.NavigatorByCategory': 'Kategooria',
     'itemslisting.NavigatorByLocation': 'Asukoht',
     'itemslisting.NewContactName': 'Kontaktnimi',

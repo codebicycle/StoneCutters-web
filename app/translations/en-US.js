@@ -50,6 +50,7 @@ module.exports = {
     'itemslisting.FreeClassifieds': 'Free classifieds',
     'itemslisting.HighestFirst': 'Highest Price First',
     'itemslisting.LowestFirst': 'Lowest Price First',
+    'itemslisting.More': 'More',
     'itemslisting.NavigatorByCategory': 'Category',
     'itemslisting.NavigatorByLocation': 'Location',
     'itemslisting.NewContactName': 'Contact name',

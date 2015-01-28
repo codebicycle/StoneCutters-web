@@ -50,6 +50,7 @@ module.exports = {
     'itemslisting.FreeClassifieds': '\uBB34\uB8CC \uC548\uB0B4\uAD11\uACE0',
     'itemslisting.HighestFirst': '\uCD5C\uCD08\uC758 \uCD5C\uACE0\uAC00',
     'itemslisting.LowestFirst': '\uCD5C\uC800\uAC00 \uBA3C\uC800',
+    'itemslisting.More': '\uB354\uD568',
     'itemslisting.NavigatorByCategory': '\uBC94\uC704\uBCC4',
     'itemslisting.NavigatorByLocation': '\uC704\uCE58',
     'itemslisting.NewContactName': '\uB2F4\uB2F9\uC790 \uC131\uBA85',

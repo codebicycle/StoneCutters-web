@@ -50,6 +50,7 @@ module.exports = {
     'itemslisting.FreeClassifieds': '\xDCcretsiz seri ilanlar',
     'itemslisting.HighestFirst': 'Y\xFCksek Fiyatl\u0131dan Ba\u015Flayarak',
     'itemslisting.LowestFirst': 'D\xFC\u015F\xFCk Fiyatl\u0131dan Ba\u015Flayarak',
+    'itemslisting.More': 'Di\u011Ferleri',
     'itemslisting.NavigatorByCategory': 'Kategori',
     'itemslisting.NavigatorByLocation': 'Yer',
     'itemslisting.NewContactName': '\u0130rtibat kurulacak ki\u015Finin ad\u0131',

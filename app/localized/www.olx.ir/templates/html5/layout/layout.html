@@ -16,7 +16,12 @@
         <script>function init() {
             $LAB
                 .script("{{ [jsDir, 'common', 'libs.js'] | join('/') | static }}")
-                .script("{{ [jsDir, 'common', 'translations.js'] | join('/') | static }}")
+                .script("{{ [jsDir, 'common', 'translations', 'en-US.js'] | join('/') | static }}")
+                {% for language in languages -%}
+                    {% if language != 'en-US' %}
+                        .script("{{ [jsDir, 'common', 'translations', (language + '.js')] | join('/') | static }}")
+                    {% endif %}
+                {%- endfor %}
                 .script("{{ [jsDir, 'common', ((['config-', environment, '.js'] | join('')) if (environment != 'production') else 'config.js')] | join('/') | static }}")
                 .script("{{ [jsDir, directory, 'templates', 'html5', 'templates.js'] | join('/') | static }}").wait()
                 .script("{{ [jsDir, directory, 'app.js'] | join('/') | static }}").wait(function wait() {
@@ -25,6 +30,7 @@
                     App.start();
                 });
         }</script>
+        <script src="{{ '/js/polyfills.js' | static }}" ></script>
         <script async src="{{ '/js/LAB.js' | static }}" onload="init()"></script>
     </body>
 </html>

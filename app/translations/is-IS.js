@@ -50,6 +50,7 @@ module.exports = {
     'itemslisting.FreeClassifieds': '\xD3keypis sm\xE1augl\xFDsingar',
     'itemslisting.HighestFirst': 'H\xE6sta ver\xF0 fyrst',
     'itemslisting.LowestFirst': 'L\xE6gsta ver\xF0 fyrst',
+    'itemslisting.More': 'Meira',
     'itemslisting.NavigatorByCategory': 'Flokkur',
     'itemslisting.NavigatorByLocation': 'Sta\xF0setning',
     'itemslisting.NewContactName': 'Nafn tengili\xF0s',

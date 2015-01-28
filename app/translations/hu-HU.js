@@ -50,6 +50,7 @@ module.exports = {
     'itemslisting.FreeClassifieds': 'Ingyenes apr\xF3hirdet\xE9sek',
     'itemslisting.HighestFirst': 'El\u0151sz\xF6r a legmagasabb \xE1rak',
     'itemslisting.LowestFirst': 'El\u0151sz\xF6r a legalacsonyabb \xE1rak',
+    'itemslisting.More': 'T\xF6bb',
     'itemslisting.NavigatorByCategory': 'Kateg\xF3ria',
     'itemslisting.NavigatorByLocation': 'Helysz\xEDn',
     'itemslisting.NewContactName': 'Kontakt neve',

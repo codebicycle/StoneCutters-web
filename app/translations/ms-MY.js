@@ -50,6 +50,7 @@ module.exports = {
     'itemslisting.FreeClassifieds': 'Iklaneka percuma',
     'itemslisting.HighestFirst': 'Harga Tertinggi Dahulu',
     'itemslisting.LowestFirst': 'Harga Terendah Dahulu',
+    'itemslisting.More': 'Banyak lagi',
     'itemslisting.NavigatorByCategory': 'Kategori',
     'itemslisting.NavigatorByLocation': 'Lokasi',
     'itemslisting.NewContactName': 'Hubungi saya',

@@ -50,6 +50,7 @@ module.exports = {
     'itemslisting.FreeClassifieds': 'Libreng mga klasipikadong patalastas',
     'itemslisting.HighestFirst': 'Unang pinakamataas na Halaga',
     'itemslisting.LowestFirst': 'Unang pinakamurang halaga',
+    'itemslisting.More': 'Marami pa',
     'itemslisting.NavigatorByCategory': 'Kategorya',
     'itemslisting.NavigatorByLocation': 'Lokasyon',
     'itemslisting.NewContactName': 'Pangalan',

@@ -50,6 +50,7 @@ module.exports = {
     'itemslisting.FreeClassifieds': 'Matangazo ya bure',
     'itemslisting.HighestFirst': 'Bei ya juu Kwanza',
     'itemslisting.LowestFirst': 'Bei ya CHini Kwanza',
+    'itemslisting.More': 'Zaidi',
     'itemslisting.NavigatorByCategory': 'Kundi',
     'itemslisting.NavigatorByLocation': 'Eneo',
     'itemslisting.NewContactName': 'Jina la mwasiliani',

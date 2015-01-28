@@ -50,6 +50,7 @@ module.exports = {
     'itemslisting.FreeClassifieds': 'Gratis snuffeladvertensies',
     'itemslisting.HighestFirst': 'Hoogste Prys Eerste',
     'itemslisting.LowestFirst': 'Laagste Prys Eerste',
+    'itemslisting.More': 'Meer',
     'itemslisting.NavigatorByCategory': 'Kategorie',
     'itemslisting.NavigatorByLocation': 'Plek',
     'itemslisting.NewContactName': 'Kontaknaam',
