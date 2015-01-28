@@ -1,6 +1,11 @@
-{% view 'items/partials/itemlistingtabs' %}
-{% view 'partials/adserving', 'slot_top_listing' %}
-<ul class="items-list {{ itemListingClass }}">
-    {% include (template + '/items/items.html') %}
-</ul>
-{% view 'partials/adserving', 'slot_bottom_listing' %}
+{% if items.length > 0 %}
+    {% view 'items/partials/itemlistingtabs' %}
+    {% view 'partials/adserving', 'slot_top_listing' %}
+    <ul class="items-list {{ itemListingClass }}">
+        {% include (template + '/items/items.html') %}
+    </ul>
+    {% view 'partials/adserving', 'slot_bottom_listing' %}
+{% else %}
+    <div class="noresults">{{ dictionary["listingpageitemslisting.WeAreSorryNoResults"] }}</div>
+    {% view 'partials/adserving', 'slot_noresult_listing' %}
+{% endif %}
