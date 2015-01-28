@@ -1,0 +1,66 @@
+.users_conversation_view {
+    box($white, $greyBorders, 0 0 3px 3px, 0, solid, 1px);
+
+    .conversation {
+        margin: 10px auto;
+        width: 560px;
+    }
+    ul {
+        ul-reset();
+    }
+
+    .conversation-item {
+        border-bottom: 1px solid $greyBorders;
+        clear-fix();
+
+        .wrapper-img {
+            border: 1px solid $greyBorders;
+            box-sizing: content-box;
+            display: inline-block;
+            float: left;
+            height: 98px;
+            text-align: center;
+            vertical-align: middle;
+            width: 128px;
+
+            img {
+                height: auto;
+                margin: auto;
+                max-height: 100%;
+                max-width: 100%;
+                vertical-align: middle;
+                width: auto;
+            }
+        }
+        .conversation-item-data {
+            float: left;
+            margin-right: 30px;
+            overflow: hidden;
+            padding: 10px;
+            width: 355px;
+            h3 {
+                font-size: $xl;
+                margin: 0;
+            }
+            p {
+                font-size: $m;
+                line-height: $m;
+                margin: 5px 0 10px 0;
+            }
+        }
+    }
+    .conversation-chat {
+        vertical-align: baseline;
+        .conversation-name {
+            font-size: $l;
+            font-weight: bold;
+        }
+        span {
+            float: left;
+            font-size: $baseFont;
+        }
+        p {
+            clear: both;
+        }
+    }
+}

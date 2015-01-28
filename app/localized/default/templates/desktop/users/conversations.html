@@ -3,7 +3,6 @@
         {% set item = items.get(conversation.itemId) %}
         <div class="conversations-thread clearfix">
             <img src="{{ item.get('thumbnail') }}">
-            {{ item.get('thumbnail') | log}}
             <a href="{{ ('/myolx/conversation/' + conversation.threadId) | link }}">
                 <h3>{{ conversation.buyerName }}</h3>
                 <p>{{ item.get('title') }}</p>

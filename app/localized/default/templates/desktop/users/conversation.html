@@ -1,28 +1,33 @@
 <div class="conversation">
+    <a href="{{ '/myolx/conversations' | link }}" class="back icons icon-arrow-left"> Volver a mis mensajes</a>
     {% set item = thread.get('item') %}
     <div class="conversation-item">
-        <img src="{{ item.images[0].thumbnail }}" alt="{{ item.title }}">
+        <a href="{{ item.slug }}" class="wrapper-img">
+            <img src="{{ item.images[0].thumbnail }}" alt="{{ item.title }}">
+        </a>
         <div class="conversation-item-data">
             <h3>Conversación con {{ thread.get('senders')[0].name }}</h3>
             <p><a href="{{ item.slug }}">{{ item.title }}</a>
         </div>
     </div>
+    <ul>
     {% for message in thread.get('messages') %}
-        <div class="conversation-chat {{ 'chat-sendit' if message.isMine else 'chat-receive' }}" >
+        <li class="conversation-chat {{ 'chat-sendit' if message.isMine else 'chat-receive' }}" >
             {% if not message.isMine %}
-                <h4>{{ thread.get('senders')[0].name }}</h4>
+                <span class="conversation-name">{{ thread.get('senders')[0].name }}</span>
             {% else %}
-                <h4>Vos</h4>
+                <span clarr="conversation-name">Vos</span>
             {% endif %}
             <span> - {{ message.date | date(false, true) }}</span>
             <p>{{ message.text }}</p>
-        </div>
+        </li>
     {% endfor %}
+    </ul>
     <div class="conversation-input">
         <form>
             <textarea></textarea>
             <a href="#">{{ dictionary["supportform.Reset"] }}</a>
-            <a class="btn" href="#">{{ dictionary["landingbody.SubmitRegistration"] }}</a>
+            <button class="reply-send btn" type="submit">{{ dictionary["myolx.Reply"] }}</button>
         </form>
     </div>
 </div>

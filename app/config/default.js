@@ -117,6 +117,10 @@ module.exports = {
             }
         },
         desktop: {
+            hermes: {
+                worldwide: false,
+                countries: ['www.olx.com.py']
+            },
             contactForm: {
                 worldwide: false,
                 countries: ['www.olx.co.cr']

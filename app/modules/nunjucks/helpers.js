@@ -63,6 +63,7 @@ module.exports = function(nunjucks) {
     function statics() {
         return helpers.common.static.apply(this.ctx, arguments);
     }
+    
 
     return {
         is: is,
