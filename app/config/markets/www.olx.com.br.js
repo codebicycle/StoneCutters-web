@@ -21,5 +21,13 @@ module.exports = {
                 enabled: true
             }
         }
+    },
+    featured: {
+        enabled: true,
+        quantity: {
+            total: 2,
+            top: 1,
+            bottom: 1
+        }
     }
 };

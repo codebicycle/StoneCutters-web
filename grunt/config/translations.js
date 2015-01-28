@@ -66,6 +66,13 @@ module.exports = {
         'itemslisting.LowestFirst',
         'adsense.SponsoredLinks',
         'misc.Age',
-        'misc.Max'
+        'misc.Max',
+        'messages_date_format.and',
+        'messages_date_format.day',
+        'messages_date_format.days_n',
+        'messages_date_format.hour',
+        'messages_date_format.hours_n',
+        'messages_date_format.minute',
+        'messages_date_format.minutes_n'
     ]
 };

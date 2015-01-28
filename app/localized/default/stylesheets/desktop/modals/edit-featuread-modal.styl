@@ -1,0 +1,36 @@
+#edit-featuread-modal {
+    .modal-container {
+        width: 720px;
+        .modal-header {
+            padding: 10px 20px;
+            .modal-title {
+                font-size: $xl;
+            }
+        }
+        .modal-content {
+            min-height: 100px;
+            padding: 10px 20px;
+            .edit-feature-ad-actions {
+                float: left;
+            }
+            .btnedit-modal, .btn-cancel {
+                border-radius();
+                font-size: $m;
+                font-weight: bold;
+                line-height: 1;
+            }
+            .btnedit-modal {
+                action-button($orange, $white, 3px, 10px 20px 10px 10px);
+                float: right;
+                &.icons:before {
+                    margin: 0 10px 0 0;
+                }
+            }
+            .btn-cancel {
+                action-button($greyStrong, $white, 3px, 10px 20px);
+                float: left;
+                cursor: pointer;
+            }
+        }
+    }
+}
