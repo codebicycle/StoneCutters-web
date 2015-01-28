@@ -21,9 +21,9 @@ module.exports = {
         type: 'development'
     },
     localization: {
-        wap: ['www.olx.com.br', 'www.olx.co.za', 'www.olx.ir', 'www.olx.hn'],
-        html4: ['www.olx.com.br', 'www.olx.co.za', 'www.olx.ir', 'www.olx.hn'],
-        html5: ['www.olx.com.br', 'www.olx.ir', 'www.olx.hn'],
+        wap: ['www.olx.com.br', 'www.olx.co.za', 'www.olx.ir', 'www.olx.hn', 'www.olx.com.bd'],
+        html4: ['www.olx.com.br', 'www.olx.co.za', 'www.olx.ir', 'www.olx.hn', 'www.olx.com.bd'],
+        html5: ['www.olx.com.br', 'www.olx.ir', 'www.olx.hn', 'www.olx.com.bd'],
         desktop: ['www.olx.com.bo']
     },
     icons: {
@@ -189,6 +189,26 @@ module.exports = {
             'default':'legal',
             'www.olx.com.ng': 'support-ng',
             'www.olx.com.ke': 'support-ke'
+        }
+    },
+    migration: {
+        /*
+            Stages:
+                1: "Inform"     -> Initial process. Inform about the upcoming actions
+                2. "Transfer"   -> Stop adding new content. Transfer user actions to new site
+                3. "Close"      -> Close site. Redirect all traffic to new site
+        */
+        'www.olx.com.mx': {
+            stage: 1,
+            banner: true
+        },
+        'www.olx.cl': {
+            stage: 1,
+            banner: true
+        },
+        'www.olx.com.bd': {
+            stage: 1,
+            banner: true
         }
     }
 };
