@@ -462,6 +462,7 @@ module.exports = {
     'misc.Sort_Mob': 'Sort',
     'misc.SpecificFields_title': 'C\xE2mpuri specifice categorie (Op\u0163ionale)',
     'misc.States': 'State',
+    'misc.SuburbsOrNeighborhoods_EM': 'Suburbii sau cartiere',
     'misc.TechQuestions': 'For technical or general questions',
     'misc.ThereWasProb': 'A ap\u0103rut o problem\u0103',
     'misc.TitleCharacters_Mob': 'Titlul trebuie s\u0103 con\u0163in\u0103  cel pu\u0163in <<NUMBER>> caractere',

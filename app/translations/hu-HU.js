@@ -462,6 +462,7 @@ module.exports = {
     'misc.Sort_Mob': 'Sort',
     'misc.SpecificFields_title': 'Kateg\xF3riaf\xFCgg\u0151 mez\u0151k (V\xE1laszthat\xF3k)',
     'misc.States': '\xC1llamok',
+    'misc.SuburbsOrNeighborhoods_EM': 'El\u0151v\xE1rosok vagy v\xE1rosr\xE9szek',
     'misc.TechQuestions': 'For technical or general questions',
     'misc.ThereWasProb': 'Hiba mer\xFClt fel',
     'misc.TitleCharacters_Mob': 'A c\xEDm minim\xE1lis hossza: <<NUMBER>> karakter',

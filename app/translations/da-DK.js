@@ -462,6 +462,7 @@ module.exports = {
     'misc.Sort_Mob': 'Sort',
     'misc.SpecificFields_title': 'Kategorispecifikke felter (valgfrit)',
     'misc.States': 'Stater',
+    'misc.SuburbsOrNeighborhoods_EM': 'Forst\xE6der eller kvarterer',
     'misc.TechQuestions': 'For technical or general questions',
     'misc.ThereWasProb': 'Der opstod et problem',
     'misc.TitleCharacters_Mob': 'Titel skal v\xE6re p\xE5 mindst <<NUMBER>> tegn',

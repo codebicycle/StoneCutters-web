@@ -12,6 +12,7 @@ module.exports = function(app, dataAdapter) {
     var User = require('../../app/models/user');
     var Item = require('../../app/models/item');
     var helpers = require('../../app/helpers');
+    var translations = require('../../shared/translations');
 
     (function reply() {
         app.post('/items/:itemId/reply', handler);
@@ -95,6 +96,7 @@ module.exports = function(app, dataAdapter) {
         function handler(req, res, next) {
             var location = req.rendrApp.session.get('location');
             var platform = req.rendrApp.session.get('platform');
+            var dictionary = translations.get(req.rendrApp.session.get('selectedLanguage'));
             var newImages;
             var item;
             var editing;
@@ -110,11 +112,25 @@ module.exports = function(app, dataAdapter) {
 
                 function callback(err, _item, _images) {
                     editing = !!(_item && _item.id);
+
                     if (err === 'aborted') {
                         done.abort();
                         statsd.increment([location.abbreviation, editing ? 'editing' : 'posting', 'error', 'abort', platform]);
                         return fail(err, 'aborted');
                     }
+
+                    if (typeof _item.neighborhood !== 'undefined') {
+                        if (_item.neighborhood !== '') {
+                            var aux = _item.neighborhood.split('-');
+
+                            _item['neighborhood.id'] = aux[0];
+                            _item['neighborhood.name'] = aux[1];
+                        } else {
+                            _item['neighborhood.id'] = '';
+                            _item['neighborhood.name'] = '';
+                        }
+                    }
+
                     newImages = _.clone(_images);
                     done.errfcb.apply(null, Array.prototype.slice.call(arguments, 0));
                 }
@@ -126,6 +142,26 @@ module.exports = function(app, dataAdapter) {
                     return handlerPostLocation(_item, _images, req, res, next);
                 }
                 done(_item, _images);
+            }
+
+            function validate(done, _item, images){
+                var err;
+
+                if (typeof _item.neighborhood !== 'undefined') {
+                    if(_item.neighborhood === ''){
+                        err = [{
+                            selector: 'neighborhood',
+                            message: dictionary['countryoptions.SelectANeighborhood'],
+                            label: 'neighborhood'
+                        }];
+
+                        return fail(err, 'aborted');
+                    } else {
+                        done(_item);
+                    }
+                } else {
+                    done(_item);
+                }
             }
 
             function post(done, _item, images) {
@@ -191,6 +227,7 @@ module.exports = function(app, dataAdapter) {
             asynquence().or(fail)
                 .then(parse)
                 .then(checkWapChangeLocation)
+                .then(validate)
                 .then(post)
                 .then(success)
                 .val(clean);

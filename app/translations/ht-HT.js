@@ -462,6 +462,7 @@ module.exports = {
     'misc.Sort_Mob': 'Sort',
     'misc.SpecificFields_title': 'Chan Espesifik Kategori (Opsyon\xE8l)',
     'misc.States': 'z\xF2n',
+    'misc.SuburbsOrNeighborhoods_EM': 'Banlye oswa Katye',
     'misc.TechQuestions': 'For technical or general questions',
     'misc.ThereWasProb': 'Te gen yon pwobl\xE8m',
     'misc.TitleCharacters_Mob': 'Tit sa a dwe gen omwen <<NUMBER>> karakt\xE8',

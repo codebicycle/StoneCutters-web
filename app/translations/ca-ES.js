@@ -462,6 +462,7 @@ module.exports = {
     'misc.Sort_Mob': 'Sort',
     'misc.SpecificFields_title': 'Camps espec\xEDfics de categoria (opcionals)',
     'misc.States': 'Estats',
+    'misc.SuburbsOrNeighborhoods_EM': 'Barris o districtes',
     'misc.TechQuestions': 'For technical or general questions',
     'misc.ThereWasProb': 'Hi ha hagut un problema',
     'misc.TitleCharacters_Mob': 'El t\xEDtol ha de contenir com a m\xEDnim <<NUMBER>> car\xE0cters',

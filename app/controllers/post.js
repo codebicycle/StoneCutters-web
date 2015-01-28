@@ -362,7 +362,8 @@ function form(params, callback) {
         }.bind(this);
 
         var fetch = function(done) {
-            this.app.fetch({
+            var platform = this.app.session.get('platform');
+            var spec = {
                 postingSession: {
                     model: 'PostingSession',
                     params: {}
@@ -376,7 +377,20 @@ function form(params, callback) {
                         languageId: languageId
                     }
                 }
-            }, {
+            };
+
+            if (platform === "html4" || platform === "wap") {
+                spec.neighborhoods = {
+                    collection: 'Neighborhoods',
+                    params: {
+                        level: 'cities',
+                        type: 'neighborhoods',
+                        location: siteLocation,
+                        languageId: languageId
+                    }
+                };
+            }
+            this.app.fetch(spec, {
                 readFromCache: false
             }, done.errfcb);
         }.bind(this);
@@ -397,10 +411,10 @@ function form(params, callback) {
                 done.abort();
                 return helpers.common.redirect.call(this, '/posting/' + params.categoryId);
             }
-            done(response.postingSession, response.fields);
+            done(response.postingSession, response.fields, response.neighborhoods);
         }.bind(this);
 
-        var success = function(_postingSession, _field) {
+        var success = function(_postingSession, _field, _neighborhood) {
             var category = this.dependencies.categories.get(params.categoryId);
             var subcategory = category.get('children').get(params.subcategoryId);
 
@@ -408,6 +422,7 @@ function form(params, callback) {
             tracking.addParam('subcategory', subcategory.toJSON());
             this.app.seo.addMetatag('robots', 'noindex, nofollow');
             this.app.seo.addMetatag('googlebot', 'noindex, nofollow');
+
             callback(null, {
                 postingSession: _postingSession.get('postingSession'),
                 intent: 'create',
@@ -416,6 +431,7 @@ function form(params, callback) {
                 subcategory: subcategory.toJSON(),
                 language: languageId,
                 siteLocation: siteLocation,
+                neighborhoods: _neighborhood ? _neighborhood.toJSON() : undefined,
                 form: this.form
             });
         }.bind(this);

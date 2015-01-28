@@ -462,6 +462,7 @@ module.exports = {
     'misc.Sort_Mob': 'Sort',
     'misc.SpecificFields_title': 'Kategoriespezifische Felder (Kann-Eingaben)',
     'misc.States': 'Bundesl\xE4nder',
+    'misc.SuburbsOrNeighborhoods_EM': 'Vororte oder Stadtteile',
     'misc.TechQuestions': 'For technical or general questions',
     'misc.ThereWasProb': 'Ein Problem ist aufgetreten',
     'misc.TitleCharacters_Mob': 'Der Titel muss mindestens <<NUMBER>> Zeichen enthalten',
