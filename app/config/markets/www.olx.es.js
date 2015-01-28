@@ -23,5 +23,8 @@ module.exports = {
                 name: 'Móviles'
             }
         ]
+    },
+    featured: {
+        enabled: true
     }
 };

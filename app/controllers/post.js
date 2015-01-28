@@ -6,6 +6,7 @@ var middlewares = require('../middlewares');
 var helpers = require('../helpers');
 var tracking = require('../modules/tracking');
 var Item = require('../models/item');
+var FeatureAd = require('../models/feature_ad');
 var config = require('../../shared/config');
 
 module.exports = {
@@ -526,6 +527,29 @@ function success(params, callback) {
             }.bind(this));
         }.bind(this);
 
+        var findFeatured = function(done, item, relateds) {
+            if (!FeatureAd.isEnabled(this.app)) {
+                return done(item, relateds);
+            }
+            this.app.fetch({
+                featuread: {
+                    model : 'Feature_ad',
+                    params: {
+                        id: item.get('id'),
+                        locate: this.app.session.get('selectedLanguage')
+                    }
+                }
+            }, {
+                readFromCache: false
+            }, function afterFetch(err, res) {
+                if (err) {
+                    res = {};
+                }
+                item.set('featured', res.featuread);
+                done(item, relateds);
+            }.bind(this));
+        }.bind(this);
+
         var success = function(_item, _relatedItems) {
             var item = _item.toJSON();
             var subcategory = this.dependencies.categories.search(item.category.id);
@@ -562,6 +586,7 @@ function success(params, callback) {
             .then(findItem)
             .then(checkItem)
             .then(findRelatedItems)
+            .then(findFeatured)
             .val(success);
     }
 }
