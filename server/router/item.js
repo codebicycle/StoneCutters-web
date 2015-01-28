@@ -155,7 +155,7 @@ module.exports = function(app, dataAdapter) {
                             label: 'neighborhood'
                         }];
 
-                        return fail(err, 'aborted');
+                        return fail(err);
                     } else {
                         done(_item);
                     }
