@@ -17,12 +17,12 @@ module.exports = Base.extend({
 
         this._checkAdServing();
         adserving = {
-            enabled : this.adServing.isSlotEnabled(),
+            enabled : this.adServing.isServiceEnabled(),
             slotname: this.adServing.get('slotname')
         };
 
         if (adserving.enabled) {
-            adserving.classname = 'ads-' + this.adServing.get('type').toLowerCase();
+            adserving.classname = 'ads-' + this.adServing.get('service').toLowerCase();
         }
 
         return _.extend({}, data, {
@@ -31,20 +31,22 @@ module.exports = Base.extend({
     },
     postRender: function() {
         this._checkAdServing();
-        if (!this.adServing.isSlotEnabled()) {
+        if (!this.adServing.isServiceEnabled()) {
             return;
         }
         var settings = this.adServing.getSettings();
-        var type = this.adServing.get('type');
+        var service = this.adServing.get('service');
 
-        if (type === 'CSA' || type === 'AFC') {
+        console.log('ouput settings:', settings);
+
+        if (service === 'CSA' || service === 'AFC') {
             if (this.isGoogleReferer() && settings.seo) {
                 settings.params.number = settings.seo;
                 settings.options.channel = settings.options.channel.replace('Organic', 'SEO');
             }
             settings.options.channel = settings.options.channel.replace('[navigator]', window.BrowserDetect.browsername);
         }
-        switch (type) {
+        switch (service) {
             case 'CSA':
                 this._includeCsaLib();
                 window._googCsa('ads', settings.options, settings.params);

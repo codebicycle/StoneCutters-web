@@ -16,7 +16,10 @@ function initialize(attrs, options) {
     this.app = options.app;
     this.categories = new Categories(options.categories);
     this.config = getConfig.call(this);
-    this.set('type', this.config.type);
+    this.set({
+        'service': this.config.service,
+        'format': this.config.format
+    });
 }
 
 function getSettings() {
@@ -24,56 +27,62 @@ function getSettings() {
         return this.get('settings');
     }
     var slotname = this.get('slotname');
-    var type = this.get('type');
+    var service = this.get('service');
     var settings = {
         enabled: false,
         slotname : slotname
     };
-    var configType;
 
     if (this.config.enabled) {
-        configType = utils.get(configAdServing, type, {});
+        settings.params = _.extend({}, this.config.params || {}, {
+            container: slotname
+        });
+        settings.options = _.extend({}, this.config.options || {}, {
+            query: getQuery.call(this),
+            channel: createChannels.call(this, service),
+            hl: this.app.session.get('selectedLanguage').split('-').shift()
+        });
 
-        if (configType.enabled) {
-            settings.params = _.extend({}, configType.params, this.config.params || {}, {
-                container: slotname
-            });
-            settings.options = _.extend({}, configType.options, {
-                query: getQuery.call(this),
-                channel: createChannels.call(this, type),
-                hl: this.app.session.get('selectedLanguage').split('-').shift()
-            });
-
-            // TODO Mover a CSA module (create)
-            if (settings.params.adIconUrl) {
-                settings.params.adIconUrl = settings.params.adIconUrl.replace(configType.language.pattern, _.contains(configType.language.list, settings.options.hl) ? settings.options.hl : configType.language['default']);
-            }
-
-            _.extend(settings, {
-                enabled: true,
-                type: type,
-                seo: this.config.seo
-            });
+        if (settings.params.adIconUrl && this.config.language) {
+            settings.params.adIconUrl = settings.params.adIconUrl.replace(this.config.language.pattern, _.contains(this.config.language.list, settings.options.hl) ? settings.options.hl : this.config.language['default']);
         }
+
+        _.extend(settings, {
+            enabled: true,
+            service: service,
+            seo: this.config.seo || 0
+        });
     }
+
     this.set('settings', settings);
     return settings;
 }
 
-function createChannels(type) {
-    if (type === 'ADX') {
+function extendConfig(config, defaults) {
+    config = _.extend({}, defaults, config);
+    config.params = _.extend({}, defaults.params || {}, config.params || {});
+    return config;
+}
+
+function createChannels(service) {
+    if (service === 'ADX') {
         return;
     }
     var slotname = this.get('slotname');
-    var configType = utils.get(configAdServing, type, {});
+    var configService = utils.get(configAdServing, [service, 'default'], {});
     var countryCode = this.app.session.get('location').abbreviation;
-    var prefix = configType.options.channel.replace('[countrycode]', countryCode);
+    var prefix = configService.options.channel.replace('[countrycode]', countryCode);
     var currentRoute = this.app.session.get('currentRoute');
+    var currentRouteAction = currentRoute.action;
     var channels = [];
     var configChannel;
     var pageChannel;
 
-    configChannel = utils.get(configAdServing, ['channels', 'page', [currentRoute.controller, currentRoute.action].join('#')], {});
+    if (slotname === 'listing_noresult' && currentRoute.controller === 'searches' && currentRoute.action === 'search') {
+        currentRouteAction = 'noresult';
+    }
+
+    configChannel = utils.get(configAdServing, ['channels', 'page', [currentRoute.controller, currentRouteAction].join('#')], {});
     pageChannel = getCategoryForChannel.call(this);
 
     channels.push(prefix);
@@ -84,15 +93,19 @@ function createChannels(type) {
     channels.push('[navigator]');
     channels.push([prefix, configChannel.name, this.config.location, 'Organic'].join('_'));
 
-    return channels.join(type === 'CSA' ? ' ' : ',');
+    return channels.join(service === 'CSA' ? ' ' : ',');
 }
 
-function isSlotEnabled() {
+function isServiceEnabled() {
     return this.isEnabled() && this.config.enabled;
 }
 
 function isEnabled() {
     return config.getForMarket(this.app.session.get('location').url, ['adserving', 'enabled'], false);
+}
+
+function getQuery() {
+    return getSearchQuery.call(this) || getCategoryQuery.call(this) || getCategoriesQuery.call(this);
 }
 
 function getSearchQuery() {
@@ -111,29 +124,16 @@ function getCategoryQuery() {
     }
 }
 
-function getCategoriesQuery() {
-    var configAD = utils.get(configAdServing, this.get('type'), {});
-
-    return _.reduce(configAD.options.queryCategories || [], function(memo, id) {
-        var category = getCategoryName.call(this, id);
-
-        if (category) {
-            memo.push(category);
-        }
-        return memo;
-    }, [], this).join(' ').replace(/-/g, '');
-}
-
-function getQuery() {
-    return getSearchQuery.call(this) || getCategoryQuery.call(this) || getCategoriesQuery.call(this);
-}
-
 function getCategoryId() {
     var dataPage = this.app.session.get('dataPage');
 
     if (dataPage) {
         return dataPage.subcategory || dataPage.category;
     }
+}
+
+function getCategoryName(id) {
+    return getCategoryAttribute.call(this, id, 'trName');
 }
 
 function getCategoryAttribute(id, attr) {
@@ -153,8 +153,15 @@ function getCategoryAttribute(id, attr) {
     return name;
 }
 
-function getCategoryName(id) {
-    return getCategoryAttribute.call(this, id, 'trName');
+function getCategoriesQuery() {
+    return _.reduce(this.config.queryCategories || [], function(memo, id) {
+        var category = getCategoryName.call(this, id);
+
+        if (category) {
+            memo.push(category);
+        }
+        return memo;
+    }, [], this).join(' ').replace(/-/g, '');
 }
 
 function getCategoryForChannel() {
@@ -170,73 +177,30 @@ function getCategoryForChannel() {
     return name;
 }
 
-function getGroupType(location) {
-    var types = utils.get(configAdServing, ['groups', 'types'], {});
-    var type = 'default';
-
-    _.each(types, function each(countries, group) {
-        if (_.contains(countries, location)) {
-            type = group;
-        }
-    });
-    return type;
-}
-
-function getCustomType() {
-    var type = getCategoryId.call(this);
-
-    if (!type) {
-        type = this.app.session.get('currentRoute').action;
-    }
-    return type;
-}
-
-function extendConfig(config, defaults) {
-    config = _.defaults({}, config, defaults);
-    config.params = _.defaults({}, config.params || {}, defaults.params || {});
-    return config;
-}
-
-function getSlotConfig(slotname, typeGroup) {
-    var configDefault = utils.get(configAdServing, ['groups', 'slots', slotname, 'default'], {});
-    var config = utils.get(configAdServing, ['groups', 'slots', slotname, typeGroup], {});
-
-    return extendConfig(config, configDefault);
-}
-
-function getGroupConfig(slotname, typeGroup, typeSlot) {
-    var configTypeDefault = utils.get(configAdServing, ['groups', 'config', 'default', typeSlot, 'default', slotname], {});
-    var configType = utils.get(configAdServing, ['groups', 'config', typeGroup, typeSlot], {});
-    var config = utils.get(configType, ['default', slotname], {});
-    var type = getCustomType.call(this);
-    var configCustom;
-
-    config = extendConfig(config, configTypeDefault);
-    if (configType.customs) {
-        configCustom = _.find(configType.customs, function find(custom) {
-            return _.contains(custom.categories, type);
-        });
-        if (configCustom && configCustom[slotname]) {
-            config = extendConfig(configCustom[slotname], config);
-        }
-    }
-    return config;
-}
-
 function getConfig() {
-    var typeGroup = getGroupType(this.app.session.get('location').url);
-    var slotname = this.get('slotname');
-    var configDefault = getSlotConfig(slotname, typeGroup);
-    var config = getGroupConfig.call(this, slotname, typeGroup, configDefault.type);
+    var configMarket = config.getForMarket(this.app.session.get('location').url, ['adserving', 'slots'].concat(this.get('slotname').split('_')), {});
+    var configService = utils.get(configAdServing, configMarket.service, {});
+    var configFormatDefault = utils.get(configAdServing, [configMarket.service, 'default'], {});
+    var configFormat = utils.get(configService, configMarket.format, {});
+    var configFormats = extendConfig(configFormat, configFormatDefault);
+    var configResult = extendConfig(configMarket, configFormats);
 
-    return extendConfig(config, configDefault);
+    return extendConfig(configResult, {
+        enabled: configService.enabled,
+        language: configService.language
+    });
+}
+
+function getConfigType(type) {
+    var config = utils.get(configAdServing, type, {});
+    return config;
 }
 
 module.exports = Base.extend({
     initialize: initialize,
     getSettings: getSettings,
     isEnabled: isEnabled,
-    isSlotEnabled: isSlotEnabled
+    isServiceEnabled: isServiceEnabled
 });
 
 module.exports.id = 'Adserving';

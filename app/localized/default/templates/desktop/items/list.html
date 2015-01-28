@@ -1,6 +1,6 @@
 {% view 'items/partials/itemlistingtabs' %}
-{% view 'partials/adserving', 'slot_top_listing' %}
+{% view 'partials/adserving', 'listing_top' %}
 <ul class="items-list {{ itemListingClass }}">
     {% include (template + '/items/items.html') %}
 </ul>
-{% view 'partials/adserving', 'slot_bottom_listing' %}
+{% view 'partials/adserving', 'listing_bottom' %}
