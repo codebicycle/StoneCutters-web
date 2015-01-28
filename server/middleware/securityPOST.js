@@ -4,6 +4,7 @@ module.exports = function(dataAdapter, excludedUrls) {
     return function loader() {
         var _ = require('underscore');
         var crypto = require('crypto');
+        var statsd  = require('../modules/statsd')();
 
         var SECRET = '2014ArwEn2015';
         var securities = {
@@ -37,6 +38,7 @@ module.exports = function(dataAdapter, excludedUrls) {
             })) {
                 return next();
             }
+            statsd.increment([req.rendrApp.session.get('location').abbreviation, 'middleware', 'security', 403]);
             res.status(403).end();
         };
     };

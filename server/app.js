@@ -48,9 +48,9 @@ module.exports = function appUseConf(done) {
         rendrApp.use(middleware.closed());
         rendrApp.use(middleware.templates());
         rendrApp.use(middleware.internetOrg());
-        rendrApp.use(middleware.dependencies());
         rendrApp.use(middleware.securityPOST());
         rendrApp.use(middleware.securityGET());
+        rendrApp.use(middleware.dependencies());
     }
 
     server.expressApp.configure(expressConfiguration);
