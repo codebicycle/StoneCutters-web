@@ -5,34 +5,54 @@ module.exports = {
         trackPage: 'home'
     },
     'categories#show#listing': {
-        trackPage: 'resultSet'
+        trackPage: 'resultSet',
+        resultSetType: 'browse',
+        resultSetFormat: 'list'
     },
     'categories#showig#listing': {
-        trackPage: 'resultSet'
+        trackPage: 'resultSet',
+        resultSetType: 'browse',
+        resultSetFormat: 'gallery'
     },
     'categories#show': {
-        trackPage: 'resultSet_subcategories'
+        trackPage: 'resultSet_subcategories',
+        resultSetType: 'browse',
+        resultSetFormat: 'list'
     },
     'searches#search': {
-        trackPage: 'resultSet'
+        trackPage: 'resultSet',
+        resultSetType: 'search',
+        resultSetFormat: 'list'
     },
     'searches#searchig': {
-        trackPage: 'resultSet'
+        trackPage: 'resultSet',
+        resultSetType: 'search',
+        resultSetFormat: 'gallery'
     },
     'searches#filter': {
-        trackPage: 'resultSet'
+        trackPage: 'resultSet',
+        resultSetType: 'search',
+        resultSetFormat: 'list'
     },
     'searches#filterig': {
-        trackPage: 'resultSet'
+        trackPage: 'resultSet',
+        resultSetType: 'search',
+        resultSetFormat: 'gallery'
     },
     'searches#statics': {
-        trackPage: 'resultSet'
+        trackPage: 'resultSet',
+        resultSetType: 'static',
+        resultSetFormat: 'list'
     },
     'searches#allresults': {
-        trackPage: 'resultSet'
+        trackPage: 'resultSet',
+        resultSetType: 'browse',
+        resultSetFormat: 'list'
     },
     'searches#allresultsig': {
-        trackPage: 'resultSet'
+        trackPage: 'resultSet',
+        resultSetType: 'browse',
+        resultSetFormat: 'gallery'
     },
     'items#success': {
         trackPage: 'replySent'
@@ -41,13 +61,16 @@ module.exports = {
         trackPage: 'replyForm'
     },
     'items#show': {
-        trackPage: 'item'
+        trackPage: 'item',
+        sellerType: 'private'
     },
     'items#gallery': {
-        trackPage: 'item'
+        trackPage: 'item',
+        sellerType: 'private'
     },
     'items#map': {
-        trackPage: 'item'
+        trackPage: 'item',
+        sellerType: 'private'
     },
     'locations#list': {
         trackPage: 'resultSet_locations'
