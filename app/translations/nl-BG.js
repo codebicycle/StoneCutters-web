@@ -372,6 +372,7 @@ module.exports = {
     'featured_listings.WhyCantIModifyMyListing': 'Waarom kan ik mijn advertentie niet wijzigen?',
     'featured_listings.WhyCantIModifyMyListing_content': 'Een als topper geplaatste advertenties kan pas worden gewijzigd na het verstrijken van de periode waarin de advertentie als topper is geplaatst. De reden hiervoor is dat wij bezoekers (die jouw advertentie mogelijk als favoriet hebben opgeslagen) zo goed mogelijk van dienst willen zijn.<br />Als je je topper toch wilt veranderen, kun je kiezen uit twee mogelijkheden:<br /><ul><li>Wacht tot je advertentie niet meer als topper wordt weergegeven, verander je advertentie en plaats deze opnieuw als topper.</li><li> <<CONTACTLINK>>Neem contact op met onze klantenservice<</CONTACTLINK>> (voor heel belangrijke wijzigingen).</li></ul>',
     'featured_listings_emails.HomePage': 'Startpagina',
+    'featured_listings_emails.ListingPage': 'Advertentiepagina',
     'featured_listings_emails.YouHaveNotBeenCharged': 'Er is geen bedrag in rekening gebracht.',
     'partnership.IfYouHaveLotsOfListingsToSubmitUseAFeed': 'Als je veel advertenties wilt indienen bij OLX, kun je ons de advertenties sturen in XML- of CSV-indeling. De advertenties worden gratis gepubliceerd en regelmatig bijgewerkt.',
     'business_directory.Map': 'Kaart',

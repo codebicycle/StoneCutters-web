@@ -372,6 +372,7 @@ module.exports = {
     'featured_listings.WhyCantIModifyMyListing': 'Why can\'t I modify my listing?',
     'featured_listings.WhyCantIModifyMyListing_content': 'To guarantee a good experience to the visitor (who may have bookmarked your listing), we don\u2019t allow Featured Listings to be modified until the Featured Listing option expires.<br /><br />If you want to make changes to your ads, you have two options:<br /><ul><li>Wait until the Featured Listing option ends, change your listing and buy the Featured Listing option again, or</li><li>For really important changes <<CONTACTLINK>>contact our Customer Service Team<</CONTACTLINK>>.</li></ul>',
     'featured_listings_emails.HomePage': 'Home page',
+    'featured_listings_emails.ListingPage': 'Listing page',
     'featured_listings_emails.YouHaveNotBeenCharged': 'You have not been charged.',
     'partnership.IfYouHaveLotsOfListingsToSubmitUseAFeed': 'If you have lots of listings you want to submit to OLX, you can use an XML feed.',
     'business_directory.Map': 'Map',

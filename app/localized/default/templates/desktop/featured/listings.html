@@ -11,9 +11,11 @@
         <p>
             {{ dictionary["featured_listings.Benefits_content"] }}
         </p>
+        <span class="featuredType">{{ dictionary["featured_listings_emails.HomePage"] }}</span>
+        <span class="featuredType">{{ dictionary["featured_listings_emails.ListingPage"] }}</span>
         <div class="content-img">
-            <img src="" alt="">
-            <span>{{ dictionary["misc.SampleFeatured"] }}</span>
+            <img src="{{ '/images/desktop/feature_ads/featuredHome.jpg' | static }}" alt="{{ dictionary["featured_listings_emails.HomePage"] }}">
+            <img src="{{ '/images/desktop/feature_ads/featuredListing.jpg' | static }}" alt="{{ dictionary["featured_listings_emails.ListingPage"] }}">
         </div>
     </li>
     <li>
