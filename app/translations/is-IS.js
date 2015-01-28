@@ -462,6 +462,7 @@ module.exports = {
     'misc.Sort_Mob': 'Sort',
     'misc.SpecificFields_title': 'Reitir fyrir tiltekna flokka (valfrj\xE1lst)',
     'misc.States': 'R\xEDki',
+    'misc.SuburbsOrNeighborhoods_EM': 'Hverfi',
     'misc.TechQuestions': 'For technical or general questions',
     'misc.ThereWasProb': 'Vandam\xE1l kom upp',
     'misc.TitleCharacters_Mob': 'Titillinn ver\xF0ur a\xF0 innihalda a.m.k. <<NUMBER>> ritt\xE1kn',

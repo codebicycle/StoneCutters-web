@@ -462,6 +462,7 @@ module.exports = {
     'misc.Sort_Mob': 'S\u1EAFp x\u1EBFp',
     'misc.SpecificFields_title': 'C\xE1c tr\u01B0\u1EDDng c\u1EE5 th\u1EC3 c\u1EE7a Nh\xF3m h\xE0ng (c\xE1c t\xF9y ch\u1ECDn)',
     'misc.States': 'C\xE1c bang',
+    'misc.SuburbsOrNeighborhoods_EM': 'C\xE1c v\xF9ng ngo\u1EA1i \xF4 ho\u1EB7c l\xE2n c\u1EADn',
     'misc.TechQuestions': 'D\xE0nh cho c\xE1c c\xE2u h\u1ECFi v\u1EC1 k\u1EF9 thu\u1EADt ho\u1EB7c c\xE1c v\u1EA5n \u0111\u1EC1 chung',
     'misc.ThereWasProb': 'C\xF3 l\u1ED7i',
     'misc.TitleCharacters_Mob': 'T\xEAn ch\u1EE7 \u0111\u1EC1 c\u1EA7n ch\u1EE9a \xEDt nh\u1EA5t <<NUMBER>> k\xED t\u1EF1',

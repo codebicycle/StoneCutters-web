@@ -462,6 +462,7 @@ module.exports = {
     'misc.Sort_Mob': 'Sort',
     'misc.SpecificFields_title': 'Medan Spesifik Kategori (Opsyenal)',
     'misc.States': 'Negeri',
+    'misc.SuburbsOrNeighborhoods_EM': 'Surbandar atau Kejiranan',
     'misc.TechQuestions': 'For technical or general questions',
     'misc.ThereWasProb': 'Terdapat masalah',
     'misc.TitleCharacters_Mob': 'Tajuk mesti mengandungi sekurang-kurangnya <<NUMBER>> aksara',
