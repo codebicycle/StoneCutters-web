@@ -105,7 +105,7 @@ module.exports = function(dataAdapter, excludedUrls) {
             }
 
             function fail(err) {
-                statsd.increment(['Unknown Location', 'middleware', 'platform', 'error']);
+                statsd.increment(['all', 'middleware', 'platform', 'error']);
                 res.status(500).sendfile(errorPath);
             }
 

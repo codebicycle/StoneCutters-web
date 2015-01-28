@@ -50,7 +50,7 @@ function test() {
 
     it('should reply a valid user', function(done) {
         var data = {
-            itemId: '123456789',
+            id: '123456789',
             message: 'This is the message',
             email: 'robot_test@olx.com',
             name: 'robot_test',
@@ -77,7 +77,7 @@ function test() {
 
     it('should not reply with no message', function(done) {
         var data = {
-            itemId: '123456789',
+            id: '123456789',
             email: 'robot_test@olx.com',
             name: 'robot_test',
             phone: '123456789',
@@ -91,7 +91,7 @@ function test() {
 
     it('should not reply with no email', function(done) {
         var data = {
-            itemId: '123456789',
+            id: '123456789',
             message: 'This is the message',
             name: 'robot_test',
             phone: '123456789',
@@ -105,7 +105,7 @@ function test() {
 
     it('should not reply with no name', function(done) {
         var data = {
-            itemId: '123456789',
+            id: '123456789',
             message: 'This is the message',
             email: 'robot_test@olx.com',
             phone: '123456789',
@@ -119,7 +119,7 @@ function test() {
 
     it('should reply with no phone', function(done) {
         var data = {
-            itemId: '123456789',
+            id: '123456789',
             message: 'This is the message',
             email: 'robot_test@olx.com',
             name: 'robot_test',
@@ -133,7 +133,7 @@ function test() {
 
     it('should reply with no token', function(done) {
         var data = {
-            itemId: '123456789',
+            id: '123456789',
             message: 'This is the message',
             email: 'robot_test@olx.com',
             name: 'robot_test',
@@ -150,7 +150,9 @@ function mock(data) {
     user = new User(data, options);
 
     dataAdapter.post = sinon.stub();
-    dataAdapter.post.callsArgWith(3, null, null, data);
+    dataAdapter.post.callsArgWith(3, null, {
+        statusCode: 200
+    }, data);
 
     statsd.increment = sinon.stub();
 }

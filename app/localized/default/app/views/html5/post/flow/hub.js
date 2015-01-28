@@ -193,6 +193,9 @@ module.exports = Base.extend({
             $locationSummary.addClass('error').text(cityError);
         }
         else {
+            if(location.children && location.children.length > 0){
+                location.name = location.children[0].name;
+            }
             $locationSummary.addClass('success').text(location.name);
         }
         if (failed) {

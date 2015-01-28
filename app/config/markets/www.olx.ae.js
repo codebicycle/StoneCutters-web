@@ -1,6 +1,7 @@
 module.exports = {
     categoryTree: {
-        order: [185, 186, 362, 187, 16, 191, 190]
+        order: [405, 185, 362, 187, 186, 16, 191, 190],
+        columns: [2, 3, 2]
     },
     successPage: {
         keepPosting: [
