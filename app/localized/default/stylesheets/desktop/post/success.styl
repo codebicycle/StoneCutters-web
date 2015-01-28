@@ -129,6 +129,41 @@
                 font-weight: bold;
             }
         }
+
+        .featured-ads {
+            box($yellowSuccess, $yellowBorders, 3px 3px 3px 3px, 20px, solid, 1px);
+            margin-top: 20px;
+            position: relative;
+
+            .featured-ads-title {
+                margin: 10px 0 0;
+                font-size: $m;
+                color: $black;
+                font-weight: bold;
+            }
+
+            .icon-feature {
+                green-star()
+                top: -8px;
+                margin-left: -32px;
+            }
+
+            em {
+                ribbon($green, $white)
+                top: 11px;
+                padding-left: 22px;
+            }
+
+            ul {
+                padding: 15px;
+                margin: 0;
+
+                li {
+                    font-size: $s;
+                    margin-bottom: 5px;
+                }
+            }
+        }
     }
 }
 
@@ -138,7 +173,7 @@
     margin-bottom: 20px;
     position: relative;
 
-    &.icon-time::before {
+    &.icon-time::before, &.icon-feature::before {
         color: $blue;
         font-size: remify(64px);
         left: 20px;
