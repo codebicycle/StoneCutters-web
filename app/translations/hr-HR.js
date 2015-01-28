@@ -441,6 +441,7 @@ module.exports = {
     'misc.Sort_Mob': 'Sort',
     'misc.SpecificFields_title': 'Specifi\u010Dna polja kategorija (po izboru)',
     'misc.States': 'Savezne dr\u017Eave',
+    'misc.SuburbsOrNeighborhoods_EM': 'Susjedstva',
     'misc.TechQuestions': 'For technical or general questions',
     'misc.ThereWasProb': 'Pojavio se problem',
     'misc.TitleCharacters_Mob': 'Naziv mora sadr\u017Eavati najmanje <<NUMBER>> znakova',

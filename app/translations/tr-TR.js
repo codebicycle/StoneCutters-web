@@ -441,6 +441,7 @@ module.exports = {
     'misc.Sort_Mob': 'Sort',
     'misc.SpecificFields_title': 'Kategoriye \xD6zel Alanlar (Tercihe Ba\u011Fl\u0131)',
     'misc.States': 'Eyaletler',
+    'misc.SuburbsOrNeighborhoods_EM': 'Semtler ya da Mahalleler',
     'misc.TechQuestions': 'For technical or general questions',
     'misc.ThereWasProb': 'Bir sorun olu\u015Ftu',
     'misc.TitleCharacters_Mob': 'Ba\u015Fl\u0131k en az <<NUMBER>> karakter i\xE7ermelidir',

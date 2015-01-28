@@ -441,6 +441,7 @@ module.exports = {
     'misc.Sort_Mob': 'Panga',
     'misc.SpecificFields_title': 'Uga ya Kundi Maalum (Hiari)',
     'misc.States': 'Nchi',
+    'misc.SuburbsOrNeighborhoods_EM': 'Kitongoji au Eneo',
     'misc.TechQuestions': 'Kwa maswali ya kiufundi au ya kawaida',
     'misc.ThereWasProb': 'Kulikuwa na tatizo',
     'misc.TitleCharacters_Mob': 'Kichwa ni lazima iwe na vibambo <<NUMBER>>',

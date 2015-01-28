@@ -441,6 +441,7 @@ module.exports = {
     'misc.Sort_Mob': 'Sort',
     'misc.SpecificFields_title': 'Pola w danej kategorii (opcjonalne)',
     'misc.States': 'Stany',
+    'misc.SuburbsOrNeighborhoods_EM': 'Dzielnice',
     'misc.TechQuestions': 'For technical or general questions',
     'misc.ThereWasProb': 'Wyst\u0105pi\u0142 problem',
     'misc.TitleCharacters_Mob': 'Tytu\u0142 powinien zawiera\u0107 przynajmniej <<NUMBER>> znak\xF3w',

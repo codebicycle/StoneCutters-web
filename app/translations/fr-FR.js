@@ -441,6 +441,7 @@ module.exports = {
     'misc.Sort_Mob': 'Trier',
     'misc.SpecificFields_title': 'Champs de Cat\xE9gorie Sp\xE9cifiques (Facultatif)',
     'misc.States': 'Etats',
+    'misc.SuburbsOrNeighborhoods_EM': 'Banlieues ou Quartiers',
     'misc.TechQuestions': 'Questions techniques ou g\xE9n\xE9rales',
     'misc.ThereWasProb': 'Il y a eu un probl\xE8me',
     'misc.TitleCharacters_Mob': 'Le titre doit comporter au moins <<NUMBER>> caract\xE8res',

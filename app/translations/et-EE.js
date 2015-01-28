@@ -441,6 +441,7 @@ module.exports = {
     'misc.Sort_Mob': 'Sort',
     'misc.SpecificFields_title': 'Kategooriatele vastavad v\xE4ljad (valikulised)',
     'misc.States': 'Osariigid',
+    'misc.SuburbsOrNeighborhoods_EM': 'Eeslinnad v\xF5i l\xE4hi\xFCmbruskonnad',
     'misc.TechQuestions': 'For technical or general questions',
     'misc.ThereWasProb': 'Ilmnes probleem',
     'misc.TitleCharacters_Mob': 'Pealkirjas peab olema v\xE4hemalt <<NUMBER>> t\xE4hem\xE4rki',

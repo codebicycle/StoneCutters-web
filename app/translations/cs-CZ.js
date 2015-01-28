@@ -441,6 +441,7 @@ module.exports = {
     'misc.Sort_Mob': 'Sort',
     'misc.SpecificFields_title': 'Specifick\xE1 pole kategori\xED (Voliteln\xE9)',
     'misc.States': 'St\xE1ty',
+    'misc.SuburbsOrNeighborhoods_EM': 'P\u0159edm\u011Bst\xED nebo \u010Dtvrti',
     'misc.TechQuestions': 'For technical or general questions',
     'misc.ThereWasProb': 'Do\u0161lo k probl\xE9mu',
     'misc.TitleCharacters_Mob': 'Nadpis mus\xED obsahovat alespo\u0148 <<NUMBER>> znak\u016F',

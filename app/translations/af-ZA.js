@@ -441,6 +441,7 @@ module.exports = {
     'misc.Sort_Mob': 'Sorteer',
     'misc.SpecificFields_title': 'Kategorie-spesifieke Velde (Opsionele)',
     'misc.States': 'State',
+    'misc.SuburbsOrNeighborhoods_EM': 'Stede of Omgewings',
     'misc.TechQuestions': 'Vir tegniese of algemene vrae',
     'misc.ThereWasProb': 'Daar was \'n probleem',
     'misc.TitleCharacters_Mob': 'Titel moet ten minste <<NUMBER>> karakters bevat.',

@@ -441,6 +441,7 @@ module.exports = {
     'misc.Sort_Mob': 'Sort',
     'misc.SpecificFields_title': '\u30AB\u30C6\u30B4\u30EA\u30FC\u7279\u5B9A\u30D5\u30A3\u30FC\u30EB\u30C9(\u30AA\u30D7\u30B7\u30E7\u30CA\u30EB)',
     'misc.States': '\u5DDE',
+    'misc.SuburbsOrNeighborhoods_EM': '\u90CA\u5916\u307E\u305F\u306F\u8FD1\u96A3',
     'misc.TechQuestions': 'For technical or general questions',
     'misc.ThereWasProb': '\u554F\u984C\u304C\u3042\u308A\u307E\u3057\u305F',
     'misc.TitleCharacters_Mob': '\u30BF\u30A4\u30C8\u30EB\u306F\u5C11\u306A\u304F\u3068\u3082<<NUMBER>> \u6587\u5B57\u4F7F\u7528\u3059\u308B\u5FC5\u8981\u304C\u3042\u308A\u307E\u3059',

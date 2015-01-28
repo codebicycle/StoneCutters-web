@@ -441,6 +441,7 @@ module.exports = {
     'misc.Sort_Mob': 'Sort',
     'misc.SpecificFields_title': '\uCE74\uD14C\uACE0\uB9AC \uACE0\uC720 \uD544\uB4DC (\uC120\uD0DD \uC0AC\uD56D)',
     'misc.States': '\uC8FC',
+    'misc.SuburbsOrNeighborhoods_EM': '\uAD50\uC678 \uB610\uB294 \uC778\uADFC',
     'misc.TechQuestions': 'For technical or general questions',
     'misc.ThereWasProb': '\uBB38\uC81C\uAC00 \uBC1C\uC0DD\uD588\uC2B5\uB2C8\uB2E4',
     'misc.TitleCharacters_Mob': '\uC81C\uBAA9\uC740 \uCD5C\uC18C <<NUMBER>>\uBB38\uC790\uB97C \uD3EC\uD568\uD574\uC57C \uD569\uB2C8\uB2E4',

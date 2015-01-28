@@ -441,6 +441,7 @@ module.exports = {
     'misc.Sort_Mob': 'Sort',
     'misc.SpecificFields_title': 'Mga Partikular na Field ng Kategorya (Mga Opsyonal)',
     'misc.States': 'Lokasyon',
+    'misc.SuburbsOrNeighborhoods_EM': 'Mga Nasa Labas ng Lungsod o Komunidad',
     'misc.TechQuestions': 'For technical or general questions',
     'misc.ThereWasProb': 'Nagkaroon ng problema',
     'misc.TitleCharacters_Mob': 'Ang pamagat ay dapat naglalaman ng hindi bababa sa <<NUMBER>> (na) character',

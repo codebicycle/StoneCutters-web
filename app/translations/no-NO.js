@@ -441,6 +441,7 @@ module.exports = {
     'misc.Sort_Mob': 'Sort',
     'misc.SpecificFields_title': 'Felter for spesifikk kategori (valgfritt)',
     'misc.States': 'Stater',
+    'misc.SuburbsOrNeighborhoods_EM': 'Forsteder eller nabolag',
     'misc.TechQuestions': 'For technical or general questions',
     'misc.ThereWasProb': 'Det oppstod et problem',
     'misc.TitleCharacters_Mob': 'Tittel m\xE5 inneholde minst <<NUMBER>> tegn',

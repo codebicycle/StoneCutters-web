@@ -441,6 +441,7 @@ module.exports = {
     'misc.Sort_Mob': 'Sort',
     'misc.SpecificFields_title': 'Bidang Spesifik Kategori (Opsional)',
     'misc.States': 'Negara Bagian',
+    'misc.SuburbsOrNeighborhoods_EM': 'Kota Satelit atau Sekitar',
     'misc.TechQuestions': 'For technical or general questions',
     'misc.ThereWasProb': 'Ada masalah',
     'misc.TitleCharacters_Mob': 'Judul harus memiliki minimal <<NUMBER>> karakter',

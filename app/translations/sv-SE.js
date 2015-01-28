@@ -441,6 +441,7 @@ module.exports = {
     'misc.Sort_Mob': 'Sort',
     'misc.SpecificFields_title': 'Kategorispecifikka f\xE4lt (tillval)',
     'misc.States': 'Stater',
+    'misc.SuburbsOrNeighborhoods_EM': 'F\xF6rorter eller grannlag',
     'misc.TechQuestions': 'For technical or general questions',
     'misc.ThereWasProb': 'Det fanns ett problem',
     'misc.TitleCharacters_Mob': 'Titel m\xE5ste best\xE5 av minst <<NUMBER>> tecken',

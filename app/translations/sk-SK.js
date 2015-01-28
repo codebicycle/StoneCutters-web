@@ -441,6 +441,7 @@ module.exports = {
     'misc.Sort_Mob': 'Sort',
     'misc.SpecificFields_title': '\u0160pecifick\xE9 polia kateg\xF3rie (vo\u013Eby)',
     'misc.States': '\u0160t\xE1ty',
+    'misc.SuburbsOrNeighborhoods_EM': 'Predmestia alebo \u0161tvrte',
     'misc.TechQuestions': 'For technical or general questions',
     'misc.ThereWasProb': 'Vyskytol sa probl\xE9m',
     'misc.TitleCharacters_Mob': 'N\xE1zov mus\xED ma\u0165 aspo\u0148 <<NUMBER>> znakov',

@@ -441,6 +441,7 @@ module.exports = {
     'misc.Sort_Mob': 'Ordenar',
     'misc.SpecificFields_title': 'Campos Espec\xEDficos de Categor\xEDa (Opcionales)',
     'misc.States': 'Departamentos',
+    'misc.SuburbsOrNeighborhoods_EM': 'Municipios o colonias',
     'misc.TechQuestions': 'Para consultas t\xE9cnicas o generales',
     'misc.ThereWasProb': 'Hubo un problema',
     'misc.TitleCharacters_Mob': 'El t\xEDtulo debe tener al menos <<NUMBER>> caracteres',

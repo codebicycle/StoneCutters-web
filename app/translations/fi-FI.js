@@ -441,6 +441,7 @@ module.exports = {
     'misc.Sort_Mob': 'Sort',
     'misc.SpecificFields_title': 'Luokkakohtaiset kent\xE4t (valinnaiset)',
     'misc.States': 'Osavaltiot',
+    'misc.SuburbsOrNeighborhoods_EM': 'L\xE4hi\xF6t tai naapurustot',
     'misc.TechQuestions': 'For technical or general questions',
     'misc.ThereWasProb': 'Ongelma ilmeni',
     'misc.TitleCharacters_Mob': 'Otsikossa pit\xE4\xE4 olla v\xE4hint\xE4\xE4n <<NUMBER>> merkki\xE4',
