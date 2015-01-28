@@ -82,9 +82,6 @@
                     {{ dictionary["terms.BeforeSubmitting"] | replace('<<LINK_TERMS_USE>>', ([' <a target="_blank" href="', ('/featured_listings' | link), '" data-pass-thru="true" >'] | join(''))) | replace('<</LINK_TERMS_USE>>', '</a>') }}
                 </div>
                 <input id="fad-submit" type="button" value='{{ dictionary["itemslisting.FeatureYourAd"] }}' {# if not someSectionEnabled %}disabled=""{% endif #} >
-                <div class="fad-edit">
-                    <a href="{{ ['/myolx/edititem?editid=', item.id, '&sk=', sk] | join('') | link }}">{{ dictionary["edititem_submitbutton.EditIt"] }}</a>
-                </div>
             </div>
             <p class="fad-error hide">
                 {{ dictionary["postingerror.PleaseSelectAtLeastOneOption"] }}
