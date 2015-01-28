@@ -17,47 +17,49 @@
             {% endif %}
             <div class="feature-ad-details">
                 {% for section in item.featured.get('sections') %}
-                <div class="fad-content">
-                    <p class="fad-section-{{ section.sectionId }}-form">
-                        <input type="checkbox" name="fad-section-{{ section.sectionId }}-check" id="fad-section-{{ section.sectionId }}-check" value="{{ section.sectionId }}" class="fad-check" {% if section.enabled %}data-id="{{ section.sectionId }}" data-payment="{{ section.paymentProviderId }}" data-concept="{{ section.conceptId }}" data-item="{{ item.get('id') }}"{% else %}disabled=""{% endif %}>
-                        <label for="fad-section-{{ section.sectionId }}-check">
-                            {% if section.sectionId == '4' %}
-                                {{ dictionary["featured_listings_emails.HomePage"] }}
-                            {% elif section.sectionId == '3' %}
-                                {{ dictionary["featured_listings.TopListingsAndSearchResults"] }}
-                            {% endif %}
-                        </label>
-
-                        {% if section.enabled and section.weeks %}
-                            <select id="fad-section-{{ section.sectionId }}-weeks" name="fad-section-{{ section.sectionId }}-weeks">
-                                {% for week in (1 | rangeToArray(section.weeks)) %}
-                                    <option value="{{ week }}">
-                                        {{ week }}
-                                        {% if week == 1 %}
-                                            {{ dictionary["messages_date_format.week"] }}
-                                        {% else %}
-                                            {{ dictionary["messages_date_format.WEEKS"] }}
-                                        {% endif %}
-                                    </option>
-                                {% endfor %}
-                            </select>
-                        {% endif %}
-                    </p>
                     {% if section.enabled %}
-                        <p class="fad-section-{{ section.sectionId }}-price">
-                            <span>{{ section.price.displayPrice }}</span>
-                            <small>{{ dictionary["itemslisting.PerWeek"] }}</small>
-                        </p>
-                    {% else %}
-                        {% if section.errors and section.errors.length != 0 %}
-                            <p class="fad-section-{{ section.sectionId }}-errors">
-                                {% for error in section.errors %}
-                                    <span class="fad-error">{{ error }}</span>
-                                {% endfor %}
+                        <div class="fad-content">
+                            <p class="fad-section-{{ section.sectionId }}-form form">
+                                <input type="checkbox" name="fad-section-{{ section.sectionId }}-check" id="fad-section-{{ section.sectionId }}-check" value="{{ section.sectionId }}" class="fad-check" {% if section.enabled %}data-id="{{ section.sectionId }}" data-payment="{{ section.paymentProviderId }}" data-concept="{{ section.conceptId }}" data-item="{{ item.get('id') }}"{% else %}disabled=""{% endif %}>
+                                <label for="fad-section-{{ section.sectionId }}-check">
+                                    {% if section.sectionId == '4' %}
+                                        {{ dictionary["featured_listings_emails.HomePage"] }}
+                                    {% elif section.sectionId == '3' %}
+                                        {{ dictionary["featured_listings.TopListingsAndSearchResults"] }}
+                                    {% endif %}
+                                </label>
+
+                                {% if section.enabled and section.weeks %}
+                                    <select id="fad-section-{{ section.sectionId }}-weeks" name="fad-section-{{ section.sectionId }}-weeks">
+                                        {% for week in (1 | rangeToArray(section.weeks)) %}
+                                            <option value="{{ week }}">
+                                                {{ week }}
+                                                {% if week == 1 %}
+                                                    {{ dictionary["messages_date_format.week"] }}
+                                                {% else %}
+                                                    {{ dictionary["messages_date_format.WEEKS"] }}
+                                                {% endif %}
+                                            </option>
+                                        {% endfor %}
+                                    </select>
+                                {% endif %}
                             </p>
-                        {% endif %}
+                            {% if section.enabled %}
+                                <p class="fad-section-{{ section.sectionId }}-price price">
+                                    <span>{{ section.price.displayPrice }}</span>
+                                    <small>{{ dictionary["itemslisting.PerWeek"] }}</small>
+                                </p>
+                            {% else %}
+                                {% if section.errors and section.errors.length != 0 %}
+                                    <p class="fad-section-{{ section.sectionId }}-errors errors">
+                                        {% for error in section.errors %}
+                                            <span class="fad-error">{{ error }}</span>
+                                        {% endfor %}
+                                    </p>
+                                {% endif %}
+                            {% endif %}
+                        </div>
                     {% endif %}
-                </div>
                 {% endfor %}
                 {% if not item.has('images') or item.get('images').length == 0 %}
                     <div class="fad-message">
@@ -71,7 +73,7 @@
             </div>
             <div class="fad-submit">
                 <div class="feature-ad-terms">
-                    {{ dictionary["terms.BeforeSubmitting"] | replace('<<LINK_TERMS_USE>>', (['<a target="_blank" href="', ('/featured_listings' | link), '" data-pass-thru="true" >'] | join(''))) | replace('<</LINK_TERMS_USE>>', '</a>') }}
+                    {{ dictionary["terms.BeforeSubmitting"] | replace('<<LINK_TERMS_USE>>', ([' <a target="_blank" href="', ('/featured_listings' | link), '" data-pass-thru="true" >'] | join(''))) | replace('<</LINK_TERMS_USE>>', '</a>') }}
                 </div>
                 <input id="fad-submit" type="button" value='{{ dictionary["itemslisting.FeatureYourAd"] }}' {# if not someSectionEnabled %}disabled=""{% endif #} >
                 <div class="fad-edit">
