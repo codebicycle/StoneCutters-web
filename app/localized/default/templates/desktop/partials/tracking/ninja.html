@@ -1,17 +1,19 @@
 {% if tracking.params and tracking.params.ninja %}
-<script type="text/javascript">
+<script type="text/javascript" id="ninja-lib">
     var dataLayer = window.dataLayer || [];
     dataLayer.push({{ tracking.params.ninja.params }});
+
     (function() {
         window.configTracking = {
             siteUrl: "{{ location.url }}",
             environment: "testing"
         };
-        var script = document.createElement("script")
-        script.type = "text/javascript";
-        script.async = true;
-        script.src = ("https:" == document.location.protocol ? "https://" : "http://") + 'ninja.onap.io/ninja.js';
-        (document.getElementsByTagName("head")[0] || document.getElementsByTagName("body")[0] || document.getElementsByTagName("script")[0].parentNode).insertBefore(script, null);
+
+        var ninja = document.createElement('script');
+        ninja.type = 'text/javascript';
+        ninja.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'ninja.onap.io/ninja.js';
+        ninja.async = true;
+        document.getElementById('ninja-lib').parentNode.appendChild(ninja);
     })();
 </script>
 {% endif %}

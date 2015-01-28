@@ -23,7 +23,15 @@ function isEnabled() {
     return enabled;
 }
 
+function getParams(page, options) {
+    var _params = params.get.apply(this, arguments);
+
+    return {
+        params: JSON.stringify(_params)
+    };
+}
+
 module.exports = {
     isEnabled: isEnabled,
-    getParams: params.get
+    getParams: getParams
 };
