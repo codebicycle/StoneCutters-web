@@ -22,6 +22,13 @@ module.exports = {
             location: 'Bottom'
         }
     },
+    slot_noresult_listing: {
+        'default': {
+            enabled: true,
+            type: 'CSA',
+            location: 'Top'
+        }
+    },
     slot_side_listing: {
         'default': {
             enabled: true,
