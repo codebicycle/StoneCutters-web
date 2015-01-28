@@ -147,7 +147,7 @@ function getCategoryAttribute(id, attr) {
             category = this.categories.get(id);
         }
         if (subcategory || category) {
-            name = (subcategory || category).get(attr);
+            name = (subcategory || category).get(attr).replace(/-/g, '');
         }
     }
     return name;
@@ -189,11 +189,6 @@ function getConfig() {
         enabled: configService.enabled,
         language: configService.language
     });
-}
-
-function getConfigType(type) {
-    var config = utils.get(configAdServing, type, {});
-    return config;
 }
 
 module.exports = Base.extend({

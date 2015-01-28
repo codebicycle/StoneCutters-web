@@ -37,8 +37,6 @@ module.exports = Base.extend({
         var settings = this.adServing.getSettings();
         var service = this.adServing.get('service');
 
-        console.log('ouput settings:', settings);
-
         if (service === 'CSA' || service === 'AFC') {
             if (this.isGoogleReferer() && settings.seo) {
                 settings.params.number = settings.seo;
