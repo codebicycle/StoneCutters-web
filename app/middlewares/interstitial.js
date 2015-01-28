@@ -12,7 +12,7 @@ module.exports = function(params, next) {
     }
     var locationUrl = this.app.session.get('location').url;
     if (_.contains(['www.olx.ir', 'www.olx.com.bd', 'www.olx.com.mx', 'www.olx.cl'], locationUrl)) {
-
+        return next();
     }
     if (locationUrl === 'www.olx.co.za' && this.app.session.get('internet.org')) {
         return next();
