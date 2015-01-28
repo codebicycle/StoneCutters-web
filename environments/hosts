@@ -17,6 +17,12 @@
 {IP}  www.olx.com           # United States
 {IP}  olx.com           # United States
 {IP}  losangeles.olx.com           # United States
+{IP}  lasvegas.olx.com # United States
+{IP}  yonkers.olx.com # United States
+{IP}  sacramento.olx.com # United States
+{IP}  norfolk-virginia.olx.com # United States
+{IP}  fortmeade-maryland.olx.com # United States
+{IP}  farrwest.olx.com # United States
 
 {IP}  m.olx.com.ar        # Argentina
 {IP}  wap.m.olx.com.ar        # Argentina
@@ -200,6 +206,7 @@
 {IP}  html5.m.olx.com.br        # Brazil
 {IP}  www.olx.com.br        # Brazil
 {IP}  olx.com.br        # Brazil
+{IP}  adolfo.olx.com.br        # Brazil
 
 {IP}  m.olx.cl            # Chile
 {IP}  wap.m.olx.cl            # Chile
@@ -222,6 +229,7 @@
 {IP}  www.olx.co.cr         # Costa Rica
 {IP}  olx.co.cr         # Costa Rica
 {IP}  nicoya.olx.co.cr         # Costa Rica
+{IP}  canas.olx.co.cr         # Costa Rica
 
 {IP}  m.olx.com.ec        # Ecuador
 {IP}  wap.m.olx.com.ec        # Ecuador
@@ -287,6 +295,7 @@
 {IP}  html5.m.olx.it            # Italy
 {IP}  www.olx.it            # Italy
 {IP}  olx.it            # Italy
+{IP}  milano.olx.it # Italy
 
 {IP}  m.olx.ir			# Iran
 {IP}  wap.m.olx.ir		# Iran
@@ -344,6 +353,7 @@
 {IP}  html5.m.olx.com.pa        # Panama
 {IP}  www.olx.com.pa        # Panama
 {IP}  olx.com.pa        # Panama
+{IP}  monagrillo.olx.com.pa        # Panama
 
 {IP}  m.olx.com.py        # Paraguay
 {IP}  wap.m.olx.com.py        # Paraguay
@@ -603,6 +613,9 @@
 {IP}  html5.m.olx.es            # Spain
 {IP}  www.olx.es            # Spain
 {IP}  olx.es            # Spain
+{IP}  gava.olx.es # Spain
+{IP}  getafe.olx.es # Spain
+{IP}  ciudadzaragoza.olx.es # Spain
 
 {IP}  m.olx.lk            # Sri Lanka
 {IP}  wap.m.olx.lk            # Sri Lanka
@@ -669,3 +682,7 @@
 {IP}  html5.m.jaovat.com        # Jaovat - Vietnam
 {IP}  www.jaovat.com        # Jaovat - Vietnam
 {IP}  jaovat.com        # Jaovat - Vietnam
+
+#IPSTATICS
+{IPSTATICS} images01.olx-st.com images02.olx-st.com images03.olx-st.com images04.olx-st.com
+{IPSTATICS} static01.olx-st.com static02.olx-st.com static03.olx-st.com static04.olx-st.com

@@ -71,7 +71,9 @@
                         </small>
                         {% for field in fields.contactInformation %}
                             {% if field.fieldType == 'text' %}
-                                {{ FieldText(field.label, field.name, field.mandatory, form,  user) }}
+                                {% if field.name != 'streetAddress' %}
+                                    {{ FieldText(field.label, field.name, field.mandatory, form,  user) }}
+                                {% endif %}
                             {% elif field.fieldType == 'combobox' %}
                                 {{ FieldCombobox(field.label, field.name , form, field.value) }}
                             {% endif %}
@@ -87,6 +89,25 @@
                                 <input type="submit" value="{{ dictionary["countryoptions.ChangeCity"] }}" class="link" formaction="{{ '/post/location' | link }}" name="btnChangeLocation" >
                             </span>
                         </small>
+                        <br>
+                        {% if neighborhoods.length > 0 %}
+                                <label for="neighborhood" style="margin-top: 10px;display:block;"><small>* {{ dictionary['countryoptions.SelectANeighborhood'] }}</small>
+                                <select name="neighborhood" id="neighborhood">
+                                    <option value="">-{{ dictionary["countryoptions.SelectANeighborhood"] }}-</option>
+                                    {% for neighborhood in neighborhoods %}
+                                        <option value="{{neighborhood.id}}-{{neighborhood.name}}">{{neighborhood.name}}</option>
+                                    {% endfor %}
+                                </select>
+                                </label>
+                        {% endif %}
+
+                        {% for field in fields.contactInformation %}
+                            {% if field.fieldType == 'text' %}
+                                {% if field.name == 'streetAddress' %}
+                                    {{ FieldText(field.label, field.name, field.mandatory, form,  user) }}
+                                {% endif %}
+                            {% endif %}
+                        {% endfor %}
                         <br>
                         <small>* {{ dictionary["wap_posting_step4.mandatoryField"] }}</small>
 
