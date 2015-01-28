@@ -11,10 +11,7 @@ module.exports = function(params, next) {
         return next();
     }
     var locationUrl = this.app.session.get('location').url;
-    if (locationUrl === 'www.olx.ir') {
-        return next();
-    }
-    if (locationUrl === 'www.olx.com.bd') {
+    if (_.contains(['www.olx.ir', 'www.olx.com.bd', 'www.olx.com.mx', 'www.olx.cl'], locationUrl)) {
         return next();
     }
     if (locationUrl === 'www.olx.co.za' && this.app.session.get('internet.org')) {
