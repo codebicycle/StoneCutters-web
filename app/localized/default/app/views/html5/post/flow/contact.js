@@ -169,8 +169,6 @@ module.exports = Base.extend({
         if (show) {
             this.$el.trigger('show');
         }
-
-
     },
     onSubmit: function(event) {
         event.preventDefault();
