@@ -726,9 +726,7 @@ function conversation(params, callback) {
             delete params.message;
             _params = _.extend({}, params, {
                 token: user.token,
-                userId: user.userId,
-                platform: 'android',
-                version: '5.0.0'
+                userId: user.userId
             });
             done();
         }.bind(this);

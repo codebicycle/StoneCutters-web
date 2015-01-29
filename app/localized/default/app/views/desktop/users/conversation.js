@@ -14,6 +14,7 @@ module.exports = Base.extend({
     },
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
+        data.thread = this.parentView.getThread();
         return data;
     },
     postRender: function() {
@@ -59,8 +60,7 @@ module.exports = Base.extend({
                 query: {
                     token: user.token,
                     userId: user.userId,
-                    platform: 'android',
-                    version: '5.0.0'
+                    platform: this.app.session.get('platform')
                 },
                 data: {
                     message: message
@@ -77,9 +77,7 @@ module.exports = Base.extend({
                     params: {
                         token: user.token,
                         userId: user.userId,
-                        threadId: threadId,
-                        platform: 'android',
-                        version: '5.0.0'
+                        threadId: threadId
                     }
                 }
             }, {
@@ -92,6 +90,7 @@ module.exports = Base.extend({
         }.bind(this);
 
         var error = function(err) {
+            console.log('error', err);
         }.bind(this);
 
         asynquence().or(error)

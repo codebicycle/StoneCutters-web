@@ -89,12 +89,6 @@ DataAdapter.prototype.serverRequest = function(req, api, options, callback) {
     }
 
     function request(done) {
-        if (~api.url.indexOf('/conversations')) {
-            api.query.platform = 'android';
-            api.query.version = '5.0.0';
-            api.query.location = 'www.olx.cl';
-            console.log(utils.params(api.url, api.query));
-        }
         restler.request(api.url, api)
             .on('success', success)
             .on('fail', fail)
@@ -356,12 +350,7 @@ DataAdapter.prototype.ajaxParams = function(api, options) {
         });
         api.data = data;
     }
-    if (~api.url.indexOf('/conversations')) {
-        _.extend(api[api.data ? 'data' : 'query'], {
-            platform: 'android',
-            version: '5.0.0'
-        });
-    }
+    
     return api;
 };
 
