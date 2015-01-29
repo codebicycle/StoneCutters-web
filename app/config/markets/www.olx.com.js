@@ -7,36 +7,39 @@ module.exports = {
         slots: {
             listing : {
                 topgallery: {
-                    location: 'Top',
                     service: 'CSA',
-                    format: 'default'
+                    format: 'default',
+                    location: 'Top',
+                    seo: 1
                 },
                 top: {
-                    location: 'Top',
                     service: 'CSA',
-                    format: 'custom'
+                    format: 'custom',
+                    location: 'Top',
+                    seo: 1
                 },
                 side: {
-                    location: 'Side',
                     service: 'ADX',
                     format: 'WideSkyscraper',
+                    location: 'Side',
                     params: {
                         slotId: '3997611586'
                     }
                 },
                 bottom: {
-                    location: 'Bottom',
-                    service: 'CSA',
-                    format: 'custom'
-                },
-                noresult: {
-                    seo: 10,
-                    location: 'Top',
                     service: 'CSA',
                     format: 'custom',
+                    location: 'Bottom',
+                    seo: 0
+                },
+                noresult: {
+                    service: 'CSA',
+                    format: 'custom',
+                    location: 'Top',
                     params: {
                         number: 10
-                    }
+                    },
+                    seo: 10
                 }
             },
             item: {

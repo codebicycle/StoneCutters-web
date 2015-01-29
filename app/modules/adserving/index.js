@@ -18,7 +18,8 @@ function initialize(attrs, options) {
     this.config = getConfig.call(this);
     this.set({
         'service': this.config.service,
-        'format': this.config.format
+        'format': this.config.format,
+        'classname': 'adserving-' + this.config.service.toLowerCase() + ' ' + this.get('slotname')
     });
 }
 
@@ -180,7 +181,7 @@ function getCategoryForChannel() {
 function getConfig() {
     var configMarket = config.getForMarket(this.app.session.get('location').url, ['adserving', 'slots'].concat(this.get('slotname').split('_')), {});
     var configService = utils.get(configAdServing, configMarket.service, {});
-    var configFormatDefault = utils.get(configAdServing, [configMarket.service, 'default'], {});
+    var configFormatDefault = utils.get(configService, 'default', {});
     var configFormat = utils.get(configService, configMarket.format, {});
     var configFormats = extendConfig(configFormat, configFormatDefault);
     var configResult = extendConfig(configMarket, configFormats);
