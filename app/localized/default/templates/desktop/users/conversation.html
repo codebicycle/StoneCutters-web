@@ -6,7 +6,13 @@
             <img src="{{ item.images[0].thumbnail }}" alt="{{ item.title }}">
         </a>
         <div class="conversation-item-data">
-            <h3>Conversación con {{ thread.get('senders')[0].name }}</h3>
+            <h3>Conversación con 
+                {% for sender in thread.get('senders') %}
+                    {% if not sender.isMine %}
+                        {{ sender.name }}
+                    {% endif %}
+                {% endfor %}
+            </h3>
             <p><a href="{{ item.slug }}">{{ item.title }}</a>
         </div>
     </div>

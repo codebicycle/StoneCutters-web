@@ -90,7 +90,6 @@ module.exports = Base.extend({
         }.bind(this);
 
         var error = function(err) {
-            console.log('error', err);
         }.bind(this);
 
         asynquence().or(error)

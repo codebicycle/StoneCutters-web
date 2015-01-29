@@ -40,7 +40,8 @@ module.exports = Base.extend({
                 helpers.dataAdapter.post(this.app.req, '/conversations/' + threadId + '/read', {
                     query: {
                         userId: user.userId,
-                        token: user.token
+                        token: user.token,
+                        platform: this.app.session.get('platform')
                     },
                     cache: false,
                     json: true
