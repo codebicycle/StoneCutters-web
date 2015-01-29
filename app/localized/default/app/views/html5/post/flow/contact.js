@@ -48,8 +48,8 @@ module.exports = Base.extend({
         }
         this.$('[name=email]').change();
 
-        location = this.parentView.getItem().getLocation() ? this.parentView.getItem().getLocation().url : undefined;
-        if( location !== undefined && !this.neighborhoodSelected) {
+        location = this.parentView.getItem().getLocation();
+        if( location && location.url && !this.neighborhoodSelected) {
             this.onNeighborhood();
         }
     },
@@ -64,7 +64,6 @@ module.exports = Base.extend({
     },
     onNeighborhood: function() {
         var fetch = function(done) {
-
             $('body > .loading').show();
             this.app.fetch({
                 neighborhoods: {
@@ -86,15 +85,13 @@ module.exports = Base.extend({
         }.bind(this);
 
         var success = function(res) {
-            var options = res.neighborhoods;
-            var aux = res.neighborhoods.toJSON();
-
             $('body > .loading').hide();
-            if(aux.length) {
-                this.neighborhoods = options;
+            if (res.neighborhoods && res.neighborhoods.length) {
+                this.neighborhoods = res.neighborhoods;
                 this.existNeighborhoods = true;
                 this.neighborhoodSelected = false;
-            } else {
+            }
+            else {
                 this.existNeighborhoods = false;
                 this.neighborhoodSelected = true;
             }
@@ -202,8 +199,8 @@ module.exports = Base.extend({
             $email.addClass('error').after('<small class="error">' + translations.get(this.app.session.get('selectedLanguage'))['postingerror.InvalidEmail'] + '</small>');
             statsd.increment([location, 'posting', 'invalid', this.app.session.get('platform'), 'email']);
         }
-        if(this.existNeighborhoods){
-            if(!this.neighborhoodSelected){
+        if (this.existNeighborhoods) {
+            if (!this.neighborhoodSelected) {
                 failed = true;
                 $location.addClass('error').after('<small class="error">' + translations.get(this.app.session.get('selectedLanguage'))['countryoptions.SelectANeighborhood'] + '</small>');
                 statsd.increment([location, 'posting', 'invalid', this.app.session.get('platform'), 'city']);
@@ -214,7 +211,6 @@ module.exports = Base.extend({
             $location.addClass('error').after('<small class="error">' + translations.get(this.app.session.get('selectedLanguage'))['misc.AdNeedsLocation_Mob'] + '</small>');
             statsd.increment([location, 'posting', 'invalid', this.app.session.get('platform'), 'city']);
         }
-
         if (failed) {
             this.$el.addClass('error');
         }
