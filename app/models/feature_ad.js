@@ -9,7 +9,13 @@ var FeatureAd = Base.extend({
     url: '/items/:id/isFeaturable',
     isEnabled: function() {
         return FeatureAd.isEnabled(this.app);
-    }
+    },
+    getSection: function(id) {
+       var section = _.find(this.get('sections'), function each(section) {
+           return section.sectionId === id;
+       });
+       return section;
+   }
 });
 
 FeatureAd.isEnabled = function isEnabled(app) {
