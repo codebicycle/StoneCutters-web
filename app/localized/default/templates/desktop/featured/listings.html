@@ -1,4 +1,4 @@
-<h3>{{ dictionary["widgets.Featured_listings"] }}</h3>
+<h1>{{ dictionary["widgets.Featured_listings"] }}</h1>
 
 <ul>
     <li>
@@ -11,10 +11,12 @@
         <p>
             {{ dictionary["featured_listings.Benefits_content"] }}
         </p>
-        <span class="featuredType">{{ dictionary["featured_listings_emails.HomePage"] }}</span>
-        <span class="featuredType">{{ dictionary["featured_listings_emails.ListingPage"] }}</span>
         <div class="content-img">
+            <span class="featuredType">{{ dictionary["featured_listings_emails.HomePage"] }}</span>
             <img src="{{ '/images/desktop/feature_ads/featuredHome.jpg' | static }}" alt="{{ dictionary["featured_listings_emails.HomePage"] }}">
+        </div>
+        <div class="content-img">
+            <span class="featuredType">{{ dictionary["featured_listings_emails.ListingPage"] }}</span>
             <img src="{{ '/images/desktop/feature_ads/featuredListing.jpg' | static }}" alt="{{ dictionary["featured_listings_emails.ListingPage"] }}">
         </div>
     </li>
@@ -69,7 +71,7 @@
     <li>
         <h4>{{ dictionary["featured_listings.AdditionalTermsForFeaturedAds"] }}</h4>
         <p>
-            {{ dictionary["featured_listings.AdditionalTermsForFeaturedAds_content"] | replace('<<LINK_TERMS_USE>>', (['<a target="_blank" href="', ('/featured_listings' | link), '" data-pass-thru="true" >'] | join(''))) | replace('<</LINK_TERMS_USE>>', '</a>') }}
+            {{ dictionary["featured_listings.AdditionalTermsForFeaturedAds_content"] | replace('<<LINK_TERMS_USE>>', (['<a target="_blank" href="', ('/terms' | link), '" data-pass-thru="true" >'] | join(''))) | replace('<</LINK_TERMS_USE>>', '</a>') }}
         </p>
     </li>
     <li>
