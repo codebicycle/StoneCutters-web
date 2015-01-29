@@ -133,18 +133,19 @@
             </section>
         </div>
     {% endif %}
-
-    <section class="nav">
-        <span></span>
-        <div class="links {{ 'twice' if (item.metadata.seo.prevItem and item.metadata.seo.nextItem) }}">
-            {% if item.metadata.seo.prevItem %}
-                <a class="first" href="{{ item.metadata.seo.prevItem.itemUrl | link }}">{{ dictionary["listingpageitemslisting.Previous"] }} </a>
-            {% endif %}
-            {% if item.metadata.seo.nextItem %}
-                <a class="second" href="{{ item.metadata.seo.nextItem.itemUrl | link }}">{{ dictionary["itemslisting.Next"] }} </a>
-            {% endif %}
-        </div>
-    </section>
+    {% if (item.metadata.seo.prevItem or item.metadata.seo.nextItem) %}
+        <section class="nav">
+            <span></span>
+            <div class="links {{ 'twice' if (item.metadata.seo.prevItem and item.metadata.seo.nextItem) }}">
+                {% if item.metadata.seo.prevItem %}
+                    <a class="first" href="{{ item.metadata.seo.prevItem.itemUrl | link }}">{{ dictionary["listingpageitemslisting.Previous"] }} </a>
+                {% endif %}
+                {% if item.metadata.seo.nextItem %}
+                    <a class="second" href="{{ item.metadata.seo.nextItem.itemUrl | link }}">{{ dictionary["itemslisting.Next"] }} </a>
+                {% endif %}
+            </div>
+        </section>
+    {% endif %}
 
 </section>
 
