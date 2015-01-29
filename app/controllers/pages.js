@@ -139,12 +139,7 @@ function error(params, callback) {
         if (this.app.session.get('isServer')) {
             this.app.req.res.status(404);
         }
-        if (this.app.session.get('path') !== '/500') {
-            statsd.increment(['all', 'errors', 404]);
-        }
-        else {
-            statsd.increment(['all', 'errors', 500]);
-        }
+        statsd.increment(['all', 'errors', this.app.session.get('path') !== '/500' ? 404 : 500]);
         if (err) {
             this.app.session.clear('error');
         }
