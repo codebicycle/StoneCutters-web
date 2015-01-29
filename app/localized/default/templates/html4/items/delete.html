@@ -1,3 +1,6 @@
+{% from macros import Breadcrumb, BreadcrumbHome, Errors %}
+{% set link = (breadcrumb | link) %}
+{{ Breadcrumb(dictionary, link, dictionary["myolx.MyAds"], ['<a href="', '/logout' | link, '" class="logout" data-qa="logout-button">', dictionary["myolx.SignOut"], '</a>'] | join) }}
 <section id="formdeleteitem">
     <div class="confirmdelete">
         <h4 class="subtitle">{{ dictionary["posting_removedsurvey.WarningAdToBeRemoved"] }} </h4>
@@ -41,3 +44,5 @@
         </form>
     </div>
 </section>
+{{ BreadcrumbHome(dictionary, link, ('/' | link)) }}
+{% view 'partials/tracking' %}
