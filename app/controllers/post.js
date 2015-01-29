@@ -179,7 +179,9 @@ function flow(params, callback) {
                 return true;
             }
             if (item.getLocation().url && item.getLocation().url !== siteLocation) {
-                helpers.common.redirect.call(this, [protocol, '://', host.replace(shortHost, item.getLocation().url), url].join(''), null, {
+                helpers.common.redirect.call(this, helpers.common.link(url, this.app, {
+                    location: item.getLocation().url
+                }), null, {
                     pushState: false
                 });
                 return true;
