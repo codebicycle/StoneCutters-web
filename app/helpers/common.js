@@ -9,6 +9,7 @@ if (typeof window === 'undefined') {
 }
 
 module.exports = (function() {
+    var env = config.get(['environment', 'type'], 'development');
 
     var linkIgParsers = (function() {
         var regexpFindPage = /-p-[0-9]+/;
@@ -207,7 +208,6 @@ module.exports = (function() {
     }
 
     function statics(path, key, value) {
-        var env = config.get(['environment', 'type'], 'development');
         var host = this.app ? this.app.session.get('host') : '';
         var type;
 
@@ -240,6 +240,9 @@ module.exports = (function() {
     }
 
     function error(err, res, status, callback) {
+        if (env !== 'production') {
+            console.log('[OLX DEBUG] 404 ::', err, err ? err.stack || err : '');
+        }
         if (_.isFunction(status)) {
             callback = status;
             status = 404;
@@ -271,6 +274,27 @@ module.exports = (function() {
        return output;
     }
 
+    function dateDiff(start, end) {
+        var miliseconds = (new Date(end)).getTime() - (new Date(start)).getTime();
+        var seconds = miliseconds / 1000;
+        var minutes = Math.floor(seconds / 60);
+        var hours = Math.floor(minutes / 60);
+        var days = Math.floor(hours / 24);
+        var out = [];
+
+        minutes = minutes - hours*60;
+        hours = hours - days*24;
+
+        out.push(days);
+        out.push(this.dictionary['messages_date_format.day' + (hours > 1 ? 's_n' : '')] + ',');
+        out.push(hours);
+        out.push(this.dictionary['messages_date_format.hour' + (hours > 1 ? 's_n' : '')]);
+        out.push(this.dictionary['messages_date_format.and']);
+        out.push(minutes);
+        out.push(this.dictionary['messages_date_format.minute' + (minutes > 1 ? 's_n' : '')]);
+        return out.join(' ');
+    }
+
     return {
         slugToUrl: slugToUrl,
         link: utils.link,
@@ -282,6 +306,7 @@ module.exports = (function() {
         redirect: redirect,
         error: error,
         serializeFormJSON: serializeFormJSON,
-        'static': statics
+        'static': statics,
+        dateDiff: dateDiff
     };
 })();

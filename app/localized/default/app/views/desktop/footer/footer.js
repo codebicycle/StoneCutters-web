@@ -2,6 +2,7 @@
 
 var Base = require('../../../../../common/app/bases/view').requireView('footer/footer');
 var config = require('../../../../../../../shared/config');
+var FeatureAd = require('../../../../../../models/feature_ad');
 var _ = require('underscore');
 
 module.exports = Base.extend({
@@ -21,6 +22,7 @@ module.exports = Base.extend({
         var states = data.states;
         var currentState = {};
         var selectedLanguage = this.app.session.get('selectedLanguage').split('-')[0];
+        var isFeaturedCountry = FeatureAd.isEnabled(this.app);
 
         if(location.children.length) {
             _.each(states, function each(state, i){
@@ -33,6 +35,7 @@ module.exports = Base.extend({
         return _.extend({}, data, {
             selectedLanguage: selectedLanguage,
             socials: socials,
+            isFeaturedCountry: isFeaturedCountry,
             currentState: {
                 hostname: currentState.hostname,
                 name: currentState.name

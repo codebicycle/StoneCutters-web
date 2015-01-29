@@ -28,17 +28,17 @@
     <div class="messages errors">
         {% for field, messages in errors %}
             {% for message in messages %}
-
                 {% if field == 'priceC' %}
                     <span>{{ dictionary["posting_fields_1.price"] }}: {{ message }}</span><br/>
                 {% elif field ==  'contactName' %}
                     <span>{{ dictionary["itemslisting.NewContactName"] }}: {{ message }}</span><br/>
                 {% elif field ==  'phone' %}
                     <span>{{ dictionary["posting_fields_1.phoneNumber"] }}: {{ message }}</span><br/>
+                {% elif field ==  'neighborhood' %}
+                    <span>{{ dictionary["misc.SuburbsOrNeighborhoods_EM"] }}: {{ message }}</span><br/>
                 {% else %}
                     <span>{{ dictionary["posting_fields_1."+field] }}: {{ message }}</span><br/>
                 {% endif %}
-
             {% endfor %}
         {% endfor %}
     </div>
