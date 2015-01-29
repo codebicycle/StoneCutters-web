@@ -7,14 +7,22 @@ var config = require('../../shared/config');
 var FeatureAd = Base.extend({
     idAttribute: 'id',
     url: '/items/:id/isFeaturable',
+    parse: function(response) {
+        if (response && response.sections) {
+            response.sections = _.uniq(response.sections, function predicate(section) {
+               return section.sectionId + section.conceptId;
+            });
+        }
+        return response;
+    },
     isEnabled: function() {
         return FeatureAd.isEnabled(this.app);
     },
     getSection: function(id) {
-       var section = _.find(this.get('sections'), function each(section) {
-           return section.sectionId === id;
-       });
-       return section;
+        var section = _.find(this.get('sections'), function each(section) {
+            return section.sectionId === id;
+        });
+        return section;
    }
 });
 
