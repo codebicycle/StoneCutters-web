@@ -1,12 +1,14 @@
 <div class="conversations">
     {% for conversation in conversations %}
         {% set item = items.get(conversation.itemId) %}
-        <div class="conversations-thread clearfix">
-            <img src="{{ item.get('thumbnail') }}">
-            <a href="{{ ('/myolx/conversation/' + conversation.threadId) | link }}">
-                <h3>{{ conversation.buyerName }}</h3>
-                <p>{{ item.get('title') }}</p>
-                <span>{{ conversation.messageDate | date(false, true) }}
+        <div class="conversations-thread clearfix{{ ' read' if conversation.read }}" >
+            <a href="{{ ('/myolx/conversation/' + conversation.threadId) | link }}" data-threadId="{{ conversation.threadId }}">
+                <img src="{{ item.get('thumbnail') }}">
+                <div class="conversations-data">
+                    <h3>{{ conversation.buyerName }}</h3>
+                    <p>{{ item.get('title') }}</p>
+                    <span>{{ conversation.messageDate | date(false, true) }}
+                </div>
             </a>
         </div>
     {% endfor %}

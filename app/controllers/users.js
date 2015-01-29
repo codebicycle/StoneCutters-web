@@ -714,6 +714,7 @@ function conversation(params, callback) {
             this.app.seo.addMetatag('googlebot', 'noindex, nofollow');
             callback(null, 'users/myolx', {
                 thread: res.thread,
+                include: ['thread'],
                 viewname: 'conversation'
             });
         }.bind(this);

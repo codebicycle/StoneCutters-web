@@ -356,6 +356,12 @@ DataAdapter.prototype.ajaxParams = function(api, options) {
         });
         api.data = data;
     }
+    if (~api.url.indexOf('/conversations')) {
+        _.extend(api[api.data ? 'data' : 'query'], {
+            platform: 'android',
+            version: '5.0.0'
+        });
+    }
     return api;
 };
 

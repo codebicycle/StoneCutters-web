@@ -24,9 +24,11 @@
     {% endfor %}
     </ul>
     <div class="conversation-input">
-        <form>
-            <textarea></textarea>
-            <a href="#">{{ dictionary["supportform.Reset"] }}</a>
+        <form data-message-reply data-threadId="{{ thread.get('threadId') }}">
+            <textarea data-messageText ></textarea>
+            <p data-error class="error hide">{{ dictionary['please-comp-msg'] }}</p>
+            <img class="spinner hide" src="{{ '/images/desktop/spinner-bgWhite.gif' | static }}" alt="">
+            <a href="{{ '/myolx/conversations' | link }}">{{ dictionary["supportform.Reset"] }}</a>
             <button class="reply-send btn" type="submit">{{ dictionary["myolx.Reply"] }}</button>
         </form>
     </div>

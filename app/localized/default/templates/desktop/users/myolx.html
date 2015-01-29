@@ -14,7 +14,7 @@
         <a href="#">{{ dictionary["myolx.Settings"] }} </a>
     </li><!-- #}
     --><li class="{{ messagesClass }}">
-        <a href="{{ '/myolx/myolxmessages' | link }}">{{ dictionary["myolx.Messages"] }}</a>
+        <a href="{{ '/myolx/conversations' if isHermesEnabled else '/myolx/myolxmessages' | link }}">{{ dictionary["myolx.Messages"] }}</a>
     </li>
 </ul>
 
