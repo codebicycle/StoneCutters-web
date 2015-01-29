@@ -2,19 +2,19 @@
     <div class="confirmdelete">
         <h4 class="subtitle">{{ dictionary["posting_removedsurvey.WarningAdToBeRemoved"] }} </h4>
         <div class="itemdelete">
-            <figure class="image">
-                {% if images.length %}
-                    <img src="" alt="" class="thumbnail">
+            <div class="image">
+                {% if item.images.length %}
+                    <img src="{{ item.images[0].thumbnail }}" alt="" class="thumbnail">
                 {% else %}
                     <span class="withoutimg"></span>
                 {% endif %}
-            </figure>
+            </div>
             <div class="description">
                 {{ item.title }}
             </div>
         </div>
         <h5>{{ dictionary["posting_removedsurvey.RemovedAdSurvey"] }} </h5>
-        <form action="{{ ['/myolx/deleteitem/', item.id] | join('') | link }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ ['/myolx/deleteitem/', item.id] | join('') | link }}" method="POST" enctype="multipart/form-data" class="formdelete">
             <div class="reason">
                 <input type="radio" name="close_reason" value="1" required id="close_reason1">
                 <label for="close_reason1">{{ dictionary["posting_removedsurvey.RemovedAdSurveyAnswer1"] }} </label>
@@ -35,6 +35,8 @@
             <input type="hidden" name="idd" id="idd" value="">
             <div class="buttons deleteitem">
                 <button type="submit" class="btn accept">{{ dictionary["seccion-30.478"] }}</button>
+                <span>{{ dictionary["biderrorheader.Or"] }}</span>
+                <a href="/myolx/myadslisting" class="btncanceldelete">{{ dictionary["supportform.Reset"] }}</a>
             </div>
         </form>
     </div>
