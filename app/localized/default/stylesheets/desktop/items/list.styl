@@ -21,9 +21,9 @@
         h3 {
             font-weight: normal;
             margin: 0;
+            display: block;
         }
         p,
-        h3,
         .items-info,
         .items-image {
             display: inline-block;
@@ -68,6 +68,19 @@
                 color: $greyStrong;
                 font-size: $xs;
                 text-transform: capitalize;
+            }
+            em {
+                ribbon($green, $white)
+            }
+            &.featuredad {
+                position: relative;
+
+                h3 {
+                    margin-top: 10px;
+                }
+                .icon-feature {
+                    green-star()
+                }
             }
         }
         .items-price {

@@ -4,7 +4,6 @@ var _ = require('underscore');
 var asynquence = require('asynquence');
 var middlewares = require('../middlewares');
 var helpers = require('../helpers');
-var tracking = require('../modules/tracking');
 var config = require('../../shared/config');
 
 if (typeof window === 'undefined') {
@@ -20,8 +19,7 @@ module.exports = {
     error: middlewares(error),
     allstates: middlewares(allstates),
     sitemap: middlewares(sitemap),
-    sitemapByDate: middlewares(sitemapByDate),
-    featured_listings: middlewares(featuredListings)
+    sitemapByDate: middlewares(sitemapByDate)
 };
 
 function terms(params, callback) {
@@ -290,31 +288,4 @@ function sitemapByDate(params, callback) {
     helpers.common.redirect.call(this, '/', null, {
         status: 302
     });
-}
-
-function featuredListings(params, callback) {
-    helpers.controllers.control.call(this, params, controller);
-
-    function controller() {
-        var redirect = function(done) {
-            var platform = this.app.session.get('platform');
-
-            if (platform !== 'desktop') {
-                return done.fail();
-            }
-            done();
-        }.bind(this);
-
-        var success = function() {
-            callback(null, {});
-        }.bind(this);
-
-        var error = function(err, res) {
-            return helpers.common.error.call(this, err, res, callback);
-        }.bind(this);
-
-        asynquence().or(error)
-            .then(redirect)
-            .val(success);
-    }
 }

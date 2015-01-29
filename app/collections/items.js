@@ -1,11 +1,12 @@
 'use strict';
 
-var Base = require('../bases/collection');
 var _ = require('underscore');
+var Base = require('../bases/collection');
 var Item = require('../models/item');
 var helpers = require('../helpers');
 var Filters = require('../modules/filters');
 var Paginator = require('../modules/paginator');
+var config = require('../../shared/config');
 
 module.exports = Base.extend({
     model: Item,
