@@ -71,7 +71,7 @@
                 {% endfor %}
                 {% if not item.images or item.images.length == 0 %}
                     <div class="fad-message">
-                        {% if not item.has('price') or item.price.amount == 0 %}
+                        {% if not item.price or item.price.amount == 0 %}
                             {{ dictionary["featured_listings.UnableToFeature_NoImages_NoPrice"] }}
                         {% else %}
                             {{ dictionary["featured_listings.UnableToFeature_NoImages"] }}
