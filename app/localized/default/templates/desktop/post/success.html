@@ -8,8 +8,10 @@
 <section id="item-preview" class="item-preview" data-qa="item">
     <section class="item-preview-content">
         <div class="header-edit">
-            <p>{{ dictionary["posting_photos.NeedChangeAd"] }} </p>
-            <a href="{{ item.slug.replace(domain, fullDomain) | editSlug(item.id) }}" class="icons icon-edit" title="{{ dictionary['messages_site_class.ClickEdit'] }}">{{ dictionary["posting_publishbutton.EditYourAd_ZA"] }} </a>
+            {% if item.status.editable %}
+                <p>{{ dictionary["posting_photos.NeedChangeAd"] }} </p>
+                <a href="{{ item.slug.replace(domain, fullDomain) | editSlug(item.id) }}" class="icons icon-edit" title="{{ dictionary['messages_site_class.ClickEdit'] }}">{{ dictionary["posting_publishbutton.EditYourAd_ZA"] }}</a>
+            {% endif %}
         </div>
         <div class="wrapper">
             <h1 class="item-title">{{ item.title }}</h1>
@@ -26,7 +28,9 @@
     <aside class="side-column">
         <div class="header-edit">
             <p>{{ dictionary["postingheader.ContactDetails"] }} </p>
-            <a href="{{ item.slug.replace(domain, fullDomain) | editSlug(item.id) }}" class="icons icon-edit" title="{{ dictionary['messages_site_class.ClickEdit'] }}">{{ dictionary["seccion-40.1528"] | capitalize }} </a>
+            {% if item.status.editable %}
+                <a href="{{ item.slug.replace(domain, fullDomain) | editSlug(item.id) }}" class="icons icon-edit" title="{{ dictionary['messages_site_class.ClickEdit'] }}">{{ dictionary["seccion-40.1528"] | capitalize }}</a>
+            {% endif %}
         </div>
         <div class="user-info">
             <p class="icons icon-user user-name">{{ item.contactName }}</p>
@@ -34,6 +38,9 @@
                 <p class="icons icon-phone user-phone">{{ item.phone }}</p>
             {% endif %}
         </div>
+        {% if item.featured and item.featured.isEnabled() %}
+            {% view 'post/feature_ad' %}
+        {% endif %}
     </aside>{# right-column #}
 </section>{# item-preview #}
 

@@ -8,20 +8,23 @@ module.exports = {
         'categories#showig': {
             name: 'ListingGallery'
         },
-        'items#allresults': {
+        'searches#allresults': {
             name: 'Listing'
         },
-        'items#allresultsig': {
+        'searches#allresultsig': {
             name: 'ListingGallery'
         },
-        'items#search': {
+        'searches#search': {
             name: 'Search'
         },
-        'items#searchig': {
+        'searches#searchig': {
             name: 'SearchGallery'
         },
-        'items#staticSearch': {
+        'searches#statics': {
             name: 'StaticSearch'
+        },
+        'searches#noresult': {
+            name: 'NoResult'
         },
         'items#show': {
             name: 'Item'

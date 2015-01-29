@@ -1,11 +1,12 @@
 'use strict';
 
-var Base = require('../bases/collection');
 var _ = require('underscore');
+var Base = require('../bases/collection');
 var Item = require('../models/item');
 var helpers = require('../helpers');
 var Filters = require('../modules/filters');
 var Paginator = require('../modules/paginator');
+var config = require('../../shared/config');
 
 module.exports = Base.extend({
     model: Item,
@@ -93,6 +94,18 @@ module.exports = Base.extend({
         _.extend(this.params, this.filters.smaugize());
 
         return Base.prototype.fetch.apply(this, arguments);
+    },
+    hasImages: function() {
+        var has = false;
+        var filter;
+
+        if (this.filters && this.filters.has('hasimage')) {
+            filter = this.filters.get('hasimage').get('value');
+            if (filter && filter.length === 1 && filter[0].id == 'true') {
+                has = true;
+            }
+        }
+        return has;
     }
 });
 

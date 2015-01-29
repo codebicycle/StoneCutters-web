@@ -1,0 +1,25 @@
+<span>{{ dictionary["contactseller_form.ReplyToListing"] }}</span>
+<form id="replyForm" action="">
+    <label>* {{ dictionary["replymessage.Message"] }}</label>
+    <textarea class="message" name="message"></textarea>
+    <small class="message hide"></small>
+
+    <label>* {{ dictionary["replymessage.Name"] }}</label>
+    <input type="text" value="{{ user.username if user.username }}" class="name" name="name">
+    <small class="name hide"></small>
+
+    <label>* {{ dictionary["replymessage.Email"] }}</label>
+    <input type="email" value="{{ user.email if user.email }}" class="email" name="email">
+    <small class="email hide"></small>
+
+    <label>{{ dictionary["itemgeneraldetails.Phone"] }}</label>
+    <input type="number" class="phone" name="phone">
+    <input type="hidden" class="itemId" name="itemId" value="{{ item.id }}">
+
+    <span>* {{ dictionary["wap_posting_step4.mandatoryField"] }}</span>
+
+    <div class="btnCenter">
+        <input type="submit" class="btns orange submit trackMe" value="{{ dictionary["contactseller_form.60"] }}" data-tracking="ItemPage-ClickReply" data-qa="reply-send-button" >
+    </div>
+</form>
+<div class="clear"></div>
