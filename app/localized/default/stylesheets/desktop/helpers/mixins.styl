@@ -285,3 +285,39 @@ cursive(color, size)
     font-family: 'Kalam', cursive;
     font-size: size
     color: color
+
+green-star()
+   background: $featureStarBg;
+   border: 2px solid white;
+   border-radius: 50%;
+   color: white;
+   margin-left: -28px;
+   padding: 1px 4px 5px;
+   position: relative;
+   top: -1px;
+   z-index: 298;
+
+ribbon(bgcolor, color)
+    background: bgcolor;
+    color: color;
+    font-size: 10px;
+    font-weight: bold;
+    left: 0;
+    padding: 0 20px 0 30px;
+    position: absolute;
+    height: 20px;
+    line-height:19px;
+    text-transform: uppercase;
+    font-style: normal;
+
+    &:after {
+        border-color: $green transparent $green $green;
+        border-style: solid;
+        border-width: 10px;
+        bottom: 0;
+        content: " ";
+        height: 0;
+        position: absolute;
+        right: -10px;
+        width: 0;
+    }

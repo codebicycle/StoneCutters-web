@@ -74,5 +74,28 @@ module.exports = {
                 platforms: ['wap', 'html4', 'html5', 'desktop']
             }
         }
+    },
+    featured: {
+        enabled: false,
+        quantity: {
+            total: 6,
+            top: 3,
+            bottom: 3
+        },
+        params: {
+            'f.featured': '3+OR+5',
+            featuredAds: true,
+            offset: 0
+        },
+        section: {
+            'categories#list': {
+                quantity: {
+                    total: 6
+                },
+                params: {
+                    'f.featured': '4+OR+5'
+                }
+            }
+        }
     }
 };
