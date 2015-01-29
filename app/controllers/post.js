@@ -15,13 +15,20 @@ module.exports = {
     form: middlewares(form),
     success: middlewares(success),
     edit: middlewares(edit),
-    editsuccess: middlewares(editsuccess)
+    editsuccess: middlewares(editsuccess),
+    renew: middlewares(renew)
 };
 
 function flowMarketing(params, callback) {
     params.marketing = true;
     return flow.call(this, params, callback);
 }
+
+function renew(params, callback) {
+    params.renew = true;
+    return flow.call(this, params, callback);
+}
+
 function flow(params, callback) {
     helpers.controllers.control.call(this, params, controller);
 
@@ -33,7 +40,6 @@ function flow(params, callback) {
         var platform = this.app.session.get('platform');
         var isDesktop = platform === 'desktop';
         var itemId = params.itemId;
-
         var promise = asynquence().or(error.bind(this))
             .then(prepare.bind(this));
 
@@ -58,6 +64,7 @@ function flow(params, callback) {
         }
 
         function fetch(done) {
+            console.log(params);
             var data = {};
             var locationUrl;
 
@@ -143,6 +150,9 @@ function flow(params, callback) {
             else if (isDesktop) {
                 if (redirect.call(this, res.item)) {
                     return;
+                }
+                if (res.item && params.renew)  {
+                    res.item.set('renew', true);
                 }
                 postingController.call(this, res.postingSession, res.cities, res.item, res.fields);
             }

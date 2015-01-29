@@ -38,6 +38,10 @@ module.exports = function(nunjucks) {
         return dateformat(_date, 'dd/mm/yyyy');
     }
 
+    function dateDiff(start, end) { 
+      return helpers.common.dateDiff.call(this.ctx, start, end);
+    }
+
     function countFormat(count) {
         return count.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
     }
@@ -68,6 +72,7 @@ module.exports = function(nunjucks) {
         is: is,
         log: log,
         date: date,
+        dateDiff: dateDiff,
         link: link,
         linkig: linkig,
         encode: encode,
@@ -77,6 +82,7 @@ module.exports = function(nunjucks) {
         slugToUrl: helpers.common.slugToUrl,
         hijri: helpers.hijri,
         persianDigits: helpers.numbers.toPersian,
-        latinDigits: helpers.numbers.toLatin
+        latinDigits: helpers.numbers.toLatin,
+
     };
 };

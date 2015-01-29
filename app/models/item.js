@@ -193,6 +193,8 @@ function postFields(done) {
     var id = this.get('id');
     var sk = this.get('sk');
     var user = this.app.session.get('user');
+    var renew =  this.get('renew') || false;
+    var action = 'edit';
     var query = {
         postingSession: this.get('postingSession'),
         languageId: this.app.session.get('languageId'),
@@ -200,6 +202,9 @@ function postFields(done) {
     };
     var data;
 
+    if(renew) {
+        action = 'renew';
+    }
     if (!id) {
         query.intent = 'create';
     }
@@ -211,7 +216,7 @@ function postFields(done) {
         this.unset('sk');
     }
     data = this.toData(true);
-    helpers.dataAdapter.post(this.app.req, '/items' + (!id ? '' : ['', id, 'edit'].join('/')), {
+    helpers.dataAdapter.post(this.app.req, '/items' + (!id ? '' : ['', id, action].join('/')), {
         data: data,
         query: query
     }, callback.bind(this));
