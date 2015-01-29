@@ -5,11 +5,7 @@ var asynquence = require('asynquence');
 var middlewares = require('../middlewares');
 var helpers = require('../helpers');
 var config = require('../../shared/config');
-
-if (typeof window === 'undefined') {
-    var statsdModule = '../../server/modules/statsd';
-    var statsd = require(statsdModule)();
-}
+var statsd = require('../../shared/statsd')();
 
 module.exports = {
     terms: middlewares(terms),
@@ -142,13 +138,8 @@ function error(params, callback) {
 
         if (this.app.session.get('isServer')) {
             this.app.req.res.status(404);
-            if (this.app.session.get('path') !== '/500') {
-                statsd.increment(['all', 'errors', 404]);
-            }
-            else {
-                statsd.increment(['all', 'errors', 500]);
-            }
         }
+        statsd.increment(['all', 'errors', this.app.session.get('path') !== '/500' ? 404 : 500]);
         if (err) {
             this.app.session.clear('error');
         }
