@@ -145,23 +145,14 @@ module.exports = function(app, dataAdapter) {
             }
 
             function validate(done, _item, images){
-                var err;
-
-                if (typeof _item.neighborhood !== 'undefined') {
-                    if(_item.neighborhood === ''){
-                        err = [{
-                            selector: 'neighborhood',
-                            message: dictionary['countryoptions.SelectANeighborhood'],
-                            label: 'neighborhood'
-                        }];
-
-                        return fail(err);
-                    } else {
-                        done(_item);
-                    }
-                } else {
-                    done(_item);
+                if (typeof _item.neighborhood !== 'undefined' && _item.neighborhood === '') {
+                    return fail([{
+                        selector: 'neighborhood',
+                        message: dictionary['countryoptions.SelectANeighborhood'],
+                        label: 'neighborhood'
+                    }]);
                 }
+                done(_item, images);
             }
 
             function post(done, _item, images) {
