@@ -16,7 +16,8 @@ module.exports = function(dataAdapter, excludedUrls) {
                 clientId: req.rendrApp.session.get('clientId'),
                 ip: req.rendrApp.session.get('ip'),
                 userAgent: req.rendrApp.session.get('userAgent'),
-                platform: req.rendrApp.session.get('platform')
+                platform: req.rendrApp.session.get('platform'),
+                market: req.rendrApp.session.get('location').abbreviation
             });
 
             _.each(sixpack.experiments, function each(experiment) {

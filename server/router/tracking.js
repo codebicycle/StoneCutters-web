@@ -363,10 +363,11 @@ module.exports = function trackingRouter(app, dataAdapter) {
 
         function handler(req, res) {
             res.on('finish', function onResponseFinish() {
-                var platform = req.param('platform');
                 var experiment = req.param('experiment');
+                var platform = req.param('platform');
+                var market = req.param('market');
 
-                if (!platform || !experiment) {
+                if (!experiment || !platform || !market) {
                     return;
                 }
 
@@ -374,7 +375,8 @@ module.exports = function trackingRouter(app, dataAdapter) {
                     clientId: req.rendrApp.session.get('clientId'),
                     ip: req.rendrApp.session.get('ip'),
                     userAgent: utils.getUserAgent(req),
-                    platform: platform
+                    platform: platform,
+                    market: market
                 });
 
                 sixpack.convert(sixpack.experiments[experiment]);

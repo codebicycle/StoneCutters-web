@@ -8,6 +8,7 @@ var tracking = require('../modules/tracking');
 var Item = require('../models/item');
 var FeatureAd = require('../models/feature_ad');
 var config = require('../../shared/config');
+var Sixpack = require('../../shared/sixpack');
 
 module.exports = {
     flow: middlewares(flow),
@@ -577,6 +578,16 @@ function success(params, callback) {
             });
         }.bind(this);
 
+        var convert = function() {
+            var sixpack = new Sixpack({
+                platform: this.app.session.get('platform'),
+                market: this.app.session.get('location').abbreviation,
+                experiments: this.app.session.get('experiments')
+            });
+
+            sixpack.convert(sixpack.experiments.html5Interstitial);
+        }.bind(this);
+
         var error = function(err, res) {
             return helpers.common.error.call(this, err, res, callback);
         }.bind(this);
@@ -587,7 +598,8 @@ function success(params, callback) {
             .then(checkItem)
             .then(findRelatedItems)
             .then(findFeatured)
-            .val(success);
+            .val(success)
+            .val(convert);
     }
 }
 

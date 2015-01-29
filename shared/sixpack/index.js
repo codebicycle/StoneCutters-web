@@ -15,6 +15,7 @@ function Sixpack(options) {
     this.ip = options.ip;
     this.userAgent = options.userAgent;
     this.platform = options.platform;
+    this.market = (options.market || '').toLowerCase();
     this.experiments = options.experiments || this.experiments();
     this.session = new sixpack.Session(this.clientId, config.host, this.ip, this.userAgent, config.timeout);
 }
@@ -27,9 +28,10 @@ Sixpack.prototype.experiments = function() {
     _.each(Object.keys(config.experiments), function each(key) {
         var experiment = _.clone(config.experiments[key]);
 
-        if (this.enabled && experiment.enabled && _.contains(experiment.platforms, this.platform)) {
+        if (this.enabled && experiment.enabled && _.contains(experiment.platforms, this.platform) && _.contains(experiment.markets, this.market)) {
             delete experiment.enabled;
             delete experiment.platforms;
+            delete experiment.markets;
             experiment.key = key;
             experiments[key] = experiment;
         }

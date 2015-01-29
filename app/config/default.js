@@ -3,6 +3,12 @@
 var utils = require('../../shared/utils');
 
 module.exports = {
+    sixpack: {
+        enabled: true,
+        host: 'http://sixpack.olx.com',
+        timeout: utils.SECOND,
+        experiments: require('./experiments')
+    },
     smaug: {
         protocol: 'http',
         host: 'api-v2.olx.com',

@@ -13,6 +13,7 @@ module.exports = Base.extend({
         var className = _.result(Base.prototype, 'className') || '';
         var sixpack = new Sixpack({
             platform: this.app.session.get('platform'),
+            market: this.app.session.get('location').abbreviation,
             experiments: this.app.session.get('experiments')
         });
         var sixpackClass = sixpack.className(sixpack.experiments.html5HeaderPostButton);
@@ -78,6 +79,7 @@ module.exports = Base.extend({
     onPostClick: function() {
         var sixpack = new Sixpack({
             platform: this.app.session.get('platform'),
+            market: this.app.session.get('location').abbreviation,
             experiments: this.app.session.get('experiments')
         });
 
@@ -171,6 +173,9 @@ module.exports = Base.extend({
     },
     onSelectLocation: function(){
         this.customize("itemslisting.NavigatorByLocation");
+    },
+    onLoginStart: function(){
+        this.customize("defaulthtmlhead.My Listings");
     },
     customize: function(key) {
         var data = Base.prototype.getTemplateData.call(this);

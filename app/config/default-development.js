@@ -5,7 +5,7 @@ var utils = require('../../shared/utils');
 module.exports = {
     sixpack: {
         enabled: true,
-        host: 'http://sixpack.olx-testing.com',
+        host: 'http://sixpack-testing.olx.com',
         timeout: utils.SECOND,
         experiments: require('./experiments/development')
     },
