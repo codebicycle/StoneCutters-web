@@ -6,6 +6,7 @@ var rEmail = /[-0-9a-zA-Z.+_]+@[-0-9a-zA-Z.+_]+\.[a-zA-Z]{2,4}/;
 var rPhone = /^[\d -]+$/;
 var translations = require('../../../../../../../../shared/translations');
 var statsd = require('../../../../../../../../shared/statsd')();
+var asynquence = require('asynquence');
 
 module.exports = Base.extend({
     className: 'post_flow_contact_view disabled',
@@ -37,6 +38,7 @@ module.exports = Base.extend({
     postRender: function() {
         var current = this.app.session.get('location').current;
         var user = this.app.session.get('user');
+        var location;
 
         if (!this.parentView.getItem().getLocation() && current) {
             this.parentView.getItem().set('location', current);
@@ -45,6 +47,11 @@ module.exports = Base.extend({
             this.parentView.getItem().set('email', user.email || true);
         }
         this.$('[name=email]').change();
+
+        location = this.parentView.getItem().getLocation() ? this.parentView.getItem().getLocation().url : undefined;
+        if( location !== undefined && !this.neighborhoodSelected) {
+            this.onNeighborhood();
+        }
     },
     events: {
         'show': 'onShow',
@@ -54,6 +61,48 @@ module.exports = Base.extend({
         'click .location': 'onLocationClick',
         'locationChange': 'onLocationChange',
         'submit': 'onSubmit'
+    },
+    onNeighborhood: function() {
+        var fetch = function(done) {
+
+            $('body > .loading').show();
+            this.app.fetch({
+                neighborhoods: {
+                    collection: 'Neighborhoods',
+                    params: {
+                        level: 'cities',
+                        type: 'neighborhoods',
+                        location: this.parentView.getItem().getLocation().url,
+                        languageId: this.app.session.get('languages')._byId[this.app.session.get('selectedLanguage')].id
+                    }
+                }
+            }, {
+                readFromCache: false
+            }, done.errfcb);
+        }.bind(this);
+
+        var error = function(err) {
+            console.log(err); // TODO: HANDLE ERRORS
+        }.bind(this);
+
+        var success = function(res) {
+            var options = res.neighborhoods;
+            var aux = res.neighborhoods.toJSON();
+
+            $('body > .loading').hide();
+            if(aux.length) {
+                this.neighborhoods = options;
+                this.existNeighborhoods = true;
+                this.neighborhoodSelected = false;
+            } else {
+                this.existNeighborhoods = false;
+                this.neighborhoodSelected = true;
+            }
+        }.bind(this);
+
+        asynquence().or(error)
+            .then(fetch)
+            .val(success);
     },
     onShow: function(event, categoryId) {
         event.preventDefault();
@@ -115,10 +164,13 @@ module.exports = Base.extend({
 
         var show = !this.$el.hasClass('disabled');
 
+        this.neighborhoodSelected = true;
         this.render();
         if (show) {
             this.$el.trigger('show');
         }
+
+
     },
     onSubmit: function(event) {
         event.preventDefault();
@@ -152,11 +204,19 @@ module.exports = Base.extend({
             $email.addClass('error').after('<small class="error">' + translations.get(this.app.session.get('selectedLanguage'))['postingerror.InvalidEmail'] + '</small>');
             statsd.increment([location, 'posting', 'invalid', this.app.session.get('platform'), 'email']);
         }
-        if (!this.parentView.getItem().getLocation()) {
+        if(this.existNeighborhoods){
+            if(!this.neighborhoodSelected){
+                failed = true;
+                $location.addClass('error').after('<small class="error">' + translations.get(this.app.session.get('selectedLanguage'))['countryoptions.SelectANeighborhood'] + '</small>');
+                statsd.increment([location, 'posting', 'invalid', this.app.session.get('platform'), 'city']);
+            }
+        }
+        else if (!this.parentView.getItem().getLocation()) {
             failed = true;
             $location.addClass('error').after('<small class="error">' + translations.get(this.app.session.get('selectedLanguage'))['misc.AdNeedsLocation_Mob'] + '</small>');
             statsd.increment([location, 'posting', 'invalid', this.app.session.get('platform'), 'city']);
         }
+
         if (failed) {
             this.$el.addClass('error');
         }
