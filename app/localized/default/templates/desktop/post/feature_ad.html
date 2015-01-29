@@ -2,7 +2,7 @@
     <i class="icons icon-feature"></i><em>{{ dictionary["misc.FeaturedAd _BR"] }}</em>
     <p class="featured-ads-title">{{ dictionary["itemslisting.FeatureYourAd"] }}</p>
     <ul>
-        <li>{{ dictionary["misc.PriceListings"] }}</li>
+        <li>{{ dictionary["misc.PriceListings"] | replace('<<PRICE>>', item.featured.getSection('3').price.displayPrice) }}</li>
         <li>{{ dictionary["misc.FeaturedNotEdit"] }}</li>
         <li>{{ dictionary["misc.ChargedAfter"] }}</li>
     </ul>

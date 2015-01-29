@@ -34,6 +34,7 @@ module.exports = Base.extend({
         this.errors = {};
         this.currentViewName = 'hub';
         this.dictionary = translations.get(this.app.session.get('selectedLanguage'));
+        this.neighborhoodSelected = false;
     },
     postRender: function() {
         $(window).on('beforeunload', this.onBeforeUnload);

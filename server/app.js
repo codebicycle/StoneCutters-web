@@ -36,11 +36,11 @@ module.exports = function appUseConf(done) {
         rendrApp.use(middleware.localstorageiframe());
         rendrApp.use(middleware.manifest());
         rendrApp.use(middleware.robots());
-        rendrApp.use(middleware.com());
         rendrApp.use(middleware.redirections());
         rendrApp.use(middleware.host());
         rendrApp.use(middleware.platform());
         rendrApp.use(middleware.session());
+        rendrApp.use(middleware.com());
         rendrApp.use(middleware.device());
         rendrApp.use(middleware.environment());
         rendrApp.use(middleware.location());

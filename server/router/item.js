@@ -118,19 +118,6 @@ module.exports = function(app, dataAdapter) {
                         statsd.increment([location.abbreviation, editing ? 'editing' : 'posting', 'error', 'abort', platform]);
                         return fail(err, 'aborted');
                     }
-
-                    if (typeof _item.neighborhood !== 'undefined') {
-                        if (_item.neighborhood !== '') {
-                            var aux = _item.neighborhood.split('-');
-
-                            _item['neighborhood.id'] = aux[0];
-                            _item['neighborhood.name'] = aux[1];
-                        } else {
-                            _item['neighborhood.id'] = '';
-                            _item['neighborhood.name'] = '';
-                        }
-                    }
-
                     newImages = _.clone(_images);
                     done.errfcb.apply(null, Array.prototype.slice.call(arguments, 0));
                 }
@@ -144,24 +131,22 @@ module.exports = function(app, dataAdapter) {
                 done(_item, _images);
             }
 
-            function validate(done, _item, images){
-                var err;
+            function validate(done, _item, images) {
+                var neighborhood;
 
                 if (typeof _item.neighborhood !== 'undefined') {
-                    if(_item.neighborhood === ''){
-                        err = [{
+                    if (_item.neighborhood === '') {
+                        return fail([{
                             selector: 'neighborhood',
                             message: dictionary['countryoptions.SelectANeighborhood'],
                             label: 'neighborhood'
-                        }];
-
-                        return fail(err);
-                    } else {
-                        done(_item);
+                        }]);
                     }
-                } else {
-                    done(_item);
+                    neighborhood = _item.neighborhood.split('-');
+                    _item['neighborhood.id'] = neighborhood[0];
+                    _item['neighborhood.name'] = neighborhood[1];
                 }
+                done(_item, images);
             }
 
             function post(done, _item, images) {
