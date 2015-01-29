@@ -1,8 +1,8 @@
 'use strict';
 
-var Base = require('../bases/model');
-var asynquence = require('asynquence');
 var _ = require('underscore');
+var asynquence = require('asynquence');
+var Base = require('../bases/model');
 var helpers = require('../helpers');
 var statsd = require('../../shared/statsd')();
 

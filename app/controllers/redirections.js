@@ -4,6 +4,7 @@ var _ = require('underscore');
 var helpers = require('../helpers');
 var middlewares = require('../middlewares');
 var utils = require('../../shared/utils');
+var statsd = require('../../shared/statsd')();
 var phpRedirections = {
     index: '',
     posting: 'posting',
@@ -11,14 +12,11 @@ var phpRedirections = {
     login: 'login',
     switch_domain: '',
     myolx: 'myolx/myadslisting',
-    yourads: 'myolx/myadslisting'
+    yourads: 'myolx/myadslisting',
+    buyfeaturedad: 'myolx/buyfeaturedad',
+    featured_ad: 'featured_ad'
 };
 var phpPaths = Object.keys(phpRedirections);
-
-if (typeof window === 'undefined') {
-    var statsdModule = '../../server/modules/statsd';
-    var statsd = require(statsdModule)();
-}
 
 module.exports = {
     category: function(params, callback) {

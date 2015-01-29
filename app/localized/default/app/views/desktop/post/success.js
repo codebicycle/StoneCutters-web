@@ -1,8 +1,6 @@
 'use strict';
 
-var Base = require('../../../../../common/app/bases/view');
-var _ = require('underscore');
-var breadcrumb = require('../../../../../../modules/breadcrumb');
+var Base = require('../../../../../common/app/bases/view').requireView('post/success');
 
 module.exports = Base.extend({
     className: 'posting-success-view',
@@ -13,12 +11,10 @@ module.exports = Base.extend({
 
         data.item.location.stateName = data.item.location.children[0].name;
         data.item.location.cityName = data.item.location.children[0].children[0].name;
-        if(data.item.location.children[0].children[0].children[0]){
+        if (data.item.location.children[0].children[0].children[0]) {
             data.item.location.neighborhoodName = data.item.location.children[0].children[0].children[0].name;
         }
-        return _.extend({}, data, {
-            breadcrumb: breadcrumb.get.call(this, data)
-        });
+        return data;
     },
     postRender: function() {
         var category = 'Posting';
@@ -34,5 +30,3 @@ module.exports = Base.extend({
         });
     }
 });
-
-module.exports.id = 'post/success';

@@ -68,6 +68,23 @@ module.exports = function(nunjucks) {
         return helpers.common.static.apply(this.ctx, arguments);
     }
 
+    function rangeToArray(start, end, options) {
+        var array = [];
+        var i;
+
+        options = _.defaults({}, options || {}, {
+            equal: true,
+            increment: 1
+        });
+        for (i = start; i < end; i += options.increment) {
+            array.push(i);
+        }
+        if (options.equal) {
+            array.push(end);
+        }
+        return array;
+    }
+
     return {
         is: is,
         log: log,
@@ -77,6 +94,7 @@ module.exports = function(nunjucks) {
         linkig: linkig,
         encode: encode,
         'static': statics,
+        rangeToArray: rangeToArray,
         countFormat: countFormat,
         editSlug: editSlug,
         slugToUrl: helpers.common.slugToUrl,

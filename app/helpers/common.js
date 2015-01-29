@@ -9,6 +9,7 @@ if (typeof window === 'undefined') {
 }
 
 module.exports = (function() {
+    var env = config.get(['environment', 'type'], 'development');
 
     var linkIgParsers = (function() {
         var regexpFindPage = /-p-[0-9]+/;
@@ -207,7 +208,6 @@ module.exports = (function() {
     }
 
     function statics(path, key, value) {
-        var env = config.get(['environment', 'type'], 'development');
         var host = this.app ? this.app.session.get('host') : '';
         var type;
 
@@ -229,8 +229,6 @@ module.exports = (function() {
     }
 
     function redirect(url, parameters, options) {
-        var siteLocation = this.app.session.get('siteLocation');
-
         options = (options || {});
         url = utils.link(url, this.app, options.query);
         if (parameters) {
@@ -242,8 +240,10 @@ module.exports = (function() {
     }
 
     function error(err, res, status, callback) {
-        console.log('Error:');
-        console.log(err.stack);
+        if (env !== 'production') {
+            console.log('[OLX DEBUG] 404 ::', err, err ? err.stack || err : '');
+        }
+
         if (_.isFunction(status)) {
             callback = status;
             status = 404;
