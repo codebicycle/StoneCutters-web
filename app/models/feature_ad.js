@@ -12,7 +12,7 @@ var FeatureAd = Base.extend({
     },
     getSection: function(id) {
        var section = _.find(this.get('sections'), function each(section) {
-           return section.sectionId == id;
+           return section.sectionId === id;
        });
        return section;
    }
@@ -33,7 +33,6 @@ FeatureAd.isEnabled = function isEnabled(app) {
 FeatureAd.isLocationEnabled = function isLocationEnabled(location) {
     return config.getForMarket(location, ['featured', 'enabled'], false);
 };
-
 
 module.exports = FeatureAd;
 module.exports.id = 'FeatureAd';
