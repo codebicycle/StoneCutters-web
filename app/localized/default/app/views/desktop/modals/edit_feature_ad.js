@@ -20,7 +20,7 @@ module.exports = Base.extend({
         event.stopImmediatePropagation();
 
         $('.btnedit-modal').attr('href', options.href);
-        $('.feature-ad-time').html(helpers.common.dateDiff.call(this, options.featuredDates.start, options.featuredDates.end));
+        $('.feature-ad-time').html(helpers.common.dateDiff.call(this, new Date(), options.featuredDates.end));
     }
 });
 
