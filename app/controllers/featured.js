@@ -4,7 +4,7 @@ var _ = require('underscore');
 var asynquence = require('asynquence');
 var middlewares = require('../middlewares');
 var helpers = require('../helpers');
-var statsd = require('../../statsd')();
+var statsd = require('../../shared/statsd')();
 
 module.exports = {
     ads: middlewares(ads),
