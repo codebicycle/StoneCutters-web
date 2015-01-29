@@ -4,6 +4,7 @@ var _ = require('underscore');
 var asynquence = require('asynquence');
 var middlewares = require('../middlewares');
 var helpers = require('../helpers');
+var statsd = require('../../statsd')();
 
 module.exports = {
     ads: middlewares(ads),
@@ -19,6 +20,11 @@ function ads(params, callback) {
         var securityKey = params.sk;
         var id = params.id;
         var item;
+
+        var log = function(done) {
+            statsd.increment([this.app.session.get('location').abbreviation, 'featured', 'ads', result ? 'success' : 'error', this.app.session.get('platform')]);
+            done();
+        }.bind(this);
 
         var redirect = function(done) {
             var platform = this.app.session.get('platform');
@@ -82,6 +88,7 @@ function ads(params, callback) {
         }.bind(this);
 
         asynquence().or(error)
+            .then(log)
             .then(redirect)
             .then(prepare)
             .then(fetch)
