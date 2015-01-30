@@ -230,29 +230,58 @@ module.exports = Base.extend({
         event.stopPropagation();
         event.stopImmediatePropagation();
 
-        this.$('#image').addClass('pending');
+        this.$('.images').addClass('pending');
         this.$el.trigger('change');
+
+        //this.$('#image').addClass('pending');
+        //this.$el.trigger('change');
     },
     onImagesLoadEnd: function(event) {
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();
 
-        var $container = this.$('#image');
-        var $image = this.$('#imagesDisplay');
-        var image = this.parentView.getItem().get('images')[0];
+        var $container = this.$('.images');
+        var $display = this.$('.display');
+        var $ammount = $('.ammount');
+        var images = this.parentView.getItem().get('images');
 
-        if (image) {
+        console.log(images);
+
+        if (images[0]) {
             $container.removeClass('pending').addClass('fill');
-            $image.removeAttr('class').addClass('r' + image.orientation).css({
-                'background-image': 'url(' + image.url + ')'
+            $display.removeClass('r1 r2 r3 r4 r5 r6 r7 r8').addClass('r' + images[0].orientation).css({
+                'background-image': 'url(' + images[0].url + ')'
             });
         }
         else {
             $container.removeClass('pending fill');
-            $image.removeAttr('class style');
+            $display.removeClass('r').removeAttr('style');
         }
         this.$el.trigger('change');
+
+        if (images.length > 1) {
+            $ammount.removeClass('hidden').text('+' + (images.length - 1));
+        }
+        else {
+            $ammount.addClass('hidden').text('');
+        }
+
+        //var $container = this.$('#image');
+        //var $image = this.$('#imagesDisplay');
+        //var image = this.parentView.getItem().get('images')[0];
+
+        //if (image) {
+        //    $container.removeClass('pending').addClass('fill');
+        //    $image.removeAttr('class').addClass('r' + image.orientation).css({
+        //        'background-image': 'url(' + image.url + ')'
+        //    });
+        //}
+        //else {
+        //    $container.removeClass('pending fill');
+        //    $image.removeAttr('class style');
+        //}
+        //this.$el.trigger('change');
     }
 });
 

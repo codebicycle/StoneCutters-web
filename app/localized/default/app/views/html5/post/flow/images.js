@@ -67,6 +67,7 @@ module.exports = Base.extend({
         this.parentView.getItem().get('images').splice(input.replace('file', ''), 1);
         this.render();
         this.$el.trigger('show');
+        this.parentView.$el.trigger('imagesLoadEnd');
     },
     onInputClick: function(event) {
         event.stopPropagation();
