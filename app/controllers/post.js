@@ -180,9 +180,9 @@ function flow(params, callback) {
                 return true;
             }
             if (item.getLocation().url && item.getLocation().url !== siteLocation) {
-                helpers.common.redirect.call(this, helpers.common.link(url, this.app, {
+                helpers.common.redirect.call(this, url, {
                     location: item.getLocation().url
-                }), null, {
+                }, {
                     pushState: false
                 });
                 return true;
