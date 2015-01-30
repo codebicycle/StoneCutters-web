@@ -3,6 +3,7 @@
 var _ = require('underscore');
 var config = require('../../../../../shared/config');
 var params = require('./params');
+var env = config.get(['environment', 'type'], 'production');
 
 function isPlatformEnabled(platforms) {
     var enabled = true;
@@ -25,13 +26,28 @@ function isEnabled() {
 
 function getParams(page, options) {
     var _params = params.get.apply(this, arguments);
+    var config = getConfig.apply(this, arguments);
 
     return {
-        params: JSON.stringify(_params)
+        params: JSON.stringify(_params),
+        config: JSON.stringify(config)
     };
+}
+
+function getConfig(page, options) {
+    var loction = this.app.session.get('location');
+    var config = {
+        siteUrl: location.url
+    };
+
+    if (env !== 'production') {
+        config.environment = 'testing';
+    }
+    return config;
 }
 
 module.exports = {
     isEnabled: isEnabled,
-    getParams: getParams
+    getParams: getParams,
+    getConfig: getConfig
 };
