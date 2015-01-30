@@ -26,12 +26,24 @@ var FeatureAd = Base.extend({
    }
 });
 
+function isPlatformEnabled(app, platforms) {
+    var enabled = true;
+
+    if (platforms && !_.contains(platforms, app.session.get('platform'))) {
+        enabled = false;
+    }
+    return enabled;
+}
+
 FeatureAd.isEnabled = function isEnabled(app) {
     var currentRoute = app.session.get('currentRoute');
     var section = [currentRoute.controller, currentRoute.action].join('#');
     var location = app.session.get('location');
     var enabled = FeatureAd.isLocationEnabled(location.url);
 
+    if (enabled) {
+        enabled = isPlatformEnabled(app, config.getForMarket(location.url, ['featured', 'platforms']));
+    }
     if (enabled) {
         enabled = config.getForMarket(location.url, ['featured', 'section', section, 'enabled'], true);
     }

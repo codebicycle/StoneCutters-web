@@ -77,6 +77,7 @@ module.exports = {
     },
     featured: {
         enabled: false,
+        platforms: ['desktop'],
         quantity: {
             total: 6,
             top: 3,
