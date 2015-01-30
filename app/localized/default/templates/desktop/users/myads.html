@@ -99,6 +99,8 @@
                     {{ item.message }}
                 </div>
                 <div class="buttons">
+                    {% set itemDate = item.date.timestamp.replace('T',' ') | dateDiff(currentTime, 'json') %}
+                    {% set itemDays = itemDate.days %}
                     {% if (status == 'ready' or status == 'pending' or status == 'rejected') %}
                         {% if item.editable %}
                             <a href="#" class="btn icons icon-edit btnedit {{item.isFeatured}}" data-href="{{ item.slug.replace(domain, fullDomain) | editSlug(item.id) }}" rel="nofollow" data-modal="edit-featuread-modal"{{ [' data-featured="true" data-featuredDatesStart="', item.featuredDates.start, '" data-featuredDatesEnd="', item.featuredDates.end, '"'] | join('') if item.isFeatured }}>{{ dictionary["showactivelistings.Edit"] }}</a>
@@ -111,7 +113,7 @@
                         {% endif %}
 
                     {% endif %}
-                    {% if (status == 'close' ) %}
+                    {% if (status == 'deleted') %}
                             <a href="{{ ('/myolx/renewitem/'+ item.id) | link }}" class="btn icons icon-repulish">{{ dictionary["myolx.Republish"] }}</a>                            
                         {% endif %}
                     {% if (status == 'expired' and item.blockType == '0') %}

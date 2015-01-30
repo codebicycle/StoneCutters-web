@@ -38,8 +38,8 @@ module.exports = function(nunjucks) {
         return dateformat(_date, 'dd/mm/yyyy');
     }
 
-    function dateDiff(start, end) { 
-      return helpers.common.dateDiff.call(this.ctx, start, end);
+    function dateDiff(start, end, format) { 
+      return helpers.common.dateDiff.call(this.ctx, start, end, format);
     }
 
     function countFormat(count) {

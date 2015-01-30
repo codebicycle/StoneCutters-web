@@ -275,6 +275,34 @@ module.exports = (function() {
        return output;
     }
 
+    var dateDiffFormats = (function() {
+        function toString(days, hours, minutes) {
+            var out = [];
+
+            out.push(days);
+            out.push(this.dictionary['messages_date_format.day' + (days > 1 ? 's_n' : '')] + ',');
+            out.push(hours);
+            out.push(this.dictionary['messages_date_format.hour' + (hours > 1 ? 's_n' : '')]);
+            out.push(this.dictionary['messages_date_format.and']);
+            out.push(minutes);
+            out.push(this.dictionary['messages_date_format.minute' + (minutes > 1 ? 's_n' : '')]);
+            return out.join(' ');
+        }
+
+        function toJson(days, hours, minutes) {
+            return {
+                days: days,
+                hours: hours,
+                minutes: minutes
+            };
+        }
+
+        return {
+            string: toString,
+            json: toJson
+        };
+    })();
+
     function parseDate(date) {
         if (!_.isString(date)) {
             return date;
@@ -286,7 +314,11 @@ module.exports = (function() {
         return new Date(date[0], date[1] - 1, date[2], date[3], date[4], date[5]);
     }
 
-    function dateDiff(start, end) {
+    function dateDiff(start, end, format) {
+        console.log("DEBUG[common#dateDiff]......");
+        console.log(start);
+        console.log(end);
+        console.log(format);        
         var miliseconds = parseDate(end).getTime() - parseDate(start).getTime();
         var seconds = miliseconds / 1000;
         var minutes = Math.floor(seconds / 60);
@@ -296,15 +328,7 @@ module.exports = (function() {
 
         minutes = minutes - hours*60;
         hours = hours - days*24;
-
-        out.push(days);
-        out.push(this.dictionary['messages_date_format.day' + (hours > 1 ? 's_n' : '')] + ',');
-        out.push(hours);
-        out.push(this.dictionary['messages_date_format.hour' + (hours > 1 ? 's_n' : '')]);
-        out.push(this.dictionary['messages_date_format.and']);
-        out.push(minutes);
-        out.push(this.dictionary['messages_date_format.minute' + (minutes > 1 ? 's_n' : '')]);
-        return out.join(' ');
+        return dateDiffFormats[format || 'string'].call(this, days, hours, minutes);
     }
 
     return {

@@ -215,6 +215,7 @@ function postFields(done) {
         query.securityKey = sk;
         this.unset('sk');
     }
+    console.log("ACTION:", action);
     data = this.toData(true);
     helpers.dataAdapter.post(this.app.req, '/items' + (!id ? '' : ['', id, action].join('/')), {
         data: data,

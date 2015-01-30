@@ -305,11 +305,15 @@ function myads(params, callback) {
         var success = function(items) {
             var platform = this.app.session.get('platform');
             var view = 'users/myads';
+            var now = new Date();
+            var currentTime = now.toISOString().replace('T',' ').substr(0,19);
+
             var data = {
                 include: ['items'],
                 items: items,
                 deleted: deleted,
-                paginator: items.paginator
+                paginator: items.paginator,
+                currentTime: currentTime
             };
 
             if (platform === 'desktop') {

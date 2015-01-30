@@ -65,7 +65,6 @@ function flow(params, callback) {
         }
 
         function fetch(done) {
-            console.log(params);
             var data = {};
             var locationUrl;
 
