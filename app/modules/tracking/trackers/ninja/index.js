@@ -35,7 +35,7 @@ function getParams(page, options) {
 }
 
 function getConfig(page, options) {
-    var loction = this.app.session.get('location');
+    var location = this.app.session.get('location');
     var config = {
         siteUrl: location.url
     };
