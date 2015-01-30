@@ -47,7 +47,7 @@ function getSettings() {
                 hl: this.app.session.get('selectedLanguage').split('-').shift()
             });
 
-            if (currentRoute.action === 'search') {
+            if (currentRoute.controller === 'searches' && !~currentRoute.action.indexOf('allresults')) {
                 settings.options.pubId = 'olx';
             }
 
