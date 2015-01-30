@@ -1,19 +1,20 @@
 {% if tracking.params and tracking.params.ninja %}
 <script type="text/javascript" id="ninja-lib">
-    var dataLayer = window.dataLayer || [];
+    var dataLayer = [];
     dataLayer.push({{ tracking.params.ninja.params }});
 
     (function() {
-        window.configTracking = {
-            siteUrl: "{{ location.url }}",
-            environment: "testing"
-        };
+        window.configTracking = {{ tracking.params.ninja.config }};
 
-        var ninja = document.createElement('script');
-        ninja.type = 'text/javascript';
-        ninja.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'ninja.onap.io/ninja.js';
-        ninja.async = true;
-        document.getElementById('ninja-lib').parentNode.appendChild(ninja);
+        var ninja = document.getElementById('ninja-lib');
+        if (!ninja) {
+            ninja = document.createElement('script');
+            ninja.type = 'text/javascript';
+            ninja.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'ninja.onap.io/ninja.js';
+            ninja.async = true;
+            ninja.id = 'ninja-lib';
+            document.getElementsByTagName('head').shift().appendChild(ninja);
+        }
     })();
 </script>
 {% endif %}
