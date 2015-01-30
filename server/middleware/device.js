@@ -54,7 +54,8 @@ module.exports = function(dataAdapter, excludedUrls) {
             }
             req.rendrApp.session.persist(marketing);
             req.rendrApp.session.update({
-                device: device
+                device: device,
+                userAgent: userAgent
             });
             next();
         };
