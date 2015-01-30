@@ -6,7 +6,7 @@ module.exports = {
     sixpack: {
         enabled: true,
         host: 'http://sixpack-testing.olx.com',
-        timeout: utils.SECOND,
+        timeout: utils.SECOND * 10,
         experiments: require('./experiments/development')
     },
     smaug: {
