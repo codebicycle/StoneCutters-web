@@ -61,7 +61,7 @@
         }
         .items-info {
             font-size: $m;
-            padding: 0 10px 0 15px;
+            padding: 10px 10px 0 15px;
             width: 330px;
 
             span {
@@ -69,18 +69,8 @@
                 font-size: $xs;
                 text-transform: capitalize;
             }
-            em {
-                ribbon($green, $white)
-            }
             &.featuredad {
-                position: relative;
-
-                h3 {
-                    margin-top: 10px;
-                }
-                .icon-feature {
-                    green-star()
-                }
+                padding: 25px 10px 0 15px;
             }
         }
         .items-price {
@@ -93,6 +83,35 @@
             color: $greyStrong;
             font-size: $xs;
             width: 60px;
+        }
+        p.featuredad {
+            position: absolute;
+            left: 138px;
+            top: -8px;
+            height: 20px;
+            .icon-star-circle {
+                color: $featureStarBg;
+                font-size: 26px;
+                position: absolute;
+                z-index: 10;
+                top: -7px;
+                left: 0;
+                &:before {
+                    border:2px solid $white;
+                    border-radius(50%);
+                    background: $white;
+                }
+            }
+
+            em {
+                ribbon($green, $white);
+                top: 0;
+                left: 24px;
+                padding-left: 22px;
+                position: absolute;
+                width: 100px;
+                text-align: center;
+            }
         }
     }
     &.staticsearch {
