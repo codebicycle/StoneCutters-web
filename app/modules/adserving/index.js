@@ -30,10 +30,12 @@ function getSettings() {
         slotname : slotname
     };
     var configType;
+    var currentRoute;
 
 
     if (this.config.enabled) {
         configType = utils.get(configAdServing, type, {});
+        currentRoute = this.app.session.get('currentRoute');
 
         if (configType.enabled) {
             settings.params = _.extend({}, configType.params, this.config.params || {}, {
@@ -44,8 +46,6 @@ function getSettings() {
                 channel: createChannels.call(this, type),
                 hl: this.app.session.get('selectedLanguage').split('-').shift()
             });
-
-            var currentRoute = this.app.session.get('currentRoute');
 
             if (currentRoute.action === 'search') {
                 settings.options.pubId = 'olx';
