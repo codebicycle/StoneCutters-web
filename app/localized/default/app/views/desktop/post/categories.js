@@ -103,6 +103,13 @@ module.exports = Base.extend({
                 id: subcategoryId,
                 fields: res.fields.get('fields')
             });
+            var $fieldsToValidate = $('input, select, textarea');
+
+            $fieldsToValidate.each(function( index) {
+                if(!$(this).hasClass('image-input-file') && $(this).attr('required') ) {
+                    $(this).change();
+                }
+            });
         }.bind(this);
 
         asynquence().or(error)
