@@ -31,6 +31,7 @@ function getSettings() {
     };
     var configType;
 
+
     if (this.config.enabled) {
         configType = utils.get(configAdServing, type, {});
 
@@ -43,6 +44,12 @@ function getSettings() {
                 channel: createChannels.call(this, type),
                 hl: this.app.session.get('selectedLanguage').split('-').shift()
             });
+
+            var currentRoute = this.app.session.get('currentRoute');
+
+            if (currentRoute.action === 'search') {
+                settings.options.pubId = 'olx';
+            }
 
             // TODO Mover a CSA module (create)
             if (settings.params.adIconUrl) {
