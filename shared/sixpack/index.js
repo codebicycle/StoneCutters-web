@@ -4,6 +4,7 @@ var sixpack = require('sixpack-client');
 var asynquence = require('asynquence');
 var _ = require('underscore');
 var utils = require('../utils');
+var statsd = require('../statsd')();
 var config = require('../config').get('sixpack', {
     experiments: {}
 });
@@ -59,9 +60,11 @@ Sixpack.prototype.participate = function(experiment, done) {
 
     function callback(err, res) {
         if (err || res.status !== 'ok') {
+            statsd.increment([this.market, 'sixpack', 'participate', experiment.name, 'error', err ? 'err' : res.status, this.platform]);
             delete this.experiments[experiment.key];
             return this.callback(done)();
         }
+        statsd.increment([this.market, 'sixpack', 'participate', experiment.name, 'success', this.platform]);
         delete this.experiments[experiment.key].alternatives;
         this.experiments[experiment.key].alternative = res.alternative.name;
         this.callback(done)();

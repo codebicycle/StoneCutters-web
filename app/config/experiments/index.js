@@ -4,7 +4,7 @@ module.exports = {
     html5HeaderPostButton: {
         enabled: true,
         platforms: ['html5'],
-        markets: ['www.olx.com.ar'],
+        markets: ['ar'],
         name: 'header-post-button',
         alternatives: {
             TEXT: 'text',
@@ -14,7 +14,7 @@ module.exports = {
     html5Interstitial: {
         enabled: true,
         platforms: ['html5'],
-        markets: ['www.olx.com.br'],
+        markets: ['br'],
         name: 'interstitial',
         alternatives: {
             ON: 'on',
