@@ -39,7 +39,7 @@ module.exports = {
                     }
                 },
                 slot_noresult_listing: {
-                    seo: 10,
+                    seo: 1,
                     params: {
                         number: 10,
                         fontSizeTitle: 18,

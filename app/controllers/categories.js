@@ -294,6 +294,8 @@ function handleItems(params, promise, gallery) {
             tracking.addParam('subcategory', subcategory.toJSON());
         }
         tracking.addParam('page', query.page);
+        tracking.addParam('filters', items.filters);
+        tracking.addParam('paginator', items.paginator);
 
         done({
             type: 'items',

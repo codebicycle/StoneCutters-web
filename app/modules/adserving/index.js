@@ -30,9 +30,12 @@ function getSettings() {
         slotname : slotname
     };
     var configType;
+    var currentRoute;
+
 
     if (this.config.enabled) {
         configType = utils.get(configAdServing, type, {});
+        currentRoute = this.app.session.get('currentRoute');
 
         if (configType.enabled) {
             settings.params = _.extend({}, configType.params, this.config.params || {}, {
@@ -43,6 +46,10 @@ function getSettings() {
                 channel: createChannels.call(this, type),
                 hl: this.app.session.get('selectedLanguage').split('-').shift()
             });
+
+            if (currentRoute.controller === 'searches' && !~currentRoute.action.indexOf('allresults')) {
+                settings.options.pubId = 'olx';
+            }
 
             // TODO Mover a CSA module (create)
             if (settings.params.adIconUrl) {
