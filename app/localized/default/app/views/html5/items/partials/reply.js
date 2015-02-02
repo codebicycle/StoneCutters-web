@@ -11,9 +11,21 @@ var statsd = require('../../../../../../../../shared/statsd')();
 var rEmail = /^[_a-zA-Z0-9-]+(\.[_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*(\.[a-zA-Z]{2,6})$/;
 
 module.exports = Base.extend({
-    className: 'items_reply_view',
     id: 'item-contact-form',
     tagName: 'section',
+    className: function() {
+        if (helpers.features.isEnabled.call(this, 'newItemPage')) {
+            return 'items_reply_view';
+        }
+        return 'reply';
+    },
+    getTemplateData: function() {
+        var data = Base.prototype.getTemplateData.call(this);
+
+        return _.extend({}, data, {
+            newItemPage: helpers.features.isEnabled.call(this, 'newItemPage')
+        });
+    },
     postRender: function() {
         this.dictionary = translations.get(this.app.session.get('selectedLanguage'));
         this.user = new User(_.extend({
@@ -28,10 +40,16 @@ module.exports = Base.extend({
         this.$spinner = $('.loading');
 
         this.$fields = this.$('textarea, input:not([type=submit], [type=hidden])');
-        this.app.router.once('action:end', this.onStart);
-        this.app.router.once('action:start', this.onEnd);
-        this.attachTrackMe();
-        this.$itemSlug = $('.itemSlug').val();
+
+        if (helpers.features.isEnabled.call(this, 'newItemPage')) {
+            this.app.router.once('action:end', this.onStart);
+            this.app.router.once('action:start', this.onEnd);
+            this.attachTrackMe();
+            this.$itemSlug = $('.itemSlug').val();
+        }
+        else {
+            this.$success = this.parentView.$('.msgCont');
+        }
     },
     events: {
         'blur textarea, input:not([type=submit], [type=hidden])': 'onBlur',
@@ -79,20 +97,27 @@ module.exports = Base.extend({
         function success(reply) {
             event.target.reset();
             this.$spinner.hide();
-            var params;
-            var newUrl;
 
-            params = {
-                sent: true
-            };
-            newUrl = {
-                slug: this.$itemSlug
-            };
-            newUrl = helpers.common.slugToUrl(newUrl);
-            helpers.common.redirect.call(this.app.router, newUrl , params, {
-                status: 200
-            });
+            if (helpers.features.isEnabled.call(this, 'newItemPage')) {
+                var params;
+                var newUrl;
 
+                params = {
+                    sent: true
+                };
+                newUrl = {
+                    slug: this.$itemSlug
+                };
+                newUrl = helpers.common.slugToUrl(newUrl);
+                helpers.common.redirect.call(this.app.router, newUrl , params, {
+                    status: 200
+                });
+            } else {
+                this.$success.addClass('visible').find('.msgCont-container').text(this.dictionary['comments.YourMessageHasBeenSent'].replace(/<br \/>/g,''));
+                setTimeout(function onTimeout() {
+                    this.$success.removeClass('visible');
+                }.bind(this), 3000);
+            }
             this.trackSuccess(reply);
         }
 

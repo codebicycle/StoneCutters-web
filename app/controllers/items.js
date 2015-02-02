@@ -32,6 +32,7 @@ function show(params, callback) {
         var siteLocation = this.app.session.get('siteLocation');
         var languages = this.app.session.get('languages');
         var platform = this.app.session.get('platform');
+        var newItemPage = helpers.features.isEnabled.call(this, 'newItemPage');
         var anonymousItem;
 
         var prepare = function(done) {
@@ -249,6 +250,9 @@ function show(params, callback) {
             }
             else if (item.status.deprecated) {
                 view = 'items/expired';
+            }
+            else if (!newItemPage) {
+                view = 'items/default/show';
             }
 
             callback(null, view, {
