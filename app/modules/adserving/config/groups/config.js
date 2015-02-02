@@ -5,13 +5,13 @@ module.exports = {
         CSA: {
             'default': {
                 slot_top_listing_gallery: {
-                    seo: true,
+                    seo: 1,
                     params: {
                         number: 3
                     }
                 },
                 slot_top_listing: {
-                    seo: true,
+                    seo: 1,
                     params: {
                         number: 3,
                         fontSizeTitle: 18,
@@ -25,7 +25,7 @@ module.exports = {
                     }
                 },
                 slot_bottom_listing: {
-                    seo: true,
+                    seo: 0,
                     params: {
                         number: 3,
                         fontSizeTitle: 18,
@@ -39,7 +39,7 @@ module.exports = {
                     }
                 },
                 slot_noresult_listing: {
-                    seo: true,
+                    seo: 1,
                     params: {
                         number: 10,
                         fontSizeTitle: 18,
@@ -57,7 +57,7 @@ module.exports = {
         AFC: {
             'default': {
                 slot_side_listing: {
-                    seo: true,
+                    seo: 1,
                     params: {
                         number: 1,
                         media: 'flash, image',
@@ -66,7 +66,7 @@ module.exports = {
                     }
                 },
                 slot_side_item: {
-                    seo: true,
+                    seo: 1,
                     params: {
                         number: 1,
                         media: 'flash, image',
@@ -75,7 +75,7 @@ module.exports = {
                     }
                 },
                 slot_top_item: {
-                    seo: true,
+                    seo: 1,
                     params: {
                         number: 3,
                         media: 'text',
@@ -84,7 +84,7 @@ module.exports = {
                     }
                 },
                 slot_bottom_item: {
-                    seo: true,
+                    seo: 1,
                     params: {
                         number: 5,
                         media: 'text',
