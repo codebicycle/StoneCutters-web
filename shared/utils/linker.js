@@ -9,11 +9,21 @@ var linkParams = {
     location: function (href, app, query) {
         var siteLocation = app.session.get('siteLocation');
         var platform = app.session.get('platform');
+        var domain = app.session.get('domain');
+        var host = app.session.get('shortHost');
+        var brand;
 
         if (platform === 'desktop' && query.location) {
             href = fullizeUrl(href, app);
-            href = href.replace(/^(.+:\/\/)[^.]*/, '$1' + query.location.split('.').shift());
+            href = href.replace(/^(.+:\/\/)[^(:|\/)]*/, '$1' + query.location);
             delete query.location;
+        }
+        if (platform !== 'desktop' && query.location && siteLocation && query.location.split('.').pop() !== siteLocation.split('.').pop()) {
+            brand = domain.split('.').shift();
+            host = host.split(brand);
+            host[1] = '.' + query.location.split('.').splice(2).join('.');
+            href = fullizeUrl(href, app);
+            href = href.replace(app.session.get('shortHost'), host.join(brand));
         }
         if (platform !== 'desktop' && !query.location && siteLocation && !~siteLocation.indexOf('www.')) {
             href = params(href, 'location', siteLocation);
