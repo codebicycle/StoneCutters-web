@@ -1,13 +1,13 @@
 {% set changesearch =  '<strong>' + search + '</strong>' %}
 {% for item in items %}
-    <li>
+    <li {{ 'class="featuredad"' if item.isFeatured }}>
         <a href="{{ item.slug.replace(domain, fullDomain) }}" data-qa="list-item" >
             <figure class="items-image {{ 'lines' if item.imagesCount > 1 }} {{ 'icons icon-photo' if not item.thumbnail }}">
                 {% if item.thumbnail %}
                     <img src="{{ item.thumbnail }}" alt="{{ item.title }}">
                 {% endif %}
             </figure><!--
-            --><div class="items-info{{ ' featuredad' if item.isFeatured }}">
+            --><div class="items-info">
                 <h3>{{ item.title }}</h3>
                 {% if isStaticSearch %}
                     <div class="description">{{ item.description | truncate( 200, True, '...') }} </div>

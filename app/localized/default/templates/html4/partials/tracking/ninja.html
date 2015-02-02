@@ -1,7 +1,7 @@
 {% if tracking.params and tracking.params.ninja %}
 <script type="text/javascript">
-    var dataLayer = [];
-    dataLayer.push({{ tracking.params.ninja.params }});
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({{ tracking.params.ninja.params }});
 
     (function() {
         window.configTracking = {{ tracking.params.ninja.config }};
