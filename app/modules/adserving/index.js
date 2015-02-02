@@ -30,9 +30,12 @@ function getSettings() {
         slotname : slotname
     };
     var configType;
+    var currentRoute;
+
 
     if (this.config.enabled) {
         configType = utils.get(configAdServing, type, {});
+        currentRoute = this.app.session.get('currentRoute');
 
         if (configType.enabled) {
             settings.params = _.extend({}, configType.params, this.config.params || {}, {
@@ -43,6 +46,10 @@ function getSettings() {
                 channel: createChannels.call(this, type),
                 hl: this.app.session.get('selectedLanguage').split('-').shift()
             });
+
+            if (currentRoute.controller === 'searches' && !~currentRoute.action.indexOf('allresults')) {
+                settings.options.pubId = 'olx';
+            }
 
             // TODO Mover a CSA module (create)
             if (settings.params.adIconUrl) {
@@ -69,11 +76,16 @@ function createChannels(type) {
     var countryCode = this.app.session.get('location').abbreviation;
     var prefix = configType.options.channel.replace('[countrycode]', countryCode);
     var currentRoute = this.app.session.get('currentRoute');
+    var currentRouteAction = currentRoute.action;
     var channels = [];
     var configChannel;
     var pageChannel;
 
-    configChannel = utils.get(configAdServing, ['channels', 'page', [currentRoute.controller, currentRoute.action].join('#')], {});
+    if (slotname === 'slot_noresult_listing' && currentRoute.controller === 'searches' && currentRoute.action === 'search') {
+        currentRouteAction = 'noresult';
+    }
+
+    configChannel = utils.get(configAdServing, ['channels', 'page', [currentRoute.controller, currentRouteAction].join('#')], {});
     pageChannel = getCategoryForChannel.call(this);
 
     channels.push(prefix);

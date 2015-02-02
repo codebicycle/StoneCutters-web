@@ -94,8 +94,8 @@ module.exports = Base.extend({
             preventLinks:false,
             mode:'horizontal'
         });
-        this.$(window).on('resize', this.resize).trigger('resize');
 
+        this.$(window).on('resize', this.resize).trigger('resize');
         this.$('section#itemPage section.onePicture .slide div').click(function(e) {
             e.preventDefault();
             $('body').addClass('noscroll');

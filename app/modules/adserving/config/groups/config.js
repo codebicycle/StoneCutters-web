@@ -5,13 +5,13 @@ module.exports = {
         CSA: {
             'default': {
                 slot_top_listing_gallery: {
-                    seo: 1,
+                    seo: true,
                     params: {
                         number: 3
                     }
                 },
                 slot_top_listing: {
-                    seo: 1,
+                    seo: true,
                     params: {
                         number: 3,
                         fontSizeTitle: 18,
@@ -25,9 +25,23 @@ module.exports = {
                     }
                 },
                 slot_bottom_listing: {
-                    seo: 0,
+                    seo: true,
                     params: {
                         number: 3,
+                        fontSizeTitle: 18,
+                        adIconLocation: 'ad-left',
+                        adIconWidth: 143,
+                        adIconHeight: 112,
+                        adIconSpacingAbove: 4,
+                        adIconSpacingBefore: 6,
+                        adIconSpacingAfter: 15,
+                        adIconUrl: 'http://afs.googleusercontent.com/olx/olx_[langcode].png'
+                    }
+                },
+                slot_noresult_listing: {
+                    seo: true,
+                    params: {
+                        number: 10,
                         fontSizeTitle: 18,
                         adIconLocation: 'ad-left',
                         adIconWidth: 143,
@@ -43,7 +57,7 @@ module.exports = {
         AFC: {
             'default': {
                 slot_side_listing: {
-                    seo: 1,
+                    seo: true,
                     params: {
                         number: 1,
                         media: 'flash, image',
@@ -52,7 +66,7 @@ module.exports = {
                     }
                 },
                 slot_side_item: {
-                    seo: 1,
+                    seo: true,
                     params: {
                         number: 1,
                         media: 'flash, image',
@@ -61,7 +75,7 @@ module.exports = {
                     }
                 },
                 slot_top_item: {
-                    seo: 1,
+                    seo: true,
                     params: {
                         number: 3,
                         media: 'text',
@@ -70,7 +84,7 @@ module.exports = {
                     }
                 },
                 slot_bottom_item: {
-                    seo: 1,
+                    seo: true,
                     params: {
                         number: 5,
                         media: 'text',

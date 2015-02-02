@@ -23,5 +23,8 @@ module.exports = {
                 name: 'Cellulari'
             }
         ]
+    },
+    featured: {
+        enabled: true
     }
 };

@@ -1,0 +1,14 @@
+<div class="featured-ads">
+    <p class="featuredad">
+        <i class="icons icon-star-circle"></i>
+        <em>{{ dictionary["misc.FeaturedAd _BR"] }}</em>
+    </p>
+    <p class="featured-ads-title">{{ dictionary["itemslisting.FeatureYourAd"] }}</p>
+    <ul>
+        <li>{{ dictionary["misc.PriceListings"] | replace('<<PRICE>>', item.featured.getSection('3').price.displayPrice) }}</li>
+        <li>{{ dictionary["misc.FeaturedNotEdit"] }}</li>
+        <li>{{ dictionary["misc.ChargedAfter"] }}</li>
+    </ul>
+    <a href="#" class="open-modal" rel="nofollow" data-modal="featuread-modal">{{ dictionary["featured_listings.FeatureMyListing"] }}</a>
+    {% view 'modals/feature_ad' %}
+</div>

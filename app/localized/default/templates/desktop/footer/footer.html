@@ -33,6 +33,9 @@
             </div>
             <ul class="footer-help-slide">
                 <li><a rel="nofollow" href="{{ '/help' | link }}">{{ dictionary["biderrorheader.Help"] }}</a></li>
+                {% if isFeaturedCountry %}
+                    <li><a rel="nofollow" href="{{ '/featured_listings' | link }}">{{ dictionary["featured_listings.HowDoIFeatureMyAd"] }}</a></li>
+                {% endif %}
                 <li><a rel="nofollow" href="{{ '/terms' | link }}">{{ dictionary["register_form.termsAgreeB"] }}</a></li>
                 <li><a rel="nofollow" href="{{ '/about' | link }}">{{ dictionary["defaultfooter.About OLX"] }} </a></li>
                 <li><a rel="nofollow"  href="{{ '/help/contact' | link }}">{{ dictionary["contact_us.ContactBrand"] }} </a></li>
@@ -43,7 +46,7 @@
     {% include (template + '/marketing/appStores.html') %}
 </div>
 <div class="container">
-    <p class="text">{{ dictionary["defaulthtmlhead.FreeClassifiedsInArea"] | replace('<AREA>',location.name) }}  - Copyright &copy; 2006-2014 OLX, Inc.</p>
+    <p class="text">{{ dictionary["defaulthtmlhead.FreeClassifiedsInArea"] | replace('<AREA>',location.name) }}  - Copyright &copy; 2006-2015 OLX, Inc.</p>
     {% if socials %}
         <ul class="social">
         {% for social in socials %}
