@@ -131,7 +131,7 @@
         }
 
         .featured-ads {
-            box($yellow, $yellowBorders, 3px 3px 3px 3px, 20px, solid, 1px);
+            box($yellow, $yellowBorders, 3px, 30px 20px 20px, solid, 1px);
             margin-top: 20px;
             position: relative;
 
@@ -142,16 +142,34 @@
                 font-weight: bold;
             }
 
-            .icon-feature {
-                green-star()
-                top: -8px;
-                margin-left: -32px;
-            }
+            p.featuredad {
+                position: absolute;
+                left: -17px;
+                top: -6px;
+                height: 20px;
+                .icon-star-circle {
+                    color: $featureStarBg;
+                    font-size: 26px;
+                    position: absolute;
+                    z-index: 10;
+                    top: -7px;
+                    left: 0;
+                    &:before {
+                        border:2px solid $white;
+                        border-radius(50%);
+                        background: $white;
+                    }
+                }
 
-            em {
-                ribbon($green, $white)
-                top: 11px;
-                padding-left: 22px;
+                em {
+                    ribbon($green, $white);
+                    top: 0;
+                    left: 24px;
+                    padding-left: 22px;
+                    position: absolute;
+                    width: 115px;
+                    text-align: center;
+                }
             }
 
             ul {
@@ -173,7 +191,7 @@
     margin-bottom: 20px;
     position: relative;
 
-    &.icon-time::before, &.icon-feature::before {
+    &.icon-time::before, &.icon-star-circle::before {
         color: $blue;
         font-size: remify(64px);
         left: 20px;

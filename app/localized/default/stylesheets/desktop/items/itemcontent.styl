@@ -15,17 +15,28 @@
         }
         .featuredad {
             position: relative;
-            .icon-feature {
-                green-star()
-                top: 0;
-                margin-left: -2px;
+            height: 20px;
+            margin: 20px 0;
+            .icon-star-circle {
+                color: $featureStarBg;
+                font-size: 26px;
+                position: absolute;
+                z-index: 10;
+                top: -7px;
+                left: 0;
+                &:before {
+                    border:2px solid $white;
+                    border-radius(50%);
+                    background: $white;
+                }
             }
-            
+
             em {
-                ribbon($green, $white)
-                top: -1px;
-                left: 12px;
+                ribbon($green, $white);
+                top: 0;
+                left: 24px;
                 padding-left: 22px;
+                position: absolute;
             }
         }
         .item-title {

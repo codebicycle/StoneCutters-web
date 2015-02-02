@@ -1,11 +1,11 @@
 {% if result %}
-    <aside id="notification-message" class="notification-message icons icon-feature">
+    <aside id="notification-message" class="notification-message icons icon-star-circle">
         <h4>{{ dictionary["featured_listings.YourAdWillBeFeaturedSoon"] }}</h4>
         <p>{% set itemLink = (item.slug.replace(domain, fullDomain)) %} <a href="{{ itemLink }}">{{ itemLink }}</a></p>
     </aside>
     {% view 'post/keepposting' %}
 {% else %}
-    <aside id="notification-message" class="notification-message error icons icon-feature">
+    <aside id="notification-message" class="notification-message error icons icon-star-circle">
         <h4>{{ dictionary["featured_listings.TheTransactionFailed"] }}<br>{{ dictionary["featured_listings_emails.YouHaveNotBeenCharged"] }}</h4>
     </aside>
 {% endif %}
