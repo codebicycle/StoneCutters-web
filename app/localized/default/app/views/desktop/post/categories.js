@@ -46,6 +46,10 @@ module.exports = Base.extend({
         var user = this.app.session.get('user');
         var params = {};
 
+        if(this.$el.hasClass('error')) {
+            this.$el.attr('data-cat-error','true');
+        }
+
         intent = intent ? 'edit' : 'post';
         if (intent === 'post') {
             params = {
@@ -96,6 +100,7 @@ module.exports = Base.extend({
         }.bind(this);
 
         var success = function(res) {
+
             this.$('.error.message').remove();
             this.$el.removeClass('error').addClass('success');
             this.parentView.$el.trigger('subcategorySubmit', {
@@ -103,13 +108,16 @@ module.exports = Base.extend({
                 id: subcategoryId,
                 fields: res.fields.get('fields')
             });
-            var $fieldsToValidate = $('input, select, textarea');
 
-            $fieldsToValidate.each(function( index) {
-                if(!$(this).hasClass('image-input-file') && $(this).attr('required') ) {
-                    $(this).change();
-                }
-            });
+            if(this.$el.attr('data-cat-error')) {
+                var $fieldsToValidate = $('input, select, textarea');
+                $fieldsToValidate.each(function( index) {
+                    if(!$(this).hasClass('image-input-file') && $(this).attr('required') && $(this).attr('id') !== 'field-location' ) {
+                        $(this).change();
+                    }
+                });
+                this.$el.removeAttr('data-cat-error','true');
+            }
         }.bind(this);
 
         asynquence().or(error)
