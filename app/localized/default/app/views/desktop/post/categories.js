@@ -111,7 +111,7 @@ module.exports = Base.extend({
 
             if(this.$el.attr('data-cat-error')) {
                 var $fieldsToValidate = $('input, select, textarea');
-                $fieldsToValidate.each(function( index) {
+                $fieldsToValidate.each(function(index) {
                     if(!$(this).hasClass('image-input-file') && $(this).attr('required') && $(this).attr('id') !== 'field-location' ) {
                         $(this).change();
                     }
