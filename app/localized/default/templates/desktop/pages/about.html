@@ -1,4 +1,147 @@
-<h1>{{ dictionary["defaultfooter.About OLX"] }} </h1>
+{#<h1>{{ dictionary["defaultfooter.About OLX"] }} </h1>
 {{ dictionary["about.about_Body"] | replace('<<QTY_COUNTRIES>>', '106') | replace('<<QTY_LANGUAGES>>', '40') }}
+
+{% view 'partials/tracking' %} #}
+
+<div class="help-navigation">
+    <h3 class="title">{{ dictionary["misc.NeedHelp"] }}</h3>
+    <ul>
+        <li {{ 'class="selected"' if tab == 'new-olx' }} >
+            <a class="help-toggle-content icons icon-user" data-help-content="new-olx" href="#">{{ dictionary["help.NewToBrand"] }}</a>
+        </li>
+        <li>
+            <a class="help-toggle-content icons icon-list" data-help-content="ads" href="#">{{ dictionary["itemslisting.Classifieds"] }}</a>
+        </li>
+        <li {{ 'class="selected"' if tab == 'faq' }} >
+            <a class="help-toggle-content icons icon-question" data-help-content="faqs" href="#">{{ dictionary["misc.FrequentQuestions"] }}</a>
+        </li>
+        {% if isContactEnabled %}
+            <li {{ 'class="selected"' if tab == 'contact' }}>
+                <a class="help-toggle-content icons icon-chat" data-help-content="contact" href="#">{{ dictionary["contact_us.ContactBrand"] | replace('<<BRAND>>','OLX') }}</a>
+            </li>
+        {% endif %}
+        <li>
+            <a class="help-toggle-content icons icon-more" data-help-content="more-suggestions" href="#">{{ dictionary["help.MoreGuidelines"] }}</a>
+        </li>
+    </ul>
+</div>
+
+
+<div class="about-content">
+
+    <h3 class="title">{{ dictionary["about.AboutBrand"] | replace("<<BRAND>>","OLX") }}</h3>
+	<p>{{ dictionary["about.AboutText1"] | replace("<<BRAND>>","OLX") }}.</p>
+	<p>{{ dictionary["about.AboutText2"] | replace("<<BRAND>>","OLX") }}.</p>
+
+	<section>
+	    <h4 class="subtitle">{{ dictionary["about.Mission"] }}</h4>
+		<img src="{{ ('/images/desktop/about_us/mission.jpg') | static }}" >
+	    <p>{{ dictionary["about.MissionText1"] }}</p>
+    </section>
+
+	<section>
+    	<h4 class="subtitle">{{ dictionary["about.Presence"] }}</h4>
+		<img src="{{ ('/images/desktop/about_us/presence.jpg') | static }}" >
+    </section>
+
+	<section>
+    	<h4 class="subtitle">{{ dictionary["about.History"] }}</h4>
+		<img src="{{ ('/images/desktop/about_us/presence.jpg') | static }}" >
+    </section>
+
+    <section class="stats-container">
+    	<h4 class="subtitle">{{ dictionary["about.Stats"] }}</h4>
+	    <div class="container-box">
+	        <div class="box box-left">
+	            <p class="box-title">{{ dictionary["about.Countries"] }}</p>
+	            <p class="box-numbers">{{ dictionary["about.More40"] }}</p> 
+	        </div>
+	        <div class="box box-right">
+	            <p class="box-title">{{ dictionary["about.Languages"] }}</p>
+	            <p class="box-numbers">{{ dictionary["about.More50"] }}</p> 
+	        </div>
+	        <div class="box box-left">
+	            <p class="box-title">{{ dictionary["about.MonthlyActiveUsers"] }}</p>
+	            <p class="box-numbers">{{ dictionary["about.More200"] }}</p> 
+	        </div>
+	        <div class="box box-right">
+	            <p class="box-title">{{ dictionary["about.Employees"] }}</p>
+	            <p class="box-numbers">{{ dictionary["about.More1200"] }}</p> 
+	        </div>
+	        <div class="box box-left">
+	            <p class="box-title">{{ dictionary["about.NewMonthlyListings"] }}</p>
+	            <p class="box-numbers">{{ dictionary["about.More24800"] }}</p> 
+	        </div>
+	        <div class="box box-right">
+	            <p class="box-title">{{ dictionary["about.MonthlyTransactions"] }}</p>
+	            <p class="box-numbers">{{ dictionary["about.More8300"] }}</p> 
+	        </div>
+	    </div>
+    </section>
+
+    <section class="leadership-container">
+	    <h4 class="subtitle">{{ dictionary["about.Leadership"] }}</h4>
+	    <div class="box box-left">
+	        <img src="{{ ('/images/desktop/about_us/4234.jpg') | static }}" >
+	        <p class="box-title">Alec Oxenford</p>
+	        <p class="box-position">Co-Founder and CEO Americas{#{ trans('about.CoFounderCeoAmericas') }#}</p> 
+	    </div>
+	    <div class="box box-right">
+	        <img src="{{ ('/images/desktop/about_us/4234.jpg') | static }}" >
+	        <p class="box-title">Amarjit Batra</p>
+	        <p class="box-position">CEO Greater India{#{ trans('about.CeoGIndia') }#}</p> 
+	    </div>
+	    <div class="box box-left">
+	        <img src="{{ ('/images/desktop/about_us/4234.jpg') | static }}" >
+	        <p class="box-title">Ariel Lebowits</p>
+	        <p class="box-position">CFO</p>
+	    </div>
+	    <div class="box box-right">
+	        <img src="{{ ('/images/desktop/about_us/4234.jpg') | static }}" >
+	        <p class="box-title">Arto Joensuu</p>
+	        <p class="box-position">CEO dubizzle{#{ trans('about.CeoDubizzle') }#}</p> 
+	    </div>
+	    <div class="box box-left">
+	        <img src="{{ ('/images/desktop/about_us/4234.jpg') | static }}" >
+	        <p class="box-title">Brad Porteus</p>
+	        <p class="box-position">CEO South East Asia{#{ trans('about.CeoSEAsia') }#}</p> 
+	    </div>
+	    <div class="box box-right">
+	        <img src="{{ ('/images/desktop/about_us/4234.jpg') | static }}" >
+	        <p class="box-title">Craig Allwright</p>
+	        <p class="box-position">General Counsel</p> 
+	    </div>
+	    <div class="box box-left">
+	        <img src="{{ ('/images/desktop/about_us/4234.jpg') | static }}" >
+	        <p class="box-title">Mark Jacobs</p>
+	        <p class="box-position">HR Leader{#{ trans('about.HrLeader') }#}</p> 
+	    </div>
+	    <div class="box box-right">
+	        <img src="{{ ('/images/desktop/about_us/4234.jpg') | static }}" >
+	        <p class="box-title">Martin Kroon</p>
+	        <p class="box-position">Director Shared Services</p> 
+	    </div>
+	    <div class="box box-left">
+	        <img src="{{ ('/images/desktop/about_us/4234.jpg') | static }}" >
+	        <p class="box-title">Martin Scheepbouwer</p>
+	        <p class="box-position">CEO Classifieds{#{ trans('about.CeoClassifieds') }#}</p> 
+	    </div>
+	    <div class="box box-right">
+	        <img src="{{ ('/images/desktop/about_us/4234.jpg') | static }}" >
+	        <p class="box-title">Miguel Mascarenhas</p>
+	        <p class="box-position">CTO</p> 
+	    </div>
+	    <div class="box box-left">
+	        <img src="{{ ('/images/desktop/about_us/4234.jpg') | static }}" >
+	        <p class="box-title">Roelof Lettinga</p>
+	        <p class="box-position">Strategy and Operations{#{ trans('about.StrategyOperations') }#}</p> 
+	    </div>
+	    <div class="box box-right">
+	        <img src="{{ ('/images/desktop/about_us/4234.jpg') | static }}" >
+	        <p class="box-title">Tim Hilpert</p>
+	        <p class="box-position">CEO Europe{#{ trans('about.CeoEurope') }#}</p> 
+	    </div>
+    </section>
+</div>
 
 {% view 'partials/tracking' %}

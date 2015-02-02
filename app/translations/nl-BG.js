@@ -197,7 +197,6 @@ module.exports = {
     'posting_fields_1.title': 'Titel',
     'posting_fields_1.validationError': 'Controleer de velden met fouten',
     'posting_fields_1.YourEmailAddressWontBeShared': 'Je emailadres wordt niet weergegeven',
-    'edititem_submitbutton.EditIt': 'Bewerk het',
     'posting_publishbutton.ValidationError': 'Er waren problemen met sommige velden.',
     'posting_photos.RemovePhoto': 'Deze foto verwijderen',
     'posting_changecategorymod.Cancel': 'Annuleer',
