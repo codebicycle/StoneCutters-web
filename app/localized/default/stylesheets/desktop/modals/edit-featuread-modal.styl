@@ -16,7 +16,6 @@
             .btnedit-modal, .btn-cancel {
                 border-radius();
                 font-size: $m;
-                font-weight: bold;
                 line-height: 1;
             }
             .btnedit-modal {
@@ -27,10 +26,11 @@
                 }
             }
             .btn-cancel {
-                action-button($greyBoxBg, $black, 3px, 10px);
+                action-button($greyBoxBg, $black, 3px, 10px, false);
                 float: right;
                 margin-right: 10px;
                 cursor: pointer;
+                font-weight: normal;
             }
         }
     }
