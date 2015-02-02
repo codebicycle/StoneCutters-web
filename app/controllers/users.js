@@ -490,8 +490,8 @@ function messages(params, callback) {
 
         var fetch = function(done) {
             this.app.fetch({
-                conversations: {
-                    collection: 'Conversations',
+                messages: {
+                    collection: 'Messages',
                     params: _params
                 }
             }, {
