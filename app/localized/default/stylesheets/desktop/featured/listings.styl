@@ -1,41 +1,20 @@
-.featured_listings_view {
-    box($white, $greyBorders, 3px, 20px, solid, 1px)
-
-    ul {
-        ul-reset();
-        li {
-            margin-bottom: 40px;
-        }
-    }
-    .featuredType {
+#featured-listings-view {
+    .content-img {
         display: inline-block;
+        margin: 15px 0 0 0;
         text-align: center;
         width: 48%;
-        margin: 10px 0 5px;
-    }
-    .content-img {
-        img, span {
+        .featuredType {
             display: inline-block;
+            margin: 5px 0;
+        }
+        &:last-child {
+            margin-left: 30px;
         }
     }
-
-    h4, p {
-        width: 750px;
-    }
-
-    h3 {
-        font-size: $l;
-        font-weight: normal;
-        border-bottom: 1px solid $greyBorders;
-    }
-
     h4 {
+        color: $orange;
+        margin: 0 0 5px;
         font-size: $m;
-        margin-bottom: 0;
-    }
-
-    p {
-        font-size: $s;
-        margin-top: 10px;
     }
 }
