@@ -47,7 +47,7 @@ module.exports = Base.extend({
         switch (type) {
             case 'CSA':
                 this._includeCsaLib();
-                window._googCsa('ads', settings.options, settings.params);
+                this.app.router.appView.trigger('adserving:CSA', settings);
                 break;
             case 'ADX':
                 this.createIframeADX(settings.params, settings.options);
