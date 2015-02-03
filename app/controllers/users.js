@@ -654,7 +654,7 @@ function configuration(params, callback) {
 
         var success = function(response) {
             callback(null, 'users/myolx', {
-                profile: response.profile.toJSON(),
+                profile: response.profile,
                 viewname: 'configuration'
             });
         }.bind(this);
@@ -703,7 +703,10 @@ function userprofile(params, callback) {
 
             _params = _.extend({
                 token: user.token,
-                userId: user.userId
+                userId: user.userId,
+                languageId: this.app.session.get('languages')._byId[this.app.session.get('selectedLanguage')].id,
+                item_type: 'myAds',
+                pageSize: 0
             }, params);
             done();
         }.bind(this);
@@ -713,6 +716,10 @@ function userprofile(params, callback) {
                 profile: {
                     model: 'User',
                     params: _params
+                },
+                items: {
+                    collection: 'Items',
+                    params: _params
                 }
             }, {
                 readFromCache: false
@@ -721,7 +728,8 @@ function userprofile(params, callback) {
 
         var success = function(response) {
             callback(null, 'users/myolx', {
-                profile: response.profile.toJSON(),
+                profile: response.profile,
+                items: response.items,
                 viewname: 'userprofile'
             });
         }.bind(this);

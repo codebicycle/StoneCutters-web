@@ -5,5 +5,6 @@ var helpers = require('../../../../../../helpers');
 var _ = require('underscore');
 
 module.exports = Base.extend({
-    className: 'users_configuration_view'
+    tagName: 'main',
+    className: 'users-configuration-view'
 });

@@ -684,5 +684,5 @@
 {IP}  jaovat.com        # Jaovat - Vietnam
 
 #IPSTATICS
-{IPSTATICS} images01.olx-st.com images02.olx-st.com images03.olx-st.com images04.olx-st.com
-{IPSTATICS} static01.olx-st.com static02.olx-st.com static03.olx-st.com static04.olx-st.com
+#{IPSTATICS} images01.olx-st.com images02.olx-st.com images03.olx-st.com images04.olx-st.com
+#{IPSTATICS} static01.olx-st.com static02.olx-st.com static03.olx-st.com static04.olx-st.com

@@ -1,6 +1,5 @@
-{{ dictionary["usersprofile.UsernamesProfile"] | replace('<<USERNAME>>', profile.username) }}
+{#{ dictionary["usersprofile.UsernamesProfile"] | replace('<<USERNAME>>', profile.username) }}
 
-{{user|log}}
 {{ dictionary["messages_email_register.Username"] }} - {{ profile.username }}<br>
 {{ dictionary["comments.CommentsFormName"] }} - <br>
 {{ dictionary["defaultheader.Location"] }} - {{ profile.location.neighborhood }}, {{ profile.location.city }}, {{ profile.location.state }}, {{ profile.location.country }}<br>
@@ -12,4 +11,43 @@
 {{ profile.configuration.sendTips }}<br>
 {{ profile.configuration.showAds }}
 {{ dictionary["usersprofile.UsernamesAds"] | replace('<<USERNAME>>', profile.username) }}
-{{ dictionary["usersprofile.ViewAllUsernamesAds"] | replace('<<USERNAME>>', profile.username) }}
+{{ dictionary["usersprofile.ViewAllUsernamesAds"] | replace('<<USERNAME>>', profile.username) }#}
+<section class="userprofile">
+    <a rel="nofollow" href="{{ '/myolx/configuration' | link }}" class="icons icon-arrow-left">{{ dictionary["defaultfooter.Back"] }}</a>
+    <h1>{{ dictionary["usersprofile.UsernamesProfile"] | replace('<<USERNAME>>', profile.get('username')) }}</h1>
+    <div class="user-image icons icon-user"></div>
+    <ul class="links">
+        <li><strong>{{ dictionary["messages_email_register.Username"] }}:</strong> {{ profile.get('username') }}</li>
+        <li><strong>{{ dictionary["comments.CommentsFormName"] }}:</strong> {{ profile.get('firstname') }}</li>
+        <li><strong>{{ dictionary["defaultheader.Location"] }}:</strong> {{ (profile.get('location').neighborhood + ', ') if profile.get('location').neighborhood }}{{ profile.get('location').city }}, {{ profile.get('location').state }}, {{ profile.get('location').country }}</li>
+    </ul>
+</section>
+<div class="user-ads">
+    <h3>{{ dictionary["usersprofile.UsernamesAds"] | replace('<<USERNAME>>', profile.get('username')) }}</h3>
+    {% if items.length > 6 %}
+        <span class="icons icon-arrow-left arrows" data-navigate="left" ></span>
+        <span class="icons icon-arrow-right arrows" data-navigate="right" ></span>
+    {% endif %}
+    <div class="slide">
+        <ul class="featuredad-content" data-items-slide>
+            {% for item in items.toJSON() %}
+                {% if item.status == 'ready' %}
+                    <li>
+                        {{ '<i class="icons icon-star-circle"></i>' if item.isFeatured }}
+                        <a href="{{ item.slug.replace(domain, fullDomain) }}">
+                            <figure class="items-image {{ 'icons icon-photo' if not item.thumbnail }}">
+                                {% if item.thumbnail %}
+                                    <img src="{{ item.thumbnail }}" alt="{{ item.title }}" />
+                                {% endif %}
+                            </figure>
+                            <h3>{{ item.title | truncate( 40, True) }}</h3>
+                            <p class="items-price">
+                                {{ item.price.displayPrice }}
+                            </p>
+                        </a>
+                    </li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+    </div>
+</div>
