@@ -160,5 +160,9 @@ module.exports = {
     'www.olx.sn': {
         'default': 'UA-54083301-42',
         desktop: 'UA-137146-121'
+    },
+    'www.olx.ae': {
+        'default': 'UA-5247560-17',
+        desktop: 'UA-137146-22'
     }
 };
