@@ -90,6 +90,7 @@ module.exports = Base.extend({
                 that.swipeTo( galeryNavigator.clickedSlideIndex );
             }
         });
+
         var updateNavPosition = function(){
             $('.swiper-nav .active-nav').removeClass('active-nav');
             var activeNav = $('.swiper-nav .swiper-slide').eq(that.activeIndex).addClass('active-nav');

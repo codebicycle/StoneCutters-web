@@ -78,7 +78,7 @@ module.exports = Base.extend({
 
         function validate(done) {
             var hasErrors = false;
-            console.log('validar');
+
             _.each(this.$fields, function each(field) {
                 var isValid = this.validate($(field));
 
@@ -91,7 +91,6 @@ module.exports = Base.extend({
         }
 
         function submit(done) {
-            console.log('submit');
             this.user.reply(done, this.reply);
         }
 
@@ -121,7 +120,6 @@ module.exports = Base.extend({
         }
 
         function fail(err) {
-            console.log('err ',err);
             this.$spinner.hide();
         }
     },
@@ -179,7 +177,7 @@ module.exports = Base.extend({
         var name = field.attr('name');
         var value = field.val();
         var isEmpty;
-        console.log(field);
+
         this.addData(field);
         if (name === 'phone') {
             return true;
