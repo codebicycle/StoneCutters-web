@@ -4,6 +4,7 @@
     .module {
         box($greyPageBg, $yellowBorders, 3px, 8px 8px 18px 8px, solid, 1px);
         display: inline-block;
+        height: 100px;
         margin: 0 15px 0 0;
         text-align: center;
         vertical-align: middle;
@@ -190,8 +191,9 @@
     clear-fix();
     margin-bottom: 20px;
     position: relative;
+    min-height: 50px;
 
-    &.icon-time::before, &.icon-star-circle::before {
+    &.icon-time::before, &.icon-star-circle::before, &.icon-sad::before {
         color: $blue;
         font-size: remify(64px);
         left: 20px;

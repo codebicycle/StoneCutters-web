@@ -13,10 +13,17 @@
             #feature-ad {
                 h2 {
                     font-size: $m;
+                    margin: 0;
                     small {
                         display: block;
                         font-weight: normal;
                     }
+                }
+            }
+            .feature-ad-form {
+                margin: 10px 0 0 0;
+                h5 {
+                    margin: 0 0 10px;
                 }
             }
             .fad-edit {
@@ -31,6 +38,9 @@
                 }
             }
             .fad-submit {
+                padding-top: 10px;
+                margin-top: 10px;
+                border-top: 1px solid $disableText;
                 input {
                     border-radius();
                     action-button($orange, $white, 3px, 10px 20px);
@@ -41,6 +51,7 @@
             }
             .feature-ad-terms {
                 font-size: $xs;
+                width: 60%;
             }
         }
     }

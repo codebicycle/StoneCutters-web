@@ -79,6 +79,35 @@
             color: $greyStrong;
             font-size: $xs;
         }
+        p.featuredad {
+            position: absolute;
+            left: 0;
+            top: 13px;
+            height: 20px;
+            .icon-star-circle {
+                color: $featureStarBg;
+                font-size: 26px;
+                position: absolute;
+                z-index: 10;
+                top: -7px;
+                left: 0;
+                &:before {
+                    border:2px solid $white;
+                    border-radius(50%);
+                    background: $white;
+                }
+            }
+
+            em {
+                ribbon($green, $white);
+                top: 0;
+                left: 24px;
+                padding-left: 22px;
+                position: absolute;
+                width: 115px;
+                text-align: center;
+            }
+        }
 
     }
 }
