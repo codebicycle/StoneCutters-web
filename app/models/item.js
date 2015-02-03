@@ -28,7 +28,8 @@ module.exports = Base.extend({
     logPost: logPost,
     logPostImages: logPostImages,
     toData: toData,
-    remove: remove
+    remove: remove,
+    rebump: rebump
 });
 
 module.exports.id = 'Item';
@@ -215,7 +216,7 @@ function postFields(done) {
         query.securityKey = sk;
         this.unset('sk');
     }
-    console.log("ACTION:", action);
+
     data = this.toData(true);
     helpers.dataAdapter.post(this.app.req, '/items' + (!id ? '' : ['', id, action].join('/')), {
         data: data,
@@ -343,6 +344,23 @@ function remove(reason, comment, done) {
 
     function callback(err) {
         this.set('status', 'closed');
+        this.errfcb(done)(err);
+    }
+}
+
+function rebump(done) {
+      helpers.dataAdapter.post(this.app.req, '/items/' + this.get('id') + '/rebump', {
+        query: {
+            token: (this.app.session.get('user') || {}).token,
+            postingSession: this.get('postingSession'),
+            platform: this.app.session.get('platform')
+        },
+        data: {
+            location: this.app.session.get('location').url
+        }
+    }, callback.bind(this));
+
+    function callback(err, response) {
         this.errfcb(done)(err);
     }
 }

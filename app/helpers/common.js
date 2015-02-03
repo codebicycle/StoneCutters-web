@@ -315,10 +315,6 @@ module.exports = (function() {
     }
 
     function dateDiff(start, end, format) {
-        console.log("DEBUG[common#dateDiff]......");
-        console.log(start);
-        console.log(end);
-        console.log(format);        
         var miliseconds = parseDate(end).getTime() - parseDate(start).getTime();
         var seconds = miliseconds / 1000;
         var minutes = Math.floor(seconds / 60);

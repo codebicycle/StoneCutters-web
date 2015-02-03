@@ -17,13 +17,53 @@ module.exports = {
     success: middlewares(success),
     edit: middlewares(edit),
     editsuccess: middlewares(editsuccess),
-    renew: middlewares(renew)
+    renew: middlewares(renew),
+    rebump: middlewares(rebump)
 };
 
 function flowMarketing(params, callback) {
     params.marketing = true;
     return flow.call(this, params, callback);
 }
+
+
+function rebump(params, callback) {
+    helpers.controllers.control.call(this, params, controller);
+
+    function controller() {
+        var item;
+
+        var prepare = function(done) {
+            item = new Item({
+                id: params.itemId
+            }, {
+                app: this.app
+            });
+            done();
+        }.bind(this);
+
+        var fetch = function(done) {
+            item.rebump(done);
+        }.bind(this);
+
+        var success = function(res) {
+            return helpers.common.redirect.call(this, '/myolx/myadslisting', null, {
+                status: 302
+            });
+        }.bind(this);
+
+        var error = function(err, res) {
+            return helpers.common.error.call(this, err, res, callback);
+
+        }.bind(this);
+
+        asynquence().or(error)
+            .then(prepare)
+            .then(fetch)
+            .val(success);
+    }
+}
+
 
 function renew(params, callback) {
     params.renew = true;

@@ -25,6 +25,9 @@ module.exports = {
     'post#renew': {
         url: 'myolx/renewitem/:itemId'
     },
+    'post#rebump': {
+        url: 'myolx/rebump/:itemId'
+    },
     'post#editsuccess': {
         url: 'edititem/success/:itemId'
     },

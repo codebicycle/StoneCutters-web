@@ -64,7 +64,6 @@
             {% set statustxt = dictionary["misc.Pending_BR"] %}
         {% endif %}
         <li class="item {{ status }}">
-
             <figure class="image">
                 {% if (status == 'ready') %}
                     <a href="{{ item | slugToUrl | link }}">
@@ -111,13 +110,12 @@
                         {% if item.featured and item.featured.isEnabled() %}
                             <a data-idd="{{ item.id }}" data-img="{{ item.thumbnailLarge }}" data-title="{{ item.title }}" href="{{ ('/myolx/buyfeaturedad?id='+ item.id) | link }}" class="btn btnfeaturedad"><span class="icons icon-feature"></span>{{ dictionary["featured_listings.Feature"] }} </a>
                         {% endif %}
-
                     {% endif %}
-                    {% if (status == 'deleted') %}
-                            <a href="{{ ('/myolx/renewitem/'+ item.id) | link }}" class="btn icons icon-repulish">{{ dictionary["myolx.Republish"] }}</a>                            
-                        {% endif %}
-                    {% if (status == 'expired' and item.blockType == '0') %}
-                        <a href="{{ ('/myolx/rebump/'+ item.id) | link }}" class="btn icons icon-repulish">{{ dictionary["myolx.Republish"] }}</a>                            
+                    {% if (status == 'deleted' and itemDays > daysToRenew) %}
+                            <a href="{{ ('/myolx/renewitem/'+ item.id) | link }}" class="btn icons icon-repulish">{{ dictionary["myolx.Republish"] }}</a>
+                    {% endif %}
+                    {% if (status == 'expired' and item.bloquedType == '0') %}
+                        <a href="{{ ('/myolx/rebump/'+ item.id) | link }}" class="btn icons icon-repulish">{{ dictionary["myolx.Republish"] }}</a>
                     {% endif %}
                 </div>
             </div>
