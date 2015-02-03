@@ -12,7 +12,14 @@ module.exports = Base.extend({
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
 
-        this.app.session.clear('errorDirection');
+        try {
+            this.app.session.clear('errorDirection');
+        }
+        catch (error) {
+            var err = (data || {}).err || {};
+
+            console.log('[OLX_DEBUG]', this.app.session.get('platform'), this.app.session.get('referer'), JSON.stringify(err), JSON.stringify(err.stack), JSON.stringify(error.stack));
+        }
         return _.extend({}, data, {
             breadcrumb: breadcrumb.get.call(this, data)
         });
