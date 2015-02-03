@@ -6,7 +6,7 @@
             <img src="{{ item.images[0].thumbnail }}" alt="{{ item.title }}">
         </a>
         <div class="conversation-item-data">
-            <h3>Conversación con 
+            <h3>Conversación con
                 {% for sender in thread.get('senders') %}
                     {% if not sender.isMine %}
                         {{ sender.name }}
@@ -18,12 +18,17 @@
     </div>
     <ul>
     {% for message in thread.get('messages') %}
-        <li class="conversation-chat {{ 'chat-sendit' if message.isMine else 'chat-receive' }}" >
-            {% if not message.isMine %}
-                <span class="conversation-name">{{ thread.get('senders')[0].name }}</span>
-            {% else %}
-                <span clarr="conversation-name">Vos</span>
+        <li class="conversation-chat {{ 'chat-sendit' if message.isMine else 'chat-receive' }}">
+
+            {% set name = thread.get('senders')[0].name %}
+            {% if message.isMine %}
+                {% set name = 'Vos' %}
+            {% elif thread.get('senders')[0].isMine %}
+                {% set name = thread.get('senders')[1].name %}
             {% endif %}
+
+            <span class="conversation-name">{{ name }}</span>
+
             <span> - {{ message.date | date(false, true) }}</span>
             <p>{{ message.text }}</p>
         </li>
