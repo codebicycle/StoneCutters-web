@@ -17,4 +17,4 @@ module.exports = Base.extend({
     }
 });
 
-module.exports.id = 'items/default/show';
+module.exports.id = 'items/newitempage/show';

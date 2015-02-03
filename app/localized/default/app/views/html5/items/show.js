@@ -7,96 +7,38 @@ var Categories = require('../../../../../../collections/categories');
 var Item = require('../../../../../../models/item');
 var helpers = require('../../../../../../helpers');
 var statsd = require('../../../../../../../shared/statsd')();
-var translations = require('../../../../../../../shared/translations');
-var User = require('../../../../../../models/user');
-
 module.exports = Base.extend({
-    className: 'items_show_view',
-    wapAttributes: {
-        cellpadding: 0
-    },
-    initialize: function() {
-        this.dictionary = translations.get(this.app.session.get('selectedLanguage'));
-    },
-    getTemplateData: function() {
-        var data = Base.prototype.getTemplateData.call(this);
-        var isNotOwner = false;
-
-        if (data.item.user !== null && this.app.session.get('user').userId !== data.item.user.id) {
-            isNotOwner = true;
-        }
-        return _.extend({}, data, {
-            newItemPage: helpers.features.isEnabled.call(this, 'newItemPage'),
-            isNotOwner:  isNotOwner
-        });
-    },
+    className: 'items_show_view_default',
     postRender: function() {
         var that = this;
-        var marginActions = $('section.actions').height() + $('section.actions > span').height() + 20;
-        var url = this.app.session.get('url');
-        var msgSent = helpers.common.getUrlParameters('sent', url, true);
-        var $msg = this.$('.msg-resulted');
-        var galery;
-        var relatedAds;
-        var mySwiperGal = '';
-        var messages;
-        var updateNavPosition;
-        var galeryNavigator;
 
-        this.dictionary = translations.get(this.app.session.get('selectedLanguage'));
-        that.messages = {
-            'msgSend': this.dictionary['comments.YourMessageHasBeenSent'].replace(/<br \/>/g,''),
-            'addedFav': this.dictionary['itemheader.AddedFavorites'],
-            'removedFav': this.dictionary['itemheader.RemovedFavorites'],
-            'addFav': this.dictionary['itemgeneraldetails.addFavorites'],
-            'removeFav': this.dictionary['item.RemoveFromFavorites']
-        };
-
+        var marginActions = $('section.actions').height() + $('section.actions > span').height() + 15;
         $('.footer_footer_view').css('margin-bottom', marginActions + 'px');
 
-        if (msgSent && msgSent == 'true') {
-            $msg.find('span').text(that.messages.msgSend);
-            $msg.addClass('visible');
-            setTimeout(function(){
-                $msg.removeClass('visible');
-            }, 3000);
-        }
-
-        galery = this.$('.zd-gallery').swiper({
-            onSlideChangeStart: function(){
-                updateNavPosition();
-            }
-        });
-        galeryNavigator = $('.swiper-nav').swiper({
-            visibilityFullFit: true,
-            slidesPerView:'auto',
-            onSlideClick: function(){
-                galery.swipeTo( galeryNavigator.clickedSlideIndex );
-            }
-        });
-        updateNavPosition = function(){
-            $('.swiper-nav .active-nav').removeClass('active-nav');
-            var activeNav = $('.swiper-nav .swiper-slide').eq(galery.activeIndex).addClass('active-nav');
-            if (!activeNav.hasClass('swiper-slide-visible')) {
-                if (activeNav.index()>galeryNavigator.activeIndex) {
-                    var thumbsPerNav = Math.floor(galeryNavigator.width/activeNav.width())-1;
-                    galeryNavigator.swipeTo(activeNav.index()-thumbsPerNav);
-                }
-                else {
-                    galeryNavigator.swipeTo(activeNav.index());
-                }
-            }
+        that.messages = {
+            'addFav': this.$('.addFav').val(),
+            'removeFav': this.$('.removeFav').val()
         };
 
-        relatedAds = this.$('.swiper-related').swiper({
-            visibilityFullFit: true,
-            slidesPerView: 'auto',
-            preventLinks:false,
-            mode:'horizontal'
+        var galery = this.$('.swiper-container').swiper({
+            mode:'horizontal',
+            loop: true,
+            pagination: '.slidePagination',
+            paginationClickable: true,
+            initialSlide: 0
         });
-
+        var relatedAds = this.$('.swiper-containerRA').swiper({
+            mode:'horizontal',
+            slidesPerView: 3,
+            preventLinks:false
+        });
         this.$(window).on('resize', this.resize).trigger('resize');
-        this.$('section#itemPage section.onePicture .slide div').click(function(e) {
+        this.$( '.actions .email' ).click(function onClick() {
+            $('html, body').animate({
+                scrollTop: this.$('.reply').offset().top
+            }, 400);
+        }.bind(this));
+        this.$('section#itemPage section#onePicture .slide div').click(function(e) {
             e.preventDefault();
             $('body').addClass('noscroll');
             history.pushState(null, "", window.location.pathname);
@@ -107,8 +49,8 @@ module.exports = Base.extend({
             $('.galCont').removeClass('visible');
             $('body').removeClass('noscroll');
         });
-
-        this.$('.zd-gallery').click(function(e) {
+        var mySwiperGal = '';
+        this.$('section.swiper-container').click(function(e) {
             e.preventDefault();
             $('body').addClass('noscroll');
             history.pushState(null, "", window.location.pathname);
@@ -123,7 +65,7 @@ module.exports = Base.extend({
 
                 });
             }else{
-                mySwiperGal.swipeTo(galery.activeLoopIndex,750);
+                mySwiperGal.swipeTo(galery.activeLoopIndex,500);
             }
         });
         this.$('.galActions .next').click(function(e) {
@@ -160,10 +102,8 @@ module.exports = Base.extend({
                 var user = that.app.session.get('user');
                 var itemId = $this.data('itemid');
                 var url = [];
-                var $msg = $('.msg-resulted');
-
-
-                $msg.find('span').text($this.hasClass('add') ? that.messages.addedFav : that.messages.removedFav);
+                var $msg = $('.msgCont .msgCont-wrapper .msgCont-container');
+                $msg.text($this.hasClass('add') ? that.messages.addFav : that.messages.removeFav);
 
                 url.push('/users/');
                 url.push(user.userId);
@@ -182,13 +122,12 @@ module.exports = Base.extend({
                     json: true,
                     done: function() {
                         $this.toggleClass('add remove');
-                        $this.text($this.hasClass('add') ? that.messages.addFav : that.messages.removeFav);
                         $this.attr('data-qa', $this.attr('data-qa') == 'add-favorite' ? 'remove-favorite' : 'add-favorite');
 
-                        $msg.addClass('visible');
+                        $('.msgCont').addClass('visible');
                         setTimeout(function(){
-                            $msg.removeClass('visible');
-                            $msg.find('span').text('');
+                            $('.msgCont').removeClass('visible');
+                            $msg.text('');
                         }, 3000);
                     },
                     fail: function() {
@@ -228,13 +167,24 @@ module.exports = Base.extend({
                 $('body').removeClass('noscroll');
             }
         };
+
+        this.attachTrackMe(function(category, action) {
+            var itemId = $('.itemId').val();
+            var itemCategory = $('.itemCategory').val();
+            var itemSubcategory = $('.itemSubcategory').val();
+
+            return {
+                action: action,
+                custom: [category, itemCategory, itemSubcategory, action, itemId].join('::')
+            };
+        }.bind(this));
     },
     remove: function() {
         $(window).off('resize', this.resize);
         Base.prototype.remove.apply(this, arguments);
     },
     resize: function() {
-        $('section#itemPage').css('margin-bottom' , ($('.actions').height()+20)+'px');
+        $('section#itemPage').css('margin-bottom' , ($('#actions').height()+20)+'px');
         var paginationCount = $('.slidePagination span').length + 2;
         var windowSize = $(window).width();
         var paginationWidth = windowSize / paginationCount;

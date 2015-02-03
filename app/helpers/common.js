@@ -274,35 +274,6 @@ module.exports = (function() {
        return output;
     }
 
-    function getUrlParameters(parameter, staticURL, decode) {
-        var currentLocation = (staticURL.length)? staticURL : window.location.search;
-        var parr;
-        var paramOne = currentLocation.split("?");
-        var paramTwo;
-        var parArr = [];
-        var returnBool = true;
-
-        if (paramOne.length == 2) {
-            paramTwo = paramOne[1].split('&');
-            if (paramTwo.length > 1) {
-                parArr = paramTwo;
-            } else {
-                parArr.push(paramOne[1]);
-            }
-        }
-
-        for(var i = 0; i < parArr.length; i++) {
-            parr = parArr[i].split("=");
-            if(parr[0] == parameter) {
-                return (decode) ? decodeURIComponent(parr[1]) : parr[1];
-            } else {
-                returnBool = false;
-            }
-        }
-
-        if(!returnBool)
-            return false;
-    }
     function parseDate(date) {
         if (!_.isString(date)) {
             return date;
@@ -346,7 +317,6 @@ module.exports = (function() {
         redirect: redirect,
         error: error,
         serializeFormJSON: serializeFormJSON,
-        getUrlParameters: getUrlParameters,
         'static': statics,
         dateDiff: dateDiff
     };

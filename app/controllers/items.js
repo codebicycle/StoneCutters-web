@@ -251,8 +251,8 @@ function show(params, callback) {
             else if (item.status.deprecated) {
                 view = 'items/expired';
             }
-            else if (!newItemPage) {
-                view = 'items/default/show';
+            else if (newItemPage && platform === 'html5') {
+                view = 'items/newitempage/show';
             }
 
             callback(null, view, {
@@ -265,6 +265,7 @@ function show(params, callback) {
                 subcategory: subcategory,
                 category: category,
                 favorite: favorite,
+                sent: params.sent || false,
                 categories: this.dependencies.categories.toJSON()
             });
         }.bind(this);

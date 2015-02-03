@@ -1,30 +1,45 @@
-<section id="itemPage" data-qa="item">
-    <section class="title">
-        <span class="date">
-            {{ item.date.since.day if item.date.since.day }}
-            {{ dictionary[item.date.since.dictionary] }}
-            {{ (', ' + item.date.since.hour) if item.date.since.hour }}
-            {{ (', '+item.location.cityName) if item.location.cityName }}
-        </span>
-        <h1>{{ item.title }}</h1>
-        <div class="price">{{ item.price.displayPrice if item.price.displayPrice else "" }}</div>
-        <div class="clear"></div>
-    </section>
+<section id="itemPageDefault" data-qa="item">
+    <input type="hidden" value="{{ dictionary["itemheader.AddedFavorites"] }}" name="addFav" class="addFav" >
+    <input type="hidden" value="{{ dictionary["itemheader.RemovedFavorites"] }}" name="removeFav" class="removeFav" >
+
+    {% if not item.status.onReview %}
+        {% set favClass = 'remove' %}
+        {% set favLink = '#' %}
+        {% set favText = dictionary["item.RemoveFromFavorites"] %}
+        {% if not item.isFavorite %}
+            {% set favClass = 'add' %}
+            {% set favText = dictionary["itemgeneraldetails.addFavorites"] %}
+            {% if not user %}
+                {% set favLink = (['/login?redirect=/items/', item.id, '/favorite'] | join('') | link) %}
+            {% endif %}
+        {% endif %}
+        {% from macros import Breadcrumb %}
+        {% set link = (breadcrumb | link) %}
+        {{ Breadcrumb(dictionary, link, item.category.name, heading=false, ['<ul>
+            <li><a class="share trackMe" href="#share" data-tracking="ItemPage-ClickShare" >', dictionary["itemgeneraldetails.ShareThisAd"], '</a></li>
+            <li><a data-itemId="', item.id, '" class="fav ', favClass, '" href="' , favLink, '" data-qa="', favClass, '-favorite" >', favText, '</a></li>
+        </ul>'] | join) }}
+    {% else %}
+        {% from macros import Breadcrumb %}
+        {% set link = (breadcrumb | link) %}
+        {{ Breadcrumb(dictionary, link, item.category.name, heading=false) }}
+    {% endif %}
+
 
     {% if item.images.length == 0 %}
-        <section class="noPicture">
+        <section id="noPicture">
             <span></span>
             <p>{{ dictionary["itemgeneraldetails.NoPicture"] }}</p>
             <div class="clear"></div>
         </section>
     {% elif item.images.length == 1 %}
-        <section class="onePicture">
+        <section id="onePicture">
             <div class="slide">
                 <div style="background-image: url('{{ item.images[0].url }}');"></div>
             </div>
         </section>
     {% else %}
-        <section class="swiper-container zd-gallery">
+        <section class="swiper-container">
             <div class="swiper-wrapper">
                 {% for image in item.images %}
                     <div class="swiper-slide">
@@ -36,21 +51,17 @@
             </div>
             <div class="slidePagination"></div>
         </section>
-        <div class="swiper-container swiper-nav">
-            <div class="swiper-wrapper">
-                {% for image in item.images %}
-                <div class="swiper-slide {{ 'active-nav' if loop.index == 1 else '' }}" data-url="{{ image.url }}">
-                    <div class="smallslide">
-                        <div class="img" style="background-image: url('{{ image.smallUrl }}');"></div>
-                        <div class="bg"></div>
-                    </div>
-                </div>
-                {% endfor %}
-            </div>
-        </div>
     {% endif %}
 
-    <section class="optionals">
+    <section id="description">
+        <span>{{ item.date.since.day if item.date.since.day }} {{ dictionary[item.date.since.dictionary] }}{{ (', ' + item.date.since.hour) if item.date.since.hour }}{{ (', '+item.location.cityName) if item.location.cityName }}</span>
+        <div class="price">{{ item.price.displayPrice if item.price.displayPrice else "" }}</div>
+        <h1>{{ item.title }}</h1>
+        <p>{{ item.descriptionReplace }}</p>
+        <div class="clear"></div>
+    </section>
+
+    <section id="optionals">
         {% if item.optionals %}
             <ul>
                 {% for optional in item.optionals %}
@@ -62,68 +73,21 @@
         {% endif %}
         <div class="clear"></div>
     </section>
-
-    <section class="detail">
-        <h3>{{ dictionary["itemslisting.NewAdDetails"] }}</h3>
-        <p>{{ item.descriptionReplace }}</p>
-    </section>
-
-    <section class="map">
-        {% set map = "http://maps.googleapis.com/maps/api/staticmap?center=" + item.coordinates.latitude + "," + item.coordinates.longitude + "&zoom=14&size=120x92&markers=" + item.coordinates.latitude + "," + item.coordinates.longitude + "&sensor=false" %}
-
-        <div class="profile" {{ 'style="background-image: url('+ map +')"' if item.coordinates.latitude }}>
-        {% if item.phone and item.contactName %}
-            <strong>{{ item.contactName }}</strong>
-            <span>{{ item.phone }}</span>
-        {% elif item.phone or item.contactName %}
-            <strong>{{ item.contactName if item.contactName }}</strong>
-            <span> {{ item.phone if item.phone }}</span>
-        {% endif %}
-            <span>
-                {% if item.location.neighborhoodName %}
-                    {{ item.location.neighborhoodName if item.location.neighborhoodName }}
-                {% else %}
-                    {{ item.location.cityName if item.location.cityName }}
-                {% endif %}
-                {{ (', '+item.location.countryName) if item.location.countryName }}
-            </span>
-        </div>
-    </section>
-
-    {% if not item.status.onReview %}
-    <section class="contentshare">
-        {% set favClass = 'remove' %}
-        {% set favLink = '#' %}
-        {% set favText = dictionary["item.RemoveFromFavorites"] %}
-        {% if not item.isFavorite %}
-            {% set favClass = 'add' %}
-            {% set favText = dictionary["itemgeneraldetails.addFavorites"] %}
-            {% if not user %}
-                {% set favLink = (['/login?redirect=/items/', item.id, '/favorite'] | join('') | link) %}
-            {% endif %}
-        {% endif %}
-        <a data-itemId="{{ item.id }}" class="btnshare fav {{ favClass }}" href="{{ favLink }}" data-qa="{{ favClass }}-favorite" >{{ favText }}</a>
-
-        <a href="#share" data-tracking="ItemPage-ClickShare" class="btnshare share trackMe">{{ dictionary["item.ShareAd"] }}</a>
-    </section>
+    {% if item.coordinates %}
+        <section id="map">
+            <img src="http://maps.googleapis.com/maps/api/staticmap?center={{ item.coordinates.latitude }},{{ item.coordinates.longitude }}&zoom=14&size=320x100&markers={{ item.coordinates.latitude }},{{ item.coordinates.longitude }}&sensor=false">
+        </section>
     {% endif %}
-
     {% if relatedItems.length %}
-        <div class="relatedAds">
-            <h3>{{ dictionary["itemgeneraldetails.OtherRelatedListings"] | replace(':','') }}</h3>
-            <section class="swiper-container swiper-related">
+        <aside class="relatedAds">
+            <section class="swiper-containerRA">
                 <div class="swiper-wrapper">
                     {% for relatedItem in relatedItems %}
                         {% if relatedItem.thumbnail %}
                             <div class="swiper-slide">
-                                <div class="smallslide trackMe" data-itemId="{{ relatedItem.id }}" data-tracking="ItemPage-ClickRelatedAdImg" >
+                                <div class="slide trackMe" data-itemId="{{ relatedItem.id }}" data-tracking="ItemPage-ClickRelatedAdImg" >
                                     <a href="{{ relatedItem | slugToUrl | link }}">
-                                        <div class="bg" style="background-image: url('{{ relatedItem.thumbnail }}');"></div>
-                                        <div class="text">
-                                            <div class="bgopacity"></div>
-                                            <h6>{{ relatedItem.title }}</h6>
-                                            <span>{{ relatedItem.price.displayPrice }}</span>
-                                        </div>
+                                        <div style="background-image: url('{{ relatedItem.thumbnail }}');"></div>
                                     </a>
                                 </div>
                             </div>
@@ -131,115 +95,103 @@
                     {% endfor %}
                 </div>
             </section>
-        </div>
+            <a class="btns orange trackMe" href="{{ relatedAdsLink | link }}" data-tracking="ItemPage-ClickRelatedAdBtn" >{{ dictionary["itemgeneraldetails.OtherRelatedListings"] | replace(':','') }}</a>
+        </aside>
     {% endif %}
-    {% if (item.metadata.seo.prevItem or item.metadata.seo.nextItem) %}
-        <section class="nav">
-            <span></span>
-            <div class="links {{ 'twice' if (item.metadata.seo.prevItem and item.metadata.seo.nextItem) }}">
-                {% if item.metadata.seo.prevItem %}
-                    <a class="first" href="{{ item.metadata.seo.prevItem.itemUrl | link }}">{{ dictionary["listingpageitemslisting.Previous"] }} </a>
+
+    {% if item.status.contactable and item.email %}
+        {% view 'items/partials/reply' %}
+    {% endif %}
+    {% if item.status.contactable %}
+        <section class="actions">
+            <div class="background"></div>
+            {% if item.phone and item.contactName %}
+                <span>{{ item.contactName }}: {{ item.phone }}</span>
+            {% elif item.phone or item.contactName %}
+                <span>{{ item.contactName if item.contactName }} {{ item.phone if item.phone }}</span>
+            {% endif %}
+            {% if item.email and not item.phone %}
+                <div class="action email trackMe fullWidth" data-tracking="Reply-ClickEmail" data-qa="reply-button" >
+                    <div>
+                        <span>{{ dictionary["replymessage.Email"] }}</span>
+                    </div>
+                </div>
+            {% elif item.email and item.phone %}
+                {% if device.uriSchemeTel and device.uriSchemeSms %}
+                    <div class="action email trackMe" data-tracking="Reply-ClickEmail" data-qa="reply-button" >
+                        <div>
+                            <span>{{ dictionary["replymessage.Email"] }}</span>
+                        </div>
+                    </div>
+                    <div class="action call trackMe" data-tracking="Reply-ClickCall" >
+                        <a href="tel:{{ item.phone }}">
+                            <span>{{ dictionary["misc.Call"] }}</span>
+                        </a>
+                    </div>
+                    <div class="action sms trackMe" data-tracking="Reply-ClickSms" >
+                        <a href="sms:{{ item.phone }}">
+                            <span>{{ dictionary["itempagepostcomment.Sms"] }}</span>
+                        </a>
+                    </div>
+                {% elif device.uriSchemeTel and not device.uriSchemeSms %}
+                    <div class="action email trackMe midWidth" data-tracking="Reply-ClickEmail" data-qa="reply-button" >
+                        <div>
+                            <span>{{ dictionary["replymessage.Email"] }}</span>
+                        </div>
+                    </div>
+                    <div class="action call trackMe midWidth" data-tracking="Reply-ClickCall" >
+                        <a href="tel:{{ item.phone }}">
+                            <span>{{ dictionary["misc.Call"] }}</span>
+                        </a>
+                    </div>
+                {% elif device.uriSchemeSms and not device.uriSchemeTel %}
+                    <div class="action email trackMe midWidth" data-tracking="Reply-ClickEmail" data-qa="reply-button" >
+                        <div>
+                            <span>{{ dictionary["replymessage.Email"] }}</span>
+                        </div>
+                    </div>
+                    <div class="action sms trackMe midWidth" data-tracking="Reply-ClickSms" >
+                        <a href="sms:{{ item.phone }}">
+                            <span>{{ dictionary["itempagepostcomment.Sms"] }}</span>
+                        </a>
+                    </div>
+                {% else %}
+                    <div class="action email trackMe fullWidth" data-tracking="Reply-ClickEmail" data-qa="reply-button" >
+                        <div>
+                            <span>{{ dictionary["replymessage.Email"] }}</span>
+                        </div>
+                    </div>
                 {% endif %}
-                {% if item.metadata.seo.nextItem %}
-                    <a class="second" href="{{ item.metadata.seo.nextItem.itemUrl | link }}">{{ dictionary["itemslisting.Next"] }} </a>
+            {% elif item.phone and not item.email %}
+                {% if device.uriSchemeTel and device.uriSchemeSms %}
+                    <div class="action call trackMe midWidth" data-tracking="Reply-ClickCall" >
+                        <a href="tel:{{ item.phone }}">
+                            <span>{{ dictionary["misc.Call"] }}</span>
+                        </a>
+                    </div>
+                    <div class="action sms trackMe midWidth" data-tracking="Reply-ClickSms" >
+                        <a href="sms:{{ item.phone }}">
+                            <span>{{ dictionary["itempagepostcomment.Sms"] }}</span>
+                        </a>
+                    </div>
+                {% elif device.uriSchemeTel and not device.uriSchemeSms %}
+                    <div class="action call trackMe fullWidth" data-tracking="Reply-ClickCall" >
+                        <a href="tel:{{ item.phone }}">
+                            <span>{{ dictionary["misc.Call"] }}</span>
+                        </a>
+                    </div>
+                {% elif device.uriSchemeSms and not device.uriSchemeTel %}
+                    <div class="action sms trackMe fullWidth" data-tracking="Reply-ClickSms" >
+                        <a href="sms:{{ item.phone }}">
+                            <span>{{ dictionary["itempagepostcomment.Sms"] }}</span>
+                        </a>
+                    </div>
                 {% endif %}
-            </div>
+            {% endif %}
+            <div class="clear"></div>
         </section>
     {% endif %}
-
 </section>
-
-{% if item.status.contactable %}
-    <section class="actions">
-        <div class="background"></div>
-        <div class="actionscontent">
-
-        {% if item.email and not item.phone %}
-            <div class="action email trackMe fullWidth" data-tracking="Reply-ClickEmail" data-qa="reply-button" >
-                <a href="{{ ['iid-', item.id, '/reply'] | join('') | link }}">
-                    <span>{{ dictionary["replymessage.Email"] }}</span>
-                </a>
-            </div>
-        {% elif item.email and item.phone %}
-            {% if device.uriSchemeTel and device.uriSchemeSms %}
-                <div class="action call trackMe" data-tracking="Reply-ClickCall" >
-                    <a href="tel:{{ item.phone }}">
-                        <span>{{ dictionary["misc.Call"] }}</span>
-                    </a>
-                    <p class="separator"></p>
-                </div>
-                <div class="action sms trackMe" data-tracking="Reply-ClickSms" >
-                    <a href="sms:{{ item.phone }}">
-                        <span>{{ dictionary["itempagepostcomment.Sms"] }}</span>
-                    </a>
-                    <p class="separator"></p>
-                </div>
-                <div class="action email trackMe" data-tracking="Reply-ClickEmail" data-qa="reply-button" >
-                    <a href="{{ ['iid-', item.id, '/reply'] | join('') | link }}">
-                        <span>{{ dictionary["replymessage.Email"] }}</span>
-                    </a>
-                </div>
-            {% elif device.uriSchemeTel and not device.uriSchemeSms %}
-                <div class="action call trackMe midWidth" data-tracking="Reply-ClickCall" >
-                    <a href="tel:{{ item.phone }}">
-                        <span>{{ dictionary["misc.Call"] }}</span>
-                    </a>
-                    <p class="separator"></p>
-                </div>
-                <div class="action email trackMe midWidth" data-tracking="Reply-ClickEmail" data-qa="reply-button" >
-                    <a href="{{ ['iid-', item.id, '/reply'] | join('') | link }}">
-                        <span>{{ dictionary["replymessage.Email"] }}</span>
-                    </a>
-                </div>
-            {% elif device.uriSchemeSms and not device.uriSchemeTel %}
-                <div class="action sms trackMe midWidth" data-tracking="Reply-ClickSms" >
-                    <a href="sms:{{ item.phone }}">
-                        <span>{{ dictionary["itempagepostcomment.Sms"] }}</span>
-                    </a>
-                    <p class="separator"></p>
-                </div>
-                <div class="action email trackMe midWidth" data-tracking="Reply-ClickEmail" data-qa="reply-button" >
-                    <a href="{{ ['iid-', item.id, '/reply'] | join('') | link }}">
-                        <span>{{ dictionary["replymessage.Email"] }}</span>
-                    </a>
-                </div>
-            {% else %}
-                <div class="action email trackMe fullWidth" data-tracking="Reply-ClickEmail" data-qa="reply-button" >
-                    <a href="{{ ['iid-', item.id, '/reply'] | join('') | link }}">
-                        <span>{{ dictionary["replymessage.Email"] }}</span>
-                    </a>
-                </div>
-            {% endif %}
-        {% elif item.phone and not item.email %}
-            {% if device.uriSchemeTel and device.uriSchemeSms %}
-                <div class="action call trackMe midWidth" data-tracking="Reply-ClickCall" >
-                    <a href="tel:{{ item.phone }}">
-                        <span>{{ dictionary["misc.Call"] }}</span>
-                    </a>
-                </div>
-                <div class="action sms trackMe midWidth" data-tracking="Reply-ClickSms" >
-                    <a href="sms:{{ item.phone }}">
-                        <span>{{ dictionary["itempagepostcomment.Sms"] }}</span>
-                    </a>
-                </div>
-            {% elif device.uriSchemeTel and not device.uriSchemeSms %}
-                <div class="action call trackMe fullWidth" data-tracking="Reply-ClickCall" >
-                    <a href="tel:{{ item.phone }}">
-                        <span>{{ dictionary["misc.Call"] }}</span>
-                    </a>
-                </div>
-            {% elif device.uriSchemeSms and not device.uriSchemeTel %}
-                <div class="action sms trackMe fullWidth" data-tracking="Reply-ClickSms" >
-                    <a href="sms:{{ item.phone }}">
-                        <span>{{ dictionary["itempagepostcomment.Sms"] }}</span>
-                    </a>
-                </div>
-            {% endif %}
-        {% endif %}
-        <div class="clear"></div>
-        </div>
-    </section>
-{% endif %}
 
 {% if item.images.length == 1 %}
     <div id="galContOne" class="galCont">
@@ -247,7 +199,7 @@
         <div class="galCont-container swiper-container-gal" style="background-image: url('{{ item.images[0].url }}');"></div>
         <div class="galActions">
             <div class="close"><span></span></div>
-            <!--<div class="playDis"><span></span></div>-->
+            <div class="playDis"><span></span></div>
             <div class="prevDis"><span></span></div>
             <div class="nextDis"><span></span></div>
         </div>
@@ -265,7 +217,7 @@
         </div>
         <div class="galActions">
             <div class="close"><span></span></div>
-            <!--<div class="pause"><span></span></div>-->
+            <div class="pause"><span></span></div>
             <div class="prev"><span></span></div>
             <div class="next"><span></span></div>
         </div>
@@ -290,10 +242,9 @@
     </div>
 </div>
 
-<div class="msg-resulted">
-    <div class="msg-container" data-qa="reply-message-sent">
-        <span>{{ (dictionary["comments.YourMessageHasBeenSent"] | replace('<br />','')) }}</span>
-        <div class="msg-bg"></div>
+<div id="msgCont" class="msgCont">
+    <div class="msgCont-wrapper">
+        <div class="msgCont-container" data-qa="reply-message-sent"></div>
     </div>
 </div>
 
