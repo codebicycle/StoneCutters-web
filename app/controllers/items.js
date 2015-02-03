@@ -485,6 +485,7 @@ function reply(params, callback) {
     function controller() {
         var itemId = params.itemId;
         var siteLocation = this.app.session.get('siteLocation');
+        var platform = this.app.session.get('platform');
 
         var redirect = function(done) {
             var platform = this.app.session.get('platform');
@@ -529,6 +530,7 @@ function reply(params, callback) {
             var subcategory = this.dependencies.categories.search(item.category.id);
             var category;
             var parentId;
+            var view = 'items/reply';
 
             if (!subcategory) {
                 return error();
@@ -543,7 +545,11 @@ function reply(params, callback) {
             tracking.addParam('category', category.toJSON());
             tracking.addParam('subcategory', subcategory.toJSON());
 
-            callback(null, 'items/partials/reply',{
+            if (platform === 'html5') {
+                view = 'items/partials/reply';
+            }
+
+            callback(null, view,{
                 item: item,
                 form: this.form
             });
