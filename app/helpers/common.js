@@ -256,7 +256,9 @@ module.exports = (function() {
         });
         this.app.seo.addMetatag('robots', 'noindex, nofollow');
         this.app.seo.addMetatag('googlebot', 'noindex, nofollow');
-        return callback(null, 'pages/error', res || {});
+        return callback(null, 'pages/error', {
+            err: err
+        });
     }
 
     function serializeFormJSON(data) {
