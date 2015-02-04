@@ -52,7 +52,7 @@ function list(params, callback) {
             this.app.seo.setContent(this.dependencies.categories.meta);
             callback(null, {
                 icons: (~icons.indexOf(country)) ? country.split('.') : 'default'.split('.'),
-                items: res ? res.featureads : undefined 
+                items: res ? res.featureads : undefined
             });
         }.bind(this);
 
@@ -294,6 +294,8 @@ function handleItems(params, promise, gallery) {
             tracking.addParam('subcategory', subcategory.toJSON());
         }
         tracking.addParam('page', query.page);
+        tracking.addParam('filters', items.filters);
+        tracking.addParam('paginator', items.paginator);
 
         done({
             type: 'items',

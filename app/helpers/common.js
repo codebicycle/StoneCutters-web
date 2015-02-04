@@ -256,7 +256,9 @@ module.exports = (function() {
         });
         this.app.seo.addMetatag('robots', 'noindex, nofollow');
         this.app.seo.addMetatag('googlebot', 'noindex, nofollow');
-        return callback(null, 'pages/error', res || {});
+        return callback(null, 'pages/error', {
+            err: err
+        });
     }
 
     function serializeFormJSON(data) {
@@ -274,8 +276,19 @@ module.exports = (function() {
        return output;
     }
 
+    function parseDate(date) {
+        if (!_.isString(date)) {
+            return date;
+        }
+        date = date.split(/[- .:]/);
+        _.map(date, function toNumber(part) {
+            return Number(part);
+        });
+        return new Date(date[0], date[1] - 1, date[2], date[3], date[4], date[5]);
+    }
+
     function dateDiff(start, end) {
-        var miliseconds = (new Date(end)).getTime() - (new Date(start)).getTime();
+        var miliseconds = parseDate(end).getTime() - parseDate(start).getTime();
         var seconds = miliseconds / 1000;
         var minutes = Math.floor(seconds / 60);
         var hours = Math.floor(minutes / 60);

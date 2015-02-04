@@ -127,11 +127,16 @@ module.exports = {
             keyade: {
                 enabled: true,
                 platforms: ['wap', 'html4', 'html5', 'desktop']
+            },
+            ninja: {
+                enabled: false,
+                platforms: ['desktop']
             }
         }
     },
     featured: {
         enabled: false,
+        platforms: ['desktop'],
         quantity: {
             total: 6,
             top: 3,

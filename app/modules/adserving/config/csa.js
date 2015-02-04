@@ -2,15 +2,10 @@
 
 module.exports = {
     enabled: true,
-    language: {
-        'default': 'es',
-        list: ['es', 'en', 'pt', 'it', 'fr'],
-        pattern: '[langcode]'
-    },
     'default': {
         queryCategories: [16, 185, 190, 821],
         options: {
-            pubId: 'olx-browse',
+            pubId: 'olx',
             query: '',
             channel: 'OLX_[countrycode]',
             hl: 'en',
@@ -57,5 +52,10 @@ module.exports = {
             adIconSpacingAfter: 15,
             adIconUrl: 'http://afs.googleusercontent.com/olx/olx_[langcode].png'
         }
+    },
+    language: {
+        'default': 'es',
+        list: ['es', 'en', 'pt', 'it', 'fr'],
+        pattern: '[langcode]'
     }
 };
