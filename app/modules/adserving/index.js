@@ -97,7 +97,7 @@ function createChannels(type) {
 function getClientId(type) {
     var configType = utils.get(configAdServing, type, {});
     var pubId = configType.options.pubId;
-    if (type !== 'CSA') {
+    if (type === 'ADX') {
         return pubId;
     }
     var countryCode = this.app.session.get('location').abbreviation.toLowerCase();
