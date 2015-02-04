@@ -3,7 +3,7 @@
 {% from macros import Breadcrumb, BreadcrumbHome %}
 {% set link = (breadcrumb | link) %}
 {{ Breadcrumb(dictionary, link, dictionary["defaultfooter.PublishFreeAd"]) }}
-<div id="success">
+<div id="success" data-qa="success">
     <div>
         <h1>{{ dictionary["misc.AllSet_Mob"] }}</h1>
         <h2>{{ dictionary["misc.AdSubmittedApproval"] }}</h2>
