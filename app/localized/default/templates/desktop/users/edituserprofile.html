@@ -1,3 +1,6 @@
+<a rel="nofollow" href="{{ '/myolx/configuration' | link }}" class="icons icon-arrow-left">{{ dictionary["defaultfooter.Back"] }}</a>
+<h1>{{ dictionary["usersprofile.EditMyProfile"] }}</h1>
+
 {% from macros import Field %}
 
 {% set statesField = {
@@ -15,8 +18,20 @@
 {% set cityField = {
     isOptional: false,
     name: "city",
-    mandatory: true,
-    label: '.',
+    mandatory: false,
+    label: ' ',
+    values: 'cities',
+    fieldType: "combobox",
+    dataType: "select",
+    selected: profile.location.city
+} %}
+{{ Field(cityField) }}
+
+{% set cityField = {
+    isOptional: false,
+    name: "city",
+    mandatory: false,
+    label: ' ',
     values: 'cities',
     fieldType: "combobox",
     dataType: "select",
@@ -50,7 +65,7 @@
 
 {% set aboutMeField = {
     dataType: "string",
-    fieldType: "text",
+    fieldType: "textarea",
     isOptional: true,
     label: dictionary["usersprofile.AboutMe"],
     mandatory: false,
@@ -61,7 +76,7 @@
 
 {% set interestsField = {
     dataType: "string",
-    fieldType: "text",
+    fieldType: "textarea",
     isOptional: true,
     label: dictionary["usersprofile.Interests"],
     mandatory: false,
@@ -82,7 +97,8 @@
 {{ Field(webField) }}
 
 
-<fieldset class="seller-post">
-    <input type="submit" value="{{ dictionary["alertstitle.SaveProfile"] }}" class="posting" data-qa="submit-button" />
-    <a href="{{ '/myolx/configuration' | link }}">{{ dictionary["wap_posting_step4.Cancel"] }}</a>
+<fieldset class="save-config">
+    <input type="submit" value="{{ dictionary["alertstitle.SaveProfile"] }}" class="save" />
+    {{ dictionary["biderrorheader.Or"] }}
+    <a href="{{ '/myolx/configuration' | link }}" class="cancel" >{{ dictionary["wap_posting_step4.Cancel"] }}</a>
 </fieldset>

@@ -1,25 +1,24 @@
-{#{ dictionary["usersprofile.UsernamesProfile"] | replace('<<USERNAME>>', profile.username) }}
-
-{{ dictionary["messages_email_register.Username"] }} - {{ profile.username }}<br>
-{{ dictionary["comments.CommentsFormName"] }} - <br>
-{{ dictionary["defaultheader.Location"] }} - {{ profile.location.neighborhood }}, {{ profile.location.city }}, {{ profile.location.state }}, {{ profile.location.country }}<br>
-{{ dictionary["usersprofile.MyWebsite"] }} - {{ profile.webSite }}<br>
-{{ dictionary["usersprofile.AboutMe"] }} - {{ profile.aboutMe }}<br>
-{{ profile.interest }}
-{{ dictionary["item.sex"] }} - {{ profile.gender }}<br>
-{{ profile.configuration.sendBulletin }}<br>
-{{ profile.configuration.sendTips }}<br>
-{{ profile.configuration.showAds }}
-{{ dictionary["usersprofile.UsernamesAds"] | replace('<<USERNAME>>', profile.username) }}
-{{ dictionary["usersprofile.ViewAllUsernamesAds"] | replace('<<USERNAME>>', profile.username) }#}
 <section class="userprofile">
     <a rel="nofollow" href="{{ '/myolx/configuration' | link }}" class="icons icon-arrow-left">{{ dictionary["defaultfooter.Back"] }}</a>
     <h1>{{ dictionary["usersprofile.UsernamesProfile"] | replace('<<USERNAME>>', profile.get('username')) }}</h1>
-    <div class="user-image icons icon-user"></div>
+    {#<div class="user-image icons icon-user"></div>#}
     <ul class="links">
-        <li><strong>{{ dictionary["messages_email_register.Username"] }}:</strong> {{ profile.get('username') }}</li>
-        <li><strong>{{ dictionary["comments.CommentsFormName"] }}:</strong> {{ profile.get('firstname') }}</li>
+        {% if profile.get('username') %}
+            <li><strong>{{ dictionary["messages_email_register.Username"] }}:</strong> {{ profile.get('username') }}</li>
+        {% endif %}
+        {% if profile.get('firstname') %}
+            <li><strong>{{ dictionary["comments.CommentsFormName"] }}:</strong> {{ profile.get('firstname') }}</li>
+        {% endif %}
         <li><strong>{{ dictionary["defaultheader.Location"] }}:</strong> {{ (profile.get('location').neighborhood + ', ') if profile.get('location').neighborhood }}{{ profile.get('location').city }}, {{ profile.get('location').state }}, {{ profile.get('location').country }}</li>
+        {% if profile.get('webSite') %}
+            <li><strong>{{ dictionary["usersprofile.MyWebsite"] }}</strong> {{ profile.get('webSite') }}</li>
+        {% endif %}
+        {% if profile.get('interest') %}
+            <li><strong>{{ dictionary["usersprofile.Interests"] }}</strong> {{ profile.get('interest') }}</li>
+        {% endif %}
+        {% if profile.get('aboutMe') %}
+            <li><strong>{{ dictionary["usersprofile.AboutMe"] }}</strong> {{ profile.get('aboutMe') }}</li>
+        {% endif %}
     </ul>
 </section>
 <div class="user-ads">

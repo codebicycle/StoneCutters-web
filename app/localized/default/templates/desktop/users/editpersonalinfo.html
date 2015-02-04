@@ -1,4 +1,5 @@
-{{ dictionary["register_form.EditMyInfo"] }}
+<a rel="nofollow" href="{{ '/myolx/configuration' | link }}" class="icons icon-arrow-left">{{ dictionary["defaultfooter.Back"] }}</a>
+<h1>{{ dictionary["register_form.EditMyInfo"] }}</h1>
 
 {% from macros import Field %}
 
@@ -34,7 +35,8 @@
 {{ Field(webField) }}
 
 
-<fieldset class="seller-post">
-    <input type="submit" value="{{ dictionary["register_form.Save"] }}" class="posting" data-qa="submit-button" />
-    <a href="{{ '/myolx/configuration' | link }}">{{ dictionary["wap_posting_step4.Cancel"] }}</a>
+<fieldset class="save-config">
+    <input type="submit" value="{{ dictionary["register_form.Save"] }}" class="save" />
+    {{ dictionary["biderrorheader.Or"] }}
+    <a href="{{ '/myolx/configuration' | link }}" class="cancel" >{{ dictionary["wap_posting_step4.Cancel"] }}</a>
 </fieldset>

@@ -1,5 +1,10 @@
+<a rel="nofollow" href="{{ '/myolx/configuration' | link }}" class="icons icon-arrow-left">{{ dictionary["defaultfooter.Back"] }}</a>
+<h1>{{ dictionary["emailsnotificationbody.Title"] }}</h1>
+
 {% from macros import Field %}
-{{ dictionary["emailsnotificationbody.Alerts"] }}
+
+<span class="title">{{ dictionary["emailsnotificationbody.Alerts"] }}</span>
+
 {% set sendBulletinField = {
     isOptional: false,
     name: "chkMailGroup_1",
@@ -22,7 +27,7 @@
 } %}
 {{ Field(sendTipsField) }}
 
-{{ dictionary["usersprofile.MyProfile"] }}
+<span class="title">{{ dictionary["usersprofile.MyProfile"] }}</span>
 
 {% set showAdsField = {
     isOptional: false,
@@ -35,7 +40,8 @@
 } %}
 {{ Field(showAdsField) }}
 
-<fieldset class="seller-post">
-    <input type="submit" value="{{ dictionary["emailsnotificationbody.SaveSettings"] }}" class="posting" data-qa="submit-button" />
-    <a href="{{ '/myolx/configuration' | link }}">{{ dictionary["wap_posting_step4.Cancel"] }}</a>
+<fieldset class="save-config">
+    <input type="submit" value="{{ dictionary["emailsnotificationbody.SaveSettings"] }}" class="save" />
+    {{ dictionary["biderrorheader.Or"] }}
+    <a href="{{ '/myolx/configuration' | link }}" class="cancel" >{{ dictionary["wap_posting_step4.Cancel"] }}</a>
 </fieldset>
