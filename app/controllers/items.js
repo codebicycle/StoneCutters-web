@@ -265,7 +265,7 @@ function show(params, callback) {
                 subcategory: subcategory,
                 category: category,
                 favorite: favorite,
-                sent: params.sent || false,
+                sent: params.sent,
                 categories: this.dependencies.categories.toJSON()
             });
         }.bind(this);
