@@ -18,7 +18,7 @@ module.exports = {
                     service: 'CSA',
                     format: 'default',
                     location: 'Top',
-                    seo: 6
+                    seo: 4
                 },
                 top: {
                     service: 'CSA',
