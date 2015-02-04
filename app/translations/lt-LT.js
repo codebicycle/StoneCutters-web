@@ -11,6 +11,7 @@ module.exports = {
     'countryoptions.Home_SelectCity': 'Pasirinkite miest\u0105',
     'countryoptions.Home_SelectState': 'Pasirinkite valstij\u0105',
     'countryoptions.OtherCities': 'Kiti miestai',
+    'countryoptions.OtherCitiesInRegion': 'Kiti miestai, esantys <<REGION>>',
     'countryoptions.SelectACity': 'Pasirinkite miest\u0105',
     'countryoptions.SelectANeighborhood': 'Pasirinkti artimiausi\u0105 vietov\u0119',
     'defaultfooter.About OLX': 'Apie OLX',

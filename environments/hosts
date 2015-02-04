@@ -312,6 +312,8 @@
 {IP}  html5.m.olx.co.ke         # Kenia
 {IP}  www.olx.co.ke         # Kenia
 {IP}  olx.co.ke         # Kenia
+{IP}  nairobi.olx.co.ke         # Kenia
+{IP}  nairobicbd.olx.co.ke         # Kenia
 
 {IP}  m.olx.com.mx        # Mexico
 {IP}  wap.m.olx.com.mx        # Mexico
@@ -341,6 +343,8 @@
 {IP}  html5.m.olx.com.ng        # Nigeria
 {IP}  www.olx.com.ng        # Nigeria
 {IP}  olx.com.ng        # Nigeria
+{IP}  lagos.olx.com.ng        # Nigeria
+{IP}  lagos-mainland.olx.com.ng        # Nigeria
 
 {IP}  m.olx.com.pk        # Pakistan
 {IP}  wap.m.olx.com.pk        # Pakistan

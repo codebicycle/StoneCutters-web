@@ -11,6 +11,7 @@ module.exports = {
     'countryoptions.Home_SelectCity': '\u0412\u0438\u0431\u0435\u0440\u0456\u0442\u044C \u043C\u0456\u0441\u0442\u043E',
     'countryoptions.Home_SelectState': '\u0412\u0438\u0431\u0435\u0440\u0456\u0442\u044C \u0448\u0442\u0430\u0442',
     'countryoptions.OtherCities': '\u0406\u043D\u0448\u0456 \u043C\u0456\u0441\u0442\u0430',
+    'countryoptions.OtherCitiesInRegion': '\u0406\u043D\u0448\u0456 \u043C\u0456\u0441\u0442\u0430 \u0432 \u043E\u0431\u043B\u0430\u0441\u0442\u0456: <<REGION>>',
     'countryoptions.SelectACity': '\u041E\u0431\u0435\u0440\u0456\u0442\u044C \u043C\u0456\u0441\u0442\u043E',
     'countryoptions.SelectANeighborhood': '\u0412\u0438\u0431\u0435\u0440\u0456\u0442\u044C \u0441\u0443\u0441\u0456\u0434\u0441\u0442\u0432\u043E',
     'defaultfooter.About OLX': '\u041F\u0440\u043E "OLX"',

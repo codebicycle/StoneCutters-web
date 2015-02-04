@@ -11,6 +11,7 @@ module.exports = {
     'countryoptions.Home_SelectCity': 'Chwazi yon vil ',
     'countryoptions.Home_SelectState': 'Chwazi yon eta ',
     'countryoptions.OtherCities': 'L\xF2t Vil',
+    'countryoptions.OtherCitiesInRegion': 'L\xF2t vil nan<<REGION>>',
     'countryoptions.SelectACity': 'Chwazi yon vil .',
     'countryoptions.SelectANeighborhood': 'Chwazi yon katye',
     'defaultfooter.About OLX': 'Kons\xE8nan OLX',

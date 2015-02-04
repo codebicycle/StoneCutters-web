@@ -11,6 +11,7 @@ module.exports = {
     'countryoptions.Home_SelectCity': 'V\xE6lg en by',
     'countryoptions.Home_SelectState': 'V\xE6lg en stat',
     'countryoptions.OtherCities': 'Andre byer',
+    'countryoptions.OtherCitiesInRegion': '\xD8vrige byer i <<REGION>>',
     'countryoptions.SelectACity': 'V\xE6lg en by',
     'countryoptions.SelectANeighborhood': 'V\xE6lg naboomr\xE5de',
     'defaultfooter.About OLX': 'Om OLX',
