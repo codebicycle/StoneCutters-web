@@ -1,26 +1,49 @@
 <div class="help-navigation">
-    <h3 class="title">{{ dictionary["misc.NeedHelp"] }}</h3>
-    <ul>
-        <li {{ 'class="selected"' if tab == 'new-olx' }} >
-            <a class="help-toggle-content icons icon-user" data-help-content="new-olx" href="#">{{ dictionary["help.NewToBrand"] }}</a>
-        </li>
-        <li>
-            <a class="help-toggle-content icons icon-list" data-help-content="ads" href="#">{{ dictionary["itemslisting.Classifieds"] }}</a>
-        </li>
-        <li {{ 'class="selected"' if tab == 'faq' }} >
-            <a class="help-toggle-content icons icon-question" data-help-content="faqs" href="#">{{ dictionary["misc.FrequentQuestions"] }}</a>
-        </li>
-        {% if isContactEnabled %}
-            <li {{ 'class="selected"' if tab == 'contact' }}>
-                <a class="help-toggle-content icons icon-chat" data-help-content="contact" href="#">{{ dictionary["contact_us.ContactBrand"] | replace('<<BRAND>>','OLX') }}</a>
+    <div class="menu-box blue-box">
+        <h3 class="title">{{ dictionary["misc.NeedHelp"] }}</h3>
+        <ul>
+            <li {{ 'class="selected"' if tab == 'new-olx' }} >
+                <a class="help-toggle-content icons icon-user" data-help-content="new-olx" href="#">{{ dictionary["help.NewToBrand"] }}</a>
             </li>
-        {% endif %}
-        <li>
-            <a class="help-toggle-content icons icon-more" data-help-content="more-suggestions" href="#">{{ dictionary["help.MoreGuidelines"] }}</a>
-        </li>
-    </ul>
+            <li>
+                <a class="help-toggle-content icons icon-list" data-help-content="ads" href="#">{{ dictionary["itemslisting.Classifieds"] }}</a>
+            </li>
+            <li {{ 'class="selected"' if tab == 'faq' }} >
+                <a class="help-toggle-content icons icon-question" data-help-content="faqs" href="#">{{ dictionary["misc.FrequentQuestions"] }}</a>
+            </li>
+            {% if isContactEnabled %}
+                <li {{ 'class="selected"' if tab == 'contact' }}>
+                    <a class="help-toggle-content icons icon-chat" data-help-content="contact" href="#">{{ dictionary["contact_us.ContactBrand"] | replace('<<BRAND>>','OLX') }}</a>
+                </li>
+            {% endif %}
+            <li>
+                <a class="help-toggle-content icons icon-more" data-help-content="more-suggestions" href="#">{{ dictionary["help.MoreGuidelines"] }}</a>
+            </li>
+        </ul>
+    </div>
+    <div class="menu-box grey-box">
+        <h3 class="title">Company</h3>
+        <ul>
+            <li>
+                <a class="help-toggle-content icons icon-user" href="#" data-help-content="about-us">{{ dictionary["about.AboutBrand"] | replace("<<BRAND>>","OLX") }}</a>
+            </li>
+            <li>
+                <a class="help-toggle-content icons icon-list" href="#" data-help-content="why">{{ dictionary["about.Why"] }}</a>
+            </li>
+            <li>
+                <a class="help-toggle-content icons icon-question" href="#" data-help-content="press">Press</a>
+            </li>
+            <li>
+                <a class="help-toggle-content icons icon-more" href="#" data-help-content="tips">{{ dictionary["about.ListingTips"] }}</a>
+            </li>
+            <li>
+                <a class="help-toggle-content icons icon-more" href="http://blog.olx.com/">Blog</a>
+            </li>
+        </ul>
+    </div>
 </div>
-<div class="help-content">
+
+<div class="help-about-content">
     <div id="new-olx" class="help-content-display" {{ 'style="display:block"' if tab == 'new-olx' }}>
         <h3 class="title">{{ dictionary["help.NewToBrand"] }}</h3>
         <div class="faqs">
@@ -248,6 +271,247 @@
             </div>
         </div>
     </div>
+
+    <div id="about-us" class="about-content about help-content-display">
+
+        <section class="title-section">
+            <h3 class="title">{{ dictionary["about.AboutBrand"] | replace("<<BRAND>>","OLX") }}</h3>
+            <p>{{ dictionary["about.AboutText1"] | replace("<<BRAND>>","OLX") }}</p>
+            <p>{{ dictionary["about.AboutText2"] | replace("<<BRAND>>","OLX") }}</p>
+        </section>
+
+        <section class="mission-container">
+            <h4 class="subtitle">{{ dictionary["about.Mission"] }}</h4>
+            <img src="{{ ('/images/desktop/about_us/mission.jpg') | static }}" >
+            <p>{{ dictionary["about.MissionText1"] }}</p>
+        </section>
+
+        <section class="presence-container">
+            <h4 class="subtitle">{{ dictionary["about.Presence"] }}</h4>
+            <img src="{{ ('/images/desktop/about_us/presence.jpg') | static }}" >
+        </section>
+
+        <section class="history-container">
+            <h4 class="subtitle">{{ dictionary["about.History"] }}</h4>
+            <img src="{{ ('/images/desktop/about_us/presence-' + selectedLanguage + '.jpg') | static }}" >
+        </section>
+
+        <section class="stats-container">
+            <h4 class="subtitle">{{ dictionary["about.Stats"] }}</h4>
+            <div class="container-box">
+                <div class="box box-left">
+                    <p class="box-title">{{ dictionary["about.Countries"] }}</p>
+                    <p class="box-numbers">{{ dictionary["about.More40"] }}</p> 
+                </div>
+                <div class="box box-right">
+                    <p class="box-title">{{ dictionary["about.Languages"] }}</p>
+                    <p class="box-numbers">{{ dictionary["about.More50"] }}</p> 
+                </div>
+                <div class="box box-left">
+                    <p class="box-title">{{ dictionary["about.MonthlyActiveUsers"] }}</p>
+                    <p class="box-numbers">{{ dictionary["about.More200"] }}</p> 
+                </div>
+                <div class="box box-right">
+                    <p class="box-title">{{ dictionary["about.Employees"] }}</p>
+                    <p class="box-numbers">{{ dictionary["about.More1200"] }}</p> 
+                </div>
+                <div class="box box-left border-none">
+                    <p class="box-title">{{ dictionary["about.NewMonthlyListings"] }}</p>
+                    <p class="box-numbers">{{ dictionary["about.More24800"] }}</p> 
+                </div>
+                <div class="box box-right border-none">
+                    <p class="box-title">{{ dictionary["about.MonthlyTransactions"] }}</p>
+                    <p class="box-numbers">{{ dictionary["about.More8300"] }}</p> 
+                </div>
+            </div>
+        </section>
+
+        <section class="leadership-container">
+            <h4 class="subtitle">{{ dictionary["about.Leadership"] }}</h4>
+            <div class="box box-left">
+                <img src="{{ ('/images/desktop/about_us/alec-oxenford.gif') | static }}" >
+                <div>
+                    <p class="box-title">Alec Oxenford</p>
+                    <p class="box-position">Co-Founder and CEO Americas{#{ trans('about.CoFounderCeoAmericas') }#}</p>
+                </div>
+            </div>
+            <div class="box box-right">
+                <img src="{{ ('/images/desktop/about_us/amarjit-batra.gif') | static }}" >
+                <div>
+                    <p class="box-title">Amarjit Batra</p>
+                    <p class="box-position">CEO Greater India{#{ trans('about.CeoGIndia') }#}</p> 
+                </div>
+            </div>
+            <div class="box box-left">
+                <img src="{{ ('/images/desktop/about_us/ariel-lobowits.gif') | static }}" >
+                <div>
+                    <p class="box-title">Ariel Lebowits</p>
+                    <p class="box-position">CFO</p>
+                </div>
+            </div>
+            <div class="box box-right">
+                <img src="{{ ('/images/desktop/about_us/arto-joensuu.gif') | static }}" >
+                <div>
+                    <p class="box-title">Arto Joensuu</p>
+                    <p class="box-position">CEO dubizzle{#{ trans('about.CeoDubizzle') }#}</p> 
+                </div>
+            </div>
+            <div class="box box-left">
+                <img src="{{ ('/images/desktop/about_us/brad-porteus.gif') | static }}" >
+                <div>
+                    <p class="box-title">Brad Porteus</p>
+                    <p class="box-position">CEO South East Asia{#{ trans('about.CeoSEAsia') }#}</p> 
+                </div>
+            </div>
+            <div class="box box-right">
+                <img src="{{ ('/images/desktop/about_us/craig-allwright.gif') | static }}" >
+                <div>
+                    <p class="box-title">Craig Allwright</p>
+                    <p class="box-position">General Counsel</p> 
+                </div>
+            </div>
+            <div class="box box-left">
+                <img src="{{ ('/images/desktop/about_us/mark-jacobs.gif') | static }}" >
+                <div>
+                    <p class="box-title">Mark Jacobs</p>
+                    <p class="box-position">HR Leader{#{ trans('about.HrLeader') }#}</p> 
+                </div>
+            </div>
+            <div class="box box-right">
+                <img src="{{ ('/images/desktop/about_us/martin-kroon.gif') | static }}" >
+                <div>
+                    <p class="box-title">Martin Kroon</p>
+                    <p class="box-position">Director Shared Services</p> 
+                </div>
+            </div>
+            <div class="box box-left">
+                <img src="{{ ('/images/desktop/about_us/martin-sheepbouwer.gif') | static }}" >
+                <div>
+                    <p class="box-title">Martin Scheepbouwer</p>
+                    <p class="box-position">CEO Classifieds{#{ trans('about.CeoClassifieds') }#}</p> 
+                </div>
+            </div>
+            <div class="box box-right">
+                <img src="{{ ('/images/desktop/about_us/miguel-mascarenhas.gif') | static }}" >
+                <div>
+                    <p class="box-title">Miguel Mascarenhas</p>
+                    <p class="box-position">CTO</p> 
+                </div>
+            </div>
+            <div class="box box-left">
+                <img src="{{ ('/images/desktop/about_us/reolof-lettinga.gif') | static }}" >
+                <div>
+                    <p class="box-title">Roelof Lettinga</p>
+                    <p class="box-position">Strategy and Operations{#{ trans('about.StrategyOperations') }#}</p> 
+                </div>
+            </div>
+            <div class="box box-right">
+                <img src="{{ ('/images/desktop/about_us/tim-hilpert.gif') | static }}" >
+                <div>
+                    <p class="box-title">Tim Hilpert</p>
+                    <p class="box-position">CEO Europe{#{ trans('about.CeoEurope') }#}</p> 
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div id="why" class="about-content why help-content-display">
+
+        <section class="title-section">
+            <h3 class="title">{{ dictionary["about.Why"] }}</h3>
+        </section>
+
+        <section>
+            <h4 class="subtitle">{{ dictionary["about.ListingTips"] }}</h4>
+            <p>{{ dictionary["about.5WaysImprove"] }}</p>
+            <ul>
+                <li class="icons icon-piggy-bank">
+                    <p class="title-list">{{ dictionary["about.FreeNoCommission"] }}</p>
+                    <p>{{ dictionary["about.CompletelyFree"] }}</p>
+                </li>
+                <li class="icons icon-like">
+                    <p class="title-list">{{ dictionary["about.ItsSimple"] }}</p>
+                    <p>{{ dictionary["about.ItsEasy"] }}</p>
+                </li>
+                <li class="icons icon-clock">
+                    <p class="title-list">{{ dictionary["about.ItsFast"] }}</p>
+                    <p>{{ dictionary["about.ItsFast-Reason"] }}</p>
+                </li>
+                <li class="icons icon-tag">
+                    <p class="title-list">{{ dictionary["about.UniqueDeals"] }}</p>
+                    <p>{{ dictionary["about.SaveMoney"] }}</p>
+                </li>
+                <li class="icons icon-search">
+                    <p class="title-list">{{ dictionary["about.FindEverything"] }}</p>
+                    <p>{{ dictionary["about.FindEverything1"] }}</p>
+                </li>
+                <li class="icons icon-lock">
+                    <p class="title-list">{{ dictionary["about.BeControl"] }}</p>
+                    <p>{{ dictionary["about.ControlSteps"] }}</p>
+                </li>
+                <li class="icons icon-money-round">
+                    <p class="title-list">{{ dictionary["about.MakeMoney"] }}</p>
+                    <p>{{ dictionary["about.MakeMoneyText"] }}</p>
+                </li>
+                <li class="icons icon-cellphones">
+                    <p class="title-list">{{ dictionary["about.AccessAnytime"] }}</p>
+                    <p>{{ dictionary["about.CuttingEdgeApps"] }}</p>
+                </li>
+                <li class="icons icon-community">
+                    <p class="title-list">{{ dictionary["about.SupportLocalCommunity"] }}</p>
+                    <p>{{ dictionary["about.SupportLocalCommunity1"] }}</p>
+                </li>
+                <li class="icons icon-earth">
+                    <p class="title-list">{{ dictionary["about.EcoFriendly"] }}</p>
+                    <p>{{ dictionary["about.EcoFriendlyText"] }}</p>
+                </li>
+            </ul>
+        </section>
+
+    </div>
+
+    <div id="tips" class="about-content tips help-content-display">
+
+        <section class="title-section">
+            <h3 class="title">{{ dictionary["about.Tips"] }}</h3>
+        </section>
+
+        <section>
+            <h4 class="subtitle">{{ dictionary["about.ListingTips"] }}</h4>
+            <p>{{ dictionary["about.5WaysImprove"] }}</p>
+            <ul>
+                <li>{{ dictionary["about.ClearTitle"] }}</li>
+                <li>{{ dictionary["about.RightPrice"] }}</li>
+                <li>{{ dictionary["about.HiQualPics"] }}</li>
+                <li>{{ dictionary["about.BeHonest"] }}</li>
+                <li>{{ dictionary["about.PostSocialNetwork"] }}</li>
+            </ul>
+        </section>
+
+        <section>
+            <h4 class="subtitle">{{ dictionary["about.SafetyTips"] }}</h4>
+            <p>{{ dictionary["about.IdentifyFraude"]}}</p>
+            <p>{{ dictionary["about.FollowTips"]}}</p>
+            <ul>
+                <li>{{ dictionary["about.TrustInstincts"] }}</li>
+                <li>{{ dictionary["about.DontGoAlone"] }}</li>
+                <li>{{ dictionary["about.MeetPublicPlace"] }}</li>
+                <li>{{ dictionary["about.SecludedArea"] }}</li>
+                <li>{{ dictionary["about.NoStragnesHome"] }}</li>
+                <li>{{ dictionary["about.BeCautious"] }}</li>
+                <li>{{ dictionary["about.DaylightHours"] }}</li>
+                <li>{{ dictionary["about.TooGoodToBeTrue"] }}</li>
+                <li>{{ dictionary["about.TellAFriend"] }}</li>
+                <li>{{ dictionary["about.TakeMobile"] }}</li>
+                <li>{{ dictionary["about.DealLocally"] }}</li>
+                <li>{{ dictionary["about.NeverWireFunds"] }}</li>
+                <li>{{ dictionary["about.NeverGiveInfo"] }}</li>
+                <li>{{ dictionary["about.DontPay"] }}</li>
+            </ul>
+        </section>
+
+    </div>
+
 </div>
 
 {% view 'partials/tracking' %}

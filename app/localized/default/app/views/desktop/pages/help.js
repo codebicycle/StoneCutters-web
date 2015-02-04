@@ -21,12 +21,13 @@ module.exports = Base.extend({
 
         var support = config.get(['mails', 'support', location.url], 'support') + '@' + mailDomain;
         var legal = config.get(['mails', 'legal', location.url], 'legal') + '@' + mailDomain;
-
+        var selectedLanguage = this.app.session.get('selectedLanguage').split('-')[0];
+        
         return _.extend({}, data, {
             mails: {
                 support: support,
                 legal: legal,
-
+                selectedLanguage : selectedLanguage
             }
         });
     },
