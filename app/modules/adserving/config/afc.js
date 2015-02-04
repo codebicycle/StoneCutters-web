@@ -5,5 +5,6 @@ module.exports = {
     options: {
         pubId: 'ca-olx',
         channel: 'OLX_[countrycode]'
-    }
+    },
+    clientsIds: ['us', 'es', 'za']
 };
