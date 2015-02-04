@@ -10,10 +10,6 @@ module.exports = Base.extend({
     className: 'items_show_view_default',
     wapAttributes: {
         cellpadding: 0
-    },
-    getTemplateData: function() {
-        var data = Base.prototype.getTemplateData.call(this);
-        return _.extend({}, data, {});
     }
 });
 

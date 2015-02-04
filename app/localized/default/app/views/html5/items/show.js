@@ -7,6 +7,7 @@ var Categories = require('../../../../../../collections/categories');
 var Item = require('../../../../../../models/item');
 var helpers = require('../../../../../../helpers');
 var statsd = require('../../../../../../../shared/statsd')();
+
 module.exports = Base.extend({
     className: 'items_show_view_default',
     postRender: function() {
