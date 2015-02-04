@@ -5,58 +5,24 @@ module.exports = {
     },
     adserving: {
         slots: {
-            listing : {
-                topgallery: {
-                    service: 'CSA',
-                    format: 'default',
-                    location: 'Top',
-                    seo: 1
-                },
-                top: {
-                    service: 'CSA',
-                    format: 'custom',
-                    location: 'Top',
-                    seo: 1
-                },
+            listing: {
                 side: {
                     service: 'ADX',
                     format: 'WideSkyscraper',
                     location: 'Side',
                     params: {
-                        slotId: '3997611586'
+                        slotId: '2381150986'
                     }
-                },
-                bottom: {
-                    service: 'CSA',
-                    format: 'custom',
-                    location: 'Bottom',
-                    seo: 0
-                },
-                noresult: {
-                    service: 'CSA',
-                    format: 'custom',
-                    location: 'Top',
-                    params: {
-                        number: 10
-                    },
-                    seo: 10
                 }
             },
             item: {
-                top: {
-                    location: 'Top',
-                    service: 'AFC',
-                    format: 'TextTop'
-                },
                 side: {
+                    service: 'ADX',
+                    format: 'MediumRectangle',
                     location: 'Side',
-                    service: 'AFC',
-                    format: 'MediumRectangle'
-                },
-                bottom: {
-                    location: 'Bottom',
-                    service: 'AFC',
-                    format: 'TextBottom'
+                    params: {
+                        slotId: '3857858866'
+                    }
                 }
             }
         }

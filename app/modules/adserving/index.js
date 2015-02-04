@@ -28,6 +28,7 @@ function getSettings() {
     }
     var slotname = this.get('slotname');
     var service = this.get('service');
+    console.log(this.config.service);
     var settings = {
         enabled: false,
         slotname : slotname

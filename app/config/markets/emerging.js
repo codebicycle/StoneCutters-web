@@ -11,33 +11,25 @@ module.exports = {
         }
     },
     adserving: {
+        enabled: true,
         slots: {
-            listing : {
+            listing: {
                 topgallery: {
                     service: 'CSA',
                     format: 'default',
                     location: 'Top',
-                    seo: 1
+                    seo: 6
                 },
-                top: {
-                    service: 'CSA',
-                    format: 'custom',
-                    location: 'Top',
-                    seo: 1
-                },
+
                 side: {
-                    service: 'ADX',
+                    service: 'AFC',
                     format: 'WideSkyscraper',
-                    location: 'Side',
-                    params: {
-                        slotId: '3997611586'
-                    }
+                    location: 'Side'
                 },
                 bottom: {
                     service: 'CSA',
                     format: 'custom',
-                    location: 'Bottom',
-                    seo: 0
+                    location: 'Bottom'
                 },
                 noresult: {
                     service: 'CSA',
@@ -46,24 +38,24 @@ module.exports = {
                     params: {
                         number: 10
                     },
-                    seo: 10
+                    seo: 11
                 }
             },
             item: {
                 top: {
-                    location: 'Top',
                     service: 'AFC',
-                    format: 'TextTop'
+                    format: 'TextTop',
+                    location: 'Top'
                 },
                 side: {
-                    location: 'Side',
                     service: 'AFC',
-                    format: 'MediumRectangle'
+                    format: 'MediumRectangle',
+                    location: 'Side'
                 },
                 bottom: {
-                    location: 'Bottom',
                     service: 'AFC',
-                    format: 'TextBottom'
+                    format: 'TextBottom',
+                    location: 'Bottom'
                 }
             }
         }

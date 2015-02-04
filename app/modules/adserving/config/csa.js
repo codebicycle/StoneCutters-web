@@ -4,6 +4,7 @@ module.exports = {
     enabled: true,
     'default': {
         queryCategories: [16, 185, 190, 821],
+        seo: 4,
         options: {
             pubId: 'olx',
             query: '',
@@ -41,6 +42,7 @@ module.exports = {
         }
     },
     'custom': {
+        seo: 3,
         params: {
             number: 3,
             fontSizeTitle: 18,
