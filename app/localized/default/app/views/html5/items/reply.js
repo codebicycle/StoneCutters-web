@@ -2,18 +2,18 @@
 
 var _ = require('underscore');
 var asynquence = require('asynquence');
-var Base = require('../../../../../../common/app/bases/view');
-var User = require('../../../../../../../models/user');
-var tracking = require('../../../../../../../modules/tracking');
-var helpers = require('../../../../../../../helpers');
-var translations = require('../../../../../../../../shared/translations');
-var statsd = require('../../../../../../../../shared/statsd')();
+var Base = require('../../../../../common/app/bases/view');
+var User = require('../../../../../../models/user');
+var tracking = require('../../../../../../modules/tracking');
+var helpers = require('../../../../../../helpers');
+var translations = require('../../../../../../../shared/translations');
+var statsd = require('../../../../../../../shared/statsd')();
 var rEmail = /^[_a-zA-Z0-9-]+(\.[_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*(\.[a-zA-Z]{2,6})$/;
 
 module.exports = Base.extend({
-    className: 'reply',
     id: 'item-contact-form',
     tagName: 'section',
+    className: 'items_reply_view',
     postRender: function() {
         this.dictionary = translations.get(this.app.session.get('selectedLanguage'));
         this.user = new User(_.extend({
@@ -23,10 +23,14 @@ module.exports = Base.extend({
         }, this.app.session.get('user') || {}), {
             app: this.app
         });
+
         this.$el.trigger('reset');
         this.$spinner = $('.loading');
-        this.$success = this.parentView.$('.msgCont');
         this.$fields = this.$('textarea, input:not([type=submit], [type=hidden])');
+        this.app.router.once('action:end', this.onStart);
+        this.app.router.once('action:start', this.onEnd);
+        this.attachTrackMe();
+        this.$itemSlug = this.$('.itemSlug').val();
     },
     events: {
         'blur textarea, input:not([type=submit], [type=hidden])': 'onBlur',
@@ -74,11 +78,18 @@ module.exports = Base.extend({
         function success(reply) {
             event.target.reset();
             this.$spinner.hide();
-            this.$success.addClass('visible').find('.msgCont-container').text(this.dictionary['comments.YourMessageHasBeenSent'].replace(/<br \/>/g,''));
-            setTimeout(function onTimeout() {
-                this.$success.removeClass('visible');
-            }.bind(this), 3000);
+
+            var params = {
+                sent: true
+            };
+            var newUrl = {
+                slug: this.$itemSlug
+            };
+            newUrl = helpers.common.slugToUrl(newUrl);
             this.trackSuccess(reply);
+            helpers.common.redirect.call(this.app.router, newUrl , params, {
+                status: 200
+            });
         }
 
         function fail(err) {
@@ -91,22 +102,25 @@ module.exports = Base.extend({
         };
     },
     trackSuccess: function(reply) {
-        var item = this.parentView.getItem();
-        var categories = this.parentView.getCategories();
-        var subcategory = categories.search(item.get('category').id);
-        var category = categories.search(item.get('category').parentId) || subcategory;
+        var item;
+        var categories;
+        var subcategory;
+        var category;
 
         tracking.reset();
+        categories = this.$('.itemCategory').val();
+        subcategory = this.$('.itemSubcategory').val();
+        category = categories || subcategory;
         tracking.setPage('items#success');
-        tracking.addParam('item', item.toJSON());
-        tracking.addParam('category', category.toJSON());
-        tracking.addParam('subcategory', subcategory.toJSON());
+        tracking.addParam('item', this.reply.itemId);
+        tracking.addParam('category', category);
+        tracking.addParam('subcategory', subcategory);
         $('#partials-tracking-view').trigger('update', tracking.generateURL.call(this));
 
         this.track({
             category: 'Reply',
             action: 'ReplySuccess',
-            custom: ['Reply', item.get('category').parentId, item.get('category').id, 'ReplySuccess', this.reply.id].join('::')
+            custom: ['Reply', categories, subcategory, 'ReplySuccess', this.reply.id].join('::')
         });
     },
     validate: function(field) {
@@ -136,7 +150,13 @@ module.exports = Base.extend({
     setError: function (isValid, name, text) {
         this.$('small.' + name).text(isValid ? '' : text).toggleClass('hide', isValid);
         return isValid;
+    },
+    onStart: function(event) {
+        this.appView.trigger('reply:start');
+    },
+    onEnd: function(event) {
+        this.appView.trigger('reply:end');
     }
 });
 
-module.exports.id = 'items/partials/reply';
+module.exports.id = 'items/reply';

@@ -486,11 +486,12 @@ function reply(params, callback) {
         var itemId = params.itemId;
         var siteLocation = this.app.session.get('siteLocation');
         var platform = this.app.session.get('platform');
+        var newItemPage = helpers.features.isEnabled.call(this, 'newItemPage');
 
         var redirect = function(done) {
             var platform = this.app.session.get('platform');
 
-            if (platform === 'desktop') {
+            if (platform === 'desktop' || (platform === 'html5' && !newItemPage)) {
                 return done.fail();
             }
             done();
@@ -519,7 +520,7 @@ function reply(params, callback) {
             }
 
             var platform = this.app.session.get('platform');
-            if (platform === 'desktop') {
+            if (platform === 'desktop' || (platform === 'html5' && !newItemPage)) {
                 return done.fail();
             }
             done(resItem.item);
@@ -530,7 +531,6 @@ function reply(params, callback) {
             var subcategory = this.dependencies.categories.search(item.category.id);
             var category;
             var parentId;
-            var view = 'items/reply';
 
             if (!subcategory) {
                 return error();
@@ -545,11 +545,7 @@ function reply(params, callback) {
             tracking.addParam('category', category.toJSON());
             tracking.addParam('subcategory', subcategory.toJSON());
 
-            if (platform === 'html5') {
-                view = 'items/partials/reply';
-            }
-
-            callback(null, view,{
+            callback(null, {
                 item: item,
                 form: this.form
             });
