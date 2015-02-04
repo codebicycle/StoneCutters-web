@@ -67,5 +67,12 @@ module.exports = {
                 name: 'Teléfonos'
             }
         ]
+    },
+    posting: {
+        flow: {
+            hub: {
+                images: 'compact'
+            }
+        }
     }
 };
