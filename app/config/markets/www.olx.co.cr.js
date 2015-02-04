@@ -30,16 +30,6 @@ module.exports = {
             id: 'Yf5i1HOwd70'
         }
     ],
-    tracking: {
-        trackers: {
-            hydra: {
-                enabled: true
-            },
-            tagmanager: {
-                enabled: false
-            }
-        }
-    },
     successPage: {
         keepPosting: [
             {
@@ -61,5 +51,15 @@ module.exports = {
                 name: 'Móviles'
             }
         ]
+    },
+    tracking: {
+        trackers: {
+            hydra: {
+                enabled: false
+            },
+            tagmanager: {
+                enabled: true
+            }
+        }
     }
 };
