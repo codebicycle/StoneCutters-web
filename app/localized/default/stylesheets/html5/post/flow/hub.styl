@@ -118,7 +118,7 @@
 
 			}
 			
-			.hint {
+			.msg {
 
 				padding: .25rem .5rem;
 				margin-top: 10px;
@@ -128,7 +128,7 @@
 				font-size: .8125rem;
 				line-height: 1em;
 				
-				&:before {
+				&.hint {
 
 					content: url(imageUrl/images/html5/post/flow/exclamation_icon.png);
 					display: inline-block;
@@ -136,6 +136,13 @@
 					font-size: 0;
 					line-height: 0;
 					vertical-align: top;
+
+				}
+				
+				&.wait {
+
+					display: none;
+					margin: 0 0 10px;
 
 				}
 
@@ -149,7 +156,7 @@
 					background-size: cover;
 
 				}
-
+				
 			}
 			
 			&.pending {
@@ -158,6 +165,12 @@
 
 					display: table-cell;
 
+				}
+				
+				.wait {
+
+					display: block;
+					
 				}
 
 			}

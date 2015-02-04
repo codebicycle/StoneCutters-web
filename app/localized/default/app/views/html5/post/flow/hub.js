@@ -211,7 +211,7 @@ module.exports = Base.extend({
         event.stopPropagation();
         event.stopImmediatePropagation();
 
-        if (this.$('.step.success').length === 3 && !this.$('#image').hasClass('pending')) {
+        if (this.$('.step.success').length === 3 && !this.$('.images').hasClass('pending')) {
             this.$('#post').removeClass('opaque');
         }
         else {
@@ -243,7 +243,8 @@ module.exports = Base.extend({
 
         var $container = this.$('.images');
         var $display = this.$('.display');
-        var $ammount = $('.ammount');
+        var $ammount = this.$('.ammount');
+        var $key = this.$('.key');
         var images = this.parentView.getItem().get('images');
 
         console.log(images);
@@ -260,11 +261,18 @@ module.exports = Base.extend({
         }
         this.$el.trigger('change');
 
-        if (images.length > 1) {
-            $ammount.removeClass('hidden').text('+' + (images.length - 1));
-        }
-        else {
-            $ammount.addClass('hidden').text('');
+        switch (images.length) {
+            case 0:
+                $ammount.addClass('hidden').text('');
+                $key.text(translations.get(this.app.session.get('selectedLanguage'))['photos.AddPicturesNew']);
+                break;
+            case 1:
+                $key.text(translations.get(this.app.session.get('selectedLanguage'))['posting_fields_1.addAnotherPhoto']);
+                break;
+            default:
+                $ammount.removeClass('hidden').text('+' + (images.length - 1));
+                $key.text(translations.get(this.app.session.get('selectedLanguage'))['posting_fields_1.addAnotherPhoto']);
+                break;
         }
 
         //var $container = this.$('#image');
