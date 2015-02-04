@@ -231,6 +231,7 @@ module.exports = Base.extend({
         event.stopImmediatePropagation();
 
         this.$('.images').addClass('pending');
+        this.$('.hint').text(translations.get(this.app.session.get('selectedLanguage'))['posting_photosprogress.wait']);
         this.$el.trigger('change');
 
         //this.$('#image').addClass('pending');
@@ -245,9 +246,8 @@ module.exports = Base.extend({
         var $display = this.$('.display');
         var $ammount = this.$('.ammount');
         var $key = this.$('.key');
+        var $hint = this.$('.hint');
         var images = this.parentView.getItem().get('images');
-
-        console.log(images);
 
         if (images[0]) {
             $container.removeClass('pending').addClass('fill');
@@ -257,8 +257,9 @@ module.exports = Base.extend({
         }
         else {
             $container.removeClass('pending fill');
-            $display.removeClass('r').removeAttr('style');
+            $display.removeClass('r1 r2 r3 r4 r5 r6 r7 r8').removeAttr('style');
         }
+        $hint.text(translations.get(this.app.session.get('selectedLanguage'))['misc.AddPhotosSellFaster_Mob']);
         this.$el.trigger('change');
 
         switch (images.length) {
@@ -274,6 +275,8 @@ module.exports = Base.extend({
                 $key.text(translations.get(this.app.session.get('selectedLanguage'))['posting_fields_1.addAnotherPhoto']);
                 break;
         }
+
+        //posting_photosprogress.wait
 
         //var $container = this.$('#image');
         //var $image = this.$('#imagesDisplay');
