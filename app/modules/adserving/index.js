@@ -17,9 +17,8 @@ function initialize(attrs, options) {
     this.categories = new Categories(options.categories);
     this.config = getConfig.call(this);
     this.set({
-        'service': this.config.service,
-        'format': this.config.format,
-        'classname': 'adserving-' + this.config.service.toLowerCase() + ' ' + this.get('slotname')
+        service: this.config.service,
+        format: this.config.format
     });
 }
 

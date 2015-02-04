@@ -3,7 +3,6 @@ module.exports = {
         order: [185, 186, 362, 187, 16, 191, 190]
     },
     adserving: {
-        enabled: true,
         slots: {
             listing : {
                 topgallery: {

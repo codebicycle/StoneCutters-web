@@ -22,7 +22,7 @@ module.exports = Base.extend({
         };
 
         if (adserving.enabled) {
-            adserving.classname = this.adServing.get('classname');
+            adserving.classname = 'adserving-' + this.adServing.get('service').toLowerCase() + ' ' + adserving.slotname;
         }
 
         return _.extend({}, data, {
