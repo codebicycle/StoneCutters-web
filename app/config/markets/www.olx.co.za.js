@@ -40,6 +40,9 @@ module.exports = {
             hub: {
                 images: 'compact'
             }
+        },
+        success: {
+            addmessage: true
         }
     }
 };
