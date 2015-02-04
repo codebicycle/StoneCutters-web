@@ -1,43 +1,169 @@
-/*vendors = moz webkit o official
-
-@keyframes spinLoader {
-
-	from {
-
-		-moz-transform: rotate(0deg);
-		-webkit-transform: rotate(0deg);
-		transform: rotate(0deg);
-
-	}
-
-	to {
-
-		-moz-transform: rotate(360deg);
-		-webkit-transform: rotate(360deg);
-		transform: rotate(360deg);
-
-	}
-
-}*/
-
 .post_flow_hub_view {
 
 	counter-reset: index;
 
-	header {
-
+	.images {
+		
 		position: relative;
 		overflow: hidden;
+	
+		&.compact {
 
-		#image {
+			padding: 10px;
 
-			overflow: hidden;
-			width: 100%;
-			padding-top: 66.6666%;
-			background: #DDD url(imageUrl/images/html5/cameraBig.png) no-repeat center center;
-			background-size: 45% auto;
+			.action {
 
-			#imagesDisplay {
+				overflow: hidden;
+				display: table;
+				table-layout: fixed;
+				width: 100%;
+
+			}
+			
+			.display {
+
+				position: relative;
+				display: none;
+				width: 100px;
+				height: 100px;
+				font-size: 0;
+				line-height: 0;
+				vertical-align: bottom;
+				border-right: solid 10px #FFF;
+				background: #EEE url(imageUrl/images/html5/post/flow/waiting.gif) no-repeat center center;
+
+			}
+			
+			.ammount {
+
+				position: absolute;
+				right: 0;
+				bottom: 0;
+				float: right;
+				width: 2rem;
+				height: 2rem;
+				background: rgba(0, 0, 0, .5);
+				color: #FFF;
+				font-size: 1rem;
+				line-height: 2rem;
+				font-weight: bold;
+				text-align: center;
+				
+				&.hidden {
+
+					display: none;
+
+				}
+
+			}
+			
+			.text {
+
+				display: table-cell;
+				height: 98px;
+				vertical-align: middle;
+				background: #DDD;
+				border: thin dashed #999;
+				text-align: center;
+				
+				> span {
+
+					display: table;
+					width: 100%;
+					
+					&:before {
+
+						content: url(imageUrl/images/html5/post/flow/camera_icon_02.png);
+						display: table-cell;
+						padding: 0 10px;
+						font-size: 0;
+						line-height: 0;
+						text-align: right;
+						vertical-align: middle;
+
+					}
+					
+					span {
+
+						display: table-cell;
+						padding-right: 10px;
+						text-align: left;
+						vertical-align: middle;
+
+					}
+
+				}
+
+			}
+			
+			.hint {
+
+				overflow: hidden;
+				padding: .25rem .5rem;
+				margin-top: 10px;
+				background-color: #666;
+				color: #FFF;
+				text-align: center;
+				font-size: .8125rem;
+				line-height: 1em;
+				white-space: nowrap;
+				text-overflow: ellipsis;
+				
+				&:before {
+
+					content: url(imageUrl/images/html5/post/flow/exclamation_icon.png);
+					display: inline-block;
+					margin-right: .5rem;
+					font-size: 0;
+					line-height: 0;
+					vertical-align: top;
+
+				}
+				
+			}
+			
+			&.fill {
+
+				.display {
+
+					display: table-cell;
+					background-size: cover;
+
+				}
+				
+			}
+			
+			&.pending {
+
+				.display {
+
+					display: table-cell;
+
+				}
+				
+				.hint:before {
+
+					display: none;
+
+				}
+
+			}
+
+		}
+		
+		&.default {
+
+			.action {
+
+				overflow: hidden;
+				width: 100%;
+				padding-top: 66.6666%;
+				background: #DDD url(imageUrl/images/html5/cameraBig.png) no-repeat center center;
+				background-size: 45% auto;
+
+			}
+			
+			.display {
 
 				display: none;
 				position: absolute;
@@ -78,8 +204,9 @@
 				}
 
 			}
+			
+			.text {
 
-			span {
 				position: absolute;
 				top: 0;
 				left: 0;
@@ -93,17 +220,18 @@
 				font-size: 4vw;
 				color: #A3B606;
 				text-align: center;
-			}
 
+			}
+			
 			&.fill {
 
-				#imagesDisplay {
+				.display {
 
 					display: block;
 
 				}
 
-				span {
+				.text {
 
 					display: none;
 
@@ -111,26 +239,6 @@
 
 			}
 
-			/*&:after {
-
-				content: '';
-				position: absolute;
-				top: 0;
-				left: 0;
-				width: 46vw;
-				height: 46vw;
-				margin: -23vw 0 0 -23vw;
-				box-sizing: border-box;
-				border-style: solid;
-				border-width: 2vw;
-				border-color: rgba(163, 182, 6, 1) rgba(163, 182, 6, .5)  rgba(163, 182, 6, .5);
-				border-radius: 100%;
-
-				animation: spinLoader 1s ease-in-out infinite;
-				-webkit-animation: spinLoader 1s ease-in-out infinite;
-
-			}*/
-				
 			&.pending {
 
 				&:after {
@@ -151,34 +259,35 @@
 
 			}
 
-		}
+			.hint {
 
-		p {
-
-			position: relative;
-			overflow: hidden;
-			padding: 0 1em;
-			background-color: #5c2a81;
-			color: #FFF;
-			height: 1.5em;
-			line-height: 1.5em;
-			text-align: center;
-
-			small {
-
-				display: block;
+				position: relative;
 				overflow: hidden;
-				font-size: .75em;
-				text-overflow: ellipsis;
-				white-space: nowrap;
+				padding: 0 1em;
+				background-color: #5c2a81;
+				color: #FFF;
+				height: 1.5em;
+				line-height: 1.5em;
+				text-align: center;
+
+				small {
+
+					display: block;
+					overflow: hidden;
+					font-size: .75em;
+					text-overflow: ellipsis;
+					white-space: nowrap;
+
+				}
 
 			}
 
 		}
 
 	}
-
+		
 	li {
+		
 		position: relative;
 		overflow: hidden;
 		padding: 1rem;
@@ -191,6 +300,7 @@
 		}
 
 		&:before {
+			
 			width: 2rem;
 			height: 2rem;
 			display: block;
@@ -206,9 +316,11 @@
 		    line-height: 2rem;
 		    text-align: center;
 		    font-weight: bold;
+		
 		}
 
 		h3 {
+			
 			position: relative;
 			padding: 0;
 			z-index: 1;
@@ -219,6 +331,7 @@
 			color: #333;
 			white-space: nowrap;
 			text-overflow: ellipsis;
+		
 		}
 
 		.stepSummary {

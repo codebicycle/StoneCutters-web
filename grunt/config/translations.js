@@ -73,6 +73,8 @@ module.exports = {
         'messages_date_format.hour',
         'messages_date_format.hours_n',
         'messages_date_format.minute',
-        'messages_date_format.minutes_n'
+        'messages_date_format.minutes_n',
+        'posting_fields_1.addAnotherPhoto',
+        'posting_photosprogress.wait'
     ]
 };
