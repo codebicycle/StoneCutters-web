@@ -369,7 +369,7 @@ module.exports = {
     'help.WhatShouldIDoIfISuspectAFraudulentBuyer_content': 'Si sospechas que un comprador est\xE1 actuando fraudulentamente, por favor cont\xE1ctanos a trav\xE9s de <<CONTACTLINK>>Asuntos Legales<</CONTACTLINK>>.',
     'help.WhatShouldIDoIfISuspectAFraudulentSeller': '\xBFQu\xE9 puedo hacer si sospecho de un vendedor fraudulento?',
     'help.WhatShouldIDoIfISuspectAFraudulentSeller_content': 'Si sospechas que un anuncio del sitio es falso o fraudulento, por favor cont\xE1ctanos a trav\xE9s de  <<CONTACTLINK>>Asuntos Legales<</CONTACTLINK>>.',
-    'terms.BeforeSubmitting': 'Antes de enviar, por favor, lea nuestros<<LINK_TERMS_USE>>T\xE9rminos y condiciones.<</LINK_TERMS_USE>>',
+    'terms.BeforeSubmitting': 'Antes de enviar, por favor, lea nuestros<<LINK_TERMS_USE>>T\xE9rminos y Condiciones.<</LINK_TERMS_USE>>',
     'terms.TermsOfUse': 'Condiciones de Uso',
     'about.AboutBrand': 'Acerca de OLX',
     'about.AboutText1': 'OLXes la plataforma l\xEDder mundial de clasificados se enfoca en los mercados emergentes en celulares y en l\xEDnea',

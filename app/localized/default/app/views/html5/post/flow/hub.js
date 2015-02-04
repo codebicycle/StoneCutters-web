@@ -19,7 +19,6 @@ module.exports = Base.extend({
     events: {
         'show': 'onShow',
         'hide': 'onHide',
-        'click #image': 'onImageClick',
         'click .images .action': 'onImageClick',
         'stepChange': 'onStepChange',
         'click .step:not(".opaque")': 'onStepClick',
@@ -233,9 +232,6 @@ module.exports = Base.extend({
         this.$('.images').addClass('pending');
         this.$('.hint').text(translations.get(this.app.session.get('selectedLanguage'))['posting_photosprogress.wait']);
         this.$el.trigger('change');
-
-        //this.$('#image').addClass('pending');
-        //this.$el.trigger('change');
     },
     onImagesLoadEnd: function(event) {
         event.preventDefault();
@@ -275,24 +271,6 @@ module.exports = Base.extend({
                 $key.text(translations.get(this.app.session.get('selectedLanguage'))['posting_fields_1.addAnotherPhoto']);
                 break;
         }
-
-        //posting_photosprogress.wait
-
-        //var $container = this.$('#image');
-        //var $image = this.$('#imagesDisplay');
-        //var image = this.parentView.getItem().get('images')[0];
-
-        //if (image) {
-        //    $container.removeClass('pending').addClass('fill');
-        //    $image.removeAttr('class').addClass('r' + image.orientation).css({
-        //        'background-image': 'url(' + image.url + ')'
-        //    });
-        //}
-        //else {
-        //    $container.removeClass('pending fill');
-        //    $image.removeAttr('class style');
-        //}
-        //this.$el.trigger('change');
     }
 });
 
