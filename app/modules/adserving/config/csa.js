@@ -9,8 +9,6 @@ module.exports = {
             pubId: 'olx',
             query: '',
             channel: 'OLX_[countrycode]',
-            hl: 'en',
-            adPage: 3,
             adsafe: 'Medium',
             ie: 'UTF-8',
             oe: 'UTF-8',
@@ -59,5 +57,6 @@ module.exports = {
         'default': 'es',
         list: ['es', 'en', 'pt', 'it', 'fr'],
         pattern: '[langcode]'
-    }
+    },
+    clientsIds: ['us', 'es', 'za']
 };

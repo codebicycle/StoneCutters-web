@@ -39,7 +39,7 @@ module.exports = Base.extend({
 
         if (service === 'CSA' || service === 'AFC') {
             if (this.isGoogleReferer() && settings.seo) {
-                settings.params.number += settings.seo;
+                settings.params.number = settings.seo;
                 settings.options.channel = settings.options.channel.replace('Organic', 'SEO');
             }
             settings.options.channel = settings.options.channel.replace('[navigator]', window.BrowserDetect.browsername);

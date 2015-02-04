@@ -16,10 +16,7 @@ function initialize(attrs, options) {
     this.app = options.app;
     this.categories = new Categories(options.categories);
     this.config = getConfig.call(this);
-    this.set({
-        service: this.config.service,
-        format: this.config.format
-    });
+    this.set('service', this.config.service);
 }
 
 function getSettings() {
@@ -28,7 +25,6 @@ function getSettings() {
     }
     var slotname = this.get('slotname');
     var service = this.get('service');
-    console.log(this.config.service);
     var settings = {
         enabled: false,
         slotname : slotname
@@ -41,6 +37,8 @@ function getSettings() {
         settings.options = _.extend({}, this.config.options || {}, {
             query: getQuery.call(this),
             channel: createChannels.call(this, service),
+            adPage: this.app.session.get('page'),
+            pubId: getClientId.call(this, service),
             hl: this.app.session.get('selectedLanguage').split('-').shift()
         });
 
@@ -67,7 +65,7 @@ function extendConfig(config, defaults) {
 
 function createChannels(service) {
     if (service === 'ADX') {
-        return;
+        return '';
     }
     var slotname = this.get('slotname');
     var configService = utils.get(configAdServing, [service, 'default'], {});
@@ -96,6 +94,30 @@ function createChannels(service) {
 
     return channels.join(service === 'CSA' ? ' ' : ',');
 }
+
+function getClientId(service) {
+    var configType = utils.get(configAdServing, [service, 'default'], {});
+    var pubId = configType.options.pubId;
+    if (service === 'ADX') {
+        return pubId;
+    }
+    var countryCode = this.app.session.get('location').abbreviation.toLowerCase();
+    var currentRoute = this.app.session.get('currentRoute');
+    var clientId = [];
+
+    clientId.push(pubId);
+
+    if (_.contains(configType.clientsIds, countryCode)) {
+        clientId.push(countryCode);
+    }
+
+    if (currentRoute.controller !== 'searches' || !!~currentRoute.action.indexOf('allresults')) {
+        clientId.push('browse');
+    }
+
+    return clientId.join('-');
+}
+
 
 function isServiceEnabled() {
     return this.isEnabled() && this.config.enabled;

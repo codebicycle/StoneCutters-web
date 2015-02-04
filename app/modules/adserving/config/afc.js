@@ -37,5 +37,6 @@ module.exports = {
             width: 728,
             height: 90
         }
-    }
+    },
+    clientsIds: ['us', 'es', 'za']
 };

@@ -5,9 +5,6 @@ module.exports = {
     'default': {
         options: {
             pubId: 'ca-pub-9177434926134739'
-        },
-        params: {
-            slotId: '0000000000'
         }
     },
     'MediumRectangle': {

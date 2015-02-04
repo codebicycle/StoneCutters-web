@@ -20,7 +20,12 @@ module.exports = {
                     location: 'Top',
                     seo: 6
                 },
-
+                top: {
+                    service: 'CSA',
+                    format: 'custom',
+                    location: 'Top',
+                    seo: 4
+                },
                 side: {
                     service: 'AFC',
                     format: 'WideSkyscraper',
