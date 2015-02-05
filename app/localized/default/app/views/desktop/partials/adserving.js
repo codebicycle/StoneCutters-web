@@ -39,7 +39,7 @@ module.exports = Base.extend({
 
         if (type === 'CSA' || type === 'AFC') {
             if (this.isGoogleReferer() && settings.seo) {
-                settings.params.number = settings.seo;
+                settings.params.number += settings.seo;
                 settings.options.channel = settings.options.channel.replace('Organic', 'SEO');
             }
             settings.options.channel = settings.options.channel.replace('[navigator]', window.BrowserDetect.browsername);
@@ -47,7 +47,7 @@ module.exports = Base.extend({
         switch (type) {
             case 'CSA':
                 this._includeCsaLib();
-                window._googCsa('ads', settings.options, settings.params);
+                this.app.router.appView.trigger('adserving:CSA', settings);
                 break;
             case 'ADX':
                 this.createIframeADX(settings.params, settings.options);

@@ -12,6 +12,9 @@ module.exports = Base.extend({
     },
     initialize: function() {
         this.app.on('change:loading', this.loading.bind(this, this.$('#progressBar')));
+        this.adserving = [];
+        this.on('adserving:CSA', this.onAdservingCSA);
+        this.app.router.on('action:end', this.onEnd.bind(this));
     },
     loading: function($progressBar, app, isLoading) {
         if (isLoading){
@@ -81,6 +84,20 @@ module.exports = Base.extend({
             ', left=' + left
         );
     },
+    onAdservingCSA: function(settings) {
+        if (!this.adserving.length) {
+            this.adserving.push('ads');
+            this.adserving.push(settings.options);
+        }
+        this.adserving.push(settings.params);
+    },
+    onEnd: function() {
+        if (!this.adserving.length) {
+            return;
+        }
+        window._googCsa.apply(window._googCsa, this.adserving);
+        this.adserving = [];
+    }
 });
 
 module.exports.id = 'app_view/index';

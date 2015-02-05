@@ -38,9 +38,12 @@ function getSettings() {
             settings.params = _.extend({}, configType.params, this.config.params || {}, {
                 container: slotname
             });
+
             settings.options = _.extend({}, configType.options, {
                 query: getQuery.call(this),
                 channel: createChannels.call(this, type),
+                adPage: this.app.session.get('page'),
+                pubId: getClientId.call(this, type),
                 hl: this.app.session.get('selectedLanguage').split('-').shift()
             });
 
@@ -90,6 +93,29 @@ function createChannels(type) {
     channels.push([prefix, configChannel.name, this.config.location, 'Organic'].join('_'));
 
     return channels.join(type === 'CSA' ? ' ' : ',');
+}
+
+function getClientId(type) {
+    var configType = utils.get(configAdServing, type, {});
+    var pubId = configType.options.pubId;
+    if (type === 'ADX') {
+        return pubId;
+    }
+    var countryCode = this.app.session.get('location').abbreviation.toLowerCase();
+    var currentRoute = this.app.session.get('currentRoute');
+    var clientId = [];
+
+    clientId.push(pubId);
+
+    if (_.contains(configType.clientsIds, countryCode)) {
+        clientId.push(countryCode);
+    }
+
+    if (currentRoute.controller !== 'searches' || !!~currentRoute.action.indexOf('allresults')) {
+        clientId.push('browse');
+    }
+
+    return clientId.join('-');
 }
 
 function isSlotEnabled() {

@@ -12,6 +12,7 @@ module.exports = function(app, dataAdapter) {
     var User = require('../../app/models/user');
     var Item = require('../../app/models/item');
     var helpers = require('../../app/helpers');
+    var translations = require('../../shared/translations');
 
     (function reply() {
         app.post('/items/:itemId/reply', handler);
@@ -95,6 +96,7 @@ module.exports = function(app, dataAdapter) {
         function handler(req, res, next) {
             var location = req.rendrApp.session.get('location');
             var platform = req.rendrApp.session.get('platform');
+            var dictionary = translations.get(req.rendrApp.session.get('selectedLanguage'));
             var newImages;
             var item;
             var editing;
@@ -110,6 +112,7 @@ module.exports = function(app, dataAdapter) {
 
                 function callback(err, _item, _images) {
                     editing = !!(_item && _item.id);
+
                     if (err === 'aborted') {
                         done.abort();
                         statsd.increment([location.abbreviation, editing ? 'editing' : 'posting', 'error', 'abort', platform]);
@@ -126,6 +129,24 @@ module.exports = function(app, dataAdapter) {
                     return handlerPostLocation(_item, _images, req, res, next);
                 }
                 done(_item, _images);
+            }
+
+            function validate(done, _item, images) {
+                var neighborhood;
+
+                if (typeof _item.neighborhood !== 'undefined') {
+                    if (_item.neighborhood === '') {
+                        return fail([{
+                            selector: 'neighborhood',
+                            message: dictionary['countryoptions.SelectANeighborhood'],
+                            label: 'neighborhood'
+                        }]);
+                    }
+                    neighborhood = _item.neighborhood.split('-');
+                    _item['neighborhood.id'] = neighborhood[0];
+                    _item['neighborhood.name'] = neighborhood[1];
+                }
+                done(_item, images);
             }
 
             function post(done, _item, images) {
@@ -191,6 +212,7 @@ module.exports = function(app, dataAdapter) {
             asynquence().or(fail)
                 .then(parse)
                 .then(checkWapChangeLocation)
+                .then(validate)
                 .then(post)
                 .then(success)
                 .val(clean);

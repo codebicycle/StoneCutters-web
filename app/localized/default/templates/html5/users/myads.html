@@ -69,7 +69,7 @@
                 {#{ item.date.since.day if item.date.since.day }} {{ dictionary[item.date.since.dictionary] }}{{ (', ' + item.date.since.hour) if item.date.since.hour }#}
                 <li class="my-ads {{ status }}" data-status="{{ status }}">
                     {% if item.editable %}
-                        <a class="btnfilter edit trackMe" data-tracking="Myolx-ClickEdit" href="{{ item.slug.replace(domain, fullDomain) | editSlug(item.id) }}">{{ dictionary["showactivelistings.Edit"] }}</a>
+                        <a class="btnfilter edit trackMe" data-tracking="Myolx-ClickEdit" data-qa="edit-button" href="{{ ('/myolx/edititem/' + item.id) | link }}">{{ dictionary["showactivelistings.Edit"] }}</a>
                     {% endif %}
                     {% if status != 'deleted' %}
                         <a class="btnfilter more" href="#" data-action="more" data-itemUrl="{{ item | slugToUrl | link }}" data-id="{{ item.id }}" >{{ dictionary["itemslisting.More"] }}</a>

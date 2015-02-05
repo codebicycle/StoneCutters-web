@@ -3,15 +3,23 @@
 var Base = require('../../../../../../common/app/bases/view');
 var translations = require('../../../../../../../../shared/translations');
 var _ = require('underscore');
+var config = require('../../../../../../../../shared/config');
 
 module.exports = Base.extend({
     className: 'post_flow_hub_view',
     id: 'hub',
     tagName: 'section',
+    getTemplateData: function() {
+        var data = Base.prototype.getTemplateData.call(this);
+
+        return _.extend({}, data, {
+            imagesTemplate: data.template + '/post/flow/hub/images.' + config.getForMarket(this.app.session.get('location').url, ['posting', 'flow', 'hub', 'images'], 'default') + '.html'
+        });
+    },
     events: {
         'show': 'onShow',
         'hide': 'onHide',
-        'click #image': 'onImageClick',
+        'click .images .action': 'onImageClick',
         'stepChange': 'onStepChange',
         'click .step:not(".opaque")': 'onStepClick',
         'categoryChange': 'onCategoryChange',
@@ -202,7 +210,7 @@ module.exports = Base.extend({
         event.stopPropagation();
         event.stopImmediatePropagation();
 
-        if (this.$('.step.success').length === 3 && !this.$('#image').hasClass('pending')) {
+        if (this.$('.step.success').length === 3 && !this.$('.images').hasClass('pending')) {
             this.$('#post').removeClass('opaque');
         }
         else {
@@ -221,7 +229,8 @@ module.exports = Base.extend({
         event.stopPropagation();
         event.stopImmediatePropagation();
 
-        this.$('#image').addClass('pending');
+        this.$('.images').addClass('pending');
+        this.$('.hint').text(translations.get(this.app.session.get('selectedLanguage'))['posting_photosprogress.wait']);
         this.$el.trigger('change');
     },
     onImagesLoadEnd: function(event) {
@@ -229,21 +238,39 @@ module.exports = Base.extend({
         event.stopPropagation();
         event.stopImmediatePropagation();
 
-        var $container = this.$('#image');
-        var $image = this.$('#imagesDisplay');
-        var image = this.parentView.getItem().get('images')[0];
+        var $container = this.$('.images');
+        var $display = this.$('.display');
+        var $ammount = this.$('.ammount');
+        var $key = this.$('.key');
+        var $hint = this.$('.hint');
+        var images = this.parentView.getItem().get('images');
 
-        if (image) {
+        if (images[0]) {
             $container.removeClass('pending').addClass('fill');
-            $image.removeAttr('class').addClass('r' + image.orientation).css({
-                'background-image': 'url(' + image.url + ')'
+            $display.removeClass('r1 r2 r3 r4 r5 r6 r7 r8').addClass('r' + images[0].orientation).css({
+                'background-image': 'url(' + images[0].url + ')'
             });
         }
         else {
             $container.removeClass('pending fill');
-            $image.removeAttr('class style');
+            $display.removeClass('r1 r2 r3 r4 r5 r6 r7 r8').removeAttr('style');
         }
+        $hint.text(translations.get(this.app.session.get('selectedLanguage'))['misc.AddPhotosSellFaster_Mob']);
         this.$el.trigger('change');
+
+        switch (images.length) {
+            case 0:
+                $ammount.addClass('hidden').text('');
+                $key.text(translations.get(this.app.session.get('selectedLanguage'))['photos.AddPicturesNew']);
+                break;
+            case 1:
+                $key.text(translations.get(this.app.session.get('selectedLanguage'))['posting_fields_1.addAnotherPhoto']);
+                break;
+            default:
+                $ammount.removeClass('hidden').text('+' + (images.length - 1));
+                $key.text(translations.get(this.app.session.get('selectedLanguage'))['posting_fields_1.addAnotherPhoto']);
+                break;
+        }
     }
 });
 

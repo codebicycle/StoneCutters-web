@@ -6,7 +6,9 @@ var middlewares = require('../middlewares');
 var helpers = require('../helpers');
 var tracking = require('../modules/tracking');
 var Item = require('../models/item');
+var FeatureAd = require('../models/feature_ad');
 var config = require('../../shared/config');
+var Sixpack = require('../../shared/sixpack');
 
 module.exports = {
     flow: middlewares(flow),
@@ -178,7 +180,9 @@ function flow(params, callback) {
                 return true;
             }
             if (item.getLocation().url && item.getLocation().url !== siteLocation) {
-                helpers.common.redirect.call(this, [protocol, '://', host.replace(shortHost, item.getLocation().url), url].join(''), null, {
+                helpers.common.redirect.call(this, url, {
+                    location: item.getLocation().url
+                }, {
                     pushState: false
                 });
                 return true;
@@ -361,7 +365,8 @@ function form(params, callback) {
         }.bind(this);
 
         var fetch = function(done) {
-            this.app.fetch({
+            var platform = this.app.session.get('platform');
+            var spec = {
                 postingSession: {
                     model: 'PostingSession',
                     params: {}
@@ -375,7 +380,20 @@ function form(params, callback) {
                         languageId: languageId
                     }
                 }
-            }, {
+            };
+
+            if (platform === "html4" || platform === "wap") {
+                spec.neighborhoods = {
+                    collection: 'Neighborhoods',
+                    params: {
+                        level: 'cities',
+                        type: 'neighborhoods',
+                        location: siteLocation,
+                        languageId: languageId
+                    }
+                };
+            }
+            this.app.fetch(spec, {
                 readFromCache: false
             }, done.errfcb);
         }.bind(this);
@@ -396,10 +414,10 @@ function form(params, callback) {
                 done.abort();
                 return helpers.common.redirect.call(this, '/posting/' + params.categoryId);
             }
-            done(response.postingSession, response.fields);
+            done(response.postingSession, response.fields, response.neighborhoods);
         }.bind(this);
 
-        var success = function(_postingSession, _field) {
+        var success = function(_postingSession, _field, _neighborhood) {
             var category = this.dependencies.categories.get(params.categoryId);
             var subcategory = category.get('children').get(params.subcategoryId);
 
@@ -407,6 +425,7 @@ function form(params, callback) {
             tracking.addParam('subcategory', subcategory.toJSON());
             this.app.seo.addMetatag('robots', 'noindex, nofollow');
             this.app.seo.addMetatag('googlebot', 'noindex, nofollow');
+
             callback(null, {
                 postingSession: _postingSession.get('postingSession'),
                 intent: 'create',
@@ -415,6 +434,7 @@ function form(params, callback) {
                 subcategory: subcategory.toJSON(),
                 language: languageId,
                 siteLocation: siteLocation,
+                neighborhoods: _neighborhood ? _neighborhood.toJSON() : undefined,
                 form: this.form
             });
         }.bind(this);
@@ -510,6 +530,29 @@ function success(params, callback) {
             }.bind(this));
         }.bind(this);
 
+        var findFeatured = function(done, item, relateds) {
+            if (!FeatureAd.isEnabled(this.app)) {
+                return done(item, relateds);
+            }
+            this.app.fetch({
+                featuread: {
+                    model : 'Feature_ad',
+                    params: {
+                        id: item.get('id'),
+                        locate: this.app.session.get('selectedLanguage')
+                    }
+                }
+            }, {
+                readFromCache: false
+            }, function afterFetch(err, res) {
+                if (err) {
+                    res = {};
+                }
+                item.set('featured', res.featuread);
+                done(item, relateds);
+            }.bind(this));
+        }.bind(this);
+
         var success = function(_item, _relatedItems) {
             var item = _item.toJSON();
             var subcategory = this.dependencies.categories.search(item.category.id);
@@ -537,6 +580,16 @@ function success(params, callback) {
             });
         }.bind(this);
 
+        var convert = function() {
+            var sixpack = new Sixpack({
+                platform: this.app.session.get('platform'),
+                market: this.app.session.get('location').abbreviation,
+                experiments: this.app.session.get('experiments')
+            });
+
+            sixpack.convert(sixpack.experiments.html5Interstitial);
+        }.bind(this);
+
         var error = function(err, res) {
             return helpers.common.error.call(this, err, res, callback);
         }.bind(this);
@@ -546,7 +599,9 @@ function success(params, callback) {
             .then(findItem)
             .then(checkItem)
             .then(findRelatedItems)
-            .val(success);
+            .then(findFeatured)
+            .val(success)
+            .val(convert);
     }
 }
 

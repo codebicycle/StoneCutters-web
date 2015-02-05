@@ -8,6 +8,7 @@ var helpers = require('../helpers');
 var tracking = require('../modules/tracking');
 var Paginator = require('../modules/paginator');
 var Seo = require('../modules/seo');
+var FeatureAd = require('../models/feature_ad');
 var config = require('../../shared/config');
 var utils = require('../../shared/utils');
 
@@ -21,16 +22,47 @@ function list(params, callback) {
     helpers.controllers.control.call(this, params, controller);
 
     function controller() {
-        var platform = this.app.session.get('platform');
-        var icons = config.get(['icons', platform], []);
-        var location = this.app.session.get('location');
-        var country = location.url;
 
-        this.app.seo.setContent(this.dependencies.categories.meta);
-        callback(null, {
-            icons: (~icons.indexOf(country)) ? country.split('.') : 'default'.split('.'),
-            location: location
-        });
+        var fetch = function(done) {
+            if (!FeatureAd.isEnabled(this.app)) {
+                return done();
+            }
+            var languages = this.app.session.get('languages');
+
+            params.seo = this.app.seo.isEnabled();
+            params.languageId = languages._byId[this.app.session.get('selectedLanguage')].id;
+            Paginator.prepare(this.app, params);
+
+            this.app.fetch({
+                featureads: {
+                    collection: 'FeatureAds',
+                    params: params
+                }
+            }, {
+                readFromCache: false
+            }, done.errfcb);
+        }.bind(this);
+
+        var success = function(res) {
+            var platform = this.app.session.get('platform');
+            var icons = config.get(['icons', platform], []);
+            var location = this.app.session.get('location');
+            var country = location.url;
+
+            this.app.seo.setContent(this.dependencies.categories.meta);
+            callback(null, {
+                icons: (~icons.indexOf(country)) ? country.split('.') : 'default'.split('.'),
+                items: res ? res.featureads : undefined
+            });
+        }.bind(this);
+
+        var error = function(err, res) {
+            return helpers.common.error.call(this, err, res, callback);
+        }.bind(this);
+
+        asynquence().or(error)
+            .then(fetch)
+            .val(success);
     }
 }
 
@@ -165,7 +197,21 @@ function handleItems(params, promise, gallery) {
         done();
     }.bind(this);
 
-    var fetch = function(done) {
+    var fetchFeatured = function(done) {
+        if (!FeatureAd.isEnabled(this.app)) {
+            return done();
+        }
+        this.app.fetch({
+            featureads: {
+                collection: 'FeatureAds',
+                params: _.clone(params)
+            }
+        }, {
+            readFromCache: false
+        }, done.errfcb);
+    }.bind(this);
+
+    var fetch = function(done, res) {
         this.app.fetch({
             items: {
                 collection: 'Items',
@@ -173,7 +219,15 @@ function handleItems(params, promise, gallery) {
             }
         }, {
             readFromCache: false
-        }, done.errfcb);
+        }, function afterFetch(err, response) {
+            if (err) {
+                return done.fail(err);
+            }
+            if (response && res && res.featureads) {
+                res.featureads.mergeTo(response.items);
+            }
+            done(response);
+        });
     }.bind(this);
 
     var filters = function(done, res) {
@@ -240,6 +294,8 @@ function handleItems(params, promise, gallery) {
             tracking.addParam('subcategory', subcategory.toJSON());
         }
         tracking.addParam('page', query.page);
+        tracking.addParam('filters', items.filters);
+        tracking.addParam('paginator', items.paginator);
 
         done({
             type: 'items',
@@ -258,6 +314,7 @@ function handleItems(params, promise, gallery) {
     promise.then(configure);
     promise.then(redirect);
     promise.then(prepare);
+    promise.then(fetchFeatured);
     promise.then(fetch);
     promise.then(filters);
     promise.then(paginate);

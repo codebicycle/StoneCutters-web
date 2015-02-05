@@ -4,10 +4,13 @@
     </td>
 </tr>
 <tr>
-    <td style="padding: .5em .5em .25em; border-top: solid thin #808080;">
+    <td style="padding: .5em .5em .25em; border-top: solid thin #808080;" data-qa="success">
         <strong style="color:#494949;">{{ dictionary["misc.AllSet_Mob"] }}</strong><br>
         <strong style="color:#e2771c;">{{ dictionary["misc.AdSubmittedApproval"] }}</strong><br>
         <small>{{ dictionary["misc.SeeAdIn2Hrs_Mob"] }}</small><br>
+        {% if addmessage %}
+            <small>Your reference for this advert is: <strong>{{ item.id }}</strong></small></br>
+        {% endif %}
         <small>{{ dictionary["postingtitlelisting.view"] }} <a href="{{ item | slugToUrl | link }}" data-qa="posted-ad-link" >{{ dictionary["itemwarning.Here"] }}</a></small><br><br>
     </td>
 </tr>

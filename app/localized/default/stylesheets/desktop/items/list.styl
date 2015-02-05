@@ -5,6 +5,11 @@
     margin: 10px 0;
 
     li {
+        &.featuredad {
+            .items-date, .items-price, .items-info {
+                padding-top: 30px;
+            }
+        }
         box($white, $greyBorders, 0, 10px);
         border-bottom-color: $white;
         position: relative;
@@ -21,9 +26,9 @@
         h3 {
             font-weight: normal;
             margin: 0;
+            display: block;
         }
         p,
-        h3,
         .items-info,
         .items-image {
             display: inline-block;
@@ -61,7 +66,7 @@
         }
         .items-info {
             font-size: $m;
-            padding: 0 10px 0 15px;
+            padding: 10px 10px 0 15px;
             width: 330px;
 
             span {
@@ -80,6 +85,39 @@
             color: $greyStrong;
             font-size: $xs;
             width: 60px;
+        }
+        .items-price, .items-date {
+            margin: 0;
+            padding-top: 10px;
+        }
+        p.featuredad {
+            position: absolute;
+            left: 138px;
+            top: -3px;
+            height: 20px;
+            .icon-star-circle {
+                color: $featureStarBg;
+                font-size: 26px;
+                position: absolute;
+                z-index: 10;
+                top: -7px;
+                left: 0;
+                &:before {
+                    border:2px solid $white;
+                    border-radius(50%);
+                    background: $white;
+                }
+            }
+
+            em {
+                ribbon($green, $white);
+                top: 0;
+                left: 24px;
+                padding-left: 22px;
+                position: absolute;
+                width: 120px;
+                text-align: center;
+            }
         }
     }
     &.staticsearch {

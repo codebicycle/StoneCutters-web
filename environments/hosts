@@ -10,12 +10,21 @@
 #162.242.207.113    sh.care.olx.com   #production
 
 #ARWEN
+{IP}  get.olx.com           # Get OLX
+{IP}  get.olx.ir           # Get OLX
+
 {IP}  m.olx.com           # United States
 {IP}  wap.m.olx.com           # United States
 {IP}  html4.m.olx.com           # United States
 {IP}  html5.m.olx.com           # United States
 {IP}  www.olx.com           # United States
 {IP}  olx.com           # United States
+{IP}  lasvegas.olx.com # United States
+{IP}  yonkers.olx.com # United States
+{IP}  sacramento.olx.com # United States
+{IP}  norfolk-virginia.olx.com # United States
+{IP}  fortmeade-maryland.olx.com # United States
+{IP}  farrwest.olx.com # United States
 
 {IP}  m.olx.com.ar        # Argentina
 {IP}  wap.m.olx.com.ar        # Argentina
@@ -199,6 +208,7 @@
 {IP}  html5.m.olx.com.br        # Brazil
 {IP}  www.olx.com.br        # Brazil
 {IP}  olx.com.br        # Brazil
+{IP}  adolfo.olx.com.br        # Brazil
 
 {IP}  m.olx.cl            # Chile
 {IP}  wap.m.olx.cl            # Chile
@@ -287,6 +297,7 @@
 {IP}  html5.m.olx.it            # Italy
 {IP}  www.olx.it            # Italy
 {IP}  olx.it            # Italy
+{IP}  milano.olx.it # Italy
 
 {IP}  m.olx.ir			# Iran
 {IP}  wap.m.olx.ir		# Iran
@@ -301,6 +312,8 @@
 {IP}  html5.m.olx.co.ke         # Kenia
 {IP}  www.olx.co.ke         # Kenia
 {IP}  olx.co.ke         # Kenia
+{IP}  nairobi.olx.co.ke         # Kenia
+{IP}  nairobicbd.olx.co.ke         # Kenia
 
 {IP}  m.olx.com.mx        # Mexico
 {IP}  wap.m.olx.com.mx        # Mexico
@@ -330,6 +343,8 @@
 {IP}  html5.m.olx.com.ng        # Nigeria
 {IP}  www.olx.com.ng        # Nigeria
 {IP}  olx.com.ng        # Nigeria
+{IP}  lagos.olx.com.ng        # Nigeria
+{IP}  lagos-mainland.olx.com.ng        # Nigeria
 
 {IP}  m.olx.com.pk        # Pakistan
 {IP}  wap.m.olx.com.pk        # Pakistan
@@ -604,6 +619,10 @@
 {IP}  html5.m.olx.es            # Spain
 {IP}  www.olx.es            # Spain
 {IP}  olx.es            # Spain
+{IP}  gava.olx.es # Spain
+{IP}  getafe.olx.es # Spain
+{IP}  ciudadzaragoza.olx.es # Spain
+{IP}  ciudadmadrid.olx.es # Spain
 
 {IP}  m.olx.lk            # Sri Lanka
 {IP}  wap.m.olx.lk            # Sri Lanka

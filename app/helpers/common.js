@@ -256,7 +256,9 @@ module.exports = (function() {
         });
         this.app.seo.addMetatag('robots', 'noindex, nofollow');
         this.app.seo.addMetatag('googlebot', 'noindex, nofollow');
-        return callback(null, 'pages/error', res || {});
+        return callback(null, 'pages/error', {
+            err: err
+        });
     }
 
     function serializeFormJSON(data) {
@@ -274,6 +276,38 @@ module.exports = (function() {
        return output;
     }
 
+    function parseDate(date) {
+        if (!_.isString(date)) {
+            return date;
+        }
+        date = date.split(/[- .:]/);
+        _.map(date, function toNumber(part) {
+            return Number(part);
+        });
+        return new Date(date[0], date[1] - 1, date[2], date[3], date[4], date[5]);
+    }
+
+    function dateDiff(start, end) {
+        var miliseconds = parseDate(end).getTime() - parseDate(start).getTime();
+        var seconds = miliseconds / 1000;
+        var minutes = Math.floor(seconds / 60);
+        var hours = Math.floor(minutes / 60);
+        var days = Math.floor(hours / 24);
+        var out = [];
+
+        minutes = minutes - hours*60;
+        hours = hours - days*24;
+
+        out.push(days);
+        out.push(this.dictionary['messages_date_format.day' + (hours > 1 ? 's_n' : '')] + ',');
+        out.push(hours);
+        out.push(this.dictionary['messages_date_format.hour' + (hours > 1 ? 's_n' : '')]);
+        out.push(this.dictionary['messages_date_format.and']);
+        out.push(minutes);
+        out.push(this.dictionary['messages_date_format.minute' + (minutes > 1 ? 's_n' : '')]);
+        return out.join(' ');
+    }
+
     return {
         slugToUrl: slugToUrl,
         link: utils.link,
@@ -285,6 +319,7 @@ module.exports = (function() {
         redirect: redirect,
         error: error,
         serializeFormJSON: serializeFormJSON,
-        'static': statics
+        'static': statics,
+        dateDiff: dateDiff
     };
 })();
