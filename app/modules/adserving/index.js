@@ -32,6 +32,7 @@ function getSettings() {
 
     if (this.config.enabled) {
         settings.params = _.extend({}, this.config.params || {}, {
+            number: getNumberPerCategory.call(this, service),
             container: slotname
         });
         settings.options = _.extend({}, this.config.options || {}, {
@@ -45,6 +46,8 @@ function getSettings() {
         if (settings.params.adIconUrl && this.config.language) {
             settings.params.adIconUrl = settings.params.adIconUrl.replace(this.config.language.pattern, _.contains(this.config.language.list, settings.options.hl) ? settings.options.hl : this.config.language['default']);
         }
+
+        console.log('Mostrando: ' + slotname + ' ' + service + ' ' + settings.params.number);
 
         _.extend(settings, {
             enabled: true,
@@ -118,6 +121,20 @@ function getClientId(service) {
     return clientId.join('-');
 }
 
+function getNumberPerCategory(service){
+    var number = this.config.params.number;
+
+    if (service !== 'CSA') {
+        return number || 1;
+    }
+    var cat = getCategoryId.call(this);
+
+    if (!cat) {
+        cat = this.app.session.get('currentRoute').action;
+    }
+
+    return utils.get(this.config, ['numberPerCategoryCSA', cat], number);
+}
 
 function isServiceEnabled() {
     return this.isEnabled() && this.config.enabled;

@@ -18,13 +18,11 @@ module.exports = {
                     service: 'CSA',
                     format: 'default',
                     location: 'Top',
-                    seo: 4
                 },
                 top: {
                     service: 'CSA',
                     format: 'custom',
                     location: 'Top',
-                    seo: 4
                 },
                 side: {
                     service: 'AFC',
@@ -43,7 +41,7 @@ module.exports = {
                     params: {
                         number: 10
                     },
-                    seo: 11
+                    seo: 1
                 }
             },
             item: {
