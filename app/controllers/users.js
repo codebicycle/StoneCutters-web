@@ -617,9 +617,10 @@ function conversations(params, callback) {
         var message;
         var _params;
         var user;
+        var view = 'users/myolx';
 
         var redirect = function(done) {
-            if (platform !== 'desktop') {
+            if (platform !== 'desktop' && platform !== 'html5') {
                 return done.fail();
             }
             user = this.app.session.get('user');
@@ -675,7 +676,11 @@ function conversations(params, callback) {
         var success = function(res) {
             this.app.seo.addMetatag('robots', 'noindex, nofollow');
             this.app.seo.addMetatag('googlebot', 'noindex, nofollow');
-            callback(null, 'users/myolx', {
+
+            if (platform === 'html5') {
+                view = 'users/conversations';
+            }
+            callback(null, view, {
                 include: ['conversations', 'items'],
                 conversations: res.conversations.toJSON(),
                 items: res.conversations.items,
@@ -685,7 +690,6 @@ function conversations(params, callback) {
         }.bind(this);
 
         var error = function(err, res) {
-            console.log(err);
             return helpers.common.error.call(this, err, res, callback);
         }.bind(this);
 
@@ -706,9 +710,10 @@ function conversation(params, callback) {
         var message;
         var _params;
         var user;
+        var view = 'users/myolx';
 
         var redirect = function(done) {
-            if (platform !== 'desktop') {
+            if (platform !== 'desktop' && platform !== 'html5') {
                 return done.fail();
             }
             user = this.app.session.get('user');
@@ -745,7 +750,12 @@ function conversation(params, callback) {
         var success = function(res) {
             this.app.seo.addMetatag('robots', 'noindex, nofollow');
             this.app.seo.addMetatag('googlebot', 'noindex, nofollow');
-            callback(null, 'users/myolx', {
+
+            if (platform === 'html5') {
+                view = 'users/conversation';
+            }
+
+            callback(null, view, {
                 thread: res.thread,
                 include: ['thread'],
                 viewname: 'conversation'

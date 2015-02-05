@@ -1,0 +1,185 @@
+.users_conversation_view,
+.users_conversations_view {
+    header {
+        background: #efefef;
+        border-bottom: 1px solid #ccc;
+        font-weight: bold;
+        padding: 15px 20px;
+        color: #0076be;
+    }
+
+    .link-thread ,
+    .link-item {
+        box-sizing: border-box;
+        display: block;
+        overflow: hidden;
+        padding: 10px;
+        width: 100%;
+    }
+
+    .items-image {
+        border: 1px solid #ccc;
+        float: left;
+        height: 50px;
+        line-height: 95px;
+        margin: 0 10px 0 0;
+        padding: 0;
+        position: relative;
+        text-align: center;
+        width: 50px;
+        &.noPhoto {
+            background: #fff url(imageUrl/images/html5/noPhoto.png) 50% 50% no-repeat;
+        }
+        img {
+            bottom: 0;
+            left: 0;
+            margin: auto;
+            max-height: 100%;
+            max-width: 100%;
+            position: absolute;
+            right: 0;
+            top: 0;
+        }
+    }
+}
+
+.users_conversations_view {
+    .conversations-thread {
+        border-bottom: 1px solid #ccc;
+        overflow: hidden;
+        .conversations-data {
+            font-size: 14px;
+            .top {
+                overflow: hidden;
+            }
+            .name,
+            .date,
+            .title {
+                display: block;
+            }
+            .name, .date {
+                color: #666;
+            }
+            .name {
+                float: left;
+            }
+            .date, .title {
+                font-size: 13px;
+            }
+            .date {
+                float: right;
+            }
+            .title,
+            .message {
+                color: #b1b1b1;
+                height: 16px;
+                overflow: hidden;
+                padding-top: 3px;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                word-wrap: break-word;
+            }
+            &.unread {
+                .name,
+                .date,
+                .message {
+                    font-weight: bold;
+                }
+                .message {
+                    color: #ff7800;
+                }
+            }
+        }
+    }
+}
+
+.users_conversation_view {
+    overflow: hidden;
+    font-size: 14px;
+    position: relative;
+    .date {
+        color: #b1b1b1;
+        font-size: 12px;
+    }
+    .conversation {
+        // padding-bottom: 54px;
+    }
+    .item {
+        border-bottom: 1px solid #ccc;
+        position: relative;
+        background: #fff;
+        width: 100%;
+        .item-data {
+            .top {
+                overflow: hidden;
+            }
+            .title {
+                color: #474747;
+                padding-top: 3px;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                word-wrap: break-word;
+            }
+            .price {
+                font-size: 20px;
+                color: #ff7800;
+                font-weight: bold;
+                position: absolute;
+                bottom: 10px;
+                right: 10px;
+            }
+        }
+    }
+    .message {
+        border-bottom: 1px solid #ccc;
+        overflow: hidden;
+        padding: 10px;
+        &.is-mine {
+            background: #f9fddf;
+        }
+        .name,
+        .text {
+            color: #474747;
+        }
+        .name {
+            font-weight: bold;
+        }
+        .text {
+            padding: 5px 0;
+        }
+        .name,
+        .date {
+            display: block;
+            font-size: 12px;
+        }
+    }
+    .conversation-input {
+        padding: 10px;
+        // position: fixed;
+        // bottom: 0;
+        width: 100%;
+        box-sizing: border-box;
+        background: #fff;
+        height: 54px;
+        overflow: hidden;
+        input,
+        .reply-send {
+            border-radius: 3px;
+            border-sizing: border-box;
+            border: 1px solid #ccc;
+        }
+        input {
+            float: left;
+            padding: 8px 0;
+            width: 69%;
+        }
+        .reply-send {
+            background: #a8b301;
+            border-color: #8c9603;
+            color: #fff;
+            float: right;
+            font-weight: bold;
+            padding: 8px 5px;
+        }
+    }
+}

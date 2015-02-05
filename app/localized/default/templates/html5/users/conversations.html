@@ -1,0 +1,30 @@
+<header>
+    <p>{{ dictionary["myolx.Messages"] }}</p>
+</header>
+<ul class="conversations">
+    {% for conversation in conversations %}
+        {% if items.get(conversation.itemId) %}
+            {% set item = items.get(conversation.itemId) %}
+        {% endif %}
+        <li class="conversations-thread" >
+            <a class="link-thread" href="{{ ('/myolx/conversation/' + conversation.threadId) | link }}" data-threadId="{{ conversation.threadId }}">
+                <figure class="items-image {{ 'noPhoto' if not item.get('images').length }}">
+                    {% if item.get('images').length %}
+                        <img src="{{ item.get('images')[0].thumbnail }}">
+                    {% endif %}
+                </figure>
+                <div class="conversations-data {{ ' read' if conversation.read else ' unread'}}">
+                    <div class="top">
+                        <span class="name">{{ conversation.buyerName }}</span>
+                        <span class="date">{{ conversation.messageDate | date(false, true) }}</span>
+                    </div>
+                    <span class="title">{{ item.get('title') }}</span>
+                    <p class="message">{{ conversation.messageText }}</p>
+                </div>
+            </a>
+        </li>
+    {% endfor %}
+</ul>
+{% if paginator and paginator.isEnabled() %}
+    {% include (template + '/items/pagination.html') %}
+{% endif %}

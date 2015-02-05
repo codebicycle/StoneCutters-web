@@ -114,6 +114,10 @@ module.exports = {
             smartBanner: {
                 worldwide: false,
                 countries: []
+            },
+            hermes: {
+                worldwide: false,
+                countries: ['www.olx.cl', 'www.olx.com.ar']
             }
         },
         html4: {
