@@ -180,7 +180,7 @@ module.exports = {
     'group1': {
         CSA: {
             customs: [{
-                categories: [185, 800, 806, 815, 830, 853, 859],
+                categories: [185, 362, 800, 806, 815, 830, 853, 859],
                 slot_top_listing: {
                     params: {
                         number: 1
