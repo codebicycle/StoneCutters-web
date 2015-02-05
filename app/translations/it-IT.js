@@ -438,6 +438,7 @@ module.exports = {
     'misc.MeetAtSafeLocation': 'Cerca di fissare l\'incontro in un luogo pubblico e sicuro',
     'misc.misc-keep': 'Continua a',
     'misc.misc_publishing': 'Pubblicare!',
+    'misc.MoreResultsIn': 'Altri risultati in',
     'misc.NeedHelp': 'Hai bisogno d\'aiuto?',
     'misc.NextPage': 'Pagina Successiva',
     'misc.NoResults': 'Non abbiamo trovato nulla, ma abbiamo ci\xF2 che stai cercando!',

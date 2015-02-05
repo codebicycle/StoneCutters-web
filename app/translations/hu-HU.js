@@ -438,6 +438,7 @@ module.exports = {
     'misc.MeetAtSafeLocation': 'A tal\xE1lkoz\xF3t biztons\xE1gos, nyilv\xE1nos helyre besz\xE9lje meg',
     'misc.misc-keep': 'Keep',
     'misc.misc_publishing': 'Publishing!',
+    'misc.MoreResultsIn': 'M\xE9g t\xF6bb tal\xE1lat:',
     'misc.NeedHelp': 'Need any help?',
     'misc.NextPage': 'K\xF6vetkez\u0151 oldal',
     'misc.NoResults': 'Nem tal\xE1ltunk semmit, de biztosan megtal\xE1lja n\xE1lunk, amit keres!',

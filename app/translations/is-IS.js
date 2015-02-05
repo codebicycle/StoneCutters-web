@@ -438,6 +438,7 @@ module.exports = {
     'misc.MeetAtSafeLocation': 'Hittist \xE1 \xF6ruggum sta\xF0 \xFEar sem f\xF3lk er \xE1 ferli',
     'misc.misc-keep': 'Keep',
     'misc.misc_publishing': 'Publishing!',
+    'misc.MoreResultsIn': 'Fleiri ni\xF0urst\xF6\xF0ur \xED',
     'misc.NeedHelp': 'Need any help?',
     'misc.NextPage': 'N\xE6sta s\xED\xF0a',
     'misc.NoResults': 'Vi\xF0 fundum ekkert, en vi\xF0 me\xF0 \xFEa\xF0 sem \xFE\xFA ert a\xF0 leita a\xF0!',

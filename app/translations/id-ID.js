@@ -438,6 +438,7 @@ module.exports = {
     'misc.MeetAtSafeLocation': 'Upayakan bertemu di lokasi umum yang aman',
     'misc.misc-keep': 'Keep',
     'misc.misc_publishing': 'Publishing!',
+    'misc.MoreResultsIn': 'Lebih banyak hasil di',
     'misc.NeedHelp': 'Need any help?',
     'misc.NextPage': 'Halaman Berikutnya',
     'misc.NoResults': 'Kami tidak menemukan apa pun, tapi kami memiliki apa yang Anda cari!',

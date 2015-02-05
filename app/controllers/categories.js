@@ -188,6 +188,7 @@ function handleItems(params, promise, gallery) {
 
         query = _.clone(params);
         params.categoryId = params.catId;
+        params.abundance = true;
         params.seo = this.app.seo.isEnabled();
         params.languageId = languages._byId[this.app.session.get('selectedLanguage')].id;
         delete params.catId;

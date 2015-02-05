@@ -438,6 +438,7 @@ module.exports = {
     'misc.MeetAtSafeLocation': 'Eseye rankontre yon kote piblik, ki gen sekirite',
     'misc.misc-keep': 'Keep',
     'misc.misc_publishing': 'Publishing!',
+    'misc.MoreResultsIn': 'Plis rezilta nan',
     'misc.NeedHelp': 'Need any help?',
     'misc.NextPage': 'Pwochen Paj',
     'misc.NoResults': 'Nou pa te jwenn anyen, men nou gen sa w ap ch\xE8che a.',

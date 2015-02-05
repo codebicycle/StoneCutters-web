@@ -438,6 +438,7 @@ module.exports = {
     'misc.MeetAtSafeLocation': 'Pabandykite susitikti saugoje vie\u0161oje vietoje',
     'misc.misc-keep': 'Keep',
     'misc.misc_publishing': 'Publishing!',
+    'misc.MoreResultsIn': 'Daugiau rezultat\u0173',
     'misc.NeedHelp': 'Need any help?',
     'misc.NextPage': 'Kitas puslapis',
     'misc.NoResults': 'Mes nieko neradome, bet turime tai, ko ie\u0161kote!',

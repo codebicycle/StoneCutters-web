@@ -129,6 +129,7 @@ function search(params, callback, gallery) {
 
         var prepare = function(done) {
             params.seo = this.app.seo.isEnabled();
+            params.abundance = true;
             params.languageId = languages._byId[this.app.session.get('selectedLanguage')].id;
             Paginator.prepare(this.app, params);
             query = _.clone(params);
@@ -530,6 +531,7 @@ function allresults(params, callback, gallery) {
             delete params.search;
 
             params.seo = this.app.seo.isEnabled();
+            params.abundance = true;
             params.languageId = languages._byId[this.app.session.get('selectedLanguage')].id;
             if (platform !== 'desktop') {
                 params['f.hasimage'] = true;

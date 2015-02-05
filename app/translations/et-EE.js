@@ -438,6 +438,7 @@ module.exports = {
     'misc.MeetAtSafeLocation': 'P\xFC\xFCdke kohtuda turvalises ja avalikus kohas',
     'misc.misc-keep': 'Keep',
     'misc.misc_publishing': 'Publishing!',
+    'misc.MoreResultsIn': 'Rohkem tulemusi',
     'misc.NeedHelp': 'Need any help?',
     'misc.NextPage': 'J\xE4rgmine lehek\xFClg',
     'misc.NoResults': 'Me ei leidnud midagi, kuid meil on olemas see, mida otsite!',

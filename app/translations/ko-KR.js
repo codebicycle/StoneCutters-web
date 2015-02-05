@@ -438,6 +438,7 @@ module.exports = {
     'misc.MeetAtSafeLocation': '\uC548\uC804\uD558\uACE0 \uACF5\uAC1C\uB41C \uC7A5\uC18C\uC5D0\uC11C \uB9CC\uB098\uB3C4\uB85D \uD558\uC138\uC694.',
     'misc.misc-keep': 'Keep',
     'misc.misc_publishing': 'Publishing!',
+    'misc.MoreResultsIn': '\uACB0\uACFC \uB354 \uBCF4\uAE30',
     'misc.NeedHelp': 'Need any help?',
     'misc.NextPage': '\uB2E4\uC74C \uD398\uC774\uC9C0',
     'misc.NoResults': '\uC544\uBB34\uAC83\uB3C4 \uBC1C\uACAC\uD558\uC9C0 \uBABB\uD588\uC2B5\uB2C8\uB2E4\uB9CC \uC800\uD76C\uC5D0\uAC8C \uADC0\uD558\uAED8\uC11C \uCC3E\uACE0 \uACC4\uC2E0 \uD488\uBAA9\uC774 \uC788\uC2B5\uB2C8\uB2E4.',

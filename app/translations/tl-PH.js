@@ -438,6 +438,7 @@ module.exports = {
     'misc.MeetAtSafeLocation': 'Subukang makipagkita sa isang ligtas at pampublikong lokasyon',
     'misc.misc-keep': 'Keep',
     'misc.misc_publishing': 'Publishing!',
+    'misc.MoreResultsIn': 'Higit pang mga resulta sa',
     'misc.NeedHelp': 'Need any help?',
     'misc.NextPage': 'Susunod na Pahina',
     'misc.NoResults': 'Wala kaming nahanap na anumang bagay, pero mayroon kami ng hinahanap mo!',
