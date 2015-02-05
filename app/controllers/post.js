@@ -217,7 +217,7 @@ function flow(params, callback) {
             if (!item) {
                 return false;
             }
-            if (item.get('status') && !item.get('status').editable) {
+            if (item.get('status') && !item.get('status').editable && !params.renew)  {
                 helpers.common.redirect.call(this, '/iid-' + itemId);
                 return true;
             }
