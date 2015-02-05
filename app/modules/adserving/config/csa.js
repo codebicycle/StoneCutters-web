@@ -3,7 +3,7 @@
 module.exports = {
     enabled : true,
     options: {
-        pubId: 'olx-browse',
+        pubId: 'olx',
         queryCategories: [16, 185, 190, 821],
         query: '',
         channel: 'OLX_[countrycode]',
@@ -49,5 +49,6 @@ module.exports = {
         'default': 'es',
         list: ['es', 'en', 'pt', 'it', 'fr'],
         pattern: '[langcode]'
-    }
+    },
+    clientsIds: ['us', 'es', 'za']
 };

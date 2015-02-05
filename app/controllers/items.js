@@ -32,6 +32,7 @@ function show(params, callback) {
         var siteLocation = this.app.session.get('siteLocation');
         var languages = this.app.session.get('languages');
         var platform = this.app.session.get('platform');
+        var newItemPage = helpers.features.isEnabled.call(this, 'newItemPage');
         var anonymousItem;
 
         var prepare = function(done) {
@@ -250,6 +251,9 @@ function show(params, callback) {
             else if (item.status.deprecated) {
                 view = 'items/expired';
             }
+            else if (newItemPage && platform === 'html5') {
+                view = 'items/newitempage/show';
+            }
 
             callback(null, view, {
                 include: ['item'],
@@ -261,6 +265,7 @@ function show(params, callback) {
                 subcategory: subcategory,
                 category: category,
                 favorite: favorite,
+                sent: params.sent,
                 categories: this.dependencies.categories.toJSON()
             });
         }.bind(this);
@@ -480,11 +485,13 @@ function reply(params, callback) {
     function controller() {
         var itemId = params.itemId;
         var siteLocation = this.app.session.get('siteLocation');
+        var platform = this.app.session.get('platform');
+        var newItemPage = helpers.features.isEnabled.call(this, 'newItemPage');
 
         var redirect = function(done) {
             var platform = this.app.session.get('platform');
 
-            if (platform === 'html5' || platform === 'desktop') {
+            if (platform === 'desktop' || (platform === 'html5' && !newItemPage)) {
                 return done.fail();
             }
             done();
@@ -511,9 +518,9 @@ function reply(params, callback) {
             if (!resItem.item) {
                 return done.fail(null, {});
             }
-            var platform = this.app.session.get('platform');
 
-            if (platform === 'html5' || platform === 'desktop') {
+            var platform = this.app.session.get('platform');
+            if (platform === 'desktop' || (platform === 'html5' && !newItemPage)) {
                 return done.fail();
             }
             done(resItem.item);
@@ -621,6 +628,76 @@ function success(params, callback) {
     }
 }
 
+function filter(params, callback) {
+    helpers.controllers.control.call(this, params, controller);
+
+    function controller() {
+        var platform = this.app.session.get('platform');
+
+        var redirect = function(done) {
+            if (platform !== 'html5') {
+                done.abort();
+                return helpers.common.redirect.call(this, this.app.session.get('url').replace('/filter', ''));
+            }
+            done();
+        }.bind(this);
+
+        var prepare = function(done) {
+            params.location = this.app.session.get('siteLocation');
+            params.offset = 0;
+            params.pageSize = 0;
+            params.languageId = this.app.session.get('languages')._byId[this.app.session.get('selectedLanguage')].id;
+
+            if (params.search) {
+                params.searchTerm = params.search;
+                delete params.search;
+            }
+            if (params.catId) {
+                params.categoryId = params.catId;
+                delete params.catId;
+            }
+            if (params.title) {
+                delete params.title;
+            }
+            delete params.platform;
+            delete params.page;
+            delete params.filters;
+            done();
+        }.bind(this);
+
+        var find = function(done) {
+            this.app.fetch({
+                items: {
+                    collection: 'Items',
+                    params: params
+                }
+            }, {
+                readFromCache: false
+            }, function afterFetch(err, res) {
+                done(res.items.filters);
+            }.bind(this));
+        }.bind(this);
+
+        var success = function(filters) {
+            this.app.seo.addMetatag('robots', 'noindex, nofollow');
+            this.app.seo.addMetatag('googlebot', 'noindex, nofollow');
+            callback(null, 'items/filter', {
+                filters: filters
+            });
+        }.bind(this);
+
+        var error = function(err, res) {
+            return helpers.common.error.call(this, err, res, callback);
+        }.bind(this);
+
+        asynquence().or(error)
+            .then(redirect)
+            .then(prepare)
+            .then(find)
+            .val(success);
+    }
+}
+
 function favorite(params, callback) {
     var user;
     var intent;
@@ -723,76 +800,6 @@ function deleteItem(params, callback) {
         .then(prepare)
         .then(remove)
         .val(success);
-}
-
-function filter(params, callback) {
-    helpers.controllers.control.call(this, params, controller);
-
-    function controller() {
-        var platform = this.app.session.get('platform');
-
-        var redirect = function(done) {
-            if (platform !== 'html5') {
-                done.abort();
-                return helpers.common.redirect.call(this, this.app.session.get('url').replace('/filter', ''));
-            }
-            done();
-        }.bind(this);
-
-        var prepare = function(done) {
-            params.location = this.app.session.get('siteLocation');
-            params.offset = 0;
-            params.pageSize = 0;
-            params.languageId = this.app.session.get('languages')._byId[this.app.session.get('selectedLanguage')].id;
-
-            if (params.search) {
-                params.searchTerm = params.search;
-                delete params.search;
-            }
-            if (params.catId) {
-                params.categoryId = params.catId;
-                delete params.catId;
-            }
-            if (params.title) {
-                delete params.title;
-            }
-            delete params.platform;
-            delete params.page;
-            delete params.filters;
-            done();
-        }.bind(this);
-
-        var find = function(done) {
-            this.app.fetch({
-                items: {
-                    collection: 'Items',
-                    params: params
-                }
-            }, {
-                readFromCache: false
-            }, function afterFetch(err, res) {
-                done(res.items.filters);
-            }.bind(this));
-        }.bind(this);
-
-        var success = function(filters) {
-            this.app.seo.addMetatag('robots', 'noindex, nofollow');
-            this.app.seo.addMetatag('googlebot', 'noindex, nofollow');
-            callback(null, 'items/filter', {
-                filters: filters
-            });
-        }.bind(this);
-
-        var error = function(err, res) {
-            return helpers.common.error.call(this, err, res, callback);
-        }.bind(this);
-
-        asynquence().or(error)
-            .then(redirect)
-            .then(prepare)
-            .then(find)
-            .val(success);
-    }
 }
 
 function sort(params, callback) {

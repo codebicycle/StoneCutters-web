@@ -44,6 +44,10 @@ module.exports = Base.extend({
         this.app.router.appView.on('filter:end', this.restore.bind(this));
         this.app.router.appView.on('location:start', this.onSelectLocation.bind(this));
         this.app.router.appView.on('location:end', this.restore.bind(this));
+        if (helpers.features.isEnabled.call(this, 'newItemPage')) {
+            this.app.router.appView.on('reply:start', this.onReplyForm.bind(this));
+            this.app.router.appView.on('reply:end', this.restore.bind(this));
+        }
         this.app.router.appView.on('login:start', this.onLoginStart.bind(this));
         this.app.router.appView.on('login:end', this.restore.bind(this));
         this.app.router.appView.on('register:start', this.onLoginStart.bind(this));
@@ -178,6 +182,9 @@ module.exports = Base.extend({
     },
     onLoginStart: function(){
         this.customize("defaulthtmlhead.My Listings");
+    },
+    onReplyForm: function() {
+        this.customize('itemslisting.ContactSeller');
     },
     customize: function(key) {
         var data = Base.prototype.getTemplateData.call(this);

@@ -200,30 +200,46 @@ module.exports = Base.extend({
         var _errors = [];
         var data;
 
-        if ($field.attr('required') && !value.trim().length) {
-            _errors.push({
-                selector: $field.attr('name'),
-                message: this.dictionary["postingerror.PleaseCompleteThisField"]
-            });
-            $field.trigger('fieldValidationEnd', [_errors]);
-        }
-        else if ($field.attr('name') == 'state' || $field.attr('name') == 'location') {
-            $field.trigger('fieldValidationEnd');
-        }
-        else {
-            data = {
-                'category.id': this.item.get('category').id,
-                'category.parentId': this.item.get('category').parentId,
-                'location': this.app.session.get('location').url,
-                'languageId': this.app.session.get('languages')._byId[this.app.session.get('selectedLanguage')].id
-            };
-            data[$field.attr('name')] = value;
-            helpers.dataAdapter.post(this.app.req, '/items/fields/validate', {
-                data: data
-            }, function onResponse(err, response, body) {
-                _errors = body;
+        if (this.item.get('category').id === undefined || this.item.get('category').parentId === undefined) {
+            var $fieldCat = this.$('.posting-categories-list');
+            var messages = [this.dictionary["postingerror.PleaseSelectCategory"],this.dictionary["postingerror.PleaseSelectSubcategory"]];
+
+            if (!$fieldCat.closest('.field-wrapper').hasClass('error')) {
+                $fieldCat.closest('.field-wrapper').addClass('error').removeClass('success');
+                _.each(messages, function (message) {
+                    $fieldCat.parent().append('<small class="error message">' + message + '</small>');
+                });
+            }
+
+            $field.removeClass('validating');
+            $(document).scrollTop(this.$el.offset().top);
+        } else {
+
+            if ($field.attr('required') && !value.trim().length) {
+                _errors.push({
+                    selector: $field.attr('name'),
+                    message: this.dictionary["postingerror.PleaseCompleteThisField"]
+                });
                 $field.trigger('fieldValidationEnd', [_errors]);
-            });
+            }
+            else if ($field.attr('name') == 'state' || $field.attr('name') == 'location') {
+                $field.trigger('fieldValidationEnd');
+            }
+            else {
+                data = {
+                    'category.id': this.item.get('category').id,
+                    'category.parentId': this.item.get('category').parentId,
+                    'location': this.app.session.get('location').url,
+                    'languageId': this.app.session.get('languages')._byId[this.app.session.get('selectedLanguage')].id
+                };
+                data[$field.attr('name')] = value;
+                helpers.dataAdapter.post(this.app.req, '/items/fields/validate', {
+                    data: data
+                }, function onResponse(err, response, body) {
+                    _errors = body;
+                    $field.trigger('fieldValidationEnd', [_errors]);
+                });
+            }
         }
     },
     onFieldValidationEnd: function(event, _errors) {

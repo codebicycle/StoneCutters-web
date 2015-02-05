@@ -118,6 +118,10 @@ module.exports = {
             hermes: {
                 worldwide: false,
                 countries: ['www.olx.cl', 'www.olx.com.ar']
+            },
+            newItemPage: {
+                worldwide: false,
+                countries: ['www.olx.com.bo']
             }
         },
         html4: {
