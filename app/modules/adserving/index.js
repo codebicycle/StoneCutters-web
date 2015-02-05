@@ -111,7 +111,7 @@ function getClientId(type) {
         clientId.push(countryCode);
     }
 
-    if (currentRoute.controller !== 'searches' || !!~currentRoute.action.indexOf('allresults')) {
+    if (type === 'CSA' && (currentRoute.controller !== 'searches' || !!~currentRoute.action.indexOf('allresults'))) {
         clientId.push('browse');
     }
 
