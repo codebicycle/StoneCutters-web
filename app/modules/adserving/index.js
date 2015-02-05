@@ -42,6 +42,7 @@ function getSettings() {
             settings.options = _.extend({}, configType.options, {
                 query: getQuery.call(this),
                 channel: createChannels.call(this, type),
+                adPage: this.app.session.get('page'),
                 pubId: getClientId.call(this, type),
                 hl: this.app.session.get('selectedLanguage').split('-').shift()
             });

@@ -11,6 +11,7 @@ module.exports = {
     'countryoptions.Home_SelectCity': 'Zvo\u013Ete mesto',
     'countryoptions.Home_SelectState': 'Zvo\u013Ete \u0161t\xE1t',
     'countryoptions.OtherCities': '\u010Eal\u0161ie mest\xE1',
+    'countryoptions.OtherCitiesInRegion': 'In\xE9 mest\xE1 v regi\xF3ne <<REGION>>',
     'countryoptions.SelectACity': 'Zvo\u013Ete mesto',
     'countryoptions.SelectANeighborhood': 'Vyberte susedstvo',
     'defaultfooter.About OLX': 'O OLX',

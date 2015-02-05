@@ -11,6 +11,7 @@ module.exports = {
     'countryoptions.Home_SelectCity': 'Lungsod',
     'countryoptions.Home_SelectState': 'Piliin ang lungsod',
     'countryoptions.OtherCities': 'Ibang mga Lungsod',
+    'countryoptions.OtherCitiesInRegion': 'Ibang mga Lungsod sa <<REGION>>',
     'countryoptions.SelectACity': 'Pumili ng lungsod.',
     'countryoptions.SelectANeighborhood': 'Pumili ng kalapit-bahayan',
     'defaultfooter.About OLX': 'Tungkol sa OLX',

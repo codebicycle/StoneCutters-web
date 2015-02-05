@@ -235,6 +235,7 @@ module.exports = {
     'supportform.VerificationCode': '\u06A9\u062F \u062A\u0627\u06CC\u06CC\u062F:',
     'countryoptions.ChangeCity': '\u062A\u063A\u06CC\u06CC\u0631 \u0634\u0647\u0631',
     'countryoptions.EnterCity': '\u0646\u0627\u0645 \u06CC\u06A9 \u0634\u0647\u0631 \u0631\u0627 \u0648\u0627\u0631\u062F \u06A9\u0646\u06CC\u062F',
+    'countryoptions.OtherCitiesInRegion': '\u0634\u0647\u0631\u0647\u0627\u06CC \u062F\u06CC\u06AF\u0631 \u062F\u0631<<REGION>>',
     'defaultfooter.change': '\u062A\u063A\u06CC\u06CC\u0631',
     'defaultfooter.Home': '\u0635\u0641\u062D\u0647 \u0627\u0635\u0644\u06CC',
     'defaultfooter.PublishFreeAd': '\u0622\u06AF\u0647\u06CC \u062E\u0648\u062F \u0631\u0627 \u0631\u0627\u06CC\u06AF\u0627\u0646 \u062F\u0631\u062C \u06A9\u0646\u06CC\u062F',

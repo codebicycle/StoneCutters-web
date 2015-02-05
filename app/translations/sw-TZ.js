@@ -11,6 +11,7 @@ module.exports = {
     'countryoptions.Home_SelectCity': 'Chagua mji',
     'countryoptions.Home_SelectState': 'Chagua jimbo',
     'countryoptions.OtherCities': 'Miji Mingine',
+    'countryoptions.OtherCitiesInRegion': 'Miji Mingine katika <<REGION>>',
     'countryoptions.SelectACity': 'Chagua mji',
     'countryoptions.SelectANeighborhood': 'Chagua kitongoji',
     'defaultfooter.About OLX': 'Kuhusu OLX',

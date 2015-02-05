@@ -11,6 +11,7 @@ module.exports = {
     'countryoptions.Home_SelectCity': 'Velg en by',
     'countryoptions.Home_SelectState': 'Velg en stat',
     'countryoptions.OtherCities': 'Andre byer',
+    'countryoptions.OtherCitiesInRegion': 'Andre kommuner i <<REGION>>',
     'countryoptions.SelectACity': 'Velg en by',
     'countryoptions.SelectANeighborhood': 'Velg et nabolag',
     'defaultfooter.About OLX': 'Om OLX',

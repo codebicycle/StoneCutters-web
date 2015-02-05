@@ -11,6 +11,7 @@ module.exports = {
     'countryoptions.Home_SelectCity': 'V\xE4lj en stad',
     'countryoptions.Home_SelectState': 'V\xE4lj en stat',
     'countryoptions.OtherCities': 'Andra St\xE4der',
+    'countryoptions.OtherCitiesInRegion': 'Andra St\xE4der i <<REGION>>',
     'countryoptions.SelectACity': 'V\xE4lj en stad',
     'countryoptions.SelectANeighborhood': 'V\xE4lj ett grannskap',
     'defaultfooter.About OLX': 'Om OLX',

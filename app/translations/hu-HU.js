@@ -11,6 +11,7 @@ module.exports = {
     'countryoptions.Home_SelectCity': 'V\xE1lasszon telep\xFCl\xE9st',
     'countryoptions.Home_SelectState': 'V\xE1lasszon \xE1llamot',
     'countryoptions.OtherCities': 'Tov\xE1bbi telep\xFCl\xE9sek',
+    'countryoptions.OtherCitiesInRegion': 'M\xE1s v\xE1rosok <<REGION>> r\xE9gi\xF3ban',
     'countryoptions.SelectACity': 'V\xE1lasszon telep\xFCl\xE9st',
     'countryoptions.SelectANeighborhood': 'V\xE1lasszon szomsz\xE9ds\xE1got',
     'defaultfooter.About OLX': 'OLX n\xE9vjegy',

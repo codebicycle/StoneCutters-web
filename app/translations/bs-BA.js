@@ -11,6 +11,7 @@ module.exports = {
     'countryoptions.Home_SelectCity': 'Odaberite grad',
     'countryoptions.Home_SelectState': 'Odaberite dr\u017Eavu',
     'countryoptions.OtherCities': 'Ostali gradovi',
+    'countryoptions.OtherCitiesInRegion': 'Drugi gradovi u <<REGION>>',
     'countryoptions.SelectACity': 'Odaberite grad',
     'countryoptions.SelectANeighborhood': 'Odaberi susjedstvo',
     'defaultfooter.About OLX': 'O OLX',

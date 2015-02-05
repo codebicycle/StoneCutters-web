@@ -11,6 +11,7 @@ module.exports = {
     'countryoptions.Home_SelectCity': 'Selecione uma Cidade',
     'countryoptions.Home_SelectState': 'Selecione um Estado',
     'countryoptions.OtherCities': 'Outras cidades',
+    'countryoptions.OtherCitiesInRegion': 'Outras Cidades - <<REGION>>',
     'countryoptions.SelectACity': 'Selecione uma cidade',
     'countryoptions.SelectANeighborhood': 'Selecione uma localidade vizinha',
     'defaultfooter.About OLX': 'Sobre a OLX',
