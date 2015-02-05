@@ -423,6 +423,7 @@ module.exports = {
     'about.NoStragnesHome': 'Do not invite strangers into your home, and do not go to theirs.',
     'about.PostSocialNetwork': '<b>POST IN SOCIAL NETWORK:</b> All your friends and their friends are potential buyers.',
     'about.Presence': '\u0645\u0648\u062C\u0648\u062F\u06AF\u06CC',
+    'about.Press': 'Press',
     'about.RightPrice': '<b>RIGHT PRICE:</b> Good deals attract more attention.',
     'about.SafetyTips': 'Safety Tips',
     'about.SaveMoney': 'In OLX you save money because you can access the most unique set of deals',

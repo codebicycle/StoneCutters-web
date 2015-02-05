@@ -10,7 +10,8 @@ module.exports = Base.extend({
     className: 'pages-help-view',
     events: {
         'click .help-toggle-content': 'helpToggleContent',
-        'click .question .icons': 'helpToggleQuestion'
+        'click .question .icons': 'helpToggleQuestion',
+        'click [data-navigate]': 'navigate'
     },
 
     getTemplateData: function() {
@@ -22,14 +23,20 @@ module.exports = Base.extend({
         var support = config.get(['mails', 'support', location.url], 'support') + '@' + mailDomain;
         var legal = config.get(['mails', 'legal', location.url], 'legal') + '@' + mailDomain;
         var selectedLanguage = this.app.session.get('selectedLanguage').split('-')[0];
-        
+
         return _.extend({}, data, {
             mails: {
                 support: support,
                 legal: legal,
-                selectedLanguage : selectedLanguage
-            }
+            },
+            selectedLanguage : selectedLanguage
         });
+    },
+    postRender: function() {
+        var $slide = $('.user-ads ul li');
+        var slideWrapperWidth = $slide.outerWidth() * $slide.length;
+        $('.user-ads ul').width(slideWrapperWidth);
+
     },
     helpToggleContent: function(event) {
         event.preventDefault();
@@ -59,5 +66,38 @@ module.exports = Base.extend({
                 toggleClass('faq-open').
                 find('.question-content').slideToggle();
         }
+    },
+    navigate: function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+
+        var $current = $(event.currentTarget);
+        var direction = $current.data('navigate');
+        var $slideWrapper = $('[data-items-slide]');
+        var $slide = $('.user-ads ul li');
+        var slideWidth = $slide.outerWidth();
+        var slideWrapperPos = $slideWrapper.position().left;
+        var slideLength = $slide.length;
+        var maxLeftPosition = -(slideLength - 6) * slideWidth;
+        var pxToMove = 0;
+
+        if(direction == 'right' && slideWrapperPos !== maxLeftPosition) {
+            pxToMove = slideWrapperPos - slideWidth;
+        }
+        else if(direction == 'left' && slideWrapperPos !== 0) {
+            pxToMove = slideWrapperPos + slideWidth;
+        }
+        else if(slideWrapperPos === 0) {
+            pxToMove = maxLeftPosition;
+        }
+
+        $slideWrapper.animate({
+            'left': pxToMove + 'px'
+        }, 100);
+
+        
+
+        
     }
 });

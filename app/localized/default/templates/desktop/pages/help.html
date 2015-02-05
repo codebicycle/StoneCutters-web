@@ -22,7 +22,7 @@
         </ul>
     </div>
     <div class="menu-box grey-box">
-        <h3 class="title">Company</h3>
+        <h3 class="title">{{ dictionary["about.Company"] }}</h3>
         <ul>
             <li>
                 <a class="help-toggle-content icons icon-user" href="#" data-help-content="about-us">{{ dictionary["about.AboutBrand"] | replace("<<BRAND>>","OLX") }}</a>
@@ -31,13 +31,13 @@
                 <a class="help-toggle-content icons icon-list" href="#" data-help-content="why">{{ dictionary["about.Why"] }}</a>
             </li>
             <li>
-                <a class="help-toggle-content icons icon-question" href="#" data-help-content="press">Press</a>
+                <a class="help-toggle-content icons icon-question" href="#" data-help-content="press">{{ dictionary["about.Press"] }}</a>
             </li>
             <li>
                 <a class="help-toggle-content icons icon-more" href="#" data-help-content="tips">{{ dictionary["about.ListingTips"] }}</a>
             </li>
             <li>
-                <a class="help-toggle-content icons icon-more" href="http://blog.olx.com/">Blog</a>
+                <a class="help-toggle-content icons icon-more" href="http://blog.olx.com/">{{ dictionary["about.Blog"] }}</a>
             </li>
         </ul>
     </div>
@@ -293,7 +293,7 @@
 
         <section class="history-container">
             <h4 class="subtitle">{{ dictionary["about.History"] }}</h4>
-            <img src="{{ ('/images/desktop/about_us/presence-' + selectedLanguage + '.jpg') | static }}" >
+            <img src="{{ ('/images/desktop/about_us/timeline-' + selectedLanguage + '.jpg') | static }}" >
         </section>
 
         <section class="stats-container">
@@ -467,6 +467,82 @@
                 </li>
             </ul>
         </section>
+
+    </div>
+
+    <div id="press" class="about-content press help-content-display">
+
+        <section class="title-section">
+            <h3 class="title">{{ dictionary["about.Tips"] }}</h3>
+        </section>
+
+        <section class="user-ads">
+            <h4 class="subtitle">{{ dictionary["about.ListingTips"] }}</h4>
+            <span class="icons icon-arrow-left arrows" data-navigate="left" ></span>
+            <span class="icons icon-arrow-right arrows" data-navigate="right" ></span>
+            <div class="slide">
+                <ul class="" data-items-slide>
+                    <li>
+                        <a href="#">
+                            <figure class="items-image">
+                                <img src="{{ ('/images/desktop/about_us/mission.jpg') | static }}" alt="" />
+                            </figure>
+                            <h3>fgdfgfdg</h3>
+                            <p class="items-price">
+                                fhcghfhgf
+                            </p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <figure class="items-image">
+                                <img src="{{ ('/images/desktop/about_us/mission.jpg') | static }}" alt="" />
+                            </figure>
+                            <h3>fgdfgfdg</h3>
+                            <p class="items-price">
+                                fhcghfhgf
+                            </p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <figure class="items-image">
+                                <img src="{{ ('/images/desktop/about_us/mission.jpg') | static }}" alt="" />
+                            </figure>
+                            <h3>fgdfgfdg</h3>
+                            <p class="items-price">
+                                fhcghfhgf
+                            </p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <figure class="items-image">
+                                <img src="{{ ('/images/desktop/about_us/mission.jpg') | static }}" alt="" />
+                            </figure>
+                            <h3>fgdfgfdg</h3>
+                            <p class="items-price">
+                                fhcghfhgf
+                            </p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <figure class="items-image">
+                                <img src="{{ ('/images/desktop/about_us/mission.jpg') | static }}" alt="" />
+                            </figure>
+                            <h3>fgdfgfdg</h3>
+                            <p class="items-price">
+                                fhcghfhgf
+                            </p>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+        </section>
+
+        
 
     </div>
 

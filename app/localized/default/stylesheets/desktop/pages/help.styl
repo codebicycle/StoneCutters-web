@@ -286,10 +286,8 @@
         }
 
         .about-content {
-            box($white, $greyBorders , 3px, 0, solid, 1px);
             float: right;
-            width: 596px;
-            padding: 0 30px;
+            width: 656px;
 
             .title {
                 border-bottom: 1px solid $greyBorders;
@@ -309,6 +307,15 @@
             section {
                 margin-top: 35px;
                 overflow: hidden;
+                padding: 0 20px;
+                &.title-section {
+                    margin-top: 0;
+                    padding: 0;
+                    h3, p{
+                        padding-left: 20px;
+                        padding-right: 20px;
+                    }
+                }
             }
 
             p {
@@ -493,7 +500,94 @@
 
                 
             }
-                
+            &.press {
+                .user-ads {
+                    position: relative;
+                    .slide {
+                        height: 195px;
+                        width: 942px;
+                        overflow: hidden;
+                        position: relative;
+                        margin-left: 20px;
+                        ul {
+                            ul-reset();
+                            position: absolute;
+                            top: 0;
+                            left: 0;
+                            height: 120px;
+                            li, .items-image, img {
+                                width: 180px;
+                            }
+                            li{
+                                display: inline-block;
+                            }
+                        }
+                    }
+                    .arrows {
+                        position: absolute;
+                        top: 90px;
+                        z-index: 10;
+                        cursor: pointer;
+                        color: $greyStrong;
+                        &:hover {
+                            color: $black;
+                        }
+                        &.icon-arrow-left {
+                            left: 0;
+                        }
+                        &.icon-arrow-right {
+                            right: 0;
+                        }
+                    }
+
+                    .carousel-container,
+                    .carousel-mask{
+                        width: 500px;
+                        position: relative;
+                    }
+
+                    .carousel-container{
+                        padding: 20px 40px;
+                        background: #ccc;
+                    }
+
+                    .carousel-mask{
+                        overflow: hidden;
+                        margin: 0 auto;
+                    }
+
+                    #carousel{
+                        overflow: hidden;
+                        position: relative;
+                        left: 0;
+                    }
+
+                    #carousel li{
+                        float: left;
+                        width: 500px;
+                        margin-right: 2px;
+                    }
+
+                    #carousel li img{
+                        width: 100%;
+                    }
+
+
+                    .direction-icon{
+                        position: absolute;
+                        top: 50%;
+                        margin-top: -30px;
+                    }
+
+                    .prev-button{
+                        left: 5px;
+                    }
+
+                    .next-button{
+                        right: 5px;
+                    }
+                }
+            }    
             &.tips {
                 ul {
                     ul-reset();
@@ -503,6 +597,7 @@
                     font-size: $m;
                     line-height: $l;
                     margin-bottom: 10px;
+                    list-style: disc inside;
                 }
             }
 
