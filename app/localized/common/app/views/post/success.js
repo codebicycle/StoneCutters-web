@@ -12,7 +12,7 @@ module.exports = Base.extend({
 
         return _.extend({}, data, {
             breadcrumb: breadcrumb.get.call(this, data),
-            addmessage: config.getForMarket(this.app.session.get('location').url, ['posting','success','addmessage'], '')
+            addmessage: config.getForMarket(this.app.session.get('location').url, ['posting','success','addmessage'], false)
         });
     }
 });
