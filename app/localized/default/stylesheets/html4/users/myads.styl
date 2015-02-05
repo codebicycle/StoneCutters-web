@@ -1,21 +1,167 @@
-#myads ul.itemListing a.action {
-	float: right;
-	margin: 0 8px 0 0;
-	color: #4A7AD0;
-	font-size: 12px;
+#myads {
+	margin-bottom: 20px;
+	overflow: hidden;
+
+    .itemListing {
+    	overflow: hidden;
+        li {
+            float: left;
+            background: #fff;
+            height: auto;
+        	position: relative;
+            .title,
+			.status {
+				margin-top: 5px;
+			}
+			.status {
+				font-size: 12px;
+            	width: 44%;
+				&.ready {
+			        color: #aab20a;
+			    }
+			    &.expired,
+			    &.deleted {
+			        color: #000;
+			    }
+			    &.rejected {
+			        color: #d51f36;
+			    }
+			    &.pending {
+			        color: #f2b520;
+			    }
+			}
+            .itemInfo {
+            	float: left;
+            	width: 40%;
+			}
+            .title,
+            .itemPrice {
+            	float: left;
+            	width: 100%;
+            }
+            .title {
+            	font-size: 14px;
+            	height: 34px;
+            	color: #000;
+            	overflow: hidden;
+            }
+            .itemPrice {
+            	color: #b0b0b0;
+				font-weight: bold;
+				margin-top: 6px;
+            	font-size: 20px;
+            }
+            .actions {
+            	float: left;
+            	.action {
+					position: absolute;
+					text-align: center;
+					font-size: 13px;
+					font-weight: bold;
+					border: 1px solid #dedede;
+					padding: 5px;
+					width: 50px;
+					&.delete {
+						bottom: 5px;
+					}
+					&.edit {
+						bottom: 40px;
+						color: #178cc8;
+					}
+            	}
+            }
+        }
+    }
 }
-#myads ul.itemListing li .itemInfo span.status {
-	padding: 3px 6px;
-	color: #ffffff;
-	font-size: 12px;
-}
-#myads ul.itemListing li .itemInfo span.status.rejected {
-	background: red;
-}
-#myads ul.itemListing li .itemInfo span.status.pending {
-	background: orange;
-}
-#myads ul.itemListing li .itemInfo span.status.ready {
-	color: #666666;
-	padding: 3px 0;
+
+#formdeleteitem {
+    color: #000;
+	margin-bottom: 20px;
+	overflow: hidden;
+    .subtitle,
+    h5 {
+    	margin: 20px 0;
+    	padding: 0 10px;
+        font-size: 14px;
+        color: #000;
+    }
+    .itemdelete {
+        overflow: hidden;
+        padding: 0 10px;
+        .image {
+            float: left;
+            margin-right: 10px;
+            min-height: 76px;
+            max-height: 76px;
+            display: inline-block;
+            text-align: center;
+            width: 76px;
+            border: 1px solid #eee;
+            padding: 2px;
+            position: relative;
+            .withoutimg,
+            img {
+                bottom: 2px;
+                left: 2px;
+                margin: auto;
+                max-height: 76px;
+                max-width: 100%;
+                position: absolute;
+                right: 2px;
+                top: 2px;
+            }
+            .withoutimg {
+                background: #fff url(imageUrl/images/html4/noPhoto.png);
+				background-size: cover;
+				background-position: center;
+				background-repeat: no-repeat;
+            }
+        }
+        .description {
+            font-size: 14px;
+        }
+    }
+    .formdelete {
+        .reason {
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+            overflow: hidden;
+        }
+        input[type="radio"] {
+            margin-right: 5px;
+        }
+        input[type="text"] {
+            padding: 5px;
+            margin-left: 5px;
+            width: 70%;
+            border: 1px solid #eee;
+        }
+        input[type="radio"],
+        input[type="text"],
+        label {
+            display: inline-block;
+            font-size: 14px;
+        }
+        .deleteitem {
+            margin-top: 20px;
+            text-align: center;
+        }
+    }
+
+    .accept {
+        background: #aab22a;
+        border-color: #919b00;
+        border-radius: 3px;
+        border: 1px solid;
+        box-sizing: border-box;
+        color: #fff;
+        font-size: .8125rem;
+        font-weight: bold;
+        height: 40px;
+        line-height: 40px;
+        text-align: center;
+        text-decoration: none;
+        padding: 0 10px;
+    }
+
 }
