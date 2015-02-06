@@ -47,8 +47,6 @@ function getSettings() {
             settings.params.adIconUrl = settings.params.adIconUrl.replace(this.config.language.pattern, _.contains(this.config.language.list, settings.options.hl) ? settings.options.hl : this.config.language['default']);
         }
 
-        //console.log('Mostrando: ' + slotname + ' ' + service + ' ' + settings.params.number);
-
         _.extend(settings, {
             enabled: true,
             service: service,
@@ -99,8 +97,8 @@ function createChannels(service) {
 }
 
 function getClientId(service) {
-    var configType = utils.get(configAdServing, [service, 'default'], {});
-    var pubId = configType.options.pubId;
+    var configType = utils.get(configAdServing, service, {});
+    var pubId = utils.get(configType, ['default', 'options', 'pubId'], '');
     if (service === 'ADX') {
         return pubId;
     }

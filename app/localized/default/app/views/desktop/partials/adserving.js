@@ -54,6 +54,7 @@ module.exports = Base.extend({
                 break;
             case 'AFC':
                 this.createIframeAFC(settings.params, settings.options);
+                console.log(settings);
                 break;
         }
     },

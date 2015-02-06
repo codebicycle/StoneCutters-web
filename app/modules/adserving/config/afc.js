@@ -3,6 +3,7 @@
 module.exports = {
     enabled: true,
     'default': {
+        queryCategories: [16, 185, 190, 821],
         options: {
             pubId: 'ca-olx',
             channel: 'OLX_[countrycode]'
