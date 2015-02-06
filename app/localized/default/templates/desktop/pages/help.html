@@ -3,21 +3,21 @@
         <h3 class="title">{{ dictionary["misc.NeedHelp"] }}</h3>
         <ul>
             <li {{ 'class="selected"' if tab == 'new-olx' }} >
-                <a class="help-toggle-content icons icon-user" data-help-content="new-olx" href="#">{{ dictionary["help.NewToBrand"] }}</a>
+                <a class="help-toggle-content icons icon-user" data-help-content="new-olx" data-toggle-content href="#">{{ dictionary["help.NewToBrand"] }}</a>
             </li>
             <li>
-                <a class="help-toggle-content icons icon-list" data-help-content="ads" href="#">{{ dictionary["itemslisting.Classifieds"] }}</a>
+                <a class="help-toggle-content icons icon-list" data-help-content="ads" data-toggle-content href="#">{{ dictionary["itemslisting.Classifieds"] }}</a>
             </li>
             <li {{ 'class="selected"' if tab == 'faq' }} >
-                <a class="help-toggle-content icons icon-question" data-help-content="faqs" href="#">{{ dictionary["misc.FrequentQuestions"] }}</a>
+                <a class="help-toggle-content icons icon-question" data-help-content="faqs" data-toggle-content href="#">{{ dictionary["misc.FrequentQuestions"] }}</a>
             </li>
             {% if isContactEnabled %}
                 <li {{ 'class="selected"' if tab == 'contact' }}>
-                    <a class="help-toggle-content icons icon-chat" data-help-content="contact" href="#">{{ dictionary["contact_us.ContactBrand"] | replace('<<BRAND>>','OLX') }}</a>
+                    <a class="help-toggle-content icons icon-chat" data-help-content="contact" data-toggle-content href="#">{{ dictionary["contact_us.ContactBrand"] | replace('<<BRAND>>','OLX') }}</a>
                 </li>
             {% endif %}
             <li>
-                <a class="help-toggle-content icons icon-more" data-help-content="more-suggestions" href="#">{{ dictionary["help.MoreGuidelines"] }}</a>
+                <a class="help-toggle-content icons icon-more" data-help-content="more-suggestions" data-toggle-content href="#">{{ dictionary["help.MoreGuidelines"] }}</a>
             </li>
         </ul>
     </div>
@@ -25,19 +25,19 @@
         <h3 class="title">{{ dictionary["about.Company"] }}</h3>
         <ul>
             <li>
-                <a class="help-toggle-content icons icon-user" href="#" data-help-content="about-us">{{ dictionary["about.AboutBrand"] | replace("<<BRAND>>","OLX") }}</a>
+                <a class="help-toggle-content icons icon-user" href="#" data-help-content="about-us" data-toggle-content >{{ dictionary["about.AboutBrand"] | replace("<<BRAND>>","OLX") }}</a>
             </li>
             <li>
-                <a class="help-toggle-content icons icon-list" href="#" data-help-content="why">{{ dictionary["about.Why"] }}</a>
+                <a class="help-toggle-content icons icon-list" href="#" data-help-content="why" data-toggle-content >{{ dictionary["about.Why"] }}</a>
             </li>
             <li>
-                <a class="help-toggle-content icons icon-question" href="#" data-help-content="press">{{ dictionary["about.Press"] }}</a>
+                <a class="help-toggle-content icons icon-question" href="#" data-help-content="press" data-toggle-content>{{ dictionary["about.Press"] }}</a>
             </li>
             <li>
-                <a class="help-toggle-content icons icon-more" href="#" data-help-content="tips">{{ dictionary["about.ListingTips"] }}</a>
+                <a class="help-toggle-content icons icon-more" href="#" data-help-content="tips" data-toggle-content>{{ dictionary["about.ListingTips"] }}</a>
             </li>
             <li>
-                <a class="help-toggle-content icons icon-more" href="http://blog.olx.com/">{{ dictionary["about.Blog"] }}</a>
+                <a class="help-toggle-content icons icon-more" href="http://blog.olx.com/" target="_BLANK">{{ dictionary["about.Blog"] }}</a>
             </li>
         </ul>
     </div>
@@ -301,27 +301,27 @@
             <div class="container-box">
                 <div class="box box-left">
                     <p class="box-title">{{ dictionary["about.Countries"] }}</p>
-                    <p class="box-numbers">{{ dictionary["about.More40"] }}</p> 
+                    <p class="box-numbers">{{ dictionary["about.More40"] }}</p>
                 </div>
                 <div class="box box-right">
                     <p class="box-title">{{ dictionary["about.Languages"] }}</p>
-                    <p class="box-numbers">{{ dictionary["about.More50"] }}</p> 
+                    <p class="box-numbers">{{ dictionary["about.More50"] }}</p>
                 </div>
                 <div class="box box-left">
                     <p class="box-title">{{ dictionary["about.MonthlyActiveUsers"] }}</p>
-                    <p class="box-numbers">{{ dictionary["about.More200"] }}</p> 
+                    <p class="box-numbers">{{ dictionary["about.More200"] }}</p>
                 </div>
                 <div class="box box-right">
                     <p class="box-title">{{ dictionary["about.Employees"] }}</p>
-                    <p class="box-numbers">{{ dictionary["about.More1200"] }}</p> 
+                    <p class="box-numbers">{{ dictionary["about.More1200"] }}</p>
                 </div>
                 <div class="box box-left border-none">
                     <p class="box-title">{{ dictionary["about.NewMonthlyListings"] }}</p>
-                    <p class="box-numbers">{{ dictionary["about.More24800"] }}</p> 
+                    <p class="box-numbers">{{ dictionary["about.More24800"] }}</p>
                 </div>
                 <div class="box box-right border-none">
                     <p class="box-title">{{ dictionary["about.MonthlyTransactions"] }}</p>
-                    <p class="box-numbers">{{ dictionary["about.More8300"] }}</p> 
+                    <p class="box-numbers">{{ dictionary["about.More8300"] }}</p>
                 </div>
             </div>
         </section>
@@ -339,7 +339,7 @@
                 <img src="{{ ('/images/desktop/about_us/amarjit-batra.gif') | static }}" >
                 <div>
                     <p class="box-title">Amarjit Batra</p>
-                    <p class="box-position">CEO Greater India{#{ trans('about.CeoGIndia') }#}</p> 
+                    <p class="box-position">CEO Greater India{#{ trans('about.CeoGIndia') }#}</p>
                 </div>
             </div>
             <div class="box box-left">
@@ -353,63 +353,63 @@
                 <img src="{{ ('/images/desktop/about_us/arto-joensuu.gif') | static }}" >
                 <div>
                     <p class="box-title">Arto Joensuu</p>
-                    <p class="box-position">CEO dubizzle{#{ trans('about.CeoDubizzle') }#}</p> 
+                    <p class="box-position">CEO dubizzle{#{ trans('about.CeoDubizzle') }#}</p>
                 </div>
             </div>
             <div class="box box-left">
                 <img src="{{ ('/images/desktop/about_us/brad-porteus.gif') | static }}" >
                 <div>
                     <p class="box-title">Brad Porteus</p>
-                    <p class="box-position">CEO South East Asia{#{ trans('about.CeoSEAsia') }#}</p> 
+                    <p class="box-position">CEO South East Asia{#{ trans('about.CeoSEAsia') }#}</p>
                 </div>
             </div>
             <div class="box box-right">
                 <img src="{{ ('/images/desktop/about_us/craig-allwright.gif') | static }}" >
                 <div>
                     <p class="box-title">Craig Allwright</p>
-                    <p class="box-position">General Counsel</p> 
+                    <p class="box-position">General Counsel</p>
                 </div>
             </div>
             <div class="box box-left">
                 <img src="{{ ('/images/desktop/about_us/mark-jacobs.gif') | static }}" >
                 <div>
                     <p class="box-title">Mark Jacobs</p>
-                    <p class="box-position">HR Leader{#{ trans('about.HrLeader') }#}</p> 
+                    <p class="box-position">HR Leader{#{ trans('about.HrLeader') }#}</p>
                 </div>
             </div>
             <div class="box box-right">
                 <img src="{{ ('/images/desktop/about_us/martin-kroon.gif') | static }}" >
                 <div>
                     <p class="box-title">Martin Kroon</p>
-                    <p class="box-position">Director Shared Services</p> 
+                    <p class="box-position">Director Shared Services</p>
                 </div>
             </div>
             <div class="box box-left">
                 <img src="{{ ('/images/desktop/about_us/martin-sheepbouwer.gif') | static }}" >
                 <div>
                     <p class="box-title">Martin Scheepbouwer</p>
-                    <p class="box-position">CEO Classifieds{#{ trans('about.CeoClassifieds') }#}</p> 
+                    <p class="box-position">CEO Classifieds{#{ trans('about.CeoClassifieds') }#}</p>
                 </div>
             </div>
             <div class="box box-right">
                 <img src="{{ ('/images/desktop/about_us/miguel-mascarenhas.gif') | static }}" >
                 <div>
                     <p class="box-title">Miguel Mascarenhas</p>
-                    <p class="box-position">CTO</p> 
+                    <p class="box-position">CTO</p>
                 </div>
             </div>
             <div class="box box-left">
                 <img src="{{ ('/images/desktop/about_us/reolof-lettinga.gif') | static }}" >
                 <div>
                     <p class="box-title">Roelof Lettinga</p>
-                    <p class="box-position">Strategy and Operations{#{ trans('about.StrategyOperations') }#}</p> 
+                    <p class="box-position">Strategy and Operations{#{ trans('about.StrategyOperations') }#}</p>
                 </div>
             </div>
             <div class="box box-right">
                 <img src="{{ ('/images/desktop/about_us/tim-hilpert.gif') | static }}" >
                 <div>
                     <p class="box-title">Tim Hilpert</p>
-                    <p class="box-position">CEO Europe{#{ trans('about.CeoEurope') }#}</p> 
+                    <p class="box-position">CEO Europe{#{ trans('about.CeoEurope') }#}</p>
                 </div>
             </div>
         </section>
@@ -476,10 +476,10 @@
             <h3 class="title">{{ dictionary["about.Press"] }}</h3>
         </section>
 
-        <section class="user-ads">
+        <section class="user-ads news">
             <h4 class="subtitle">{{ dictionary["about.InTheNews"] }}</h4>
-            <span class="icons icon-arrow-left arrows" data-navigate="left" ></span>
-            <span class="icons icon-arrow-right arrows" data-navigate="right" ></span>
+            <span class="icons icon-arrow-left arrows" data-navigate="left" data-section="news"></span>
+            <span class="icons icon-arrow-right arrows" data-navigate="right" data-section="news"></span>
             <div class="slide">
                 <ul class="" data-items-slide>
                     <li>
@@ -487,51 +487,51 @@
                             <figure class="items-image">
                                 <img src="{{ ('/images/desktop/about_us/mission.jpg') | static }}" alt="" />
                             </figure>
-                            <h3>fgdfgfdg</h3>
+                            <h3>1</h3>
                             <p class="items-price">
                                 fhcghfhgf
                             </p>
                         </a>
-                    </li>
-                    <li>
+                    </li><!--
+                    --><li>
                         <a href="#">
                             <figure class="items-image">
                                 <img src="{{ ('/images/desktop/about_us/mission.jpg') | static }}" alt="" />
                             </figure>
-                            <h3>fgdfgfdg</h3>
+                            <h3>2</h3>
                             <p class="items-price">
                                 fhcghfhgf
                             </p>
                         </a>
-                    </li>
-                    <li>
+                    </li><!--
+                    --><li>
                         <a href="#">
                             <figure class="items-image">
                                 <img src="{{ ('/images/desktop/about_us/mission.jpg') | static }}" alt="" />
                             </figure>
-                            <h3>fgdfgfdg</h3>
+                            <h3>3</h3>
                             <p class="items-price">
                                 fhcghfhgf
                             </p>
                         </a>
-                    </li>
-                    <li>
+                    </li><!--
+                    --><li>
                         <a href="#">
                             <figure class="items-image">
                                 <img src="{{ ('/images/desktop/about_us/mission.jpg') | static }}" alt="" />
                             </figure>
-                            <h3>fgdfgfdg</h3>
+                            <h3>4</h3>
                             <p class="items-price">
                                 fhcghfhgf
                             </p>
                         </a>
-                    </li>
-                    <li>
+                    </li><!--
+                    --><li>
                         <a href="#">
                             <figure class="items-image">
                                 <img src="{{ ('/images/desktop/about_us/mission.jpg') | static }}" alt="" />
                             </figure>
-                            <h3>fgdfgfdg</h3>
+                            <h3>5</h3>
                             <p class="items-price">
                                 fhcghfhgf
                             </p>
@@ -541,10 +541,10 @@
             </div>
 
         </section>
-        <section class="user-ads">
-            <h4 class="subtitle">{{ dictionary["about.PressReleases"] }}</h4>
-            <span class="icons icon-arrow-left arrows" data-navigate="left" ></span>
-            <span class="icons icon-arrow-right arrows" data-navigate="right" ></span>
+        <section class="user-ads press">
+            <h4 class="subtitle">{{ dictionary["about.InTheNews"] }}</h4>
+            <span class="icons icon-arrow-left arrows" data-navigate="left" data-section="press"></span>
+            <span class="icons icon-arrow-right arrows" data-navigate="right" data-section="press"></span>
             <div class="slide">
                 <ul class="" data-items-slide>
                     <li>
@@ -552,51 +552,51 @@
                             <figure class="items-image">
                                 <img src="{{ ('/images/desktop/about_us/mission.jpg') | static }}" alt="" />
                             </figure>
-                            <h3>fgdfgfdg</h3>
+                            <h3>1</h3>
                             <p class="items-price">
                                 fhcghfhgf
                             </p>
                         </a>
-                    </li>
-                    <li>
+                    </li><!--
+                    --><li>
                         <a href="#">
                             <figure class="items-image">
                                 <img src="{{ ('/images/desktop/about_us/mission.jpg') | static }}" alt="" />
                             </figure>
-                            <h3>fgdfgfdg</h3>
+                            <h3>2</h3>
                             <p class="items-price">
                                 fhcghfhgf
                             </p>
                         </a>
-                    </li>
-                    <li>
+                    </li><!--
+                    --><li>
                         <a href="#">
                             <figure class="items-image">
                                 <img src="{{ ('/images/desktop/about_us/mission.jpg') | static }}" alt="" />
                             </figure>
-                            <h3>fgdfgfdg</h3>
+                            <h3>3</h3>
                             <p class="items-price">
                                 fhcghfhgf
                             </p>
                         </a>
-                    </li>
-                    <li>
+                    </li><!--
+                    --><li>
                         <a href="#">
                             <figure class="items-image">
                                 <img src="{{ ('/images/desktop/about_us/mission.jpg') | static }}" alt="" />
                             </figure>
-                            <h3>fgdfgfdg</h3>
+                            <h3>4</h3>
                             <p class="items-price">
                                 fhcghfhgf
                             </p>
                         </a>
-                    </li>
-                    <li>
+                    </li><!--
+                    --><li>
                         <a href="#">
                             <figure class="items-image">
                                 <img src="{{ ('/images/desktop/about_us/mission.jpg') | static }}" alt="" />
                             </figure>
-                            <h3>fgdfgfdg</h3>
+                            <h3>5</h3>
                             <p class="items-price">
                                 fhcghfhgf
                             </p>
@@ -606,10 +606,10 @@
             </div>
 
         </section>
-        <section class="user-ads">
-            <h4 class="subtitle">{{ dictionary["about.MediaResources"] }}</h4>
-            <span class="icons icon-arrow-left arrows" data-navigate="left" ></span>
-            <span class="icons icon-arrow-right arrows" data-navigate="right" ></span>
+        <section class="user-ads sources">
+            <h4 class="subtitle">{{ dictionary["about.InTheNews"] }}</h4>
+            <span class="icons icon-arrow-left arrows" data-navigate="left" data-section="sources"></span>
+            <span class="icons icon-arrow-right arrows" data-navigate="right" data-section="sources"></span>
             <div class="slide">
                 <ul class="" data-items-slide>
                     <li>
@@ -617,51 +617,51 @@
                             <figure class="items-image">
                                 <img src="{{ ('/images/desktop/about_us/mission.jpg') | static }}" alt="" />
                             </figure>
-                            <h3>fgdfgfdg</h3>
+                            <h3>1</h3>
                             <p class="items-price">
                                 fhcghfhgf
                             </p>
                         </a>
-                    </li>
-                    <li>
+                    </li><!--
+                    --><li>
                         <a href="#">
                             <figure class="items-image">
                                 <img src="{{ ('/images/desktop/about_us/mission.jpg') | static }}" alt="" />
                             </figure>
-                            <h3>fgdfgfdg</h3>
+                            <h3>2</h3>
                             <p class="items-price">
                                 fhcghfhgf
                             </p>
                         </a>
-                    </li>
-                    <li>
+                    </li><!--
+                    --><li>
                         <a href="#">
                             <figure class="items-image">
                                 <img src="{{ ('/images/desktop/about_us/mission.jpg') | static }}" alt="" />
                             </figure>
-                            <h3>fgdfgfdg</h3>
+                            <h3>3</h3>
                             <p class="items-price">
                                 fhcghfhgf
                             </p>
                         </a>
-                    </li>
-                    <li>
+                    </li><!--
+                    --><li>
                         <a href="#">
                             <figure class="items-image">
                                 <img src="{{ ('/images/desktop/about_us/mission.jpg') | static }}" alt="" />
                             </figure>
-                            <h3>fgdfgfdg</h3>
+                            <h3>4</h3>
                             <p class="items-price">
                                 fhcghfhgf
                             </p>
                         </a>
-                    </li>
-                    <li>
+                    </li><!--
+                    --><li>
                         <a href="#">
                             <figure class="items-image">
                                 <img src="{{ ('/images/desktop/about_us/mission.jpg') | static }}" alt="" />
                             </figure>
-                            <h3>fgdfgfdg</h3>
+                            <h3>5</h3>
                             <p class="items-price">
                                 fhcghfhgf
                             </p>
@@ -672,7 +672,7 @@
 
         </section>
 
-        
+
 
     </div>
 
