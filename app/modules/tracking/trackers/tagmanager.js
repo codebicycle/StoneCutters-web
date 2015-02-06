@@ -31,7 +31,18 @@ function isEnabled() {
 function getParams(page, options) {
     var params = utils.get(configTracking, ['tagmanager', this.app.session.get('location').url], {});
 
-    params.pageName = common.getPageName.call(this, page, options);
+    params.params = {
+        pageName: common.getPageName.call(this, page, options)
+    };
+    if (options.iid) {
+        params.params.iid = options.iid;
+    }
+    if (options.uid) {
+        params.params.uid = options.uid;
+    }
+    if (options.emailh) {
+        params.params.emailh = options.emailh;
+    }
     return params;
 }
 
