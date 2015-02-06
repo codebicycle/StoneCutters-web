@@ -127,7 +127,7 @@ module.exports = {
         trackPage: 'terms'
     },
     'pages#help': {
-        process: 'help'
+        trackPage: 'help'
     },
     'pages#interstitial': {
         trackPage: 'interstitial'

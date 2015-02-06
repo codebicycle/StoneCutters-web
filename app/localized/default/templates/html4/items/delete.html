@@ -1,0 +1,48 @@
+{% from macros import Breadcrumb, BreadcrumbHome, Errors %}
+{% set link = (breadcrumb | link) %}
+{{ Breadcrumb(dictionary, link, dictionary["myolx.MyAds"], ['<a href="', '/logout' | link, '" class="logout" data-qa="logout-button">', dictionary["myolx.SignOut"], '</a>'] | join) }}
+<section id="formdeleteitem">
+    <div class="confirmdelete">
+        <h4 class="subtitle">{{ dictionary["posting_removedsurvey.WarningAdToBeRemoved"] }} </h4>
+        <div class="itemdelete">
+            <div class="image">
+                {% if item.images.length %}
+                    <img src="{{ item.images[0].thumbnail }}" alt="" class="thumbnail">
+                {% else %}
+                    <span class="withoutimg"></span>
+                {% endif %}
+            </div>
+            <div class="description">
+                {{ item.title }}
+            </div>
+        </div>
+        <h5>{{ dictionary["posting_removedsurvey.RemovedAdSurvey"] }} </h5>
+        <form action="{{ ['/myolx/deleteitem/', item.id] | join('') | link }}" method="POST" enctype="multipart/form-data" class="formdelete">
+            <div class="reason">
+                <input type="radio" name="close_reason" value="1" required id="close_reason1">
+                <label for="close_reason1">{{ dictionary["posting_removedsurvey.RemovedAdSurveyAnswer1"] }} </label>
+            </div>
+            <div class="reason">
+                <input type="radio" name="close_reason" value="2" required id="close_reason2">
+                <label for="close_reason2">{{ dictionary["posting_removedsurvey.RemovedAdSurveyAnswer2"] }} </label>
+            </div>
+            <div class="reason">
+                <input type="radio" name="close_reason" value="3" required id="close_reason3">
+                <label for="close_reason3">{{ dictionary["posting_removedsurvey.RemovedAdSurveyAnswer3"] }} </label>
+            </div>
+            <div class="reason">
+                <input type="radio" name="close_reason" value="4" required id="close_reason4">
+                <label for="close_reason4">{{ dictionary["posting_optionallist.other"] }}</label>
+                <input type="text" name="close_comment" class="text" id="close_reason5">
+            </div>
+            <input type="hidden" name="idd" id="idd" value="">
+            <div class="buttons deleteitem">
+                <button type="submit" class="btn accept">{{ dictionary["seccion-30.478"] }}</button>
+                <span>{{ dictionary["biderrorheader.Or"] }}</span>
+                <a href="/myolx/myadslisting" class="btncanceldelete">{{ dictionary["supportform.Reset"] }}</a>
+            </div>
+        </form>
+    </div>
+</section>
+{{ BreadcrumbHome(dictionary, link, ('/' | link)) }}
+{% view 'partials/tracking' %}

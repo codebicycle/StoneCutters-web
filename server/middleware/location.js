@@ -115,7 +115,7 @@ module.exports = function(dataAdapter, excludedUrls) {
                         }));
                     });
                 }
-                statsd.increment(['Unknown Location', 'middleware', 'location', 'error']);
+                statsd.increment(['all', 'middleware', 'location', 'error']);
                 res.status(500).sendfile(errorPath);
             }
 

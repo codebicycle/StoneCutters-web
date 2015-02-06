@@ -9,7 +9,7 @@ var helpers = require('../../../../../../helpers');
 var statsd = require('../../../../../../../shared/statsd')();
 
 module.exports = Base.extend({
-    className: 'items_show_view',
+    className: 'items_show_view_default',
     postRender: function() {
         var that = this;
 
@@ -216,5 +216,3 @@ module.exports = Base.extend({
         return this.categories;
     }
 });
-
-module.exports.id = 'items/show';

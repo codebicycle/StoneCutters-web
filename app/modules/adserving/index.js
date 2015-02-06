@@ -42,6 +42,7 @@ function getSettings() {
             settings.options = _.extend({}, configType.options, {
                 query: getQuery.call(this),
                 channel: createChannels.call(this, type),
+                adPage: this.app.session.get('page'),
                 pubId: getClientId.call(this, type),
                 hl: this.app.session.get('selectedLanguage').split('-').shift()
             });
@@ -91,13 +92,13 @@ function createChannels(type) {
     channels.push('[navigator]');
     channels.push([prefix, configChannel.name, this.config.location, 'Organic'].join('_'));
 
-    return channels.join(type === 'CSA' ? ' ' : ',');
+    return channels.join(',');
 }
 
 function getClientId(type) {
     var configType = utils.get(configAdServing, type, {});
     var pubId = configType.options.pubId;
-    if (type !== 'CSA') {
+    if (type === 'ADX') {
         return pubId;
     }
     var countryCode = this.app.session.get('location').abbreviation.toLowerCase();
@@ -110,7 +111,7 @@ function getClientId(type) {
         clientId.push(countryCode);
     }
 
-    if (currentRoute.controller !== 'searches' || !!~currentRoute.action.indexOf('allresults')) {
+    if (type === 'CSA' && (currentRoute.controller !== 'searches' || !!~currentRoute.action.indexOf('allresults'))) {
         clientId.push('browse');
     }
 
