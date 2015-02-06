@@ -9,7 +9,7 @@ module.exports = Base.extend({
     id: 'pages-help-view',
     className: 'pages-help-view',
     events: {
-        'click .help-toggle-content': 'helpToggleContent',
+        'click [data-toggle-content]': 'helpToggleContent',
         'click .question .icons': 'helpToggleQuestion',
         'click [data-navigate]': 'navigate'
     },
@@ -31,12 +31,6 @@ module.exports = Base.extend({
             },
             selectedLanguage : selectedLanguage
         });
-    },
-    postRender: function() {
-        var $slide = $('.user-ads ul li');
-        var slideWrapperWidth = $slide.outerWidth() * $slide.length;
-        $('.user-ads ul').width(slideWrapperWidth);
-
     },
     helpToggleContent: function(event) {
         event.preventDefault();
@@ -74,12 +68,13 @@ module.exports = Base.extend({
 
         var $current = $(event.currentTarget);
         var direction = $current.data('navigate');
-        var $slideWrapper = $('[data-items-slide]');
-        var $slide = $('.user-ads ul li');
+        var currentWrapper = $current.data('section');
+        var $slideWrapper = $('.user-ads.' + currentWrapper + ' ul');
+        var $slide = $('.user-ads.' + currentWrapper + ' ul li');
         var slideWidth = $slide.outerWidth();
         var slideWrapperPos = $slideWrapper.position().left;
         var slideLength = $slide.length;
-        var maxLeftPosition = -(slideLength - 6) * slideWidth;
+        var maxLeftPosition = -(slideLength - 3) * slideWidth;
         var pxToMove = 0;
 
         if(direction == 'right' && slideWrapperPos !== maxLeftPosition) {
@@ -96,8 +91,5 @@ module.exports = Base.extend({
             'left': pxToMove + 'px'
         }, 100);
 
-        
-
-        
     }
 });

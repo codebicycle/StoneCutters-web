@@ -86,7 +86,7 @@
         .help-content-display {
             display: none;
         }
-        
+
         .help-content-display-first {
             display: block;
         }
@@ -337,7 +337,7 @@
                 p {
                     margin: 5px 0;
                 }
-                
+
             }
 
             &.about {
@@ -414,7 +414,7 @@
                     }
 
                 }
-                
+
             }
 
             &.why {
@@ -498,32 +498,34 @@
                     }
                 }
 
-                
+
             }
             &.press {
                 .user-ads {
+                    &.press, &.sources, &.news {
+                        ul {
+                            width: 1025px;
+                        }
+                    }
                     position: relative;
                     .slide {
                         height: 195px;
-                        width: 942px;
+                        width: 615px;
                         overflow: hidden;
                         position: relative;
-                        margin-left: 20px;
                         ul {
                             ul-reset();
                             position: absolute;
                             top: 0;
                             left: 0;
                             height: 120px;
-                            li, .items-image, img {
-                                width: 178px;
-                            }
-                            li{
+                            li {
+                                width: 195px;
+                                padding: 5px;
                                 display: inline-block;
                                 background: #ccc;
                             }
-                            figure {
-                                padding: 0;
+                            li, .items-image, img {
                                 margin: 0;
                             }
                         }
@@ -592,7 +594,7 @@
                         right: 5px;
                     }
                 }
-            }    
+            }
             &.tips {
                 ul {
                     ul-reset();
