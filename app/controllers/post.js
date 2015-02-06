@@ -568,9 +568,6 @@ function success(params, callback) {
             tracking.addParam('item', item);
             tracking.addParam('category', category.toJSON());
             tracking.addParam('subcategory', subcategory.toJSON());
-            if (user) {
-                tracking.addParam('uid', user.id);
-            }
             this.app.seo.addMetatag('robots', 'noindex, nofollow');
             this.app.seo.addMetatag('googlebot', 'noindex, nofollow');
             callback(null, {
