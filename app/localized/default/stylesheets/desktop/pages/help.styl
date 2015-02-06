@@ -74,6 +74,9 @@
         }
         .grey-box {
             box($greyBoxBg, $greyBorders , 3px, 0, solid, 1px);
+            li {
+                border-top: 1px solid $greyBorders;
+            }
         }
 
     }
@@ -290,8 +293,8 @@
             width: 656px;
 
             .title {
-                border-bottom: 1px solid $greyBorders;
-                font-size: $xl;
+                border-bottom: 2px solid $greyBorders;
+                font-size: $l;
                 margin: 0;
                 padding: 19px 0 18px 0;
             }
@@ -307,7 +310,7 @@
             section {
                 margin-top: 35px;
                 overflow: hidden;
-                padding: 0 20px;
+                padding: 0 20px 20px;
                 &.title-section {
                     margin-top: 0;
                     padding: 0;
@@ -355,7 +358,12 @@
                         display: block;
                     }
                 }
-
+                .history-container {
+                    img {
+                        width: 100%;
+                        display: block;
+                    }
+                }
                 .stats-container {
                     .box {
                         border-bottom: 1px solid $greyBorders;
@@ -433,7 +441,7 @@
                     margin-bottom: 35px;
                     &::before {
                         color: $green;
-                        font-size: 70px;
+                        font-size: 45px;
                         position: absolute;
                         left: 0;
                         display: block;
@@ -490,7 +498,7 @@
                     }
 
                     p {
-                        margin: 5px 0 5px 80px;
+                        margin: 5px 0 5px 60px;
                         &.title-list {
                             color: $green;
                             font-size: $l;
@@ -502,37 +510,72 @@
             }
             &.press {
                 .user-ads {
-                    &.press, &.sources, &.news {
+                    &.sources {
+                        .slide, ul,li {
+                            height: 190px;
+                        }
                         ul {
-                            width: 1025px;
+                            width: 190px;
+                        }
+                    }
+                    &.news {
+                        .slide, ul,li {
+                            height: 220px;
+                        }
+                        ul {
+                            width: 1510px;
+                        }
+
+                    }
+                    &.press {
+                        .slide, ul,li {
+                            height: 130px;
+                        }
+                        ul {
+                            width: 945px;
                         }
                     }
                     position: relative;
                     .slide {
-                        height: 195px;
-                        width: 615px;
+                        width: 568px;
                         overflow: hidden;
                         position: relative;
+                        margin: 0 auto;
                         ul {
                             ul-reset();
                             position: absolute;
                             top: 0;
                             left: 0;
-                            height: 120px;
                             li {
-                                width: 195px;
+                                width: 178px;
                                 padding: 5px;
-                                display: inline-block;
-                                background: #ccc;
+                                float: left;
                             }
                             li, .items-image, img {
                                 margin: 0;
+                            }
+                            a {
+                                display: block;
+                            }
+                            a:hover{
+                                text-decoration: none;
+                            }
+                            h3{
+                                font-size: $m;
+                                color: $black;
+                                font-weight: normal;
+                                margin: 5px 0 10px;
+                            }
+                            p{
+                                font-size: $baseFont;
+                                margin: 0 0 5px;
                             }
                         }
                     }
                     .arrows {
                         position: absolute;
-                        top: 90px;
+                        top: 50%;
+                        margin-top: -8px;
                         z-index: 10;
                         cursor: pointer;
                         color: $greyStrong;
@@ -540,58 +583,11 @@
                             color: $black;
                         }
                         &.icon-arrow-left {
-                            left: 0;
+                            left: 20px;
                         }
                         &.icon-arrow-right {
-                            right: 0;
+                            right: 20px;
                         }
-                    }
-
-                    .carousel-container,
-                    .carousel-mask{
-                        width: 500px;
-                        position: relative;
-                    }
-
-                    .carousel-container{
-                        padding: 20px 40px;
-                        background: #ccc;
-                    }
-
-                    .carousel-mask{
-                        overflow: hidden;
-                        margin: 0 auto;
-                    }
-
-                    #carousel{
-                        overflow: hidden;
-                        position: relative;
-                        left: 0;
-                    }
-
-                    #carousel li{
-                        float: left;
-                        width: 500px;
-                        margin-right: 2px;
-                    }
-
-                    #carousel li img{
-                        width: 100%;
-                    }
-
-
-                    .direction-icon{
-                        position: absolute;
-                        top: 50%;
-                        margin-top: -30px;
-                    }
-
-                    .prev-button{
-                        left: 5px;
-                    }
-
-                    .next-button{
-                        right: 5px;
                     }
                 }
             }
