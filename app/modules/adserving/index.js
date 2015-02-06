@@ -47,7 +47,7 @@ function getSettings() {
             settings.params.adIconUrl = settings.params.adIconUrl.replace(this.config.language.pattern, _.contains(this.config.language.list, settings.options.hl) ? settings.options.hl : this.config.language['default']);
         }
 
-        console.log('Mostrando: ' + slotname + ' ' + service + ' ' + settings.params.number);
+        //console.log('Mostrando: ' + slotname + ' ' + service + ' ' + settings.params.number);
 
         _.extend(settings, {
             enabled: true,
@@ -95,7 +95,7 @@ function createChannels(service) {
     channels.push('[navigator]');
     channels.push([prefix, configChannel.name, this.config.location, 'Organic'].join('_'));
 
-    return channels.join(service === 'CSA' ? ' ' : ',');
+    return channels.join(',');
 }
 
 function getClientId(service) {
@@ -145,7 +145,24 @@ function isEnabled() {
 }
 
 function getQuery() {
-    return getSearchQuery.call(this) || getCategoryQuery.call(this) || getCategoriesQuery.call(this);
+    var query = getSearchQuery.call(this);
+    var category = getCategoryQuery.call(this);
+    var querycategories = getCategoriesQuery.call(this);
+    var queryResult = [];
+
+    if (query) {
+        queryResult.push(query);
+    }
+
+    if (category) {
+        queryResult.push(category);
+    }
+
+    if (!queryResult.length) {
+        queryResult.push(querycategories);
+    }
+
+    return queryResult.join(' ');
 }
 
 function getSearchQuery() {

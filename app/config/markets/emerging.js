@@ -17,12 +17,12 @@ module.exports = {
                 topgallery: {
                     service: 'CSA',
                     format: 'default',
-                    location: 'Top',
+                    location: 'Top'
                 },
                 top: {
                     service: 'CSA',
                     format: 'custom',
-                    location: 'Top',
+                    location: 'Top'
                 },
                 side: {
                     service: 'AFC',
