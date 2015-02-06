@@ -1,6 +1,6 @@
 {% set changesearch =  '<strong>' + search + '</strong>' %}
 {% for item in items %}
-    <li {{ 'class="featuredad"' if item.isFeatured }}>
+    <li class="item {{ ' featuredad' if item.isFeatured }}" >
         <a href="{{ item.slug.replace(domain, fullDomain) }}" data-qa="list-item" >
             <figure class="items-image {{ 'lines' if item.imagesCount > 1 }} {{ 'icons icon-photo' if not item.thumbnail }}">
                 {% if item.thumbnail %}
@@ -29,3 +29,37 @@
         </a>
     </li>
 {% endfor %}
+
+{% if meta.abundance %}
+    <li class="title">{{ dictionary["misc.MoreResultsIn"] }} {{ location.name if meta.abundance.locationType == 'country' else location.children[0].name }}</li>
+    {% for item in meta.abundance.data %}
+        <li class="item {{ ' featuredad' if item.isFeatured }}" >
+            <a href="{{ item.slug.replace(domain, fullDomain) }}" data-qa="list-item" >
+                <figure class="items-image {{ 'lines' if item.imagesCount > 1 }} {{ 'icons icon-photo' if not item.thumbnail }}">
+                    {% if item.thumbnail %}
+                        <img src="{{ item.thumbnail }}" alt="{{ item.title }}">
+                    {% endif %}
+                </figure><!--
+                --><div class="items-info">
+                    <h3>{{ item.title }}</h3>
+                    {% if isStaticSearch %}
+                        <div class="description">{{ item.description | truncate( 200, True, '...') }} </div>
+                    {% endif %}
+                    <span>{{ item.seo.references[0].anchor }}</span>
+                </div><!--
+                --><p class="items-price">
+                    {{ item.price.displayPrice }}
+                </p><!--
+                --><p class="items-date">
+                    {{ item.date.since.day if item.date.since.day }} {{ dictionary[item.date.since.dictionary] }}{{ (', <br>' + item.date.since.hour) if item.date.since.hour }}
+                </p>
+                {% if item.isFeatured %}
+                    <p class="featuredad">
+                        <i class="icons icon-star-circle"></i>
+                        <em>{{ dictionary["misc.FeaturedAd _BR"] }}</em>
+                    </p>
+                {% endif %}
+            </a>
+        </li>
+    {% endfor %}
+{% endif %}
