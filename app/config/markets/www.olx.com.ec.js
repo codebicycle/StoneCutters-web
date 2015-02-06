@@ -1,4 +1,9 @@
 module.exports = {
+    celebrities: {
+        home: {
+            enabled: true
+        }
+    },
     socials: [
         {
             name: 'facebook',

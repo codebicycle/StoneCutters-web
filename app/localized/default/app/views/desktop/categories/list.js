@@ -19,7 +19,8 @@ module.exports = Base.extend({
         var countryMapClass = config.getForMarket(location.url, ['countryMapStyle'], '');
         var videos = config.getForMarket(location.url, ['videos'], '');
         var testimonials = config.getForMarket(location.url, ['testimonials'], '');
-
+        var celebrities = config.getForMarket(location.url, ['celebrities'], '');
+console.log(celebrities);
         categories = helpers.common.categoryOrder(categories, location.url);
 
         if(location.children.length) {
@@ -34,6 +35,7 @@ module.exports = Base.extend({
             categories: categories,
             countryMapClass: countryMapClass,
             testimonials: testimonials,
+            celebrities: celebrities,
             videos: videos,
             selectedLanguage: selectedLanguage,
             currentState: {
