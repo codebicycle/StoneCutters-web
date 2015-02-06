@@ -458,6 +458,7 @@ module.exports = {
     'misc.MeetAtSafeLocation': 'Jaribu kukutana katika  eneo salama, la umma',
     'misc.misc-keep': 'Endelea',
     'misc.misc_publishing': 'Kuchapisha!',
+    'misc.MoreResultsIn': 'Matokeo zaidi katika',
     'misc.NeedHelp': 'Unahitaji msaada wowote?',
     'misc.NextPage': 'Ukurasa Ufuatao',
     'misc.NoResults': 'Hatukupata kitu chochote, lakini tuna kile unachotafuta!',

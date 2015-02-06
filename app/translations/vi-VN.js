@@ -458,6 +458,7 @@ module.exports = {
     'misc.MeetAtSafeLocation': 'C\u1ED1 g\u1EAFng g\u1EB7p \u1EDF m\u1ED9t n\u01A1i c\xF4ng c\u1ED9ng, an to\xE0n',
     'misc.misc-keep': 'H\xE3y ti\u1EBFp t\u1EE5c',
     'misc.misc_publishing': '\u0110\u0103ng rao v\u1EB7t!',
+    'misc.MoreResultsIn': 'Th\xEAm k\u1EBFt qu\u1EA3 v\u1EC1',
     'misc.NeedHelp': 'B\u1EA1n c\xF3 c\u1EA7n gi\xFAp \u0111\u1EE1 g\xEC kh\xF4ng?',
     'misc.NextPage': 'Trang ti\u1EBFp',
     'misc.NoResults': 'Ch\xFAng t\xF4i kh\xF4ng t\xECm th\u1EA5y g\xEC c\u1EA3 nh\u01B0ng ch\xFAng t\xF4i c\xF3 nh\u1EEFng c\xE1i b\u1EA1n t\xECm ki\u1EBFm!',

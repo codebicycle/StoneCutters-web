@@ -458,6 +458,7 @@ module.exports = {
     'misc.MeetAtSafeLocation': 'G\xFCvenli ve halka a\xE7\u0131k bir yerde bulu\u015Fmaya \xE7al\u0131\u015F\u0131n',
     'misc.misc-keep': 'Keep',
     'misc.misc_publishing': 'Publishing!',
+    'misc.MoreResultsIn': 'Daha fazla sonu\xE7',
     'misc.NeedHelp': 'Need any help?',
     'misc.NextPage': 'Sonraki Sayfa',
     'misc.NoResults': 'Bir \u015Fey bulamad\u0131k, ancak arad\u0131\u011F\u0131n\u0131z \u015Feyi not ettik!',

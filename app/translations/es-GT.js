@@ -458,6 +458,7 @@ module.exports = {
     'misc.MeetAtSafeLocation': 'Trata de reunirte en un lugar seguro y p\xFAblico',
     'misc.misc-keep': '\xA1Sigue',
     'misc.misc_publishing': 'publicando!',
+    'misc.MoreResultsIn': 'M\xE1s resultados en',
     'misc.NeedHelp': '\xBFNecesitas ayuda?',
     'misc.NextPage': 'Pr\xF3xima p\xE1gina',
     'misc.NoResults': 'No encontramos nada, pero \xA1tenemos lo que est\xE1s buscando!',

@@ -458,6 +458,7 @@ module.exports = {
     'misc.MeetAtSafeLocation': '\u8BF7\u4E00\u5B9A\u5728\u5B89\u5168\u7684\u516C\u5171\u573A\u6240\u4F1A\u9762',
     'misc.misc-keep': 'Keep',
     'misc.misc_publishing': 'Publishing!',
+    'misc.MoreResultsIn': '\u66F4\u591A\u7ED3\u679C',
     'misc.NeedHelp': 'Need any help?',
     'misc.NextPage': '\u4E0B\u4E00\u9875',
     'misc.NoResults': '\u6CA1\u6709\u641C\u7D22\u7ED3\u679C\uFF0C\u4E0D\u8FC7\u6211\u4EEC\u6709\u60A8\u6240\u8981\u5BFB\u627E\u7684\u5546\u54C1\uFF01',

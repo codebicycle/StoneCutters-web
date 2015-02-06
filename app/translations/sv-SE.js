@@ -458,6 +458,7 @@ module.exports = {
     'misc.MeetAtSafeLocation': 'F\xF6rs\xF6k att tr\xE4ffas p\xE5 en s\xE4ker, offentlig plats',
     'misc.misc-keep': 'Keep',
     'misc.misc_publishing': 'Publishing!',
+    'misc.MoreResultsIn': 'Fler resultat i',
     'misc.NeedHelp': 'Need any help?',
     'misc.NextPage': 'N\xE4sta sida',
     'misc.NoResults': 'Vi hittade inte n\xE5got, men vi har det du s\xF6ker!',

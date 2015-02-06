@@ -458,6 +458,7 @@ module.exports = {
     'misc.MeetAtSafeLocation': 'Cuba bertemu di lokasi awam yang selamat',
     'misc.misc-keep': 'Keep',
     'misc.misc_publishing': 'Publishing!',
+    'misc.MoreResultsIn': 'Lebih banyak keputusan dalam',
     'misc.NeedHelp': 'Need any help?',
     'misc.NextPage': 'Halaman seterusnya',
     'misc.NoResults': 'Kami tak menjumpai apa-apa, tapi kami ada apa yang anda cari!',
