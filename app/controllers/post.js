@@ -568,7 +568,6 @@ function success(params, callback) {
             tracking.addParam('item', item);
             tracking.addParam('category', category.toJSON());
             tracking.addParam('subcategory', subcategory.toJSON());
-            tracking.addParam('iid', itemId);
             if (user) {
                 tracking.addParam('uid', user.id);
             }
