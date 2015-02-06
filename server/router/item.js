@@ -361,4 +361,52 @@ module.exports = function(app, dataAdapter) {
             });
         }
     })();
+
+    (function deleteitem() {
+        app.post('/myolx/deleteitem/:itemId', handler);
+
+        function handler(req, res, next) {
+            var itemId = req.param('itemId', null);
+            var item;
+            var removedata;
+
+            function parse(done) {
+                formidable.parse(req, done.errfcb);
+            }
+
+            function prepare(done, data) {
+                item = new Item({
+                    id: itemId
+                }, {
+                    app: req.rendrApp
+                });
+                removedata = data;
+                done();
+            }
+            function remove(done) {
+                var reason = removedata.close_reason;
+                var comment = removedata.close_comment;
+
+                item.remove(reason, comment, done);
+            }
+            function success(data) {
+                var url = '/myolx/myadslisting?deleted=true';
+
+                res.redirect(utils.link(url, req.rendrApp));
+            }
+
+            function error(err) {
+                var url = req.headers.referer || '/';
+
+                res.redirect(utils.link(url.split('?').shift(), req.rendrApp));
+            }
+
+            asynquence().or(error)
+                .then(parse)
+                .then(prepare)
+                .then(remove)
+                .val(success);
+        }
+    })();
+
 };

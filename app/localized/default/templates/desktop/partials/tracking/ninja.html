@@ -1,0 +1,23 @@
+{% if tracking.params and tracking.params.ninja %}
+<script type="text/javascript">
+    window.dataLayer = window.dataLayer || [];
+    while (window.dataLayer.length > 0) {
+        window.dataLayer.pop();
+    }
+    window.dataLayer.push({{ tracking.params.ninja.params }});
+
+    (function() {
+        window.configTracking = {{ tracking.params.ninja.config }};
+
+        var ninja = document.getElementById('ninja-lib');
+        if (!ninja) {
+            ninja = document.createElement('script');
+            ninja.type = 'text/javascript';
+            ninja.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'ninja.onap.io/ninja.js';
+            ninja.async = true;
+            ninja.id = 'ninja-lib';
+            document.getElementsByTagName('head')[0].appendChild(ninja);
+        }
+    })();
+</script>
+{% endif %}

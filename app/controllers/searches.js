@@ -129,6 +129,7 @@ function search(params, callback, gallery) {
 
         var prepare = function(done) {
             params.seo = this.app.seo.isEnabled();
+            params.abundance = true;
             params.languageId = languages._byId[this.app.session.get('selectedLanguage')].id;
             Paginator.prepare(this.app, params);
             query = _.clone(params);
@@ -232,6 +233,8 @@ function search(params, callback, gallery) {
             tracking.addParam('page', page);
             tracking.addParam('category', _category);
             tracking.addParam('subcategory', _subcategory);
+            tracking.addParam('filters', items.filters);
+            tracking.addParam('paginator', items.paginator);
 
             this.app.session.update({
                 dataPage: {
@@ -455,6 +458,8 @@ function statics(params, callback) {
             tracking.addParam('page_nb', items.paginator.get('totalPages'));
             tracking.addParam('category', _category);
             tracking.addParam('subcategory', _subcategory);
+            tracking.addParam('filters', items.filters);
+            tracking.addParam('paginator', items.paginator);
 
             this.app.session.update({
                 dataPage: {
@@ -526,6 +531,7 @@ function allresults(params, callback, gallery) {
             delete params.search;
 
             params.seo = this.app.seo.isEnabled();
+            params.abundance = true;
             params.languageId = languages._byId[this.app.session.get('selectedLanguage')].id;
             if (platform !== 'desktop') {
                 params['f.hasimage'] = true;
@@ -621,6 +627,8 @@ function allresults(params, callback, gallery) {
             this.app.seo.addMetatag('googlebot', 'noindex, nofollow');
 
             tracking.addParam('page_nb', meta.totalPages);
+            tracking.addParam('filters', items.filters);
+            tracking.addParam('paginator', items.paginator);
 
             callback(null, {
                 categories: this.dependencies.categories.toJSON(),
