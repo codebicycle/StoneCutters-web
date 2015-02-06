@@ -92,7 +92,7 @@ function createChannels(type) {
     channels.push('[navigator]');
     channels.push([prefix, configChannel.name, this.config.location, 'Organic'].join('_'));
 
-    return channels.join(type === 'CSA' ? ' ' : ',');
+    return channels.join(',');
 }
 
 function getClientId(type) {
