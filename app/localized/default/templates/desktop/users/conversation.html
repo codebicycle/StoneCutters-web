@@ -1,0 +1,45 @@
+<div class="conversation">
+    <a href="{{ '/myolx/conversations' | link }}" class="back icons icon-arrow-left"> Volver a mis mensajes</a>
+    {% set item = thread.get('item') %}
+    <div class="conversation-item">
+        <a href="{{ item.slug }}" class="wrapper-img">
+            <img src="{{ item.images[0].thumbnail }}" alt="{{ item.title }}">
+        </a>
+        <div class="conversation-item-data">
+            <h3>Conversación con
+                {% for sender in thread.get('senders') %}
+                    {% if not sender.isMine %}
+                        {{ sender.name }}
+                    {% endif %}
+                {% endfor %}
+            </h3>
+            <p><a href="{{ item.slug }}">{{ item.title }}</a>
+        </div>
+    </div>
+    <ul>
+    {% for message in thread.get('messages') %}
+        <li class="conversation-chat icons icon-chat {{ 'chat-sendit' if message.isMine else 'chat-receive' }}">
+
+            {% set name = thread.get('senders')[0].name %}
+            {% if message.isMine %}
+                {% set name = 'Vos' %}
+            {% elif thread.get('senders')[0].isMine %}
+                {% set name = thread.get('senders')[1].name %}
+            {% endif %}
+
+            <span class="conversation-name"> {{ name }}</span>
+
+            <span class="fecha"> - {{ message.date | date(false, true) }}</span>
+            <p class="conversation-chat icons icon-chat" > {{ message.text }}</p>
+        </li>
+    {% endfor %}
+    </ul>
+    <div class="conversation-input">
+        <form data-message-reply data-threadId="{{ thread.get('threadId') }}">
+            <textarea data-messageText ></textarea>
+            <p data-error class="error hide">{{ dictionary['please-comp-msg'] }}</p>
+            <img class="spinner hide" src="{{ '/images/desktop/spinner-bgWhite.gif' | static }}" alt="">
+            <button class="btn orange" type="submit">{{ dictionary["myolx.Reply"] }}</button>
+        </form>
+    </div>
+</div>

@@ -40,6 +40,12 @@ module.exports = {
     'users#readmessages': {
         url: 'myolx/readmessages/:msgId'
     },
+    'users#conversations': {
+        url: 'myolx/conversations'
+    },
+    'users#conversation': {
+        url: 'myolx/conversation/:threadId'
+    },
     'users#deleteitem': {
         url: 'myolx/deleteitem'
     }

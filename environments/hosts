@@ -2,8 +2,9 @@
 127.0.0.1       {LOCAL}
 
 #SMAUG
-{SMAUG}             api-v2.olx.com    #environment
+#{SMAUG}             api-v2.olx.com    #environment
 #190.210.62.60      api-v2.olx.com    #production
+108.171.171.70      api-v2.olx.com    #testing
 
 #SPAMHANDLER
 {SPAMHANDLER}       sh.care.olx.com   #environment
@@ -216,6 +217,8 @@
 {IP}  html5.m.olx.cl            # Chile
 {IP}  www.olx.cl            # Chile
 {IP}  olx.cl            # Chile
+{IP}  cabrero.olx.cl     #Chile
+{IP}  launion.olx.cl     #Chile
 
 {IP}  m.olx.com.co        # Colombia
 {IP}  wap.m.olx.com.co        # Colombia
@@ -299,12 +302,12 @@
 {IP}  olx.it            # Italy
 {IP}  milano.olx.it # Italy
 
-{IP}  m.olx.ir			# Iran
-{IP}  wap.m.olx.ir		# Iran
-{IP}  html4.m.olx.ir		# Iran
-{IP}  html5.m.olx.ir		# Iran
-{IP}  www.olx.ir		# Iran
-{IP}  olx.ir		# Iran
+{IP}  m.olx.ir          # Iran
+{IP}  wap.m.olx.ir      # Iran
+{IP}  html4.m.olx.ir        # Iran
+{IP}  html5.m.olx.ir        # Iran
+{IP}  www.olx.ir        # Iran
+{IP}  olx.ir        # Iran
 
 {IP}  m.olx.co.ke         # Kenia
 {IP}  wap.m.olx.co.ke         # Kenia
