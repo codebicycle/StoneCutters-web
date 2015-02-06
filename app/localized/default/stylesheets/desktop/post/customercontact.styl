@@ -1,0 +1,114 @@
+.customer-contact-service {
+    .icon-arrow {
+        color: $white;
+        font-size: 10px;
+        font-weight: normal;
+        left: 13px;
+        position: absolute;
+        top: 10px;
+        z-index: 200;
+    }
+
+    box();
+    transition(300ms);
+    padding: 7px 0 0 35px;
+    position: fixed;
+    right: 0;
+    top: 100px;
+    border-radius: 6px 0 0 6px;
+
+    &.active {
+        transition(300ms);
+        right: -266px;
+        .icon-arrow {
+            transform(rotate(180deg));
+            left: 11px;
+            position: absolute;
+            top: 12px;
+        }
+    }
+    p {
+        margin: 0;
+    }
+    .customer-help-tab {
+        background: $green url(imageUrl/images/needhelp.png) bottom 12px center no-repeat;
+        border-radius: 5px 0 0 5px;
+        display: block;
+        height: 100%;
+        left: 0;
+        position: absolute;
+        text-indent: -10000em;
+        top: 0;
+        width: 35px;
+    }
+    .container-title {
+        clear-fix();
+        font-size: $xl;
+        padding-left: 10px;
+
+
+        .horary {
+            font-size: $xs;
+            padding-bottom: 6px;
+            width: 255px
+        }
+
+        .icon-phone-round {
+            float: left;
+            color: $green;
+            font-size: remify(22px);
+        }
+        .text-title {
+            font-size: $xl;
+            color: $green;
+            float: left;
+            display: block;
+            font-weight: bold;
+            padding: 0 0 6px 10px;
+
+            span{
+                display: block;
+                font-size: $s;
+                letter-spacing: 7px;
+                text-align: right;
+                margin-right: -8px;
+            }
+        }
+    }
+    .contact-info {
+        clear-fix();
+        background: $greyBoxBg;
+        padding: 14px 0 10px 10px;
+        position: relative;
+
+        &::before {
+            arrow($white transparent transparent, 10px 11px 11px);
+            left: 30px;
+            top: 0;
+        }
+        p {
+            font-size: $s;
+            color: $black;
+        }
+        .name {
+            font-weight: bold;
+            padding-top: 4px;
+        }
+        .work {
+            font-size: $xs;
+        }
+        img {
+            float: left;
+            margin-right: 10px;
+        }
+    }
+
+    .foto {
+        width: 62px;
+        height: 62px;
+        float: left;
+        display: block;
+        background: red;
+    }
+
+}
