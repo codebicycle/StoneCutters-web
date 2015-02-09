@@ -11,7 +11,7 @@
     }
     ul {
         ul-reset();
-        padding:10px 120px;
+        padding:10px 115px;
     }
 
     .conversation-item {
@@ -59,8 +59,10 @@
         vertical-align: baseline;
         .conversation-name {
         font-size: $baseFont;
-
         }
+        &.chat-sendit{
+        margin-left:20px;
+    }    
         span {
             display:inline-block;
             font-size:12px;
@@ -70,25 +72,24 @@
             color:#CCC;
         }
         p {
-            clear: both;
             padding-left: 20px;
             margin:0;
+            position:relative;
+            top:-15px;
+            left:0px;
         }
-    .chat-sendit:{
-        margin-left:20px;
-    }    
-
-    }
-    .conversation-chat:before{
+        &:before{
         color:#999;
-        margin-left: -5px;
     }
 
+    }
     .chat-sendit:before{
         color:#ccc;
     }
 
-
+    .chat-receive:last-child{
+        font-weight:bold;
+    }
 
     .conversation-input {
         clear-fix();
