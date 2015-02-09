@@ -2,8 +2,12 @@
     <a href="{{ '/myolx/conversations' | link }}" class="back icons icon-arrow-left"> Volver a mis mensajes</a>
     {% set item = thread.get('item') %}
     <div class="conversation-item">
-        <a href="{{ item.slug }}" class="wrapper-img">
-            <img src="{{ item.images[0].thumbnail }}" alt="{{ item.title }}">
+        <a href="{{ item.slug }}">
+            <figure class="wrapper-img {{ 'lines' if item.images.length }} {{ 'icons icon-photo' if not item.images.length }}">
+                {% if item.images.length %}
+                    <img src="{{ item.images[0].thumbnail }}" alt="" class="thumbnail">
+                {% endif %}
+            </figure>
         </a>
         <div class="conversation-item-data">
             <h3>Conversación con
