@@ -26,11 +26,8 @@
             {% elif thread.get('senders')[0].isMine %}
                 {% set name = thread.get('senders')[1].name %}
             {% endif %}
-
-            <span class="conversation-name"> {{ name }}</span>
-
-            <span class="fecha"> - {{ message.date | date(false, true) }}</span>
-            <p class="conversation-chat icons icon-chat" > {{ message.text }}</p>
+            <p class="conversation-chat" > {{ message.text }} <span class="fecha">{{ name }} - {{ message.date | date(false, true) }}</span></p>
+            
         </li>
     {% endfor %}
     </ul>
