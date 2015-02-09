@@ -79,6 +79,10 @@ module.exports = {
             ninja: {
                 enabled: false,
                 platforms: ['desktop']
+            },
+            adroll: {
+                enabled: false,
+                platforms: ['desktop']
             }
         }
     },

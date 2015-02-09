@@ -1280,5 +1280,29 @@ module.exports = {
             siteId: 522915,
             logServer: 'logw310'
         }
+    },
+    //Senegal+
+    'www.olx.sn': {
+        'default': {
+            siteId: 543868,
+            logServer: 'logw347',
+            secureLogServer: 'logws1347'
+        },
+        desktop: {
+            siteId: 537452,
+            logServer: 'logw347'
+        }
+    },
+    //Cameroon+
+    'www.olx.sn': {
+        'default': {
+            siteId: 543861,
+            logServer: 'logw336',
+            secureLogServer: 'logws336'
+        },
+        desktop: {
+            siteId: 537453,
+            logServer: 'logw336'
+        }
     }
 };

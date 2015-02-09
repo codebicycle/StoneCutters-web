@@ -7,6 +7,7 @@ var _ = require('underscore');
 var asynquence = require('asynquence');
 var translations = require('../../../../../../../shared/translations');
 var Item = require('../../../../../../models/item');
+var config = require('../../../../../../../shared/config');
 
 function onpopstate(event) {
     var $loading = $('body > .loading');
@@ -52,8 +53,12 @@ module.exports = Base.extend({
     },
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
+        var location = this.app.session.get('location');
+        var customerContact = config.getForMarket(location.url, ['post_customer_contact'], '');
 
-        return _.extend({}, data);
+        return _.extend({}, data, {
+            customerContact: customerContact
+        });
     },
     postRender: function() {
         var paramCategory;
