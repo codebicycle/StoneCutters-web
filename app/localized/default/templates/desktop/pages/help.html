@@ -24,8 +24,8 @@
     <div class="menu-box grey-box">
         <h3 class="title">{{ dictionary["about.Company"] }}</h3>
         <ul>
-            <li>
-                <a class="help-toggle-content icons icon-olx" href="#" data-help-content="about-us" data-toggle-content >{{ dictionary["about.AboutBrand"] | replace("<<BRAND>>","OLX") }}</a>
+            <li {{ 'class="selected"' if active == 'about' }}>
+                <a class="help-toggle-content icons icon-olx" href="#" data-help-content="about-us" data-toggle-content>{{ dictionary["about.AboutBrand"] | replace("<<BRAND>>","OLX") }}</a>
             </li>
             <li>
                 <a class="help-toggle-content icons icon-help-round" href="#" data-help-content="why" data-toggle-content >{{ dictionary["about.Why"] }}</a>
@@ -272,7 +272,7 @@
         </div>
     </div>
 
-    <div id="about-us" class="about-content about help-content-display">
+    <div id="about-us" class="about-content about help-content-display" {{ 'style="display:block"' if active == 'about' }}>
 
         <section class="title-section">
             <h3 class="title">{{ dictionary["about.AboutBrand"] | replace("<<BRAND>>","OLX") }}</h3>
@@ -594,10 +594,8 @@
                             </p>
                         </a>
                     </li>
-
                 </ul>
             </div>
-
         </section>
         <section class="user-ads press">
             <h4 class="subtitle">{{ dictionary["about.PressReleases"] }}</h4>
@@ -678,7 +676,7 @@
             <h3 class="title">{{ dictionary["about.Tips"] }}</h3>
         </section>
 
-        <section>
+        <section class="listing-tips">
             <h4 class="subtitle">{{ dictionary["about.ListingTips"] }}</h4>
             <p>{{ dictionary["about.5WaysImprove"] }}</p>
             <ul>
