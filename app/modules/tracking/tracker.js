@@ -10,6 +10,7 @@ var tagmanager = require('./trackers/tagmanager');
 var allpages = require('./trackers/allpages');
 var facebook = require('./trackers/facebook');
 var ninja = require('./trackers/ninja');
+var adroll = require('./trackers/adroll');
 var utils = require('../../../shared/utils');
 var esi = require('../esi');
 
@@ -20,7 +21,8 @@ var trackers = {
     tagmanager: tagmanager,
     allpages: allpages,
     facebook: facebook,
-    ninja: ninja
+    ninja: ninja,
+    adroll: adroll
 };
 
 _.each(trackers, function each(tracker, name) {
