@@ -163,7 +163,7 @@ function show(params, callback) {
                 return helpers.common.redirect.call(this, slug);
             }
             if (response.item.get('location').url !== this.app.session.get('location').url) {
-                url = [protocol, '://', platform, '.', response.item.get('location').url.replace('www.', 'm.'), '/', slug].join('');
+                url = [protocol, '://', this.app.session.get('host'), '/', slug].join('');
 
                 done.abort();
                 return helpers.common.redirect.call(this, url, null, {
