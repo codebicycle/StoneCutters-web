@@ -31,7 +31,7 @@
                 {% set name = thread.get('senders')[1].name %}
             {% endif %}
             <p class="conversation-chat" > {{ message.text }} <span class="fecha">{{ name }} - {{ message.date | date(false, true) }}</span></p>
-            
+
         </li>
     {% endfor %}
     </ul>
@@ -44,3 +44,6 @@
         </form>
     </div>
 </div>
+{% if paginator and paginator.isEnabled() %}
+    {% include (template + '/users/partials/pagination.html') %}
+{% endif %}
