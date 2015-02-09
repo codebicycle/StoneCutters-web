@@ -1,17 +1,44 @@
 <form id="replyForm" action="">
-    <label>* {{ dictionary["replymessage.Message"] }}</label>
-    <textarea class="message" name="message" placeholder="{{ dictionary["misc.EnterMessage"] }}"></textarea>
-    <small class="message hide"></small>
+    {% if user.email %}
+        <div class="info">
+                {% if user.username %}
+                    <span>{{ user.username }}</span>
+                    <input type="hidden" value="{{ user.username }}" class="name" name="name">
+                {% endif %}
+                <span>{{ user.email }}</span>
+                <input type="hidden" value="{{ user.email }}" name="email" class="email">
+        </div>
+    {% endif %}
+    <div class="contentmessage {{ 'lines' if not user.email }}">
+        <h3>Contactar con el vendedor</h3>
+        <div class="field">
+            <label>* {{ dictionary["replymessage.Message"] }}</label>
+            <textarea class="message" name="message"></textarea>
+            <small class="placeholder">{{ dictionary["misc.EnterMessage"] }}</small>
+            <small class="message error hide"></small>
+        </div>
+    </div>
+    {% if not user.email %}
+        <h3>Completa tus datos de contacto una vez:</h3>
+        <div class="field">
+            <label>{{ dictionary["replymessage.Name"] }}</label>
+            <input type="text" value="{{ user.username if user.username }}" class="name" name="name">
+            <small class="placeholder">{{ dictionary["misc.EnterName"] }}</small>
+        </div>
+        <div class="field">
+            <label>* {{ dictionary["replymessage.Email"] }}</label>
+            <input type="email" value="{{ user.email if user.email }}" class="email" name="email">
+            <small class="placeholder">{{ dictionary["misc.EnterEmail"] }}</small>
+            <small class="email error hide"></small>
+        </div>
 
-    <label>{{ dictionary["replymessage.Name"] }}</label>
-    <input type="text" value="{{ user.username if user.username }}" placeholder="{{ dictionary["misc.EnterName"] }}" class="name" name="name">
+        <div class="field">
+            <label>{{ dictionary["itemgeneraldetails.Phone"] }}</label>
+            <input type="number" class="phone" name="phone">
+            <small class="placeholder">{{ dictionary["misc.EnterPhoneNumber"] }}</small>
+        </div>
+    {% endif %}
 
-    <label>* {{ dictionary["replymessage.Email"] }}</label>
-    <input type="email" value="{{ user.email if user.email }}" placeholder="{{ dictionary["misc.EnterEmail"] }}" class="email" name="email">
-    <small class="email hide"></small>
-
-    <label>{{ dictionary["itemgeneraldetails.Phone"] }}</label>
-    <input type="number" class="phone" name="phone" placeholder="{{ dictionary["misc.EnterPhoneNumber"] }}">
     <input type="hidden" class="itemId" name="itemId" value="{{ item.id }}">
     <input type="hidden" class="itemSlug" name="itemSlug" value="{{ item.slug }}">
 

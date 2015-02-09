@@ -39,6 +39,8 @@ module.exports = Base.extend({
         this.app.router.appView.on('register:end', this.show.bind(this));
         this.app.router.appView.on('lostpassword:start', this.hide.bind(this));
         this.app.router.appView.on('lostpassword:end', this.show.bind(this));
+        this.app.router.appView.on('reply:start', this.hide.bind(this));
+        this.app.router.appView.on('reply:end', this.show.bind(this));
         this.attachTrackMe();
     },
     hideFooter: function() {
