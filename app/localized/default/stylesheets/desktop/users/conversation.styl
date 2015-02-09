@@ -62,7 +62,7 @@
         }
         &.chat-sendit{
         margin-left:20px;
-    }    
+    }
         span {
             display:inline-block;
             font-size:12px;
@@ -96,13 +96,14 @@
         box($white, $greyBorders, 3px, 0, solid, 1px);
         background-color:#FE7;
         padding:10px 110px;
-        textarea{
+        textarea {
             width:714px;
             height:90px;
             padding:10px;
             margin-bottom:10px;
-
-
+            &.error {
+                border-color: $red;
+            }
         }
         button[type="submit"] {
             action-button($orange, $white, 3px, padding = 10px 0);

@@ -34,10 +34,12 @@ module.exports = Base.extend({
         var user = this.app.session.get('user');
 
         $('[data-error]').addClass('hide');
-        
+        $('[data-messageText]').removeClass('error');
+
         var validate = function(done) {
             if (!message) {
                 $('[data-error]').removeClass('hide');
+                $('[data-messageText]').addClass('error');
                 return done.abort();
             }
             done();
@@ -90,6 +92,8 @@ module.exports = Base.extend({
         }.bind(this);
 
         var error = function(err) {
+            $form.find('.spinner, .reply-send').toggle();
+            $('[data-messageText]').addClass('error');
         }.bind(this);
 
         asynquence().or(error)
