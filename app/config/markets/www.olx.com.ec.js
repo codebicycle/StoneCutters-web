@@ -20,6 +20,14 @@ module.exports = {
     ],
     videos: [
         {
+            title: 'OLX Ecuador - Consola',
+            id: '-VDOdJUePhI'
+        },
+        {
+            title: 'OLX Ecuador - Garaje',
+            id: 'BpwjQm6Atcc'
+        },
+        {
             title: 'OLX Ecuador - Comercial Sofá Cama - Vender es fácil',
             id: 'XlLozB_JfRk'
         },

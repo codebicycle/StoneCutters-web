@@ -20,7 +20,7 @@ module.exports = Base.extend({
         var videos = config.getForMarket(location.url, ['videos'], '');
         var testimonials = config.getForMarket(location.url, ['testimonials'], '');
         var celebrities = config.getForMarket(location.url, ['celebrities'], '');
-console.log(celebrities);
+
         categories = helpers.common.categoryOrder(categories, location.url);
 
         if(location.children.length) {
