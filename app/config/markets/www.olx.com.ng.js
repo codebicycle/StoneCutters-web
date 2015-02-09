@@ -1,4 +1,13 @@
 module.exports = {
+    post_customer_contact: {
+        phone: '0700-CALL-OLX',
+        phone_wodrs: '(2255-659)',
+        contact_photo: '/images/desktop/posting_customer/ng.jpg',
+        horary: 'Call us Monday to Friday from 9am to 4pm',
+        name: 'Abiola',
+        work: 'Customer Support Manager',
+        phrase: '"Our team is here to help!"'
+    },
     categoryTree: {
         order: [830, 800, 811, 806, 362, 815, 859, 16, 821],
         columns: [3, 2, 2]
