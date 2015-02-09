@@ -632,7 +632,7 @@ function conversations(params, callback) {
         }.bind(this);
 
         var prepare = function(done) {
-            Paginator.prepare(this.app, params, 'myConv');
+            Paginator.prepare(this.app, params, 'myConvs');
             conversation = params.conversation;
             delete params.conversation;
             _params = _.extend({}, params, {
@@ -704,7 +704,7 @@ function conversation(params, callback) {
         var platform = this.app.session.get('platform');
         var location = this.app.session.get('location');
         var page = params ? params.page : undefined;
-        var message;
+        var thread;
         var _params;
         var user;
 
@@ -722,9 +722,9 @@ function conversation(params, callback) {
         }.bind(this);
 
         var prepare = function(done) {
-            Paginator.prepare(this.app, params, 'myMsgs');
-            message = params.message;
-            delete params.message;
+            Paginator.prepare(this.app, params, 'myConv');
+            thread = params.thread;
+            delete params.thread;
             _params = _.extend({}, params, {
                 token: user.token,
                 userId: user.userId
@@ -743,13 +743,32 @@ function conversation(params, callback) {
             }, done.errfcb);
         }.bind(this);
 
-        var success = function(res) {
+        var paginate = function(done, res) {
+            var url = 'myolx/conversation/' + _params.threadId;
+            var realPage;
+
+            if (page == 1) {
+                done.abort();
+                return helpers.common.redirect.call(this, url);
+            }
+            realPage = res.thread.paginate([url, '[page]'].join(''), params, {
+                page: page
+            });
+            if (realPage) {
+                done.abort();
+                return helpers.common.redirect.call(this, [url, '-p-', realPage].join(''));
+            }
+            done(res);
+        }.bind(this);
+
+        var success = function(response) {
             this.app.seo.addMetatag('robots', 'noindex, nofollow');
             this.app.seo.addMetatag('googlebot', 'noindex, nofollow');
             callback(null, 'users/myolx', {
-                thread: res.thread,
+                thread: response.thread,
                 include: ['thread'],
-                viewname: 'conversation'
+                viewname: 'conversation',
+                paginator: response.thread.paginator
             });
         }.bind(this);
 
@@ -762,6 +781,7 @@ function conversation(params, callback) {
             .then(redirect)
             .then(prepare)
             .then(fetch)
+            .then(paginate)
             .val(success);
     }
 }
