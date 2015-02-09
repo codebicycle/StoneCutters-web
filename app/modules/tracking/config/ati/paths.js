@@ -1294,7 +1294,7 @@ module.exports = {
         }
     },
     //Cameroon+
-    'www.olx.sn': {
+    'www.olx.cm': {
         'default': {
             siteId: 543861,
             logServer: 'logw336',
