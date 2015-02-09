@@ -7,7 +7,9 @@ module.exports = {
             related: 30,
             myAds: 15,
             myFavs: 15,
-            myMsgs: 15
+            myMsgs: 15,
+            myConv: 15
+
         }
     },
     adserving: {
