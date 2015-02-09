@@ -93,6 +93,9 @@ module.exports = Base.extend({
         this.reply = {
             id: this.$('[name=itemId]').val()
         };
+        if (this.user.has('userId')) {
+            this.reply.userId = this.user.get('userId');
+        }
     },
     onReplySuccessClick: function(event) {
         event.preventDefault();
