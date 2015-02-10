@@ -323,6 +323,7 @@
 
             p {
                 font-size: $baseFont;
+                line-height: $l;
             }
 
             .box {
@@ -374,13 +375,10 @@
                             border-bottom: none;
                         }
                     }
-
-
                     .box-title{
                         font-size: $m;
                         margin-bottom: 8px;
                     }
-
                     .box-numbers{
                         font-size: $xxxl;
                         line-height: $xl;
@@ -420,7 +418,6 @@
                         font-size: $s;
                         line-height: $m;
                     }
-
                 }
 
             }
@@ -455,8 +452,6 @@
                         }
                     }
                 }
-
-
             }
             &.press {
                 .user-ads {
@@ -470,7 +465,7 @@
                     }
                     &.news {
                         .slide, ul,li {
-                            height: 220px;
+                            height: 235px;
                         }
                         ul {
                             width: 1510px;
@@ -479,7 +474,7 @@
                     }
                     &.press {
                         .slide, ul,li {
-                            height: 130px;
+                            height: 140px;
                         }
                         ul {
                             width: 945px;
@@ -511,7 +506,8 @@
                                 text-decoration: none;
                             }
                             h3{
-                                font-size: $m;
+                                font-size: $baseFont;
+                                line-height: $l;
                                 color: $black;
                                 font-weight: normal;
                                 margin: 5px 0 10px;
@@ -548,11 +544,12 @@
                 }
                 li {
                     margin-bottom: 10px;
-                    list-style: disc inside;
-                }
-                .listing-tips {
-                    font-size: $m;
+                    list-style: disc;
+                    margin-left: 20px;
                     line-height: $l;
+                    b {
+                        text-transform: uppercase;
+                    }
                 }
             }
 

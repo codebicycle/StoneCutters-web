@@ -447,7 +447,7 @@ module.exports = {
     'about.NoStragnesHome': 'N\u2019invitez pas des \xE9trangers dans votre maison, et ne vous rendez pas chez eux.',
     'about.PostSocialNetwork': '<b>Postez sur les reseaux sociaux:</b> Tous vos amis et leurs amis sont des acheteurs potentiels.',
     'about.Presence': 'Pr\xE9sence',
-    'about.Press': 'Press',
+    'about.Press': 'Presse',
     'about.PressReleases': 'Communiqu\xE9s de presse',
     'about.RightPrice': '<b>Un Juste Prix:</b> Les bonnes opportunit\xE9s attirent davantage l\'attention.',
     'about.SafetyTips': 'Conseils de s\xE9curit\xE9',
