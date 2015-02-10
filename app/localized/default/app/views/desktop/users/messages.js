@@ -15,6 +15,7 @@ module.exports = Base.extend({
         var data = Base.prototype.getTemplateData.call(this);
 
         this.messages = this.messages || data.context.ctx.messages;
+
         return _.extend({}, data, {
             messages: this.messages
         });

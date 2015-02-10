@@ -24,10 +24,12 @@ module.exports = Base.extend({
         var data = Base.prototype.getTemplateData.call(this);
         var currentRoute = this.app.session.get('currentRoute');
         var postingFlowEnabled = this.app.session.get('platform') === 'html5' && config.get(['posting', 'flow', 'enabled', this.app.session.get('siteLocation')], true);
+        var isHermesEnabled = helpers.features.isEnabled.call(this, 'hermes');
 
         return _.extend({}, data, {
             postingFlowEnabled: postingFlowEnabled,
-            postingFlow: postingFlowEnabled && currentRoute.controller === 'post' && currentRoute.action === 'flow'
+            postingFlow: postingFlowEnabled && currentRoute.controller === 'post' && currentRoute.action === 'flow',
+            isHermesEnabled: isHermesEnabled
         });
     },
     postRender: function() {
