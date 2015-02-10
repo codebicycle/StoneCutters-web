@@ -55,7 +55,16 @@ module.exports = {
                 enabled: false
             },
             tagmanager: {
+                enabled: false
+            },
+            ninja: {
                 enabled: true
+            },
+            ati: {
+                enabled: false
+            },
+            analytics: {
+                enabled: false
             }
         }
     }

@@ -1,19 +1,19 @@
 <form class="images">
-    {%- for i in range(0, 6) -%}
-        <input type="file" id="file{{ i }}" accept="image/*" />
+    {%- for i in range(0, slots) -%}
+        <input class="input" type="file" id="file{{ i }}" accept="image/*" />
     {%- endfor -%}
-    <ul class="fileUpload">
-        {%- for i in range(0, 6) -%}
-            <li class="imgCont trackMe" data-tracking="Posting-ClickUploadPicture" data-input="file{{ i }}">
-                <div class="image"></div>
+    <ul class="files">
+        {%- for i in range(0, slots) -%}
+            <li class="file trackMe" data-tracking="Posting-ClickUploadPicture">
+                <div class="display"></div>
                 <span class="remove"></span>
             </li>
         {%- endfor -%}
     </ul>
 </form>
-<p><small>&#9733; {{ dictionary["misc.AddPhotosSellFaster_Mob"] }}</small></p>
+<p class="hint"><small>&#9733; {{ dictionary["misc.AddPhotosSellFaster_Mob"] }}</small></p>
 <form>
     <div class="btnCenter">
-        <input type="submit" value="{{ dictionary["posting_buttonpublish.buttonstep1"] }}" class="btns orange" data-qa="images-continue-button" >
+        <input type="submit" value="{{ dictionary['posting_buttonpublish.buttonstep1'] }}" class="btns orange" data-qa="images-continue-button" >
     </div>
 </form>
