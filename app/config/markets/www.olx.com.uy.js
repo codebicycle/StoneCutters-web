@@ -37,6 +37,17 @@ module.exports = {
                         allresults: 2,
                         allresultsig: 2
                     }
+                },
+                side: {
+                    service: 'none'
+                }
+            },
+            item: {
+                top: {
+                    service: 'none'
+                },
+                side: {
+                    service: 'none'
                 }
             }
         }

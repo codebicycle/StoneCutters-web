@@ -156,7 +156,7 @@ function getQuery() {
         queryResult.push(category);
     }
 
-    if (!queryResult.length) {
+    if (!queryResult.length && querycategories) {
         queryResult.push(querycategories);
     }
 

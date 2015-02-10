@@ -30,6 +30,55 @@ module.exports = {
             id: 'Yf5i1HOwd70'
         }
     ],
+    adserving: {
+        slots: {
+            listing: {
+                topgallery: {
+                    service: 'CSA',
+                    format: 'default',
+                    location: 'Top',
+                    numberPerCategoryCSA: {
+                        '800': 1,
+                        '806': 1,
+                        '815': 1,
+                        '830': 1,
+                        '853': 1,
+                        '859': 1,
+                        '362': 2,
+                        allresults: 2,
+                        allresultsig: 2
+                    }
+                },
+                top: {
+                    service: 'CSA',
+                    format: 'custom',
+                    location: 'Top',
+                    numberPerCategoryCSA: {
+                        '800': 1,
+                        '806': 1,
+                        '815': 1,
+                        '830': 1,
+                        '853': 1,
+                        '859': 1,
+                        '362': 2,
+                        allresults: 2,
+                        allresultsig: 2
+                    }
+                },
+                side: {
+                    service: 'none'
+                }
+            },
+            item: {
+                top: {
+                    service: 'none'
+                },
+                side: {
+                    service: 'none'
+                }
+            }
+        }
+    },
     tracking: {
         trackers: {
             hydra: {

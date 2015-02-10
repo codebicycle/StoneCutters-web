@@ -2,30 +2,6 @@ module.exports = {
     categoryTree: {
         order: [185, 186, 362, 187, 16, 191, 190]
     },
-    adserving: {
-        slots: {
-            listing: {
-                side: {
-                    service: 'ADX',
-                    format: 'WideSkyscraper',
-                    location: 'Side',
-                    params: {
-                        slotId: '3997611586'
-                    }
-                }
-            },
-            item: {
-                side: {
-                    service: 'ADX',
-                    format: 'MediumRectangle',
-                    location: 'Side',
-                    params: {
-                        slotId: '5474319466'
-                    }
-                }
-            }
-        }
-    },
     successPage: {
         keepPosting: [
             {

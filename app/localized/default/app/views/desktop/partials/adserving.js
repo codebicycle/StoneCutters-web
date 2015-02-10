@@ -38,12 +38,15 @@ module.exports = Base.extend({
         var service = this.adServing.get('service');
 
         if (service === 'CSA' || service === 'AFC') {
-            if (this.isGoogleReferer() && settings.seo) {
-                settings.params.number += settings.seo;
+            if (this.isGoogleReferer()) {
                 settings.options.channel = settings.options.channel.replace('Organic', 'SEO');
+                if (settings.seo) {
+                    settings.params.number += settings.seo;
+                }
             }
             settings.options.channel = settings.options.channel.replace('[navigator]', window.BrowserDetect.browsername);
         }
+        console.log(settings);
         switch (service) {
             case 'CSA':
                 this._includeCsaLib();
@@ -54,7 +57,6 @@ module.exports = Base.extend({
                 break;
             case 'AFC':
                 this.createIframeAFC(settings.params, settings.options);
-                console.log(settings);
                 break;
         }
     },
