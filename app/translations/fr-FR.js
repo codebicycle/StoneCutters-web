@@ -398,7 +398,7 @@ module.exports = {
     'about.Blog': 'Blog',
     'about.Company': 'Soci\xE9t\xE9',
     'about.CompletelyFree': 'OLX est compl\xE8tement gratuit, \xE0 la fois pour l\'acheteur et pour le vendeur',
-    'about.ControlSteps': 'Avec OLX vous pouvez contr\xF4ler toutes les \xE9tapes du processus d\'achat et de vente, de la n\xE9gociation \xE0 la d\xE9cision de changer d\'avis.',
+    'about.ControlSteps': 'Avec OLX vous pouvez contr\xF4ler toutes les \xE9tapes du processus d\'achat et de vente.',
     'about.Countries': 'Pays',
     'about.CuttingEdgeApps': 'OLX offer une application de pointe pour chaque appareil, ce qui permet d\'acheter et de vendre \xE0 tout moment et partout.',
     'about.Download_Mob': 'T\xE9l\xE9charger',

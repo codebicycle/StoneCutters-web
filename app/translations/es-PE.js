@@ -398,7 +398,7 @@ module.exports = {
     'about.Blog': 'Blog',
     'about.Company': 'Empresa',
     'about.CompletelyFree': 'OLX es completamente gratuito para el comprador y para el vendedor.',
-    'about.ControlSteps': 'Con OLX puedes controlar todos los paso del proceso de compra y venta: desde la negociaci\xF3n hasta el momento en que tomas una decisi\xF3n o hasta que cambias de parecer.',
+    'about.ControlSteps': 'Con OLX puedes controlar todos los pasos del proceso de compra y venta.',
     'about.Countries': 'Pa\xEDses',
     'about.CuttingEdgeApps': 'OLX tiene innovadoras aplicaciones para todos los dispositivos, lo que te permite comprar y vender en todo momento y en todo lugar.',
     'about.Download_Mob': 'Descargar',
