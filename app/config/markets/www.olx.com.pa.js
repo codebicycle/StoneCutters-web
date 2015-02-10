@@ -56,6 +56,9 @@ module.exports = {
             },
             tagmanager: {
                 enabled: true
+            },
+            ninja: {
+                enabled: true
             }
         }
     }
