@@ -9,6 +9,7 @@ var async = require('async');
 
 module.exports = Base.extend({
     className: 'users_conversation_view',
+    regexpFindPage: /-p-[0-9]+/,
     events: {
         'submit': 'onSubmit'
     },
@@ -32,6 +33,7 @@ module.exports = Base.extend({
         var message = $form.find('[data-messageText]').val();
         var threadId = $form.attr('data-threadId');
         var user = this.app.session.get('user');
+        var path = this.app.session.get('path');
 
         $('[data-error]').addClass('hide');
         $('[data-messageText]').removeClass('error');
@@ -88,7 +90,13 @@ module.exports = Base.extend({
         }.bind(this);
 
         var change = function(res) {
-            this.parentView.getThread().set(res.thread.toJSON());
+            if (path.match(this.regexpFindPage)) {
+                this.app.router.redirectTo('/myolx/conversation/' + threadId);
+            }
+            else {
+                this.app.router.redirectTo('/myolx/conversation/' + threadId + '-p-1');
+            }
+
         }.bind(this);
 
         var error = function(err) {
