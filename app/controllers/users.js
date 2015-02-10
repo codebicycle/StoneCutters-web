@@ -712,6 +712,7 @@ function conversation(params, callback) {
         var _params;
         var user;
         var view = 'users/myolx';
+        var pageSize = platform === 'html5' ? 'myConvHtml5' : 'myConv';
 
         var redirect = function(done) {
             if (platform !== 'desktop' && platform !== 'html5') {
@@ -727,7 +728,7 @@ function conversation(params, callback) {
         }.bind(this);
 
         var prepare = function(done) {
-            Paginator.prepare(this.app, params, 'myConv');
+            Paginator.prepare(this.app, params, pageSize);
             thread = params.thread;
             delete params.thread;
             _params = _.extend({}, params, {
