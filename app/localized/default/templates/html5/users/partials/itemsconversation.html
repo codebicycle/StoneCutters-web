@@ -1,6 +1,6 @@
 <div class="item">
     <a href="{{ item.slug }}" class="link-item">
-        <figure class="items-image {{ 'noPhoto' if not item.images.length }}">
+        <figure class="items-image {{ 'noPhoto' if not thread.item.images.length }}">
             {% if thread.item.images.length %}
                 <img src="{{ thread.item.images[0].thumbnail }}">
             {% endif %}

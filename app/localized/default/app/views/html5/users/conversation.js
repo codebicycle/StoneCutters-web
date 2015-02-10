@@ -23,7 +23,6 @@ module.exports = Base.extend({
         this.threadId = $('.conversation-input').attr('data-threadId');
 
         $(document).on('scroll', this.detectScroll);
-        $('.conversation-input input').focus();
 
         this.poll = setInterval(this.getConversation.bind(this), 20000);
 
@@ -40,7 +39,7 @@ module.exports = Base.extend({
     detectScroll: function(e) {
         var topHeight = $('.header_index_view').outerHeight() + this.$('header').outerHeight();
         var height = $(window).scrollTop();
-        console.log(height);
+
         if (height > topHeight + 30) {
             this.$('.item').css({
                 position: 'fixed',

@@ -10,6 +10,9 @@ module.exports = Base.extend({
         'click .reply-send': 'onSubmit',
         'reset': 'onReset'
     },
+    postRender: function() {
+        this.$('.conversation-input input').focus();
+    },
     onSubmit: function(event) {
         event.preventDefault();
         event.stopPropagation();
