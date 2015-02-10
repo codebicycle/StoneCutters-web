@@ -1,6 +1,6 @@
 <div class="conversations">
 <div class="top-conversations">
-<p>{{ dictionary["myolx.FIndPrevMessages"] }}</p>
+<p>{{ dictionary["myolx.FIndPrevMessages"] | replace('<<LINK>>', ([' <a href="', ('/myolx/myolxmessages' | link), '">'] | join(''))) | replace('<</LINK>>', '</a>') }}</p>
 </div>
     {% for conversation in conversations %}
         {% set item = items.get(conversation.itemId) %}

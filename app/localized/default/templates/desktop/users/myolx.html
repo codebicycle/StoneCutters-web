@@ -1,6 +1,6 @@
-{% if viewname == 'messages' %}
+{% if viewname == 'messages' or viewname == 'conversations' %}
     {% set messagesClass =  'active messages' %}
-{% elif viewname == 'readmessages' %}
+{% elif viewname == 'readmessages' or viewname == 'conversation' %}
     {% set messagesClass = 'active' %}
 {% endif %}
 <ul class="myolxmenu">
