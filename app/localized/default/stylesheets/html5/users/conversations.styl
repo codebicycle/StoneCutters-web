@@ -160,13 +160,16 @@
         input,
         .reply-send {
             border-radius: 3px;
-            border-sizing: border-box;
+            box-sizing: border-box;
             border: 1px solid #ccc;
         }
         input {
             float: left;
-            padding: 8px 0;
+            padding: 8px;
             width: 69%;
+            &.error {
+                border-color: red;
+            }
         }
         .reply-send {
             background: #a8b301;
@@ -175,6 +178,9 @@
             float: right;
             font-weight: bold;
             padding: 8px 5px;
+        }
+        .spinner {
+            margin: 7px 0 0 40px;
         }
     }
 }

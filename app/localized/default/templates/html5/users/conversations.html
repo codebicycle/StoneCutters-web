@@ -8,12 +8,12 @@
         {% endif %}
         <li class="conversations-thread" >
             <a class="link-thread" href="{{ ('/myolx/conversation/' + conversation.threadId) | link }}" data-threadId="{{ conversation.threadId }}">
-                <figure class="items-image {{ 'noPhoto' if not item.get('images').length }}">
-                    {% if item.get('images').length %}
-                        <img src="{{ item.get('images')[0].thumbnail }}">
+                <figure class="items-image {{ 'noPhoto' if not item.get('thumbnail') }}">
+                    {% if item.get('thumbnail') %}
+                        <img src="{{ item.get('thumbnail') }}">
                     {% endif %}
                 </figure>
-                <div class="conversations-data {{ ' read' if conversation.read else ' unread'}}">
+                <div class="conversations-data {{ ' unread' if not conversation.read}}">
                     <div class="top">
                         <span class="name">{{ conversation.buyerName }}</span>
                         <span class="date">{{ conversation.messageDate | date(false, true) }}</span>

@@ -8,15 +8,14 @@ var helpers = require('../../../../../../helpers');
 module.exports = Base.extend({
     className: 'users_conversations_view',
     events: {
-        'click .conversations-thread a': 'markAsRead',
-        'click [data-delete-message]': 'deleteMessage',
-        'click [data-select-all]': 'selectAll'
+        'click .conversations-thread a': 'markAsRead'
     },
     markAsRead: function(event) {
-        var threadId = $(event.currentTarget).data('threadid');
+        var $this = $(event.currentTarget);
+        var threadId = $this.data('threadid');
         var user = this.app.session.get('user');
 
-        if(!$(event.currentTarget).parent().hasClass('read')) {
+        if ($this.find('.conversations-data').hasClass('unread')) {
             var prepare = function(done) {
                if (!user) {
                     done.abort();

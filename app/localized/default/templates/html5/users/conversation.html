@@ -1,43 +1,6 @@
 <header>
     <p>{{ dictionary["myolx.Messages"] }}</p>
 </header>
-{% set item = thread.get('item') %}
-<div class="item">
-    <a href="{{ item.slug }}" class="link-item">
-        <figure class="items-image {{ 'noPhoto' if not item.images.length }}">
-            {% if item.images.length %}
-                <img src="{{ item.images[0].thumbnail }}">
-            {% endif %}
-        </figure>
-        <div class="item-data">
-            <div class="top">
-                <span class="date">{{ item.date.timestamp | date("MMM DD, YYYY") }}</span>
-            </div>
-            <span class="title">{{ item.title }}</span>
-            <span class="price">$ 7.500</span>
-            {% if item.price.displayPrice %}
-                <span class="price">{{ item.price.displayPrice }}</span>
-            {% endif %}
-        </div>
-    </a>
-</div>
-<ul class="conversation">
-    {% for message in thread.get('messages') %}
-        <li class="message {{ 'is-mine' if message.isMine }}">
-            {% set name = thread.get('senders')[0].name %}
-            {% if message.isMine %}
-                {% set name = 'Vos' %}
-            {% elif thread.get('senders')[0].isMine %}
-                {% set name = thread.get('senders')[1].name %}
-            {% endif %}
-            <span class="name">{{ name }}</span>
-            <p class="text">{{ message.text }}</p>
-            <span class="date"> {{ message.date | date(false, true) }}</span>
-        </li>
-    {% endfor %}
-</ul>
-<form class="conversation-input" data-message-reply data-threadId="{{ thread.get('threadId') }}">
-    <input type="text" value="" data-messageText />
-    <img class="spinner hide" src="{{ '/images/desktop/spinner-bgWhite.gif' | static }}" alt="">
-    <button class="reply-send">{{ dictionary["myolx.Reply"] }}</button>
-</form>
+{% view 'users/partials/itemsconversation' %}
+{% view 'users/partials/inputconversation' %}
+
