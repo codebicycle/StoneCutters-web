@@ -51,21 +51,6 @@ module.exports = Base.extend({
                 }, done.errfcb);
             }.bind(this);
 
-            var success = function(done) {
-                this.app.fetch({
-                    thread: {
-                        model: 'Thread',
-                        params: {
-                            token: user.token,
-                            userId: user.userId,
-                            threadId: this.parentView.threadId
-                        }
-                    }
-                }, {
-                    readFromCache: false
-                }, done.errfcb);
-            }.bind(this);
-
             var change = function(res) {
                 this.parentView.$el.trigger('newMessage');
                 this.$el.trigger('reset');
@@ -77,7 +62,6 @@ module.exports = Base.extend({
             asynquence().or(error)
                 .then(prepare)
                 .then(sendMessage)
-                .then(success)
                 .val(change);
         }
     },

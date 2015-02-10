@@ -94,7 +94,8 @@ module.exports = Base.extend({
                     params: {
                         token: user.token,
                         userId: user.userId,
-                        threadId: this.threadId
+                        threadId: this.threadId,
+                        pageSize: 300
                     }
                 }
             }, {
