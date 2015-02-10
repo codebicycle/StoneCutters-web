@@ -47,7 +47,10 @@ module.exports = {
         ]
     },
     'users#conversation': {
-        url: 'myolx/conversation/:threadId'
+        urls: [
+            'myolx/conversation/:threadId-p-:page([0-9]+)',
+            'myolx/conversation/:threadId'
+        ]
     },
     'users#deleteitem': {
         url: 'myolx/deleteitem'

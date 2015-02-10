@@ -10,12 +10,14 @@
             </figure>
         </a>
         <div class="conversation-item-data">
-            <h3>Conversación con
-                {% for sender in thread.get('senders') %}
-                    {% if not sender.isMine %}
-                        {{ sender.name }}
-                    {% endif %}
-                {% endfor %}
+            {% set senderName = '' %}
+            {% if thread.get('senders')[0].isMine %}
+                {% set senderName = thread.get('senders')[1].name %}
+            {% else %}
+                {% set senderName = thread.get('senders')[0].name %}
+            {% endif %}
+            <h3>{{ dictionary["myolx.ConversationWith"] | replace('<<NAME>>', senderName) }}
+
             </h3>
             <p><a href="{{ item.slug }}">{{ item.title }}</a>
         </div>
@@ -26,21 +28,24 @@
 
             {% set name = thread.get('senders')[0].name %}
             {% if message.isMine %}
-                {% set name = 'Vos' %}
+                {% set name = dictionary["myolx.You"] %}
             {% elif thread.get('senders')[0].isMine %}
                 {% set name = thread.get('senders')[1].name %}
             {% endif %}
             <p class="conversation-chat" > {{ message.text }} <span class="fecha">{{ name }} - {{ message.date | date(false, true) }}</span></p>
-            
+
         </li>
     {% endfor %}
     </ul>
     <div class="conversation-input">
         <form data-message-reply data-threadId="{{ thread.get('threadId') }}">
-            <textarea data-messageText ></textarea>
-            <p data-error class="error hide">{{ dictionary['please-comp-msg'] }}</p>
+            <textarea data-messageText class="text-field" ></textarea>
+            <p data-error class="error hide">{{ dictionary["misc.please-comp-msg"] }}</p>
             <img class="spinner hide" src="{{ '/images/desktop/spinner-bgWhite.gif' | static }}" alt="">
             <button class="btn orange" type="submit">{{ dictionary["myolx.Reply"] }}</button>
         </form>
     </div>
 </div>
+{% if paginator and paginator.isEnabled() %}
+    {% include (template + '/users/partials/pagination.html') %}
+{% endif %}

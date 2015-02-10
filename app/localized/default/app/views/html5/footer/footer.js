@@ -39,6 +39,8 @@ module.exports = Base.extend({
         this.app.router.appView.on('register:end', this.show.bind(this));
         this.app.router.appView.on('lostpassword:start', this.hide.bind(this));
         this.app.router.appView.on('lostpassword:end', this.show.bind(this));
+        this.app.router.appView.on('conversation:start', this.hide.bind(this));
+        this.app.router.appView.on('conversation:end', this.show.bind(this));
         this.attachTrackMe();
     },
     hideFooter: function() {
@@ -47,6 +49,7 @@ module.exports = Base.extend({
         return (currentRoute.action === 'filter' ||
                 currentRoute.action === 'sort' ||
                 currentRoute.action === 'location' ||
+                currentRoute.action === 'conversation' ||
                 currentRoute.action === 'login' ||
                 currentRoute.action === 'lostpassword' ||
                 currentRoute.action === 'register');

@@ -8,7 +8,9 @@ module.exports = {
             myAds: 15,
             myFavs: 15,
             myMsgs: 15,
-            myConv: 15
+            myConvs: 15,
+            myConv: 15,
+            myConvHtml5: 300
         },
         maxPage: {
             allResults: 500
