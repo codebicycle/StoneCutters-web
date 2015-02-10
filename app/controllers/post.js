@@ -26,12 +26,21 @@ function flowMarketing(params, callback) {
     return flow.call(this, params, callback);
 }
 
-
 function rebump(params, callback) {
+    console.log("post::rebump");
     helpers.controllers.control.call(this, params, controller);
 
     function controller() {
+        var location = this.app.session.get('location');
         var item;
+
+        var check = function(done) {
+            if(!config.getForMarket(location.url, ['ads', 'rebump', 'enabled'],false)) {
+                done.abort();
+                return helpers.common.redirect.call(this, '/iid-' + params.itemId);
+            }
+            done();
+        }.bind(this);
 
         var prepare = function(done) {
             item = new Item({
@@ -53,17 +62,20 @@ function rebump(params, callback) {
         }.bind(this);
 
         var error = function(err, res) {
+            if(params.itemId) {
+                return helpers.common.redirect.call(this, '/iid-' + params.itemId);
+            }
             return helpers.common.error.call(this, err, res, callback);
 
         }.bind(this);
 
         asynquence().or(error)
+            .then(check)
             .then(prepare)
             .then(fetch)
             .val(success);
     }
 }
-
 
 function renew(params, callback) {
     params.renew = true;
@@ -82,14 +94,26 @@ function flow(params, callback) {
         var isDesktop = platform === 'desktop';
         var itemId = params.itemId;
         var promise = asynquence().or(error.bind(this))
+            .then(check.bind(this))
             .then(prepare.bind(this));
 
         if (isPostingFlow || isDesktop || itemId) {
             promise
+
                 .then(fetch.bind(this))
                 .then(parse.bind(this));
         }
         promise.val(success.bind(this));
+
+        function check(done) {
+            if(params.renew) {
+                if(!config.getForMarket(location.url, ['ads', 'renew', 'enabled'],false)) {
+                    params.renew = false;
+                    return done.fail({});
+                }
+            }
+            done();
+        }
 
         function prepare(done) {
             if ((!isPostingFlow && !isDesktop) && (!siteLocation || siteLocation.indexOf('www.') === 0)) {

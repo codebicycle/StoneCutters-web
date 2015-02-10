@@ -10,7 +10,11 @@ module.exports = {
             myMsgs: 15
         },
         renew: {
-            daysToRenew: 14
+            enabled: true,
+            daysToRenew: 15
+        },
+        rebump: {
+            enabled: false
         },
         maxPage: {
             allResults: 500

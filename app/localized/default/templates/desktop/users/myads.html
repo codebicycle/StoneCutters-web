@@ -111,10 +111,10 @@
                             <a data-idd="{{ item.id }}" data-img="{{ item.thumbnailLarge }}" data-title="{{ item.title }}" href="{{ ('/myolx/buyfeaturedad?id='+ item.id) | link }}" class="btn btnfeaturedad"><span class="icons icon-feature"></span>{{ dictionary["featured_listings.Feature"] }} </a>
                         {% endif %}
                     {% endif %}
-                    {% if (status == 'deleted' and itemDays > daysToRenew) %}
+                    {% if (isRenewEnabled and status == 'deleted' and itemDays >= daysToRenew) %}
                             <a href="{{ ('/myolx/renewitem/'+ item.id) | link }}" class="btn icons icon-repulish">{{ dictionary["myolx.Republish"] }}</a>
                     {% endif %}
-                    {% if (status == 'expired' and item.bloquedType == '0') %}
+                    {% if (isRebumpEnabled and status == 'expired' and item.bloquedType == '0') %}
                         <a href="{{ ('/myolx/rebump/'+ item.id) | link }}" class="btn icons icon-repulish">{{ dictionary["myolx.Republish"] }}</a>
                     {% endif %}
                 </div>
