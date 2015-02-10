@@ -244,11 +244,14 @@ module.exports = Base.extend({
         var $key = this.$('.key');
         var $hint = this.$('.hint');
         var images = this.parentView.getItem().get('images');
+        var image = _.find(images, function each(image) {
+            return !!image;
+        });
 
-        if (images[0]) {
+        if (image) {
             $container.removeClass('pending').addClass('fill');
-            $display.removeClass('r1 r2 r3 r4 r5 r6 r7 r8').addClass('r' + images[0].orientation).css({
-                'background-image': 'url(' + images[0].url + ')'
+            $display.removeClass('r1 r2 r3 r4 r5 r6 r7 r8').addClass('r' + image.orientation).css({
+                'background-image': 'url(' + image.url + ')'
             });
         }
         else {
