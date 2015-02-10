@@ -18,7 +18,8 @@
 	mandatory: true,
 	label: dictionary["seccion-35.559"],
 	fieldType: "text",
-	dataType: "string"
+	dataType: "string",
+	value: user.email
 } %}
 
 {% set phoneField = {
@@ -48,7 +49,6 @@
 {% view 'post/locations' %}
 
 {{ Field(adressField) }}
-
 
 <fieldset class="seller-post">
     <input type="submit" value="{{ dictionary['wap_posting_step5.Post'] }}" class="posting" data-qa="submit-button" />

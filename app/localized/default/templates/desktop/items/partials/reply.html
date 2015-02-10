@@ -19,7 +19,6 @@
         <span>{{ dictionary["misc.SayOLX"] }}</span>
     {% endif %}
 </div>
-
 <form id="replyForm" action="">
     <input type="hidden" class="itemId" name="itemId" value="{{ item.id }}">
     <fieldset class="message">
@@ -36,7 +35,7 @@
     </fieldset>
     <fieldset  class="email">
         <label for="email">
-            <input type="text" name="email" id="email" class="email" value="" maxlength="200" placeholder="{{ dictionary["buyerinfo.E-mail"] }} ">
+            <input type="text" name="email" id="email" class="email" value="{{ user.email }}" maxlength="200" placeholder="{{ dictionary["buyerinfo.E-mail"] }} ">
             <span class="error hide email"></span>
         </label>
     </fieldset>
