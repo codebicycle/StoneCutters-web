@@ -3,13 +3,21 @@
         {% set item = items.get(conversation.itemId) %}
         <div class="conversations-thread clearfix{{ ' read' if conversation.read }}" >
             <a href="{{ ('/myolx/conversation/' + conversation.threadId) | link }}" data-threadId="{{ conversation.threadId }}">
-                <img src="{{ item.thumbnail }}">
+                <figure class="wrapper-img {{ 'lines' if item.imagesCount > 1 }} {{ 'icons icon-photo' if not item.thumbnail }}">
+                    {% if item.thumbnail %}
+                        <img src="{{ item.thumbnail }}" alt="{{ item.title }}">
+                    {% endif %}
+                </figure>
                 <div class="conversations-data">
                     <h3>{{ conversation.buyerName }}</h3>
                     <p>{{ item.title }}</p>
+                    <p> </p>
                     <span>{{ conversation.messageDate | date(false, true) }}
                 </div>
             </a>
         </div>
     {% endfor %}
 </div>
+{% if paginator and paginator.isEnabled() %}
+    {% include (template + '/users/partials/pagination.html') %}
+{% endif %}

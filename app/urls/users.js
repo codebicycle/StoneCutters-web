@@ -41,10 +41,16 @@ module.exports = {
         url: 'myolx/readmessages/:msgId'
     },
     'users#conversations': {
-        url: 'myolx/conversations'
+        urls: [
+            'myolx/conversations-p-:page([0-9]+)',
+            'myolx/conversations'
+        ]
     },
     'users#conversation': {
-        url: 'myolx/conversation/:threadId'
+        urls: [
+            'myolx/conversation/:threadId-p-:page([0-9]+)',
+            'myolx/conversation/:threadId'
+        ]
     },
     'users#deleteitem': {
         url: 'myolx/deleteitem'

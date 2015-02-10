@@ -7,7 +7,9 @@ module.exports = {
             related: 30,
             myAds: 15,
             myFavs: 15,
-            myMsgs: 15
+            myMsgs: 15,
+            myConvs: 15,
+            myConv: 15
         },
         maxPage: {
             allResults: 500

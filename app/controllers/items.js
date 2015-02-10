@@ -15,7 +15,7 @@ module.exports = {
     reply: middlewares(reply),
     success: middlewares(success),
     favorite: middlewares(favorite),
-    'delete': middlewares(deleteItem),
+    'delete': middlewares(deleteitem),
     filter: middlewares(filter),
     sort: middlewares(sort)
 };
@@ -163,7 +163,7 @@ function show(params, callback) {
                 return helpers.common.redirect.call(this, slug);
             }
             if (response.item.get('location').url !== this.app.session.get('location').url) {
-                url = [protocol, '://', platform, '.', response.item.get('location').url.replace('www.', 'm.'), '/', slug].join('');
+                url = [protocol, '://', this.app.session.get('host'), '/', slug].join('');
 
                 done.abort();
                 return helpers.common.redirect.call(this, url, null, {
@@ -753,53 +753,63 @@ function favorite(params, callback) {
         .val(success);
 }
 
-function deleteItem(params, callback) {
-    var user;
-    var itemId;
+function deleteitem(params, callback) {
+    helpers.controllers.control.call(this, params, controller);
 
-    var prepare = function(done) {
+    function controller() {
+        var itemId = params.itemId;
         var platform = this.app.session.get('platform');
 
-        if (platform === 'wap') {
-            done.abort();
-            return helpers.common.redirect.call(this, '/');
-        }
-        user = this.app.session.get('user');
-        if (!user) {
-            done.abort();
-            return helpers.common.redirect.call(this, '/login', null, {
-                status: 302
-            });
-        }
-        itemId = !params.itemId || params.itemId === 'undefined' ? undefined : params.itemId;
-        done();
-    }.bind(this);
-
-    var remove = function(done) {
-        helpers.dataAdapter.post(this.app.req, ('/items/' + itemId + '/delete'), {
-            query: {
-                token: user.token,
-                platform: this.app.session.get('platform')
+        var redirect = function(done) {
+            if (platform !== 'html4') {
+                done.abort();
+                return helpers.common.redirect.call(this, '/');
             }
-        }, done.errfcb);
-    }.bind(this);
+            done();
+        }.bind(this);
 
-    var success = function() {
-        helpers.common.redirect.call(this, '/myolx/myadslisting?deleted=true', null, {
-            status: 302
-        });
-    }.bind(this);
+        var prepare = function(done) {
+            params.id = params.itemId;
+            delete params.itemId;
+            done();
+        }.bind(this);
 
-    var error = function() {
-        helpers.common.redirect.call(this, '/myolx/myadslisting', null, {
-            status: 302
-        });
-    }.bind(this);
+        var findItem = function(done) {
+            this.app.fetch({
+                item: {
+                    model: 'Item',
+                    params: params
+                }
+            }, {
+                readFromCache: false
+            }, done.errfcb);
+        }.bind(this);
 
-    asynquence().or(error)
-        .then(prepare)
-        .then(remove)
-        .val(success);
+        var checkItem = function(done, resItem) {
+            if (!resItem.item) {
+                return done.fail(null, {});
+            }
+            done(resItem.item);
+        }.bind(this);
+
+        var success = function(_item) {
+            var item = _item.toJSON();
+
+            callback(null, {
+                item: item
+            });
+        }.bind(this);
+
+        var error = function(err, res) {
+            return helpers.common.error.call(this, err, res, callback);
+        }.bind(this);
+
+        asynquence().or(error)
+            .then(prepare)
+            .then(findItem)
+            .then(checkItem)
+            .val(success);
+    }
 }
 
 function sort(params, callback) {

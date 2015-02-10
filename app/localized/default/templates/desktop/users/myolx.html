@@ -5,10 +5,10 @@
 {% endif %}
 <ul class="myolxmenu">
     <li class="{{ 'active' if viewname == 'myads' else '' }}">
-        <a href="{{ '/myolx/myadslisting' | link }}" data-qa="my-ads-link">{{ dictionary["defaulthtmlhead.My Listings"] }}</a>
+        <a href="{{ '/myolx/myadslisting' | link }}">{{ dictionary["defaulthtmlhead.My Listings"] }}</a>
     </li><!--
     --><li class="{{ 'active' if viewname == 'favorites' else '' }}">
-        <a href="{{ '/myolx/favoritelisting' | link }}" data-qa="my-favorites-link">{{ dictionary["defaulthtmlhead.My Favorites"] }}</a>
+        <a href="{{ '/myolx/favoritelisting' | link }}">{{ dictionary["defaulthtmlhead.My Favorites"] }}</a>
     </li><!--
     {# --><li>
         <a href="#">{{ dictionary["myolx.Settings"] }} </a>

@@ -614,7 +614,7 @@ function conversations(params, callback) {
         var platform = this.app.session.get('platform');
         var location = this.app.session.get('location');
         var page = params ? params.page : undefined;
-        var message;
+        var conversation;
         var _params;
         var user;
         var view = 'users/myolx';
@@ -633,9 +633,9 @@ function conversations(params, callback) {
         }.bind(this);
 
         var prepare = function(done) {
-            Paginator.prepare(this.app, params, 'myMsgs');
-            message = params.message;
-            delete params.message;
+            Paginator.prepare(this.app, params, 'myConvs');
+            conversation = params.conversation;
+            delete params.conversation;
             _params = _.extend({}, params, {
                 token: user.token,
                 userId: user.userId
@@ -655,25 +655,25 @@ function conversations(params, callback) {
             }, done.errfcb);
         }.bind(this);
 
-        // var paginate = function(done, res) {
-        //     var url = '/myolx/myolxmessages';
-        //     var realPage;
+        var paginate = function(done, res) {
+            var url = 'myolx/conversations';
+            var realPage;
 
-        //     if (page == 1) {
-        //         done.abort();
-        //         return helpers.common.redirect.call(this, url);
-        //     }
-        //     realPage = res.messages.paginate([url, '[page]'].join(''), params, {
-        //         page: page
-        //     });
-        //     if (realPage) {
-        //         done.abort();
-        //         return helpers.common.redirect.call(this, [url, '-p-', realPage].join(''));
-        //     }
-        //     done(res);
-        // }.bind(this);
+            if (page == 1) {
+                done.abort();
+                return helpers.common.redirect.call(this, url);
+            }
+            realPage = res.conversations.paginate([url, '[page]'].join(''), params, {
+                page: page
+            });
+            if (realPage) {
+                done.abort();
+                return helpers.common.redirect.call(this, [url, '-p-', realPage].join(''));
+            }
+            done(res);
+        }.bind(this);
 
-        var success = function(res) {
+        var success = function(response) {
             this.app.seo.addMetatag('robots', 'noindex, nofollow');
             this.app.seo.addMetatag('googlebot', 'noindex, nofollow');
 
@@ -682,10 +682,10 @@ function conversations(params, callback) {
             }
             callback(null, view, {
                 include: ['conversations', 'items'],
-                conversations: res.conversations.toJSON(),
-                items: res.conversations.items,
-                viewname: 'conversations'
-                // paginator: response.messages.paginator
+                conversations: response.conversations.toJSON(),
+                items: response.conversations.items,
+                viewname: 'conversations',
+                paginator: response.conversations.paginator
             });
         }.bind(this);
 
@@ -697,6 +697,7 @@ function conversations(params, callback) {
             .then(redirect)
             .then(prepare)
             .then(fetch)
+            .then(paginate)
             .val(success);
     }
 }
@@ -707,7 +708,7 @@ function conversation(params, callback) {
         var platform = this.app.session.get('platform');
         var location = this.app.session.get('location');
         var page = params ? params.page : undefined;
-        var message;
+        var thread;
         var _params;
         var user;
         var view = 'users/myolx';
@@ -726,9 +727,9 @@ function conversation(params, callback) {
         }.bind(this);
 
         var prepare = function(done) {
-            Paginator.prepare(this.app, params, 'myMsgs');
-            message = params.message;
-            delete params.message;
+            Paginator.prepare(this.app, params, 'myConv');
+            thread = params.thread;
+            delete params.thread;
             _params = _.extend({}, params, {
                 token: user.token,
                 userId: user.userId
@@ -747,7 +748,25 @@ function conversation(params, callback) {
             }, done.errfcb);
         }.bind(this);
 
-        var success = function(res) {
+        var paginate = function(done, res) {
+            var url = 'myolx/conversation/' + _params.threadId;
+            var realPage;
+
+            if (page == 1) {
+                done.abort();
+                return helpers.common.redirect.call(this, url);
+            }
+            realPage = res.thread.paginate([url, '[page]'].join(''), params, {
+                page: page
+            });
+            if (realPage) {
+                done.abort();
+                return helpers.common.redirect.call(this, [url, '-p-', realPage].join(''));
+            }
+            done(res);
+        }.bind(this);
+
+        var success = function(response) {
             this.app.seo.addMetatag('robots', 'noindex, nofollow');
             this.app.seo.addMetatag('googlebot', 'noindex, nofollow');
 
@@ -756,9 +775,10 @@ function conversation(params, callback) {
             }
 
             callback(null, view, {
-                thread: res.thread,
+                thread: response.thread,
                 include: ['thread'],
-                viewname: 'conversation'
+                viewname: 'conversation',
+                paginator: response.thread.paginator
             });
         }.bind(this);
 
@@ -771,6 +791,7 @@ function conversation(params, callback) {
             .then(redirect)
             .then(prepare)
             .then(fetch)
+            .then(paginate)
             .val(success);
     }
 }

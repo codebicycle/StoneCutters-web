@@ -92,7 +92,7 @@ function createChannels(type) {
     channels.push('[navigator]');
     channels.push([prefix, configChannel.name, this.config.location, 'Organic'].join('_'));
 
-    return channels.join(type === 'CSA' ? ' ' : ',');
+    return channels.join(',');
 }
 
 function getClientId(type) {
@@ -111,7 +111,7 @@ function getClientId(type) {
         clientId.push(countryCode);
     }
 
-    if (currentRoute.controller !== 'searches' || !!~currentRoute.action.indexOf('allresults')) {
+    if (type === 'CSA' && (currentRoute.controller !== 'searches' || !!~currentRoute.action.indexOf('allresults'))) {
         clientId.push('browse');
     }
 

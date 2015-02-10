@@ -40,41 +40,73 @@
     }
 
     .conversations-thread {
-        background-color: $greyPageBg;
+        clear-fix();
+        background-color: #fafafa;
         border-bottom: 1px solid $greyBorders;
         box-sizing: padding-box;
-        display: inline-block;
-        float: left;
         padding: 10px;
-        width: 100%;
-        img {
+        clear:both;
+
+        figure{
+            border: 1px solid $greyBorders;
+            box-sizing: padding-box;
+            display: inline-block;
             float: left;
-            padding: 10px;
+            height: 75px;
+            text-align: center;
+            vertical-align: middle;
+            width: 100px;
+            margin:0px;
+            background-color:$white;
+        }
+        figure:before{
+             color:#ccc;
+             font-size:50px;
+             padding-top:10px;
+        }
+
+        img {
             width: 100px;
         }
         h3, p {
             margin: 0;
             min-width: 300px;
-            padding: 10px;
+            padding: 5px 10px;
+            color:$black;
         }
         span {
             position: absolute;
             right: 0;
-            top: 10px;
+            top: 5px;
+            color:$black;
+        }
+        a{
+         clear-fix();
+            color:$black;
+            display:block;
         }
         &:hover {
-            background-color: $white;
+            background-color:greyPageBg;
         }
         .conversations-data {
             float: left;
             position: relative;
-            width: 835px;
+            width: 845px;
         }
     }
+    .conversations-thread:last-child{
+        border-bottom:none;
+    }
+
     .backToOlx {
         border-bottom: 0;
         padding: 20px 0;
         text-align: center;
+    }
+
+    .read{
+            background-color: #eee;
+
     }
 
     .btn {
@@ -134,4 +166,3 @@
         }
     }
 }
-
