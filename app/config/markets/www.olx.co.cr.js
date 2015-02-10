@@ -27,6 +27,10 @@ module.exports = {
             id: 'dSavGD707o4'
         },
         {
+            title: 'OLX Costa Rica - Mauricio "El Chunche" Montero - Garaje',
+            id: '1sR75hvjlRI'
+        },
+        {
             title: 'OLX Costa Rica - Bicicleta - Vender es fácil',
             id: 'iYUX408RQq4'
         },
