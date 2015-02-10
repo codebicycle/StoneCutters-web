@@ -1,0 +1,206 @@
+.pages-about-view {
+    clear-fix();
+    .about-navigation {
+        float: left;
+        width: 294px;
+        ul {
+            ul-reset();
+            li {
+                border-top: 1px solid $lightBlueBorder;
+            }
+        }
+
+        .help-toggle-content {
+            display: block;
+            padding: 14px 0 15px 20px;
+            &:hover {
+                background: $white;
+            }
+        }
+
+        .icons::before {
+            font-size: $m;
+            margin-right: 10px;
+        }
+
+        .selected {
+            background: $white;
+            border-right: 1px solid $lightBlueBorder;
+            cursor: auto;
+            position: relative;
+
+            a,
+            .icons::before {
+                color: $greyStrong;
+            }
+
+            &:hover a {
+                text-decoration: none;
+            }
+        }
+        .selected::after,
+        .selected::before {
+            border: solid transparent;
+            content: " ";
+            height: 0;
+            left: 100%;
+            position: absolute;
+            top: 50%;
+            width: 0;
+        }
+        .selected::after {
+            border-color: rgba(255, 255, 255, 0);
+            border-left-color: $white;
+            border-width: 24px;
+            margin-top: -24px;
+        }
+        .selected::before {
+            border-color: rgba(185, 221, 243, 0);
+            border-left-color: $lightBlueBorder;
+            border-width: 25px;
+            margin-top: -25px;
+        }
+        .title {
+            font-size: $xl;
+            font-weight: normal;
+            margin: 0;
+            padding: 15px 0 15px 20px;
+        }
+        .menu-box {
+            margin-bottom: 20px;
+        }
+        .blue-box {
+            box($lightBlue, $lightBlueBorder , 3px, 0, solid, 1px);
+        }
+        .grey-box {
+            box($greyBoxBg, $greyBorders , 3px, 0, solid, 1px);
+        }
+    }
+
+    .about-content {
+        box($white, $greyBorders , 3px, 0, solid, 1px);
+        float: right;
+        width: 596px;
+        padding: 0 30px;
+
+        .title {
+            border-bottom: 1px solid $greyBorders;
+            font-size: $xl;
+            margin: 0;
+            padding: 19px 0 18px 0;
+        }
+
+        .subtitle {
+            font-size: $l;
+            line-height: $l;
+            font-weight: bold;
+            margin: 0 0 20px;
+            color: $orange;
+        }
+
+        section {
+            margin-top: 35px;
+            overflow: hidden;
+        }
+
+        p {
+            font-size: $baseFont;
+        }
+
+        .box {
+            padding: 10px 15px;
+            width: 258px;
+
+            &.box-left {
+                float: left;
+            }
+
+            &.box-right {
+                float: right;
+            }
+
+            p {
+                margin: 5px 0;
+            }
+            
+        }
+
+        .mission-container {
+            img{
+                width: 322px;
+                margin: 0 auto;
+                display: block;
+            }
+        }
+
+        .presence-container {
+            img {
+                width: 100%;
+                display: block;
+            }
+        }
+
+        .stats-container {
+            .box {
+                border-bottom: 1px solid $greyBorders;
+                padding-top: 20px;
+                padding-bottom: 20px;
+
+                &.border-none{
+                    border-bottom: none;
+                }
+            }
+
+
+            .box-title{
+                font-size: $m;
+                margin-bottom: 8px;
+            }
+
+            .box-numbers{
+                font-size: $xxxl;
+                line-height: $xl;
+                font-weight: bold;
+                color: #999;
+            }
+        }
+
+        .leadership-container {
+            .box {
+                overflow: hidden;
+                text-align: left;
+                padding-left: 0;
+                padding-right: 0;
+                width: 288px;
+                min-height: 110px;
+
+                div {
+                    float: left;
+                    padding: 4px 10px;
+                    width: 183px;
+                }
+
+                img {
+                    float: left;
+                    display: block;
+                    width: 85px;
+                }
+            }
+            .box-title {
+                font-size: $l;
+                line-height: $ll;
+                font-weight: bold;
+            }
+
+            .box-position {
+                font-size: $s;
+                line-height: $m;
+            }
+
+        }
+
+    }
+
+}
+
+
