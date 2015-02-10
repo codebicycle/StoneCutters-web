@@ -56,6 +56,9 @@ module.exports = {
         trackers: {
             allpages: {
                 enabled: true
+            },
+            adroll: {
+                enabled: true
             }
         }
     }
