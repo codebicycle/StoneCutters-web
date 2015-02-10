@@ -272,6 +272,7 @@ module.exports = {
     'myolx.BackToMyOLX': 'Atgal \u012F mano OLX',
     'myolx.EditListing': 'Redaguoti skelbim\u0105',
     'myolx.EmailPasswordInvalid': 'Apgailestaujame, J\u016Bs\u0173 J\u016Bs\u0173 el. pa\u0161to adresas arba slapta\u017Eodis yra neteisingas',
+    'myolx.FIndPrevMessages': 'Mes atnaujinome J\u016Bs\u0173 gaut\u0173j\u0173 lai\u0161k\u0173 d\u0117\u017Eut\u0119! Tr\u016Bksta prane\u0161im\u0173? Ankstesnius rasite <<LINK>>\u010Dia<</LINK>>',
     'myolx.MessageNotSent': 'Prane\u0161imas nei\u0161si\u0173stas',
     'myolx.Messages': 'Prane\u0161imai',
     'myolx.MyAds': 'Mano skelbimai',

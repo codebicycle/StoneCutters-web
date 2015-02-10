@@ -272,6 +272,7 @@ module.exports = {
     'myolx.BackToMyOLX': 'Tilbage til Min OLX',
     'myolx.EditListing': 'Rediger annonce',
     'myolx.EmailPasswordInvalid': 'Beklager din email eller adgangskode er ugyldig',
+    'myolx.FIndPrevMessages': 'Vi har opgraderet din indbakke! Mangler du beskeder? Du finder tidligere beskeder <<LINK>>her<</LINK>>',
     'myolx.MessageNotSent': 'Beskeden blev ikke sendt',
     'myolx.Messages': 'Meddelelser',
     'myolx.MyAds': 'Mine annoncer',

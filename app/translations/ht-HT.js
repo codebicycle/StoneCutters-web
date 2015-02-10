@@ -272,6 +272,7 @@ module.exports = {
     'myolx.BackToMyOLX': 'Retounen sou  OLX mwen',
     'myolx.EditListing': 'Chanje Anons yo',
     'myolx.EmailPasswordInvalid': 'Nou regr\xE8t, Email oswa modpas ou a pa bon',
+    'myolx.FIndPrevMessages': 'Nou te mete mesajri ou a ajou? Eske gen mesaj ou pa ka jwenn? Ou ka jwenn ansyen yo  <<LINK>>la<</LINK>>',
     'myolx.MessageNotSent': 'Mesaj la pa te ale',
     'myolx.Messages': 'Messaj',
     'myolx.MyAds': 'Anons Mwen yo',

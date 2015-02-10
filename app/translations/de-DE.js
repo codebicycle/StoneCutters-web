@@ -272,6 +272,7 @@ module.exports = {
     'myolx.BackToMyOLX': 'Zur\xFCck zu Mein OLX',
     'myolx.EditListing': 'Kleinanzeige \xE4ndern',
     'myolx.EmailPasswordInvalid': 'Es tut uns leid, aber Ihre E-Mail-Adresse oder das Passwort ist ung\xFCltig.',
+    'myolx.FIndPrevMessages': 'Wir haben Ihre Mailbox aktualisiert. Ihnen fehlen Nachrichten? <<LINK>>Hier<</LINK>> finden Sie die \xC4lteren.',
     'myolx.MessageNotSent': 'Nachricht wurde nicht gesendet',
     'myolx.Messages': 'Mitteilungen',
     'myolx.MyAds': 'Meine Kleinanzeigen',

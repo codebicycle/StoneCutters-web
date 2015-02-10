@@ -272,6 +272,7 @@ module.exports = {
     'myolx.BackToMyOLX': 'Terug na My OLX',
     'myolx.EditListing': 'Redigeer Lysting',
     'myolx.EmailPasswordInvalid': 'Jammer, jou e-posadres of wagwoord is blykbaar ongeldig.',
+    'myolx.FIndPrevMessages': 'Ons het jou inmandjie verbeter! Verlore boodskappe? Jy kan die voriges  <<LINK>>hier<</LINK>> opspoor.',
     'myolx.MessageNotSent': 'Die boodskap is nie gestuur nie.',
     'myolx.Messages': 'Boodskappe',
     'myolx.MyAds': 'My Lystings',

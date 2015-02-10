@@ -272,6 +272,7 @@ module.exports = {
     'myolx.BackToMyOLX': 'Retour \xE0 Mon OLX',
     'myolx.EditListing': 'Modifier l\'Annonce',
     'myolx.EmailPasswordInvalid': 'Sorry, you Email or password seem to be invalid',
+    'myolx.FIndPrevMessages': 'We upgraded your inbox! Missing messages? You can find the previous ones <<LINK>>here<</LINK>>',
     'myolx.MessageNotSent': 'The Message was not sent',
     'myolx.Messages': 'Messages',
     'myolx.MyAds': 'Mes Annonces',

@@ -272,6 +272,7 @@ module.exports = {
     'myolx.BackToMyOLX': 'Atpaka\u013C uz Mans OLX',
     'myolx.EditListing': 'Redi\u0123\u0113t sludin\u0101jumu',
     'myolx.EmailPasswordInvalid': 'Atvainojiet, j\u016Bsu e-adrese vai parole nav der\u012Bga',
+    'myolx.FIndPrevMessages': 'We upgraded your inbox! Missing messages? You can find the previous ones <<LINK>>here<</LINK>>',
     'myolx.MessageNotSent': 'Zi\u0146ojums netika nos\u016Bt\u012Bts',
     'myolx.Messages': 'Zi\u0146ojumi',
     'myolx.MyAds': 'Mani sludin\u0101jumi',

@@ -3,7 +3,7 @@
     {% set item = thread.get('item') %}
     <div class="conversation-item">
         <a href="{{ item.slug }}">
-            <figure class="wrapper-img {{ 'lines' if item.images.length }} {{ 'icons icon-photo' if not item.images.length }}">
+            <figure class="wrapper-img {{ 'icons icon-photo' if not item.images.length }}">
                 {% if item.images.length %}
                     <img src="{{ item.images[0].thumbnail }}" alt="" class="thumbnail">
                 {% endif %}

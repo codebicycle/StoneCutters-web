@@ -272,6 +272,7 @@ module.exports = {
     'myolx.BackToMyOLX': 'Pabalik sa My OLX',
     'myolx.EditListing': 'I-edit ang Patalastas',
     'myolx.EmailPasswordInvalid': 'Paumanhin, mukhang hindi tama ang inyong Email o password',
+    'myolx.FIndPrevMessages': 'In-upgrade namin ang iyong inbox! May nawawalang mga mensahe? Mahahanap mo ang mga dating mensahe <<LINK>>dito<</LINK>>',
     'myolx.MessageNotSent': 'Hindi naipadala ang Mensahe',
     'myolx.Messages': 'Mga mensahe',
     'myolx.MyAds': 'Aking mga Patalastas',

@@ -1,6 +1,7 @@
 .users_conversations_view {
     box($white, $greyBorders, 0 0 3px 3px, 0, solid, 1px);
 
+
     .alert {
         p {
             font-size: 14px;
@@ -40,6 +41,11 @@
     }
 
     .conversations-thread {
+        &:hover {
+            border: 1px solid $greyBorders;
+            box-shadow(0 0 2px 2px rgba(0, 0, 0, .1));
+            z-index: 100;
+        }
         clear-fix();
         background-color: #fafafa;
         border-bottom: 1px solid $greyBorders;
@@ -166,3 +172,5 @@
         }
     }
 }
+
+

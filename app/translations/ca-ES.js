@@ -272,6 +272,7 @@ module.exports = {
     'myolx.BackToMyOLX': 'Tornar a El meu OLX',
     'myolx.EditListing': 'Editar anunci',
     'myolx.EmailPasswordInvalid': 'Ho sentim, el teu correu electr\xF2nic o contrasenya semblen incorrectes',
+    'myolx.FIndPrevMessages': 'Hem actualitzat la teva safata d\'entrada! Et falta algun missatge? Pots trobar els missatges anteriors <<LINK>>aqu\xED<</LINK>>',
     'myolx.MessageNotSent': 'El missatge no s\'ha enviat',
     'myolx.Messages': 'Missatges',
     'myolx.MyAds': 'Les meves anuncis',

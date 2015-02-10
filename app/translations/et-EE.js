@@ -272,6 +272,7 @@ module.exports = {
     'myolx.BackToMyOLX': 'Tagasi "Minu OLXi"',
     'myolx.EditListing': 'Muuda kuulutust',
     'myolx.EmailPasswordInvalid': 'Kahjuks on teie e-posti aadress v\xF5i parool kehtetu',
+    'myolx.FIndPrevMessages': 'T\xE4iustasime teie sisendkausta! Kas osa s\xF5numeid on puudu? Varasemad s\xF5numid leiate <<LINK>>siit<</LINK>>',
     'myolx.MessageNotSent': 'S\xF5numit ei saadetud',
     'myolx.Messages': 'S\xF5numid',
     'myolx.MyAds': 'Minu kataloogid',

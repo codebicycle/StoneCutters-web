@@ -21,23 +21,33 @@
 
 
         .wrapper-img {
-            border: 1px solid $greyBorders;
-            box-sizing: content-box;
-            display: inline-block;
-            float: left;
-            height: 57px;
-            text-align: center;
-            vertical-align: middle;
-            width: 100px;
+                border: 1px solid #ccc;
+                display: inline-block;
+                float: left;
+                max-height: 75px;
+                min-height: 75px;
+                padding: 2px;
+                position: relative;
+                text-align: center;
+                width: 100px;
+                margin:0;
 
             img {
-                height: auto;
+                bottom: 2px;
+                left: 0;
                 margin: auto;
-                max-height: 100%;
+                max-height: 144px;
                 max-width: 100%;
-                vertical-align: middle;
-                width: auto;
+                position: absolute;
+                right: 0;
+                top: 2px;
             }
+        }
+
+             .wrapper-img:before{
+             color:#ccc;
+             font-size:50px;
+             padding-top:10px;
         }
         .conversation-item-data {
             float: left;

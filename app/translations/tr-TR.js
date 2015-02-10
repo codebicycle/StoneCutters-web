@@ -272,6 +272,7 @@ module.exports = {
     'myolx.BackToMyOLX': 'OLX Bana \xD6zel\'e Geri D\xF6n',
     'myolx.EditListing': '\u0130lan\u0131 D\xFCzenle',
     'myolx.EmailPasswordInvalid': '\xDCzg\xFCn\xFCz, e-posta ya da \u015Fifre ge\xE7ersiz',
+    'myolx.FIndPrevMessages': 'Gelen kutunuzu g\xFCncelledik! Eksik mesajlar m\u0131 var? Eski mesajlar\u0131 <<LINK>>burada<</LINK>> bulabilirsiniz.',
     'myolx.MessageNotSent': 'Mesaj g\xF6nderilmedi',
     'myolx.Messages': '\u0130letiler',
     'myolx.MyAds': '\u0130lanlar\u0131m',

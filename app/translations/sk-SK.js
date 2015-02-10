@@ -272,6 +272,7 @@ module.exports = {
     'myolx.BackToMyOLX': 'Sp\xE4\u0165 na M\xF4j OLX',
     'myolx.EditListing': 'Upravi\u0165 ozn\xE1menie',
     'myolx.EmailPasswordInvalid': '\u013Dutujeme, v\xE1\u0161 e-mail alebo heslo je zrejme neplatn\xE9',
+    'myolx.FIndPrevMessages': 'Vylep\u0161ili sme v\xE1\u0161 prie\u010Dinok doru\u010Denej po\u0161ty! Ch\xFDbaj\xFA v\xE1m spr\xE1vy? Tie star\u0161ie n\xE1jdete <<LINK>>tu<</LINK>>',
     'myolx.MessageNotSent': 'Spr\xE1va nebola odoslan\xE1',
     'myolx.Messages': 'Spr\xE1vy',
     'myolx.MyAds': 'Moje ozn\xE1menia',
