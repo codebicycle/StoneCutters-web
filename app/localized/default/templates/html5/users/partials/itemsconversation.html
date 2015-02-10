@@ -21,7 +21,7 @@
         <li class="message {{ 'is-mine' if message.isMine }}">
             {% set name = thread.senders[0].name %}
             {% if message.isMine %}
-                {% set name = 'Vos' %}
+                {% set name = dictionary["myolx.You"] %}
             {% elif thread.senders[0].isMine %}
                 {% set name = thread.senders[1].name %}
             {% endif %}
