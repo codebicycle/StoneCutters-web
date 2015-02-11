@@ -274,6 +274,7 @@ module.exports = {
     'myolx.EditListing': 'Bi\xEAn t\u1EADp danh m\u1EE5c',
     'myolx.EmailPasswordInvalid': 'Xin l\u1ED7i, Email hay m\u1EADt kh\u1EA9u c\u1EE7a b\u1EA1n d\u01B0\u1EDDng nh\u01B0 kh\xF4ng h\u1EE3p l\u1EC7',
     'myolx.FIndPrevMessages': 'Ch\xFAng t\xF4i \u0111\xE3 n\xE2ng c\u1EA5p h\u1ED9p th\u01B0 c\u1EE7a b\u1EA1n! B\u1ECB m\u1EA5t tin nh\u1EAFn? B\u1EA1n c\xF3 th\u1EC3 t\xECm th\u1EA5y nh\u1EEFng tin nh\u1EAFn tr\u01B0\u1EDBc kia <<LINK>>t\u1EA1i \u0111\xE2y<</LINK>>',
+    'myolx.LatestMessages': 'Quay l\u1EA1i c\xE1c tin nh\u1EAFn m\u1EDBi nh\u1EA5t',
     'myolx.MessageNotSent': 'Tin nh\u1EAFn ch\u01B0a \u0111\u01B0\u1EE3c g\u1EEDi',
     'myolx.Messages': 'Tin nh\u1EAFn',
     'myolx.MyAds': 'Rao V\u1EB7t C\u1EE7a T\xF4i',

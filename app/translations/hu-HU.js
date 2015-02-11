@@ -274,6 +274,7 @@ module.exports = {
     'myolx.EditListing': 'Hirdet\xE9s szerkeszt\xE9se',
     'myolx.EmailPasswordInvalid': 'Sajnos \xFAgy t\u0171nik, e-mail c\xEDme vagy jelszava \xE9rv\xE9nytelen',
     'myolx.FIndPrevMessages': 'Friss\xEDtett\xFCk a be\xE9rkez\u0151 leveleit! Hi\xE1nyzik n\xE9h\xE1ny \xFCzenete? A kor\xE1bbiakat  <<LINK>>itt<</LINK>> tal\xE1lja',
+    'myolx.LatestMessages': 'Vissza a legut\xF3bbi \xFCzeneteimhez',
     'myolx.MessageNotSent': 'Az \xFCzenet nem ker\xFClt elk\xFCld\xE9sre',
     'myolx.Messages': '\xDCzenetek',
     'myolx.MyAds': 'Hirdet\xE9seim',

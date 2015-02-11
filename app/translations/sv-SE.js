@@ -274,6 +274,7 @@ module.exports = {
     'myolx.EditListing': 'Redigera annons',
     'myolx.EmailPasswordInvalid': 'Tyv\xE4rr, din e-post eller l\xF6senord verkar vara ogiltig',
     'myolx.FIndPrevMessages': 'Vi har uppgraderat din inbox! Saknade meddelanden? Du hittar de tidigare meddelandena <<LINK>>h\xE4r<</LINK>>',
+    'myolx.LatestMessages': 'Tillbaka till mina senaste meddelanden',
     'myolx.MessageNotSent': 'Meddelandet skickades inte',
     'myolx.Messages': 'Meddelanden',
     'myolx.MyAds': 'Mina annonser',

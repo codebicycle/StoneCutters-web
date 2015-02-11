@@ -1,5 +1,5 @@
 {% if viewname == 'messages' or viewname == 'conversations' %}
-    {% set messagesClass =  'active messages' %}
+    {% set messagesClass =  'active' %}
 {% elif viewname == 'readmessages' or viewname == 'conversation' %}
     {% set messagesClass = 'active' %}
 {% endif %}
@@ -13,7 +13,7 @@
     {# --><li>
         <a href="#">{{ dictionary["myolx.Settings"] }} </a>
     </li><!-- #}
-    --><li class="{{ messagesClass }}">
+    --><li class="{{ messagesClass }}{{ ' messages' if not isHermesEnabled }}">
         <a href="{{ '/myolx/conversations' if isHermesEnabled else '/myolx/myolxmessages' | link }}">{{ dictionary["myolx.Messages"] }}</a>
     </li>
 </ul>

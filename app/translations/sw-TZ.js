@@ -274,6 +274,7 @@ module.exports = {
     'myolx.EditListing': 'Hariri tangazo',
     'myolx.EmailPasswordInvalid': 'Samahani, Barua pepe yako au nenosiri inaonekana kuwa batili',
     'myolx.FIndPrevMessages': 'Sisi tuliboresha kisanduku pokezi chako! Unaweza kupata zile za nyuma <<LINK>>hapa<</LINK>>',
+    'myolx.LatestMessages': 'Rejea kwa ujumbe wangu wa hivi karibuni',
     'myolx.MessageNotSent': 'Ujumbe Haukutumwa',
     'myolx.Messages': 'Ujumbe',
     'myolx.MyAds': 'Matangazo Yangu',

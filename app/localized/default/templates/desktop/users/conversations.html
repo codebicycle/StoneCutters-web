@@ -1,6 +1,6 @@
 <div class="conversations">
 <div class="top-conversations">
-<p>{{ dictionary["myolx.FIndPrevMessages"] | replace('<<LINK>>', ([' <a href="', ('/myolx/myolxmessages' | link), '">'] | join(''))) | replace('<</LINK>>', '</a>') }}</p>
+    <p>{{ dictionary["myolx.FIndPrevMessages"] | replace('<<LINK>>', ([' <a href="', ('/myolx/myolxmessages' | link), '">'] | join(''))) | replace('<</LINK>>', '</a>') }}</p>
 </div>
     {% for conversation in conversations %}
         {% set item = items.get(conversation.itemId) %}
@@ -11,10 +11,10 @@
                         <img src="{{ item.get('thumbnail') }}" alt="{{ item.get('title') }}">
                     {% endif %}
                 </figure>
-                       <div class="conversations-data">
+                <div class="conversations-data">
                     <h3>{{ conversation.buyerName }}</h3>
                     <h4>'{{ item.get('title') }}'</h4>
-                    <p>{{ conversation.messageText }}</p>
+                    <p>"{{ conversation.messageText | truncate( 100, True, '...') }}"</p>
                     <span>{{ conversation.messageDate | date(false, true) }}
                 </div>
             </a>

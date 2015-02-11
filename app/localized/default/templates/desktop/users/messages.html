@@ -1,3 +1,8 @@
+{% if isHermesEnabled %}
+    <div class="latest-messages">
+        <a href="{{ '/myolx/conversations' | link }}">{{ dictionary["myolx.LatestMessages"] }}</p>
+    </div>
+{% endif %}
 <div message-alert class="alert hide">
     <p message-alert-success class="icons icon-check success">{{ dictionary["itempagepostcomment.CommentPosted"] }}</p>
     <p message-alert-fail class="fail">{{ dictionary["myolx.MessageNotSent"] }}</p>

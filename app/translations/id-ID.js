@@ -274,6 +274,7 @@ module.exports = {
     'myolx.EditListing': 'Edit Iklan',
     'myolx.EmailPasswordInvalid': 'Maaf, Email atau kata sandi Anda tampak tidak sah',
     'myolx.FIndPrevMessages': 'Kami telah memutakhirkan kotak masuk Anda! Ada pesan yang hilang? Anda dapat menemukan pesan-pesan sebelumnya di <<LINK>>sini<</LINK>>',
+    'myolx.LatestMessages': 'Kembali ke pesan terakhir saya',
     'myolx.MessageNotSent': 'Pesan Tidak Terkirim',
     'myolx.Messages': 'Pesan',
     'myolx.MyAds': 'Iklan Saya',

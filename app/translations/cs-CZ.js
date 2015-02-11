@@ -274,6 +274,7 @@ module.exports = {
     'myolx.EditListing': 'Upravit z\xE1znam',
     'myolx.EmailPasswordInvalid': 'Je n\xE1m l\xEDto, v\xE1\u0161 e-mail nebo heslo nen\xED spr\xE1vn\xE9',
     'myolx.FIndPrevMessages': 'Vylep\u0161ili jsme va\u0161i schr\xE1nku p\u0159\xEDchoz\xED po\u0161ty! Chyb\xED v n\xED zpr\xE1vy? D\u0159\xEDv\u011Bj\u0161\xED zpr\xE1vy najdete <<LINK>>zde<</LINK>>',
+    'myolx.LatestMessages': 'Zp\u011Bt k nejnov\u011Bj\u0161\xEDm zpr\xE1v\xE1m',
     'myolx.MessageNotSent': 'Zpr\xE1va nebyla odesl\xE1na',
     'myolx.Messages': 'Zpr\xE1vy',
     'myolx.MyAds': 'Moje z\xE1znamy',

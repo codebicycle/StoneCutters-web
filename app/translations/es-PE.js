@@ -274,6 +274,7 @@ module.exports = {
     'myolx.EditListing': 'Editar anuncio',
     'myolx.EmailPasswordInvalid': 'Lo sentimos, al parecer tu e-mail no es una direcci\xF3n v\xE1lida.',
     'myolx.FIndPrevMessages': 'Hemos actualizado tu bandeja de entrada. \xBFTe faltan mensajes? Puedes encontrar tus mensajes anteriores <<LINK>>aqu\xED<</LINK>>.',
+    'myolx.LatestMessages': 'Volver a mis mensajes m\xE1s recientes',
     'myolx.MessageNotSent': 'Este mensaje no ha sido enviado.',
     'myolx.Messages': 'Mensajes',
     'myolx.MyAds': ' Mis anuncios',
