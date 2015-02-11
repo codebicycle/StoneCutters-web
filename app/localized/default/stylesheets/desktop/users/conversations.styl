@@ -42,7 +42,7 @@
     }
 
     .conversations-thread {
-        box($white, $greyBorders, 0, 0, solid, 1px);
+        box(#fdfea1, $greyBorders, 0, 0, solid, 1px);
 
         &:hover {
             border: 1px solid $greyBorders;
@@ -50,7 +50,7 @@
             z-index: 100;
         }
         clear-fix();
-        background-color: #fafafa;
+        background-color: #fdfea1;
         border-bottom: 1px solid $greyBorders;
         box-sizing: padding-box;
         padding: 10px;
@@ -113,7 +113,7 @@
             position: relative;
             width: 845px;
         }
-        border-color:#ccc #ccc #fff;
+        border-color:#ccc #ccc #fdfea1;
         &:last-child {
         border-color:#ccc;
         }
@@ -126,8 +126,8 @@
     }
 
     .read{
-        background-color: #eee;
-        border-color:#ccc #ccc #eee;
+        background-color: $white;
+        border-color:#ccc #ccc $white;
 
     }
 

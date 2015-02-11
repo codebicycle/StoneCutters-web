@@ -14,6 +14,7 @@
                        <div class="conversations-data">
                     <h3>{{ conversation.buyerName }}</h3>
                     <p>{{ item.get('title') }}</p>
+                    {{ message.text }}
                     <span>{{ conversation.messageDate | date(false, true) }}
                 </div>
             </a>
