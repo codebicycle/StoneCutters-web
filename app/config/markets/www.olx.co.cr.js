@@ -2,6 +2,11 @@ module.exports = {
     categoryTree: {
         order: [185, 186, 362, 187, 16, 191, 190]
     },
+    celebrities: {
+        home: {
+            enabled: true
+        }
+    },
     socials: [
         {
             name: 'facebook',
@@ -17,6 +22,14 @@ module.exports = {
         }
     ],
     videos: [
+        {
+            title: 'OLX Costa Rica - Consola',
+            id: 'dSavGD707o4'
+        },
+        {
+            title: 'OLX Costa Rica - Mauricio "El Chunche" Montero - Garaje',
+            id: '1sR75hvjlRI'
+        },
         {
             title: 'OLX Costa Rica - Bicicleta - Vender es fácil',
             id: 'iYUX408RQq4'
@@ -79,16 +92,6 @@ module.exports = {
             }
         }
     },
-    tracking: {
-        trackers: {
-            hydra: {
-                enabled: true
-            },
-            tagmanager: {
-                enabled: false
-            }
-        }
-    },
     successPage: {
         keepPosting: [
             {
@@ -110,5 +113,15 @@ module.exports = {
                 name: 'Móviles'
             }
         ]
+    },
+    tracking: {
+        trackers: {
+            hydra: {
+                enabled: true
+            },
+            tagmanager: {
+                enabled: false
+            }
+        }
     }
 };

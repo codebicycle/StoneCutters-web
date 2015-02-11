@@ -3,11 +3,14 @@
 {% from macros import Breadcrumb, BreadcrumbHome %}
 {% set link = (breadcrumb | link) %}
 {{ Breadcrumb(dictionary, link, dictionary["defaultfooter.PublishFreeAd"]) }}
-<div id="success">
+<div id="success" data-qa="success">
     <div>
         <h1>{{ dictionary["misc.AllSet_Mob"] }}</h1>
         <h2>{{ dictionary["misc.AdSubmittedApproval"] }}</h2>
         <p>{{ dictionary["misc.SeeAdIn2Hrs_Mob"] }}</p>
+        {% if addmessage %}
+            <p>Your reference for this advert is: <strong>{{ item.id }}</strong></p>
+        {% endif %}
         <p>{{ dictionary["postingtitlelisting.view"] }} <a href="{{ item | slugToUrl | link }}" data-qa="posted-ad-link" >{{ dictionary["itemwarning.Here"] }}</a></p>
     </div>
     <div style="margin:6px 0 0 0;">

@@ -40,9 +40,7 @@ module.exports = Base.extend({
 
         var field = $(event.target);
 
-        if (this.validate(field)) {
-            this.reply[field.attr('name')] = field.val();
-        }
+        this.validate(field);
     },
     onSubmit: function(event) {
         event.preventDefault();
@@ -116,6 +114,7 @@ module.exports = Base.extend({
         var value = field.val();
         var isEmpty;
 
+        this.addData(field);
         if (name === 'phone') {
             return true;
         }
@@ -124,6 +123,9 @@ module.exports = Base.extend({
             return this.isEmail(name, value);
         }
         return !isEmpty;
+    },
+    addData: function (field){
+        this.reply[field.attr('name')] = field.val();
     },
     isEmpty: function (name, value) {
         return !this.setError(!!value, name, this.dictionary['postingerror.PleaseCompleteThisField']);

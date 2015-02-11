@@ -85,30 +85,33 @@ module.exports = {
     'redirections#editphp': {
         url: 'myolx/edititem.php'
     },
+    'redirections#myadsphp': {
+        url: 'myolx/index.php'
+    },
     'redirections#php': {
         url: ':path.php'
     },
     'redirections#allresultsig': {
         urls: [
-            'nf/all-results-ig-p-:page/-:filters([a-zA-Z0-9_\\-\\.]+)',
+            'nf/all-results-ig-p-:page/-:filters([a-zA-Z0-9_\\-\\.~]+)',
             'nf/all-results-ig-p-:page'
         ]
     },
     'redirections#searchfilterig': {
         urls: [
-            'nf/:title-cat-:catId([0-9]+)-p-:page([0-9]+)-ig/:search/-:filters([a-zA-Z0-9_\\-\\.]+)',
-            'nf/-cat-:catId([0-9]+)-p-:page([0-9]+)-ig/:search/-:filters([a-zA-Z0-9_\\-\\.]+)',
-            'nf/cat-:catId([0-9]+)-p-:page([0-9]+)-ig/:search/-:filters([a-zA-Z0-9_\\-\\.]+)',
-            'nf/:title-cat-:catId([0-9]+)-ig/:search/-:filters([a-zA-Z0-9_\\-\\.]+)',
-            'nf/-cat-:catId([0-9]+)-ig/:search/-:filters([a-zA-Z0-9_\\-\\.]+)',
-            'nf/cat-:catId([0-9]+)-ig/:search/-:filters([a-zA-Z0-9_\\-\\.]+)'
+            'nf/:title-cat-:catId([0-9]+)-p-:page([0-9]+)-ig/:search/-:filters([a-zA-Z0-9_\\-\\.~]+)',
+            'nf/-cat-:catId([0-9]+)-p-:page([0-9]+)-ig/:search/-:filters([a-zA-Z0-9_\\-\\.~]+)',
+            'nf/cat-:catId([0-9]+)-p-:page([0-9]+)-ig/:search/-:filters([a-zA-Z0-9_\\-\\.~]+)',
+            'nf/:title-cat-:catId([0-9]+)-ig/:search/-:filters([a-zA-Z0-9_\\-\\.~]+)',
+            'nf/-cat-:catId([0-9]+)-ig/:search/-:filters([a-zA-Z0-9_\\-\\.~]+)',
+            'nf/cat-:catId([0-9]+)-ig/:search/-:filters([a-zA-Z0-9_\\-\\.~]+)'
         ]
     },
     'redirections#searchfilter': {
         urls: [
-            'nf/:title-cat-:catId([0-9]+)-p-:page([0-9]+)/:search/-:filters([a-zA-Z0-9_\\-\\.]+)',
-            'nf/-cat-:catId([0-9]+)-p-:page([0-9]+)/:search/-:filters([a-zA-Z0-9_\\-\\.]+)',
-            'nf/cat-:catId([0-9]+)-p-:page([0-9]+)/:search/-:filters([a-zA-Z0-9_\\-\\.]+)'
+            'nf/:title-cat-:catId([0-9]+)-p-:page([0-9]+)/:search/-:filters([a-zA-Z0-9_\\-\\.~]+)',
+            'nf/-cat-:catId([0-9]+)-p-:page([0-9]+)/:search/-:filters([a-zA-Z0-9_\\-\\.~]+)',
+            'nf/cat-:catId([0-9]+)-p-:page([0-9]+)/:search/-:filters([a-zA-Z0-9_\\-\\.~]+)'
         ]
     },
     'redirections#staticSearch': {

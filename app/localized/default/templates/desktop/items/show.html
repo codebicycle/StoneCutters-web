@@ -18,6 +18,8 @@
 
         {% view 'items/partials/reply' %}
 
+        {% include (template + "/items/partials/safetytips.html") %}
+
         {% view 'partials/adserving', 'item_side' %}
     </aside>
 </section>

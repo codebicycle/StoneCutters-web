@@ -29,7 +29,7 @@
                 </ul>
             </div>
             <div class="column">
-                <h4>{{ dictionary["misc.States"] if location.metadata.seo.topLocations.secondLevel.name == 'state' else ('Otras Ciudades en ' + currentState.name) }}</h4>
+                <h4>{{ dictionary["misc.States"] if location.metadata.seo.topLocations.secondLevel.name == 'state' else (dictionary["countryoptions.OtherCitiesInRegion"] | replace('<<REGION>>', currentState.name)) }}</h4>
                 <ul class="modal-cities">
                     {% for state in secondLevel %}
                         <li><a href="{{ '/nf/all-results' | link({location: state.url}) }}" rel="nofollow">{{ state.anchor }}</a></li>

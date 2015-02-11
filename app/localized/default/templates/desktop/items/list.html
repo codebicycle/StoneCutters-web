@@ -6,6 +6,6 @@
     </ul>
     {% view 'partials/adserving', 'listing_bottom' %}
 {% else %}
-    <div class="noresults">{{ dictionary["listingpageitemslisting.WeAreSorryNoResults"] }}</div>
+    <div class="noresults" data-qa="no-results-found">{{ dictionary["listingpageitemslisting.WeAreSorryNoResults"] }}</div>
     {% view 'partials/adserving', 'listing_noresult' %}
 {% endif %}

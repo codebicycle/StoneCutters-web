@@ -114,6 +114,10 @@ module.exports = {
             smartBanner: {
                 worldwide: false,
                 countries: []
+            },
+            newItemPage: {
+                worldwide: false,
+                countries: ['www.olx.com.bo']
             }
         },
         html4: {

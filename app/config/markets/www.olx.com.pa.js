@@ -101,10 +101,37 @@ module.exports = {
     tracking: {
         trackers: {
             hydra: {
-                enabled: true
+                enabled: false
             },
             tagmanager: {
                 enabled: false
+            },
+            ninja: {
+                enabled: true
+            },
+            ati: {
+                enabled: true,
+                server: {
+                    enabled: true,
+                    platforms: ['html5', 'html4', 'wap'],
+                    event: true
+                },
+                client: {
+                    enabled: true,
+                    platforms: ['html5']
+                }
+            },
+            analytics: {
+                enabled: true,
+                server: {
+                    enabled: true,
+                    platforms: ['html5', 'html4', 'wap'],
+                    event: true
+                },
+                client: {
+                    enabled: true,
+                    platforms: ['html5']
+                }
             }
         }
     }
