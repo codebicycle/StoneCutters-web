@@ -9,5 +9,6 @@ module.exports = {
     tagmanager: require('./tagmanager'),
     allpages: require('./allpages'),
     facebook: require('./facebook'),
-    ninja: require('./ninja')
+    ninja: require('./ninja'),
+    adroll: require('./adroll'),
 };
