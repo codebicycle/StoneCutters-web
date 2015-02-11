@@ -15,7 +15,14 @@
                 <span>{{ item.seo.references[0].anchor }}</span>
             </div><!--
             --><p class="items-price">
-                {{ item.price.displayPrice }}
+                {% if item.price.displayPrice %}
+                    {{ item.price.displayPrice }}
+                        {% if item.priceTypeData.type == 'NEGOTIABLE' %}
+                            <span class="price-type">{{ item.priceTypeData.displayPriceType }}</span>
+                        {% endif %}
+                {% else %}
+                    {{ item.priceTypeData.displayPriceType }}
+                {% endif %}
             </p><!--
             --><p class="items-date">
                 {{ item.date.since.day if item.date.since.day }} {{ dictionary[item.date.since.dictionary] }}{{ (', <br>' + item.date.since.hour) if item.date.since.hour }}
@@ -48,7 +55,14 @@
                     <span>{{ item.seo.references[0].anchor }}</span>
                 </div><!--
                 --><p class="items-price">
+                    {% if item.price.displayPrice %}
                     {{ item.price.displayPrice }}
+                        {% if item.priceTypeData.type == 'NEGOTIABLE' %}
+                            <span class="price-type">{{ item.priceTypeData.displayPriceType }}</span>
+                        {% endif %}
+                {% else %}
+                    {{ item.priceTypeData.displayPriceType }}
+                {% endif %}
                 </p><!--
                 --><p class="items-date">
                     {{ item.date.since.day if item.date.since.day }} {{ dictionary[item.date.since.dictionary] }}{{ (', <br>' + item.date.since.hour) if item.date.since.hour }}
