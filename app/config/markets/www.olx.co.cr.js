@@ -117,10 +117,10 @@ module.exports = {
     tracking: {
         trackers: {
             hydra: {
-                enabled: true
+                enabled: false
             },
             tagmanager: {
-                enabled: false
+                enabled: true
             }
         }
     }
