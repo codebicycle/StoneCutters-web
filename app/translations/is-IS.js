@@ -59,6 +59,7 @@ module.exports = {
     'itemslisting.NewlyListed': 'N\xFDtt \xE1 lista',
     'itemslisting.NewShareThisAd': 'Deildu \xFEessari augl\xFDsingu',
     'itemslisting.Next': 'N\xE6sta',
+    'itemslisting.Of': 'af',
     'itemslisting.PendingAd': 'Augl\xFDsing \xED bi\xF0',
     'itemslisting.PerWeek': '\xC1 viku',
     'itemslisting.Previous': 'S\xED\xF0asta',

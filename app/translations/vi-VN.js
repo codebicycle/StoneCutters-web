@@ -59,6 +59,7 @@ module.exports = {
     'itemslisting.NewlyListed': 'M\u1EDBi \u0111\u01B0\u1EE3c l\u1EADp danh s\xE1ch',
     'itemslisting.NewShareThisAd': 'Chia s\u1EBB Qu\u1EA3ng c\xE1o n\xE0y',
     'itemslisting.Next': 'Ti\u1EBFp',
+    'itemslisting.Of': 'c\u1EE7a',
     'itemslisting.PendingAd': 'Qu\u1EA3ng c\xE1o \u0111ang Ch\u1EDD X\u1EED l\xFD',
     'itemslisting.PerWeek': 'H\xE0ng Tu\u1EA7n',
     'itemslisting.Previous': 'Tr\u01B0\u1EDBc',

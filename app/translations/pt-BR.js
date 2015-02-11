@@ -59,6 +59,7 @@ module.exports = {
     'itemslisting.NewlyListed': 'Mais recentes',
     'itemslisting.NewShareThisAd': 'Compartilhar este an\xFAncio',
     'itemslisting.Next': 'Seguinte',
+    'itemslisting.Of': 'de',
     'itemslisting.PendingAd': 'An\xFAncio Pendente',
     'itemslisting.PerWeek': 'Por semana',
     'itemslisting.Previous': 'Anterior',

@@ -59,6 +59,7 @@ module.exports = {
     'itemslisting.NewlyListed': 'Daty: od najnowszych',
     'itemslisting.NewShareThisAd': 'Udost\u0119pnij to og\u0142oszenie',
     'itemslisting.Next': 'Nast\u0119pna',
+    'itemslisting.Of': '',
     'itemslisting.PendingAd': 'Og\u0142oszenie oczekuj\u0105ce',
     'itemslisting.PerWeek': 'Na tydzie\u0144',
     'itemslisting.Previous': 'Poprzedni',

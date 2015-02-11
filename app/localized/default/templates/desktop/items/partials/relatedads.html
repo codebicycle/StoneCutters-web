@@ -1,0 +1,29 @@
+<div class="relatedads">
+    <h2>{{ dictionary ["itemgeneraldetails.RelatedListings"] }}</h2>
+    
+    {% for relatedItem in relatedItems %}
+        {% if loop.index < 4 %}
+            {% if relatedItem.thumbnail %}
+                <div class="related-item">
+                    <div class="related-wrap" data-itemId="{{ relatedItem.id }}" data-tracking="ItemPage-ClickRelatedAdImg" >
+                        <a class="related-img" href="{{ relatedItem | slugToUrl | link }}">
+                            <img src="{{ relatedItem.thumbnail }}" alt="">
+                        </a>
+                        <a class="related-title" href="{{ relatedItem | slugToUrl | link }}">
+                            {{ relatedItem.title }}
+                        </a>
+                        <h3>{{ relatedItem.price.displayPrice }}</h3>
+                        <span>
+                        {% if relatedItem.date.month < 10 %}
+                            {% set month = "messages_date_format.90" %}
+                        {% else %}
+                            {% set month = "messages_date_format.9" %}
+                        {% endif %}
+                        {{ relatedItem.date.day +' '+ dictionary["itemslisting.Of"] +' '+ dictionary[month + relatedItem.date.month] }}
+                        </span>
+                    </div>
+                </div>
+            {% endif %}
+        {% endif %}
+    {% endfor %}
+</div>

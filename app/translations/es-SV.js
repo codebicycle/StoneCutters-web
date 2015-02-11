@@ -59,6 +59,7 @@ module.exports = {
     'itemslisting.NewlyListed': 'Tiempo: m\xE1s reciente',
     'itemslisting.NewShareThisAd': 'Compartir este anuncio',
     'itemslisting.Next': 'Siguiente',
+    'itemslisting.Of': 'de',
     'itemslisting.PendingAd': 'Anuncio pendiente',
     'itemslisting.PerWeek': 'Por semana',
     'itemslisting.Previous': 'Anterior',

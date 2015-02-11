@@ -59,6 +59,7 @@ module.exports = {
     'itemslisting.NewlyListed': 'Baru Didaftar',
     'itemslisting.NewShareThisAd': 'Bagi Iklan ini',
     'itemslisting.Next': 'Selanjutnya',
+    'itemslisting.Of': 'dari',
     'itemslisting.PendingAd': 'Iklan yang Menunggu',
     'itemslisting.PerWeek': 'Per Minggu',
     'itemslisting.Previous': 'Sebelumnya',

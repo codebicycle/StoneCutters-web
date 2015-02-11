@@ -59,6 +59,7 @@ module.exports = {
     'itemslisting.NewlyListed': 'Uusi ilmoitus',
     'itemslisting.NewShareThisAd': 'Jaa t\xE4m\xE4 Ilmoitus',
     'itemslisting.Next': 'Seuraava',
+    'itemslisting.Of': ' /',
     'itemslisting.PendingAd': 'Ilmoitus odottaa',
     'itemslisting.PerWeek': 'Per viikko',
     'itemslisting.Previous': 'Edellinen',
