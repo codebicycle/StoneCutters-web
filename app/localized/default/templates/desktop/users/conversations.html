@@ -13,8 +13,8 @@
                 </figure>
                        <div class="conversations-data">
                     <h3>{{ conversation.buyerName }}</h3>
-                    <p>{{ item.get('title') }}</p>
-                    {{ message.text }}
+                    <h4>'{{ item.get('title') }}'</h4>
+                    <p>{{ conversation.messageText }}</p>
                     <span>{{ conversation.messageDate | date(false, true) }}
                 </div>
             </a>
