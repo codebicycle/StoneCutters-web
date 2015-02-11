@@ -3,41 +3,56 @@
 
     .conversation {
         margin: 10px auto;
-        padding:10px;
+        padding: 10px;
     }
-    .back:before{
-        color:$black;
-        font-size:xs;
+    .back {
+        display: block;
+        font-size: $xs;
+        margin: 0 115px 5px;
+        &:before {
+            font-size: remify(8px);
+            margin: 0 4px;
+        }
     }
     ul {
         ul-reset();
-        padding:10px 115px;
+        padding: 0 115px;
     }
 
     .conversation-item {
         border-bottom: 1px solid $greyBorders;
         clear-fix();
-        padding:10px 0;
-
+        padding: 10px 0;
+        margin: 0 115px;
 
         .wrapper-img {
-            border: 1px solid $greyBorders;
-            box-sizing: content-box;
-            display: inline-block;
-            float: left;
-            height: 57px;
-            text-align: center;
-            vertical-align: middle;
-            width: 100px;
+                border: 1px solid #ccc;
+                display: inline-block;
+                float: left;
+                max-height: 75px;
+                min-height: 75px;
+                padding: 2px;
+                position: relative;
+                text-align: center;
+                width: 100px;
+                margin:0;
 
             img {
-                height: auto;
+                bottom: 2px;
+                left: 0;
                 margin: auto;
-                max-height: 100%;
+                max-height: 144px;
                 max-width: 100%;
-                vertical-align: middle;
-                width: auto;
+                position: absolute;
+                right: 0;
+                top: 2px;
             }
+        }
+
+             .wrapper-img:before{
+             color: #ccc;
+             font-size: 50px;
+             padding-top: 10px;
         }
         .conversation-item-data {
             float: left;
@@ -56,60 +71,50 @@
         }
     }
     .conversation-chat {
-        vertical-align: baseline;
-        .conversation-name {
-        font-size: $baseFont;
+        border-top: 1px solid $greyBorders;
+        padding: 20px 30px;
+        &:first-child {
+            border: none;
         }
-        &.chat-sendit{
-        margin-left:20px;
-    }
-        span {
-            display:inline-block;
-            font-size:12px;
+        .name {
+            font-weight: bold;
+            font-size: $m;
         }
-        .fecha{
-            font-size: $xs;
-            color:#CCC;
+        .date, .message {
+            font-size: $s;
         }
-        p {
-            padding-left: 20px;
-            margin:0;
-            position:relative;
-            top:-15px;
-            left:0px;
+        .message {
+            margin: 5px 0 0;
         }
-        &:before{
-        color:#999;
     }
-
-    }
-    .chat-sendit:before{
-        color:#ccc;
-    }
-
-    .chat-receive:last-child{
-        font-weight:bold;
-    }
-
     .conversation-input {
         clear-fix();
-        box($white, $greyBorders, 3px, 0, solid, 1px);
-        background-color:#FE7;
-        padding:10px 110px;
+        box($yellow, $yellowBorders, 3px, 0, solid, 1px);
+        padding: 10px 110px;
+
         textarea {
-            width:714px;
-            height:90px;
-            padding:10px;
-            margin-bottom:10px;
+            height: 90px;
+            margin-bottom: 10px;
+            padding: 10px;
+            width: 714px;
             &.error {
                 border-color: $red;
             }
         }
         button[type="submit"] {
             action-button($orange, $white, 3px, padding = 10px 0);
+            float: right;
             font-size: $baseFont;
-            padding:5px 10px;
-            float:right;
+            padding: 5px 10px;
+        }
+        p.error {
+            color: $red;
+            margin: -5px 0 5px;
+            font-size: $xs;
+        }
+        .phone {
+            float: left;
+            padding: 5px 0;
         }
     }
 }

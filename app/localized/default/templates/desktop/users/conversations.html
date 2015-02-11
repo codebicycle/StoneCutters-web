@@ -1,17 +1,20 @@
 <div class="conversations">
+<div class="top-conversations">
+    <p>{{ dictionary["myolx.FIndPrevMessages"] | replace('<<LINK>>', ([' <a href="', ('/myolx/myolxmessages' | link), '">'] | join(''))) | replace('<</LINK>>', '</a>') }}</p>
+</div>
     {% for conversation in conversations %}
         {% set item = items.get(conversation.itemId) %}
         <div class="conversations-thread clearfix{{ ' read' if conversation.read }}" >
             <a href="{{ ('/myolx/conversation/' + conversation.threadId) | link }}" data-threadId="{{ conversation.threadId }}">
-                <figure class="wrapper-img {{ 'lines' if item.imagesCount > 1 }} {{ 'icons icon-photo' if not item.thumbnail }}">
-                    {% if item.thumbnail %}
-                        <img src="{{ item.thumbnail }}" alt="{{ item.title }}">
+                <figure class="wrapper-img {{ 'lines' if item.get('imagesCount') > 1 }} {{ 'icons icon-photo' if not item.get('thumbnail') }}">
+                    {% if item.get('thumbnail') %}
+                        <img src="{{ item.get('thumbnail') }}" alt="{{ item.get('title') }}">
                     {% endif %}
                 </figure>
                 <div class="conversations-data">
                     <h3>{{ conversation.buyerName }}</h3>
-                    <p>{{ item.title }}</p>
-                    <p> </p>
+                    <h4>'{{ item.get('title') }}'</h4>
+                    <p>"{{ conversation.messageText | truncate( 100, True, '...') }}"</p>
                     <span>{{ conversation.messageDate | date(false, true) }}
                 </div>
             </a>

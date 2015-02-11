@@ -273,6 +273,8 @@ module.exports = {
     'myolx.ConversationWith': 'Conversatie met <<NAME>>',
     'myolx.EditListing': 'Wijzig advertentie',
     'myolx.EmailPasswordInvalid': 'Je e-mailadres of wachtwoord lijkt ongeldig te zijn',
+    'myolx.FIndPrevMessages': 'We hebben je Postvak IN bijgewerkt. Zoek je berichten? Klik <<LINK>>hier<</LINK>> voor je eerdere berichten.',
+    'myolx.LatestMessages': 'Terug naar mijn laatste berichten',
     'myolx.MessageNotSent': 'Het bericht is niet verzonden',
     'myolx.Messages': 'Berichten',
     'myolx.MyAds': 'Mijn advertenties',
