@@ -26,6 +26,9 @@ module.exports = {
         'searches#noresult': {
             name: 'NoResult'
         },
+        'searches#filter': {
+            name: 'Search'
+        },
         'items#show': {
             name: 'Item'
         }
