@@ -234,7 +234,9 @@ DataAdapter.prototype.clientRequest = function(req, api, options, callback) {
             logger.error('%s %d %s %j %s', api.type.toUpperCase(), res.status, api.url, err, elapsed);
             statsd.increment([locale, 'sockets', api.url.split('//')[1].split('/').shift().replace(rGraphite, '-'), 'error', res.status]);
             failed.apply(this, arguments);
-            done(err, {
+            done(err || {
+                statusCode: res.status
+            }, {
                 readyState: res.readyState,
                 responseText: res.responseText,
                 statusCode: res.status,

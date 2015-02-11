@@ -16,12 +16,17 @@ module.exports = Base.extend({
     lostpassword: lostpassword,
     register: register,
     registerConfirm: registerConfirm,
-    reply: reply
+    reply: reply,
+    edit: edit,
+    toData: toData
 });
 
 module.exports.id = 'User';
 
 function parse(response) {
+    if (response.profile.firstname) {
+        response.profile.firstName = response.profile.firstname;
+    }
     return response.profile;
 }
 
@@ -238,4 +243,44 @@ function reply(done, data) {
         statsd.increment([this.get('country'), 'reply', 'error', err.statusCode, this.get('platform')]);
         done.fail(err);
     }
+}
+
+function edit(done) {
+    asynquence().or(fail.bind(this))
+        .then(submit.bind(this))
+        .val(success.bind(this));
+
+    function submit(done) {
+        dataAdapter.post(this.app.req, '/users/' + this.get('userId') + '/profile/' + this.get('intent'), {
+            query: {
+                platform: this.get('platform'),
+                token: this.get('token')
+            },
+            data: this.toData()
+        }, done.errfcb);
+    }
+
+    function success(response, profile) {
+        console.log(response, profile);
+        statsd.increment([this.get('country'), 'profile', this.get('intent'), 'success', this.get('platform')]);
+        done();
+    }
+
+    function fail(err) {
+        statsd.increment([this.get('country'), 'profile', this.get('intent'), 'error', err.statusCode, this.get('platform')]);
+        done.fail(err);
+    }
+}
+
+function toData() {
+    var data = this.toJSON();
+
+    delete data.token;
+    delete data.intent;
+    delete data.favorites;
+    delete data.unreadConversationsCount;
+    delete data.unreadMessagesCount;
+    delete data.agreeTerms;
+    delete data.country;
+    return data;
 }

@@ -4,7 +4,7 @@ module.exports = {
     'users#register': {
         url: 'register'
     },
-    'users#success': {
+    'users#registersuccess': {
         url: 'register/success'
     },
     'users#login': {
@@ -27,6 +27,9 @@ module.exports = {
     },
     'users#configuration': {
         url: 'myolx/configuration'
+    },
+    'users#createuserprofile': {
+        url: 'myolx/createuserprofile'
     },
     'users#edituserprofile': {
         url: 'myolx/edituserprofile'
