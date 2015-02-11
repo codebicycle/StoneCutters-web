@@ -162,7 +162,7 @@ module.exports = Base.extend({
         if (field instanceof window.jQuery) {
             $field = field;
             shouldValidateField = !!$field.data('validate');
-            if ($field.attr('name') === 'state' || $field.attr('name') === 'location') {
+            if ($field.attr('name') === 'state' || $field.attr('name') === 'location' || $field.attr('name') == 'neighborhood') {
                 $field.trigger('fieldValidationStart');
             }
             field.name = $field.attr('name');
@@ -227,7 +227,7 @@ module.exports = Base.extend({
                 });
                 $field.trigger('fieldValidationEnd', [_errors]);
             }
-            else if ($field.attr('name') == 'state' || $field.attr('name') == 'location') {
+            else if ($field.attr('name') == 'state' || $field.attr('name') == 'location' || $field.attr('name') == 'neighborhood') {
                 $field.trigger('fieldValidationEnd');
             }
             else {

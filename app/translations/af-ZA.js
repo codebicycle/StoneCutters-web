@@ -238,6 +238,7 @@ module.exports = {
     'item.Rejected': 'Afgekeur',
     'item.RemoveFromFavorites': 'Verwyder van gunstelinge',
     'item.SeeMoreAds': 'Kyk na nog advts. <<LINK_TO_CATEGORY>>',
+    'item.SelectA_Neighborhood': 'Kies \'n omgewing',
     'item.ShareAd': 'Deel \'n advt.',
     'item.ThisAdIsNoLongerAvailable': 'Hierdie advt. is nie meer beskikbaar nie.',
     'item.ViewBiggerMap': 'Bekyk Groter Kaart',

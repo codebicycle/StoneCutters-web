@@ -238,6 +238,7 @@ module.exports = {
     'item.Rejected': 'Odbijeno',
     'item.RemoveFromFavorites': 'Uklonite iz favorita',
     'item.SeeMoreAds': 'Pogledaj vi\u0161e oglasa u kategoriji  <<LINK_TO_CATEGORY>>',
+    'item.SelectA_Neighborhood': 'Izaberite kom\u0161iluk',
     'item.ShareAd': 'Podijelite oglas',
     'item.ThisAdIsNoLongerAvailable': 'Ovaj oglas nije vi\u0161e dostupan.',
     'item.ViewBiggerMap': 'Pogledajte ve\u0107u mapu',

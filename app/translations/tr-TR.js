@@ -238,6 +238,7 @@ module.exports = {
     'item.Rejected': 'Reddedildi',
     'item.RemoveFromFavorites': 'Favorilerden kald\u0131r\u0131n',
     'item.SeeMoreAds': '<<LINK_TO_CATEGORY>> kategorisinden daha fazla ilan g\xF6r\xFCn',
+    'item.SelectA_Neighborhood': 'Bir Mahalle se\xE7in',
     'item.ShareAd': '\u0130lan payla\u015F\u0131n',
     'item.ThisAdIsNoLongerAvailable': 'Bu ilan art\u0131k kullan\u0131lam\u0131yor',
     'item.ViewBiggerMap': 'Daha B\xFCy\xFCk Bir Haritay\u0131 G\xF6r\xFCnt\xFCleyin',

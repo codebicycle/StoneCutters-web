@@ -238,6 +238,7 @@ module.exports = {
     'item.Rejected': 'Atteikts',
     'item.RemoveFromFavorites': 'Iz\u0146emt no favor\u012Btiem',
     'item.SeeMoreAds': 'Skatiet vair\u0101k sludin\u0101jumus \u0161eit: <<LINK_TO_CATEGORY>>',
+    'item.SelectA_Neighborhood': 'Atlas\u012Bt kaimi\u0146us',
     'item.ShareAd': 'Kop\u012Bgojiet sludin\u0101jumu',
     'item.ThisAdIsNoLongerAvailable': '\u0160is sludin\u0101jums vairs nav pieejams',
     'item.ViewBiggerMap': 'Skatieties liel\u0101ku karti',

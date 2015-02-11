@@ -238,6 +238,7 @@ module.exports = {
     'item.Rejected': 'Rejet\xE9e',
     'item.RemoveFromFavorites': 'Supprimer des favoris',
     'item.SeeMoreAds': 'Voir plus d\'annonces dans <<LINK_TO_CATEGORY>>',
+    'item.SelectA_Neighborhood': 'S\xE9lectionnez un Quartier',
     'item.ShareAd': 'Partager annonce',
     'item.ThisAdIsNoLongerAvailable': 'Cette annonce n\'est plus disponiblle',
     'item.ViewBiggerMap': 'Agrandir plan',

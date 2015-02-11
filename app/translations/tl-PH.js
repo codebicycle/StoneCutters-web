@@ -238,6 +238,7 @@ module.exports = {
     'item.Rejected': 'Tinaggihan',
     'item.RemoveFromFavorites': 'Tanggalin mula sa mga paborito',
     'item.SeeMoreAds': 'Makakita ng higit pang mga anunsyo sa <<LINK_TO_CATEGORY>>',
+    'item.SelectA_Neighborhood': 'Pumili ng lugar',
     'item.ShareAd': 'Ibahagi ang ad',
     'item.ThisAdIsNoLongerAvailable': 'Hindi na available ang patalastas na ito',
     'item.ViewBiggerMap': 'Tingnan ang Mas Malaking Mapa',

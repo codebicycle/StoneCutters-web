@@ -238,6 +238,7 @@ module.exports = {
     'item.Rejected': 'Atmesta',
     'item.RemoveFromFavorites': '\u0160alinti i\u0161 megiamiausi\u0173',
     'item.SeeMoreAds': '\u017Dr. daugiau skelbim\u0173, esan\u010Di\u0173 <<LINK_TO_CATEGORY>>',
+    'item.SelectA_Neighborhood': 'Pasirinkite rajon\u0105',
     'item.ShareAd': 'Bendrinti skelbim\u0105',
     'item.ThisAdIsNoLongerAvailable': '\u0160is skelbimas pa\u0161alintas',
     'item.ViewBiggerMap': 'Rodyti didesn\u012F \u017Eem\u0117lap\u012F',
