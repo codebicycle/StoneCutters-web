@@ -11,17 +11,19 @@ module.exports = Base.extend({
     id: 'images',
     tagName: 'section',
     pending: 0,
-    postRender: function() {
-        _.each(this.parentView.getItem().get('images').slice(0, 6), function each(image, i) {
-            this.showImage(i, image);
-        }, this);
+    getTemplateData: function() {
+        var data = Base.prototype.getTemplateData.call(this);
+        
+        return _.extend({}, data, {
+            slots: 6
+        });
     },
     events: {
         'show': 'onShow',
         'hide': 'onHide',
-        'click .image:not(.fill .image)': 'onImageClick',
+        'click .display': 'onDisplayClick',
         'click .remove': 'onRemoveClick',
-        'click input[type=file]': 'onInputClick',
+        'click .input': 'onInputClick',
         'change form': 'onChange',
         'submit form': 'onSubmit',
         'imageLoadStart': 'onImageLoadStart',
@@ -42,16 +44,23 @@ module.exports = Base.extend({
 
         this.$el.addClass('disabled');
     },
-    onImageClick: function(event) {
+    onDisplayClick: function(event) {
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();
 
-        var $image = $(event.currentTarget);
-        var $container = $image.parent();
-        var $input = this.$('#' + $container.data('input'));
-
-        $input.click();
+        var position = 0;
+        var images = this.parentView.getItem().get('images');
+        var $file = $(event.currentTarget).parent();
+        var $files = this.$('.file');
+        
+        if (images.length) {
+            position = $files.index($file);
+            if (!images[position]) {
+                position = images.length;
+            }
+        }
+        this.$('#file' + position).trigger('click', [position]);
     },
     onRemoveClick: function(event) {
         event.preventDefault();
@@ -59,56 +68,62 @@ module.exports = Base.extend({
         event.stopImmediatePropagation();
 
         var $remove = $(event.currentTarget);
-        var $container = $remove.parent().removeClass('loaded');
-        var $image = $container.find('.image').removeClass('fill').removeAttr('style');
-        var input = $container.data('input');
-        var $input = this.$('#' + input).val('');
+        var $image = $remove.siblings('.display').removeClass('fill r1 r2 r3 r4 r5 r6').removeAttr('style');
+        var $file = $remove.parent().removeClass('loaded');
+        var $files = $file.parent().find('.file');
+        var $input = this.$('.input').eq($files.index($file));
 
-        this.parentView.getItem().get('images').splice(input.replace('file', ''), 1);
-        this.render();
-        this.$el.trigger('show');
+        this.parentView.getItem().get('images').splice($files.index($file), 1);
+        $input.replaceWith($input.clone(true));
+        $files.parent('.files').append($file.detach());
         this.parentView.$el.trigger('imagesLoadEnd');
     },
-    onInputClick: function(event) {
+    onInputClick: function(event, position) {
         event.stopPropagation();
         event.stopImmediatePropagation();
+
+        var $input = $(event.target).data('position', position);
     },
     onChange: function(event) {
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();
 
-        var $input = $(event.target);
-        var input = $input.attr('id');
-        var index = input.replace('file', '');
-        var $container = this.$('[data-input=' + input + ']').addClass('loading');
-        var $image = $container.children('.image');
         var image = event.target.files[0];
+        var position = $(event.target).data('position');
+        var $file = this.$('.file').eq(position);
+        var $image = $file.find('.display');
 
         asynquence().or(fail.bind(this))
+            .then(reset.bind(this))
             .then(post.bind(this))
             .then(success.bind(this))
             .val(done.bind(this));
 
+        function reset(done) {
+            $file.removeClass('loaded');
+            done();
+        }
+
         function post(done) {
             this.$el.trigger('imageLoadStart');
-            this.parentView.getItem().get('images')[index] = image;
+            $file.addClass('loading');
+            this.parentView.getItem().get('images')[position] = image;
             this.parentView.getItem().postImages(done);
         }
 
         function success(done) {
-            this.showImage(index, image, done);
+            this.showImage(position, image, done);
         }
 
         function done() {
             this.$el.trigger('imageLoadEnd');
-            $container.removeClass('loading');
+            $file.removeClass('loading');
         }
 
         function fail(err) {
             this.$el.trigger('imageLoadEnd');
-            this.parentView.getItem().get('images').splice(index, 1);
-            $input.val('');
+            this.parentView.getItem().get('images').splice(position, 1);
         }
     },
     onSubmit: function(event) {
@@ -138,17 +153,17 @@ module.exports = Base.extend({
     },
     showImage: function(index, file, callback) {
         var image = new window.Image();
-        var $container = this.$('[data-input=file' + index + ']');
-        var $image = $container.children('.image');
+        var $file = this.$('.file').eq(index);
+        var $display = $file.children('.display');
 
         image.src = file.url = file.url || window.URL.createObjectURL(file);
         image.onerror = image.onload = function(event) {
             EXIF.getData(this);
             file.orientation = EXIF.getTag(this, 'Orientation') || 1;
-            $image.addClass('fill r' + file.orientation).css({
+            $display.addClass('fill r' + file.orientation).css({
                 'background-image': 'url(' + this.src + ')'
             });
-            $container.addClass('loaded');
+            $file.addClass('loaded');
             if (callback) {
                 callback();
             }

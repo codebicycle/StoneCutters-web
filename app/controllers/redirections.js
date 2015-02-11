@@ -149,6 +149,9 @@ module.exports = {
         }
         helpers.common.redirect.call(this, '/');
     }),
+    myadsphp: function(params, callback) {
+        helpers.common.redirect.call(this, '/myolx/myadslisting');
+    },
     php: function(params, callback) {
         if (_.contains(phpPaths, params.path)) {
             return helpers.common.redirect.call(this, this.app.session.get('url').replace(params.path + '.php', phpRedirections[params.path]));

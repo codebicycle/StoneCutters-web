@@ -3,7 +3,7 @@
     {% view 'partials/adserving', 'slot_top_listing_gallery' %}
     <ul class="items-list-ig {{ itemListingClass }}">
         {% for item in items %}
-            <li>
+            <li class="item">
                 <a href="{{ item.slug.replace(domain, fullDomain) }}">
                     <figure class="items-image">
                         <img src="{{ item.thumbnail if item.thumbnail else ('/images/html4/noPhoto.png' | static) }}">
@@ -27,8 +27,36 @@
                 </a>
             </li>
         {% endfor %}
+        {% if meta.abundance %}
+            <li class="title">{{ dictionary["misc.MoreResultsIn"] }} {{ location.name if meta.abundance.locationType == 'country' else location.children[0].name }}</li>
+            {% for item in meta.abundance.data %}
+                <li class="item">
+                    <a href="{{ item.slug.replace(domain, fullDomain) }}">
+                        <figure class="items-image">
+                            <img src="{{ item.thumbnail if item.thumbnail else ('/images/html4/noPhoto.png' | static) }}">
+                        </figure>
+                        <h3 class="items-info">
+                            {{ item.title | truncate( 50, True) }}
+                        </h3>
+                        <p class="items-price">
+                            {{ item.price.displayPrice if item.price and item.price.amount > 0 }}
+                            {{ ('<span>' + item.priceTypeData.displayPriceType + '</span>') if not(item.priceTypeData.type == 'FIXED') }}
+                        </p>
+                        <p class="items-date">
+                            {{ item.date.since.day if item.date.since.day }} {{ dictionary[item.date.since.dictionary] }}{{ (', ' + item.date.since.hour) if item.date.since.hour }}
+                        </p>
+                        {% if item.isFeatured %}
+                            <p class="featuredad">
+                                <i class="icons icon-star-circle"></i>
+                                <em>{{ dictionary["misc.FeaturedAd _BR"] }}</em>
+                            </p>
+                        {% endif %}
+                    </a>
+                </li>
+            {% endfor %}
+        {% endif %}
     </ul>
 {% else %}
-    <div class="noresults">{{ dictionary["listingpageitemslisting.WeAreSorryNoResults"] }}</div>
+    <div class="noresults" data-qa="no-results-found">{{ dictionary["listingpageitemslisting.WeAreSorryNoResults"] }}</div>
     {% view 'partials/adserving', 'slot_noresult_listing' %}
 {% endif %}

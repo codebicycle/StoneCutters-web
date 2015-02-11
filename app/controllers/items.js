@@ -163,7 +163,7 @@ function show(params, callback) {
                 return helpers.common.redirect.call(this, slug);
             }
             if (response.item.get('location').url !== this.app.session.get('location').url) {
-                url = [protocol, '://', platform, '.', response.item.get('location').url.replace('www.', 'm.'), '/', slug].join('');
+                url = [protocol, '://', this.app.session.get('host'), '/', slug].join('');
 
                 done.abort();
                 return helpers.common.redirect.call(this, url, null, {
@@ -487,6 +487,8 @@ function reply(params, callback) {
         var siteLocation = this.app.session.get('siteLocation');
         var platform = this.app.session.get('platform');
         var newItemPage = helpers.features.isEnabled.call(this, 'newItemPage');
+        var isHermes = helpers.features.isEnabled.call(this, 'hermes');
+        var user = this.app.session.get('user');
 
         var redirect = function(done) {
             var platform = this.app.session.get('platform');
@@ -526,6 +528,43 @@ function reply(params, callback) {
             done(resItem.item);
         }.bind(this);
 
+        var verifyConversations = function(done,_item) {
+            if (isHermes && user && platform === 'html5') {
+                var verifyConversation = function(done) {
+                    helpers.dataAdapter.post(this.app.req, '/conversations', {
+                        query: {
+                            location: siteLocation,
+                            platform: this.app.session.get('platform')
+                        },
+                        data: {
+                            itemIds: itemId,
+                            emails: user.email
+                        },
+                        cache: false,
+                        json: true
+                    }, done.errfcb);
+                }.bind(this);
+
+                var successConversation = function(done, err, response, body) {
+                    if(response.conversations && response.conversations.length > 0){
+                        var threadId = response.conversations[0].threadId;
+                        done.abort();
+                        helpers.common.redirect.call(this, '/myolx/conversation/' + threadId, null, {
+                            status: 302
+                        });
+                    }
+                    done(_item);
+                }.bind(this);
+
+                asynquence().or(error)
+                    .then(verifyConversation)
+                    .then(successConversation);
+            }
+            else {
+                done(_item);
+            }
+         }.bind(this);
+
         var success = function(_item) {
             var item = _item.toJSON();
             var subcategory = this.dependencies.categories.search(item.category.id);
@@ -560,6 +599,7 @@ function reply(params, callback) {
             .then(prepare)
             .then(findItem)
             .then(checkItem)
+            .then(verifyConversations)
             .val(success);
     }
 }

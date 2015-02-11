@@ -1,0 +1,115 @@
+.users_conversation_view {
+    box($white, $greyBorders, 0 0 3px 3px, 0, solid, 1px);
+
+    .conversation {
+        margin: 10px auto;
+        padding:10px;
+    }
+    .back:before{
+        color:$black;
+        font-size:xs;
+    }
+    ul {
+        ul-reset();
+        padding:10px 115px;
+    }
+
+    .conversation-item {
+        border-bottom: 1px solid $greyBorders;
+        clear-fix();
+        padding:10px 0;
+
+
+        .wrapper-img {
+            border: 1px solid $greyBorders;
+            box-sizing: content-box;
+            display: inline-block;
+            float: left;
+            height: 57px;
+            text-align: center;
+            vertical-align: middle;
+            width: 100px;
+
+            img {
+                height: auto;
+                margin: auto;
+                max-height: 100%;
+                max-width: 100%;
+                vertical-align: middle;
+                width: auto;
+            }
+        }
+        .conversation-item-data {
+            float: left;
+            margin-right: 30px;
+            overflow: hidden;
+            padding-left: 10px;
+            h3 {
+                font-size: $xl;
+                margin: 0;
+            }
+            p {
+                font-size: $m;
+                line-height: $m;
+                margin: 5px 0 10px 0;
+            }
+        }
+    }
+    .conversation-chat {
+        vertical-align: baseline;
+        .conversation-name {
+        font-size: $baseFont;
+        }
+        &.chat-sendit{
+        margin-left:20px;
+    }
+        span {
+            display:inline-block;
+            font-size:12px;
+        }
+        .fecha{
+            font-size: $xs;
+            color:#CCC;
+        }
+        p {
+            padding-left: 20px;
+            margin:0;
+            position:relative;
+            top:-15px;
+            left:0px;
+        }
+        &:before{
+        color:#999;
+    }
+
+    }
+    .chat-sendit:before{
+        color:#ccc;
+    }
+
+    .chat-receive:last-child{
+        font-weight:bold;
+    }
+
+    .conversation-input {
+        clear-fix();
+        box($white, $greyBorders, 3px, 0, solid, 1px);
+        background-color:#FE7;
+        padding:10px 110px;
+        textarea {
+            width:714px;
+            height:90px;
+            padding:10px;
+            margin-bottom:10px;
+            &.error {
+                border-color: $red;
+            }
+        }
+        button[type="submit"] {
+            action-button($orange, $white, 3px, padding = 10px 0);
+            font-size: $baseFont;
+            padding:5px 10px;
+            float:right;
+        }
+    }
+}

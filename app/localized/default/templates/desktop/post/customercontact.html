@@ -1,0 +1,27 @@
+<span class="icons icon-arrow"></span>
+<a class="customer-help-tab" href="#">Need Help?</a>
+<div class="container-title">
+    <p class="horary">{{ customerContact.horary }}</p>
+    <i class="icons icon-phone-round"></i>
+    <p class="text-title">
+        {{ customerContact.phone }}
+        {% if customerContact.phone_wodrs %}
+            <span>{{ customerContact.phone_wodrs }}</span>
+        {% endif %}
+    </p>
+
+</div>
+<div class="contact-info">
+    {% if customerContact.contact_photo %}
+        <img src="{{ customerContact.contact_photo | static }}" class="foto" />
+    {% endif %}
+    <p class="name">
+        {{ customerContact.name }}
+    </p>
+    <p class="work">
+        {{ customerContact.work }}
+    </p>
+    <p class="phrase">
+        {{ customerContact.phrase }}
+    </p>
+</div>

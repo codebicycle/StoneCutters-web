@@ -7,7 +7,10 @@ module.exports = {
             related: 30,
             myAds: 15,
             myFavs: 15,
-            myMsgs: 15
+            myMsgs: 15,
+            myConvs: 15,
+            myConv: 15
+
         }
     },
     adserving: {
@@ -74,6 +77,10 @@ module.exports = {
                 platforms: ['wap', 'html4', 'html5', 'desktop']
             },
             ninja: {
+                enabled: false,
+                platforms: ['desktop']
+            },
+            adroll: {
                 enabled: false,
                 platforms: ['desktop']
             }
