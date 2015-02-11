@@ -36,7 +36,7 @@
                     </a>
                     <div class="actions">
                         {% if item.editable %}
-                            <a href="{{ ['/myolx/edititem/', item.id] | join('') | link }}" class="action edit">{{ dictionary["showactivelistings.Edit"] }}</a>
+                            <a href="{{ ['/myolx/edititem/', item.id] | join('') | link }}" class="action edit" data-qa="edit-button">{{ dictionary["showactivelistings.Edit"] }}</a>
                         {% endif %}
                         {% if status == 'ready' %}
                             <a href="{{ ['/myolx/deleteitem/', item.id] | join('') | link }}" class="action delete">{{ dictionary["confirmremoveitem.Delete"] }}</a>
