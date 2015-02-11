@@ -308,11 +308,10 @@
             }
 
             section {
-                margin-top: 35px;
+                margin-bottom: 35px;
                 overflow: hidden;
                 padding: 0 20px 20px;
                 &.title-section {
-                    margin-top: 0;
                     padding: 0;
                     h3, p{
                         padding-left: 20px;
@@ -431,21 +430,20 @@
                     font-size: $m;
                     line-height: $l;
                     margin-bottom: 0px;
-                    margin-top: 30px;
                 }
                 .icons {
                     position: relative;
                     margin-bottom: 35px;
                     &::before {
                         color: $green;
-                        font-size: 45px;
+                        font-size: 40px;
                         position: absolute;
                         left: 0;
                         display: block;
                     }
 
                     p {
-                        margin: 5px 0 5px 60px;
+                        margin: 5px 0 5px 55px;
                         &.title-list {
                             color: $green;
                             font-size: $l;
@@ -456,28 +454,37 @@
             &.press {
                 .user-ads {
                     &.sources {
-                        .slide, ul,li {
+                        .slide, ul,li, .arrows {
                             height: 190px;
                         }
                         ul {
                             width: 190px;
                         }
+                        .arrows {
+                            line-height: 190px;
+                        }
                     }
                     &.news {
-                        .slide, ul,li {
+                        .slide, ul,li, .arrows {
                             height: 235px;
                         }
                         ul {
                             width: 1510px;
                         }
+                        .arrows {
+                            line-height: 235px;
+                        }
 
                     }
                     &.press {
-                        .slide, ul,li {
+                        .slide, ul,li, .arrows {
                             height: 140px;
                         }
                         ul {
                             width: 945px;
+                        }
+                        .arrows {
+                            line-height: 140px;
                         }
                     }
                     position: relative;
@@ -520,11 +527,10 @@
                     }
                     .arrows {
                         position: absolute;
-                        top: 50%;
-                        margin-top: -8px;
                         z-index: 10;
                         cursor: pointer;
                         color: $greyStrong;
+                        padding:0 3px;
                         &:hover {
                             color: $black;
                         }
