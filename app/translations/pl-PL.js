@@ -274,6 +274,7 @@ module.exports = {
     'myolx.EditListing': 'Edytuj og\u0142oszenie',
     'myolx.EmailPasswordInvalid': 'Niestety podany adres e-mail lub has\u0142o wydaj\u0105 si\u0119 nieprawid\u0142owe',
     'myolx.FIndPrevMessages': 'Twoja skrzynka zosta\u0142a zaktualizowana! Brakuje wiadomo\u015Bci? Starsze wiadomo\u015Bci mo\u017Cesz znale\u017A\u0107 <<LINK>>tutaj<</LINK>>',
+    'myolx.LatestMessages': 'Powr\xF3t do najnowszych wiadomo\u015Bci',
     'myolx.MessageNotSent': 'Wiadomo\u015B\u0107 nie zosta\u0142a wys\u0142ana',
     'myolx.Messages': 'Wiadomo\u015Bci',
     'myolx.MyAds': 'Moje og\u0142oszenia',

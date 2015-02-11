@@ -274,6 +274,7 @@ module.exports = {
     'myolx.EditListing': 'Editar an\xFAncios',
     'myolx.EmailPasswordInvalid': 'Ops! E-mail e/ou senha inv\xE1lidos',
     'myolx.FIndPrevMessages': 'N\xF3s atualizamos sua caixa de entrada! Faltando mensagens? Encontre as anteriores <<LINK>>aqui<</LINK>>',
+    'myolx.LatestMessages': 'Voltar para \xFAltimas mensagens',
     'myolx.MessageNotSent': 'Sua mensagem n\xE3o foi enviada',
     'myolx.Messages': 'Mensagens',
     'myolx.MyAds': 'Meus an\xFAncios',

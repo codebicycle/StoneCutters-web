@@ -274,6 +274,7 @@ module.exports = {
     'myolx.EditListing': 'Breyta augl\xFDsingu',
     'myolx.EmailPasswordInvalid': '\xDE\xFA vir\xF0ist hafa gefi\xF0 upp rangt netfang e\xF0a a\xF0gangsor\xF0',
     'myolx.FIndPrevMessages': 'Vi\xF0 uppf\xE6r\xF0um innh\xF3lfi\xF0 \xFEitt! Vantar skilabo\xF0? \xDE\xFA finnur \xFEau eldri <<LINK>>h\xE9r<</LINK>>',
+    'myolx.LatestMessages': 'Til baka \xED s\xED\xF0ustu skilabo\xF0in',
     'myolx.MessageNotSent': 'Skilabo\xF0in voru ekki send',
     'myolx.Messages': 'Skilabo\xF0',
     'myolx.MyAds': 'Augl\xFDsingarnar m\xEDnar',

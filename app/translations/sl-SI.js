@@ -274,6 +274,7 @@ module.exports = {
     'myolx.EditListing': 'Uredi oglas',
     'myolx.EmailPasswordInvalid': '\u017Dal nam je, videti je, da sta va\u0161 e-po\u0161tni naslov ali geslo neveljavna',
     'myolx.FIndPrevMessages': 'We upgraded your inbox! Missing messages? You can find the previous ones <<LINK>>here<</LINK>>',
+    'myolx.LatestMessages': 'Back to my latest messages',
     'myolx.MessageNotSent': 'Sporo\u010Dilo ni bilo poslano',
     'myolx.Messages': 'Sporo\u010Dila',
     'myolx.MyAds': 'Moji oglasi',

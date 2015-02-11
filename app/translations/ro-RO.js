@@ -274,6 +274,7 @@ module.exports = {
     'myolx.EditListing': 'Edita\u0163i List\u0103ri',
     'myolx.EmailPasswordInvalid': 'Ne pare r\u0103u, se pare c\u0103 adresa dvs. de e-mail sau parola nu sunt valide',
     'myolx.FIndPrevMessages': 'Am adus la zi inbox-ul dvs.! Lipsesc mesaje? Mesajele precedente le pute\u0163i g\u0103si <<LINK>>aici<</LINK>>',
+    'myolx.LatestMessages': '\xCEnapoi la ultimele mesaje',
     'myolx.MessageNotSent': 'Mesajul nu a fost trimis',
     'myolx.Messages': 'Mesaje',
     'myolx.MyAds': 'Anun\u0163urile mele',
