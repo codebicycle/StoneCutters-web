@@ -58,10 +58,12 @@ function getSettings() {
     return settings;
 }
 
-function extendConfig(config, defaults) {
-    config = _.extend({}, defaults, config);
-    config.params = _.extend({}, defaults.params || {}, config.params || {});
-    return config;
+function extendConfig(defaults, extras) {
+    var extended;
+
+    extended = _.extend({}, defaults, extras);
+    extended.params = _.extend({}, defaults.params || {}, extras.params || {});
+    return extended;
 }
 
 function createChannels(service) {
@@ -121,12 +123,11 @@ function getClientId(service) {
 
 function getNumberPerCategory(service){
     var number = this.config.params.number;
+    var cat = getCategoryId.call(this);
 
     if (service !== 'CSA') {
         return number || 1;
     }
-    var cat = getCategoryId.call(this);
-
     if (!cat) {
         cat = this.app.session.get('currentRoute').action;
     }

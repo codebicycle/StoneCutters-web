@@ -27,7 +27,7 @@ module.exports = {
                 side: {
                     service: 'AFC',
                     format: 'WideSkyscraper',
-                    location: 'Top' // Side
+                    location: 'Side'
                 },
                 bottom: {
                     service: 'CSA',

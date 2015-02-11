@@ -46,7 +46,6 @@ module.exports = Base.extend({
             }
             settings.options.channel = settings.options.channel.replace('[navigator]', window.BrowserDetect.browsername);
         }
-        console.log(settings);
         switch (service) {
             case 'CSA':
                 this._includeCsaLib();
