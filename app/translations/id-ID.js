@@ -478,6 +478,7 @@ module.exports = {
     'misc.publish-in': 'Publish In',
     'misc.RejectedAd_Caps': 'Iklan yang ditolak',
     'misc.Removed': 'Dihapus',
+    'misc.ReturnToMsgs': 'Volver a mis mensajes',
     'misc.return_ads': '<<LINK>>Return to My Ads<</LINK>>',
     'misc.SafetyTipsBuyers': 'Kiat Keamanan bagi Pembeli',
     'misc.SayOLX': 'When you call, say you saw the ad on OLX',

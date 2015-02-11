@@ -478,6 +478,7 @@ module.exports = {
     'misc.publish-in': 'Pubblica in',
     'misc.RejectedAd_Caps': 'Annuncio respinto',
     'misc.Removed': 'Eliminato',
+    'misc.ReturnToMsgs': 'Volver a mis mensajes',
     'misc.return_ads': '<<LINK>>Ritorna ai Miei Annunci<</LINK>>',
     'misc.SafetyTipsBuyers': 'Consigli di Sicurezza per gli Acquirenti',
     'misc.SayOLX': 'Quando telefoni, fai presente di aver visto l\'annuncio su OLX',

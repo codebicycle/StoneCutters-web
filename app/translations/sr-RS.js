@@ -478,6 +478,7 @@ module.exports = {
     'misc.publish-in': 'Publish In',
     'misc.RejectedAd_Caps': 'Odbijeni oglas',
     'misc.Removed': 'Uklonjen',
+    'misc.ReturnToMsgs': 'Volver a mis mensajes',
     'misc.return_ads': '<<LINK>>Return to My Ads<</LINK>>',
     'misc.SafetyTipsBuyers': 'Bezbednosni saveti za kupce',
     'misc.SayOLX': 'When you call, say you saw the ad on OLX',

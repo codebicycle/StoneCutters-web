@@ -478,6 +478,7 @@ module.exports = {
     'misc.publish-in': 'Publish In',
     'misc.RejectedAd_Caps': 'Afvist annonce',
     'misc.Removed': 'Fjernet',
+    'misc.ReturnToMsgs': 'Volver a mis mensajes',
     'misc.return_ads': '<<LINK>>Return to My Ads<</LINK>>',
     'misc.SafetyTipsBuyers': 'Sikkerhedstip til k\xF8bere',
     'misc.SayOLX': 'When you call, say you saw the ad on OLX',

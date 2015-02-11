@@ -478,6 +478,7 @@ module.exports = {
     'misc.publish-in': '\u0110\u0103ng trong',
     'misc.RejectedAd_Caps': 'Qu\u1EA3ng c\xE1o b\u1ECB t\u1EEB ch\u1ED1i',
     'misc.Removed': '\u0110\xE3 xo\xE1',
+    'misc.ReturnToMsgs': 'Volver a mis mensajes',
     'misc.return_ads': '<<LINK>>Quay v\u1EC1 C\xE1c rao v\u1EB7t c\u1EE7a t\xF4i<</LINK>>',
     'misc.SafetyTipsBuyers': 'Nh\u1EEFng m\u1EB9o an to\xE0n cho ng\u01B0\u1EDDi mua',
     'misc.SayOLX': 'Khi g\u1ECDi \u0111i\u1EC7n, h\xE3y n\xF3i r\u1EB1ng b\u1EA1n th\u1EA5y rao v\u1EB7t \u0111\xF3 \u1EDF tr\xEAn OLX',

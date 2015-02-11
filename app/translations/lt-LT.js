@@ -478,6 +478,7 @@ module.exports = {
     'misc.publish-in': 'Publish In',
     'misc.RejectedAd_Caps': 'Atmestas skelbimas',
     'misc.Removed': 'Pa\u0161alintas',
+    'misc.ReturnToMsgs': 'Volver a mis mensajes',
     'misc.return_ads': '<<LINK>>Return to My Ads<</LINK>>',
     'misc.SafetyTipsBuyers': 'Su saugumu susij\u0119 patarimai pirk\u0117jams',
     'misc.SayOLX': 'When you call, say you saw the ad on OLX',

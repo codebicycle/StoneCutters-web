@@ -478,6 +478,7 @@ module.exports = {
     'misc.publish-in': 'Publish In',
     'misc.RejectedAd_Caps': '\u09AA\u09CD\u09B0\u09A4\u09CD\u09AF\u09BE\u0996\u09CD\u09AF\u09BE\u09A4 \u09AC\u09BF\u099C\u09CD\u099E\u09BE\u09AA\u09A8',
     'misc.Removed': '\u0985\u09AA\u09B8\u09BE\u09B0\u09BF\u09A4',
+    'misc.ReturnToMsgs': 'Volver a mis mensajes',
     'misc.return_ads': '<<LINK>>Return to My Ads<</LINK>>',
     'misc.SafetyTipsBuyers': '\u0995\u09CD\u09B0\u09C7\u09A4\u09BE\u09A6\u09C7\u09B0 \u09A8\u09BF\u09B0\u09BE\u09AA\u09A4\u09CD\u09A4\u09BE\u09B0 \u099C\u09A8\u09CD\u09AF \u09AA\u09B0\u09BE\u09AE\u09B0\u09CD\u09B6',
     'misc.SayOLX': 'When you call, say you saw the ad on OLX',
