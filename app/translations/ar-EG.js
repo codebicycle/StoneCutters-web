@@ -273,6 +273,8 @@ module.exports = {
     'myolx.ConversationWith': 'Conversation with <<NAME>>',
     'myolx.EditListing': 'Edit Listing',
     'myolx.EmailPasswordInvalid': 'Sorry, you Email or password seem to be invalid',
+    'myolx.FIndPrevMessages': 'We upgraded your inbox! Missing messages? You can find the previous ones <<LINK>>here<</LINK>>',
+    'myolx.LatestMessages': 'Back to my latest messages',
     'myolx.MessageNotSent': 'The Message was not sent',
     'myolx.Messages': 'Messages',
     'myolx.MyAds': '\u0628\u0644\u062F\u064A \u0646\u062A\u0627\u0626\u062C',

@@ -273,6 +273,8 @@ module.exports = {
     'myolx.ConversationWith': '<<NAME>> ile yap\u0131lan konu\u015Fma',
     'myolx.EditListing': '\u0130lan\u0131 D\xFCzenle',
     'myolx.EmailPasswordInvalid': '\xDCzg\xFCn\xFCz, e-posta ya da \u015Fifre ge\xE7ersiz',
+    'myolx.FIndPrevMessages': 'Gelen kutunuzu g\xFCncelledik! Eksik mesajlar m\u0131 var? Eski mesajlar\u0131 <<LINK>>burada<</LINK>> bulabilirsiniz.',
+    'myolx.LatestMessages': 'Son mesajlar\u0131ma d\xF6n',
     'myolx.MessageNotSent': 'Mesaj g\xF6nderilmedi',
     'myolx.Messages': '\u0130letiler',
     'myolx.MyAds': '\u0130lanlar\u0131m',

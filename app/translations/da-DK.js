@@ -273,6 +273,8 @@ module.exports = {
     'myolx.ConversationWith': 'Samtale med <<NAME>>',
     'myolx.EditListing': 'Rediger annonce',
     'myolx.EmailPasswordInvalid': 'Beklager din email eller adgangskode er ugyldig',
+    'myolx.FIndPrevMessages': 'Vi har opgraderet din indbakke! Mangler du beskeder? Du finder tidligere beskeder <<LINK>>her<</LINK>>',
+    'myolx.LatestMessages': 'Tilbage til mine seneste beskeder',
     'myolx.MessageNotSent': 'Beskeden blev ikke sendt',
     'myolx.Messages': 'Meddelelser',
     'myolx.MyAds': 'Mine annoncer',

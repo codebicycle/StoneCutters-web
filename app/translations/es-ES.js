@@ -273,6 +273,8 @@ module.exports = {
     'myolx.ConversationWith': 'Conversaci\xF3n con <<NAME>>',
     'myolx.EditListing': 'Editar anuncio',
     'myolx.EmailPasswordInvalid': 'Lo sentimos, parece que tu email o contrase\xF1a no son v\xE1lidos',
+    'myolx.FIndPrevMessages': 'Hemos actualizado tu buz\xF3n de entrada, \xBFte falta alg\xFAn mensaje? Puedes consultar los mensajes anteriores can <<LINK>>aqui<</LINK>>',
+    'myolx.LatestMessages': 'Volver a los \xFAltimos mensajes',
     'myolx.MessageNotSent': 'No se ha enviado el mensaje',
     'myolx.Messages': 'Mensajes',
     'myolx.MyAds': 'Mis anuncios',

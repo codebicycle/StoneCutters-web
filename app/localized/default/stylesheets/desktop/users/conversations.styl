@@ -1,6 +1,4 @@
 .users_conversations_view {
-    box($white, $greyBorders, 0 0 3px 3px, 0, solid, 1px);
-
     .alert {
         p {
             font-size: 14px;
@@ -37,11 +35,22 @@
 
     .conversations {
         clear-fix();
+        .top-conversations{
+            box($white, $greyBorders, 0, 0 10px, solid, 1px);
+            border-color: $greyBorders $greyBorders $white;
+        }
     }
 
     .conversations-thread {
+        box(#fdfea1, $greyBorders, 0, 0, solid, 1px);
+
+        &:hover {
+            border: 1px solid $greyBorders;
+            box-shadow(0 0 2px 2px rgba(0, 0, 0, .1));
+            z-index: 100;
+        }
         clear-fix();
-        background-color: #fafafa;
+        background-color: #fdfea1;
         border-bottom: 1px solid $greyBorders;
         box-sizing: padding-box;
         padding: 10px;
@@ -50,14 +59,19 @@
         figure{
             border: 1px solid $greyBorders;
             box-sizing: padding-box;
-            display: inline-block;
+            border: 1px solid $greyBorders;
             float: left;
-            height: 75px;
+            max-height: 75px;
+            min-height: 75px;
+            padding: 2px;
+            position: relative;
             text-align: center;
-            vertical-align: middle;
             width: 100px;
-            margin:0px;
+            margin:0;
             background-color:$white;
+            vertical-align: middle;
+            padding:0;
+
         }
         figure:before{
              color:#ccc;
@@ -66,14 +80,21 @@
         }
 
         img {
-            width: 100px;
-        }
-        h3, p {
+                bottom: 2px;
+                left: 0;
+                margin: auto;
+                max-height: 144px;
+                max-width: 100%;
+                position: absolute;
+                right: 0;
+                top: 2px;        }
+        h3, h4, p {
             margin: 0;
             min-width: 300px;
             padding: 5px 10px;
             color:$black;
         }
+
         span {
             position: absolute;
             right: 0;
@@ -93,9 +114,10 @@
             position: relative;
             width: 845px;
         }
-    }
-    .conversations-thread:last-child{
-        border-bottom:none;
+        border-color:#ccc #ccc #fdfea1;
+        &:last-child {
+        border-color:#ccc;
+        }
     }
 
     .backToOlx {
@@ -105,7 +127,8 @@
     }
 
     .read{
-            background-color: #eee;
+        background-color: $white;
+        border-color:#ccc #ccc $white;
 
     }
 
@@ -166,3 +189,5 @@
         }
     }
 }
+
+

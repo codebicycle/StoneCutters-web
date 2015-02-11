@@ -273,6 +273,8 @@ module.exports = {
     'myolx.ConversationWith': 'Razgovor sa <<NAME>>',
     'myolx.EditListing': 'Uredite oglas',
     'myolx.EmailPasswordInvalid': 'E-adresa ili lozinka je neva\u017Ee\u0107a',
+    'myolx.FIndPrevMessages': 'Nadogradili smo va\u0161e prijemno sandu\u010De! Nedostaju vam poruke? Ranije poruke se nalaze <<LINK>>ovde<</LINK>>',
+    'myolx.LatestMessages': 'Nazad na najnovije poruke',
     'myolx.MessageNotSent': 'Poruka nije poslata',
     'myolx.Messages': 'Poruke',
     'myolx.MyAds': 'Moji oglasi',
