@@ -1,4 +1,13 @@
 module.exports = {
+    categoryTree: {
+        order: [830, 800, 811, 806, 362, 815, 859, 16, 821],
+        columns: [3, 2, 2]
+    },
+    celebrities: {
+        home: {
+            enabled: true
+        }
+    },
     socials: [
         {
             name: 'facebook',
@@ -14,6 +23,14 @@ module.exports = {
         }
     ],
     videos: [
+        {
+            title: 'OLX Ecuador - Consola',
+            id: '-VDOdJUePhI'
+        },
+        {
+            title: 'OLX Ecuador - Garaje',
+            id: 'BpwjQm6Atcc'
+        },
         {
             title: 'OLX Ecuador - Comercial Sofá Cama - Vender es fácil',
             id: 'XlLozB_JfRk'
