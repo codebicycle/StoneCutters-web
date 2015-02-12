@@ -22,7 +22,7 @@ module.exports = Base.extend({
         this.detectScroll = this.detectScroll.bind(this);
         this.threadId = $('.conversation-input').attr('data-threadId');
 
-        $(document).on('scroll', this.detectScroll);
+        // $(document).on('scroll', this.detectScroll);
 
         this.poll = setInterval(this.getConversation.bind(this), 20000);
 
