@@ -105,8 +105,8 @@ emails:
     default:
       subdomain: olxla
       brand_id: 195655
-      email: gonzalo.aizpun@olx.com
-      password: olx2014
+      email: zendesk@olx.com
+      password: zendesk2015
     www.olx.co.cr:
       subdomain: olxcr
       brand_id: 300699
@@ -164,8 +164,6 @@ emails:
     www.olx.com.pa:
       subdomain: olxpa
       brand_id: 304945
-      email: zendesk@olx.com
-      password: zendesk2015
     www.olx.com.pe:
       subdomain: olxpe
       brand_id: 304955
@@ -175,8 +173,6 @@ emails:
     www.olx.com.uy:
       subdomain: olxuy
       brand_id: 300729
-      email: zendesk@olx.com
-      password: zendesk2015
     www.olx.com.ve:
       subdomain: olxve
       brand_id: 300739
