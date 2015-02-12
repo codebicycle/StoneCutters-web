@@ -2,9 +2,11 @@
 {% if form.errors.main %}
     {% set error = dictionary["posting_fields_1.validationError"] %}
 {% endif %}
-
 <section class="login_view">
     <h4 class="title">{{ dictionary["loginbox.Login"] }}</h4>
+
+    {% view 'users/facebooklogin' %}
+    
     <form action="{{ '/login' | link }}" method="POST" enctype="multipart/form-data">
         <fieldset class="wrapper {{ 'error' if error != '' }}">
             <label class="login-label">{{ dictionary["comments.CommentsFormEmail"] }}</label>

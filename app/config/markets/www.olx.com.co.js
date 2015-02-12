@@ -1,18 +1,21 @@
 module.exports = {
-    socials: [
-        {
-            name: 'facebook',
-            link: 'https://www.facebook.com/OLXcolombia'
-        },
-        {
-            name: 'twitter',
-            link: 'https://twitter.com/olx_colombia'
-        },
-        {
-            name: 'youtube',
-            link: 'https://www.youtube.com/user/OLXcolombia'
-        }
-    ],
+    socials: {
+        facebookLogin: true,
+        links: [
+            {
+                name: 'facebook',
+                link: 'https://www.facebook.com/OLXcolombia'
+            },
+            {
+                name: 'twitter',
+                link: 'https://twitter.com/olx_colombia'
+            },
+            {
+                name: 'youtube',
+                link: 'https://www.youtube.com/user/OLXcolombia'
+            }
+        ]
+    },
     post_banner: {
         image: 'post-colombia'
     },

@@ -2,20 +2,23 @@ module.exports = {
     categoryTree: {
         order: [185, 186, 362, 187, 16, 191, 190]
     },
-    socials: [
-        {
-            name: 'facebook',
-            link: 'https://www.facebook.com/OLXCostaRica'
-        },
-        {
-            name: 'twitter',
-            link: 'https://twitter.com/olx_costarica'
-        },
-        {
-            name: 'youtube',
-            link: 'https://www.youtube.com/user/OLXcostarica'
-        }
-    ],
+    socials: {
+        facebookLogin: true,
+        links: [
+            {
+                name: 'facebook',
+                link: 'https://www.facebook.com/OLXCostaRica'
+            },
+            {
+                name: 'twitter',
+                link: 'https://twitter.com/olx_costarica'
+            },
+            {
+                name: 'youtube',
+                link: 'https://www.youtube.com/user/OLXcostarica'
+            }
+        ]
+    },
     videos: [
         {
             title: 'OLX Costa Rica - Bicicleta - Vender es fácil',
