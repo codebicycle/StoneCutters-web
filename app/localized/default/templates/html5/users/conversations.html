@@ -1,30 +1,37 @@
 <header>
     <p>{{ dictionary["myolx.Messages"] }}</p>
 </header>
-<ul class="conversations">
-    {% for conversation in conversations %}
-        {% if items.get(conversation.itemId) %}
-            {% set item = items.get(conversation.itemId) %}
-        {% endif %}
-        <li class="conversations-thread" >
-            <a class="link-thread" href="{{ ('/myolx/conversation/' + conversation.threadId) | link }}" data-threadId="{{ conversation.threadId }}">
-                <figure class="items-image {{ 'noPhoto' if not item.get('thumbnail') }}">
-                    {% if item.get('thumbnail') %}
-                        <img src="{{ item.get('thumbnail') }}">
-                    {% endif %}
-                </figure>
-                <div class="conversations-data {{ ' unread' if not conversation.read}}">
-                    <div class="top">
-                        <span class="name">{{ conversation.buyerName }}</span>
-                        <span class="date">{{ conversation.messageDate | date(false, true) }}</span>
+{% if not conversations.length %}
+    <div class="nomessages">
+        <span class="icon"></span>
+        <span>{{ dictionary["netvibes_myolx.content.NoMessages"] }}</span>
+    </div>
+{% else %}
+    <ul class="conversations">
+        {% for conversation in conversations %}
+            {% if items.get(conversation.itemId) %}
+                {% set item = items.get(conversation.itemId) %}
+            {% endif %}
+            <li class="conversations-thread" >
+                <a class="link-thread" href="{{ ('/myolx/conversation/' + conversation.threadId) | link }}" data-threadId="{{ conversation.threadId }}">
+                    <figure class="items-image {{ 'noPhoto' if not item.get('thumbnail') }}">
+                        {% if item.get('thumbnail') %}
+                            <img src="{{ item.get('thumbnail') }}">
+                        {% endif %}
+                    </figure>
+                    <div class="conversations-data {{ ' unread' if not conversation.read}}">
+                        <div class="top">
+                            <span class="name">{{ conversation.buyerName }}</span>
+                            <span class="date">{{ conversation.messageDate | date(false, true) }}</span>
+                        </div>
+                        <span class="title">{{ item.get('title') }}</span>
+                        <p class="message">{{ conversation.messageText }}</p>
                     </div>
-                    <span class="title">{{ item.get('title') }}</span>
-                    <p class="message">{{ conversation.messageText }}</p>
-                </div>
-            </a>
-        </li>
-    {% endfor %}
-</ul>
-{% if paginator and paginator.isEnabled() %}
-    {% include (template + '/items/pagination.html') %}
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+    {% if paginator and paginator.isEnabled() %}
+        {% include (template + '/items/pagination.html') %}
+    {% endif %}
 {% endif %}
