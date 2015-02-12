@@ -34,5 +34,15 @@ module.exports = {
                 name: 'Cell phones'
             }
         ]
+    },
+    posting: {
+        flow: {
+            hub: {
+                images: 'compact'
+            }
+        },
+        success: {
+            addmessage: true
+        }
     }
 };

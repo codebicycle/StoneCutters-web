@@ -10,18 +10,23 @@
 #162.242.207.113    sh.care.olx.com   #production
 
 #ARWEN
+{IP}  get.olx.com           # Get OLX
+{IP}  get.olx.ir           # Get OLX
+
 {IP}  m.olx.com           # United States
 {IP}  wap.m.olx.com           # United States
 {IP}  html4.m.olx.com           # United States
 {IP}  html5.m.olx.com           # United States
 {IP}  www.olx.com           # United States
 {IP}  olx.com           # United States
+{IP}  losangeles.olx.com           # United States
 {IP}  lasvegas.olx.com # United States
 {IP}  yonkers.olx.com # United States
 {IP}  sacramento.olx.com # United States
 {IP}  norfolk-virginia.olx.com # United States
 {IP}  fortmeade-maryland.olx.com # United States
 {IP}  farrwest.olx.com # United States
+{IP}  california.olx.com # United States
 
 {IP}  m.olx.com.ar        # Argentina
 {IP}  wap.m.olx.com.ar        # Argentina
@@ -309,6 +314,8 @@
 {IP}  html5.m.olx.co.ke         # Kenia
 {IP}  www.olx.co.ke         # Kenia
 {IP}  olx.co.ke         # Kenia
+{IP}  nairobi.olx.co.ke         # Kenia
+{IP}  nairobicbd.olx.co.ke         # Kenia
 
 {IP}  m.olx.com.mx        # Mexico
 {IP}  wap.m.olx.com.mx        # Mexico
@@ -338,6 +345,8 @@
 {IP}  html5.m.olx.com.ng        # Nigeria
 {IP}  www.olx.com.ng        # Nigeria
 {IP}  olx.com.ng        # Nigeria
+{IP}  lagos.olx.com.ng        # Nigeria
+{IP}  lagos-mainland.olx.com.ng        # Nigeria
 
 {IP}  m.olx.com.pk        # Pakistan
 {IP}  wap.m.olx.com.pk        # Pakistan
@@ -660,6 +669,8 @@
 {IP}  www.olx.ae            # United Arab Emirates
 {IP}  olx.ae            # United Arab Emirates
 {IP}  dubaicity.olx.ae            # United Arab Emirates
+{IP}  dubai.olx.ae            # United Arab Emirates
+
 
 {IP}  m.olx.com.uy        # Uruguay
 {IP}  wap.m.olx.com.uy        # Uruguay

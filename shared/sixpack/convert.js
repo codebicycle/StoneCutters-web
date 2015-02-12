@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = function convert(experiment, done) {
-    if (!experiment || !experiment.alternative) {
+    if (!experiment || !experiment.name) {
         return this.callback(done)();
     }
     $.ajax({

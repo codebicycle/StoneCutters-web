@@ -1,6 +1,17 @@
 <div class="user-info">
     {% if item.contactName %}
         <p class="icons icon-user user-name">{{ item.contactName }}</p>
+        {% if item.user.firstActivityDate %}
+            <span>
+                {% if item.user.firstActivityDate.month < 10 %}
+                    {% set month = "messages_date_format.90" %}
+                {% else %}
+                    {% set month = "messages_date_format.9" %}
+                {% endif %}
+                {{ dictionary["usersprofile.OnBrandSince"] | replace(':', '') }} 
+                {{ dictionary[month + item.user.firstActivityDate.month] + ' ' + item.user.firstActivityDate.year }}
+            </span>
+        {% endif %}
     {% endif %}
     {#<span class="user-status">User Status</span>#}
     {% if item.phone %}
@@ -25,7 +36,7 @@
     </fieldset>
     <fieldset  class="email">
         <label for="email">
-            <input type="text" name="email" id="email" class="email" value="" maxlength="200" placeholder="{{ dictionary["buyerinfo.E-mail"] }} ">
+            <input type="text" name="email" id="email" class="email" value="{{ user.email }}" maxlength="200" placeholder="{{ dictionary["buyerinfo.E-mail"] }} ">
             <span class="error hide email"></span>
         </label>
     </fieldset>

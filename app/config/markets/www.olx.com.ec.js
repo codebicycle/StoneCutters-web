@@ -1,4 +1,13 @@
 module.exports = {
+    categoryTree: {
+        order: [830, 800, 811, 806, 362, 815, 859, 16, 821],
+        columns: [3, 2, 2]
+    },
+    celebrities: {
+        home: {
+            enabled: true
+        }
+    },
     socials: {
         facebookLogin: false,
         links: [
@@ -17,6 +26,14 @@ module.exports = {
         ]
     },
     videos: [
+        {
+            title: 'OLX Ecuador - Consola',
+            id: '-VDOdJUePhI'
+        },
+        {
+            title: 'OLX Ecuador - Garaje',
+            id: 'BpwjQm6Atcc'
+        },
         {
             title: 'OLX Ecuador - Comercial Sofá Cama - Vender es fácil',
             id: 'XlLozB_JfRk'
@@ -51,5 +68,54 @@ module.exports = {
                 name: 'Teléfonos'
             }
         ]
+    },
+    adserving: {
+        slots: {
+            listing: {
+                topgallery: {
+                    service: 'CSA',
+                    format: 'default',
+                    location: 'Top',
+                    numberPerCategoryCSA: {
+                        '800': 1,
+                        '806': 1,
+                        '815': 1,
+                        '830': 1,
+                        '853': 1,
+                        '859': 1,
+                        '362': 2,
+                        allresults: 2,
+                        allresultsig: 2
+                    }
+                },
+                top: {
+                    service: 'CSA',
+                    format: 'custom',
+                    location: 'Top',
+                    numberPerCategoryCSA: {
+                        '800': 1,
+                        '806': 1,
+                        '815': 1,
+                        '830': 1,
+                        '853': 1,
+                        '859': 1,
+                        '362': 2,
+                        allresults: 2,
+                        allresultsig: 2
+                    }
+                },
+                side: {
+                    service: 'none'
+                }
+            },
+            item: {
+                top: {
+                    service: 'none'
+                },
+                side: {
+                    service: 'none'
+                }
+            }
+        }
     }
 };

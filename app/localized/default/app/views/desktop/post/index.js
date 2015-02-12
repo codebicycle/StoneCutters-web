@@ -7,6 +7,7 @@ var _ = require('underscore');
 var asynquence = require('asynquence');
 var translations = require('../../../../../../../shared/translations');
 var Item = require('../../../../../../models/item');
+var config = require('../../../../../../../shared/config');
 
 function onpopstate(event) {
     var $loading = $('body > .loading');
@@ -52,8 +53,12 @@ module.exports = Base.extend({
     },
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
+        var location = this.app.session.get('location');
+        var customerContact = config.getForMarket(location.url, ['post_customer_contact'], '');
 
-        return _.extend({}, data);
+        return _.extend({}, data, {
+            customerContact: customerContact
+        });
     },
     postRender: function() {
         var paramCategory;
@@ -200,30 +205,46 @@ module.exports = Base.extend({
         var _errors = [];
         var data;
 
-        if ($field.attr('required') && !value.trim().length) {
-            _errors.push({
-                selector: $field.attr('name'),
-                message: this.dictionary["postingerror.PleaseCompleteThisField"]
-            });
-            $field.trigger('fieldValidationEnd', [_errors]);
-        }
-        else if ($field.attr('name') == 'state' || $field.attr('name') == 'location') {
-            $field.trigger('fieldValidationEnd');
-        }
-        else {
-            data = {
-                'category.id': this.item.get('category').id,
-                'category.parentId': this.item.get('category').parentId,
-                'location': this.app.session.get('location').url,
-                'languageId': this.app.session.get('languages')._byId[this.app.session.get('selectedLanguage')].id
-            };
-            data[$field.attr('name')] = value;
-            helpers.dataAdapter.post(this.app.req, '/items/fields/validate', {
-                data: data
-            }, function onResponse(err, response, body) {
-                _errors = body;
+        if (this.item.get('category').id === undefined || this.item.get('category').parentId === undefined) {
+            var $fieldCat = this.$('.posting-categories-list');
+            var messages = [this.dictionary["postingerror.PleaseSelectCategory"],this.dictionary["postingerror.PleaseSelectSubcategory"]];
+
+            if (!$fieldCat.closest('.field-wrapper').hasClass('error')) {
+                $fieldCat.closest('.field-wrapper').addClass('error').removeClass('success');
+                _.each(messages, function (message) {
+                    $fieldCat.parent().append('<small class="error message">' + message + '</small>');
+                });
+            }
+
+            $field.removeClass('validating');
+            $(document).scrollTop(this.$el.offset().top);
+        } else {
+
+            if ($field.attr('required') && !value.trim().length) {
+                _errors.push({
+                    selector: $field.attr('name'),
+                    message: this.dictionary["postingerror.PleaseCompleteThisField"]
+                });
                 $field.trigger('fieldValidationEnd', [_errors]);
-            });
+            }
+            else if ($field.attr('name') == 'state' || $field.attr('name') == 'location') {
+                $field.trigger('fieldValidationEnd');
+            }
+            else {
+                data = {
+                    'category.id': this.item.get('category').id,
+                    'category.parentId': this.item.get('category').parentId,
+                    'location': this.app.session.get('location').url,
+                    'languageId': this.app.session.get('languages')._byId[this.app.session.get('selectedLanguage')].id
+                };
+                data[$field.attr('name')] = value;
+                helpers.dataAdapter.post(this.app.req, '/items/fields/validate', {
+                    data: data
+                }, function onResponse(err, response, body) {
+                    _errors = body;
+                    $field.trigger('fieldValidationEnd', [_errors]);
+                });
+            }
         }
     },
     onFieldValidationEnd: function(event, _errors) {

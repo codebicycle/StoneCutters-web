@@ -6,7 +6,7 @@ var AdServing = require('../../../../../../modules/adserving');
 var translations = require('../../../../../../../shared/translations');
 
 module.exports = Base.extend({
-    className: 'adserving-listing',
+    className: 'adserving',
     initialize: function() {
         Base.prototype.initialize.call(this);
         this.dictionary = translations.get(this.app.session.get('selectedLanguage'));
@@ -17,12 +17,12 @@ module.exports = Base.extend({
 
         this._checkAdServing();
         adserving = {
-            enabled : this.adServing.isSlotEnabled(),
+            enabled : this.adServing.isServiceEnabled(),
             slotname: this.adServing.get('slotname')
         };
 
         if (adserving.enabled) {
-            adserving.classname = 'ads-' + this.adServing.get('type').toLowerCase();
+            adserving.classname = 'adserving-' + this.adServing.get('service').toLowerCase() + ' ' + adserving.slotname;
         }
 
         return _.extend({}, data, {
@@ -31,23 +31,25 @@ module.exports = Base.extend({
     },
     postRender: function() {
         this._checkAdServing();
-        if (!this.adServing.isSlotEnabled()) {
+        if (!this.adServing.isServiceEnabled()) {
             return;
         }
         var settings = this.adServing.getSettings();
-        var type = this.adServing.get('type');
+        var service = this.adServing.get('service');
 
-        if (type === 'CSA' || type === 'AFC') {
-            if (this.isGoogleReferer() && settings.seo) {
-                settings.params.number += settings.seo;
+        if (service === 'CSA' || service === 'AFC') {
+            if (this.isGoogleReferer()) {
                 settings.options.channel = settings.options.channel.replace('Organic', 'SEO');
+                if (settings.seo) {
+                    settings.params.number += settings.seo;
+                }
             }
             settings.options.channel = settings.options.channel.replace('[navigator]', window.BrowserDetect.browsername);
         }
-        switch (type) {
+        switch (service) {
             case 'CSA':
                 this._includeCsaLib();
-                window._googCsa('ads', settings.options, settings.params);
+                this.app.router.appView.trigger('adserving:CSA', settings);
                 break;
             case 'ADX':
                 this.createIframeADX(settings.params, settings.options);
@@ -78,6 +80,7 @@ module.exports = Base.extend({
     },
     createIframeADX: function(params, options) {
         var slotname = this.adServing.get('slotname');
+        var toplocation = this.getTopLocation();
 
         $('<iframe></iframe>')
         .attr({
@@ -93,7 +96,7 @@ module.exports = Base.extend({
             ifrScripts.push('google_ad_slot = "' + params.slotId + '";');
             ifrScripts.push('google_ad_width = "' + params.width + '";');
             ifrScripts.push('google_ad_height = "' + params.height + '";');
-            ifrScripts.push('google_page_url = "' + (window.top.location.href || '') + '";');
+            ifrScripts.push('google_page_url = "' + toplocation + '";');
 
             domIfr.write('<script type="text/javascript">' + ifrScripts.join('\n') + '</script><script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script><style>body{margin:0;}</style>');
         }).appendTo('#' + slotname);
@@ -101,6 +104,7 @@ module.exports = Base.extend({
     createIframeAFC: function(params, options) {
         var slotname = params.container;
         var boxTitle = this.dictionary['adsense.SponsoredLinks'];
+        var toplocation = this.getTopLocation();
 
         $('<iframe></iframe>')
         .attr({
@@ -121,7 +125,7 @@ module.exports = Base.extend({
             ifrScripts.push('google_max_num_ads =  ' + params.number + ';');
             ifrScripts.push('google_hints = "' + options.query + '";');
             ifrScripts.push('google_ad_section = "title body";');
-            ifrScripts.push('google_page_url = "' + (window.top.location.href || '') + '";');
+            ifrScripts.push('google_page_url = "' + toplocation + '";');
             ifrScripts.push('google_ad_request_done = function(r){ window.parent.AFCrender(r, "' + slotname + '", "' + boxTitle + '"); };');
             ifrScripts.push('document.write("&nbsp;");');
 
@@ -140,6 +144,9 @@ module.exports = Base.extend({
     },
     isGoogleReferer: function() {
         return document.referrer.match(/^[a-zA-Z0-9:\/\/]*\.google\.[a-zA-Z.]+/) && (document.location.search.indexOf('invite=') == -1);
+    },
+    getTopLocation: function() {
+        return (window.top.location.href || '').replace(':' + window.top.location.port, '').replace(window.top.location.search, '').replace(window.top.location.hash, '');
     }
 });
 

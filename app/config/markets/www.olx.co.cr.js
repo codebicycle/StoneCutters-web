@@ -2,6 +2,11 @@ module.exports = {
     categoryTree: {
         order: [185, 186, 362, 187, 16, 191, 190]
     },
+    celebrities: {
+        home: {
+            enabled: true
+        }
+    },
     socials: {
         facebookLogin: true,
         links: [
@@ -21,6 +26,14 @@ module.exports = {
     },
     videos: [
         {
+            title: 'OLX Costa Rica - Consola',
+            id: 'dSavGD707o4'
+        },
+        {
+            title: 'OLX Costa Rica - Mauricio "El Chunche" Montero - Garaje',
+            id: '1sR75hvjlRI'
+        },
+        {
             title: 'OLX Costa Rica - Bicicleta - Vender es fácil',
             id: 'iYUX408RQq4'
         },
@@ -33,13 +46,52 @@ module.exports = {
             id: 'Yf5i1HOwd70'
         }
     ],
-    tracking: {
-        trackers: {
-            hydra: {
-                enabled: true
+    adserving: {
+        slots: {
+            listing: {
+                topgallery: {
+                    service: 'CSA',
+                    format: 'default',
+                    location: 'Top',
+                    numberPerCategoryCSA: {
+                        '800': 1,
+                        '806': 1,
+                        '815': 1,
+                        '830': 1,
+                        '853': 1,
+                        '859': 1,
+                        '362': 2,
+                        allresults: 2,
+                        allresultsig: 2
+                    }
+                },
+                top: {
+                    service: 'CSA',
+                    format: 'custom',
+                    location: 'Top',
+                    numberPerCategoryCSA: {
+                        '800': 1,
+                        '806': 1,
+                        '815': 1,
+                        '830': 1,
+                        '853': 1,
+                        '859': 1,
+                        '362': 2,
+                        allresults: 2,
+                        allresultsig: 2
+                    }
+                },
+                side: {
+                    service: 'none'
+                }
             },
-            tagmanager: {
-                enabled: false
+            item: {
+                top: {
+                    service: 'none'
+                },
+                side: {
+                    service: 'none'
+                }
             }
         }
     },
@@ -64,5 +116,15 @@ module.exports = {
                 name: 'Móviles'
             }
         ]
+    },
+    tracking: {
+        trackers: {
+            hydra: {
+                enabled: false
+            },
+            tagmanager: {
+                enabled: true
+            }
+        }
     }
 };

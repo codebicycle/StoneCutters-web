@@ -52,7 +52,7 @@ function list(params, callback) {
             this.app.seo.setContent(this.dependencies.categories.meta);
             callback(null, {
                 icons: (~icons.indexOf(country)) ? country.split('.') : 'default'.split('.'),
-                items: res ? res.featureads : undefined 
+                items: res ? res.featureads : undefined
             });
         }.bind(this);
 
@@ -188,6 +188,7 @@ function handleItems(params, promise, gallery) {
 
         query = _.clone(params);
         params.categoryId = params.catId;
+        params.abundance = true;
         params.seo = this.app.seo.isEnabled();
         params.languageId = languages._byId[this.app.session.get('selectedLanguage')].id;
         delete params.catId;

@@ -4,7 +4,19 @@
     display: block;
     margin: 10px 0;
 
-    li {
+    .title {
+        display: block;
+        border-top: 1px solid $greyBorders;
+        padding: 20px 10px 5px 0;
+        font-size: $m;
+    }
+
+    .item {
+        &.featuredad {
+            .items-date, .items-price, .items-info {
+                padding-top: 30px;
+            }
+        }
         box($white, $greyBorders, 0, 10px);
         border-bottom-color: $white;
         position: relative;
@@ -69,9 +81,6 @@
                 font-size: $xs;
                 text-transform: capitalize;
             }
-            &.featuredad {
-                padding: 25px 10px 0 15px;
-            }
         }
         .items-price {
             color: $black;
@@ -84,10 +93,14 @@
             font-size: $xs;
             width: 60px;
         }
+        .items-price, .items-date {
+            margin: 0;
+            padding-top: 10px;
+        }
         p.featuredad {
             position: absolute;
             left: 138px;
-            top: -8px;
+            top: -3px;
             height: 20px;
             .icon-star-circle {
                 color: $featureStarBg;
@@ -109,7 +122,7 @@
                 left: 24px;
                 padding-left: 22px;
                 position: absolute;
-                width: 115px;
+                width: 120px;
                 text-align: center;
             }
         }

@@ -42,6 +42,10 @@ module.exports = Base.extend({
         this.app.router.appView.on('filter:end', this.restore.bind(this));
         this.app.router.appView.on('location:start', this.onSelectLocation.bind(this));
         this.app.router.appView.on('location:end', this.restore.bind(this));
+        if (helpers.features.isEnabled.call(this, 'newItemPage')) {
+            this.app.router.appView.on('reply:start', this.onReplyForm.bind(this));
+            this.app.router.appView.on('reply:end', this.restore.bind(this));
+        }
         this.app.router.appView.on('login:start', this.onLoginStart.bind(this));
         this.app.router.appView.on('login:end', this.restore.bind(this));
         this.app.router.appView.on('register:start', this.onLoginStart.bind(this));
@@ -158,12 +162,13 @@ module.exports = Base.extend({
     onPostingFlowStart: function() {
         this.$('#topBar, #myOlx').addClass('disabled');
         this.$('#myOlx').css('display', 'none');
+        this.$('.migration-banner-bd').addClass('disabled');
     },
     onPostingFlowEnd: function() {
         this.app.router.once('action:end', this.onPostingFlowAfter.bind(this));
     },
     onPostingFlowAfter: function() {
-        this.$('#topBar, #myOlx').removeClass('disabled');
+        this.$('#topBar, #myOlx, .migration-banner-bd').removeClass('disabled');
     },
     onSelectSortStart: function(){
         this.customize("unavailableitemrelateditems.SortBy");
@@ -176,6 +181,9 @@ module.exports = Base.extend({
     },
     onLoginStart: function(){
         this.customize("defaulthtmlhead.My Listings");
+    },
+    onReplyForm: function() {
+        this.customize('itemslisting.ContactSeller');
     },
     customize: function(key) {
         var data = Base.prototype.getTemplateData.call(this);
