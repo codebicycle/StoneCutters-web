@@ -402,7 +402,7 @@ module.exports = {
     'about.CuttingEdgeApps': 'OLX cuenta con aplicaciones modernas para todos los dispositivos, lo que te permitir\xE1 comprar y vender desde cualquier lugar y en cualquier momento',
     'about.Download_Mob': 'Descargar',
     'about.EcoFriendly': 'S\xE9 ecol\xF3gico',
-    'about.EcoFriendlyText': 'Los productos usados son extremadamente ecol\xF3gicos. Ya que no generan emisiones de carbono ni utilizan recursos naturales. Es aun mejor que el reciclaje.',
+    'about.EcoFriendlyText': 'Los productos usados son extremadamente ecol\xF3gicos. Ya que no generan emisiones de carbono ni utilizan recursos naturales. Es aun mejor que el reciclaje',
     'about.Employees': 'Empleados',
     'about.FindEverything': 'Encuentra todo',
     'about.FindEverything1': 'Con OLX puedes encontrar de todo: equipos electr\xF3nicos, mascotas, veh\xEDculos, bienes inmuebles o servicios',
