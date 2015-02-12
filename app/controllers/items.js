@@ -490,22 +490,28 @@ function reply(params, callback) {
         var isHermes = helpers.features.isEnabled.call(this, 'hermes');
         var user = this.app.session.get('user');
 
-        var redirect = function(done) {
-            var platform = this.app.session.get('platform');
+        asynquence().or(error.bind(this))
+            .then(redirect.bind(this))
+            .then(prepare.bind(this))
+            .then(findItem.bind(this))
+            .then(checkItem.bind(this))
+            .then(verifyConversations.bind(this))
+            .val(success.bind(this));
 
+        function redirect(done) {
             if (platform === 'desktop' || (platform === 'html5' && !newItemPage)) {
                 return done.fail();
             }
             done();
-        }.bind(this);
+        }
 
-        var prepare = function(done) {
+        function prepare(done) {
             params.id = params.itemId;
             delete params.itemId;
             done();
-        }.bind(this);
+        }
 
-        var findItem = function(done) {
+        function findItem(done) {
             this.app.fetch({
                 item: {
                     model: 'Item',
@@ -514,58 +520,56 @@ function reply(params, callback) {
             }, {
                 readFromCache: false
             }, done.errfcb);
-        }.bind(this);
+        }
 
-        var checkItem = function(done, resItem) {
+        function checkItem(done, resItem) {
             if (!resItem.item) {
                 return done.fail(null, {});
             }
-
-            var platform = this.app.session.get('platform');
             if (platform === 'desktop' || (platform === 'html5' && !newItemPage)) {
                 return done.fail();
             }
             done(resItem.item);
-        }.bind(this);
+        }
 
-        var verifyConversations = function(done,_item) {
-            if (isHermes && user && platform === 'html5') {
-                var verifyConversation = function(done) {
-                    helpers.dataAdapter.post(this.app.req, '/conversations', {
-                        query: {
-                            location: siteLocation,
-                            platform: this.app.session.get('platform')
-                        },
-                        data: {
-                            itemIds: itemId,
-                            emails: user.email
-                        },
-                        cache: false,
-                        json: true
-                    }, done.errfcb);
-                }.bind(this);
-
-                var successConversation = function(done, err, response, body) {
-                    if(response.conversations && response.conversations.length > 0){
-                        var threadId = response.conversations[0].threadId;
-                        done.abort();
-                        helpers.common.redirect.call(this, '/myolx/conversation/' + threadId, null, {
-                            status: 302
-                        });
-                    }
-                    done(_item);
-                }.bind(this);
-
-                asynquence().or(error)
-                    .then(verifyConversation)
-                    .then(successConversation);
+        function verifyConversations(done,_item) {
+            if (!isHermes || !user || platform !== 'html5') {
+                return done(_item);
             }
-            else {
-                done(_item);
-            }
-         }.bind(this);
 
-        var success = function(_item) {
+            asynquence().or(done.fail)
+                .then(verifyConversation.bind(this))
+                .val(successConversation.bind(this));
+
+            function verifyConversation(done) {
+                helpers.dataAdapter.post(this.app.req, '/conversations', {
+                    query: {
+                        location: siteLocation,
+                        platform: platform
+                    },
+                    data: {
+                        itemIds: itemId,
+                        emails: user.email
+                    },
+                    cache: false
+                }, done.errfcb);
+            }
+
+            function successConversation(response, body) {
+                if (!body.conversations || !body.conversations.length) {
+                    return done(_item);
+                }
+
+                var threadId = body.conversations[0].threadId;
+
+                done.abort();
+                return helpers.common.redirect.call(this, '/myolx/conversation/' + threadId, null, {
+                    status: 302
+                });
+            }
+         }
+
+        function success(_item) {
             var item = _item.toJSON();
             var subcategory = this.dependencies.categories.search(item.category.id);
             var category;
@@ -588,19 +592,11 @@ function reply(params, callback) {
                 item: item,
                 form: this.form
             });
-        }.bind(this);
+        }
 
-        var error = function(err, res) {
+        function error(err, res) {
             return helpers.common.error.call(this, err, res, callback);
-        }.bind(this);
-
-        asynquence().or(error)
-            .then(redirect)
-            .then(prepare)
-            .then(findItem)
-            .then(checkItem)
-            .then(verifyConversations)
-            .val(success);
+        }
     }
 }
 
