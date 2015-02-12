@@ -458,6 +458,7 @@ function success(params, callback) {
         var itemId = params.itemId;
         var siteLocation = this.app.session.get('siteLocation');
         var languageId = this.app.session.get('languageId');
+        var securityKey = params.sk;
 
         asynquence().or(fail.bind(this))
             .then(prepare.bind(this))
@@ -567,6 +568,7 @@ function success(params, callback) {
             callback(null, {
                 user: user,
                 item: item,
+                securityKey: securityKey,
                 category: category.toJSON(),
                 subcategory: subcategory.toJSON(),
                 relatedItems: _relatedItems
