@@ -37,21 +37,6 @@ module.exports = Base.extend({
         this.dictionary = translations.get(this.app.session.get('selectedLanguage'));
         this.neighborhoodSelected = false;
     },
-
-    getTemplateData: function() {
-        var data = Base.prototype.getTemplateData.call(this);
-        var location = this.app.session.get('location');
-        var banner = config.get(['migration', location.url, 'banner'], false);
-        var languageAbbreviation = this.app.session.get('languages')._byId[this.app.session.get('selectedLanguage')].isocode.toLowerCase();
-
-        console.log('banner', banner);
-
-        return _.extend({}, data, {
-            banner: banner ? data.template + '/partials/migration/banner-' + location.abbreviation.toLowerCase() + '.html' : false,
-            languageAbbreviation: languageAbbreviation
-        });
-    },
-
     postRender: function() {
         $(window).on('beforeunload', this.onBeforeUnload);
         $(window).on('unload', {
