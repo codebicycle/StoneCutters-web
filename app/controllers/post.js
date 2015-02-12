@@ -17,13 +17,72 @@ module.exports = {
     form: middlewares(form),
     success: middlewares(success),
     edit: middlewares(edit),
-    editsuccess: middlewares(editsuccess)
+    editsuccess: middlewares(editsuccess),
+    renew: middlewares(renew),
+    rebump: middlewares(rebump)
 };
 
 function flowMarketing(params, callback) {
     params.marketing = true;
     return flow.call(this, params, callback);
 }
+
+function rebump(params, callback) {
+    console.log("post::rebump");
+    helpers.controllers.control.call(this, params, controller);
+
+    function controller() {
+        var location = this.app.session.get('location');
+        var item;
+
+        var check = function(done) {
+            if(!config.getForMarket(location.url, ['ads', 'rebump', 'enabled'],false)) {
+                done.abort();
+                return helpers.common.redirect.call(this, '/iid-' + params.itemId);
+            }
+            done();
+        }.bind(this);
+
+        var prepare = function(done) {
+            item = new Item({
+                id: params.itemId
+            }, {
+                app: this.app
+            });
+            done();
+        }.bind(this);
+
+        var fetch = function(done) {
+            item.rebump(done);
+        }.bind(this);
+
+        var success = function(res) {
+            return helpers.common.redirect.call(this, '/myolx/myadslisting', null, {
+                status: 302
+            });
+        }.bind(this);
+
+        var error = function(err, res) {
+            if(params.itemId) {
+                return helpers.common.redirect.call(this, '/iid-' + params.itemId);
+            }
+            return helpers.common.error.call(this, err, res, callback);
+
+        }.bind(this);
+
+        asynquence().or(error)
+            .then(check)
+            .then(prepare)
+            .then(fetch)
+            .val(success);
+    }
+}
+
+function renew(params, callback) {
+    params.renew = true;
+    return flow.call(this, params, callback);
+}
+
 function flow(params, callback) {
     helpers.controllers.control.call(this, params, controller);
 
@@ -35,16 +94,27 @@ function flow(params, callback) {
         var platform = this.app.session.get('platform');
         var isDesktop = platform === 'desktop';
         var itemId = params.itemId;
-
         var promise = asynquence().or(error.bind(this))
+            .then(check.bind(this))
             .then(prepare.bind(this));
 
         if (isPostingFlow || isDesktop || itemId) {
             promise
+
                 .then(fetch.bind(this))
                 .then(parse.bind(this));
         }
         promise.val(success.bind(this));
+
+        function check(done) {
+            if(params.renew) {
+                if(!config.getForMarket(location.url, ['ads', 'renew', 'enabled'],false)) {
+                    params.renew = false;
+                    return done.fail({});
+                }
+            }
+            done();
+        }
 
         function prepare(done) {
             if ((!isPostingFlow && !isDesktop) && (!siteLocation || siteLocation.indexOf('www.') === 0)) {
@@ -146,6 +216,9 @@ function flow(params, callback) {
                 if (redirect.call(this, res.item)) {
                     return;
                 }
+                if (res.item && params.renew)  {
+                    res.item.set('renew', true);
+                }
                 postingController.call(this, res.postingSession, res.cities, res.item, res.fields);
             }
             else if (itemId) {
@@ -169,7 +242,7 @@ function flow(params, callback) {
             if (!item) {
                 return false;
             }
-            if (item.get('status') && !item.get('status').editable) {
+            if (item.get('status') && !item.get('status').editable && !params.renew)  {
                 helpers.common.redirect.call(this, '/iid-' + itemId);
                 return true;
             }
