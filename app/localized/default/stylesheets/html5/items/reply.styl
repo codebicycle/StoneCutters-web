@@ -13,47 +13,43 @@ section.items_reply_view {
 
         form {
             display: block;
-            textarea, input {
-                -moz-box-sizing: border-box;
-                border-radius: 0.5em;
-                border: 1px solid #B1B1B1;
-                color: #222;
-                display: block;
-                margin: .2rem 0 .6rem;
-                padding: .5rem;
-                width: 100%;
-                &::-webkit-input-placeholder {
-                   color: #B1B1B1;
+            padding: 0 10px;
+            .field {
+                padding-bottom: .7rem;
+                textarea, input {
+                    -moz-box-sizing: border-box;
+                    border-radius: 0.5em;
+                    border: 1px solid #E9E9E9;
+                    color: #222;
+                    display: block;
+                    margin: .2rem 0 .7rem;
+                    padding: .5rem;
+                    width: 95%;
                 }
-
-                &:-moz-placeholder {
-                   color: #B1B1B1;
+                textarea {
+                    height: 4rem;
+                    resize: none;
                 }
-
-                &::-moz-placeholder {
-                   color: #B1B1B1;
+                small {
+                    color: #FF0000;
+                    font-size: 0.75rem;
+                    margin: -0.5rem 0 0.5rem;
+                    padding: 0.25rem 0 0 0.5rem;
+                    &.placeholder {
+                        color: #BFBFBF;
+                        display: block;
+                    }
+                    &.error {
+                        padding-left: 17px;
+                        background: url(imageUrl/images/html5/icon_error.png) left 3px no-repeat;
+                        margin-left: .5rem;
+                    }
                 }
-
-                &:-ms-input-placeholder {
-                   color: #B1B1B1;
+                &.haserror {
+                    textarea, input {
+                        margin-bottom: .2rem;
+                    }
                 }
-            }
-
-            textarea {
-                height: 6rem;
-                resize: none;
-            }
-
-            input {
-                height: 2.3rem;
-            }
-
-            small {
-                color: #FF0000;
-                display: block;
-                font-size: 0.75rem;
-                margin: -0.5rem 0 0.5rem;
-                padding: 0.25rem 0 0 0.5rem;
             }
 
             .btnCenter {
@@ -65,6 +61,28 @@ section.items_reply_view {
                     font-weight: 800;
                     padding: .5rem 2rem;
                     width: auto;
+                }
+            }
+            h3 {
+                padding: 0 0 .7rem 0;
+                color: #25a0df;
+            }
+            .contentmessage {
+                padding-bottom: 0;
+                margin-bottom: 13px;
+                &.lines {
+                    border-bottom: 1px solid #E9E9E9;
+                }
+            }
+
+            .info {
+                border-bottom: 1px solid #e9e9e9;
+                padding: 5px 0;
+                margin-bottom: 12px;
+                span {
+                    color: #b1b1b1;
+                    font-size: 14px;
+                    padding-left: 10px;
                 }
             }
         }
