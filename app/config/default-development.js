@@ -121,7 +121,7 @@ module.exports = {
             },
             newItemPage: {
                 worldwide: false,
-                countries: ['www.olx.com.bo','www.olx.com.ar','www.olx.cl']
+                countries: ['www.olx.com.bo','www.olx.com.ar','www.olx.cl','www.olx.com.uy']
             }
         },
         html4: {
