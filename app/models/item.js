@@ -191,7 +191,6 @@ function postImages(done) {
 
 function postFields(done) {
     var id = this.get('id');
-    var sk = this.get('sk');
     var user = this.app.session.get('user');
     var query = {
         postingSession: this.get('postingSession'),
@@ -206,9 +205,8 @@ function postFields(done) {
     if (user) {
         query.token = user.token;
     }
-    else if (id && sk) {
-        query.securityKey = sk;
-        this.unset('sk');
+    else if (id) {
+        query.securityKey = this.get('securityKey');
     }
     data = this.toData(true);
     helpers.dataAdapter.post(this.app.req, '/items' + (!id ? '' : ['', id, 'edit'].join('/')), {
@@ -305,6 +303,7 @@ function toData(includeImages) {
     else {
         delete data.images;
     }
+    delete data.securityKey;
     delete data.category;
     delete data.price;
     delete data.optionals;

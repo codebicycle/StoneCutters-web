@@ -67,6 +67,7 @@
         <input type="hidden" name="postingSession" value="{{postingSession}}">
         <input type="hidden" name="category.parentId" value="{{category.id}}">
         <input type="hidden" name="category.id" value="{{subcategory.id}}">
+        <input type="hidden" name="securityKey" value="{{item.get('securityKey')}}">
         {% if item and item.has('id') %}
             <input type="hidden" name="id" value="{{ item.get('id') }}">
         {% endif %}
