@@ -123,7 +123,27 @@ function show(params, callback, gallery) {
         }.bind(this);
 
         var success = function(_result) {
-            callback(null, _result);
+            var platform = this.app.session.get('platform');
+            if ( platform === 'html4') {
+                var items = [];
+
+                _.each(_result.items, function(item, i) {
+                    items.push(item);
+                    if (i % 3 === 0) {
+                        items.push({
+                            thumbnail: '',
+                            title: 'I Call U Mobiles',
+                            location: 'Mombassa Island',
+                            isShop: true
+                        });
+                    }
+                });
+                _result.items = items;
+                callback(null, _result);
+            }
+            else {
+                callback(null, _result);
+            }
         }.bind(this);
 
         var error = function(err, res) {
