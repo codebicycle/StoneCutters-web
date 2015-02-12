@@ -11,7 +11,6 @@ var Field = require('../../../../../../../models/field');
 var Categories = require('../../../../../../../collections/categories');
 var Cities = require('../../../../../../../collections/cities');
 var States = require('../../../../../../../collections/states');
-var config = require('../../../../../../../../shared/config');
 
 window.URL = window.URL || window.webkitURL;
 
