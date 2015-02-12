@@ -1,4 +1,25 @@
 .users_register_view {
+    .success.register {
+        box($lightBlue, $lightBlueBorder, 3px, 20px, solid, 1px);
+        clear-fix();
+        margin-bottom: 10px;
+        &::before {
+            float: left;
+            color: $blue;
+            font-size: remify(60px);
+            margin-right: 20px;
+        }
+        h3 {
+            margin: 7px 0 2px;
+            font-size: $l;
+        }
+        p {
+            margin:0;
+        }
+    }
+}
+
+.register-main-content {
     box($white, $greyBorders, 3px, 0 0 20px 0, solid, 1px);
 
     .title {
