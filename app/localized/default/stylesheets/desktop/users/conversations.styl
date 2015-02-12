@@ -1,4 +1,20 @@
 .users_conversations_view {
+    .conversations {
+        clear-fix();
+        box($white, $greyBorders, 0, 10px 0 0, solid, 1px);
+        margin-bottom: 15px;
+        .top-conversations {
+            padding: 10px;
+            margin: 0;
+            &:last-child {
+                border-top: 1px solid $greyBorders;
+            }
+            &:first-child {
+                padding: 0 10px 10px;
+            }
+        }
+    }
+
     .alert {
         p {
             font-size: 14px;
@@ -33,28 +49,17 @@
         border-bottom: 1px solid $greyBorders;
     }
 
-    .conversations {
-        clear-fix();
-        .top-conversations{
-            box($white, $greyBorders, 0, 0 10px, solid, 1px);
-            border-color: $greyBorders $greyBorders $white;
-        }
-    }
-
     .conversations-thread {
-        box(#fdfea1, $greyBorders, 0, 0, solid, 1px);
-
+        box($yellowSuccess, $greyBorders, 0, 0, solid, 1px 0 0 0);
+        box-sizing: padding-box;
+        clear-fix();
+        clear:both;
+        padding: 10px;
+        position: relative;
         &:hover {
-            border: 1px solid $greyBorders;
             box-shadow(0 0 2px 2px rgba(0, 0, 0, .1));
             z-index: 100;
         }
-        clear-fix();
-        background-color: #fdfea1;
-        border-bottom: 1px solid $greyBorders;
-        box-sizing: padding-box;
-        padding: 10px;
-        clear:both;
 
         figure{
             border: 1px solid $greyBorders;
