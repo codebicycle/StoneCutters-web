@@ -1,10 +1,8 @@
 {% if tracking.params and tracking.params.ninja %}
 <script type="text/javascript">
-    window.dataLayer = window.dataLayer || [];
-    while (window.dataLayer.length > 0) {
-        window.dataLayer.pop();
-    }
-    window.dataLayer.push({{ tracking.params.ninja.params }});
+    window.dataLayer.push({'cleanup': function() {
+        window.dataLayer.push({{ tracking.params.ninja.params }});
+    }});
 
     (function() {
         window.configTracking = {{ tracking.params.ninja.config }};
