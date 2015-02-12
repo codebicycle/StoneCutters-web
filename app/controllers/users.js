@@ -635,6 +635,7 @@ function conversations(params, callback) {
         var prepare = function(done) {
             Paginator.prepare(this.app, params, 'myConvs');
             conversation = params.conversation;
+            params.location = location.url;
             delete params.conversation;
             _params = _.extend({}, params, {
                 token: user.token,
@@ -730,6 +731,7 @@ function conversation(params, callback) {
         var prepare = function(done) {
             Paginator.prepare(this.app, params, pageSize);
             thread = params.thread;
+            params.location = location.url;
             delete params.thread;
             _params = _.extend({}, params, {
                 token: user.token,
