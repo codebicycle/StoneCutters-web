@@ -192,7 +192,6 @@ function postImages(done) {
 
 function postFields(done) {
     var id = this.get('id');
-    var sk = this.get('sk');
     var user = this.app.session.get('user');
     var renew =  this.get('renew') || false;
     var action = 'edit';
@@ -212,9 +211,8 @@ function postFields(done) {
     if (user) {
         query.token = user.token;
     }
-    else if (id && sk) {
-        query.securityKey = sk;
-        this.unset('sk');
+    else if (id) {
+        query.securityKey = this.get('securityKey');
     }
 
     data = this.toData(true);
@@ -312,6 +310,7 @@ function toData(includeImages) {
     else {
         delete data.images;
     }
+    delete data.securityKey;
     delete data.category;
     delete data.price;
     delete data.optionals;

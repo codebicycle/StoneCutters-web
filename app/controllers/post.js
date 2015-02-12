@@ -8,7 +8,6 @@ var tracking = require('../modules/tracking');
 var Item = require('../models/item');
 var FeatureAd = require('../models/feature_ad');
 var config = require('../../shared/config');
-var Sixpack = require('../../shared/sixpack');
 
 module.exports = {
     flow: middlewares(flow),
@@ -92,6 +91,7 @@ function flow(params, callback) {
         var location = this.app.session.get('location');
         var isPostingFlow = helpers.features.isEnabled.call(this, 'postingFlow');
         var platform = this.app.session.get('platform');
+        var languageId = this.app.session.get('languageId');
         var isDesktop = platform === 'desktop';
         var itemId = params.itemId;
         var promise = asynquence().or(error.bind(this))
@@ -123,9 +123,6 @@ function flow(params, callback) {
                     status: 302
                 });
             }
-            if (user) {
-                params.token = user.token;
-            }
             done();
         }
 
@@ -151,7 +148,7 @@ function flow(params, callback) {
                         level: 'states',
                         type: 'cities',
                         location: locationUrl,
-                        languageId: this.app.session.get('languages')._byId[this.app.session.get('selectedLanguage')].id
+                        languageId: languageId
                     }
                 };
             }
@@ -160,7 +157,7 @@ function flow(params, callback) {
                     model: 'Item',
                     params: {
                         id: itemId,
-                        languageId: this.app.session.get('languages')._byId[this.app.session.get('selectedLanguage')].id
+                        languageId: languageId
                     }
                 };
                 data.fields = {
@@ -168,10 +165,15 @@ function flow(params, callback) {
                     params: {
                         intent: 'edit',
                         itemId: itemId,
-                        languageId: this.app.session.get('languages')._byId[this.app.session.get('selectedLanguage')].id,
-                        token: params.token
+                        languageId: languageId
                     }
                 };
+                if (user) {
+                    data.fields.params.token = user.token;
+                }
+                else if (params.sk) {
+                    data.fields.params.securityKey = params.sk;
+                }
             }
 
             this.app.fetch(data, {
@@ -200,6 +202,9 @@ function flow(params, callback) {
                     res.item.get('optionals')[index].value = field.value.key || field.value.value;
                 });
             }, this);
+            if (res.fields.get('securityKey')) {
+                res.item.set('securityKey', res.fields.get('securityKey'));
+            }
             done(res);
         }
 
@@ -244,12 +249,6 @@ function flow(params, callback) {
             }
             if (item.get('status') && !item.get('status').editable && !params.renew)  {
                 helpers.common.redirect.call(this, '/iid-' + itemId);
-                return true;
-            }
-            if (!user || !user.userId || (item.get('user') && item.get('user').id != user.userId)) {
-                helpers.common.redirect.call(this, '/iid-' + itemId, null, {
-                    status: 302
-                });
                 return true;
             }
             if (item.getLocation().url && item.getLocation().url !== siteLocation) {
@@ -529,36 +528,32 @@ function success(params, callback) {
 
     function controller() {
         var user = this.app.session.get('user');
-        var securityKey = params.sk;
         var itemId = params.itemId;
         var siteLocation = this.app.session.get('siteLocation');
-        var languages = this.app.session.get('languages');
-        var anonymousItem;
+        var languageId = this.app.session.get('languageId');
+        var securityKey = params.sk;
 
-        var prepare = function(done) {
+        asynquence().or(fail.bind(this))
+            .then(prepare.bind(this))
+            .then(fetch.bind(this))
+            .then(check.bind(this))
+            .then(fetchRelated.bind(this))
+            .then(fetchFeatured.bind(this))
+            .val(successFetch.bind(this));
+
+        function prepare(done) {
             if (user) {
                 params.token = user.token;
             }
-            else if (typeof window !== 'undefined' && localStorage) {
-                anonymousItem = localStorage.getItem('anonymousItem');
-                anonymousItem = (!anonymousItem ? {} : JSON.parse(anonymousItem));
-                if (securityKey) {
-                    anonymousItem[params.itemId] = securityKey;
-                    localStorage.setItem('anonymousItem', JSON.stringify(anonymousItem));
-                }
-                else {
-                    securityKey = anonymousItem[params.itemId];
-                }
-            }
             params.id = params.itemId;
-            params.languageId = languages._byId[this.app.session.get('selectedLanguage')].id;
+            params.languageId = languageId;
             delete params.itemId;
             delete params.title;
             delete params.sk;
             done();
-        }.bind(this);
+        }
 
-        var findItem = function(done) {
+        function fetch(done) {
             this.app.fetch({
                 item: {
                     model: 'Item',
@@ -567,16 +562,16 @@ function success(params, callback) {
             }, {
                 readFromCache: false
             }, done.errfcb);
-        }.bind(this);
+        }
 
-        var checkItem = function(done, resItem) {
+        function check(done, resItem) {
             if (!resItem.item) {
                 return done.fail(null, {});
             }
             done(resItem.item);
-        }.bind(this);
+        }
 
-        var findRelatedItems = function(done, _item) {
+        function fetchRelated(done, _item) {
             this.app.fetch({
                 relatedItems: {
                     collection : 'Items',
@@ -601,9 +596,9 @@ function success(params, callback) {
                 }
                 done(_item, res.relatedItems);
             }.bind(this));
-        }.bind(this);
+        }
 
-        var findFeatured = function(done, item, relateds) {
+        function fetchFeatured(done, item, relateds) {
             if (!FeatureAd.isEnabled(this.app)) {
                 return done(item, relateds);
             }
@@ -624,16 +619,16 @@ function success(params, callback) {
                 item.set('featured', res.featuread);
                 done(item, relateds);
             }.bind(this));
-        }.bind(this);
+        }
 
-        var success = function(_item, _relatedItems) {
+        function successFetch(_item, _relatedItems) {
             var item = _item.toJSON();
             var subcategory = this.dependencies.categories.search(item.category.id);
             var category;
             var parentId;
 
             if (!subcategory) {
-                return error();
+                return fail();
             }
             parentId = subcategory.get('parentId');
             category = parentId ? this.dependencies.categories.get(parentId) : subcategory;
@@ -646,35 +641,16 @@ function success(params, callback) {
             callback(null, {
                 user: user,
                 item: item,
-                sk: securityKey,
+                securityKey: securityKey,
                 category: category.toJSON(),
                 subcategory: subcategory.toJSON(),
                 relatedItems: _relatedItems
             });
-        }.bind(this);
+        }
 
-        var convert = function() {
-            var sixpack = new Sixpack({
-                platform: this.app.session.get('platform'),
-                market: this.app.session.get('location').abbreviation,
-                experiments: this.app.session.get('experiments')
-            });
-
-            sixpack.convert(sixpack.experiments.html5Interstitial);
-        }.bind(this);
-
-        var error = function(err, res) {
+        function fail(err, res) {
             return helpers.common.error.call(this, err, res, callback);
-        }.bind(this);
-
-        asynquence().or(error)
-            .then(prepare)
-            .then(findItem)
-            .then(checkItem)
-            .then(findRelatedItems)
-            .then(findFeatured)
-            .val(success)
-            .val(convert);
+        }
     }
 }
 
@@ -837,19 +813,9 @@ function edit(params, callback) {
             if (user) {
                 params.token = user.token;
             }
-            else {
-                if (typeof window !== 'undefined' && localStorage) {
-                    anonymousItem = localStorage.getItem('anonymousItem');
-                    anonymousItem = (!anonymousItem ? {} : JSON.parse(anonymousItem));
-                    if (securityKey) {
-                        anonymousItem[id] = securityKey;
-                        localStorage.setItem('anonymousItem', JSON.stringify(anonymousItem));
-                    }
-                    else {
-                        securityKey = anonymousItem[id];
-                    }
-                }
+            else if (securityKey) {
                 params.securityKey = securityKey;
+                _item.set('securityKey', securityKey);
             }
         }
 
