@@ -1,6 +1,6 @@
 {% if items.length > 0 %}
     {% view 'items/partials/itemlistingtabs' %}
-    {% view 'partials/adserving', 'slot_top_listing_gallery' %}
+    {% view 'partials/adserving', 'listing_topgallery' %}
     <ul class="items-list-ig {{ itemListingClass }}">
         {% for item in items %}
             <li class="item">
@@ -28,7 +28,9 @@
             </li>
         {% endfor %}
         {% if meta.abundance %}
-            <li class="title">{{ dictionary["misc.MoreResultsIn"] }} {{ location.name if meta.abundance.locationType == 'country' else location.children[0].name }}</li>
+            <li class="title">
+                {{ dictionary["misc.MoreResultsIn"] }} {{ location.name if meta.abundance.locationType == 'country' else location.children[0].name }}
+            </li>
             {% for item in meta.abundance.data %}
                 <li class="item">
                     <a href="{{ item.slug.replace(domain, fullDomain) }}">

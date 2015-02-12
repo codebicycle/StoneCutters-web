@@ -14,7 +14,57 @@ module.exports = {
         }
     },
     adserving: {
-        enabled: true
+        enabled: true,
+        slots: {
+            listing: {
+                topgallery: {
+                    service: 'CSA',
+                    format: 'default',
+                    location: 'Top'
+                },
+                top: {
+                    service: 'CSA',
+                    format: 'custom',
+                    location: 'Top'
+                },
+                side: {
+                    service: 'AFC',
+                    format: 'WideSkyscraper',
+                    location: 'Side'
+                },
+                bottom: {
+                    service: 'CSA',
+                    format: 'custom',
+                    location: 'Bottom'
+                },
+                noresult: {
+                    service: 'CSA',
+                    format: 'custom',
+                    location: 'Top',
+                    params: {
+                        number: 10
+                    },
+                    seo: 1
+                }
+            },
+            item: {
+                top: {
+                    service: 'AFC',
+                    format: 'TextTop',
+                    location: 'Top'
+                },
+                side: {
+                    service: 'AFC',
+                    format: 'MediumRectangle',
+                    location: 'Side'
+                },
+                bottom: {
+                    service: 'AFC',
+                    format: 'TextBottom',
+                    location: 'Bottom'
+                }
+            }
+        }
     },
     seo: {
         enabled: true,

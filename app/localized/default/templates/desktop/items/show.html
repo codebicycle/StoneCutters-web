@@ -1,12 +1,12 @@
 {% include (template + "/items/itembreadcrumb.html") %}
 
-{% view 'partials/adserving', 'slot_top_item' %}
+{% view 'partials/adserving', 'item_top' %}
 
 <section id="item-page" data-qa="item" >
     <div class="item-main-wrapper">
         {% include (template + "/items/itemcontent.html") %}
 
-        {% view 'partials/adserving', 'slot_bottom_item' %}
+        {% view 'partials/adserving', 'item_bottom' %}
 
         {% if seo %}
             {% set seoFrom = "item" %}
@@ -20,7 +20,7 @@
 
         {% include (template + "/items/partials/safetytips.html") %}
 
-        {% view 'partials/adserving', 'slot_side_item' %}
+        {% view 'partials/adserving', 'item_side' %}
     </aside>
 </section>
 {% view 'partials/tracking' %}

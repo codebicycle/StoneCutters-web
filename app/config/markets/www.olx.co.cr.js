@@ -2,6 +2,11 @@ module.exports = {
     categoryTree: {
         order: [185, 186, 362, 187, 16, 191, 190]
     },
+    celebrities: {
+        home: {
+            enabled: true
+        }
+    },
     socials: [
         {
             name: 'facebook',
@@ -18,6 +23,14 @@ module.exports = {
     ],
     videos: [
         {
+            title: 'OLX Costa Rica - Consola',
+            id: 'dSavGD707o4'
+        },
+        {
+            title: 'OLX Costa Rica - Mauricio "El Chunche" Montero - Garaje',
+            id: '1sR75hvjlRI'
+        },
+        {
             title: 'OLX Costa Rica - Bicicleta - Vender es fácil',
             id: 'iYUX408RQq4'
         },
@@ -30,6 +43,55 @@ module.exports = {
             id: 'Yf5i1HOwd70'
         }
     ],
+    adserving: {
+        slots: {
+            listing: {
+                topgallery: {
+                    service: 'CSA',
+                    format: 'default',
+                    location: 'Top',
+                    numberPerCategoryCSA: {
+                        '800': 1,
+                        '806': 1,
+                        '815': 1,
+                        '830': 1,
+                        '853': 1,
+                        '859': 1,
+                        '362': 2,
+                        allresults: 2,
+                        allresultsig: 2
+                    }
+                },
+                top: {
+                    service: 'CSA',
+                    format: 'custom',
+                    location: 'Top',
+                    numberPerCategoryCSA: {
+                        '800': 1,
+                        '806': 1,
+                        '815': 1,
+                        '830': 1,
+                        '853': 1,
+                        '859': 1,
+                        '362': 2,
+                        allresults: 2,
+                        allresultsig: 2
+                    }
+                },
+                side: {
+                    service: 'none'
+                }
+            },
+            item: {
+                top: {
+                    service: 'none'
+                },
+                side: {
+                    service: 'none'
+                }
+            }
+        }
+    },
     successPage: {
         keepPosting: [
             {

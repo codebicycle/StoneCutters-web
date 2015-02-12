@@ -137,7 +137,7 @@ module.exports = {
             },
             contactForm: {
                 worldwide: false,
-                countries: ['www.olx.co.cr']
+                countries: ['www.olx.co.cr', 'www.olx.com.uy', 'www.olx.com.pa']
             }
         }
     },
