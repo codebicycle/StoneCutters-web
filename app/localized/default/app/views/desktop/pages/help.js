@@ -35,7 +35,6 @@ module.exports = Base.extend({
     helpToggleContent: function(event) {
         event.preventDefault();
         var element = $(event.currentTarget);
-        //element.parent('li').siblings('li.selected').removeClass('selected');
         $('.help-navigation ul li').removeClass('selected');
         element.parent('li').addClass('selected');
         $('.help-content-display').hide();
@@ -66,7 +65,6 @@ module.exports = Base.extend({
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();
-
         var $current = $(event.currentTarget);
         var direction = $current.data('navigate');
         var currentWrapper = $current.data('section');

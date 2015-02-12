@@ -51,7 +51,7 @@ function help(params, callback) {
         var active = params.active;
         var isContactEnabled = helpers.features.isEnabled.call(this, 'contactForm', platform, location.url);
 
-        if (active && active != 'about' && !isContactEnabled) {
+        if (active && active !== 'about' && !isContactEnabled) {
             tab = 'faq';
         } else if (active) {
             tab = 'contact';
