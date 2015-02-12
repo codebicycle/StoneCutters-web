@@ -18,7 +18,7 @@ function onpopstate(event) {
         history.back();
     }
     else {
-        history.pushState(null, '', window.location.pathname);
+        history.pushState(null, '', window.location.pathname + window.location.search);
     }
 }
 
@@ -188,7 +188,7 @@ module.exports = Base.extend({
     },
     handleBack: function() {
         this.edited = true;
-        history.pushState(null, '', window.location.pathname);
+        history.pushState(null, '', window.location.pathname + window.location.search);
         $(window).on('popstate', {
             message: this.dictionary['misc.WantToGoBack']
         }, onpopstate);

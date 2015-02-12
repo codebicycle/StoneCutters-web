@@ -21,8 +21,8 @@ module.exports = function userRouter(app) {
             function prepare(done, data) {
                 user = new User(_.extend(data, {
                     location: req.rendrApp.session.get('siteLocation'),
-                    country: req.rendrApp.session.get('location').name,
-                    languageId: req.rendrApp.session.get('languages')._byId[req.rendrApp.session.get('selectedLanguage')].id,
+                    country: req.rendrApp.session.get('location').abbreviation,
+                    languageId: req.rendrApp.session.get('languageId'),
                     platform: req.rendrApp.session.get('platform')
                 }), {
                     app: req.rendrApp
@@ -86,8 +86,8 @@ module.exports = function userRouter(app) {
             function prepare(done, data) {
                 user = new User(_.extend(data, {
                     location: req.rendrApp.session.get('siteLocation'),
-                    country: req.rendrApp.session.get('location').name,
-                    languageId: req.rendrApp.session.get('languages')._byId[req.rendrApp.session.get('selectedLanguage')].id,
+                    country: req.rendrApp.session.get('location').abbreviation,
+                    languageId: req.rendrApp.session.get('languageId'),
                     platform: req.rendrApp.session.get('platform')
                 }), {
                     app: req.rendrApp
@@ -145,8 +145,8 @@ module.exports = function userRouter(app) {
                 user = new User(_.extend(data, {
                     'new': true,
                     location: req.rendrApp.session.get('siteLocation'),
-                    country: location.name,
-                    languageId: req.rendrApp.session.get('languages')._byId[req.rendrApp.session.get('selectedLanguage')].id,
+                    country: location.abbreviation,
+                    languageId: req.rendrApp.session.get('languageId'),
                     platform: platform
                 }), {
                     app: req.rendrApp
@@ -157,7 +157,7 @@ module.exports = function userRouter(app) {
             function validate(done) {
                 if (!user.get('agreeTerms')) {
                     res.redirect(301, utils.link('/register?agreeTerms=0', req.rendrApp));
-                    statsd.increment([location.name, 'register', 'error', 'terms', platform]);
+                    statsd.increment([location.abbreviation, 'register', 'error', 'terms', platform]);
                     return end();
                 }
                 done(user);
@@ -217,8 +217,8 @@ module.exports = function userRouter(app) {
                 user = new User(_.extend(data, {
                     'new': true,
                     location: req.rendrApp.session.get('siteLocation'),
-                    country: location.name,
-                    languageId: req.rendrApp.session.get('languages')._byId[req.rendrApp.session.get('selectedLanguage')].id,
+                    country: location.abbreviation,
+                    languageId: req.rendrApp.session.get('languageId'),
                     platform: platform,
                     identityType: 1,
                     withConfirmation: true
@@ -231,7 +231,7 @@ module.exports = function userRouter(app) {
             function validate(done) {
                 if (!user.get('agreeTerms')) {
                     res.redirect(301, utils.link('/register?agreeTerms=0', req.rendrApp));
-                    statsd.increment([location.name, 'register', 'error', 'terms', platform]);
+                    statsd.increment([location.abbreviation, 'register', 'error', 'terms', platform]);
                     return end();
                 }
                 done(user);

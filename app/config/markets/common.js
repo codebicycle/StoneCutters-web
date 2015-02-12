@@ -9,6 +9,13 @@ module.exports = {
             myFavs: 15,
             myMsgs: 15
         },
+        renew: {
+            enabled: true,
+            daysToRenew: 15
+        },
+        rebump: {
+            enabled: false
+        },
         maxPage: {
             allResults: 500
         }
