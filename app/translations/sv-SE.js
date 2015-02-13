@@ -283,6 +283,7 @@ module.exports = {
     'myolx.Republish': 'Publicera igen',
     'myolx.Send': 'Skicka',
     'myolx.Settings': 'Inst\xE4llningar',
+    'myolx.SignInWithFacebook': 'Logga in med Facebook',
     'myolx.SignOut': 'Logga ut',
     'myolx.TheAdHasBeenDeleted': 'Annonsen har blivit raderad',
     'myolx.ThisMessageIsRegarding': 'Detta meddelande g\xE4ller',

@@ -283,6 +283,7 @@ module.exports = {
     'myolx.Republish': '\u91CD\u65B0\u767C\u4F48',
     'myolx.Send': '\u50B3\u9001',
     'myolx.Settings': '\u8A2D\u5B9A',
+    'myolx.SignInWithFacebook': '\u7528Facebook\u767B\u9304',
     'myolx.SignOut': '\u9000\u51FA',
     'myolx.TheAdHasBeenDeleted': '\u9019\u500B\u5EE3\u544A\u88AB\u522A\u9664',
     'myolx.ThisMessageIsRegarding': '\u6B64\u7559\u8A00\u6709\u95DC',

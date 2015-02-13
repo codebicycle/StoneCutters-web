@@ -8,20 +8,22 @@ module.exports = {
             enabled: true
         }
     },
-    socials: [
-        {
-            name: 'facebook',
-            link: 'https://www.facebook.com/OLXEcuador'
-        },
-        {
-            name: 'twitter',
-            link: 'https://twitter.com/OLX_Ecuador'
-        },
-        {
-            name: 'youtube',
-            link: 'https://www.youtube.com/user/OLXecuador'
-        }
-    ],
+    socials: {
+        links: [
+            {
+                name: 'facebook',
+                link: 'https://www.facebook.com/OLXEcuador'
+            },
+            {
+                name: 'twitter',
+                link: 'https://twitter.com/OLX_Ecuador'
+            },
+            {
+                name: 'youtube',
+                link: 'https://www.youtube.com/user/OLXecuador'
+            }
+        ]
+    },
     videos: [
         {
             title: 'OLX Ecuador - Consola',

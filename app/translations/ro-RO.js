@@ -283,6 +283,7 @@ module.exports = {
     'myolx.Republish': 'Re-public\u0103',
     'myolx.Send': 'Trimite',
     'myolx.Settings': 'Set\u0103ri',
+    'myolx.SignInWithFacebook': '\xCEnregistrare pe Facebook',
     'myolx.SignOut': 'Delogheaz\u0103-te',
     'myolx.TheAdHasBeenDeleted': 'Anun\u021Bul a fost \u0219ters',
     'myolx.ThisMessageIsRegarding': 'Acest mesaj este despre',

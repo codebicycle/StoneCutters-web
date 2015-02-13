@@ -283,6 +283,7 @@ module.exports = {
     'myolx.Republish': 'Repibliye',
     'myolx.Send': 'Voye',
     'myolx.Settings': 'Reglaj',
+    'myolx.SignInWithFacebook': 'Konekte ak Facebook',
     'myolx.SignOut': 'Dekonekte',
     'myolx.TheAdHasBeenDeleted': 'Anons sa yo efase',
     'myolx.ThisMessageIsRegarding': 'Mesaj sa a se kons\xE8nan',

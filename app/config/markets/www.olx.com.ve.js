@@ -1,18 +1,20 @@
 module.exports = {
-    socials: [
-        {
-            name: 'facebook',
-            link: 'https://www.facebook.com/OLXvenezuela'
-        },
-        {
-            name: 'twitter',
-            link: 'https://twitter.com/OLX_Venezuela'
-        },
-        {
-            name: 'youtube',
-            link: 'https://www.youtube.com/user/OLXvenezuela'
-        }
-    ],
+    socials: {
+        links: [
+            {
+                name: 'facebook',
+                link: 'https://www.facebook.com/OLXvenezuela'
+            },
+            {
+                name: 'twitter',
+                link: 'https://twitter.com/OLX_Venezuela'
+            },
+            {
+                name: 'youtube',
+                link: 'https://www.youtube.com/user/OLXvenezuela'
+            }
+        ]
+    },
     videos: [
         {
             title: 'OLX Venezuela - Comercial Sofá Cama - Vender es fácil',

@@ -283,6 +283,7 @@ module.exports = {
     'myolx.Republish': 'Publiser p\xE5 nytt',
     'myolx.Send': 'Send',
     'myolx.Settings': 'Innstillinger',
+    'myolx.SignInWithFacebook': 'Logg in med Facebook',
     'myolx.SignOut': 'Logg ut',
     'myolx.TheAdHasBeenDeleted': 'Annonsen er slettet',
     'myolx.ThisMessageIsRegarding': 'Denne meldingen gjelder',

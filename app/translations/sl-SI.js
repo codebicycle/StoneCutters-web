@@ -283,6 +283,7 @@ module.exports = {
     'myolx.Republish': 'Ponovno objavi',
     'myolx.Send': 'Po\u0161lji',
     'myolx.Settings': 'Nastavitve',
+    'myolx.SignInWithFacebook': 'Prijavite se skozi Facebook',
     'myolx.SignOut': 'Izpis',
     'myolx.TheAdHasBeenDeleted': 'Oglas je bil izbrisan',
     'myolx.ThisMessageIsRegarding': 'To sporo\u010Dilo je v zvezi z',

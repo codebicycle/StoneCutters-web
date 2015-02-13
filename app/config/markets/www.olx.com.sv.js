@@ -3,20 +3,22 @@ module.exports = {
         order: [830, 800, 362, 806, 859, 16, 187, 815, 191, 186, 811, 190],
         columns: [4, 3, 3]
     },
-    socials: [
-        {
-            name: 'facebook',
-            link: 'https://www.facebook.com/OLXElSalvador'
-        },
-        {
-            name: 'twitter',
-            link: 'https://twitter.com/OLX_ElSalvador'
-        },
-        {
-            name: 'youtube',
-            link: 'https://www.youtube.com/user/OLXelsalvador'
-        }
-    ],
+    socials: {
+        links: [
+            {
+                name: 'facebook',
+                link: 'https://www.facebook.com/OLXElSalvador'
+            },
+            {
+                name: 'twitter',
+                link: 'https://twitter.com/OLX_ElSalvador'
+            },
+            {
+                name: 'youtube',
+                link: 'https://www.youtube.com/user/OLXelsalvador'
+            }
+        ]
+    },
     videos: [
         {
             title: 'OLX El Salvador - Bicicleta - Vender es fácil',

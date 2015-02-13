@@ -283,6 +283,7 @@ module.exports = {
     'myolx.Republish': 'Endurbirta',
     'myolx.Send': 'Senda',
     'myolx.Settings': 'Stillingar',
+    'myolx.SignInWithFacebook': 'Skr\xE1 mig inn me\xF0 Facebook',
     'myolx.SignOut': '\xDAtskr\xE1ning',
     'myolx.TheAdHasBeenDeleted': 'Augl\xFDsingunni hefur veri\xF0 eytt',
     'myolx.ThisMessageIsRegarding': '\xDEessi skilabo\xF0 eru var\xF0andi',

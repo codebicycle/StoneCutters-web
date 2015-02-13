@@ -283,6 +283,7 @@ module.exports = {
     'myolx.Republish': '\xDAjra k\xF6zz\xE9tenni',
     'myolx.Send': 'K\xFCld\xE9s',
     'myolx.Settings': 'Be\xE1ll\xEDt\xE1sok',
+    'myolx.SignInWithFacebook': 'Bejelentkez\xE9s a Facebookba',
     'myolx.SignOut': 'Kijelentkez\xE9s',
     'myolx.TheAdHasBeenDeleted': 'A hirdet\xE9s t\xF6r\xF6lve',
     'myolx.ThisMessageIsRegarding': 'Ez az \xFCzenet a k\xF6vetkez\u0151kkel kapcsolatos:',

@@ -283,6 +283,7 @@ module.exports = {
     'myolx.Republish': 'Terbitkan semula',
     'myolx.Send': 'Kirim',
     'myolx.Settings': 'Tetapan',
+    'myolx.SignInWithFacebook': 'Daftar masuk dengan Facebook',
     'myolx.SignOut': 'Daftar keluar',
     'myolx.TheAdHasBeenDeleted': 'Iklan telah dihapuskan',
     'myolx.ThisMessageIsRegarding': 'Mesej ini adalah berkenaan',

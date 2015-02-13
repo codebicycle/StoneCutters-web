@@ -283,6 +283,7 @@ module.exports = {
     'myolx.Republish': 'Avalda uuesti',
     'myolx.Send': 'Saada',
     'myolx.Settings': 'Seaded',
+    'myolx.SignInWithFacebook': 'Logi sisse  Facebooki',
     'myolx.SignOut': 'Logi v\xE4lja',
     'myolx.TheAdHasBeenDeleted': 'Kuulutus on kustutatud',
     'myolx.ThisMessageIsRegarding': 'Selle s\xF5numi teema on',

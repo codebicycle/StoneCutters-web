@@ -283,6 +283,7 @@ module.exports = {
     'myolx.Republish': 'Tornar a publicar',
     'myolx.Send': 'Enviar',
     'myolx.Settings': 'Configuraci\xF3',
+    'myolx.SignInWithFacebook': 'Iniciar sessi\xF3 amb Facebook',
     'myolx.SignOut': 'Tancar sessi\xF3',
     'myolx.TheAdHasBeenDeleted': 'L\'anunci ha estat eliminat',
     'myolx.ThisMessageIsRegarding': 'Aquest missatge est\xE0 relacionat amb',

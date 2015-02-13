@@ -3,20 +3,22 @@ module.exports = {
         order: [830, 800, 362, 806, 859, 16, 187, 815, 191, 186, 811, 190],
         columns: [4, 3, 3]
     },
-    socials: [
-        {
-            name: 'facebook',
-            link: 'https://www.facebook.com/OLXGuatemala'
-        },
-        {
-            name: 'twitter',
-            link: 'https://twitter.com/OLX_Guatemala'
-        },
-        {
-            name: 'youtube',
-            link: 'https://www.youtube.com/user/OLXguatemala'
-        }
-    ],
+    socials: {
+        links: [
+            {
+                name: 'facebook',
+                link: 'https://www.facebook.com/OLXGuatemala'
+            },
+            {
+                name: 'twitter',
+                link: 'https://twitter.com/OLX_Guatemala'
+            },
+            {
+                name: 'youtube',
+                link: 'https://www.youtube.com/user/OLXguatemala'
+            }
+        ]
+    },
     videos: [
         {
             title: 'OLX Guatemala - Celular - Vender es fácil',

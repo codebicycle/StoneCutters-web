@@ -283,6 +283,7 @@ module.exports = {
     'myolx.Republish': 'Yeniden Yay\u0131nla',
     'myolx.Send': 'Yolla',
     'myolx.Settings': 'Ayarlar',
+    'myolx.SignInWithFacebook': 'Facebook ile oturum a\xE7',
     'myolx.SignOut': '\xDCye \xC7\u0131k\u0131\u015F\u0131',
     'myolx.TheAdHasBeenDeleted': '\u0130lan silinmi\u015Ftir',
     'myolx.ThisMessageIsRegarding': 'Bu iletinin konusu',

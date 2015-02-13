@@ -283,6 +283,7 @@ module.exports = {
     'myolx.Republish': 'Ripubblica',
     'myolx.Send': 'Invia',
     'myolx.Settings': 'Impostazioni',
+    'myolx.SignInWithFacebook': 'Accedi con Facebook',
     'myolx.SignOut': 'Uscire',
     'myolx.TheAdHasBeenDeleted': 'L\'annuncio \xE8 stato cancellato',
     'myolx.ThisMessageIsRegarding': 'Questo messaggio \xE9 riguardo a ',

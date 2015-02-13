@@ -283,6 +283,7 @@ module.exports = {
     'myolx.Republish': 'Atk\u0101rtoti public\u0113t',
     'myolx.Send': 'Nos\u016Bt\u012Bt',
     'myolx.Settings': 'Iestat\u012Bjumi',
+    'myolx.SignInWithFacebook': 'Pierakstiet mani ar Facebook',
     'myolx.SignOut': 'Izrakst\u012Bties',
     'myolx.TheAdHasBeenDeleted': 'Sludin\u0101jums tika izdz\u0113sts',
     'myolx.ThisMessageIsRegarding': '\u0160is zi\u0146ojums ir par',

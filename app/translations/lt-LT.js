@@ -283,6 +283,7 @@ module.exports = {
     'myolx.Republish': 'Skelbti i\u0161 naujo',
     'myolx.Send': 'Si\u0173sti',
     'myolx.Settings': 'Parametrai',
+    'myolx.SignInWithFacebook': 'Prisijungti naudojant \u201EFacebook\u201C',
     'myolx.SignOut': 'I\u0161siregistruoti',
     'myolx.TheAdHasBeenDeleted': 'Skelbimas i\u0161trintas',
     'myolx.ThisMessageIsRegarding': '\u0160is prane\u0161imas yra apie',

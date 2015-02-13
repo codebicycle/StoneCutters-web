@@ -283,6 +283,7 @@ module.exports = {
     'myolx.Republish': 'Opnieuw plaatsen',
     'myolx.Send': 'Verzenden',
     'myolx.Settings': 'Instellingen',
+    'myolx.SignInWithFacebook': 'Inloggen met Facebook',
     'myolx.SignOut': 'Uitloggen',
     'myolx.TheAdHasBeenDeleted': 'De advertentie is verwijderd',
     'myolx.ThisMessageIsRegarding': 'Dit bericht gaat over',

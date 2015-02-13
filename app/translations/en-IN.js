@@ -283,6 +283,7 @@ module.exports = {
     'myolx.Republish': 'Republish',
     'myolx.Send': 'Send',
     'myolx.Settings': 'Settings',
+    'myolx.SignInWithFacebook': 'Sign in with Facebook',
     'myolx.SignOut': 'Sign out',
     'myolx.TheAdHasBeenDeleted': 'The ad has been deleted',
     'myolx.ThisMessageIsRegarding': 'This message is regarding',

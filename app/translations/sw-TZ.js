@@ -283,6 +283,7 @@ module.exports = {
     'myolx.Republish': 'Chapisha upya',
     'myolx.Send': 'Tuma',
     'myolx.Settings': 'Mipangilio',
+    'myolx.SignInWithFacebook': 'Ingia ukitumia Facebook',
     'myolx.SignOut': 'Toka',
     'myolx.TheAdHasBeenDeleted': 'Tangazo limefutwa',
     'myolx.ThisMessageIsRegarding': 'Ujumbe huu ni kuhusu',
