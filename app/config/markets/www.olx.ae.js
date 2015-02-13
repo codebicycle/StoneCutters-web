@@ -3,6 +3,9 @@ module.exports = {
         order: [405, 185, 362, 187, 186, 16, 191, 190],
         columns: [2, 3, 2]
     },
+    socials: {
+        facebookLogin: true
+    },
     successPage: {
         keepPosting: [
             {

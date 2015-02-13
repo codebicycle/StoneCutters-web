@@ -2,7 +2,6 @@
 
 var Base = require('../../../../../common/app/bases/view').requireView('users/facebooklogin');
 var _ = require('underscore');
-var config = require('../../../../../../../shared/config');
 var asynquence = require('asynquence');
 var User = require('../../../../../../models/user');
 
@@ -12,18 +11,9 @@ module.exports = Base.extend({
     events: {
         'click [data-facebook-login]': 'facebookLogIn',
     },
-    getTemplateData: function() {
-        var data = Base.prototype.getTemplateData.call(this);
-        var location = this.app.session.get('location');
-        var facebooklogin = config.getForMarket(location.url, ['socials', 'facebookLogin'], '');
-
-        return _.extend({}, data, {
-            facebookLogin: facebooklogin
-        });
-    },
     postRender: function() {
         window.fbAsyncInit = function (){
-            FB.init({
+            window.FB.init({
                 appId      : '168791636471880',
                 cookie     : true,
                 xfbml      : true,
@@ -40,22 +30,19 @@ module.exports = Base.extend({
         }(document, 'script', 'facebook-jssdk'));
     },
     facebookLogIn: function() {
-        FB.login(this.statusChangeCallback.bind(this), {
+        window.FB.login(this.statusChangeCallback.bind(this), {
             scope: 'public_profile, email'
         });
     },
-    facebookLogOut: function() {
-
-    },
     checkLoginState: function() {
-        FB.getLoginStatus(this.statusChangeCallback.bind(this));
+        window.FB.getLoginStatus(this.statusChangeCallback.bind(this));
     },
     statusChangeCallback: function(response) {
         var token;
 
         if (response.status === 'connected') {
             token = response.authResponse.accessToken;
-            FB.api('/me', function(response) {
+            window.FB.api('/me', function(response) {
                 this.appLogIn(response, token);
             }.bind(this));
         }

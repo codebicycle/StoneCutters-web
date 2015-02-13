@@ -9,6 +9,9 @@ module.exports = {
     post_banner: {
         image: 'post-africa'
     },
+    socials: {
+        facebookLogin: true
+    },
     successPage: {
         keepPosting: [
             {

@@ -12,6 +12,9 @@ module.exports = {
             }
         }
     },
+    socials: {
+        facebookLogin: true
+    },
     successPage: {
         keepPosting: [
             {

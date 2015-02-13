@@ -1,6 +1,6 @@
 module.exports = {
     socials: {
-        facebookLogin: false,
+        facebookLogin: true,
         links: [
             {
                 name: 'facebook',

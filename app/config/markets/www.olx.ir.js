@@ -10,6 +10,9 @@ module.exports = {
             myMsgs: 15
         }
     },
+    socials: {
+        facebookLogin: true
+    },
     tracking: {
         trackers: {
             analytics: {

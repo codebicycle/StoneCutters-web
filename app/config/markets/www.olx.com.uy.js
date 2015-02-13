@@ -66,6 +66,9 @@ module.exports = {
             id: 'rhJVT5fDkWU'
         }
     ],
+    socials: {
+        facebookLogin: true
+    },
     successPage: {
         keepPosting: [
             {

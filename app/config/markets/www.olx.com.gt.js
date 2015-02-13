@@ -4,7 +4,7 @@ module.exports = {
         columns: [4, 3, 3]
     },
     socials: {
-        facebookLogin: false,
+        facebookLogin: true,
         links: [
             {
                 name: 'facebook',
