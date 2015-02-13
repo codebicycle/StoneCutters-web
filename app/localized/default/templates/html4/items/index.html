@@ -18,9 +18,7 @@
         </div>
     {% else %}
         <ul class="itemListing">
-            {{ items | log }}
             {% for item in items %}
-                {% if not item.isShop %}
                 <li>
                     <a href="{{ item | slugToUrl | link }}">
                         <div class="imageCont" style="background-image: url({{ item.thumbnail if item.thumbnail else ('/images/html4/noPhoto.png' | static) }});"></div>
@@ -36,20 +34,26 @@
                         <span>{{ item.displayLocation }}</span>
                     </div>
                 </li>
-                {% else %}
-                    <li>
-                        <a href="#">
-                            <div class="imageCont" style="background-image: url({{ item.thumbnail if item.thumbnail else ('/images/html4/noPhoto.png' | static) }});"></div>
-                        </a>
-                        <div class="itemInfo">
-                            <div class="centerCont">
+                {% if shops.length %}
+                    {% if loop.index0 and loop.index0 % 4 == 0 %}
+                        {% set shop = shops[pos] %}
+                        {% set pos = loop.index0 / 4 %}
+                        {{ loop.index0 }}
+                        {% if shop %}
+                            <li class="adLikeStore">
                                 <a href="#">
-                                    <h2>{{ item.title }}</h2>
+                                    <div class="flag" style="background-image: url({{ ('/images/html4/stores/storeFlag.png' | static) }});"></div>
+                                    <div class="imageCont" style="background-image: url({{ shop.image if shop.image else ('/images/html4/noPhoto.png' | static) }});"></div>
+                                    <div class="itemInfo">
+                                        <div class="centerCont">
+                                            <h2>{{ shop.name }}</h2>
+                                        </div>
+                                        <span>{{ shop.address }}</span>
+                                    </div>
                                 </a>
-                            </div>
-                            <span>{{ item.location }}</span>
-                        </div>
-                    </li>
+                            </li>
+                        {% endif %}
+                    {% endif %}
                 {% endif %}
             {% endfor %}
         </ul>
