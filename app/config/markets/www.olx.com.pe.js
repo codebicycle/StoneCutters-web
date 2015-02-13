@@ -3,7 +3,6 @@ module.exports = {
         image: 'post-peru'
     },
     socials: {
-        facebookLogin: true,
         links: [
             {
                 name: 'facebook',

@@ -9,8 +9,5 @@ module.exports = {
             myFavs: 15,
             myMsgs: 15
         }
-    },
-    socials: {
-        facebookLogin: true
-    },
+    }
 };

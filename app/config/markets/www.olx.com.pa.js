@@ -4,7 +4,6 @@ module.exports = {
     },
     countryMapStyle: 'special',
     socials: {
-        facebookLogin: true,
         links: [
             {
                 name: 'facebook',
