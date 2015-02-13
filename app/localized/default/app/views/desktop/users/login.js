@@ -11,7 +11,7 @@ module.exports = Base.extend({
         var data = Base.prototype.getTemplateData.call(this);
         var location = this.app.session.get('location');
         var params = this.options.params || {};
-        var facebooklogin = config.getForMarket(location.url, ['socials', 'facebookLogin'], '');
+        var facebooklogin = config.getForMarket(location.url, ['socials', 'facebookLogin'], false);
 
         return _.extend({}, data, {
             params: params,
