@@ -87,7 +87,14 @@ module.exports = Base.extend({
         'categoryReset': 'onCategoryReset',
         'errors': 'onErrors',
         'mousedown select': 'changeSelectValue',
-        'touchstart select': 'changeSelectValue'
+        'touchstart select': 'changeSelectValue',
+        'click .migration-banner-bd': 'onMigrationBannerBdClick'
+    },
+    onMigrationBannerBdClick: function(event) {
+        event.preventDefault();
+        $(window).off('beforeunload', this.onBeforeUnload);
+        $(window).off('popstate', onpopstate);
+        window.location.href = event.currentTarget.href;
     },
     changeSelectValue: function(event){
         var select = $(event.target);
