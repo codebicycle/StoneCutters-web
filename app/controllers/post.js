@@ -100,7 +100,6 @@ function flow(params, callback) {
 
         if (isPostingFlow || isDesktop || itemId) {
             promise
-
                 .then(fetch.bind(this))
                 .then(parse.bind(this));
         }
