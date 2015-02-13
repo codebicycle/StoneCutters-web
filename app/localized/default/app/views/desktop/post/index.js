@@ -54,6 +54,7 @@ module.exports = Base.extend({
         var customerContact = config.getForMarket(location.url, ['post_customer_contact'], '');
 
         return _.extend({}, data, {
+            item: this.getItem(data.item),
             customerContact: customerContact
         });
     },
