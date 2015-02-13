@@ -283,6 +283,7 @@ module.exports = {
     'myolx.Republish': 'Zamie\u015B\u0107 ponownie',
     'myolx.Send': 'Wy\u015Blij',
     'myolx.Settings': 'Ustawienia',
+    'myolx.SignInWithFacebook': 'Zaloguj do serwisu Facebook',
     'myolx.SignOut': 'Wyloguj',
     'myolx.TheAdHasBeenDeleted': 'Og\u0142oszenie zosta\u0142o usuni\u0119te',
     'myolx.ThisMessageIsRegarding': 'Ta wiadomo\u015B\u0107 dotyczy Twojego og\u0142oszenia:',

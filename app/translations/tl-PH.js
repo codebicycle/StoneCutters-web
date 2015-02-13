@@ -283,6 +283,7 @@ module.exports = {
     'myolx.Republish': 'Muling ilathala',
     'myolx.Send': 'Ipadala',
     'myolx.Settings': 'Mga Setting',
+    'myolx.SignInWithFacebook': 'Mag-sign in sa Facebook',
     'myolx.SignOut': 'Mag-sign Out',
     'myolx.TheAdHasBeenDeleted': 'Tinanggal ang patalastas',
     'myolx.ThisMessageIsRegarding': 'Ang mensaheng ito ay tungkol sa',

@@ -283,6 +283,7 @@ module.exports = {
     'myolx.Republish': 'Voltar a publicar',
     'myolx.Send': 'Enviar',
     'myolx.Settings': 'Defini\xE7\xF5es',
+    'myolx.SignInWithFacebook': 'Iniciar a sess\xE3o com Facebook',
     'myolx.SignOut': 'Sair',
     'myolx.TheAdHasBeenDeleted': 'O an\xFAncio foi eliminado',
     'myolx.ThisMessageIsRegarding': 'Esta mensagem \xE9 de leitura',

@@ -283,6 +283,7 @@ module.exports = {
     'myolx.Republish': 'Julkaise uudelleen',
     'myolx.Send': 'L\xE4het\xE4',
     'myolx.Settings': 'Asetukset',
+    'myolx.SignInWithFacebook': 'Kirjaudu sis\xE4\xE4n Facebookin kautta',
     'myolx.SignOut': 'Kirjaudu ulos',
     'myolx.TheAdHasBeenDeleted': 'Ilmoitus on poistettu',
     'myolx.ThisMessageIsRegarding': 'T\xE4m\xE4 viesti koskee aihetta ',

@@ -283,6 +283,7 @@ module.exports = {
     'myolx.Republish': '\u0110\u0103ng l\u1EA1i',
     'myolx.Send': 'G\u1EEDi',
     'myolx.Settings': 'C\xE0i \u0111\u1EB7t',
+    'myolx.SignInWithFacebook': 'Nh\u1EADp nh\u1EADp v\u1EDBi Facebook',
     'myolx.SignOut': 'Tho\xE1t',
     'myolx.TheAdHasBeenDeleted': 'Tin rao v\u1EB7t \u0111\xE3 \u0111\u01B0\u1EE3c x\xF3a',
     'myolx.ThisMessageIsRegarding': 'Tin nh\u1EAFn n\xE0y li\xEAn quan \u0111\u1EBFn',

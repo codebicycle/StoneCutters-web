@@ -283,6 +283,7 @@ module.exports = {
     'myolx.Republish': 'Objavi ponovo',
     'myolx.Send': 'Po\u0161alji',
     'myolx.Settings': 'Postavke',
+    'myolx.SignInWithFacebook': 'Prijavi me s Facebook-om',
     'myolx.SignOut': 'Odjava',
     'myolx.TheAdHasBeenDeleted': 'Oglasi su izbrisani',
     'myolx.ThisMessageIsRegarding': 'Ova poruka je u vezi',

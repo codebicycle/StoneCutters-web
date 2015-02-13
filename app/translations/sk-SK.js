@@ -283,6 +283,7 @@ module.exports = {
     'myolx.Republish': 'Znova zverejni\u0165',
     'myolx.Send': 'Odosla\u0165',
     'myolx.Settings': 'Nastavenia',
+    'myolx.SignInWithFacebook': 'Prihl\xE1si\u0165 sa do Facebooku',
     'myolx.SignOut': 'Odhl\xE1si\u0165 sa',
     'myolx.TheAdHasBeenDeleted': 'Inzer\xE1t bol vymazan\xFD',
     'myolx.ThisMessageIsRegarding': 'T\xE1to spr\xE1va sa t\xFDka',

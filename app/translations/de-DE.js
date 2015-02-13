@@ -283,6 +283,7 @@ module.exports = {
     'myolx.Republish': 'Erneut ver\xF6ffentlichen',
     'myolx.Send': 'Senden',
     'myolx.Settings': 'Einstellungen',
+    'myolx.SignInWithFacebook': 'Mit Facebook anmelden',
     'myolx.SignOut': 'Abmelden',
     'myolx.TheAdHasBeenDeleted': 'Die Annonce wurde gel\xF6scht',
     'myolx.ThisMessageIsRegarding': 'Diese Mitteilung betrifft',

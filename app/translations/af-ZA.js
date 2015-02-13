@@ -283,6 +283,7 @@ module.exports = {
     'myolx.Republish': 'Publiseer weer',
     'myolx.Send': 'Stuur',
     'myolx.Settings': 'Instellings',
+    'myolx.SignInWithFacebook': 'Teken aan by Facebook',
     'myolx.SignOut': 'Log af',
     'myolx.TheAdHasBeenDeleted': 'Die advt. is geskrap.',
     'myolx.ThisMessageIsRegarding': 'Hierdie boodskap het betrekking op',
