@@ -43,6 +43,9 @@ module.exports = Base.extend({
     },
     initialize: function() {
         Base.prototype.initialize.call(this);
+        this.pendingValidations = [];
+        this.errors = {};
+        this.formErrors = [];
         this.dictionary = translations.get(this.app.session.get('selectedLanguage'));
     },
     getTemplateData: function() {
@@ -109,6 +112,7 @@ module.exports = Base.extend({
             return field.name === 'email';
         });
         var email = field.value ? field.value.value : '';
+
 
         this.item.get('category').parentId = subcategory.parentId;
         this.item.get('category').id = subcategory.id;
@@ -376,8 +380,8 @@ module.exports = Base.extend({
             }
         }
     },
-    getItem: function() {
-        this.item = this.item || (this.options.item && this.options.item.toJSON ? this.options.item : new Item(this.options.item || {}, {
+    getItem: function(item) {
+        this.item = this.item || (item && (item.toJSON ? item : new Item(item))) || (this.options.item && this.options.item.toJSON ? this.options.item : new Item(this.options.item || {}, {
             app: this.app
         }));
         return this.item;
