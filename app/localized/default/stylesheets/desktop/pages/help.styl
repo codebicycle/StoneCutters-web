@@ -1,7 +1,6 @@
 .pages-help-view {
     clear-fix();
     .help-navigation {
-        box($lightBlue, $lightBlueBorder , 3px, 0, solid, 1px);
         float: left;
         width: 294px;
         ul {
@@ -67,10 +66,22 @@
             margin: 0;
             padding: 15px 0 15px 20px;
         }
+        .menu-box {
+            margin-bottom: 20px;
+        }
+        .blue-box {
+            box($lightBlue, $lightBlueBorder , 3px, 0, solid, 1px);
+        }
+        .grey-box {
+            box($greyBoxBg, $greyBorders , 3px, 0, solid, 1px);
+            li {
+                border-top: 1px solid $greyBorders;
+            }
+        }
 
     }
 
-    .help-content {
+    .help-about-content {
         box($white, $greyBorders , 3px, 0, solid, 1px);
         float: right;
         width: 656px;
@@ -78,7 +89,7 @@
         .help-content-display {
             display: none;
         }
-        
+
         .help-content-display-first {
             display: block;
         }
@@ -276,6 +287,268 @@
                 }
             }
         }
+
+        .about-content {
+            float: right;
+            width: 656px;
+
+            .title {
+                border-bottom: 2px solid $greyBorders;
+                font-size: $l;
+                margin: 0;
+                padding: 19px 0 18px 0;
+            }
+
+            .subtitle {
+                font-size: $l;
+                line-height: $l;
+                font-weight: bold;
+                margin: 0 0 20px;
+                color: $orange;
+            }
+
+            section {
+                margin-bottom: 35px;
+                overflow: hidden;
+                padding: 0 20px 20px;
+                &.title-section {
+                    padding: 0;
+                    h3, p{
+                        padding-left: 20px;
+                        padding-right: 20px;
+                    }
+                }
+            }
+
+            p {
+                font-size: $baseFont;
+                line-height: $l;
+            }
+
+            .box {
+                padding: 10px 15px;
+                width: 258px;
+
+                &.box-left {
+                    float: left;
+                }
+
+                &.box-right {
+                    float: right;
+                }
+
+                p {
+                    margin: 5px 0;
+                }
+
+            }
+
+            &.about {
+                .mission-container {
+                    img{
+                        width: 322px;
+                        margin: 0 auto;
+                        display: block;
+                    }
+                }
+
+                .presence-container {
+                    img {
+                        width: 100%;
+                        display: block;
+                    }
+                }
+                .history-container {
+                    img {
+                        width: 100%;
+                        display: block;
+                    }
+                }
+                .stats-container {
+                    .box {
+                        border-bottom: 1px solid $greyBorders;
+                        padding-top: 20px;
+                        padding-bottom: 20px;
+
+                        &.border-none{
+                            border-bottom: none;
+                        }
+                    }
+                    .box-title{
+                        font-size: $m;
+                        margin-bottom: 8px;
+                    }
+                    .box-numbers{
+                        font-size: $xxxl;
+                        line-height: $xl;
+                        font-weight: bold;
+                        color: #999;
+                    }
+                }
+
+                .leadership-container {
+                    .box {
+                        overflow: hidden;
+                        text-align: left;
+                        padding-left: 0;
+                        padding-right: 0;
+                        width: 288px;
+                        min-height: 110px;
+
+                        div {
+                            float: left;
+                            padding: 4px 10px;
+                            width: 183px;
+                        }
+
+                        img {
+                            float: left;
+                            display: block;
+                            width: 85px;
+                        }
+                    }
+                    .box-title {
+                        font-size: $l;
+                        line-height: $ll;
+                        font-weight: bold;
+                    }
+
+                    .box-position {
+                        font-size: $s;
+                        line-height: $m;
+                    }
+                }
+
+            }
+
+            &.why {
+                dl {
+                    margin-top: 20px;
+                }
+                ul{
+                    ul-reset();
+                    font-size: $m;
+                    line-height: $l;
+                    margin-bottom: 0px;
+                }
+                .icons {
+                    position: relative;
+                    margin-bottom: 35px;
+                    &::before {
+                        color: $green;
+                        font-size: 40px;
+                        position: absolute;
+                        left: 0;
+                        display: block;
+                    }
+
+                    p {
+                        margin: 5px 0 5px 55px;
+                        &.title-list {
+                            color: $green;
+                            font-size: $l;
+                        }
+                    }
+                }
+            }
+            &.press {
+                .user-ads {
+                    &.sources {
+                        .slide, ul,li, .arrows {
+                            height: 190px;
+                        }
+                        ul {
+                            width: 190px;
+                        }
+                        .arrows {
+                            line-height: 190px;
+                        }
+                    }
+                    &.news {
+                        .slide, ul,li, .arrows {
+                            height: 235px;
+                        }
+                        ul {
+                            width: 1510px;
+                        }
+                        .arrows {
+                            line-height: 235px;
+                        }
+
+                    }
+                    &.press {
+                        .slide, ul,li, .arrows {
+                            height: 140px;
+                        }
+                        ul {
+                            width: 945px;
+                        }
+                        .arrows {
+                            line-height: 140px;
+                        }
+                    }
+                    position: relative;
+                    .slide {
+                        width: 568px;
+                        overflow: hidden;
+                        position: relative;
+                        margin: 0 auto;
+                        ul {
+                            ul-reset();
+                            position: absolute;
+                            top: 0;
+                            left: 0;
+                            li {
+                                width: 178px;
+                                padding: 5px;
+                                float: left;
+                            }
+                            li, .items-image, img {
+                                margin: 0;
+                            }
+                            a {
+                                display: block;
+                            }
+                            a:hover{
+                                text-decoration: none;
+                            }
+                            h3{
+                                font-size: $baseFont;
+                                line-height: $l;
+                                color: $black;
+                                font-weight: normal;
+                                margin: 5px 0 10px;
+                            }
+                            p{
+                                font-size: $baseFont;
+                                margin: 0 0 5px;
+                            }
+                        }
+                    }
+                    .arrows {
+                        position: absolute;
+                        z-index: 10;
+                        cursor: pointer;
+                        color: $greyStrong;
+                        padding:0 3px;
+                        &:hover {
+                            color: $black;
+                        }
+                        &.icon-arrow-left {
+                            left: 20px;
+                        }
+                        &.icon-arrow-right {
+                            right: 20px;
+                        }
+                    }
+                }
+            }
+
+        }
+
+
+
+
     }
 
 }

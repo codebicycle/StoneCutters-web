@@ -1,26 +1,46 @@
 <div class="help-navigation">
-    <h3 class="title">{{ dictionary["misc.NeedHelp"] }}</h3>
-    <ul>
-        <li {{ 'class="selected"' if tab == 'new-olx' }} >
-            <a class="help-toggle-content icons icon-user" data-help-content="new-olx" href="#">{{ dictionary["help.NewToBrand"] }}</a>
-        </li>
-        <li>
-            <a class="help-toggle-content icons icon-list" data-help-content="ads" href="#">{{ dictionary["itemslisting.Classifieds"] }}</a>
-        </li>
-        <li {{ 'class="selected"' if tab == 'faq' }} >
-            <a class="help-toggle-content icons icon-question" data-help-content="faqs" href="#">{{ dictionary["misc.FrequentQuestions"] }}</a>
-        </li>
-        {% if isContactEnabled %}
-            <li {{ 'class="selected"' if tab == 'contact' }}>
-                <a class="help-toggle-content icons icon-chat" data-help-content="contact" href="#">{{ dictionary["contact_us.ContactBrand"] | replace('<<BRAND>>','OLX') }}</a>
+    <div class="menu-box blue-box">
+        <h3 class="title">{{ dictionary["misc.NeedHelp"] }}</h3>
+        <ul>
+            <li {{ 'class="selected"' if tab == 'new-olx' }} >
+                <a class="help-toggle-content icons icon-user" data-help-content="new-olx" data-toggle-content href="#">{{ dictionary["help.NewToBrand"] }}</a>
             </li>
-        {% endif %}
-        <li>
-            <a class="help-toggle-content icons icon-more" data-help-content="more-suggestions" href="#">{{ dictionary["help.MoreGuidelines"] }}</a>
-        </li>
-    </ul>
+            <li>
+                <a class="help-toggle-content icons icon-list" data-help-content="ads" data-toggle-content href="#">{{ dictionary["itemslisting.Classifieds"] }}</a>
+            </li>
+            <li {{ 'class="selected"' if tab == 'faq' }} >
+                <a class="help-toggle-content icons icon-question" data-help-content="faqs" data-toggle-content href="#">{{ dictionary["misc.FrequentQuestions"] }}</a>
+            </li>
+            {% if isContactEnabled %}
+                <li {{ 'class="selected"' if tab == 'contact' }}>
+                    <a class="help-toggle-content icons icon-chat" data-help-content="contact" data-toggle-content href="#">{{ dictionary["contact_us.ContactBrand"] | replace('<<BRAND>>','OLX') }}</a>
+                </li>
+            {% endif %}
+            <li>
+                <a class="help-toggle-content icons icon-more" data-help-content="more-suggestions" data-toggle-content href="#">{{ dictionary["help.MoreGuidelines"] }}</a>
+            </li>
+        </ul>
+    </div>
+    <div class="menu-box grey-box">
+        <h3 class="title">{{ dictionary["about.Company"] }}</h3>
+        <ul>
+            <li {{ 'class="selected"' if active == 'about' }}>
+                <a class="help-toggle-content icons icon-olx" href="#" data-help-content="about-us" data-toggle-content>{{ dictionary["about.AboutBrand"] | replace("<<BRAND>>","OLX") }}</a>
+            </li>
+            <li>
+                <a class="help-toggle-content icons icon-help-round" href="#" data-help-content="why" data-toggle-content >{{ dictionary["about.Why"] }}</a>
+            </li>
+            <li>
+                <a class="help-toggle-content icons icon-press" href="#" data-help-content="press" data-toggle-content>{{ dictionary["about.Press"] }}</a>
+            </li>
+            <li>
+                <a class="help-toggle-content icons icon-chat" href="http://blog.olx.com/" target="_BLANK">{{ dictionary["about.Blog"] }}</a>
+            </li>
+        </ul>
+    </div>
 </div>
-<div class="help-content">
+
+<div class="help-about-content">
     <div id="new-olx" class="help-content-display" {{ 'style="display:block"' if tab == 'new-olx' }}>
         <h3 class="title">{{ dictionary["help.NewToBrand"] }}</h3>
         <div class="faqs">
@@ -248,6 +268,396 @@
             </div>
         </div>
     </div>
+
+    <div id="about-us" class="about-content about help-content-display" {{ 'style="display:block"' if active == 'about' }}>
+
+        <section class="title-section">
+            <h3 class="title">{{ dictionary["about.AboutBrand"] | replace("<<BRAND>>","OLX") }}</h3>
+            <p>{{ dictionary["about.AboutText1"] | replace("<<BRAND>>","OLX") }}.</p>
+            <p>{{ dictionary["about.AboutText2"] | replace("<<BRAND>>","OLX") }}.</p>
+        </section>
+
+        <section class="mission-container">
+            <h4 class="subtitle">{{ dictionary["about.Mission"] }}</h4>
+            <img src="{{ ('/images/desktop/about_us/mission.jpg') | static }}" >
+            <p>{{ dictionary["about.MissionText1"] }}.</p>
+        </section>
+
+        <section class="presence-container">
+            <h4 class="subtitle">{{ dictionary["about.Presence"] }}</h4>
+            <img src="{{ ('/images/desktop/about_us/presence.jpg') | static }}" >
+        </section>
+
+        <section class="history-container">
+            <h4 class="subtitle">{{ dictionary["about.History"] }}</h4>
+            <img src="{{ ('/images/desktop/about_us/timeline-' + selectedLanguage + '.jpg') | static }}" >
+        </section>
+
+        <section class="stats-container">
+            <h4 class="subtitle">{{ dictionary["about.Stats"] }}</h4>
+            <div class="container-box">
+                <div class="box box-left">
+                    <p class="box-title">{{ dictionary["about.Countries"] }}</p>
+                    <p class="box-numbers">{{ dictionary["about.More40"] }}</p>
+                </div>
+                <div class="box box-right">
+                    <p class="box-title">{{ dictionary["about.Languages"] }}</p>
+                    <p class="box-numbers">{{ dictionary["about.More50"] }}</p>
+                </div>
+                <div class="box box-left">
+                    <p class="box-title">{{ dictionary["about.MonthlyActiveUsers"] }}</p>
+                    <p class="box-numbers">{{ dictionary["about.More200"] }}</p>
+                </div>
+                <div class="box box-right">
+                    <p class="box-title">{{ dictionary["about.Employees"] }}</p>
+                    <p class="box-numbers">{{ dictionary["about.More1200"] }}</p>
+                </div>
+                <div class="box box-left border-none">
+                    <p class="box-title">{{ dictionary["about.NewMonthlyListings"] }}</p>
+                    <p class="box-numbers">{{ dictionary["about.More24800"] }}</p>
+                </div>
+                <div class="box box-right border-none">
+                    <p class="box-title">{{ dictionary["about.MonthlyTransactions"] }}</p>
+                    <p class="box-numbers">{{ dictionary["about.More8300"] }}</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="leadership-container">
+            <h4 class="subtitle">{{ dictionary["about.Leadership"] }}</h4>
+            <div class="box box-left">
+                <img src="{{ ('/images/desktop/about_us/alec-oxenford.gif') | static }}" >
+                <div>
+                    <p class="box-title">Alec Oxenford</p>
+                    <p class="box-position">Co-Founder and CEO Americas{#{ trans('about.CoFounderCeoAmericas') }#}</p>
+                </div>
+            </div>
+            <div class="box box-right">
+                <img src="{{ ('/images/desktop/about_us/amarjit-batra.gif') | static }}" >
+                <div>
+                    <p class="box-title">Amarjit Batra</p>
+                    <p class="box-position">CEO Greater India{#{ trans('about.CeoGIndia') }#}</p>
+                </div>
+            </div>
+            <div class="box box-left">
+                <img src="{{ ('/images/desktop/about_us/ariel-lobowits.gif') | static }}" >
+                <div>
+                    <p class="box-title">Ariel Lebowits</p>
+                    <p class="box-position">CFO</p>
+                </div>
+            </div>
+            <div class="box box-right">
+                <img src="{{ ('/images/desktop/about_us/brad-porteus.gif') | static }}" >
+                <div>
+                    <p class="box-title">Brad Porteus</p>
+                    <p class="box-position">CEO South East Asia{#{ trans('about.CeoSEAsia') }#}</p>
+                </div>
+            </div>
+            <div class="box box-left">
+                <img src="{{ ('/images/desktop/about_us/craig-allwright.gif') | static }}" >
+                <div>
+                    <p class="box-title">Craig Allwright</p>
+                    <p class="box-position">General Counsel</p>
+                </div>
+            </div>
+            <div class="box box-right">
+                <img src="{{ ('/images/desktop/about_us/mark-jacobs.gif') | static }}" >
+                <div>
+                    <p class="box-title">Mark Jacobs</p>
+                    <p class="box-position">HR Leader{#{ trans('about.HrLeader') }#}</p>
+                </div>
+            </div>
+            <div class="box box-left">
+                <img src="{{ ('/images/desktop/about_us/martin-kroon.gif') | static }}" >
+                <div>
+                    <p class="box-title">Martin Kroon</p>
+                    <p class="box-position">Director Shared Services</p>
+                </div>
+            </div>
+            <div class="box box-right">
+                <img src="{{ ('/images/desktop/about_us/martin-sheepbouwer.gif') | static }}" >
+                <div>
+                    <p class="box-title">Martin Scheepbouwer</p>
+                    <p class="box-position">CEO Classifieds{#{ trans('about.CeoClassifieds') }#}</p>
+                </div>
+            </div>
+            <div class="box box-left">
+                <img src="{{ ('/images/desktop/about_us/miguel-mascarenhas.gif') | static }}" >
+                <div>
+                    <p class="box-title">Miguel Mascarenhas</p>
+                    <p class="box-position">CTO</p>
+                </div>
+            </div>
+            <div class="box box-right">
+                <img src="{{ ('/images/desktop/about_us/reolof-lettinga.gif') | static }}" >
+                <div>
+                    <p class="box-title">Roelof Lettinga</p>
+                    <p class="box-position">Strategy and Operations{#{ trans('about.StrategyOperations') }#}</p>
+                </div>
+            </div>
+            <div class="box box-left">
+                <img src="{{ ('/images/desktop/about_us/tim-hilpert.gif') | static }}" >
+                <div>
+                    <p class="box-title">Tim Hilpert</p>
+                    <p class="box-position">CEO Europe Middle East</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div id="why" class="about-content why help-content-display">
+
+        <section class="title-section">
+            <h3 class="title">{{ dictionary["about.Why"] }}</h3>
+        </section>
+
+        <section>
+            <ul>
+                <li class="icons icon-piggy-bank">
+                    <p class="title-list">{{ dictionary["about.FreeNoCommission"] }}</p>
+                    <p>{{ dictionary["about.CompletelyFree"] }}.</p>
+                </li>
+                <li class="icons icon-like">
+                    <p class="title-list">{{ dictionary["about.ItsSimple"] }}</p>
+                    <p>{{ dictionary["about.ItsEasy"] }}.</p>
+                </li>
+                <li class="icons icon-clock">
+                    <p class="title-list">{{ dictionary["about.ItsFast"] }}</p>
+                    <p>{{ dictionary["about.ItsFast-Reason"] }}.</p>
+                </li>
+                <li class="icons icon-tag">
+                    <p class="title-list">{{ dictionary["about.UniqueDeals"] }}</p>
+                    <p>{{ dictionary["about.SaveMoney"] }}.</p>
+                </li>
+                <li class="icons icon-search">
+                    <p class="title-list">{{ dictionary["about.FindEverything"] }}</p>
+                    <p>{{ dictionary["about.FindEverything1"] }}.</p>
+                </li>
+                <li class="icons icon-lock">
+                    <p class="title-list">{{ dictionary["about.BeControl"] }}</p>
+                    <p>{{ dictionary["about.ControlSteps"] }}.</p>
+                </li>
+                <li class="icons icon-money-round">
+                    <p class="title-list">{{ dictionary["about.MakeMoney"] }}</p>
+                    <p>{{ dictionary["about.MakeMoneyText"] }}.</p>
+                </li>
+                <li class="icons icon-mobile">
+                    <p class="title-list">{{ dictionary["about.AccessAnytime"] }}</p>
+                    <p>{{ dictionary["about.CuttingEdgeApps"] }}.</p>
+                </li>
+                <li class="icons icon-community2">
+                    <p class="title-list">{{ dictionary["about.SupportLocalCommunity"] }}</p>
+                    <p>{{ dictionary["about.SupportLocalCommunity1"] }}.</p>
+                </li>
+                <li class="icons icon-earth">
+                    <p class="title-list">{{ dictionary["about.EcoFriendly"] }}</p>
+                    <p>{{ dictionary["about.EcoFriendlyText"] }}.</p>
+                </li>
+            </ul>
+        </section>
+
+    </div>
+
+    <div id="press" class="about-content press help-content-display">
+
+        <section class="title-section">
+            <h3 class="title">{{ dictionary["about.Press"] }}</h3>
+        </section>
+
+        <section class="user-ads news">
+            <h4 class="subtitle">{{ dictionary["about.InTheNews"] }}</h4>
+            <span class="icons icon-arrow-left arrows" data-navigate="left" data-section="news"></span>
+            <span class="icons icon-arrow-right arrows" data-navigate="right" data-section="news"></span>
+            <div class="slide">
+                <ul class="" data-items-slide>
+                    <li>
+                        <a href="http://www.forbes.com/sites/allenadamson/2014/11/25/what-top-three-factors-lead-to-a-new-brands-success-ask-olx/" target="_BLANK">
+                            <figure class="items-image">
+                                <img src="{{ ('/images/desktop/about_us/press-forbes.jpg') | static }}" alt="" />
+                            </figure>
+                            <h3>What Top Three Factors Lead to a New Brand's Success? Ask OLX</h3>
+                            <p>
+                                New York
+                            </p>
+                            <p class="date">
+                                November 25, 2014, 3:19 PM EDT
+                            </p>
+                        </a>
+                    </li><!--
+                    --><li>
+                        <a href="http://fortune.com/2014/10/29/olx-emerging-markets/" title="" target="_BLANK">
+                            <figure class="items-image">
+                                <img src="{{ ('/images/desktop/about_us/press-fortune.jpg') | static }}" alt="" />
+                            </figure>
+                            <h3>Meet OLX, the biggest Web company you've never heard of</h3>
+                            <p>
+                                New York
+                            </p>
+                            <p class="date">
+                                October 29, 2014, 2:35 PM EDT
+                            </p>
+                        </a>
+                    </li><!--
+                    --><li>
+                        <a href="http://video.foxbusiness.com/v/3799388101001/the-craigslist-of-emerging-markets/" title="" target="_BLANK">
+                            <figure class="items-image">
+                                <img src="{{ ('/images/desktop/about_us/press-fox.jpg') | static }}" alt="" />
+                            </figure>
+                            <h3>The Craigslist of emerging markets</h3>
+                            <p>
+                                New York
+                            </p>
+                            <p class="date">
+                                September 22, 2014
+                            </p>
+                        </a>
+                    </li><!--
+                    --><li>
+                        <a href="https://www.youtube.com/watch?v=egMtJzAF86c" title="" target="_BLANK">
+                            <figure class="items-image">
+                                <img src="{{ ('/images/desktop/about_us/press-cnn.jpg') | static }}" alt="" />
+                            </figure>
+                            <h3>CNN - OLX. Alec Oxenford y su emprendimiento tecnológico</h3>
+                            <p>
+                                Buenos Aires, Argentina
+                            </p>
+                            <p class="date">
+                                Agosto 19, 2014
+                            </p>
+                        </a>
+                    </li><!--
+                    --><li>
+                        <a href="http://www1.folha.uol.com.br/mercado/2014/11/1548165-olx-e-bomnegociocom-fecham-acordo-para-fortalecer-classificados-on-line.shtml" title="" target="_BLANK">
+                            <figure class="items-image">
+                                <img src="{{ ('/images/desktop/about_us/press-folha.jpg') | static }}" alt="" />
+                            </figure>
+                            <h3>OLX e bomnegócio.com fecham acordo para fortalecer classificados on-line</h3>
+                            <p>
+                                São Paulo, Brazil
+                            </p>
+                            <p class="date">
+                                November 14, 2014
+                            </p>
+                        </a>
+                    </li><!--
+                    --><li>
+                        <a href="http://yourstory.com/2013/08/naspers-backed-olx-claims-to-have-60-market-share-in-indian-online-classifieds/" title="" target="_BLANK">
+                            <figure class="items-image">
+                                <img src="{{ ('/images/desktop/about_us/press-yourstory.jpg') | static }}" alt="" />
+                            </figure>
+                            <h3>A sharp focus on C2C commerce helps OLX India achieve</h3>
+                            <p>
+                                India
+                            </p>
+                            <p class="date">
+                                August 28, 2013
+                            </p>
+                        </a>
+                    </li><!--
+                    --><li>
+                        <a href="http://businesstoday.co.ke/news/news/1416837689/valuable-lesson-bred-olx-kenya-success" title="" target="_BLANK">
+                            <figure class="items-image">
+                                <img src="{{ ('/images/desktop/about_us/press-businesstoday.jpg') | static }}" alt="" />
+                            </figure>
+                            <h3>Valuable lessons that bred OLX's huge success</h3>
+                            <p>
+                                Kenya
+                            </p>
+                            <p class="date">
+                                November 24, 2014
+                            </p>
+                        </a>
+                    </li><!--
+                    --><li>
+                        <a href="http://ain.ua/2014/11/19/551039" title="" target="_BLANK">
+                            <figure class="items-image">
+                                <img src="{{ ('/images/desktop/about_us/press-ain.jpg') | static }}" alt="" />
+                            </figure>
+                            <h3>Sergey Gapochenko: How OLX.ua (ex-Slando) in crisis</h3>
+                            <p>
+                                Ukraine
+                            </p>
+                            <p class="date">
+                                November 19, 2014
+                            </p>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </section>
+        <section class="user-ads press">
+            <h4 class="subtitle">{{ dictionary["about.PressReleases"] }}</h4>
+            <span class="icons icon-arrow-left arrows" data-navigate="left" data-section="press"></span>
+            <span class="icons icon-arrow-right arrows" data-navigate="right" data-section="press"></span>
+            <div class="slide">
+                <ul class="" data-items-slide>
+                    <li>
+                        <a href="http://www.businesswire.com/news/home/20141222005051/en/OLX-Celebrates-Successful-2014-Release-Year-End-Metrics#.VLAbZorF8gB" title="" target="_BLANK">
+                            <h3>OLX Celebrates Successful 2014 with Release of New, Year-End Metrics</h3>
+                            <p class="items-price">
+                                December 22, 2014
+                            </p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="http://www.businesswire.com/news/home/20141209006439/en/OLX-Partners-Facebook-Offer-Free-Access-Online#.VLAf_YrF8gB" title="" target="_BLANK">
+                            <h3>OLX Partners with Facebook to Offer Free Access to Online Classifieds in Emerging Markets via Internet.org</h3>
+                            <p class="items-price">
+                                December 09, 2014
+                            </p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="http://www.businesswire.com/news/home/20140916005335/en/OLX-Announces-Expansion-Eleven-International-Markets#.VLRHomSG_9t" title="" target="_BLANK">
+                            <h3>OLX Surpasses 200 Million Active Monthly Users Worldwide.</h3>
+                            <p class="items-price">
+                                October 29, 2014
+                            </p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="http://www.businesswire.com/news/home/20140916005335/en/OLX-Announces-Expansion-Eleven-International-Markets#.VGIMr76nDjI" title="" target="_BLANK">
+                            <h3>OLX Announces Expansion in Eleven International Markets.</h3>
+                            <p class="items-price">
+                                September 16, 2014
+                            </p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="http://www.businesswire.com/news/home/20140815005044/en/OLX-Releases-Updated-Android-App-Optimized-Wireless#.VLAiQ4rF8gB" title="" target="_BLANK">
+                            <h3>OLX Releases Updated Android App Optimized for All Wireless Connection Speeds</h3>
+                            <p class="items-price">
+                                August 15, 2014
+                            </p>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+        </section>
+        <section class="user-ads sources">
+            <h4 class="subtitle">{{ dictionary["about.MediaResources"] }}</h4>
+            {#<span class="icons icon-arrow-left arrows" data-navigate="left" data-section="sources"></span>
+            <span class="icons icon-arrow-right arrows" data-navigate="right" data-section="sources"></span>#}
+            <div class="slide">
+                <ul class="" data-items-slide>
+                    <li>
+                        <a href="http://brand.olx.com/brand-manifesto/download/logotype.zip" title="" target="_BLANK">
+                            <figure class="items-image">
+                                <img src="{{ ('/images/desktop/about_us/logo.jpg') | static }}" alt="" />
+                            </figure>
+                            <h3>Logotype</h3>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+        </section>
+
+
+
+    </div>
+
 </div>
 
 {% view 'partials/tracking' %}
