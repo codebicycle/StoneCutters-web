@@ -54,14 +54,9 @@ module.exports = {
             hydra: {
                 enabled: false
             },
-            tagmanager: {
-                enabled: false
-            },
-            ninja: {
-                enabled: true
-            },
             ati: {
                 enabled: true,
+                platforms: ['html5', 'html4', 'wap'],
                 server: {
                     enabled: true,
                     platforms: ['html5', 'html4', 'wap'],
@@ -74,6 +69,7 @@ module.exports = {
             },
             analytics: {
                 enabled: true,
+                platforms: ['html5', 'html4', 'wap'],
                 server: {
                     enabled: true,
                     platforms: ['html5', 'html4', 'wap'],
@@ -83,6 +79,12 @@ module.exports = {
                     enabled: true,
                     platforms: ['html5']
                 }
+            },
+            ninja: {
+                enabled: true
+            },
+            tagmanager: {
+                enabled: false
             }
         }
     }
