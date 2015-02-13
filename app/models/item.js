@@ -28,7 +28,8 @@ module.exports = Base.extend({
     logPost: logPost,
     logPostImages: logPostImages,
     toData: toData,
-    remove: remove
+    remove: remove,
+    rebump: rebump
 });
 
 module.exports.id = 'Item';
@@ -191,8 +192,9 @@ function postImages(done) {
 
 function postFields(done) {
     var id = this.get('id');
-    var sk = this.get('sk');
     var user = this.app.session.get('user');
+    var renew =  this.get('renew') || false;
+    var action = 'edit';
     var query = {
         postingSession: this.get('postingSession'),
         languageId: this.app.session.get('languageId'),
@@ -200,18 +202,21 @@ function postFields(done) {
     };
     var data;
 
+    if(renew) {
+        action = 'renew';
+    }
     if (!id) {
         query.intent = 'create';
     }
     if (user) {
         query.token = user.token;
     }
-    else if (id && sk) {
-        query.securityKey = sk;
-        this.unset('sk');
+    else if (id) {
+        query.securityKey = this.get('securityKey');
     }
+
     data = this.toData(true);
-    helpers.dataAdapter.post(this.app.req, '/items' + (!id ? '' : ['', id, 'edit'].join('/')), {
+    helpers.dataAdapter.post(this.app.req, '/items' + (!id ? '' : ['', id, action].join('/')), {
         data: data,
         query: query
     }, callback.bind(this));
@@ -305,6 +310,7 @@ function toData(includeImages) {
     else {
         delete data.images;
     }
+    delete data.securityKey;
     delete data.category;
     delete data.price;
     delete data.optionals;
@@ -337,6 +343,23 @@ function remove(reason, comment, done) {
 
     function callback(err) {
         this.set('status', 'closed');
+        this.errfcb(done)(err);
+    }
+}
+
+function rebump(done) {
+      helpers.dataAdapter.post(this.app.req, '/items/' + this.get('id') + '/rebump', {
+        query: {
+            token: (this.app.session.get('user') || {}).token,
+            postingSession: this.get('postingSession'),
+            platform: this.app.session.get('platform')
+        },
+        data: {
+            location: this.app.session.get('location').url
+        }
+    }, callback.bind(this));
+
+    function callback(err, response) {
         this.errfcb(done)(err);
     }
 }
