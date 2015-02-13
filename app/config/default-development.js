@@ -31,9 +31,9 @@ module.exports = {
         type: 'development'
     },
     localization: {
-        wap: ['www.olx.com.br', 'www.olx.co.za', 'www.olx.ir', 'www.olx.hn', 'www.olx.com.bd'],
-        html4: ['www.olx.com.br', 'www.olx.co.za', 'www.olx.ir', 'www.olx.hn', 'www.olx.com.bd'],
-        html5: ['www.olx.com.br', 'www.olx.ir', 'www.olx.hn', 'www.olx.com.bd'],
+        wap: ['www.olx.com.br', 'www.olx.co.za', 'www.olx.ir', 'www.olx.hn'],
+        html4: ['www.olx.com.br', 'www.olx.co.za', 'www.olx.ir', 'www.olx.hn'],
+        html5: ['www.olx.com.br', 'www.olx.ir', 'www.olx.hn'],
         desktop: ['www.olx.com.bo']
     },
     icons: {
@@ -129,7 +129,7 @@ module.exports = {
         desktop: {
             contactForm: {
                 worldwide: false,
-                countries: ['www.olx.co.cr']
+                countries: ['www.olx.co.cr', 'www.olx.com.uy', 'www.olx.com.pa']
             }
         }
     },

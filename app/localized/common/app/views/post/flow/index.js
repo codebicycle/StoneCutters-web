@@ -8,8 +8,12 @@ module.exports = Base.extend({
     id: 'posting-flow',
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
+        var languageAbbreviation = this.app.session.get('languages')._byId[this.app.session.get('selectedLanguage')].isocode.toLowerCase();
 
-        return _.extend({}, data, {});
+        return _.extend({}, data, {
+            languageAbbreviation: languageAbbreviation,
+            isBangladesh: this.app.session.get('location').url === 'www.olx.com.bd'
+        });
     }
 });
 
