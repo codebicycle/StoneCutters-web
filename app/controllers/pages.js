@@ -53,8 +53,10 @@ function help(params, callback) {
 
         if (active && active !== 'about' && !isContactEnabled) {
             tab = 'faq';
-        } else if (active) {
+        } else if (active && active !== 'about') {
             tab = 'contact';
+        } else if ( active === 'about' ){
+            tab = 'about';
         }
 
         // Delete this callback
