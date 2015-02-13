@@ -20,7 +20,9 @@ module.exports = {
     messages: middlewares(messages),
     readmessages: middlewares(readmessages),
     conversations: middlewares(conversations),
-    conversation: middlewares(conversation)
+    conversation: middlewares(conversation),
+    unsubscribe: middlewares(unsubscribe),
+    report: middlewares(report)
 };
 
 function register(params, callback) {
@@ -796,5 +798,21 @@ function conversation(params, callback) {
             .then(fetch)
             .then(paginate)
             .val(success);
+    }
+}
+
+function report(params, callback) {
+    helpers.controllers.control.call(this, params, controller);
+
+    function controller() {
+        callback(null, {});
+    }
+}
+
+function unsubscribe(params, callback) {
+    helpers.controllers.control.call(this, params, controller);
+
+    function controller() {
+        callback(null, {});
     }
 }

@@ -46,6 +46,12 @@ module.exports = {
             'myolx/conversations'
         ]
     },
+    'users#report': {
+        url: 'myolx/conversation/report/:hash'
+    },
+    'users#unsubscribe': {
+        url: 'myolx/conversation/unsubscribe/:hash'
+    },
     'users#conversation': {
         urls: [
             'myolx/conversation/:threadId-p-:page([0-9]+)',
