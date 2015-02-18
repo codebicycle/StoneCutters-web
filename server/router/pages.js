@@ -14,14 +14,13 @@ module.exports = function pagesRouter(app, dataAdapter) {
         tag: 'li',
         html: '<strong>${key}:</strong> ${value}'
     };
-    var hostname = require('os').hostname();
+    var hostname = require('os').hostname().replace(/^[0-9]+-/, '');
     var version = configClient.get(['deploy', 'version'], '1.1.dev').split('.').pop();
 
     (function health() {
         app.get('/health', handler);
 
         function handler(req, res) {
-            statsd.gauge([hostname, 'all', 'health'], 1);
             if (!isNaN(version)) {
                 statsd.gauge([hostname, 'all', 'version'], version);
             }
