@@ -59,6 +59,7 @@ module.exports = {
     'itemslisting.NewlyListed': 'Nov\u011B za\u0159azeno',
     'itemslisting.NewShareThisAd': 'Sd\xEDlet tento inzer\xE1t',
     'itemslisting.Next': 'N\xE1sleduj\xEDc\xED',
+    'itemslisting.Of': 'z',
     'itemslisting.PendingAd': 'Inzer\xE1t je zpracov\xE1v\xE1n',
     'itemslisting.PerWeek': 'T\xFDdn\u011B',
     'itemslisting.Previous': 'P\u0159edchoz\xED',

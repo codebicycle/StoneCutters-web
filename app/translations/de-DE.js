@@ -59,6 +59,7 @@ module.exports = {
     'itemslisting.NewlyListed': 'Zeit: neu eingestellte Angebote',
     'itemslisting.NewShareThisAd': 'Annonce mit anderen teilen',
     'itemslisting.Next': 'N&#228;chste Seite',
+    'itemslisting.Of': 'von',
     'itemslisting.PendingAd': 'Annonce, deren Aktivierung noch aussteht',
     'itemslisting.PerWeek': 'Pro Woche',
     'itemslisting.Previous': 'Vorige Seite',

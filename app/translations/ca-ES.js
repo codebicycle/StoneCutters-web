@@ -59,6 +59,7 @@ module.exports = {
     'itemslisting.NewlyListed': 'Nova llista',
     'itemslisting.NewShareThisAd': 'Compartir aquest anunci',
     'itemslisting.Next': 'Seg\xFCent',
+    'itemslisting.Of': 'de',
     'itemslisting.PendingAd': 'Anunci pendent',
     'itemslisting.PerWeek': 'Setmanalment',
     'itemslisting.Previous': 'Anterior',

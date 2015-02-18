@@ -59,6 +59,7 @@ module.exports = {
     'itemslisting.NewlyListed': 'Nyligen upplagd',
     'itemslisting.NewShareThisAd': 'Dela denna Annons',
     'itemslisting.Next': 'N\xE4sta',
+    'itemslisting.Of': 'av',
     'itemslisting.PendingAd': 'P\xE5g\xE5ende annons',
     'itemslisting.PerWeek': 'Per vecka',
     'itemslisting.Previous': 'F\xF6reg\xE5ende',

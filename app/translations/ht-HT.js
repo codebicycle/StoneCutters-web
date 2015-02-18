@@ -59,6 +59,7 @@ module.exports = {
     'itemslisting.NewlyListed': 'Sa ki pi resan yo',
     'itemslisting.NewShareThisAd': 'Pataje Anons sa a',
     'itemslisting.Next': 'Pwochen',
+    'itemslisting.Of': 'de',
     'itemslisting.PendingAd': 'Reklam an atant',
     'itemslisting.PerWeek': 'Pa sem\xE8n',
     'itemslisting.Previous': 'Avan',

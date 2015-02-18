@@ -59,6 +59,7 @@ module.exports = {
     'itemslisting.NewlyListed': 'Mpya Zilizoorodheshwa',
     'itemslisting.NewShareThisAd': 'Shriki tangazi hili',
     'itemslisting.Next': 'Ifuatayo',
+    'itemslisting.Of': 'ya',
     'itemslisting.PendingAd': 'Tangazo Linasubiri',
     'itemslisting.PerWeek': 'Kila Wiki',
     'itemslisting.Previous': 'Awali',

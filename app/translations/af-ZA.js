@@ -59,6 +59,7 @@ module.exports = {
     'itemslisting.NewlyListed': 'Nuutgelys',
     'itemslisting.NewShareThisAd': 'Deel hierdie Advt. met ander',
     'itemslisting.Next': 'Volgende',
+    'itemslisting.Of': 'van',
     'itemslisting.PendingAd': 'Hangende Advt.',
     'itemslisting.PerWeek': 'Per Week',
     'itemslisting.Previous': 'Vorige',
