@@ -3,6 +3,7 @@
     {% include (template + '/partials/filterorder.html') %}
 {% endif %}
 <section id="itemListing">
+    {% view 'partials/adserving', 'listing_mobiletop' %}
     {% if meta.total == 0 %}
         <div class="emtyList" data-qa="no-results-found">
             <div></div>

@@ -16,7 +16,7 @@ module.exports = {
         },
         params: {
             container: '[slot_empty]',
-            number: 3,
+            //number: 3,
             width: '100%',
             fontFamily: 'arial',
             rolloverLinkUnderline: false,
@@ -29,7 +29,7 @@ module.exports = {
             colorDomainLink: '#999',
             fontSizeDescription: 12,
             lineHeightDescription: 16,
-            colorText: '#999',
+            //colorText: '#999',
             colorAdSeparator: '#CCC',
             verticalSpacing: 2,
             rolloverAdBackgroundColor: '#FFF',
@@ -41,7 +41,7 @@ module.exports = {
     },
     'custom': {
         params: {
-            number: 3,
+            //number: 1,
             fontSizeTitle: 18,
             adIconLocation: 'ad-left',
             adIconWidth: 143,
@@ -50,6 +50,12 @@ module.exports = {
             adIconSpacingBefore: 6,
             adIconSpacingAfter: 15,
             adIconUrl: 'http://afs.googleusercontent.com/olx/olx_[langcode].png'
+        }
+    },
+    'webmobile': {
+        params: {
+            number: 1,
+            colorText: '#FF0000'
         }
     },
     language: {

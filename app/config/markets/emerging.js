@@ -24,6 +24,11 @@ module.exports = {
                     format: 'custom',
                     location: 'Top'
                 },
+                mobiletop: {
+                    service: 'CSA',
+                    format: 'webmobile',
+                    location: 'Top'
+                },
                 side: {
                     service: 'AFC',
                     format: 'WideSkyscraper',
