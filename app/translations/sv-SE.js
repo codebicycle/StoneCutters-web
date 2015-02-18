@@ -238,6 +238,7 @@ module.exports = {
     'item.Rejected': 'F\xF6rkastad',
     'item.RemoveFromFavorites': 'Ta bort fr\xE5n favoriter',
     'item.SeeMoreAds': 'Visa fler annonser i <<LINK_TO_CATEGORY>>',
+    'item.SelectA_Neighborhood': 'V\xE4lj ett grannskap',
     'item.ShareAd': 'Dela annons',
     'item.ThisAdIsNoLongerAvailable': 'Denna annons \xE4r inte l\xE4ngre tillg\xE4nglig',
     'item.ViewBiggerMap': 'Se st\xF6rre karta',

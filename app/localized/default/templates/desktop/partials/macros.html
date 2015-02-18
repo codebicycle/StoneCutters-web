@@ -98,7 +98,7 @@
 
 {% macro Field(hint = false, field) %}
     <fieldset class="field-wrapper{{ ' hide' if field.hide }}">
-        {% if field.label %}<label for="field-{{ field.name }}" class="field-label">{% if field.mandatory == true or field.mandatory == 'true' %}* {% endif %}{{ field.label }}</label>{% endif %}
+        {% if field.label %}<label for="field-{{ field.name }}" class="field-label">{% if field.mandatory == true or field.mandatory == 'true' or field.name == 'neighborhood' %}* {% endif %}{{ field.label }}</label>{% endif %}
         <div class="field-controls">
             {% if field.fieldType == 'text' and field.name == 'description' %}
                 {{ Textarea(name = field.name, required = field.mandatory, value = field.value) }}

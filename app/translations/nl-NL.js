@@ -238,6 +238,7 @@ module.exports = {
     'item.Rejected': 'Geweigerd',
     'item.RemoveFromFavorites': 'Uit favorieten verwijderen',
     'item.SeeMoreAds': 'Bekijk meer advertenties in <<LINK_TO_CATEGORY>>',
+    'item.SelectA_Neighborhood': 'Kies een buurt',
     'item.ShareAd': 'Advertentie delen',
     'item.ThisAdIsNoLongerAvailable': 'Deze advertentie is niet meer beschikbaar',
     'item.ViewBiggerMap': 'Grotere kaart bekijken',

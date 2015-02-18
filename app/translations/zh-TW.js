@@ -238,6 +238,7 @@ module.exports = {
     'item.Rejected': '\u88AB\u62D2\u7D55',
     'item.RemoveFromFavorites': '\u5F9E\u6536\u85CF\u593E\u4E2D\u522A\u9664',
     'item.SeeMoreAds': '\u5728 <<LINK_TO_CATEGORY>>\u67E5\u770B\u66F4\u591A\u5EE3\u544A',
+    'item.SelectA_Neighborhood': '\u9078\u64C7\u4E00\u500B\u793E\u5340',
     'item.ShareAd': '\u5206\u4EAB\u5206\u985E\u5EE3\u544A',
     'item.ThisAdIsNoLongerAvailable': '\u9019\u500B\u5EE3\u544A\u5DF2\u7D93\u4E0D\u5B58\u5728',
     'item.ViewBiggerMap': '\u67E5\u770B\u66F4\u5927\u7684\u5730\u5716',

@@ -238,6 +238,7 @@ module.exports = {
     'item.Rejected': 'Elutas\xEDtva',
     'item.RemoveFromFavorites': 'T\xF6rl\xE9s a kedvencekb\u0151l',
     'item.SeeMoreAds': 'Tov\xE1bbi hirdet\xE9sek: <<LINK_TO_CATEGORY>>',
+    'item.SelectA_Neighborhood': 'V\xE1lasszon k\xF6rny\xE9ket',
     'item.ShareAd': 'Hirdet\xE9s megoszt\xE1sa',
     'item.ThisAdIsNoLongerAvailable': 'A hirdet\xE9s m\xE1r nem el\xE9rhet\u0151',
     'item.ViewBiggerMap': 'Nagyobb t\xE9rk\xE9p megtekint\xE9se',

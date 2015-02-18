@@ -238,6 +238,7 @@ module.exports = {
     'item.Rejected': 'Zamietnut\xFD',
     'item.RemoveFromFavorites': 'Odobra\u0165 z ob\u013E\xFAben\xFDch',
     'item.SeeMoreAds': 'Pozrie\u0165 viac inzer\xE1tov v kateg\xF3rii <<LINK_TO_CATEGORY>>',
+    'item.SelectA_Neighborhood': 'Zvo\u013Ete lokalitu',
     'item.ShareAd': 'podeli\u0165 sa o reklamu',
     'item.ThisAdIsNoLongerAvailable': 'Toto ozn\xE1menie u\u017E nie je dostupn\xE9.',
     'item.ViewBiggerMap': 'Zobrazi\u0165 v\xE4\u010D\u0161iu mapu',

@@ -238,6 +238,7 @@ module.exports = {
     'item.Rejected': 'Recusado',
     'item.RemoveFromFavorites': 'Remover dos favoritos',
     'item.SeeMoreAds': 'Veja mais an\xFAncios em <<LINK_TO_CATEGORY>>',
+    'item.SelectA_Neighborhood': 'Selecione um bairro',
     'item.ShareAd': 'Compartilhar an\xFAncio',
     'item.ThisAdIsNoLongerAvailable': 'Esse an\xFAncio n\xE3o est\xE1 mais dispon\xEDvel',
     'item.ViewBiggerMap': 'Ver Mapa Maior',
