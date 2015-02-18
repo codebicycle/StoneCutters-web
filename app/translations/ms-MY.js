@@ -238,6 +238,7 @@ module.exports = {
     'item.Rejected': 'Ditolak',
     'item.RemoveFromFavorites': 'Alih keluar daripada kegemaran',
     'item.SeeMoreAds': 'Lihat lebih banyak iklan dalam <<LINK_TO_CATEGORY>>',
+    'item.SelectA_Neighborhood': 'Pilih Kejiranan',
     'item.ShareAd': 'Kongsi iklan',
     'item.ThisAdIsNoLongerAvailable': 'Iklan ini kini sudah tiada.',
     'item.ViewBiggerMap': 'Lihat Peta yang Lebih Besar',

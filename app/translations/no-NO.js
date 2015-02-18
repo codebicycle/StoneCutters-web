@@ -238,6 +238,7 @@ module.exports = {
     'item.Rejected': 'Avvist',
     'item.RemoveFromFavorites': 'Fjern fra favoritter',
     'item.SeeMoreAds': 'Se flere annonser i <<LINK_TO_CATEGORY>>',
+    'item.SelectA_Neighborhood': 'Velg et nabolag',
     'item.ShareAd': 'Del annonse',
     'item.ThisAdIsNoLongerAvailable': 'Denne annonsen er ikke lenger tilgjengelig.',
     'item.ViewBiggerMap': 'Vis st\xF8rre kart',

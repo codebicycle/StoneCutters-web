@@ -238,6 +238,7 @@ module.exports = {
     'item.Rejected': 'Refize',
     'item.RemoveFromFavorites': 'Retire nan favorites',
     'item.SeeMoreAds': 'Gade plis anons nan <<LINK_TO_CATEGORY>>',
+    'item.SelectA_Neighborhood': 'Chwazi Yon Vwazinay',
     'item.ShareAd': 'Pataje reklam',
     'item.ThisAdIsNoLongerAvailable': 'Anons sa a pa disponib ank\xF2',
     'item.ViewBiggerMap': 'Gade yon pi gwo kat',

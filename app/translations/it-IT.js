@@ -238,6 +238,7 @@ module.exports = {
     'item.Rejected': 'Rifiutato',
     'item.RemoveFromFavorites': 'Rimuovi dai Preferiti',
     'item.SeeMoreAds': 'Guarda altri annunci in <<LINK_TO_CATEGORY>>',
+    'item.SelectA_Neighborhood': 'Seleziona una zona',
     'item.ShareAd': 'Condividi annuncio',
     'item.ThisAdIsNoLongerAvailable': 'Questo annuncio non \xE8 pi\xF9 disponibile',
     'item.ViewBiggerMap': 'Visualizzazione ingrandita della mappa',
