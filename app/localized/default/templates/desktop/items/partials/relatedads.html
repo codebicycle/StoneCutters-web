@@ -14,12 +14,7 @@
                         </a>
                         <h3>{{ relatedItem.price.displayPrice }}</h3>
                         <span>
-                        {% if relatedItem.date.month < 10 %}
-                            {% set month = "messages_date_format.90" %}
-                        {% else %}
-                            {% set month = "messages_date_format.9" %}
-                        {% endif %}
-                        {{ relatedItem.date.day +' '+ dictionary["itemslisting.Of"] +' '+ dictionary[month + relatedItem.date.month] }}
+                        {{ relatedItem.date.day +' '+ dictionary["itemslisting.Of"] +' '+ dictionary["messages_date_format.9" + (relatedItem.date.month + 100 + '') | replace('1', '', 1)] }}
                         </span>
                     </div>
                 </div>
