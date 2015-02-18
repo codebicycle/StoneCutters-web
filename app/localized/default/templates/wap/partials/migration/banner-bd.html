@@ -1,7 +1,14 @@
+{% if not isPostFlow %}
+	{% set link = 'http://m.ekhanei.com/welcome' %}
+	{% set image = '/images/html4/migration/bd/bannerHP-' + languageAbbreviation + '.jpg' %}
+{% else %}
+	{% set link = 'http://m.ekhanei.com/newad' %}
+	{% set image = '/images/html4/migration/bd/bannerAI-' + languageAbbreviation + '.jpg' %}
+{% endif %}
 <tr>
     <td align="center" bgcolor="#447733" colspan="3" width="100%" style="background-color:#473;">
-        <a style="display: block;" href="http://www.ekhanei.com/{{ languageAbbreviation }}">
-            <img width="100%" src="{{ '/images/html4/migration/bd/banner-' + languageAbbreviation + '.jpg' | static }}" alt="OLX is now part of Ekhanei.com" align="middle" />
+        <a style="display: block;" href="{{ link }}">
+            <img width="100%" src="{{ image | static }}" align="middle" />
         </a>
     </td>
 </tr>

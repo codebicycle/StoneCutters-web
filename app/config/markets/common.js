@@ -12,6 +12,13 @@ module.exports = {
             myConv: 50,
             myConvHtml5: 300
         },
+        renew: {
+            enabled: true,
+            daysToRenew: 15
+        },
+        rebump: {
+            enabled: false
+        },
         maxPage: {
             allResults: 500
         }

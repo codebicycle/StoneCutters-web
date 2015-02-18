@@ -164,12 +164,13 @@ module.exports = Base.extend({
     onPostingFlowStart: function() {
         this.$('#topBar, #myOlx').addClass('disabled');
         this.$('#myOlx').css('display', 'none');
+        this.$('.migration-banner-bd').addClass('disabled');
     },
     onPostingFlowEnd: function() {
         this.app.router.once('action:end', this.onPostingFlowAfter.bind(this));
     },
     onPostingFlowAfter: function() {
-        this.$('#topBar, #myOlx').removeClass('disabled');
+        this.$('#topBar, #myOlx, .migration-banner-bd').removeClass('disabled');
     },
     onSelectSortStart: function(){
         this.customize("unavailableitemrelateditems.SortBy");
