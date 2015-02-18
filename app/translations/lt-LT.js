@@ -59,6 +59,7 @@ module.exports = {
     'itemslisting.NewlyListed': 'Nauji skelbimai',
     'itemslisting.NewShareThisAd': 'Dalintis skelbim\u0105',
     'itemslisting.Next': 'Toliau',
+    'itemslisting.Of': 'i\u0161',
     'itemslisting.PendingAd': 'Laukiantis skelbimas',
     'itemslisting.PerWeek': 'Per savait\u0119',
     'itemslisting.Previous': 'Ankstesnis',

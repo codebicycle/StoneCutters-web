@@ -59,6 +59,7 @@ module.exports = {
     'itemslisting.NewlyListed': 'Leg\xFAjabb hirdet\xE9sek',
     'itemslisting.NewShareThisAd': 'A hirdet\xE9s k\xF6zz\xE9t\xE9tele',
     'itemslisting.Next': 'K\xF6vetkez\u0151',
+    'itemslisting.Of': '/',
     'itemslisting.PendingAd': 'F\xFCgg\u0151 hirdet\xE9s',
     'itemslisting.PerWeek': 'Hetente',
     'itemslisting.Previous': 'El\u0151z\u0151',

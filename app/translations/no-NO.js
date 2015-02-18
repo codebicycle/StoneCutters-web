@@ -59,6 +59,7 @@ module.exports = {
     'itemslisting.NewlyListed': 'Nylig satt inn',
     'itemslisting.NewShareThisAd': 'Del din annonse',
     'itemslisting.Next': 'Neste',
+    'itemslisting.Of': 'av',
     'itemslisting.PendingAd': 'Kommende annonse',
     'itemslisting.PerWeek': 'Per uke',
     'itemslisting.Previous': 'Forrige',

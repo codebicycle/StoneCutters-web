@@ -59,6 +59,7 @@ module.exports = {
     'itemslisting.NewlyListed': 'Bagong Nilista',
     'itemslisting.NewShareThisAd': 'Ibahagi ang Ad na ito',
     'itemslisting.Next': 'Sunod',
+    'itemslisting.Of': 'ng',
     'itemslisting.PendingAd': 'Nakabinbing Anunsyo',
     'itemslisting.PerWeek': 'Kada Linggo',
     'itemslisting.Previous': 'Nakaraan',

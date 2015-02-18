@@ -59,6 +59,7 @@ module.exports = {
     'itemslisting.NewlyListed': 'V\xE4rsked kuulutused',
     'itemslisting.NewShareThisAd': 'Jagage seda kuulutust',
     'itemslisting.Next': 'J\xE4rgmine',
+    'itemslisting.Of': '',
     'itemslisting.PendingAd': 'Ootel kuulutus',
     'itemslisting.PerWeek': 'N\xE4dalas',
     'itemslisting.Previous': 'Eelmine',

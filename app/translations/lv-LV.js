@@ -59,6 +59,7 @@ module.exports = {
     'itemslisting.NewlyListed': 'Nesen public\u0113ts',
     'itemslisting.NewShareThisAd': 'Kop\u012Bgot \u0161o sludin\u0101jumu',
     'itemslisting.Next': 'N\u0101kamais',
+    'itemslisting.Of': 'no',
     'itemslisting.PendingAd': 'Apstiprin\u0101ms sludin\u0101jums',
     'itemslisting.PerWeek': 'Ned\u0113\u013C\u0101',
     'itemslisting.Previous': 'Iepriek\u0161\u0113jais',

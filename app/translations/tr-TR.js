@@ -59,6 +59,7 @@ module.exports = {
     'itemslisting.NewlyListed': 'En Yeniler',
     'itemslisting.NewShareThisAd': 'Bu \u0130lan\u0131 payla\u015F',
     'itemslisting.Next': 'Sonraki',
+    'itemslisting.Of': '/',
     'itemslisting.PendingAd': '\u0130lan Beklemede',
     'itemslisting.PerWeek': 'Haftal\u0131k',
     'itemslisting.Previous': '\xD6nceki',

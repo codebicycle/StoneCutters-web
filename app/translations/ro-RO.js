@@ -59,6 +59,7 @@ module.exports = {
     'itemslisting.NewlyListed': ' Listat Recent',
     'itemslisting.NewShareThisAd': 'Distribui\u0163i acest anun\u0163',
     'itemslisting.Next': 'Urm\u0103torul',
+    'itemslisting.Of': 'din',
     'itemslisting.PendingAd': 'Anun\u0163 \xEEn a\u015Fteptare.',
     'itemslisting.PerWeek': 'S\u0103pt\u0103m\xE2nal',
     'itemslisting.Previous': 'Anterior',

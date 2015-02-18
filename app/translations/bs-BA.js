@@ -59,6 +59,7 @@ module.exports = {
     'itemslisting.NewlyListed': 'Novi oglasi',
     'itemslisting.NewShareThisAd': 'Podijeli ovaj oglas',
     'itemslisting.Next': 'Sljede\u0107e',
+    'itemslisting.Of': 'od',
     'itemslisting.PendingAd': 'Oglas na \u010Dekanju',
     'itemslisting.PerWeek': 'Sedmi\u010Dno',
     'itemslisting.Previous': 'Prethodno',
