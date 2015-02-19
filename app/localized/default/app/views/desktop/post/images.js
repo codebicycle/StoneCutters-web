@@ -65,9 +65,19 @@ module.exports = Base.extend({
         var image = event.target.files[0];
 
         asynquence().or(fail.bind(this))
+            .then(validate.bind(this))
             .then(post.bind(this))
             .then(success.bind(this))
             .val(done.bind(this));
+
+        function validate(done) {
+            if (image.size > 5242880) {
+                done.abort();
+                $container.removeClass('loading');
+                return alert('Imagen mayor a 5MB. Sos un toga');
+            }
+            done();
+        }
 
         function post(done) {
             this.$el.trigger('imageLoadStart');
