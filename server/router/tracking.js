@@ -51,10 +51,10 @@ module.exports = function trackingRouter(app, dataAdapter) {
                 statsd.increment([req.query.locIso || 'all', 'tracking', type, tracker, platform, 'success']);
             })
             .on('fail', function fail() {
-                statsd.increment([req.query.locIso || 'all', 'tracking', type, tracker, platform, 'error']);
+                statsd.increment([req.query.locIso || 'all', 'tracking', type, tracker, platform, 'fail']);
             })
             .on('error', function error() {
-                statsd.increment([req.query.locIso || 'all', 'tracking', type, tracker, platform, 'fail']);
+                statsd.increment([req.query.locIso || 'all', 'tracking', type, tracker, platform, 'error']);
             });
     }
 
