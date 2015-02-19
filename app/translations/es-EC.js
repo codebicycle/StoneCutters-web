@@ -420,7 +420,7 @@ module.exports = {
     'about.FreeNoCommission': 'Es 100% Gratis, sin comisiones',
     'about.History': 'Historia',
     'about.InTheNews': 'En las Noticias',
-    'about.ItsEasy': 'Comprar y vender es f\xE1cil. No hace falta registrarse. Puedes publicar un anuncio tomando una foto, a\xF1adiendo la descripci\xF3n y detalles de contacto. Luego solo espera las respuestas',
+    'about.ItsEasy': 'Comprar y vender es f\xE1cil y no hace falta registrarse. Puedes publicar un anuncio tan solo al tomar una foto, a\xF1adiendo una descripci\xF3n y detalles de contacto. Luego solo espera las respuestas.',
     'about.ItsFast': 'Es R\xE1pido',
     'about.ItsFast-Reason': 'Dado que millones de usuarios entran a la plataforma a diario, compradores y vendedores se conectan r\xE1pidamente para realizar transacciones',
     'about.ItsSimple': 'Es Simple',
