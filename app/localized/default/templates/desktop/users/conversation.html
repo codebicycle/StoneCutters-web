@@ -34,7 +34,7 @@
             {% elif thread.get('senders')[0].isMine %}
                 {% set name = thread.get('senders')[1].name %}
             {% endif %}
-            <span class="name">{{ name }}</span><span class="date"> - {{ message.date | date(false, true) }}</span>
+            <span class="name">{{ name }}</span><span class="date"> - <time>{{ message.date.since.day if message.date.since.day }} {{ dictionary[message.date.since.dictionary] }}{{ (' ' + message.date.since.hour) if message.date.since.hour }} {{ (' ' + yearToShow) if yearToShow }}</time></span>
             <p class="message">{{ message.text }}</p>
         </li>
     {% endfor %}
