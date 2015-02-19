@@ -1,3 +1,6 @@
+{% if customerContact %}
+    {% view 'post/customercontact' %}
+{% endif %}
 <form id="postingForm" action="{{ '/post' | link }}" method="POST" enctype="multipart/form-data" novalidate>
     <section id="posting-item-information" class="posting-item-information">
         {% if marketing %}

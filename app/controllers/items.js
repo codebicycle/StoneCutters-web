@@ -15,7 +15,7 @@ module.exports = {
     reply: middlewares(reply),
     success: middlewares(success),
     favorite: middlewares(favorite),
-    'delete': middlewares(deleteItem),
+    'delete': middlewares(deleteitem),
     filter: middlewares(filter),
     sort: middlewares(sort)
 };
@@ -32,6 +32,7 @@ function show(params, callback) {
         var siteLocation = this.app.session.get('siteLocation');
         var languages = this.app.session.get('languages');
         var platform = this.app.session.get('platform');
+        var newItemPage = helpers.features.isEnabled.call(this, 'newItemPage');
         var anonymousItem;
 
         var prepare = function(done) {
@@ -162,7 +163,7 @@ function show(params, callback) {
                 return helpers.common.redirect.call(this, slug);
             }
             if (response.item.get('location').url !== this.app.session.get('location').url) {
-                url = [protocol, '://', platform, '.', response.item.get('location').url.replace('www.', 'm.'), '/', slug].join('');
+                url = [protocol, '://', this.app.session.get('host'), '/', slug].join('');
 
                 done.abort();
                 return helpers.common.redirect.call(this, url, null, {
@@ -250,6 +251,9 @@ function show(params, callback) {
             else if (item.status.deprecated) {
                 view = 'items/expired';
             }
+            else if (newItemPage && platform === 'html5') {
+                view = 'items/newitempage/show';
+            }
 
             callback(null, view, {
                 include: ['item'],
@@ -261,6 +265,7 @@ function show(params, callback) {
                 subcategory: subcategory,
                 category: category,
                 favorite: favorite,
+                sent: params.sent,
                 categories: this.dependencies.categories.toJSON()
             });
         }.bind(this);
@@ -480,11 +485,13 @@ function reply(params, callback) {
     function controller() {
         var itemId = params.itemId;
         var siteLocation = this.app.session.get('siteLocation');
+        var platform = this.app.session.get('platform');
+        var newItemPage = helpers.features.isEnabled.call(this, 'newItemPage');
 
         var redirect = function(done) {
             var platform = this.app.session.get('platform');
 
-            if (platform === 'html5' || platform === 'desktop') {
+            if (platform === 'desktop' || (platform === 'html5' && !newItemPage)) {
                 return done.fail();
             }
             done();
@@ -511,9 +518,9 @@ function reply(params, callback) {
             if (!resItem.item) {
                 return done.fail(null, {});
             }
-            var platform = this.app.session.get('platform');
 
-            if (platform === 'html5' || platform === 'desktop') {
+            var platform = this.app.session.get('platform');
+            if (platform === 'desktop' || (platform === 'html5' && !newItemPage)) {
                 return done.fail();
             }
             done(resItem.item);
@@ -621,110 +628,6 @@ function success(params, callback) {
     }
 }
 
-function favorite(params, callback) {
-    var user;
-    var intent;
-
-    var prepare = function(done) {
-        var platform = this.app.session.get('platform');
-        var url;
-
-        if (platform === 'wap') {
-            done.abort();
-            return helpers.common.redirect.call(this, '/');
-        }
-        user = this.app.session.get('user');
-        if (!user) {
-            url = helpers.common.params('/login', 'redirect', (params.redirect || '/des-iid-' + params.itemId));
-
-            done.abort();
-            return helpers.common.redirect.call(this, url, null, {
-                status: 302
-            });
-        }
-        intent = !params.intent || params.intent === 'undefined' ? undefined : params.intent;
-        done();
-    }.bind(this);
-
-    var add = function(done) {
-        helpers.dataAdapter.post(this.app.req, '/users/' + user.userId + '/favorites/' + params.itemId + (intent ? '/' + intent : ''), {
-            query: {
-                token: user.token,
-                platform: this.app.session.get('platform')
-            }
-        }, done.errfcb);
-    }.bind(this);
-
-    var success = function() {
-        var url = (params.redirect || '/des-iid-' + params.itemId);
-
-        url = helpers.common.params(url, 'favorite', (intent || 'add'));
-        helpers.common.redirect.call(this, url, null, {
-            status: 302
-        });
-    }.bind(this);
-
-    var error = function() {
-        helpers.common.redirect.call(this, params.redirect || '/des-iid-' + params.itemId, null, {
-            status: 302
-        });
-    }.bind(this);
-
-    asynquence().or(error)
-        .then(prepare)
-        .then(add)
-        .val(success);
-}
-
-function deleteItem(params, callback) {
-    var user;
-    var itemId;
-
-    var prepare = function(done) {
-        var platform = this.app.session.get('platform');
-
-        if (platform === 'wap') {
-            done.abort();
-            return helpers.common.redirect.call(this, '/');
-        }
-        user = this.app.session.get('user');
-        if (!user) {
-            done.abort();
-            return helpers.common.redirect.call(this, '/login', null, {
-                status: 302
-            });
-        }
-        itemId = !params.itemId || params.itemId === 'undefined' ? undefined : params.itemId;
-        done();
-    }.bind(this);
-
-    var remove = function(done) {
-        helpers.dataAdapter.post(this.app.req, ('/items/' + itemId + '/delete'), {
-            query: {
-                token: user.token,
-                platform: this.app.session.get('platform')
-            }
-        }, done.errfcb);
-    }.bind(this);
-
-    var success = function() {
-        helpers.common.redirect.call(this, '/myolx/myadslisting?deleted=true', null, {
-            status: 302
-        });
-    }.bind(this);
-
-    var error = function() {
-        helpers.common.redirect.call(this, '/myolx/myadslisting', null, {
-            status: 302
-        });
-    }.bind(this);
-
-    asynquence().or(error)
-        .then(prepare)
-        .then(remove)
-        .val(success);
-}
-
 function filter(params, callback) {
     helpers.controllers.control.call(this, params, controller);
 
@@ -791,6 +694,120 @@ function filter(params, callback) {
             .then(redirect)
             .then(prepare)
             .then(find)
+            .val(success);
+    }
+}
+
+function favorite(params, callback) {
+    var user;
+    var intent;
+
+    var prepare = function(done) {
+        var platform = this.app.session.get('platform');
+        var url;
+
+        if (platform === 'wap') {
+            done.abort();
+            return helpers.common.redirect.call(this, '/');
+        }
+        user = this.app.session.get('user');
+        if (!user) {
+            url = helpers.common.params('/login', 'redirect', (params.redirect || '/des-iid-' + params.itemId));
+
+            done.abort();
+            return helpers.common.redirect.call(this, url, null, {
+                status: 302
+            });
+        }
+        intent = !params.intent || params.intent === 'undefined' ? undefined : params.intent;
+        done();
+    }.bind(this);
+
+    var add = function(done) {
+        helpers.dataAdapter.post(this.app.req, '/users/' + user.userId + '/favorites/' + params.itemId + (intent ? '/' + intent : ''), {
+            query: {
+                token: user.token,
+                platform: this.app.session.get('platform')
+            }
+        }, done.errfcb);
+    }.bind(this);
+
+    var success = function() {
+        var url = (params.redirect || '/des-iid-' + params.itemId);
+
+        url = helpers.common.params(url, 'favorite', (intent || 'add'));
+        helpers.common.redirect.call(this, url, null, {
+            status: 302
+        });
+    }.bind(this);
+
+    var error = function() {
+        helpers.common.redirect.call(this, params.redirect || '/des-iid-' + params.itemId, null, {
+            status: 302
+        });
+    }.bind(this);
+
+    asynquence().or(error)
+        .then(prepare)
+        .then(add)
+        .val(success);
+}
+
+function deleteitem(params, callback) {
+    helpers.controllers.control.call(this, params, controller);
+
+    function controller() {
+        var itemId = params.itemId;
+        var platform = this.app.session.get('platform');
+
+        var redirect = function(done) {
+            if (platform !== 'html4') {
+                done.abort();
+                return helpers.common.redirect.call(this, '/');
+            }
+            done();
+        }.bind(this);
+
+        var prepare = function(done) {
+            params.id = params.itemId;
+            delete params.itemId;
+            done();
+        }.bind(this);
+
+        var findItem = function(done) {
+            this.app.fetch({
+                item: {
+                    model: 'Item',
+                    params: params
+                }
+            }, {
+                readFromCache: false
+            }, done.errfcb);
+        }.bind(this);
+
+        var checkItem = function(done, resItem) {
+            if (!resItem.item) {
+                return done.fail(null, {});
+            }
+            done(resItem.item);
+        }.bind(this);
+
+        var success = function(_item) {
+            var item = _item.toJSON();
+
+            callback(null, {
+                item: item
+            });
+        }.bind(this);
+
+        var error = function(err, res) {
+            return helpers.common.error.call(this, err, res, callback);
+        }.bind(this);
+
+        asynquence().or(error)
+            .then(prepare)
+            .then(findItem)
+            .then(checkItem)
             .val(success);
     }
 }

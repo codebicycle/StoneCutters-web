@@ -3,6 +3,85 @@ module.exports = {
         order: [830, 800, 811, 815, 853, 362, 859, 806, 821 ,16],
         columns: [3, 3, 2]
     },
+    adserving: {
+        slots: {
+            listing: {
+                topgallery: {
+                    service: 'CSA',
+                    format: 'default',
+                    location: 'Top',
+                    numberPerCategoryCSA: {
+                        '800': 1,
+                        '806': 1,
+                        '815': 1,
+                        '830': 1,
+                        '853': 1,
+                        '859': 1,
+                        '801': 1,
+                        '802': 1,
+                        '803': 1,
+                        '804': 1,
+                        '805': 1,
+                        '870': 1,
+                        '871': 1,
+                        '907': 1,
+                        '912': 1,
+                        '362': 2,
+                        '376': 2,
+                        '377': 2,
+                        '378': 2,
+                        '379': 2,
+                        '380': 2,
+                        '412': 2,
+                        '416': 2,
+                        '417': 2,
+                        '886': 2,
+                        allresults: 2,
+                        allresultsig: 2
+                    }
+                },
+                top: {
+                    service: 'CSA',
+                    format: 'custom',
+                    location: 'Top',
+                    numberPerCategoryCSA: {
+                        '800': 1,
+                        '806': 1,
+                        '815': 1,
+                        '830': 1,
+                        '853': 1,
+                        '859': 1,
+                        '801': 1,
+                        '802': 1,
+                        '803': 1,
+                        '804': 1,
+                        '805': 1,
+                        '870': 1,
+                        '871': 1,
+                        '907': 1,
+                        '912': 1,
+                        '362': 2,
+                        '376': 2,
+                        '377': 2,
+                        '378': 2,
+                        '379': 2,
+                        '380': 2,
+                        '412': 2,
+                        '416': 2,
+                        '417': 2,
+                        '886': 2,
+                        allresults: 2,
+                        allresultsig: 2
+                    }
+                }
+            },
+            item: {
+                top: {
+                    service: 'none'
+                }
+            }
+        }
+    },
     videos: [
         {
             title: 'OLX Uruguay - Celular - Vender es fácil',
@@ -41,9 +120,6 @@ module.exports = {
     },
     tracking: {
         trackers: {
-            hydra: {
-                enabled: false
-            },
             tagmanager: {
                 enabled: true
             }

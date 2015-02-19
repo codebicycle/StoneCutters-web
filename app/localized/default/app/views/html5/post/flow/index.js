@@ -23,7 +23,7 @@ function onpopstate(event) {
         history.back();
     }
     else {
-        history.pushState(null, '', window.location.pathname);
+        history.pushState(null, '', window.location.pathname + window.location.search);
     }
 }
 
@@ -87,7 +87,14 @@ module.exports = Base.extend({
         'categoryReset': 'onCategoryReset',
         'errors': 'onErrors',
         'mousedown select': 'changeSelectValue',
-        'touchstart select': 'changeSelectValue'
+        'touchstart select': 'changeSelectValue',
+        'click .migration-banner-bd': 'onMigrationBannerBdClick'
+    },
+    onMigrationBannerBdClick: function(event) {
+        event.preventDefault();
+        $(window).off('beforeunload', this.onBeforeUnload);
+        $(window).off('popstate', onpopstate);
+        window.location.href = event.currentTarget.href;
     },
     changeSelectValue: function(event){
         var select = $(event.target);
@@ -117,7 +124,7 @@ module.exports = Base.extend({
     },
     handleBack: function() {
         this.edited = true;
-        history.pushState(null, '', window.location.pathname);
+        history.pushState(null, '', window.location.pathname + window.location.search);
         $(window).on('popstate', {
             message: this.dictionary['misc.WantToGoBack']
         }, onpopstate);

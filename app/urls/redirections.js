@@ -85,6 +85,9 @@ module.exports = {
     'redirections#editphp': {
         url: 'myolx/edititem.php'
     },
+    'redirections#myadsphp': {
+        url: 'myolx/index.php'
+    },
     'redirections#php': {
         url: ':path.php'
     },

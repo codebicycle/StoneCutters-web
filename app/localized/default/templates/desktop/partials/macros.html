@@ -1,7 +1,7 @@
 {% macro Field(hint = false, field) %}
     <fieldset class="field-wrapper{{ ' hide' if field.hide }} {{ ' checkbox' if field.fieldType == 'checkbox' }}">
         {% if field.label and field.fieldType != 'checkbox' %}
-            <label for="field-{{ field.name }}" class="field-label">{% if field.mandatory == true or field.mandatory == 'true' %}* {% endif %}{{ field.label }}</label>
+            <label for="field-{{ field.name }}" class="field-label">{% if field.mandatory == true or field.mandatory == 'true' or field.name == 'neighborhood' %}* {% endif %}{{ field.label }}</label>
         {% endif %}
         <div class="field-controls{{ ' radio' if field.fieldType == 'radio' }}">
             {% if field.fieldType == 'textarea' %}

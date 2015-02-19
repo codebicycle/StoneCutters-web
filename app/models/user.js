@@ -17,6 +17,8 @@ module.exports = Base.extend({
     register: register,
     registerConfirm: registerConfirm,
     reply: reply,
+    registerWithFacebook: registerWithFacebook,
+    authenticateWithFacebook: authenticateWithFacebook,
     edit: edit,
     toData: toData
 });
@@ -245,6 +247,68 @@ function reply(done, data) {
     }
 }
 
+function registerWithFacebook(done) {
+    asynquence().or(fail.bind(this))
+        .then(prepare.bind(this))
+        .then(submit.bind(this))
+        .val(success.bind(this));
+
+    function submit(done) {
+        dataAdapter.post(this.app.req, '/users/facebook/register', {
+            data: this.toData()
+        }, done.errfcb);
+    }
+
+    function success(res) {
+        statsd.increment([this.get('country'), 'facebookRegister', 'success', this.get('platform')]);
+        done(res);
+    }
+
+    function fail(err) {
+        statsd.increment([this.get('country'), 'facebookRegister', 'error', err.statusCode, this.get('platform')]);
+        done.fail(err);
+    }
+}
+
+function authenticateWithFacebook(done) {
+    asynquence().or(fail.bind(this))
+        .then(prepare.bind(this))
+        .then(submit.bind(this))
+        .then(persist.bind(this))
+        .val(success.bind(this));
+
+    function prepare(done) {
+        var query = {
+            facebookToken: this.get('facebookToken')
+        };
+        done(query);
+    }
+
+    function submit(done, query) {
+        dataAdapter.get(this.app.req, '/users/facebook/' + this.get('facebookId'), {
+            query: query
+        }, done.errfcb);
+    }
+
+    function persist(done, res, user) {
+        this.set(user);
+        this.app.session.persist({
+            user: user
+        });
+        done();
+    }
+
+    function success() {
+        statsd.increment([this.get('country'), 'facebookLogin', 'success', this.get('platform')]);
+        done();
+    }
+
+    function fail(err) {
+        statsd.increment([this.get('country'), 'facebookLogin', 'error', err.statusCode, this.get('platform')]);
+        done.fail(err);
+    }
+}
+
 function edit(done) {
     asynquence().or(fail.bind(this))
         .then(submit.bind(this))
@@ -263,7 +327,7 @@ function edit(done) {
     function success(response, profile) {
         console.log(response, profile);
         statsd.increment([this.get('country'), 'profile', this.get('intent'), 'success', this.get('platform')]);
-        done();
+        done(res);
     }
 
     function fail(err) {
@@ -275,6 +339,11 @@ function edit(done) {
 function toData() {
     var data = this.toJSON();
 
+    _.each(data, function each(value, key) {
+        if (value === undefined || value === null || value === '') {
+            delete data[key];
+        }
+    });
     delete data.token;
     delete data.intent;
     delete data.favorites;

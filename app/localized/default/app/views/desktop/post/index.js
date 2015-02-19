@@ -7,6 +7,7 @@ var _ = require('underscore');
 var asynquence = require('asynquence');
 var translations = require('../../../../../../../shared/translations');
 var Item = require('../../../../../../models/item');
+var config = require('../../../../../../../shared/config');
 
 function onpopstate(event) {
     var $loading = $('body > .loading');
@@ -17,7 +18,7 @@ function onpopstate(event) {
         history.back();
     }
     else {
-        history.pushState(null, '', window.location.pathname);
+        history.pushState(null, '', window.location.pathname + window.location.search);
     }
 }
 
@@ -25,9 +26,6 @@ module.exports = Base.extend({
     tagName: 'main',
     id: 'posting-view',
     className: 'posting-view',
-    pendingValidations: [],
-    errors: {},
-    formErrors: [],
     events: {
         'focus .text-field': 'fieldFocus',
         'blur .text-field': 'fieldFocus',
@@ -52,12 +50,20 @@ module.exports = Base.extend({
     },
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
+        var location = this.app.session.get('location');
+        var customerContact = config.getForMarket(location.url, ['post_customer_contact'], '');
 
-        return _.extend({}, data);
+        return _.extend({}, data, {
+            item: this.getItem(data.item),
+            customerContact: customerContact
+        });
     },
     postRender: function() {
         var paramCategory;
 
+        this.pendingValidations = [];
+        this.errors = {};
+        this.formErrors = [];
         $(window).on('beforeunload', this.onBeforeUnload);
         this.editing = !!this.getItem().has('id');
         if (this.editing) {
@@ -157,7 +163,7 @@ module.exports = Base.extend({
         if (field instanceof window.jQuery) {
             $field = field;
             shouldValidateField = !!$field.data('validate');
-            if ($field.attr('name') === 'state' || $field.attr('name') === 'location') {
+            if ($field.attr('name') === 'state' || $field.attr('name') === 'location' || $field.attr('name') === 'neighborhood') {
                 $field.trigger('fieldValidationStart');
             }
             field.name = $field.attr('name');
@@ -183,7 +189,7 @@ module.exports = Base.extend({
     },
     handleBack: function() {
         this.edited = true;
-        history.pushState(null, '', window.location.pathname);
+        history.pushState(null, '', window.location.pathname + window.location.search);
         $(window).on('popstate', {
             message: this.dictionary['misc.WantToGoBack']
         }, onpopstate);
@@ -222,7 +228,7 @@ module.exports = Base.extend({
                 });
                 $field.trigger('fieldValidationEnd', [_errors]);
             }
-            else if ($field.attr('name') == 'state' || $field.attr('name') == 'location') {
+            else if ($field.attr('name') === 'state' || $field.attr('name') === 'location' || $field.attr('name') === 'neighborhood') {
                 $field.trigger('fieldValidationEnd');
             }
             else {
@@ -375,8 +381,8 @@ module.exports = Base.extend({
             }
         }
     },
-    getItem: function() {
-        this.item = this.item || (this.options.item && this.options.item.toJSON ? this.options.item : new Item(this.options.item || {}, {
+    getItem: function(item) {
+        this.item = this.item || (item && (item.toJSON ? item : new Item(item))) || (this.options.item && this.options.item.toJSON ? this.options.item : new Item(this.options.item || {}, {
             app: this.app
         }));
         return this.item;
