@@ -12,9 +12,13 @@ module.exports = Base.extend({
     events: {
         'click [data-fav]': 'addToFavorites',
         'submit [data-login-form]': 'login',
+        'click [data-facebook-login]': 'facebookLogin',
         'click [data-modal-close]': 'onCloseModal',
         'click .open-modal': 'onOpenModal',
         'click [data-modal-shadow]': 'onCloseModal'
+    },
+    postRender: function() {
+        this.listenTo(this.app, 'loginSuccess', this.loginSuccess);
     },
     addToFavorites: function (e) {
         var $this = $(e.currentTarget);
@@ -90,13 +94,12 @@ module.exports = Base.extend({
         }
 
         function success() {
-            this.$('[data-fav]').attr('data-user', true).data('user', true).click();
             this.app.trigger('login', user);
             this.app.router.navigate(this.app.session.get('path'), {
                 trigger: true,
                 replace: true
             });
-            $('#modal-addfavorites-view').trigger('hide');
+            this.loginSuccess();
         }
 
         function error(err) {
@@ -107,6 +110,13 @@ module.exports = Base.extend({
             .then(prepare.bind(this))
             .then(submit.bind(this))
             .val(success.bind(this));
+    },
+    facebookLogin: function() {
+        this.app.trigger('loginFromItem', {redirectTo: this.app.session.get('path')});
+    },
+    loginSuccess: function() {
+        this.$('[data-fav]').attr('data-user', true).data('user', true).click();
+        $('#modal-addfavorites-view').trigger('hide');
     },
     onOpenModal: function(event) {
         event.preventDefault();
