@@ -42,8 +42,10 @@ module.exports = Base.extend({
 
         function fail(errors) {
             _.each(errors, function each(error) {
-                this.$('[name=' + error.selector + ']')
-                    .after('<small class="error message">' + error.message + '</small>')
+                var $field = this.$('[name=' + error.selector + ']');
+
+                $field.siblings('small').remove();
+                $field.after('<small class="error message">' + error.message + '</small>')
                     .parents('fieldset')
                     .addClass('error');
             }, this);
