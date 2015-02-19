@@ -22,6 +22,12 @@ module.exports = {
     'post#flow#edit': {
         url: 'myolx/edititem/:itemId'
     },
+    'post#renew': {
+        url: 'myolx/renewitem/:itemId'
+    },
+    'post#rebump': {
+        url: 'myolx/rebump/:itemId'
+    },
     'post#editsuccess': {
         url: 'edititem/success/:itemId'
     },

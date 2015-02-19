@@ -5,6 +5,7 @@ var asynquence = require('asynquence');
 var URLParser = require('url');
 var Base = require('../../../../../common/app/bases/view').requireView('users/myads');
 var helpers = require('../../../../../../helpers');
+var config = require('../../../../../../../shared/config');
 
 module.exports = Base.extend({
     events: {
@@ -17,9 +18,15 @@ module.exports = Base.extend({
         'click [data-modal-shadow]': 'onCloseModal'
     },
     getTemplateData: function() {
+
+        var now = new Date();
+        var location = this.app.session.get('location');
         var data = Base.prototype.getTemplateData.call(this);
 
+        data.currentTime = now.toISOString().replace('T',' ').substr(0,19);
+        data.daysToRenew = config.getForMarket(location.url, ['ads', 'renew', 'daysToRenew'],14);
         data.items = data.items || this.parentView.items;
+
         return data;
     },
     onDeleteClick: function(event) {

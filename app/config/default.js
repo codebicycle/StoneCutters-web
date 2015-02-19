@@ -31,9 +31,9 @@ module.exports = {
         imagePath: 'http://images[[basenumber]].olx-st.com/mobile-webapp'
     },
     localization: {
-        wap: ['www.olx.com.br', 'www.olx.co.za', 'www.olx.ir', 'www.olx.hn', 'www.olx.com.bd'],
-        html4: ['www.olx.com.br', 'www.olx.co.za', 'www.olx.ir', 'www.olx.hn', 'www.olx.com.bd'],
-        html5: ['www.olx.com.br', 'www.olx.ir', 'www.olx.hn', 'www.olx.com.bd'],
+        wap: ['www.olx.com.br', 'www.olx.co.za', 'www.olx.ir', 'www.olx.hn'],
+        html4: ['www.olx.com.br', 'www.olx.co.za', 'www.olx.ir', 'www.olx.hn'],
+        html5: ['www.olx.com.br', 'www.olx.ir', 'www.olx.hn'],
         desktop: ['www.olx.com.bo']
     },
     icons: {
@@ -133,7 +133,7 @@ module.exports = {
         desktop: {
             hermes: {
                 worldwide: false,
-                countries: ['www.olx.com.py']
+                countries: ['www.olx.com.uy']
             },
             contactForm: {
                 worldwide: false,

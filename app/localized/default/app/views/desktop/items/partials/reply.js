@@ -23,6 +23,7 @@ module.exports = Base.extend({
         }, this.app.session.get('user') || {}), {
             app: this.app
         });
+
         this.$el.trigger('reset');
         this.$spinner = this.$('.spinner');
         this.$submit = this.$('.submit');
@@ -54,6 +55,7 @@ module.exports = Base.extend({
         this.$spinner.removeClass('hide');
         this.$submit.addClass('hide');
         this.$success.addClass('hide');
+
         asynquence().or(fail.bind(this))
             .then(validate.bind(this))
             .then(submit.bind(this))
@@ -91,11 +93,10 @@ module.exports = Base.extend({
     },
     onReset: function(event) {
         this.reply = {
-            id: this.$('[name=itemId]').val()
+            id: this.$('[name=itemId]').val(),
+            userId: this.user.get('userId'),
+            email: this.user.get('email')
         };
-        if (this.user.has('userId')) {
-            this.reply.userId = this.user.get('userId');
-        }
     },
     onReplySuccessClick: function(event) {
         event.preventDefault();

@@ -9,8 +9,9 @@ module.exports = Base.extend({
     id: 'pages-help-view',
     className: 'pages-help-view',
     events: {
-        'click .help-toggle-content': 'helpToggleContent',
-        'click .question .icons': 'helpToggleQuestion'
+        'click [data-toggle-content]': 'helpToggleContent',
+        'click .question .icons': 'helpToggleQuestion',
+        'click [data-navigate]': 'navigate'
     },
 
     getTemplateData: function() {
@@ -21,19 +22,20 @@ module.exports = Base.extend({
 
         var support = config.get(['mails', 'support', location.url], 'support') + '@' + mailDomain;
         var legal = config.get(['mails', 'legal', location.url], 'legal') + '@' + mailDomain;
+        var selectedLanguage = this.app.session.get('selectedLanguage').split('-')[0];
 
         return _.extend({}, data, {
             mails: {
                 support: support,
                 legal: legal,
-
-            }
+            },
+            selectedLanguage : selectedLanguage
         });
     },
     helpToggleContent: function(event) {
         event.preventDefault();
         var element = $(event.currentTarget);
-        element.parent('li').siblings('li.selected').removeClass('selected');
+        $('.help-navigation ul li').removeClass('selected');
         element.parent('li').addClass('selected');
         $('.help-content-display').hide();
         $('#' + element.attr('data-help-content')).show();
@@ -58,5 +60,35 @@ module.exports = Base.extend({
                 toggleClass('faq-open').
                 find('.question-content').slideToggle();
         }
+    },
+    navigate: function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+        var $current = $(event.currentTarget);
+        var direction = $current.data('navigate');
+        var currentWrapper = $current.data('section');
+        var $slideWrapper = $('.user-ads.' + currentWrapper + ' ul');
+        var $slide = $('.user-ads.' + currentWrapper + ' ul li');
+        var slideWidth = $slide.outerWidth();
+        var slideWrapperPos = $slideWrapper.position().left;
+        var slideLength = $slide.length;
+        var maxLeftPosition = -(slideLength - 3) * slideWidth;
+        var pxToMove = 0;
+
+        if(direction == 'right' && slideWrapperPos !== maxLeftPosition) {
+            pxToMove = slideWrapperPos - slideWidth;
+        }
+        else if(direction == 'left' && slideWrapperPos !== 0) {
+            pxToMove = slideWrapperPos + slideWidth;
+        }
+        else if(slideWrapperPos === 0) {
+            pxToMove = maxLeftPosition;
+        }
+
+        $slideWrapper.animate({
+            'left': pxToMove + 'px'
+        }, 100);
+
     }
 });

@@ -7,20 +7,22 @@ module.exports = {
             enabled: true
         }
     },
-    socials: [
-        {
-            name: 'facebook',
-            link: 'https://www.facebook.com/OLXCostaRica'
-        },
-        {
-            name: 'twitter',
-            link: 'https://twitter.com/olx_costarica'
-        },
-        {
-            name: 'youtube',
-            link: 'https://www.youtube.com/user/OLXcostarica'
-        }
-    ],
+    socials: {
+        links: [
+            {
+                name: 'facebook',
+                link: 'https://www.facebook.com/OLXCostaRica'
+            },
+            {
+                name: 'twitter',
+                link: 'https://twitter.com/olx_costarica'
+            },
+            {
+                name: 'youtube',
+                link: 'https://www.youtube.com/user/OLXcostarica'
+            }
+        ]
+    },
     videos: [
         {
             title: 'OLX Costa Rica - Consola',
@@ -51,13 +53,44 @@ module.exports = {
                     format: 'default',
                     location: 'Top',
                     numberPerCategoryCSA: {
-                        '800': 1,
-                        '806': 1,
-                        '815': 1,
-                        '830': 1,
-                        '853': 1,
-                        '859': 1,
+                        '185': 1,
+                        '209': 1,
+                        '210': 1,
+                        '211': 1,
+                        '214': 1,
+                        '215': 1,
+                        '217': 1,
+                        '218': 1,
+                        '219': 1,
+                        '227': 1,
+                        '228': 1,
+                        '229': 1,
+                        '234': 1,
+                        '238': 1,
+                        '240': 1,
+                        '243': 1,
+                        '312': 1,
+                        '364': 1,
+                        '365': 1,
+                        '366': 1,
+                        '402': 1,
+                        '498': 1,
+                        '501': 1,
+                        '568': 1,
+                        '594': 1,
+                        '820': 1,
+                        '898': 1,
+                        '911': 1,
                         '362': 2,
+                        '376': 2,
+                        '377': 2,
+                        '378': 2,
+                        '379': 2,
+                        '380': 2,
+                        '412': 2,
+                        '416': 2,
+                        '417': 2,
+                        '886': 2,
                         allresults: 2,
                         allresultsig: 2
                     }
@@ -67,13 +100,44 @@ module.exports = {
                     format: 'custom',
                     location: 'Top',
                     numberPerCategoryCSA: {
-                        '800': 1,
-                        '806': 1,
-                        '815': 1,
-                        '830': 1,
-                        '853': 1,
-                        '859': 1,
+                        '185': 1,
+                        '209': 1,
+                        '210': 1,
+                        '211': 1,
+                        '214': 1,
+                        '215': 1,
+                        '217': 1,
+                        '218': 1,
+                        '219': 1,
+                        '227': 1,
+                        '228': 1,
+                        '229': 1,
+                        '234': 1,
+                        '238': 1,
+                        '240': 1,
+                        '243': 1,
+                        '312': 1,
+                        '364': 1,
+                        '365': 1,
+                        '366': 1,
+                        '402': 1,
+                        '498': 1,
+                        '501': 1,
+                        '568': 1,
+                        '594': 1,
+                        '820': 1,
+                        '898': 1,
+                        '911': 1,
                         '362': 2,
+                        '376': 2,
+                        '377': 2,
+                        '378': 2,
+                        '379': 2,
+                        '380': 2,
+                        '412': 2,
+                        '416': 2,
+                        '417': 2,
+                        '886': 2,
                         allresults: 2,
                         allresultsig: 2
                     }

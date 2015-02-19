@@ -76,6 +76,9 @@ module.exports = {
         wikititles: true,
         altImages: true
     },
+    socials: {
+        facebookLogin: true
+    },
     tracking: {
         enabled: true,
         trackers: {
