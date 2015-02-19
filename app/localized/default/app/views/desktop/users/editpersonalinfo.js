@@ -31,12 +31,13 @@ module.exports = Base.extend({
             .val(success.bind(this));
 
         function submit(done) {
-            console.log(this.parentView.getProfile());
             this.parentView.getProfile().changePassword(done);
         }
 
         function success() {
-            this.render();
+            helpers.common.redirect.call(this.app.router, '/myolx/myadslisting', null, {
+                status: 200
+            });
         }
 
         function fail(errors) {

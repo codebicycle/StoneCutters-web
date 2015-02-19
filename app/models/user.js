@@ -315,7 +315,6 @@ function edit(done) {
     }
 
     function success(response, profile) {
-        console.log(response, profile);
         statsd.increment([this.get('country'), 'profile', this.get('intent'), 'success', this.get('platform')]);
         done();
     }
