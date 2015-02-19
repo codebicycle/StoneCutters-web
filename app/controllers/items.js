@@ -485,6 +485,7 @@ function reply(params, callback) {
     function controller() {
         var itemId = params.itemId;
         var siteLocation = this.app.session.get('siteLocation');
+        var location = this.app.session.get('location');
         var platform = this.app.session.get('platform');
         var newItemPage = helpers.features.isEnabled.call(this, 'newItemPage');
         var isHermes = helpers.features.isEnabled.call(this, 'hermes');
@@ -544,7 +545,7 @@ function reply(params, callback) {
             function verifyConversation(done) {
                 helpers.dataAdapter.post(this.app.req, '/conversations', {
                     query: {
-                        location: siteLocation,
+                        location: location.url,
                         platform: platform
                     },
                     data: {
