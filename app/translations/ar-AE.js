@@ -59,6 +59,7 @@ module.exports = {
     'itemslisting.NewlyListed': '\u0648\u0642\u062A : \u0627\u0644\u0623\u0642\u0631\u0628',
     'itemslisting.NewShareThisAd': 'Share this Ad',
     'itemslisting.Next': '\u0645\u062A\u0639\u0644\u0642',
+    'itemslisting.Of': '\u0645\u0646 ',
     'itemslisting.PendingAd': 'Pending Ad',
     'itemslisting.PerWeek': 'Per Week',
     'itemslisting.Previous': '\u0642\u0628\u0644',
