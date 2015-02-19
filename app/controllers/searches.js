@@ -278,6 +278,7 @@ function statics(params, callback) {
     function controller() {
         var page = params ? params.page : undefined;
         var platform = this.app.session.get('platform');
+        var languages = this.app.session.get('languages');
         var url = ['/q/', params.search, (params.catId ? ['/c-', params.catId].join('') : '')].join('');
         var query;
         var category;
@@ -340,6 +341,7 @@ function statics(params, callback) {
             Paginator.prepare(this.app, params, 'static');
             query = _.clone(params);
             params.categoryId = params.catId;
+            params.languageId = languages._byId[this.app.session.get('selectedLanguage')].id;
             delete params.search;
             delete params.page;
             delete params.filters;
