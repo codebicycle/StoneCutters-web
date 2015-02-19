@@ -20,12 +20,12 @@ module.exports = {
     favorites: middlewares(favorites),
     messages: middlewares(messages),
     readmessages: middlewares(readmessages),
-    configuration: middlewares(configuration),
+    editpersonalinfo: middlewares(editpersonalinfo)
+    /*configuration: middlewares(configuration),
     userprofile: middlewares(userprofile),
     createuserprofile: middlewares(createuserprofile),
     edituserprofile: middlewares(edituserprofile),
-    editpersonalinfo: middlewares(editpersonalinfo),
-    emailsnotification: middlewares(emailsnotification)
+    emailsnotification: middlewares(emailsnotification)*/
 };
 
 function register(params, callback) {
@@ -616,7 +616,30 @@ function readmessages(params, callback) {
     }
 }
 
-function configuration(params, callback) {
+function editpersonalinfo(params, callback) {
+    helpers.controllers.control.call(this, params, controller);
+
+    function controller() {
+        if (this.app.session.get('platform') !== 'desktop') {
+            return helpers.common.redirect.call(this, '/');
+        }
+        if (!this.app.session.get('user')) {
+            return helpers.common.redirect.call(this, '/login', null, {
+                status: 302
+            });
+        }
+        callback(null, 'users/myolx', {
+            include: ['profile'],
+            profile: _.extend({
+                country: this.app.session.get('location').abbreviation,
+                location: this.app.session.get('location').url
+            }, this.app.session.get('user')),
+            viewname: 'editpersonalinfo'
+        });
+    }
+}
+
+/*function configuration(params, callback) {
     helpers.controllers.control.call(this, params, controller);
 
     function controller() {
@@ -918,6 +941,7 @@ function edituserprofile(params, callback) {
 
         function success(profile) {
             callback(null, 'users/myolx', {
+                include: ['profile'],
                 profile: profile,
                 viewname: 'edituserprofile'
             });
@@ -926,24 +950,6 @@ function edituserprofile(params, callback) {
         function error(err, res) {
             return helpers.common.error.call(this, err, res, callback);
         }
-    }
-}
-
-function editpersonalinfo(params, callback) {
-    helpers.controllers.control.call(this, params, controller);
-
-    function controller() {
-        if (this.app.session.get('platform') !== 'desktop') {
-            return helpers.common.redirect.call(this, '/');
-        }
-        if (!this.app.session.get('user')) {
-            return helpers.common.redirect.call(this, '/login', null, {
-                status: 302
-            });
-        }
-        callback(null, 'users/myolx', {
-            viewname: 'editpersonalinfo'
-        });
     }
 }
 
@@ -997,4 +1003,4 @@ function emailsnotification(params, callback) {
             return helpers.common.error.call(this, err, res, callback);
         }
     }
-}
+}*/

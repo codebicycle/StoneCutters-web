@@ -16,7 +16,7 @@
 
 {% set webField = {
     isOptional: true,
-    name: "password",
+    name: "currentPassword",
     mandatory: false,
     label: dictionary["lostform.CurrentPassword"],
     fieldType: "password",
@@ -26,14 +26,13 @@
 
 {% set webField = {
     isOptional: true,
-    name: "password",
+    name: "newPassword",
     mandatory: false,
     label: dictionary["lostform.NewPassword"],
     fieldType: "password",
     dataType: "string"
 } %}
 {{ Field(webField) }}
-
 
 <fieldset class="save-config">
     <input type="submit" value="{{ dictionary["register_form.Save"] }}" class="save" />

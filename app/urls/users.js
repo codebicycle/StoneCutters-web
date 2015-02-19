@@ -25,7 +25,7 @@ module.exports = {
     'users#myolx': {
         url: 'myolx'
     },
-    'users#configuration': {
+    /*'users#configuration': {
         url: 'myolx/configuration'
     },
     'users#createuserprofile': {
@@ -39,6 +39,9 @@ module.exports = {
     },
     'users#emailsnotification': {
         url: 'myolx/emailsnotification'
+    },*/
+    'users#editpersonalinfo': {
+        url: 'myolx/configuration'
     },
     'users#myads': {
         urls: [

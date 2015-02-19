@@ -41,9 +41,6 @@
             data-validate="true"
         {% endif %}
         {% if value %}
-        {{name|log}}
-        {{value|log}}
-        {{(value.value if value.value else value)|log}}
             value="{{ value.value if value.value else value }}"
         {% endif %}
     />

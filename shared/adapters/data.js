@@ -205,7 +205,7 @@ DataAdapter.prototype.clientRequest = function(req, api, options, callback) {
                     return fail(err, res);
                 }
             }
-            if (body && body.itemProperties === null){
+            if (body && body.itemProperties === null) {
                 body.itemProperties = {};
             }
             logger.log('%s %d %s %s', api.type.toUpperCase(), res.status, api.url, elapsed);
@@ -221,9 +221,15 @@ DataAdapter.prototype.clientRequest = function(req, api, options, callback) {
         }
 
         function fail(res, textStatus, err) {
+            var body;
+
             elapsed = getElapsed(start, elapsed);
             try {
                 err = JSON.parse(err);
+            }
+            catch (error) {}
+            try {
+                body = JSON.parse(res.responseText);
             }
             catch (error) {}
             if (options.convertErrorCode) {
@@ -241,14 +247,14 @@ DataAdapter.prototype.clientRequest = function(req, api, options, callback) {
                 responseText: res.responseText,
                 statusCode: res.status,
                 statusText: res.statusText
-            });
+            }, body);
         }
     }
 
     function check(done, err, res, body) {
         if (err) {
             done.abort();
-            return callback(err, res);
+            return callback(err, res, body);
         }
         done(res, body);
     }

@@ -4,8 +4,6 @@ var _ = require('underscore');
 var asynquence = require('asynquence');
 var Base = require('../../../../../common/app/bases/view').requireView('users/edituserprofile');
 var helpers = require('../../../../../../helpers');
-var User = require('../../../../../../models/user');
-var States = require('../../../../../../collections/states');
 
 module.exports = Base.extend({
     tagName: 'form',
@@ -14,8 +12,8 @@ module.exports = Base.extend({
         var data = Base.prototype.getTemplateData.call(this);
 
         return _.extend({}, data, {
-            profile: this.getProfile(data.profile),
-            states: this.getStates(data.states).map(function each(state) {
+            profile: this.parentView.getProfile(data.profile),
+            states: this.parentView.getStates(data.states).map(function each(state) {
                 return {
                     key: state.get('id'),
                     value: state.get('name')
@@ -51,7 +49,7 @@ module.exports = Base.extend({
 
         var $field = $(event.target);
 
-        this.getProfile().set($field.attr('name'), $field.val());
+        this.parentView.getProfile().set($field.attr('name'), $field.val());
     },
     onChangeState: function(event) {
         event.preventDefault();
@@ -64,11 +62,11 @@ module.exports = Base.extend({
             .val(success.bind(this));
 
             function change(done) {
-                var state = this.getStates().findWhere({
+                var state = this.parentView.getStates().findWhere({
                     id: $(event.target).val()
                 });
 
-                this.getProfile()
+                this.parentView.getProfile()
                     .set('stateId', state.get('id'))
                     .set('location', state.get('url'));
                 done(state);
@@ -98,7 +96,7 @@ module.exports = Base.extend({
             id: $(event.target).val()
         });
 
-        this.getProfile()
+        this.parentView.getProfile()
             .set('cityId', city.get('id'))
             .set('location', city.get('url'));
     },
@@ -112,7 +110,7 @@ module.exports = Base.extend({
             .val(success.bind(this));
 
         function edit(done) {
-            this.getProfile().edit(done);
+            this.parentView.getProfile().edit(done);
         }
 
         function success() {
@@ -124,17 +122,5 @@ module.exports = Base.extend({
         function fail(err) {
             console.log(err);
         }
-    },
-    getProfile: function(profile) {
-        this.profile = this.profile || (this.parentView.options.profile && this.parentView.options.profile.toJSON ? this.parentView.options.profile : new User(profile || this.parentView.options.profile || {}, {
-            app: this.app
-        }));
-        return this.profile;
-    },
-    getStates: function(states) {
-        this.states = this.states || (this.parentView.options.states && this.parentView.options.states.toJSON ? this.parentView.options.states : new States(states || this.parentView.options.states || {}, {
-            app: this.app
-        }));
-        return this.states;
     }
 });
