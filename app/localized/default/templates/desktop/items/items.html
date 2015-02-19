@@ -1,7 +1,7 @@
 {% set changesearch =  '<strong>' + search + '</strong>' %}
 {% for item in items %}
     <li class="item {{ ' featuredad' if item.isFeatured }}" >
-        <a href="{{ item.slug.replace(domain, fullDomain) }}" data-qa="list-item" >
+        <a href="{{ item.slug.replace(domain, fullDomain) if item.slug else (['iid-', item.id] | join('') | link) }}" data-qa="list-item" >
             <figure class="items-image {{ 'lines' if item.imagesCount > 1 }} {{ 'icons icon-photo' if not item.thumbnail }}">
                 {% if item.thumbnail %}
                     <img src="{{ item.thumbnail }}" alt="{{ item.title }}">
@@ -34,7 +34,7 @@
     <li class="title">{{ dictionary["misc.MoreResultsIn"] }} {{ location.name if meta.abundance.locationType == 'country' else location.children[0].name }}</li>
     {% for item in meta.abundance.data %}
         <li class="item {{ ' featuredad' if item.isFeatured }}" >
-            <a href="{{ item.slug.replace(domain, fullDomain) }}" data-qa="list-item" >
+            <a href="{{ item.slug.replace(domain, fullDomain) if item.slug else (['iid-', item.id] | join('') | link) }}" data-qa="list-item" >
                 <figure class="items-image {{ 'lines' if item.imagesCount > 1 }} {{ 'icons icon-photo' if not item.thumbnail }}">
                     {% if item.thumbnail %}
                         <img src="{{ item.thumbnail }}" alt="{{ item.title }}">

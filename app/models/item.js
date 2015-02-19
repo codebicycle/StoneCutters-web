@@ -9,11 +9,7 @@ var statsd = require('../../shared/statsd')();
 module.exports = Base.extend({
     idAttribute: 'id',
     url: '/items/:id',
-    defaults: {
-        category: {},
-        optionals: [],
-        images: []
-    },
+    defaults: defaults,
     shortTitle: shortTitle,
     shortDescription: shortDescription,
     getLocation: getLocation,
@@ -33,6 +29,14 @@ module.exports = Base.extend({
 });
 
 module.exports.id = 'Item';
+
+function defaults() {
+    return {
+        category: {},
+        optionals: [],
+        images: []
+    };
+}
 
 function shortTitle() {
     var title = this.get('title');
