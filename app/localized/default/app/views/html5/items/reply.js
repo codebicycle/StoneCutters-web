@@ -68,6 +68,7 @@ module.exports = Base.extend({
             if(this.user){
                 this.reply.name = this.$('input.name').val();
                 this.reply.email = this.$('input.email').val();
+                this.reply.userId = this.user.get('userId');
             }
 
             done();

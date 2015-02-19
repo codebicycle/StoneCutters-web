@@ -10,7 +10,7 @@
         </div>
     {% endif %}
     <div class="contentmessage {{ 'lines' if not user.email }}">
-        <h3>Contactar con el vendedor</h3>
+        <h3>{{ dictionary["mybids.ContactSeller"] }}</h3>
         <div class="field">
             <label>* {{ dictionary["replymessage.Message"] }}</label>
             <textarea class="message" name="message"></textarea>
@@ -19,7 +19,7 @@
         </div>
     </div>
     {% if not user.email %}
-        <h3>Completa tus datos de contacto una vez:</h3>
+        <h3>{{ dictionary["itemgeneraldetails.PersonalInfo"] }}</h3>
         <div class="field">
             <label>{{ dictionary["replymessage.Name"] }}</label>
             <input type="text" value="{{ user.username if user.username }}" class="name" name="name">
