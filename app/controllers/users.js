@@ -621,6 +621,7 @@ function conversations(params, callback) {
     function controller() {
         var platform = this.app.session.get('platform');
         var location = this.app.session.get('location');
+        var languages = this.app.session.get('languages');
         var page = params ? params.page : undefined;
         var conversation;
         var _params;
@@ -644,6 +645,7 @@ function conversations(params, callback) {
             Paginator.prepare(this.app, params, 'myConvs');
             conversation = params.conversation;
             params.location = location.url;
+            params.languageId = languages._byId[this.app.session.get('selectedLanguage')].id;
             delete params.conversation;
             _params = _.extend({}, params, {
                 token: user.token,
@@ -716,6 +718,7 @@ function conversation(params, callback) {
     function controller() {
         var platform = this.app.session.get('platform');
         var location = this.app.session.get('location');
+        var languages = this.app.session.get('languages');
         var page = params ? params.page : undefined;
         var thread;
         var _params;
@@ -740,6 +743,7 @@ function conversation(params, callback) {
             Paginator.prepare(this.app, params, pageSize);
             thread = params.thread;
             params.location = location.url;
+            params.languageId = languages._byId[this.app.session.get('selectedLanguage')].id;
             delete params.thread;
             _params = _.extend({}, params, {
                 token: user.token,

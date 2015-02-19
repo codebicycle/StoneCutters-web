@@ -2,7 +2,7 @@
     <a href="{{ '/myolx/conversations' | link }}" class="back icons icon-arrow-left">{{ dictionary["misc.ReturnToMsgs"] }}</a>
     {% set item = thread.get('item') %}
     <div class="conversation-item">
-        <a href="{{ item.slug.replace(domain, fullDomain) }}">
+        <a href="{{ item.slug.replace(domain, fullDomain) | replace('en/', '') }}">
             <figure class="wrapper-img {{ 'lines' if item.images.length }} {{ 'icons icon-photo' if not item.images.length }}">
                 {% if item.images.length %}
                     <img src="{{ item.images[0].thumbnail }}" alt="" class="thumbnail">
@@ -19,7 +19,7 @@
             <h3>{{ dictionary["myolx.ConversationWith"] | replace('<<NAME>>', senderName) }}
 
             </h3>
-            <p><a href="{{ item.slug.replace(domain, fullDomain) }}">{{ item.title }}</a>
+            <p><a href="{{ item.slug.replace(domain, fullDomain) | replace('en/', '') }}">{{ item.title }}</a>
         </div>
     </div>
     <ul>
