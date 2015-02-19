@@ -1,23 +1,11 @@
-<a rel="nofollow" href="{{ '/myolx/configuration' | link }}" class="icons icon-arrow-left">{{ dictionary["defaultfooter.Back"] }}</a>
 <h1>{{ dictionary["register_form.EditMyInfo"] }}</h1>
 
 {% from macros import Field %}
 
-{% set nameField = {
-    isOptional: false,
-    name: "email",
-    mandatory: true,
-    label: dictionary["seccion-35.559"],
-    fieldType: "text",
-    dataType: "string",
-    value: user.email
-} %}
-{{ Field(nameField) }}
-
 {% set webField = {
     isOptional: true,
     name: "currentPassword",
-    mandatory: false,
+    mandatory: true,
     label: dictionary["lostform.CurrentPassword"],
     fieldType: "password",
     dataType: "string"
@@ -27,7 +15,7 @@
 {% set webField = {
     isOptional: true,
     name: "newPassword",
-    mandatory: false,
+    mandatory: true,
     label: dictionary["lostform.NewPassword"],
     fieldType: "password",
     dataType: "string"
