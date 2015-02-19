@@ -65,32 +65,33 @@ module.exports = Base.extend({
         var $neighborhoods = $('#field-neighborhood');
 
         if ($states.val()) {
-            $states.trigger('change');
+            $states.trigger('change', [true]);
         }
         if ($cities.val()) {
-            $cities.trigger('change');
+            $cities.trigger('change', [true]);
         }
         if ($neighborhoods.val()) {
-            $neighborhoods.trigger('change');
+            $neighborhoods.trigger('change', [true]);
         }
     },
-    onStateChange: function(event) {
+    onStateChange: function(event, skipValidation) {
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();
 
         var $field = $(event.target);
         var $firstOption = $field.find('option').first();
+        var $cities = $('#field-location');
 
         if ($firstOption.attr('value') === '') {
             $firstOption.remove();
         }
 
         this.resetNeighborhoods();
-        this.getCities($field.val());
-        this.parentView.$el.trigger('fieldSubmit', [$field]);
+        this.getCities($field.val(), skipValidation, ($cities.val() ? [$cities.val()] : undefined));
+        this.parentView.$el.trigger('fieldSubmit', [$field, skipValidation]);
     },
-    onCityChange: function(event) {
+    onCityChange: function(event, skipValidation) {
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();
@@ -102,10 +103,10 @@ module.exports = Base.extend({
             $firstOption.remove();
         }
 
-        this.getNeighborhoods($field.val());
-        this.parentView.$el.trigger('fieldSubmit', [$field]);
+        this.getNeighborhoods($field.val(), skipValidation);
+        this.parentView.$el.trigger('fieldSubmit', [$field, skipValidation]);
     },
-    onNeighborhoodChange: function(event) {
+    onNeighborhoodChange: function(event, skipValidation) {
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();
@@ -117,9 +118,9 @@ module.exports = Base.extend({
             $firstOption.remove();
         }
 
-        this.parentView.$el.trigger('fieldSubmit', [$field]);
+        this.parentView.$el.trigger('fieldSubmit', [$field, skipValidation]);
     },
-    getCities: function(state) {
+    getCities: function(state, skipValidation, cityId) {
         var options;
         var $cities = this.$('#field-location');
 
@@ -158,9 +159,9 @@ module.exports = Base.extend({
         var success = function(options) {
             $cities.removeAttr('disabled').empty();
             _.each(options, function each(city) {
-                $cities.append('<option value="' + city.key + '">' + city.value + '</option>');
+                $cities.append('<option value="' + city.key + '"' + (city.key == cityId ? 'selected="selected"' : '') + '>' + city.value + '</option>');
             }.bind(this));
-            this.parentView.$el.trigger('fieldSubmit', [$cities]);
+            this.parentView.$el.trigger('fieldSubmit', [$cities, skipValidation]);
         }.bind(this);
 
         asynquence().or(error)
@@ -168,7 +169,7 @@ module.exports = Base.extend({
             .then(parse)
             .val(success);
     },
-    getNeighborhoods: function(city) {
+    getNeighborhoods: function(city, skipValidation) {
         var options;
         var $neighborhoods = this.$('#field-neighborhood');
 
@@ -215,7 +216,7 @@ module.exports = Base.extend({
                 _.each(options, function each(neighborhood) {
                     $neighborhoods.append('<option value="' + neighborhood.key + '">' + neighborhood.value + '</option>');
                 }.bind(this));
-                this.parentView.$el.trigger('fieldSubmit', [$neighborhoods]);
+                this.parentView.$el.trigger('fieldSubmit', [$neighborhoods, skipValidation]);
             }
             else {
                 this.resetNeighborhoods();
