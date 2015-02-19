@@ -27,7 +27,7 @@
             {% endif %}
             <span class="name">{{ name }}</span>
             <p class="text">{{ message.text }}</p>
-            <span class="date"> {{ message.date | date(false, true) }}</span>
+            <span class="date"><time>{{ message.date.since.day if message.date.since.day }} {{ dictionary[message.date.since.dictionary] }}{{ (',' + message.date.since.hour) if message.date.since.hour }} {{ (' ' + yearToShow) if yearToShow }}</time></span>
         </li>
     {% endfor %}
 </ul>
