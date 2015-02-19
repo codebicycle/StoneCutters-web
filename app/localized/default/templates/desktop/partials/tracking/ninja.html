@@ -1,5 +1,6 @@
 {% if tracking.params and tracking.params.ninja %}
 <script type="text/javascript">
+    window.dataLayer = window.dataLayer || [];
     window.dataLayer.push({'cleanup': function() {
         window.dataLayer.push({{ tracking.params.ninja.params }});
     }});

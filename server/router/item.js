@@ -34,8 +34,8 @@ module.exports = function(app, dataAdapter) {
                 }
                 reply = data;
                 user = new User({
-                    country: req.rendrApp.session.get('location').name,
-                    languageId: req.rendrApp.session.get('languages')._byId[req.rendrApp.session.get('selectedLanguage')].id,
+                    country: req.rendrApp.session.get('location').abbreviation,
+                    languageId: req.rendrApp.session.get('languageId'),
                     platform: req.rendrApp.session.get('platform')
                 }, {
                     app: req.rendrApp

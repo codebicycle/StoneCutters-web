@@ -1,3 +1,5 @@
-<a href="http://www.ekhanei.com/{{ languageAbbreviation }}" class="migration-banner-bd">
-	<img src="{{ '/images/html5/migration/bd/banner-' + languageAbbreviation + '.jpg' | static }}" alt="OLX is now part of Ekhanei.com" align="middle" />
+{% set link = 'http://m.ekhanei.com/welcome' %}
+{% set image = '/images/html5/migration/bd/bannerHP-' + languageAbbreviation + '.jpg' %}
+<a href="{{ link }}" class="migration-banner-bd {{ 'disabled' if postingFlow }}">
+	<img src="{{ image | static }}" align="middle" />
 </a>

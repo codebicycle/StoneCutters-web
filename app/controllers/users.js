@@ -7,6 +7,7 @@ var helpers = require('../helpers');
 var Paginator = require('../modules/paginator');
 var User = require('../models/user');
 var FeatureAd = require('../models/feature_ad');
+var config = require('../../shared/config');
 
 module.exports = {
     register: middlewares(register),
@@ -20,7 +21,9 @@ module.exports = {
     messages: middlewares(messages),
     readmessages: middlewares(readmessages),
     conversations: middlewares(conversations),
-    conversation: middlewares(conversation)
+    conversation: middlewares(conversation),
+    unsubscribe: middlewares(unsubscribe),
+    report: middlewares(report)
 };
 
 function register(params, callback) {
@@ -305,13 +308,18 @@ function myads(params, callback) {
         }.bind(this);
 
         var success = function(items) {
+            var location = this.app.session.get('location');
+            var isRenewEnabled = config.getForMarket(location.url, ['ads', 'renew', 'enabled'],false);
+            var isRebumpEnabled = config.getForMarket(location.url, ['ads', 'rebump', 'enabled'],false);
             var platform = this.app.session.get('platform');
             var view = 'users/myads';
             var data = {
                 include: ['items'],
                 items: items,
                 deleted: deleted,
-                paginator: items.paginator
+                paginator: items.paginator,
+                isRenewEnabled: isRenewEnabled,
+                isRebumpEnabled: isRebumpEnabled
             };
 
             if (platform === 'desktop') {
@@ -796,5 +804,21 @@ function conversation(params, callback) {
             .then(fetch)
             .then(paginate)
             .val(success);
+    }
+}
+
+function report(params, callback) {
+    helpers.controllers.control.call(this, params, controller);
+
+    function controller() {
+        callback(null, {});
+    }
+}
+
+function unsubscribe(params, callback) {
+    helpers.controllers.control.call(this, params, controller);
+
+    function controller() {
+        callback(null, {});
     }
 }

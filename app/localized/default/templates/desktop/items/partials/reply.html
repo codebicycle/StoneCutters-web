@@ -12,6 +12,10 @@
                 {{ dictionary[month + item.user.firstActivityDate.month] + ' ' + item.user.firstActivityDate.year }}
             </span>
         {% endif %}
+     {% else %}
+        {% if item.user.username %}
+            <p class="icons icon-user user-name">{{ item.user.username }}</p>
+        {% endif %}
     {% endif %}
     {#<span class="user-status">User Status</span>#}
     {% if item.phone %}

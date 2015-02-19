@@ -1,18 +1,20 @@
 module.exports = {
-    socials: [
-        {
-            name: 'facebook',
-            link: 'https://www.facebook.com/OLXvenezuela'
-        },
-        {
-            name: 'twitter',
-            link: 'https://twitter.com/OLX_Venezuela'
-        },
-        {
-            name: 'youtube',
-            link: 'https://www.youtube.com/user/OLXvenezuela'
-        }
-    ],
+    socials: {
+        links: [
+            {
+                name: 'facebook',
+                link: 'https://www.facebook.com/OLXvenezuela'
+            },
+            {
+                name: 'twitter',
+                link: 'https://twitter.com/OLX_Venezuela'
+            },
+            {
+                name: 'youtube',
+                link: 'https://www.youtube.com/user/OLXvenezuela'
+            }
+        ]
+    },
     videos: [
         {
             title: 'OLX Venezuela - Comercial Sofá Cama - Vender es fácil',
@@ -61,9 +63,26 @@ module.exports = {
                         '806': 1,
                         '815': 1,
                         '830': 1,
-                        '853': 1,
                         '859': 1,
+                        '801': 1,
+                        '802': 1,
+                        '803': 1,
+                        '804': 1,
+                        '805': 1,
+                        '870': 1,
+                        '871': 1,
+                        '907': 1,
+                        '912': 1,
                         '362': 2,
+                        '376': 2,
+                        '377': 2,
+                        '378': 2,
+                        '379': 2,
+                        '380': 2,
+                        '412': 2,
+                        '416': 2,
+                        '417': 2,
+                        '886': 2,
                         allresults: 2,
                         allresultsig: 2
                     }
@@ -77,22 +96,33 @@ module.exports = {
                         '806': 1,
                         '815': 1,
                         '830': 1,
-                        '853': 1,
                         '859': 1,
+                        '801': 1,
+                        '802': 1,
+                        '803': 1,
+                        '804': 1,
+                        '805': 1,
+                        '870': 1,
+                        '871': 1,
+                        '907': 1,
+                        '912': 1,
                         '362': 2,
+                        '376': 2,
+                        '377': 2,
+                        '378': 2,
+                        '379': 2,
+                        '380': 2,
+                        '412': 2,
+                        '416': 2,
+                        '417': 2,
+                        '886': 2,
                         allresults: 2,
                         allresultsig: 2
                     }
-                },
-                side: {
-                    service: 'none'
                 }
             },
             item: {
                 top: {
-                    service: 'none'
-                },
-                side: {
                     service: 'none'
                 }
             }

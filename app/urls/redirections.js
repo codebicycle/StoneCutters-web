@@ -88,6 +88,12 @@ module.exports = {
     'redirections#myadsphp': {
         url: 'myolx/index.php'
     },
+    'redirections#unsubscribe': {
+        url: 'myolx/conversation/unsubscribe.php'
+    },
+    'redirections#report': {
+        url: 'myolx/conversation/report.php'
+    },
     'redirections#php': {
         url: ':path.php'
     },
