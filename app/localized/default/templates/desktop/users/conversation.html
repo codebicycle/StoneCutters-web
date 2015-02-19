@@ -10,14 +10,11 @@
             </figure>
         </a>
         <div class="conversation-item-data">
-            {% set senderName = '' %}
-            {% set phone = '' %}
-            {% if thread.get('senders')[0].isMine %}
+            {% set senderName = thread.get('senders')[0].name %}
+            {% set phone = thread.get('senders')[0].phone %}
+            {% if thread.get('senders')[0].isMine and thread.get('senders')[1] %}
                 {% set senderName = thread.get('senders')[1].name %}
                 {% set phone = thread.get('senders')[1].phone %}
-            {% else %}
-                {% set senderName = thread.get('senders')[0].name %}
-                {% set phone = thread.get('senders')[0].phone %}
             {% endif %}
             <h3>{{ dictionary["myolx.ConversationWith"] | replace('<<NAME>>', senderName) }}
 
