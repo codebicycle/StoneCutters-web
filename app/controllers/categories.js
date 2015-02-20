@@ -126,20 +126,134 @@ function show(params, callback, gallery) {
         var success = function(_result) {
             var platform = this.app.session.get('platform');
             if ( platform === 'html4') {
-                var items = [];
-
-                _.each(_result.items, function(item, i) {
-                    items.push(item);
-                    if (i % 3 === 0) {
-                        items.push({
-                            thumbnail: '',
-                            title: 'I Call U Mobiles',
-                            location: 'Mombassa Island',
-                            isShop: true
-                        });
-                    }
-                });
-                _result.items = items;
+                var shops = [
+                            undefined,
+                            {
+                                "id": "54d8b6fee4b0a94af2c0e3f4",
+                                "name": "Official Samsung Phones",
+                                "description": "The broadest assortment of Samsung mobile phones",
+                                "email": "samsung@olx.com",
+                                "image": "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRYJvxoCJ8mB4CIjQX-688wF4Y8-J_BgDTQRQ0v8hYZVfwV4tlQ",
+                                "location": {
+                                    "lat": -1.291168,
+                                    "lon": 36.821458
+                                },
+                                "phone": "731837091",
+                                "address": "Parliament Rd in front of Machakos Bus, Nairobi",
+                                "openHours": {
+                                    "from": 9,
+                                    "to": 9
+                                },
+                                "items": [
+                                    {
+                                        "id": 782293240,
+                                        "slug": "tablet-tecno-type-iid-782189851",
+                                        "title": "A black iPhone 5",
+                                        "description": "It is the latest version and affordable.",
+                                        "price": "Ksh45000",
+                                        "location": "Fedha",
+                                        "date": "Today, 9:38",
+                                        "image": "http://images01.olx-st.com/ui/92/45/27/t_1423467532_782293240_1.jpg"
+                                    }
+                                ],
+                                "type": 2
+                            },
+                            undefined,
+                            {
+                                "id": "54d8b729e4b0a94af2c0e3f5",
+                                "name": "I Call U Mobiles",
+                                "description": "All mobile phone brands in an only place. Buy Safe, Buy I Call U",
+                                "email": "icallu@olx.com",
+                                "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTkfKRnhOKXQ9AGZ-qeOaCy-uxHQLGFR1l4DksWeU0Oij8b-bOIBQ",
+                                "location": {
+                                    "lat": -1.291929,
+                                    "lon": 36.821855
+                                },
+                                "phone": "701593759",
+                                "address": "Parliament Rd in next to Braintech Clinic, Nairobi",
+                                "openHours": {
+                                    "from": 9,
+                                    "to": 9
+                                },
+                                "items": [
+                                    {
+                                        "id": 782205472,
+                                        "slug": "tablet-tecno-type-iid-782189851",
+                                        "title": "Galaxy Samsung Note 3, affordable and new from Korea",
+                                        "description": "<p>super perfect phone, android supported and you can get all the apps from the play store. a working stylus and available immediately. call now</p>",
+                                        "price": "Ksh13100",
+                                        "location": "Car wash",
+                                        "date": "Today, 20:40",
+                                        "image": "http://images04.olx-st.com/ui/69/16/52/t_1423420835_782205472_1.jpg"
+                                    }
+                                ],
+                                "type": 1
+                            },
+                            undefined,
+                            {
+                                "id": "54d8b729e4b0a94af2c0e3f5",
+                                "name": "I Call U Mobiles",
+                                "description": "All mobile phone brands in an only place. Buy Safe, Buy I Call U",
+                                "email": "icallu@olx.com",
+                                "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTkfKRnhOKXQ9AGZ-qeOaCy-uxHQLGFR1l4DksWeU0Oij8b-bOIBQ",
+                                "location": {
+                                    "lat": -1.291929,
+                                    "lon": 36.821855
+                                },
+                                "phone": "701593759",
+                                "address": "Parliament Rd in next to Braintech Clinic, Nairobi",
+                                "openHours": {
+                                    "from": 9,
+                                    "to": 9
+                                },
+                                "items": [
+                                    {
+                                        "id": 782205472,
+                                        "slug": "tablet-tecno-type-iid-782189851",
+                                        "title": "Galaxy Samsung Note 3, affordable and new from Korea",
+                                        "description": "<p>super perfect phone, android supported and you can get all the apps from the play store. a working stylus and available immediately. call now</p>",
+                                        "price": "Ksh13100",
+                                        "location": "Car wash",
+                                        "date": "Today, 20:40",
+                                        "image": "http://images04.olx-st.com/ui/69/16/52/t_1423420835_782205472_1.jpg"
+                                    }
+                                ],
+                                "type": 1
+                            },
+                            undefined,
+                            undefined,
+                            {
+                                "id": "54d8b753e4b0a94af2c0e3f6",
+                                "name": "Santek Technology",
+                                "description": "Mobiles and accesories, we sell all the major brands",
+                                "email": "santek@olx.com",
+                                "image": "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcRybLH8p12X14pFD65iR8TMFlnyqWWxquZ2QjVrWKnA6WFj6JxJ",
+                                "location": {
+                                    "lat": -1.290417,
+                                    "lon": 36.821437
+                                },
+                                "phone": "716368206",
+                                "address": "Harambee Ave in front of Sheria House, Nairobi",
+                                "openHours": {
+                                    "from": 9,
+                                    "to": 9
+                                },
+                                "items": [
+                                    {
+                                        "id": 782189851,
+                                        "slug": "tablet-tecno-type-iid-782189851",
+                                        "title": "Tablet tecno type",
+                                        "description": "its new and pink in colour at the back",
+                                        "price": "",
+                                        "location": "Baragoi",
+                                        "date": "Today, 18:41",
+                                        "image": "/images/html4/noPhoto.png"
+                                    }
+                                ],
+                                "type": 2
+                            }
+                        ];
+                _result.shops = shops;
                 callback(null, _result);
             }
             else {
