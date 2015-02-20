@@ -6,6 +6,7 @@ var middlewares = require('../middlewares');
 var helpers = require('../helpers');
 var Paginator = require('../modules/paginator');
 var User = require('../models/user');
+var Conversation = require('../models/conversation');
 var FeatureAd = require('../models/feature_ad');
 var config = require('../../shared/config');
 
@@ -811,7 +812,33 @@ function report(params, callback) {
     helpers.controllers.control.call(this, params, controller);
 
     function controller() {
-        callback(null, {});
+        var conversation;
+
+        var prepare = function(done) {
+            conversation = new Conversation({
+                hash: params.hash
+            }, {
+                app: this.app
+            });
+            done();
+        }.bind(this);
+
+        var fetch = function(done,err) {
+            conversation.report(done);
+        }.bind(this);
+
+        var error = function(err, res) {
+            return helpers.common.error.call(this, err, res, callback);
+        }.bind(this);
+
+        var success = function() {
+            callback(null, {});
+        }.bind(this);
+
+        asynquence().or(error)
+            .then(prepare)
+            .then(fetch)
+            .val(success);
     }
 }
 
@@ -819,6 +846,31 @@ function unsubscribe(params, callback) {
     helpers.controllers.control.call(this, params, controller);
 
     function controller() {
-        callback(null, {});
+
+        var prepare = function(done) {
+            conversation = new Conversation({
+                hash: params.hash
+            }, {
+                app: this.app
+            });
+            done();
+        }.bind(this);
+
+        var fetch = function(done,err) {
+            conversation.unsubscribe(done);
+        }.bind(this);
+
+        var error = function(err, res) {
+            return helpers.common.error.call(this, err, res, callback);
+        }.bind(this);
+
+        var success = function() {
+            callback(null, {});
+        }.bind(this);
+
+        asynquence().or(error)
+            .then(prepare)
+            .then(fetch)
+            .val(success);
     }
 }
