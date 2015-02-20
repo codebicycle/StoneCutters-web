@@ -146,6 +146,7 @@ function show(params, callback, gallery) {
                                 "items": [
                                     {
                                         "id": 782293240,
+                                        "slug": "tablet-tecno-type-iid-782189851",
                                         "title": "A black iPhone 5",
                                         "description": "It is the latest version and affordable.",
                                         "price": "Ksh45000",
@@ -176,6 +177,7 @@ function show(params, callback, gallery) {
                                 "items": [
                                     {
                                         "id": 782205472,
+                                        "slug": "tablet-tecno-type-iid-782189851",
                                         "title": "Galaxy Samsung Note 3, affordable and new from Korea",
                                         "description": "<p>super perfect phone, android supported and you can get all the apps from the play store. a working stylus and available immediately. call now</p>",
                                         "price": "Ksh13100",
@@ -206,6 +208,7 @@ function show(params, callback, gallery) {
                                 "items": [
                                     {
                                         "id": 782205472,
+                                        "slug": "tablet-tecno-type-iid-782189851",
                                         "title": "Galaxy Samsung Note 3, affordable and new from Korea",
                                         "description": "<p>super perfect phone, android supported and you can get all the apps from the play store. a working stylus and available immediately. call now</p>",
                                         "price": "Ksh13100",
@@ -237,6 +240,7 @@ function show(params, callback, gallery) {
                                 "items": [
                                     {
                                         "id": 782189851,
+                                        "slug": "tablet-tecno-type-iid-782189851",
                                         "title": "Tablet tecno type",
                                         "description": "its new and pink in colour at the back",
                                         "price": "",
@@ -248,38 +252,6 @@ function show(params, callback, gallery) {
                                 "type": 2
                             }
                         ];
-                var getCenter = function(shops) {
-                    var minLat = 91;
-                    var maxLat = -91;
-                    var minLng = 181;
-                    var maxLng = -181;
-                    var shopLocation;
-                    var lat;
-                    var lng;
-
-                    for (var j in shops) {
-                        if (shops[j]) {
-                            shopLocation = shops[j].location;
-                            if (shopLocation.lat > maxLat) {
-                                maxLat = shopLocation.lat;
-                            }
-                            if (shopLocation.lat < minLat) {
-                                minLat = shopLocation.lat;
-                            }
-                            if (shopLocation.lng > maxLng) {
-                                maxLng = shopLocation.lng;
-                            }
-                            if (shopLocation.lng < minLng) {
-                                minLng = shopLocation.lng;
-                            }
-                        }
-                    }
-                    lat = (maxLat + minLat) / 2;
-                    lng = (maxLng + minLng) / 2;
-                    return JSON.stringify({"lat": lat, "lng": lng});
-                };
-
-                _result.center = getCenter(shops);
                 _result.shops = shops;
                 callback(null, _result);
             }

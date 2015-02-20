@@ -1,6 +1,6 @@
 {% view 'locations/select' %}
 {% view 'partials/search' %}
-{% from macros import Breadcrumb, BreadcrumbHome, AdLikeStore, CallToActions %}
+{% from macros import Breadcrumb, BreadcrumbHome %}
 {% set link = (breadcrumb | link) %}
 {{ Breadcrumb(dictionary, link, subcategory.trName) }}
 
@@ -8,8 +8,8 @@
     {% if shops.length and meta.total > 0 %}
         <div class="mapShops">
             <p class="nearby">Shops nearby:</p>
-            <a href="">
-                <img src="http://maps.googleapis.com/maps/api/staticmap?center={{ [center.lat, ',', center.lng] | join }}&zoom=16&size=320x100&markers={% for shop in shops %}{{ [shop.location.lat, ",", shop.location.lon, "|"] | join if shop }}{% endfor %}&sensor=false" />
+            <a href="{{ '/shops' | link({from: 'map'}) }}">
+                <img src="http://maps.googleapis.com/maps/api/staticmap?&zoom=16&size=320x100&markers={% for shop in shops %}{{ [shop.location.lat, ",", shop.location.lon, "|"] | join if shop }}{% endfor %}&sensor=false" />
             </a>
         </div>
     {% endif %}
@@ -36,9 +36,9 @@
                         {% set shop = shops[loop.index0] %}
                         {% if shop %}
                             {% if shop.type == 1 %}
-                                {{ AdLikeStore(shop) }}
+                                {% include (template + '/items/adlikestore.html') %}
                             {% else %}
-                                {{ CallToActions(shop) }}
+                                {% include (template + '/items/calltoactions.html') %}
                             {% endif %}
                         {% endif %}
                     {% endif %}

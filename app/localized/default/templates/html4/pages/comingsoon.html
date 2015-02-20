@@ -1,0 +1,10 @@
+{% from macros import Breadcrumb, BreadcrumbHome %}
+{% set link = ((breadcrumb if breadcrumb else '/') | link) %}
+{{ Breadcrumb(dictionary, link, 'coming soon') }}
+<div class="errorPage">
+    <p><strong>COMING SOON</strong></p>
+    <p>ASDKL ASDKLSDKJ ASKLJDASKLJ KLADSDKLJASDKLJSA</p>
+</div>
+{{ BreadcrumbHome(dictionary, link, ('/' | link)) }}
+
+{% view 'partials/tracking' %}

@@ -11,7 +11,7 @@ module.exports = {
         urls: [
             'help',
             'help/:active'
-        ]        
+        ]
     },
     'pages#allstates': {
         urls: [
@@ -27,5 +27,14 @@ module.exports = {
     },
     'pages#interstitial': {
         url: 'interstitial'
+    },
+    'pages#comingsoon': {
+        url: 'comingsoon'
+    },
+    'pages#shops': {
+        url: 'shops'
+    },
+    'pages#shop': {
+        url: 'shop/:shopId/:shopName'
     }
 };

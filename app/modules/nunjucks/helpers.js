@@ -81,6 +81,10 @@ module.exports = function(nunjucks) {
         return array;
     }
 
+    function convertToSlug(str) {
+    return str.toLowerCase().replace(/[^\w ]+/g,'').replace(/ +/g,'-');
+    }
+
     return {
         is: is,
         log: log,
@@ -90,6 +94,7 @@ module.exports = function(nunjucks) {
         encode: encode,
         'static': statics,
         rangeToArray: rangeToArray,
+        convertToSlug: convertToSlug,
         countFormat: countFormat,
         editSlug: editSlug,
         slugToUrl: helpers.common.slugToUrl,
