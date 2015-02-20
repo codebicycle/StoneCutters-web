@@ -23,7 +23,7 @@ module.exports = {
     conversations: middlewares(conversations),
     conversation: middlewares(conversation),
     unsubscribe: middlewares(unsubscribe),
-    report: middlewares(report)
+    report: middlewares(report),
     editpersonalinfo: middlewares(editpersonalinfo)
     /*configuration: middlewares(configuration),
     userprofile: middlewares(userprofile),

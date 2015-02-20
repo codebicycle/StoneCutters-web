@@ -278,11 +278,8 @@ module.exports = {
     'myolx.AreYouSureYouWantToCloseSelectedListings': 'Je, una uhakika unataka kufuta matangazo yaliochaguliwa?',
     'myolx.BackToMyAds': 'Rejea kwa matangazo yangu',
     'myolx.BackToMyOLX': 'Back to My OLX',
-<<<<<<< HEAD
-    'myolx.ConversationWith': 'Mazungumzo na <<NAME>>',
-=======
     'myolx.ChangeEmailAddressOrPassword': 'Badilisha anwani ya barua pepe au nenosiri',
->>>>>>> develop
+    'myolx.ConversationWith': 'Mazungumzo na <<NAME>>',
     'myolx.EditListing': 'Hariri tangazo',
     'myolx.EmailPasswordInvalid': 'Samahani, Barua pepe yako au nenosiri inaonekana kuwa batili',
     'myolx.FIndPrevMessages': 'Sisi tuliboresha kisanduku pokezi chako! Unaweza kupata zile za nyuma <<LINK>>hapa<</LINK>>',
@@ -303,7 +300,6 @@ module.exports = {
     'myolx.SuccessfullyUnsubscribed': 'Umejitoa kwa Mafanikio',
     'myolx.TheAdHasBeenDeleted': 'Tangazo limefutwa',
     'myolx.ThisMessageIsRegarding': 'Ujumbe huu ni kuhusu',
-    'myolx.UnsubscribedConversation': 'Umejiengua kutoka kwa mazungumzo na <<USERNAME>>, imerejelea kwa tangazo hili: <<ITEM_TITLE>>',
     'myolx.You': 'Wewe',
     'myolx.YouCurrentlyHaveNoActiveListings': 'Kwa sasa hauna matangazo amilifu',
     'myolx.YouCurrentlyHaveNoFavoriteListings': 'Kwa sasa hauna matangazo uyapendayo',

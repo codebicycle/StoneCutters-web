@@ -278,11 +278,8 @@ module.exports = {
     'myolx.AreYouSureYouWantToCloseSelectedListings': 'Haluatko varmasti poistaa valitsemasi ilmoitukset?',
     'myolx.BackToMyAds': 'Takaisin omiin ilmoituksiin',
     'myolx.BackToMyOLX': 'Takaisin Oma OLX -sivulle',
-<<<<<<< HEAD
-    'myolx.ConversationWith': 'Keskustelu henkil\xF6n <<NAME>> kanssa',
-=======
     'myolx.ChangeEmailAddressOrPassword': 'Muokkaa s\xE4hk\xF6postiosoitetta tai salasanaa',
->>>>>>> develop
+    'myolx.ConversationWith': 'Keskustelu henkil\xF6n <<NAME>> kanssa',
     'myolx.EditListing': 'Muokkaa ilmoitusta',
     'myolx.EmailPasswordInvalid': 'Valitettavasti s\xE4hk\xF6postiosoitteesi tai salasanasi on virheellinen',
     'myolx.FIndPrevMessages': 'Me p\xE4ivitimme saapuneet-kansiosi! Puuttuuko sinulta viestej\xE4? L\xF6yd\xE4t edelliset <<LINK>>t\xE4st\xE4<</LINK>>',
@@ -303,7 +300,6 @@ module.exports = {
     'myolx.SuccessfullyUnsubscribed': 'Peruuttaminen onnistui',
     'myolx.TheAdHasBeenDeleted': 'Ilmoitus on poistettu',
     'myolx.ThisMessageIsRegarding': 'T\xE4m\xE4 viesti koskee aihetta ',
-    'myolx.UnsubscribedConversation': 'Olet peruuttanut keskustelun tilauksen k\xE4ytt\xE4j\xE4nimell\xE4 <<USERNAME>>, joka viittaa t\xE4h\xE4n ilmoitukseen: <<ITEM_TITLE>>',
     'myolx.You': 'Sin\xE4',
     'myolx.YouCurrentlyHaveNoActiveListings': 'Sinulla ei ole aktiivisia ilmoituksia',
     'myolx.YouCurrentlyHaveNoFavoriteListings': 'Sinulla ei ole suosikki-ilmoituksia',

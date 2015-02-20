@@ -278,11 +278,8 @@ module.exports = {
     'myolx.AreYouSureYouWantToCloseSelectedListings': 'Se\xE7ili ilanlar\u0131 sonland\u0131rmak istedi\u011Finizden emin misiniz?',
     'myolx.BackToMyAds': '\u0130lanlar\u0131ma Geri D\xF6n',
     'myolx.BackToMyOLX': 'OLX Bana \xD6zel\'e Geri D\xF6n',
-<<<<<<< HEAD
-    'myolx.ConversationWith': '<<NAME>> ile yap\u0131lan konu\u015Fma',
-=======
     'myolx.ChangeEmailAddressOrPassword': 'E-Posta adresini ya da parolay\u0131 de\u011Fi\u015Ftir ',
->>>>>>> develop
+    'myolx.ConversationWith': '<<NAME>> ile yap\u0131lan konu\u015Fma',
     'myolx.EditListing': '\u0130lan\u0131 D\xFCzenle',
     'myolx.EmailPasswordInvalid': '\xDCzg\xFCn\xFCz, e-posta ya da \u015Fifre ge\xE7ersiz',
     'myolx.FIndPrevMessages': 'Gelen kutunuzu g\xFCncelledik! Eksik mesajlar m\u0131 var? Eski mesajlar\u0131 <<LINK>>burada<</LINK>> bulabilirsiniz.',
@@ -303,7 +300,6 @@ module.exports = {
     'myolx.SuccessfullyUnsubscribed': 'Abonelikten Ba\u015Far\u0131yla \xC7\u0131k\u0131ld\u0131',
     'myolx.TheAdHasBeenDeleted': '\u0130lan silinmi\u015Ftir',
     'myolx.ThisMessageIsRegarding': 'Bu iletinin konusu',
-    'myolx.UnsubscribedConversation': '<<USERNAME>> ile olan konu\u015Fmadan ba\u015Far\u0131yla \xE7\u0131kt\u0131n\u0131z, ilgili ilan: <<ITEM_TITLE>>',
     'myolx.You': 'Siz',
     'myolx.YouCurrentlyHaveNoActiveListings': '\u015Eu an aktif ilan\u0131n\u0131z bulunmuyor',
     'myolx.YouCurrentlyHaveNoFavoriteListings': '\u015Eu an favori ilan\u0131n\u0131z bulunmuyor',

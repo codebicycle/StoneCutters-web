@@ -278,11 +278,8 @@ module.exports = {
     'myolx.AreYouSureYouWantToCloseSelectedListings': 'Sei sicuro di voler chiudere gli annunci selezionati?',
     'myolx.BackToMyAds': 'Torna a I Miei Annunci',
     'myolx.BackToMyOLX': 'Torna a Mio OLX',
-<<<<<<< HEAD
-    'myolx.ConversationWith': 'Conversazione con <<NAME>>',
-=======
     'myolx.ChangeEmailAddressOrPassword': 'Cambia indirizzo mail o password',
->>>>>>> develop
+    'myolx.ConversationWith': 'Conversazione con <<NAME>>',
     'myolx.EditListing': 'Modifica Annuncio',
     'myolx.EmailPasswordInvalid': 'Spiacenti, la tua Email o password risultano non valide',
     'myolx.FIndPrevMessages': 'Abbiamo aggiornato la tua casella di posta in entrata! Mancano dei messaggi? Puoi trovare quelli precedenti <<LINK>>qui<</LINK>>',
@@ -303,7 +300,6 @@ module.exports = {
     'myolx.SuccessfullyUnsubscribed': 'Cancellazione avvenuta con Successo',
     'myolx.TheAdHasBeenDeleted': 'L\'annuncio \xE8 stato cancellato',
     'myolx.ThisMessageIsRegarding': 'Questo messaggio \xE9 riguardo a ',
-    'myolx.UnsubscribedConversation': 'Ti sei cancellato dalla conversazione con  <<USERNAME>>, riferita a questo annuncio: <<ITEM_TITLE>>',
     'myolx.You': 'Tu',
     'myolx.YouCurrentlyHaveNoActiveListings': 'Attualmente non hai annunci attivi',
     'myolx.YouCurrentlyHaveNoFavoriteListings': 'Attualmente non hai annunci preferiti',

@@ -278,11 +278,8 @@ module.exports = {
     'myolx.AreYouSureYouWantToCloseSelectedListings': 'Viltu \xF6rugglega ey\xF0a v\xF6ldum augl\xFDsingum?',
     'myolx.BackToMyAds': 'Aftur \xED augl\xFDsinguna m\xEDna',
     'myolx.BackToMyOLX': 'Aftur \xED Mitt OLX',
-<<<<<<< HEAD
-    'myolx.ConversationWith': 'Samtal vi\xF0 <<NAME>>',
-=======
     'myolx.ChangeEmailAddressOrPassword': 'Breyta netfangi e\xF0a a\xF0gangsor\xF0i',
->>>>>>> develop
+    'myolx.ConversationWith': 'Samtal vi\xF0 <<NAME>>',
     'myolx.EditListing': 'Breyta augl\xFDsingu',
     'myolx.EmailPasswordInvalid': '\xDE\xFA vir\xF0ist hafa gefi\xF0 upp rangt netfang e\xF0a a\xF0gangsor\xF0',
     'myolx.FIndPrevMessages': 'Vi\xF0 uppf\xE6r\xF0um innh\xF3lfi\xF0 \xFEitt! Vantar skilabo\xF0? \xDE\xFA finnur \xFEau eldri <<LINK>>h\xE9r<</LINK>>',
@@ -303,7 +300,6 @@ module.exports = {
     'myolx.SuccessfullyUnsubscribed': '\xC1skrift sagt upp',
     'myolx.TheAdHasBeenDeleted': 'Augl\xFDsingunni hefur veri\xF0 eytt',
     'myolx.ThisMessageIsRegarding': '\xDEessi skilabo\xF0 eru var\xF0andi',
-    'myolx.UnsubscribedConversation': '\xDE\xFA munt ekki lengur f\xE1 skilabo\xF0 \xFAr samtaliinu vi\xF0 <<USERNAME>> um \xFEessa augl\xFDsingu: <<ITEM_TITLE>>',
     'myolx.You': '\xDE\xFA',
     'myolx.YouCurrentlyHaveNoActiveListings': '\xDE\xFA ert ekki me\xF0 neinar virkar augl\xFDsingar \xED augnablikinu',
     'myolx.YouCurrentlyHaveNoFavoriteListings': '\xDE\xFA ert ekki me\xF0 neinar upp\xE1halds augl\xFDsingar \xED augnablikinu',

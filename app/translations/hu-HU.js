@@ -278,11 +278,8 @@ module.exports = {
     'myolx.AreYouSureYouWantToCloseSelectedListings': 'Biztos, hogy t\xF6r\xF6lni szeretn\xE9 a kiv\xE1lasztott hirdet\xE9seket?',
     'myolx.BackToMyAds': 'Vissza a hirdet\xE9seimre',
     'myolx.BackToMyOLX': 'Vissza a Saj\xE1t OLX oldalra',
-<<<<<<< HEAD
-    'myolx.ConversationWith': 'Besz\xE9lget\u0151partnere <<NAME>>',
-=======
     'myolx.ChangeEmailAddressOrPassword': 'E-mail c\xEDm vagy jelsz\xF3 megv\xE1ltoztat\xE1sa',
->>>>>>> develop
+    'myolx.ConversationWith': 'Besz\xE9lget\u0151partnere <<NAME>>',
     'myolx.EditListing': 'Hirdet\xE9s szerkeszt\xE9se',
     'myolx.EmailPasswordInvalid': 'Sajnos \xFAgy t\u0171nik, e-mail c\xEDme vagy jelszava \xE9rv\xE9nytelen',
     'myolx.FIndPrevMessages': 'Friss\xEDtett\xFCk a be\xE9rkez\u0151 leveleit! Hi\xE1nyzik n\xE9h\xE1ny \xFCzenete? A kor\xE1bbiakat  <<LINK>>itt<</LINK>> tal\xE1lja',
@@ -303,7 +300,6 @@ module.exports = {
     'myolx.SuccessfullyUnsubscribed': 'Sikeresen leiratkozott',
     'myolx.TheAdHasBeenDeleted': 'A hirdet\xE9s t\xF6r\xF6lve',
     'myolx.ThisMessageIsRegarding': 'Ez az \xFCzenet a k\xF6vetkez\u0151kkel kapcsolatos:',
-    'myolx.UnsubscribedConversation': 'Leiratkozott <<USERNAME>> felhaszn\xE1l\xF3nkkal folytatott kommunik\xE1ci\xF3r\xF3l, a k\xF6vetkez\u0151 hirdet\xE9s kapcs\xE1n: <<ITEM_TITLE>>',
     'myolx.You': '\xD6n',
     'myolx.YouCurrentlyHaveNoActiveListings': 'Jelenleg nincs akt\xEDv hirdet\xE9se',
     'myolx.YouCurrentlyHaveNoFavoriteListings': 'Jelenleg nincs kedvenc hirdet\xE9se',

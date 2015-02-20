@@ -278,11 +278,8 @@ module.exports = {
     'myolx.AreYouSureYouWantToCloseSelectedListings': 'Eske ou vr\xE8man vle f\xE8men anons ki chwazi yo?',
     'myolx.BackToMyAds': 'Retounen sou Anons mwen yo',
     'myolx.BackToMyOLX': 'Retounen sou  OLX mwen',
-<<<<<<< HEAD
-    'myolx.ConversationWith': 'Konv\xE8sasyon ak  <<NAME>>',
-=======
     'myolx.ChangeEmailAddressOrPassword': 'Chanje im\xE8l ou oubyen kod sekr\xE8 ou',
->>>>>>> develop
+    'myolx.ConversationWith': 'Konv\xE8sasyon ak  <<NAME>>',
     'myolx.EditListing': 'Chanje Anons yo',
     'myolx.EmailPasswordInvalid': 'Nou regr\xE8t, Email oswa modpas ou a pa bon',
     'myolx.FIndPrevMessages': 'Nou te mete mesajri ou a ajou? Eske gen mesaj ou pa ka jwenn? Ou ka jwenn ansyen yo  <<LINK>>la<</LINK>>',
@@ -303,7 +300,6 @@ module.exports = {
     'myolx.SuccessfullyUnsubscribed': 'Nou retire ou nan konv\xE8sasyon an',
     'myolx.TheAdHasBeenDeleted': 'Anons sa yo efase',
     'myolx.ThisMessageIsRegarding': 'Mesaj sa a se kons\xE8nan',
-    'myolx.UnsubscribedConversation': 'Nou te retire ou nan konv\xE8sas yon ak <<USERNAME>>, kons\xE8nan anons sa a: <<ITEM_TITLE>>',
     'myolx.You': 'Ou menm',
     'myolx.YouCurrentlyHaveNoActiveListings': 'Ou pa genyen anons aktiv pou konyea a',
     'myolx.YouCurrentlyHaveNoFavoriteListings': 'Ou pa genyen okenn anons prefere ou te sere pou konyea',

@@ -278,11 +278,8 @@ module.exports = {
     'myolx.AreYouSureYouWantToCloseSelectedListings': 'B\u1EA1n c\xF3 ch\u1EAFc l\xE0 mu\u1ED1n \u0111\xF3ng l\u1EA1i c\xE1c rao v\u1EB7t \u0111\u01B0\u1EE3c ch\u1ECDn kh\xF4ng?',
     'myolx.BackToMyAds': 'Quay tr\u1EDF l\u1EA1i Danh m\u1EE5c c\u1EE7a t\xF4i',
     'myolx.BackToMyOLX': 'Tr\u1EDF l\u1EA1i OLX c\u1EE7a t\xF4i',
-<<<<<<< HEAD
-    'myolx.ConversationWith': 'Cu\u1ED9c n\xF3i chuy\u1EC7n v\u1EDBi <<NAME>>',
-=======
     'myolx.ChangeEmailAddressOrPassword': 'Thay \u0111\u1ED5i \u0111\u1ECBa ch\u1EC9 email hay m\u1EADt kh\u1EA9u',
->>>>>>> develop
+    'myolx.ConversationWith': 'Cu\u1ED9c n\xF3i chuy\u1EC7n v\u1EDBi <<NAME>>',
     'myolx.EditListing': 'Bi\xEAn t\u1EADp danh m\u1EE5c',
     'myolx.EmailPasswordInvalid': 'Xin l\u1ED7i, Email hay m\u1EADt kh\u1EA9u c\u1EE7a b\u1EA1n d\u01B0\u1EDDng nh\u01B0 kh\xF4ng h\u1EE3p l\u1EC7',
     'myolx.FIndPrevMessages': 'Ch\xFAng t\xF4i \u0111\xE3 n\xE2ng c\u1EA5p h\u1ED9p th\u01B0 c\u1EE7a b\u1EA1n! B\u1ECB m\u1EA5t tin nh\u1EAFn? B\u1EA1n c\xF3 th\u1EC3 t\xECm th\u1EA5y nh\u1EEFng tin nh\u1EAFn tr\u01B0\u1EDBc kia <<LINK>>t\u1EA1i \u0111\xE2y<</LINK>>',
@@ -303,7 +300,6 @@ module.exports = {
     'myolx.SuccessfullyUnsubscribed': '\u0110\xE3 hu\u1EF7 \u0111\u0103ng k\xFD th\xE0nh c\xF4ng',
     'myolx.TheAdHasBeenDeleted': 'Tin rao v\u1EB7t \u0111\xE3 \u0111\u01B0\u1EE3c x\xF3a',
     'myolx.ThisMessageIsRegarding': 'Tin nh\u1EAFn n\xE0y li\xEAn quan \u0111\u1EBFn',
-    'myolx.UnsubscribedConversation': 'B\u1EA1n \u0111\xE3 \u0111\u01B0\u1EE3c tho\xE1t kh\u1ECFi n\xF3i chuy\u1EC7n v\u1EDBi <<USERNAME>>, li\xEAn quan \u0111\u1EBFn rao v\u1EB7t n\xE0y: <<ITEM_TITLE>>',
     'myolx.You': 'B\u1EA1n',
     'myolx.YouCurrentlyHaveNoActiveListings': 'Hi\u1EC7n t\u1EA1i b\u1EA1n kh\xF4ng c\xF3 danh m\u1EE5c ho\u1EA1t \u0111\u1ED9ng n\xE0o',
     'myolx.YouCurrentlyHaveNoFavoriteListings': 'Hi\u1EC7n t\u1EA1i b\u1EA1n kh\xF4ng c\xF3 danh m\u1EE5c \u01B0a th\xEDch n\xE0o',

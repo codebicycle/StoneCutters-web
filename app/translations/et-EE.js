@@ -278,11 +278,8 @@ module.exports = {
     'myolx.AreYouSureYouWantToCloseSelectedListings': 'Olete kindel, et soovite valitud kuulutused kustutada?',
     'myolx.BackToMyAds': 'Tagasi minu kuulutustesse',
     'myolx.BackToMyOLX': 'Tagasi "Minu OLXi"',
-<<<<<<< HEAD
-    'myolx.ConversationWith': 'Vestlus isikuga <<NAME>>',
-=======
     'myolx.ChangeEmailAddressOrPassword': 'Muuda e-posti aadress v\xF5i salas\xF5na',
->>>>>>> develop
+    'myolx.ConversationWith': 'Vestlus isikuga <<NAME>>',
     'myolx.EditListing': 'Muuda kuulutust',
     'myolx.EmailPasswordInvalid': 'Kahjuks on teie e-posti aadress v\xF5i parool kehtetu',
     'myolx.FIndPrevMessages': 'T\xE4iustasime teie sisendkausta! Kas osa s\xF5numeid on puudu? Varasemad s\xF5numid leiate <<LINK>>siit<</LINK>>',
@@ -303,7 +300,6 @@ module.exports = {
     'myolx.SuccessfullyUnsubscribed': 'Tellimus edukalt t\xFChistatud',
     'myolx.TheAdHasBeenDeleted': 'Kuulutus on kustutatud',
     'myolx.ThisMessageIsRegarding': 'Selle s\xF5numi teema on',
-    'myolx.UnsubscribedConversation': 'T\xFChistasite kasutajaga <<USERNAME>> vestluse, mis puudutab kuulutust pealkirjaga: <<ITEM_TITLE>>',
     'myolx.You': 'Teie',
     'myolx.YouCurrentlyHaveNoActiveListings': 'Hetkel pole aktiivseid kuulutusi',
     'myolx.YouCurrentlyHaveNoFavoriteListings': 'Hetkel pole lemmikutesse paigutatud kuulutusi',

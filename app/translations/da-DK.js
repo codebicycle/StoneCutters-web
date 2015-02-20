@@ -278,11 +278,8 @@ module.exports = {
     'myolx.AreYouSureYouWantToCloseSelectedListings': 'Er du sikker p\xE5, du vil lukke de valgte annoncer?',
     'myolx.BackToMyAds': 'Tilbage til mine annoncer.',
     'myolx.BackToMyOLX': 'Tilbage til Min OLX',
-<<<<<<< HEAD
-    'myolx.ConversationWith': 'Samtale med <<NAME>>',
-=======
     'myolx.ChangeEmailAddressOrPassword': 'Skift e-mail-adresse eller adgangskode',
->>>>>>> develop
+    'myolx.ConversationWith': 'Samtale med <<NAME>>',
     'myolx.EditListing': 'Rediger annonce',
     'myolx.EmailPasswordInvalid': 'Beklager din email eller adgangskode er ugyldig',
     'myolx.FIndPrevMessages': 'Vi har opgraderet din indbakke! Mangler du beskeder? Du finder tidligere beskeder <<LINK>>her<</LINK>>',
@@ -303,7 +300,6 @@ module.exports = {
     'myolx.SuccessfullyUnsubscribed': 'Afmelding gennemf\xF8rt.',
     'myolx.TheAdHasBeenDeleted': 'Annoncen er slettet',
     'myolx.ThisMessageIsRegarding': 'Denne meddelelse er om',
-    'myolx.UnsubscribedConversation': 'Du er afmeldt fra samtalen med <<USERNAME>>, se denne annonce: <<ITEM_TITLE>>',
     'myolx.You': 'Dig',
     'myolx.YouCurrentlyHaveNoActiveListings': 'Du har ingen aktive annoncer',
     'myolx.YouCurrentlyHaveNoFavoriteListings': 'Du har ingen favoritannoncer',

@@ -278,11 +278,8 @@ module.exports = {
     'myolx.AreYouSureYouWantToCloseSelectedListings': 'Gusto mo ba talagang i-delete ang piling mga patalastas?',
     'myolx.BackToMyAds': 'Balik sa aking mga Talaan',
     'myolx.BackToMyOLX': 'Pabalik sa My OLX',
-<<<<<<< HEAD
-    'myolx.ConversationWith': 'Pakikipag-usap kay <<NAME>>',
-=======
     'myolx.ChangeEmailAddressOrPassword': 'Baguhin ang email address o password',
->>>>>>> develop
+    'myolx.ConversationWith': 'Pakikipag-usap kay <<NAME>>',
     'myolx.EditListing': 'I-edit ang Patalastas',
     'myolx.EmailPasswordInvalid': 'Paumanhin, mukhang hindi tama ang inyong Email o password',
     'myolx.FIndPrevMessages': 'In-upgrade namin ang iyong inbox! May nawawalang mga mensahe? Mahahanap mo ang mga dating mensahe <<LINK>>dito<</LINK>>',
@@ -303,7 +300,6 @@ module.exports = {
     'myolx.SuccessfullyUnsubscribed': 'Matagumpay na Nakapag-unsubscribe',
     'myolx.TheAdHasBeenDeleted': 'Tinanggal ang patalastas',
     'myolx.ThisMessageIsRegarding': 'Ang mensaheng ito ay tungkol sa',
-    'myolx.UnsubscribedConversation': 'Inalis kayo sa pagkaka-subscribe mula sa pakikipag-usap kay <<USERNAME>>, ini-refer kayo sa anunsyong ito: <<ITEM_TITLE>>',
     'myolx.You': 'Kayo',
     'myolx.YouCurrentlyHaveNoActiveListings': 'Wala kang aktibong mga patalastas sa kasalukuyan',
     'myolx.YouCurrentlyHaveNoFavoriteListings': 'Wala kang paboritong mga talaan sa kasalukuyan',

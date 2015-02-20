@@ -278,11 +278,8 @@ module.exports = {
     'myolx.AreYouSureYouWantToCloseSelectedListings': '\uC120\uD0DD\uD558\uC2E0 \uBAA9\uB85D\uC11C\uB97C \uB2EB\uC73C\uC2DC\uACA0\uC2B5\uB2C8\uAE4C?',
     'myolx.BackToMyAds': '\uB098\uC758 \uBB3C\uD488\uBAA9\uB85D\uC11C\uB85C \uB3CC\uC544\uAC00\uAE30',
     'myolx.BackToMyOLX': '\uB098\uC758 OLX\uB85C \uB3CC\uC544\uAC00\uAE30',
-<<<<<<< HEAD
-    'myolx.ConversationWith': '<<NAME>> \uB2D8\uACFC \uB300\uD654',
-=======
     'myolx.ChangeEmailAddressOrPassword': '\uC774\uBA54\uC77C \uC8FC\uC18C \uD639\uC740 \uD328\uC2A4\uC6CC\uB4DC \uBCC0\uACBD\uD558\uAE30',
->>>>>>> develop
+    'myolx.ConversationWith': '<<NAME>> \uB2D8\uACFC \uB300\uD654',
     'myolx.EditListing': '\uBAA9\uB85D\uC11C \uC218\uC815\uD558\uAE30',
     'myolx.EmailPasswordInvalid': '\uC8C4\uC1A1\uD569\uB2C8\uB2E4\uB9CC \uACE0\uAC1D\uB2D8\uC758 \uC774\uBA54\uC77C \uB610\uB294 \uBE44\uBC00\uBC88\uD638\uAC00 \uC798\uBABB\uB41C \uAC83 \uAC19\uC2B5\uB2C8\uB2E4',
     'myolx.FIndPrevMessages': '\uC218\uC2E0\uD568\uC774 \uC5C5\uADF8\uB808\uC774\uB4DC\uB418\uC5C8\uC2B5\uB2C8\uB2E4! \uC774\uC804 \uBA54\uC2DC\uC9C0\uB97C \uBCF4\uACE0 \uC2F6\uC73C\uC138\uC694? <<LINK>>\uC774\uACF3<</LINK>>\uC5D0\uC11C \uBCF4\uC2E4 \uC218 \uC788\uC2B5\uB2C8\uB2E4.',
@@ -303,7 +300,6 @@ module.exports = {
     'myolx.SuccessfullyUnsubscribed': '\uAD6C\uB3C5 \uD574\uC9C0 \uC131\uACF5',
     'myolx.TheAdHasBeenDeleted': '\uAD11\uACE0\uAC00 \uC0AD\uC81C\uB418\uC5C8\uC2B5\uB2C8\uB2E4',
     'myolx.ThisMessageIsRegarding': '\uC774 \uBA54\uC2DC\uC9C0\uC758 \uB0B4\uC6A9',
-    'myolx.UnsubscribedConversation': '<<ITEM_TITLE>> \uAD11\uACE0\uC640 \uAD00\uB828\uD558\uC5EC <<USERNAME>> \uB2D8\uACFC\uC758 \uB300\uD654\uB85C\uBD80\uD130 \uAD6C\uB3C5 \uD574\uC9C0\uB418\uC5C8\uC2B5\uB2C8\uB2E4',
     'myolx.You': '\uADC0\uD558',
     'myolx.YouCurrentlyHaveNoActiveListings': '\uD604\uC7AC \uC0AC\uC6A9 \uC911\uC778 \uBAA9\uB85D\uC11C\uAC00 \uC5C6\uC2B5\uB2C8\uB2E4',
     'myolx.YouCurrentlyHaveNoFavoriteListings': '\uD604\uC7AC \uC88B\uC544\uD558\uB294 \uBAA9\uB85D\uC11C\uAC00 \uC5C6\uC2B5\uB2C8\uB2E4',

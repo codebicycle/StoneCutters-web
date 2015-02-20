@@ -278,11 +278,8 @@ module.exports = {
     'myolx.AreYouSureYouWantToCloseSelectedListings': 'Wollen Sie wirklich die ausgew\xE4hlten Kleinanzeigen beenden?',
     'myolx.BackToMyAds': 'Zur\xFCck zu meinen Artikel',
     'myolx.BackToMyOLX': 'Zur\xFCck zu Mein OLX',
-<<<<<<< HEAD
-    'myolx.ConversationWith': 'Konversation mit <<NAME>>',
-=======
     'myolx.ChangeEmailAddressOrPassword': 'E-Mailadresse und Passwort \xE4ndern',
->>>>>>> develop
+    'myolx.ConversationWith': 'Konversation mit <<NAME>>',
     'myolx.EditListing': 'Kleinanzeige \xE4ndern',
     'myolx.EmailPasswordInvalid': 'Es tut uns leid, aber Ihre E-Mail-Adresse oder das Passwort ist ung\xFCltig.',
     'myolx.FIndPrevMessages': 'Wir haben Ihre Mailbox aktualisiert. Ihnen fehlen Nachrichten? <<LINK>>Hier<</LINK>> finden Sie die \xC4lteren.',
@@ -303,7 +300,6 @@ module.exports = {
     'myolx.SuccessfullyUnsubscribed': 'Abmeldung erfolgreich',
     'myolx.TheAdHasBeenDeleted': 'Die Annonce wurde gel\xF6scht',
     'myolx.ThisMessageIsRegarding': 'Diese Mitteilung betrifft',
-    'myolx.UnsubscribedConversation': 'Sie haben sich erfolgreich von dem Dialog mit<<USERNAME>>, die Anzeige <<ITEM_TITLE>> betreffend, abgemeldet.',
     'myolx.You': 'Sie',
     'myolx.YouCurrentlyHaveNoActiveListings': 'Sie haben zur Zeit keine aktiven Kleinanzeigen',
     'myolx.YouCurrentlyHaveNoFavoriteListings': 'Sie haben zur Zeit keine Kleinanzeigen als Favoriten',

@@ -278,11 +278,8 @@ module.exports = {
     'myolx.AreYouSureYouWantToCloseSelectedListings': 'Opravdu si to p\u0159ejete odstranit vybran\xE9 inzer\xE1ty?',
     'myolx.BackToMyAds': 'Zp\u011Bt na Moje z\xE1znamy',
     'myolx.BackToMyOLX': 'Zp\u011Bt na Moje OLX',
-<<<<<<< HEAD
-    'myolx.ConversationWith': 'Konverzace s <<NAME>>',
-=======
     'myolx.ChangeEmailAddressOrPassword': 'Zm\u011Bnit e-mailovou adresu nebo heslo.',
->>>>>>> develop
+    'myolx.ConversationWith': 'Konverzace s <<NAME>>',
     'myolx.EditListing': 'Upravit z\xE1znam',
     'myolx.EmailPasswordInvalid': 'Je n\xE1m l\xEDto, v\xE1\u0161 e-mail nebo heslo nen\xED spr\xE1vn\xE9',
     'myolx.FIndPrevMessages': 'Vylep\u0161ili jsme va\u0161i schr\xE1nku p\u0159\xEDchoz\xED po\u0161ty! Chyb\xED v n\xED zpr\xE1vy? D\u0159\xEDv\u011Bj\u0161\xED zpr\xE1vy najdete <<LINK>>zde<</LINK>>',
@@ -303,7 +300,6 @@ module.exports = {
     'myolx.SuccessfullyUnsubscribed': '\xDAsp\u011B\u0161n\u011B odhl\xE1\u0161eno',
     'myolx.TheAdHasBeenDeleted': 'Inzer\xE1t byl odstran\u011Bn',
     'myolx.ThisMessageIsRegarding': 'Tato zpr\xE1va se t\xFDk\xE1',
-    'myolx.UnsubscribedConversation': 'Odhl\xE1sili jste se z konverzace s <<USERNAME>> ohledn\u011B tohoto inzer\xE1tu: <<ITEM_TITLE>>',
     'myolx.You': 'Vy',
     'myolx.YouCurrentlyHaveNoActiveListings': 'Aktu\xE1ln\u011B nem\xE1te \u017E\xE1dn\xE9 aktivn\xED inzer\xE1ty.',
     'myolx.YouCurrentlyHaveNoFavoriteListings': 'Aktu\xE1ln\u011B nem\xE1te \u017E\xE1dn\xE9 obl\xEDben\xE9 inzer\xE1ty.',

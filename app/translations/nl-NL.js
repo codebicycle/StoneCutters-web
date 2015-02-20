@@ -278,11 +278,8 @@ module.exports = {
     'myolx.AreYouSureYouWantToCloseSelectedListings': 'Weet je zeker dat je de geselecteerde advertenties wilt verwijderen?',
     'myolx.BackToMyAds': 'Terug naar mijn advertenties',
     'myolx.BackToMyOLX': 'Terug naar Mijn OLX',
-<<<<<<< HEAD
-    'myolx.ConversationWith': 'Conversatie met <<NAME>>',
-=======
     'myolx.ChangeEmailAddressOrPassword': 'E-mailadres of wachtwoord wijzigen',
->>>>>>> develop
+    'myolx.ConversationWith': 'Conversatie met <<NAME>>',
     'myolx.EditListing': 'Wijzig advertentie',
     'myolx.EmailPasswordInvalid': 'Je e-mailadres of wachtwoord lijkt ongeldig te zijn',
     'myolx.FIndPrevMessages': 'We hebben je Postvak IN bijgewerkt. Zoek je berichten? Klik <<LINK>>hier<</LINK>> voor je eerdere berichten.',
@@ -303,7 +300,6 @@ module.exports = {
     'myolx.SuccessfullyUnsubscribed': 'Je bent afgemeld',
     'myolx.TheAdHasBeenDeleted': 'De advertentie is verwijderd',
     'myolx.ThisMessageIsRegarding': 'Dit bericht gaat over',
-    'myolx.UnsubscribedConversation': 'Je bent afgemeld van de conversatie met <<USERNAME>>, met betrekking tot deze advertentie: <<ITEM_TITLE>>',
     'myolx.You': 'Jij',
     'myolx.YouCurrentlyHaveNoActiveListings': 'Je hebt momenteel geen actieve advertenties',
     'myolx.YouCurrentlyHaveNoFavoriteListings': 'Je hebt momenteel geen favoriete advertenties',

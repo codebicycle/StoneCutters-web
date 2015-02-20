@@ -278,11 +278,8 @@ module.exports = {
     'myolx.AreYouSureYouWantToCloseSelectedListings': '\xCAtes-vous s\xFBr de vouloir supprimer les annonces s\xE9lectionn\xE9es?',
     'myolx.BackToMyAds': 'Retour \xE0 mes Annonces',
     'myolx.BackToMyOLX': 'Retour \xE0 Mon OLX',
-<<<<<<< HEAD
-    'myolx.ConversationWith': 'Conversation with <<NAME>>',
-=======
     'myolx.ChangeEmailAddressOrPassword': 'Changer votre email ou votre mot de passe',
->>>>>>> develop
+    'myolx.ConversationWith': 'Conversation with <<NAME>>',
     'myolx.EditListing': 'Modifier l\'Annonce',
     'myolx.EmailPasswordInvalid': 'Sorry, you Email or password seem to be invalid',
     'myolx.FIndPrevMessages': 'We upgraded your inbox! Missing messages? You can find the previous ones <<LINK>>here<</LINK>>',
@@ -303,7 +300,6 @@ module.exports = {
     'myolx.SuccessfullyUnsubscribed': 'Successfully Unsubscribed',
     'myolx.TheAdHasBeenDeleted': 'L\'annonce a \xE9t\xE9 effac\xE9e',
     'myolx.ThisMessageIsRegarding': 'Ce message concerne',
-    'myolx.UnsubscribedConversation': 'You have been unsubscribed from the conversation with <<USERNAME>>, referred to this ad: <<ITEM_TITLE>>',
     'myolx.You': 'You',
     'myolx.YouCurrentlyHaveNoActiveListings': 'Vous n\'avez aucune annonce active pour le moment',
     'myolx.YouCurrentlyHaveNoFavoriteListings': 'Vous n\'avez aucune annonce favorita pour le moment',

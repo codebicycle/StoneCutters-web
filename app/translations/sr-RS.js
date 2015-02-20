@@ -278,11 +278,8 @@ module.exports = {
     'myolx.AreYouSureYouWantToCloseSelectedListings': '\u017Delite li zaista da izbri\u0161ete izabrane oglase?',
     'myolx.BackToMyAds': 'Nazad na moje oglase',
     'myolx.BackToMyOLX': 'Nazad na moj OLX',
-<<<<<<< HEAD
-    'myolx.ConversationWith': 'Razgovor sa <<NAME>>',
-=======
     'myolx.ChangeEmailAddressOrPassword': 'Promenite e-adresu ili lozinku',
->>>>>>> develop
+    'myolx.ConversationWith': 'Razgovor sa <<NAME>>',
     'myolx.EditListing': 'Uredite oglas',
     'myolx.EmailPasswordInvalid': 'E-adresa ili lozinka je neva\u017Ee\u0107a',
     'myolx.FIndPrevMessages': 'Nadogradili smo va\u0161e prijemno sandu\u010De! Nedostaju vam poruke? Ranije poruke se nalaze <<LINK>>ovde<</LINK>>',
@@ -303,7 +300,6 @@ module.exports = {
     'myolx.SuccessfullyUnsubscribed': 'Prijava za e-poruke je otkazana',
     'myolx.TheAdHasBeenDeleted': 'Oglas je izbrisan',
     'myolx.ThisMessageIsRegarding': 'Ova poruka je u vezi sa',
-    'myolx.UnsubscribedConversation': 'Prijava za razgovor sa <<USERNAME>> u vezi sa ovim oglasom: <<ITEM_TITLE>> je otkazana.',
     'myolx.You': 'Vi',
     'myolx.YouCurrentlyHaveNoActiveListings': 'Trenutno nemate aktivnih oglasa',
     'myolx.YouCurrentlyHaveNoFavoriteListings': 'Trenutno nemate omiljenih oglasa',

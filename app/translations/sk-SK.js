@@ -278,11 +278,8 @@ module.exports = {
     'myolx.AreYouSureYouWantToCloseSelectedListings': 'Naozaj chcete vymaza\u0165 vybrat\xE9 ozn\xE1menia?',
     'myolx.BackToMyAds': 'Sp\xE4\u0165 na moje ozn\xE1menia',
     'myolx.BackToMyOLX': 'Sp\xE4\u0165 na M\xF4j OLX',
-<<<<<<< HEAD
-    'myolx.ConversationWith': 'Konverz\xE1cia s <<NAME>>',
-=======
     'myolx.ChangeEmailAddressOrPassword': 'Zmena e-mailovej adresy alebo hesla',
->>>>>>> develop
+    'myolx.ConversationWith': 'Konverz\xE1cia s <<NAME>>',
     'myolx.EditListing': 'Upravi\u0165 ozn\xE1menie',
     'myolx.EmailPasswordInvalid': '\u013Dutujeme, v\xE1\u0161 e-mail alebo heslo je zrejme neplatn\xE9',
     'myolx.FIndPrevMessages': 'Vylep\u0161ili sme v\xE1\u0161 prie\u010Dinok doru\u010Denej po\u0161ty! Ch\xFDbaj\xFA v\xE1m spr\xE1vy? Tie star\u0161ie n\xE1jdete <<LINK>>tu<</LINK>>',
@@ -303,7 +300,6 @@ module.exports = {
     'myolx.SuccessfullyUnsubscribed': 'Boli ste \xFAspe\u0161ne odhl\xE1sen\xFD',
     'myolx.TheAdHasBeenDeleted': 'Inzer\xE1t bol vymazan\xFD',
     'myolx.ThisMessageIsRegarding': 'T\xE1to spr\xE1va sa t\xFDka',
-    'myolx.UnsubscribedConversation': 'Boli ste odhl\xE1sen\xFD z konverz\xE1cie s pou\u017E\xEDvate\u013Eom <<USERNAME>>, ktor\xE1 sa t\xFDka tohto inzer\xE1tu: <<ITEM_TITLE>>',
     'myolx.You': 'Vy',
     'myolx.YouCurrentlyHaveNoActiveListings': 'Moment\xE1lne nem\xE1te \u017Eiadne akt\xEDvne ozn\xE1menia',
     'myolx.YouCurrentlyHaveNoFavoriteListings': 'Moment\xE1lne nem\xE1te \u017Eiadne ob\u013E\xFAben\xE9 ozn\xE1menia',

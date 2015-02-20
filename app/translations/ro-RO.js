@@ -278,11 +278,8 @@ module.exports = {
     'myolx.AreYouSureYouWantToCloseSelectedListings': 'Sunte\u0163i sigur(\u0103) c\u0103 vre\u0163i s\u0103 elimina\u0163i anun\u0163urile selectate?',
     'myolx.BackToMyAds': '\xCEnapoi la List\u0103rile Mele',
     'myolx.BackToMyOLX': '\xCEnapoi la OLX-ul meu',
-<<<<<<< HEAD
-    'myolx.ConversationWith': 'Conversa\u0163ie cu <<NAME>>',
-=======
     'myolx.ChangeEmailAddressOrPassword': 'Schimb\u0103 adresa de email sau parola',
->>>>>>> develop
+    'myolx.ConversationWith': 'Conversa\u0163ie cu <<NAME>>',
     'myolx.EditListing': 'Edita\u0163i List\u0103ri',
     'myolx.EmailPasswordInvalid': 'Ne pare r\u0103u, se pare c\u0103 adresa dvs. de e-mail sau parola nu sunt valide',
     'myolx.FIndPrevMessages': 'Am adus la zi inbox-ul dvs.! Lipsesc mesaje? Mesajele precedente le pute\u0163i g\u0103si <<LINK>>aici<</LINK>>',
@@ -303,7 +300,6 @@ module.exports = {
     'myolx.SuccessfullyUnsubscribed': 'Abonament anulat cu succes',
     'myolx.TheAdHasBeenDeleted': 'Anun\u021Bul a fost \u0219ters',
     'myolx.ThisMessageIsRegarding': 'Acest mesaj este despre',
-    'myolx.UnsubscribedConversation': 'A fost anulat abonamentul la conversa\u0163ia cu <<USERNAME>>, cu privire la acest anun\u0163: <<ITEM_TITLE>>',
     'myolx.You': 'Dvs.',
     'myolx.YouCurrentlyHaveNoActiveListings': 'Nu ave\u0163i nicio listare activ\u0103',
     'myolx.YouCurrentlyHaveNoFavoriteListings': 'Nu ave\u0163i nicio listare favorit\u0103',

@@ -278,11 +278,8 @@ module.exports = {
     'myolx.AreYouSureYouWantToCloseSelectedListings': '\u60A8\u78BA\u5B9A\u60A8\u8981\u522A\u9664\u9078\u64C7\u7684\u5EE3\u544A?',
     'myolx.BackToMyAds': '\u8FD4\u56DE\u6211\u7684\u5EE3\u544A',
     'myolx.BackToMyOLX': '\u56DE\u5230\u6211\u7684OLX',
-<<<<<<< HEAD
-    'myolx.ConversationWith': '\u548C<<NAME>>\u7684\u8AC7\u8A71',
-=======
     'myolx.ChangeEmailAddressOrPassword': '\u66F4\u63DB\u96FB\u5B50\u90F5\u7BB1\u5730\u5740',
->>>>>>> develop
+    'myolx.ConversationWith': '\u548C<<NAME>>\u7684\u8AC7\u8A71',
     'myolx.EditListing': '\u66F4\u6539\u5EE3\u544A',
     'myolx.EmailPasswordInvalid': '\u4E0D\u597D\u610F\u601D\uFF0C\u60A8\u7684\u96FB\u5B50\u90F5\u7BB1\u6216\u5BC6\u78BC\u7121\u6548',
     'myolx.FIndPrevMessages': '\u6211\u5011\u5DF2\u66F4\u65B0\u4E86\u60A8\u6536\u4FE1\u7BB1! \u6709\u4E1F\u5931\u7684\u6D88\u606F\u55CE\uFF1F\u60A8\u5728<<LINK>>\u9019\u88CF<</LINK>>\u80FD\u627E\u5230\u4EE5\u524D\u7684\u6D88\u606F\u3002',
@@ -303,7 +300,6 @@ module.exports = {
     'myolx.SuccessfullyUnsubscribed': '\u6210\u529F\u9000\u8A02',
     'myolx.TheAdHasBeenDeleted': '\u9019\u500B\u5EE3\u544A\u88AB\u522A\u9664',
     'myolx.ThisMessageIsRegarding': '\u6B64\u7559\u8A00\u6709\u95DC',
-    'myolx.UnsubscribedConversation': '\u60A8\u5DF2\u5F9E\u8207 <<USERNAME>>\u7684\u6703\u8A71\u4E2D\u9000\u51FA\uFF0C\u8ACB\u53C3\u95B1\u8A72\u5EE3\u544A\uFF1A <<ITEM_TITLE>>',
     'myolx.You': '\u60A8',
     'myolx.YouCurrentlyHaveNoActiveListings': '\u60A8\u76EE\u524D\u6C92\u6709\u5728\u7DDA\u5EE3\u544A',
     'myolx.YouCurrentlyHaveNoFavoriteListings': '\u60A8\u76EE\u524D\u6C92\u6709\u6536\u85CF\u4EFB\u4F55\u5EE3\u544A',

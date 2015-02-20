@@ -278,11 +278,8 @@ module.exports = {
     'myolx.AreYouSureYouWantToCloseSelectedListings': 'Are you sure you want to close the selected listings?',
     'myolx.BackToMyAds': '\u0631\u062C\u0648\u0639 \u0627\u0644\u0649 \u0644\u0627\u0626\u062D\u062A\u064A ',
     'myolx.BackToMyOLX': 'Back to My OLX',
-<<<<<<< HEAD
-    'myolx.ConversationWith': 'Conversation with <<NAME>>',
-=======
     'myolx.ChangeEmailAddressOrPassword': 'Change email address or password',
->>>>>>> develop
+    'myolx.ConversationWith': 'Conversation with <<NAME>>',
     'myolx.EditListing': 'Edit Listing',
     'myolx.EmailPasswordInvalid': 'Sorry, you Email or password seem to be invalid',
     'myolx.FIndPrevMessages': 'We upgraded your inbox! Missing messages? You can find the previous ones <<LINK>>here<</LINK>>',
@@ -303,7 +300,6 @@ module.exports = {
     'myolx.SuccessfullyUnsubscribed': 'Successfully Unsubscribed',
     'myolx.TheAdHasBeenDeleted': 'The ad has been deleted',
     'myolx.ThisMessageIsRegarding': 'This message is regarding',
-    'myolx.UnsubscribedConversation': 'You have been unsubscribed from the conversation with <<USERNAME>>, referred to this ad: <<ITEM_TITLE>>',
     'myolx.You': 'You',
     'myolx.YouCurrentlyHaveNoActiveListings': 'You currently have no active listings',
     'myolx.YouCurrentlyHaveNoFavoriteListings': 'You currently have no favorite listings',

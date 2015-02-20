@@ -278,11 +278,8 @@ module.exports = {
     'myolx.AreYouSureYouWantToCloseSelectedListings': 'Czy jeste\u015B pewny/na, \u017Ce chcesz usun\u0105\u0107 wybrane og\u0142oszenie/a?',
     'myolx.BackToMyAds': 'Powr\xF3t do moich og\u0142osze\u0144',
     'myolx.BackToMyOLX': 'Wr\xF3\u0107 do Mojego OLX',
-<<<<<<< HEAD
-    'myolx.ConversationWith': 'Rozmowa z: <<NAME>>',
-=======
     'myolx.ChangeEmailAddressOrPassword': 'Zmie\u0144 adres e-mail lub has\u0142o',
->>>>>>> develop
+    'myolx.ConversationWith': 'Rozmowa z: <<NAME>>',
     'myolx.EditListing': 'Edytuj og\u0142oszenie',
     'myolx.EmailPasswordInvalid': 'Niestety podany adres e-mail lub has\u0142o wydaj\u0105 si\u0119 nieprawid\u0142owe',
     'myolx.FIndPrevMessages': 'Twoja skrzynka zosta\u0142a zaktualizowana! Brakuje wiadomo\u015Bci? Starsze wiadomo\u015Bci mo\u017Cesz znale\u017A\u0107 <<LINK>>tutaj<</LINK>>',
@@ -303,7 +300,6 @@ module.exports = {
     'myolx.SuccessfullyUnsubscribed': 'Subskrypcja zosta\u0142a anulowana',
     'myolx.TheAdHasBeenDeleted': 'Og\u0142oszenie zosta\u0142o usuni\u0119te',
     'myolx.ThisMessageIsRegarding': 'Ta wiadomo\u015B\u0107 dotyczy Twojego og\u0142oszenia:',
-    'myolx.UnsubscribedConversation': 'Usun\u0119li\u015Bmy Twoj\u0105 subskrypcj\u0119 rozmowy z u\u017Cytkownikiem <<USERNAME>> zwi\u0105zan\u0105 z tym og\u0142oszeniem: <<ITEM_TITLE>>',
     'myolx.You': 'Ty',
     'myolx.YouCurrentlyHaveNoActiveListings': 'W chwili obecnej nie masz aktywnych og\u0142osze\u0144',
     'myolx.YouCurrentlyHaveNoFavoriteListings': 'Nie masz ulubionych og\u0142osze\u0144',

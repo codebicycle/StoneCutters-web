@@ -278,11 +278,8 @@ module.exports = {
     'myolx.AreYouSureYouWantToCloseSelectedListings': '\xC4r du s\xE4ker p\xE5 att du vill radera de valda annonserna?',
     'myolx.BackToMyAds': 'Tillbaka till mina annonser',
     'myolx.BackToMyOLX': 'Tillbaka till Mitt OLX',
-<<<<<<< HEAD
-    'myolx.ConversationWith': 'Samtal med <<NAME>>',
-=======
     'myolx.ChangeEmailAddressOrPassword': '\xC4ndra e-postadress eller l\xF6senord',
->>>>>>> develop
+    'myolx.ConversationWith': 'Samtal med <<NAME>>',
     'myolx.EditListing': 'Redigera annons',
     'myolx.EmailPasswordInvalid': 'Tyv\xE4rr, din e-post eller l\xF6senord verkar vara ogiltig',
     'myolx.FIndPrevMessages': 'Vi har uppgraderat din inbox! Saknade meddelanden? Du hittar de tidigare meddelandena <<LINK>>h\xE4r<</LINK>>',
@@ -303,7 +300,6 @@ module.exports = {
     'myolx.SuccessfullyUnsubscribed': 'Ditt abonnemang har annullerats',
     'myolx.TheAdHasBeenDeleted': 'Annonsen har blivit raderad',
     'myolx.ThisMessageIsRegarding': 'Detta meddelande g\xE4ller',
-    'myolx.UnsubscribedConversation': 'Ditt abonnemang har annullerats fr\xE5n samtalet med <<USERNAME>>, enligt denna annons: <<ITEM_TITLE>>',
     'myolx.You': 'Ni',
     'myolx.YouCurrentlyHaveNoActiveListings': 'Du har f\xF6r tillf\xE4llet inga aktiva annonser ',
     'myolx.YouCurrentlyHaveNoFavoriteListings': 'Du har f\xF6r tillf\xE4llet inga favoritannonser',

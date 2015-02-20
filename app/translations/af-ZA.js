@@ -278,11 +278,8 @@ module.exports = {
     'myolx.AreYouSureYouWantToCloseSelectedListings': 'Is jy seker dat jy die gekose advertensies wil skrap?',
     'myolx.BackToMyAds': 'Terug na my Lystings',
     'myolx.BackToMyOLX': 'Terug na My OLX',
-<<<<<<< HEAD
-    'myolx.ConversationWith': 'Gesprek met <<NAME>>',
-=======
     'myolx.ChangeEmailAddressOrPassword': 'Verander e-posadres of wagwoord',
->>>>>>> develop
+    'myolx.ConversationWith': 'Gesprek met <<NAME>>',
     'myolx.EditListing': 'Redigeer Lysting',
     'myolx.EmailPasswordInvalid': 'Jammer, jou e-posadres of wagwoord is blykbaar ongeldig.',
     'myolx.FIndPrevMessages': 'Ons het jou inmandjie verbeter! Verlore boodskappe? Jy kan die voriges  <<LINK>>hier<</LINK>> opspoor.',
@@ -303,7 +300,6 @@ module.exports = {
     'myolx.SuccessfullyUnsubscribed': 'Suksesvol Afgeteken',
     'myolx.TheAdHasBeenDeleted': 'Die advt. is geskrap.',
     'myolx.ThisMessageIsRegarding': 'Hierdie boodskap het betrekking op',
-    'myolx.UnsubscribedConversation': 'Jy is van die gesprek met  <<USERNAME>>, na wie in hierdie advt., <<ITEM_TITLE>>, verwys word, afgeteken.',
     'myolx.You': 'Jy',
     'myolx.YouCurrentlyHaveNoActiveListings': 'Jy het tans geen aktiewe lystings nie',
     'myolx.YouCurrentlyHaveNoFavoriteListings': 'Jy het tans geen gunstelinglystings nie',

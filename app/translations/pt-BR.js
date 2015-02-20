@@ -278,11 +278,8 @@ module.exports = {
     'myolx.AreYouSureYouWantToCloseSelectedListings': 'Tem a certeza que pretende excluir os an\xFAncios selecionados?',
     'myolx.BackToMyAds': 'Voltar para os meus An\xFAncios',
     'myolx.BackToMyOLX': 'Regressar ao Meu OLX',
-<<<<<<< HEAD
-    'myolx.ConversationWith': 'Conversa com <<NAME>>',
-=======
     'myolx.ChangeEmailAddressOrPassword': 'Alterar dados do cadastro',
->>>>>>> develop
+    'myolx.ConversationWith': 'Conversa com <<NAME>>',
     'myolx.EditListing': 'Editar an\xFAncios',
     'myolx.EmailPasswordInvalid': 'Ops! E-mail e/ou senha inv\xE1lidos',
     'myolx.FIndPrevMessages': 'N\xF3s atualizamos sua caixa de entrada! Faltando mensagens? Encontre as anteriores <<LINK>>aqui<</LINK>>',
@@ -303,7 +300,6 @@ module.exports = {
     'myolx.SuccessfullyUnsubscribed': 'Seu registro foi cancelado com sucesso.',
     'myolx.TheAdHasBeenDeleted': 'O seu an\xFAncio foi exclu\xEDdo com sucesso!',
     'myolx.ThisMessageIsRegarding': 'Esta mensagem \xE9 a respeito de',
-    'myolx.UnsubscribedConversation': 'Voc\xEA foi desconectado da conversa com <<USERNAME>>, sobre a publica\xE7\xE3o: <<ITEM_TITLE>>',
     'myolx.You': 'Voc\xEA',
     'myolx.YouCurrentlyHaveNoActiveListings': 'Atualmente, n\xE3o h\xE1 an\xFAncios ativos em sua conta',
     'myolx.YouCurrentlyHaveNoFavoriteListings': 'No momento voc\xEA n\xE3o possui an\xFAncios favoritos.',

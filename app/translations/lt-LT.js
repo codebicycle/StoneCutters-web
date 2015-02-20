@@ -278,11 +278,8 @@ module.exports = {
     'myolx.AreYouSureYouWantToCloseSelectedListings': 'Ar tikrai norite i\u0161trinti pasirinktus skelbimus?',
     'myolx.BackToMyAds': 'Atgal prie mano skelbim\u0173',
     'myolx.BackToMyOLX': 'Atgal \u012F mano OLX',
-<<<<<<< HEAD
-    'myolx.ConversationWith': 'Pokalbis su <<NAME>>',
-=======
     'myolx.ChangeEmailAddressOrPassword': 'Keisti el. pa\u0161to adres\u0105 ar slapta\u017Eod\u012F',
->>>>>>> develop
+    'myolx.ConversationWith': 'Pokalbis su <<NAME>>',
     'myolx.EditListing': 'Redaguoti skelbim\u0105',
     'myolx.EmailPasswordInvalid': 'Apgailestaujame, J\u016Bs\u0173 J\u016Bs\u0173 el. pa\u0161to adresas arba slapta\u017Eodis yra neteisingas',
     'myolx.FIndPrevMessages': 'Mes atnaujinome J\u016Bs\u0173 gaut\u0173j\u0173 lai\u0161k\u0173 d\u0117\u017Eut\u0119! Tr\u016Bksta prane\u0161im\u0173? Ankstesnius rasite <<LINK>>\u010Dia<</LINK>>',
@@ -303,7 +300,6 @@ module.exports = {
     'myolx.SuccessfullyUnsubscribed': 'Paslaugos s\u0117kmingai atsisakyta',
     'myolx.TheAdHasBeenDeleted': 'Skelbimas i\u0161trintas',
     'myolx.ThisMessageIsRegarding': '\u0160is prane\u0161imas yra apie',
-    'myolx.UnsubscribedConversation': 'J\u016Bs atsisak\u0117te t\u0119sti pokalb\u012F su <<USERNAME>> d\u0117l \u0161io skelbimo: <<ITEM_TITLE>>',
     'myolx.You': 'J\u016Bs',
     'myolx.YouCurrentlyHaveNoActiveListings': '\u0160iuo metu neturite aktyvi\u0173 skelbim\u0173',
     'myolx.YouCurrentlyHaveNoFavoriteListings': '\u0160iuo metu parankini\u0173 skelbim\u0173 neturite',

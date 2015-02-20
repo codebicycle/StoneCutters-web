@@ -278,11 +278,8 @@ module.exports = {
     'myolx.AreYouSureYouWantToCloseSelectedListings': 'Vai tie\u0161\u0101m v\u0113laties dz\u0113st atlas\u012Btos sludin\u0101jumus?',
     'myolx.BackToMyAds': 'Atpaka\u013C pie maniem sludin\u0101jumiem',
     'myolx.BackToMyOLX': 'Atpaka\u013C uz Mans OLX',
-<<<<<<< HEAD
-    'myolx.ConversationWith': 'Conversation with <<NAME>>',
-=======
     'myolx.ChangeEmailAddressOrPassword': 'Main\u012Bt e-pasta adresi vai paroli',
->>>>>>> develop
+    'myolx.ConversationWith': 'Conversation with <<NAME>>',
     'myolx.EditListing': 'Redi\u0123\u0113t sludin\u0101jumu',
     'myolx.EmailPasswordInvalid': 'Atvainojiet, j\u016Bsu e-adrese vai parole nav der\u012Bga',
     'myolx.FIndPrevMessages': 'We upgraded your inbox! Missing messages? You can find the previous ones <<LINK>>here<</LINK>>',
@@ -303,7 +300,6 @@ module.exports = {
     'myolx.SuccessfullyUnsubscribed': 'Successfully Unsubscribed',
     'myolx.TheAdHasBeenDeleted': 'Sludin\u0101jums tika izdz\u0113sts',
     'myolx.ThisMessageIsRegarding': '\u0160is zi\u0146ojums ir par',
-    'myolx.UnsubscribedConversation': 'You have been unsubscribed from the conversation with <<USERNAME>>, referred to this ad: <<ITEM_TITLE>>',
     'myolx.You': 'You',
     'myolx.YouCurrentlyHaveNoActiveListings': 'Jums \u0161obr\u012Bd nav akt\u012Bvu zi\u0146ojumu',
     'myolx.YouCurrentlyHaveNoFavoriteListings': 'Jums \u0161obr\u012Bd nav atz\u012Bm\u0113tu zi\u0146ojumu',

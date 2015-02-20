@@ -278,11 +278,8 @@ module.exports = {
     'myolx.AreYouSureYouWantToCloseSelectedListings': 'Apakah Anda yakin ingin menutup iklan yang dipilih?',
     'myolx.BackToMyAds': 'Kembali ke Iklan saya',
     'myolx.BackToMyOLX': 'Kembali ke OLX Saya',
-<<<<<<< HEAD
-    'myolx.ConversationWith': 'Percakapan dengan <<NAME>>',
-=======
     'myolx.ChangeEmailAddressOrPassword': 'Ganti alamat email atau kata sandi',
->>>>>>> develop
+    'myolx.ConversationWith': 'Percakapan dengan <<NAME>>',
     'myolx.EditListing': 'Edit Iklan',
     'myolx.EmailPasswordInvalid': 'Maaf, Email atau kata sandi Anda tampak tidak sah',
     'myolx.FIndPrevMessages': 'Kami telah memutakhirkan kotak masuk Anda! Ada pesan yang hilang? Anda dapat menemukan pesan-pesan sebelumnya di <<LINK>>sini<</LINK>>',
@@ -303,7 +300,6 @@ module.exports = {
     'myolx.SuccessfullyUnsubscribed': 'Berhasil Berhenti Berlangganan',
     'myolx.TheAdHasBeenDeleted': 'Iklan telah dihapus',
     'myolx.ThisMessageIsRegarding': 'Pesan ini mengenai',
-    'myolx.UnsubscribedConversation': 'Langganan Anda telah dihentikan untuk percakapan dengan <<USERNAME>>, yang merujuk ke iklan ini: <<ITEM_TITLE>>',
     'myolx.You': 'Anda',
     'myolx.YouCurrentlyHaveNoActiveListings': 'Saat ini Anda tidak mempunyai iklan yang aktif',
     'myolx.YouCurrentlyHaveNoFavoriteListings': 'Saat ini Anda tidak punya iklan favorit',
