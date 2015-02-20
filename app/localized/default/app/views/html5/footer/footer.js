@@ -20,7 +20,8 @@ module.exports = Base.extend({
         var currentRoute = this.app.session.get('currentRoute');
 
         return _.extend({}, data, {
-            postingFlow: currentRoute.controller === 'post' && currentRoute.action === 'flow' && this.app.session.get('platform') === 'html5' && config.get(['posting', 'flow', 'enabled', this.app.session.get('siteLocation')], true)
+            postingFlow: currentRoute.controller === 'post' && currentRoute.action === 'flow' && this.app.session.get('platform') === 'html5' && config.get(['posting', 'flow', 'enabled', this.app.session.get('siteLocation')], true),
+            downloadAppBanner: this.app.session.get('location').url !== 'www.olx.com.bd'
         });
     },
     postRender: function() {
@@ -33,12 +34,12 @@ module.exports = Base.extend({
         this.app.router.appView.on('sort:end', this.show.bind(this));
         this.app.router.appView.on('location:start', this.hide.bind(this));
         this.app.router.appView.on('location:end', this.show.bind(this));
-        /*this.app.router.appView.on('login:start', this.hide.bind(this));
+        this.app.router.appView.on('login:start', this.hide.bind(this));
         this.app.router.appView.on('login:end', this.show.bind(this));
         this.app.router.appView.on('register:start', this.hide.bind(this));
         this.app.router.appView.on('register:end', this.show.bind(this));
         this.app.router.appView.on('lostpassword:start', this.hide.bind(this));
-        this.app.router.appView.on('lostpassword:end', this.show.bind(this));*/
+        this.app.router.appView.on('lostpassword:end', this.show.bind(this));
         this.attachTrackMe();
     },
     hideFooter: function() {
@@ -46,10 +47,10 @@ module.exports = Base.extend({
 
         return (currentRoute.action === 'filter' ||
                 currentRoute.action === 'sort' ||
-                currentRoute.action === 'location'/* ||
+                currentRoute.action === 'location' ||
                 currentRoute.action === 'login' ||
                 currentRoute.action === 'lostpassword' ||
-                currentRoute.action === 'register'*/);
+                currentRoute.action === 'register');
     },
     changeLocation: function (e, siteLocation) {
         this.$('.footer-links .footer-link').each(function(i, link) {

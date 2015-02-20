@@ -5,6 +5,7 @@ module.exports = function(dataAdapter, excludedUrls) {
         var _ = require('underscore');
         var asynquence = require('asynquence');
         var statsd = require('../modules/statsd')();
+        var utils = require('../../shared/utils');
         var comCountries = ['tn', 'us', 'nl', 'vn', 'mc', 'dz'];
 
         function endsWith(str, suffix) {
@@ -19,7 +20,13 @@ module.exports = function(dataAdapter, excludedUrls) {
             var edgescape = req.get('x-akamai-edgescape');
             var countryCode;
 
-            if (!edgescape || req.path !== '/' || !endsWith(req.host, '.com')) {
+            if (!edgescape || req.path !== '/' || !endsWith(req.host, '.com') || req.rendrApp.session.get('stay')) {
+                return next();
+            }
+            if (req.param('stay')) {
+                req.rendrApp.session.persist({
+                    stay: 1
+                });
                 return next();
             }
             edgescape.split(',').forEach(function each(property) {
@@ -29,7 +36,7 @@ module.exports = function(dataAdapter, excludedUrls) {
                 }
             });
             if (!countryCode) {
-                statsd.increment(['Unknown Location', 'middleware', 'com', 'miss']);
+                statsd.increment(['all', 'middleware', 'com', 'miss']);
                 return next();
             }
 
@@ -66,14 +73,14 @@ module.exports = function(dataAdapter, excludedUrls) {
 
             function redirect(response, country) {
                 var origin = req.get('host').split(':');
-                var host = req.protocol + '://' + country.url.replace('www', 'm');
+                var host = req.protocol + '://' + country.url;
 
                 if (origin.length > 1) {
                     host += ':' + origin[1];
                 }
-                statsd.increment([country.name, 'middleware', 'com', 'redirection']);
+                statsd.increment([country.abbreviation, 'middleware', 'com', 'redirection']);
                 res.header('Cache-Control', 'no-cache, no-store');
-                res.redirect(host + req.originalUrl);
+                res.redirect(utils.params(host + req.originalUrl, 'from', 'www'));
             }
 
             function setUrl(url) {

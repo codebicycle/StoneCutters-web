@@ -44,24 +44,26 @@ module.exports = Base.extend({
         var subcategoryId = subcategory.data('id');
         var categoryId = subcategory.parents('.subcategories').siblings('.category').data('id');
         var user = this.app.session.get('user');
-        var params = {};
+        var params = {
+            intent: intent ? 'edit' : 'post',
+            languageId: this.app.session.get('languageId')
+        };
 
-        intent = intent ? 'edit' : 'post';
-        if (intent === 'post') {
-            params = {
-                intent: intent,
-                location: this.app.session.get('siteLocation'),
-                categoryId: subcategoryId,
-                languageId: this.app.session.get('languages')._byId[this.app.session.get('selectedLanguage')].id
-            };
+        if(this.$el.hasClass('error')) {
+            this.$el.attr('data-cat-error','true');
+        }
+        if (params.intent === 'post') {
+            params.location = this.app.session.get('siteLocation');
+            params.categoryId = subcategoryId;
         }
         else {
-            params = {
-                intent: intent,
-                itemId: this.parentView.item.get('id'),
-                languageId: this.app.session.get('languages')._byId[this.app.session.get('selectedLanguage')].id,
-                token: user.token
-            };
+            params.itemId = this.parentView.getItem().get('id');
+            if (user) {
+                params.token = user.token;
+            }
+            else {
+                params.securityKey = this.parentView.getItem().get('securityKey');
+            }
         }
 
         $('a.category').removeClass('select');
@@ -96,6 +98,7 @@ module.exports = Base.extend({
         }.bind(this);
 
         var success = function(res) {
+
             this.$('.error.message').remove();
             this.$el.removeClass('error').addClass('success');
             this.parentView.$el.trigger('subcategorySubmit', {
@@ -103,6 +106,16 @@ module.exports = Base.extend({
                 id: subcategoryId,
                 fields: res.fields.get('fields')
             });
+
+            if(this.$el.attr('data-cat-error')) {
+                var $fieldsToValidate = $('input, select, textarea');
+                $fieldsToValidate.each(function(index) {
+                    if(!$(this).hasClass('image-input-file') && $(this).attr('required') && $(this).attr('id') !== 'field-location' ) {
+                        $(this).change();
+                    }
+                });
+                this.$el.removeAttr('data-cat-error','true');
+            }
         }.bind(this);
 
         asynquence().or(error)

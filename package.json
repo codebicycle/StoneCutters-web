@@ -37,7 +37,7 @@
     "rendr": "git://github.com/rendrjs/rendr#6497522d78",
     "rendr-nunjucks": "martin-didomenico-olx/rendr-nunjucks#develop",
     "restler": "3.2.0",
-    "sixpack-client": "1.0.0",
+    "sixpack-client": "git://github.com/seatgeek/sixpack-js#8959b332a5",
     "time": "0.11.0",
     "underscore": "1.6.0",
     "newrelic": "1.13.3"

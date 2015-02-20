@@ -1,0 +1,82 @@
+<h1>{{ dictionary["widgets.Featured_listings"] }}</h1>
+
+<ul>
+    <li>
+        <p>
+            {{ dictionary["featured_listings.FeaturedListings_Content"] }}
+        </p>
+    </li>
+    <li>
+        <h4>{{ dictionary["featured_listings.Benefits"] }}</h4>
+        <p>
+            {{ dictionary["featured_listings.Benefits_content"] }}
+        </p>
+        <div class="content-img">
+            <span class="featuredType">{{ dictionary["featured_listings_emails.HomePage"] }}</span>
+            <img src="{{ '/images/desktop/feature_ads/featuredHome.jpg' | static }}" alt="{{ dictionary["featured_listings_emails.HomePage"] }}">
+        </div>
+        <div class="content-img">
+            <span class="featuredType">{{ dictionary["featured_listings_emails.ListingPage"] }}</span>
+            <img src="{{ '/images/desktop/feature_ads/featuredListing.jpg' | static }}" alt="{{ dictionary["featured_listings_emails.ListingPage"] }}">
+        </div>
+    </li>
+    <li>
+        <h4>{{ dictionary["featured_listings.HowDoesItWork"] }}</h4>
+        <p>
+            {{ dictionary["featured_listings.HowDoesItWork_New"] }}
+        </p>
+    </li>
+    <li>
+        <h4>{{ dictionary["featured_listings.HowMuchVisitsWillIncrease"] }}</h4>
+        <p>
+            {{ dictionary["featured_listings.HowMuchVisitsWillIncrease_content"] }}
+        </p>
+    </li>
+    <li>
+        <h4>{{ dictionary["featured_listings.HowDoIBuyAFeaturedListing"] }}</h4>
+        <p>
+            {{ dictionary["featured_listings.HowDoIBuyAFeaturedListing_New"] }}
+        </p>
+    </li>
+    <li>
+        <h4>{{ dictionary["featured_listings.HowMuchDoesItCost"] }}</h4>
+        <p>
+            {{ dictionary["featured_listings.HowMuchDoesItCost_New"] }}
+        </p>
+    </li>
+    <li>
+        <h4>{{ dictionary["featured_listings.HowLongWillMyListingAppearInFeaturedListings"] }}</h4>
+        <p>
+            {{ dictionary["featured_listings.HowLongWillMyListingAppearInFeaturedListings_content"] }}
+        </p>
+    </li>
+    <li>
+        <h4>{{ dictionary["featured_listings.IDontSeeMyListingInFeaturedListings"] }}</h4>
+        <p>
+            {{ dictionary["featured_listings.IDontSeeMyListingInFeaturedListings_content"] | replace('<<CONTACTLINK>>','<a href="mailto:support@olx.com">') | replace('<</CONTACTLINK>>','</a>') }}
+        </p>
+    </li>
+    <li>
+        <h4>{{ dictionary["featured_listings.WhyCantIModifyMyListing"] }}</h4>
+        <p>
+            {{ dictionary["featured_listings.WhyCantIModifyMyListing_content"] | replace('<<CONTACTLINK>>','<a href="mailto:support@olx.com">') | replace('<</CONTACTLINK>>','</a>') }}
+        </p>
+    </li>
+    <li>
+        <h4>{{ dictionary["featured_listings.StillHaveQuestions"] }}</h4>
+        <p>
+            {{ dictionary["featured_listings.StillHaveQuestions_content"] | replace('<<CONTACTLINK>>','<a href="mailto:support@olx.com">') | replace('<</CONTACTLINK>>','</a>') }}
+        </p>
+    </li>
+    <li>
+        <h4>{{ dictionary["featured_listings.AdditionalTermsForFeaturedAds"] }}</h4>
+        <p>
+            {{ dictionary["featured_listings.AdditionalTermsForFeaturedAds_content"] | replace('<<LINK_TERMS_USE>>', (['<a target="_blank" href="', ('/terms' | link), '" data-pass-thru="true" >'] | join(''))) | replace('<</LINK_TERMS_USE>>', '</a>') }}
+        </p>
+    </li>
+    <li>
+        <p>
+            {{ dictionary["featured_listings.ResultsMayVaryFromPostingToPostingAndAreNotGuaranteed"] }}
+        </p>
+    </li>
+</ul>

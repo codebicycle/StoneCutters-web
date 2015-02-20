@@ -6,8 +6,14 @@
         {% include (template + '/marketing/marketing-box-sell.html') %}
     {% endif %}
 </section>
+{% if items and items.length > 0 %}
+    {% include (template + '/featured/home.html') %}
+{% endif %}
 
 <section id="category-tree">
+    {% if celebrities.home.enabled %}
+        {% include (template + '/categories/partials/celebritie.html') %}
+    {% endif %}
     {% include (template + '/partials/categorytree.html') %}
 </section>
 
@@ -20,3 +26,4 @@
     {% include (template + '/modals/videogallery.html') %}
 {% endif %}
 {% view 'partials/tracking' %}
+

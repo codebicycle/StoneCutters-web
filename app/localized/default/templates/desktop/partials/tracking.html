@@ -7,5 +7,11 @@
 
     {% include (template + '/partials/tracking/analytics.html') %}
 
+    {% include (template + '/partials/tracking/ninja.html') %}
+
+    {% include (template + '/partials/tracking/adroll.html') %}
+
+    {% include (template + '/partials/tracking/hydra.html') %}
+
     <div id="tracking-data" data-params='{% json tracking.params %}'></div>
 {% endif %}

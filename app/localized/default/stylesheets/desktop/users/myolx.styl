@@ -11,7 +11,8 @@
             list-style: none;
             position: relative;
             vertical-align: bottom;
-            width: 25%;
+            width: 237px;
+            margin-left: 10px;
 
             a {
                 box($greyBoxBg, $greyBorders, 3px 3px 0 0, 10px 0, solid, 1px 1px 0 1px)
@@ -19,16 +20,14 @@
                 display: block;
                 font-size: 20px;
                 text-align: center;
-                width: 96%;
+                width: 100%;
                 &:hover{
                     color: #369;
                     text-decoration: underline;
                 }
             }
-            &:last-child {
-                a {
-                    width: 100%;
-                }
+            &:first-child {
+                margin: 0;
             }
             &.active {
                 a {
@@ -67,7 +66,6 @@
         box($white, $greyBorders,0 0 3px 3px, 0,solid , 1px);
         margin-top: 0;
         padding: 0;
-        width: 100%;
 
         .item {
             border-bottom: 1px solid $greyBorders;
@@ -181,7 +179,7 @@
                 float: left;
                 margin: 30px 30px 30px 0;
                 text-align: right;
-                width: 115px;
+                width: 110px;
 
                 span {
                     color: $black;
@@ -317,7 +315,7 @@
                 line-height: 1.5;
                 margin: -2px 5px 0 2px;
             }
-            
+
             &.icons:hover {
                 color: fontcolor;
                 border-color: $greyStrong;
@@ -325,6 +323,23 @@
                 background: -moz-linear-gradient(top,  #f6f6f6 0%,$greyBoxBg 100%);
                 background: -ms-linear-gradient(top, #f6f6f6 0%,$greyBoxBg 100%);
                 background: linear-gradient(to bottom, #f6f6f6 0%,$greyBoxBg 100%);
+            }
+
+            &.btnfeaturedad {
+                border-radius();
+                action-button($orange, $white, 3px, 5px 20px 5px 40px);
+                position: relative;
+                &:hover {
+                    background-color: $orange;
+                    border-color: rgba(0, 0, 0, .1) rgba(0, 0, 0, .1) rgba(0, 0, 0, .25);
+                }
+                span {
+                    position: absolute;
+                    left: 15px;
+                    top: 0;
+                    color: $white;
+                    font-size: 19px;
+                }
             }
         }
         .orange {

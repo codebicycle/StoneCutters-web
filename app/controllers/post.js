@@ -6,6 +6,7 @@ var middlewares = require('../middlewares');
 var helpers = require('../helpers');
 var tracking = require('../modules/tracking');
 var Item = require('../models/item');
+var FeatureAd = require('../models/feature_ad');
 var config = require('../../shared/config');
 
 module.exports = {
@@ -15,13 +16,72 @@ module.exports = {
     form: middlewares(form),
     success: middlewares(success),
     edit: middlewares(edit),
-    editsuccess: middlewares(editsuccess)
+    editsuccess: middlewares(editsuccess),
+    renew: middlewares(renew),
+    rebump: middlewares(rebump)
 };
 
 function flowMarketing(params, callback) {
     params.marketing = true;
     return flow.call(this, params, callback);
 }
+
+function rebump(params, callback) {
+    console.log("post::rebump");
+    helpers.controllers.control.call(this, params, controller);
+
+    function controller() {
+        var location = this.app.session.get('location');
+        var item;
+
+        var check = function(done) {
+            if(!config.getForMarket(location.url, ['ads', 'rebump', 'enabled'],false)) {
+                done.abort();
+                return helpers.common.redirect.call(this, '/iid-' + params.itemId);
+            }
+            done();
+        }.bind(this);
+
+        var prepare = function(done) {
+            item = new Item({
+                id: params.itemId
+            }, {
+                app: this.app
+            });
+            done();
+        }.bind(this);
+
+        var fetch = function(done) {
+            item.rebump(done);
+        }.bind(this);
+
+        var success = function(res) {
+            return helpers.common.redirect.call(this, '/myolx/myadslisting', null, {
+                status: 302
+            });
+        }.bind(this);
+
+        var error = function(err, res) {
+            if(params.itemId) {
+                return helpers.common.redirect.call(this, '/iid-' + params.itemId);
+            }
+            return helpers.common.error.call(this, err, res, callback);
+
+        }.bind(this);
+
+        asynquence().or(error)
+            .then(check)
+            .then(prepare)
+            .then(fetch)
+            .val(success);
+    }
+}
+
+function renew(params, callback) {
+    params.renew = true;
+    return flow.call(this, params, callback);
+}
+
 function flow(params, callback) {
     helpers.controllers.control.call(this, params, controller);
 
@@ -31,10 +91,11 @@ function flow(params, callback) {
         var location = this.app.session.get('location');
         var isPostingFlow = helpers.features.isEnabled.call(this, 'postingFlow');
         var platform = this.app.session.get('platform');
+        var languageId = this.app.session.get('languageId');
         var isDesktop = platform === 'desktop';
         var itemId = params.itemId;
-
         var promise = asynquence().or(error.bind(this))
+            .then(check.bind(this))
             .then(prepare.bind(this));
 
         if (isPostingFlow || isDesktop || itemId) {
@@ -44,15 +105,22 @@ function flow(params, callback) {
         }
         promise.val(success.bind(this));
 
+        function check(done) {
+            if(params.renew) {
+                if(!config.getForMarket(location.url, ['ads', 'renew', 'enabled'],false)) {
+                    params.renew = false;
+                    return done.fail({});
+                }
+            }
+            done();
+        }
+
         function prepare(done) {
             if ((!isPostingFlow && !isDesktop) && (!siteLocation || siteLocation.indexOf('www.') === 0)) {
                 done.abort();
                 return helpers.common.redirect.call(this, '/location?target=' + (itemId ? 'myolx/edititem/' + itemId : 'posting'), null, {
                     status: 302
                 });
-            }
-            if (user) {
-                params.token = user.token;
             }
             done();
         }
@@ -79,7 +147,7 @@ function flow(params, callback) {
                         level: 'states',
                         type: 'cities',
                         location: locationUrl,
-                        languageId: this.app.session.get('languages')._byId[this.app.session.get('selectedLanguage')].id
+                        languageId: languageId
                     }
                 };
             }
@@ -88,7 +156,7 @@ function flow(params, callback) {
                     model: 'Item',
                     params: {
                         id: itemId,
-                        languageId: this.app.session.get('languages')._byId[this.app.session.get('selectedLanguage')].id
+                        languageId: languageId
                     }
                 };
                 data.fields = {
@@ -96,10 +164,15 @@ function flow(params, callback) {
                     params: {
                         intent: 'edit',
                         itemId: itemId,
-                        languageId: this.app.session.get('languages')._byId[this.app.session.get('selectedLanguage')].id,
-                        token: params.token
+                        languageId: languageId
                     }
                 };
+                if (user) {
+                    data.fields.params.token = user.token;
+                }
+                else if (params.sk) {
+                    data.fields.params.securityKey = params.sk;
+                }
             }
 
             this.app.fetch(data, {
@@ -128,6 +201,9 @@ function flow(params, callback) {
                     res.item.get('optionals')[index].value = field.value.key || field.value.value;
                 });
             }, this);
+            if (res.fields.get('securityKey')) {
+                res.item.set('securityKey', res.fields.get('securityKey'));
+            }
             done(res);
         }
 
@@ -143,6 +219,9 @@ function flow(params, callback) {
             else if (isDesktop) {
                 if (redirect.call(this, res.item)) {
                     return;
+                }
+                if (res.item && params.renew)  {
+                    res.item.set('renew', true);
                 }
                 postingController.call(this, res.postingSession, res.cities, res.item, res.fields);
             }
@@ -167,18 +246,14 @@ function flow(params, callback) {
             if (!item) {
                 return false;
             }
-            if (item.get('status') && !item.get('status').editable) {
+            if (item.get('status') && !item.get('status').editable && !params.renew)  {
                 helpers.common.redirect.call(this, '/iid-' + itemId);
                 return true;
             }
-            if (!user || !user.userId || (item.get('user') && item.get('user').id != user.userId)) {
-                helpers.common.redirect.call(this, '/iid-' + itemId, null, {
-                    status: 302
-                });
-                return true;
-            }
             if (item.getLocation().url && item.getLocation().url !== siteLocation) {
-                helpers.common.redirect.call(this, [protocol, '://', host.replace(shortHost, item.getLocation().url), url].join(''), null, {
+                helpers.common.redirect.call(this, url, {
+                    location: item.getLocation().url
+                }, {
                     pushState: false
                 });
                 return true;
@@ -361,7 +436,8 @@ function form(params, callback) {
         }.bind(this);
 
         var fetch = function(done) {
-            this.app.fetch({
+            var platform = this.app.session.get('platform');
+            var spec = {
                 postingSession: {
                     model: 'PostingSession',
                     params: {}
@@ -375,7 +451,20 @@ function form(params, callback) {
                         languageId: languageId
                     }
                 }
-            }, {
+            };
+
+            if (platform === "html4" || platform === "wap") {
+                spec.neighborhoods = {
+                    collection: 'Neighborhoods',
+                    params: {
+                        level: 'cities',
+                        type: 'neighborhoods',
+                        location: siteLocation,
+                        languageId: languageId
+                    }
+                };
+            }
+            this.app.fetch(spec, {
                 readFromCache: false
             }, done.errfcb);
         }.bind(this);
@@ -396,10 +485,10 @@ function form(params, callback) {
                 done.abort();
                 return helpers.common.redirect.call(this, '/posting/' + params.categoryId);
             }
-            done(response.postingSession, response.fields);
+            done(response.postingSession, response.fields, response.neighborhoods);
         }.bind(this);
 
-        var success = function(_postingSession, _field) {
+        var success = function(_postingSession, _field, _neighborhood) {
             var category = this.dependencies.categories.get(params.categoryId);
             var subcategory = category.get('children').get(params.subcategoryId);
 
@@ -407,6 +496,7 @@ function form(params, callback) {
             tracking.addParam('subcategory', subcategory.toJSON());
             this.app.seo.addMetatag('robots', 'noindex, nofollow');
             this.app.seo.addMetatag('googlebot', 'noindex, nofollow');
+
             callback(null, {
                 postingSession: _postingSession.get('postingSession'),
                 intent: 'create',
@@ -415,6 +505,7 @@ function form(params, callback) {
                 subcategory: subcategory.toJSON(),
                 language: languageId,
                 siteLocation: siteLocation,
+                neighborhoods: _neighborhood ? _neighborhood.toJSON() : undefined,
                 form: this.form
             });
         }.bind(this);
@@ -436,36 +527,32 @@ function success(params, callback) {
 
     function controller() {
         var user = this.app.session.get('user');
-        var securityKey = params.sk;
         var itemId = params.itemId;
         var siteLocation = this.app.session.get('siteLocation');
-        var languages = this.app.session.get('languages');
-        var anonymousItem;
+        var languageId = this.app.session.get('languageId');
+        var securityKey = params.sk;
 
-        var prepare = function(done) {
+        asynquence().or(fail.bind(this))
+            .then(prepare.bind(this))
+            .then(fetch.bind(this))
+            .then(check.bind(this))
+            .then(fetchRelated.bind(this))
+            .then(fetchFeatured.bind(this))
+            .val(successFetch.bind(this));
+
+        function prepare(done) {
             if (user) {
                 params.token = user.token;
             }
-            else if (typeof window !== 'undefined' && localStorage) {
-                anonymousItem = localStorage.getItem('anonymousItem');
-                anonymousItem = (!anonymousItem ? {} : JSON.parse(anonymousItem));
-                if (securityKey) {
-                    anonymousItem[params.itemId] = securityKey;
-                    localStorage.setItem('anonymousItem', JSON.stringify(anonymousItem));
-                }
-                else {
-                    securityKey = anonymousItem[params.itemId];
-                }
-            }
             params.id = params.itemId;
-            params.languageId = languages._byId[this.app.session.get('selectedLanguage')].id;
+            params.languageId = languageId;
             delete params.itemId;
             delete params.title;
             delete params.sk;
             done();
-        }.bind(this);
+        }
 
-        var findItem = function(done) {
+        function fetch(done) {
             this.app.fetch({
                 item: {
                     model: 'Item',
@@ -474,16 +561,16 @@ function success(params, callback) {
             }, {
                 readFromCache: false
             }, done.errfcb);
-        }.bind(this);
+        }
 
-        var checkItem = function(done, resItem) {
+        function check(done, resItem) {
             if (!resItem.item) {
                 return done.fail(null, {});
             }
             done(resItem.item);
-        }.bind(this);
+        }
 
-        var findRelatedItems = function(done, _item) {
+        function fetchRelated(done, _item) {
             this.app.fetch({
                 relatedItems: {
                     collection : 'Items',
@@ -508,16 +595,39 @@ function success(params, callback) {
                 }
                 done(_item, res.relatedItems);
             }.bind(this));
-        }.bind(this);
+        }
 
-        var success = function(_item, _relatedItems) {
+        function fetchFeatured(done, item, relateds) {
+            if (!FeatureAd.isEnabled(this.app)) {
+                return done(item, relateds);
+            }
+            this.app.fetch({
+                featuread: {
+                    model : 'Feature_ad',
+                    params: {
+                        id: item.get('id'),
+                        locate: this.app.session.get('selectedLanguage')
+                    }
+                }
+            }, {
+                readFromCache: false
+            }, function afterFetch(err, res) {
+                if (err) {
+                    res = {};
+                }
+                item.set('featured', res.featuread);
+                done(item, relateds);
+            }.bind(this));
+        }
+
+        function successFetch(_item, _relatedItems) {
             var item = _item.toJSON();
             var subcategory = this.dependencies.categories.search(item.category.id);
             var category;
             var parentId;
 
             if (!subcategory) {
-                return error();
+                return fail();
             }
             parentId = subcategory.get('parentId');
             category = parentId ? this.dependencies.categories.get(parentId) : subcategory;
@@ -530,23 +640,16 @@ function success(params, callback) {
             callback(null, {
                 user: user,
                 item: item,
-                sk: securityKey,
+                securityKey: securityKey,
                 category: category.toJSON(),
                 subcategory: subcategory.toJSON(),
                 relatedItems: _relatedItems
             });
-        }.bind(this);
+        }
 
-        var error = function(err, res) {
+        function fail(err, res) {
             return helpers.common.error.call(this, err, res, callback);
-        }.bind(this);
-
-        asynquence().or(error)
-            .then(prepare)
-            .then(findItem)
-            .then(checkItem)
-            .then(findRelatedItems)
-            .val(success);
+        }
     }
 }
 
@@ -709,19 +812,9 @@ function edit(params, callback) {
             if (user) {
                 params.token = user.token;
             }
-            else {
-                if (typeof window !== 'undefined' && localStorage) {
-                    anonymousItem = localStorage.getItem('anonymousItem');
-                    anonymousItem = (!anonymousItem ? {} : JSON.parse(anonymousItem));
-                    if (securityKey) {
-                        anonymousItem[id] = securityKey;
-                        localStorage.setItem('anonymousItem', JSON.stringify(anonymousItem));
-                    }
-                    else {
-                        securityKey = anonymousItem[id];
-                    }
-                }
+            else if (securityKey) {
                 params.securityKey = securityKey;
+                _item.set('securityKey', securityKey);
             }
         }
 

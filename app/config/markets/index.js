@@ -2,7 +2,6 @@ module.exports = {
     common: require('./common'),
     emerging: require('./emerging'),
     'www.olx.com': require('./www.olx.com'),
-    'www.olx.com.br': require('./www.olx.com.br'),
     'www.olx.com.ar': require('./www.olx.com.ar'),
     'www.olx.com.co': require('./www.olx.com.co'),
     'www.olx.com.pe': require('./www.olx.com.pe'),

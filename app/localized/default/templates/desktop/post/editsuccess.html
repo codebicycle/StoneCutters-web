@@ -1,6 +1,6 @@
-<aside id="notification-message" class="notification-message icons icon-time">
-    <h4>{{ dictionary["posting_step4.WellDoneAdCreated"] }}</h4>
-    <p>{{ dictionary["posting_fields_1.IfAdApprovedYouWillReceiveEmailConfirmation"] }} <a href="{{ '/myolx/myadslisting' | link }}">{{ dictionary["widgets.ViewAllMyAdsOnOlx"] }}</a></p>
+<aside id="notification-message" class="notification-message icons icon-time" data-qa="success">
+    <h4>{{ dictionary["misc.well-done"] }}</h4>
+    <p>{{ dictionary["posting_fields_1.IfAdApprovedYouWillReceiveEmailConfirmation"] }} {{ dictionary["misc.return_ads"] | replace('<<LINK>>',(["<a href='" , "/myolx/myadslisting" | link, "'>"] | join(''))) | replace('<</LINK>>','</a>') }}</p>
 </aside>
 
 {% view 'post/keepposting' %}

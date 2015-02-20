@@ -176,6 +176,7 @@ module.exports = Base.extend({
         this.parentView.getItem().set('location', this.city);
         this.parentView.getItem().set('neighborhood.id', $nb.data('id'));
         this.parentView.getItem().set('neighborhood.name', $nb.data('name'));
+        this.parentView.neighborhoodSelected = true;
         this.parentView.$el.trigger('flow', [this.id, 'contact']);
     },
     onSubmit: function(event) {

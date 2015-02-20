@@ -1,0 +1,27 @@
+<h1>{{ dictionary["register_form.EditMyInfo"] }}</h1>
+
+{% from macros import Field %}
+
+{% set webField = {
+    isOptional: true,
+    name: "currentPassword",
+    mandatory: true,
+    label: dictionary["lostform.CurrentPassword"],
+    fieldType: "password",
+    dataType: "string"
+} %}
+{{ Field(webField) }}
+
+{% set webField = {
+    isOptional: true,
+    name: "newPassword",
+    mandatory: true,
+    label: dictionary["lostform.NewPassword"],
+    fieldType: "password",
+    dataType: "string"
+} %}
+{{ Field(webField) }}
+
+<fieldset class="save-config">
+    <input type="submit" value="{{ dictionary["register_form.Save"] }}" class="save" />
+</fieldset>

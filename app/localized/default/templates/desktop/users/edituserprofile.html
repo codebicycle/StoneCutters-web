@@ -1,0 +1,93 @@
+<a rel="nofollow" href="{{ '/myolx/configuration' | link }}" class="icons icon-arrow-left">{{ dictionary["defaultfooter.Back"] }}</a>
+<h1>{{ dictionary["usersprofile.EditMyProfile"] }}</h1>
+
+{% from macros import Field %}
+
+{% set statesField = {
+    isOptional: false,
+    name: "stateId",
+    mandatory: true,
+    label: dictionary["defaultheader.Location"],
+    values: states,
+    fieldType: "combobox",
+    dataType: "select",
+    selected: profile.get('stateId')
+} %}
+{{ Field(statesField) }}
+
+{% if cities %}
+    {% set cityField = {
+        isOptional: false,
+        name: "cityId",
+        mandatory: false,
+        label: ' ',
+        values: cities,
+        fieldType: "combobox",
+        dataType: "select",
+        selected: profile.get('cityId')
+    } %}
+    {{ Field(cityField) }}
+{% endif %}
+
+{% set nameField = {
+    isOptional: false,
+    name: "firstName",
+    mandatory: true,
+    label: dictionary["comments.CommentsFormName"],
+    fieldType: "text",
+    dataType: "string",
+    value: profile.get('firstName')
+} %}
+{{ Field(nameField) }}
+
+{% set genderField = {
+    isOptional: false,
+    name: "gender",
+    mandatory: true,
+    label: dictionary["item.sex"],
+    values: [ { key: 'M', value: ' Masculino' }, { key: 'F', value: ' Femenino' } ],
+    fieldType: "radio",
+    dataType: "radio",
+    selected: profile.get('gender')
+} %}
+
+{{ Field(genderField) }}
+
+{% set aboutMeField = {
+    dataType: "string",
+    fieldType: "textarea",
+    isOptional: true,
+    label: dictionary["usersprofile.AboutMe"],
+    mandatory: false,
+    name: "aboutMe",
+    value: profile.get('aboutMe')
+} %}
+{{ Field(aboutMeField) }}
+
+{% set interestsField = {
+    dataType: "string",
+    fieldType: "textarea",
+    isOptional: true,
+    label: dictionary["usersprofile.Interests"],
+    mandatory: false,
+    name: "interests",
+    value: profile.get('interests')
+} %}
+{{ Field(interestsField) }}
+
+{% set webField = {
+    isOptional: true,
+    name: "webSite",
+    mandatory: false,
+    label: dictionary["usersprofile.MyWebsite"],
+    fieldType: "text",
+    dataType: "string",
+    value: profile.get('webSite')
+} %}
+{{ Field(webField) }}
+
+<fieldset class="save-config">
+    <input type="submit" value="{{ dictionary["alertstitle.SaveProfile"] }}" class="save" />
+    {{ dictionary["biderrorheader.Or"] }}
+    <a href="{{ '/myolx/configuration' | link }}" class="cancel" >{{ dictionary["wap_posting_step4.Cancel"] }}</a>
+</fieldset>

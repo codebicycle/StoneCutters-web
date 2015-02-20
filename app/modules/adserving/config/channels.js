@@ -23,6 +23,12 @@ module.exports = {
         'searches#statics': {
             name: 'StaticSearch'
         },
+        'searches#noresult': {
+            name: 'NoResult'
+        },
+        'searches#filter': {
+            name: 'Search'
+        },
         'items#show': {
             name: 'Item'
         }

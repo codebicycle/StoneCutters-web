@@ -1,5 +1,8 @@
-.adserving-listing {
-    .ads-csa {
+.adserving {
+    &:empty {
+        display: none;
+    }
+    .adserving-csa {
         margin-top: 10px;
         iframe {
             border: 1px solid $greyBorders;
@@ -7,7 +10,7 @@
             box-sizing: border-box;
             display: block;
         }
-        &.slot_bottom_listing {
+        &.listing_bottom {
             margin-bottom: 10px;
             margin-top: -10px;
             iframe {
@@ -15,40 +18,43 @@
                 border-top: none;
             }
         }
-        &.slot_top_listing_gallery:not(:empty) {
+        &.listing_topgallery:not(:empty) {
             background: $white;
             border: 1px solid $greyBorders;
             box-sizing: border-box;
-            height: auto !important; /* es de vida o muerte */
+            height: auto !important;
             margin: 10px 0;
             padding: 10px;
             iframe {
                 border: none;
             }
         }
+        &.listing_noresult iframe {
+            border-bottom: 1px solid $greyBorders;
+        }
     }
-    .ads-adx,
-    .ads-afc {
+    .adserving-adx,
+    .adserving-afc {
         text-align: center;
         iframe {
             border: none;
             margin: 0;
             vertical-align: top;
         }
-        &.slot_side_listing,
-        &.slot_side_item {
+        &.listing_side,
+        &.item_side {
             margin-top: 20px;
         }
-        &.slot_top_item {
+        &.item_top {
             margin: 10px 0 20px 0;
-            min-height: 90px;
+            min-height: 62px;
         }
     }
-    .ads-afc {
+    .adserving-afc {
         iframe {
             visibility: hidden;
         }
-        .ads-afc-box-title {
+        .adserving-afc-box-title {
             color: $black;
             display: block;
             float: left;
@@ -77,36 +83,36 @@
                     border: none;
                 }
 
-                .ads-afc-desc {
+                .adserving-afc-desc {
                     font-size: $xs;
                 }
-                .ads-afc-link {
+                .adserving-afc-link {
                     font-size: $xs;
                     padding-left: 5px;
                     text-decoration: underline;
                 }
-                .ads-afc-title {
+                .adserving-afc-title {
                     text-decoration: underline;
                 }
             }
         }
-        &.slot_bottom_item {
+        &.item_bottom {
             li {
                 padding: 20px;
 
-                .ads-afc-title {
+                .adserving-afc-title {
                     color: $orange;
                     display: block;
                     font-size: $l;
                 }
             }
         }
-        &.slot_top_item {
+        &.item_top {
             li {
-                .ads-afc-link {
+                .adserving-afc-link {
                     color: #080;
                 }
-                .ads-afc-title {
+                .adserving-afc-title {
                     font-size: $m;
                     font-weight: bold;
                     padding: 0 5px 0 0;
@@ -116,6 +122,6 @@
     }
 }
 
-.adserving-listing:not(:empty) + .items-list {
+.adserving:not(:empty) + .items-list {
     margin-top: 0;
 }

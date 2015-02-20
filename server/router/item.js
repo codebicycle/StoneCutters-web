@@ -12,6 +12,7 @@ module.exports = function(app, dataAdapter) {
     var User = require('../../app/models/user');
     var Item = require('../../app/models/item');
     var helpers = require('../../app/helpers');
+    var translations = require('../../shared/translations');
 
     (function reply() {
         app.post('/items/:itemId/reply', handler);
@@ -33,8 +34,8 @@ module.exports = function(app, dataAdapter) {
                 }
                 reply = data;
                 user = new User({
-                    country: req.rendrApp.session.get('location').name,
-                    languageId: req.rendrApp.session.get('languages')._byId[req.rendrApp.session.get('selectedLanguage')].id,
+                    country: req.rendrApp.session.get('location').abbreviation,
+                    languageId: req.rendrApp.session.get('languageId'),
                     platform: req.rendrApp.session.get('platform')
                 }, {
                     app: req.rendrApp
@@ -95,6 +96,7 @@ module.exports = function(app, dataAdapter) {
         function handler(req, res, next) {
             var location = req.rendrApp.session.get('location');
             var platform = req.rendrApp.session.get('platform');
+            var dictionary = translations.get(req.rendrApp.session.get('selectedLanguage'));
             var newImages;
             var item;
             var editing;
@@ -110,6 +112,7 @@ module.exports = function(app, dataAdapter) {
 
                 function callback(err, _item, _images) {
                     editing = !!(_item && _item.id);
+
                     if (err === 'aborted') {
                         done.abort();
                         statsd.increment([location.abbreviation, editing ? 'editing' : 'posting', 'error', 'abort', platform]);
@@ -126,6 +129,24 @@ module.exports = function(app, dataAdapter) {
                     return handlerPostLocation(_item, _images, req, res, next);
                 }
                 done(_item, _images);
+            }
+
+            function validate(done, _item, images) {
+                var neighborhood;
+
+                if (typeof _item.neighborhood !== 'undefined') {
+                    if (_item.neighborhood === '') {
+                        return fail([{
+                            selector: 'neighborhood',
+                            message: dictionary['countryoptions.SelectANeighborhood'],
+                            label: 'neighborhood'
+                        }]);
+                    }
+                    neighborhood = _item.neighborhood.split('-');
+                    _item['neighborhood.id'] = neighborhood[0];
+                    _item['neighborhood.name'] = neighborhood[1];
+                }
+                done(_item, images);
             }
 
             function post(done, _item, images) {
@@ -191,6 +212,7 @@ module.exports = function(app, dataAdapter) {
             asynquence().or(fail)
                 .then(parse)
                 .then(checkWapChangeLocation)
+                .then(validate)
                 .then(post)
                 .then(success)
                 .val(clean);
@@ -339,4 +361,52 @@ module.exports = function(app, dataAdapter) {
             });
         }
     })();
+
+    (function deleteitem() {
+        app.post('/myolx/deleteitem/:itemId', handler);
+
+        function handler(req, res, next) {
+            var itemId = req.param('itemId', null);
+            var item;
+            var removedata;
+
+            function parse(done) {
+                formidable.parse(req, done.errfcb);
+            }
+
+            function prepare(done, data) {
+                item = new Item({
+                    id: itemId
+                }, {
+                    app: req.rendrApp
+                });
+                removedata = data;
+                done();
+            }
+            function remove(done) {
+                var reason = removedata.close_reason;
+                var comment = removedata.close_comment;
+
+                item.remove(reason, comment, done);
+            }
+            function success(data) {
+                var url = '/myolx/myadslisting?deleted=true';
+
+                res.redirect(utils.link(url, req.rendrApp));
+            }
+
+            function error(err) {
+                var url = req.headers.referer || '/';
+
+                res.redirect(utils.link(url.split('?').shift(), req.rendrApp));
+            }
+
+            asynquence().or(error)
+                .then(parse)
+                .then(prepare)
+                .then(remove)
+                .val(success);
+        }
+    })();
+
 };

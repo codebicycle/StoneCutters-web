@@ -1,3 +1,6 @@
+{% if banner %}
+    {% include banner %}
+{% endif %}
 <div id="header">
     <span><a href="{{ '/' | link }}">{{ location.url | replace('www.', '') }}</a></span>
     <ul>
