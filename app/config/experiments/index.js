@@ -2,7 +2,7 @@
 
 module.exports = {
     html5HeaderPostButton: {
-        enabled: true,
+        enabled: false,
         platforms: ['html5'],
         markets: ['ar'],
         name: 'header-post-button',
@@ -12,7 +12,7 @@ module.exports = {
         }
     },
     html5Interstitial: {
-        enabled: true,
+        enabled: false,
         platforms: ['html5'],
         markets: ['br'],
         name: 'interstitial',
