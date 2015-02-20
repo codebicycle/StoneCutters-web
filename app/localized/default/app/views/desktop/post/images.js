@@ -73,8 +73,7 @@ module.exports = Base.extend({
         function validate(done) {
             if (image.size > 5242880) {
                 done.abort();
-                $container.removeClass('loading');
-                return alert('Imagen mayor a 5MB. Sos un toga');
+                return $container.removeClass('loading');
             }
             done();
         }
