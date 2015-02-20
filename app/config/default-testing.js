@@ -9,6 +9,14 @@ module.exports = {
         timeout: utils.SECOND * 10,
         experiments: require('./experiments/testing')
     },
+    optimizely: {
+        html5: {
+            id: 2515510557
+        },
+        desktop: {
+            id: 2515040242
+        }
+    },
     smaug: {
         protocol: 'http',
         host: 'api-v2.olx.com',
@@ -121,6 +129,10 @@ module.exports = {
             newItemPage: {
                 worldwide: false,
                 countries: ['www.olx.com.bo', 'www.olx.cl', 'www.olx.com.mx', 'www.olx.com.ve', 'www.olx.com.gt', 'www.olx.com.pe', 'www.olx.com.sv', 'www.olx.com.ec', 'www.olx.com.co', 'www.olx.co.za', 'www.olx.com.ar', 'www.olx.com.uy']
+            },
+            optimizely: {
+                worldwide: false,
+                countries: ['www.olx.com.gh']
             }
         },
         html4: {
@@ -137,6 +149,10 @@ module.exports = {
             contactForm: {
                 worldwide: false,
                 countries: ['www.olx.co.cr', 'www.olx.com.uy', 'www.olx.com.pa']
+            },
+            optimizely: {
+                worldwide: false,
+                countries: ['www.olx.com.gh']
             }
         }
     },

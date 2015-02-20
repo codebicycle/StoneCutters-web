@@ -1,3 +1,6 @@
+{% if optimizely %}
+	<script src="//cdn.optimizely.com/js/{{ optimizely.id }}.js"></script>
+{% endif %}
 <meta charset="utf-8" />
 <title>{{ head.title }}</title>
 {% include (template + "/partials/newrelic.html") %}
