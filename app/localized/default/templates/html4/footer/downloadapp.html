@@ -31,8 +31,13 @@
                </div>
                <h2>{{ dictionary[marketing.freeInKey] }} {{ marketing.freeIn }}</h2>
            </div>
-           <a class="btns blue" href="{{ marketing.link }}">{{ dictionary["about.Download_Mob"] }}</a>
-           <div class="clear"></div>
+          {% if marketing.direct %}
+              <a class="btns blue" href="{{ marketing.direct }}">{{ dictionary["misc.DirectDownload"] }}</a>
+              <a class="btns blue" href="{{ marketing.link }}">{{ dictionary["misc.FromStore"] }}</a>
+          {% else %}
+              <a class="btns blue" href="{{ marketing.link }}">{{ dictionary["about.Download_Mob"] }}</a>
+          {% endif %}
+          <div class="clear"></div>
        </div>
    {% endif %}
 {% endif %}
