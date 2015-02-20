@@ -145,7 +145,7 @@ module.exports = {
         desktop: {
             hermes: {
                 worldwide: false,
-                countries: ['www.olx.com.uy']
+                countries: []
             },
             contactForm: {
                 worldwide: false,
