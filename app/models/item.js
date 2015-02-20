@@ -301,6 +301,9 @@ function toData(includeImages) {
     if (data.priceC) {
         data.priceC = parseFloat(data.priceC);
     }
+    else {
+        data.priceType = 'NEGOTIABLE';
+    }
     if (data.optionals) {
         _.each(data.optionals, function each(optional) {
             data[optional.name] = optional.id || optional.value;
