@@ -10,12 +10,19 @@
             </figure>
         </a>
         <div class="conversation-item-data">
-            {% set senderName = thread.get('senders')[0].name %}
-            {% set phone = thread.get('senders')[0].phone %}
-            {% if thread.get('senders')[0].isMine and thread.get('senders')[1] %}
+            {% if item.user.id != thread.get('userId') %}
+                {% set phone = item.phone %}
+                {% set senderName = item.user.username %}
+            {% elif thread.get('senders')[1] and thread.get('senders')[1].isMine %}
+                {% set senderName = thread.get('senders')[0].name %}
+                {% set phone = thread.get('senders')[0].phone %}
+            {% elif thread.get('senders')[0].isMine %}
                 {% set senderName = thread.get('senders')[1].name %}
                 {% set phone = thread.get('senders')[1].phone %}
+            {% else %}
+                {% set senderName = thread.get('senders')[0].name %}
             {% endif %}
+
             <h3>{{ dictionary["myolx.ConversationWith"] | replace('<<NAME>>', senderName) }}
 
             </h3>
@@ -25,11 +32,12 @@
     <ul>
     {% for message in thread.get('messages') %}
         <li class="conversation-chat">
-            {% set name = thread.get('senders')[0].name %}
             {% if message.isMine %}
                 {% set name = dictionary["myolx.You"] %}
             {% elif thread.get('senders')[0].isMine %}
                 {% set name = thread.get('senders')[1].name %}
+            {% elif thread.get('senders')[1].isMine %}
+                {% set name = thread.get('senders')[0].name %}
             {% endif %}
             <span class="name">{{ name }}</span><span class="date"> - <time>{{ message.date.since.day if message.date.since.day }} {{ dictionary[message.date.since.dictionary] }}{{ (' ' + message.date.since.hour) if message.date.since.hour }} {{ (' ' + yearToShow) if yearToShow }}</time></span>
             <p class="message">{{ message.text }}</p>
