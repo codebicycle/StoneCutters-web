@@ -162,7 +162,7 @@ function search(params, callback, gallery) {
             }, done.errfcb);
         }.bind(this);
 
-        var fetch = function(done) {
+        var fetch = function(done, res) {
             var collections = {
                 items: {
                     collection: 'Items',
