@@ -302,7 +302,7 @@ function toData(includeImages) {
         data.priceC = parseFloat(data.priceC);
     }
     else {
-        data.priceType = 'FREE';
+        data.priceType = 'NEGOTIABLE';
     }
     if (data.optionals) {
         _.each(data.optionals, function each(optional) {
