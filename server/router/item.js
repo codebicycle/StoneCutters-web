@@ -11,7 +11,6 @@ module.exports = function(app, dataAdapter) {
     var statsd  = require('../modules/statsd')();
     var User = require('../../app/models/user');
     var Item = require('../../app/models/item');
-    var helpers = require('../../app/helpers');
     var translations = require('../../shared/translations');
 
     (function reply() {
