@@ -2,7 +2,7 @@
     overflow: hidden;
     background: #DDD;
 
-    a {
+    a.item-list, .my-ads {
         background: #FFF;
         border-bottom: 1px solid #ECECEC;
         display: block;
@@ -10,7 +10,8 @@
         overflow: hidden;
         padding: 7px;
         position: relative;
-
+    }
+    a.item-list {
         &:active {
             background-color: #F6F6F6;
         }
@@ -70,7 +71,14 @@
             background-color: red;
         }
     }
-
+    .abundace {
+        color: #4a148c;
+        display: block;
+        font-family: Arial;
+        font-size: .9rem;
+        font-weight: normal;
+        padding: 7px 10px;
+    }
     li.showig {
         a {
             text-align: center;

@@ -1,6 +1,7 @@
 'use strict';
 
 var Base = require('../../../../../common/app/bases/view').requireView('header/index');
+var Sixpack = require('../../../../../../../shared/sixpack');
 var utils = require('../../../../../../../shared/utils');
 var config = require('../../../../../../../shared/config');
 var helpers = require('../../../../../../helpers');
@@ -8,6 +9,17 @@ var _ = require('underscore');
 
 module.exports = Base.extend({
     urlreferer: '',
+    className: function() {
+        var className = _.result(Base.prototype, 'className') || '';
+        var sixpack = new Sixpack({
+            platform: this.app.session.get('platform'),
+            market: this.app.session.get('location').abbreviation,
+            experiments: this.app.session.get('experiments')
+        });
+        var sixpackClass = sixpack.className(sixpack.experiments.html5HeaderPostButton);
+
+        return className + (sixpackClass ? ' ' : '') + sixpackClass;
+    },
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
         var currentRoute = this.app.session.get('currentRoute');
@@ -30,12 +42,16 @@ module.exports = Base.extend({
         this.app.router.appView.on('filter:end', this.restore.bind(this));
         this.app.router.appView.on('location:start', this.onSelectLocation.bind(this));
         this.app.router.appView.on('location:end', this.restore.bind(this));
-        /*this.app.router.appView.on('login:start', this.onLoginStart.bind(this));
+        if (helpers.features.isEnabled.call(this, 'newItemPage')) {
+            this.app.router.appView.on('reply:start', this.onReplyForm.bind(this));
+            this.app.router.appView.on('reply:end', this.restore.bind(this));
+        }
+        this.app.router.appView.on('login:start', this.onLoginStart.bind(this));
         this.app.router.appView.on('login:end', this.restore.bind(this));
         this.app.router.appView.on('register:start', this.onLoginStart.bind(this));
         this.app.router.appView.on('register:end', this.restore.bind(this));
         this.app.router.appView.on('lostpassword:start', this.onLoginStart.bind(this));
-        this.app.router.appView.on('lostpassword:end', this.restore.bind(this));*/
+        this.app.router.appView.on('lostpassword:end', this.restore.bind(this));
         this.app.router.on('action:end', this.onActionEnd.bind(this));
         if (helpers.features.isEnabled.call(this, 'smartBanner')) {
             if ( !(/(iPad|iPhone|iPod).*OS [6-7].*AppleWebKit.*Mobile.*Safari/.test(navigator.userAgent)) && !this.app.session.get('interstitial') ) {
@@ -61,7 +77,17 @@ module.exports = Base.extend({
     events: {
         'click .logIn span': 'onLoginClick',
         'click #myOlx li a': 'onMenuClick',
-        'click .topBarFilters .filter-btns': 'onCancelFilter'
+        'click .topBarFilters .filter-btns': 'onCancelFilter',
+        'click .postBtn': 'onPostClick'
+    },
+    onPostClick: function() {
+        var sixpack = new Sixpack({
+            platform: this.app.session.get('platform'),
+            market: this.app.session.get('location').abbreviation,
+            experiments: this.app.session.get('experiments')
+        });
+
+        sixpack.convert(sixpack.experiments.html5HeaderPostButton);
     },
     onLoginClick: function(event) {
         event.preventDefault();
@@ -136,12 +162,13 @@ module.exports = Base.extend({
     onPostingFlowStart: function() {
         this.$('#topBar, #myOlx').addClass('disabled');
         this.$('#myOlx').css('display', 'none');
+        this.$('.migration-banner-bd').addClass('disabled');
     },
     onPostingFlowEnd: function() {
         this.app.router.once('action:end', this.onPostingFlowAfter.bind(this));
     },
     onPostingFlowAfter: function() {
-        this.$('#topBar, #myOlx').removeClass('disabled');
+        this.$('#topBar, #myOlx, .migration-banner-bd').removeClass('disabled');
     },
     onSelectSortStart: function(){
         this.customize("unavailableitemrelateditems.SortBy");
@@ -155,18 +182,14 @@ module.exports = Base.extend({
     onLoginStart: function(){
         this.customize("defaulthtmlhead.My Listings");
     },
+    onReplyForm: function() {
+        this.customize('itemslisting.ContactSeller');
+    },
     customize: function(key) {
         var data = Base.prototype.getTemplateData.call(this);
         var route = this.app.session.get('currentRoute').action;
 
         this.urlreferer = data.referer || '/';
-
-        if (route === 'register' || route === 'lostpassword') {
-            this.urlreferer = '/login';
-        } else if (route === 'login') {
-            this.urlreferer = '/';
-        }
-
         this.$('.logo, .header-links').hide();
         this.$('.topBarFilters').removeClass('hide');
         this.$('.topBarFilters .title').text(data.dictionary[key]);

@@ -8,5 +8,7 @@ module.exports = {
     hydra: require('./hydra'),
     tagmanager: require('./tagmanager'),
     allpages: require('./allpages'),
-    facebook: require('./facebook')
+    facebook: require('./facebook'),
+    ninja: require('./ninja'),
+    adroll: require('./adroll'),
 };

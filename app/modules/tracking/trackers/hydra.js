@@ -61,7 +61,7 @@ function getParams(page, options) {
     }, this);
 
     if (url && url.indexOf('?')) {
-        params = _.defaults(params, utils.parse(URLParser.parse(url).search));
+        params = _.defaults(params, utils.parse(URLParser.parse(url).query));
     }
     return {
         page: pageName,

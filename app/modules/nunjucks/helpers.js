@@ -38,6 +38,10 @@ module.exports = function(nunjucks) {
         return dateformat(_date, 'dd/mm/yyyy');
     }
 
+    function dateDiff(start, end, format) { 
+      return helpers.common.dateDiff.call(this.ctx, start, end, format);
+    }
+
     function countFormat(count) {
         return count.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
     }
@@ -64,19 +68,39 @@ module.exports = function(nunjucks) {
         return helpers.common.static.apply(this.ctx, arguments);
     }
 
+    function rangeToArray(start, end, options) {
+        var array = [];
+        var i;
+
+        options = _.defaults({}, options || {}, {
+            equal: true,
+            increment: 1
+        });
+        for (i = start; i < end; i += options.increment) {
+            array.push(i);
+        }
+        if (options.equal) {
+            array.push(end);
+        }
+        return array;
+    }
+
     return {
         is: is,
         log: log,
         date: date,
+        dateDiff: dateDiff,
         link: link,
         linkig: linkig,
         encode: encode,
         'static': statics,
+        rangeToArray: rangeToArray,
         countFormat: countFormat,
         editSlug: editSlug,
         slugToUrl: helpers.common.slugToUrl,
         hijri: helpers.hijri,
         persianDigits: helpers.numbers.toPersian,
-        latinDigits: helpers.numbers.toLatin
+        latinDigits: helpers.numbers.toLatin,
+
     };
 };

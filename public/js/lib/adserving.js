@@ -75,13 +75,13 @@ AFCFlashRender.prototype.render = function render() {
 function AFCTextRender() {}
 
 AFCTextRender.prototype.html = [
-    '<span class="ads-afc-box-title">{{= boxTitle }}</span>',
+    '<span class="adserving-afc-box-title">{{= boxTitle }}</span>',
     '<ul>',
     '{{ for (var item in list) { item = list[item]; }}',
-    ' <li><a class="ads-afc-title" href="{{= item.url }}" target="_blank">{{= item.line1 }}</a>',
-    ' <span class="ads-afc-desc">{{= item.line2 }}</span>',
-    ' <span class="ads-afc-desc">{{= item.line3 }}</span>',
-    ' <a class="ads-afc-link" href="{{= item.url }}" target="_blank">{{= item.visible_url }}</a></li>',
+    ' <li><a class="adserving-afc-title" href="{{= item.url }}" target="_blank">{{= item.line1 }}</a>',
+    ' <span class="adserving-afc-desc">{{= item.line2 }}</span>',
+    ' <span class="adserving-afc-desc">{{= item.line3 }}</span>',
+    ' <a class="adserving-afc-link" href="{{= item.url }}" target="_blank">{{= item.visible_url }}</a></li>',
     '{{ } }}',
     '</ul>'
 ].join('');

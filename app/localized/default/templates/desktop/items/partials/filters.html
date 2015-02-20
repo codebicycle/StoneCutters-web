@@ -1,5 +1,5 @@
 {% if category and search %}
-    <span class="title">{{ category.trName }}</span>
+    <span class="title">{{ category.get('trName') }}</span>
     <a href="{{ ('/nf/search/' + search) | linkig }}" rel="nofollow"  class="icons icon-arrow-left">{{ dictionary["listingpageitemslisting.AllCategories"] }}</a>
 {% endif %}
 {% if filters %}

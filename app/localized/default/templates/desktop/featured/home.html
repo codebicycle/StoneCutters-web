@@ -1,0 +1,21 @@
+<div class="featuredad-home">
+    <h3>{{ dictionary["widgets.Featured_listings"] }}</h3>
+    <ul class="featuredad-content">
+        {% for item in items.toJSON() %}
+            <li>
+                <i class="icons icon-star-circle"></i>
+                <a href="{{ item.slug.replace(domain, fullDomain) }}">
+                    <figure class="items-image {{ 'icons icon-photo' if not item.thumbnail }}">
+                        {% if item.thumbnail %}
+                            <img src="{{ item.thumbnail }}" alt="{{ item.title }}" />
+                        {% endif %}
+                    </figure>
+                    <h3>{{ item.title | truncate( 40, True) }}</h3>
+                    <p class="items-price">
+                        {{ item.price.displayPrice }}
+                    </p>
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+</div>

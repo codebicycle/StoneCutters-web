@@ -1,4 +1,4 @@
-action-button(bgcolor = #ccc, fontcolor = #fff, radius = 3px, padding = 10px)
+action-button(bgcolor = #ccc, fontcolor = #fff, radius = 3px, padding = 10px, textShadow = true)
     background: bgcolor;
     background-image: -moz-linear-gradient(center top, rgba(255, 255, 255, .25), rgba(255, 255, 255, 0));
     background-image: -ms-linear-gradient(center top, rgba(255, 255, 255, .25), rgba(255, 255, 255, 0));
@@ -10,13 +10,14 @@ action-button(bgcolor = #ccc, fontcolor = #fff, radius = 3px, padding = 10px)
     color: fontcolor;
     padding: padding;
     text-align: center;
-    text-shadow: 0 -1px 0 rgba(0, 0, 0, .25);
     &:hover
         background-image: -moz-linear-gradient(center top, rgba(255, 255, 255, .5), rgba(255, 255, 255, 0));
         background-image: -ms-linear-gradient(center top, rgba(255, 255, 255, .5), rgba(255, 255, 255, 0));
         background-image: linear-gradient(to bottom, rgba(255, 255, 255, .5), rgba(255, 255, 255, 0));
         color: fontcolor;
         text-decoration: none;
+    if textShadow == true
+        text-shadow: 0 -1px 0 rgba(0, 0, 0, .25);
 
 arrow(bgColor, borderW)
     position: absolute
@@ -285,3 +286,28 @@ cursive(color, size)
     font-family: 'Kalam', cursive;
     font-size: size
     color: color
+
+ribbon(bgcolor, color, height = 20px, fontSize = 10px, padding = 0 20px 0 30px)
+    background: bgcolor;
+    color: color;
+    font-size: fontSize;
+    font-weight: bold;
+    left: 0;
+    padding: padding;
+    position: absolute;
+    height: height;
+    line-height: height;
+    text-transform: uppercase;
+    font-style: normal;
+
+    &:after {
+        border-color: $green transparent $green $green;
+        border-style: solid;
+        border-width: (height / 2);
+        bottom: 0;
+        content: " ";
+        height: 0;
+        position: absolute;
+        right: - (height / 2);
+        width: 0;
+    }

@@ -1,6 +1,6 @@
 {% for item in items %}
     <li class="{{ nav.current }}">
-        <a href="{{ item | slugToUrl | link }}" data-qa="list-item">
+        <a href="{{ item | slugToUrl | link }}" class="item-list" data-qa="list-item">
             <div {% if item.thumbnail %} style="background-image:url({{ item.thumbnail if nav.current == 'show' else item.fullImage }});" {% endif %} data-fullimg="{{ item.fullImage }}" class="image{{ ' filled' if item.thumbnail }} {{ 'showig' if nav.current == 'showig' }}">
             </div>
             <p class="datetime">
@@ -14,3 +14,22 @@
         </a>
     </li>
 {% endfor %}
+
+{% if meta.abundance %}
+    <li class="abundace">{{ dictionary["misc.MoreResultsIn"] }} {{ location.name if meta.abundance.locationType == 'country' else location.children[0].name }}</li>
+    {% for item in meta.abundance.data %}
+        <li class="{{ nav.current }}">
+            <a href="{{ item | slugToUrl | link }}" class="item-list" data-qa="list-item">
+                <div {% if item.thumbnail %} style="background-image:url({{ item.thumbnail if nav.current == 'show' else item.fullImage }});" {% endif %} data-fullimg="{{ item.fullImage }}" class="image{{ ' filled' if item.thumbnail }} {{ 'showig' if nav.current == 'showig' }}">
+                </div>
+                <p class="datetime">
+                    {% if item.displayLocation %}
+                        {{ dictionary["crm_new_version.RenameCategory_3"] }} {{ item.neighborhood if item.neighborhood else item.displayLocation }}
+                    {% endif %}
+                </p>
+                <h2 class="title">{{ item.title }}</h2>
+                <div class="price">{{ item.price.displayPrice }}</div>
+            </a>
+        </li>
+    {% endfor %}
+{% endif %}

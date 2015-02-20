@@ -1,21 +1,32 @@
 'use strict';
 
-var Base = require('../../../../../common/app/bases/view').requireView('users/myads');
-var asynquence = require('asynquence');
-var helpers = require('../../../../../../helpers');
 var _ = require('underscore');
+var asynquence = require('asynquence');
+var URLParser = require('url');
+var Base = require('../../../../../common/app/bases/view').requireView('users/myads');
+var helpers = require('../../../../../../helpers');
+var config = require('../../../../../../../shared/config');
 
 module.exports = Base.extend({
     events: {
         'click .btndelete': 'onDeleteClick',
         'click .btncanceldelete': 'onCancelDeleteClick',
         'click .backtomyolx': 'onCancelDeleteClick',
-        'submit .formdelete': 'onDelete'
+        'submit .formdelete': 'onDelete',
+        'click .btnedit': 'onEditClick',
+        'click [data-modal-close]': 'onCloseModal',
+        'click [data-modal-shadow]': 'onCloseModal'
     },
     getTemplateData: function() {
+
+        var now = new Date();
+        var location = this.app.session.get('location');
         var data = Base.prototype.getTemplateData.call(this);
 
+        data.currentTime = now.toISOString().replace('T',' ').substr(0,19);
+        data.daysToRenew = config.getForMarket(location.url, ['ads', 'renew', 'daysToRenew'],14);
         data.items = data.items || this.parentView.items;
+
         return data;
     },
     onDeleteClick: function(event) {
@@ -70,5 +81,31 @@ module.exports = Base.extend({
         function success() {
             this.render();
         }
+    },
+    onEditClick: function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+
+        var $btn = $(event.target);
+        
+        if ($btn.data('featured')) {
+            $('#modal-edit-featuread-view').trigger('update', {
+                href: $btn.data('href'),
+                featuredDates: {
+                    start: $btn.data('featureddatesstart') || '2015-01-23 07:39:09',
+                    end: $btn.data('featureddatesend') || '2015-01-26 20:50:22'
+                }
+            });
+            $('#modal-edit-featuread-view').trigger('show');
+            return;
+        }
+        this.app.router.redirectTo(URLParser.parse($btn.data('href')).path);
+    },
+    onCloseModal: function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+        $('#modal-edit-featuread-view').trigger('hide');
     }
 });

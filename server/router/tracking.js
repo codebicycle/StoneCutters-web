@@ -4,6 +4,7 @@ module.exports = function trackingRouter(app, dataAdapter) {
     var _ = require('underscore');
     var restler = require('restler');
     var statsd  = require('../modules/statsd')();
+    var Sixpack = require('../../shared/sixpack');
     var config = require('../../shared/config');
     var utils = require('../../shared/utils');
     var tracking = require('../../app/modules/tracking');
@@ -49,11 +50,11 @@ module.exports = function trackingRouter(app, dataAdapter) {
             .on('success', function success() {
                 statsd.increment([req.query.locIso || 'all', 'tracking', type, tracker, platform, 'success']);
             })
-            .on('fail', function error() {
-                statsd.increment([req.query.locIso || 'all', 'tracking', type, tracker, platform, 'error']);
-            })
-            .on('error', function fail() {
+            .on('fail', function fail() {
                 statsd.increment([req.query.locIso || 'all', 'tracking', type, tracker, platform, 'fail']);
+            })
+            .on('error', function error() {
+                statsd.increment([req.query.locIso || 'all', 'tracking', type, tracker, platform, 'error']);
             });
     }
 
@@ -272,7 +273,7 @@ module.exports = function trackingRouter(app, dataAdapter) {
             var params = {
                 clientId: ctx.app.session.get('clientId').substr(24),
                 custom: ctx.req.query.custom,
-                url: ctx.req.query.url
+                url: utils.fullizeUrl(ctx.req.query.url, ctx.app)
             };
             var config = {
                 platform: ctx.app.session.get('platform'),
@@ -348,6 +349,37 @@ module.exports = function trackingRouter(app, dataAdapter) {
                     return;
                 }
                 statsd.increment(metric.split('.'), value);
+            });
+
+            res.set('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-age=0, max-stale=0, post-check=0, pre-check=0');
+            res.set('Content-Type', 'image/gif');
+            res.set('Content-Length', gif.length);
+            res.end(gif);
+        }
+    })();
+
+    (function sixpack() {
+        app.get('/tracking/sixpack.gif', handler);
+
+        function handler(req, res) {
+            res.on('finish', function onResponseFinish() {
+                var experiment = req.param('experiment');
+                var platform = req.param('platform');
+                var market = req.param('market');
+
+                if (!experiment || !platform || !market) {
+                    return;
+                }
+
+                var sixpack = new Sixpack({
+                    clientId: req.rendrApp.session.get('clientId'),
+                    ip: req.rendrApp.session.get('ip'),
+                    userAgent: utils.getUserAgent(req),
+                    platform: platform,
+                    market: market
+                });
+
+                sixpack.convert(sixpack.experiments[experiment]);
             });
 
             res.set('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-age=0, max-stale=0, post-check=0, pre-check=0');

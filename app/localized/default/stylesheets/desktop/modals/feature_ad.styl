@@ -1,0 +1,58 @@
+#featuread-modal {
+    .modal-container {
+        width: 720px;
+        .modal-header {
+            padding: 10px 20px;
+            .modal-title {
+                font-size: $xl;
+            }
+        }
+        .modal-content {
+            min-height: 300px;
+            padding: 10px 20px;
+            #feature-ad {
+                h2 {
+                    font-size: $m;
+                    margin: 0;
+                    small {
+                        display: block;
+                        font-weight: normal;
+                    }
+                }
+            }
+            .feature-ad-form {
+                margin: 10px 0 0 0;
+                h5 {
+                    margin: 0 0 10px;
+                }
+            }
+            .fad-edit {
+                padding: 0;
+                a {
+                    border-radius();
+                    action-button($greyStrong, $white, 3px, 10px 20px);
+                    display: block;
+                    font-size: $m;
+                    font-weight: bold;
+                    line-height: 1;
+                }
+            }
+            .fad-submit {
+                padding-top: 10px;
+                margin-top: 10px;
+                border-top: 1px solid $disableText;
+                input {
+                    border-radius();
+                    action-button($orange, $white, 3px, 10px 20px);
+                    font-size: $m;
+                    font-weight: bold;
+                    line-height: 1;
+                }
+            }
+            .feature-ad-terms {
+                font-size: $xs;
+                width: 60%;
+            }
+        }
+    }
+}

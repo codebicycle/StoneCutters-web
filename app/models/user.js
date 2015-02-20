@@ -9,16 +9,29 @@ var statsd = require('../../shared/statsd')();
 var utils = require('../../shared/utils');
 
 module.exports = Base.extend({
-    url: '/users',
+    url: '/users/:userId/profile',
+    parse: parse,
     getUsernameOrEmail: getUsernameOrEmail,
     login: login,
     lostpassword: lostpassword,
     register: register,
     registerConfirm: registerConfirm,
-    reply: reply
+    reply: reply,
+    registerWithFacebook: registerWithFacebook,
+    authenticateWithFacebook: authenticateWithFacebook,
+    edit: edit,
+    changePassword: changePassword,
+    toData: toData
 });
 
 module.exports.id = 'User';
+
+function parse(response) {
+    if (response.profile.firstname) {
+        response.profile.firstName = response.profile.firstname;
+    }
+    return response.profile;
+}
 
 function getUsernameOrEmail() {
     return this.get('usernameOrEmail') || this.get('username') || this.get('email');
@@ -32,16 +45,22 @@ function getHash(hash) {
 }
 
 function login(done) {
-    var challenge = function(done) {
+    asynquence().or(fail.bind(this))
+        .then(challenge.bind(this))
+        .then(submit.bind(this))
+        .then(persist.bind(this))
+        .val(success.bind(this));
+
+    function challenge(done) {
         dataAdapter.get(this.app.req, '/users/challenge', {
             query: {
                 u: this.getUsernameOrEmail(),
                 platform: this.get('platform')
             }
         }, done.errfcb);
-    }.bind(this);
+    }
 
-    var submit = function(done, res, data) {
+    function submit(done, res, data) {
         var hash = this.get('password');
 
         if (!this.has('noMD5')) {
@@ -54,135 +73,125 @@ function login(done) {
                 platform: this.get('platform')
             }
         }, done.errfcb);
-    }.bind(this);
+    }
 
-    var persist = function(done, res, user) {
+    function persist(done, res, user) {
         this.set(user);
         this.app.session.persist({
             user: user
         });
         done();
-    }.bind(this);
+    }
 
-    var success = function(res) {
+    function success() {
         if (!this.has('new')) {
             statsd.increment([this.get('country'), 'login', 'success', this.get('platform')]);
         }
         done();
-    }.bind(this);
+    }
 
-    var error = function(err) {
+    function fail(err) {
         if (!this.has('new')) {
             statsd.increment([this.get('country'), 'login', 'error', err.statusCode, this.get('platform')]);
         }
         done.fail(err);
-    }.bind(this);
-
-    asynquence().or(error)
-        .then(challenge)
-        .then(submit)
-        .then(persist)
-        .val(success);
+    }
 }
 
 function lostpassword(done) {
-    var prepare = function(done) {
-        var query = {
-            email: this.get('email'),
-            url: this.get('location')
-        };
-        done(query);
-    }.bind(this);
+    asynquence().or(fail.bind(this))
+        .then(submit.bind(this))
+        .val(success.bind(this));
 
-    var submit = function(done, query) {
+    function submit(done, query) {
         dataAdapter.get(this.app.req, '/users/forgotpassword', {
-            query: query
+            query: {
+                email: this.get('email'),
+                url: this.get('location')
+            }
         }, done.errfcb);
-    }.bind(this);
+    }
 
-    var success = function() {
+    function success() {
         statsd.increment([this.get('country'), 'lostpassword', 'success', this.get('platform')]);
         done();
-    }.bind(this);
+    }
 
-    var error = function(err) {
+    function fail(err) {
         statsd.increment([this.get('country'), 'lostpassword', 'error', err.statusCode, this.get('platform')]);
         done.fail(err);
-    }.bind(this);
-
-    asynquence().or(error)
-        .then(prepare)
-        .then(submit)
-        .val(success);
+    }
 }
 
 function register(done) {
-    var query = {
-        platform: this.get('platform')
-    };
+    asynquence().or(fail.bind(this))
+        .then(prepare.bind(this))
+        .then(submit.bind(this))
+        .then(persist.bind(this))
+        .val(success.bind(this));
 
-    if (this.has('withConfirmation')) {
-        query.withConfirmation = this.get('withConfirmation');
+    function prepare(done) {
+        var query = {
+            platform: this.get('platform')
+        };
+
+        if (this.has('withConfirmation')) {
+            query.withConfirmation = this.get('withConfirmation');
+        }
+        done(query);
     }
 
-    var submit = function(done) {
+    function submit(done, query) {
         dataAdapter.post(this.app.req, '/users', {
             query: query,
             data: this.toJSON()
         }, done.errfcb);
-    }.bind(this);
+    }
 
-    var persist = function(done, res, user) {
+    function persist(done, res, user) {
         user = user || {};
         delete user.password;
         this.set(user);
         done();
-    }.bind(this);
+    }
 
-    var success = function(res) {
+    function success() {
         statsd.increment([this.get('country'), 'register', 'success', this.get('platform')]);
         done();
-    }.bind(this);
+    }
 
-    var error = function(err) {
+    function fail(err) {
         statsd.increment([this.get('country'), 'register', 'error', err.statusCode, this.get('platform')]);
         done.fail(err);
-    }.bind(this);
-
-    asynquence().or(error)
-        .then(submit)
-        .then(persist)
-        .val(success);
+    }
 }
 
 function registerConfirm(done) {
-    var query = {
-      languageId: this.get('languageId'),
-      platform: this.get('platform'),
-      username: this.get('username'),
-      hash: this.get('hash')
-    };
+    asynquence().or(fail.bind(this))
+        .then(submit.bind(this))
+        .val(success.bind(this));
 
-    var submit = function(done) {
-      dataAdapter.post(this.app.req, '/users/confirm', {
-        query: query
-      }, done.errfcb);
-    }.bind(this);
+    function submit(done) {
+        dataAdapter.post(this.app.req, '/users/confirm', {
+            query: {
+                languageId: this.get('languageId'),
+                platform: this.get('platform'),
+                username: this.get('username'),
+                hash: this.get('hash')
+            }
+        }, done.errfcb);
+    }
 
-    var success = function(res, body) {
-      this.set(body);
-      statsd.increment([this.get('country'), 'register','confirm', 'success', this.get('platform')]);
-      done(true);
-    }.bind(this);
+    function success(res, body) {
+        this.set(body);
+        statsd.increment([this.get('country'), 'register','confirm', 'success', this.get('platform')]);
+        done();
+    }
 
-    var error = function(err) {
-      statsd.increment([this.get('country'), 'register','confirm', 'error', err.statusCode, this.get('platform')]);
-      done.fail(err);
-    }.bind(this);
-
-    asynquence().or(error)
-    .then(submit)
-    .val(success);
+    function fail(err) {
+        statsd.increment([this.get('country'), 'register','confirm', 'error', err.statusCode, this.get('platform')]);
+        done.fail(err);
+    }
 }
 
 function reply(done, data) {
@@ -233,4 +242,137 @@ function reply(done, data) {
         statsd.increment([this.get('country'), 'reply', 'error', err.statusCode, this.get('platform')]);
         done.fail(err);
     }
+}
+
+function registerWithFacebook(done) {
+    asynquence().or(fail.bind(this))
+        .then(submit.bind(this))
+        .val(success.bind(this));
+
+    function submit(done) {
+        dataAdapter.post(this.app.req, '/users/facebook/register', {
+            data: this.toData()
+        }, done.errfcb);
+    }
+
+    function success(res) {
+        statsd.increment([this.get('country'), 'facebookRegister', 'success', this.get('platform')]);
+        done(res);
+    }
+
+    function fail(err) {
+        statsd.increment([this.get('country'), 'facebookRegister', 'error', err.statusCode, this.get('platform')]);
+        done.fail(err);
+    }
+}
+
+function authenticateWithFacebook(done) {
+    asynquence().or(fail.bind(this))
+        .then(submit.bind(this))
+        .then(persist.bind(this))
+        .val(success.bind(this));
+
+    function submit(done, query) {
+        dataAdapter.get(this.app.req, '/users/facebook/' + this.get('facebookId'), {
+            query: {
+                facebookToken: this.get('facebookToken')
+            }
+        }, done.errfcb);
+    }
+
+    function persist(done, res, user) {
+        this.set(user);
+        this.app.session.persist({
+            user: user
+        });
+        done();
+    }
+
+    function success() {
+        statsd.increment([this.get('country'), 'facebookLogin', 'success', this.get('platform')]);
+        done();
+    }
+
+    function fail(err) {
+        statsd.increment([this.get('country'), 'facebookLogin', 'error', err.statusCode, this.get('platform')]);
+        done.fail(err);
+    }
+}
+
+function edit(done) {
+    asynquence().or(fail.bind(this))
+        .then(submit.bind(this))
+        .val(success.bind(this));
+
+    function submit(done) {
+        dataAdapter.post(this.app.req, '/users/' + this.get('userId') + '/profile/' + this.get('intent'), {
+            query: {
+                platform: this.get('platform'),
+                token: this.get('token')
+            },
+            data: this.toData()
+        }, done.errfcb);
+    }
+
+    function success(response, profile) {
+        statsd.increment([this.get('country'), 'profile', this.get('intent'), 'success', this.get('platform')]);
+        done();
+    }
+
+    function fail(err) {
+        statsd.increment([this.get('country'), 'profile', this.get('intent'), 'error', err.statusCode, this.get('platform')]);
+        done.fail(err);
+    }
+}
+
+function changePassword(done) {
+    asynquence().or(fail.bind(this))
+        .then(submit.bind(this))
+        .val(success.bind(this));
+
+    function submit(done) {
+        dataAdapter.post(this.app.req, '/users/' + this.get('userId') + '/edit', {
+            query: {
+                platform: this.get('platform'),
+                token: this.get('token')
+            },
+            data: this.toData()
+        }, callback);
+
+        function callback(err, response, body) {
+            if (err) {
+                body.statusCode = response.statusCode;
+                return done.fail(body);
+            }
+            done(response, body);
+        }
+    }
+
+    function success(response, profile) {
+        statsd.increment([this.get('country'), 'profile', 'password', 'success', this.get('platform')]);
+        done();
+    }
+
+    function fail(err) {
+        statsd.increment([this.get('country'), 'profile', 'password', 'error', err.statusCode, this.get('platform')]);
+        done.fail(err);
+    }
+}
+
+function toData() {
+    var data = this.toJSON();
+
+    _.each(data, function each(value, key) {
+        if (value === undefined || value === null || value === '') {
+            delete data[key];
+        }
+    });
+    delete data.token;
+    delete data.intent;
+    delete data.favorites;
+    delete data.unreadConversationsCount;
+    delete data.unreadMessagesCount;
+    delete data.agreeTerms;
+    delete data.country;
+    return data;
 }

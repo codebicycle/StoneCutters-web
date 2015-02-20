@@ -1,0 +1,7 @@
+{#<div class="user-image icons icon-user"></div>#}
+<ul class="links">
+    <li><a href="{{ ('/users/' + user.username) | link }}">{{ dictionary["usersprofile.ViewMyProfile"] }}</a></li>
+    <!-- li><a href="{{ '/myolx/edituserprofile' | link }}">{{ dictionary["usersprofile.EditMyProfile"] }}</a></li -->
+    <li><a href="{{ '/myolx/editpersonalinfo' | link }}">{{ dictionary["myolx.ChangeEmailAddressOrPassword"] }}</a></li>
+    <li><a href="{{ '/myolx/emailsnotification' | link }}">{{ dictionary["myolx.Settings"] }}</a></li>
+</ul>

@@ -7,6 +7,7 @@ var middlewares = require('../middlewares');
 var helpers = require('../helpers');
 var tracking = require('../modules/tracking');
 var Paginator = require('../modules/paginator');
+var FeatureAd = require('../models/feature_ad');
 var config = require('../../shared/config');
 var utils = require('../../shared/utils');
 var ShopsAdmin = require('../modules/shopsadmin');
@@ -130,6 +131,7 @@ function search(params, callback, gallery) {
 
         var prepare = function(done) {
             params.seo = this.app.seo.isEnabled();
+            params.abundance = true;
             params.languageId = languages._byId[this.app.session.get('selectedLanguage')].id;
             Paginator.prepare(this.app, params);
             query = _.clone(params);
@@ -144,6 +146,20 @@ function search(params, callback, gallery) {
             tracking.addParam('page_nb', 0);
 
             done();
+        }.bind(this);
+
+        var fetchFeatured = function(done) {
+            if (!FeatureAd.isEnabled(this.app)) {
+                return done();
+            }
+            this.app.fetch({
+                featureads: {
+                    collection: 'FeatureAds',
+                    params: _.clone(params)
+                }
+            }, {
+                readFromCache: false
+            }, done.errfcb);
         }.bind(this);
 
         var fetch = function(done) {
@@ -163,7 +179,15 @@ function search(params, callback, gallery) {
             }
             this.app.fetch(collections, {
                 readFromCache: false
-            }, done.errfcb);
+            }, function afterFetch(err, response) {
+                if (err) {
+                    return done.fail(err);
+                }
+                if (response && res && res.featureads) {
+                    res.featureads.mergeTo(response.items);
+                }
+                done(response);
+            });
         }.bind(this);
 
         var filters = function(done, res) {
@@ -220,6 +244,8 @@ function search(params, callback, gallery) {
             tracking.addParam('page', page);
             tracking.addParam('category', _category);
             tracking.addParam('subcategory', _subcategory);
+            tracking.addParam('filters', items.filters);
+            tracking.addParam('paginator', items.paginator);
 
             this.app.session.update({
                 dataPage: {
@@ -255,6 +281,7 @@ function search(params, callback, gallery) {
             .then(configure)
             .then(check)
             .then(prepare)
+            .then(fetchFeatured)
             .then(fetch)
             .then(filters)
             .then(paginate)
@@ -268,6 +295,7 @@ function statics(params, callback) {
     function controller() {
         var page = params ? params.page : undefined;
         var platform = this.app.session.get('platform');
+        var languages = this.app.session.get('languages');
         var url = ['/q/', params.search, (params.catId ? ['/c-', params.catId].join('') : '')].join('');
         var query;
         var category;
@@ -330,6 +358,7 @@ function statics(params, callback) {
             Paginator.prepare(this.app, params, 'static');
             query = _.clone(params);
             params.categoryId = params.catId;
+            params.languageId = languages._byId[this.app.session.get('selectedLanguage')].id;
             delete params.search;
             delete params.page;
             delete params.filters;
@@ -348,21 +377,44 @@ function statics(params, callback) {
                     }
                 });
             }
+            _.extend(params, {
+                item_type: 'static',
+                seo: this.app.seo.isEnabled()
+            });
             done();
         }.bind(this);
 
-        var findItems = function(done) {
+        var fetchFeatured = function(done) {
+            if (!FeatureAd.isEnabled(this.app)) {
+                return done();
+            }
             this.app.fetch({
-                items: {
-                    collection: 'Items',
-                    params: _.extend(params, {
-                        item_type: 'static',
-                        seo: this.app.seo.isEnabled()
-                    })
+                featureads: {
+                    collection: 'FeatureAds',
+                    params: _.clone(params)
                 }
             }, {
                 readFromCache: false
             }, done.errfcb);
+        }.bind(this);
+
+        var fetch = function(done, res) {
+            this.app.fetch({
+                items: {
+                    collection: 'Items',
+                    params: params
+                }
+            }, {
+                readFromCache: false
+            }, function afterFetch(err, response) {
+                if (err) {
+                    return done.fail(err);
+                }
+                if (response && res && res.featureads) {
+                    res.featureads.mergeTo(response.items);
+                }
+                done(response);
+            });
         }.bind(this);
 
         var filters = function(done, res) {
@@ -425,6 +477,8 @@ function statics(params, callback) {
             tracking.addParam('page_nb', items.paginator.get('totalPages'));
             tracking.addParam('category', _category);
             tracking.addParam('subcategory', _subcategory);
+            tracking.addParam('filters', items.filters);
+            tracking.addParam('paginator', items.paginator);
 
             this.app.session.update({
                 dataPage: {
@@ -451,7 +505,8 @@ function statics(params, callback) {
             .then(configure)
             .then(check)
             .then(prepare)
-            .then(findItems)
+            .then(fetchFeatured)
+            .then(fetch)
             .then(filters)
             .then(paginate)
             .val(success);
@@ -495,6 +550,7 @@ function allresults(params, callback, gallery) {
             delete params.search;
 
             params.seo = this.app.seo.isEnabled();
+            params.abundance = true;
             params.languageId = languages._byId[this.app.session.get('selectedLanguage')].id;
             if (platform !== 'desktop') {
                 params['f.hasimage'] = true;
@@ -509,7 +565,21 @@ function allresults(params, callback, gallery) {
             done();
         }.bind(this);
 
-        var fetch = function(done) {
+        var fetchFeatured = function(done) {
+            if (!FeatureAd.isEnabled(this.app)) {
+                return done();
+            }
+            this.app.fetch({
+                featureads: {
+                    collection: 'FeatureAds',
+                    params: _.clone(params)
+                }
+            }, {
+                readFromCache: false
+            }, done.errfcb);
+        }.bind(this);
+
+        var fetch = function(done, res) {
             this.app.fetch({
                 items: {
                     collection: 'Items',
@@ -517,7 +587,15 @@ function allresults(params, callback, gallery) {
                 }
             }, {
                 readFromCache: false
-            }, done.errfcb);
+            }, function afterFetch(err, response) {
+                if (err) {
+                    return done.fail(err);
+                }
+                if (response && res && res.featureads) {
+                    res.featureads.mergeTo(response.items);
+                }
+                done(response);
+            });
         }.bind(this);
 
         var filters = function(done, res) {
@@ -568,6 +646,8 @@ function allresults(params, callback, gallery) {
             this.app.seo.addMetatag('googlebot', 'noindex, nofollow');
 
             tracking.addParam('page_nb', meta.totalPages);
+            tracking.addParam('filters', items.filters);
+            tracking.addParam('paginator', items.paginator);
 
             callback(null, {
                 categories: this.dependencies.categories.toJSON(),
@@ -585,6 +665,7 @@ function allresults(params, callback, gallery) {
         asynquence().or(error)
             .then(redirect)
             .then(prepare)
+            .then(fetchFeatured)
             .then(fetch)
             .then(filters)
             .then(paginate)

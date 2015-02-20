@@ -65,118 +65,62 @@ module.exports = Base.extend({
         var $neighborhoods = $('#field-neighborhood');
 
         if ($states.val()) {
-            $states.trigger('change');
+            $states.trigger('change', [true]);
         }
         if ($cities.val()) {
-            $cities.trigger('change');
+            $cities.trigger('change', [true]);
         }
         if ($neighborhoods.val()) {
-            $neighborhoods.trigger('change');
+            $neighborhoods.trigger('change', [true]);
         }
     },
-    onStateChange: function(event) {
+    onStateChange: function(event, skipValidation) {
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();
 
         var $field = $(event.target);
         var $firstOption = $field.find('option').first();
-        var $neighborhoods = this.$('#field-neighborhood');
-
-        $neighborhoods.parents('.field-wrapper').addClass('hide');
-        $neighborhoods.empty().attr('required', false);
+        var $cities = $('#field-location');
 
         if ($firstOption.attr('value') === '') {
             $firstOption.remove();
         }
 
-        this.getCities($field.val());
-        this.parentView.$el.trigger('fieldSubmit', [$field]);
+        this.resetNeighborhoods();
+        this.getCities($field.val(), skipValidation, ($cities.val() ? [$cities.val()] : undefined));
+        this.parentView.$el.trigger('fieldSubmit', [$field, skipValidation]);
     },
-    onCityChange: function(event) {
+    onCityChange: function(event, skipValidation) {
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();
 
         var $field = $(event.target);
         var $firstOption = $field.find('option').first();
-        var $neighborhoods = this.$('#field-neighborhood');
-        var url = $field.val();
 
         if ($firstOption.attr('value') === '') {
             $firstOption.remove();
         }
 
-        var fetch = function(done) {
-            this.app.fetch({
-                neighborhoods: {
-                    collection: 'Neighborhoods',
-                    params: {
-                        location: url,
-                        languageId: this.app.session.get('languages')._byId[this.app.session.get('selectedLanguage')].id
-                    }
-                }
-            }, {
-                readFromCache: false,
-                writeToCache: false,
-                store: false
-            }, done.errfcb);
-        }.bind(this);
-
-        var error = function(error) {
-            console.log(error); // TODO: HANDLE ERRORS
-        }.bind(this);
-
-        var success = function(response) {
-            var options = response.neighborhoods.toJSON();
-            var location = this.parentView.parentView.getItem().getLocation() || {};
-
-            if (location.children && location.children[0] && location.children[0].type === 'neighborhood') {
-                location = location.children[0];
-            }
-            if (options.length) {
-                $neighborhoods.removeAttr('disabled').empty();
-
-                options.unshift({
-                    id: '',
-                    name: translations.get(this.app.session.get('selectedLanguage'))['countryoptions.SelectANeighborhood']
-                });
-                _.each(options, function each(neighborhood) {
-                    $neighborhoods.append('<option value="' + neighborhood.id + '"' + (location.id === neighborhood.id ? ' selected' : '') + '>' + neighborhood.name + '</option>');
-                }, this);
-                $neighborhoods.parents('.field-wrapper').removeClass('hide');
-            }
-            else {
-                $neighborhoods.parents('.field-wrapper').addClass('hide');
-                this.parentView.parentView.getItem().unset('neighborhood.id');
-                this.parentView.parentView.getItem().unset('neighborhood.name');
-            }
-
-            this.parentView.$el.trigger('fieldSubmit', [$field]);
-        }.bind(this);
-
-        asynquence().or(error)
-            .then(fetch)
-            .val(success);
+        this.getNeighborhoods($field.val(), skipValidation);
+        this.parentView.$el.trigger('fieldSubmit', [$field, skipValidation]);
     },
-    onNeighborhoodChange: function(event) {
+    onNeighborhoodChange: function(event, skipValidation) {
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();
 
         var $field = $(event.target);
+        var $firstOption = $field.find('option').first();
 
-        this.parentView.$el.trigger('fieldSubmit', [{
-            name: [$field.attr('name'), 'id'].join('.'),
-            value: $field.val()
-        }]);
-        this.parentView.$el.trigger('fieldSubmit', [{
-            name: [$field.attr('name'), 'name'].join('.'),
-            value: $field.find(':selected').text()
-        }]);
+        if ($firstOption.attr('value') === '') {
+            $firstOption.remove();
+        }
 
+        this.parentView.$el.trigger('fieldSubmit', [$field, skipValidation]);
     },
-    getCities: function(state) {
+    getCities: function(state, skipValidation, cityId) {
         var options;
         var $cities = this.$('#field-location');
 
@@ -215,15 +159,83 @@ module.exports = Base.extend({
         var success = function(options) {
             $cities.removeAttr('disabled').empty();
             _.each(options, function each(city) {
-                $cities.append('<option value="' + city.key + '">' + city.value + '</option>');
+                $cities.append('<option value="' + city.key + '"' + (city.key == cityId ? 'selected="selected"' : '') + '>' + city.value + '</option>');
             }.bind(this));
-            this.parentView.$el.trigger('fieldSubmit', [$cities]);
+            this.parentView.$el.trigger('fieldSubmit', [$cities, skipValidation]);
         }.bind(this);
 
         asynquence().or(error)
             .then(fetch)
             .then(parse)
             .val(success);
+    },
+    getNeighborhoods: function(city, skipValidation) {
+        var options;
+        var $neighborhoods = this.$('#field-neighborhood');
+
+        var fetch = function(done) {
+            this.app.fetch({
+                neighborhoods: {
+                    collection: 'Neighborhoods',
+                    params: {
+                        location: city,
+                        languageId: this.app.session.get('languages')._byId[this.app.session.get('selectedLanguage')].id
+                    }
+                }
+            }, {
+                readFromCache: false,
+                writeToCache: false,
+                store: false
+            }, done.errfcb);
+        }.bind(this);
+
+        var parse = function(done, response) {
+            options = _.map(response.neighborhoods.toJSON(), function each(neighborhood) {
+                return {
+                    key: neighborhood.id,
+                    value: neighborhood.name
+                };
+            });
+            if (options.length) {
+                options.unshift({
+                    key: '',
+                    value: translations.get(this.app.session.get('selectedLanguage'))['item.SelectA_Neighborhood']
+                });
+            }
+            done(options);
+        }.bind(this);
+
+        var error = function(error) {
+            console.log(error); // TODO: HANDLE ERRORS
+        }.bind(this);
+
+        var success = function(options) {
+            if (options.length) {
+                $neighborhoods.removeAttr('disabled').attr('required', true).empty();
+                $neighborhoods.parents('.field-wrapper').removeClass('hide');
+                _.each(options, function each(neighborhood) {
+                    $neighborhoods.append('<option value="' + neighborhood.key + '">' + neighborhood.value + '</option>');
+                }.bind(this));
+                this.parentView.$el.trigger('fieldSubmit', [$neighborhoods, skipValidation]);
+            }
+            else {
+                this.resetNeighborhoods();
+            }
+        }.bind(this);
+
+        asynquence().or(error)
+            .then(fetch)
+            .then(parse)
+            .val(success);
+
+    },
+    resetNeighborhoods: function() {
+        var $neighborhoods = this.$('#field-neighborhood');
+
+        delete this.parentView.parentView.errors.neighborhoods;
+        $neighborhoods.parents('.field-wrapper').addClass('hide').removeClass('error');
+        $neighborhoods.siblings('.error.message').remove();
+        $neighborhoods.empty().attr('required', false);
     }
 });
 

@@ -4,7 +4,7 @@
             <p class="price">{{ item.price.displayPrice }}</p>
         {% endif %}
         {% if item.priceTypeData and not(item.priceTypeData.type == 'FIXED') %}
-            <p class="price-type">{{ item.priceTypeData.displayPriceType }}</p>
+            <p class="price-negotiable">{{ item.priceTypeData.displayPriceType }}</p>
         {% endif %}
     </div>
 {% endif %}

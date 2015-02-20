@@ -9,6 +9,8 @@ var hydra = require('./trackers/hydra');
 var tagmanager = require('./trackers/tagmanager');
 var allpages = require('./trackers/allpages');
 var facebook = require('./trackers/facebook');
+var ninja = require('./trackers/ninja');
+var adroll = require('./trackers/adroll');
 var utils = require('../../../shared/utils');
 var esi = require('../esi');
 
@@ -18,7 +20,9 @@ var trackers = {
     hydra: hydra,
     tagmanager: tagmanager,
     allpages: allpages,
-    facebook: facebook
+    facebook: facebook,
+    ninja: ninja,
+    adroll: adroll
 };
 
 _.each(trackers, function each(tracker, name) {

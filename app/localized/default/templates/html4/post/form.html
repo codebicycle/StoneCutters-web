@@ -56,7 +56,9 @@
         <h4>{{ dictionary["defaulthtmlhead.SellerInformation"] }}</h4>
         {% for field in fields.contactInformation %}
             {% if field.fieldType == 'text' %}
-                {{ FieldText(field.label, field.name, field.mandatory, form,  user) }}
+                {% if field.name != 'streetAddress' %}
+                    {{ FieldText(field.label, field.name, field.mandatory, form,  user) }}
+                {% endif %}
             {% elif field.fieldType == 'combobox' %}
                 {{ FieldCombobox(field.label, field.name , form, field.value) }}
             {% endif %}
@@ -67,6 +69,7 @@
         <input type="hidden" name="category.id" value="{{subcategory.id}}">
         {% if item and item.has('id') %}
             <input type="hidden" name="id" value="{{ item.get('id') }}">
+            <input type="hidden" name="securityKey" value="{{item.get('securityKey')}}">
         {% endif %}
         <div class="formField">
             <h3>
@@ -74,6 +77,25 @@
                 <input type="submit" value="{{ dictionary["countryoptions.ChangeCity"] }}" class="link" formaction="{{ '/post/location' | link }}">
             </h3>
         </div>
+        {% if neighborhoods.length > 0 %}
+            <div class="formField">
+                <label for="neighborhood">* {{ dictionary['countryoptions.SelectANeighborhood'] }}</label>
+                <select name="neighborhood" id="neighborhood">
+                    <option value="">-{{ dictionary["countryoptions.SelectANeighborhood"] }}-</option>
+                    {% for neighborhood in neighborhoods %}
+                        <option value="{{neighborhood.id}}-{{neighborhood.name}}">{{neighborhood.name}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        {% endif %}
+
+        {% for field in fields.contactInformation %}
+            {% if field.fieldType == 'text' %}
+                {% if field.name == 'streetAddress' %}
+                    {{ FieldText(field.label, field.name, field.mandatory, form,  user) }}
+                {% endif %}
+            {% endif %}
+        {% endfor %}
 
         <div class="formField">
             <small>* {{ dictionary["wap_posting_step4.mandatoryField"] }}</small>
