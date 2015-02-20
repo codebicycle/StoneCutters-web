@@ -15,7 +15,8 @@ module.exports = Base.extend({
 
         return _.extend({}, data, {
             breadcrumb: breadcrumb.get.call(this, data),
-            filtersEnabled: helpers.features.isEnabled.call(this, 'listingFilters')
+            filtersEnabled: helpers.features.isEnabled.call(this, 'listingFilters'),
+            shopsEnabled: helpers.features.isEnabled.call(this, 'shops')
         });
     }
 });

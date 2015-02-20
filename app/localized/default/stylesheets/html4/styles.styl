@@ -310,11 +310,26 @@ ul.itemListing li .itemInfo .itemPrice {
 	margin: 0 8px 0 0;
 }
 
-/*----adLikeStore----*/
-
+/*---- shops ----*/
+.mapShops {
+	margin-bottom: 5px;
+	.nearby {
+		border-bottom: 1px solid #8900d0;
+		color: #8900d0;
+		text-align: center;
+		font-size: 12px;
+		padding: 5px 0;
+	}
+}
 .itemListing {
-	.adLikeStore {
+	.adLikeStore,
+	.callToAction {
 		background: #f7f7f7;
+		.imageCont {
+			background: #fff;
+		}
+	}
+	.adLikeStore {
 		a {
 			position: relative;
 		}
@@ -333,6 +348,53 @@ ul.itemListing li .itemInfo .itemPrice {
 			h2 {
 				font-size: 14px;
 				color: #333;
+			}
+		}
+	}
+	.callToAction {
+		height: 120px;
+		.imageCont {
+			border-bottom: 1px solid #ececec;
+		}
+		.buttons {
+			float: left;
+			width: 100%;
+			position: relative;
+			.name {
+				color: #777;
+				float: left;
+				font-size: 11px;
+				font-style: italic;
+				background: url(imageUrl/images/html4/stores/storeIcon.png) 0 50% no-repeat;
+				padding: 1px 0 1px 20px;
+				margin-left: 5px;
+			}
+			ul {
+				position: absolute;
+				right: 5px;
+				top: -5px;
+				li {
+					width: auto;
+					height: auto;
+					display: inline-block;
+					border: 0;
+				}
+				a {
+					text-indent: -9999px;
+					width: 25px;
+					height: 21px;
+					border: 1px solid #ddd;
+					border-radius: 2px;
+					&.mail {
+						background: url(imageUrl/images/html4/stores/mail.png) 50% 0 no-repeat #fff;
+					}
+					&.phone {
+						background: url(imageUrl/images/html4/stores/phone.png) 50% 2px no-repeat #fff;
+					}
+					&.sms {
+						background: url(imageUrl/images/html4/stores/sms.png) 50% 3px no-repeat #fff;
+					}
+				}
 			}
 		}
 	}

@@ -1,8 +1,20 @@
 {% view 'locations/select' %}
 {% view 'partials/search' %}
-{% from macros import Breadcrumb, BreadcrumbHome %}
+{% from macros import Breadcrumb, BreadcrumbHome, AdLikeStore, CallToActions %}
 {% set link = (breadcrumb | link) %}
 {{ Breadcrumb(dictionary, link, subcategory.trName) }}
+
+{% if shopsEnabled %}
+    {% if shops.length and meta.total > 0 %}
+        <div class="mapShops">
+            <p class="nearby">Shops nearby:</p>
+            <a href="">
+                <img src="http://maps.googleapis.com/maps/api/staticmap?center={{ [center.lat, ',', center.lng] | join }}&zoom=16&size=320x100&markers={% for shop in shops %}{{ [shop.location.lat, ",", shop.location.lon, "|"] | join if shop }}{% endfor %}&sensor=false" />
+            </a>
+        </div>
+    {% endif %}
+{% endif %}
+
 <div id="itemListing">
     {% if meta.total == 0 %}
         <div class="emtyList">
@@ -19,6 +31,18 @@
     {% else %}
         <ul class="itemListing">
             {% for item in items %}
+                {% if shopsEnabled %}
+                    {% if shops.length %}
+                        {% set shop = shops[loop.index0] %}
+                        {% if shop %}
+                            {% if shop.type == 1 %}
+                                {{ AdLikeStore(shop) }}
+                            {% else %}
+                                {{ CallToActions(shop) }}
+                            {% endif %}
+                        {% endif %}
+                    {% endif %}
+                {% endif %}
                 <li>
                     <a href="{{ item | slugToUrl | link }}">
                         <div class="imageCont" style="background-image: url({{ item.thumbnail if item.thumbnail else ('/images/html4/noPhoto.png' | static) }});"></div>
@@ -34,27 +58,6 @@
                         <span>{{ item.displayLocation }}</span>
                     </div>
                 </li>
-                {% if shops.length %}
-                    {% if loop.index0 and loop.index0 % 4 == 0 %}
-                        {% set shop = shops[pos] %}
-                        {% set pos = loop.index0 / 4 %}
-                        {{ loop.index0 }}
-                        {% if shop %}
-                            <li class="adLikeStore">
-                                <a href="#">
-                                    <div class="flag" style="background-image: url({{ ('/images/html4/stores/storeFlag.png' | static) }});"></div>
-                                    <div class="imageCont" style="background-image: url({{ shop.image if shop.image else ('/images/html4/noPhoto.png' | static) }});"></div>
-                                    <div class="itemInfo">
-                                        <div class="centerCont">
-                                            <h2>{{ shop.name }}</h2>
-                                        </div>
-                                        <span>{{ shop.address }}</span>
-                                    </div>
-                                </a>
-                            </li>
-                        {% endif %}
-                    {% endif %}
-                {% endif %}
             {% endfor %}
         </ul>
         {% if paginator and paginator.isEnabled() %}

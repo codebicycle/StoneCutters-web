@@ -126,6 +126,7 @@ function show(params, callback, gallery) {
             var platform = this.app.session.get('platform');
             if ( platform === 'html4') {
                 var shops = [
+                            undefined,
                             {
                                 "id": "54d8b6fee4b0a94af2c0e3f4",
                                 "name": "Official Samsung Phones",
@@ -152,8 +153,10 @@ function show(params, callback, gallery) {
                                         "date": "Today, 9:38",
                                         "image": "http://images01.olx-st.com/ui/92/45/27/t_1423467532_782293240_1.jpg"
                                     }
-                                ]
+                                ],
+                                "type": 2
                             },
+                            undefined,
                             {
                                 "id": "54d8b729e4b0a94af2c0e3f5",
                                 "name": "I Call U Mobiles",
@@ -180,8 +183,41 @@ function show(params, callback, gallery) {
                                         "date": "Today, 20:40",
                                         "image": "http://images04.olx-st.com/ui/69/16/52/t_1423420835_782205472_1.jpg"
                                     }
-                                ]
+                                ],
+                                "type": 1
                             },
+                            undefined,
+                            {
+                                "id": "54d8b729e4b0a94af2c0e3f5",
+                                "name": "I Call U Mobiles",
+                                "description": "All mobile phone brands in an only place. Buy Safe, Buy I Call U",
+                                "email": "icallu@olx.com",
+                                "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTkfKRnhOKXQ9AGZ-qeOaCy-uxHQLGFR1l4DksWeU0Oij8b-bOIBQ",
+                                "location": {
+                                    "lat": -1.291929,
+                                    "lon": 36.821855
+                                },
+                                "phone": "701593759",
+                                "address": "Parliament Rd in next to Braintech Clinic, Nairobi",
+                                "openHours": {
+                                    "from": 9,
+                                    "to": 9
+                                },
+                                "items": [
+                                    {
+                                        "id": 782205472,
+                                        "title": "Galaxy Samsung Note 3, affordable and new from Korea",
+                                        "description": "<p>super perfect phone, android supported and you can get all the apps from the play store. a working stylus and available immediately. call now</p>",
+                                        "price": "Ksh13100",
+                                        "location": "Car wash",
+                                        "date": "Today, 20:40",
+                                        "image": "http://images04.olx-st.com/ui/69/16/52/t_1423420835_782205472_1.jpg"
+                                    }
+                                ],
+                                "type": 1
+                            },
+                            undefined,
+                            undefined,
                             {
                                 "id": "54d8b753e4b0a94af2c0e3f6",
                                 "name": "Santek Technology",
@@ -208,9 +244,42 @@ function show(params, callback, gallery) {
                                         "date": "Today, 18:41",
                                         "image": "/images/html4/noPhoto.png"
                                     }
-                                ]
+                                ],
+                                "type": 2
                             }
                         ];
+                var getCenter = function(shops) {
+                    var minLat = 91;
+                    var maxLat = -91;
+                    var minLng = 181;
+                    var maxLng = -181;
+                    var shopLocation;
+                    var lat;
+                    var lng;
+
+                    for (var j in shops) {
+                        if (shops[j]) {
+                            shopLocation = shops[j].location;
+                            if (shopLocation.lat > maxLat) {
+                                maxLat = shopLocation.lat;
+                            }
+                            if (shopLocation.lat < minLat) {
+                                minLat = shopLocation.lat;
+                            }
+                            if (shopLocation.lng > maxLng) {
+                                maxLng = shopLocation.lng;
+                            }
+                            if (shopLocation.lng < minLng) {
+                                minLng = shopLocation.lng;
+                            }
+                        }
+                    }
+                    lat = (maxLat + minLat) / 2;
+                    lng = (maxLng + minLng) / 2;
+                    return JSON.stringify({"lat": lat, "lng": lng});
+                };
+
+                _result.center = getCenter(shops);
                 _result.shops = shops;
                 callback(null, _result);
             }
