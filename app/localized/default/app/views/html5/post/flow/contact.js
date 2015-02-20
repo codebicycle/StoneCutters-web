@@ -182,7 +182,7 @@ module.exports = Base.extend({
         var $email = this.$('input[name=email]').removeClass('error');
         var $location = this.$('.location').removeClass('error');
         var failed = false;
-        var location = this.app.session.get('location').abbreviation.toLowerCase();
+        var location = this.app.session.get('location').abbreviation;
 
         this.$el.removeClass('error').find('small').remove();
         if (!$contactName.val().length) {
