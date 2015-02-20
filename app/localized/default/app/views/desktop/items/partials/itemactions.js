@@ -14,7 +14,7 @@ module.exports = Base.extend({
         'submit [data-login-form]': 'login',
         'click [data-facebook-login]': 'facebookLogin',
         'click [data-modal-close]': 'onCloseModal',
-        'click .open-modal': 'onOpenModal',
+        'click .open-modal[data-user=false]': 'onOpenModal',
         'click [data-modal-shadow]': 'onCloseModal'
     },
     postRender: function() {
