@@ -1,5 +1,8 @@
+{% if optimizely %}
+	<script src="//cdn.optimizely.com/js/{{ optimizely.id }}.js"></script>
+{% endif %}
 <meta charset="utf-8" />
-<title>{{head.title}}</title>
+<title>{{ head.title }}</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 {% include (template + "/partials/newrelic.html") %}
 {% if smartBanner %}
@@ -7,11 +10,11 @@
     <meta name="apple-itunes-app" content="app-id=382059698"/>
 {% endif %}
 {% for metatag in head.metatags %}
-    <meta name="{{metatag.name}}" content="{{metatag.content}}" />
+    <meta name="{{ metatag.name }}" content="{{ metatag.content }}" />
 {% endfor %}
-<link href="{{'/css/template/styles.css' | replace('template', template) | static }}" media="screen" rel="stylesheet" type="text/css" />
+<link href="{{ '/css/template/styles.css' | replace('template', template) | static }}" media="screen" rel="stylesheet" type="text/css" />
 <link href="{{ ['/css/', icons, '/html5/icons.css'] | join('') | static }}" media="screen" rel="stylesheet" type="text/css" />
 {% if head.canonical %}
-    <link rel="canonical" href="{{head.canonical}}" >
+    <link rel="canonical" href="{{ head.canonical }}" >
 {% endif %}
 <link rel="shortcut icon" href="{{ '/images/common/favicon.ico' | static }}" type="image/x-icon">

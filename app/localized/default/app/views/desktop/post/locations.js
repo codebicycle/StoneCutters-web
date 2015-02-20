@@ -63,34 +63,41 @@ module.exports = Base.extend({
         var $states = $('#field-state');
         var $cities = $('#field-location');
         var $neighborhoods = $('#field-neighborhood');
+        var category = this.parentView.parentView.getItem().get('category');
+        var options = {
+            pendingValidation: (category.id === undefined || category.parentId === undefined)
+        };
 
         if ($states.val()) {
-            $states.trigger('change');
+            $states.trigger('change', [options]);
         }
         if ($cities.val()) {
-            $cities.trigger('change');
+            $cities.trigger('change', [options]);
         }
         if ($neighborhoods.val()) {
-            $neighborhoods.trigger('change');
+            $neighborhoods.trigger('change', [options]);
         }
     },
-    onStateChange: function(event) {
+    onStateChange: function(event, options) {
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();
 
         var $field = $(event.target);
         var $firstOption = $field.find('option').first();
+        var $cities = $('#field-location');
+
+        options = options || {};
 
         if ($firstOption.attr('value') === '') {
             $firstOption.remove();
         }
 
         this.resetNeighborhoods();
-        this.getCities($field.val());
-        this.parentView.$el.trigger('fieldSubmit', [$field]);
+        this.getCities($field.val(), options, ($cities.val() ? [$cities.val()] : undefined));
+        this.parentView.$el.trigger('fieldSubmit', [$field, options]);
     },
-    onCityChange: function(event) {
+    onCityChange: function(event, options) {
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();
@@ -98,14 +105,16 @@ module.exports = Base.extend({
         var $field = $(event.target);
         var $firstOption = $field.find('option').first();
 
+        options = options || {};
+
         if ($firstOption.attr('value') === '') {
             $firstOption.remove();
         }
 
-        this.getNeighborhoods($field.val());
-        this.parentView.$el.trigger('fieldSubmit', [$field]);
+        this.getNeighborhoods($field.val(), options);
+        this.parentView.$el.trigger('fieldSubmit', [$field, options]);
     },
-    onNeighborhoodChange: function(event) {
+    onNeighborhoodChange: function(event, options) {
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();
@@ -113,15 +122,17 @@ module.exports = Base.extend({
         var $field = $(event.target);
         var $firstOption = $field.find('option').first();
 
+        options = options || {};
+
         if ($firstOption.attr('value') === '') {
             $firstOption.remove();
         }
 
-        this.parentView.$el.trigger('fieldSubmit', [$field]);
+        this.parentView.$el.trigger('fieldSubmit', [$field, options]);
     },
-    getCities: function(state) {
-        var options;
+    getCities: function(state, options, cityId) {
         var $cities = this.$('#field-location');
+        var cities;
 
         var fetch = function(done) {
             this.app.fetch({
@@ -138,29 +149,29 @@ module.exports = Base.extend({
         }.bind(this);
 
         var parse = function(done, response) {
-            options = _.map(response.cities.toJSON(), function each(city) {
+            cities = _.map(response.cities.toJSON(), function each(city) {
                 return {
                     key: city.url,
                     value: city.name
                 };
             });
-            options.unshift({
+            cities.unshift({
                 key: '',
                 value: translations.get(this.app.session.get('selectedLanguage'))['countryoptions.Home_SelectCity']
             });
-            done(options);
+            done(cities);
         }.bind(this);
 
         var error = function(error) {
             console.log(error); // TODO: HANDLE ERRORS
         }.bind(this);
 
-        var success = function(options) {
+        var success = function(cities) {
             $cities.removeAttr('disabled').empty();
-            _.each(options, function each(city) {
-                $cities.append('<option value="' + city.key + '">' + city.value + '</option>');
+            _.each(cities, function each(city) {
+                $cities.append('<option value="' + city.key + '"' + (city.key == cityId ? 'selected="selected"' : '') + '>' + city.value + '</option>');
             }.bind(this));
-            this.parentView.$el.trigger('fieldSubmit', [$cities]);
+            this.parentView.$el.trigger('fieldSubmit', [$cities, options]);
         }.bind(this);
 
         asynquence().or(error)
@@ -168,9 +179,9 @@ module.exports = Base.extend({
             .then(parse)
             .val(success);
     },
-    getNeighborhoods: function(city) {
-        var options;
+    getNeighborhoods: function(city, options) {
         var $neighborhoods = this.$('#field-neighborhood');
+        var neighborhoods;
 
         var fetch = function(done) {
             this.app.fetch({
@@ -189,33 +200,33 @@ module.exports = Base.extend({
         }.bind(this);
 
         var parse = function(done, response) {
-            options = _.map(response.neighborhoods.toJSON(), function each(neighborhood) {
+            neighborhoods = _.map(response.neighborhoods.toJSON(), function each(neighborhood) {
                 return {
                     key: neighborhood.id,
                     value: neighborhood.name
                 };
             });
-            if (options.length) {
-                options.unshift({
+            if (neighborhoods.length) {
+                neighborhoods.unshift({
                     key: '',
                     value: translations.get(this.app.session.get('selectedLanguage'))['item.SelectA_Neighborhood']
                 });
             }
-            done(options);
+            done(neighborhoods);
         }.bind(this);
 
         var error = function(error) {
             console.log(error); // TODO: HANDLE ERRORS
         }.bind(this);
 
-        var success = function(options) {
-            if (options.length) {
+        var success = function(neighborhoods) {
+            if (neighborhoods.length) {
                 $neighborhoods.removeAttr('disabled').attr('required', true).empty();
                 $neighborhoods.parents('.field-wrapper').removeClass('hide');
-                _.each(options, function each(neighborhood) {
+                _.each(neighborhoods, function each(neighborhood) {
                     $neighborhoods.append('<option value="' + neighborhood.key + '">' + neighborhood.value + '</option>');
                 }.bind(this));
-                this.parentView.$el.trigger('fieldSubmit', [$neighborhoods]);
+                this.parentView.$el.trigger('fieldSubmit', [$neighborhoods, options]);
             }
             else {
                 this.resetNeighborhoods();

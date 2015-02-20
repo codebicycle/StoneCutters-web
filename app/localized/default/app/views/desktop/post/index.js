@@ -68,7 +68,8 @@ module.exports = Base.extend({
         this.editing = !!this.getItem().has('id');
         if (this.editing) {
             this.$('#posting-categories-view').trigger('editCategory', [this.item.get('category')]);
-            this.$('#field-location').trigger('change');
+            this.$('#posting-contact-view').trigger('formRendered');
+            this.$('#posting-locations-view').trigger('formRendered');
         }
         else {
             if (this.getUrlParam('cat') !== undefined) {
@@ -92,6 +93,7 @@ module.exports = Base.extend({
                     }
                 }.bind(this));
                 this.$el.trigger('errorsUpdate');
+                this.$('#posting-contact-view').trigger('formRendered');
                 this.$('#posting-locations-view').trigger('formRendered');
             }
         }
@@ -151,7 +153,7 @@ module.exports = Base.extend({
             this.handleBack();
         }
     },
-    onFieldSubmit: function(event, field) {
+    onFieldSubmit: function(event, field, options) {
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();
@@ -160,18 +162,33 @@ module.exports = Base.extend({
         var shouldValidateField = false;
         var canValidateFields = this.item.has('category');
 
+        options = _.defaults({}, options || {}, {
+            skipValidation: false,
+            pendingValidation: false
+        });
+
         if (field instanceof window.jQuery) {
             $field = field;
             shouldValidateField = !!$field.data('validate');
             if ($field.attr('name') === 'state' || $field.attr('name') === 'location' || $field.attr('name') === 'neighborhood') {
-                $field.trigger('fieldValidationStart');
+                if (options.pendingValidation) {
+                    this.pendingValidations.push($field);
+                }
+                else if (!options.skipValidation) {
+                    $field.trigger('fieldValidationStart');
+                }
             }
             field.name = $field.attr('name');
             field.value = $field.val();
         }
         if (shouldValidateField) {
             if (canValidateFields) {
-                $field.trigger('fieldValidationStart');
+                if (options.pendingValidation) {
+                    this.pendingValidations.push($field);
+                }
+                else if (!options.skipValidation) {
+                    $field.trigger('fieldValidationStart');
+                }
             }
             else {
                 this.pendingValidations.push($field);

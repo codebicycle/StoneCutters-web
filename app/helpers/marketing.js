@@ -22,6 +22,9 @@ module.exports = {
         switch(osName) {
             case 'Android':
                 data.link = 'market://details?id=com.olx.olx&referrer=utm_source%3DOLX_'+platform+'_DownloadApp%26utm_'+medium+'%3DFooter%26utm_campaign%3B'+medium;
+                if (location.url === 'www.olx.ir') {
+                    //data.direct = 'http://www.olx.ir/apps/OLX.Iran.1.1.apk';
+                }
                 data.forOsKey = 'misc.BrandFor_Mob';
                 data.forOs = ' Android';
                 data.freeInKey = 'misc.FreeIn_Mob';
