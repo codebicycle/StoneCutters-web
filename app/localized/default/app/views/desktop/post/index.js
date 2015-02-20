@@ -151,7 +151,7 @@ module.exports = Base.extend({
             this.handleBack();
         }
     },
-    onFieldSubmit: function(event, field) {
+    onFieldSubmit: function(event, field, skipValidation) {
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();
@@ -164,14 +164,18 @@ module.exports = Base.extend({
             $field = field;
             shouldValidateField = !!$field.data('validate');
             if ($field.attr('name') === 'state' || $field.attr('name') === 'location' || $field.attr('name') === 'neighborhood') {
-                $field.trigger('fieldValidationStart');
+                if (!skipValidation) {
+                    $field.trigger('fieldValidationStart');
+                }
             }
             field.name = $field.attr('name');
             field.value = $field.val();
         }
         if (shouldValidateField) {
             if (canValidateFields) {
-                $field.trigger('fieldValidationStart');
+                if (!skipValidation) {
+                    $field.trigger('fieldValidationStart');
+                }
             }
             else {
                 this.pendingValidations.push($field);
