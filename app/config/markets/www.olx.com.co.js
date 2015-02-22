@@ -15,39 +15,48 @@ module.exports = {
             }
         ]
     },
+    marketing: {
+        home_banner: {
+            image: 'home-colombia'
+        },
+        listing_banner: {
+            image: 'home-colombia'
+        },
+        videos: [
+            {
+                title: 'OLX Colombia - Patrón Bermúdez - Celular',
+                id: 'vOlDNW5BdGU'
+            },
+            {
+                title: 'OLX Colombia - Gafas - Vender es fácil',
+                id: 'LenRRiECAvw'
+            },
+            {
+                title: 'En OLX todos pueden vender',
+                id: '77hkuVlT_78'
+            },
+            {
+                title: 'OLX Colombia - Bicicleta - Vender es fácil',
+                id: 'Ljii4NbsHKA'
+            },
+            {
+                title: 'OLX Colombia - Celular - Vender es fácil',
+                id: 'y6YlZcHh7Ew'
+            },
+            {
+                title: 'OLX Colombia - Jorge "Patrón" Bermúdez - Vender es fácil',
+                id: 'H-pLeNmxMWs'
+            },
+            {
+                title: 'OLX Colombia - Poker - Vender es fácil',
+                id: 'KuwFa8fSuiM'
+            }
+        ]
+    },
     post_banner: {
         image: 'post-colombia'
     },
-    videos: [
-        {
-            title: 'OLX Colombia - Patrón Bermúdez - Celular',
-            id: 'vOlDNW5BdGU'
-        },
-        {
-            title: 'OLX Colombia - Gafas - Vender es fácil',
-            id: 'LenRRiECAvw'
-        },
-        {
-            title: 'En OLX todos pueden vender',
-            id: '77hkuVlT_78'
-        },
-        {
-            title: 'OLX Colombia - Bicicleta - Vender es fácil',
-            id: 'Ljii4NbsHKA'
-        },
-        {
-            title: 'OLX Colombia - Celular - Vender es fácil',
-            id: 'y6YlZcHh7Ew'
-        },
-        {
-            title: 'OLX Colombia - Jorge "Patrón" Bermúdez - Vender es fácil',
-            id: 'H-pLeNmxMWs'
-        },
-        {
-            title: 'OLX Colombia - Poker - Vender es fácil',
-            id: 'KuwFa8fSuiM'
-        }
-    ],
+
     successPage: {
         keepPosting: [
             {

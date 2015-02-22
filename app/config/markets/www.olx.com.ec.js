@@ -24,28 +24,30 @@ module.exports = {
             }
         ]
     },
-    videos: [
-        {
-            title: 'OLX Ecuador - Consola',
-            id: '-VDOdJUePhI'
-        },
-        {
-            title: 'OLX Ecuador - Garaje',
-            id: 'BpwjQm6Atcc'
-        },
-        {
-            title: 'OLX Ecuador - Comercial Sofá Cama - Vender es fácil',
-            id: 'XlLozB_JfRk'
-        },
-        {
-            title: 'En OLX todos pueden vender',
-            id: 'HYFEkS-fhRA'
-        },
-        {
-            title: 'OLX Ecuador - Comercial Smartphone - Vender es fácil',
-            id: 'Ui3-Mows0KM'
-        }
-    ],
+    marketing: {
+        videos: [
+            {
+                title: 'OLX Ecuador - Consola',
+                id: '-VDOdJUePhI'
+            },
+            {
+                title: 'OLX Ecuador - Garaje',
+                id: 'BpwjQm6Atcc'
+            },
+            {
+                title: 'OLX Ecuador - Comercial Sofá Cama - Vender es fácil',
+                id: 'XlLozB_JfRk'
+            },
+            {
+                title: 'En OLX todos pueden vender',
+                id: 'HYFEkS-fhRA'
+            },
+            {
+                title: 'OLX Ecuador - Comercial Smartphone - Vender es fácil',
+                id: 'Ui3-Mows0KM'
+            }
+        ]
+    },
     successPage: {
         keepPosting: [
             {

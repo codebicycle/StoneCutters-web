@@ -17,7 +17,7 @@ module.exports = Base.extend({
         var categories = data.categories;
         var currentState = {};
         var countryMapClass = config.getForMarket(location.url, ['countryMapStyle'], '');
-        var videos = config.getForMarket(location.url, ['videos'], '');
+        var marketing = config.getForMarket(location.url, ['marketing'], '');
         var testimonials = config.getForMarket(location.url, ['testimonials'], '');
         var celebrities = config.getForMarket(location.url, ['celebrities'], '');
 
@@ -36,8 +36,8 @@ module.exports = Base.extend({
             countryMapClass: countryMapClass,
             testimonials: testimonials,
             celebrities: celebrities,
-            videos: videos,
             selectedLanguage: selectedLanguage,
+            marketing: marketing,
             currentState: {
                 hostname: currentState.hostname,
                 name: currentState.name
