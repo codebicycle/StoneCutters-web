@@ -1,11 +1,12 @@
 'use strict';
 
+var _ = require('underscore');
+var async = require('async');
+var asynquence = require('asynquence');
 var Base = require('../../../../../common/app/bases/view').requireView('users/conversation');
 var Thread = require('../../../../../../models/conversation');
-var asynquence = require('asynquence');
-var _ = require('underscore');
 var helpers = require('../../../../../../helpers');
-var async = require('async');
+var statsd = require('../../../../../../../shared/statsd')();
 
 module.exports = Base.extend({
     className: 'users_conversation_view',
@@ -90,6 +91,7 @@ module.exports = Base.extend({
         }.bind(this);
 
         var change = function(res) {
+            statsd.increment([this.app.session.get('location').abbreviation, 'conversations', 'reply', 'success', this.app.session.get('platform')]);
             if (path.match(this.regexpFindPage)) {
                 this.app.router.redirectTo('/myolx/conversation/' + threadId);
             }
@@ -100,6 +102,7 @@ module.exports = Base.extend({
         }.bind(this);
 
         var error = function(err) {
+            statsd.increment([this.app.session.get('location').abbreviation, 'conversations', 'reply', 'error', this.app.session.get('platform')]);
             $form.find('.spinner, .reply-send').toggle();
             $('[data-messageText]').addClass('error');
         }.bind(this);
