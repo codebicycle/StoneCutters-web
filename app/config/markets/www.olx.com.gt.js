@@ -190,6 +190,13 @@ module.exports = {
                 top: {
                     service: 'none'
                 }
+            },
+            tracking: {
+                trackers: {
+                    tagmanager: {
+                        enabled: true
+                    }
+                }
             }
         }
     }
