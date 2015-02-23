@@ -238,7 +238,7 @@ function getConfig() {
     var configService = utils.get(configAdServing, configMarket.service, {});
     var configFormatDefault = utils.get(configService, 'default', {});
     var configFormat = utils.get(configService, configMarket.format, {});
-    var configFormats = extendConfig(configFormat, configFormatDefault);
+    var configFormats = extendConfig(configFormatDefault, configFormat);
     var configResult = extendConfig(configMarket, configFormats);
 
     return extendConfig(configResult, {

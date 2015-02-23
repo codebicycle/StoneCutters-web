@@ -26,7 +26,7 @@ module.exports = {
                 },
                 mobiletop: {
                     service: 'CSA',
-                    format: 'webmobile',
+                    format: 'mobileweb',
                     location: 'Top'
                 },
                 side: {
@@ -41,12 +41,8 @@ module.exports = {
                 },
                 noresult: {
                     service: 'CSA',
-                    format: 'custom',
-                    location: 'Top',
-                    params: {
-                        number: 10
-                    },
-                    seo: 1
+                    format: 'noresult',
+                    location: 'Top'
                 }
             },
             item: {
