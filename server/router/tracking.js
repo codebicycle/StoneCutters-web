@@ -52,6 +52,7 @@ module.exports = function trackingRouter(app, dataAdapter) {
                 statsd.increment([req.query.locIso || 'all', 'tracking', type, tracker, platform, 'success']);
             })
             .on('fail', function fail() {
+                console.log('[OLX_DEBUG]', 'tracking', type, tracker, url);
                 statsd.increment([req.query.locIso || 'all', 'tracking', type, tracker, platform, 'fail']);
             })
             .on('error', function error() {
