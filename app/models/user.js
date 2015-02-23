@@ -104,7 +104,8 @@ function lostpassword(done) {
         .val(success.bind(this));
 
     function submit(done, query) {
-        dataAdapter.get(this.app.req, '/users/forgotpassword', {
+
+        dataAdapter.post(this.app.req, '/users/forgotpassword', {
             query: {
                 email: this.get('email'),
                 url: this.get('location')

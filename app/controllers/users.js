@@ -129,6 +129,14 @@ function lostpassword(params, callback) {
                status: 302
            });
         }
+        if (platform === 'html5' && params.success) {
+            return helpers.common.redirect.call(this, '/login', {
+                sent: true
+            }, {
+                status: 302
+            });
+        }
+
         callback(null, {
             form: this.form,
             success: params.success
@@ -156,7 +164,8 @@ function login(params, callback) {
         }
         callback(null, {
             form: this.form,
-            redirect: params.redirect
+            redirect: params.redirect,
+            sent: params.sent
         });
     }
 }
