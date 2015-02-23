@@ -92,5 +92,5 @@ module.exports = {
         list: ['es', 'en', 'pt', 'it', 'fr'],
         pattern: '[langcode]'
     },
-    clientsIds: ['us', 'es', 'za', 'pe', 'ng']
+    clientsIds: ['us', 'es', 'za']
 };

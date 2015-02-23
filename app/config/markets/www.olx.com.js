@@ -24,28 +24,6 @@ module.exports = {
             }
         ]
     },
-    adserving: {
-        enabled: true,
-        slots: {
-            listing: {
-                mobiletop: {
-                    service: 'CSA',
-                    format: 'mobileweb',
-                    location: 'Top'
-                },
-                mobilebottom: {
-                    service: 'CSA',
-                    format: 'mobileweb',
-                    location: 'Bottom'
-                },
-                mobilenoresult: {
-                    service: 'CSA',
-                    format: 'mobilenoresult',
-                    location: 'Top'
-                }
-            }
-        }
-    },
     featured: {
         enabled: true,
         quantity: {
