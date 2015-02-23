@@ -274,7 +274,7 @@ module.exports = function trackingRouter(app, dataAdapter) {
             var params = {
                 clientId: ctx.app.session.get('clientId').substr(24),
                 custom: ctx.req.query.custom,
-                url: utils.fullizeUrl(helpers.common.static.call(ctx, ctx.req.query.url), ctx.app)
+                url: utils.fullizeUrl(ctx.req.query.url, ctx.app)
             };
             var config = {
                 platform: ctx.app.session.get('platform'),
