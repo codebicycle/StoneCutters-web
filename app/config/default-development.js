@@ -33,7 +33,7 @@ module.exports = {
             maxPageSize: 27
         }
     },
-    staticAccept: ['css', 'js'],
+    staticAccept: ['css', 'js', 'apk'],
     imageAccept: ['jpg', 'jpeg', 'png', 'gif', 'ico'],
     environment: {
         type: 'development'
