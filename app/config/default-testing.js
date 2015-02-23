@@ -252,5 +252,10 @@ module.exports = {
             stage: 1,
             banner: true
         }
+    },
+    iris: {
+        direct: {
+            enabled: true
+        }
     }
 };

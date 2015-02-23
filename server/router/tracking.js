@@ -8,6 +8,7 @@ module.exports = function trackingRouter(app, dataAdapter) {
     var config = require('../../shared/config');
     var utils = require('../../shared/utils');
     var tracking = require('../../app/modules/tracking');
+    var helpers = require('../../app/helpers');
     var env = config.get(['environment', 'type'], 'development');
     var gif = new Buffer('R0lGODlhAQABAPAAAP39/QAAACH5BAgAAAAALAAAAAABAAEAAAICRAEAOw==', 'base64');
     var devices = ['Android', 'iOS'];
@@ -50,7 +51,7 @@ module.exports = function trackingRouter(app, dataAdapter) {
             .on('success', function success() {
                 statsd.increment([req.query.locIso || 'all', 'tracking', type, tracker, platform, 'success']);
             })
-            .on('fail', function fail() {
+            .on('fail', function fail(err) {
                 statsd.increment([req.query.locIso || 'all', 'tracking', type, tracker, platform, 'fail']);
             })
             .on('error', function error() {
@@ -273,7 +274,7 @@ module.exports = function trackingRouter(app, dataAdapter) {
             var params = {
                 clientId: ctx.app.session.get('clientId').substr(24),
                 custom: ctx.req.query.custom,
-                url: utils.fullizeUrl(ctx.req.query.url, ctx.app)
+                url: utils.fullizeUrl(helpers.common.static.call(ctx, ctx.req.query.url), ctx.app)
             };
             var config = {
                 platform: ctx.app.session.get('platform'),

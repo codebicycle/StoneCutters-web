@@ -11,7 +11,6 @@ module.exports = function(app, dataAdapter) {
     var statsd  = require('../modules/statsd')();
     var User = require('../../app/models/user');
     var Item = require('../../app/models/item');
-    var helpers = require('../../app/helpers');
     var translations = require('../../shared/translations');
 
     (function reply() {
@@ -102,7 +101,7 @@ module.exports = function(app, dataAdapter) {
             var editing;
 
             if (!req.headers['content-type']) {
-                console.log('[OLX_DEBUG]', 'no-content-type', location.url, platform, req.rendrApp.session.get('osName'));
+                console.log('[OLX_DEBUG]', 'no-content-type', location.url, platform, req.rendrApp.session.get('osName'), req.get('user-agent'));
             }
 
             function parse(done) {
