@@ -1,0 +1,52 @@
+<section class="userprofile">
+    <a rel="nofollow" href="{{ '/myolx/configuration' | link }}" class="icons icon-arrow-left">{{ dictionary["defaultfooter.Back"] }}</a>
+    <h1>{{ dictionary["usersprofile.UsernamesProfile"] | replace('<<USERNAME>>', profile.get('username')) }}</h1>
+    {#<div class="user-image icons icon-user"></div>#}
+    <ul class="links">
+        {% if profile.get('username') %}
+            <li><strong>{{ dictionary["messages_email_register.Username"] }}:</strong> {{ profile.get('username') }}</li>
+        {% endif %}
+        {% if profile.get('firstname') %}
+            <li><strong>{{ dictionary["comments.CommentsFormName"] }}:</strong> {{ profile.get('firstname') }}</li>
+        {% endif %}
+        <li><strong>{{ dictionary["defaultheader.Location"] }}:</strong> {{ (profile.get('location').neighborhood + ', ') if profile.get('location').neighborhood }}{{ profile.get('location').city }}, {{ profile.get('location').state }}, {{ profile.get('location').country }}</li>
+        {% if profile.get('webSite') %}
+            <li><strong>{{ dictionary["usersprofile.MyWebsite"] }}</strong> {{ profile.get('webSite') }}</li>
+        {% endif %}
+        {% if profile.get('interest') %}
+            <li><strong>{{ dictionary["usersprofile.Interests"] }}</strong> {{ profile.get('interest') }}</li>
+        {% endif %}
+        {% if profile.get('aboutMe') %}
+            <li><strong>{{ dictionary["usersprofile.AboutMe"] }}</strong> {{ profile.get('aboutMe') }}</li>
+        {% endif %}
+    </ul>
+</section>
+<div class="user-ads">
+    <h3>{{ dictionary["usersprofile.UsernamesAds"] | replace('<<USERNAME>>', profile.get('username')) }}</h3>
+    {% if items.length > 6 %}
+        <span class="icons icon-arrow-left arrows" data-navigate="left" ></span>
+        <span class="icons icon-arrow-right arrows" data-navigate="right" ></span>
+    {% endif %}
+    <div class="slide">
+        <ul class="featuredad-content" data-items-slide>
+            {% for item in items.toJSON() %}
+                {% if item.status == 'ready' %}
+                    <li>
+                        {{ '<i class="icons icon-star-circle"></i>' if item.isFeatured }}
+                        <a href="{{ item.slug.replace(domain, fullDomain) }}">
+                            <figure class="items-image {{ 'icons icon-photo' if not item.thumbnail }}">
+                                {% if item.thumbnail %}
+                                    <img src="{{ item.thumbnail }}" alt="{{ item.title }}" />
+                                {% endif %}
+                            </figure>
+                            <h3>{{ item.title | truncate( 40, True) }}</h3>
+                            <p class="items-price">
+                                {{ item.price.displayPrice }}
+                            </p>
+                        </a>
+                    </li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+    </div>
+</div>

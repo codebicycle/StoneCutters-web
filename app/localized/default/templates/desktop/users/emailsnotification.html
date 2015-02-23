@@ -1,0 +1,47 @@
+<a rel="nofollow" href="{{ '/myolx/configuration' | link }}" class="icons icon-arrow-left">{{ dictionary["defaultfooter.Back"] }}</a>
+<h1>{{ dictionary["emailsnotificationbody.Title"] }}</h1>
+
+{% from macros import Field %}
+
+<span class="title">{{ dictionary["emailsnotificationbody.Alerts"] }}</span>
+
+{% set sendBulletinField = {
+    isOptional: false,
+    name: "chkMailGroup_1",
+    mandatory: true,
+    label: dictionary["emailsnotificationbody.Group1"],
+    fieldType: "checkbox",
+    dataType: "checkbox",
+    value: profile.configuration.sendBulletin
+} %}
+{{ Field(sendBulletinField) }}
+
+{% set sendTipsField = {
+    isOptional: false,
+    name: "chkMailGroup_2",
+    mandatory: true,
+    label: dictionary["emailsnotificationbody.Group2"],
+    fieldType: "checkbox",
+    dataType: "checkbox",
+    value: profile.configuration.sendTips
+} %}
+{{ Field(sendTipsField) }}
+
+<span class="title">{{ dictionary["usersprofile.MyProfile"] }}</span>
+
+{% set showAdsField = {
+    isOptional: false,
+    name: "showads",
+    mandatory: true,
+    label: dictionary["usersprofile.ShowMyAdsOnMyProfile"],
+    fieldType: "checkbox",
+    dataType: "checkbox",
+    value: profile.configuration.showAds
+} %}
+{{ Field(showAdsField) }}
+
+<fieldset class="save-config">
+    <input type="submit" value="{{ dictionary["emailsnotificationbody.SaveSettings"] }}" class="save" />
+    {{ dictionary["biderrorheader.Or"] }}
+    <a href="{{ '/myolx/configuration' | link }}" class="cancel" >{{ dictionary["wap_posting_step4.Cancel"] }}</a>
+</fieldset>

@@ -1,0 +1,69 @@
+.users-configuration-view, .userprofile, .users-editpersonalinfo-view, .users-edituserprofile-view, .users-emailsnotification-view {
+    box($white, $greyBorders, 0 0 3px 3px, 20px, solid, 1px);
+    h1 {
+        font-size: $l;
+        border-bottom: 1px solid $greyBorders;
+        padding-bottom: 5px;
+        margin-bottom: 20px;
+        font-weight: normal;
+    }
+    .icon-arrow-left {
+        display: block;
+        font-size: $xs;
+        margin: 0 0 20px 0;
+        &:before {
+            color: $black;
+            font-size: remify(8px);
+            margin: 0 4px 3px 0;
+        }
+    }
+    .save-config {
+        border: none;
+        margin: 0;
+        padding: 10px 10px 0 200px;
+        width: 440px;
+        .save {
+            action-button($orange, $white, 3px, 10px 20px);
+            font-weight: bold;
+            margin-right: 5px;
+        }
+    }
+}
+.users-emailsnotification-view {
+    .save-config {
+        padding: 10px 10px 0 0;
+    }
+    .field-wrapper.checkbox {
+        padding: 5px 0 0;
+        input {
+            margin: 0 3px 0 0;
+        }
+    }
+    .title {
+        font-size: $m;
+        display: block;
+        margin: 20px 0 0;
+    }
+}
+.users-configuration-view, .users-userprofile-view {
+    .user-image {
+        background-color: $greyBoxBg;
+        color: $white;
+        display: inline-block;
+        font-size: remify(50px);
+        height: 90px;
+        line-height: 75px;
+        text-align: center;
+        vertical-align: top;
+        width: 90px;
+        margin-right: 15px;
+    }
+    .links {
+        ul-reset();
+        display: inline-block;
+        margin: 0;
+        li {
+            margin: 5px 0;
+        }
+    }
+}

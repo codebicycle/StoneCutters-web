@@ -31,7 +31,8 @@ module.exports = Base.extend({
     },
     events: {
         'fieldsChange': 'onFieldsChange',
-        'change': 'onChange'
+        'change': 'onChange',
+        'change #field-priceType': 'onPriceTypeChange'
     },
     onFieldsChange: function(event, options) {
         event.preventDefault();
@@ -74,6 +75,20 @@ module.exports = Base.extend({
             this.$('select').trigger('change');
         }
         this.parentView.$el.trigger('fieldSubmit', [$field]);
+    },
+    onPriceTypeChange: function(event) {
+        var $field = $(event.target);
+        var $price = this.$('#field-priceC');
+        var $currency = this.$('#field-currency_type');
+
+        if ($field.val() === 'FREE') {
+            $price.attr('disabled', true).val('');
+            $currency.attr('disabled', true);
+        }
+        else {
+            $price.removeAttr('disabled');
+            $currency.removeAttr('disabled');
+        }
     }
 });
 
