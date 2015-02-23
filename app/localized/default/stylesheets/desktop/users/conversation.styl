@@ -1,0 +1,121 @@
+.users_conversation_view {
+    box($white, $greyBorders, 0 0 3px 3px, 0, solid, 1px);
+
+    .conversation {
+        margin: 10px auto;
+        padding: 10px;
+    }
+    .back {
+        display: block;
+        font-size: $xs;
+        margin: 0 115px 5px;
+        &:before {
+            font-size: remify(8px);
+            margin: 0 4px;
+        }
+    }
+    ul {
+        ul-reset();
+        padding: 0 115px;
+    }
+
+    .conversation-item {
+        border-bottom: 1px solid $greyBorders;
+        clear-fix();
+        padding: 10px 0;
+        margin: 0 115px;
+
+        .wrapper-img {
+                border: 1px solid #ccc;
+                display: inline-block;
+                float: left;
+                max-height: 75px;
+                min-height: 75px;
+                padding: 2px;
+                position: relative;
+                text-align: center;
+                width: 100px;
+                margin:0;
+
+            img {
+                bottom: 0;
+                left: 0;
+                margin: auto;
+                max-height: 100%;
+                max-width: 100%;
+                position: absolute;
+                right: 0;
+                top: 0;
+            }
+        }
+
+             .wrapper-img:before{
+             color: #ccc;
+             font-size: 50px;
+             padding-top: 10px;
+        }
+        .conversation-item-data {
+            float: left;
+            margin-right: 30px;
+            overflow: hidden;
+            padding-left: 10px;
+            h3 {
+                font-size: $xl;
+                margin: 0;
+            }
+            p {
+                font-size: $m;
+                line-height: $m;
+                margin: 5px 0 10px 0;
+            }
+        }
+    }
+    .conversation-chat {
+        border-top: 1px solid $greyBorders;
+        padding: 20px 30px;
+        &:first-child {
+            border: none;
+        }
+        .name {
+            font-weight: bold;
+            font-size: $m;
+        }
+        .date, .message {
+            font-size: $s;
+        }
+        .message {
+            margin: 5px 0 0;
+        }
+    }
+    .conversation-input {
+        clear-fix();
+        box($yellow, $yellowBorders, 3px, 0, solid, 1px);
+        padding: 10px 110px;
+
+        textarea {
+            height: 90px;
+            margin-bottom: 10px;
+            padding: 10px;
+            width: 100%;
+            resize: none;
+            &.error {
+                border-color: $red;
+            }
+        }
+        button[type="submit"] {
+            action-button($orange, $white, 3px, padding = 10px 0);
+            float: right;
+            font-size: $baseFont;
+            padding: 5px 10px;
+        }
+        p.error {
+            color: $red;
+            margin: -5px 0 5px;
+            font-size: $xs;
+        }
+        .phone {
+            float: left;
+            padding: 5px 0;
+        }
+    }
+}

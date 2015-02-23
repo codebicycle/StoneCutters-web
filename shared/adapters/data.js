@@ -358,6 +358,7 @@ DataAdapter.prototype.ajaxParams = function(api, options) {
         });
         api.data = data;
     }
+    
     return api;
 };
 

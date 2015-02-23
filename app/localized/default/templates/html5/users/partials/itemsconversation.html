@@ -1,0 +1,33 @@
+<div class="item">
+    <a href="{{ thread.item | slugToUrl | link | replace('en/', '') }}" class="link-item">
+        <figure class="items-image {{ 'noPhoto' if not thread.item.images.length }}">
+            {% if thread.item.images.length %}
+                <img src="{{ thread.item.images[0].thumbnail }}">
+            {% endif %}
+        </figure>
+        <div class="item-data">
+            <div class="top">
+                <span class="date">{{ thread.item.date.timestamp | date("MMM DD, YYYY") }}</span>
+            </div>
+            <span class="title">{{ thread.item.title }}</span>
+            {% if thread.item.price.displayPrice %}
+                <span class="price">{{ thread.item.price.displayPrice }}</span>
+            {% endif %}
+        </div>
+    </a>
+</div>
+<ul class="conversation">
+    {% for message in thread.messages %}
+        <li class="message {{ 'is-mine' if message.isMine }}">
+            {% set name = thread.senders[0].name %}
+            {% if message.isMine %}
+                {% set name = dictionary["myolx.You"] %}
+            {% elif thread.senders[0].isMine %}
+                {% set name = thread.senders[1].name %}
+            {% endif %}
+            <span class="name">{{ name }}</span>
+            <p class="text">{{ message.text }}</p>
+            <span class="date"><time>{{ message.date.since.day if message.date.since.day }} {{ dictionary[message.date.since.dictionary] }}{{ (',' + message.date.since.hour) if message.date.since.hour }} {{ (' ' + yearToShow) if yearToShow }}</time></span>
+        </li>
+    {% endfor %}
+</ul>
