@@ -25,9 +25,7 @@ module.exports = {
                     location: 'Top'
                 },
                 mobiletop: {
-                    service: 'CSA',
-                    format: 'mobileweb',
-                    location: 'Top'
+                    service: 'none'
                 },
                 side: {
                     service: 'AFC',
@@ -39,10 +37,16 @@ module.exports = {
                     format: 'custom',
                     location: 'Bottom'
                 },
+                mobilebottom: {
+                    service: 'none'
+                },
                 noresult: {
                     service: 'CSA',
                     format: 'noresult',
                     location: 'Top'
+                },
+                mobilenoresult: {
+                    service: 'none'
                 }
             },
             item: {

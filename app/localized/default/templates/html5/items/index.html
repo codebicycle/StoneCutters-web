@@ -3,7 +3,6 @@
     {% include (template + '/partials/filterorder.html') %}
 {% endif %}
 <section id="itemListing">
-    {% view 'partials/adserving', 'listing_mobiletop' %}
     {% if meta.total == 0 %}
         <div class="emtyList" data-qa="no-results-found">
             <div></div>
@@ -14,8 +13,11 @@
             </p>
             <a class="btns orange" href="{{ '/' | link }}" >{{ dictionary["registrationconfirmsuccesstext.Browse"] | replace('<<BRAND>>','OLX') }}</a>
         </div>
+        {% view 'partials/adserving', 'listing_mobilenoresult' %}
     {% else %}
+        {% view 'partials/adserving', 'listing_mobiletop' %}
         {% view 'items/items' %}
+        {% view 'partials/adserving', 'listing_mobilebottom' %}
         {% if paginator and paginator.isEnabled() %}
             {% include (template + '/items/pagination.html') %}
         {% endif %}

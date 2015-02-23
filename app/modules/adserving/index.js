@@ -74,7 +74,9 @@ function createChannels(service) {
     var configService = utils.get(configAdServing, [service, 'default'], {});
     var countryCode = this.app.session.get('location').abbreviation;
     var prefix = configService.options.channel.replace('[countrycode]', countryCode);
+    var prefixMobile = prefix.replace('_', 'MW_');
     var currentRoute = this.app.session.get('currentRoute');
+    var currentPlatform = this.app.session.get('platform');
     var currentRouteAction = currentRoute.action;
     var channels = [];
     var configChannel;
@@ -82,6 +84,13 @@ function createChannels(service) {
 
     if (slotname === 'listing_noresult' && currentRoute.controller === 'searches' && currentRoute.action === 'search') {
         currentRouteAction = 'noresult';
+    }
+
+    if (currentPlatform !== 'desktop') {
+        channels.push(prefix);
+        channels.push(prefixMobile);
+
+        return channels.join(',');
     }
 
     configChannel = utils.get(configAdServing, ['channels', 'page', [currentRoute.controller, currentRouteAction].join('#')], {});

@@ -75,10 +75,22 @@ module.exports = {
             colorDomainLink: '#B0B0B0'
         }
     },
+    mobilenoresult: {
+        seo: 1,
+        params: {
+            number: 10,
+            fontSizeTitle: 13,
+            colorTitleLink: '#178CC8',
+            colorText: '#B0B0B0',
+            fontSizeDescription: 11,
+            fontSizeDomainLink: 11,
+            colorDomainLink: '#B0B0B0'
+        }
+    },
     language: {
         'default': 'es',
         list: ['es', 'en', 'pt', 'it', 'fr'],
         pattern: '[langcode]'
     },
-    clientsIds: ['us', 'es', 'za']
+    clientsIds: ['us', 'es', 'za', 'pe', 'ng']
 };
