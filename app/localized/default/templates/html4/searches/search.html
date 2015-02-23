@@ -3,6 +3,16 @@
 {% from macros import Breadcrumb, BreadcrumbHome %}
 {% set link = (breadcrumb | link) %}
 {{ Breadcrumb(dictionary, link, dictionary["listingpageitemslisting.ResultsForNew4"] | replace('<<KEYWORD>>', search) | replace('<<NUMBER>>', meta.total)) }}
+{% if shopsEnabled %}
+    {% if shops.length and meta.total > 0 %}
+        <div class="mapShops">
+            <p class="nearby">Shops nearby:</p>
+            <a href="{{ '/shops' | link({from: 'map'}) }}">
+                <img src="http://maps.googleapis.com/maps/api/staticmap?&zoom=16&size=320x100&markers={% for shop in shops %}{{ [shop.location.lat, ",", shop.location.lon, "|"] | join if shop }}{% endfor %}&sensor=false" />
+            </a>
+        </div>
+    {% endif %}
+{% endif %}
 <div id="itemListing">
     {% if meta.total == 0 %}
         <div class="emtyList" data-qa="no-results-found">
@@ -13,6 +23,19 @@
     {% else %}
         <ul class="itemListing">
             {% for item in items %}
+            {% if shopsEnabled %}
+                    {% if shops.length %}
+                        {% set shop = shops[loop.index0] %}
+                        {% if shop %}
+                    {{ shop.items[0].date|log }}
+                            {% if shop.type == 1 %}
+                                {% include (template + '/items/adlikestore.html') %}
+                            {% else %}
+                                {% include (template + '/items/calltoactions.html') %}
+                            {% endif %}
+                        {% endif %}
+                    {% endif %}
+                {% endif %}
                 <li>
                     <a href="{{ item | slugToUrl | link }}" data-qa="list-item">
                         <div class="imageCont" style="background-image: url({{ item.thumbnail if item.thumbnail else ('/images/html4/noPhoto.png' | static) }});"></div>

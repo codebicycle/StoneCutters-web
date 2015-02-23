@@ -5,7 +5,7 @@ var _ = require('underscore');
 var Shop = require('../models/shop');
 var helpers = require('../helpers');
 var config = require('../../shared/config');
-var HOST = config.get(['mario', 'host'], 'luigi.apps.olx.com');
+var HOST = config.get(['mario', 'host'], 'mario.apps.olx.com');
 module.exports = Base.extend({
     model: Shop,
     initialize: function() {

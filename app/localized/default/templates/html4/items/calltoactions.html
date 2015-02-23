@@ -4,7 +4,7 @@
     </a>
     <div class="itemInfo">
         <p class="itemPrice">{{ shop.items[0].price }}</p>
-        <span>{{ shop.items[0].date }}</span>
+        <span>{{ shop.items[0].date.since.day if shop.items[0].date.since.day }} {{ dictionary[shop.items[0].date.since.dictionary] }}{{ (', ' + shop.items[0].date.since.hour) if shop.items[0].date.since.hour }}</span>
         <span>{{ shop.address | truncate( 60, True) }}</span>
         <div class="centerCont">
             <a href="#">
