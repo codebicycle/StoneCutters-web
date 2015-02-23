@@ -14,7 +14,7 @@
     </div>
     <div class="buttons">
         <span class="name">{{ shop.name | truncate( 40, True) }}</span>
-        <ul>
+        <ul class="green-icons">
             <li><a class="phone" href="{{ shop.items[0] | slugToUrl | link({from: 'listing-shop-item-call'}) }}">phone</a></li>
             <li><a class="mail" href="{{ shop.items[0] | slugToUrl | link({from: 'listing-shop-item-email'}) }}">mail</a></li>
             <li><a class="sms" href="{{ shop.items[0] | slugToUrl | link({from: 'listing-shop-item-sms'}) }}">sms</a></li>
