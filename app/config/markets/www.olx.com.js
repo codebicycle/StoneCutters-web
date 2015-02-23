@@ -43,17 +43,6 @@ module.exports = {
                     format: 'mobilenoresult',
                     location: 'Top'
                 }
-            },
-            item: {
-                top: {
-                    service: 'none'
-                },
-                side: {
-                    service: 'none'
-                },
-                bottom: {
-                    service: 'none'
-                }
             }
         }
     },
