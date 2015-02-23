@@ -17,4 +17,8 @@
 
 </form>
 
+{% if chatEnabled %}
+    {% view 'partials/chat' %}
+{% endif %}
+
 {% view 'partials/tracking' %}

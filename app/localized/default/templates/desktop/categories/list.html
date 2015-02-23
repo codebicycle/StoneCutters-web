@@ -22,8 +22,13 @@
 {% endif %}
 
 {% include (template + '/modals/location.html') %}
+
+{% if chatEnabled %}
+    {% view 'partials/chat' %}
+{% endif %}
+
 {% if videos %}
     {% include (template + '/modals/videogallery.html') %}
 {% endif %}
-{% view 'partials/tracking' %}
 
+{% view 'partials/tracking' %}

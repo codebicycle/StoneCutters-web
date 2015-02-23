@@ -4,6 +4,7 @@ var Base = require('../../../../../common/app/bases/view').requireView('categori
 var _ = require('underscore');
 var helpers = require('../../../../../../helpers');
 var config = require('../../../../../../../shared/config');
+var Chat = require('../../../../../../modules/chat');
 
 module.exports = Base.extend({
     tagName: 'main',
@@ -38,10 +39,23 @@ module.exports = Base.extend({
             celebrities: celebrities,
             videos: videos,
             selectedLanguage: selectedLanguage,
+            chatEnabled: Chat.isEnabled.call(this),
             currentState: {
                 hostname: currentState.hostname,
                 name: currentState.name
             }
         });
-    }
+    },
+    postRender: function() {
+        this.app.router.once('action:end', this.onStart);
+        this.app.router.once('action:start', this.onEnd);
+    },
+    onEnd: function(event) {
+        Chat.hide.call(this);
+        this.appView.trigger('list:end');
+    },
+    onStart: function(event) {
+        this.appView.trigger('list:start');
+        Chat.show.call(this);
+    },
 });

@@ -6,7 +6,7 @@ var helpers = require('../../../../../../helpers');
 var _ = require('underscore');
 var asynquence = require('asynquence');
 var translations = require('../../../../../../../shared/translations');
-var Item = require('../../../../../../models/item');
+var Chat = require('../../../../../../modules/chat');
 var config = require('../../../../../../../shared/config');
 
 function onpopstate(event) {
@@ -55,7 +55,8 @@ module.exports = Base.extend({
 
         return _.extend({}, data, {
             item: this.getItem(data.item),
-            customerContact: customerContact
+            customerContact: customerContact,
+            chatEnabled: Chat.isEnabled.call(this)
         });
     },
     postRender: function() {
@@ -280,10 +281,13 @@ module.exports = Base.extend({
     onEnd: function(event) {
         $(window).off('beforeunload', this.onBeforeUnload);
         $(window).off('popstate', onpopstate);
+        Chat.hide.call(this);
+
         this.appView.trigger('posting:end');
     },
     onStart: function(event) {
         this.appView.trigger('posting:start');
+        Chat.show.call(this);
     },
     onError: function(event) {
         event.preventDefault();
