@@ -122,6 +122,10 @@ module.exports = {
                 worldwide: false,
                 countries: []
             },
+            hermes: {
+                worldwide: false,
+                countries: []
+            },
             newItemPage: {
                 worldwide: false,
                 countries: ['www.olx.com.bo']
@@ -138,6 +142,10 @@ module.exports = {
             }
         },
         desktop: {
+            hermes: {
+                worldwide: false,
+                countries: ['www.olx.com.uy']
+            },
             contactForm: {
                 worldwide: false,
                 countries: ['www.olx.co.cr', 'www.olx.com.uy', 'www.olx.com.pa']

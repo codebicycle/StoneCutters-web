@@ -226,7 +226,7 @@ function reply(done, data) {
     }
 
     function check(done, response, body) {
-        if (body.id) {
+        if (body.id || body.threadId) {
             return done(body);
         }
         body.statusCode = response.statusCode;

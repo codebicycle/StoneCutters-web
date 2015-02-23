@@ -122,9 +122,13 @@ module.exports = {
                 worldwide: false,
                 countries: []
             },
+            hermes: {
+                worldwide: false,
+                countries: ['www.olx.cl', 'www.olx.com.mx', 'www.olx.com.ve', 'www.olx.com.gt', 'www.olx.com.pe', 'www.olx.com.sv', 'www.olx.com.ec', 'www.olx.com.co', 'www.olx.co.za', 'www.olx.com.ar', 'www.olx.com.uy']
+            },
             newItemPage: {
                 worldwide: false,
-                countries: ['www.olx.com.bo']
+                countries: ['www.olx.com.bo', 'www.olx.cl', 'www.olx.com.mx', 'www.olx.com.ve', 'www.olx.com.gt', 'www.olx.com.pe', 'www.olx.com.sv', 'www.olx.com.ec', 'www.olx.com.co', 'www.olx.co.za', 'www.olx.com.ar', 'www.olx.com.uy']
             },
             optimizely: {
                 worldwide: false,
@@ -138,6 +142,10 @@ module.exports = {
             }
         },
         desktop: {
+            hermes: {
+                worldwide: false,
+                countries: ['www.olx.com.uy']
+            },
             contactForm: {
                 worldwide: false,
                 countries: ['www.olx.co.cr', 'www.olx.com.uy', 'www.olx.com.pa']

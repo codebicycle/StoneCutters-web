@@ -20,6 +20,10 @@ module.exports = {
     favorites: middlewares(favorites),
     messages: middlewares(messages),
     readmessages: middlewares(readmessages),
+    conversations: middlewares(conversations),
+    conversation: middlewares(conversation),
+    unsubscribe: middlewares(unsubscribe),
+    report: middlewares(report),
     editpersonalinfo: middlewares(editpersonalinfo)
     /*configuration: middlewares(configuration),
     userprofile: middlewares(userprofile),
@@ -465,14 +469,15 @@ function messages(params, callback) {
     helpers.controllers.control.call(this, params, controller);
 
     function controller() {
+        var platform = this.app.session.get('platform');
+        var location = this.app.session.get('location');
+        var isHermesEnable = helpers.features.isEnabled('hermes', platform, location.url);
         var page = params ? params.page : undefined;
         var message;
         var _params;
         var user;
 
         var redirect = function(done) {
-            var platform = this.app.session.get('platform');
-
             if (platform !== 'desktop') {
                 return done.fail();
             }
@@ -613,6 +618,219 @@ function readmessages(params, callback) {
             .then(prepare)
             .then(fetch)
             .val(success);
+    }
+}
+
+function conversations(params, callback) {
+    helpers.controllers.control.call(this, params, controller);
+
+    function controller() {
+        var platform = this.app.session.get('platform');
+        var location = this.app.session.get('location');
+        var languages = this.app.session.get('languages');
+        var page = params ? params.page : undefined;
+        var conversation;
+        var _params;
+        var user;
+        var view = 'users/myolx';
+
+        var redirect = function(done) {
+            if (platform !== 'desktop' && platform !== 'html5') {
+                return done.fail();
+            }
+            user = this.app.session.get('user');
+            if (!user) {
+                return helpers.common.redirect.call(this, '/login', null, {
+                    status: 302
+                });
+            }
+            done();
+        }.bind(this);
+
+        var prepare = function(done) {
+            Paginator.prepare(this.app, params, 'myConvs');
+            conversation = params.conversation;
+            params.location = location.url;
+            params.languageId = languages._byId[this.app.session.get('selectedLanguage')].id;
+            delete params.conversation;
+            _params = _.extend({}, params, {
+                token: user.token,
+                userId: user.userId
+            });
+
+            done();
+        }.bind(this);
+
+        var fetch = function(done) {
+            this.app.fetch({
+                conversations: {
+                    collection: 'Conversations',
+                    params: _params
+                }
+            }, {
+                readFromCache: false
+            }, done.errfcb);
+        }.bind(this);
+
+        var paginate = function(done, res) {
+            var url = 'myolx/conversations';
+            var realPage;
+
+            if (page == 1) {
+                done.abort();
+                return helpers.common.redirect.call(this, url);
+            }
+            realPage = res.conversations.paginate([url, '[page]'].join(''), params, {
+                page: page
+            });
+            if (realPage) {
+                done.abort();
+                return helpers.common.redirect.call(this, [url, '-p-', realPage].join(''));
+            }
+            done(res);
+        }.bind(this);
+
+        var success = function(response) {
+            this.app.seo.addMetatag('robots', 'noindex, nofollow');
+            this.app.seo.addMetatag('googlebot', 'noindex, nofollow');
+
+            if (platform === 'html5') {
+                view = 'users/conversations';
+            }
+            callback(null, view, {
+                include: ['conversations', 'items'],
+                conversations: response.conversations.toJSON(),
+                items: response.conversations.items,
+                viewname: 'conversations',
+                paginator: response.conversations.paginator
+            });
+        }.bind(this);
+
+        var error = function(err, res) {
+            return helpers.common.error.call(this, err, res, callback);
+        }.bind(this);
+
+        asynquence().or(error)
+            .then(redirect)
+            .then(prepare)
+            .then(fetch)
+            .then(paginate)
+            .val(success);
+    }
+}
+
+function conversation(params, callback) {
+    helpers.controllers.control.call(this, params, controller);
+
+    function controller() {
+        var platform = this.app.session.get('platform');
+        var location = this.app.session.get('location');
+        var languages = this.app.session.get('languages');
+        var page = params ? params.page : undefined;
+        var thread;
+        var _params;
+        var user;
+        var view = 'users/myolx';
+        var pageSize = platform === 'html5' ? 'myConvHtml5' : 'myConv';
+
+        var redirect = function(done) {
+            if (platform !== 'desktop' && platform !== 'html5') {
+                return done.fail();
+            }
+            user = this.app.session.get('user');
+            if (!user) {
+                return helpers.common.redirect.call(this, '/login', null, {
+                    status: 302
+                });
+            }
+            done();
+        }.bind(this);
+
+        var prepare = function(done) {
+            Paginator.prepare(this.app, params, pageSize);
+            thread = params.thread;
+            params.location = location.url;
+            params.languageId = languages._byId[this.app.session.get('selectedLanguage')].id;
+            delete params.thread;
+            _params = _.extend({}, params, {
+                token: user.token,
+                userId: user.userId
+            });
+            done();
+        }.bind(this);
+
+        var fetch = function(done) {
+            this.app.fetch({
+                thread: {
+                    model: 'Thread',
+                    params: _params
+                }
+            }, {
+                readFromCache: false
+            }, done.errfcb);
+        }.bind(this);
+
+        var paginate = function(done, res) {
+            var url = 'myolx/conversation/' + _params.threadId;
+            var realPage;
+
+            if (page == 1) {
+                done.abort();
+                return helpers.common.redirect.call(this, url);
+            }
+            realPage = res.thread.paginate([url, '[page]'].join(''), params, {
+                page: page
+            });
+            if (realPage) {
+                done.abort();
+                return helpers.common.redirect.call(this, [url, '-p-', realPage].join(''));
+            }
+            done(res);
+        }.bind(this);
+
+        var success = function(response) {
+            this.app.seo.addMetatag('robots', 'noindex, nofollow');
+            this.app.seo.addMetatag('googlebot', 'noindex, nofollow');
+
+            if (platform === 'html5') {
+                view = 'users/conversation';
+            }
+
+            callback(null, view, {
+                thread: response.thread,
+                include: ['thread'],
+                viewname: 'conversation',
+                paginator: response.thread.paginator
+            });
+        }.bind(this);
+
+        var error = function(err, res) {
+            console.log(err);
+            return helpers.common.error.call(this, err, res, callback);
+        }.bind(this);
+
+        asynquence().or(error)
+            .then(redirect)
+            .then(prepare)
+            .then(fetch)
+            .then(paginate)
+            .val(success);
+    }
+}
+
+function report(params, callback) {
+    helpers.controllers.control.call(this, params, controller);
+
+    function controller() {
+        callback(null, {});
+    }
+}
+
+function unsubscribe(params, callback) {
+    helpers.controllers.control.call(this, params, controller);
+
+    function controller() {
+        callback(null, {});
     }
 }
 
