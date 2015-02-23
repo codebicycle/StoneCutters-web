@@ -1,0 +1,25 @@
+.notification-message {
+    box($greenLight, $greenBorder, 3px, 20px 20px 20px 100px, solid, 1px);
+    clear-fix();
+    margin-bottom: 20px;
+    position: relative;
+    min-height: 50px;
+
+    &.icon-happy::before, &.icon-sad::before {
+        color: $green;
+        font-size: remify(64px);
+        left: 20px;
+        position: absolute;
+        top: 13px;
+    }
+
+    h4,
+    p {
+        line-height: 1.4;
+        margin: 0;
+    }
+
+    h4 {
+        font-size: $l;
+    }
+}

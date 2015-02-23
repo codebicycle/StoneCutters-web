@@ -6,6 +6,7 @@ var middlewares = require('../middlewares');
 var helpers = require('../helpers');
 var config = require('../../shared/config');
 var statsd = require('../../shared/statsd')();
+var Item = require('../models/item');
 
 module.exports = {
     terms: middlewares(terms),
@@ -15,7 +16,8 @@ module.exports = {
     error: middlewares(error),
     allstates: middlewares(allstates),
     sitemap: middlewares(sitemap),
-    sitemapByDate: middlewares(sitemapByDate)
+    sitemapByDate: middlewares(sitemapByDate),
+    didyousell: middlewares(didyousell)
 };
 
 function terms(params, callback) {
@@ -150,6 +152,98 @@ function error(params, callback) {
         callback(null, {
             error: err
         });
+    }
+}
+
+function didyousell(params, callback) {
+    helpers.controllers.control.call(this, params, controller);
+
+    console.log(params);
+
+    function controller() {
+        var user = this.app.session.get('user');
+        var securityKey = params.sk;
+        var itemId = params.itemid;
+        var languages = this.app.session.get('languages');
+        var platform = this.app.session.get('platform');
+        var newItemPage = helpers.features.isEnabled.call(this, 'newItemPage');
+        var anonymousItem;
+
+        var prepare = function(done) {
+            if (user) {
+                params.token = user.token;
+            }
+            else if (typeof window !== 'undefined' && localStorage) {
+                anonymousItem = localStorage.getItem('anonymousItem');
+                anonymousItem = (!anonymousItem ? {} : JSON.parse(anonymousItem));
+                if (securityKey) {
+                    anonymousItem[itemId] = securityKey;
+                    localStorage.setItem('anonymousItem', JSON.stringify(anonymousItem));
+                }
+                else {
+                    securityKey = anonymousItem[itemId];
+                }
+            }
+            params.id = itemId;
+            params.seo = this.app.seo.isEnabled();
+            params.languageId = languages._byId[this.app.session.get('selectedLanguage')].id;
+            delete params.itemId;
+            delete params.title;
+            delete params.sk;
+            done();
+        }.bind(this);
+
+        var fetch = function(done) {
+            this.app.fetch({
+                item: {
+                    model: 'Item',
+                    params: params
+                }
+            }, {
+                readFromCache: false
+            }, function afterFetch(err, res) {
+                if (!res) {
+                    res = {};
+                }
+                if (err) {
+                    if (err.status !== 422) {
+                        return done.fail(err, res);
+                    }
+                    // res.item = buildItemPurged(err.body);
+                    err = null;
+                }
+                if (!res.item.get('status')) {
+                    console.log('[OLX_DEBUG]', 'no status', res.item.get('id'));
+                    return error(new Error(), res);
+                }
+                else if (!res.item.get('status').open && !res.item.get('status').onReview) {
+                    res.item.set('purged', true);
+                }
+                done(res);
+            }.bind(this));
+        }.bind(this);
+
+        var success = function(_item, relatedItems) {
+            var item = _item.toJSON();
+            var subcategory = this.dependencies.categories.search(_item.get('category').id);
+            var view = 'items/show';
+            var category;
+            var url;
+
+            console.log(item);
+            
+            callback(null, view, {
+                include: ['item'],
+                item: item,
+                sk: securityKey,
+                sent: params.sent,
+            });
+        }.bind(this);
+
+        asynquence().or(error)
+            .then(prepare)
+            .then(fetch)
+            .val(success);
     }
 }
 
