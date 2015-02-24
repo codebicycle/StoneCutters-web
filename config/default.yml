@@ -164,8 +164,6 @@ emails:
     www.olx.com.pa:
       subdomain: olxpa
       brand_id: 304945
-      email: zendesk@olx.com
-      password: zendesk2015
     www.olx.com.pe:
       subdomain: olxpe
       brand_id: 304955
@@ -175,8 +173,6 @@ emails:
     www.olx.com.uy:
       subdomain: olxuy
       brand_id: 300729
-      email: zendesk@olx.com
-      password: zendesk2015
     www.olx.com.ve:
       subdomain: olxve
       brand_id: 300739
@@ -186,15 +182,9 @@ emails:
     www.olx.co.ke:
       subdomain: olxke
       brand_id: 288292
-      email: zendesk@olx.com
-      password: zendesk2015
     www.olx.co.ug:
       subdomain: olxug
       brand_id: 483591
-      email: zendesk@olx.com
-      password: zendesk2015
     www.olx.co.tz:
       subdomain: olxtz
       brand_id: 483601
-      email: zendesk@olx.com
-      password: zendesk2015
