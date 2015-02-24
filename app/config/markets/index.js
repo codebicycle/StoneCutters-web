@@ -28,7 +28,6 @@ module.exports = {
     'www.olx.it': require('./www.olx.it'),
     'www.olx.es': require('./www.olx.es'),
     'www.olx.fr': require('./www.olx.fr'),
-    'www.olx.in': require('./www.olx.in'),
     'www.olx.ir': require('./www.olx.ir'),
     'www.olx.ae': require('./www.olx.ae')
 };

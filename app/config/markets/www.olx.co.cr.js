@@ -177,15 +177,5 @@ module.exports = {
                 name: 'Móviles'
             }
         ]
-    },
-    tracking: {
-        trackers: {
-            hydra: {
-                enabled: false
-            },
-            tagmanager: {
-                enabled: true
-            }
-        }
     }
 };
