@@ -33,7 +33,7 @@ module.exports = {
             maxPageSize: 27
         }
     },
-    staticAccept: ['css', 'js'],
+    staticAccept: ['css', 'js', 'apk'],
     imageAccept: ['jpg', 'jpeg', 'png', 'gif', 'ico'],
     environment: {
         type: 'development'
@@ -123,9 +123,13 @@ module.exports = {
                 worldwide: false,
                 countries: []
             },
+            hermes: {
+                worldwide: false,
+                countries: ['www.olx.cl', 'www.olx.com.mx', 'www.olx.com.ve', 'www.olx.com.gt', 'www.olx.com.pe', 'www.olx.com.sv', 'www.olx.com.ec', 'www.olx.com.co', 'www.olx.co.za', 'www.olx.com.ar', 'www.olx.com.uy']
+            },
             newItemPage: {
                 worldwide: false,
-                countries: ['www.olx.com.bo']
+                countries: ['www.olx.com.bo', 'www.olx.cl', 'www.olx.com.mx', 'www.olx.com.ve', 'www.olx.com.gt', 'www.olx.com.pe', 'www.olx.com.sv', 'www.olx.com.ec', 'www.olx.com.co', 'www.olx.co.za', 'www.olx.com.ar', 'www.olx.com.uy']
             },
             optimizely: {
                 worldwide: false,
@@ -139,9 +143,13 @@ module.exports = {
             }
         },
         desktop: {
+            hermes: {
+                worldwide: false,
+                countries: ['www.olx.com.uy', 'www.olx.com.sv', 'www.olx.com.gt', 'www.olx.com.ve', 'www.olx.com.ec', 'www.olx.com.pe']
+            },
             contactForm: {
                 worldwide: false,
-                countries: ['www.olx.co.cr', 'www.olx.com.uy', 'www.olx.com.pa']
+                countries: ['www.olx.co.cr', 'www.olx.com.uy', 'www.olx.com.pa', 'www.olx.co.ug', 'www.olx.co.tz']
             },
             optimizely: {
                 worldwide: false,
@@ -239,6 +247,11 @@ module.exports = {
         'www.olx.com.bd': {
             stage: 1,
             banner: true
+        }
+    },
+    iris: {
+        direct: {
+            enabled: true
         }
     }
 };

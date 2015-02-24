@@ -7,7 +7,10 @@ module.exports = {
             related: 30,
             myAds: 15,
             myFavs: 15,
-            myMsgs: 15
+            myMsgs: 15,
+            myConvs: 15,
+            myConv: 50
+
         }
     },
     adserving: {
@@ -24,6 +27,9 @@ module.exports = {
                     format: 'custom',
                     location: 'Top'
                 },
+                mobiletop: {
+                    service: 'none'
+                },
                 side: {
                     service: 'AFC',
                     format: 'WideSkyscraper',
@@ -34,14 +40,16 @@ module.exports = {
                     format: 'custom',
                     location: 'Bottom'
                 },
+                mobilebottom: {
+                    service: 'none'
+                },
                 noresult: {
                     service: 'CSA',
-                    format: 'custom',
-                    location: 'Top',
-                    params: {
-                        number: 10
-                    },
-                    seo: 1
+                    format: 'noresult',
+                    location: 'Top'
+                },
+                mobilenoresult: {
+                    service: 'none'
                 }
             },
             item: {

@@ -41,6 +41,8 @@ module.exports = {
         'pages#error': 'error',
         'pages#allstates': 'sitemap',
         'pages#sitemap': 'sitemapcalendar',
-        'pages#about': 'static/about'
+        'pages#about': 'static/about',
+        'users#conversation': 'myolx/conversation',
+        'users#conversations': 'myolx/conversations'
     }
 };
