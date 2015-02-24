@@ -33,7 +33,7 @@ module.exports = {
             maxPageSize: 27
         }
     },
-    staticAccept: ['css', 'js'],
+    staticAccept: ['css', 'js', 'apk'],
     imageAccept: ['jpg', 'jpeg', 'png', 'gif', 'ico'],
     environment: {
         type: 'development'
@@ -149,7 +149,7 @@ module.exports = {
             },
             contactForm: {
                 worldwide: false,
-                countries: ['www.olx.co.cr', 'www.olx.com.uy', 'www.olx.com.pa']
+                countries: ['www.olx.co.cr', 'www.olx.com.uy', 'www.olx.com.pa', 'www.olx.co.ug', 'www.olx.co.tz']
             },
             optimizely: {
                 worldwide: false,
