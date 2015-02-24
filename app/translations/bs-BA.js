@@ -538,6 +538,7 @@ module.exports = {
     'misc.publish-in': 'Publish In',
     'misc.RejectedAd_Caps': 'Odbijen oglas',
     'misc.Removed': 'Uklonjeno',
+    'misc.RemoveFromList': 'Ukloni s ovog spiska',
     'misc.ReturnToMsgs': 'Volver a mis mensajes',
     'misc.return_ads': '<<LINK>>Return to My Ads<</LINK>>',
     'misc.SafetyTipsBuyers': 'Sigurnosni savjeti za kupce',

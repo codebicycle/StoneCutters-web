@@ -114,7 +114,10 @@ module.exports = Base.extend({
             var reason = this.$('.formdelete input[name="close_reason"]:checked').val();
             var comment = this.$('.formdelete input[name="close_comment"]').val();
 
-            item.remove(reason, comment, done);
+            item.remove({
+                reason: reason,
+                comment: comment
+            }, done);
         }
 
         function success(e) {
