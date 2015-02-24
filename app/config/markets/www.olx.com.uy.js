@@ -179,12 +179,5 @@ module.exports = {
                 name: 'Teléfonos'
             }
         ]
-    },
-    tracking: {
-        trackers: {
-            tagmanager: {
-                enabled: true
-            }
-        }
     }
 };

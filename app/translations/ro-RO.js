@@ -538,6 +538,7 @@ module.exports = {
     'misc.publish-in': 'Publish In',
     'misc.RejectedAd_Caps': 'Anun\u021B refuzat',
     'misc.Removed': 'Eliminat',
+    'misc.RemoveFromList': 'Eliminare de pe aceast\u0103 list\u0103',
     'misc.ReturnToMsgs': 'Volver a mis mensajes',
     'misc.return_ads': '<<LINK>>Return to My Ads<</LINK>>',
     'misc.SafetyTipsBuyers': 'Sfaturi pentru siguran\u0163a cump\u0103r\u0103torilor',

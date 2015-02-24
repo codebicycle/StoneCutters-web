@@ -538,6 +538,7 @@ module.exports = {
     'misc.publish-in': 'Publish In',
     'misc.RejectedAd_Caps': 'Augl\xFDsingu var hafna\xF0',
     'misc.Removed': 'Fjarl\xE6g\xF0',
+    'misc.RemoveFromList': 'Fjarl\xE6gja af \xFEessum lista',
     'misc.ReturnToMsgs': 'Volver a mis mensajes',
     'misc.return_ads': '<<LINK>>Return to My Ads<</LINK>>',
     'misc.SafetyTipsBuyers': '\xD6ryggisr\xE1\xF0 fyrir kaupendur',
