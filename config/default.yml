@@ -179,3 +179,12 @@ emails:
     www.olx.hn:
       subdomain: olxhn
       brand_id: 304975
+    www.olx.co.ke:
+      subdomain: olxke
+      brand_id: 288292
+    www.olx.co.ug:
+      subdomain: olxug
+      brand_id: 483591
+    www.olx.co.tz:
+      subdomain: olxtz
+      brand_id: 483601
