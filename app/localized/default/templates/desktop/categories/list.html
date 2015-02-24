@@ -23,9 +23,7 @@
 
 {% include (template + '/modals/location.html') %}
 
-{% if chatEnabled %}
-    {% view 'partials/chat' %}
-{% endif %}
+{% view 'partials/chat' %}
 
 {% if videos %}
     {% include (template + '/modals/videogallery.html') %}
