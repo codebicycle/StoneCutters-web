@@ -3,6 +3,7 @@
 var _ = require('underscore');
 var Base = require('../../bases/view');
 var helpers = require('../../../../../helpers');
+var breadcrumb = require('../../../../../modules/breadcrumb');
 
 module.exports = Base.extend({
     className: 'searches_searchig_view',
