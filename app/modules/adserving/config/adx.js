@@ -7,13 +7,13 @@ module.exports = {
             pubId: 'ca-pub-9177434926134739'
         }
     },
-    'MediumRectangle': {
+    MediumRectangle: {
         params: {
             width: 300,
             height: 250
         }
     },
-    'WideSkyscraper': {
+    WideSkyscraper: {
         params: {
             width: 160,
             height: 600
