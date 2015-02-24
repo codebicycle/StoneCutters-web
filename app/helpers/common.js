@@ -153,7 +153,8 @@ module.exports = (function() {
         }
 
         function statics(env, filePath, host) {
-            var envPath = config.get(['environment', 'staticPath'], '');
+            var isIris = host.split(':').shift().split('.').pop() === 'ir';
+            var envPath = config.get(['environment', isIris ? 'staticPathIris' : 'staticPath'], config.get(['environment', 'staticPath'], ''));
             var pointIndex = filePath.lastIndexOf('.');
             var fileName = filePath.substr(0, pointIndex);
             var ext = filePath.substr(pointIndex + 1);
@@ -175,7 +176,8 @@ module.exports = (function() {
         }
 
         function image(env, filePath, host) {
-            var envPath = config.get(['environment', 'staticPath'], '');
+            var isIris = host.split('.').pop() === 'ir';
+            var envPath = config.get(['environment', isIris ? 'staticPathIris' : 'staticPath'], config.get(['environment', 'staticPath'], ''));
 
             envPath = getEnv(envPath, filePath, {
                 env: env,
