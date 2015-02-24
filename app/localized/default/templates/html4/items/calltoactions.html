@@ -7,7 +7,7 @@
         <span>{{ shop.items[0].date.since.day if shop.items[0].date.since.day }} {{ dictionary[shop.items[0].date.since.dictionary] }}{{ (', ' + shop.items[0].date.since.hour) if shop.items[0].date.since.hour }}</span>
         <span>{{ shop.address | truncate( 60, True) }}</span>
         <div class="centerCont">
-            <a href="#">
+            <a href="{{ shop.items[0] | slugToUrl | link({from: 'listing-shop-item'}) }}">
                 <h2>{{ shop.items[0].title | truncate( 20, True) }}</h2>
             </a>
         </div>
