@@ -27,6 +27,9 @@ module.exports = {
                     format: 'custom',
                     location: 'Top'
                 },
+                mobiletop: {
+                    service: 'none'
+                },
                 side: {
                     service: 'AFC',
                     format: 'WideSkyscraper',
@@ -37,14 +40,16 @@ module.exports = {
                     format: 'custom',
                     location: 'Bottom'
                 },
+                mobilebottom: {
+                    service: 'none'
+                },
                 noresult: {
                     service: 'CSA',
-                    format: 'custom',
-                    location: 'Top',
-                    params: {
-                        number: 10
-                    },
-                    seo: 1
+                    format: 'noresult',
+                    location: 'Top'
+                },
+                mobilenoresult: {
+                    service: 'none'
                 }
             },
             item: {
@@ -94,7 +99,7 @@ module.exports = {
                 },
                 client: {
                     enabled: true,
-                    platforms: ['desktop', 'html5']
+                    platforms: ['html5']
                 }
             },
             analytics: {
@@ -106,16 +111,16 @@ module.exports = {
                 },
                 client: {
                     enabled: true,
-                    platforms: ['desktop', 'html5']
+                    platforms: ['html5']
                 }
             },
             hydra: {
-                enabled: true,
-                platforms: ['desktop']
+                enabled: false,
+                platforms: []
             },
             tagmanager: {
                 enabled: false,
-                platforms: ['desktop']
+                platforms: []
             },
             facebook: {
                 enabled: false,
@@ -130,7 +135,7 @@ module.exports = {
                 platforms: ['wap', 'html4', 'html5', 'desktop']
             },
             ninja: {
-                enabled: false,
+                enabled: true,
                 platforms: ['desktop']
             },
             adroll: {

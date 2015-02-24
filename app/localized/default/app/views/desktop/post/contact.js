@@ -15,14 +15,15 @@ module.exports = Base.extend({
         'click [data-modal-close]': 'onCloseModal',
         'click .open-modal': 'onOpenModal',
         'click [data-modal-shadow]': 'onCloseModal',
-        'fieldsChange': 'onFieldsChange'
+        'fieldsChange': 'onFieldsChange',
+        'formRendered': 'onFormRendered'
     },
-    onChange: function(event) {
+    onChange: function(event, options) {
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();
 
-        this.parentView.$el.trigger('fieldSubmit', [$(event.target)]);
+        this.parentView.$el.trigger('fieldSubmit', [$(event.target), options]);
     },
     onDisablePost: function(event) {
         this.$('.posting').attr('disabled', 'disabled');
@@ -48,6 +49,17 @@ module.exports = Base.extend({
         event.stopImmediatePropagation();
 
         this.$('[name="email"]').val(email).trigger('change');
+    },
+    onFormRendered: function(event) {
+        var $email = this.$('[name="email"]');
+        var category = this.parentView.getItem().get('category');
+        var options = {
+            pendingValidation: (category.id === undefined || category.parentId === undefined)
+        };
+
+        if ($email.val()) {
+            $email.trigger('change', [options]);
+        }
     }
 });
 

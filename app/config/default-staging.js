@@ -9,6 +9,14 @@ module.exports = {
         timeout: utils.SECOND * 5,
         experiments: require('./experiments/staging')
     },
+    optimizely: {
+        html5: {
+            id: 2529260866
+        },
+        desktop: {
+            id: 2487590435
+        }
+    },
     smaug: {
         protocol: 'http',
         host: 'api-v2.olx.com',
@@ -22,7 +30,7 @@ module.exports = {
             maxPageSize: 26
         }
     },
-    staticAccept: ['css', 'js'],
+    staticAccept: ['css', 'js', 'apk'],
     imageAccept: ['jpg', 'jpeg', 'png', 'gif', 'ico'],
     environment: {
         type: 'staging',
@@ -121,6 +129,10 @@ module.exports = {
             newItemPage: {
                 worldwide: false,
                 countries: ['www.olx.com.bo']
+            },
+            optimizely: {
+                worldwide: false,
+                countries: ['www.olx.com.gh']
             }
         },
         html4: {
@@ -132,11 +144,15 @@ module.exports = {
         desktop: {
             hermes: {
                 worldwide: false,
-                countries: ['www.olx.com.uy']
+                countries: ['www.olx.com.uy', 'www.olx.com.sv', 'www.olx.com.gt', 'www.olx.com.ve', 'www.olx.com.ec', 'www.olx.com.pe']
             },
             contactForm: {
                 worldwide: false,
-                countries: ['www.olx.co.cr', 'www.olx.com.uy', 'www.olx.com.pa']
+                countries: ['www.olx.co.cr', 'www.olx.com.uy', 'www.olx.com.pa', 'www.olx.co.ug', 'www.olx.co.tz', 'www.olx.com.pe', 'www.olx.com.sv', 'www.olx.com.ec', 'www.olx.com.ve', 'www.olx.com.uy', 'www.olx.com.ar', 'www.olx.com.co', 'www.olx.com.gt']
+            },
+            optimizely: {
+                worldwide: false,
+                countries: ['www.olx.com.gh']
             }
         }
     },

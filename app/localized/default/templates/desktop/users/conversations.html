@@ -14,7 +14,7 @@
                             {% endif %}
                         </figure>
                         <div class="conversations-data">
-                            <h3>{{ conversation.buyerName }}</h3>
+                            <h3>{{ conversation.contactName }}</h3>
                             <h4>'{{ item.get('title') }}'</h4>
                             <p>"{{ conversation.messageText | truncate( 100, True, '...') }}"</p>
                             <span>{{ conversation.messageDate | date(false, true) }}

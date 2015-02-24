@@ -20,7 +20,7 @@
                         </figure>
                         <div class="conversations-data {{ ' unread' if not conversation.read}}">
                             <div class="top">
-                                <span class="name">{{ conversation.buyerName }}</span>
+                                <span class="name">{{ conversation.contactName }}</span>
                                 <span class="date">{{ conversation.messageDate | date(false, true) }}</span>
                             </div>
                             <span class="title">{{ item.get('title') }}</span>

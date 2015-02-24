@@ -1,10 +1,8 @@
 'use strict';
 
 var Base = require('../bases/collection');
-var _ = require('underscore');
 var Message = require('../models/message');
 var Paginator = require('../modules/paginator');
-var helpers = require('../helpers');
 
 module.exports = Base.extend({
     model: Message,

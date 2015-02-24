@@ -116,7 +116,7 @@ module.exports = Base.extend({
         var $priceType = this.$('select[name=priceType]');
         var $priceC = this.$('input[name=priceC]').removeClass('error');
         var failed = false;
-        var location = this.app.session.get('location').abbreviation.toLowerCase();
+        var location = this.app.session.get('location').abbreviation;
 
         this.$el.removeClass('error').find('small').remove();
         if ($title.val().length < 10) {

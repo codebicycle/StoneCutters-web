@@ -37,7 +37,6 @@ module.exports = function appUseConf(done) {
         rendrApp.use(middleware.manifest());
         rendrApp.use(middleware.robots());
         rendrApp.use(middleware.redirections());
-        rendrApp.use(middleware.getOlx());
         rendrApp.use(middleware.host());
         rendrApp.use(middleware.platform());
         rendrApp.use(middleware.session());

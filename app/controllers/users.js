@@ -12,7 +12,7 @@ var config = require('../../shared/config');
 
 module.exports = {
     register: middlewares(register),
-    success: middlewares(success),
+    registersuccess: middlewares(registersuccess),
     login: middlewares(login),
     lostpassword: middlewares(lostpassword),
     logout: middlewares(logout),
@@ -24,7 +24,13 @@ module.exports = {
     conversations: middlewares(conversations),
     conversation: middlewares(conversation),
     unsubscribe: middlewares(unsubscribe),
-    report: middlewares(report)
+    report: middlewares(report),
+    editpersonalinfo: middlewares(editpersonalinfo)
+    /*configuration: middlewares(configuration),
+    userprofile: middlewares(userprofile),
+    createuserprofile: middlewares(createuserprofile),
+    edituserprofile: middlewares(edituserprofile),
+    emailsnotification: middlewares(emailsnotification)*/
 };
 
 function register(params, callback) {
@@ -103,13 +109,13 @@ function register(params, callback) {
     }
 }
 
-function success(params, callback) {
+function registersuccess(params, callback) {
     helpers.controllers.control.call(this, params, controller);
 
     function controller() {
         this.app.seo.addMetatag('robots', 'noindex, nofollow');
         this.app.seo.addMetatag('googlebot', 'noindex, nofollow');
-        callback(null, {
+        callback(null, 'users/success', {
 
         });
     }
@@ -622,6 +628,7 @@ function conversations(params, callback) {
     function controller() {
         var platform = this.app.session.get('platform');
         var location = this.app.session.get('location');
+        var languages = this.app.session.get('languages');
         var page = params ? params.page : undefined;
         var conversation;
         var _params;
@@ -645,6 +652,7 @@ function conversations(params, callback) {
             Paginator.prepare(this.app, params, 'myConvs');
             conversation = params.conversation;
             params.location = location.url;
+            params.languageId = languages._byId[this.app.session.get('selectedLanguage')].id;
             delete params.conversation;
             _params = _.extend({}, params, {
                 token: user.token,
@@ -711,12 +719,14 @@ function conversations(params, callback) {
             .val(success);
     }
 }
+
 function conversation(params, callback) {
     helpers.controllers.control.call(this, params, controller);
 
     function controller() {
         var platform = this.app.session.get('platform');
         var location = this.app.session.get('location');
+        var languages = this.app.session.get('languages');
         var page = params ? params.page : undefined;
         var thread;
         var _params;
@@ -741,6 +751,7 @@ function conversation(params, callback) {
             Paginator.prepare(this.app, params, pageSize);
             thread = params.thread;
             params.location = location.url;
+            params.languageId = languages._byId[this.app.session.get('selectedLanguage')].id;
             delete params.thread;
             _params = _.extend({}, params, {
                 token: user.token,
@@ -874,3 +885,392 @@ function unsubscribe(params, callback) {
             .val(success);
     }
 }
+
+function editpersonalinfo(params, callback) {
+    helpers.controllers.control.call(this, params, controller);
+
+    function controller() {
+        if (this.app.session.get('platform') !== 'desktop') {
+            return helpers.common.redirect.call(this, '/');
+        }
+        if (!this.app.session.get('user')) {
+            return helpers.common.redirect.call(this, '/login', null, {
+                status: 302
+            });
+        }
+        callback(null, 'users/myolx', {
+            include: ['profile'],
+            profile: _.extend({
+                country: this.app.session.get('location').abbreviation,
+                location: this.app.session.get('location').url
+            }, this.app.session.get('user')),
+            viewname: 'editpersonalinfo'
+        });
+    }
+}
+
+/*function configuration(params, callback) {
+    helpers.controllers.control.call(this, params, controller);
+
+    function controller() {
+        var user = this.app.session.get('user');
+
+        asynquence().or(error.bind(this))
+            .then(redirect.bind(this))
+            .then(fetch.bind(this))
+            .val(success.bind(this));
+
+        function redirect(done) {
+            if (this.app.session.get('platform') !== 'desktop') {
+                done.abort();
+                return helpers.common.redirect.call(this, '/');
+            }
+            if (!user) {
+                done.abort();
+                return helpers.common.redirect.call(this, '/login', null, {
+                    status: 302
+                });
+            }
+            done();
+        }
+
+        function fetch(done) {
+            this.app.fetch({
+                profile: {
+                    model: 'User',
+                    params: {
+                        token: user.token,
+                        userId: user.userId
+                    }
+                }
+            }, {
+                readFromCache: false
+            }, after.bind(this));
+
+            function after(err, response) {
+                if (err) {
+                    if (err.status !== 400) {
+                        return done.fail(err);
+                    }
+                    done.abort();
+                    return helpers.common.redirect.call(this, '/myolx/createuserprofile', null, {
+                        status: 302
+                    });
+                }
+                done(response);
+            }
+        }
+
+        function success(response) {
+            callback(null, 'users/myolx', {
+                profile: response.profile,
+                viewname: 'configuration'
+            });
+        }
+
+        function error(err, res) {
+            return helpers.common.error.call(this, err, res, callback);
+        }
+    }
+}
+
+function userprofile(params, callback) {
+    helpers.controllers.control.call(this, params, controller);
+
+    function controller() {
+        var user = this.app.session.get('user');
+
+        asynquence().or(error.bind(this))
+            .then(redirect.bind(this))
+            .gate(fetchProfile.bind(this), fetchItems.bind(this))
+            .val(success.bind(this));
+
+        function redirect(done) {
+            if (this.app.session.get('platform') !== 'desktop') {
+                done.abort();
+                return helpers.common.redirect.call(this, '/');
+            }
+            if (!user) {
+                done.abort();
+                return helpers.common.redirect.call(this, '/login', null, {
+                    status: 302
+                });
+            }
+            if (user.username !== params.username) {
+                done.abort();
+                return helpers.common.redirect.call(this, '/', null, {
+                    status: 302
+                });
+            }
+            done();
+        }
+
+        function fetchProfile(done) {
+            this.app.fetch({
+                profile: {
+                    model: 'User',
+                    params: {
+                        token: user.token,
+                        userId: user.userId
+                    }
+                }
+            }, {
+                readFromCache: false
+            }, after.bind(this));
+
+            function after(err, response) {
+                if (err) {
+                    if (err.status !== 400) {
+                        return done.fail(err);
+                    }
+                    done.abort();
+                    return helpers.common.redirect.call(this, '/myolx/createuserprofile', null, {
+                        status: 302
+                    });
+                }
+                done(response);
+            }
+        }
+
+        function fetchItems(done) {
+            this.app.fetch({
+                items: {
+                    collection: 'Items',
+                    params: {
+                        token: user.token,
+                        userId: user.userId,
+                        languageId: this.app.session.get('languages')._byId[this.app.session.get('selectedLanguage')].id,
+                        item_type: 'myAds',
+                        pageSize: 0
+                    }
+                }
+            }, {
+                readFromCache: false
+            }, done.errfcb);
+        }
+
+        function success(response1, response2) {
+            callback(null, 'users/myolx', {
+                profile: response1.profile,
+                items: response2.items,
+                viewname: 'userprofile'
+            });
+        }
+
+        function error(err, res) {
+            return helpers.common.error.call(this, err, res, callback);
+        }
+    }
+}
+
+function createuserprofile(params, callback) {
+    helpers.controllers.control.call(this, params, controller);
+
+    function controller() {
+        var platform = this.app.session.get('platform');
+        var user = this.app.session.get('user');
+
+        asynquence().or(error.bind(this))
+            .then(redirect.bind(this))
+            .then(fetch.bind(this))
+            .then(set.bind(this))
+            .val(success.bind(this));
+
+        function redirect(done) {
+            if (platform !== 'desktop') {
+                done.abort();
+                return helpers.common.redirect.call(this, '/');
+            }
+            if (!user) {
+                done.abort();
+                return helpers.common.redirect.call(this, '/login', null, {
+                    status: 302
+                });
+            }
+            done();
+        }
+
+        function fetch(done) {
+            this.app.fetch({
+                profile: {
+                    model: 'User',
+                    params: {
+                        token: user.token,
+                        userId: user.userId
+                    }
+                }
+            }, {
+                readFromCache: false
+            }, after.bind(this));
+
+            function after(err, response) {
+                if (!err) {
+                    done.abort();
+                    return helpers.common.redirect.call(this, '/myolx/edituserprofile', null, {
+                        status: 302
+                    });
+                }
+                if (err.status !== 400) {
+                    return done.fail(err);
+                }
+                done(new User(user, {
+                    app: this.app
+                }));
+            }
+        }
+
+        function set(done, profile) {
+            var location = this.app.session.get('location');
+            var state = location.children[0] || {
+                children: []
+            };
+            var city = state.children[0] || {};
+
+            profile.set('location', location.url);
+            profile.set('countryId', location.id);
+            if (state.id) {
+                profile.set('location', state.url);
+                profile.set('stateId', state.id);
+            }
+            if (city.id) {
+                profile.set('location', city.url);
+                profile.set('cityId', city.id);
+            }
+            profile
+                .set('platform', platform)
+                .set('languageId', this.app.session.get('languageId'))
+                .set('intent', 'create');
+            done(profile);
+        }
+
+        function success(profile) {
+            callback(null, 'users/myolx', {
+                include: ['profile', 'states'],
+                profile: profile,
+                viewname: 'edituserprofile'
+            });
+        }
+
+        function error(err, res) {
+            return helpers.common.error.call(this, err, res, callback);
+        }
+    }
+}
+
+function edituserprofile(params, callback) {
+    helpers.controllers.control.call(this, params, controller);
+
+    function controller() {
+        var user = this.app.session.get('user');
+
+        asynquence().or(error.bind(this))
+            .then(redirect.bind(this))
+            .then(fetch.bind(this))
+            .val(success.bind(this));
+
+        function redirect(done) {
+            if (this.app.session.get('platform') !== 'desktop') {
+                done.abort();
+                return helpers.common.redirect.call(this, '/');
+            }
+            if (!user) {
+                done.abort();
+                return helpers.common.redirect.call(this, '/login', null, {
+                    status: 302
+                });
+            }
+            done();
+        }
+
+        function fetch(done) {
+            this.app.fetch({
+                profile: {
+                    model: 'User',
+                    params: {
+                        token: user.token,
+                        userId: user.userId
+                    }
+                }
+            }, {
+                readFromCache: false
+            }, after.bind(this));
+
+            function after(err, response) {
+                if (!err) {
+                    return done(response.profile);
+                }
+                if (err.status !== 400) {
+                    return done.fail(err);
+                }
+                done.abort();
+                return helpers.common.redirect.call(this, '/myolx/createuserprofile', null, {
+                    status: 302
+                });
+            }
+        }
+
+        function success(profile) {
+            callback(null, 'users/myolx', {
+                include: ['profile'],
+                profile: profile,
+                viewname: 'edituserprofile'
+            });
+        }
+
+        function error(err, res) {
+            return helpers.common.error.call(this, err, res, callback);
+        }
+    }
+}
+
+function emailsnotification(params, callback) {
+    helpers.controllers.control.call(this, params, controller);
+
+    function controller() {
+        var user = this.app.session.get('user');
+
+        asynquence().or(error.bind(this))
+            .then(redirect.bind(this))
+            .then(fetch.bind(this))
+            .val(success.bind(this));
+
+        function redirect(done) {
+            if (this.app.session.get('platform') !== 'desktop') {
+                done.abort();
+                return helpers.common.redirect.call(this, '/');
+            }
+            if (!user) {
+                done.abort();
+                return helpers.common.redirect.call(this, '/login', null, {
+                    status: 302
+                });
+            }
+            done();
+        }
+
+        function fetch(done) {
+            this.app.fetch({
+                profile: {
+                    model: 'User',
+                    params: {
+                        token: user.token,
+                        userId: user.userId
+                    }
+                }
+            }, {
+                readFromCache: false
+            }, done.errfcb);
+        }
+
+        function success(response) {
+            callback(null, 'users/myolx', {
+                profile: response.profile.toJSON(),
+                viewname: 'emailsnotification'
+            });
+        }
+
+        function error(err, res) {
+            return helpers.common.error.call(this, err, res, callback);
+        }
+    }
+}*/

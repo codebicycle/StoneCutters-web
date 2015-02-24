@@ -4,7 +4,7 @@ module.exports = {
     'users#register': {
         url: 'register'
     },
-    'users#success': {
+    'users#registersuccess': {
         url: 'register/success'
     },
     'users#login': {
@@ -16,8 +16,32 @@ module.exports = {
     'users#logout': {
         url: 'logout'
     },
+    'users#userprofile': {
+        urls: [
+            'users/:username',
+            '/^\/users\/.*/'
+        ]
+    },
     'users#myolx': {
         url: 'myolx'
+    },
+    /*'users#configuration': {
+        url: 'myolx/configuration'
+    },
+    'users#createuserprofile': {
+        url: 'myolx/createuserprofile'
+    },
+    'users#edituserprofile': {
+        url: 'myolx/edituserprofile'
+    },
+    'users#editpersonalinfo': {
+        url: 'myolx/editpersonalinfo'
+    },
+    'users#emailsnotification': {
+        url: 'myolx/emailsnotification'
+    },*/
+    'users#editpersonalinfo': {
+        url: 'myolx/configuration'
     },
     'users#myads': {
         urls: [
@@ -57,8 +81,5 @@ module.exports = {
             'myolx/conversation/:threadId-p-:page([0-9]+)',
             'myolx/conversation/:threadId'
         ]
-    },
-    'users#deleteitem': {
-        url: 'myolx/deleteitem'
     }
 };

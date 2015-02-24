@@ -2,7 +2,7 @@
     <a href="{{ '/myolx/conversations' | link }}" class="back icons icon-arrow-left">{{ dictionary["misc.ReturnToMsgs"] }}</a>
     {% set item = thread.get('item') %}
     <div class="conversation-item">
-        <a href="{{ item.slug.replace(domain, fullDomain) }}">
+        <a href="{{ item.slug.replace(domain, fullDomain) | replace('en/', '') }}">
             <figure class="wrapper-img {{ 'lines' if item.images.length }} {{ 'icons icon-photo' if not item.images.length }}">
                 {% if item.images.length %}
                     <img src="{{ item.images[0].thumbnail }}" alt="" class="thumbnail">
@@ -10,16 +10,23 @@
             </figure>
         </a>
         <div class="conversation-item-data">
-            {% set senderName = thread.get('senders')[0].name %}
-            {% set phone = thread.get('senders')[0].phone %}
-            {% if thread.get('senders')[0].isMine and thread.get('senders')[1] %}
+            {% if item.user.id != thread.get('userId') %}
+                {% set phone = item.phone %}
+                {% set senderName = item.user.username %}
+            {% elif thread.get('senders')[1] and thread.get('senders')[1].isMine %}
+                {% set senderName = thread.get('senders')[0].name %}
+                {% set phone = thread.get('senders')[0].phone %}
+            {% elif thread.get('senders')[0].isMine %}
                 {% set senderName = thread.get('senders')[1].name %}
                 {% set phone = thread.get('senders')[1].phone %}
+            {% else %}
+                {% set senderName = thread.get('senders')[0].name %}
             {% endif %}
+
             <h3>{{ dictionary["myolx.ConversationWith"] | replace('<<NAME>>', senderName) }}
 
             </h3>
-            <p><a href="{{ item.slug.replace(domain, fullDomain) }}">{{ item.title }}</a>
+            <p><a href="{{ item.slug.replace(domain, fullDomain) | replace('en/', '') }}">{{ item.title }}</a>
         </div>
     </div>
     <ul>
@@ -28,10 +35,12 @@
             {% set name = thread.get('senders')[0].name %}
             {% if message.isMine %}
                 {% set name = dictionary["myolx.You"] %}
+            {% elif thread.get('senders')[1] and thread.get('senders')[1].isMine %}
+                {% set name = thread.get('senders')[0].name %}
             {% elif thread.get('senders')[0].isMine %}
                 {% set name = thread.get('senders')[1].name %}
             {% endif %}
-            <span class="name">{{ name }}</span><span class="date"> - {{ message.date | date(false, true) }}</span>
+            <span class="name">{{ name }}</span><span class="date"> - <time>{{ message.date.since.day if message.date.since.day }} {{ dictionary[message.date.since.dictionary] }}{{ (' ' + message.date.since.hour) if message.date.since.hour }} {{ (' ' + yearToShow) if yearToShow }}</time></span>
             <p class="message">{{ message.text }}</p>
         </li>
     {% endfor %}
