@@ -5,6 +5,7 @@ var Sixpack = require('../../../../../../../shared/sixpack');
 var utils = require('../../../../../../../shared/utils');
 var config = require('../../../../../../../shared/config');
 var helpers = require('../../../../../../helpers');
+var asynquence = require('asynquence');
 var _ = require('underscore');
 
 module.exports = Base.extend({
@@ -35,6 +36,7 @@ module.exports = Base.extend({
     postRender: function() {
         this.attachTrackMe();
         $('body').on('change:location', this.changeLocation.bind(this));
+        $('body').on('update:notifications', this.showNotification.bind(this));
         $('body').on('update:postingLink', this.updatePostingLink.bind(this));
         this.app.router.appView.on('postingflow:start', this.onPostingFlowStart.bind(this));
         this.app.router.appView.on('postingflow:end', this.onPostingFlowEnd.bind(this));
@@ -68,6 +70,22 @@ module.exports = Base.extend({
             }
         }
     },
+    showNotification: function() {
+        var user = this.app.session.get('user');
+        var isHermesEnabled = helpers.features.isEnabled.call(this, 'hermes');
+
+        if (user && isHermesEnabled) {
+            this.unreadConversations();
+        }
+
+        this.$('.logIn .btns.blue.active').toggleClass('active');
+        if (this.notifications) {
+            this.$('.notification').css('display', 'block');
+            $('.message-notification').css('display', 'none');
+        }
+        this.isMenuOpen = false;
+        this.$('#myOlx').hide();
+    },
     onActionEnd: function() {
         if (this.isPostButtonEnabled()) {
             this.$('.postBtn').removeClass('disabled');
@@ -78,7 +96,6 @@ module.exports = Base.extend({
     },
     events: {
         'click .logIn span': 'onLoginClick',
-        'click #myOlx li a': 'onMenuClick',
         'click .topBarFilters .filter-btns': 'onCancelFilter',
         'click .postBtn': 'onPostClick'
     },
@@ -91,6 +108,7 @@ module.exports = Base.extend({
 
         sixpack.convert(sixpack.experiments.html5HeaderPostButton);
     },
+    isMenuOpen: false,
     onLoginClick: function(event) {
         event.preventDefault();
         event.stopPropagation();
@@ -99,11 +117,22 @@ module.exports = Base.extend({
         var $current = $(event.currentTarget);
 
         $current.toggleClass('active');
-        this.$('#myOlx').slideToggle();
-    },
-    onMenuClick: function(event) {
-        this.$('.logIn .btns.blue.active').toggleClass('active');
-        this.$('#myOlx').slideUp();
+        if (!this.isMenuOpen) {
+            this.isMenuOpen = true;
+            if (this.notifications) {
+                this.$('.notification').css('display', 'none');
+                $('.message-notification').css('display', 'inline-block');
+            }
+            this.$('#myOlx').slideDown();
+        }
+        else {
+            this.isMenuOpen = false;
+            if (this.notifications) {
+                this.$('.notification').css('display', 'block');
+                $('.message-notification').css('display', 'none');
+            }
+            this.$('#myOlx').slideUp();
+        }
     },
     onCancelFilter: function(event) {
         event.preventDefault();
@@ -206,5 +235,34 @@ module.exports = Base.extend({
             $links.show();
             $text.addClass('hide').find('.title').text('');
         });
+    },
+    unreadConversations: function() {
+        var user = this.app.session.get('user');
+
+        asynquence()
+            .then(unreadCheck.bind(this))
+            .val(success.bind(this));
+
+        function unreadCheck(done) {
+            helpers.dataAdapter.get(this.app.req, '/conversations/unread/count', {
+                query: {
+                    token: user.token,
+                    userId: user.userId,
+                    location: this.app.session.get('location').url,
+                    platform: this.app.session.get('platform')
+                },
+                cache: false,
+                json: true
+            }, done.errfcb);
+        }
+
+        function success(res, body) {
+            if (body.count) {
+                this.notifications = true;
+                return this.$('.notification').css('display', 'block');
+            }
+            this.notifications = false;
+            return this.$('.notification').css('display', 'none');
+        }
     }
 });
