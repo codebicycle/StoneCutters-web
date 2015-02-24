@@ -152,9 +152,8 @@ module.exports = (function() {
             return envPath;
         }
 
-        function statics(env, filePath, host) {
-            var isIris = host.split(':').shift().split('.').pop() === 'ir';
-            var envPath = config.get(['environment', isIris ? 'staticPathIris' : 'staticPath'], config.get(['environment', 'staticPath'], ''));
+        function statics(env, filePath, host, location) {
+            var envPath = config.get(['environment', location === 'www.olx.ir' ? 'staticPathIris' : 'staticPath'], config.get(['environment', 'staticPath'], ''));
             var pointIndex = filePath.lastIndexOf('.');
             var fileName = filePath.substr(0, pointIndex);
             var ext = filePath.substr(pointIndex + 1);
@@ -175,9 +174,8 @@ module.exports = (function() {
             return [envPath, fileName, envName, revision, '.', ext].join('');
         }
 
-        function image(env, filePath, host) {
-            var isIris = host.split('.').pop() === 'ir';
-            var envPath = config.get(['environment', isIris ? 'staticPathIris' : 'staticPath'], config.get(['environment', 'staticPath'], ''));
+        function image(env, filePath, host, location) {
+            var envPath = config.get(['environment', location === 'www.olx.ir' ? 'staticPathIris' : 'staticPath'], config.get(['environment', 'staticPath'], ''));
 
             envPath = getEnv(envPath, filePath, {
                 env: env,
@@ -211,6 +209,7 @@ module.exports = (function() {
 
     function statics(path, key, value) {
         var host = this.app ? this.app.session.get('host') : '';
+        var location = this.app && this.app.session.get('location') ? this.app.session.get('location').url : '';
         var type;
 
         if (key && value) {
@@ -220,7 +219,7 @@ module.exports = (function() {
         if (!type) {
             return path;
         }
-        return staticsHandler[type](env, path, host);
+        return staticsHandler[type](env, path, host, location);
     }
 
     function slugToUrl(obj) {
