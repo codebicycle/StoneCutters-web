@@ -9,12 +9,5 @@ module.exports = {
             myFavs: 15,
             myMsgs: 15
         }
-    },
-    tracking: {
-        trackers: {
-            analytics: {
-                enabled: false
-            }
-        }
     }
 };

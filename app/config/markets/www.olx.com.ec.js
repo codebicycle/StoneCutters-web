@@ -197,8 +197,31 @@ module.exports = {
     },
     tracking: {
         trackers: {
+            ati: {
+                enabled: true,
+                client: {
+                    enabled: true,
+                    platforms: ['desktop', 'html5']
+                }
+            },
+            analytics: {
+                enabled: true,
+                client: {
+                    enabled: true,
+                    platforms: ['desktop', 'html5']
+                }
+            },
+            hydra: {
+                enabled: true,
+                platforms: ['desktop']
+            },
             tagmanager: {
-                enabled: true
+                enabled: true,
+                platforms: ['desktop']
+            },
+            ninja: {
+                enabled: false,
+                platforms: []
             }
         }
     }
