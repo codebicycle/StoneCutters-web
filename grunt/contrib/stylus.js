@@ -14,81 +14,44 @@ module.exports = function(grunt) {
     };
 
     (function stylusGeneral() {
-        var key;
-
         environments.forEach(function eachEnvironments(environment) {
             platforms.forEach(function (platform) {
-                key = environment + '-' + platform;
-
-                stylus[key] = {
-                    files: {},
-                    options: {
-                        paths: [],
-                        import: [],
-                        define: {
-                            staticUrl: (stylusConfig[environment] ? stylusConfig[environment].urls.static : ''),
-                            imageUrl: (stylusConfig[environment] ? stylusConfig[environment].urls.image : '')
-                        }
-                    }
-                };
-                getFiles(environment, platform);
+                prepareFiles(environment, platform);
             });
         });
 
-
-        function getFiles(environment, _platform) {
+        function prepareFiles(environment, _platform) {
             var localization = utils.getLocalization(grunt, {}, environment);
-            var files = {};
-            var file;
+            var data = findDefaultData(environment, _platform);
+            var options = {
+                environment: environment
+            };
             var platform;
-
-            grunt.file.recurse('app/localized/default/stylesheets', function callback(abspath, rootdir, subdir, filename) {
-                var parts = subdir.split('/');
-                var target = 'public/css/default/' + parts[0] + '/styles';
-                var helpers = {};
-                var platform = parts[0];
-
-                if (platform !== _platform) {
-                    return;
-                }
-
-                if (parts[1] && parts[1] === 'helpers') {
-                    helpers = rootdir + '/' + platform;
-                    stylus[key].options.paths = [helpers];
-                    stylus[key].options.import = ['helpers'];
-                    return false;
-                }
-                if (environment !== 'production') {
-                    target += '-' + environment;
-                }
-                target += '.css';
-                if (filename.split('.').pop() !== 'styl') {
-                    return;
-                }
-                if (!files[target]) {
-                    files[target] = {};
-                }
-
-                files[target][abspath] = abspath;
-            });
+            var files;
 
             for (platform in localization) {
                 if (platform !== _platform) {
                     continue;
                 }
-                localization[platform].forEach(eachLocation);
-            }
-            for (var target in files) {
-                stylus[key].files[target] = [];
-                for (file in files[target]) {
-                    stylus[key].files[target].unshift(files[target][file]);
-                }
+                _.extend(options, {
+                    platform: platform
+                });
+                prepareTask(data.files, data.options, _.extend(options, {
+                    location: 'default'
+                }));
+                localization[platform].forEach(function eachLocation(location) {
+                    files = findLocationFiles(location, data.files);
+                    prepareTask(files, data.options, _.extend(options, {
+                        location: location
+                    }));
+                });
             }
 
-            function eachLocation(location) {
+            function findLocationFiles(location, defaultFiles) {
                 var dir = 'app/localized/' + location + '/stylesheets/' + platform;
                 var defaultTarget = 'public/css/default/' + platform + '/styles';
                 var target = 'public/css/' + location + '/' + platform + '/styles';
+                var files = _.clone(defaultFiles);
 
                 if (environment !== 'production') {
                     defaultTarget += '-' + environment;
@@ -102,8 +65,8 @@ module.exports = function(grunt) {
                 if (grunt.file.exists(dir)) {
                     grunt.file.recurse(dir, function each(abspath, rootdir, subdir, filename) {
                         if (subdir && subdir === 'helpers') {
-                            stylus[key].options.paths = [rootdir];
-                            stylus[key].options.import = ['helpers'];
+                            data.options.paths = [rootdir];
+                            data.options.import = ['helpers'];
                             return false;
                         }
                         if (filename.split('.').pop() !== 'styl') {
@@ -111,6 +74,68 @@ module.exports = function(grunt) {
                         }
                         files[target][abspath.replace('/' + location + '/', '/default/')] = abspath;
                     });
+                }
+                delete files[defaultTarget];
+                return files;
+            }
+        }
+
+        function findDefaultData(environment, platform) {
+            var data = {
+                files: {},
+                options: {}
+            };
+
+            grunt.file.recurse('app/localized/default/stylesheets', function callback(abspath, rootdir, subdir, filename) {
+                var parts = subdir.split('/');
+                var target = 'public/css/default/' + parts[0] + '/styles';
+                var helpers;
+
+                if (parts[0] !== platform) {
+                    return;
+                }
+                if (parts[1] && parts[1] === 'helpers') {
+                    helpers = rootdir + '/' + parts[0];
+                    data.options.paths = [helpers];
+                    data.options.import = ['helpers'];
+                    return false;
+                }
+                if (environment !== 'production') {
+                    target += '-' + environment;
+                }
+                target += '.css';
+                if (filename.split('.').pop() !== 'styl') {
+                    return;
+                }
+                if (!data.files[target]) {
+                    data.files[target] = {};
+                }
+                data.files[target][abspath] = abspath;
+            });
+            return data;
+        }
+
+        function prepareTask(files, stylusOptions, options) {
+            var key = [options.environment, options.platform, options.location].join('-');
+            var target;
+            var file;
+
+            stylus[key] = {
+                files: {},
+                options: _.defaults({}, stylusOptions, {
+                    paths: [],
+                    import: [],
+                    define: {
+                        staticUrl: utils.get(stylusConfig, [options.environment, options.location, 'urls', 'static'], utils.get(stylusConfig, [options.environment, 'urls', 'static'], '')),
+                        imageUrl: utils.get(stylusConfig, [options.environment, options.location, 'urls', 'image'], utils.get(stylusConfig, [options.environment, 'urls', 'static'], ''))
+                    }
+                })
+            };
+
+            for (target in files) {
+                stylus[key].files[target] = [];
+                for (file in files[target]) {
+                    stylus[key].files[target].unshift(files[target][file]);
                 }
             }
         }
