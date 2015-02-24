@@ -45,15 +45,5 @@ module.exports = Base.extend({
                 name: currentState.name
             }
         });
-    },
-    postRender: function() {
-        this.app.router.once('action:end', this.onStart);
-        this.app.router.once('action:start', this.onEnd);
-    },
-    onEnd: function(event) {
-        this.appView.trigger('list:end');
-    },
-    onStart: function(event) {
-        this.appView.trigger('list:start');
-    },
+    }
 });
