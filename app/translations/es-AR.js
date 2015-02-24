@@ -538,6 +538,7 @@ module.exports = {
     'misc.publish-in': 'Publish In',
     'misc.RejectedAd_Caps': 'Aviso rechazado',
     'misc.Removed': 'Eliminado',
+    'misc.RemoveFromList': 'Eliminar de esta lista',
     'misc.ReturnToMsgs': 'Volver a mis mensajes',
     'misc.return_ads': '<<LINK>>Return to My Ads<</LINK>>',
     'misc.SafetyTipsBuyers': 'Consejos de seguridad para compradores',

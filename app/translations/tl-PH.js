@@ -538,6 +538,7 @@ module.exports = {
     'misc.publish-in': 'Publish In',
     'misc.RejectedAd_Caps': 'tinanggihan na ad',
     'misc.Removed': 'Inalis',
+    'misc.RemoveFromList': 'Alisin mula sa listahang ito',
     'misc.ReturnToMsgs': 'Volver a mis mensajes',
     'misc.return_ads': '<<LINK>>Return to My Ads<</LINK>>',
     'misc.SafetyTipsBuyers': 'Mga Tip sa Kaligtasan para sa Mga Bumibili',

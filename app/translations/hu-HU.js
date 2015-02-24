@@ -538,6 +538,7 @@ module.exports = {
     'misc.publish-in': 'Publish In',
     'misc.RejectedAd_Caps': 'Elutas\xEDtott hirdet\xE9s',
     'misc.Removed': 'Elt\xE1vol\xEDtva',
+    'misc.RemoveFromList': 'Elt\xE1vol\xEDt\xE1s a list\xE1r\xF3l',
     'misc.ReturnToMsgs': 'Volver a mis mensajes',
     'misc.return_ads': '<<LINK>>Return to My Ads<</LINK>>',
     'misc.SafetyTipsBuyers': 'Biztons\xE1gi tippek v\xE1s\xE1rl\xF3knak',

@@ -538,6 +538,7 @@ module.exports = {
     'misc.publish-in': 'Publish In',
     'misc.RejectedAd_Caps': 'Reddedilen ilan',
     'misc.Removed': 'Kald\u0131r\u0131ld\u0131',
+    'misc.RemoveFromList': 'Bu listeden kald\u0131r',
     'misc.ReturnToMsgs': 'Volver a mis mensajes',
     'misc.return_ads': '<<LINK>>Return to My Ads<</LINK>>',
     'misc.SafetyTipsBuyers': 'Al\u0131c\u0131lar i\xE7in G\xFCvenlik \u0130pu\xE7lar\u0131',
