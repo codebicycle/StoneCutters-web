@@ -51,11 +51,9 @@ module.exports = Base.extend({
         this.app.router.once('action:start', this.onEnd);
     },
     onEnd: function(event) {
-        Chat.hide.call(this);
         this.appView.trigger('list:end');
     },
     onStart: function(event) {
         this.appView.trigger('list:start');
-        Chat.show.call(this);
     },
 });

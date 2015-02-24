@@ -281,13 +281,11 @@ module.exports = Base.extend({
     onEnd: function(event) {
         $(window).off('beforeunload', this.onBeforeUnload);
         $(window).off('popstate', onpopstate);
-        Chat.hide.call(this);
 
         this.appView.trigger('posting:end');
     },
     onStart: function(event) {
         this.appView.trigger('posting:start');
-        Chat.show.call(this);
     },
     onError: function(event) {
         event.preventDefault();

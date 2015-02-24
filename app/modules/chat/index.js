@@ -14,28 +14,6 @@ function isEnabled() {
     return enabled;
 }
 
-function show() {
-    if(isEnabled.call(this) && window.$zopim) {
-        window.asyncApi = window.asyncApi || [];
-        window.asyncApi.push({
-            wait: function() {
-                return typeof window.$zopim.livechat !== 'undefined';
-            },
-            callback: function() {
-                window.$zopim.livechat.window.show();
-            }
-        });
-    }
-}
-
-function hide() {
-    if(isEnabled.call(this) && window.$zopim) {
-        window.$zopim.livechat.hideAll();
-    }
-}
-
 module.exports = {
-    isEnabled: isEnabled,
-    show: show,
-    hide: hide
+    isEnabled: isEnabled
 };
