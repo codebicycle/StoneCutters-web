@@ -1,8 +1,7 @@
 'use strict';
 
-var Base = require('../../../../../common/app/bases/view').requireView('searches/statics');
 var _ = require('underscore');
-var helpers = require('../../../../../../helpers');
+var Base = require('../../../../../common/app/bases/view').requireView('searches/statics');
 
 module.exports = Base.extend({
     className: 'items_search_view',
