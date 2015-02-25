@@ -38,6 +38,13 @@ module.exports = {
                     format: 'WideSkyscraper',
                     location: 'Side'
                 }
+            },
+            item: {
+                side: {
+                    service: 'ADX',
+                    format: 'MediumRectangle',
+                    location: 'Side'
+                }
             }
         }
     },

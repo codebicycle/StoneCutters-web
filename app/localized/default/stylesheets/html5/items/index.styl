@@ -68,6 +68,18 @@ section#itemListing .adserving {
     &:empty {
         display: none;
     }
+    .adserving-adx {
+        text-align: center;
+        iframe {
+            border: none;
+            margin: 0;
+            vertical-align: top;
+        }
+        &.listing_mobiletop {
+            margin: 10px 0;
+            min-height: 50px;
+        }
+    }
     .adserving-csa {
         &.listing_mobilebottom:not(:empty),
         &.listing_mobilenoresult:not(:empty),

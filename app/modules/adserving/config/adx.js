@@ -9,8 +9,8 @@ module.exports = {
     },
     HalfBanner: {
         params: {
-            width: 234,
-            height: 60
+            width: 300,
+            height: 50
         }
     },
     MediumRectangle: {
