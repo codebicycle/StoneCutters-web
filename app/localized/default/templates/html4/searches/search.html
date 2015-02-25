@@ -21,16 +21,15 @@
             <a class="btns orange" href="{{ '/' | link }}" >{{ dictionary["registrationconfirmsuccesstext.Browse"] | replace('<<BRAND>>','OLX') }}</a>
         </div>
     {% else %}
-        <ul class="itemListing">
+        <ul class="itemListing">{{experiment | log}}
             {% for item in items %}
             {% if shopsEnabled %}
                     {% if shops.length %}
                         {% set shop = shops[loop.index0] %}
                         {% if shop %}
-                    {{ shop.items[0].date|log }}
-                            {% if shop.type == 1 %}
+                            {% if experiment == 'adlikestore' %}
                                 {% include (template + '/items/adlikestore.html') %}
-                            {% else %}
+                            {% elif experiment == 'calltoactions' %}
                                 {% include (template + '/items/calltoactions.html') %}
                             {% endif %}
                         {% endif %}
