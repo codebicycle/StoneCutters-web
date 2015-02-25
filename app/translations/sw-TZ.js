@@ -538,6 +538,7 @@ module.exports = {
     'misc.publish-in': 'Chapisha katika',
     'misc.RejectedAd_Caps': 'Tangazo lililokataliwa',
     'misc.Removed': 'Imeondolewa',
+    'misc.RemoveFromList': 'Kuondoa kutoka kwenye orodha hii',
     'misc.ReturnToMsgs': 'Volver a mis mensajes',
     'misc.return_ads': '<<LINK>>Rejea kwa Matangazo Yangu<</LINK>>',
     'misc.SafetyTipsBuyers': 'Vidokezo vya Usalama kwa Wanunuzi',

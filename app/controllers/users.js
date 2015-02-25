@@ -6,6 +6,7 @@ var middlewares = require('../middlewares');
 var helpers = require('../helpers');
 var Paginator = require('../modules/paginator');
 var User = require('../models/user');
+var Conversation = require('../models/conversation');
 var FeatureAd = require('../models/feature_ad');
 var config = require('../../shared/config');
 
@@ -133,6 +134,14 @@ function lostpassword(params, callback) {
                status: 302
            });
         }
+        if (platform === 'html5' && params.success) {
+            return helpers.common.redirect.call(this, '/login', {
+                sent: true
+            }, {
+                status: 302
+            });
+        }
+
         callback(null, {
             form: this.form,
             success: params.success
@@ -160,7 +169,8 @@ function login(params, callback) {
         }
         callback(null, {
             form: this.form,
-            redirect: params.redirect
+            redirect: params.redirect,
+            sent: params.sent
         });
     }
 }
@@ -822,7 +832,33 @@ function report(params, callback) {
     helpers.controllers.control.call(this, params, controller);
 
     function controller() {
-        callback(null, {});
+        var conversation;
+
+        var prepare = function(done) {
+            conversation = new Conversation({
+                hash: params.hash
+            }, {
+                app: this.app
+            });
+            done();
+        }.bind(this);
+
+        var fetch = function(done,err) {
+            conversation.report(done);
+        }.bind(this);
+
+        var error = function(err, res) {
+            return helpers.common.error.call(this, err, res, callback);
+        }.bind(this);
+
+        var success = function() {
+            callback(null, {});
+        }.bind(this);
+
+        asynquence().or(error)
+            .then(prepare)
+            .then(fetch)
+            .val(success);
     }
 }
 
@@ -830,7 +866,33 @@ function unsubscribe(params, callback) {
     helpers.controllers.control.call(this, params, controller);
 
     function controller() {
-        callback(null, {});
+        var conversation;
+
+        var prepare = function(done) {
+            conversation = new Conversation({
+                hash: params.hash
+            }, {
+                app: this.app
+            });
+            done();
+        }.bind(this);
+
+        var fetch = function(done,err) {
+            conversation.unsubscribe(done);
+        }.bind(this);
+
+        var error = function(err, res) {
+            return helpers.common.error.call(this, err, res, callback);
+        }.bind(this);
+
+        var success = function() {
+            callback(null, {});
+        }.bind(this);
+
+        asynquence().or(error)
+            .then(prepare)
+            .then(fetch)
+            .val(success);
     }
 }
 

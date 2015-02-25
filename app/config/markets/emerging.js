@@ -92,6 +92,7 @@ module.exports = {
             },
             ati: {
                 enabled: true,
+                platforms: ['html5', 'html4', 'wap'],
                 server: {
                     enabled: true,
                     platforms: ['html5', 'html4', 'wap'],
@@ -99,11 +100,12 @@ module.exports = {
                 },
                 client: {
                     enabled: true,
-                    platforms: ['desktop', 'html5']
+                    platforms: ['html5']
                 }
             },
             analytics: {
                 enabled: true,
+                platforms: ['html5', 'html4', 'wap'],
                 server: {
                     enabled: true,
                     platforms: ['html5', 'html4', 'wap'],
@@ -111,16 +113,16 @@ module.exports = {
                 },
                 client: {
                     enabled: true,
-                    platforms: ['desktop', 'html5']
+                    platforms: ['html5']
                 }
             },
             hydra: {
-                enabled: true,
-                platforms: ['desktop']
+                enabled: false,
+                platforms: []
             },
             tagmanager: {
                 enabled: false,
-                platforms: ['desktop']
+                platforms: []
             },
             facebook: {
                 enabled: false,
@@ -135,7 +137,7 @@ module.exports = {
                 platforms: ['wap', 'html4', 'html5', 'desktop']
             },
             ninja: {
-                enabled: false,
+                enabled: true,
                 platforms: ['desktop']
             },
             adroll: {

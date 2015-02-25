@@ -35,7 +35,9 @@ module.exports = {
     environment: {
         type: 'testing',
         staticPath: 'http://static01.olx-st.com/mobile-webapp',
-        imagePath: 'http://images01.olx-st.com/mobile-webapp'
+        imagePath: 'http://images01.olx-st.com/mobile-webapp',
+        staticPathIris: 'http://static01.olx-st.ir/mobile-webapp',
+        imagePathIris: 'http://images01.olx-st.ir/mobile-webapp'
     },
     localization: {
         wap: ['www.olx.co.za', 'www.olx.ir', 'www.olx.hn'],
@@ -148,7 +150,7 @@ module.exports = {
             },
             contactForm: {
                 worldwide: false,
-                countries: ['www.olx.co.cr', 'www.olx.com.uy', 'www.olx.com.pa', 'www.olx.co.ug', 'www.olx.co.tz']
+                countries: ['www.olx.co.cr', 'www.olx.com.uy', 'www.olx.com.pa', 'www.olx.co.ug', 'www.olx.co.tz', 'www.olx.com.pe', 'www.olx.com.sv', 'www.olx.com.ec', 'www.olx.com.ve', 'www.olx.com.uy', 'www.olx.com.ar', 'www.olx.com.co', 'www.olx.com.gt']
             },
             optimizely: {
                 worldwide: false,

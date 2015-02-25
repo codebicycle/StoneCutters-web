@@ -188,12 +188,5 @@ module.exports = {
                 }
             }
         }
-    },
-    tracking: {
-        trackers: {
-            tagmanager: {
-                enabled: true
-            }
-        }
     }
 };

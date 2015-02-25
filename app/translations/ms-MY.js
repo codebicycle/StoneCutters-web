@@ -538,6 +538,7 @@ module.exports = {
     'misc.publish-in': 'Publish In',
     'misc.RejectedAd_Caps': 'Iklan yang ditolak',
     'misc.Removed': 'Dibuang',
+    'misc.RemoveFromList': 'Dibuang dari senarai',
     'misc.ReturnToMsgs': 'Volver a mis mensajes',
     'misc.return_ads': '<<LINK>>Return to My Ads<</LINK>>',
     'misc.SafetyTipsBuyers': 'Petua Keselamatan untuk Pembeli',

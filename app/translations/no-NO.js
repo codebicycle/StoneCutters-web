@@ -538,6 +538,7 @@ module.exports = {
     'misc.publish-in': 'Publish In',
     'misc.RejectedAd_Caps': 'Avviste annonse',
     'misc.Removed': 'Fjernet',
+    'misc.RemoveFromList': 'Fjerne fra denne listen',
     'misc.ReturnToMsgs': 'Volver a mis mensajes',
     'misc.return_ads': '<<LINK>>Return to My Ads<</LINK>>',
     'misc.SafetyTipsBuyers': 'Sikkerhetstips for kj\xF8pere',

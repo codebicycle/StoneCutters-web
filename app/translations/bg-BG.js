@@ -538,6 +538,7 @@ module.exports = {
     'misc.publish-in': 'Publish In',
     'misc.RejectedAd_Caps': 'O\u0442\u0445\u0432\u044A\u0440\u043B\u0435\u043D\u0430 \u043E\u0431\u044F\u0432\u0430',
     'misc.Removed': '\u041F\u0440\u0435\u043C\u0430\u0445\u043D\u0430\u0442\u0438',
+    'misc.RemoveFromList': '\u041F\u0440\u0435\u043C\u0430\u0445\u0432\u0430\u043D\u0435 \u043E\u0442 \u0442\u043E\u0437\u0438 \u0441\u043F\u0438\u0441\u044A\u043A',
     'misc.ReturnToMsgs': 'Volver a mis mensajes',
     'misc.return_ads': '<<LINK>>Return to My Ads<</LINK>>',
     'misc.SafetyTipsBuyers': '\u0421\u044A\u0432\u0435\u0442\u0438 \u0437\u0430 \u0431\u0435\u0437\u043E\u043F\u0430\u0441\u043D\u043E\u0441\u0442 \u0437\u0430 \u043A\u0443\u043F\u0443\u0432\u0430\u0447\u0438\u0442\u0435',

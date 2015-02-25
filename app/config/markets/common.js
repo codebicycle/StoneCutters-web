@@ -37,39 +37,5 @@ module.exports = {
         metaTitleLength: 110,
         metaDescriptionLength: 160,
         maxResultToIndexFollow: 0
-    },
-    tracking: {
-        enabled: true,
-        trackers: {
-            serverSide: {
-                enabled: true
-            },
-            ati: {
-                enabled: true,
-                server: {
-                    enabled: true,
-                    platforms: ['html5', 'html4', 'wap']
-                },
-                client: {
-                    enabled: true,
-                    platforms: ['desktop', 'html5']
-                }
-            },
-            analytics: {
-                enabled: true,
-                server: {
-                    enabled: true,
-                    platforms: ['html5', 'html4', 'wap']
-                },
-                client: {
-                    enabled: true,
-                    platforms: ['desktop', 'html5']
-                }
-            },
-            hydra: {
-                enabled: true,
-                platforms: ['desktop']
-            }
-        }
     }
 };

@@ -163,44 +163,5 @@ module.exports = {
                 }
             }
         }
-    },
-    tracking: {
-        trackers: {
-            hydra: {
-                enabled: false
-            },
-            ati: {
-                enabled: true,
-                platforms: ['html5', 'html4', 'wap'],
-                server: {
-                    enabled: true,
-                    platforms: ['html5', 'html4', 'wap'],
-                    event: true
-                },
-                client: {
-                    enabled: true,
-                    platforms: ['html5']
-                }
-            },
-            analytics: {
-                enabled: true,
-                platforms: ['html5', 'html4', 'wap'],
-                server: {
-                    enabled: true,
-                    platforms: ['html5', 'html4', 'wap'],
-                    event: true
-                },
-                client: {
-                    enabled: true,
-                    platforms: ['html5']
-                }
-            },
-            ninja: {
-                enabled: true
-            },
-            tagmanager: {
-                enabled: false
-            }
-        }
     }
 };
