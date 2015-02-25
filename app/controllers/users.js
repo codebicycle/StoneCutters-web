@@ -866,6 +866,7 @@ function unsubscribe(params, callback) {
     helpers.controllers.control.call(this, params, controller);
 
     function controller() {
+        var conversation;
 
         var prepare = function(done) {
             conversation = new Conversation({
