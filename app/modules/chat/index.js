@@ -1,6 +1,5 @@
 'use strict';
 
-var _ = require('underscore');
 var config = require('../../../shared/config');
 
 function isEnabled() {
