@@ -1,10 +1,16 @@
 'use strict';
 
 module.exports = {
-    enabled: false,
+    enabled: true,
     'default': {
         options: {
             pubId: 'ca-pub-9177434926134739'
+        }
+    },
+    HalfBanner: {
+        params: {
+            width: 234,
+            height: 60
         }
     },
     MediumRectangle: {
