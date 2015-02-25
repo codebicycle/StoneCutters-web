@@ -10,8 +10,10 @@ module.exports = {
             myMsgs: 15
         }
     },
-    post_banner: {
-        image: 'post-africa'
+    marketing: {
+        post_banner: {
+            image: 'post-africa'
+        }
     },
     successPage: {
         keepPosting: [

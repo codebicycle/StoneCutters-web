@@ -3,9 +3,6 @@ module.exports = {
         order: [830, 800, 811, 806, 362, 815, 859, 16, 821],
         columns: [3, 2, 2]
     },
-    post_banner: {
-        image: 'post-peru'
-    },
     socials: {
         links: [
             {
@@ -23,6 +20,9 @@ module.exports = {
         ]
     },
     marketing: {
+        post_banner: {
+            image: 'post-peru'
+        },
         videos: [
             {
                 title: 'OLX Peru - Cristian Rivero - Garage',
