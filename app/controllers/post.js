@@ -27,7 +27,6 @@ function flowMarketing(params, callback) {
 }
 
 function rebump(params, callback) {
-
     helpers.controllers.control.call(this, params, controller);
 
     function controller() {
