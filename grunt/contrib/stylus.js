@@ -22,12 +22,12 @@ module.exports = function(grunt) {
 
         function prepareFiles(environment, _platform) {
             var localization = utils.getLocalization(grunt, {}, environment);
-            var data = findDefaultData(environment, _platform);
+            var defaultData = findDefaultData(environment, _platform);
             var options = {
                 environment: environment
             };
             var platform;
-            var files;
+            var data;
 
             for (platform in localization) {
                 if (platform !== _platform) {
@@ -36,22 +36,28 @@ module.exports = function(grunt) {
                 _.extend(options, {
                     platform: platform
                 });
-                prepareTask(data.files, data.options, _.extend(options, {
+                prepareTask(defaultData, _.extend(options, {
                     location: 'default'
                 }));
-                localization[platform].forEach(function eachLocation(location) {
-                    files = findLocationFiles(location, data.files);
-                    prepareTask(files, data.options, _.extend(options, {
-                        location: location
-                    }));
-                });
+                localization[platform].forEach(eachLocation.bind(null, defaultData, options));
             }
 
-            function findLocationFiles(location, defaultFiles) {
+            function eachLocation(defaultData, options, location) {
+                var data = findLocationData(location, defaultData);
+
+                prepareTask(data, _.extend(options, {
+                    location: location
+                }));
+            }
+
+            function findLocationData(location, defaultData) {
                 var dir = 'app/localized/' + location + '/stylesheets/' + platform;
                 var defaultTarget = 'public/css/default/' + platform + '/styles';
                 var target = 'public/css/' + location + '/' + platform + '/styles';
-                var files = _.clone(defaultFiles);
+                var data = {
+                    files: _.clone(defaultData.files),
+                    options: _.clone(defaultData.options)
+                };
 
                 if (environment !== 'production') {
                     defaultTarget += '-' + environment;
@@ -59,8 +65,8 @@ module.exports = function(grunt) {
                 }
                 defaultTarget += '.css';
                 target += '.css';
-                if (!files[target]) {
-                    files[target] = _.clone(files[defaultTarget]);
+                if (!data.files[target]) {
+                    data.files[target] = _.clone(data.files[defaultTarget]);
                 }
                 if (grunt.file.exists(dir)) {
                     grunt.file.recurse(dir, function each(abspath, rootdir, subdir, filename) {
@@ -72,11 +78,11 @@ module.exports = function(grunt) {
                         if (filename.split('.').pop() !== 'styl') {
                             return;
                         }
-                        files[target][abspath.replace('/' + location + '/', '/default/')] = abspath;
+                        data.files[target][abspath.replace('/' + location + '/', '/default/')] = abspath;
                     });
                 }
-                delete files[defaultTarget];
-                return files;
+                delete data.files[defaultTarget];
+                return data;
             }
         }
 
@@ -115,19 +121,20 @@ module.exports = function(grunt) {
             return data;
         }
 
-        function prepareTask(files, stylusOptions, options) {
+        function prepareTask(data, options) {
             var key = [options.environment, options.platform, options.location].join('-');
+            var files = data.files;
             var target;
             var file;
 
             stylus[key] = {
                 files: {},
-                options: _.defaults({}, stylusOptions, {
+                options: _.defaults({}, data.options, {
                     paths: [],
                     import: [],
                     define: {
                         staticUrl: utils.get(stylusConfig, [options.environment, options.location, 'urls', 'static'], utils.get(stylusConfig, [options.environment, 'urls', 'static'], '')),
-                        imageUrl: utils.get(stylusConfig, [options.environment, options.location, 'urls', 'image'], utils.get(stylusConfig, [options.environment, 'urls', 'static'], ''))
+                        imageUrl: utils.get(stylusConfig, [options.environment, options.location, 'urls', 'image'], utils.get(stylusConfig, [options.environment, 'urls', 'image'], ''))
                     }
                 })
             };
@@ -186,8 +193,8 @@ module.exports = function(grunt) {
                 fileName.push(environment);
             }
             if (environment !== 'development') {
-                stylus[key].options.define.staticUrl = stylusConfig[environment].urls.static;
-                stylus[key].options.define.imageUrl = stylusConfig[environment].urls.image;
+                stylus[key].options.define.staticUrl = utils.get(stylusConfig, [environment, 'urls', 'static'], '');
+                stylus[key].options.define.imageUrl = utils.get(stylusConfig, [environment, 'urls', 'image'], '');
             }
             fileName.push('.css');
             fileName = fileName.join('');
