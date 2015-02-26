@@ -89,6 +89,30 @@ module.exports = function(nunjucks) {
     return str.toLowerCase().replace(/[^\w ]+/g,'').replace(/ +/g,'-');
     }
 
+    function randomInt(max) {
+        return Math.floor(Math.random() * max);
+    }
+
+    function shuffleItems(items, shops){
+        console.log(items.length, shops.length);
+        var shuffle = [];
+        var itemIndex = 0;
+        var shopIndex = 0;
+        var length = items.length + shops.length;
+
+        for (var i = 0; i < length; i++) {
+            if (randomInt(10) <= 2 && shopIndex < shops.length) {
+                shuffle[i] = { "index": shopIndex, "type": "shop"};
+                shopIndex++;
+            } else if (itemIndex < items.length) {
+                shuffle[i] = { "index": itemIndex, "type": "item"};
+                itemIndex++;                
+            }
+        }
+        return shuffle;
+
+    }
+
     return {
         is: is,
         log: log,
@@ -106,6 +130,8 @@ module.exports = function(nunjucks) {
         hijri: helpers.hijri,
         persianDigits: helpers.numbers.toPersian,
         latinDigits: helpers.numbers.toLatin,
+        randomInt: randomInt,
+        shuffleItems: shuffleItems
 
     };
 };
