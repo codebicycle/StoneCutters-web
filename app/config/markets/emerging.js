@@ -187,5 +187,16 @@ module.exports = {
                 }
             }
         }
+    },
+    chat: {
+        enabled: false,
+        sections: {
+            'categories#list': {
+                enabled: false
+            },
+            'post#flow': {
+                enabled: false
+            }
+        }
     }
 };

@@ -76,5 +76,16 @@ module.exports = {
                 images: 'compact'
             }
         }
+    },
+    chat: {
+        enabled: true,
+        sections: {
+            'categories#list': {
+                enabled: true
+            },
+            'post#flow': {
+                enabled: true
+            }
+        }
     }
 };
