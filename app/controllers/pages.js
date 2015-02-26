@@ -158,8 +158,6 @@ function error(params, callback) {
 function didyousell(params, callback) {
     helpers.controllers.control.call(this, params, controller);
 
-    console.log(params);
-
     function controller() {
         var user = this.app.session.get('user');
         var securityKey = params.sk;
@@ -201,43 +199,26 @@ function didyousell(params, callback) {
                 }
             }, {
                 readFromCache: false
-            }, function afterFetch(err, res) {
-                if (!res) {
-                    res = {};
-                }
-                if (err) {
-                    if (err.status !== 422) {
-                        return done.fail(err, res);
-                    }
-                    // res.item = buildItemPurged(err.body);
-                    err = null;
-                }
-                if (!res.item.get('status')) {
-                    console.log('[OLX_DEBUG]', 'no status', res.item.get('id'));
-                    return error(new Error(), res);
-                }
-                else if (!res.item.get('status').open && !res.item.get('status').onReview) {
-                    res.item.set('purged', true);
-                }
-                done(res);
-            }.bind(this));
+            }, done.errfcb);
         }.bind(this);
 
-        var success = function(_item, relatedItems) {
-            var item = _item.toJSON();
-            var subcategory = this.dependencies.categories.search(_item.get('category').id);
-            var view = 'items/show';
+        var success = function(res) {
+            var item = res.item;
+            var subcategory = this.dependencies.categories.search(item.get('category').id);
             var category;
             var url;
 
-            console.log(item);
-            
-            callback(null, view, {
+            callback(null, {
                 include: ['item'],
-                item: item,
+                item: item.toJSON(),
                 sk: securityKey,
+                answer: params.answer,
                 sent: params.sent,
             });
+        }.bind(this);
+
+        var error = function(err, res) {
+            return helpers.common.error.call(this, err, res, callback);
         }.bind(this);
 
         asynquence().or(error)
