@@ -167,6 +167,14 @@ function didyousell(params, callback) {
         var newItemPage = helpers.features.isEnabled.call(this, 'newItemPage');
         var anonymousItem;
 
+        var redirect = function(done) {
+            if (platform === 'wap') {
+                done.abort();
+                return helpers.common.redirect.call(this, '/');
+            }
+            done();
+        }.bind(this);
+
         var prepare = function(done) {
             if (user) {
                 params.token = user.token;
@@ -222,6 +230,7 @@ function didyousell(params, callback) {
         }.bind(this);
 
         asynquence().or(error)
+            .then(redirect)
             .then(prepare)
             .then(fetch)
             .val(success);

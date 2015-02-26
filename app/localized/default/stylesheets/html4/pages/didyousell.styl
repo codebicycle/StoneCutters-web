@@ -1,12 +1,19 @@
-.pages_didyousell_view {
-    clear-fix();
+.pages_didyousell_view::after {
+    clear: both;
+    content: " ";
+    display: block;
+}
+
+.notification-message::after {
+    clear: both;
+    content: " ";
+    display: block;
 }
 
 .notification-message {
     background-color: #eeffcc;
-    border-radius(3px);
+    border-radius: 3px;
     border: 1px solid #ccdd77;
-    clear-fix();
     margin: 20px;
     min-height: 50px;
     padding: 10px;
@@ -33,7 +40,7 @@
     }
 }
 .notification-keep-posting {
-    border-radius(3px);
+    border-radius: 3px;
     border: 1px solid #ccc;
     margin: 20px;
     padding: 10px;
@@ -61,10 +68,14 @@
         margin-bottom: 10px;
     }
 }
+.didYouSellNo::after {
+    clear: both;
+    content: " ";
+    display: block;
+}
 
 .didYouSellNo {
-    border: 1px solid $greyBorders;
-    clear-fix();
+    border: 1px solid #ccc;
     margin: 20px 10px;
     padding: 10px 0;
     text-align: center;
@@ -78,7 +89,7 @@
     }
 
     p {
-        color: $black;
+        color: #2d2d2d;
         float: left;
         font-size: 16px;
         margin-bottom: 25px;
@@ -90,9 +101,10 @@
         p {
             margin-bottom: 10px;
         }
+
     }
-    article {
-        border-top: 1px solid $greyBorders;
+    .didYouSellOpt {
+        border-top: 1px solid #cccccc;
         display: inline-block;
         float: left;
         height: 100px;
@@ -100,14 +112,14 @@
         width: 97%
 
         h3 {
-            color: $black;
+            color: #2d2d2d;
             font-size: 16px;
             font-weight: bold;
             text-align: left;
             margin-bottom: 5px;
         }
         p {
-            color: $black;
+            color: #2d2d2d;
             font-size: 12px;
             text-align: left;
         }
@@ -117,10 +129,11 @@
             width: 80%;
         }
         .btns {
-            border: 1px solid $greyBorders;
-            color: $orange;
+            border: 1px solid #cccccc;
+            color: #dd8931;
             font-size: 14px;
             font-weight: bold;
+            float: left;
         }
     }
     .icons {
@@ -131,7 +144,6 @@
         float: left;
     }
     .icon-lamp {
-        clear-fix();
         background-image: url(imageUrl/images/html5/icons/icon_lampara-azul.png);
         float: none;
         height: 41px;
