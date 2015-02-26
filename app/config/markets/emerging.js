@@ -187,5 +187,26 @@ module.exports = {
                 }
             }
         }
+    },
+    chat: {
+        enabled: false,
+        sections: {
+            'categories#list': {
+                enabled: false
+            },
+            'post#flow': {
+                enabled: false
+            }
+        }
+    },
+    relatedAds: {
+        desktop: {
+            enabled: true,
+            group: 2,
+            quantity: 3,
+            module: 'suggestion',
+            layout: 'default',
+            link: 'http://samurai.onap.io/samurai.js'
+        }
     }
 };
