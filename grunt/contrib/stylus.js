@@ -14,48 +14,96 @@ module.exports = function(grunt) {
     };
 
     (function stylusGeneral() {
-        var key;
-
         environments.forEach(function eachEnvironments(environment) {
             platforms.forEach(function (platform) {
-                key = environment + '-' + platform;
-
-                stylus[key] = {
-                    files: {},
-                    options: {
-                        paths: [],
-                        import: [],
-                        define: {
-                            staticUrl: (stylusConfig[environment] ? stylusConfig[environment].urls.static : ''),
-                            imageUrl: (stylusConfig[environment] ? stylusConfig[environment].urls.image : '')
-                        }
-                    }
-                };
-                getFiles(environment, platform);
+                prepareFiles(environment, platform);
             });
         });
 
-
-        function getFiles(environment, _platform) {
+        function prepareFiles(environment, _platform) {
             var localization = utils.getLocalization(grunt, {}, environment);
-            var files = {};
-            var file;
+            var defaultData = findDefaultData(environment, _platform);
+            var options = {
+                environment: environment
+            };
             var platform;
+            var data;
+
+            for (platform in localization) {
+                if (platform !== _platform) {
+                    continue;
+                }
+                _.extend(options, {
+                    platform: platform
+                });
+                prepareTask(defaultData, _.extend(options, {
+                    location: 'default'
+                }));
+                localization[platform].forEach(eachLocation.bind(null, defaultData, options));
+            }
+
+            function eachLocation(defaultData, options, location) {
+                var data = findLocationData(location, defaultData);
+
+                prepareTask(data, _.extend(options, {
+                    location: location
+                }));
+            }
+
+            function findLocationData(location, defaultData) {
+                var dir = 'app/localized/' + location + '/stylesheets/' + platform;
+                var defaultTarget = 'public/css/default/' + platform + '/styles';
+                var target = 'public/css/' + location + '/' + platform + '/styles';
+                var data = {
+                    files: _.clone(defaultData.files),
+                    options: _.clone(defaultData.options)
+                };
+
+                if (environment !== 'production') {
+                    defaultTarget += '-' + environment;
+                    target += '-' + environment;
+                }
+                defaultTarget += '.css';
+                target += '.css';
+                if (!data.files[target]) {
+                    data.files[target] = _.clone(data.files[defaultTarget]);
+                }
+                if (grunt.file.exists(dir)) {
+                    grunt.file.recurse(dir, function each(abspath, rootdir, subdir, filename) {
+                        if (subdir && subdir === 'helpers') {
+                            data.options.paths = [rootdir];
+                            data.options.import = ['helpers'];
+                            return false;
+                        }
+                        if (filename.split('.').pop() !== 'styl') {
+                            return;
+                        }
+                        data.files[target][abspath.replace('/' + location + '/', '/default/')] = abspath;
+                    });
+                }
+                delete data.files[defaultTarget];
+                return data;
+            }
+        }
+
+        function findDefaultData(environment, platform) {
+            var data = {
+                files: {},
+                options: {}
+            };
 
             grunt.file.recurse('app/localized/default/stylesheets', function callback(abspath, rootdir, subdir, filename) {
                 var parts = subdir.split('/');
                 var target = 'public/css/default/' + parts[0] + '/styles';
-                var helpers = {};
-                var platform = parts[0];
+                var helpers;
 
-                if (platform !== _platform) {
+                if (parts[0] !== platform) {
                     return;
                 }
-
                 if (parts[1] && parts[1] === 'helpers') {
-                    helpers = rootdir + '/' + platform;
-                    stylus[key].options.paths = [helpers];
-                    stylus[key].options.import = ['helpers'];
+                    helpers = rootdir + '/' + parts[0];
+                    data.options.paths = [helpers];
+                    data.options.import = ['helpers'];
                     return false;
                 }
                 if (environment !== 'production') {
@@ -65,52 +113,36 @@ module.exports = function(grunt) {
                 if (filename.split('.').pop() !== 'styl') {
                     return;
                 }
-                if (!files[target]) {
-                    files[target] = {};
+                if (!data.files[target]) {
+                    data.files[target] = {};
                 }
-
-                files[target][abspath] = abspath;
+                data.files[target][abspath] = abspath;
             });
+            return data;
+        }
 
-            for (platform in localization) {
-                if (platform !== _platform) {
-                    continue;
-                }
-                localization[platform].forEach(eachLocation);
-            }
-            for (var target in files) {
+        function prepareTask(data, options) {
+            var key = [options.environment, options.platform, options.location].join('-');
+            var files = data.files;
+            var target;
+            var file;
+
+            stylus[key] = {
+                files: {},
+                options: _.defaults({}, data.options, {
+                    paths: [],
+                    import: [],
+                    define: {
+                        staticUrl: utils.get(stylusConfig, [options.environment, options.location, 'urls', 'static'], utils.get(stylusConfig, [options.environment, 'urls', 'static'], '')),
+                        imageUrl: utils.get(stylusConfig, [options.environment, options.location, 'urls', 'image'], utils.get(stylusConfig, [options.environment, 'urls', 'image'], ''))
+                    }
+                })
+            };
+
+            for (target in files) {
                 stylus[key].files[target] = [];
                 for (file in files[target]) {
                     stylus[key].files[target].unshift(files[target][file]);
-                }
-            }
-
-            function eachLocation(location) {
-                var dir = 'app/localized/' + location + '/stylesheets/' + platform;
-                var defaultTarget = 'public/css/default/' + platform + '/styles';
-                var target = 'public/css/' + location + '/' + platform + '/styles';
-
-                if (environment !== 'production') {
-                    defaultTarget += '-' + environment;
-                    target += '-' + environment;
-                }
-                defaultTarget += '.css';
-                target += '.css';
-                if (!files[target]) {
-                    files[target] = _.clone(files[defaultTarget]);
-                }
-                if (grunt.file.exists(dir)) {
-                    grunt.file.recurse(dir, function each(abspath, rootdir, subdir, filename) {
-                        if (subdir && subdir === 'helpers') {
-                            stylus[key].options.paths = [rootdir];
-                            stylus[key].options.import = ['helpers'];
-                            return false;
-                        }
-                        if (filename.split('.').pop() !== 'styl') {
-                            return;
-                        }
-                        files[target][abspath.replace('/' + location + '/', '/default/')] = abspath;
-                    });
                 }
             }
         }
@@ -161,8 +193,8 @@ module.exports = function(grunt) {
                 fileName.push(environment);
             }
             if (environment !== 'development') {
-                stylus[key].options.define.staticUrl = stylusConfig[environment].urls.static;
-                stylus[key].options.define.imageUrl = stylusConfig[environment].urls.image;
+                stylus[key].options.define.staticUrl = utils.get(stylusConfig, [environment, 'urls', 'static'], '');
+                stylus[key].options.define.imageUrl = utils.get(stylusConfig, [environment, 'urls', 'image'], '');
             }
             fileName.push('.css');
             fileName = fileName.join('');

@@ -6,9 +6,7 @@
 <section class="login_view">
     <h4 class="title">{{ dictionary["loginbox.Login"] }}</h4>
 
-    {% if facebookLogin %}
-        {% view 'users/facebooklogin' %}
-    {% endif %}
+    {% view 'users/facebooklogin' %}
     
     <form action="{{ '/login' | link }}" method="POST" enctype="multipart/form-data">
         <fieldset class="wrapper {{ 'error' if error != '' }}">
