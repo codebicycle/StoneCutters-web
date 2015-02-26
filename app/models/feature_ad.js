@@ -37,15 +37,23 @@ function isPlatformEnabled(app, platforms) {
 
 FeatureAd.isEnabled = function isEnabled(app) {
     var currentRoute = app.session.get('currentRoute');
-    var section = [currentRoute.controller, currentRoute.action].join('#');
     var location = app.session.get('location');
+    var env = config.get(['environment', 'type'], 'development');
+    var section = [currentRoute.controller, currentRoute.action].join('#');
     var enabled = FeatureAd.isLocationEnabled(location.url);
+    var environments;
 
     if (enabled) {
         enabled = isPlatformEnabled(app, config.getForMarket(location.url, ['featured', 'platforms']));
     }
     if (enabled) {
         enabled = config.getForMarket(location.url, ['featured', 'section', section, 'enabled'], true);
+    }
+    if (enabled) {
+        environments = config.getForMarket(location.url, ['featured', 'section', section, 'environments']);
+        if (environments) {
+            enabled = _.contains(environments, env);
+        }
     }
     return enabled;
 };
