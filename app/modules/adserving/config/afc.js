@@ -39,5 +39,13 @@ module.exports = {
             height: 90
         }
     },
+    TextBottomZA: {
+        params: {
+            number: 3,
+            media: 'text',
+            width: 728,
+            height: 90
+        }
+    },
     clientsIds: ['us', 'es', 'za']
 };
