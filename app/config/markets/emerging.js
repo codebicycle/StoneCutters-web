@@ -20,12 +20,30 @@ module.exports = {
                 topgallery: {
                     service: 'CSA',
                     format: 'default',
-                    location: 'Top'
+                    location: 'Top',
+                    numberPerCategoryCSA: {
+                        filterig: 2,
+                        filter: 2,
+                        searchig: 2,
+                        search: 2,
+                        statics: 2,
+                        allresults: 2,
+                        allresultsig: 2
+                    }
                 },
                 top: {
                     service: 'CSA',
                     format: 'custom',
-                    location: 'Top'
+                    location: 'Top',
+                    numberPerCategoryCSA: {
+                        filterig: 2,
+                        filter: 2,
+                        searchig: 2,
+                        search: 2,
+                        statics: 2,
+                        allresults: 2,
+                        allresultsig: 2
+                    }
                 },
                 mobiletop: {
                     service: 'none'
