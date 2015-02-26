@@ -10,7 +10,7 @@ module.exports = Base.extend({
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
         var sixpack = new Sixpack({
-            clientId: this.app.session.get('sixpackId'),
+            clientId: this.app.session.get('clientId'),
             platform: this.app.session.get('platform'),
             market: this.app.session.get('location').abbreviation,
             experiments: this.app.session.get('experiments')
