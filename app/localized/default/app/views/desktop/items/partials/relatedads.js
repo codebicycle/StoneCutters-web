@@ -3,22 +3,28 @@
 var _ = require('underscore');
 var Base = require('../../../../../../common/app/bases/view');
 var translations = require('../../../../../../../../shared/translations');
+var config = require('../../../../../../../../shared/config');
 
 module.exports = Base.extend({
-    className: 'clm-samurai',
     id: 'related-ads',
     postRender: function() {
+        var location = this.app.session.get('location');
+
+        if (!config.getForMarket(location.url, ['relatedAds', 'desktop', 'enabled'], false)) {
+            return;
+        }
+
         var id = this.id;
         var data = {
-            module: 'suggestion',
-            country: this.app.session.get('location').id,
+            module: config.getForMarket(location.url, ['relatedAds', 'desktop', 'module'], 'suggestion'),
+            country: location.id,
             item: this.parentView.getItem().get('id'),
-            group: '2',
             title: translations.get(this.app.session.get('selectedLanguage'))['itemgeneraldetails.RelatedListings'],
-            quantity: '3',
-            layout: 'default',
+            group: config.getForMarket(location.url, ['relatedAds', 'desktop', 'group'], 2),
+            quantity: config.getForMarket(location.url, ['relatedAds', 'desktop', 'quantity'], 'default'),
+            layout: config.getForMarket(location.url, ['relatedAds', 'desktop', 'layout'], 3),
             language: this.app.session.get('selectedLanguage'),
-            location: this.app.session.get('location').url,
+            location: location.url,
             callback: 'samuraiCallback'
         };
 
@@ -40,7 +46,7 @@ module.exports = Base.extend({
             });
             content += '></div>';
             content += '<script type="text/javascript">window.samuraiCallback = function(html) { window.parent.$("#'  + id + '").html(html); };</script>';
-            content += '<script type="text/javascript" async src="http://clm-samurai-demo.onap.io/samurai.js"></script>';
+            content += '<script type="text/javascript" async src="' + config.getForMarket(location.url, ['relatedAds', 'desktop', 'link'], 'http://samurai.onap.io/samurai.js') + '"></script>';
             (this.contentDocument || this.contentWindow.document).write(content);
         }
     }
