@@ -6,6 +6,8 @@
     <div class="item-main-wrapper">
         {% include (template + "/items/itemcontent.html") %}
 
+        {% view 'items/partials/relatedads' %}
+
         {% view 'partials/adserving', 'item_bottom' %}
 
         {% if seo %}
