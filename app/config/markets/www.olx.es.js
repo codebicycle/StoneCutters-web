@@ -24,6 +24,30 @@ module.exports = {
             }
         ]
     },
+    adserving: {
+        enabled: true,
+        slots: {
+            listing: {
+                mobiletop: {
+                    service: 'ADX',
+                    format: 'HalfBanner',
+                    location: 'Top'
+                },
+                side: {
+                    service: 'ADX',
+                    format: 'WideSkyscraper',
+                    location: 'Side'
+                }
+            },
+            item: {
+                side: {
+                    service: 'ADX',
+                    format: 'MediumRectangle',
+                    location: 'Side'
+                }
+            }
+        }
+    },
     featured: {
         enabled: true
     }
