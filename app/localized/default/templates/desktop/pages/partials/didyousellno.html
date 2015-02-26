@@ -7,7 +7,10 @@
                 <div>
                     <h3>{{ dictionary["misc.ShareAd"] }}</h3>
                     <p>Utilizá las redes sociales para aumentar la exposición de tu aviso.</p>
-                    <iframe src="http://www.facebook.com/plugins/share_button.php?href={{ item.slug }}&amp;layout=button" scrolling="no" frameborder="0" style="border:none; overflow:hidden;" allowTransparency="true"></iframe>
+                    <div class="facebook-share" data-share-facebook data-share-url="{{ item.slug }}">
+                        <span class="icons icon-facebook"></span>
+                        <p>{{ dictionary["item.ShareAd"] }}</p>
+                    </div>
                 </div>
             </article>
             <article>

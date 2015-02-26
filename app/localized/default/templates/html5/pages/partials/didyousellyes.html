@@ -1,24 +1,14 @@
-<aside id="notification-message" class="notification-message icons icon-happy">
+<section id="notification-message" class="notification-message icons icon-happy">
+    <span class="icons icon-happy"></span>
     <h4>{{ dictionary["posting_step4.WellDoneAdCreated"] }}</h4>
     <p>{{ dictionary["posting_fields_1.IfAdApprovedYouWillReceiveEmailConfirmation"] }}</p>
-</aside>
+</section>
 
-<aside id="notification-keep-posting" class="notification-keep-posting">
-    <h3 class="title">{{ dictionary["misc.misc-keep"] }} <span class="highlight">{{ dictionary["misc.misc_publishing"] | lower }}</span></h3>
-    <p class="message icons icon-arrow"><span class="highlight">{{ dictionary["crm_new_version.SomethingElseToPost"] }} </span>{{ dictionary["defaultheader.PostAFreeAd"] }}.</p>
-    <div class="categories-best-selling">
-        {% for category in keepPostingCat %}
-            {% if category.category and category.subcategory %}
-                {% set postingLink = '/posting?cat='+category.category+'&subcat='+category.subcategory %}
-            {% else %}
-                {% set postingLink = '/posting?cat='+category.category %}
-            {% endif %}
-            <a href="{{ postingLink | link }}" class="module">
-                <article class="icons icon-cat-{{ category.icon }}">
-                    <p>{{ dictionary["misc.publish-in"] }} <strong>{{ category.name }}</strong></p>
-                </article>
-            </a>
-        {% endfor %}
-        <a href="{{ '/posting' | link }}" class="posting" role="button">{{ dictionary["defaultheader2.Post"] }}<span>{{ dictionary["posting_selector.SelectCategory"] }}</span></a>
+<section id="notification-keep-posting" class="notification-keep-posting">
+    <p>Seguro que tenés más cosas para vender:</p>
+    <h3 class="title">¡Publicá lo que ya no usas en OLX!</h3>
+    <span class="categories-icons"></span>
+    <div class="btnPost">
+        <a href="{{ '/posting' | link }}" class="btns orange" data-qa="post-button">Seguir vendiendo</a>
     </div>
-</aside>
+</section>

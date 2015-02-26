@@ -26,26 +26,62 @@
 }
 .didYouSellNo {
     clear-fix();
+
     h2 {
         color: $violet;
         font-size: $ll;
         text-align: center;
-        margin-bottom: 5px;
+        margin: 0 0 5px 0;
     }
 
     p {
         color: $black;
         font-size: $l;
         text-align: center;
-        margin-bottom: 15px;
+        margin-bottom: 25px;
     }
     .didYouSellOptions {
         margin: auto;
+
+        p {
+            margin-bottom: 10px;
+        }
+
+        .facebook-share {
+            action-button($blueFacebook, $white, 3px, 10px);
+            cursor: pointer;
+            font-size: $m;
+            height: 22px;
+            padding: 0;
+            text-align: left;
+            width: 136px;
+
+            span {
+                border-right: 1px solid $blueFacebook;
+                box-shadow: 1px 0px $blueFacebookBorder;
+                display: inline-block;
+                padding: 2px 5px;
+                &::before {
+                    margin-top: -2px;
+                }
+            }
+            p {
+                display: inline-block;
+                margin: 1px 0 0px 10px;
+                vertical-align: middle;
+                font-size: 12px;
+                color: $white;
+            }
+            .icons {
+                color: $white;
+                font-size: $m;
+            }
+        }
     }
     article {
         float: left;
         height: 100px;
-        padding: 10px;
+        padding: 10px 10px 30px 10px;
         width: 290px;
         h3 {
             color: $green;

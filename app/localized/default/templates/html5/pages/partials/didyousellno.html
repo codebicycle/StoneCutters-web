@@ -1,4 +1,5 @@
     <div class="didYouSellNo page-standart">
+        <span class="icons icon-lamp"></span>
         <h2>¡Queremos ayudarte a vender!</h2>
         <p>Siguiendo los siguientes consejos podés aumentar tus posibilidades de vender</p>
         <div class="didYouSellOptions">
@@ -7,47 +8,23 @@
                 <div>
                     <h3>{{ dictionary["misc.ShareAd"] }}</h3>
                     <p>Utilizá las redes sociales para aumentar la exposición de tu aviso.</p>
-                    <iframe src="http://www.facebook.com/plugins/share_button.php?href={{ item.slug }}&amp;layout=button" scrolling="no" frameborder="0" style="border:none; overflow:hidden;" allowTransparency="true"></iframe>
+                    <a href="https://www.facebook.com/sharer/sharer.php?u={{ item.slug }}" target="_blank" class="facebookButton"></a>
                 </div>
             </article>
             <article>
-                <span class="icons icon-money-round"></span>
+                <span class="icons icon-ticket"></span>
                 <div>
                     <h3>Bajá el precio</h3>
                     <p>Colocando un precio accesible tu aviso recibirá más consultas.</p>
-                    <a href="{{ '/myolx/edititem/' | link }}/{{ item.itemid }}?sk={{ sk }}">Modificar el precio</a>
+                    <a href="{{ '/myolx/edititem/' | link }}/{{ item.itemid }}?sk={{ sk }}" class="btns white">Modificar el precio</a>
                 </div>
             </article>
             <article>
-                <span class="icons icon-edit"></span>
-                <div>
-                    <h3>Escribí un título llamativo</h3>
-                    <p>un título claro y descriptivo atrae a más compradores.</p>
-                    <a href="{{ '/myolx/edititem/' | link }}/{{ item.itemid }}?sk={{ sk }}">{{ dictionary["crm_new_version.EditUrTitleNow"] }}</a>
-                </div>
-            </article>
-            <article>
-                <span class="icons icon-camera"></span>
-                <div>
-                    <h3>Más fotos</h3>
-                    <p>Subí muchas fotos, por que los avisos con fotos reciben hasta 5 veces más visitas.</p>
-                    <a href="{{ '/myolx/edititem/' | link }}/{{ item.itemid }}?sk={{ sk }}">Subir más fotos</a>
-                </div>
-            </article>
-            <article>
-                <span class="icons icon-tag"></span>
+                <span class="icons icon-post"></span>
                 <div>
                     <h3>Publicá más avisos</h3>
                     <p>Esto aumenta la confianza de los compradores y tus chances de vender.</p>
-                    <a href="{{ '/posting' | link }}">{{ dictionary["defaultheader.PostAnAd"] }}</a>
-                </div>
-            </article>
-            <article>
-                <span class="icons icon-description"></span>
-                <div>
-                    <h3>Mejorá la descripción</h3>
-                    <p>Describí tu aviso con más detalles. Esto te ayudará a vender más rápido</p>
-                    <a href="{{ '/myolx/edititem/' | link }}/{{ item.itemid }}?sk={{ sk }}">{{ dictionary["crm_new_version.EditDescriptionNow"] }}</a>
+                    <a href="{{ '/posting' | link }}" class="btns white">{{ dictionary["defaultheader.PostAnAd"] }}</a>
                 </div>
             </article>
         </div>
