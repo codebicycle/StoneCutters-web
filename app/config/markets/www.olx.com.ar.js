@@ -23,5 +23,13 @@ module.exports = {
                 name: 'Teléfonos'
             }
         ]
+    },
+    chat: {
+        enabled: true,
+        sections: {
+            'post#flow': {
+                enabled: true
+            }
+        }
     }
 };
