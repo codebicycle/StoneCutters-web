@@ -169,9 +169,8 @@ function search(params, callback, gallery) {
                     params: params
                 } 
             };
-            var location = this.app.session.get('location').url;
-            var useShops = config.getForMarket(location, ['useShops'], false);
-            if (useShops) {
+            var experiment = this.app.session.get('experiments').html4ShowShops;
+            if (experiment && experiment.alternative != 'items') {
                 collections.shops = {
                     collection: 'Shops',
                     params: params,

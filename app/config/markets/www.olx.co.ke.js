@@ -164,6 +164,5 @@ module.exports = {
                 }
             }
         }
-    },
-    useShops: true
+    }
 };

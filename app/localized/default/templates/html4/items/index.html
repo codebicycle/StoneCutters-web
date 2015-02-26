@@ -4,7 +4,7 @@
 {% set link = (breadcrumb | link) %}
 {{ Breadcrumb(dictionary, link, subcategory.trName) }}
 
-{% if shopsEnabled %}
+{% if shopsAlternative == 'adlikestore_map' or shopsAlternative == 'calltoactions_map' %}
     {% if shops.length and meta.total > 0 %}
         <div class="mapShops">
             <p class="nearby">Shops nearby:</p>
@@ -29,15 +29,15 @@
             <a class="btns orange" href="{{ '/' | link }}" >{{ dictionary["registrationconfirmsuccesstext.Browse"] | replace('<<BRAND>>','OLX') }}</a>
         </div>
     {% else %}
-        <ul class="itemListing">{{experiment | log}}
+        <ul class="itemListing">
             {% for item in items %}
-                {% if shopsEnabled %}
+                {% if shopsAlternative != 'items' %}
                     {% if shops.length %}
                         {% set shop = shops[loop.index0] %}
                         {% if shop %}
-                            {% if experiment == 'adlikestore' %}
+                            {% if shopsAlternative == 'adlikestore' or shopsAlternative == 'adlikestore_map' %}
                                 {% include (template + '/items/adlikestore.html') %}
-                            {% elif experiment == 'calltoactions' %}
+                            {% elif shopsAlternative == 'calltoactions' or shopsAlternative == 'calltoactions_map' %}
                                 {% include (template + '/items/calltoactions.html') %}
                             {% endif %}
                         {% endif %}
