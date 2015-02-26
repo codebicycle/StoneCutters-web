@@ -84,10 +84,7 @@ module.exports = {
                 bottom: {
                     service: 'AFC',
                     format: 'TextBottom',
-                    location: 'Bottom',
-                    params: {
-                        number: 3
-                    }
+                    location: 'Bottom'
                 }
             }
         }
