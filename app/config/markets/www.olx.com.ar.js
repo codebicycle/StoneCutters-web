@@ -174,5 +174,13 @@ module.exports = {
                 }
             }
         }
+    },
+    chat: {
+        enabled: true,
+        sections: {
+            'post#flow': {
+                enabled: true
+            }
+        }
     }
 };
