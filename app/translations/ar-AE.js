@@ -65,6 +65,7 @@ module.exports = {
     'itemslisting.RefineYourSearch': 'Refine your search',
     'itemslisting.SelectAll': 'Select All',
     'loginbox.CreateYourAccount': '\u0644\u0625\u0646\u0634\u0627\u0621 \u062D\u0633\u0627\u0628\u0643 \u062D\u0631\u0629 :',
+    'loginbox.ForgotYourPassword': '\xBF\u0646\u0633\u064A\u062A \u0633\u0631\u064B\u0643?',
     'loginbox.IAgreeToTheTermsAndConditionsOfBrand': 'I agree to the <<LINK_TERMS_USE>>Terms and Conditions<</LINK_TERMS_USE>> of OLX',
     'loginbox.IfYouAlreadyHaveAnAccountClickHereToLogIn': 'If you already have an account, click here to log in.',
     'loginbox.IfYouDontHaveAccountOrNeverPostedOnBrand': 'If you do not have an account or never posted an ad on OLX',

@@ -65,6 +65,7 @@ module.exports = {
     'itemslisting.RefineYourSearch': 'L\u1ECDc t\xECm ki\u1EBFm c\u1EE7a b\u1EA1n',
     'itemslisting.SelectAll': 'Ch\u1ECDn t\u1EA5t c\u1EA3',
     'loginbox.CreateYourAccount': 'T\u1EA1o t\xE0i kho\u1EA3n mi\u1EC5n ph\xED:',
+    'loginbox.ForgotYourPassword': 'Qu\xEAn m\u1EADt kh\u1EA9u?',
     'loginbox.IAgreeToTheTermsAndConditionsOfBrand': 'T\xF4i \u0111\u1ED3ng \xFD v\u1EDBi <<LINK_TERMS_USE>>\u0110i\u1EC1u kho\u1EA3n v\xE0 \u0111i\u1EC1u ki\u1EC7n <</LINK_TERMS_USE>> c\u1EE7a OLX',
     'loginbox.IfYouAlreadyHaveAnAccountClickHereToLogIn': 'N\u1EBFu b\u1EA1n \u0111\xE3 c\xF3 t\xE0i kho\u1EA3n r\u1ED3i, b\u1EA5m v\xE0o \u0111\xE2y \u0111\u1EC3 \u0111\u0103ng nh\u1EADp.',
     'loginbox.IfYouDontHaveAccountOrNeverPostedOnBrand': 'N\u1EBFu b\u1EA1n kh\xF4ng c\xF3 t\xE0i kho\u1EA3n ho\u1EB7c ch\u01B0a t\u1EEBng \u0111\u0103ng qu\u1EA3ng c\xE1o tr\xEAn OLX',

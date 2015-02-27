@@ -65,6 +65,7 @@ module.exports = {
     'itemslisting.RefineYourSearch': 'Rafine Rech\xE8ch ou ',
     'itemslisting.SelectAll': 'Chwazi Tout',
     'loginbox.CreateYourAccount': 'Kreye yon kont gratis:',
+    'loginbox.ForgotYourPassword': 'Ou bliye kod sekr\xE8 ou?',
     'loginbox.IAgreeToTheTermsAndConditionsOfBrand': 'Mwen dak\xF2k ak  <<LINK_TERMS_USE>>R\xE8gleman ak Kondisyon <</LINK_TERMS_USE>>  OLX yo.',
     'loginbox.IfYouAlreadyHaveAnAccountClickHereToLogIn': 'Ou deja genyen yon kont, klike la pou konekte.',
     'loginbox.IfYouDontHaveAccountOrNeverPostedOnBrand': 'Mwen pa genyen yon kont oubyen pat janm pibliye yon anons sou OLX',

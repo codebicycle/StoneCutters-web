@@ -9,11 +9,11 @@
         <input type="text" name="usernameOrEmail" data-qa="login-username-field">
         <label class="top">{{ dictionary["loginbox.Password"] }}</label>
         <input type="password" name="password" data-qa="login-password-field">
-        <small><a href="{{ '/lostpassword' | link }}" class="forgot">{{ dictionary["landingbody.ForgotPassword"] }}</a></small>
+        <small><a href="{{ '/lostpassword' | link }}" class="forgot">{{ dictionary["loginbox.ForgotYourPassword"] }}</a></small>
         <input type="hidden" name="redirect" value="{{ redirect if redirect else link }}">
         <div class="content-btns">
-            <a class="back" data-qa="register-link" href="{{ '/register' | link }}">{{ dictionary["register_form.278"] }}</a>
             <input type="submit" value="{{ dictionary["loginbox.Login"] }}" class="accept" data-qa="login-button" >
+            <a class="back" data-qa="register-link" href="{{ '/register' | link }}">{{ dictionary["register_form.278"] }}</a>
         </div>
     </form>
 </section>

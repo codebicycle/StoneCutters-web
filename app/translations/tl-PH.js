@@ -65,6 +65,7 @@ module.exports = {
     'itemslisting.RefineYourSearch': 'Pakinisin ang paghahanap',
     'itemslisting.SelectAll': 'Piliin Lahat',
     'loginbox.CreateYourAccount': 'Gumawa ng iyong account nang libre:',
+    'loginbox.ForgotYourPassword': 'Nakalimutan ang iyong password?',
     'loginbox.IAgreeToTheTermsAndConditionsOfBrand': 'Sumasang-ayon ako sa <<LINK_TERMS_USE>>Mga Alituntunin at mga Kondisyon<</LINK_TERMS_USE>> ng OLX',
     'loginbox.IfYouAlreadyHaveAnAccountClickHereToLogIn': 'Kung mayroon ka nang account, mag-click dito upang makapag-log in',
     'loginbox.IfYouDontHaveAccountOrNeverPostedOnBrand': 'Kung wala kang account o hindi kailanman nag-post ng patalastas sa OLX',

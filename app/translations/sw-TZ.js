@@ -65,6 +65,7 @@ module.exports = {
     'itemslisting.RefineYourSearch': 'Boresha utafutaji wako',
     'itemslisting.SelectAll': 'Chagua Zote',
     'loginbox.CreateYourAccount': 'Unda akaunti yako bure.',
+    'loginbox.ForgotYourPassword': 'Umesahau nenosiri yako?',
     'loginbox.IAgreeToTheTermsAndConditionsOfBrand': 'Nakubaliana na<<LINK_TERMS_USE>>Sheria na Masharti <</LINK_TERMS_USE>> ya OLX',
     'loginbox.IfYouAlreadyHaveAnAccountClickHereToLogIn': 'Kama tayari una akaunti, bonyeza hapa ili uingie',
     'loginbox.IfYouDontHaveAccountOrNeverPostedOnBrand': 'Kama huna akaunti au kamwe hujawahi kuchapisha tangazo kwa  OLX',

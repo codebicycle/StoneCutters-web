@@ -65,6 +65,7 @@ module.exports = {
     'itemslisting.RefineYourSearch': 'Upresni\u0165 h\u013Eadanie',
     'itemslisting.SelectAll': 'Vybra\u0165 v\u0161etky',
     'loginbox.CreateYourAccount': 'Vytvorte va\u0161e bezplatn\xE9 konto:',
+    'loginbox.ForgotYourPassword': 'Zabudli ste heslo?',
     'loginbox.IAgreeToTheTermsAndConditionsOfBrand': 'S\xFAhlas\xEDm so <<LINK_TERMS_USE>>Zmluvn\xFDmi podmienkami<</LINK_TERMS_USE>> OLX',
     'loginbox.IfYouAlreadyHaveAnAccountClickHereToLogIn': 'Ak u\u017E m\xE1te \xFA\u010Det, prihl\xE1ste sa kliknut\xEDm sem.',
     'loginbox.IfYouDontHaveAccountOrNeverPostedOnBrand': 'Ak nem\xE1te \xFA\u010Det alebo ste e\u0161te nepodali reklamu na OLX',

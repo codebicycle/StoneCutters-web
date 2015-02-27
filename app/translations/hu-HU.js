@@ -65,6 +65,7 @@ module.exports = {
     'itemslisting.RefineYourSearch': 'Finom\xEDtsa a keres\xE9st',
     'itemslisting.SelectAll': '\xD6sszes kiv\xE1laszt\xE1sa',
     'loginbox.CreateYourAccount': 'Hozzon l\xE9tre ingyenes felhaszn\xE1l\xF3i fi\xF3kot:',
+    'loginbox.ForgotYourPassword': 'Elfelejtette a jelszav\xE1t?',
     'loginbox.IAgreeToTheTermsAndConditionsOfBrand': 'Elfogadom a OLX <<LINK_TERMS_USE>>Szerz\u0151d\xE9si felt\xE9teleit<</LINK_TERMS_USE>>.',
     'loginbox.IfYouAlreadyHaveAnAccountClickHereToLogIn': 'Ha m\xE1r van fi\xF3kja, kattintson ide, \xE9s jelentkezzen be.',
     'loginbox.IfYouDontHaveAccountOrNeverPostedOnBrand': 'Ha nincs fi\xF3kja, vagy m\xE9g nem adott fel OLX hirdet\xE9st',

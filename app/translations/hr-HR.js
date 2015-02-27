@@ -65,6 +65,7 @@ module.exports = {
     'itemslisting.RefineYourSearch': 'Detaljnije definirajte upit',
     'itemslisting.SelectAll': 'Odaberi sve',
     'loginbox.CreateYourAccount': 'Besplatno otvorite va\u0161 korisni\u010Dki ra\u010Dun:',
+    'loginbox.ForgotYourPassword': 'Zaboravili ste lozinku?',
     'loginbox.IAgreeToTheTermsAndConditionsOfBrand': 'Sla\u017Eem se sa <<LINK_TERMS_USE>>Uvjetima i Zahtjevima<</LINK_TERMS_USE>> OLX-a',
     'loginbox.IfYouAlreadyHaveAnAccountClickHereToLogIn': 'Ako ve\u0107 imate korisni\u010Dki ra\u010Dun, kliknite ovdje za prijavu.',
     'loginbox.IfYouDontHaveAccountOrNeverPostedOnBrand': 'Ako nemate korisni\u010Dki ra\u010Dun i nikad niste objavili oglas na OLX-u',

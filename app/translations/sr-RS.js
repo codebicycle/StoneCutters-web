@@ -65,6 +65,7 @@ module.exports = {
     'itemslisting.RefineYourSearch': 'Suzite pretragu',
     'itemslisting.SelectAll': 'Izaberi sve',
     'loginbox.CreateYourAccount': 'Kreirajte nalog besplatno:',
+    'loginbox.ForgotYourPassword': 'Zaboravili ste lozinku?',
     'loginbox.IAgreeToTheTermsAndConditionsOfBrand': 'Prihvatam <<LINK_TERMS_USE>>Odredbe i uslove<</LINK_TERMS_USE>> kompanije OLX',
     'loginbox.IfYouAlreadyHaveAnAccountClickHereToLogIn': 'Ako ve\u0107 imate nalog, kliknite ovde da biste se prijavili.',
     'loginbox.IfYouDontHaveAccountOrNeverPostedOnBrand': 'Ako nemate nalog ili nikad niste objavili oglas na lokaciji OLX',

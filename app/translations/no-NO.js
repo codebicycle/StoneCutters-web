@@ -65,6 +65,7 @@ module.exports = {
     'itemslisting.RefineYourSearch': 'Raffiner s\xF8ket ditt',
     'itemslisting.SelectAll': 'Velg alle',
     'loginbox.CreateYourAccount': 'Opprett en konto gratis:',
+    'loginbox.ForgotYourPassword': 'Har du glemt passordet ditt?',
     'loginbox.IAgreeToTheTermsAndConditionsOfBrand': 'Jeg godtar <<LINK_TERMS_USE>>brukerbetingelsene<</LINK_TERMS_USE>> til OLX',
     'loginbox.IfYouAlreadyHaveAnAccountClickHereToLogIn': 'Hvis du allerede har en konto, klikk her for \xE5 logge inn.',
     'loginbox.IfYouDontHaveAccountOrNeverPostedOnBrand': 'Hvis du ikke har en konto eller aldri har satt inn en annonse p\xE5 OLX',

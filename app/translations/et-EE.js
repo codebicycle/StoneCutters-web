@@ -65,6 +65,7 @@ module.exports = {
     'itemslisting.RefineYourSearch': 'T\xE4psustage otsingut',
     'itemslisting.SelectAll': 'Vali k\xF5ik',
     'loginbox.CreateYourAccount': 'Looge tasuta konto:',
+    'loginbox.ForgotYourPassword': 'Unustasite salas\xF5na?',
     'loginbox.IAgreeToTheTermsAndConditionsOfBrand': 'N\xF5ustun <<LINK_TERMS_USE>>kasutustingimustega<</LINK_TERMS_USE>> of OLX',
     'loginbox.IfYouAlreadyHaveAnAccountClickHereToLogIn': 'Kui Teil juba on konto, kl\xF5psake sisselogimiseks siia.',
     'loginbox.IfYouDontHaveAccountOrNeverPostedOnBrand': 'Kui Teil pole kontot v\xF5i kui Te pole OLXis kunagi kuulutust postitanud',

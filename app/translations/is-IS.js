@@ -65,6 +65,7 @@ module.exports = {
     'itemslisting.RefineYourSearch': 'N\xE1kv\xE6mari leit',
     'itemslisting.SelectAll': 'Velja allt',
     'loginbox.CreateYourAccount': 'Stofna\xF0u reikning \xFE\xE9r a\xF0 kostna\xF0arlausu:',
+    'loginbox.ForgotYourPassword': 'Gleymdir\xF0u a\xF0gangsor\xF0inu?',
     'loginbox.IAgreeToTheTermsAndConditionsOfBrand': '\xC9g sam\xFEykki <<LINK_TERMS_USE>>skilm\xE1la<</LINK_TERMS_USE>> OLX',
     'loginbox.IfYouAlreadyHaveAnAccountClickHereToLogIn': 'Ef \xFE\xFA ert \xFEegar me\xF0 reikning skaltu smella h\xE9r til a\xF0 skr\xE1 \xFEig inn',
     'loginbox.IfYouDontHaveAccountOrNeverPostedOnBrand': 'Ef \xFE\xFA ert ekki me\xF0 reikning e\xF0a hefur aldrei birt augl\xFDsingu \xE1 OLX',

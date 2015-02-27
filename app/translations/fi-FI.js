@@ -65,6 +65,7 @@ module.exports = {
     'itemslisting.RefineYourSearch': 'T\xE4smenn\xE4 hakua',
     'itemslisting.SelectAll': 'Valitse kaikki',
     'loginbox.CreateYourAccount': 'Luo k\xE4ytt\xE4j\xE4tili ilmaiseksi:',
+    'loginbox.ForgotYourPassword': 'Unohditko salasanasi?',
     'loginbox.IAgreeToTheTermsAndConditionsOfBrand': 'Hyv\xE4ksyn <<LINK_TERMS_USE>>ehdot ja edellytykset<</LINK_TERMS_USE>> , jotka koskevat tuotetta OLX',
     'loginbox.IfYouAlreadyHaveAnAccountClickHereToLogIn': 'Jos sinulla on jo k\xE4ytt\xE4j\xE4tili, napsauta t\xE4st\xE4 kirjautuaksesi sis\xE4\xE4n.',
     'loginbox.IfYouDontHaveAccountOrNeverPostedOnBrand': 'Jos sinulla ei ole tili\xE4 tai et ole koskaan l\xE4hett\xE4nyt mainosta tuotteesta OLX',

@@ -65,6 +65,7 @@ module.exports = {
     'itemslisting.RefineYourSearch': 'Revizui\u0163i c\u0103utarea dumneavoastr\u0103',
     'itemslisting.SelectAll': 'Selecteaz\u0103 tot',
     'loginbox.CreateYourAccount': 'Crea\u0163i contul dvs. gratis:',
+    'loginbox.ForgotYourPassword': 'A\u0163i uitat parola?',
     'loginbox.IAgreeToTheTermsAndConditionsOfBrand': 'Sunt de acord cu <<LINK_TERMS_USE>>Termenii \u015Fi condi\u0163iile<</LINK_TERMS_USE>> OLX',
     'loginbox.IfYouAlreadyHaveAnAccountClickHereToLogIn': 'Dac\u0103 ave\u0163i deja un cont, face\u0163i click aici pentru a v\u0103 loga',
     'loginbox.IfYouDontHaveAccountOrNeverPostedOnBrand': 'Dac\u0103 nu ave\u0163i un cont sau nu a\u0163i mai publicat niciodat\u0103 un anun\u0163 pe  OLX',

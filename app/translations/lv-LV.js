@@ -65,6 +65,7 @@ module.exports = {
     'itemslisting.RefineYourSearch': 'Detaliz\u0113jiet mekl\u0113\u0161anu',
     'itemslisting.SelectAll': 'Atlas\u012Bt visu',
     'loginbox.CreateYourAccount': 'Izveidojiet savu kontu bez maksas:',
+    'loginbox.ForgotYourPassword': 'Aizmirs\u0101t paroli?',
     'loginbox.IAgreeToTheTermsAndConditionsOfBrand': 'Es piekr\u012Btu <<LINK_TERMS_USE>>noteikumiem un nosac\u012Bjumiem<</LINK_TERMS_USE>> attiec\u012Bb\u0101 uz OLX',
     'loginbox.IfYouAlreadyHaveAnAccountClickHereToLogIn': 'Ja jums jau ir konts, uzklik\u0161\u0137iniet \u0161eit, lai pieteiktos.',
     'loginbox.IfYouDontHaveAccountOrNeverPostedOnBrand': 'Ja jums nav konta vai ja j\u016Bs nekad neesat public\u0113jis/-usi sludin\u0101jumu OLX',

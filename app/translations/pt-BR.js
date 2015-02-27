@@ -65,6 +65,7 @@ module.exports = {
     'itemslisting.RefineYourSearch': 'Refine sua pesquisa',
     'itemslisting.SelectAll': 'Selecionar tudo',
     'loginbox.CreateYourAccount': 'Crie a sua conta gr\xE1tis:',
+    'loginbox.ForgotYourPassword': 'Esqueceu a senha?',
     'loginbox.IAgreeToTheTermsAndConditionsOfBrand': 'Concordo com os <<LINK_TERMS_USE>>Termos e Condi\xE7\xF5es<</LINK_TERMS_USE>> da OLX',
     'loginbox.IfYouAlreadyHaveAnAccountClickHereToLogIn': 'Se j\xE1 possui uma conta, clique aqui para fazer o login.',
     'loginbox.IfYouDontHaveAccountOrNeverPostedOnBrand': 'N\xE3o \xE9 cadastrado na OLX? Gerencie os seus an\xFAncios de forma r\xE1pida e f\xE1cil em um \xFAnico lugar:',

@@ -65,6 +65,7 @@ module.exports = {
     'itemslisting.RefineYourSearch': 'Patikslinti paie\u0161k\u0105',
     'itemslisting.SelectAll': 'Pasirinkti visk\u0105',
     'loginbox.CreateYourAccount': 'Sukurkite paskyr\u0105 nemokamai:',
+    'loginbox.ForgotYourPassword': 'Pamir\u0161ote slapta\u017Eod\u012F?',
     'loginbox.IAgreeToTheTermsAndConditionsOfBrand': 'A\u0161 sutinku su OLX <<LINK_TERMS_USE>>teisin\u0117mis s\u0105lygomis<</LINK_TERMS_USE>>',
     'loginbox.IfYouAlreadyHaveAnAccountClickHereToLogIn': 'Jeigu jau turite paskyr\u0105, spustel\u0117kite \u010Dia, kad prisijungtum\u0117te.',
     'loginbox.IfYouDontHaveAccountOrNeverPostedOnBrand': 'Jeigu neturite paskyros arba niekada nesate siunt\u0119 skelbimo OLX',

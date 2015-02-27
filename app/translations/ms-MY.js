@@ -65,6 +65,7 @@ module.exports = {
     'itemslisting.RefineYourSearch': 'Perincikan carian anda',
     'itemslisting.SelectAll': 'Pilih Semua',
     'loginbox.CreateYourAccount': 'Buat akaun anda secara percuma:',
+    'loginbox.ForgotYourPassword': 'Terlupa kata laluan anda? ',
     'loginbox.IAgreeToTheTermsAndConditionsOfBrand': 'Saya bersetuju dengan  <<LINK_TERMS_USE>>Terma dan Syarat<</LINK_TERMS_USE>>  OLX',
     'loginbox.IfYouAlreadyHaveAnAccountClickHereToLogIn': 'Jika anda sudah pun mempunyai akaun, klik di sini untuk log masuk.',
     'loginbox.IfYouDontHaveAccountOrNeverPostedOnBrand': 'Jika anda tidak ada akaun atau tidak pernah menyiarkan iklan di OLX',

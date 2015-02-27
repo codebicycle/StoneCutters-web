@@ -65,6 +65,7 @@ module.exports = {
     'itemslisting.RefineYourSearch': 'F\xF6rb\xE4ttra din s\xF6kning',
     'itemslisting.SelectAll': 'Markera Alla',
     'loginbox.CreateYourAccount': 'Skapa ditt konto gratis:',
+    'loginbox.ForgotYourPassword': 'Gl\xF6mt ditt l\xF6senord?',
     'loginbox.IAgreeToTheTermsAndConditionsOfBrand': 'Jag samtycker till  <<LINK_TERMS_USE>>Villkoren<</LINK_TERMS_USE>> fr\xE5n OLX',
     'loginbox.IfYouAlreadyHaveAnAccountClickHereToLogIn': 'Om du redan har ett konto, klick h\xE4r f\xF6r att logga in',
     'loginbox.IfYouDontHaveAccountOrNeverPostedOnBrand': 'Om du inte har ett konto eller aldrig har publicerat en annons med OLX',

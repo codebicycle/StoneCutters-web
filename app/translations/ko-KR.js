@@ -65,6 +65,7 @@ module.exports = {
     'itemslisting.RefineYourSearch': '\uAC80\uC0C9\uC744 \uAD6C\uCCB4\uD654\uD558\uC138\uC694',
     'itemslisting.SelectAll': '\uC804\uCCB4 \uC120\uD0DD\uD558\uAE30',
     'loginbox.CreateYourAccount': '\uBB34\uB8CC\uB85C \uACC4\uC815\uC744 \uC138\uC6B0\uC138\uC694:',
+    'loginbox.ForgotYourPassword': '\uBE44\uBC00\uBC88\uD638\uB97C \uBD84\uC2E4\uD558\uC168\uB098\uC694? ',
     'loginbox.IAgreeToTheTermsAndConditionsOfBrand': '\uB098\uB294 OLX\uC758 <<LINK_TERMS_USE>>\uC57D\uC815\uC870\uAC74<</LINK_TERMS_USE>> \uC5D0 \uB3D9\uC758\uD569\uB2C8\uB2E4. ',
     'loginbox.IfYouAlreadyHaveAnAccountClickHereToLogIn': '\uC774\uBBF8 \uACC4\uC815\uC774 \uC788\uC73C\uC2E0 \uACBD\uC6B0 \uC774\uACF3\uC5D0 \uD074\uB9AD\uD558\uC5EC \uB85C\uADF8\uC778\uD558\uC5EC \uC8FC\uC138\uC694.',
     'loginbox.IfYouDontHaveAccountOrNeverPostedOnBrand': '\uACC4\uC815\uC774 \uC5C6\uC73C\uC2DC\uAC70\uB098 OLX\uC5D0 \uAD11\uACE0\uB97C \uD558\uC9C0 \uC54A\uC73C\uC2E0 \uACBD\uC6B0',
