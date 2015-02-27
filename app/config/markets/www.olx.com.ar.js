@@ -207,7 +207,7 @@ module.exports = {
                 },
                 mobiletop: {
                     service: 'AFC',
-                    format: 'TextTop',
+                    format: 'TextMobile',
                     location: 'Top',
                     numberPerCategoryCSA: {
                         '800': 0,
