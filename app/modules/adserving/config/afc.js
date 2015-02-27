@@ -23,6 +23,14 @@ module.exports = {
             height: 600
         }
     },
+    TextMobile: {
+        params: {
+            number: 3,
+            media: 'text',
+            width: 300,
+            height: 50
+        }
+    },
     TextTop: {
         params: {
             number: 3,

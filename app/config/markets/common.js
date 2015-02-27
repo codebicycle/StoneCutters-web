@@ -61,7 +61,7 @@ module.exports = {
                 },
                 mobiletop: {
                     service: 'AFC',
-                    format: 'TextTop',
+                    format: 'TextMobile',
                     location: 'Top',
                     params: {
                         number: 2
@@ -79,7 +79,7 @@ module.exports = {
                 },
                 mobitlebottom: {
                     service: 'AFC',
-                    format: 'TextTop',
+                    format: 'TextMobile',
                     location: 'Bottom',
                     params: {
                         number: 3
@@ -95,7 +95,7 @@ module.exports = {
                 },
                 mobilenoresult: {
                     service: 'AFC',
-                    format: 'TextTop',
+                    format: 'TextMobile',
                     location: 'Top',
                     params: {
                         number: 10
