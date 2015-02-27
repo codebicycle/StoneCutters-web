@@ -1,6 +1,6 @@
 module.exports = {
     categoryTree: {
-        order: [830, 800, 811, 806, 362, 815, 859, 16, 821],
+        order: [830, 16, 811, 806, 362, 815, 859, 800, 821],
         columns: [3, 2, 2]
     },
     socials: {
@@ -27,7 +27,7 @@ module.exports = {
             image: 'home-colombia'
         },
         post_banner: {
-            image: 'post-colombia'
+            image: 'post-colombia-woman'
         },
         videos: [
             {

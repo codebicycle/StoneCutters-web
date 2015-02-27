@@ -188,5 +188,34 @@ module.exports = {
                 }
             }
         }
+    },
+    cities: {
+        max: 6,
+        top: [
+            {
+                url: 'lima-lima.olx.com.pe',
+                anchor: 'Lima'
+            },
+            {
+                url: 'limametropolitana.olx.com.pe',
+                anchor: 'Lima Metropolitana'
+            },
+            {
+                url: 'ciudadarequipa.olx.com.pe',
+                anchor: 'Arequipa'
+            },
+            {
+                url: 'trujillo.olx.com.pe',
+                anchor: 'Trujillo'
+            },
+            {
+                url: 'chiclayo.olx.com.pe',
+                anchor: 'Chiclayo'
+            },
+            {
+                url: 'callaostate.olx.com.pe',
+                anchor: 'Callao'
+            },
+        ]
     }
 };
