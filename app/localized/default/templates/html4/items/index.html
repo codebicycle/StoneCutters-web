@@ -31,10 +31,7 @@
     {% else %}
         <ul class="itemListing">
             {% set shuffle = items | shuffleItems(shops) %}
-            
             {% for element in shuffle %}
-
-                {{ element | log }}
                 {% if element.type == 'shop' %}
                     {% set shop = shops[element.index] %}
                     {% if shop %}

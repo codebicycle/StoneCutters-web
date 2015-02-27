@@ -11,7 +11,7 @@ module.exports = Base.extend({
         var experiment = this.app.session.get('experiments').html4ShowShops;
         console.log('viewhtml4', experiment);
         var alternative = '';
-        if(experiment) {
+        if (experiment) {
             alternative = experiment.alternative;
         }
  

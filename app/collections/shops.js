@@ -31,7 +31,6 @@ module.exports = Base.extend({
     },
     fetch: function(options) {
         options = options || {};
-        console.log('shops params', options);
 
         options.data = options.data || {};
         _.defaults(options.data, this.defaultParams || {});

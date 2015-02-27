@@ -46,20 +46,19 @@ function show(params, callback) {
         });
         var experiment = sixpack.experiments.html4ShowShops;
         
-        if( experiment && ( experiment.firstClick && !clicked ) || !experiment.firstClick ) {
+        if ( experiment ) {
+            if (( experiment.firstClick && !clicked ) || !experiment.firstClick ) {
 
-            console.log('experiment', experiment);
+                if (experiment.alternative == 'items' || (experiment.alternative != 'items' && params.from)) {
+                    sixpack.convert(experiment);
+                }
 
-            if(experiment.alternative == 'items' || (experiment.alternative != 'items' && params.from)) {
-                sixpack.convert(experiment);
-            }
-
-            this.app.session.persist({
-                isShopExperimented: true
-            });           
+                this.app.session.persist({
+                    isShopExperimented: true
+                });
+            }           
         }
-
-
+ 
         var prepare = function(done) {
             if (user) {
                 params.token = user.token;
