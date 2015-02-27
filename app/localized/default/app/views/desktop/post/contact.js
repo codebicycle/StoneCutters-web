@@ -19,11 +19,12 @@ module.exports = Base.extend({
         'fieldsChange': 'onFieldsChange',
         'formRendered': 'onFormRendered'
     },
-    onPaste: function(event) {
-        event.preventDefault();
+    onPaste: function(e) {
+        e.preventDefault();
 
         var $phone = this.$('[name="phone"]');
-        var phone = (event.originalEvent || event).clipboardData.getData('text/plain') || $phone.val();
+        var event = e.originalEvent || e;
+        var phone = event.clipboardData ? event.clipboardData.getData('text/plain') : $phone.val();
 
         $phone.val(phone.replace(/[^\d]/gi, ''));
         return true;
