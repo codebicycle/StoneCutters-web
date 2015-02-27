@@ -35,6 +35,9 @@ function show(params, callback) {
         var platform = this.app.session.get('platform');
         var newItemPage = helpers.features.isEnabled.call(this, 'newItemPage');
         var anonymousItem;
+
+
+        var clicked = this.app.session.get('isShopExperimented');
         var sixpack = new Sixpack({
             clientId: this.app.session.get('clientId'),
             platform: this.app.session.get('platform'),
@@ -42,9 +45,20 @@ function show(params, callback) {
             experiments: this.app.session.get('experiments')
         });
         var experiment = sixpack.experiments.html4ShowShops;
-        if(experiment.alternative == 'items' || (experiment.alternative != 'items' && params.from)) {
-            sixpack.convert(experiment);
+        
+        if( experiment && ( experiment.firstClick && !clicked ) || !experiment.firstClick ) {
+
+            console.log('experiment', experiment);
+
+            if(experiment.alternative == 'items' || (experiment.alternative != 'items' && params.from)) {
+                sixpack.convert(experiment);
+            }
+
+            this.app.session.persist({
+                isShopExperimented: true
+            });           
         }
+
 
         var prepare = function(done) {
             if (user) {
