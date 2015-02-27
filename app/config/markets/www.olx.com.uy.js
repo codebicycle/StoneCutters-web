@@ -184,5 +184,23 @@ module.exports = {
         desktop: {
             enabled: true
         }
+    },
+    featured: {
+        enabled: true,
+        environments: ['testing', 'staging'],
+        section: {
+            'categories#list': {
+                enabled: false
+            },
+            'users#myads': {
+                enabled: false
+            },
+            'post#flow': {
+                enabled: false
+            },
+            'post#flowMarketing': {
+                enabled: false
+            }
+        }
     }
 };
