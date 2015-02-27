@@ -36,7 +36,9 @@ module.exports = {
     environment: {
         type: 'production',
         staticPath: 'http://static[[basenumber]].olx-st.com/mobile-webapp',
-        imagePath: 'http://images[[basenumber]].olx-st.com/mobile-webapp'
+        imagePath: 'http://images[[basenumber]].olx-st.com/mobile-webapp',
+        staticPathIris: 'http://static[[basenumber]].olx-st.ir/mobile-webapp',
+        imagePathIris: 'http://images[[basenumber]].olx-st.ir/mobile-webapp'
     },
     localization: {
         wap: ['www.olx.co.za', 'www.olx.ir', 'www.olx.hn'],
