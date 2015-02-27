@@ -292,7 +292,7 @@ function toData(includeImages) {
             delete data.location;
         }
     }
-    if (data.price) {
+    if (data.price && !data.priceC) {
         data.priceC = data.price;
     }
     if (_.isObject(data.priceC)) {

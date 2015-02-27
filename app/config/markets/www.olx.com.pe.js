@@ -217,5 +217,10 @@ module.exports = {
                 anchor: 'Callao'
             },
         ]
+    },
+    relatedAds: {
+        desktop: {
+            enabled: true
+        }
     }
 };

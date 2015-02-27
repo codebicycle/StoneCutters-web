@@ -2,9 +2,8 @@
 127.0.0.1       {LOCAL}
 
 #SMAUG
-#{SMAUG}             api-v2.olx.com    #environment
+{SMAUG}             api-v2.olx.com    #environment
 #190.210.62.60      api-v2.olx.com    #production
-108.171.171.70      api-v2.olx.com    #testing
 
 #SPAMHANDLER
 {SPAMHANDLER}       sh.care.olx.com   #environment
@@ -618,6 +617,8 @@
 {IP}  html5.m.olx.co.za         # South Africa
 {IP}  www.olx.co.za         # South Africa
 {IP}  olx.co.za         # South Africa
+{IP}  gauteng.olx.co.za         # South Africa
+{IP}  johannesburg.olx.co.za         # South Africa
 
 {IP}  m.olx.es            # Spain
 {IP}  wap.m.olx.es            # Spain

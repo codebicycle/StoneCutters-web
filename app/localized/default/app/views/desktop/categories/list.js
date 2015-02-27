@@ -4,6 +4,7 @@ var Base = require('../../../../../common/app/bases/view').requireView('categori
 var _ = require('underscore');
 var helpers = require('../../../../../../helpers');
 var config = require('../../../../../../../shared/config');
+var Chat = require('../../../../../../modules/chat');
 
 module.exports = Base.extend({
     tagName: 'main',
@@ -47,6 +48,7 @@ module.exports = Base.extend({
             maxTopCities: maxTopCities,
             selectedLanguage: selectedLanguage,
             marketing: marketing,
+            chatEnabled: Chat.isEnabled.call(this),
             currentState: {
                 hostname: currentState.hostname,
                 name: currentState.name

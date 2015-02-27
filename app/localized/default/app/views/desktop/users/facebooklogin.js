@@ -4,12 +4,24 @@ var Base = require('../../../../../common/app/bases/view').requireView('users/fa
 var _ = require('underscore');
 var asynquence = require('asynquence');
 var User = require('../../../../../../models/user');
+var config = require('../../../../../../../shared/config');
 
 module.exports = Base.extend({
     className: 'users_facebook_login',
     user: {},
+    // fromItem: false,
+    redirectTo: '',
     events: {
-        'click [data-facebook-login]': 'facebookLogIn',
+        'click [data-facebook-login]': 'facebookLogin'
+    },
+    getTemplateData: function() {
+        var data = Base.prototype.getTemplateData.call(this);
+        var location = this.app.session.get('location');
+        var facebooklogin = config.getForMarket(location.url, ['socials', 'facebookLogin'], false);
+
+        return _.extend({}, data, {
+            facebookLogin: facebooklogin
+        });
     },
     postRender: function() {
         window.fbAsyncInit = function (){
@@ -28,8 +40,12 @@ module.exports = Base.extend({
             js.src = '//connect.facebook.net/en_US/sdk.js';
             fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));
+
+        this.listenTo(this.app, 'loginFromItem', function(data) {
+            this.redirectTo = data.redirectTo;
+        });
     },
-    facebookLogIn: function() {
+    facebookLogin: function() {
         window.FB.login(this.statusChangeCallback.bind(this), {
             scope: 'public_profile, email'
         });
@@ -42,8 +58,9 @@ module.exports = Base.extend({
 
         if (response.status === 'connected') {
             token = response.authResponse.accessToken;
+
             window.FB.api('/me', function(response) {
-                this.appLogIn(response, token);
+                this.appLogin(response, token);
             }.bind(this));
         }
     },
@@ -68,7 +85,7 @@ module.exports = Base.extend({
         }
 
         function success() {
-            this.appLogIn(response, token);
+            this.appLogin(response, token);
         }
 
         function error(err) {
@@ -80,7 +97,7 @@ module.exports = Base.extend({
             .then(submit.bind(this))
             .val(success.bind(this));
     },
-    appLogIn: function(response, token) {
+    appLogin: function(response, token) {
         function prepare(done) {
             this.user = new User(_.extend({
                 facebookId: response.id,
@@ -96,8 +113,11 @@ module.exports = Base.extend({
         }
 
         function success() {
+            var url = (this.redirectTo !== '') ? this.redirectTo : '/';
+
             this.app.trigger('login', this.user);
-            this.app.router.navigate('/', {
+            this.app.trigger('loginSuccess');
+            this.app.router.navigate(url, {
                 trigger: true,
                 replace: true
             });

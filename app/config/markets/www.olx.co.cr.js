@@ -179,5 +179,10 @@ module.exports = {
                 name: 'Móviles'
             }
         ]
+    },
+    relatedAds: {
+        desktop: {
+            enabled: true
+        }
     }
 };

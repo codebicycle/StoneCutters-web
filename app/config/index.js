@@ -29,9 +29,6 @@ module.exports = function(environment) {
         var value = utils.get(MARKETS, [location].concat(keys));
 
         if (checkValue(value)) {
-            value = utils.get(MARKETS, ['emerging'].concat(keys));
-        }
-        if (checkValue(value)) {
             value = utils.get(MARKETS, ['common'].concat(keys), defaultValue);
         }
         return value;
