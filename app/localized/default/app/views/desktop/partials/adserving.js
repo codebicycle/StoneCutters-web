@@ -91,6 +91,7 @@ module.exports = Base.extend({
         .attr({
             height: params.height,
             width: params.width,
+            slot: params.slotId,
             src: 'about:blank',
             id: slotname + '_iframe'
         }).on('load', function() {
