@@ -10,8 +10,17 @@ module.exports = {
             myMsgs: 15
         }
     },
-    post_banner: {
-        image: 'post-africa'
+    categoryTree: {
+        order: [800, 811, 806, 362, 815, 821, 853, 16],
+        columns: [2, 2, 2]
+    },
+    marketing: {
+        post_banner: {
+            image: 'post-africa-object'
+        },
+        home_block_banner_top: {
+            image: 'marketing-box-image-za'
+        }
     },
     successPage: {
         keepPosting: [
@@ -362,6 +371,43 @@ module.exports = {
         success: {
             addmessage: true
         }
+    },
+    cities: {
+        max: 9,
+        top: [
+            {
+                url: 'gauteng.olx.co.za',
+                anchor: 'Gauteng'
+            },
+            {
+                url: 'westerncape.olx.co.za',
+                anchor: 'Western Cape'
+            },
+            {
+                url: 'kwazulunatal.olx.co.za',
+                anchor: 'KwaZulu-Natal'
+            },
+            {
+                url: 'freestate.olx.co.za',
+                anchor: 'Free State'
+            },
+            {
+                url: 'easterncape.olx.co.za',
+                anchor: 'Eastern Cape'
+            },
+            {
+                url: 'mpumalanga.olx.co.za',
+                anchor: 'Mpumalanga'
+            },
+            {
+                url: 'limpopo.olx.co.za',
+                anchor: 'North West'
+            },
+            {
+                url: 'northwest.olx.co.za',
+                anchor: 'Limpopo'
+            }
+        ]
     },
     relatedAds: {
         desktop: {

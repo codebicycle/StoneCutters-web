@@ -3,9 +3,6 @@ module.exports = {
         order: [830, 800, 811, 806, 362, 815, 859, 16, 821],
         columns: [3, 2, 2]
     },
-    post_banner: {
-        image: 'post-peru'
-    },
     socials: {
         links: [
             {
@@ -22,20 +19,25 @@ module.exports = {
             }
         ]
     },
-    videos: [
-        {
-            title: 'OLX Peru - Cristian Rivero - Garage',
-            id: '8vBPKNFEEiE'
+    marketing: {
+        post_banner: {
+            image: 'post-peru'
         },
-        {
-            title: 'OLX Peru - Cristian Rivero - Cafetera',
-            id: '2YEmhQWMc9M'
-        },
-        {
-            title: 'OLX Perú - Poker - Vender es fácil',
-            id: 'y7DhaMzv_04'
-        }
-    ],
+        videos: [
+            {
+                title: 'OLX Peru - Cristian Rivero - Garage',
+                id: '8vBPKNFEEiE'
+            },
+            {
+                title: 'OLX Peru - Cristian Rivero - Cafetera',
+                id: '2YEmhQWMc9M'
+            },
+            {
+                title: 'OLX Perú - Poker - Vender es fácil',
+                id: 'y7DhaMzv_04'
+            }
+        ]
+    },
     successPage: {
         keepPosting: [
             {
@@ -186,6 +188,35 @@ module.exports = {
                 }
             }
         }
+    },
+    cities: {
+        max: 6,
+        top: [
+            {
+                url: 'lima-lima.olx.com.pe',
+                anchor: 'Lima'
+            },
+            {
+                url: 'limametropolitana.olx.com.pe',
+                anchor: 'Lima Metropolitana'
+            },
+            {
+                url: 'ciudadarequipa.olx.com.pe',
+                anchor: 'Arequipa'
+            },
+            {
+                url: 'trujillo.olx.com.pe',
+                anchor: 'Trujillo'
+            },
+            {
+                url: 'chiclayo.olx.com.pe',
+                anchor: 'Chiclayo'
+            },
+            {
+                url: 'callaostate.olx.com.pe',
+                anchor: 'Callao'
+            },
+        ]
     },
     relatedAds: {
         desktop: {
