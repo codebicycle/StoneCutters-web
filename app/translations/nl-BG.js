@@ -59,7 +59,6 @@ module.exports = {
     'itemslisting.NewlyListed': 'Nieuw aangeboden',
     'itemslisting.NewShareThisAd': 'Deze advertentie delen',
     'itemslisting.Next': 'Volgende',
-    'itemslisting.Of': 'van',
     'itemslisting.PendingAd': 'Advertentie is in behandeling',
     'itemslisting.PerWeek': 'Per week',
     'itemslisting.Previous': 'Vorige',
