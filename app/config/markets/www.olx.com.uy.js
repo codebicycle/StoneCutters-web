@@ -179,5 +179,10 @@ module.exports = {
                 name: 'Teléfonos'
             }
         ]
+    },
+    relatedAds: {
+        desktop: {
+            enabled: true
+        }
     }
 };

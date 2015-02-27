@@ -2,6 +2,7 @@
 
 var _ = require('underscore');
 var config = require('./config');
+var utils = require('../shared/utils');
 
 var options = {
     environments: {
@@ -61,5 +62,6 @@ function getLocalization(grunt, defaultValue, environment) {
 module.exports = {
     option: option,
     getEnvironments: getEnvironments,
-    getLocalization: getLocalization
+    getLocalization: getLocalization,
+    get: utils.get
 };

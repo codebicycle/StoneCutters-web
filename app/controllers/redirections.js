@@ -153,9 +153,11 @@ module.exports = {
         helpers.common.redirect.call(this, '/myolx/myadslisting');
     },
     unsubscribe: function(params, callback) {
+        params.hash = params.hash.replace(/ /g,'+');
         helpers.common.redirect.call(this, 'myolx/conversation/unsubscribe/' + encodeURIComponent(params.hash));
     },
     report: function(params, callback) {
+        params.hash = params.hash.replace(/ /g,'+');
         helpers.common.redirect.call(this, 'myolx/conversation/report/' + encodeURIComponent(params.hash));
     },
     php: function(params, callback) {

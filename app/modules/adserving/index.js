@@ -43,12 +43,13 @@ function getSettings() {
             hl: this.app.session.get('selectedLanguage').split('-').shift()
         });
 
+
         if (settings.params.adIconUrl && this.config.language) {
             settings.params.adIconUrl = settings.params.adIconUrl.replace(this.config.language.pattern, _.contains(this.config.language.list, settings.options.hl) ? settings.options.hl : this.config.language['default']);
         }
 
         _.extend(settings, {
-            enabled: true,
+            enabled: !!settings.params.number,
             service: service,
             seo: this.config.seo || 0
         });
@@ -135,7 +136,7 @@ function getNumberPerCategory(service){
     var cat = getCategoryId.call(this);
 
     if (service !== 'CSA') {
-        return number || 1;
+        return typeof number === 'undefined' ? 1 : number;
     }
     if (!cat) {
         cat = this.app.session.get('currentRoute').action;

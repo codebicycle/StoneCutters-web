@@ -160,7 +160,7 @@ module.exports = (function() {
             var revision = '';
             var envName = '';
 
-            if (env !== 'development') {
+            if (env !== 'development' && ext !== 'apk') {
                 revision = '-' + config.get(['deploy', 'revision'], '0');
             }
             if (ext === 'css' && env !== 'production') {

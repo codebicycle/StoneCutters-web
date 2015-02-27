@@ -36,13 +36,14 @@ module.exports = Base.extend({
         event.stopImmediatePropagation();
         event.stopImmediatePropagation();
 
+        var $btnrem = $(event.target);
+        var id = $btnrem.data('idd');
+
         asynquence().or(success.bind(this)) // TODO: Improve error handling
             .then(remove.bind(this))
             .val(success.bind(this));
 
         function remove(done) {
-            var $btnrem = $(event.target);
-            var id = $btnrem.data('idd');
             var item = this.parentView.items.get(id);
 
             item.remove({
@@ -54,7 +55,7 @@ module.exports = Base.extend({
             var path = this.app.session.get('path');
 
             this.app.router.redirectTo(utils.params(path, {
-                removed: true
+                removed: id
             }));
         }
     },
