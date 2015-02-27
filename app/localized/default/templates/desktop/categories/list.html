@@ -6,6 +6,10 @@
         {% view 'categories/partials/country-area' %}
         {% if marketing.videos %}
             {% view 'marketing/bannervideo' %}
+        {% elif marketing.home_block_banner_image %}
+            {% include (template + '/marketing/box-image.html') %}
+        {% elif marketing.home_block_banner_top %}
+            {% include (template + '/marketing/marketing-box-sell-za.html') %}
         {% else %}
             {% include (template + '/marketing/marketing-box-sell.html') %}
         {% endif %}

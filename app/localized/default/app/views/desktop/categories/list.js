@@ -9,6 +9,11 @@ module.exports = Base.extend({
     tagName: 'main',
     id: 'categories-list-view',
     className: 'categories-list-view',
+    events: {
+        'click [data-modal-close]': 'onCloseModal',
+        'click .open-modal': 'onOpenModal',
+        'click [data-modal-shadow]': 'onCloseModal'
+    },
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
         var location = this.app.session.get('location');
@@ -20,6 +25,8 @@ module.exports = Base.extend({
         var marketing = config.getForMarket(location.url, ['marketing'], '');
         var testimonials = config.getForMarket(location.url, ['testimonials'], '');
         var celebrities = config.getForMarket(location.url, ['celebrities'], '');
+        var topCities = config.getForMarket(location.url, ['cities', 'top'], location.metadata.seo.topLocations.firstLevel.entities);
+        var maxTopCities = config.getForMarket(location.url, ['cities', 'max'], 7);
 
         categories = helpers.common.categoryOrder(categories, location.url);
 
@@ -36,6 +43,8 @@ module.exports = Base.extend({
             countryMapClass: countryMapClass,
             testimonials: testimonials,
             celebrities: celebrities,
+            topCities: topCities,
+            maxTopCities: maxTopCities,
             selectedLanguage: selectedLanguage,
             marketing: marketing,
             currentState: {
@@ -43,5 +52,17 @@ module.exports = Base.extend({
                 name: currentState.name
             }
         });
+    },
+    onOpenModal: function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+        $('#location-modal').trigger('show');
+    },
+    onCloseModal: function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+        $('#location-modal').trigger('hide');
     }
 });
