@@ -7,6 +7,7 @@ var helpers = require('../helpers');
 var tracking = require('../modules/tracking');
 var Filters = require('../modules/filters');
 var Item = require('../models/item');
+var Sixpack = require('../../shared/sixpack');
 
 module.exports = {
     show: middlewares(show),
@@ -35,6 +36,29 @@ function show(params, callback) {
         var newItemPage = helpers.features.isEnabled.call(this, 'newItemPage');
         var anonymousItem;
 
+
+        var clicked = this.app.session.get('isShopExperimented');
+        var sixpack = new Sixpack({
+            clientId: this.app.session.get('clientId'),
+            platform: this.app.session.get('platform'),
+            market: this.app.session.get('location').abbreviation,
+            experiments: this.app.session.get('experiments')
+        });
+        var experiment = sixpack.experiments.html4ShowShops;
+        
+        if ( experiment ) {
+            if (( experiment.firstClick && !clicked ) || !experiment.firstClick ) {
+
+                if (experiment.alternative == 'items' || (experiment.alternative != 'items' && params.from)) {
+                    sixpack.convert(experiment);
+                }
+
+                this.app.session.persist({
+                    isShopExperimented: true
+                });
+            }           
+        }
+ 
         var prepare = function(done) {
             if (user) {
                 params.token = user.token;

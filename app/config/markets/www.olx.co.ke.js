@@ -187,7 +187,6 @@ module.exports = {
             }
         }
     },
-    useShops: true,
     relatedAds: {
         desktop: {
             enabled: true

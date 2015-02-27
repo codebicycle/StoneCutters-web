@@ -14,8 +14,7 @@ module.exports = Base.extend({
         var data = Base.prototype.getTemplateData.call(this);
 
         return _.extend({}, data, {
-            breadcrumb: breadcrumb.get.call(this, data),
-            shopsEnabled: helpers.features.isEnabled.call(this, 'shops')
+            breadcrumb: breadcrumb.get.call(this, data)
         });
     }
 });
