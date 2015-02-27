@@ -42,7 +42,7 @@ module.exports = {
         wap: ['www.olx.co.za', 'www.olx.ir', 'www.olx.hn'],
         html4: ['www.olx.co.za', 'www.olx.ir', 'www.olx.hn'],
         html5: ['www.olx.ir', 'www.olx.hn'],
-        desktop: ['www.olx.com.bo']
+        desktop: ['www.olx.co.za', 'www.olx.com.bo']
     },
     icons: {
         wap: [],
