@@ -365,5 +365,10 @@ module.exports = {
         success: {
             addmessage: true
         }
+    },
+    relatedAds: {
+        desktop: {
+            enabled: true
+        }
     }
 };
