@@ -148,7 +148,7 @@ module.exports = {
             },
             contactForm: {
                 worldwide: false,
-                countries: ['www.olx.co.cr', 'www.olx.com.uy', 'www.olx.com.pa', 'www.olx.co.ug', 'www.olx.co.tz', 'www.olx.com.pe', 'www.olx.com.sv', 'www.olx.com.ec', 'www.olx.com.ve', 'www.olx.com.uy', 'www.olx.com.ar', 'www.olx.com.co', 'www.olx.com.gt']
+                countries: ['www.olx.co.cr', 'www.olx.com.uy', 'www.olx.com.pa', 'www.olx.co.ug', 'www.olx.co.tz', 'www.olx.com.pe', 'www.olx.com.sv', 'www.olx.com.ec', 'www.olx.com.ve', 'www.olx.com.uy', 'www.olx.com.ar', 'www.olx.com.co', 'www.olx.com.gt', 'www.olx.sn', 'www.olx.cm', 'www.olx.com.gh', 'www.olx.co.za']
             },
             optimizely: {
                 worldwide: false,
