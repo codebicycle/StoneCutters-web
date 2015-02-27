@@ -65,8 +65,6 @@ function extendConfig(defaults, extras) {
     extended = _.extend({}, defaults, extras);
     extended.params = _.extend({}, defaults.params || {}, extras.params || {});
 
-    console.log(extended);
-
     return extended;
 }
 
@@ -134,7 +132,7 @@ function getClientId(service) {
     return clientId.join('-');
 }
 
-function getNumberPerCategory(service){
+function getNumberPerCategory(service) {
     var number = this.config.params.number;
     var cat = getCategoryId.call(this);
 
@@ -252,7 +250,7 @@ function getConfig() {
     var configFormatDefault = utils.get(configService, 'default', {});
     var configFormat = utils.get(configService, configMarket.format, {});
     var configFormats = extendConfig(configFormatDefault, configFormat);
-    var configResult = extendConfig(configMarket, configFormats);
+    var configResult = extendConfig(configFormats, configMarket);
 
     return extendConfig(configResult, {
         enabled: configService.enabled,

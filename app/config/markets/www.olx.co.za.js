@@ -347,8 +347,11 @@ module.exports = {
                 },
                 bottom: {
                     service: 'AFC',
-                    format: 'TextBottomZA',
-                    location: 'Bottom'
+                    format: 'TextBottom',
+                    location: 'Bottom',
+                    params: {
+                        number: 3
+                    }
                 }
             }
         }

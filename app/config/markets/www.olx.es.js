@@ -32,7 +32,10 @@ module.exports = {
                     service: 'ADX',
                     format: 'HalfBanner',
                     language: 'es',
-                    location: 'Top'
+                    location: 'Top',
+                    params: {
+                        slotId: 9904443106
+                    }
                 },
                 side: {
                     service: 'ADX',
@@ -40,7 +43,7 @@ module.exports = {
                     language: 'es',
                     location: 'Side',
                     params: {
-                        slotId: 555555
+                        slotId: 9904443106
                     }
                 }
             },
@@ -49,7 +52,10 @@ module.exports = {
                     service: 'ADX',
                     format: 'MediumRectangle',
                     language: 'es',
-                    location: 'Side'
+                    location: 'Side',
+                    params: {
+                        slotId: 8287982506
+                    }
                 }
             }
         }
