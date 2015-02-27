@@ -64,6 +64,9 @@ function extendConfig(defaults, extras) {
 
     extended = _.extend({}, defaults, extras);
     extended.params = _.extend({}, defaults.params || {}, extras.params || {});
+
+    console.log(extended);
+
     return extended;
 }
 
