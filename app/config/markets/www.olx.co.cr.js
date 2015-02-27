@@ -23,28 +23,30 @@ module.exports = {
             }
         ]
     },
-    videos: [
-        {
-            title: 'OLX Costa Rica - Consola',
-            id: 'dSavGD707o4'
-        },
-        {
-            title: 'OLX Costa Rica - Mauricio "El Chunche" Montero - Garaje',
-            id: '1sR75hvjlRI'
-        },
-        {
-            title: 'OLX Costa Rica - Bicicleta - Vender es fácil',
-            id: 'iYUX408RQq4'
-        },
-        {
-            title: 'OLX Costa Rica - Anteojos - Vender es fácil',
-            id: 'Mrfetr0kAoI'
-        },
-        {
-            title: 'OLX Costa Rica - Poker - Vender es fácil',
-            id: 'Yf5i1HOwd70'
-        }
-    ],
+    marketing: {
+        videos: [
+            {
+                title: 'OLX Costa Rica - Consola',
+                id: 'dSavGD707o4'
+            },
+            {
+                title: 'OLX Costa Rica - Mauricio "El Chunche" Montero - Garaje',
+                id: '1sR75hvjlRI'
+            },
+            {
+                title: 'OLX Costa Rica - Bicicleta - Vender es fácil',
+                id: 'iYUX408RQq4'
+            },
+            {
+                title: 'OLX Costa Rica - Anteojos - Vender es fácil',
+                id: 'Mrfetr0kAoI'
+            },
+            {
+                title: 'OLX Costa Rica - Poker - Vender es fácil',
+                id: 'Yf5i1HOwd70'
+            }
+        ]
+    },
     adserving: {
         slots: {
             listing: {

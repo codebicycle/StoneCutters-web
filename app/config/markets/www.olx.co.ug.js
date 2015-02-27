@@ -6,8 +6,10 @@ module.exports = {
     adserving: {
         enabled: false
     },
-    post_banner: {
-        image: 'post-africa'
+    marketing: {
+        post_banner: {
+            image: 'post-africa'
+        }
     },
     successPage: {
         keepPosting: [
