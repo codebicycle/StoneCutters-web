@@ -217,7 +217,7 @@ module.exports = {
     },
     relatedAds: {
         desktop: {
-            enabled: true,
+            enabled: false,
             group: 2,
             quantity: 3,
             module: 'suggestion',
