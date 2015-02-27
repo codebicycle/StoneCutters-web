@@ -107,15 +107,20 @@
                         {% if (status == 'ready') %}
                             <a data-idd="{{ item.id }}" data-img="{{ item.thumbnailLarge }}" data-title="{{ item.title }}" href="{{ ('/myolx/deleteitem/'+ item.id) | link }}" class="btn icons icon-trash btndelete">{{ dictionary["confirmremoveitem.Delete"] }} </a>
                         {% endif %}
-                        {% if item.featured and item.featured.isEnabled() %}
-                            <a data-idd="{{ item.id }}" data-img="{{ item.thumbnailLarge }}" data-title="{{ item.title }}" href="{{ ('/myolx/buyfeaturedad?id='+ item.id) | link }}" class="btn btnfeaturedad"><span class="icons icon-star-circle"></span>{{ dictionary["featured_listings.Feature"] }} </a>
-                        {% endif %}
+                    {% endif %}
+                    {% if (status == 'rejected' or status == 'expired' or item.status == 'closed') %}
+                        <a data-idd="{{ item.id }}" href="#" class="btn icons icon-trash btnremove">{{ dictionary["misc.RemoveFromList"] }} </a>
                     {% endif %}
                     {% if (isRenewEnabled and status == 'deleted' and itemDays >= daysToRenew) %}
                             <a href="{{ ('/myolx/renewitem/'+ item.id) | link }}" class="btn icons icon-repulish">{{ dictionary["myolx.Republish"] }}</a>
                     {% endif %}
                     {% if (isRebumpEnabled and status == 'expired' and item.bloquedType == '0') %}
                         <a href="{{ ('/myolx/rebump/'+ item.id) | link }}" class="btn icons icon-repulish">{{ dictionary["myolx.Republish"] }}</a>
+                    {% endif %}
+                    {% if (status == 'ready' or status == 'pending' or status == 'rejected') %}
+                        {% if item.featured and item.featured.isEnabled() %}
+                            <a data-idd="{{ item.id }}" data-img="{{ item.thumbnailLarge }}" data-title="{{ item.title }}" href="{{ ('/myolx/buyfeaturedad?id='+ item.id) | link }}" class="btn btnfeaturedad"><span class="icons icon-star-circle"></span>{{ dictionary["featured_listings.Feature"] }} </a>
+                        {% endif %}
                     {% endif %}
                 </div>
             </div>

@@ -4,6 +4,8 @@ var _ = require('underscore');
 var translations = require('../../../shared/translations');
 
 module.exports = {
+    city: city,
+    state: state,
     kilometers: kilometers,
     bathrooms: bathrooms,
     bedrooms: bedrooms,
@@ -20,6 +22,43 @@ function buildKilometerRange(to, label, dictionary) {
         to: to,
         label: [dictionary['misc.LessThan'], label, dictionary['posting_optionallist.Kms']].join('')
     };
+}
+
+function sortFilterCityAndState(locations, options) {
+    var platform = options.app.session.get('platform');
+    var hiddenLocations;
+
+    if (platform !== 'desktop' || !locations || !locations.length || locations.length <= 12) {
+        return locations;
+    }
+    hiddenLocations = locations.slice(12).sort(function sortByName(location1, location2) {
+        if (location1.value > location2.value) {
+            return 1;
+        }
+        if (location1.value < location2.value) {
+            return -1;
+        }
+        return 0;
+    });
+    return locations.slice(0, 12).concat(hiddenLocations);
+}
+
+function city(filter, options) {
+    filter.set({
+        value: sortFilterCityAndState(filter.get('value'), options)
+    }, {
+        unset: false
+    });
+    return filter;
+}
+
+function state(filter, options) {
+    filter.set({
+        value: sortFilterCityAndState(filter.get('value'), options)
+    }, {
+        unset: false
+    });
+    return filter;
 }
 
 function kilometers(filter, options) {

@@ -1,6 +1,8 @@
 'use strict';
 
-var helpers = require('./features');
+var features = require('./features');
+var common = require('./common');
+var config = require('../../shared/config');
 
 module.exports = {
     getInfo: function(app, medium) {
@@ -9,21 +11,23 @@ module.exports = {
         var osName = app.session.get('osName');
         var osVersion = app.session.get('osVersion');
         var browserName = app.session.get('browserName');
-        var useADX = helpers.isEnabled.call(this, 'interstitialByADX', platform, location.url);
+        var useADX = features.isEnabled.call(this, 'interstitialByADX', platform, location.url);
         var language = app.session.get('selectedLanguage').split('-')[0];
+        var data = {};
+
         if (language != 'es' && language != 'pt') {
             language = 'en';
         }
-        var data = {};
-
         if((osVersion < 2.1 && osName == 'Android') || (osVersion < 3.2 && osName == 'iOS')){
             return data;
         }
         switch(osName) {
             case 'Android':
                 data.link = 'market://details?id=com.olx.olx&referrer=utm_source%3DOLX_'+platform+'_DownloadApp%26utm_'+medium+'%3DFooter%26utm_campaign%3B'+medium;
-                if (location.url === 'www.olx.ir') {
-                    //data.direct = 'http://www.olx.ir/apps/OLX.Iran.1.1.apk';
+                if (location.url === 'www.olx.ir' && config.get(['iris', 'direct', 'enabled'], false)) {
+                    data.direct = common.static.call({
+                        app: app
+                    }, '/apps/OLX.Iran.1.1.apk');
                 }
                 data.forOsKey = 'misc.BrandFor_Mob';
                 data.forOs = ' Android';

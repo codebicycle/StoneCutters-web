@@ -6,7 +6,7 @@ var helpers = require('../../../../../../helpers');
 var _ = require('underscore');
 var asynquence = require('asynquence');
 var translations = require('../../../../../../../shared/translations');
-var Item = require('../../../../../../models/item');
+var Chat = require('../../../../../../modules/chat');
 var config = require('../../../../../../../shared/config');
 
 function onpopstate(event) {
@@ -55,7 +55,8 @@ module.exports = Base.extend({
 
         return _.extend({}, data, {
             item: this.getItem(data.item),
-            customerContact: customerContact
+            customerContact: customerContact,
+            chatEnabled: Chat.isEnabled.call(this)
         });
     },
     postRender: function() {
@@ -68,7 +69,8 @@ module.exports = Base.extend({
         this.editing = !!this.getItem().has('id');
         if (this.editing) {
             this.$('#posting-categories-view').trigger('editCategory', [this.item.get('category')]);
-            this.$('#field-location').trigger('change');
+            this.$('#posting-contact-view').trigger('formRendered');
+            this.$('#posting-locations-view').trigger('formRendered');
         }
         else {
             if (this.getUrlParam('cat') !== undefined) {
@@ -92,6 +94,7 @@ module.exports = Base.extend({
                     }
                 }.bind(this));
                 this.$el.trigger('errorsUpdate');
+                this.$('#posting-contact-view').trigger('formRendered');
                 this.$('#posting-locations-view').trigger('formRendered');
             }
         }
@@ -151,7 +154,7 @@ module.exports = Base.extend({
             this.handleBack();
         }
     },
-    onFieldSubmit: function(event, field, skipValidation) {
+    onFieldSubmit: function(event, field, options) {
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();
@@ -160,11 +163,19 @@ module.exports = Base.extend({
         var shouldValidateField = false;
         var canValidateFields = this.item.has('category');
 
+        options = _.defaults({}, options || {}, {
+            skipValidation: false,
+            pendingValidation: false
+        });
+
         if (field instanceof window.jQuery) {
             $field = field;
             shouldValidateField = !!$field.data('validate');
             if ($field.attr('name') === 'state' || $field.attr('name') === 'location' || $field.attr('name') === 'neighborhood') {
-                if (!skipValidation) {
+                if (options.pendingValidation) {
+                    this.pendingValidations.push($field);
+                }
+                else if (!options.skipValidation) {
                     $field.trigger('fieldValidationStart');
                 }
             }
@@ -173,7 +184,10 @@ module.exports = Base.extend({
         }
         if (shouldValidateField) {
             if (canValidateFields) {
-                if (!skipValidation) {
+                if (options.pendingValidation) {
+                    this.pendingValidations.push($field);
+                }
+                else if (!options.skipValidation) {
                     $field.trigger('fieldValidationStart');
                 }
             }
@@ -284,6 +298,7 @@ module.exports = Base.extend({
     onEnd: function(event) {
         $(window).off('beforeunload', this.onBeforeUnload);
         $(window).off('popstate', onpopstate);
+
         this.appView.trigger('posting:end');
     },
     onStart: function(event) {

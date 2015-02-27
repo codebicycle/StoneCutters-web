@@ -9,21 +9,21 @@ module.exports = {
             channel: 'OLX_[countrycode]'
         }
     },
-    'MediumRectangle': {
+    MediumRectangle: {
         params: {
             media: 'flash, image',
             width: 300,
             height: 250
         }
     },
-    'WideSkyscraper': {
+    WideSkyscraper: {
         params: {
             media: 'flash, image',
             width: 160,
             height: 600
         }
     },
-    'TextTop': {
+    TextTop: {
         params: {
             number: 3,
             media: 'text',
@@ -31,9 +31,17 @@ module.exports = {
             height: 90
         }
     },
-    'TextBottom': {
+    TextBottom: {
         params: {
             number: 5,
+            media: 'text',
+            width: 728,
+            height: 90
+        }
+    },
+    TextBottomZA: {
+        params: {
+            number: 3,
             media: 'text',
             width: 728,
             height: 90

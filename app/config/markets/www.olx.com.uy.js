@@ -180,11 +180,9 @@ module.exports = {
             }
         ]
     },
-    tracking: {
-        trackers: {
-            tagmanager: {
-                enabled: true
-            }
+    relatedAds: {
+        desktop: {
+            enabled: true
         }
     }
 };

@@ -1,0 +1,31 @@
+<div class="conversations">
+    <p class="top-conversations">{{ dictionary["myolx.FIndPrevMessages"] | replace('<<LINK>>', ([' <a href="', ('/myolx/myolxmessages' | link), '">'] | join(''))) | replace('<</LINK>>', '</a>') }}</p>
+    {% if conversations.length == 0 %}
+        <p class="top-conversations">{{ dictionary["netvibes_myolx.content.NoMessages"] }}</p>
+    {% else %}
+        {% for conversation in conversations %}
+            {% if items.get(conversation.itemId) %}
+                {% set item = items.get(conversation.itemId) %}
+                <div class="conversations-thread clearfix{{ ' read' if conversation.read }}" >
+                    <a href="{{ ('/myolx/conversation/' + conversation.threadId) | link }}" data-threadId="{{ conversation.threadId }}">
+                        <figure class="wrapper-img {{ 'lines' if item.get('imagesCount') > 1 }} {{ 'icons icon-photo' if not item.get('thumbnail') }}">
+                            {% if item.get('thumbnail') %}
+                                <img src="{{ item.get('thumbnail') }}" alt="{{ item.get('title') }}">
+                            {% endif %}
+                        </figure>
+                        <div class="conversations-data">
+                            <h3>{{ conversation.contactName }}</h3>
+                            <h4>'{{ item.get('title') }}'</h4>
+                            <p>"{{ conversation.messageText | truncate( 100, True, '...') }}"</p>
+                            <span>{{ conversation.messageDate | date(false, true) }}
+                        </div>
+                    </a>
+                </div>
+            {% endif %}
+
+        {% endfor %}
+    {% endif %}
+</div>
+{% if paginator and paginator.isEnabled() %}
+    {% include (template + '/users/partials/pagination.html') %}
+{% endif %}

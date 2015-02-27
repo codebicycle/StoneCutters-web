@@ -178,14 +178,9 @@ module.exports = {
             }
         ]
     },
-    tracking: {
-        trackers: {
-            hydra: {
-                enabled: false
-            },
-            tagmanager: {
-                enabled: true
-            }
+    relatedAds: {
+        desktop: {
+            enabled: true
         }
     }
 };

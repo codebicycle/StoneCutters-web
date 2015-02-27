@@ -90,7 +90,6 @@ module.exports = {
                         '831': 1,
                         '832': 1,
                         '857': 1,
-                        '853': 1,
                         '859': 1,
                         '860': 1,
                         '861': 1,
@@ -149,7 +148,6 @@ module.exports = {
                         '831': 1,
                         '832': 1,
                         '857': 1,
-                        '853': 1,
                         '859': 1,
                         '860': 1,
                         '861': 1,
@@ -195,6 +193,11 @@ module.exports = {
             adroll: {
                 enabled: true
             }
+        }
+    },
+    relatedAds: {
+        desktop: {
+            enabled: true
         }
     }
 };
