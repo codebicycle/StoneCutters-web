@@ -101,10 +101,12 @@ module.exports = function(nunjucks) {
         var length = items.length + shops.length;
 
         for (var i = 0; i < length; i++) {
-            if (randomInt(10) <= 2 && shopIndex < shops.length) {
+
+            var isShop = (((randomInt(10) < 1) && shopIndex < shops.length) || (itemIndex >= items.length && shopIndex < shops.length));
+            if (isShop) {
                 shuffle[i] = { "index": shopIndex, "type": "shop"};
                 shopIndex++;
-            } else if (itemIndex < items.length) {
+            } else {
                 shuffle[i] = { "index": itemIndex, "type": "item"};
                 itemIndex++;                
             }
