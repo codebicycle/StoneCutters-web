@@ -14,6 +14,12 @@ module.exports = Base.extend({
     id: 'item-contact-form',
     tagName: 'section',
     className: 'items_reply_view',
+    getTemplateData: function() {
+        var data = Base.prototype.getTemplateData.call(this);
+        data.fields = [{ name: 'message', label: 'replymessage.Message', mandatory: 'true'},{name: 'name', label: 'replymessage.Name', mandatory: 'false'}, {name: 'email', label: 'replymessage.Email', mandatory: 'true'}, {name: 'phone', label: 'itemgeneraldetails.Phone'}];
+
+        return _.extend({}, data, {});
+    },
     postRender: function() {
         this.dictionary = translations.get(this.app.session.get('selectedLanguage'));
         this.user = new User(_.extend({
@@ -54,8 +60,19 @@ module.exports = Base.extend({
         this.$spinner.show();
         asynquence().or(fail.bind(this))
             .then(validate.bind(this))
+            .then(prepare.bind(this))
             .then(submit.bind(this))
             .val(success.bind(this));
+
+        function prepare(done) {
+            if(this.user){
+                this.reply.name = this.$('input.name').val();
+                this.reply.email = this.$('input.email').val();
+                this.reply.userId = this.user.get('userId');
+            }
+
+            done();
+        }
 
         function validate(done) {
             var hasErrors = false;
@@ -77,7 +94,6 @@ module.exports = Base.extend({
 
         function success(reply) {
             event.target.reset();
-            this.$spinner.hide();
 
             var params = {
                 sent: true
@@ -87,6 +103,7 @@ module.exports = Base.extend({
             };
             newUrl = helpers.common.slugToUrl(newUrl);
             this.trackSuccess(reply);
+            this.$spinner.hide();
             helpers.common.redirect.call(this.app.router, newUrl , params, {
                 status: 200
             });
@@ -129,7 +146,7 @@ module.exports = Base.extend({
         var isEmpty;
 
         this.addData(field);
-        if (name === 'phone') {
+        if (name === 'phone' || name === 'name') {
             return true;
         }
         isEmpty = this.isEmpty(name, value);
@@ -148,7 +165,15 @@ module.exports = Base.extend({
         return this.setError(rEmail.test(value), name, this.dictionary['postingerror.InvalidEmailAddress']);
     },
     setError: function (isValid, name, text) {
+        var tip = this.$('input[name="'+name+'"],textarea[name="'+name+'"]').parents('.field').find('.placeholder');
+        if (isValid) {
+            tip.show();
+        }
+        else {
+            tip.hide();
+        }
         this.$('small.' + name).text(isValid ? '' : text).toggleClass('hide', isValid);
+        this.$('small.' + name).parents('.field').toggleClass('haserror', !isValid);
         return isValid;
     },
     onStart: function(event) {

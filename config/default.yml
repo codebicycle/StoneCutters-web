@@ -159,8 +159,8 @@ emails:
       subdomain: olxgt
       brand_id: 304935
     www.olx.com.ni:
-      subdomain: olxni
-      brand_id: 300719
+      subdomain: olxmilk
+      brand_id: 304905
     www.olx.com.pa:
       subdomain: olxpa
       brand_id: 304945
@@ -177,5 +177,14 @@ emails:
       subdomain: olxve
       brand_id: 300739
     www.olx.hn:
-      subdomain: olxhn
-      brand_id: 304975
+      subdomain: olxmilk
+      brand_id: 304905
+    www.olx.co.ke:
+      subdomain: olxke
+      brand_id: 288292
+    www.olx.co.ug:
+      subdomain: olxug
+      brand_id: 483591
+    www.olx.co.tz:
+      subdomain: olxtz
+      brand_id: 483601

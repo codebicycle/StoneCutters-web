@@ -43,12 +43,13 @@ function getSettings() {
             hl: this.app.session.get('selectedLanguage').split('-').shift()
         });
 
+
         if (settings.params.adIconUrl && this.config.language) {
             settings.params.adIconUrl = settings.params.adIconUrl.replace(this.config.language.pattern, _.contains(this.config.language.list, settings.options.hl) ? settings.options.hl : this.config.language['default']);
         }
 
         _.extend(settings, {
-            enabled: true,
+            enabled: !!settings.params.number,
             service: service,
             seo: this.config.seo || 0
         });
@@ -74,7 +75,9 @@ function createChannels(service) {
     var configService = utils.get(configAdServing, [service, 'default'], {});
     var countryCode = this.app.session.get('location').abbreviation;
     var prefix = configService.options.channel.replace('[countrycode]', countryCode);
+    var prefixMobile = prefix.replace('_', 'MW_');
     var currentRoute = this.app.session.get('currentRoute');
+    var currentPlatform = this.app.session.get('platform');
     var currentRouteAction = currentRoute.action;
     var channels = [];
     var configChannel;
@@ -82,6 +85,13 @@ function createChannels(service) {
 
     if (slotname === 'listing_noresult' && currentRoute.controller === 'searches' && currentRoute.action === 'search') {
         currentRouteAction = 'noresult';
+    }
+
+    if (currentPlatform !== 'desktop') {
+        channels.push(prefix);
+        channels.push(prefixMobile);
+
+        return channels.join(',');
     }
 
     configChannel = utils.get(configAdServing, ['channels', 'page', [currentRoute.controller, currentRouteAction].join('#')], {});
@@ -126,7 +136,7 @@ function getNumberPerCategory(service){
     var cat = getCategoryId.call(this);
 
     if (service !== 'CSA') {
-        return number || 1;
+        return typeof number === 'undefined' ? 1 : number;
     }
     if (!cat) {
         cat = this.app.session.get('currentRoute').action;
@@ -238,7 +248,7 @@ function getConfig() {
     var configService = utils.get(configAdServing, configMarket.service, {});
     var configFormatDefault = utils.get(configService, 'default', {});
     var configFormat = utils.get(configService, configMarket.format, {});
-    var configFormats = extendConfig(configFormat, configFormatDefault);
+    var configFormats = extendConfig(configFormatDefault, configFormat);
     var configResult = extendConfig(configMarket, configFormats);
 
     return extendConfig(configResult, {

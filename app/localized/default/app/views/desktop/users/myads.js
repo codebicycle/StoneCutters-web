@@ -6,9 +6,11 @@ var URLParser = require('url');
 var Base = require('../../../../../common/app/bases/view').requireView('users/myads');
 var helpers = require('../../../../../../helpers');
 var config = require('../../../../../../../shared/config');
+var utils = require('../../../../../../../shared/utils');
 
 module.exports = Base.extend({
     events: {
+        'click .btnremove': 'onRemoveClick',
         'click .btndelete': 'onDeleteClick',
         'click .btncanceldelete': 'onCancelDeleteClick',
         'click .backtomyolx': 'onCancelDeleteClick',
@@ -18,7 +20,6 @@ module.exports = Base.extend({
         'click [data-modal-shadow]': 'onCloseModal'
     },
     getTemplateData: function() {
-
         var now = new Date();
         var location = this.app.session.get('location');
         var data = Base.prototype.getTemplateData.call(this);
@@ -28,6 +29,35 @@ module.exports = Base.extend({
         data.items = data.items || this.parentView.items;
 
         return data;
+    },
+    onRemoveClick: function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+        event.stopImmediatePropagation();
+
+        var $btnrem = $(event.target);
+        var id = $btnrem.data('idd');
+
+        asynquence().or(success.bind(this)) // TODO: Improve error handling
+            .then(remove.bind(this))
+            .val(success.bind(this));
+
+        function remove(done) {
+            var item = this.parentView.items.get(id);
+
+            item.remove({
+                deleteType: 'purged'
+            }, done);
+        }
+
+        function success() {
+            var path = this.app.session.get('path');
+
+            this.app.router.redirectTo(utils.params(path, {
+                removed: id
+            }));
+        }
     },
     onDeleteClick: function(event) {
         event.preventDefault();
@@ -75,7 +105,10 @@ module.exports = Base.extend({
             var reason = this.$('.formdelete input[name="close_reason"]:checked').val();
             var comment = this.$('.formdelete input[name="close_comment"]').val();
 
-            item.remove(reason, comment, done);
+            item.remove({
+                reason: reason,
+                comment: comment
+            }, done);
         }
 
         function success() {

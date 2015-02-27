@@ -218,6 +218,9 @@
 {IP}  html5.m.olx.cl            # Chile
 {IP}  www.olx.cl            # Chile
 {IP}  olx.cl            # Chile
+{IP}  cabrero.olx.cl     #Chile
+{IP}  launion.olx.cl     #Chile
+{IP}  arica.olx.cl     #Chile
 
 {IP}  m.olx.com.co        # Colombia
 {IP}  wap.m.olx.com.co        # Colombia
@@ -301,12 +304,12 @@
 {IP}  olx.it            # Italy
 {IP}  milano.olx.it # Italy
 
-{IP}  m.olx.ir			# Iran
-{IP}  wap.m.olx.ir		# Iran
-{IP}  html4.m.olx.ir		# Iran
-{IP}  html5.m.olx.ir		# Iran
-{IP}  www.olx.ir		# Iran
-{IP}  olx.ir		# Iran
+{IP}  m.olx.ir          # Iran
+{IP}  wap.m.olx.ir      # Iran
+{IP}  html4.m.olx.ir        # Iran
+{IP}  html5.m.olx.ir        # Iran
+{IP}  www.olx.ir        # Iran
+{IP}  olx.ir        # Iran
 
 {IP}  m.olx.co.ke         # Kenia
 {IP}  wap.m.olx.co.ke         # Kenia
@@ -614,6 +617,8 @@
 {IP}  html5.m.olx.co.za         # South Africa
 {IP}  www.olx.co.za         # South Africa
 {IP}  olx.co.za         # South Africa
+{IP}  gauteng.olx.co.za         # South Africa
+{IP}  johannesburg.olx.co.za         # South Africa
 
 {IP}  m.olx.es            # Spain
 {IP}  wap.m.olx.es            # Spain
@@ -679,6 +684,7 @@
 {IP}  www.olx.com.uy        # Uruguay
 {IP}  olx.com.uy        # Uruguay
 {IP}  ciudadmontevideo.olx.com.uy        # Uruguay
+{IP}  falagian.olx.com.uy        # Uruguay
 
 {IP}  m.olx.com.ve        # Venezuela
 {IP}  wap.m.olx.com.ve        # Venezuela

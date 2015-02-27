@@ -114,7 +114,7 @@ function generate(query) {
         try {
             tracker.call(this, tracking, page, query.params);
         } catch(e) {
-            console.log('[OLX_DEBUG]', 'Tracking not found |', name);
+            console.log('[OLX_DEBUG]', 'Tracking not found |', name, e instanceof Error ? JSON.stringify(e.stack) : e);
         }
     }, this);
     return tracking;
