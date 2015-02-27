@@ -11,7 +11,6 @@ var Seo = require('../modules/seo');
 var FeatureAd = require('../models/feature_ad');
 var config = require('../../shared/config');
 var utils = require('../../shared/utils');
-var ShopsAdmin = require('../modules/shopsadmin');
 
 module.exports = {
     list: middlewares(list),
@@ -307,11 +306,6 @@ function handleItems(params, promise, gallery) {
         tracking.addParam('filters', items.filters);
         tracking.addParam('paginator', items.paginator);
 
-        var shopsAdmin = new ShopsAdmin();
-        if (shops) {
-            shopsAdmin.setShops(shops.toJSON());
-        }        
-
         done({
             type: 'items',
             category: category.toJSON(),
@@ -321,7 +315,6 @@ function handleItems(params, promise, gallery) {
             meta: meta,
             items: items.toJSON(),
             shops: shops !== undefined ? shops.toJSON() : [],
-            shopsAdmin: shopsAdmin,            
             filters: items.filters,
             paginator: items.paginator,
             hasItemsWithImages: items.hasImages()

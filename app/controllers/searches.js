@@ -10,7 +10,6 @@ var Paginator = require('../modules/paginator');
 var FeatureAd = require('../models/feature_ad');
 var config = require('../../shared/config');
 var utils = require('../../shared/utils');
-var ShopsAdmin = require('../modules/shopsadmin');
 var config = require('../../shared/config');
 
 module.exports = {
@@ -254,14 +253,9 @@ function search(params, callback, gallery) {
                 }
             });
 
-            var shopsAdmin = new ShopsAdmin();
-            if (shops) {
-                shopsAdmin.setShops(shops.toJSON());
-            }
             callback(null, ['searches/search', gallery.replace('-', '')].join(''), {
                 items: items.toJSON(),
                 shops: shops !== undefined ? shops.toJSON() : [],
-                shopsAdmin: shopsAdmin,
                 meta: items.meta,
                 filters: items.filters,
                 paginator: items.paginator,
