@@ -194,5 +194,10 @@ module.exports = {
                 enabled: true
             }
         }
+    },
+    relatedAds: {
+        desktop: {
+            enabled: true
+        }
     }
 };
