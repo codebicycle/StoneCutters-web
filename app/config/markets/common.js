@@ -77,13 +77,10 @@ module.exports = {
                     format: 'custom',
                     location: 'Bottom'
                 },
-                mobitlebottom: {
+                mobilebottom: {
                     service: 'AFC',
                     format: 'TextMobile',
-                    location: 'Bottom',
-                    params: {
-                        number: 3
-                    }
+                    location: 'Bottom'
                 },
                 noresult: {
                     service: 'CSA',
