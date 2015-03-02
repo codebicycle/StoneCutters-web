@@ -30,13 +30,18 @@ module.exports = Base.extend({
         });
     },
     postRender: function() {
+        var settings;
+        var service;
+
         this._checkAdServing();
         if (!this.adServing.isServiceEnabled()) {
             return;
         }
-        var settings = this.adServing.getSettings();
-        var service = this.adServing.get('service');
-
+        settings = this.adServing.getSettings();
+        if (!settings.enabled) {
+            return;
+        }
+        service = this.adServing.get('service');
         if (service === 'CSA' || service === 'AFC') {
             if (this.isGoogleReferer()) {
                 settings.options.channel = settings.options.channel.replace('Organic', 'SEO');
@@ -46,6 +51,7 @@ module.exports = Base.extend({
             }
             settings.options.channel = settings.options.channel.replace('[navigator]', window.BrowserDetect.browsername);
         }
+        console.log(settings);
         switch (service) {
             case 'CSA':
                 this._includeCsaLib();
@@ -86,6 +92,7 @@ module.exports = Base.extend({
         .attr({
             height: params.height,
             width: params.width,
+            slot: params.slotId,
             src: 'about:blank',
             id: slotname + '_iframe'
         }).on('load', function() {
