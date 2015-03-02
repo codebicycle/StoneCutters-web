@@ -9,8 +9,8 @@ module.exports = Base.extend({
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
         var experiment = this.app.session.get('experiments').html4ShowShops;
-        console.log('viewhtml4', experiment);
         var alternative = '';
+        
         if (experiment) {
             alternative = experiment.alternative;
         }

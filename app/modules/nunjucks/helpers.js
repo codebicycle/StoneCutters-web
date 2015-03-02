@@ -95,7 +95,6 @@ module.exports = function(nunjucks) {
     }
 
     function shuffleItems(items, shops){
-        console.log(items.length, shops.length);
         var shuffle = [];
         var itemIndex = 0;
         var shopIndex = 0;
