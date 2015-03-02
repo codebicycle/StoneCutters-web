@@ -104,13 +104,6 @@ module.exports = Base.extend({
                 }
             }
         };
-
-        var relatedAds = this.$('.swiper-related').swiper({
-            visibilityFullFit: true,
-            slidesPerView: 'auto',
-            preventLinks:false,
-            mode:'horizontal'
-        });
     },
     showOnePicture: function(e) {
         e.preventDefault();
