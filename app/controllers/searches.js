@@ -172,8 +172,10 @@ function search(params, callback, gallery) {
             if (experiment && experiment.alternative != 'items') {
                 collections.shops = {
                     collection: 'Shops',
-                    params: params,
+                    params: _.clone(params),
                 };
+                collections.shops.params.pageSize = 3;
+                collections.shops.params.offset = 3 * (params.offset / params.pageSize);
             }
             this.app.fetch(collections, {
                 readFromCache: false
