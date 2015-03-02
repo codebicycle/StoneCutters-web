@@ -23,28 +23,30 @@ module.exports = {
             }
         ]
     },
-    videos: [
-        {
-            title: 'OLX Costa Rica - Consola',
-            id: 'dSavGD707o4'
-        },
-        {
-            title: 'OLX Costa Rica - Mauricio "El Chunche" Montero - Garaje',
-            id: '1sR75hvjlRI'
-        },
-        {
-            title: 'OLX Costa Rica - Bicicleta - Vender es fácil',
-            id: 'iYUX408RQq4'
-        },
-        {
-            title: 'OLX Costa Rica - Anteojos - Vender es fácil',
-            id: 'Mrfetr0kAoI'
-        },
-        {
-            title: 'OLX Costa Rica - Poker - Vender es fácil',
-            id: 'Yf5i1HOwd70'
-        }
-    ],
+    marketing: {
+        videos: [
+            {
+                title: 'OLX Costa Rica - Consola',
+                id: 'dSavGD707o4'
+            },
+            {
+                title: 'OLX Costa Rica - Mauricio "El Chunche" Montero - Garaje',
+                id: '1sR75hvjlRI'
+            },
+            {
+                title: 'OLX Costa Rica - Bicicleta - Vender es fácil',
+                id: 'iYUX408RQq4'
+            },
+            {
+                title: 'OLX Costa Rica - Anteojos - Vender es fácil',
+                id: 'Mrfetr0kAoI'
+            },
+            {
+                title: 'OLX Costa Rica - Poker - Vender es fácil',
+                id: 'Yf5i1HOwd70'
+            }
+        ]
+    },
     adserving: {
         slots: {
             listing: {
@@ -142,6 +144,53 @@ module.exports = {
                         allresultsig: 2
                     }
                 },
+                mobiletop: {
+                    service: 'AFC',
+                    format: 'TextMobile',
+                    location: 'Top',
+                    numberPerCategoryCSA: {
+                        '185': 1,
+                        '209': 1,
+                        '210': 1,
+                        '211': 1,
+                        '214': 1,
+                        '215': 1,
+                        '217': 1,
+                        '218': 1,
+                        '219': 1,
+                        '227': 1,
+                        '228': 1,
+                        '229': 1,
+                        '234': 1,
+                        '238': 1,
+                        '240': 1,
+                        '243': 1,
+                        '312': 1,
+                        '364': 1,
+                        '365': 1,
+                        '366': 1,
+                        '402': 1,
+                        '498': 1,
+                        '501': 1,
+                        '568': 1,
+                        '594': 1,
+                        '820': 1,
+                        '898': 1,
+                        '911': 1,
+                        '362': 2,
+                        '376': 2,
+                        '377': 2,
+                        '378': 2,
+                        '379': 2,
+                        '380': 2,
+                        '412': 2,
+                        '416': 2,
+                        '417': 2,
+                        '886': 2,
+                        allresults: 2,
+                        allresultsig: 2
+                    }
+                },
                 side: {
                     service: 'none'
                 }
@@ -177,5 +226,10 @@ module.exports = {
                 name: 'Móviles'
             }
         ]
+    },
+    relatedAds: {
+        desktop: {
+            enabled: true
+        }
     }
 };
