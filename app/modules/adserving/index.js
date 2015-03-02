@@ -43,7 +43,6 @@ function getSettings() {
             hl: this.app.session.get('selectedLanguage').split('-').shift()
         });
 
-
         if (settings.params.adIconUrl && this.config.language) {
             settings.params.adIconUrl = settings.params.adIconUrl.replace(this.config.language.pattern, _.contains(this.config.language.list, settings.options.hl) ? settings.options.hl : this.config.language['default']);
         }

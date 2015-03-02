@@ -11,8 +11,8 @@ module.exports = {
         }
     },
     categoryTree: {
-        order: [800, 811, 806, 362, 815, 821, 853, 16],
-        columns: [2, 2, 2]
+        order: [806, 815, 821, 881, 800, 185, 16, 853, 362, 811, 600, 191],
+        columns: [3, 3, 3]
     },
     marketing: {
         post_banner: {
