@@ -8,6 +8,7 @@ var tracking = require('../modules/tracking');
 var Filters = require('../modules/filters');
 var Item = require('../models/item');
 var Sixpack = require('../../shared/sixpack');
+var restler = require('restler');
 
 module.exports = {
     show: middlewares(show),
@@ -56,7 +57,19 @@ function show(params, callback) {
                 this.app.session.persist({
                     isShopExperimented: true
                 });
-            }           
+            }
+
+            restler.postJson('http://localhost:3500/track/experiment', {
+                alternative: experiment.alternative,
+                clientId: sixpack.clientId,
+                from: params.from 
+            })
+            .on('success', function onSuccess(data, response) {
+                console.log('success');
+            })
+            .on('fail', function onFail(err, response) {
+                console.log('fail', err);
+            });           
         }
  
         var prepare = function(done) {
