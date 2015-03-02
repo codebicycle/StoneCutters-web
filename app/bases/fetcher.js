@@ -87,6 +87,12 @@ module.exports = {
                 callback(null, model);
             },
             error: function(model, resp, options) {
+                var modelName = fetcher.modelUtils.modelName(model.constructor);
+
+                if (modelName == 'shops') {
+                    //make an exception with shops, don´t throw error
+                    callback(null, model);
+                }
                 var body, respOutput, err;
 
                 body = resp.body;
