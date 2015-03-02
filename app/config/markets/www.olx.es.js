@@ -31,19 +31,31 @@ module.exports = {
                 mobiletop: {
                     service: 'ADX',
                     format: 'HalfBanner',
-                    location: 'Top'
+                    language: 'es',
+                    location: 'Top',
+                    params: {
+                        slotId: 9904443106
+                    }
                 },
                 side: {
                     service: 'ADX',
                     format: 'WideSkyscraper',
-                    location: 'Side'
+                    language: 'es',
+                    location: 'Side',
+                    params: {
+                        slotId: 9904443106
+                    }
                 }
             },
             item: {
                 side: {
                     service: 'ADX',
                     format: 'MediumRectangle',
-                    location: 'Side'
+                    language: 'es',
+                    location: 'Side',
+                    params: {
+                        slotId: 8287982506
+                    }
                 }
             }
         }
