@@ -19,36 +19,17 @@ module.exports = Base.extend({
     },
     postRender: function() {
         this.checkPosition();
-        this.detectScroll = this.detectScroll.bind(this);
         this.threadId = $('.conversation-input').attr('data-threadId');
-
-        // $(document).on('scroll', this.detectScroll);
-
         this.poll = setInterval(this.getConversation.bind(this), 20000);
 
         this.app.router.once('action:end', this.onStart);
         this.app.router.once('action:start', this.onEnd.bind(this));
     },
     off: function() {
-        $(document).off('scroll', this.detectScroll);
         clearInterval(this.poll);
     },
     onChange: function() {
         this.$el.trigger('conversationReset');
-    },
-    detectScroll: function(e) {
-        var topHeight = $('.header_index_view').outerHeight() + this.$('header').outerHeight();
-        var height = $(window).scrollTop();
-
-        if (height > topHeight + 30) {
-            this.$('.item').css({
-                position: 'fixed',
-                top: 0
-            });
-        }
-        else {
-            this.$('.item').css('position', 'relative');
-        }
     },
     checkPosition: function() {
         var documentHeight = $(document).height();

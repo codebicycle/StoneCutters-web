@@ -110,6 +110,7 @@ function generate(query) {
         params: {}
     };
 
+    preGenerate.call(this, page);
     _.each(trackers, function(tracker, name) {
         try {
             tracker.call(this, tracking, page, query.params);
@@ -118,6 +119,14 @@ function generate(query) {
         }
     }, this);
     return tracking;
+}
+
+function preGenerate() {
+    this.app.session.persist({
+        hitCount: Number(this.app.session.get('hitCount') || 0) + 1
+    }, {
+        maxAge: 30 * utils.MINUTE
+    });
 }
 
 module.exports = {

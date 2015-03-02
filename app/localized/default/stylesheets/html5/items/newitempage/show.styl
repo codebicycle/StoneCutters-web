@@ -282,7 +282,8 @@
                 }
                 &.email {
                     a {
-                        background-image: url(imageUrl/images/html5/email.png);
+                        background-image: url(imageUrl/images/html5/icon_messaging.png);
+                        background-position: center 30%;
                         border-radius: 0 3px 3px 0;
                     }
                 }
@@ -314,12 +315,75 @@
             }
         }
 
-        .relatedAds {
+        .samurai-suggestions {
             margin: 10px 0;
             overflow: hidden;
-            h3 {
-                margin: 0 10px 0 10px;
+            padding: 0 10px;
+            text-align: center;
+            h2 {
                 padding: 0;
+                font-size: 15px;
+                color: #333;
+                margin-bottom: 10px;
+            }
+            .samurai-items {
+                .samurai-item {
+                    width: 59px;
+                    height: 55px !important;
+                    position: relative;
+                    display: inline-block;
+                    margin: 0 2px;
+                    border: 1px solid rgba(0, 0, 0, .5);
+
+                    .samurai-image {
+                        width: 59px;
+                        height: 55px;
+                        position: relative;
+                        display: block;
+                        img {
+                            position: absolute;
+                            top: 0;
+                            left: 0;
+                            right: 0;
+                            bottom: 0;
+                            max-width: 100%;
+                            max-height: 100%;
+                            margin: auto;
+                        }
+                    }
+
+                    a > .title,
+                    a > .price {
+                        background: rgba(0, 0, 0, .5);
+                        display: inline-block;
+                        z-index: 1;
+                    }
+                    .title,
+                    .price {
+                        position: absolute;
+                        text-overflow: ellipsis;
+                        white-space: nowrap;
+                        overflow: hidden;
+                        box-sizing: border-box;
+                        left: 0;
+                        display: inline-block;
+                        height: 12px;
+                        line-height: 12px;
+                        font-size: 10px;
+                        padding: 0 2px;
+                    }
+                    .title {
+                        bottom: 12px;
+                        color: #fff;
+                        width: 100%;
+                    }
+                    .price {
+                        bottom: 0px;
+                        font-weight: bold;
+                        color: #ff7700;
+                        width: 100%;
+                    }
+                }
             }
         }
 

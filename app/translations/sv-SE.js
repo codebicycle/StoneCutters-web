@@ -35,6 +35,7 @@ module.exports = {
     'defaulthtmlhead.FreeClassifiedsInArea': 'Gratis annonser i <AREA>',
     'defaulthtmlhead.GoBackToThePreviousPage': 'G\xE5 tillbaka till f\xF6reg\xE5ende sida.',
     'defaulthtmlhead.HaveYouSeenThis': 'Har du sett den h\xE4r?',
+    'defaulthtmlhead.HelloUsername': 'Hej, <<USERNAME>>',
     'defaulthtmlhead.MakeSureTheWebAddressYouEnteredIsCorrect': 'Kontrollera att webbadressen du angett \xE4r korrekt.',
     'defaulthtmlhead.My Favorites': 'Mina favoriter',
     'defaulthtmlhead.My Listings': 'Mina annonser',

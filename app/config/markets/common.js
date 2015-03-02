@@ -77,13 +77,10 @@ module.exports = {
                     format: 'custom',
                     location: 'Bottom'
                 },
-                mobitlebottom: {
+                mobilebottom: {
                     service: 'AFC',
                     format: 'TextMobile',
-                    location: 'Bottom',
-                    params: {
-                        number: 3
-                    }
+                    location: 'Bottom'
                 },
                 noresult: {
                     service: 'CSA',
@@ -223,6 +220,14 @@ module.exports = {
     },
     relatedAds: {
         desktop: {
+            enabled: false,
+            group: 2,
+            quantity: 3,
+            module: 'suggestion',
+            layout: 'default',
+            link: 'http://samurai.onap.io/samurai.js'
+        },
+        html5: {
             enabled: false,
             group: 2,
             quantity: 3,
