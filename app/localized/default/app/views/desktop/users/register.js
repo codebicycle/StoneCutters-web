@@ -13,6 +13,8 @@ module.exports = Base.extend({
         var data = Base.prototype.getTemplateData.call(this);
         var params = this.options.params || {};
 
+        console.log(params);
+        
         return _.extend({}, data, {
             params: params,
         });

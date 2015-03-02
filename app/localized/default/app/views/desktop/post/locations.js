@@ -128,6 +128,8 @@ module.exports = Base.extend({
             $firstOption.remove();
         }
 
+        this.parentView.parentView.getItem().set('neighborhood.id', $field.val());
+        this.parentView.parentView.getItem().set('neighborhood.name', $field.find('option:selected').html());
         this.parentView.$el.trigger('fieldSubmit', [$field, options]);
     },
     getCities: function(state, options, cityId) {
