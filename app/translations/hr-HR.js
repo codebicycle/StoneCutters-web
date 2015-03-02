@@ -35,6 +35,7 @@ module.exports = {
     'defaulthtmlhead.FreeClassifiedsInArea': 'Besplatni oglasi u <AREA>',
     'defaulthtmlhead.GoBackToThePreviousPage': 'Vratite se na prethodnu stranicu.',
     'defaulthtmlhead.HaveYouSeenThis': 'Jeste li ovo vidjeli?',
+    'defaulthtmlhead.HelloUsername': 'Zdravo, <<USERNAME>>',
     'defaulthtmlhead.MakeSureTheWebAddressYouEnteredIsCorrect': 'Provjerite da li je web adresa koju ste unijeli ispravna.',
     'defaulthtmlhead.My Favorites': 'Moje omiljeno',
     'defaulthtmlhead.My Listings': 'Moji oglasi',

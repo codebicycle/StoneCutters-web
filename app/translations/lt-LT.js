@@ -35,6 +35,7 @@ module.exports = {
     'defaulthtmlhead.FreeClassifiedsInArea': 'Nemokami klasifikuoti skelbimai <AREA>',
     'defaulthtmlhead.GoBackToThePreviousPage': 'Atsiverskite ankstesn\u012F puslap\u012F.',
     'defaulthtmlhead.HaveYouSeenThis': 'Ar mat\u0117te tai?',
+    'defaulthtmlhead.HelloUsername': 'Sveiki, <<USERNAME>>',
     'defaulthtmlhead.MakeSureTheWebAddressYouEnteredIsCorrect': 'Patikrinkite, ar tinkamai \u012Fved\u0117te tinklaviet\u0117s adres\u0105.',
     'defaulthtmlhead.My Favorites': 'Mano m\u0117gstamiausieji',
     'defaulthtmlhead.My Listings': 'Mano skelbimai',
