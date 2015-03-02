@@ -66,7 +66,8 @@ module.exports = {
         clicks: 0,
         time: 432000000,
         ignorePath: ['/closed', '/login', '/interstitial', '/500', '/esi', '/posting', '/posting/success', /^\/health(\/.*)?$/, /^\/force(\/.*)?$/, /^\/stats(\/.*)?$/, /^\/tracking(\/.*)?$/, /^\/posting(\/\d+)?(\/\d+)?$/],
-        ignorePlatform: ['wap', 'desktop']
+        ignorePlatform: ['wap', 'desktop'],
+        ignoreLocation: ['www.olx.co.za', 'www.olx.ir', 'www.olx.com.bd', 'www.olx.com.mx', 'www.olx.cl']
     },
     cache: {
         enabled: true,
