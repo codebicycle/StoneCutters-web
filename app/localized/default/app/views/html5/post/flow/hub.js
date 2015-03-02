@@ -12,6 +12,7 @@ module.exports = Base.extend({
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
 
+        this.className += (data.item.id) ? ' editing' : ' pending';
         return _.extend({}, data, {
             imagesTemplate: data.template + '/post/flow/hub/images.' + config.getForMarket(this.app.session.get('location').url, ['posting', 'flow', 'hub', 'images'], 'default') + '.html'
         });
@@ -35,7 +36,9 @@ module.exports = Base.extend({
         event.stopPropagation();
         event.stopImmediatePropagation();
 
-        this.parentView.$el.trigger('headerChange', translations.get(this.app.session.get('selectedLanguage'))['misc.CreateYourFreeAd_Mob']);
+        var translationKey = (this.parentView.getItem().get('id')) ? 'posting_publishbutton.EditYourAd_ZA' : 'misc.CreateYourFreeAd_Mob';
+
+        this.parentView.$el.trigger('headerChange', translations.get(this.app.session.get('selectedLanguage'))[translationKey]);
         this.$el.removeClass('disabled');
     },
     onHide: function(event) {
@@ -230,7 +233,7 @@ module.exports = Base.extend({
         event.stopImmediatePropagation();
 
         this.$('.images').addClass('pending');
-        this.$('.hint').text(translations.get(this.app.session.get('selectedLanguage'))['posting_photosprogress.wait']);
+        this.$('.hint small').text(translations.get(this.app.session.get('selectedLanguage'))['posting_photosprogress.wait']);
         this.$el.trigger('change');
     },
     onImagesLoadEnd: function(event) {
@@ -242,7 +245,7 @@ module.exports = Base.extend({
         var $display = this.$('.display');
         var $ammount = this.$('.ammount');
         var $key = this.$('.key');
-        var $hint = this.$('.hint');
+        var $hint = this.$('.hint small');
         var images = this.parentView.getItem().get('images');
         var image = _.find(images, function each(image) {
             return !!image;
@@ -258,9 +261,9 @@ module.exports = Base.extend({
             $container.removeClass('pending fill');
             $display.removeClass('r1 r2 r3 r4 r5 r6 r7 r8').removeAttr('style');
         }
-        $hint.text(translations.get(this.app.session.get('selectedLanguage'))['misc.AddPhotosSellFaster_Mob']);
-        this.$el.trigger('change');
 
+        $hint.text([String.fromCharCode(9733), translations.get(this.app.session.get('selectedLanguage'))['misc.AddPhotosSellFaster_Mob']].join(' '));
+        this.$el.trigger('change');
         switch (images.length) {
             case 0:
                 $ammount.addClass('hidden').text('');

@@ -56,6 +56,7 @@ module.exports = Base.extend({
             this.$el.trigger('descriptionSubmit', [{}, true]);
             this.$el.trigger('contactSubmit', [{}, '', true]);
             this.$('#hub').trigger('imagesLoadEnd');
+            this.$('#images').trigger('preloadImages', [this.getItem().get('images')]);
         }
         this.getCategories();
     },
