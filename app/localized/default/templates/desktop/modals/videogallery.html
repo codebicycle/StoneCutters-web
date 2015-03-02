@@ -12,7 +12,7 @@
     </div>
     <div class="video-thumbnails">
         <ul class="content">
-        {% for video in videos %}
+        {% for video in marketing.videos %}
             <li>
                 <a data-video-item="{{ video.id }}" class="video{{ ' active' if loop.first }}" href="#">
                     <span class="video-title">{{ video.title }}</span>

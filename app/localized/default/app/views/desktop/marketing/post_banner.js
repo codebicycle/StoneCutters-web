@@ -9,11 +9,11 @@ module.exports = Base.extend({
         var data = Base.prototype.getTemplateData.call(this);
         var location = this.app.session.get('location').url;
         var selectedLanguage = this.app.session.get('selectedLanguage').split('-')[0];
-        var image = config.getForMarket(location, ['post_banner', 'image'], 'post-latam');
+        var marketing = config.getForMarket(location, ['marketing'], '');
 
         return _.extend({}, data, {
             selectedLanguage: selectedLanguage,
-            image: image
+            marketing: marketing
         });
     },
 });

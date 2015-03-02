@@ -43,7 +43,6 @@ function getSettings() {
             hl: this.app.session.get('selectedLanguage').split('-').shift()
         });
 
-
         if (settings.params.adIconUrl && this.config.language) {
             settings.params.adIconUrl = settings.params.adIconUrl.replace(this.config.language.pattern, _.contains(this.config.language.list, settings.options.hl) ? settings.options.hl : this.config.language['default']);
         }
@@ -64,6 +63,7 @@ function extendConfig(defaults, extras) {
 
     extended = _.extend({}, defaults, extras);
     extended.params = _.extend({}, defaults.params || {}, extras.params || {});
+
     return extended;
 }
 
@@ -131,11 +131,11 @@ function getClientId(service) {
     return clientId.join('-');
 }
 
-function getNumberPerCategory(service){
+function getNumberPerCategory(service) {
     var number = this.config.params.number;
     var cat = getCategoryId.call(this);
 
-    if (service !== 'CSA') {
+    if (service === 'ADX') {
         return typeof number === 'undefined' ? 1 : number;
     }
     if (!cat) {
@@ -249,7 +249,7 @@ function getConfig() {
     var configFormatDefault = utils.get(configService, 'default', {});
     var configFormat = utils.get(configService, configMarket.format, {});
     var configFormats = extendConfig(configFormatDefault, configFormat);
-    var configResult = extendConfig(configMarket, configFormats);
+    var configResult = extendConfig(configFormats, configMarket);
 
     return extendConfig(configResult, {
         enabled: configService.enabled,

@@ -47,6 +47,12 @@ FeatureAd.isEnabled = function isEnabled(app) {
         enabled = isPlatformEnabled(app, config.getForMarket(location.url, ['featured', 'platforms']));
     }
     if (enabled) {
+        environments = config.getForMarket(location.url, ['featured', 'environments']);
+        if (environments) {
+            enabled = _.contains(environments, env);
+        }
+    }
+    if (enabled) {
         enabled = config.getForMarket(location.url, ['featured', 'section', section, 'enabled'], true);
     }
     if (enabled) {

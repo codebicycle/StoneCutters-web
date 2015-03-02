@@ -47,32 +47,25 @@ module.exports = {
                     service: 'CSA',
                     format: 'default',
                     location: 'Top',
-                    numberPerCategoryCSA: {
-                        filterig: 2,
-                        filter: 2,
-                        searchig: 2,
-                        search: 2,
-                        statics: 2,
-                        allresults: 2,
-                        allresultsig: 2
+                    params: {
+                        number: 2
                     }
                 },
                 top: {
                     service: 'CSA',
                     format: 'custom',
                     location: 'Top',
-                    numberPerCategoryCSA: {
-                        filterig: 2,
-                        filter: 2,
-                        searchig: 2,
-                        search: 2,
-                        statics: 2,
-                        allresults: 2,
-                        allresultsig: 2
+                    params: {
+                        number: 2
                     }
                 },
                 mobiletop: {
-                    service: 'none'
+                    service: 'AFC',
+                    format: 'TextMobile',
+                    location: 'Top',
+                    params: {
+                        number: 2
+                    }
                 },
                 side: {
                     service: 'AFC',
@@ -85,15 +78,25 @@ module.exports = {
                     location: 'Bottom'
                 },
                 mobilebottom: {
-                    service: 'none'
+                    service: 'AFC',
+                    format: 'TextMobile',
+                    location: 'Bottom'
                 },
                 noresult: {
                     service: 'CSA',
-                    format: 'noresult',
-                    location: 'Top'
+                    format: 'custom',
+                    location: 'Top',
+                    params: {
+                        number: 10
+                    }
                 },
                 mobilenoresult: {
-                    service: 'none'
+                    service: 'AFC',
+                    format: 'TextMobile',
+                    location: 'Top',
+                    params: {
+                        number: 10
+                    }
                 }
             },
             item: {
