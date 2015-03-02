@@ -131,8 +131,8 @@ module.exports = {
                 countries: ['www.olx.com.uy']
             },
             newItemPage: {
-                worldwide: false,
-                countries: ['www.olx.com.bo']
+                worldwide: true,
+                countries: ['www.olx.ir']
             },
             optimizely: {
                 worldwide: false,
