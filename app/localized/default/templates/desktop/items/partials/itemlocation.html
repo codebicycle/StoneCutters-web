@@ -1,14 +1,19 @@
 <div class="box">
     <h2 class="icons icon-pin">{{ dictionary["optionals.opt-138-323-translation-location"] }} </h2>
+    <p>
     {% for optional in item.optionals %}
         {% if optional.name == "streetaddress" %}
             {{ optional.value }}
         {% endif %}
     {% endfor %}
+    </p>
     <p>
-    {% if item.location.cityName or item.location.stateName %}
-        {{ item.location.cityName }}, {{ item.location.stateName }}
-    {% endif %}
+        {{ (item.location.neighborhoodName + ', ') if item.location.neighborhoodName  }}
+    </p>
+    <p>
+        {% if item.location.cityName or item.location.stateName %}
+            {{ item.location.cityName }}, {{ item.location.stateName }}
+        {% endif %}
     </p>
     {#<a href="" class="icons icon-zoom">{{ dictionary["item.ViewBiggerMap"] }} </a>#}
 </div>
