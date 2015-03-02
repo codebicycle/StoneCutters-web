@@ -27,7 +27,8 @@ module.exports = Base.extend({
         'change form': 'onChange',
         'submit form': 'onSubmit',
         'imageLoadStart': 'onImageLoadStart',
-        'imageLoadEnd': 'onImageLoadEnd'
+        'imageLoadEnd': 'onImageLoadEnd',
+        'preloadImages': 'onPreloadImages'
     },
     onShow: function(event) {
         event.preventDefault();
@@ -150,6 +151,23 @@ module.exports = Base.extend({
         if (--this.pending === 0) {
             this.parentView.$el.trigger('imagesLoadEnd');
         }
+    },
+    onPreloadImages: function(event, images) {
+        var $display = this.$('.display');
+
+        _.each(images, function each(image, index) {
+            var imageUrl = image.thumbnail;
+            var className = 'fill';
+
+            if (image.orientation) {
+                className += ' r' + image.orientation;
+                imageUrl = image.url;
+            }
+            $display.eq(index).addClass(className).css({
+                'background-image': 'url(' + imageUrl + ')'
+            }).parent('.file').addClass('loaded');
+        });
+
     },
     showImage: function(index, file, callback) {
         var image = new window.Image();
