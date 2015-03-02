@@ -2,11 +2,11 @@
 <script type="text/javascript">
     window.dataLayer = window.dataLayer || [];
     window.dataLayer.push({'cleanup': function() {
-        window.dataLayer.push({{ tracking.params.ninja.params }});
+        window.dataLayer.push({% json tracking.params.ninja.params %});
     }});
 
     (function() {
-        window.configTracking = {{ tracking.params.ninja.config }};
+        window.configTracking = {% json tracking.params.ninja.config %};
 
         var ninja = document.getElementById('ninja-lib');
         if (!ninja) {
