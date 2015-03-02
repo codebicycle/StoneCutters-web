@@ -10,6 +10,7 @@ var Item = require('../models/item');
 var Sixpack = require('../../shared/sixpack');
 var restler = require('restler');
 var config = require('../../shared/config');
+var shopHost = config.get(['mario', 'host'], 'mario.apps.olx.com');
 
 module.exports = {
     show: middlewares(show),
@@ -58,7 +59,7 @@ function show(params, callback) {
                 });
             }
 
-            restler.postJson('http://localhost:3500/track/experiment', {
+            restler.postJson('http://' + shopHost + '/track/experiment', {
                 alternative: experiment.alternative,
                 clientId: sixpack.clientId,
                 from: params.from 
