@@ -226,6 +226,14 @@ module.exports = {
             module: 'suggestion',
             layout: 'default',
             link: 'http://samurai.onap.io/samurai.js'
+        },
+        html5: {
+            enabled: false,
+            group: 2,
+            quantity: 3,
+            module: 'suggestion',
+            layout: 'default',
+            link: 'http://samurai.onap.io/samurai.js'
         }
     }
 };

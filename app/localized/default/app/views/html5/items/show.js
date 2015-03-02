@@ -28,11 +28,6 @@ module.exports = Base.extend({
             paginationClickable: true,
             initialSlide: 0
         });
-        var relatedAds = this.$('.swiper-containerRA').swiper({
-            mode:'horizontal',
-            slidesPerView: 3,
-            preventLinks:false
-        });
         this.$(window).on('resize', this.resize).trigger('resize');
         this.$( '.actions .email' ).click(function onClick() {
             $('html, body').animate({
