@@ -4,6 +4,8 @@ var _ = require('underscore');
 var asynquence = require('asynquence');
 var Base = require('../../../../../../common/app/bases/view').requireView('users/partials/inputconversation');
 var helpers = require('../../../../../../../helpers');
+var statsd = require('../../../../../../../../shared/statsd')();
+
 
 module.exports = Base.extend({
     events: {
@@ -52,11 +54,13 @@ module.exports = Base.extend({
             }.bind(this);
 
             var change = function(res) {
+                statsd.increment([this.app.session.get('location').abbreviation, 'conversations', 'reply', 'success', this.app.session.get('platform')]);
                 this.parentView.$el.trigger('newMessage');
                 this.$el.trigger('reset');
             }.bind(this);
 
             var error = function(err) {
+                statsd.increment([this.app.session.get('location').abbreviation, 'conversations', 'reply', 'error', this.app.session.get('platform')]);
             }.bind(this);
 
             asynquence().or(error)

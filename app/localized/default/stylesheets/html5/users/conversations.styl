@@ -6,10 +6,10 @@
         font-weight: bold;
         padding: 15px 20px;
         color: #0076be;
-        font-size: 14px;
+        font-size: 17px;
     }
 
-    .link-thread ,
+    .link-thread,
     .link-item {
         box-sizing: border-box;
         display: block;
@@ -47,7 +47,7 @@
         width: 100%;
         .icon {
             background: url(imageUrl/images/html5/ico_no_messagings.png) center 30px no-repeat;
-            min-height: 170px;
+            min-height: 200px;
             width: 100%;
         }
         span {
@@ -57,7 +57,8 @@
             font-weight: 700;
             padding: 10px;
             text-align: center;
-            margin-bottom: 40px;
+            margin-bottom: 20px;
+            box-sizing: border-box;
         }
     }
 }
@@ -121,7 +122,7 @@
         font-size: 12px;
     }
     .item {
-        border-bottom: 1px solid #ccc;
+        border-bottom: 2px solid #ccc;
         position: relative;
         background: #fff;
         width: 100%;
@@ -132,9 +133,8 @@
             .title {
                 color: #474747;
                 padding-top: 3px;
-                text-overflow: ellipsis;
-                white-space: nowrap;
-                word-wrap: break-word;
+                display: inline-block;
+                width: 150px;
             }
             .price {
                 font-size: 20px;
