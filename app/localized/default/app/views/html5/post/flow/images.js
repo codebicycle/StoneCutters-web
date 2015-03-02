@@ -157,7 +157,7 @@ module.exports = Base.extend({
 
         _.each(images, function each(image, index) {
             var className = (image.orientation) ? 'fill r' + image.orientation : 'fill';
-            var imageUrl = image.thumbnail || image.url
+            var imageUrl = image.thumbnail || image.url;
 
             $display.eq(index).addClass(className).css({
                 'background-image': 'url(' + imageUrl + ')'
