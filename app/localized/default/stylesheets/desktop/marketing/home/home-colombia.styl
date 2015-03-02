@@ -1,0 +1,61 @@
+.left{
+    float:left;
+}
+
+.right{
+    float:right;
+}
+
+.banner-home {
+    clear-fix();
+    background-image: url(imageUrl/images/desktop/marketing/home-banner/banner.png);
+    height: 180px;
+    padding-top: 200px;
+
+    p,
+    h3,
+    a {
+        color: $white;
+        text-align: center;
+        text-shadow: 3px 3px 5px $black;
+        margin: 0;
+    }
+    p,
+    a {
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .banner-column {
+        width: 50%;
+        text-align: center;
+        h3 {
+            font-family: 'HelveticaRoundedLTStd-Bd';
+            font-size: 32px;
+            line-height: 32px;
+            margin: 0 0 26px 0;
+        }
+
+        p {
+            font-size: 24px;
+            padding-bottom: 4px;
+        }
+
+        a {
+            font-size: 22px;
+            text-decoration: none;
+            font-weight: bold;
+
+            &:hover{
+                background: #a9ba06;
+            }
+        }
+
+        .banner-button {
+            border: 2px solid $white;
+            border-radius: 5px;
+            padding: 10px 20px;
+        }
+    }
+}
+
+/*** END BANNER STYLES ***/
