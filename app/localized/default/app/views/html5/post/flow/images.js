@@ -156,18 +156,13 @@ module.exports = Base.extend({
         var $display = this.$('.display');
 
         _.each(images, function each(image, index) {
-            var imageUrl = image.thumbnail;
-            var className = 'fill';
+            var className = (image.orientation) ? 'fill r' + image.orientation : 'fill';
+            var imageUrl = image.thumbnail || image.url
 
-            if (image.orientation) {
-                className += ' r' + image.orientation;
-                imageUrl = image.url;
-            }
             $display.eq(index).addClass(className).css({
                 'background-image': 'url(' + imageUrl + ')'
             }).parent('.file').addClass('loaded');
         });
-
     },
     showImage: function(index, file, callback) {
         var image = new window.Image();
