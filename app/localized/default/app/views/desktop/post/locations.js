@@ -155,9 +155,9 @@ module.exports = Base.extend({
         }.bind(this);
 
         var parse = function(done, response) {
-            var res = _.sortBy(response.cities.toJSON(), 'name');
+            var responseSorted = _.sortBy(response.cities.toJSON(), 'name');
 
-            cities = _.map(res, function each(city) {
+            cities = _.map(responseSorted, function each(city) {
                 return {
                     key: city.url,
                     value: city.name
@@ -208,9 +208,9 @@ module.exports = Base.extend({
         }.bind(this);
 
         var parse = function(done, response) {
-            var res = _.sortBy(response.neighborhoods.toJSON(), 'name');
+            var responseSorted = _.sortBy(response.neighborhoods.toJSON(), 'name');
 
-            neighborhoods = _.map(res, function each(neighborhood) {
+            neighborhoods = _.map(responseSorted, function each(neighborhood) {
                 return {
                     key: neighborhood.id,
                     value: neighborhood.name
