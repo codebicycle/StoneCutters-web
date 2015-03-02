@@ -8,6 +8,12 @@ module.exports = {
             urls: {
                 static: 'http://static-testing.olx-st.com/mobile-webapp',
                 image: 'http://images-testing.olx-st.com/mobile-webapp'
+            },
+            'www.olx.ir': {
+                urls: {
+                    static: 'http://static01.olx-st.ir/mobile-webapp',
+                    image: 'http://images01.olx-st.ir/mobile-webapp'
+                }
             }
         },
         staging: {

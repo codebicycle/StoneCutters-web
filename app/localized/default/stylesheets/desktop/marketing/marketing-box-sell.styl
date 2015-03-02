@@ -105,3 +105,55 @@
         }
     }
 }
+
+.marketing-box-sell-za {
+    padding-top: 0;
+    position: relative;
+    float: left;
+    .stuff {
+        background: url(imageUrl/images/desktop/marketing/home-banner/marketing-box-image-za.png) no-repeat center;
+        height: 190px;
+    }
+    .google-play-en, .google-play-af {
+        position: absolute;
+        bottom: -6px;
+        right: 41px;
+    }
+    .app-store-en, .app-store-af{
+       position: absolute;
+       bottom: -6px;
+       left: 90px;
+    }
+    .apps-buttons {
+        padding-top: 205px;
+        text-align: center;
+        .appStores {
+            width: 230px;
+            margin: 0 auto;
+
+            .icon-sketchyarrow {
+                &::before {
+                    transform: inherit;
+                }
+            }
+        }
+        span {
+            &.icon-sketchyarrow {
+                    &:before {
+                    -moz-transform: scale(-1, 1);
+                    -webkit-transform: scale(-1, 1);
+                    -o-transform: scale(-1, 1);
+                    -ms-transform: scale(-1, 1);
+                    transform: scale(-1, 1);
+                    color: #628;
+                }
+            }
+        }
+    }
+}
+
+.marketing-box-sell-ar {
+    .image {
+        margin-top: 11px;
+    }
+}

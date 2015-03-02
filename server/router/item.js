@@ -386,7 +386,10 @@ module.exports = function(app, dataAdapter) {
                 var reason = removedata.close_reason;
                 var comment = removedata.close_comment;
 
-                item.remove(reason, comment, done);
+                item.remove({
+                    reason: reason,
+                    comment: comment
+                }, done);
             }
             function success(data) {
                 var url = '/myolx/myadslisting?deleted=true';

@@ -35,41 +35,5 @@ module.exports = {
             testimonial: '¡Publiqué un celular a la mañana y al día siguiente ya lo había vendido!',
             image: '/images/desktop/raul.jpg',
         }
-    ],
-    tracking: {
-        trackers: {
-            hydra: {
-                enabled: false
-            },
-            ati: {
-                enabled: true,
-                platforms: ['html5', 'html4', 'wap'],
-                server: {
-                    enabled: true,
-                    platforms: ['html5', 'html4', 'wap'],
-                    event: true
-                },
-                client: {
-                    enabled: true,
-                    platforms: ['html5']
-                }
-            },
-            analytics: {
-                enabled: true,
-                platforms: ['html5', 'html4', 'wap'],
-                server: {
-                    enabled: true,
-                    platforms: ['html5', 'html4', 'wap'],
-                    event: true
-                },
-                client: {
-                    enabled: true,
-                    platforms: ['html5']
-                }
-            },
-            ninja: {
-                enabled: true
-            }
-        }
-    }
+    ]
 };

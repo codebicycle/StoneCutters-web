@@ -39,9 +39,8 @@ module.exports = {
             domainLinkAboveDescription: false
         }
     },
-    'custom': {
+    custom: {
         params: {
-            number: 3,
             fontSizeTitle: 18,
             adIconLocation: 'ad-left',
             adIconWidth: 143,
@@ -50,6 +49,16 @@ module.exports = {
             adIconSpacingBefore: 6,
             adIconSpacingAfter: 15,
             adIconUrl: 'http://afs.googleusercontent.com/olx/olx_[langcode].png'
+        }
+    },
+    mobileweb: {
+        params: {
+            fontSizeTitle: 13,
+            colorTitleLink: '#178CC8',
+            colorText: '#B0B0B0',
+            fontSizeDescription: 11,
+            fontSizeDomainLink: 11,
+            colorDomainLink: '#B0B0B0'
         }
     },
     language: {

@@ -1,19 +1,25 @@
 'use strict';
 
 module.exports = {
-    enabled: false,
+    enabled: true,
     'default': {
         options: {
             pubId: 'ca-pub-9177434926134739'
         }
     },
-    'MediumRectangle': {
+    HalfBanner: {
+        params: {
+            width: 300,
+            height: 50
+        }
+    },
+    MediumRectangle: {
         params: {
             width: 300,
             height: 250
         }
     },
-    'WideSkyscraper': {
+    WideSkyscraper: {
         params: {
             width: 160,
             height: 600

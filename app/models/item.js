@@ -292,7 +292,7 @@ function toData(includeImages) {
             delete data.location;
         }
     }
-    if (data.price) {
+    if (data.price && !data.priceC) {
         data.priceC = data.price;
     }
     if (_.isObject(data.priceC)) {
@@ -338,14 +338,17 @@ function toData(includeImages) {
     return data;
 }
 
-function remove(reason, comment, done) {
+function remove(data, done) {
+    var query = _.defaults({}, data, {
+        token: (this.app.session.get('user') || {}).token,
+        platform: this.app.session.get('platform'),
+        deleteType: 'organic',
+        reason: '4',
+        comment: ''
+    });
+
     helpers.dataAdapter.post(this.app.req, '/items/' + this.get('id') + '/delete', {
-        query: {
-            token: (this.app.session.get('user') || {}).token,
-            platform: this.app.session.get('platform'),
-            reason: reason,
-            comment: comment
-        }
+        query: query
     }, callback.bind(this));
 
     function callback(err) {

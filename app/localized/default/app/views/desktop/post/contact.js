@@ -15,8 +15,19 @@ module.exports = Base.extend({
         'click [data-modal-close]': 'onCloseModal',
         'click .open-modal': 'onOpenModal',
         'click [data-modal-shadow]': 'onCloseModal',
+        'paste [name="phone"]': 'onPaste',
         'fieldsChange': 'onFieldsChange',
         'formRendered': 'onFormRendered'
+    },
+    onPaste: function(e) {
+        e.preventDefault();
+
+        var $phone = this.$('[name="phone"]');
+        var event = e.originalEvent || e;
+        var phone = event.clipboardData ? event.clipboardData.getData('text/plain') : $phone.val();
+
+        $phone.val(phone.replace(/[^\d]/gi, ''));
+        return true;
     },
     onChange: function(event, options) {
         event.preventDefault();

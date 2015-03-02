@@ -221,6 +221,13 @@ module.exports = Base.extend({
         var route = this.app.session.get('currentRoute').action;
 
         this.urlreferer = data.referer || '/';
+
+        if (route === 'register' || route === 'lostpassword') {
+            this.urlreferer = '/login';
+        } else if (route === 'login') {
+            this.urlreferer = '/';
+        }
+
         this.$('.logo, .header-links').hide();
         this.$('.topBarFilters').removeClass('hide');
         this.$('.topBarFilters .title').text(data.dictionary[key]);

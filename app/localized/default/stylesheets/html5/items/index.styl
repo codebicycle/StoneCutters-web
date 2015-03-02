@@ -64,6 +64,49 @@ section#itemListing #itemPagination .arrow {
     position: relative;
     display: inline-block;
 }
+section#itemListing .adserving {
+    &:empty {
+        display: none;
+    }
+    .adserving-adx {
+        text-align: center;
+        iframe {
+            border: none;
+            margin: 0;
+            vertical-align: top;
+        }
+        &.listing_mobiletop {
+            margin: 10px 0;
+            min-height: 50px;
+        }
+    }
+    .adserving-afc {
+        &.listing_mobilebottom:not(:empty),
+        &.listing_mobilenoresult:not(:empty),
+        &.listing_mobiletop:not(:empty) {
+            background: none repeat scroll 0 0 #fff;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+            font-size: 14px;
+            height: auto !important; // It's really needed for CSA mobile
+            margin: 7px;
+            padding: 10px;
+            width: auto !important; // It's really needed for CSA mobile
+            iframe {
+                border: none;
+            }
+            .adserving-afc-box-title {
+                font-size: .8rem;
+            }
+            li {
+                border-top: 1px solid #ccc;
+                font-size: .8rem;
+                padding: .1rem 0;
+            }
+        }
+    }
+}
+
 section#itemListing #itemPagination .arrow.leftA {
     background: url(imageUrl/images/html4/leftA.png) no-repeat;
 }
@@ -120,5 +163,5 @@ section#itemListing #itemPagination a span:last-child {
         display: block;
         margin: 0 0 .3rem;
     }
-    
+
 }
