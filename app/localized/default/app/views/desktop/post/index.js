@@ -283,14 +283,13 @@ module.exports = Base.extend({
     },
     onErrorsUpdate: function() {
         this.isValid = !(_.size(this.errors));
-        this.$('#posting-contact-view').trigger((this.isValid) ? 'enablePost' : 'disablePost');
         this.$('#posting-errors-view').trigger('update');
     },
     onImagesLoadStart: function(event) {
         this.$('#posting-contact-view').trigger('disablePost');
     },
     onImagesLoadEnd: function(event) {
-        this.$('#posting-contact-view').trigger((this.isValid) ? 'enablePost' : 'disablePost');
+        this.$('#posting-contact-view').trigger('enablePost');
     },
     onBeforeUnload: function(event) {
         return ' ';
@@ -309,11 +308,16 @@ module.exports = Base.extend({
         event.stopPropagation();
         event.stopImmediatePropagation();
 
-        var $field;
         var errorsSummary = _.clone(this.errors);
+        var $field;
+        var $error;
 
+        $('small.error,message').each(function eachErrors() {
+            $error = $(this);
+            $error.parent().find('.error').removeClass('error');
+            $error.remove();
+        });
         _.each(errorsSummary, function eachError(message, selector) {
-
             if (selector === 'category.id' || selector === 'category.parentId') {
                 $field = this.$('.posting-categories-list');
             } else {
@@ -358,10 +362,12 @@ module.exports = Base.extend({
             this.item.post(done);
         }
 
-        function success() {
+        function success(done) {
             var category = 'Posting';
             var action = 'PostingSuccess';
             var successPage = this.editing ? '/edititem/success/' : '/posting/success/';
+
+            this.$('#posting-contact-view').trigger('enablePost');
 
             this.track({
                 category: category,
@@ -372,10 +378,11 @@ module.exports = Base.extend({
             helpers.common.redirect.call(this.app.router, successPage + this.item.get('id') + '?sk=' + this.item.get('securityKey'), null, {
                 status: 200
             });
-
         }
 
         function fail(errors) {
+            this.$('#posting-contact-view').trigger('enablePost');
+
             // TODO: Improve error handling
             if (errors) {
                 if (errors.responseText) {
@@ -395,6 +402,9 @@ module.exports = Base.extend({
                 }
                 else {
                     this.formErrors.push('Unkown error'); // Translate this
+                }
+                if (this.errors && _.size(this.errors)) {
+                    this.formErrors.length = 0;
                 }
                 this.$el.trigger('error');
             }

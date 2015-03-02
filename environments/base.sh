@@ -64,7 +64,7 @@ fi
 
 # Host alias
 # ---------------------------------------------------------------------------------------
-LOCAL_AUXI=$(cat /etc/sudoers | grep 'LOCAL' | head -n1 | awk '{print $3}');
+LOCAL_AUXI=$(cat /etc/sudoers | grep 'LOCAL' | head -n1 | tr "=" "\n" | tail -n1 | tr -d ' ');
 LOCAL=${LOCAL_AUXI:0};
 
 if [ "$LOCAL" == "" ]

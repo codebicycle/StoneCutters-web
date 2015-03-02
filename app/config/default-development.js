@@ -65,7 +65,8 @@ module.exports = {
         clicks: 0,
         time: 432000000,
         ignorePath: ['/closed', '/login', '/interstitial', '/500', '/esi','/posting' ,'/posting/success' , /^\/health(\/.*)?$/, /^\/force(\/.*)?$/, /^\/stats(\/.*)?$/, /^\/tracking(\/.*)?$/, /^\/posting(\/\d+)?(\/\d+)?$/],
-        ignorePlatform: ['wap', 'desktop']
+        ignorePlatform: ['wap', 'desktop'],
+        ignoreLocation: ['www.olx.co.za', 'www.olx.ir', 'www.olx.com.bd', 'www.olx.com.mx', 'www.olx.cl']
     },
     cache: {
         enabled: true,
@@ -128,8 +129,8 @@ module.exports = {
                 countries: ['www.olx.cl', 'www.olx.com.mx', 'www.olx.com.ve', 'www.olx.com.gt', 'www.olx.com.pe', 'www.olx.com.sv', 'www.olx.com.ec', 'www.olx.com.co', 'www.olx.co.za', 'www.olx.com.ar', 'www.olx.com.uy']
             },
             newItemPage: {
-                worldwide: false,
-                countries: ['www.olx.com.bo', 'www.olx.cl', 'www.olx.com.mx', 'www.olx.com.ve', 'www.olx.com.gt', 'www.olx.com.pe', 'www.olx.com.sv', 'www.olx.com.ec', 'www.olx.com.co', 'www.olx.co.za', 'www.olx.com.ar', 'www.olx.com.uy']
+                worldwide: true,
+                countries: ['www.olx.ir']
             },
             optimizely: {
                 worldwide: false,
@@ -153,7 +154,7 @@ module.exports = {
             },
             contactForm: {
                 worldwide: false,
-                countries: ['www.olx.co.cr', 'www.olx.com.uy', 'www.olx.com.pa', 'www.olx.co.ug', 'www.olx.co.tz', 'www.olx.com.pe', 'www.olx.com.sv', 'www.olx.com.ec', 'www.olx.com.ve', 'www.olx.com.uy', 'www.olx.com.ar', 'www.olx.com.co', 'www.olx.com.gt', 'www.olx.sn', 'www.olx.cm', 'www.olx.com.gh', 'www.olx.it', 'www.olx.ae', 'www.olx.fr', 'www.olx.es', 'www.olx.com', 'www.olx.com.bo', 'www.olx.com.py', 'www.olx.com.ni', 'www.olx.hn', 'www.olx.co.za']
+                countries: ['www.olx.co.cr', 'www.olx.com.uy', 'www.olx.com.pa', 'www.olx.co.ug', 'www.olx.co.tz', 'www.olx.com.pe', 'www.olx.com.sv', 'www.olx.com.ec', 'www.olx.com.ve', 'www.olx.com.uy', 'www.olx.com.ar', 'www.olx.com.co', 'www.olx.com.gt', 'www.olx.sn', 'www.olx.cm', 'www.olx.com.gh', 'www.olx.it', 'www.olx.ae', 'www.olx.fr', 'www.olx.es', 'www.olx.com', 'www.olx.com.bo', 'www.olx.com.py', 'www.olx.com.ni', 'www.olx.hn', 'www.olx.co.za', 'www.olx.co.ke']
             },
             optimizely: {
                 worldwide: false,

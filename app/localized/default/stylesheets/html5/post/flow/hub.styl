@@ -310,12 +310,15 @@
 			background-color: #555;
 		    border-radius: 100%;
 		    color: #fff;
-		    content: counter(index, decimal);
 		    counter-increment: index;
 		    font-size: 1.5rem;
 		    line-height: 2rem;
 		    text-align: center;
 		    font-weight: bold;
+		    border-style: solid;
+		    border-width: 5px;
+		    margin: -5px;
+		    border-color: #555;
 		
 		}
 
@@ -337,13 +340,13 @@
 		.stepSummary {
 
 			display: none;
-			margin: -.5em 0;
+			margin: -7px 0;
 			padding-right: 2.5rem;
+			line-height: 1em;
 
 			div {
 
-				font-size: .8em;
-				padding: .125em 0;
+				line-height: 1em;
 
 			}
 
@@ -351,7 +354,9 @@
 
 				display: block;
 				overflow: hidden;
-				font-size: .66em;
+				padding-top: 4px;
+				font-size: 9px;
+				line-height: 1em;
 				text-transform: uppercase;
 				color: #999;
 				white-space: nowrap;
@@ -366,6 +371,9 @@
 				color: #333;
 				white-space: nowrap;
 				text-overflow: ellipsis;
+				font-size: 12px;
+				line-height: 1em;
+				padding: 2px 0 4px;
 
 				&.error {
 
@@ -400,8 +408,9 @@
 
 			&:before {
 
-				background-color: #d38811;
+				background-color: #D38811;
     			content: "!";
+    			border-color: #D38811;
 
 			}
 
@@ -423,7 +432,8 @@
 
 			&:before {
 
-				background: #a7b52c;
+				background: #A7B52C;
+				border-color: #A7B52C;
 
 			}
 
@@ -440,6 +450,20 @@
 			}
 
 		}
+
+	}
+	
+	&.posting li:before {
+
+		content: counter(index, decimal);
+
+	}
+	
+	&.editing li:before {
+
+		background: #532581 url(imageUrl/images/html5/edit_icon.png) no-repeat center center;;
+		content: '\a0';
+		border-color: #532581;
 
 	}
 

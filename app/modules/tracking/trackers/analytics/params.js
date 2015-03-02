@@ -5,8 +5,6 @@ var config = require('../../../../../shared/config');
 var utils = require('../../../../../shared/utils');
 var environment = config.get(['environment', 'type'], 'development');
 var defaultTracker = utils.get(configTracking, ['analytics', 'trackers', 'default']);
-var SECOND = 1000;
-var MINUTE = 60 * SECOND;
 
 function getDefaults() {
     var today = new Date().getTime();
@@ -29,7 +27,7 @@ function save(utmcc) {
     this.app.session.persist({
         _gaUtmcc: [utmcc.domainHash, utmcc.userId, utmcc.initialSession, utmcc.previousSession, utmcc.currentSession, utmcc.numberSessions].join('.')
     }, {
-        maxAge: 30 * MINUTE
+        maxAge: 30 * utils.MINUTE
     });
 }
 
@@ -52,18 +50,13 @@ function parse(utmcc) {
 function check() {
     var utmcc = this.app.session.get('_gaUtmcc');
 
-    this.app.session.persist({
-        hitCount: Number(this.app.session.get('hitCount') || 0) + 1
-    }, {
-        maxAge: 30 * MINUTE
-    });
     if (!utmcc) {
         init.call(this);
         return false;
     }
 
     utmcc = parse(utmcc);
-    if ((Number(utmcc.currentSession) - Number(utmcc.initialSession)) > (30 * MINUTE)) {
+    if ((Number(utmcc.currentSession) - Number(utmcc.initialSession)) > (30 * utils.MINUTE)) {
         init.call(this);
         return false;
     }

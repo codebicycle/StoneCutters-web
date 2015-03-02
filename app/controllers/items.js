@@ -9,6 +9,7 @@ var Filters = require('../modules/filters');
 var Item = require('../models/item');
 var Sixpack = require('../../shared/sixpack');
 var restler = require('restler');
+var config = require('../../shared/config');
 
 module.exports = {
     show: middlewares(show),
@@ -36,8 +37,6 @@ function show(params, callback) {
         var platform = this.app.session.get('platform');
         var newItemPage = helpers.features.isEnabled.call(this, 'newItemPage');
         var anonymousItem;
-
-
         var clicked = this.app.session.get('isShopExperimented');
         var sixpack = new Sixpack({
             clientId: this.app.session.get('clientId'),
@@ -71,8 +70,18 @@ function show(params, callback) {
                 console.log('fail', err);
             });           
         }
- 
-        var prepare = function(done) {
+
+        var promise = asynquence().or(fail.bind(this))
+            .then(prepare.bind(this))
+            .then(fetch.bind(this))
+            .then(check.bind(this));
+
+        if (!config.getForMarket(this.app.session.get('location').url, ['relatedAds', platform, 'enabled'], false)) {
+            promise.then(fetchRelateds.bind(this));
+        }
+        promise.val(success.bind(this));
+
+        function prepare(done) {
             if (user) {
                 params.token = user.token;
             }
@@ -94,9 +103,39 @@ function show(params, callback) {
             delete params.title;
             delete params.sk;
             done();
-        }.bind(this);
+        }
 
-        var buildItemPurged = function(properties) {
+        function fetch(done) {
+            this.app.fetch({
+                item: {
+                    model: 'Item',
+                    params: params
+                }
+            }, {
+                readFromCache: false
+            }, function afterFetch(err, res) {
+                if (!res) {
+                    res = {};
+                }
+                if (err) {
+                    if (err.status !== 422) {
+                        return done.fail(err, res);
+                    }
+                    res.item = buildItemPurged.call(this, err.body);
+                    err = null;
+                }
+                if (!res.item.get('status')) {
+                    console.log('[OLX_DEBUG]', 'no status', res.item.get('id'));
+                    return fail.call(this, new Error(), res);
+                }
+                else if (!res.item.get('status').open && !res.item.get('status').onReview) {
+                    res.item.set('purged', true);
+                }
+                done(res);
+            }.bind(this));
+        }
+
+        function buildItemPurged(properties) {
             var item = new Item(properties, {
                 app: this.app
             });
@@ -141,39 +180,9 @@ function show(params, callback) {
                 item.set('title', '');
             }
             return item;
-        }.bind(this);
+        }
 
-        var fetch = function(done) {
-            this.app.fetch({
-                item: {
-                    model: 'Item',
-                    params: params
-                }
-            }, {
-                readFromCache: false
-            }, function afterFetch(err, res) {
-                if (!res) {
-                    res = {};
-                }
-                if (err) {
-                    if (err.status !== 422) {
-                        return done.fail(err, res);
-                    }
-                    res.item = buildItemPurged(err.body);
-                    err = null;
-                }
-                if (!res.item.get('status')) {
-                    console.log('[OLX_DEBUG]', 'no status', res.item.get('id'));
-                    return error(new Error(), res);
-                }
-                else if (!res.item.get('status').open && !res.item.get('status').onReview) {
-                    res.item.set('purged', true);
-                }
-                done(res);
-            }.bind(this));
-        }.bind(this);
-
-        var check = function(done, response) {
+        function check(done, response) {
             if (!response.item) {
                 return done.fail(null, {});
             }
@@ -211,9 +220,9 @@ function show(params, callback) {
                 });
             }
             done(response.item);
-        }.bind(this);
+        }
 
-        var fetchRelateds = function(done, item) {
+        function fetchRelateds(done, item) {
             this.app.fetch({
                 relatedItems: {
                     collection : 'Items',
@@ -238,9 +247,9 @@ function show(params, callback) {
                 }
                 done(item, response.relatedItems);
             }.bind(this));
-        }.bind(this);
+        }
 
-        var success = function(_item, relatedItems) {
+        function success(_item, relatedItems) {
             var item = _item.toJSON();
             var subcategory = this.dependencies.categories.search(_item.get('category').id);
             var view = 'items/show';
@@ -305,18 +314,11 @@ function show(params, callback) {
                 sent: params.sent,
                 categories: this.dependencies.categories.toJSON()
             });
-        }.bind(this);
+        }
 
-        var error = function(err, res) {
+        function fail(err, res) {
             return helpers.common.error.call(this, err, res, callback);
-        }.bind(this);
-
-        asynquence().or(error)
-            .then(prepare)
-            .then(fetch)
-            .then(check)
-            .then(fetchRelateds)
-            .val(success);
+        }
     }
 }
 

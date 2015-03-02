@@ -6,13 +6,14 @@ var config = require('../../shared/config');
 var utils = require('../../shared/utils');
 var Sixpack = require('../../shared/sixpack');
 var enabled = config.get(['interstitial', 'enabled'], false);
+var ignoreLocation = config.get(['interstitial', 'ignoreLocation'], []);
 
 module.exports = function(params, next) {
     if (!enabled) {
         return next();
     }
     var locationUrl = this.app.session.get('location').url;
-    if (_.contains(['www.olx.ir', 'www.olx.com.bd', 'www.olx.com.mx', 'www.olx.cl'], locationUrl)) {
+    if (_.contains(ignoreLocation, locationUrl)) {
         return next();
     }
     if (locationUrl === 'www.olx.co.za' && this.app.session.get('internet.org')) {

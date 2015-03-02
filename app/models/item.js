@@ -301,7 +301,7 @@ function toData(includeImages) {
     if (data.priceC) {
         data.priceC = parseFloat(data.priceC);
     }
-    else {
+    else if (data.priceType) {
         data.priceType = 'NEGOTIABLE';
     }
     if (data.optionals) {

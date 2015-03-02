@@ -35,6 +35,7 @@ module.exports = {
     'defaulthtmlhead.FreeClassifiedsInArea': 'Darmowe og\u0142oszenia - <AREA>',
     'defaulthtmlhead.GoBackToThePreviousPage': 'Wr\xF3\u0107 do poprzedniej strony',
     'defaulthtmlhead.HaveYouSeenThis': 'Znasz to?',
+    'defaulthtmlhead.HelloUsername': 'Witaj, <<USERNAME>>',
     'defaulthtmlhead.MakeSureTheWebAddressYouEnteredIsCorrect': 'Upewnij si\u0119, \u017Ce podany adres jest poprawny.',
     'defaulthtmlhead.My Favorites': 'Moje ulubione',
     'defaulthtmlhead.My Listings': 'Moje og\u0142oszenia',
