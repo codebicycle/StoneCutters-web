@@ -127,7 +127,7 @@ module.exports = {
             },
             hermes: {
                 worldwide: false,
-                countries: []
+                countries: ['www.olx.cl', 'www.olx.com.mx', 'www.olx.com.ve', 'www.olx.com.gt', 'www.olx.com.pe', 'www.olx.com.sv', 'www.olx.com.ec', 'www.olx.com.co', 'www.olx.co.za', 'www.olx.com.ar', 'www.olx.com.uy']
             },
             newItemPage: {
                 worldwide: false,
