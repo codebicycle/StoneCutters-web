@@ -128,11 +128,11 @@ module.exports = {
             },
             hermes: {
                 worldwide: false,
-                countries: []
+                countries: ['www.olx.com.uy']
             },
             newItemPage: {
-                worldwide: false,
-                countries: ['www.olx.com.bo']
+                worldwide: true,
+                countries: ['www.olx.ir']
             },
             optimizely: {
                 worldwide: false,

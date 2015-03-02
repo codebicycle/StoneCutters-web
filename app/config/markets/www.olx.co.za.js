@@ -563,6 +563,9 @@ module.exports = {
     relatedAds: {
         desktop: {
             enabled: true
+        },
+        html5: {
+            enabled: true
         }
     }
 };
