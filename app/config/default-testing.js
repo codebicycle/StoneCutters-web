@@ -20,7 +20,6 @@ module.exports = {
     smaug: {
         protocol: 'http',
         host: 'api-v2.olx.com',
-        hostIris: utils.isServer ? 'smaug' : 'api-v2.olx.ir',
         wap: {
             maxPageSize: 25
         },
