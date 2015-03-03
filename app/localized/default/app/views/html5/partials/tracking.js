@@ -21,7 +21,7 @@ module.exports = Base.extend({
         return _.extend({}, data);
     },
     postRender: function() {
-        var params = $('#tracking-data').data('params');
+        var params = $('#tracking-data').html();
 
         if (params && _.isString(params)) {
             params = JSON.parse(params);
