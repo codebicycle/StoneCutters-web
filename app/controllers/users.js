@@ -645,7 +645,7 @@ function conversations(params, callback) {
         var view = 'users/myolx';
 
         var redirect = function(done) {
-            if (platform !== 'desktop' && platform !== 'html5') {
+            if (platform !== 'desktop' && platform !== 'html5' && platform !== 'html4') {
                 return done.fail();
             }
             user = this.app.session.get('user');
@@ -704,9 +704,10 @@ function conversations(params, callback) {
             this.app.seo.addMetatag('robots', 'noindex, nofollow');
             this.app.seo.addMetatag('googlebot', 'noindex, nofollow');
 
-            if (platform === 'html5') {
+            if (platform === 'html5' || platform === 'html4') {
                 view = 'users/conversations';
             }
+
             callback(null, view, {
                 include: ['conversations', 'items'],
                 conversations: response.conversations.toJSON(),
@@ -744,7 +745,7 @@ function conversation(params, callback) {
         var pageSize = platform === 'html5' ? 'myConvHtml5' : 'myConv';
 
         var redirect = function(done) {
-            if (platform !== 'desktop' && platform !== 'html5') {
+            if (platform !== 'desktop' && platform !== 'html5' && platform !== 'html4') {
                 return done.fail();
             }
             user = this.app.session.get('user');
@@ -802,7 +803,7 @@ function conversation(params, callback) {
             this.app.seo.addMetatag('robots', 'noindex, nofollow');
             this.app.seo.addMetatag('googlebot', 'noindex, nofollow');
 
-            if (platform === 'html5') {
+            if (platform === 'html5' || platform === 'html4') {
                 view = 'users/conversation';
             }
 

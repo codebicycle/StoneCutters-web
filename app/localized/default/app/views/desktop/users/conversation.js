@@ -4,7 +4,7 @@ var _ = require('underscore');
 var async = require('async');
 var asynquence = require('asynquence');
 var Base = require('../../../../../common/app/bases/view').requireView('users/conversation');
-var Thread = require('../../../../../../models/conversation');
+var Conversation = require('../../../../../../models/conversation');
 var helpers = require('../../../../../../helpers');
 var statsd = require('../../../../../../../shared/statsd')();
 
@@ -12,110 +12,81 @@ module.exports = Base.extend({
     className: 'users_conversation_view',
     regexpFindPage: /-p-[0-9]+/,
     events: {
+        'blur textarea, input:not([type=submit], [type=hidden])': 'onBlur',
         'submit': 'onSubmit'
     },
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
+
         data.thread = this.parentView.getThread();
         return data;
     },
     postRender: function() {
         if (!this.rendered) {
-            this.parentView.getThread().on('change', this.onChange, this);
+            this.conversation = new Conversation({
+                country: this.app.session.get('location').abbreviation,
+                platform: this.app.session.get('platform'),
+                user: this.app.session.get('user'),
+                threadId: this.parentView.getThread().get('threadId')
+            }, {
+                app: this.app
+            });
         }
         this.rendered = true;
+    },
+    onBlur: function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+
+        var field = $(event.target);
+
+        if (this.validate(field)) {
+            this.conversation.set(field.attr('name'), field.val());
+        }
     },
     onSubmit: function(event) {
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();
 
-        var $form = $('.conversation-input form');
-        var message = $form.find('[data-messageText]').val();
-        var threadId = $form.attr('data-threadId');
-        var user = this.app.session.get('user');
-        var path = this.app.session.get('path');
+        asynquence().or(fail.bind(this))
+            .then(validate.bind(this))
+            .then(submit.bind(this))
+            .val(change.bind(this));
 
-        $('[data-error]').addClass('hide');
-        $('[data-messageText]').removeClass('error');
-
-        var validate = function(done) {
-            if (!message) {
-                $('[data-error]').removeClass('hide');
-                $('[data-messageText]').addClass('error');
+        function validate(done) {
+            this.$('[data-error]').addClass('hide');
+            this.$('[data-messageText]').removeClass('error');
+            if (!this.$('[data-messageText]').val()) {
+                this.$('[data-error]').removeClass('hide');
+                this.$('[data-messageText]').addClass('error');
                 return done.abort();
             }
             done();
-        }.bind(this);
+        }
 
-        var prepare = function(done) {
-            // TODO: mostrar mensajes aunque no este logueado el usuario
-            if (!user) {
-                done.abort();
-                return helpers.common.redirect.call(this.app.router, '/login', null, {
-                    status: 302
-                });
-            }
-            done();
-        }.bind(this);
+        function submit(done) {
+            this.$('.spinner, .reply-send').toggle();
+            this.conversation.reply(done);
+        }
 
-        var sendMessage = function(done) {
-            $form.find('.spinner, .reply-send').toggle();
-            helpers.dataAdapter.post(this.app.req, '/conversations/' + threadId + '/reply', {
-                query: {
-                    token: user.token,
-                    userId: user.userId,
-                    platform: this.app.session.get('platform')
-                },
-                data: {
-                    message: message
-                },
-                cache: false,
-                json: true
-            }, done.errfcb);
-        }.bind(this);
-
-        var success = function(done) {
-            this.app.fetch({
-                thread: {
-                    model: 'Thread',
-                    params: {
-                        token: user.token,
-                        userId: user.userId,
-                        threadId: threadId
-                    }
-                }
-            }, {
-                readFromCache: false
-            }, done.errfcb);
-        }.bind(this);
-
-        var change = function(res) {
-            statsd.increment([this.app.session.get('location').abbreviation, 'conversations', 'reply', 'success', this.app.session.get('platform')]);
-            if (path.match(this.regexpFindPage)) {
-                this.app.router.redirectTo('/myolx/conversation/' + threadId);
+        function change() {
+            if (this.app.session.get('path').match(this.regexpFindPage)) {
+                this.app.router.redirectTo('/myolx/conversation/' + this.conversation.get('threadId'));
             }
             else {
-                this.app.router.redirectTo('/myolx/conversation/' + threadId + '-p-1');
+                this.app.router.redirectTo('/myolx/conversation/' + this.conversation.get('threadId') + '-p-1');
             }
+        }
 
-        }.bind(this);
-
-        var error = function(err) {
-            statsd.increment([this.app.session.get('location').abbreviation, 'conversations', 'reply', 'error', this.app.session.get('platform')]);
-            $form.find('.spinner, .reply-send').toggle();
-            $('[data-messageText]').addClass('error');
-        }.bind(this);
-
-        asynquence().or(error)
-            .then(validate)
-            .then(prepare)
-            .then(sendMessage)
-            .then(success)
-            .val(change);
+        function fail(err) {
+            this.$('.spinner, .reply-send').toggle();
+            this.$('[data-messageText]').addClass('error');
+        }
     },
-    onChange: function() {
-        this.render();
+    validate: function() {
+        return true;
     }
 });
 
