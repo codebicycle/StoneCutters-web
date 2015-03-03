@@ -5,16 +5,6 @@
     <p>{{ dictionary["item.AdNotAvailable"]|replace('<<AD_TITLE>>', item.title) }} {{ dictionary["item.SeeMoreAds"]|replace('<<LINK_TO_CATEGORY>>', '') }} <a href="{{ currentCategory | slugToUrl | link }}">{{ item.category.name }}</a></p>
 </div>
 
-<div class="expired-item">
-    <figure class="items-image {{ 'icons icon-photo' if not item.images[0].thumbnail }}">
-        {% if item.images[0].thumbnail %}
-            <img src="{{ item.images[0].thumbnail }}" alt="{{ item.title }}">
-        {% endif %}
-    </figure>
-    <h3><span class="label">{{ dictionary["item.Ended_New"] }}</span>{{ item.title | truncate( 70, True, '...') }}</h3>
-    <div class="description">{{ item.description | truncate( 200, True, '...') }} </div>
-</div>
-
 {% if items and items.length > 0 %}
     <h3 class="title">{{ dictionary["misc.PeopleWereAlsoInterestedIn"] }}</h3>
     <div class="wrapper-main">
