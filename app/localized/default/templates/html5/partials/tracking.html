@@ -13,5 +13,5 @@
 
     {% include (template + '/partials/tracking/ninja.html') %}
 
-    <div id="tracking-data" data-params='{% json tracking.params %}'></div>
+    <div id="tracking-data" class="hide">{% json tracking.params %}</div>
 {% endif %}
