@@ -29,8 +29,8 @@ function getParams(page, options) {
     var config = getConfig.apply(this, arguments);
 
     return {
-        params: JSON.stringify(_params),
-        config: JSON.stringify(config)
+        params: _params,
+        config: config
     };
 }
 
