@@ -221,11 +221,6 @@ function postFields(done) {
 
     data = this.toData(true);
 
-
-    // data.neighborhood[id] = data.neighborhood;
-
-    console.log(data);
-
     helpers.dataAdapter.post(this.app.req, '/items' + (!id ? '' : ['', id, action].join('/')), {
         data: data,
         query: query
