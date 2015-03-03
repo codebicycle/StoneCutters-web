@@ -61,6 +61,8 @@ module.exports = Base.extend({
 
             var error = function(err) {
                 statsd.increment([this.app.session.get('location').abbreviation, 'conversations', 'reply', 'error', this.app.session.get('platform')]);
+                $form.find('.spinner, .reply-send').toggle();
+                $('[data-messageText]').addClass('error');
             }.bind(this);
 
             asynquence().or(error)
