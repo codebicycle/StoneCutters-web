@@ -10,6 +10,7 @@ module.exports = {
     byName: {
         city: city,
         state: state,
+        neighborhood: neighborhood,
         kilometers: kilometers,
         bathrooms: bathrooms,
         bedrooms: bedrooms,
@@ -48,14 +49,14 @@ function buildKilometerRange(to, label, dictionary) {
     };
 }
 
-function sortFilterCityAndState(locations, options) {
+function sortFilterLocations(locations, options, count) {
     var platform = options.app.session.get('platform');
     var hiddenLocations;
 
-    if (platform !== 'desktop' || !locations || !locations.length || locations.length <= 12) {
+    if (platform !== 'desktop' || !locations || !locations.length || locations.length <= count) {
         return locations;
     }
-    hiddenLocations = locations.slice(12).sort(function sortByName(location1, location2) {
+    hiddenLocations = locations.slice(count).sort(function sortByName(location1, location2) {
         if (location1.value > location2.value) {
             return 1;
         }
@@ -64,12 +65,12 @@ function sortFilterCityAndState(locations, options) {
         }
         return 0;
     });
-    return locations.slice(0, 12).concat(hiddenLocations);
+    return locations.slice(0, count).concat(hiddenLocations);
 }
 
 function city(filter, options) {
     filter.set({
-        value: sortFilterCityAndState(filter.get('value'), options)
+        value: sortFilterLocations(filter.get('value'), options, 12)
     }, {
         unset: false
     });
@@ -78,7 +79,16 @@ function city(filter, options) {
 
 function state(filter, options) {
     filter.set({
-        value: sortFilterCityAndState(filter.get('value'), options)
+        value: sortFilterLocations(filter.get('value'), options, 12)
+    }, {
+        unset: false
+    });
+    return filter;
+}
+
+function neighborhood(filter, options) {
+    filter.set({
+        value: sortFilterLocations(filter.get('value'), options, 8)
     }, {
         unset: false
     });
