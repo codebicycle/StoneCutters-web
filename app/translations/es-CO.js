@@ -35,7 +35,6 @@ module.exports = {
     'defaulthtmlhead.FreeClassifiedsInArea': 'Clasificados gratis en <AREA>',
     'defaulthtmlhead.GoBackToThePreviousPage': 'Vuelve a la p\xE1gina anterior.',
     'defaulthtmlhead.HaveYouSeenThis': '\xBFLo has visto?',
-    'defaulthtmlhead.HelloUsername': 'Hola, <<USERNAME>>',
     'defaulthtmlhead.MakeSureTheWebAddressYouEnteredIsCorrect': 'Aseg\xFArate que la direcci\xF3n web es correcta.',
     'defaulthtmlhead.My Favorites': 'Mis favoritos',
     'defaulthtmlhead.My Listings': ' Mis anuncios',
@@ -634,7 +633,7 @@ module.exports = {
     'crm_new_version.EditAnyway': 'De todo modos editar',
     'crm_new_version.EditFeaturedAd': '\xBFEstas seguro(a) que a\xFAn quieres editar tu aviso destacado?',
     'crm_new_version.EditFeaturedAd-Procedure': '<p>Despu\xE9s de editar tu aviso, tomar\xE1 algunas horas para volver a estar activo. Pero no te preocupes, tan pronto tu aviso est\xE9 activo, se reactivar\xE1 autom\xE1ticamente una acci\xF3n que toma en cuenta el tiempo en que tu aviso estuvo fuera de linea.</p><p>Si despu\xE9s de editar tu aviso no se activa por alguna raz\xF3n, el tiempo en que no estuvo activo se contabilizar\xE1 hasta que vuelva a estar activo.<p>',
-    'crm_new_version.KeepPosting': 'Sigue colocando avisos',
+    'crm_new_version.KeepPosting': 'Sigue publicando',
     'crm_new_version.RemainingTime': 'Tiempo restante',
     'crm_new_version.RenameCategory_3': 'en',
     'crm_new_version.SomethingElseToPost': '\xBFTienes algo m\xE1s para publicar?'

@@ -35,7 +35,6 @@ module.exports = {
     'defaulthtmlhead.FreeClassifiedsInArea': 'Bezplatn\xE9 inzer\xE1ty v z\xF3n\u011B <AREA>',
     'defaulthtmlhead.GoBackToThePreviousPage': 'N\xE1vrat na p\u0159edchoz\xED str\xE1nku.',
     'defaulthtmlhead.HaveYouSeenThis': 'Vid\u011Bli jste tohle?',
-    'defaulthtmlhead.HelloUsername': 'Dobr\xFD den, <<USERNAME>>',
     'defaulthtmlhead.MakeSureTheWebAddressYouEnteredIsCorrect': 'Zkontrolujte, zda jste zadali spr\xE1vnou webovou adresu.',
     'defaulthtmlhead.My Favorites': 'Moje obl\xEDben\xE9',
     'defaulthtmlhead.My Listings': 'Moje z\xE1znamy',

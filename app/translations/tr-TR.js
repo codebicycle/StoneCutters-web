@@ -35,7 +35,6 @@ module.exports = {
     'defaulthtmlhead.FreeClassifiedsInArea': '\xDCcretsiz seri ilanlar: <AREA>',
     'defaulthtmlhead.GoBackToThePreviousPage': '\xD6nceki sayfaya geri d\xF6n.',
     'defaulthtmlhead.HaveYouSeenThis': 'Bunu g\xF6rm\xFC\u015F m\xFCyd\xFCn\xFCz?',
-    'defaulthtmlhead.HelloUsername': 'Merhaba, <<USERNAME>>',
     'defaulthtmlhead.MakeSureTheWebAddressYouEnteredIsCorrect': 'Girdi\u011Finiz Web adresinin do\u011Fru oldu\u011Fundan emin olun.',
     'defaulthtmlhead.My Favorites': 'Favorilerim',
     'defaulthtmlhead.My Listings': '\u0130lanlar\u0131m',

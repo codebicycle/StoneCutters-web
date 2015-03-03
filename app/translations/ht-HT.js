@@ -35,7 +35,6 @@ module.exports = {
     'defaulthtmlhead.FreeClassifiedsInArea': 'Anons gratis nan<AREA>',
     'defaulthtmlhead.GoBackToThePreviousPage': 'Retounen sou paj  avan an.',
     'defaulthtmlhead.HaveYouSeenThis': '\xC8ske ou te w\xE8 sa a?',
-    'defaulthtmlhead.HelloUsername': 'Bonjou, <<USERNAME>>',
     'defaulthtmlhead.MakeSureTheWebAddressYouEnteredIsCorrect': 'Asire w ke adr\xE8s Ent\xE8n\xE8t ou mete a kor\xE8k.',
     'defaulthtmlhead.My Favorites': 'Favori Mwen yo',
     'defaulthtmlhead.My Listings': 'Anons Mwen yo',

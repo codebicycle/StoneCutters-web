@@ -35,7 +35,6 @@ module.exports = {
     'defaulthtmlhead.FreeClassifiedsInArea': 'Ilmaisia ilmoituksia alueella <AREA>',
     'defaulthtmlhead.GoBackToThePreviousPage': 'Siirry takaisin edelliselle sivulle.',
     'defaulthtmlhead.HaveYouSeenThis': 'Oletko n\xE4hnyt t\xE4m\xE4n?',
-    'defaulthtmlhead.HelloUsername': 'Hei, <<USERNAME>>',
     'defaulthtmlhead.MakeSureTheWebAddressYouEnteredIsCorrect': 'Varmista, ett\xE4 sy\xF6tt\xE4m\xE4si verkko-osoite on virheet\xF6n.',
     'defaulthtmlhead.My Favorites': 'Omat suosikit',
     'defaulthtmlhead.My Listings': 'Omat ilmoitukset',
