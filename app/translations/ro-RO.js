@@ -35,7 +35,6 @@ module.exports = {
     'defaulthtmlhead.FreeClassifiedsInArea': 'Clasific\u0103ri Gratuite \xEEn<AREA>',
     'defaulthtmlhead.GoBackToThePreviousPage': '\xCEnapoi la pagina anterioar\u0103.',
     'defaulthtmlhead.HaveYouSeenThis': 'A\u0163i v\u0103zut asta?',
-    'defaulthtmlhead.HelloUsername': 'Bun\u0103, <<USERNAME>>',
     'defaulthtmlhead.MakeSureTheWebAddressYouEnteredIsCorrect': 'Asigura\u0163i-v\u0103 c\u0103 adresa web introdus\u0103 este corect\u0103.',
     'defaulthtmlhead.My Favorites': 'Favoritele mele',
     'defaulthtmlhead.My Listings': 'Anun\u0163urile mele',

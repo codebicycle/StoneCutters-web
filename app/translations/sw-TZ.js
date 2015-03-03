@@ -35,7 +35,6 @@ module.exports = {
     'defaulthtmlhead.FreeClassifiedsInArea': 'Matangazo ya bure katika <AREA>',
     'defaulthtmlhead.GoBackToThePreviousPage': 'Rudi kwenye ukurasa uliopita.',
     'defaulthtmlhead.HaveYouSeenThis': 'Umeona hii?',
-    'defaulthtmlhead.HelloUsername': 'Hello, <<USERNAME>>',
     'defaulthtmlhead.MakeSureTheWebAddressYouEnteredIsCorrect': 'Hakikisha kwamba anwani ya tovuti uliyoingiza ni sahihi.',
     'defaulthtmlhead.My Favorites': 'Vipendwa Vyangu',
     'defaulthtmlhead.My Listings': 'Matangazo Yangu',

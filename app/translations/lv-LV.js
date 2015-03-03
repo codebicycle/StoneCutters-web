@@ -35,7 +35,6 @@ module.exports = {
     'defaulthtmlhead.FreeClassifiedsInArea': 'Bezmaksas sludin\u0101jumi <AREA>',
     'defaulthtmlhead.GoBackToThePreviousPage': 'Iet atpaka\u013C uz iepriek\u0161\u0113jo lapu.',
     'defaulthtmlhead.HaveYouSeenThis': 'Vai j\u016Bs esat to redz\u0113jis?',
-    'defaulthtmlhead.HelloUsername': 'Sveicin\u0101ti, <<USERNAME>>',
     'defaulthtmlhead.MakeSureTheWebAddressYouEnteredIsCorrect': 'P\u0101rliecinieties, ka j\u016Bsu ievad\u012Bt\u0101 t\u012Bmek\u013Ca adrese ir pareiza.',
     'defaulthtmlhead.My Favorites': 'Mani favor\u012Bti',
     'defaulthtmlhead.My Listings': 'Mani sludin\u0101jumi',

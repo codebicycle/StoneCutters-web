@@ -35,7 +35,6 @@ module.exports = {
     'defaulthtmlhead.FreeClassifiedsInArea': 'Free classifieds in <AREA>',
     'defaulthtmlhead.GoBackToThePreviousPage': 'Go back to the previous page.',
     'defaulthtmlhead.HaveYouSeenThis': 'Have you seen this?',
-    'defaulthtmlhead.HelloUsername': '\xA1 \u0645\u0631\u062D\u0628\u0627 , <<USERNAME>>',
     'defaulthtmlhead.MakeSureTheWebAddressYouEnteredIsCorrect': 'Make sure the Web address you entered is correct.',
     'defaulthtmlhead.My Favorites': '\u0628\u0644\u062F\u064A \u0627\u0644\u0645\u0641\u0636\u0644\u0629',
     'defaulthtmlhead.My Listings': '\u0628\u0644\u062F\u064A \u0646\u062A\u0627\u0626\u062C',
