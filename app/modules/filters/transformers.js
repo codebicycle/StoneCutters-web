@@ -4,17 +4,41 @@ var _ = require('underscore');
 var translations = require('../../../shared/translations');
 
 module.exports = {
-    city: city,
-    state: state,
-    kilometers: kilometers,
-    bathrooms: bathrooms,
-    bedrooms: bedrooms,
-    surface: surface,
-    year: year,
-    carbrand: carbrand,
-    carmodel: carmodel,
-    age: age
+    byType: {
+        SELECT: select
+    },
+    byName: {
+        city: city,
+        state: state,
+        kilometers: kilometers,
+        bathrooms: bathrooms,
+        bedrooms: bedrooms,
+        surface: surface,
+        year: year,
+        carbrand: carbrand,
+        carmodel: carmodel,
+        age: age
+    }
 };
+
+function select(filter, options) {
+    var values = filter.get('value');
+
+    if (values && values.length) {
+        _.map(values, function each(value) {
+            if (value.id && typeof value.id === 'string' && ~value.id.indexOf('_')) {
+                value.id = value.id.replace(/_/g, '+');
+            }
+            return value;
+        });
+        filter.set({
+            value: values
+        }, {
+            unset: false
+        });
+    }
+    return filter;
+}
 
 function buildKilometerRange(to, label, dictionary) {
     return {
