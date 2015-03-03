@@ -8,7 +8,6 @@ var maxAge = config.get(['interstitial', 'time'], 60000);
 
 module.exports = Base.extend({
     postRender: function() {
-        var $view = $('#partials-tracking-view');
         var interstitial = this.$('#interstitial');
         var header = $('.header_index_view');
         var views = $('[data-view]');
