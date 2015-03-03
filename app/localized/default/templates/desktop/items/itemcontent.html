@@ -8,9 +8,7 @@
         {% view 'items/partials/iteminfo' %}
         {% view 'items/partials/imagegallery' %}
         {% view 'items/partials/itemdescription' %}
-        {% if item.coordinates %}
-            {% view 'items/partials/itemlocation' %}
-        {% endif %}
+        {% view 'items/partials/itemlocation' %}
     </div>
     {% view 'items/partials/itemactions' %}
 </article>

@@ -220,6 +220,7 @@ function postFields(done) {
     }
 
     data = this.toData(true);
+
     helpers.dataAdapter.post(this.app.req, '/items' + (!id ? '' : ['', id, action].join('/')), {
         data: data,
         query: query
