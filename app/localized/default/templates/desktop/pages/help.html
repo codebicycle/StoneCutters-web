@@ -485,7 +485,7 @@
                         </a>
                     </li><!--
                     --><li>
-                        <a href="http://www1.folha.uol.com.br/mercado/2014/11/1548165-olx-e-bomnegociocom-fecham-acordo-para-fortalecer-classificados-on-line.shtml" title="" target="_BLANK">
+                        <a href="folha.uol.com.br/mercado/2014/11/1548165-olx-e-bomnegociocom-fecham-acordo-para-fortalecer-classificados-on-line.shtml" title="" target="_BLANK">
                             <figure class="items-image">
                                 <img src="{{ ('/images/desktop/about_us/press-folha.jpg') | static }}" alt="" />
                             </figure>
@@ -595,14 +595,12 @@
         </section>
         <section class="user-ads sources">
             <h4 class="subtitle">{{ dictionary["about.MediaResources"] }}</h4>
-            {#<span class="icons icon-arrow-left arrows" data-navigate="left" data-section="sources"></span>
-            <span class="icons icon-arrow-right arrows" data-navigate="right" data-section="sources"></span>#}
             <div class="slide">
                 <ul class="" data-items-slide>
                     <li>
-                        <a href="http://brand.olx.com/brand-manifesto/download/logotype.zip" title="" target="_BLANK">
+                        <a href="{{ '/images/mkt/olx-logo.zip' | static }}" title="{{ dictionary["about.AboutBrand"] | replace("<<BRAND>>","OLX") }}" target="_BLANK">
                             <figure class="items-image">
-                                <img src="{{ ('/images/desktop/about_us/logo.jpg') | static }}" alt="" />
+                                <img src="{{ '/images/desktop/about_us/logo.jpg' | static }}" alt="{{ dictionary["about.AboutBrand"] | replace("<<BRAND>>","OLX") }}" />
                             </figure>
                             <h3>Logotype</h3>
                         </a>

@@ -11,6 +11,19 @@ module.exports = {
         }
     },
     adserving: {
-        enabled: false
+        enabled: false,
+        slots: {
+            listing: {
+                mobiletop: {
+                    service: 'none'
+                },
+                mobilebottom: {
+                    service: 'none'
+                },
+                mobilenoresult: {
+                    service: 'none'
+                }
+            }
+        }
     }
 };
