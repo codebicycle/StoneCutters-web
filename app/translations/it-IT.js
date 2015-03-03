@@ -35,6 +35,7 @@ module.exports = {
     'defaulthtmlhead.FreeClassifiedsInArea': 'Annunci gratuiti in  <AREA>',
     'defaulthtmlhead.GoBackToThePreviousPage': 'Torna alla pagina precedente.',
     'defaulthtmlhead.HaveYouSeenThis': 'Hai visto questo?',
+    'defaulthtmlhead.HelloUsername': 'Ciao, <<USERNAME>>',
     'defaulthtmlhead.MakeSureTheWebAddressYouEnteredIsCorrect': 'Assicurati che l\'indirizzo Web che hai inserito sia corretto.',
     'defaulthtmlhead.My Favorites': 'I Miei Preferiti',
     'defaulthtmlhead.My Listings': 'I Miei Annunci',

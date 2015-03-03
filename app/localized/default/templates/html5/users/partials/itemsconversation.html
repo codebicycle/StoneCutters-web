@@ -9,7 +9,7 @@
             <div class="top">
                 <span class="date">{{ thread.item.date.timestamp | date("MMM DD, YYYY") }}</span>
             </div>
-            <span class="title">{{ thread.item.title }}</span>
+            <span class="title">{{ thread.item.title | truncate( 40, True, '...') }}</span>
             {% if thread.item.price.displayPrice %}
                 <span class="price">{{ thread.item.price.displayPrice }}</span>
             {% endif %}

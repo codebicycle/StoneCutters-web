@@ -35,6 +35,7 @@ module.exports = {
     'defaulthtmlhead.FreeClassifiedsInArea': 'Classificats gratu\xEFts a <AREA>',
     'defaulthtmlhead.GoBackToThePreviousPage': 'Torna a la p\xE0gina anterior.',
     'defaulthtmlhead.HaveYouSeenThis': 'Has vist aix\xF2?',
+    'defaulthtmlhead.HelloUsername': 'Hola, <<USERNAME>>',
     'defaulthtmlhead.MakeSureTheWebAddressYouEnteredIsCorrect': 'Comprova que l\'adre\xE7a del web que has escrit sigui correcta.',
     'defaulthtmlhead.My Favorites': 'Els meus favorits',
     'defaulthtmlhead.My Listings': 'Les meves anuncis',
