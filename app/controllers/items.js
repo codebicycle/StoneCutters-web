@@ -569,7 +569,9 @@ function reply(params, callback) {
 
                 done.abort();
                 return helpers.common.redirect.call(this, '/myolx/conversation/' + threadId, null, {
-                    status: 302
+                    status: 302,
+                    replace: true,
+                    trigger: true
                 });
             }
          }
