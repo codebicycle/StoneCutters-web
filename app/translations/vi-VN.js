@@ -35,7 +35,6 @@ module.exports = {
     'defaulthtmlhead.FreeClassifiedsInArea': 'Rao v\u1EB7t mi\u1EC5n ph\xED trong <AREA>',
     'defaulthtmlhead.GoBackToThePreviousPage': 'V\u1EC1 trang tr\u01B0\u1EDBc.',
     'defaulthtmlhead.HaveYouSeenThis': 'B\u1EA1n \u0111\xE3 th\u1EA5y \u0111i\u1EC1u n\xE0y?',
-    'defaulthtmlhead.HelloUsername': 'Xin ch\xE0o, <<USERNAME>>',
     'defaulthtmlhead.MakeSureTheWebAddressYouEnteredIsCorrect': 'H\xE3y ch\u1EAFc ch\u1EAFn \u0111\xE3 nh\u1EADp \u0111\xFAng \u0111\u1ECBa ch\u1EC9 Web.',
     'defaulthtmlhead.My Favorites': 'M\u1EE5c Y\xEAu Th\xEDch C\u1EE7a T\xF4i',
     'defaulthtmlhead.My Listings': 'Rao V\u1EB7t C\u1EE7a T\xF4i',

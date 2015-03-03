@@ -35,7 +35,6 @@ module.exports = {
     'defaulthtmlhead.FreeClassifiedsInArea': 'Tasuta kuulutused <AREA>',
     'defaulthtmlhead.GoBackToThePreviousPage': 'Minge tagasi eelmisele lehek\xFCljele.',
     'defaulthtmlhead.HaveYouSeenThis': 'Kas olete seda n\xE4inud?',
-    'defaulthtmlhead.HelloUsername': 'Tere, <<USERNAME>>',
     'defaulthtmlhead.MakeSureTheWebAddressYouEnteredIsCorrect': 'Veenduge, et sisestatud veebiaadress on \xF5ige.',
     'defaulthtmlhead.My Favorites': 'Minu lemmikud',
     'defaulthtmlhead.My Listings': 'Minu kataloogid',

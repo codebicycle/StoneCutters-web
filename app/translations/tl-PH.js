@@ -35,7 +35,6 @@ module.exports = {
     'defaulthtmlhead.FreeClassifiedsInArea': 'Libreng Patalastas sa <AREA>',
     'defaulthtmlhead.GoBackToThePreviousPage': 'Bumalik sa naunang pahina',
     'defaulthtmlhead.HaveYouSeenThis': 'Nakita mo na ba ito?',
-    'defaulthtmlhead.HelloUsername': 'Hello, <<USERNAME>>',
     'defaulthtmlhead.MakeSureTheWebAddressYouEnteredIsCorrect': 'Siguraduhing tama ang nailagay na Web address',
     'defaulthtmlhead.My Favorites': 'Aking mga Paborito',
     'defaulthtmlhead.My Listings': 'Aking mga listahan',

@@ -35,7 +35,6 @@ module.exports = {
     'defaulthtmlhead.FreeClassifiedsInArea': 'Iklaneka percuma dalam <AREA>',
     'defaulthtmlhead.GoBackToThePreviousPage': 'Kembali ke halaman sebelumnya.',
     'defaulthtmlhead.HaveYouSeenThis': 'Anda pernah lihat ini?',
-    'defaulthtmlhead.HelloUsername': 'Helo, <<USERNAME>>',
     'defaulthtmlhead.MakeSureTheWebAddressYouEnteredIsCorrect': 'Pastikan alamat Web yang anda masukkan itu betul.',
     'defaulthtmlhead.My Favorites': 'Kegemaran Saya',
     'defaulthtmlhead.My Listings': 'Iklan Saya',

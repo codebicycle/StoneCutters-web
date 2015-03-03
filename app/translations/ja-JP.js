@@ -35,7 +35,6 @@ module.exports = {
     'defaulthtmlhead.FreeClassifiedsInArea': '<AREA>\u3067\u306E\u7121\u6599\u30AF\u30E9\u30B7\u30D5\u30A1\u30A4\u30C9',
     'defaulthtmlhead.GoBackToThePreviousPage': '\u524D\u306E\u30DA\u30FC\u30B8\u306B\u623B\u308B\u3002',
     'defaulthtmlhead.HaveYouSeenThis': '\u3053\u308C\u3092\u3054\u89A7\u306B\u306A\u308A\u307E\u3057\u305F\u304B\uFF1F',
-    'defaulthtmlhead.HelloUsername': '\u3053\u3093\u306B\u3061\u306F\u3001, <<USERNAME>>',
     'defaulthtmlhead.MakeSureTheWebAddressYouEnteredIsCorrect': '\u5165\u529B\u3057\u305F\u30A6\u30A7\u30D6\u30A2\u30C9\u30EC\u30B9\u304C\u6B63\u3057\u3044\u304B\u78BA\u8A8D\u3057\u3066\u304F\u3060\u3055\u3044\u3002',
     'defaulthtmlhead.My Favorites': '\u304A\u6C17\u306B\u5165\u308A',
     'defaulthtmlhead.My Listings': '\u30DE\u30A4\u30EA\u30B9\u30C8',
