@@ -163,8 +163,7 @@ function handleItems(params, promise, gallery) {
         var platform = this.app.session.get('platform');
         var slug = helpers.common.slugToUrl((subcategory || category).toJSON());
         var redirectParams = {
-            replace: true,
-            trigger: true
+            replace: true
         };
 
         url = ['/', slug].join('');

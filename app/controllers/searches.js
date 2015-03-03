@@ -60,8 +60,7 @@ function search(params, callback, gallery) {
         var category;
         var subcategory;
         var redirectParams = {
-            replace: true,
-            trigger: true
+            replace: true
         };
 
         var redirect = function(done) {
