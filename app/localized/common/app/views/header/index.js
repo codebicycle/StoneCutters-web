@@ -21,6 +21,9 @@ module.exports = Base.extend({
         if (location.url === 'www.olx.com.mx') {
             postLinkUrl = 'https://m.segundamano.mx/ai';
         }
+        else if (location.url === 'www.olx.cl') {
+            postLinkUrl = 'http://m.yapo.cl/mai/form';
+        }
 
         return _.extend({}, data, {
             user: this.app.session.get('user'),
