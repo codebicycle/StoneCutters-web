@@ -240,7 +240,6 @@ module.exports = {
     },
     featured: {
         enabled: true,
-        environments: ['testing', 'staging'],
         quantity: {
             total: 4,
             top: 2,
@@ -254,6 +253,9 @@ module.exports = {
                 enabled: false
             },
             'post#flow': {
+                enabled: false
+            },
+            'post#success': {
                 enabled: false
             },
             'post#flowMarketing': {
