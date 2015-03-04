@@ -241,6 +241,11 @@ module.exports = {
     featured: {
         enabled: true,
         environments: ['testing', 'staging'],
+        quantity: {
+            total: 4,
+            top: 2,
+            bottom: 2
+        },
         section: {
             'categories#list': {
                 enabled: false
