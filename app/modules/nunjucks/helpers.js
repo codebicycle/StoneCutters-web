@@ -98,11 +98,17 @@ module.exports = function(nunjucks) {
         var shuffle = [];
         var itemIndex = 0;
         var shopIndex = 0;
+        var shopIndices = [];
         var length = items.length + shops.length;
+
+        for(var k = 0; k < shops.length; k++) {
+            var index = ( k * 10 ) + randomInt(10);
+            shopIndices[k] = index;           
+        }
 
         for (var i = 0; i < length; i++) {
 
-            var isShop = (((randomInt(10) < 1) && shopIndex < shops.length) || (itemIndex >= items.length && shopIndex < shops.length));
+            var isShop = _.contains(shopIndices, i);
             if (isShop) {
                 shuffle[i] = { "index": shopIndex, "type": "shop"};
                 shopIndex++;
