@@ -142,6 +142,8 @@ module.exports = Base.extend({
         var $cities = this.$('#field-location');
         var cities;
 
+        options = _.clone(options);
+
         var fetch = function(done) {
             this.app.fetch({
                 cities: {
@@ -199,6 +201,8 @@ module.exports = Base.extend({
         var $neighborhoods = this.$('#field-neighborhood');
         var neighborhoods;
 
+        options = _.clone(options);
+
         var fetch = function(done) {
             this.app.fetch({
                 neighborhoods: {
@@ -238,6 +242,8 @@ module.exports = Base.extend({
         }.bind(this);
 
         var success = function(neighborhoods) {
+            options.skipValidation = true;
+            
             if (neighborhoods.length) {
                 $neighborhoods.removeAttr('disabled').attr('required', true).empty();
                 $neighborhoods.parents('.field-wrapper').removeClass('hide');
