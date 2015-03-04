@@ -83,7 +83,7 @@
                 <select name="neighborhood" id="neighborhood">
                     <option value="">-{{ dictionary["countryoptions.SelectANeighborhood"] }}-</option>
                     {% for neighborhood in neighborhoods %}
-                        <option value="{{neighborhood.id}}-{{neighborhood.name}}">{{neighborhood.name}}</option>
+                        <option value="{{neighborhood.id}}-{{neighborhood.name}}" {{ 'selected="selected"' if form and form.values and form.values['neighborhood.name'] and form.values['neighborhood.name'] == neighborhood.name }}>{{ neighborhood.name }}</option>
                     {% endfor %}
                 </select>
             </div>

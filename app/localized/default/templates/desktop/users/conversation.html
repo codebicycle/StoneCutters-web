@@ -47,7 +47,7 @@
     </ul>
     <div class="conversation-input">
         <form data-message-reply data-threadId="{{ thread.get('threadId') }}">
-            <textarea data-messageText class="text-field" ></textarea>
+            <textarea data-messageText class="text-field"  name="message" ></textarea>
             <p data-error class="error hide">{{ dictionary["misc.please-comp-msg"] }}</p>
             <div class="spinner hide"></div>
             <button class="btn orange" type="submit">{{ dictionary["myolx.Reply"] }}</button>

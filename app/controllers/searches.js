@@ -59,11 +59,14 @@ function search(params, callback, gallery) {
         var url;
         var category;
         var subcategory;
+        var redirectParams = {
+            replace: true
+        };
 
         var redirect = function(done) {
             if (!params.search || _.isEmpty(params.search.trim()) || params.search === 'undefined') {
                 done.abort();
-                return helpers.common.redirect.call(this, '/nf/all-results');
+                return helpers.common.redirect.call(this, '/nf/all-results', null, redirectParams);
             }
             if (!utils.startsWith(path, starts)) {
                 done.abort();
@@ -121,7 +124,7 @@ function search(params, callback, gallery) {
 
                 if (slug.indexOf(slugUrl)) {
                     done.abort();
-                    return helpers.common.redirect.call(this, path.replace(slugUrl, slug));
+                    return helpers.common.redirect.call(this, path.replace(slugUrl, slug), null, redirectParams);
                 }
             }
             done();
