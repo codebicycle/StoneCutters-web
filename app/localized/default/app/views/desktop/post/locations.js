@@ -98,7 +98,6 @@ module.exports = Base.extend({
         if ($firstOption.attr('value') === '') {
             $firstOption.remove();
         }
-
         this.resetNeighborhoods();
         this.getCities($field.val(), options, ($cities.val() ? [$cities.val()] : undefined));
         this.parentView.$el.trigger('fieldSubmit', [$field, options]);
@@ -178,10 +177,16 @@ module.exports = Base.extend({
         }.bind(this);
 
         var success = function(cities) {
+            var selected = false;
+
             $cities.removeAttr('disabled').empty();
             _.each(cities, function each(city) {
+                if(city.key == cityId) {
+                    selected = true;
+                }
                 $cities.append('<option value="' + city.key + '"' + (city.key == cityId ? 'selected="selected"' : '') + '>' + city.value + '</option>');
             }.bind(this));
+            options.skipValidation = !selected;
             this.parentView.$el.trigger('fieldSubmit', [$cities, options]);
         }.bind(this);
 
