@@ -11,7 +11,17 @@ module.exports = function(dataAdapter, excludedUrls) {
         var statsd  = require('../modules/statsd')();
         var Seo = require('../../app/modules/seo');
         var errorPath = path.resolve('server/templates/error.html');
-        var migrated = config.get('migrated', []);
+        var noMigrated = [
+            'www.olx.ir',
+            'www.olx.it',
+            'www.olx.ae',
+            'www.olx.fr',
+            'www.olx.cl',
+            'www.olx.com',
+            'www.olx.com.mx',
+            'www.olx.com.eg',
+            'www.olxtunisie.com'
+        ];
 
         return function platform(req, res, next) {
             if (_.contains(excludedUrls.all, req.path)) {
@@ -57,7 +67,7 @@ module.exports = function(dataAdapter, excludedUrls) {
                 var url;
 
                 if (device.web_platform === 'desktop') {
-                    if (!_.contains(migrated, session.locationUrl)) {
+                    if (_.contains(noMigrated, session.locationUrl)) {
                         url = Seo.desktopizeUrl(req.originalUrl, {
                             protocol: req.protocol,
                             host: session.host,
