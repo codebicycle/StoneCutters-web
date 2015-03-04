@@ -9,5 +9,21 @@ module.exports = {
             myFavs: 15,
             myMsgs: 15
         }
+    },
+    adserving: {
+        enabled: false,
+        slots: {
+            listing: {
+                mobiletop: {
+                    service: 'none'
+                },
+                mobilebottom: {
+                    service: 'none'
+                },
+                mobilenoresult: {
+                    service: 'none'
+                }
+            }
+        }
     }
 };

@@ -11,8 +11,8 @@ var filters = utils.get(config, ['filters'], {});
 var sorts = utils.get(config, ['sorts'], {});
 var defaultOrderByName = Object.keys(filters);
 var defaultOrderByType = ['BOOLEAN', 'SELECT', 'RANGE'];
-var regexpReplace = /-([a-zA-Z0-9]+)_([a-zA-Z0-9_\.]*)/g;
-var regexpFind = /-[a-zA-Z0-9]+_[a-zA-Z0-9_\.]*/g;
+var regexpReplace = /-([a-zA-Z0-9]+)_([a-zA-Z0-9_\.\+]*)/g;
+var regexpFind = /-[a-zA-Z0-9]+_[a-zA-Z0-9_\.\+]*/g;
 var regexpSort = /([a-zA-Z0-9_]*)(desc)/g;
 var booleans = ['true', 'false'];
 var Base;
@@ -119,8 +119,14 @@ function _add(filter, options) {
 }
 
 function checkTransform(filter) {
-    var transformer = transformers[filter.get('name')];
+    var transformer = transformers.byType[filter.get('type')];
 
+    if (transformer) {
+        filter = transformer.call(this, filter, {
+            app: this.app
+        });
+    }
+    transformer = transformers.byName[filter.get('name')];
     if (transformer) {
         filter = transformer.call(this, filter, {
             app: this.app
@@ -243,7 +249,9 @@ function format() {
                 url.push(value.to);
                 break;
             case 'SELECT':
-                url.push(value.join('_'));
+                url.push(_.map(value, function each(val) {
+                    return val.replace(/_/g, '+');
+                }).join('_'));
                 break;
             case 'BOOLEAN':
                 url.push(value);
@@ -284,7 +292,9 @@ function smaugize() {
                 if (name === 'f.neighborhood') {
                     separator = ' OR ';
                 }
-                params[name] = value.join(separator);
+                params[name] = _.map(value, function each(val) {
+                    return val.replace(/\+/g, '_');
+                }).join(separator);
                 break;
             case 'RANGE':
                 params[name] = [value.from, 'TO', value.to].join('');
