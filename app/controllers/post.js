@@ -534,8 +534,6 @@ function success(params, callback) {
         asynquence().or(fail.bind(this))
             .then(prepare.bind(this))
             .then(fetch.bind(this))
-            .then(check.bind(this))
-            .then(fetchRelated.bind(this))
             .then(fetchFeatured.bind(this))
             .val(successFetch.bind(this));
 
@@ -562,49 +560,15 @@ function success(params, callback) {
             }, done.errfcb);
         }
 
-        function check(done, resItem) {
-            if (!resItem.item) {
-                return done.fail(null, {});
-            }
-            done(resItem.item);
-        }
-
-        function fetchRelated(done, _item) {
-            this.app.fetch({
-                relatedItems: {
-                    collection : 'Items',
-                    params: {
-                        location: siteLocation,
-                        offset: 0,
-                        pageSize: 10,
-                        relatedAds: itemId
-                    }
-                }
-            }, {
-                readFromCache: false
-            }, function afterFetch(err, res) {
-                if (err) {
-                    err = null;
-                    res = {
-                        relatedItems: []
-                    };
-                }
-                else {
-                    res.relatedItems = res.relatedItems.toJSON();
-                }
-                done(_item, res.relatedItems);
-            }.bind(this));
-        }
-
-        function fetchFeatured(done, item, relateds) {
+        function fetchFeatured(done, response) {
             if (!FeatureAd.isEnabled(this.app)) {
-                return done(item, relateds);
+                return done(response.item);
             }
             this.app.fetch({
                 featuread: {
                     model : 'Feature_ad',
                     params: {
-                        id: item.get('id'),
+                        id: response.item.get('id'),
                         locate: this.app.session.get('selectedLanguage')
                     }
                 }
@@ -614,12 +578,12 @@ function success(params, callback) {
                 if (err) {
                     res = {};
                 }
-                item.set('featured', res.featuread);
-                done(item, relateds);
+                response.item.set('featured', res.featuread);
+                done(response.item);
             }.bind(this));
         }
 
-        function successFetch(_item, _relatedItems) {
+        function successFetch(_item) {
             var item = _item.toJSON();
             var subcategory = this.dependencies.categories.search(item.category.id);
             var category;
@@ -641,8 +605,7 @@ function success(params, callback) {
                 item: item,
                 securityKey: securityKey,
                 category: category.toJSON(),
-                subcategory: subcategory.toJSON(),
-                relatedItems: _relatedItems
+                subcategory: subcategory.toJSON()
             });
         }
 
@@ -838,7 +801,12 @@ function editsuccess(params, callback) {
         var languages = this.app.session.get('languages');
         var anonymousItem;
 
-        var prepare = function(done) {
+        asynquence().or(fail.bind(this))
+            .then(prepare.bind(this))
+            .then(fetch.bind(this))
+            .val(successFetch.bind(this));
+
+        function prepare(done) {
             if (user) {
                 params.token = user.token;
             }
@@ -859,9 +827,9 @@ function editsuccess(params, callback) {
             delete params.title;
             delete params.sk;
             done();
-        }.bind(this);
+        }
 
-        var findItem = function(done) {
+        function fetch(done) {
             this.app.fetch({
                 item: {
                     model: 'Item',
@@ -870,50 +838,16 @@ function editsuccess(params, callback) {
             }, {
                 readFromCache: false
             }, done.errfcb);
-        }.bind(this);
+        }
 
-        var checkItem = function(done, resItem) {
-            if (!resItem.item) {
-                return done.fail(null, {});
-            }
-            done(resItem.item);
-        }.bind(this);
-
-        var findRelatedItems = function(done, _item) {
-            this.app.fetch({
-                relatedItems: {
-                    collection : 'Items',
-                    params: {
-                        location: siteLocation,
-                        offset: 0,
-                        pageSize: 10,
-                        relatedAds: itemId
-                    }
-                }
-            }, {
-                readFromCache: false
-            }, function afterFetch(err, res) {
-                if (err) {
-                    err = null;
-                    res = {
-                        relatedItems: []
-                    };
-                }
-                else {
-                    res.relatedItems = res.relatedItems.toJSON();
-                }
-                done(_item, res.relatedItems);
-            }.bind(this));
-        }.bind(this);
-
-        var success = function(_item, _relatedItems) {
-            var item = _item.toJSON();
+        function successFetch(response) {
+            var item = response._item.toJSON();
             var subcategory = this.dependencies.categories.search(item.category.id);
             var category;
             var parentId;
 
             if (!subcategory) {
-                return error();
+                return fail();
             }
             parentId = subcategory.get('parentId');
             category = parentId ? this.dependencies.categories.get(parentId) : subcategory;
@@ -928,20 +862,12 @@ function editsuccess(params, callback) {
                 item: item,
                 sk: securityKey,
                 category: category.toJSON(),
-                subcategory: subcategory.toJSON(),
-                relatedItems: _relatedItems
+                subcategory: subcategory.toJSON()
             });
-        }.bind(this);
+        }
 
-        var error = function(err, res) {
+        function fail(err, res) {
             return helpers.common.error.call(this, err, res, callback);
-        }.bind(this);
-
-        asynquence().or(error)
-            .then(prepare)
-            .then(findItem)
-            .then(checkItem)
-            .then(findRelatedItems)
-            .val(success);
+        }
     }
 }
