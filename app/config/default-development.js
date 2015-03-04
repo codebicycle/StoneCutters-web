@@ -34,7 +34,7 @@ module.exports = {
             maxPageSize: 27
         }
     },
-    staticAccept: ['css', 'js', 'apk'],
+    staticAccept: ['css', 'js', 'apk', 'zip'],
     imageAccept: ['jpg', 'jpeg', 'png', 'gif', 'ico'],
     environment: {
         type: 'development'
