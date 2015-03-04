@@ -2,6 +2,7 @@
 
 module.exports = function trackingRouter(app, dataAdapter) {
     var _ = require('underscore');
+    var qs = require('querystring');
     var restler = require('restler');
     var statsd  = require('../modules/statsd')();
     var Sixpack = require('../../shared/sixpack');
@@ -145,7 +146,13 @@ module.exports = function trackingRouter(app, dataAdapter) {
                 platform: ctx.app.session.get('platform'),
                 location: (location ? location.url : '') || ctx.req.query.locUrl
             };
-            var url = tracking.ati.pageview.call(ctx, params, config);
+            var xtor = ctx.req.query.xtor;
+            var url;
+
+            if (xtor) {
+                params.xtor = xtor;
+            }
+            url = tracking.ati.pageview.call(ctx, params, config);
 
             track(ctx.req, url, 'pageview', 'ati');
         }

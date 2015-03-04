@@ -78,6 +78,19 @@ function toArray(value) {
     return value;
 }
 
+function keysToLowerCase(source) {
+    var keys = Object.keys(source);
+    var length = keys.length;
+    var target = {};
+    var key;
+
+    while (length--) {
+      key = keys[length];
+      target[key.toLowerCase()] = source[key];
+    }
+    return target;
+}
+
 function noop() {}
 
 module.exports = _.extend({
@@ -88,5 +101,6 @@ module.exports = _.extend({
     getUserAgent: getUserAgent,
     sort: sort,
     toArray: toArray,
+    keysToLowerCase: keysToLowerCase,
     noop: noop
 }, qs, time, linker, string, crypto);

@@ -52,6 +52,10 @@ function getParams(page, options) {
     if (atiEnabled) {
         atiParams = options.atiParams || ati.getParams.call(this, page, options.query);
         params.custom = atiParams.custom;
+
+        if (ati.checkXtor.call(this)) {
+            params.xtor = this.app.session.get('xtor');
+        }
     }
     return params;
 }

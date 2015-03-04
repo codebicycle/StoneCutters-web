@@ -95,9 +95,6 @@ hosts:
 redirect:
   onDesktop: true
 
-migrated:
-    - www.olx.com.bo
-
 emails:
   captcha:
     secret: 6LcjQf8SAAAAADIPSryjN9TVSsgIrVSPADI-nC2a
