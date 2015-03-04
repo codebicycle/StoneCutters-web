@@ -15,18 +15,5 @@ module.exports = Base.extend({
             data.item.location.neighborhoodName = data.item.location.children[0].children[0].children[0].name;
         }
         return data;
-    },
-    postRender: function() {
-        var category = 'Posting';
-        var action = 'PostingSuccess';
-        var itemId = $('.itemId').val();
-        var itemCategory = $('.itemCategory').val();
-        var itemSubcategory = $('.itemSubcategory').val();
-
-        this.track({
-            category: category,
-            action: action,
-            custom: [category, itemCategory, itemSubcategory, action, itemId].join('::')
-        });
     }
 });

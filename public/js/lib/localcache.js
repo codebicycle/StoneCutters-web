@@ -94,7 +94,7 @@ window.LocalCache = {
 
     init: function() {
         if (this.hasStorage) {
-            this.remoteStorage = new CrossDomainStorage(this.getBaseDomain(), "/localstorageiframe");
+            this.remoteStorage = new CrossDomainStorage(this.getBaseDomain(), "/localstorageiframe.php");
         }
     },
 
