@@ -255,6 +255,9 @@ module.exports = {
             'post#flow': {
                 enabled: false
             },
+            'post#success': {
+                enabled: false
+            },
             'post#flowMarketing': {
                 enabled: false
             }
