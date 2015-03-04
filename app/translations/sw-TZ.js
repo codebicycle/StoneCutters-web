@@ -531,6 +531,7 @@ module.exports = {
     'misc.PeopleWereAlsoInterestedIn': 'Watu ambao wameona tangazo hili pia walikuwa wanataka:',
     'misc.PhoneNumberNotValid': 'Namba ya simu uliyoingiza si halali. Tafadhali, angalia.',
     'misc.please-comp-msg': 'Tafadhali kamilisha ujumbe huo',
+    'misc.PostButton': 'Uza bidhaa yako',
     'misc.PostFreeOn': 'Chapisha bure kwa OLX',
     'misc.PostYourFreeAdCaps_Mob': 'CHAPISHA TANGAZO LAKO BURE',
     'misc.PriceListings': 'Kwa <<PRICE>> kwa wiki, tangazo lako litaonekana juu ya miorodhesho',

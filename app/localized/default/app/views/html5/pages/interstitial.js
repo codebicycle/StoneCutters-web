@@ -31,11 +31,15 @@ module.exports = Base.extend({
             this.app.session.clear('interstitial');
         }.bind(this));
 
-        this.attachTrackMe();
+        this.attachTrackMe(function onTrackMe(category, action) {
+            return {
+                custom: category
+            };
+        }.bind(this), $('#interstitial'));
         this.track({
             category: 'Interstitial',
             action: 'View',
-            custom: 'Interstitial::-::-::View'
+            custom: 'interstitial_view'
         });
         this.app.session.persist({
             showInterstitial: '1'

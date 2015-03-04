@@ -20,7 +20,6 @@ module.exports = {
     smaug: {
         protocol: 'http',
         host: 'api-v2.olx.com',
-        hostIris: 'api-v2.olx.ir',
         wap: {
             maxPageSize: 25
         },
@@ -34,7 +33,7 @@ module.exports = {
             maxPageSize: 27
         }
     },
-    staticAccept: ['css', 'js', 'apk'],
+    staticAccept: ['css', 'js', 'apk', 'zip'],
     imageAccept: ['jpg', 'jpeg', 'png', 'gif', 'ico'],
     environment: {
         type: 'development'

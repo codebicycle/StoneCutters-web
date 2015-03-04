@@ -531,6 +531,7 @@ module.exports = {
     'misc.PeopleWereAlsoInterestedIn': 'Osoby, kt\xF3re czyta\u0142y to og\u0142oszenie, interesowa\u0142y si\u0119 r\xF3wnie\u017C:',
     'misc.PhoneNumberNotValid': 'Wprowadzony numer telefonu jest nieprawid\u0142owy. Spr\xF3buj ponownie.',
     'misc.please-comp-msg': 'Please complete the message',
+    'misc.PostButton': 'Sell your item',
     'misc.PostFreeOn': 'Publikuj bezp\u0142atnie w OLX',
     'misc.PostYourFreeAdCaps_Mob': 'OPUBLIKUJ BEZP\u0141ATNE OG\u0141OSZENIE',
     'misc.PriceListings': 'For <<PRICE>> per week, your ad appears at the top of the listings',

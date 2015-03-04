@@ -531,6 +531,7 @@ module.exports = {
     'misc.PeopleWereAlsoInterestedIn': 'Persoanele care au vizualizat asta au fost interesa\u0163i \u015Fi de:',
     'misc.PhoneNumberNotValid': 'Num\u0103rul de telefon pe care l-a\u0163i introdus nu este valabil. V\u0103 rug\u0103m s\u0103 verifica\u0163i.',
     'misc.please-comp-msg': 'Please complete the message',
+    'misc.PostButton': 'Sell your item',
     'misc.PostFreeOn': 'Publica\u0163i gratis pe OLX',
     'misc.PostYourFreeAdCaps_Mob': 'PUBLICA\u0162I ANUN\u0162UL DVS. GRATUIT',
     'misc.PriceListings': 'For <<PRICE>> per week, your ad appears at the top of the listings',

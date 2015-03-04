@@ -78,8 +78,8 @@ module.exports = Base.extend({
     track: function(data, callback, options) {
         $('#partials-tracking-view').trigger('fireTrackEvent', [data, options]);
     },
-    attachTrackMe: function(handler) {
-        this.$('.trackMe').on('click', function(e) {
+    attachTrackMe: function(handler, ctx) {
+        (ctx ? $('.trackMe', ctx) : this.$('.trackMe')).on('click', function(e) {
             $('#partials-tracking-view').trigger('trackEvent', [e.currentTarget, handler || function(category, action) {
                 return {
                    custom: [category, '-', '-', action].join('::')

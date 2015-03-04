@@ -531,6 +531,7 @@ module.exports = {
     'misc.PeopleWereAlsoInterestedIn': 'Seda kuulutust vaadanud inimesed tundsid huvi ka alltoodu vastu:',
     'misc.PhoneNumberNotValid': 'Sisestatud telefoninumber on kehtetu. Palun kontrollige seda.',
     'misc.please-comp-msg': 'Please complete the message',
+    'misc.PostButton': 'Sell your item',
     'misc.PostFreeOn': 'Postita tasuta OLXis',
     'misc.PostYourFreeAdCaps_Mob': 'POSTITAGE TASUTA KUULUTUS',
     'misc.PriceListings': 'For <<PRICE>> per week, your ad appears at the top of the listings',

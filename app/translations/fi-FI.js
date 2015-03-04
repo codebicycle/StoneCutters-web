@@ -531,6 +531,7 @@ module.exports = {
     'misc.PeopleWereAlsoInterestedIn': 'T\xE4m\xE4n ilmoituksen n\xE4hneet henkil\xF6t olivat kiinnostuneita my\xF6s seuraavista kohteista:',
     'misc.PhoneNumberNotValid': 'Antamasi puhelinnumero on virheellinen. Ole hyv\xE4 ja tarkista.',
     'misc.please-comp-msg': 'Please complete the message',
+    'misc.PostButton': 'Sell your item',
     'misc.PostFreeOn': 'Ilmoita ilmaiseksi kohteessa OLX',
     'misc.PostYourFreeAdCaps_Mob': 'ILMOITA ILMAISEKSI',
     'misc.PriceListings': 'For <<PRICE>> per week, your ad appears at the top of the listings',

@@ -18,10 +18,11 @@ module.exports = Base.extend({
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
         var currentRoute = this.app.session.get('currentRoute');
+        var location = this.app.session.get('location').url;
 
         return _.extend({}, data, {
             postingFlow: currentRoute.controller === 'post' && currentRoute.action === 'flow' && this.app.session.get('platform') === 'html5' && config.get(['posting', 'flow', 'enabled', this.app.session.get('siteLocation')], true),
-            downloadAppBanner: this.app.session.get('location').url !== 'www.olx.com.bd'
+            downloadAppBanner: !(location === 'www.olx.com.bd' || location === 'www.olx.cl')
         });
     },
     postRender: function() {

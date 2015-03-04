@@ -531,6 +531,7 @@ module.exports = {
     'misc.PeopleWereAlsoInterestedIn': 'Lid\xE9, kte\u0159\xED vid\u011Bli tento inzer\xE1t, se zaj\xEDmali tak\xE9 o:',
     'misc.PhoneNumberNotValid': 'Telefonn\xED \u010D\xEDslo, kter\xE9 jste zadali, nen\xED platn\xE9. Zkontrolujte jej, pros\xEDm.',
     'misc.please-comp-msg': 'Please complete the message',
+    'misc.PostButton': 'Sell your item',
     'misc.PostFreeOn': 'Zaslat bezplatn\xFD inzer\xE1t ke zna\u010Dce OLX',
     'misc.PostYourFreeAdCaps_Mob': 'ZADEJTE INZER\xC1T ZDARMA',
     'misc.PriceListings': 'For <<PRICE>> per week, your ad appears at the top of the listings',

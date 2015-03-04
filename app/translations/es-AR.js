@@ -531,6 +531,7 @@ module.exports = {
     'misc.PeopleWereAlsoInterestedIn': 'La gente que ha visto este aviso tambi\xE9n ha visto:',
     'misc.PhoneNumberNotValid': 'El n\xFAmero de tel\xE9fono que has indicado no es v\xE1lido. Compru\xE9balo por favor.',
     'misc.please-comp-msg': 'Por favor completa el mensaje',
+    'misc.PostButton': 'Public\xE1 un anuncio gratis',
     'misc.PostFreeOn': 'Publica gratis en OLX',
     'misc.PostYourFreeAdCaps_Mob': 'PUBLICAR',
     'misc.PriceListings': 'Por <<PRICE>> por semana, tu aviso aparece destacado en la parte superior de nuestros listados',

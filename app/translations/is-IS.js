@@ -531,6 +531,7 @@ module.exports = {
     'misc.PeopleWereAlsoInterestedIn': 'F\xF3lk sem hefur s\xE9\xF0 \xFEessa augl\xFDsingu hefur einnig \xE1huga \xE1:',
     'misc.PhoneNumberNotValid': 'S\xEDman\xFAmeri\xF0 sem \xFE\xFA sl\xF3st inn er \xF3gilt. Athuga\xF0u \xFEa\xF0.',
     'misc.please-comp-msg': 'Please complete the message',
+    'misc.PostButton': 'Sell your item',
     'misc.PostFreeOn': 'Birta \xF3keypis \xE1 OLX',
     'misc.PostYourFreeAdCaps_Mob': 'BIRTU \xD3KEYPIS AUGL\xDDSINGU',
     'misc.PriceListings': 'For <<PRICE>> per week, your ad appears at the top of the listings',
