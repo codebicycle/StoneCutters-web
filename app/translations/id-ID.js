@@ -531,6 +531,7 @@ module.exports = {
     'misc.PeopleWereAlsoInterestedIn': 'Orang yang telah melihat iklan ini juga tertarik dengan:',
     'misc.PhoneNumberNotValid': 'Nomor telepon yang Anda masukkan tidak sah. Harap dicek.',
     'misc.please-comp-msg': 'Please complete the message',
+    'misc.PostButton': 'Sell your item',
     'misc.PostFreeOn': 'Pasang gratis di OLX',
     'misc.PostYourFreeAdCaps_Mob': 'PASANG IKLAN GRATIS ANDA',
     'misc.PriceListings': 'For <<PRICE>> per week, your ad appears at the top of the listings',

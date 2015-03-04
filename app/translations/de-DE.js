@@ -531,6 +531,7 @@ module.exports = {
     'misc.PeopleWereAlsoInterestedIn': 'Besucher, die sich diese Annonce angeschaut haben, interessierten sich auch f\xFCr:',
     'misc.PhoneNumberNotValid': 'Die von Ihnen eingegebene Telefonnummer ist ung\xFCltig. Bitte \xFCberpr\xFCfen Sie sie.',
     'misc.please-comp-msg': 'Please complete the message',
+    'misc.PostButton': 'Sell your item',
     'misc.PostFreeOn': 'Kostenlos auf OLX posten',
     'misc.PostYourFreeAdCaps_Mob': 'KOSTENLOSE ANZEIGE SCHALTEN',
     'misc.PriceListings': 'For <<PRICE>> per week, your ad appears at the top of the listings',

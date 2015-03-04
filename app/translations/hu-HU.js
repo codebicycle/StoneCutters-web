@@ -531,6 +531,7 @@ module.exports = {
     'misc.PeopleWereAlsoInterestedIn': 'Azok, akik megn\xE9zt\xE9k ezt a hirdet\xE9st, az al\xE1bbiakat is \xE9rdekesnek tal\xE1lt\xE1k:',
     'misc.PhoneNumberNotValid': 'Az \xD6n \xE1ltal megadott telefonsz\xE1m \xE9rv\xE9nytelen. K\xE9rj\xFCk, ellen\u0151rizze!',
     'misc.please-comp-msg': 'Please complete the message',
+    'misc.PostButton': 'Sell your item',
     'misc.PostFreeOn': 'Ingyenes felad\xE1s itt: OLX',
     'misc.PostYourFreeAdCaps_Mob': 'ADJON FEL INGYENES HIRDET\xC9ST',
     'misc.PriceListings': 'For <<PRICE>> per week, your ad appears at the top of the listings',

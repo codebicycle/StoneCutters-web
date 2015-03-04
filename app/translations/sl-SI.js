@@ -531,6 +531,7 @@ module.exports = {
     'misc.PeopleWereAlsoInterestedIn': 'Ljudje, ki so videli ta oglas, so se zanimali tudi za:',
     'misc.PhoneNumberNotValid': 'Telefonska \u0161tevilka, ki ste jo vnesli, ni veljavna. Prosimo, preverite.',
     'misc.please-comp-msg': 'Please complete the message',
+    'misc.PostButton': 'Sell your item',
     'misc.PostFreeOn': 'Objavite brezpla\u010Dno na OLX',
     'misc.PostYourFreeAdCaps_Mob': 'OBJAVITE SVOJ BREZPLA\u010CNI OGLAS',
     'misc.PriceListings': 'For <<PRICE>> per week, your ad appears at the top of the listings',

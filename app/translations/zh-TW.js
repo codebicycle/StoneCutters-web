@@ -531,6 +531,7 @@ module.exports = {
     'misc.PeopleWereAlsoInterestedIn': '\u6AA2\u8996\u904E\u9019\u500B\u5EE3\u544A\u7684\u4EBA\u8FD8\u770B\u904E\uFF1A',
     'misc.PhoneNumberNotValid': '\u60A8\u8F38\u5165\u7684\u96FB\u8A71\u865F\u78BC\u7121\u6548\u3002\u8ACB\u6AA2\u67E5\u3002',
     'misc.please-comp-msg': 'Please complete the message',
+    'misc.PostButton': 'Sell your item',
     'misc.PostFreeOn': '\u5728OLX\u4E0A\u514D\u8CBB\u5F35\u8CBC\u5EE3\u544A',
     'misc.PostYourFreeAdCaps_Mob': '\u514D\u8CBB\u767C\u4F48\u5EE3\u544A',
     'misc.PriceListings': 'For <<PRICE>> per week, your ad appears at the top of the listings',

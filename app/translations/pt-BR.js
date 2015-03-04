@@ -531,6 +531,7 @@ module.exports = {
     'misc.PeopleWereAlsoInterestedIn': 'Usu\xE1rios que viram este an\xFAncio tamb\xE9m se interessaram por:',
     'misc.PhoneNumberNotValid': 'O n\xFAmero de telefone que voc\xEA digitou n\xE3o \xE9 v\xE1lido. Por favor, confira.',
     'misc.please-comp-msg': 'Please complete the message',
+    'misc.PostButton': 'Sell your item',
     'misc.PostFreeOn': 'Publique gr\xE1tis na OLX',
     'misc.PostYourFreeAdCaps_Mob': 'PUBLICAR AN\xDANCIO GR\xC1TIS',
     'misc.PriceListings': 'For <<PRICE>> per week, your ad appears at the top of the listings',
