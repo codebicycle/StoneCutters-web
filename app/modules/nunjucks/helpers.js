@@ -121,6 +121,19 @@ module.exports = function(nunjucks) {
 
     }
 
+    function getLocations(shops){
+        var locations = '';
+
+        for(var i = 0; i < shops.length; i++) {
+            var location = shops[i].location;
+            if ( location ) {
+                locations = locations + location.lat + "," + location.lon + "|";
+            }
+        }
+        console.log('locations', locations);
+        return locations;
+    }
+
     return {
         is: is,
         log: log,
@@ -139,7 +152,8 @@ module.exports = function(nunjucks) {
         persianDigits: helpers.numbers.toPersian,
         latinDigits: helpers.numbers.toLatin,
         randomInt: randomInt,
-        shuffleItems: shuffleItems
+        shuffleItems: shuffleItems,
+        getLocations: getLocations
 
     };
 };
