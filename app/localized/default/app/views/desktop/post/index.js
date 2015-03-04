@@ -39,6 +39,7 @@ module.exports = Base.extend({
         'fieldValidationEnd': 'onFieldValidationEnd',
         'errorsUpdate': 'onErrorsUpdate',
         'error': 'onError',
+        'errorClean': 'onErrorClean',
         'priceReset': 'onPriceReset'
     },
     initialize: function() {
@@ -178,6 +179,9 @@ module.exports = Base.extend({
                 else if (!options.skipValidation) {
                     $field.trigger('fieldValidationStart');
                 }
+                else {
+                    this.$el.trigger('errorClean', [$field]);
+                }
             }
             field.name = $field.attr('name');
             field.value = $field.val();
@@ -189,6 +193,9 @@ module.exports = Base.extend({
                 }
                 else if (!options.skipValidation) {
                     $field.trigger('fieldValidationStart');
+                }
+                else {
+                    this.$el.trigger('errorClean', [$field]);
                 }
             }
             else {
@@ -331,6 +338,16 @@ module.exports = Base.extend({
             }
         }.bind(this));
         this.$('#posting-errors-view').trigger('update');
+    },
+    onErrorClean: function(event, field) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+
+        var $field = $(field);
+
+        $field.closest('.field-wrapper').removeClass('error').removeClass('success');
+        $field.find('.error.message').html('');
     },
     onPriceReset: function(event) {
         event.preventDefault();
