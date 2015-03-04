@@ -56,11 +56,8 @@ module.exports = Base.extend({
             .val(change.bind(this));
 
         function validate(done) {
-            this.$('[data-error]').addClass('hide');
-            this.$('[data-messageText]').removeClass('error');
-            if (!this.$('[data-messageText]').val()) {
-                this.$('[data-error]').removeClass('hide');
-                this.$('[data-messageText]').addClass('error');
+
+            if (!this.validate(this.$('[data-messageText]'))) {
                 return done.abort();
             }
             done();
@@ -85,8 +82,17 @@ module.exports = Base.extend({
             this.$('[data-messageText]').addClass('error');
         }
     },
-    validate: function() {
-        return true;
+    validate: function(field) {
+        if (!field.val()) {
+            this.$('[data-error]').removeClass('hide');
+            this.$('[data-messageText]').addClass('error');
+            return false;
+        }
+        else {
+            this.$('[data-error]').addClass('hide');
+            this.$('[data-messageText]').removeClass('error');
+            return true;
+        }
     }
 });
 
