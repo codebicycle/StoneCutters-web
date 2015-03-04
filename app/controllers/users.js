@@ -707,7 +707,6 @@ function conversations(params, callback) {
             if (platform === 'html5') {
                 view = 'users/conversations';
             }
-
             callback(null, view, {
                 include: ['conversations', 'items'],
                 conversations: response.conversations.toJSON(),
@@ -806,6 +805,7 @@ function conversation(params, callback) {
             if (platform === 'html5') {
                 view = 'users/conversation';
             }
+
             callback(null, view, {
                 thread: response.thread,
                 include: ['thread'],
