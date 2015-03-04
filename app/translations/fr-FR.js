@@ -531,6 +531,7 @@ module.exports = {
     'misc.PeopleWereAlsoInterestedIn': 'Les personnes qui ont vu cette annonce ont \xE9galement \xE9t\xE9 int\xE9ress\xE9es par :',
     'misc.PhoneNumberNotValid': 'Le num\xE9ro de t\xE9l\xE9phone entr\xE9 n\'est pas valide. Merci de le v\xE9rifier.',
     'misc.please-comp-msg': 'Veuillez compl\xE9ter le message',
+    'misc.PostButton': 'Vendez votre objet',
     'misc.PostFreeOn': 'Publiez gratuitement sur OLX',
     'misc.PostYourFreeAdCaps_Mob': 'PUBLIEZ VOTRE ANNONCE GRATUITE',
     'misc.PriceListings': 'Pour <<PRICE>> par semaine, votre annonce appara\xEEt en haut de la liste',

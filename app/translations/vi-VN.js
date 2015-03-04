@@ -531,6 +531,7 @@ module.exports = {
     'misc.PeopleWereAlsoInterestedIn': 'Nh\u1EEFng ng\u01B0\u1EDDi \u0111\xE3 xem qu\u1EA3ng c\xE1o n\xE0y c\u0169ng s\u1EBD quan t\xE2m \u0111\u1EBFn:',
     'misc.PhoneNumberNotValid': 'S\u1ED1 \u0111i\u1EC7n tho\u1EA1i b\u1EA1n nh\u1EADp v\xE0o kh\xF4ng h\u1EE3p l\u1EC7. H\xE3y ki\u1EC3m tra l\u1EA1i.',
     'misc.please-comp-msg': 'Vui l\xF2ng ho\xE0n th\xE0nh tin nh\u1EAFn n\xE0y.',
+    'misc.PostButton': 'B\xE1n m\xF3n \u0111\u1ED3 c\u1EE7a b\u1EA1n',
     'misc.PostFreeOn': 'Post mi\u1EC5n ph\xED v\u1EC1 OLX',
     'misc.PostYourFreeAdCaps_Mob': '\u0110\u0102NG QU\u1EA2NG C\xC1O MI\u1EC4N PH\xCD',
     'misc.PriceListings': '\u0110\u1ED1i v\u1EDBi <<PRICE>> m\u1ED7i tu\u1EA7n, rao v\u1EB7t c\u1EE7a b\u1EA1n xu\u1EA5t hi\u1EC7n \u1EDF tr\xEAn \u0111\u1EA7u c\xE1c b\xE0i \u0111\u0103ng',

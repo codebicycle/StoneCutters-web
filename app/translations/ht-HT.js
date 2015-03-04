@@ -531,6 +531,7 @@ module.exports = {
     'misc.PeopleWereAlsoInterestedIn': 'Moun ki te f\xE8 anons sa a te enterese tou nan:',
     'misc.PhoneNumberNotValid': 'Nimewo telef\xF2n ou mete a pa valid. Tanpri, verifye.',
     'misc.please-comp-msg': 'Please complete the message',
+    'misc.PostButton': 'Sell your item',
     'misc.PostFreeOn': 'Pibliye gratis sou OLX',
     'misc.PostYourFreeAdCaps_Mob': 'PIBLIYE ANONS OU GRATIS',
     'misc.PriceListings': 'For <<PRICE>> per week, your ad appears at the top of the listings',

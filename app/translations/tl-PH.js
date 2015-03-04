@@ -531,6 +531,7 @@ module.exports = {
     'misc.PeopleWereAlsoInterestedIn': 'Mga taong nakakita na ng anunsyong ito ay interesado rin sa:',
     'misc.PhoneNumberNotValid': 'Hindi wasto ang numero ng telepono na ipinasok mo. Mangyaring tignan.',
     'misc.please-comp-msg': 'Please complete the message',
+    'misc.PostButton': 'Sell your item',
     'misc.PostFreeOn': 'Magpaskil nang libre sa OLX',
     'misc.PostYourFreeAdCaps_Mob': 'I-POST ANG INYONG ANUNSYO NANG LIBRE',
     'misc.PriceListings': 'For <<PRICE>> per week, your ad appears at the top of the listings',

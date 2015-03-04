@@ -531,6 +531,7 @@ module.exports = {
     'misc.PeopleWereAlsoInterestedIn': 'Cilv\u0113ki, kas apskat\u012Bja \u0161o sludin\u0101jumu, ieinteres\u0113j\u0101s ar\u012B par:',
     'misc.PhoneNumberNotValid': 'T\u0101lru\u0146a numurs, ko ievad\u012Bj\u0101t, nav der\u012Bgs. L\u016Bdzu, p\u0101rbaudiet to.',
     'misc.please-comp-msg': 'Please complete the message',
+    'misc.PostButton': 'Sell your item',
     'misc.PostFreeOn': 'Post free on OLX',
     'misc.PostYourFreeAdCaps_Mob': 'POST YOUR FREE AD',
     'misc.PriceListings': 'For <<PRICE>> per week, your ad appears at the top of the listings',

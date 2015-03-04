@@ -531,6 +531,7 @@ module.exports = {
     'misc.PeopleWereAlsoInterestedIn': 'Les persones que han vist aquest anunci tamb\xE9 s\'han interessat per:',
     'misc.PhoneNumberNotValid': 'El tel\xE8fon que has introdu\xEFt no \xE9s v\xE0lid. Si us plau, revisa\'l.',
     'misc.please-comp-msg': 'Please complete the message',
+    'misc.PostButton': 'Sell your item',
     'misc.PostFreeOn': 'Publica un anunci gratu\xEFt a OLX',
     'misc.PostYourFreeAdCaps_Mob': 'PUBLICA EL TEU ANUNCI GRATU\xCFT',
     'misc.PriceListings': 'For <<PRICE>> per week, your ad appears at the top of the listings',

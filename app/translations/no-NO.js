@@ -531,6 +531,7 @@ module.exports = {
     'misc.PeopleWereAlsoInterestedIn': 'Mennesker som har sett denne annonsen var ogs\xE5 interessert i:',
     'misc.PhoneNumberNotValid': 'Telefonnummeret du tastet inn er ikke gyldig. Vennligst sjekk.',
     'misc.please-comp-msg': 'Please complete the message',
+    'misc.PostButton': 'Sell your item',
     'misc.PostFreeOn': 'Publiser gratis p\xE5 OLX',
     'misc.PostYourFreeAdCaps_Mob': 'PUBLISER DIN GRATISANNONSE',
     'misc.PriceListings': 'For <<PRICE>> per week, your ad appears at the top of the listings',

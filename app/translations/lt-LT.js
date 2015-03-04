@@ -531,6 +531,7 @@ module.exports = {
     'misc.PeopleWereAlsoInterestedIn': '\u0160\u012F skelbim\u0105 perskai\u010Diusius \u017Emones taip pat domino:',
     'misc.PhoneNumberNotValid': 'J\u016Bs\u0173 \u012Fvestas telefono numeris yra neteisingas. Patikrinkite.',
     'misc.please-comp-msg': 'Please complete the message',
+    'misc.PostButton': 'Sell your item',
     'misc.PostFreeOn': '\u012Ed\u0117kite nemokam\u0105 skelbim\u0105 \u012F OLX',
     'misc.PostYourFreeAdCaps_Mob': '\u012ED\u0116KITE NEMOKAM\u0104 SKELBIM\u0104',
     'misc.PriceListings': 'For <<PRICE>> per week, your ad appears at the top of the listings',

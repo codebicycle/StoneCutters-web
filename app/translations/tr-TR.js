@@ -531,6 +531,7 @@ module.exports = {
     'misc.PeopleWereAlsoInterestedIn': 'Bu ilana bakanlar \u015Funlarla da ilgilendiler:',
     'misc.PhoneNumberNotValid': 'Girdi\u011Finiz telefon numaras\u0131 ge\xE7erli de\u011Fil. L\xFCtfen kontrol edin.',
     'misc.please-comp-msg': 'Please complete the message',
+    'misc.PostButton': 'Sell your item',
     'misc.PostFreeOn': 'OLX markas\u0131nda \xFCcretsiz yay\u0131nla',
     'misc.PostYourFreeAdCaps_Mob': '\xDCCRETS\u0130Z \u0130LANINIZI YAYINLAYIN',
     'misc.PriceListings': 'For <<PRICE>> per week, your ad appears at the top of the listings',
