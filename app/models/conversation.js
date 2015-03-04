@@ -1,12 +1,18 @@
 'use strict';
 
+var _ = require('underscore');
+var asynquence = require('asynquence');
 var Base = require('../bases/model');
+var dataAdapter = require('../helpers/dataAdapter');
 var helpers = require('../helpers');
+var statsd = require('../../shared/statsd')();
 
 module.exports = Base.extend({
 	url: '/Conversation',
 	report: report,
-	unsubscribe: unsubscribe
+	unsubscribe: unsubscribe,
+    reply: reply,
+    toData: toData
 });
 
 module.exports.id = 'Conversation';
@@ -37,4 +43,45 @@ function unsubscribe(done) {
     function callback(err) {
         this.errfcb(done)(err);
     }
+}
+
+function reply(done) {
+    asynquence().or(fail.bind(this))
+        .then(prepare.bind(this))
+        .then(submit.bind(this))
+        .val(success.bind(this));
+
+        function prepare(done) {
+            var query = {
+                token: this.get('user').token,
+                userId: this.get('user').userId,
+                platform: this.get('platform'),
+            };
+
+            done(query);
+        }
+
+        function submit(done, query) {
+            dataAdapter.post(this.app.req, '/conversations/' + this.get('threadId') + '/reply', {
+                query: query,
+                data: this.toData()
+            }, done.errfcb);
+        }
+
+        function success(reply) {
+            statsd.increment([this.get('country'), 'conversations', 'reply', 'success', this.get('platform')]);
+            done(reply);
+        }
+
+        function fail(err) {
+            statsd.increment([this.get('country'), 'conversations', 'reply', 'error', this.get('platform')]);
+            done.fail(err);
+        }
+
+}
+
+function toData() {
+    return {
+        message: this.get('message')
+    };
 }
