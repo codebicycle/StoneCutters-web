@@ -1,7 +1,47 @@
+{% set item = thread.get('item') %}
 <header>
     <p>{{ dictionary["myolx.Messages"] }}</p>
 </header>
-{% view 'users/partials/itemsconversation' %}
-{% view 'users/partials/inputconversation' %}
+
+<div class="item">
+    <a href="{{ item | slugToUrl | link | replace('en/', '') }}" class="link-item">
+        <figure class="items-image {{ 'noPhoto' if not item.images.length }}">
+            {% if item.images.length %}
+                <img src="{{ item.images[0].thumbnail }}">
+            {% endif %}
+        </figure>
+        <div class="item-data">
+            <div class="top">
+                <span class="date">{{ item.date.timestamp | date("MMM DD, YYYY") }}</span>
+            </div>
+            <span class="title">{{ item.title | truncate( 40, True, '...') }}</span>
+            {% if item.price.displayPrice %}
+                <span class="price">{{ item.price.displayPrice }}</span>
+            {% endif %}
+        </div>
+    </a>
+</div>
+<ul class="conversation">
+    {% for message in thread.get('messages') %}
+        <li class="message {{ 'is-mine' if message.isMine }}">
+            {% set name = thread.senders[0].name %}
+            {% if message.isMine %}
+                {% set name = dictionary["myolx.You"] %}
+            {% elif thread.senders[0].isMine %}
+                {% set name = thread.senders[1].name %}
+            {% endif %}
+            <span class="name">{{ name }}</span>
+            <p class="text">{{ message.text }}</p>
+            <span class="date"><time>{{ message.date.since.day if message.date.since.day }} {{ dictionary[message.date.since.dictionary] }}{{ (',' + message.date.since.hour) if message.date.since.hour }} {{ (' ' + yearToShow) if yearToShow }}</time></span>
+        </li>
+    {% endfor %}
+</ul>
+
+<form class="conversation-input" data-message-reply>
+    <input type="text" value="" data-messageText name="message" />
+    <img class="spinner hide" src="{{ '/images/desktop/spinner-bgWhite.gif' | static }}" alt="">
+    <button class="reply-send">{{ dictionary["myolx.Reply"] }}</button>
+</form>
+
 {% view 'partials/tracking' %}
 
