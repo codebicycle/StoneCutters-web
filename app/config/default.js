@@ -143,6 +143,10 @@ module.exports = {
             interstitialByADX: {
                 worldwide: true,
                 countries: []
+            },
+            shops: {
+                worldwide: false,
+                countries: []
             }
         },
         desktop: {

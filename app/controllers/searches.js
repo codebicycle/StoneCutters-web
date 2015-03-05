@@ -10,6 +10,7 @@ var Paginator = require('../modules/paginator');
 var FeatureAd = require('../models/feature_ad');
 var config = require('../../shared/config');
 var utils = require('../../shared/utils');
+var config = require('../../shared/config');
 
 module.exports = {
     filterig: middlewares(filterig),
@@ -164,12 +165,22 @@ function search(params, callback, gallery) {
         }.bind(this);
 
         var fetch = function(done, res) {
-            this.app.fetch({
+            var collections = {
                 items: {
                     collection: 'Items',
                     params: params
-                }
-            }, {
+                } 
+            };
+            var experiment = this.app.session.get('experiments').html4ShowShops;
+            if (experiment && experiment.alternative != 'items') {
+                collections.shops = {
+                    collection: 'Shops',
+                    params: _.clone(params),
+                };
+                collections.shops.params.pageSize = 3;
+                collections.shops.params.offset = 3 * (params.offset / params.pageSize);
+            }
+            this.app.fetch(collections, {
                 readFromCache: false
             }, function afterFetch(err, response) {
                 if (err) {
@@ -218,10 +229,10 @@ function search(params, callback, gallery) {
                 done.abort();
                 return helpers.common.redirect.call(this, [url, '/-p-', realPage, gallery].join(''));
             }
-            done(res.items);
+            done(res.items, res.shops);
         }.bind(this);
 
-        var success = function(items) {
+        var success = function(items, shops) {
             var _category = category ? category.toJSON() : undefined;
             var _subcategory = subcategory ? subcategory.toJSON() : undefined;
 
@@ -249,6 +260,7 @@ function search(params, callback, gallery) {
 
             callback(null, ['searches/search', gallery.replace('-', '')].join(''), {
                 items: items.toJSON(),
+                shops: shops !== undefined ? shops.toJSON() : [],
                 meta: items.meta,
                 filters: items.filters,
                 paginator: items.paginator,

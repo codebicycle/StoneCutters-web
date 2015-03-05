@@ -313,7 +313,11 @@ DataAdapter.prototype.apiDefaults = function(api) {
         api.url = api.path;
         delete api.path;
     }
-    api.url = PROTOCOL + '://' + HOST + api.url;
+    var host = api.host;
+    if (host == undefined) {
+        host = HOST;
+    }
+    api.url = PROTOCOL + '://' + host + api.url;
     apiHost = this.options[api.api] || this.options['default'] || this.options || {};
     urlOpts = _.defaults(
         _.pick(api,     ['protocol', 'port', 'query']),

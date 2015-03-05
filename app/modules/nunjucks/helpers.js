@@ -86,6 +86,54 @@ module.exports = function(nunjucks) {
         return array;
     }
 
+    function convertToSlug(str) {
+    return str.toLowerCase().replace(/[^\w ]+/g,'').replace(/ +/g,'-');
+    }
+
+    function randomInt(max) {
+        return Math.floor(Math.random() * max);
+    }
+
+    function shuffleItems(items, shops){
+        var shuffle = [];
+        var itemIndex = 0;
+        var shopIndex = 0;
+        var shopIndices = [];
+        var length = items.length + shops.length;
+
+        for(var k = 0; k < shops.length; k++) {
+            var index = ( k * 10 ) + randomInt(10);
+            shopIndices[k] = index;           
+        }
+
+        for (var i = 0; i < length; i++) {
+
+            var isShop = _.contains(shopIndices, i);
+            if (isShop) {
+                shuffle[i] = { "index": shopIndex, "type": "shop"};
+                shopIndex++;
+            } else {
+                shuffle[i] = { "index": itemIndex, "type": "item"};
+                itemIndex++;                
+            }
+        }
+        return shuffle;
+
+    }
+
+    function getLocations(shops){
+        var locations = '';
+
+        for(var i = 0; i < shops.length; i++) {
+            var location = shops[i].location;
+            if ( location ) {
+                locations = locations + location.lat + "," + location.lon + "|";
+            }
+        }
+        console.log('locations', locations);
+        return locations;
+    }
+
     return {
         is: is,
         log: log,
@@ -96,12 +144,16 @@ module.exports = function(nunjucks) {
         encode: encode,
         'static': statics,
         rangeToArray: rangeToArray,
+        convertToSlug: convertToSlug,
         countFormat: countFormat,
         editSlug: editSlug,
         slugToUrl: helpers.common.slugToUrl,
         hijri: helpers.hijri,
         persianDigits: helpers.numbers.toPersian,
         latinDigits: helpers.numbers.toLatin,
+        randomInt: randomInt,
+        shuffleItems: shuffleItems,
+        getLocations: getLocations
 
     };
 };

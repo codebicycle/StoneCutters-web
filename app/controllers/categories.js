@@ -216,12 +216,22 @@ function handleItems(params, promise, gallery) {
     }.bind(this);
 
     var fetch = function(done, res) {
-        this.app.fetch({
+        var collections = {
             items: {
                 collection: 'Items',
                 params: params
-            }
-        }, {
+            } 
+        };
+        var experiment = this.app.session.get('experiments').html4ShowShops;
+        if (experiment && experiment.alternative != 'items') {
+            collections.shops = {
+                collection: 'Shops',
+                params: _.clone(params),
+            };
+            collections.shops.params.pageSize = 3;
+            collections.shops.params.offset = 3 * (params.offset / params.pageSize);
+        }
+        this.app.fetch(collections, {
             readFromCache: false
         }, function afterFetch(err, response) {
             if (err) {
@@ -270,10 +280,10 @@ function handleItems(params, promise, gallery) {
             done.abort();
             return helpers.common.redirect.call(this, [url, '-p-', realPage, gallery].join(''));
         }
-        done(res.items);
+        done(res.items, res.shops);
     }.bind(this);
 
-    var success = function(done, items) {
+    var success = function(done, items, shops) {
         var meta = items.meta;
         var dataPage = {
             category: category.get('id')
@@ -309,6 +319,7 @@ function handleItems(params, promise, gallery) {
             relatedAds: query.relatedAds,
             meta: meta,
             items: items.toJSON(),
+            shops: shops !== undefined ? shops.toJSON() : [],
             filters: items.filters,
             paginator: items.paginator,
             hasItemsWithImages: items.hasImages()
