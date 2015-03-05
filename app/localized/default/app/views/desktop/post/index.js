@@ -179,6 +179,9 @@ module.exports = Base.extend({
                 else if (!options.skipValidation) {
                     $field.trigger('fieldValidationStart');
                 }
+                else {
+                    this.$el.trigger('errorClean', [$field]);
+                }
             }
             field.name = $field.attr('name');
             field.value = $field.val();
@@ -190,6 +193,9 @@ module.exports = Base.extend({
                 }
                 else if (!options.skipValidation) {
                     $field.trigger('fieldValidationStart');
+                }
+                else {
+                    this.$el.trigger('errorClean', [$field]);
                 }
             }
             else {

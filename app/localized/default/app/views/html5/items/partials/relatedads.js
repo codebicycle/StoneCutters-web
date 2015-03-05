@@ -17,7 +17,7 @@ module.exports = Base.extend({
         var id = this.id;
         var data = {
             module: config.getForMarket(location.url, ['relatedAds', 'html5', 'module'], 'suggestion'),
-            country: location.id,
+            country: location.abbreviation,
             item: this.parentView.getItem().get('id'),
             title: translations.get(this.app.session.get('selectedLanguage'))['itemgeneraldetails.RelatedListings'],
             group: config.getForMarket(location.url, ['relatedAds', 'html5', 'group'], 2),
