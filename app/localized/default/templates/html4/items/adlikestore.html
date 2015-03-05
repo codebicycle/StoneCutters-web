@@ -1,6 +1,6 @@
 <li class="adLikeStore">
     {% set nameSlug = shop.name | convertToSlug %}
-    <a href="{{ ['/shop/', shop.id, '/', nameSlug ] | join | link }}">
+    <a href="{{ ['/shop/', shop.id, '/', nameSlug ] | join | link({shops_experiment_from: 'listing-shop-from-page'})}}">
         <div class="flag" style="background-image: url({{ ('/images/html4/stores/storeFlag.png' | static) }});"></div>
         <div class="imageCont" style="background-image: url({{ shop.image if shop.image else ('/images/html4/noPhoto.png' | static) }});"></div>
         <div class="itemInfo">
