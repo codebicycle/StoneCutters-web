@@ -168,6 +168,7 @@ module.exports = {
     'supportform.VerificationCode': 'Cod de Verificare: ',
     'seccion-30.478': '\u015Eterge+Listare',
     'seccion-40.1528': 'editeaz\u0103',
+    'seccion-36.102433': 'vedere ',
     'seccion-31.454': 'Loca\u0163ia:',
     'seccion-35.559': 'Email',
     'distancediv.changeLocation': 'Schimb\u0103 pozi\u0163ia',
