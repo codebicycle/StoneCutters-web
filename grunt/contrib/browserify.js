@@ -9,7 +9,7 @@ module.exports = function(grunt) {
             src: ['public/js/lib/**/*.js'],
             dest: 'public/js/src/common/libs.js',
             options: {
-                alias: ['node_modules/rendr-nunjucks/index.js:rendr-nunjucks', 'node_modules/nunjucks/browser/nunjucks-slim.js:nunjucks', 'public/js/lib/jquery.js:jquery', 'node_modules/sixpack-client/sixpack.js:sixpack-client', 'node_modules/underscore/underscore.js:underscore'],
+                alias: ['node_modules/rendr-nunjucks/index.js:rendr-nunjucks', 'node_modules/nunjucks/browser/nunjucks-slim.js:nunjucks', 'public/js/lib/jquery.js:jquery', 'node_modules/sixpack-client/sixpack.js:sixpack-client', 'node_modules/underscore/underscore.js:underscore', 'node_modules/string/lib/string.js:string'],
                 external: ['url', 'querystring']
             }
         }
