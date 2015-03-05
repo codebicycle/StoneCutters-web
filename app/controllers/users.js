@@ -772,7 +772,7 @@ function conversation(params, callback) {
         var fetch = function(done) {
             this.app.fetch({
                 thread: {
-                    model: 'Thread',
+                    model: 'Conversation',
                     params: _params
                 }
             }, {

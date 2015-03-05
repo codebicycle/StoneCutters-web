@@ -5,6 +5,7 @@ var asynquence = require('asynquence');
 var Base = require('../bases/model');
 var dataAdapter = require('../helpers/dataAdapter');
 var helpers = require('../helpers');
+var Paginator = require('../modules/paginator');
 var statsd = require('../../shared/statsd')();
 
 module.exports = Base.extend({

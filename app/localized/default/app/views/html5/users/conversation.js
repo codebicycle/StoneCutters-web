@@ -1,7 +1,7 @@
 'use strict';
 
 var Base = require('../../../../../common/app/bases/view').requireView('users/conversation');
-var Thread = require('../../../../../../models/conversation');
+var Conversation = require('../../../../../../models/conversation');
 var asynquence = require('asynquence');
 var _ = require('underscore');
 var helpers = require('../../../../../../helpers');
@@ -60,7 +60,7 @@ module.exports = Base.extend({
         this.app.router.appView.trigger('conversation:end');
     },
     getThread: function() {
-        this.thread = this.thread || (this.options.thread && this.options.thread.toJSON ? this.options.thread : new Thread(this.options.thread || {}, {
+        this.thread = this.thread || (this.options.thread && this.options.thread.toJSON ? this.options.thread : new Conversation(this.options.thread || {}, {
             app: this.app
         }));
         return this.thread;
@@ -71,7 +71,7 @@ module.exports = Base.extend({
         var fetch = function(done) {
             this.app.fetch({
                 thread: {
-                    model: 'Thread',
+                    model: 'Conversation',
                     params: {
                         token: user.token,
                         userId: user.userId,
