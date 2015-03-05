@@ -49,8 +49,7 @@ module.exports = function(controller, exclude) {
             data = _.extend(json ? this.dependencies.toJSON() : _.omit(this.dependencies, 'toJSON'), data, {
                 include: this.include.concat((data || {}).include || []),
                 seo: this.app.seo,
-                tracking: tracking.generateURL.call(this),
-                search: params.search
+                tracking: tracking.generateURL.call(this)
             });
             if (!view) {
                 callback(err, data);
