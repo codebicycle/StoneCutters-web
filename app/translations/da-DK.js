@@ -168,6 +168,7 @@ module.exports = {
     'supportform.VerificationCode': 'Verifikationskode:',
     'seccion-30.478': 'Fjern+liste',
     'seccion-40.1528': 'Rediger',
+    'seccion-36.102433': 'Se',
     'seccion-31.454': 'Sted:',
     'seccion-35.559': 'E-mail',
     'distancediv.changeLocation': '\xE6ndr sted',

@@ -168,6 +168,7 @@ module.exports = {
     'supportform.VerificationCode': 'Msimbo wa Uthibitisho:',
     'seccion-30.478': 'Ondoa tangazo',
     'seccion-40.1528': 'Hariri',
+    'seccion-36.102433': 'Tazama',
     'seccion-31.454': 'Mahali:',
     'seccion-35.559': 'Barua pepe',
     'distancediv.changeLocation': 'Badilisha Mahali',

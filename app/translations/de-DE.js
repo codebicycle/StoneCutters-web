@@ -168,6 +168,7 @@ module.exports = {
     'supportform.VerificationCode': 'Best\xE4tigungscode: ',
     'seccion-30.478': 'Anzeige l\xF6schen',
     'seccion-40.1528': '\xC4ndern',
+    'seccion-36.102433': 'ansehen',
     'seccion-31.454': 'Standort:',
     'seccion-35.559': 'E-Mail',
     'distancediv.changeLocation': 'Ort wechseln',

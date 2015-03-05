@@ -168,6 +168,7 @@ module.exports = {
     'supportform.VerificationCode': 'Verification Code: ',
     'seccion-30.478': 'Tanggalin+Listahan',
     'seccion-40.1528': 'baguhin',
+    'seccion-36.102433': 'tingnan',
     'seccion-31.454': 'Lokasyon:',
     'seccion-35.559': 'Email',
     'distancediv.changeLocation': 'Palitan ang Lokasyon',
