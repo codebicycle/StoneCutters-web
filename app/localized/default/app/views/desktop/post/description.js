@@ -12,7 +12,8 @@ module.exports = Base.extend({
     className: 'posting-description-view',
     events: {
         'change': 'onChange',
-        'keyup [name=title]': 'characterCount'
+        'keyup [name=title]': 'characterCount',
+        'validate': 'onValidate'
     },
     validations: {
         title: {
@@ -34,6 +35,16 @@ module.exports = Base.extend({
         if (this.validate($field)) {
             this.parentView.$el.trigger('fieldSubmit', [$field]);
         }
+    },
+    onValidate: function(event, done, isValid) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+
+        var isValidTitle = this.validate(this.$('#field-title'));
+        var isValidDescription = this.validate(this.$('#field-description'));
+
+        done(isValid && isValidTitle && isValidDescription);
     },
     characterCount: function (event) {
         var $input = $(event.currentTarget);

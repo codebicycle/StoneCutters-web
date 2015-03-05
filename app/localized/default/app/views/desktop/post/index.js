@@ -372,6 +372,7 @@ module.exports = Base.extend({
 
         asynquence().or(fail.bind(this))
             .then(check.bind(this))
+            .then(validate.bind(this))
             .then(post.bind(this))
             .val(success.bind(this));
 
@@ -386,6 +387,20 @@ module.exports = Base.extend({
                 }, 750);
             }
             done();
+        }
+
+        function validate(done) {
+            var promise = asynquence(true).or(done.fail);
+
+            validation.call(this, '#posting-description-view');
+            promise.then(check.bind(this));
+            promise.val(done);
+
+            function validation(view) {
+                promise.then(function(next, result) {
+                    this.$(view).trigger('validate', [next, result]);
+                }.bind(this));
+            }
         }
 
         function post(done) {
