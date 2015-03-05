@@ -412,11 +412,11 @@ module.exports = {
                 anchor: 'Mpumalanga'
             },
             {
-                url: 'limpopo.olx.co.za',
+                url: 'northwest.olx.co.za',
                 anchor: 'North West'
             },
             {
-                url: 'northwest.olx.co.za',
+                url: 'limpopo.olx.co.za',
                 anchor: 'Limpopo'
             }
         ]
