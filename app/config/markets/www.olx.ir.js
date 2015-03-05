@@ -25,7 +25,7 @@ module.exports = {
                 }
             }
         }
-    }
+    },
     tracking: {
         enabled: true,
         trackers: {
