@@ -400,6 +400,10 @@ module.exports = {
                 anchor: 'KwaZulu-Natal'
             },
             {
+                url: 'northerncape.olx.co.za',
+                anchor: 'Northern Cape'
+            },
+            {
                 url: 'freestate.olx.co.za',
                 anchor: 'Free State'
             },
