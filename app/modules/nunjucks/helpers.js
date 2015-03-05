@@ -124,12 +124,15 @@ module.exports = function(nunjucks) {
     function getLocations(shops){
         var locations = '';
 
-        for(var i = 0; i < shops.length; i++) {
-            var location = shops[i].location;
-            if ( location ) {
-                locations = locations + location.lat + "," + location.lon + "|";
-            }
+        if (shops) {
+            for(var i = 0; i < shops.length; i++) {
+                var location = shops[i].location;
+                if ( location ) {
+                    locations = locations + location.lat + "," + location.lon + "|";
+                }
+            }            
         }
+
         console.log('locations', locations);
         return locations;
     }

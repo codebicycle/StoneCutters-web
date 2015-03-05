@@ -2,11 +2,8 @@
 
 var Base = require('../../bases/view');
 var _ = require('underscore');
-var restler = require('restler');
 var breadcrumb = require('../../../../../modules/breadcrumb');
-var Sixpack = require('../../../../../../shared/sixpack');
-var config = require('../../../../../../shared/config');
-var shopHost = config.get(['mario', 'host'], 'mario.apps.olx.com');
+var Shops = require('../../../../../modules/shops');
 
 module.exports = Base.extend({
     className: 'pages_comingsoon_view',
@@ -15,38 +12,9 @@ module.exports = Base.extend({
     },
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
-
-        var clicked = this.app.session.get('isShopExperimented');
-        var sixpack = new Sixpack({
-            clientId: this.app.session.get('clientId'),
-            platform: this.app.session.get('platform'),
-            market: this.app.session.get('location').abbreviation,
-            experiments: this.app.session.get('experiments')
-        });
-        var experiment = sixpack.experiments.html4ShowShops;
+        var shops = new Shops(this);
         
-        if ( experiment ) {
-            if (( experiment.firstClick && !clicked ) || !experiment.firstClick ) {
-
-                sixpack.convert(experiment);
-
-                this.app.session.persist({
-                    isShopExperimented: true
-                });
-            }
-
-            restler.postJson('http://' + shopHost + '/track/experiment', {
-                alternative: experiment.alternative,
-                clientId: sixpack.clientId,
-                from: 'shop' 
-            })
-            .on('success', function onSuccess(data, response) {
-                console.log('success');
-            })
-            .on('fail', function onFail(err, response) {
-                console.log('fail', err);
-            });           
-        }
+        shops.evaluate('listing_shop_from_page');
         
         return _.extend({}, data, {
             breadcrumb: breadcrumb.get.call(this, data)

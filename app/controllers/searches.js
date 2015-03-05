@@ -11,6 +11,7 @@ var FeatureAd = require('../models/feature_ad');
 var config = require('../../shared/config');
 var utils = require('../../shared/utils');
 var config = require('../../shared/config');
+var Shops = require('../modules/shops');
 
 module.exports = {
     filterig: middlewares(filterig),
@@ -171,8 +172,8 @@ function search(params, callback, gallery) {
                     params: params
                 } 
             };
-            var experiment = this.app.session.get('experiments').html4ShowShops;
-            if (experiment && experiment.alternative != 'items') {
+            var shops = new Shops(this);
+            if (shops.enabled()) {
                 collections.shops = {
                     collection: 'Shops',
                     params: _.clone(params),

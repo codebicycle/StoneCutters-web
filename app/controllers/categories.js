@@ -11,6 +11,7 @@ var Seo = require('../modules/seo');
 var FeatureAd = require('../models/feature_ad');
 var config = require('../../shared/config');
 var utils = require('../../shared/utils');
+var Shops = require('../modules/shops');
 
 module.exports = {
     list: middlewares(list),
@@ -222,8 +223,8 @@ function handleItems(params, promise, gallery) {
                 params: params
             } 
         };
-        var experiment = this.app.session.get('experiments').html4ShowShops;
-        if (experiment && experiment.alternative != 'items') {
+        var shops = new Shops(this);
+        if (shops.enabled()) {
             collections.shops = {
                 collection: 'Shops',
                 params: _.clone(params),
