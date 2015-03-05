@@ -841,7 +841,7 @@ function editsuccess(params, callback) {
         }
 
         function successFetch(response) {
-            var item = response._item.toJSON();
+            var item = response.item.toJSON();
             var subcategory = this.dependencies.categories.search(item.category.id);
             var category;
             var parentId;
