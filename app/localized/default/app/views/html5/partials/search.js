@@ -5,13 +5,10 @@ var helpers = require('../../../../../../helpers');
 
 module.exports = Base.extend({
     postRender: function() {
-        this.app.router.once('action:start', this.onStart.bind(this));
-    },
-    onStart: function() {
-        this.app.router.once('action:start', this.onStart.bind(this));
         this.app.router.once('action:end', this.onEnd.bind(this));
     },
     onEnd: function() {
+        this.app.router.once('action:end', this.onEnd.bind(this));
         this.$('[name=search]').val(this.app.session.get('search'));
     },
     events: {
