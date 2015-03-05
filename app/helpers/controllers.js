@@ -4,7 +4,7 @@ var _ = require('underscore');
 var asynquence = require('asynquence');
 var common = require('./common');
 var esi = require('../modules/esi');
-var tracking = require('../modules/tracking');
+var Tracking = require('../modules/tracking');
 var config = require('../../shared/config');
 var utils = require('../../shared/utils');
 var isServer = typeof window === 'undefined';
@@ -29,7 +29,9 @@ function prepare(params, done) {
 }
 
 function processTracking(done) {
-    tracking.reset();
+    this.app.tracking = new Tracking({}, {
+        app: this.app
+    });
     done();
 }
 

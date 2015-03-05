@@ -1,10 +1,9 @@
 'use strict';
 
+var _ = require('underscore');
+var asynquence = require('asynquence');
 var Base = require('../../../../../common/app/bases/view').requireView('items/sort');
 var helpers = require('../../../../../../helpers');
-var asynquence = require('asynquence');
-var _ = require('underscore');
-var tracking = require('../../../../../../modules/tracking');
 var Filters = require('../../../../../../modules/filters');
 
 module.exports = Base.extend({

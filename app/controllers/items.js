@@ -4,7 +4,6 @@ var _ = require('underscore');
 var asynquence = require('asynquence');
 var middlewares = require('../middlewares');
 var helpers = require('../helpers');
-var tracking = require('../modules/tracking');
 var Filters = require('../modules/filters');
 var Item = require('../models/item');
 var config = require('../../shared/config');
@@ -246,9 +245,9 @@ function show(params, callback) {
                 url = helpers.common.removeParams(this.app.session.get('url'), 'location');
                 this.app.seo.addMetatag('canonical', helpers.common.fullizeUrl(url, this.app));
             }
-            tracking.addParam('item', item);
-            tracking.addParam('category', category);
-            tracking.addParam('subcategory', subcategory);
+            this.app.tracking.set('item', item);
+            this.app.tracking.set('category', category);
+            this.app.tracking.set('subcategory', subcategory);
             this.app.session.update({
                 dataPage: {
                     category: (category ? category.id : undefined),
@@ -367,9 +366,9 @@ function gallery(params, callback) {
                 category = this.dependencies.categories.get(subcategory.get('parentId'));
             }
 
-            tracking.addParam('item', item);
-            tracking.addParam('category', category.toJSON());
-            tracking.addParam('subcategory', subcategory.toJSON());
+            this.app.tracking.set('item', item);
+            this.app.tracking.set('category', category.toJSON());
+            this.app.tracking.set('subcategory', subcategory.toJSON());
 
             callback(null, {
                 item: item,
@@ -460,9 +459,9 @@ function map(params, callback) {
             parentId = subcategory.get('parentId');
             category = parentId ? this.dependencies.categories.get(parentId) : subcategory;
 
-            tracking.addParam('item', _item.toJSON());
-            tracking.addParam('category', category.toJSON());
-            tracking.addParam('subcategory', subcategory.toJSON());
+            this.app.tracking.set('item', _item.toJSON());
+            this.app.tracking.set('category', category.toJSON());
+            this.app.tracking.set('subcategory', subcategory.toJSON());
             callback(null, {
                 item: _item.toJSON()
             });
@@ -590,9 +589,9 @@ function reply(params, callback) {
             this.app.seo.addMetatag('robots', 'noindex, nofollow');
             this.app.seo.addMetatag('googlebot', 'noindex, nofollow');
 
-            tracking.addParam('item', item);
-            tracking.addParam('category', category.toJSON());
-            tracking.addParam('subcategory', subcategory.toJSON());
+            this.app.tracking.set('item', item);
+            this.app.tracking.set('category', category.toJSON());
+            this.app.tracking.set('subcategory', subcategory.toJSON());
 
             callback(null, {
                 item: item,
@@ -649,9 +648,9 @@ function success(params, callback) {
             parentId = subcategory.get('parentId');
             category = parentId ? this.dependencies.categories.get(parentId) : subcategory;
 
-            tracking.addParam('item', item);
-            tracking.addParam('category', category.toJSON());
-            tracking.addParam('subcategory', subcategory.toJSON());
+            this.app.tracking.set('item', item);
+            this.app.tracking.set('category', category.toJSON());
+            this.app.tracking.set('subcategory', subcategory.toJSON());
 
             callback(null, {
                 item: item

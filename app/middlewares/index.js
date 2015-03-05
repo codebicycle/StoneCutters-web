@@ -2,7 +2,6 @@
 
 var _ = require('underscore');
 var asynquence = require('asynquence');
-var tracking = require('../modules/tracking');
 var middlewares = {
     environment: require('./environment'),
     redirections: require('./redirections'),
@@ -45,16 +44,30 @@ module.exports = function(controller, exclude) {
                 view = undefined;
             }
             json = json !== undefined ? json : true;
-            data = _.extend(json ? this.dependencies.toJSON() : _.omit(this.dependencies, 'toJSON'), data, {
-                include: this.include.concat((data || {}).include || []),
-                seo: this.app.seo,
-                tracking: tracking.generateURL.call(this)
-            });
-            if (!view) {
-                callback(err, data);
+
+            if (this.app.tracking) {
+                this.app.tracking.generate(onTrackData.bind(this));
             }
             else {
-                callback(err, view, data);
+                onTrackData.call(this, {});
+            }
+
+            function onTrackData(trackingData) {
+                data = _.extend(json ? this.dependencies.toJSON() : _.omit(this.dependencies, 'toJSON'), data, {
+                    include: this.include.concat((data || {}).include || []),
+                    seo: this.app.seo,
+                    tracking: trackingData
+                });
+                if (this.app.tracking) {
+                    this.app.tracking.clear();
+                    this.app.tracking = null;
+                }
+                if (!view) {
+                    callback(err, data);
+                }
+                else {
+                    callback(err, view, data);
+                }
             }
         }
     };

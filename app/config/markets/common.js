@@ -155,11 +155,11 @@ module.exports = {
             },
             hydra: {
                 enabled: false,
-                platforms: []
+                platforms: ['desktop']
             },
             tagmanager: {
                 enabled: false,
-                platforms: []
+                platforms: ['desktop']
             },
             facebook: {
                 enabled: false,
@@ -170,12 +170,13 @@ module.exports = {
                 platforms: ['html4', 'html5']
             },
             keyade: {
-                enabled: true,
-                platforms: ['wap', 'html4', 'html5', 'desktop']
+                enabled: true
             },
             ninja: {
                 enabled: true,
-                platforms: ['desktop']
+                noscript: {
+                    platforms: ['wap', 'html4']
+                }
             },
             adroll: {
                 enabled: false,
