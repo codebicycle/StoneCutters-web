@@ -39,6 +39,7 @@ module.exports = Base.extend({
         'fieldValidationEnd': 'onFieldValidationEnd',
         'errorsUpdate': 'onErrorsUpdate',
         'error': 'onError',
+        'errorClean': 'onErrorClean',
         'priceReset': 'onPriceReset'
     },
     initialize: function() {
@@ -236,7 +237,9 @@ module.exports = Base.extend({
             }
 
             $field.removeClass('validating');
-            $(document).scrollTop(this.$el.offset().top);
+            $('html, body').animate({
+                scrollTop: this.$el.offset().top
+            }, 750);
         } else {
 
             if ($field.attr('required') && !value.trim().length) {
@@ -330,7 +333,20 @@ module.exports = Base.extend({
                 $field.parent().append('<small class="error message">' + message + '</small>');
             }
         }.bind(this));
+        $('html, body').animate({
+            scrollTop: $('small.error,message').first().parent().offset().top - 20
+        }, 750);
         this.$('#posting-errors-view').trigger('update');
+    },
+    onErrorClean: function(event, field) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+
+        var $field = $(field);
+
+        $field.closest('.field-wrapper').removeClass('error').removeClass('success');
+        $field.parent().find('small.error.message').remove();
     },
     onPriceReset: function(event) {
         event.preventDefault();
@@ -355,8 +371,22 @@ module.exports = Base.extend({
         this.item.set('ipAddress', this.app.session.get('ip'));
 
         asynquence().or(fail.bind(this))
+            .then(check.bind(this))
             .then(post.bind(this))
             .val(success.bind(this));
+
+        function check(done) {
+            var errors = $('small.error,message');
+
+            if (errors.length) {
+                done.abort();
+                this.$('#posting-contact-view').trigger('enablePost');
+                return $('html, body').animate({
+                    scrollTop: errors.first().parent().offset().top - 20
+                }, 750);
+            }
+            done();
+        }
 
         function post(done) {
             this.item.post(done);
