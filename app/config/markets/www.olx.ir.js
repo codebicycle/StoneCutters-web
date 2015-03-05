@@ -30,7 +30,7 @@ module.exports = {
         enabled: true,
         trackers: {
             analytics: {
-                enabled: false
+                enabled: false,
                 server: {
                     enabled: false,
                     event: false
