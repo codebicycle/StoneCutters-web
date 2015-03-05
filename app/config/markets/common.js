@@ -235,5 +235,11 @@ module.exports = {
             layout: 'default',
             link: 'http://samurai.onap.io/samurai.js'
         }
+    },
+    help: {
+        linkblog: {
+            href: 'http://blog.olx.com',
+            target: '_blank'
+        }
     }
 };
