@@ -13,11 +13,15 @@ module.exports = Base.extend({
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
         var states = data.states;
+        var statesSorted;
         var cities = data.cities;
+        var citiesSorted;
         var location = data.currentLocation;
 
         if (states) {
-            states = _.map(states.toJSON(), function each(state) {
+            statesSorted = _.sortBy(states.toJSON(), 'name');
+
+            states = _.map(statesSorted, function each(state) {
                 return {
                     key: state.url,
                     value: state.name
@@ -28,7 +32,9 @@ module.exports = Base.extend({
             this.addEmptyOption(states, 'countryoptions.Home_SelectState');
         }
         if (cities) {
-            cities = _.map(cities.toJSON(), function each(city) {
+            citiesSorted = _.sortBy(cities.toJSON(), 'name');
+
+            cities = _.map(citiesSorted, function each(city) {
                 return {
                     key: city.url,
                     value: city.name
@@ -92,7 +98,6 @@ module.exports = Base.extend({
         if ($firstOption.attr('value') === '') {
             $firstOption.remove();
         }
-
         this.resetNeighborhoods();
         this.getCities($field.val(), options, ($cities.val() ? [$cities.val()] : undefined));
         this.parentView.$el.trigger('fieldSubmit', [$field, options]);
@@ -128,11 +133,16 @@ module.exports = Base.extend({
             $firstOption.remove();
         }
 
+        this.parentView.parentView.getItem().unset('neighborhood');
+        this.parentView.parentView.getItem().set('neighborhood.id', $field.val());
+        this.parentView.parentView.getItem().set('neighborhood.name', $field.find('option:selected').html());
         this.parentView.$el.trigger('fieldSubmit', [$field, options]);
     },
     getCities: function(state, options, cityId) {
         var $cities = this.$('#field-location');
         var cities;
+
+        options = _.clone(options);
 
         var fetch = function(done) {
             this.app.fetch({
@@ -149,7 +159,9 @@ module.exports = Base.extend({
         }.bind(this);
 
         var parse = function(done, response) {
-            cities = _.map(response.cities.toJSON(), function each(city) {
+            var responseSorted = _.sortBy(response.cities.toJSON(), 'name');
+
+            cities = _.map(responseSorted, function each(city) {
                 return {
                     key: city.url,
                     value: city.name
@@ -167,10 +179,16 @@ module.exports = Base.extend({
         }.bind(this);
 
         var success = function(cities) {
+            var selected = false;
+
             $cities.removeAttr('disabled').empty();
             _.each(cities, function each(city) {
+                if(city.key == cityId) {
+                    selected = true;
+                }
                 $cities.append('<option value="' + city.key + '"' + (city.key == cityId ? 'selected="selected"' : '') + '>' + city.value + '</option>');
             }.bind(this));
+            options.skipValidation = !selected;
             this.parentView.$el.trigger('fieldSubmit', [$cities, options]);
         }.bind(this);
 
@@ -182,6 +200,8 @@ module.exports = Base.extend({
     getNeighborhoods: function(city, options) {
         var $neighborhoods = this.$('#field-neighborhood');
         var neighborhoods;
+
+        options = _.clone(options);
 
         var fetch = function(done) {
             this.app.fetch({
@@ -200,7 +220,9 @@ module.exports = Base.extend({
         }.bind(this);
 
         var parse = function(done, response) {
-            neighborhoods = _.map(response.neighborhoods.toJSON(), function each(neighborhood) {
+            var responseSorted = _.sortBy(response.neighborhoods.toJSON(), 'name');
+
+            neighborhoods = _.map(responseSorted, function each(neighborhood) {
                 return {
                     key: neighborhood.id,
                     value: neighborhood.name
@@ -220,6 +242,8 @@ module.exports = Base.extend({
         }.bind(this);
 
         var success = function(neighborhoods) {
+            options.skipValidation = true;
+            
             if (neighborhoods.length) {
                 $neighborhoods.removeAttr('disabled').attr('required', true).empty();
                 $neighborhoods.parents('.field-wrapper').removeClass('hide');

@@ -162,6 +162,9 @@ function handleItems(params, promise, gallery) {
     var redirect = function(done) {
         var platform = this.app.session.get('platform');
         var slug = helpers.common.slugToUrl((subcategory || category).toJSON());
+        var redirectParams = {
+            replace: true
+        };
 
         url = ['/', slug].join('');
 
@@ -174,11 +177,11 @@ function handleItems(params, promise, gallery) {
         }
         if ((params.filters && params.filters !== 'undefined') && !utils.startsWith(path, starts)) {
             done.abort();
-            return helpers.common.redirect.call(this, [starts, path, URLParser.parse(this.app.session.get('url')).search || ''].join(''));
+            return helpers.common.redirect.call(this, [starts, path, URLParser.parse(this.app.session.get('url')).search || ''].join(''), null, redirectParams);
         }
         else if ((!params.filters || params.filters === 'undefined') && utils.startsWith(path, starts)) {
             done.abort();
-            return helpers.common.redirect.call(this, [path.replace(starts, ''), URLParser.parse(this.app.session.get('url')).search || ''].join(''));
+            return helpers.common.redirect.call(this, [path.replace(starts, ''), URLParser.parse(this.app.session.get('url')).search || ''].join(''), null, redirectParams);
         }
         done();
     }.bind(this);

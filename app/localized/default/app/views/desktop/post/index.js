@@ -6,7 +6,7 @@ var helpers = require('../../../../../../helpers');
 var _ = require('underscore');
 var asynquence = require('asynquence');
 var translations = require('../../../../../../../shared/translations');
-var Item = require('../../../../../../models/item');
+var Chat = require('../../../../../../modules/chat');
 var config = require('../../../../../../../shared/config');
 
 function onpopstate(event) {
@@ -39,6 +39,7 @@ module.exports = Base.extend({
         'fieldValidationEnd': 'onFieldValidationEnd',
         'errorsUpdate': 'onErrorsUpdate',
         'error': 'onError',
+        'errorClean': 'onErrorClean',
         'priceReset': 'onPriceReset'
     },
     initialize: function() {
@@ -55,7 +56,8 @@ module.exports = Base.extend({
 
         return _.extend({}, data, {
             item: this.getItem(data.item),
-            customerContact: customerContact
+            customerContact: customerContact,
+            chatEnabled: Chat.isEnabled.call(this)
         });
     },
     postRender: function() {
@@ -177,6 +179,9 @@ module.exports = Base.extend({
                 else if (!options.skipValidation) {
                     $field.trigger('fieldValidationStart');
                 }
+                else {
+                    this.$el.trigger('errorClean', [$field]);
+                }
             }
             field.name = $field.attr('name');
             field.value = $field.val();
@@ -188,6 +193,9 @@ module.exports = Base.extend({
                 }
                 else if (!options.skipValidation) {
                     $field.trigger('fieldValidationStart');
+                }
+                else {
+                    this.$el.trigger('errorClean', [$field]);
                 }
             }
             else {
@@ -235,7 +243,9 @@ module.exports = Base.extend({
             }
 
             $field.removeClass('validating');
-            $(document).scrollTop(this.$el.offset().top);
+            $('html, body').animate({
+                scrollTop: this.$el.offset().top
+            }, 750);
         } else {
 
             if ($field.attr('required') && !value.trim().length) {
@@ -282,14 +292,13 @@ module.exports = Base.extend({
     },
     onErrorsUpdate: function() {
         this.isValid = !(_.size(this.errors));
-        this.$('#posting-contact-view').trigger((this.isValid) ? 'enablePost' : 'disablePost');
         this.$('#posting-errors-view').trigger('update');
     },
     onImagesLoadStart: function(event) {
         this.$('#posting-contact-view').trigger('disablePost');
     },
     onImagesLoadEnd: function(event) {
-        this.$('#posting-contact-view').trigger((this.isValid) ? 'enablePost' : 'disablePost');
+        this.$('#posting-contact-view').trigger('enablePost');
     },
     onBeforeUnload: function(event) {
         return ' ';
@@ -297,6 +306,7 @@ module.exports = Base.extend({
     onEnd: function(event) {
         $(window).off('beforeunload', this.onBeforeUnload);
         $(window).off('popstate', onpopstate);
+
         this.appView.trigger('posting:end');
     },
     onStart: function(event) {
@@ -307,11 +317,16 @@ module.exports = Base.extend({
         event.stopPropagation();
         event.stopImmediatePropagation();
 
-        var $field;
         var errorsSummary = _.clone(this.errors);
+        var $field;
+        var $error;
 
+        $('small.error,message').each(function eachErrors() {
+            $error = $(this);
+            $error.parent().find('.error').removeClass('error');
+            $error.remove();
+        });
         _.each(errorsSummary, function eachError(message, selector) {
-
             if (selector === 'category.id' || selector === 'category.parentId') {
                 $field = this.$('.posting-categories-list');
             } else {
@@ -324,7 +339,20 @@ module.exports = Base.extend({
                 $field.parent().append('<small class="error message">' + message + '</small>');
             }
         }.bind(this));
+        $('html, body').animate({
+            scrollTop: $('small.error,message').first().parent().offset().top - 20
+        }, 750);
         this.$('#posting-errors-view').trigger('update');
+    },
+    onErrorClean: function(event, field) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+
+        var $field = $(field);
+
+        $field.closest('.field-wrapper').removeClass('error').removeClass('success');
+        $field.parent().find('small.error.message').remove();
     },
     onPriceReset: function(event) {
         event.preventDefault();
@@ -349,17 +377,48 @@ module.exports = Base.extend({
         this.item.set('ipAddress', this.app.session.get('ip'));
 
         asynquence().or(fail.bind(this))
+            .then(check.bind(this))
+            .then(validate.bind(this))
             .then(post.bind(this))
             .val(success.bind(this));
+
+        function check(done) {
+            var errors = $('small.error,message');
+
+            if (errors.length) {
+                done.abort();
+                this.$('#posting-contact-view').trigger('enablePost');
+                return $('html, body').animate({
+                    scrollTop: errors.first().parent().offset().top - 20
+                }, 750);
+            }
+            done();
+        }
+
+        function validate(done) {
+            var promise = asynquence(true).or(done.fail);
+
+            validation.call(this, '#posting-description-view');
+            promise.then(check.bind(this));
+            promise.val(done);
+
+            function validation(view) {
+                promise.then(function(next, result) {
+                    this.$(view).trigger('validate', [next, result]);
+                }.bind(this));
+            }
+        }
 
         function post(done) {
             this.item.post(done);
         }
 
-        function success() {
+        function success(done) {
             var category = 'Posting';
             var action = 'PostingSuccess';
             var successPage = this.editing ? '/edititem/success/' : '/posting/success/';
+
+            this.$('#posting-contact-view').trigger('enablePost');
 
             this.track({
                 category: category,
@@ -370,10 +429,11 @@ module.exports = Base.extend({
             helpers.common.redirect.call(this.app.router, successPage + this.item.get('id') + '?sk=' + this.item.get('securityKey'), null, {
                 status: 200
             });
-
         }
 
         function fail(errors) {
+            this.$('#posting-contact-view').trigger('enablePost');
+
             // TODO: Improve error handling
             if (errors) {
                 if (errors.responseText) {
@@ -393,6 +453,9 @@ module.exports = Base.extend({
                 }
                 else {
                     this.formErrors.push('Unkown error'); // Translate this
+                }
+                if (this.errors && _.size(this.errors)) {
+                    this.formErrors.length = 0;
                 }
                 this.$el.trigger('error');
             }

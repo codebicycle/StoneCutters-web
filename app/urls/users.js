@@ -64,7 +64,22 @@ module.exports = {
     'users#readmessages': {
         url: 'myolx/readmessages/:msgId'
     },
-    'users#deleteitem': {
-        url: 'myolx/deleteitem'
+    'users#conversations': {
+        urls: [
+            'myolx/conversations-p-:page([0-9]+)',
+            'myolx/conversations'
+        ]
+    },
+    'users#report': {
+        url: 'myolx/conversation/report/:hash'
+    },
+    'users#unsubscribe': {
+        url: 'myolx/conversation/unsubscribe/:hash'
+    },
+    'users#conversation': {
+        urls: [
+            'myolx/conversation/:threadId-p-:page([0-9]+)',
+            'myolx/conversation/:threadId'
+        ]
     }
 };

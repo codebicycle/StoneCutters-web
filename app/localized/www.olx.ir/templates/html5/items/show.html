@@ -103,36 +103,7 @@
     {% endif %}
 
     {% if item.status.contactable and item.email %}
-        <section class="reply">
-            <span>{{ dictionary["contactseller_form.ReplyToListing"] }}</span>
-            <form id="replyForm" action="">
-
-
-                <label>* {{ dictionary["replymessage.Message"] }}</label>
-                <textarea class="message" name="message"></textarea>
-                <small class="message hide"></small>
-
-                <label>{{ dictionary["replymessage.Name"] }}</label>
-                <input type="text" value="{{ user.username if user.username }}" class="name" name="name">
-
-                <label>* {{ dictionary["replymessage.Email"] }}</label>
-                <input type="email" value="{{ user.email if user.email }}" class="email" name="email">
-                <small class="email hide"></small>
-
-                <label>{{ dictionary["itemgeneraldetails.Phone"] }}</label>
-                <input type="number" class="phone" name="phone">
-                <input type="hidden" class="itemId" name="itemId" value="{{ item.id }}">
-
-                <input type="hidden" class="itemCategory" value="{{ item.category.id }}">
-                <input type="hidden" class="itemSubcategory" value="{{ item.category.parentId }}">
-                <span>* {{ dictionary["wap_posting_step4.mandatoryField"] }}</span>
-
-                <div class="btnCenter">
-                    <input type="button" class="btns orange submit trackMe" value="{{ dictionary["contactseller_form.60"] }}" data-tracking="ItemPage-ClickReply" data-qa="reply-send-button" >
-                </div>
-            </form>
-        <div class="clear"></div>
-        </section>
+        {% view 'items/partials/reply' %}
     {% endif %}
     {% if item.status.contactable %}
         <section class="actions">

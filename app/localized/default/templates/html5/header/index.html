@@ -12,10 +12,15 @@
         {% elif user.unreadMessagesCount > 0 %}
             <li class="logInMsg"><span class="btns blue" data-qa="my-olx-loggedIn" ></span></li>
         {% else %}
-            <li class="logIn"><span class="btns blue" data-qa="my-olx-loggedIn" ></span></li>
+            <li class="logIn">
+                <span class="btns blue logged" data-qa="my-olx-loggedIn"><span class="notification"></span></span>
+            </li>
         {% endif %}
+
         <li class="postBtn{% if not postButton %} disabled{% endif %}">
-            {% if postingFlowEnabled %}
+            {% if postLinkUrl %}
+                <a href="{{ postLinkUrl }}" class="btns orange" data-qa="post-button">{{ dictionary["misc.Sell_Post_Mobile_India"] }}</a>
+            {% elif postingFlowEnabled %}
                 <a href="{{ '/posting' | link }}" class="btns orange" data-qa="post-button">{{ dictionary["misc.Sell_Post_Mobile_India"] }}</a>
             {% elif location.current %}
                 <a href="{{ ['/posting', postLink] | join('') | link }}" class="btns orange posting-link trackMe" data-qa="post-button">{{ dictionary["misc.Sell_Post_Mobile_India"] }}</a>

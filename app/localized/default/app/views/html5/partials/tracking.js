@@ -21,7 +21,7 @@ module.exports = Base.extend({
         return _.extend({}, data);
     },
     postRender: function() {
-        var params = $('#tracking-data').data('params');
+        var params = $('#tracking-data').html();
 
         if (params && _.isString(params)) {
             params = JSON.parse(params);
@@ -87,7 +87,7 @@ module.exports = Base.extend({
             return;
         }
         data = data.split('-');
-        if (data.length === 2) {
+        if (data.length) {
             handler = handler || $.noop;
             category = data[0];
             action = data[1];

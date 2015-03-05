@@ -15,20 +15,22 @@ module.exports = {
             }
         ]
     },
-    videos: [
-        {
-            title: 'OLX Panama - Bicicleta - Vender es fácil',
-            id: 'rXfzHDejpRs'
-        },
-        {
-            title: 'OLX Panama - Anteojos - Vender es fácil',
-            id: 'eEyfckF_Xgs'
-        },
-        {
-            title: 'OLX Panamá - Poker - Vender es fácil',
-            id: 'm0sDSvsBEf0'
-        }
-    ],
+    marketing: {
+        videos: [
+            {
+                title: 'OLX Panama - Bicicleta - Vender es fácil',
+                id: 'rXfzHDejpRs'
+            },
+            {
+                title: 'OLX Panama - Anteojos - Vender es fácil',
+                id: 'eEyfckF_Xgs'
+            },
+            {
+                title: 'OLX Panamá - Poker - Vender es fácil',
+                id: 'm0sDSvsBEf0'
+            }
+        ]
+    },
     successPage: {
         keepPosting: [
             {
@@ -148,6 +150,53 @@ module.exports = {
                         allresultsig: 2
                     }
                 },
+                mobiletop: {
+                    service: 'AFC',
+                    format: 'TextMobile',
+                    location: 'Top',
+                    numberPerCategoryCSA: {
+                        '185': 1,
+                        '209': 1,
+                        '210': 1,
+                        '211': 1,
+                        '214': 1,
+                        '215': 1,
+                        '217': 1,
+                        '218': 1,
+                        '219': 1,
+                        '227': 1,
+                        '228': 1,
+                        '229': 1,
+                        '234': 1,
+                        '238': 1,
+                        '240': 1,
+                        '243': 1,
+                        '312': 1,
+                        '364': 1,
+                        '365': 1,
+                        '366': 1,
+                        '402': 1,
+                        '498': 1,
+                        '501': 1,
+                        '568': 1,
+                        '594': 1,
+                        '820': 1,
+                        '898': 1,
+                        '911': 1,
+                        '362': 2,
+                        '376': 2,
+                        '377': 2,
+                        '378': 2,
+                        '379': 2,
+                        '380': 2,
+                        '412': 2,
+                        '416': 2,
+                        '417': 2,
+                        '886': 2,
+                        allresults: 2,
+                        allresultsig: 2
+                    }
+                },
                 side: {
                     service: 'none'
                 }
@@ -162,43 +211,12 @@ module.exports = {
             }
         }
     },
-    tracking: {
-        trackers: {
-            hydra: {
-                enabled: false
-            },
-            ati: {
-                enabled: true,
-                platforms: ['html5', 'html4', 'wap'],
-                server: {
-                    enabled: true,
-                    platforms: ['html5', 'html4', 'wap'],
-                    event: true
-                },
-                client: {
-                    enabled: true,
-                    platforms: ['html5']
-                }
-            },
-            analytics: {
-                enabled: true,
-                platforms: ['html5', 'html4', 'wap'],
-                server: {
-                    enabled: true,
-                    platforms: ['html5', 'html4', 'wap'],
-                    event: true
-                },
-                client: {
-                    enabled: true,
-                    platforms: ['html5']
-                }
-            },
-            ninja: {
-                enabled: true
-            },
-            tagmanager: {
-                enabled: false
-            }
+    relatedAds: {
+        desktop: {
+            enabled: true
+        },
+        html5: {
+            enabled: true
         }
     }
 };

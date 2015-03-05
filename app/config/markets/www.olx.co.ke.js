@@ -11,27 +11,29 @@ module.exports = {
         order: [830, 800, 811, 806, 362, 815, 859, 16, 821],
         columns: [3, 2, 2]
     },
-    post_banner: {
-        image: 'post-africa'
+    marketing:{
+        post_banner: {
+            image: 'post-africa'
+        },
+        videos: [
+            {
+                title: 'Post Free ads - OLX Sell-A-Brate with Eric Omondi',
+                id: '0sf4T0HtoC4'
+            },
+            {
+                title: 'Post Free ads - OLX Sell-a-brate Story (Fred Testimonial)',
+                id: 'vloSzfdXpDM'
+            },
+            {
+                title: 'Post Free ads - OLX Sell-a-brate Story (Irene Testimonial)',
+                id: 'fgeFnUZ5uNg'
+            },
+            {
+                title: 'Post Free ads - OLX "Lazy-Boy"',
+                id: 'AbMLgwZcbwI'
+            }
+        ]
     },
-    videos: [
-        {
-            title: 'Post Free ads - OLX Sell-A-Brate with Eric Omondi',
-            id: '0sf4T0HtoC4'
-        },
-        {
-            title: 'Post Free ads - OLX Sell-a-brate Story (Fred Testimonial)',
-            id: 'vloSzfdXpDM'
-        },
-        {
-            title: 'Post Free ads - OLX Sell-a-brate Story (Irene Testimonial)',
-            id: 'fgeFnUZ5uNg'
-        },
-        {
-            title: 'Post Free ads - OLX "Lazy-Boy"',
-            id: 'AbMLgwZcbwI'
-        }
-    ],
     successPage: {
         keepPosting: [
             {
@@ -92,7 +94,6 @@ module.exports = {
                         '831': 1,
                         '832': 1,
                         '857': 1,
-                        '853': 1,
                         '859': 1,
                         '860': 1,
                         '861': 1,
@@ -151,7 +152,64 @@ module.exports = {
                         '831': 1,
                         '832': 1,
                         '857': 1,
-                        '853': 1,
+                        '859': 1,
+                        '860': 1,
+                        '861': 1,
+                        '862': 1,
+                        '863': 1,
+                        '864': 1,
+                        '865': 1,
+                        '878': 1,
+                        '890': 1,
+                        '362': 2,
+                        '376': 2,
+                        '377': 2,
+                        '378': 2,
+                        '379': 2,
+                        '380': 2,
+                        '412': 2,
+                        '416': 2,
+                        '417': 2,
+                        '886': 2,
+                        allresults: 2,
+                        allresultsig: 2
+                    }
+                },
+                mobiletop: {
+                    service: 'AFC',
+                    format: 'TextMobile',
+                    location: 'Top',
+                    numberPerCategoryCSA: {
+                        '800': 1,
+                        '801': 1,
+                        '802': 1,
+                        '803': 1,
+                        '804': 1,
+                        '805': 1,
+                        '870': 1,
+                        '871': 1,
+                        '907': 1,
+                        '912': 1,
+                        '806': 1,
+                        '807': 1,
+                        '808': 1,
+                        '809': 1,
+                        '867': 1,
+                        '868': 1,
+                        '869': 1,
+                        '874': 1,
+                        '910': 1,
+                        '815': 1,
+                        '816': 1,
+                        '817': 1,
+                        '818': 1,
+                        '819': 1,
+                        '866': 1,
+                        '877': 1,
+                        '830': 1,
+                        '831': 1,
+                        '832': 1,
+                        '857': 1,
                         '859': 1,
                         '860': 1,
                         '861': 1,
@@ -187,6 +245,14 @@ module.exports = {
                     service: 'none'
                 }
             }
+        }
+    },
+    relatedAds: {
+        desktop: {
+            enabled: true
+        },
+        html5: {
+            enabled: true
         }
     }
 };

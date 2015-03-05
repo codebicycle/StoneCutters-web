@@ -1,9 +1,11 @@
-<div class ="facebook-login" data-facebook-login>
-    <span class="icons icon-facebook"></span>
-    <p>{{ dictionary["myolx.SignInWithFacebook"] }}</p>
-</div>
-<div class="dividing-line">
-    <div class="line"></div>
-    <p>ó</p>
-    <div class="line"></div>
-</div>
+{% if facebookLogin %}
+    <div class ="facebook-login" data-facebook-login>
+        <span class="icons icon-facebook"></span>
+        <p>{{ dictionary["myolx.SignInWithFacebook"] }}</p>
+    </div>
+    <div class="dividing-line">
+        <div class="line"></div>
+        <p>ó</p>
+        <div class="line"></div>
+    </div>
+{% endif %}

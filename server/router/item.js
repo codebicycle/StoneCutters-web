@@ -101,7 +101,7 @@ module.exports = function(app, dataAdapter) {
             var editing;
 
             if (!req.headers['content-type']) {
-                console.log('[OLX_DEBUG]', 'no-content-type', location.url, platform, req.rendrApp.session.get('osName'));
+                console.log('[OLX_DEBUG]', 'no-content-type', location.url, platform, req.rendrApp.session.get('osName'), req.get('user-agent'));
             }
 
             function parse(done) {
@@ -130,25 +130,7 @@ module.exports = function(app, dataAdapter) {
                 done(_item, _images);
             }
 
-            function validate(done, _item, images) {
-                var neighborhood;
-
-                if (typeof _item.neighborhood !== 'undefined') {
-                    if (_item.neighborhood === '') {
-                        return fail([{
-                            selector: 'neighborhood',
-                            message: dictionary['countryoptions.SelectANeighborhood'],
-                            label: 'neighborhood'
-                        }]);
-                    }
-                    neighborhood = _item.neighborhood.split('-');
-                    _item['neighborhood.id'] = neighborhood[0];
-                    _item['neighborhood.name'] = neighborhood[1];
-                }
-                done(_item, images);
-            }
-
-            function post(done, _item, images) {
+            function prepare(done, _item, images) {
                 item = new Item(_.extend(_item, {
                     images: _.map(_.filter(Object.keys(_item), function each(key) {
                         if (key.indexOf('images[')) {
@@ -173,6 +155,32 @@ module.exports = function(app, dataAdapter) {
                 }), {
                     app: req.rendrApp
                 });
+                done();
+            }
+
+            function validate(done) {
+                var neighborhood;
+
+                if (item.has('neighborhood')) {
+                    neighborhood = item.get('neighborhood');
+                    if (neighborhood === '') {
+                        done.abort();
+                        return fail([{
+                            selector: 'neighborhood',
+                            message: dictionary['countryoptions.SelectANeighborhood'],
+                            label: 'neighborhood'
+                        }]);
+                    }
+                    neighborhood = neighborhood.split('-');
+                    item.set({
+                        'neighborhood.id': neighborhood[0],
+                        'neighborhood.name': neighborhood[1]
+                    });
+                }
+                done();
+            }
+
+            function post(done) {
                 item.post(done);
             }
 
@@ -211,6 +219,7 @@ module.exports = function(app, dataAdapter) {
             asynquence().or(fail)
                 .then(parse)
                 .then(checkWapChangeLocation)
+                .then(prepare)
                 .then(validate)
                 .then(post)
                 .then(success)
@@ -386,7 +395,10 @@ module.exports = function(app, dataAdapter) {
                 var reason = removedata.close_reason;
                 var comment = removedata.close_comment;
 
-                item.remove(reason, comment, done);
+                item.remove({
+                    reason: reason,
+                    comment: comment
+                }, done);
             }
             function success(data) {
                 var url = '/myolx/myadslisting?deleted=true';

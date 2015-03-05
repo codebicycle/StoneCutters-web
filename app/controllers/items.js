@@ -7,6 +7,7 @@ var helpers = require('../helpers');
 var tracking = require('../modules/tracking');
 var Filters = require('../modules/filters');
 var Item = require('../models/item');
+var config = require('../../shared/config');
 
 module.exports = {
     show: middlewares(show),
@@ -35,7 +36,17 @@ function show(params, callback) {
         var newItemPage = helpers.features.isEnabled.call(this, 'newItemPage');
         var anonymousItem;
 
-        var prepare = function(done) {
+        var promise = asynquence().or(fail.bind(this))
+            .then(prepare.bind(this))
+            .then(fetch.bind(this))
+            .then(check.bind(this));
+
+        if (!config.getForMarket(this.app.session.get('location').url, ['relatedAds', platform, 'enabled'], false)) {
+            promise.then(fetchRelateds.bind(this));
+        }
+        promise.val(success.bind(this));
+
+        function prepare(done) {
             if (user) {
                 params.token = user.token;
             }
@@ -57,9 +68,39 @@ function show(params, callback) {
             delete params.title;
             delete params.sk;
             done();
-        }.bind(this);
+        }
 
-        var buildItemPurged = function(properties) {
+        function fetch(done) {
+            this.app.fetch({
+                item: {
+                    model: 'Item',
+                    params: params
+                }
+            }, {
+                readFromCache: false
+            }, function afterFetch(err, res) {
+                if (!res) {
+                    res = {};
+                }
+                if (err) {
+                    if (err.status !== 422) {
+                        return done.fail(err, res);
+                    }
+                    res.item = buildItemPurged.call(this, err.body);
+                    err = null;
+                }
+                if (!res.item.get('status')) {
+                    console.log('[OLX_DEBUG]', 'no status', res.item.get('id'));
+                    return fail.call(this, new Error(), res);
+                }
+                else if (!res.item.get('status').open && !res.item.get('status').onReview) {
+                    res.item.set('purged', true);
+                }
+                done(res);
+            }.bind(this));
+        }
+
+        function buildItemPurged(properties) {
             var item = new Item(properties, {
                 app: this.app
             });
@@ -104,39 +145,9 @@ function show(params, callback) {
                 item.set('title', '');
             }
             return item;
-        }.bind(this);
+        }
 
-        var fetch = function(done) {
-            this.app.fetch({
-                item: {
-                    model: 'Item',
-                    params: params
-                }
-            }, {
-                readFromCache: false
-            }, function afterFetch(err, res) {
-                if (!res) {
-                    res = {};
-                }
-                if (err) {
-                    if (err.status !== 422) {
-                        return done.fail(err, res);
-                    }
-                    res.item = buildItemPurged(err.body);
-                    err = null;
-                }
-                if (!res.item.get('status')) {
-                    console.log('[OLX_DEBUG]', 'no status', res.item.get('id'));
-                    return error(new Error(), res);
-                }
-                else if (!res.item.get('status').open && !res.item.get('status').onReview) {
-                    res.item.set('purged', true);
-                }
-                done(res);
-            }.bind(this));
-        }.bind(this);
-
-        var check = function(done, response) {
+        function check(done, response) {
             if (!response.item) {
                 return done.fail(null, {});
             }
@@ -174,9 +185,9 @@ function show(params, callback) {
                 });
             }
             done(response.item);
-        }.bind(this);
+        }
 
-        var fetchRelateds = function(done, item) {
+        function fetchRelateds(done, item) {
             this.app.fetch({
                 relatedItems: {
                     collection : 'Items',
@@ -201,9 +212,9 @@ function show(params, callback) {
                 }
                 done(item, response.relatedItems);
             }.bind(this));
-        }.bind(this);
+        }
 
-        var success = function(_item, relatedItems) {
+        function success(_item, relatedItems) {
             var item = _item.toJSON();
             var subcategory = this.dependencies.categories.search(_item.get('category').id);
             var view = 'items/show';
@@ -268,18 +279,11 @@ function show(params, callback) {
                 sent: params.sent,
                 categories: this.dependencies.categories.toJSON()
             });
-        }.bind(this);
+        }
 
-        var error = function(err, res) {
+        function fail(err, res) {
             return helpers.common.error.call(this, err, res, callback);
-        }.bind(this);
-
-        asynquence().or(error)
-            .then(prepare)
-            .then(fetch)
-            .then(check)
-            .then(fetchRelateds)
-            .val(success);
+        }
     }
 }
 
@@ -485,25 +489,34 @@ function reply(params, callback) {
     function controller() {
         var itemId = params.itemId;
         var siteLocation = this.app.session.get('siteLocation');
+        var location = this.app.session.get('location');
         var platform = this.app.session.get('platform');
         var newItemPage = helpers.features.isEnabled.call(this, 'newItemPage');
+        var isHermes = helpers.features.isEnabled.call(this, 'hermes');
+        var user = this.app.session.get('user');
 
-        var redirect = function(done) {
-            var platform = this.app.session.get('platform');
+        asynquence().or(error.bind(this))
+            .then(redirect.bind(this))
+            .then(prepare.bind(this))
+            .then(findItem.bind(this))
+            .then(checkItem.bind(this))
+            .then(verifyConversations.bind(this))
+            .val(success.bind(this));
 
+        function redirect(done) {
             if (platform === 'desktop' || (platform === 'html5' && !newItemPage)) {
                 return done.fail();
             }
             done();
-        }.bind(this);
+        }
 
-        var prepare = function(done) {
+        function prepare(done) {
             params.id = params.itemId;
             delete params.itemId;
             done();
-        }.bind(this);
+        }
 
-        var findItem = function(done) {
+        function findItem(done) {
             this.app.fetch({
                 item: {
                     model: 'Item',
@@ -512,21 +525,57 @@ function reply(params, callback) {
             }, {
                 readFromCache: false
             }, done.errfcb);
-        }.bind(this);
+        }
 
-        var checkItem = function(done, resItem) {
+        function checkItem(done, resItem) {
             if (!resItem.item) {
                 return done.fail(null, {});
             }
-
-            var platform = this.app.session.get('platform');
             if (platform === 'desktop' || (platform === 'html5' && !newItemPage)) {
                 return done.fail();
             }
             done(resItem.item);
-        }.bind(this);
+        }
 
-        var success = function(_item) {
+        function verifyConversations(done,_item) {
+            if (!isHermes || !user || platform !== 'html5') {
+                return done(_item);
+            }
+
+            asynquence().or(done.fail)
+                .then(verifyConversation.bind(this))
+                .val(successConversation.bind(this));
+
+            function verifyConversation(done) {
+                helpers.dataAdapter.post(this.app.req, '/conversations', {
+                    query: {
+                        location: location.url,
+                        platform: platform
+                    },
+                    data: {
+                        itemIds: itemId,
+                        emails: user.email
+                    },
+                    cache: false
+                }, done.errfcb);
+            }
+
+            function successConversation(response, body) {
+                if (!body.conversations || !body.conversations.length) {
+                    return done(_item);
+                }
+
+                var threadId = body.conversations[0].threadId;
+
+                done.abort();
+                return helpers.common.redirect.call(this, '/myolx/conversation/' + threadId, null, {
+                    status: 302,
+                    replace: true
+                });
+            }
+         }
+
+        function success(_item) {
             var item = _item.toJSON();
             var subcategory = this.dependencies.categories.search(item.category.id);
             var category;
@@ -549,18 +598,11 @@ function reply(params, callback) {
                 item: item,
                 form: this.form
             });
-        }.bind(this);
+        }
 
-        var error = function(err, res) {
+        function error(err, res) {
             return helpers.common.error.call(this, err, res, callback);
-        }.bind(this);
-
-        asynquence().or(error)
-            .then(redirect)
-            .then(prepare)
-            .then(findItem)
-            .then(checkItem)
-            .val(success);
+        }
     }
 }
 

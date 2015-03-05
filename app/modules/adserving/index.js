@@ -48,7 +48,7 @@ function getSettings() {
         }
 
         _.extend(settings, {
-            enabled: true,
+            enabled: !!settings.params.number,
             service: service,
             seo: this.config.seo || 0
         });
@@ -63,6 +63,7 @@ function extendConfig(defaults, extras) {
 
     extended = _.extend({}, defaults, extras);
     extended.params = _.extend({}, defaults.params || {}, extras.params || {});
+
     return extended;
 }
 
@@ -74,7 +75,9 @@ function createChannels(service) {
     var configService = utils.get(configAdServing, [service, 'default'], {});
     var countryCode = this.app.session.get('location').abbreviation;
     var prefix = configService.options.channel.replace('[countrycode]', countryCode);
+    var prefixMobile = prefix.replace('_', 'MW_');
     var currentRoute = this.app.session.get('currentRoute');
+    var currentPlatform = this.app.session.get('platform');
     var currentRouteAction = currentRoute.action;
     var channels = [];
     var configChannel;
@@ -82,6 +85,13 @@ function createChannels(service) {
 
     if (slotname === 'listing_noresult' && currentRoute.controller === 'searches' && currentRoute.action === 'search') {
         currentRouteAction = 'noresult';
+    }
+
+    if (currentPlatform !== 'desktop') {
+        channels.push(prefix);
+        channels.push(prefixMobile);
+
+        return channels.join(',');
     }
 
     configChannel = utils.get(configAdServing, ['channels', 'page', [currentRoute.controller, currentRouteAction].join('#')], {});
@@ -121,12 +131,12 @@ function getClientId(service) {
     return clientId.join('-');
 }
 
-function getNumberPerCategory(service){
+function getNumberPerCategory(service) {
     var number = this.config.params.number;
     var cat = getCategoryId.call(this);
 
-    if (service !== 'CSA') {
-        return number || 1;
+    if (service === 'ADX') {
+        return typeof number === 'undefined' ? 1 : number;
     }
     if (!cat) {
         cat = this.app.session.get('currentRoute').action;
@@ -238,8 +248,8 @@ function getConfig() {
     var configService = utils.get(configAdServing, configMarket.service, {});
     var configFormatDefault = utils.get(configService, 'default', {});
     var configFormat = utils.get(configService, configMarket.format, {});
-    var configFormats = extendConfig(configFormat, configFormatDefault);
-    var configResult = extendConfig(configMarket, configFormats);
+    var configFormats = extendConfig(configFormatDefault, configFormat);
+    var configResult = extendConfig(configFormats, configMarket);
 
     return extendConfig(configResult, {
         enabled: configService.enabled,

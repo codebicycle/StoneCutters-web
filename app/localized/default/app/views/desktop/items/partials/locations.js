@@ -1,7 +1,7 @@
 'use strict';
 
-var Base = require('../../../../../../common/app/bases/view');
 var _ = require('underscore');
+var Base = require('../../../../../../common/app/bases/view');
 var helpers = require('../../../../../../../helpers');
 var Filters = require('../../../../../../../modules/filters');
 
@@ -49,33 +49,31 @@ module.exports = Base.extend({
         event.stopImmediatePropagation();
 
         var path = this.getPath('path');
-        var filtersId = '';
         var $neighborhoods = $('.neighborhood-list .neighborhoods input:checked');
+        var redirect = false;
+        var neighborhoods = [];
         var filter = {
             name: 'neighborhood',
             type: 'SELECT'
         };
 
-        if (this.filters.isActive(filter.name) && !$neighborhoods.length ) {
+        if (this.filters.isActive(filter.name) && !$neighborhoods.length) {
             this.filters.remove(filter);
-            path = [path.split('/-').shift(), '/', this.filters.format()].join('');
-            path = this.refactorPath(path);
-            path = helpers.common.link(path, this.app);
-            this.app.router.redirectTo(path);
+            redirect = true;
         }
         else if ($neighborhoods.length > 0) {
-            $neighborhoods.each(function (index) {
-                if (index === $neighborhoods.length - 1) {
-                    filtersId += $(this).val();
-                }
-                else {
-                    filtersId += $(this).val() + '_';
-                }
+            $neighborhoods.each(function eachNeighborhoods(index) {
+                neighborhoods.push(_.extend({
+                    value: $(this).val()
+                }, filter));
             });
-
             this.filters.remove(filter);
-            filter.value = filtersId;
-            this.filters.add(filter);
+            _.each(neighborhoods, function eachFilters(filter) {
+                this.filters.add(filter);
+            }, this);
+            redirect = true;
+        }
+        if (redirect) {
             path = [path.split('/-').shift(), '/', this.filters.format()].join('');
             path = this.refactorPath(path);
             path = helpers.common.link(path, this.app);
@@ -87,11 +85,10 @@ module.exports = Base.extend({
         event.stopPropagation();
         event.stopImmediatePropagation();
 
-        var $target = $(event.currentTarget);
-        var $activeNeighborhoodsList = $('.active-neighborhoods');
-        var $neighborhoodList = $('.neighborhood-list');
         var $activeNeighborhoods = $('.neighborhood-list .neighborhoods input:checked');
         var $neighborhoods = $('.neighborhood-list .neighborhoods input');
+        var $activeNeighborhoodsList = $('.active-neighborhoods');
+        var $neighborhoodList = $('.neighborhood-list');
 
         if ($activeNeighborhoods.length === $neighborhoods.length) {
             $('.neighborhood-list .select-all input')[0].checked = true;
@@ -100,7 +97,6 @@ module.exports = Base.extend({
         $activeNeighborhoodsList.slideUp( function() {
             $neighborhoodList.slideDown();
         });
-
     },
     toggleNeighborhoods: function(event) {
         event.preventDefault();

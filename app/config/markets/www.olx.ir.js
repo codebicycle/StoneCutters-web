@@ -10,10 +10,19 @@ module.exports = {
             myMsgs: 15
         }
     },
-    tracking: {
-        trackers: {
-            analytics: {
-                enabled: false
+    adserving: {
+        enabled: false,
+        slots: {
+            listing: {
+                mobiletop: {
+                    service: 'none'
+                },
+                mobilebottom: {
+                    service: 'none'
+                },
+                mobilenoresult: {
+                    service: 'none'
+                }
             }
         }
     }

@@ -152,6 +152,14 @@ module.exports = {
     myadsphp: function(params, callback) {
         helpers.common.redirect.call(this, '/myolx/myadslisting');
     },
+    unsubscribe: function(params, callback) {
+        params.hash = params.hash.replace(/ /g,'+');
+        helpers.common.redirect.call(this, 'myolx/conversation/unsubscribe/' + encodeURIComponent(params.hash));
+    },
+    report: function(params, callback) {
+        params.hash = params.hash.replace(/ /g,'+');
+        helpers.common.redirect.call(this, 'myolx/conversation/report/' + encodeURIComponent(params.hash));
+    },
     php: function(params, callback) {
         if (_.contains(phpPaths, params.path)) {
             return helpers.common.redirect.call(this, this.app.session.get('url').replace(params.path + '.php', phpRedirections[params.path]));

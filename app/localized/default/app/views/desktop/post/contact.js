@@ -15,8 +15,14 @@ module.exports = Base.extend({
         'click [data-modal-close]': 'onCloseModal',
         'click .open-modal': 'onOpenModal',
         'click [data-modal-shadow]': 'onCloseModal',
+        'change [name="phone"]': 'onPhoneChange',
         'fieldsChange': 'onFieldsChange',
         'formRendered': 'onFormRendered'
+    },
+    onPhoneChange: function(event) {
+        var $phone = $(event.target);
+
+        $phone.val($phone.val().replace(/[^\d]/gi, ''));
     },
     onChange: function(event, options) {
         event.preventDefault();

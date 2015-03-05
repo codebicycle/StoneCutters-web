@@ -1,6 +1,8 @@
 'use strict';
 
 var _ = require('underscore');
+var qs = require('querystring');
+var URLParser = require('url');
 var configTracking = require('../config');
 var config = require('../../../../shared/config');
 var utils = require('../../../../shared/utils');
@@ -241,16 +243,37 @@ function getConfig(options) {
     return config;
 }
 
+function checkXtor() {
+    var query = URLParser.parse(this.app.session.get('url')).query;
+
+    if (query) {
+        query = utils.keysToLowerCase(qs.parse(query));
+        if (query.xtor) {
+            this.app.session.persist({
+                xtor: query.xtor
+            }, {
+                maxAge: utils.HOUR
+            });
+            return true;
+        }
+    }
+    return false;
+}
+
 function pageview(params, options) {
     var config = getConfig.call(this, options);
-
-    return utils.params(['http://', config.logServer, '.ati-host.net/hit.xiti'].join(''), {
+    var query = {
         s: config.siteId,
         stc: params.custom,
         idclient: params.clientId,
         ref: params.referer,
         na: Math.round(Math.random() * 1000000)
-    });
+    };
+
+    if (params.xtor) {
+        query.xtor = params.xtor;
+    }
+    return utils.params(['http://', config.logServer, '.ati-host.net/hit.xiti'].join(''), query);
 }
 
 function event(params, options) {
@@ -273,6 +296,7 @@ module.exports = {
     isServerEnabled: isServerEnabled,
     isClientEnabled: isClientEnabled,
     getParams: getParams,
+    checkXtor: checkXtor,
     pageview: pageview,
     event: event
 };

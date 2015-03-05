@@ -22,14 +22,14 @@ module.exports = Base.extend({
     },
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
-        var isNotOwner = false;
+        var showContact = true;
 
-        if (data.item.user !== null && this.app.session.get('user') && this.app.session.get('user').userId !== data.item.user.id) {
-            isNotOwner = true;
+        if (data.item.user !== null && this.app.session.get('user') && this.app.session.get('user').userId === parseInt(data.item.user.id)) {
+            showContact = false;
         }
         return _.extend({}, data, {
             newItemPage: helpers.features.isEnabled.call(this, 'newItemPage'),
-            isNotOwner:  isNotOwner
+            showContact:  showContact
         });
     },
     postRender: function() {
@@ -104,13 +104,6 @@ module.exports = Base.extend({
                 }
             }
         };
-
-        var relatedAds = this.$('.swiper-related').swiper({
-            visibilityFullFit: true,
-            slidesPerView: 'auto',
-            preventLinks:false,
-            mode:'horizontal'
-        });
     },
     showOnePicture: function(e) {
         e.preventDefault();

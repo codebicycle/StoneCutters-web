@@ -2,6 +2,7 @@
 
 module.exports = function trackingRouter(app, dataAdapter) {
     var _ = require('underscore');
+    var qs = require('querystring');
     var restler = require('restler');
     var statsd  = require('../modules/statsd')();
     var Sixpack = require('../../shared/sixpack');
@@ -51,7 +52,7 @@ module.exports = function trackingRouter(app, dataAdapter) {
             .on('success', function success() {
                 statsd.increment([req.query.locIso || 'all', 'tracking', type, tracker, platform, 'success']);
             })
-            .on('fail', function fail() {
+            .on('fail', function fail(err) {
                 statsd.increment([req.query.locIso || 'all', 'tracking', type, tracker, platform, 'fail']);
             })
             .on('error', function error() {
@@ -145,7 +146,13 @@ module.exports = function trackingRouter(app, dataAdapter) {
                 platform: ctx.app.session.get('platform'),
                 location: (location ? location.url : '') || ctx.req.query.locUrl
             };
-            var url = tracking.ati.pageview.call(ctx, params, config);
+            var xtor = ctx.req.query.xtor;
+            var url;
+
+            if (xtor) {
+                params.xtor = xtor;
+            }
+            url = tracking.ati.pageview.call(ctx, params, config);
 
             track(ctx.req, url, 'pageview', 'ati');
         }
@@ -274,7 +281,7 @@ module.exports = function trackingRouter(app, dataAdapter) {
             var params = {
                 clientId: ctx.app.session.get('clientId').substr(24),
                 custom: ctx.req.query.custom,
-                url: utils.fullizeUrl(helpers.common.static.call(ctx, ctx.req.query.url), ctx.app)
+                url: utils.fullizeUrl(ctx.req.query.url, ctx.app)
             };
             var config = {
                 platform: ctx.app.session.get('platform'),

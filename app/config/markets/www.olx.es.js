@@ -24,6 +24,42 @@ module.exports = {
             }
         ]
     },
+    adserving: {
+        enabled: true,
+        slots: {
+            listing: {
+                mobiletop: {
+                    service: 'ADX',
+                    format: 'HalfBanner',
+                    language: 'es',
+                    location: 'Top',
+                    params: {
+                        slotId: 9904443106
+                    }
+                },
+                side: {
+                    service: 'ADX',
+                    format: 'WideSkyscraper',
+                    language: 'es',
+                    location: 'Side',
+                    params: {
+                        slotId: 9904443106
+                    }
+                }
+            },
+            item: {
+                side: {
+                    service: 'ADX',
+                    format: 'MediumRectangle',
+                    language: 'es',
+                    location: 'Side',
+                    params: {
+                        slotId: 8287982506
+                    }
+                }
+            }
+        }
+    },
     featured: {
         enabled: true
     }

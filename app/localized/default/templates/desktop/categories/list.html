@@ -1,10 +1,20 @@
 <section id="marketing-top">
-    {% view 'categories/partials/country-area' %}
-    {% if videos %}
-        {% view 'marketing/bannervideo' %}
+
+    {% if marketing.home_banner %}
+        {% include (template + '/marketing/home/' + marketing.home_banner.template + '.html') %}
     {% else %}
-        {% include (template + '/marketing/marketing-box-sell.html') %}
+        {% view 'categories/partials/country-area' %}
+        {% if marketing.videos %}
+            {% view 'marketing/bannervideo' %}
+        {% elif marketing.home_block_banner_image %}
+            {% include (template + '/marketing/box-image.html') %}
+        {% elif marketing.home_block_banner_top %}
+            {% include (template + '/marketing/marketing-box-sell-za.html') %}
+        {% else %}
+            {% include (template + '/marketing/marketing-box-sell.html') %}
+        {% endif %}
     {% endif %}
+
 </section>
 {% if items and items.length > 0 %}
     {% include (template + '/featured/home.html') %}
@@ -22,8 +32,11 @@
 {% endif %}
 
 {% include (template + '/modals/location.html') %}
-{% if videos %}
+
+{% if marketing.videos %}
     {% include (template + '/modals/videogallery.html') %}
 {% endif %}
-{% view 'partials/tracking' %}
 
+{% view 'partials/chat' %}
+
+{% view 'partials/tracking' %}

@@ -30,18 +30,20 @@ module.exports = {
             maxPageSize: 26
         }
     },
-    staticAccept: ['css', 'js'],
+    staticAccept: ['css', 'js', 'apk', 'zip'],
     imageAccept: ['jpg', 'jpeg', 'png', 'gif', 'ico'],
     environment: {
         type: 'staging',
         staticPath: 'http://static01.olx-st.com/mobile-webapp',
-        imagePath: 'http://images01.olx-st.com/mobile-webapp'
+        imagePath: 'http://images01.olx-st.com/mobile-webapp',
+        staticPathIris: 'http://static01.olx-st.ir/mobile-webapp',
+        imagePathIris: 'http://images01.olx-st.ir/mobile-webapp'
     },
     localization: {
         wap: ['www.olx.co.za', 'www.olx.ir', 'www.olx.hn'],
         html4: ['www.olx.co.za', 'www.olx.ir', 'www.olx.hn'],
         html5: ['www.olx.ir', 'www.olx.hn'],
-        desktop: ['www.olx.com.bo']
+        desktop: ['www.olx.co.za', 'www.olx.com.bo']
     },
     icons: {
         wap: ['www.olx.com.ar', 'www.olx.com.bd', 'www.olx.cm', 'www.olx.com.co', 'www.olx.com.ec', 'www.olx.com.sv', 'www.olx.com.gh', 'www.olx.com.gt', 'www.olx.in', 'www.olx.co.ke', 'www.olx.com.ng', 'www.olx.com.pe', 'www.olx.sn', 'www.olx.co.za', 'www.olx.com.ve', 'www.olx.com.pk', 'www.olx.co.ug', 'www.olx.com.uy', 'www.olx.ir'],
@@ -52,7 +54,7 @@ module.exports = {
         wap: ['www.jaovat.com', 'www.olx.fr', 'www.olx.es', 'www.olx.ir', 'www.olx.cl', 'www.olx.com.uy', 'www.olx.com.py', 'www.olx.com.pe', 'www.olx.com.ve', 'www.olx.com.co', 'www.olx.com.ec', 'www.olx.com.pa', 'www.olx.co.cr', 'www.olx.com.ni', 'www.olx.hn', 'www.olx.com.sv', 'www.olx.com.gt', 'www.olx.com.mx', 'www.olx.com.bo', 'www.olx.com.ar'],
         html4: ['www.jaovat.com', 'www.olx.fr', 'www.olx.es', 'www.olx.ir', 'www.olx.cl', 'www.olx.com.uy', 'www.olx.com.py', 'www.olx.com.pe', 'www.olx.com.ve', 'www.olx.com.co', 'www.olx.com.ec', 'www.olx.com.pa', 'www.olx.co.cr', 'www.olx.com.ni', 'www.olx.hn', 'www.olx.com.sv', 'www.olx.com.gt', 'www.olx.com.mx', 'www.olx.com.bo', 'www.olx.com.ar'],
         html5: ['www.jaovat.com', 'www.olx.fr', 'www.olx.es', 'www.olx.ir', 'www.olx.cl', 'www.olx.com.uy', 'www.olx.com.py', 'www.olx.com.pe', 'www.olx.com.ve', 'www.olx.com.co', 'www.olx.com.ec', 'www.olx.com.pa', 'www.olx.co.cr', 'www.olx.com.ni', 'www.olx.hn', 'www.olx.com.sv', 'www.olx.com.gt', 'www.olx.com.mx', 'www.olx.com.bo', 'www.olx.com.ar'],
-        desktop: ['www.jaovat.com', 'www.olx.com.bo', 'www.olx.cl', 'www.olx.com.uy', 'www.olx.com.py', 'www.olx.com.pe', 'www.olx.com.ve', 'www.olx.com.co', 'www.olx.com.ec', 'www.olx.com.pa', 'www.olx.co.cr', 'www.olx.com.ni', 'www.olx.hn', 'www.olx.com.sv', 'www.olx.com.gt', 'www.olx.com.mx', 'www.olx.com.bo']
+        desktop: ['www.jaovat.com', 'www.olx.com.ar', 'www.olx.com.bo', 'www.olx.cl', 'www.olx.com.uy', 'www.olx.com.py', 'www.olx.com.pe', 'www.olx.com.ve', 'www.olx.com.co', 'www.olx.com.ec', 'www.olx.com.pa', 'www.olx.co.cr', 'www.olx.com.ni', 'www.olx.hn', 'www.olx.com.sv', 'www.olx.com.gt', 'www.olx.com.mx', 'www.olx.com.bo', 'www.olx.es']
     },
     disablePostingButton: {
         wap: ['home', 'post', 'location'],
@@ -64,7 +66,8 @@ module.exports = {
         clicks: 0,
         time: 432000000,
         ignorePath: ['/closed', '/login', '/interstitial', '/500', '/esi', '/posting', '/posting/success', /^\/health(\/.*)?$/, /^\/force(\/.*)?$/, /^\/stats(\/.*)?$/, /^\/tracking(\/.*)?$/, /^\/posting(\/\d+)?(\/\d+)?$/],
-        ignorePlatform: ['wap', 'desktop']
+        ignorePlatform: ['wap', 'desktop'],
+        ignoreLocation: ['www.olx.co.za', 'www.olx.ir', 'www.olx.com.bd', 'www.olx.com.mx', 'www.olx.cl']
     },
     cache: {
         enabled: true,
@@ -122,9 +125,13 @@ module.exports = {
                 worldwide: false,
                 countries: []
             },
-            newItemPage: {
+            hermes: {
                 worldwide: false,
-                countries: ['www.olx.com.bo']
+                countries: ['www.olx.cl', 'www.olx.com.mx', 'www.olx.com.ve', 'www.olx.com.gt', 'www.olx.com.pe', 'www.olx.com.sv', 'www.olx.com.ec', 'www.olx.com.co', 'www.olx.co.za', 'www.olx.com.ar', 'www.olx.com.uy']
+            },
+            newItemPage: {
+                worldwide: true,
+                countries: ['www.olx.ir']
             },
             optimizely: {
                 worldwide: false,
@@ -138,9 +145,13 @@ module.exports = {
             }
         },
         desktop: {
+            hermes: {
+                worldwide: false,
+                countries: ['www.olx.com.ar', 'www.olx.com.co', 'www.olx.co.za', 'www.olx.com.uy', 'www.olx.com.sv', 'www.olx.com.gt', 'www.olx.com.ve', 'www.olx.com.ec', 'www.olx.com.pe']
+            },
             contactForm: {
                 worldwide: false,
-                countries: ['www.olx.co.cr', 'www.olx.com.uy', 'www.olx.com.pa']
+                countries: ['www.olx.co.cr', 'www.olx.com.uy', 'www.olx.com.pa', 'www.olx.co.ug', 'www.olx.co.tz', 'www.olx.com.pe', 'www.olx.com.sv', 'www.olx.com.ec', 'www.olx.com.ve', 'www.olx.com.uy', 'www.olx.com.ar', 'www.olx.com.co', 'www.olx.com.gt', 'www.olx.sn', 'www.olx.cm', 'www.olx.com.gh', 'www.olx.it', 'www.olx.ae', 'www.olx.fr', 'www.olx.es', 'www.olx.com', 'www.olx.com.bo', 'www.olx.com.py', 'www.olx.com.ni', 'www.olx.hn', 'www.olx.co.za', 'www.olx.co.ke']
             },
             optimizely: {
                 worldwide: false,
@@ -263,6 +274,135 @@ module.exports = {
             'default':'legal',
             'www.olx.com.ng': 'support-ng',
             'www.olx.com.ke': 'support-ke'
+        },
+        zendesk: {
+            'default': {
+                subdomain: 'olxla',
+                brand_id: 195655
+            },
+            'www.olx.co.cr': {
+                subdomain: 'olxcr',
+                brand_id: 300699
+            },
+            'www.olx.it': {
+                subdomain: 'olxmilk',
+                brand_id: 304905
+            },
+            'www.olx.ae': {
+                subdomain: 'olxmilk',
+                brand_id: 304905
+            },
+            'www.olx.fr': {
+                subdomain: 'olxmilk',
+                brand_id: 304905
+            },
+            'www.olx.es': {
+                subdomain: 'olxmilk',
+                brand_id: 304905
+            },
+            'www.olx.cl': {
+                subdomain: 'olxmilk',
+                brand_id: 304905
+            },
+            'www.olx.com': {
+                subdomain: 'olxmilk',
+                brand_id: 304905
+            },
+            'www.olx.com.mx': {
+                subdomain: 'olxmilk',
+                brand_id: 304905
+            },
+            'www.olx.com.eg': {
+                subdomain: 'olxmilk',
+                brand_id: 304905
+            },
+            'www.olxtunisie.com': {
+                subdomain: 'olxmilk',
+                brand_id: 304905
+            },
+            'www.jaovat.com': {
+                subdomain: 'olxmilk',
+                brand_id: 304905
+            },
+            'www.olx.com.bo': {
+                subdomain: 'olxmilk',
+                brand_id: 304905
+            },
+            'www.olx.com.py': {
+                subdomain: 'olxmilk',
+                brand_id: 304905
+            },
+            'www.olx.com.ar': {
+                subdomain: 'olxar',
+                brand_id: 304755
+            },
+            'www.olx.com.co': {
+                subdomain: 'olxco',
+                brand_id: 304915
+            },
+            'www.olx.com.ec': {
+                subdomain: 'olxec',
+                brand_id: 304925
+            },
+            'www.olx.com.gt': {
+                subdomain: 'olxgt',
+                brand_id: 304935
+            },
+            'www.olx.com.ni': {
+                subdomain: 'olxmilk',
+                brand_id: 304905
+            },
+            'www.olx.com.pa': {
+                subdomain: 'olxpa',
+                brand_id: 304945
+            },
+            'www.olx.com.pe': {
+                subdomain: 'olxpe',
+                brand_id: 304955
+            },
+            'www.olx.com.sv': {
+                subdomain: 'olxsv',
+                brand_id: 304965
+            },
+            'www.olx.com.uy': {
+                subdomain: 'olxuy',
+                brand_id: 300729
+            },
+            'www.olx.com.ve': {
+                subdomain: 'olxve',
+                brand_id: 300739
+            },
+            'www.olx.hn': {
+                subdomain: 'olxmilk',
+                brand_id: 304905
+            },
+            'www.olx.co.ke': {
+                subdomain: 'olxke',
+                brand_id: 288292
+            },
+            'www.olx.co.ug': {
+                subdomain: 'olxug',
+                brand_id: 483591
+            },
+            'www.olx.co.tz': {
+                subdomain: 'olxtz',
+                brand_id: 483601
+            },
+            'www.olx.com.gh': {
+                subdomain: 'olxgh',
+                brand_id: 485691
+            },
+            'www.olx.sn': {
+                subdomain: 'olxsn',
+                brand_id: 295132
+            },
+            'www.olx.cm': {
+                subdomain: 'olxcm',
+                brand_id: 485671
+            },
+            'www.olx.co.za': {
+                subdomain: 'olxsa'
+            }
         }
     },
     migration: {
@@ -283,6 +423,11 @@ module.exports = {
         'www.olx.com.bd': {
             stage: 1,
             banner: true
+        }
+    },
+    iris: {
+        direct: {
+            enabled: true
         }
     }
 };
