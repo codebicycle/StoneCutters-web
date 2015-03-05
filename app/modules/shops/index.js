@@ -32,7 +32,7 @@ Shops.prototype.getExperiment = function() {
 Shops.prototype.getAlternativeName = function() {
 	var experiment = this.getExperiment();
 
-	if (experiment.alternative) {
+	if (experiment && experiment.alternative) {
 		return experiment.alternative;
 	}
 	return '';
