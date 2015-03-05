@@ -168,6 +168,7 @@ module.exports = {
     'supportform.VerificationCode': 'Code de V\xE9rification:',
     'seccion-30.478': 'Retirer l\'annonce',
     'seccion-40.1528': 'Modifier',
+    'seccion-36.102433': 'Vue',
     'seccion-31.454': 'Endroit:',
     'seccion-35.559': 'Email',
     'distancediv.changeLocation': 'Modifier l\'Emplacement',

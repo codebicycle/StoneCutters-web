@@ -168,6 +168,7 @@ module.exports = {
     'supportform.VerificationCode': 'M\xE3 x\xE1c nh\u1EADn: ',
     'seccion-30.478': 'G\u1EE1 b\u1ECF+Danh m\u1EE5c',
     'seccion-40.1528': 'Bi\xEAn t\u1EADp',
+    'seccion-36.102433': 'Xem',
     'seccion-31.454': '\u0110\u1ECBa \u0111i\u1EC3m:',
     'seccion-35.559': 'Email',
     'distancediv.changeLocation': 'Thay \u0111\u1ED5i v\u1ECB tr\xED',

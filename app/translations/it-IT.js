@@ -168,6 +168,7 @@ module.exports = {
     'supportform.VerificationCode': 'Codice di Verifica: ',
     'seccion-30.478': 'Eliminare annuncio',
     'seccion-40.1528': 'modifica',
+    'seccion-36.102433': 'Vedere',
     'seccion-31.454': 'Posizione:',
     'seccion-35.559': 'Email',
     'distancediv.changeLocation': 'Cambia regione',
