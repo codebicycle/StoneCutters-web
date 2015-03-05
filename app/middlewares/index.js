@@ -9,7 +9,8 @@ var middlewares = {
     location: require('./location'),
     languages: require('./languages'),
     interstitial: require('./interstitial'),
-    dependencies: require('./dependencies')
+    dependencies: require('./dependencies'),
+    search: require('./search')
 };
 
 module.exports = function(controller, exclude) {
@@ -48,7 +49,8 @@ module.exports = function(controller, exclude) {
             data = _.extend(json ? this.dependencies.toJSON() : _.omit(this.dependencies, 'toJSON'), data, {
                 include: this.include.concat((data || {}).include || []),
                 seo: this.app.seo,
-                tracking: tracking.generateURL.call(this)
+                tracking: tracking.generateURL.call(this),
+                search: params.search
             });
             if (!view) {
                 callback(err, data);
