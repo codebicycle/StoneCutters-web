@@ -5,7 +5,6 @@ var asynquence = require('asynquence');
 var URLParser = require('url');
 var middlewares = require('../middlewares');
 var helpers = require('../helpers');
-var tracking = require('../modules/tracking');
 var Paginator = require('../modules/paginator');
 var FeatureAd = require('../models/feature_ad');
 var config = require('../../shared/config');
@@ -155,8 +154,8 @@ function search(params, callback, gallery) {
             this.app.seo.addMetatag('robots', 'noindex, nofollow');
             this.app.seo.addMetatag('googlebot', 'noindex, nofollow');
 
-            tracking.addParam('keyword', query.search);
-            tracking.addParam('page_nb', 0);
+            this.app.tracking.set('keyword', query.search);
+            this.app.tracking.set('page_nb', 0);
 
             done();
         }
@@ -243,13 +242,13 @@ function search(params, callback, gallery) {
                 this.app.seo.addMetatag('googlebot', 'noindex, nofollow');
             }
 
-            tracking.addParam('page_nb', items.meta.totalPages);
-            tracking.addParam('section', query.categoryId);
-            tracking.addParam('page', page);
-            tracking.addParam('category', _category);
-            tracking.addParam('subcategory', _subcategory);
-            tracking.addParam('filters', items.filters);
-            tracking.addParam('paginator', items.paginator);
+            this.app.tracking.set('page_nb', items.meta.totalPages);
+            this.app.tracking.set('section', query.categoryId);
+            this.app.tracking.set('page', page);
+            this.app.tracking.set('category', _category);
+            this.app.tracking.set('subcategory', _subcategory);
+            this.app.tracking.set('filters', items.filters);
+            this.app.tracking.set('paginator', items.paginator);
 
             this.app.session.update({
                 dataPage: {
@@ -360,8 +359,8 @@ function statics(params, callback) {
             delete params.page;
             delete params.filters;
 
-            tracking.addParam('keyword', query.search);
-            tracking.addParam('page_nb', 0);
+            this.app.tracking.set('keyword', query.search);
+            this.app.tracking.set('page_nb', 0);
 
             if (!query.search || _.isEmpty(query.search.trim())) {
                 this.app.seo.addMetatag('robots', 'noindex, follow');
@@ -470,12 +469,12 @@ function statics(params, callback) {
                 this.app.seo.addMetatag('googlebot', 'noindex, follow');
             }
 
-            tracking.addParam('keyword', query.search);
-            tracking.addParam('page_nb', items.paginator.get('totalPages'));
-            tracking.addParam('category', _category);
-            tracking.addParam('subcategory', _subcategory);
-            tracking.addParam('filters', items.filters);
-            tracking.addParam('paginator', items.paginator);
+            this.app.tracking.set('keyword', query.search);
+            this.app.tracking.set('page_nb', items.paginator.get('totalPages'));
+            this.app.tracking.set('category', _category);
+            this.app.tracking.set('subcategory', _subcategory);
+            this.app.tracking.set('filters', items.filters);
+            this.app.tracking.set('paginator', items.paginator);
 
             this.app.session.update({
                 dataPage: {
@@ -632,9 +631,9 @@ function allresults(params, callback, gallery) {
             this.app.seo.addMetatag('robots', 'noindex, nofollow');
             this.app.seo.addMetatag('googlebot', 'noindex, nofollow');
 
-            tracking.addParam('page_nb', meta.totalPages);
-            tracking.addParam('filters', items.filters);
-            tracking.addParam('paginator', items.paginator);
+            this.app.tracking.set('page_nb', meta.totalPages);
+            this.app.tracking.set('filters', items.filters);
+            this.app.tracking.set('paginator', items.paginator);
 
             callback(null, {
                 categories: this.dependencies.categories.toJSON(),

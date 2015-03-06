@@ -4,7 +4,7 @@ var _ = require('underscore');
 var asynquence = require('asynquence');
 var Base = require('../../../../../../common/app/bases/view');
 var User = require('../../../../../../../models/user');
-var tracking = require('../../../../../../../modules/tracking');
+var Tracking = require('../../../../../../../modules/tracking');
 var helpers = require('../../../../../../../helpers');
 var translations = require('../../../../../../../../shared/translations');
 var statsd = require('../../../../../../../../shared/statsd')();
@@ -111,19 +111,25 @@ module.exports = Base.extend({
         var categories = this.parentView.getCategories();
         var subcategory = categories.search(item.get('category').id);
         var category = categories.search(item.get('category').parentId) || subcategory;
+        var tracking = new Tracking({}, {
+            app: this.app
+        });
 
-        tracking.reset();
         tracking.setPage('items#success');
-        tracking.addParam('item', item.toJSON());
-        tracking.addParam('category', category.toJSON());
-        tracking.addParam('subcategory', subcategory.toJSON());
-        $('#partials-tracking-view').trigger('update', tracking.generateURL.call(this));
+        tracking.set('item', item.toJSON());
+        tracking.set('category', category.toJSON());
+        tracking.set('subcategory', subcategory.toJSON());
+        tracking.generate(onTrackData.bind(this));
 
         this.track({
             category: 'Reply',
             action: 'ReplySuccess',
             custom: ['Reply', item.get('category').parentId, item.get('category').id, 'ReplySuccess', this.reply.id].join('::')
         });
+
+        function onTrackData(trackingData) {
+            $('#partials-tracking-view').trigger('update', trackingData);
+        }
     },
     validate: function(field) {
         var name = field.attr('name');
