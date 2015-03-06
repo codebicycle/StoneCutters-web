@@ -20,8 +20,9 @@ module.exports = Base.extend({
         event.stopImmediatePropagation();
 
         var search = this.$('form').find('[name=search]').val();
+        var url = search ? ('/nf/search/' + search) : '/nf/all-results';
 
-        helpers.common.redirect.call(this.app.router, '/nf/search' + (search ? ('/' + search) : ''), null, {
+        helpers.common.redirect.call(this.app.router, url, null, {
             status: 200
         });
     }
