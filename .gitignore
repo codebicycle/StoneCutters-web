@@ -43,3 +43,6 @@ tests/report.xml
 public/images/*/icons
 
 .idea
+
+mapping_hosts.js
+*.hosts
