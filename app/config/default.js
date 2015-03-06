@@ -284,7 +284,7 @@ module.exports = {
         legal: {
             'default':'legal',
             'www.olx.com.ng': 'support-ng',
-            'www.olx.com.ke': 'support-ke'
+            'www.olx.co.ke': 'support-ke'
         },
         zendesk: {
             'default': {
