@@ -8,7 +8,6 @@ var keyade = require('./keyade');
 var hydra = require('./hydra');
 var tagmanager = require('./tagmanager');
 var allpages = require('./allpages');
-var facebook = require('./facebook');
 var ninja = require('./ninja');
 var adroll = require('./adroll');
 var esi = require('../../esi');
@@ -20,7 +19,6 @@ var trackers = {
     hydra: hydra,
     tagmanager: tagmanager,
     allpages: allpages,
-    facebook: facebook,
     adroll: adroll
 };
 

@@ -161,10 +161,6 @@ module.exports = {
                 enabled: false,
                 platforms: ['desktop']
             },
-            facebook: {
-                enabled: false,
-                platforms: ['html4', 'html5']
-            },
             allpages: {
                 enabled: false,
                 platforms: ['html4', 'html5']
@@ -174,6 +170,7 @@ module.exports = {
             },
             ninja: {
                 enabled: true,
+                platforms: ['desktop'],
                 noscript: {
                     platforms: ['wap', 'html4']
                 }
