@@ -3,7 +3,6 @@
 var asynquence = require('asynquence');
 var middlewares = require('../middlewares');
 var helpers = require('../helpers');
-var tracking = require('../modules/tracking');
 var config = require('../../shared/config');
 
 module.exports = {
@@ -39,7 +38,7 @@ function list(params, callback) {
                 this.app.seo.addMetatag('googlebot', 'noindex, follow');
             }
             if (params.target && params.target === 'posting') {
-                tracking.setPage('post#location');
+                this.app.tracking.setPage('post#location');
                 this.app.seo.addMetatag('robots', 'noindex, nofollow');
                 this.app.seo.addMetatag('googlebot', 'noindex, nofollow');
             }
