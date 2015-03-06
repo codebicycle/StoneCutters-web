@@ -12,6 +12,7 @@ module.exports = Base.extend({
     id: 'posting-description-view',
     className: 'posting-description-view',
     events: {
+        'change [name=description]': 'onDescriptionChange',
         'change': 'onChange',
         'keyup [name=title]': 'characterCount',
         'validate': 'onValidate'
@@ -27,9 +28,7 @@ module.exports = Base.extend({
         }
     },
     postRender: function() {
-        var $description = this.$('[name=description]');
-
-        $description.val(S($description.val()).stripTags().s);
+        this.onDescriptionChange();
     },
     onChange: function(event) {
         event.preventDefault();
@@ -41,6 +40,11 @@ module.exports = Base.extend({
         if (this.validate($field)) {
             this.parentView.$el.trigger('fieldSubmit', [$field]);
         }
+    },
+    onDescriptionChange: function() {
+        var $description = this.$('[name=description]');
+
+        $description.val(S($description.val()).stripTags().s);
     },
     onValidate: function(event, done, isValid) {
         event.preventDefault();
