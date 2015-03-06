@@ -479,6 +479,7 @@ function statics(params, callback) {
 
             this.app.session.update({
                 dataPage: {
+                    search: query.search,
                     category: _category ? _category.id : undefined,
                     subcategory: _subcategory ? _subcategory.id : undefined
                 }
