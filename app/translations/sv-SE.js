@@ -168,6 +168,7 @@ module.exports = {
     'supportform.VerificationCode': 'Verifikationskod:',
     'seccion-30.478': 'Radera+annons',
     'seccion-40.1528': 'Redigera',
+    'seccion-36.102433': 'Vy',
     'seccion-31.454': 'Ort:',
     'seccion-35.559': 'E-post',
     'distancediv.changeLocation': '\xC4ndra ort',

@@ -168,6 +168,7 @@ module.exports = {
     'supportform.VerificationCode': 'Verifikacioni k\xF4d:',
     'seccion-30.478': 'Ukloni oglas',
     'seccion-40.1528': 'uredi',
+    'seccion-36.102433': 'Prika\u017Ei',
     'seccion-31.454': 'Lokacija:',
     'seccion-35.559': 'E-adresa',
     'distancediv.changeLocation': 'Promenite lokaciju',

@@ -168,6 +168,7 @@ module.exports = {
     'supportform.VerificationCode': 'Kode Verifikasi:',
     'seccion-30.478': 'Hapus+Iklan',
     'seccion-40.1528': 'ubah',
+    'seccion-36.102433': 'lihat',
     'seccion-31.454': 'Lokasi:',
     'seccion-35.559': 'Email',
     'distancediv.changeLocation': 'Ganti lokasi',
