@@ -168,6 +168,7 @@ module.exports = {
     'supportform.VerificationCode': 'Potrditvena koda:',
     'seccion-30.478': 'Odstrani objavo',
     'seccion-40.1528': 'Urejanje',
+    'seccion-36.102433': 'Ogled',
     'seccion-31.454': 'Lokacija:',
     'seccion-35.559': 'E-po\u0161ta',
     'distancediv.changeLocation': 'Spremeni lokacijo',

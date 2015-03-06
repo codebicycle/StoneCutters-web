@@ -168,6 +168,7 @@ module.exports = {
     'supportform.VerificationCode': 'Verificatiecode: ',
     'seccion-30.478': 'Verwijder+Aadvertentie',
     'seccion-40.1528': 'bewerk',
+    'seccion-36.102433': 'toon',
     'seccion-31.454': 'Locatie:',
     'seccion-35.559': 'E-mail',
     'distancediv.changeLocation': 'Wijzig locatie',

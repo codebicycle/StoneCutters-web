@@ -168,6 +168,7 @@ module.exports = {
     'supportform.VerificationCode': '\u0AB5\u0AC7\u0AB0\u0ABF\u0AAB\u0ABF\u0A95\u0AC7\u0AB6\u0AA8 \u0A95\u0ACB\u0AA1:',
     'seccion-30.478': '\u0A9C\u0ABE\u0AB9\u0AC7\u0AB0\u0ABE\u0AA4\u0AA8\u0AC7 \u0AA6\u0AC2\u0AB0 \u0A95\u0AB0\u0ACB',
     'seccion-40.1528': '\u0A8F\u0AA1\u0ABF\u0A9F \u0A95\u0AB0\u0ACB',
+    'seccion-36.102433': '\u0A9C\u0AC1\u0A93',
     'seccion-31.454': '\u0AB8\u0ACD\u0AA5\u0AB3 :',
     'seccion-35.559': '\u0A87-\u0AAE\u0AC7\u0A87\u0AB2',
     'distancediv.changeLocation': '\u0AB8\u0ACD\u0AA5\u0AB3 \u0AAC\u0AA6\u0AB2\u0ACB',
