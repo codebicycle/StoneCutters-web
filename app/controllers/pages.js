@@ -302,7 +302,7 @@ function mobilepromo(params, callback) {
         }.bind(this);
 
         var error = function(err, res) {
-            return helpers.common.error.call(this, err, res, callback);
+            return helpers.common.redirect.call(this, '/');
         }.bind(this);
 
         asynquence().or(error)
