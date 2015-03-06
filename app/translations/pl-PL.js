@@ -168,6 +168,7 @@ module.exports = {
     'supportform.VerificationCode': 'Kod weryfikacyjny: ',
     'seccion-30.478': 'Usu\u0144+og\u0142oszenie',
     'seccion-40.1528': 'edytuj',
+    'seccion-36.102433': 'poka\u017C',
     'seccion-31.454': 'Lokalizacja:',
     'seccion-35.559': 'E-mail',
     'distancediv.changeLocation': 'Zmie\u0144 lokalizacj\u0119',

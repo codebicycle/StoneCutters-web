@@ -168,6 +168,7 @@ module.exports = {
     'supportform.VerificationCode': 'Onay Kodu: ',
     'seccion-30.478': '\u0130lan\u0131+Kald\u0131r',
     'seccion-40.1528': 'd\xFCzenle',
+    'seccion-36.102433': 'g\xF6r\xFCnt\xFClenme',
     'seccion-31.454': 'B\xF6lge:',
     'seccion-35.559': 'E-Posta',
     'distancediv.changeLocation': 'Yeri de\u011Fi\u015Ftir',

@@ -168,6 +168,7 @@ module.exports = {
     'supportform.VerificationCode': 'Kod Verifikasyon :',
     'seccion-30.478': 'Efase Anons',
     'seccion-40.1528': 'chanje',
+    'seccion-36.102433': 'Gade',
     'seccion-31.454': 'Katye: ',
     'seccion-35.559': 'Im\xE8l',
     'distancediv.changeLocation': 'Chanje kote an ',

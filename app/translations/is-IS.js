@@ -168,6 +168,7 @@ module.exports = {
     'supportform.VerificationCode': 'Sta\xF0festingark\xF3\xF0i:',
     'seccion-30.478': 'Fjarl\xE6gja augl\xFDsingu',
     'seccion-40.1528': 'Breyta',
+    'seccion-36.102433': 'Sko\xF0a',
     'seccion-31.454': 'Sta\xF0setning:',
     'seccion-35.559': 't\xF6lvup\xF3stur',
     'distancediv.changeLocation': 'Breyta sta\xF0setningu',

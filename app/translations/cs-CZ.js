@@ -168,6 +168,7 @@ module.exports = {
     'supportform.VerificationCode': 'Ov\u011B\u0159ovac\xED k\xF3d:',
     'seccion-30.478': 'Odstranit+z\xE1znam',
     'seccion-40.1528': 'upravit',
+    'seccion-36.102433': 'zobrazit',
     'seccion-31.454': 'M\xEDsto:',
     'seccion-35.559': 'E-mail',
     'distancediv.changeLocation': 'Zm\u011Bnit m\xEDsto',

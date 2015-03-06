@@ -168,6 +168,7 @@ module.exports = {
     'supportform.VerificationCode': 'C\xF3digo de Verifica\xE7\xE3o:',
     'seccion-30.478': 'Eliminar an\xFAncio.',
     'seccion-40.1528': 'edit',
+    'seccion-36.102433': 'ver',
     'seccion-31.454': 'Localiza\xE7\xE3o',
     'seccion-35.559': 'Email',
     'distancediv.changeLocation': 'Mudar a Localiza\xE7\xE3o',

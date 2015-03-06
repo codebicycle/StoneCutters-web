@@ -168,6 +168,7 @@ module.exports = {
     'supportform.VerificationCode': 'Vahvistuskoodi:',
     'seccion-30.478': 'Poista ilmoitus',
     'seccion-40.1528': 'Muokkaa',
+    'seccion-36.102433': 'Katsottu',
     'seccion-31.454': 'Sijainti:',
     'seccion-35.559': 's\xE4hk\xF6posti',
     'distancediv.changeLocation': 'muokkaa sijaintia',

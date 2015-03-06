@@ -168,6 +168,7 @@ module.exports = {
     'supportform.VerificationCode': 'Kinnituskood: ',
     'seccion-30.478': 'Eemalda+kuulutus',
     'seccion-40.1528': 'toimetage',
+    'seccion-36.102433': 'vaata',
     'seccion-31.454': 'Asukoht:',
     'seccion-35.559': 'E-post',
     'distancediv.changeLocation': 'Muutke asukohta',

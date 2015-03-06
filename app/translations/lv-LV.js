@@ -168,6 +168,7 @@ module.exports = {
     'supportform.VerificationCode': 'Verifik\u0101cijas kods: ',
     'seccion-30.478': 'Dz\u0113st sludin\u0101jumu',
     'seccion-40.1528': 'redi\u0123\u0113t',
+    'seccion-36.102433': 'skat\u012Bt',
     'seccion-31.454': 'Atra\u0161an\u0101s vieta:',
     'seccion-35.559': 'E-pasts',
     'distancediv.changeLocation': 'Main\u012Bt atra\u0161an\u0101s vietu',

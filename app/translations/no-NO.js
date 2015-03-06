@@ -168,6 +168,7 @@ module.exports = {
     'supportform.VerificationCode': 'Bekreftelseskode:',
     'seccion-30.478': 'Slett annonsen',
     'seccion-40.1528': 'Redigere',
+    'seccion-36.102433': 'Vis',
     'seccion-31.454': 'Sted:',
     'seccion-35.559': 'Epost',
     'distancediv.changeLocation': 'Endre sted',

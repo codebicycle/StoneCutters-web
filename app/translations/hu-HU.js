@@ -168,6 +168,7 @@ module.exports = {
     'supportform.VerificationCode': 'Ellen\u0151rz\u0151 k\xF3d:',
     'seccion-30.478': 'Hirdet\xE9s+t\xF6rl\xE9se',
     'seccion-40.1528': 'szerkeszt\xE9s',
+    'seccion-36.102433': 'megjelen\xEDt\xE9s',
     'seccion-31.454': 'Hely:',
     'seccion-35.559': 'E-mail',
     'distancediv.changeLocation': 'M\xE1s hely',

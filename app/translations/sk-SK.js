@@ -168,6 +168,7 @@ module.exports = {
     'supportform.VerificationCode': 'Overovac\xED k\xF3d:',
     'seccion-30.478': 'odstr\xE1ni\u0165+ozn\xE1menie',
     'seccion-40.1528': 'upravi\u0165',
+    'seccion-36.102433': 'zobrazi\u0165 ',
     'seccion-31.454': 'Umiestnenie:',
     'seccion-35.559': 'E-mail',
     'distancediv.changeLocation': 'Zmeni\u0165 miesto',

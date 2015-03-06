@@ -168,6 +168,7 @@ module.exports = {
     'supportform.VerificationCode': 'Patvirtinimo kodas:',
     'seccion-30.478': '\u0160alinti+skelbim\u0105',
     'seccion-40.1528': 'Redaguoti',
+    'seccion-36.102433': 'Per\u017Ei\u016Bra',
     'seccion-31.454': 'Vieta:',
     'seccion-35.559': 'el. pa\u0161tas',
     'distancediv.changeLocation': 'Keisti viet\u0105',

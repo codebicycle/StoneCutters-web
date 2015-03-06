@@ -168,6 +168,7 @@ module.exports = {
     'supportform.VerificationCode': 'C\xF3digo de Verificaci\xF3n:',
     'seccion-30.478': 'Eliminar anuncio',
     'seccion-40.1528': 'Editar',
+    'seccion-36.102433': 'Ver',
     'seccion-31.454': 'Ubicaci\xF3n:',
     'seccion-35.559': 'Email',
     'distancediv.changeLocation': 'Cambiar ubicaci\xF3n',

@@ -168,6 +168,7 @@ module.exports = {
     'supportform.VerificationCode': 'Kod provjere:',
     'seccion-30.478': 'Ukloni+oglas',
     'seccion-40.1528': 'izmjena',
+    'seccion-36.102433': 'Pregled',
     'seccion-31.454': 'Lokacija:',
     'seccion-35.559': 'E-po\u0161ta',
     'distancediv.changeLocation': 'Promijeni lokaciju',
