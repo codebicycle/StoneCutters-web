@@ -16,8 +16,10 @@
         <div class="wrapper">
             <h1 class="item-title">{{ item.title }}</h1>
             {% view 'items/partials/iteminfo' %}
-            {% view 'items/partials/imagegallery' %}
-            {% include (template + "/items/itemprice.html") %}
+            <div class="item-success-image">
+                {% view 'items/partials/imagegallery' %}
+                {% include (template + "/items/itemprice.html") %}
+            </div>
             {% view 'items/partials/itemdescription' %}
             {% if item.coordinates %}
                 {% view 'items/partials/itemlocation' %}
