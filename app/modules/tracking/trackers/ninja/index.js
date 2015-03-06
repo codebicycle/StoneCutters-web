@@ -51,5 +51,5 @@ module.exports = {
     isEnabled: isEnabled,
     getParams: getParams,
     getConfig: getConfig,
-    getNoScript: noscript.get
+    prepareNoScript: noscript.prepare
 };

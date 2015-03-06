@@ -2,7 +2,6 @@
 
 var _ = require('underscore');
 var utils = require('../../../../../shared/utils');
-var BaseAdapter = require('../../../../../shared/adapters/base');
 var trackPages = [
     'home',
     'resultset',
@@ -20,37 +19,25 @@ var trackPages = [
     'notfound'
 ];
 
-function get(done, ctx, ninja) {
+function prepare(done, ctx, ninja) {
     try {
-        requestForImgs.call(this, ninja, function onResponseImgs(err, res, body) {
-            if (err) {
-                log(err, 'ninja GA and ATI');
-            }
-            else {
-                ctx.params.ninja.noscript = body;
-            }
-            try {
-                ctx.urls.push(getHydraUrl.call(this, ninja));
-            } catch(e) {
-                log(e, 'ninja HYDRA');
-            }
-            done();
-        }.bind(this));
+        ctx.params.ninja.noscript = getIframeUrl.call(this, ninja);
     } catch(e) {
-        log(e, 'ninja all');
+        log(e, 'ninja GA and ATI');
     }
+    try {
+        ctx.urls.push(getHydraUrl.call(this, ninja));
+    } catch(e) {
+        log(e, 'ninja HYDRA');
+    }
+    done();
 }
 
-function requestForImgs(ninja, callback) {
+function getIframeUrl(ninja) {
     var url = 'http://tracking.onap.io/n/ninja.php';
     var query = getQuery(ninja.params, ninja.config);
-    var adapter = new BaseAdapter({});
 
-    adapter.request(this.app.req, {
-        method: 'GET',
-        url: url,
-        query: query
-    }, callback);
+    return utils.params(url, query);
 }
 
 function getHydraUrl(ninja) {
@@ -81,5 +68,5 @@ function log(e, name) {
 }
 
 module.exports = {
-    get: get
+    prepare: prepare
 };
