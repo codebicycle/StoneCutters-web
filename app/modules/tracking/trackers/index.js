@@ -90,7 +90,7 @@ function ninjaTrack(done, ctx, options) {
             location = this.app.session.get('location');
             platforms = config.getForMarket(location.url, ['tracking', 'trackers', 'ninja', 'noscript', 'platforms'], []);
             if (_.contains(platforms, this.app.session.get('platform'))) {
-                ctx.params.ninja.noscript = ninja.getNoScript.call(this, done, ctx, ctx.params.ninja);
+                ninja.prepareNoScript.call(this, done, ctx, ctx.params.ninja);
                 return;
             }
         }
