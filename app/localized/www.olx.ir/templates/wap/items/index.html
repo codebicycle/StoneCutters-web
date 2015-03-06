@@ -13,8 +13,7 @@
             </tbody>
         </table>
         {% view 'locations/select' %}
-        {% set templateName = template + '/partials/search.html' %}
-        {% include templateName %}
+        {% view 'partials/search' %}
         {% if meta.total == 0 %}
             <table width="100%" border="0" align="left" cellspacing="0" cellpadding="4" bgcolor="#FFFFFF">
                 <tbody>

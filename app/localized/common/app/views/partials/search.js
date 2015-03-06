@@ -1,30 +1,20 @@
 'use strict';
 
 var Base = require('../../bases/view');
-var helpers = require('../../../../../helpers');
 var _ = require('underscore');
 
 module.exports = Base.extend({
     className: 'partials_search_view',
     id: 'search',
+    wapAttributes: {
+        bgcolor: '#DDDDDD'
+    },
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
 
-        return _.extend({}, data, {});
-    },
-    postRender: function() {
-        var $form = this.$('form');
-        var $input = $form.find('input[name=search]');
-
-        $form.on('submit', function onSubmit(event) {
-            event.preventDefault();
-
-            var search = $input.val();
-
-            helpers.common.redirect.call(this.app.router, '/nf/search' + (search ? ('/' + search) : ''), null, {
-                status: 200
-            });
-        }.bind(this));
+        return _.extend({}, data, {
+            search: this.app.session.get('search')
+        });
     }
 });
 

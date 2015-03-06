@@ -811,7 +811,6 @@ function conversation(params, callback) {
         }.bind(this);
 
         var error = function(err, res) {
-            console.log(err);
             return helpers.common.error.call(this, err, res, callback);
         }.bind(this);
 
