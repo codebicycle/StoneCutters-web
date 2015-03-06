@@ -1,5 +1,6 @@
 'use strict';
 
+var S = require('string');
 var _ = require('underscore');
 var Base = require('../../../../../common/app/bases/view');
 var helpers = require('../../../../../../helpers');
@@ -24,6 +25,11 @@ module.exports = Base.extend({
             message: 'misc.DescriptionCharacters_Mob',
             minLength: 10
         }
+    },
+    postRender: function() {
+        var $description = this.$('[name=description]');
+
+        $description.val(S($description.val()).stripTags().s);
     },
     onChange: function(event) {
         event.preventDefault();

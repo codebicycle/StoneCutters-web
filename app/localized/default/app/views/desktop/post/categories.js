@@ -72,9 +72,11 @@ module.exports = Base.extend({
         $('.category[data-id="' + categoryId + '"]').addClass('select');
         $('.child-categories-list').removeClass('select');
         $('.child-categories-list[data-id="' + categoryId + '"]').addClass('select');
-        $('html, body').animate({
-            scrollTop: this.parentView.$('#posting-images-view').offset().top
-        }, 750);
+        if (!this.parentView.editing) {
+            $('html, body').animate({
+                scrollTop: this.parentView.$('#posting-images-view').offset().top
+            }, 750);
+        }
 
         var fetch = function(done) {
             this.app.fetch({
