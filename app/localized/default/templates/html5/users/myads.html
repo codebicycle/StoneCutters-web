@@ -66,7 +66,6 @@
                     {% set status = 'pending' %}
                     {% set statustxt = dictionary["misc.Pending_BR"] %}
                 {% endif %}
-                {#{ item.date.since.day if item.date.since.day }} {{ dictionary[item.date.since.dictionary] }}{{ (', ' + item.date.since.hour) if item.date.since.hour }#}
                 <li class="my-ads {{ status }}" data-status="{{ status }}">
                     {% if item.editable %}
                         <a class="btnfilter edit trackMe" data-tracking="Myolx-ClickEdit" data-qa="edit-button" href="{{ ('/myolx/edititem/' + item.id) | link }}">{{ dictionary["showactivelistings.Edit"] }}</a>
@@ -80,9 +79,8 @@
                     <div class="price">{{ item.price.displayPrice }}</div>
                     {% if status != 'deleted' %}
                         <div class="actions hide">
-                            {# <a href="#" class="action renews hide" data-action="renews">Republicar</a> #}
                             {% if status == 'ready' %}
-                                <a class="action view trackMe" data-tracking="Myolx-ClickSee" href="{{ item | slugToUrl | link }}" data-action="view">Ver</a>
+                                <a class="action view trackMe" data-tracking="Myolx-ClickSee" href="{{ item | slugToUrl | link }}" data-action="view">{{ dictionary["seccion-36.102433"]}}</a>
                                 <a class="action help trackMe" data-tracking="Myolx-ClickHelp" href="{{ '/help' | link }}">{{ dictionary["biderrorheader.Help"] }}</a>
                                 <a class="action delete trackMe" data-tracking="Myolx-ClickRemoveAd" data-idd="{{ item.id }}" data-img="{{ item.thumbnailLarge }}" data-title="{{ item.title }}" data-action="delete" >{{ dictionary["confirmremoveitem.Delete"] }}</a>
                             {% else %}
