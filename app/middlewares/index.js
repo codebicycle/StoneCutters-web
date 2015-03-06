@@ -9,7 +9,8 @@ var middlewares = {
     location: require('./location'),
     languages: require('./languages'),
     interstitial: require('./interstitial'),
-    dependencies: require('./dependencies')
+    dependencies: require('./dependencies'),
+    search: require('./search')
 };
 
 module.exports = function(controller, exclude) {
