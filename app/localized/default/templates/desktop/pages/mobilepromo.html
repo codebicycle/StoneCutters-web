@@ -1,28 +1,56 @@
 <div class="banner-mobilepromo">
     <div class="left-column">
         <p class="title">{{ dictionary["mobilepromo.TheOfficialBrandApplicationIsNowAvailableForYourSmartphone"] }}</p>
-        <p></p>
+        <p>
+            {{ dictionary["mobilepromo.SellAllYourStuffInASnap"] }}<br>
+            {{ dictionary["mobilepromo.FindWhatYouWantAnytimeFromAnywhere"] }}
+        </p>
     </div>
-    <div class="bottom-column"></div>
+    <div class="bottom-column">
+        <p class="title">{{ dictionary["mobilepromo.DownloadItNowForFree"] }}</p>
+        <ul class="downloads">
+            <li><a href="http://itunes.apple.com/app/olx-classifieds/id382059698" target="_blank" class="appstore">app store</a></li><!--
+            --><li><a href="https://play.google.com/store/apps/details?id=com.olx.olx" target="_blank" class="googleplay">google play</a></li><!--
+            --><li><a href="http://store.ovi.com/content/318677" target="_blank" class="nokia">nokia</a></li><!--
+            --><li><a href="http://www.windowsphone.com/en-us/apps/31fc00f9-44e8-df11-9264-00237de2db9e" target="_blank" class="windowsphone">windows phone</a></li><!--
+            --><li><a href="http://appworld.blackberry.com/webstore/content/58411" target="_blank" class="blackberry">blackberry world</a></li><!--
+            --><li><a href="http://www.amazon.com/OLX-Inc/dp/B00DTVCZ96/" target="_blank" class="amazon">amazon apps</a></li>
+        </ul>
+    </div>
 </div>
-{{ dictionary["mobilepromo.TheOfficialBrandApplicationIsNowAvailableForYourSmartphone"] }}
-{{ dictionary["mobilepromo.SellAllYourStuffInASnap"] }}
-{{ dictionary["mobilepromo.FindWhatYouWantAnytimeFromAnywhere"] }}
-{{ dictionary["mobilepromo.DownloadItNowForFree"] }}
-{{ dictionary["featured_listings.Benefits"] }}
-{{ dictionary["mobilepromo.SearchForAdsUsingLocation"] }}
-{{ dictionary["mobilepromo.ViewFullAdDescription"] }}
-{{ dictionary["mobilepromo.ViewBrandInYourLanguage"] }}
-{{ dictionary["mobilepromo.ReplyToAdsFromApp"] }}
-{{ dictionary["mobilepromo.SellStuffInSeconds"] }}
-{{ dictionary["mobilepromo.PostAdInstantly"] }}
-{{ dictionary["mobilepromo.ControlYourActivityInMyBrand"] }}
-{{ dictionary["mobilepromo.DifferentPhone"] }}
-{{ dictionary["mobilepromo.BrandAccessFromMobile"] }}
-{{ dictionary["mobilepromo.bullet1"] }}
-{{ dictionary["mobilepromo.bullet2"] }}
-{{ dictionary["mobilepromo.bullet3"] }}
-{{ dictionary["mobilepromo.bullet4"] }}
-{{ dictionary["mobilepromo.site"] }}
+<div class="content">
+    <p class="title">{{ dictionary["featured_listings.Benefits"] }}</p>
+    <ul class="benefits">
+        <li class="icons icon-pin">{{ dictionary["mobilepromo.SearchForAdsUsingLocation"] }}</li><!--
+        --><li class="icons icon-chat">{{ dictionary["mobilepromo.ReplyToAdsFromApp"] }}</li><!--
+        --><li class="icons icon-photo">{{ dictionary["mobilepromo.PostAdInstantly"] }}</li><!--
+        --><li class="icons icon-search">{{ dictionary["mobilepromo.ViewFullAdDescription"] }}</li><!--
+        --><li class="icons icon-time">{{ dictionary["mobilepromo.SellStuffInSeconds"] }}</li><!--
+        --><li class="icons icon-tag">{{ dictionary["mobilepromo.ControlYourActivityInMyBrand"] }}</li><!--
+        --><li class="icons icon-earth">{{ dictionary["mobilepromo.ViewBrandInYourLanguage"] }}</li>
+    </ul>
+</div>
+<div class="content different-phone">
+    <p class="title">{{ dictionary["mobilepromo.DifferentPhone"] }}</p>
+    <div class="different-phone">
+        <p>{{ dictionary["mobilepromo.BrandAccessFromMobile"] }}</p>
+        <ul class="bullets">
+            <li class="icons icon-check">{{ dictionary["mobilepromo.bullet1"] }}</li>
+            <li class="icons icon-check">{{ dictionary["mobilepromo.bullet2"] }}</li>
+            <li class="icons icon-check">{{ dictionary["mobilepromo.bullet4"] }}</li>
+            <li class="icons icon-check">{{ dictionary["mobilepromo.bullet5"] }}</li>
+        </ul>
+        <p>{{ dictionary["mobilepromo.site"] }} <a href="http://{{ location.url }}">{{ location.url }}</a></p>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
 
 {% view 'partials/tracking' %}
