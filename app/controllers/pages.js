@@ -165,12 +165,26 @@ function didyousell(params, callback) {
         var languages = this.app.session.get('languages');
         var platform = this.app.session.get('platform');
         var newItemPage = helpers.features.isEnabled.call(this, 'newItemPage');
+        var itemDelete = params.answer;
         var anonymousItem;
 
         var redirect = function(done) {
             if (platform === 'wap') {
                 done.abort();
                 return helpers.common.redirect.call(this, '/');
+            }
+            done();
+        }.bind(this);
+
+        var deleteItem = function(done) {
+            if (itemDelete === 'yes') {
+                 helpers.dataAdapter.post(this.app.req, '/items/' + itemId + '/delete', {
+                    query: {
+                        securityKey: securityKey,
+                        reason: 1
+                    },
+                    cache: false
+                }, done.errfcb);
             }
             done();
         }.bind(this);
@@ -231,6 +245,7 @@ function didyousell(params, callback) {
 
         asynquence().or(error)
             .then(redirect)
+            .then(deleteItem)
             .then(prepare)
             .then(fetch)
             .val(success);

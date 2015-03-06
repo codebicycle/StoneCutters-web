@@ -639,11 +639,8 @@ module.exports = {
     'crm_new_version.EditDescriptionNow': 'Hariri maelezo sasa!',
     'crm_new_version.EditFeaturedAd': 'Je, una uhakika unataka kuhariri tangazo lako lililoonyeshwa?',
     'crm_new_version.EditFeaturedAd-Procedure': '<p>Baada ya kuhariri tangazo lako, itachukua masaa machache kuwa amilifu tena. Lakini usijali, punde tangazo lako litakuwa amilifu, kipengele itaamilishwa upya otomatiki kwa kuzingatia wakati tangazo lako lilikuwa nje ya mtandao.</p><p> Kama baada ya kuhariri tangazo lako si amilifu kwa sababu yoyote, wakati ulioonyeshwa itawekwa mpaka tangazo liwe amilifu tena. </p>',
-<<<<<<< HEAD
     'crm_new_version.EditUrTitleNow': 'Hariri kichwa chako sasa!',
-=======
     'crm_new_version.KeepPosting': 'Endelea kuchapisha',
->>>>>>> develop
     'crm_new_version.RemainingTime': 'Wakati uliobaki',
     'crm_new_version.RenameCategory_3': 'katika',
     'crm_new_version.SomethingElseToPost': 'Je, una kitu kingine cha kuchapisha?'

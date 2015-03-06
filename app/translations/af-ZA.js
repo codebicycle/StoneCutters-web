@@ -28,10 +28,7 @@ module.exports = {
     'defaultheader.CloseToYou': 'OLX Close to you',
     'defaultheader.Location': 'Location',
     'defaultheader.PostAFreeAd': 'Post a Free Ad',
-<<<<<<< HEAD
     'defaultheader.PostAnAd': 'Post an Ad',
-=======
->>>>>>> develop
     'defaultheader.State': 'State',
     'defaultheader.WhatAreYouLookingFor': 'What are you looking for?',
     'defaultheader.WhereBuyersMeetSellers': 'Where buyers meet sellers',
@@ -63,20 +60,13 @@ module.exports = {
     'itemslisting.NewlyListed': 'Newly Listed',
     'itemslisting.NewShareThisAd': 'Share this Ad',
     'itemslisting.Next': 'Next',
-<<<<<<< HEAD
-    'itemslisting.Of': 'of',
-=======
->>>>>>> develop
     'itemslisting.PendingAd': 'Pending Ad',
     'itemslisting.PerWeek': 'Per Week',
     'itemslisting.Previous': 'Previous',
     'itemslisting.RefineYourSearch': 'Refine your search',
     'itemslisting.SelectAll': 'Select All',
     'loginbox.CreateYourAccount': 'Create your account for free:',
-<<<<<<< HEAD
-=======
     'loginbox.ForgotYourPassword': 'Forgot  your password?',
->>>>>>> develop
     'loginbox.IAgreeToTheTermsAndConditionsOfBrand': 'I agree to the <<LINK_TERMS_USE>>Terms and Conditions<</LINK_TERMS_USE>> of OLX',
     'loginbox.IfYouAlreadyHaveAnAccountClickHereToLogIn': 'If you already have an account, click here to log in',
     'loginbox.IfYouDontHaveAccountOrNeverPostedOnBrand': 'If you do not have an account or never posted an ad on OLX',
@@ -203,10 +193,7 @@ module.exports = {
     'itemgeneraldetails.Description': 'Description',
     'itemgeneraldetails.NoPicture': 'No Picture Provided',
     'itemgeneraldetails.OtherRelatedListings': 'Other related ads:',
-<<<<<<< HEAD
-=======
     'itemgeneraldetails.PersonalInfo': 'Personal Information',
->>>>>>> develop
     'itemgeneraldetails.Phone': 'Phone',
     'itemgeneraldetails.PicturesOf': 'Pictures of ',
     'itemgeneraldetails.Price': 'Price',
@@ -283,10 +270,7 @@ module.exports = {
     'contactseller_form.Close': 'Close',
     'contactseller_form.ReplyToListing': 'Reply to this Ad',
     'register_form.245': 'New User Registration',
-<<<<<<< HEAD
-=======
     'register_form.278': 'Register',
->>>>>>> develop
     'register_form.EditMyInfo': 'Edit my personal information',
     'register_form.Save': 'Save',
     'register_form.termsAgreeB': 'Terms and Conditions',
@@ -297,16 +281,11 @@ module.exports = {
     'myolx.BackToMyAds': 'Back to my Ads',
     'myolx.BackToMyOLX': 'Back to My OLX',
     'myolx.ChangeEmailAddressOrPassword': 'Change email address or password',
-<<<<<<< HEAD
-    'myolx.EditListing': 'Edit Ad',
-    'myolx.EmailPasswordInvalid': 'Sorry, you Email or password seem to be invalid',
-=======
     'myolx.ConversationWith': 'Conversation with <<NAME>>',
     'myolx.EditListing': 'Edit Ad',
     'myolx.EmailPasswordInvalid': 'Sorry, you Email or password seem to be invalid',
     'myolx.FIndPrevMessages': 'We upgraded your inbox! Missing messages? You can find the previous ones <<LINK>>here<</LINK>>',
     'myolx.LatestMessages': 'Back to my latest messages',
->>>>>>> develop
     'myolx.MessageNotSent': 'The Message was not sent',
     'myolx.Messages': 'Messages',
     'myolx.MyAds': 'My Ads',
@@ -320,15 +299,10 @@ module.exports = {
     'myolx.Settings': 'Settings',
     'myolx.SignInWithFacebook': 'Sign in with Facebook',
     'myolx.SignOut': 'Sign out',
-<<<<<<< HEAD
-    'myolx.TheAdHasBeenDeleted': 'The ad has been deleted',
-    'myolx.ThisMessageIsRegarding': 'This message is regarding',
-=======
     'myolx.SuccessfullyUnsubscribed': 'Successfully Unsubscribed',
     'myolx.TheAdHasBeenDeleted': 'The ad has been deleted',
     'myolx.ThisMessageIsRegarding': 'This message is regarding',
     'myolx.You': 'You',
->>>>>>> develop
     'myolx.YouCurrentlyHaveNoActiveListings': 'You currently have no active ads',
     'myolx.YouCurrentlyHaveNoFavoriteListings': 'You currently have no favorite ads',
     'readmessage.Delete': 'Delete',
@@ -346,10 +320,7 @@ module.exports = {
     'postingheader.ContactDetails': 'Contact details',
     'postingheader.Post': 'Post',
     'posting_select_subcategory.SelectSubcategory': 'Select a Subcategory ',
-<<<<<<< HEAD
-=======
     'mybids.ContactSeller': 'Contact seller',
->>>>>>> develop
     'wap_posting_step4.Cancel': 'Cancel',
     'wap_posting_step4.mandatoryField': 'mandatory field',
     'wap_posting_step4.PostingDetails': 'Posting Details',
@@ -551,11 +522,6 @@ module.exports = {
     'misc.LessThan2': 'You post your ad in less than 2 minutes',
     'misc.Max': 'Max',
     'misc.MeetAtSafeLocation': 'Try to meet at a safe, public location',
-<<<<<<< HEAD
-    'misc.misc-keep': 'Keep',
-    'misc.misc_publishing': 'Publishing!',
-=======
->>>>>>> develop
     'misc.MoreResultsIn': 'More results in',
     'misc.NeedHelp': 'Need any help?',
     'misc.NextPage': 'Next Page',
@@ -565,23 +531,17 @@ module.exports = {
     'misc.Pending_BR': 'Pending',
     'misc.PeopleWereAlsoInterestedIn': 'People who have seen this ad also were interested in:',
     'misc.PhoneNumberNotValid': 'The phone number you entered is not valid. Please, check.',
-<<<<<<< HEAD
-=======
     'misc.please-comp-msg': 'Please complete the message.',
     'misc.PostButton': 'Sell your item',
->>>>>>> develop
     'misc.PostFreeOn': 'Post free on OLX',
     'misc.PostYourFreeAdCaps_Mob': 'POST YOUR FREE AD',
     'misc.PriceListings': 'For <<PRICE>> per week, your ad appears at the top of the listings',
     'misc.publish-in': 'Publish In',
     'misc.RejectedAd_Caps': 'Rejected ad',
     'misc.Removed': 'Removed',
-<<<<<<< HEAD
-=======
     'misc.RemoveFromList': 'Remove from this list',
     'misc.ReportTracked': 'It  will be processed and tracked accordingly. Thanks, The OLX Team.',
     'misc.ReturnToMsgs': 'Volver a mis mensajes',
->>>>>>> develop
     'misc.return_ads': '<<LINK>>Return to My Ads<</LINK>>',
     'misc.SafetyTipsBuyers': 'Safety Tips for Buyers',
     'misc.SayOLX': 'When you call, say you saw the ad on OLX',
@@ -596,19 +556,13 @@ module.exports = {
     'misc.Sell_Post_Mobile_India': 'Sell',
     'misc.SendEmail': 'Send E-mail',
     'misc.Settings': 'Settings',
-<<<<<<< HEAD
     'misc.ShareAd': 'Share your ad',
-=======
->>>>>>> develop
     'misc.SinceDate': 'Since <<DATE>>',
     'misc.Sort_Mob': 'Sort',
     'misc.SpecificFields_title': 'Category Specific Fields (Optionals)',
     'misc.States': 'States',
     'misc.SuburbsOrNeighborhoods_EM': 'Surburbs or Neighborhoods',
-<<<<<<< HEAD
-=======
     'misc.SuccessfulReport': 'Your report has been successfully sent.',
->>>>>>> develop
     'misc.TechQuestions': 'For technical or general questions',
     'misc.ThereWasProb': 'There was a problem',
     'misc.TitleCharacters_Mob': 'Title must contain at least <<NUMBER>> characters',
@@ -682,16 +636,11 @@ module.exports = {
     'crm_new_version.CheckSpelling': 'Check your spelling',
     'crm_new_version.Continue': 'Would you like to continue?',
     'crm_new_version.EditAnyway': 'Edit anyway',
-<<<<<<< HEAD
     'crm_new_version.EditDescriptionNow': 'Edit description now!',
     'crm_new_version.EditFeaturedAd': 'Are you sure you want to edit your featured ad?',
     'crm_new_version.EditFeaturedAd-Procedure': '<p>After editing your ad, it will take a few hours to be active again. But don\u2019t worry, as soon as your ad is active, feature will be reactivated automatically taking into account the time your ad went offline. </p><p>If after editing your ad is not active for any reason, the featured time will be kept until the ad is active again. </p>',
     'crm_new_version.EditUrTitleNow': 'Edit your title now!',
-=======
-    'crm_new_version.EditFeaturedAd': 'Are you sure you want to edit your featured ad?',
-    'crm_new_version.EditFeaturedAd-Procedure': '<p>After editing your ad, it will take a few hours to be active again. But don\u2019t worry, as soon as your ad is active, feature will be reactivated automatically taking into account the time your ad went offline. </p><p>If after editing your ad is not active for any reason, the featured time will be kept until the ad is active again. </p>',
     'crm_new_version.KeepPosting': 'Keep posting',
->>>>>>> develop
     'crm_new_version.RemainingTime': 'Remaining time:',
     'crm_new_version.RenameCategory_3': 'in',
     'crm_new_version.SomethingElseToPost': 'Do you have something else to post?'

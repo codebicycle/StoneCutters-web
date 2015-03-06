@@ -639,11 +639,8 @@ module.exports = {
     'crm_new_version.EditDescriptionNow': 'Editar descri\xE7\xE3o agora',
     'crm_new_version.EditFeaturedAd': 'Tem certeza que deseja editar o seu an\xFAncio em destaque?',
     'crm_new_version.EditFeaturedAd-Procedure': '<p>Ap\xF3s edit\xE1-lo, levar\xE1 algumas horas para que o seu an\xFAncio volte para o site, mas n\xE3o se preocupe, assim que o seu an\xFAncio estiver ativo o destaque ser\xE1 automaticamente ativado considerando o tempo restante.</p><p>Se ap\xF3s editar seu an\xFAncio ele n\xE3o for ativado por algum motivo, o tempo de destaque que voc\xEA ainda tem ficar\xE1 guardado at\xE9 que o an\xFAncio seja ativado novamente.</p>',
-<<<<<<< HEAD
     'crm_new_version.EditUrTitleNow': 'Edite o seu t\xEDtulo agora!',
-=======
     'crm_new_version.KeepPosting': 'Keep posting',
->>>>>>> develop
     'crm_new_version.RemainingTime': 'Tempo restante:',
     'crm_new_version.RenameCategory_3': 'em',
     'crm_new_version.SomethingElseToPost': 'Voc\xEA tem outro item para vender?'

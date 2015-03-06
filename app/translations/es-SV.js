@@ -159,7 +159,7 @@ module.exports = {
     'listingpageitemslisting.ZeroResultsPage': 'Disculpe, pero no hemos encontrado resultados en <<CATEGORY>> de <<REGION>>.',
     'netvibes_myolx.content.NoActiveListings': 'Actualmente no tiene publicaciones activas.',
     'netvibes_myolx.content.NoMessages': 'Ahorita no tiene mensajes.',
-    'netvibes_myolx.content.Views': 'Le\xEDdo',
+    'netvibes_myolx.content.Views': 'Le\xEDdos',
     'supportform.Department': 'Departamento:',
     'supportform.FillForm': 'Por favor, completa el formulario para contactarte con nuestro Equipo de Soporte.',
     'supportform.Message': 'Mensaje:',
@@ -639,11 +639,8 @@ module.exports = {
     'crm_new_version.EditDescriptionNow': '\xA1Editar descripci\xF3n ahora!',
     'crm_new_version.EditFeaturedAd': '\xBFSeguro de que quieres editar tu anuncio destacado?',
     'crm_new_version.EditFeaturedAd-Procedure': '<p>Luego de editar tu anuncio, tomar\xE1n unas horas para que se reactive. No te apures, tan pronto tu anuncio est\xE9 activo, el destaque se activar\xE1 autom\xE1ticamente considerando la hora en que sali\xF3 del aire.</p><p>Si despu\xE9s de editar tu anuncio por alguna raz\xF3n no se activa, el tiempo de destaque se mantendr\xE1 hasta que se reactive el anuncio.</p>',
-<<<<<<< HEAD
     'crm_new_version.EditUrTitleNow': '\xA1Edita tu t\xEDtulo ahora!',
-=======
     'crm_new_version.KeepPosting': 'Sigue publicando',
->>>>>>> develop
     'crm_new_version.RemainingTime': 'Tiempo que queda',
     'crm_new_version.RenameCategory_3': 'en',
     'crm_new_version.SomethingElseToPost': '\xBFTienes algo m\xE1s para publicar?'

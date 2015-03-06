@@ -639,11 +639,8 @@ module.exports = {
     'crm_new_version.EditDescriptionNow': 'Modifiez la description maintenant!',
     'crm_new_version.EditFeaturedAd': 'Etes-vous certain de vouloir modifier votre annonce \xE0 la Une?',
     'crm_new_version.EditFeaturedAd-Procedure': '<p>Apr\xE8s la modification de votre annonce, il faudra quelques heures pour qu\'elle soit de nouveau active. Mais ne vous inqui\xE9tez pas, d\xE8s que votre annonce est active, la fonction sera r\xE9activ\xE9e automatiquement en tenant compte du temps durant lequel votre annonce a \xE9t\xE9 hors ligne. </p>><p>> Si apr\xE8s la modification de votre annonce celle-ci est inactive pour une raison quelconque, le temps de mise \xE0 la Une sera conserv\xE9 jusqu\'\xE0 ce que l\'annonce soit de nouveau active.</p>',
-<<<<<<< HEAD
     'crm_new_version.EditUrTitleNow': 'Modifiez votre titre maintenant!',
-=======
     'crm_new_version.KeepPosting': 'Continuez de publier',
->>>>>>> develop
     'crm_new_version.RemainingTime': 'Temps restant',
     'crm_new_version.RenameCategory_3': 'dans',
     'crm_new_version.SomethingElseToPost': 'Avez-vous autre chose \xE0 publier?'

@@ -639,11 +639,8 @@ module.exports = {
     'crm_new_version.EditDescriptionNow': '\u0395\u03C0\u03B5\u03BE\u03B5\u03C1\u03B3\u03B1\u03C3\u03C4\u03B5\u03AF\u03C4\u03B5 \u03C4\u03B7\u03BD \u03C0\u03B5\u03C1\u03B9\u03B3\u03C1\u03B1\u03C6\u03AE!',
     'crm_new_version.EditFeaturedAd': 'Are you sure you want to edit your featured ad?',
     'crm_new_version.EditFeaturedAd-Procedure': 'After editing your ad, it will take a few hours to be active again. But don\u2019t worry, as soon as your ad is active, feature will be reactivated automatically taking into account the time your ad went offline.<br><br>If after editing your ad is not active for any reason, the featured time will be kept until the ad is active again.',
-<<<<<<< HEAD
     'crm_new_version.EditUrTitleNow': '\u0395\u03C0\u03B5\u03BE\u03B5\u03C1\u03B3\u03B1\u03C3\u03C4\u03B5\u03AF\u03C4\u03B5 \u03C4\u03BF\u03BD \u03C4\u03AF\u03C4\u03BB\u03BF \u03C3\u03B1\u03C2 \u03C4\u03CE\u03C1\u03B1!',
-=======
     'crm_new_version.KeepPosting': '\u03A3\u03C5\u03BD\u03B5\u03C7\u03AF\u03C3\u03C4\u03B5 \u03BD\u03B1 \u03B4\u03B7\u03BC\u03BF\u03C3\u03B9\u03B5\u03CD\u03B5\u03C4\u03B5',
->>>>>>> develop
     'crm_new_version.RemainingTime': 'Remaining time',
     'crm_new_version.RenameCategory_3': '\u03C3\u03C4\u03B7\u03BD \u03BA\u03B1\u03C4\u03B7\u03B3\u03BF\u03C1\u03AF\u03B1',
     'crm_new_version.SomethingElseToPost': '\u0388\u03C7\u03B5\u03C4\u03B5 \u03BA\u03AC\u03C4\u03B9 \u03AC\u03BB\u03BB\u03BF \u03BD\u03B1 \u03B4\u03B7\u03BC\u03BF\u03C3\u03B9\u03B5\u03CD\u03C3\u03B5\u03C4\u03B5;'

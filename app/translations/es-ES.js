@@ -639,11 +639,8 @@ module.exports = {
     'crm_new_version.EditDescriptionNow': '\xA1Editar descripci\xF3n ahora!',
     'crm_new_version.EditFeaturedAd': '\xBFSeguro que deseas editar tu anuncio destacado?',
     'crm_new_version.EditFeaturedAd-Procedure': '<p>Despu\xE9s de editar el anuncio tardar\xE1 algunas horas en volver a estar activo. Pero no te preocupes, cuando tu anuncio vuelva a estar activo, se reactivar\xE1 su estado de destacado autom\xE1ticamente y se descontar\xE1 el tiempo que ha estado inactivo.</p><p>Si despu\xE9s de editar el anuncio no vuelve a estar activo por alg\xFAn motivo, el tiempo de anuncio destacado se conservar\xE1 hasta que vuelva a estarlo.<p>',
-<<<<<<< HEAD
     'crm_new_version.EditUrTitleNow': '\xA1Edita el t\xEDtulo!',
-=======
     'crm_new_version.KeepPosting': 'Sigue publicando',
->>>>>>> develop
     'crm_new_version.RemainingTime': 'Tiempo restante',
     'crm_new_version.RenameCategory_3': 'en',
     'crm_new_version.SomethingElseToPost': '\xBFTienes algo m\xE1s para publicar?'

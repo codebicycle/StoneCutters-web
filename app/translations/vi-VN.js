@@ -639,11 +639,8 @@ module.exports = {
     'crm_new_version.EditDescriptionNow': 'Ch\u1EC9nh s\u1EEDa m\xF4 t\u1EA3 b\xE2y gi\u1EDD!',
     'crm_new_version.EditFeaturedAd': 'B\u1EA1n c\xF3 ch\u1EAFc l\xE0 m\xECnh mu\u1ED1n ch\u1EC9nh s\u1EEDa rao v\u1EB7t \u0111ang \u0111\u01B0\u1EE3c \u0111\u0103ng c\u1EE7a m\xECnh kh\xF4ng?',
     'crm_new_version.EditFeaturedAd-Procedure': '<p>Sau khi ch\u1EC9nh s\u1EEDa rao v\u1EB7t c\u1EE7a b\u1EA1n, s\u1EBD m\u1EA5t v\xE0i gi\u1EDD \u0111\u1EC3 n\xF3 l\u1EA1i hi\u1EC3n th\u1ECB. Nh\u01B0ng \u0111\u1EEBng lo, ngay khi rao v\u1EB7t c\u1EE7a b\u1EA1n hi\u1EC3n th\u1ECB, t\xEDnh n\u0103ng s\u1EBD \u0111\u01B0\u1EE3c k\xEDch ho\u1EA1t l\u1EA1i t\u1EF1 \u0111\u1ED9ng, c\xF3 t\xEDnh \u0111\u1EBFn th\u1EDDi gian rao v\u1EB7t c\u1EE7a b\u1EA1n kh\xF4ng tr\u1EF1c tuy\u1EBFn. </p><p>N\u1EBFu sau khi ch\u1EC9nh s\u1EEDa m\xE0 rao v\u1EB7t c\u1EE7a b\u1EA1n kh\xF4ng hi\u1EC3n th\u1ECB v\xEC b\u1EA5t c\u1EE9 l\xED do g\xEC th\xEC th\u1EDDi gian t\xEDnh n\u0103ng s\u1EBD \u0111\u01B0\u1EE3c gi\u1EEF cho \u0111\u1EBFn khi rao v\u1EB7t hi\u1EC3n th\u1ECB l\u1EA1i.</p>',
-<<<<<<< HEAD
     'crm_new_version.EditUrTitleNow': 'H\xE3y ch\u1EC9nh s\u1EEDa ti\xEAu \u0111\u1EC1 c\u1EE7a b\u1EA1n b\xE2y gi\u1EDD!',
-=======
     'crm_new_version.KeepPosting': 'H\xE3y ti\u1EBFp t\u1EE5c \u0111\u0103ng',
->>>>>>> develop
     'crm_new_version.RemainingTime': 'Th\u1EDDi gian c\xF2n l\u1EA1i:',
     'crm_new_version.RenameCategory_3': '\u1EDF trong',
     'crm_new_version.SomethingElseToPost': 'B\u1EA1n c\xF3 g\xEC kh\xE1c \u0111\u1EC3 \u0111\u0103ng kh\xF4ng?'

@@ -639,11 +639,8 @@ module.exports = {
     'crm_new_version.EditDescriptionNow': 'Edita\u0163i descrierea acum!',
     'crm_new_version.EditFeaturedAd': 'Are you sure you want to edit your featured ad?',
     'crm_new_version.EditFeaturedAd-Procedure': 'After editing your ad, it will take a few hours to be active again. But don\u2019t worry, as soon as your ad is active, feature will be reactivated automatically taking into account the time your ad went offline.<br><br>If after editing your ad is not active for any reason, the featured time will be kept until the ad is active again.',
-<<<<<<< HEAD
     'crm_new_version.EditUrTitleNow': 'Edita\u0163i titlul acum!',
-=======
     'crm_new_version.KeepPosting': 'Continua\u0163i s\u0103 publica\u0163i',
->>>>>>> develop
     'crm_new_version.RemainingTime': 'Remaining time',
     'crm_new_version.RenameCategory_3': '\xEEn',
     'crm_new_version.SomethingElseToPost': 'Ave\u0163i \u015Fi altceva de publicat?'

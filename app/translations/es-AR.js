@@ -634,22 +634,14 @@ module.exports = {
     'posting_removedsurvey.RemovedAdSurveyAnswer3': 'He decidido no venderlo',
     'posting_removedsurvey.WarningAdToBeRemoved': 'Va a eliminar su aviso de OLX',
     'crm_new_version.CheckSpelling': 'Revis\xE1 la ortograf\xEDa',
-<<<<<<< HEAD
-    'crm_new_version.Continue': 'Would you like to continue?|',
-    'crm_new_version.EditAnyway': 'Edit anyway',
-    'crm_new_version.EditDescriptionNow': '\xA1Editar descripci\xF3n ahora!',
-    'crm_new_version.EditFeaturedAd': 'Are you sure you want to edit your featured ad?',
-    'crm_new_version.EditFeaturedAd-Procedure': '<p>Despu\xE9s de editar tu aviso, tardar\xE1 algunas horas hasta que se reactive. Pero no te preocupes, una vez que tu aviso est\xE9 activo, el destaque se reactivar\xE1 autom\xE1ticamente, teniendo en cuenta el tiempo en que tu aviso no estuvo publicado.</p><p>>Si por alguna raz\xF3n, luego de los cambios que realizaste, tu aviso sigue inactivo, el tiempo de destaque se mantendr\xE1 hasta que el aviso est\xE9 nuevamente activo.<p>',
-    'crm_new_version.EditUrTitleNow': '\xA1Editar t\xEDtulo ahora!',
-    'crm_new_version.RemainingTime': 'Remaining time',
-=======
     'crm_new_version.Continue': '\xBFDeseas continuar?',
     'crm_new_version.EditAnyway': 'Editar de todas formas',
+    'crm_new_version.EditDescriptionNow': '\xA1Editar descripci\xF3n ahora!',
     'crm_new_version.EditFeaturedAd': '\xBFEst\xE1s seguro de que quer\xE9s editar tu aviso destacado?',
     'crm_new_version.EditFeaturedAd-Procedure': '<p>Despu\xE9s de editar tu aviso, tardar\xE1 algunas horas hasta que se reactive. Pero no te preocupes, una vez que tu aviso est\xE9 activo, el destaque se reactivar\xE1 autom\xE1ticamente, teniendo en cuenta el tiempo en que tu aviso no estuvo publicado.</p><p>>Si por alguna raz\xF3n, luego de los cambios que realizaste, tu aviso sigue inactivo, el tiempo de destaque se mantendr\xE1 hasta que el aviso est\xE9 nuevamente activo.<p>',
+    'crm_new_version.EditUrTitleNow': '\xA1Editar t\xEDtulo ahora!',
     'crm_new_version.KeepPosting': 'Segu\xED publicando',
     'crm_new_version.RemainingTime': 'Tiempo restante',
->>>>>>> develop
     'crm_new_version.RenameCategory_3': 'en',
     'crm_new_version.SomethingElseToPost': '\xBFTen\xE9s algo m\xE1s para publicar?'
 };

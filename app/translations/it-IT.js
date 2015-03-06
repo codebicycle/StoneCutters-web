@@ -639,11 +639,8 @@ module.exports = {
     'crm_new_version.EditDescriptionNow': 'Modifica la descrizione adesso!',
     'crm_new_version.EditFeaturedAd': 'Sei sicuro di voler modificare il tuo annuncio in evidenza?',
     'crm_new_version.EditFeaturedAd-Procedure': '<p>Dopo la modifica del tuo annuncio, ci vorranno alcune ore prima che questo sia di nuovo attivo. Ma non preoccuparti, non appena il tuo annuncio \xE8 attivo, questo sar\xE0 messo nuovamente in evidenza in modo automatico tenendo in considerazione il tempo trascorso offline.</p><p>Se dopo la modifica il tuo annuncio non risulta attivo per qualsiasi motivo, il tempo in evidenza sar\xE0 conservato fino alla riattivazione dell\'annuncio. </p>',
-<<<<<<< HEAD
     'crm_new_version.EditUrTitleNow': 'Modifica adesso il tuo titolo!',
-=======
     'crm_new_version.KeepPosting': 'Continua a pubblicare',
->>>>>>> develop
     'crm_new_version.RemainingTime': 'Tempo rimanente',
     'crm_new_version.RenameCategory_3': 'in',
     'crm_new_version.SomethingElseToPost': 'Hai qualcos\'altro da pubblicare?'

@@ -1,12 +1,12 @@
     <div class="didYouSellNo page-standart">
-        <h2>¡Queremos ayudarte a vender!</h2>
-        <p>Siguiendo los siguientes consejos podés aumentar tus posibilidades de vender</p>
+        <h2>{{ dictionary['misc.HelpSell'] }}</h2>
+        <p>{{ dictionary['misc.FollowToIncrease'] }}</p>
         <div class="didYouSellOptions">
             <article>
                 <span class="icons icon-fb-round"></span>
                 <div>
                     <h3>{{ dictionary["misc.ShareAd"] }}</h3>
-                    <p>Utilizá las redes sociales para aumentar la exposición de tu aviso.</p>
+                    <p>{{ dictionary['misc.UseNetworks'] }}</p>
                     <div class="facebook-share" data-share-facebook data-share-url="{{ item.slug }}">
                         <span class="icons icon-facebook"></span>
                         <p>{{ dictionary["item.ShareAd"] }}</p>
@@ -16,40 +16,40 @@
             <article>
                 <span class="icons icon-money-round"></span>
                 <div>
-                    <h3>Bajá el precio</h3>
-                    <p>Colocando un precio accesible tu aviso recibirá más consultas.</p>
-                    <a href="{{ '/myolx/edititem/' | link }}/{{ item.itemid }}?sk={{ sk }}">Modificar el precio</a>
+                    <h3>{{ dictionary['misc.LowerPrice'] }}</h3>
+                    <p>{{ dictionary['misc.MoreAccessiblePrice'] }}</p>
+                    <a href="{{ '/myolx/edititem/' | link }}/{{ item.itemid }}?sk={{ sk }}">{{ dictionary['misc.ChangePrice'] }}</a>
                 </div>
             </article>
             <article>
                 <span class="icons icon-edit"></span>
                 <div>
-                    <h3>Escribí un título llamativo</h3>
-                    <p>un título claro y descriptivo atrae a más compradores.</p>
+                    <h3>{{ dictionary['misc.ChooseCatchyTitle'] }}</h3>
+                    <p>{{ dictionary['misc.ClearTitleAttractsBuyers'] }}</p>
                     <a href="{{ '/myolx/edititem/' | link }}/{{ item.itemid }}?sk={{ sk }}">{{ dictionary["crm_new_version.EditUrTitleNow"] }}</a>
                 </div>
             </article>
             <article>
                 <span class="icons icon-camera"></span>
                 <div>
-                    <h3>Más fotos</h3>
-                    <p>Subí muchas fotos, por que los avisos con fotos reciben hasta 5 veces más visitas.</p>
-                    <a href="{{ '/myolx/edititem/' | link }}/{{ item.itemid }}?sk={{ sk }}">Subir más fotos</a>
+                    <h3>{{ dictionary['misc.MorePhotos'] }}</h3>
+                    <p>{{ dictionary['misc.LotsOfPhotos'] }}</p>
+                    <a href="{{ '/myolx/edititem/' | link }}/{{ item.itemid }}?sk={{ sk }}">{{ dictionary['misc.UploadMorePhotos'] }}</a>
                 </div>
             </article>
             <article>
                 <span class="icons icon-tag"></span>
                 <div>
-                    <h3>Publicá más avisos</h3>
-                    <p>Esto aumenta la confianza de los compradores y tus chances de vender.</p>
+                    <h3>{{ dictionary['misc.PostMoreAds'] }}</h3>
+                    <p>{{ dictionary['misc.IncreaseBuyersConfidence'] }}</p>
                     <a href="{{ '/posting' | link }}">{{ dictionary["defaultheader.PostAnAd"] }}</a>
                 </div>
             </article>
             <article>
                 <span class="icons icon-description"></span>
                 <div>
-                    <h3>Mejorá la descripción</h3>
-                    <p>Describí tu aviso con más detalles. Esto te ayudará a vender más rápido</p>
+                    <h3>{{ dictionary['misc.ImproveYourDescription'] }}</h3>
+                    <p>{{ dictionary['misc.IncludeMoreDetails'] }}</p>
                     <a href="{{ '/myolx/edititem/' | link }}/{{ item.itemid }}?sk={{ sk }}">{{ dictionary["crm_new_version.EditDescriptionNow"] }}</a>
                 </div>
             </article>
