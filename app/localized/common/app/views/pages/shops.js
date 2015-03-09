@@ -15,7 +15,9 @@ module.exports = Base.extend({
         var data = Base.prototype.getTemplateData.call(this);
         var shops = new Shops(this);
 
-        shops.evaluate('listing_shop_from_map');       
+        shops.evaluate({
+            shops_experiment_from: 'listing_shop_from_map'
+        });      
 
         return _.extend({}, data, {
             breadcrumb: breadcrumb.get.call(this, data)

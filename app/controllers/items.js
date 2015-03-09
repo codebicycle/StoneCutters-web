@@ -37,7 +37,7 @@ function show(params, callback) {
         var newItemPage = helpers.features.isEnabled.call(this, 'newItemPage');
         var anonymousItem;
         
-        new Shops(this).evaluate(params.shops_experiment_from);
+        new Shops(this).evaluate(params);
 
         var promise = asynquence().or(fail.bind(this))
             .then(prepare.bind(this))

@@ -47,7 +47,7 @@ Shops.prototype.enabled = function() {
     return false;
 };
 
-Shops.prototype.evaluate = function(from) {
+Shops.prototype.evaluate = function(params) {
 
 	var experiment = this.getExperiment();
 	if ( experiment ) {
@@ -55,13 +55,13 @@ Shops.prototype.evaluate = function(from) {
 		var clicked = this.app.session.get('isShopExperimented');
         if (( experiment.firstClick && !clicked ) || !experiment.firstClick ) {
 			
-			convert(this.sixpack, experiment, from);
+			convert(this.sixpack, experiment, params.shops_experiment_from);
 
             this.app.session.persist({
                 isShopExperimented: true
             });
         }
-        track(experiment.alternative, this.sixpack.clientId, from);
+        track(experiment.alternative, this.sixpack.clientId, params);
 	}
 };
 
@@ -75,14 +75,18 @@ function convert(sixpack, experiment, from) {
 	}
 }
 
-function track(alternative, clientId, from) {
+function track(alternative, clientId, params) {
 
-	console.log('track', alternative, clientId, from);
-    restler.postJson('http://' + shopHost + '/track/experiment', {
-        alternative: alternative,
-        clientId: clientId,
-        from: from 
-    })
+	var queryString = '?alternative=' + alternative;
+    queryString += '&clientId=' + clientId;
+    queryString += '&shops_experiment_from=' + params.shops_experiment_from;
+    queryString += '&itemId=' + params.itemId;
+    queryString += '&shopId=' + params.shopId;
+    queryString += '&t=' + new Date().getTime();
+    var url = 'http://tracking.olx-st.com/h/minv/' + queryString;
+    console.log('track', url);
+    
+    restler.get(url)
     .on('success', function onSuccess(data, response) {
         console.log('success');
     })
