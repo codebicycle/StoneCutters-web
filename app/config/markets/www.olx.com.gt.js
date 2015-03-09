@@ -191,31 +191,13 @@ module.exports = {
                     language: 'es',
                     location: 'Top',
                     params: {
-                        slotId: 9904443106
-                    }
-                },
-                side: {
-                    service: 'ADX',
-                    format: 'WideSkyscraper',
-                    language: 'es',
-                    location: 'Side',
-                    params: {
-                        slotId: 9904443106
+                        slotId: 6186945586
                     }
                 }
             },
             item: {
                 top: {
                     service: 'none'
-                },
-                side: {
-                    service: 'ADX',
-                    format: 'MediumRectangle',
-                    language: 'es',
-                    location: 'Side',
-                    params: {
-                        slotId: 6186945586
-                    }
                 }
             }
         }
