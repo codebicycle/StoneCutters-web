@@ -541,7 +541,7 @@ module.exports = {
     'misc.Removed': 'Removed',
     'misc.RemoveFromList': 'Remove from this list',
     'misc.ReportTracked': 'It  will be processed and tracked accordingly. Thanks, The OLX Team.',
-    'misc.ReturnToMsgs': 'Volver a mis mensajes',
+    'misc.ReturnToMsgs': 'Back to my messages',
     'misc.return_ads': '<<LINK>>Return to My Ads<</LINK>>',
     'misc.SafetyTipsBuyers': 'Safety Tips for Buyers',
     'misc.SayOLX': 'When you call, say you saw the ad on OLX',
