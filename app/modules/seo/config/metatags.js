@@ -6,10 +6,11 @@ module.exports = {
     },
     categories: {
         // Home
-        list: { 
+        list: {
             title: 'Home',
             description: 'This is the home page',
-            'google-site-verification': true
+            'google-site-verification': true,
+            google: 'nositelinkssearchbox'
         },
         subcategories: {
             title: 'Listing',
