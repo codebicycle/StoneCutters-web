@@ -5,7 +5,6 @@ var asynquence = require('asynquence');
 var Base = require('../../../../../common/app/bases/view').requireView('users/myads');
 var helpers = require('../../../../../../helpers');
 var Items = require('../../../../../../collections/items');
-var tracking = require('../../../../../../modules/tracking');
 
 module.exports = Base.extend({
     events: {

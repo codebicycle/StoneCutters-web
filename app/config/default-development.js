@@ -126,7 +126,7 @@ module.exports = {
             },
             hermes: {
                 worldwide: false,
-                countries: ['www.olx.cl', 'www.olx.com.mx', 'www.olx.com.ve', 'www.olx.com.gt', 'www.olx.com.pe', 'www.olx.com.sv', 'www.olx.com.ec', 'www.olx.com.co', 'www.olx.co.za', 'www.olx.com.ar', 'www.olx.com.uy']
+                countries: ['www.olx.com.ar', 'www.olx.com.co', 'www.olx.co.za', 'www.olx.com.uy', 'www.olx.com.sv', 'www.olx.com.gt', 'www.olx.com.ve', 'www.olx.com.ec', 'www.olx.com.pe', 'www.olx.com.bo', 'www.olx.co.cr', 'www.olx.hn', 'www.olx.com.ni', 'www.olx.com.pa', 'wwww.olx.com.py', 'www.olx.co.tz', 'www.olx.cl', 'www.olx.com.mx']
             },
             newItemPage: {
                 worldwide: true,
@@ -146,7 +146,7 @@ module.exports = {
         desktop: {
             hermes: {
                 worldwide: false,
-                countries: ['www.olx.com.ar', 'www.olx.com.co', 'www.olx.co.za', 'www.olx.com.uy', 'www.olx.com.sv', 'www.olx.com.gt', 'www.olx.com.ve', 'www.olx.com.ec', 'www.olx.com.pe']
+                countries: ['www.olx.com.ar', 'www.olx.com.co', 'www.olx.co.za', 'www.olx.com.uy', 'www.olx.com.sv', 'www.olx.com.gt', 'www.olx.com.ve', 'www.olx.com.ec', 'www.olx.com.pe', 'www.olx.com.bo', 'www.olx.co.cr', 'www.olx.hn', 'www.olx.com.ni', 'www.olx.com.pa', 'wwww.olx.com.py', 'www.olx.co.tz']
             },
             contactForm: {
                 worldwide: false,
@@ -198,7 +198,7 @@ module.exports = {
     mails: {
         domain: {
             'www.olx.com.ng': 'olx.com',
-            'www.olx.com.ke': 'olx.com',
+            'www.olx.co.ke': 'olx.com',
             'www.olx.it': 'olx.com',
             'www.olx.fr': 'olx.com',
             'www.olx.es': 'olx.com',
@@ -227,7 +227,7 @@ module.exports = {
         legal: {
             'default':'legal',
             'www.olx.com.ng': 'support-ng',
-            'www.olx.com.ke': 'support-ke'
+            'www.olx.co.ke': 'support-ke'
         },
         zendesk: {
             'default': {

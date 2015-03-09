@@ -4,7 +4,6 @@ var _ = require('underscore');
 var asynquence = require('asynquence');
 var middlewares = require('../middlewares');
 var helpers = require('../helpers');
-var tracking = require('../modules/tracking');
 var Item = require('../models/item');
 var FeatureAd = require('../models/feature_ad');
 var config = require('../../shared/config');
@@ -262,7 +261,7 @@ function flow(params, callback) {
         function postingController(postingSession, cities, item, fields) {
             var currentLocation = {};
 
-            tracking.setPage('desktop_step1');
+            this.app.tracking.setPage('desktop_step1');
             if (location.current) {
                 switch (location.current.type) {
                     case 'state':
@@ -332,7 +331,7 @@ function flow(params, callback) {
         }
 
         function postingCategoriesController() {
-            tracking.setPage('categories');
+            this.app.tracking.setPage('categories');
             callback(null, 'post/categories', {});
         }
 
@@ -491,10 +490,11 @@ function form(params, callback) {
             var category = this.dependencies.categories.get(params.categoryId);
             var subcategory = category.get('children').get(params.subcategoryId);
 
-            tracking.addParam('category', category.toJSON());
-            tracking.addParam('subcategory', subcategory.toJSON());
             this.app.seo.addMetatag('robots', 'noindex, nofollow');
             this.app.seo.addMetatag('googlebot', 'noindex, nofollow');
+
+            this.app.tracking.set('category', category.toJSON());
+            this.app.tracking.set('subcategory', subcategory.toJSON());
 
             callback(null, {
                 postingSession: _postingSession.get('postingSession'),
@@ -595,11 +595,13 @@ function success(params, callback) {
             parentId = subcategory.get('parentId');
             category = parentId ? this.dependencies.categories.get(parentId) : subcategory;
 
-            tracking.addParam('item', item);
-            tracking.addParam('category', category.toJSON());
-            tracking.addParam('subcategory', subcategory.toJSON());
             this.app.seo.addMetatag('robots', 'noindex, nofollow');
             this.app.seo.addMetatag('googlebot', 'noindex, nofollow');
+
+            this.app.tracking.set('item', item);
+            this.app.tracking.set('category', category.toJSON());
+            this.app.tracking.set('subcategory', subcategory.toJSON());
+
             callback(null, {
                 user: user,
                 item: item,
@@ -745,9 +747,10 @@ function edit(params, callback) {
             else {
                 _form = form;
             }
-            tracking.addParam('item', item);
-            tracking.addParam('category', category.toJSON());
-            tracking.addParam('subcategory', subcategory.toJSON());
+            this.app.tracking.set('item', item);
+            this.app.tracking.set('category', category.toJSON());
+            this.app.tracking.set('subcategory', subcategory.toJSON());
+
             callback(null, {
                 item: item,
                 user: user,
@@ -852,11 +855,13 @@ function editsuccess(params, callback) {
             parentId = subcategory.get('parentId');
             category = parentId ? this.dependencies.categories.get(parentId) : subcategory;
 
-            tracking.addParam('item', item);
-            tracking.addParam('category', category.toJSON());
-            tracking.addParam('subcategory', subcategory.toJSON());
             this.app.seo.addMetatag('robots', 'noindex, nofollow');
             this.app.seo.addMetatag('googlebot', 'noindex, nofollow');
+
+            this.app.tracking.set('item', item);
+            this.app.tracking.set('category', category.toJSON());
+            this.app.tracking.set('subcategory', subcategory.toJSON());
+
             callback(null, {
                 user: user,
                 item: item,

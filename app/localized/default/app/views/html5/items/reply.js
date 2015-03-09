@@ -4,7 +4,7 @@ var _ = require('underscore');
 var asynquence = require('asynquence');
 var Base = require('../../../../../common/app/bases/view');
 var User = require('../../../../../../models/user');
-var tracking = require('../../../../../../modules/tracking');
+var Tracking = require('../../../../../../modules/tracking');
 var helpers = require('../../../../../../helpers');
 var translations = require('../../../../../../../shared/translations');
 var statsd = require('../../../../../../../shared/statsd')();
@@ -119,26 +119,28 @@ module.exports = Base.extend({
         };
     },
     trackSuccess: function(reply) {
-        var item;
-        var categories;
-        var subcategory;
-        var category;
+        var categories = this.$('.itemCategory').val();
+        var subcategory = this.$('.itemSubcategory').val();
+        var category = categories || subcategory;
+        var tracking = new Tracking({}, {
+            app: this.app
+        });
 
-        tracking.reset();
-        categories = this.$('.itemCategory').val();
-        subcategory = this.$('.itemSubcategory').val();
-        category = categories || subcategory;
         tracking.setPage('items#success');
-        tracking.addParam('item', this.reply.itemId);
-        tracking.addParam('category', category);
-        tracking.addParam('subcategory', subcategory);
-        $('#partials-tracking-view').trigger('update', tracking.generateURL.call(this));
+        tracking.set('item', this.reply.itemId);
+        tracking.set('category', category);
+        tracking.set('subcategory', subcategory);
+        tracking.generate(onTrackData.bind(this));
 
         this.track({
             category: 'Reply',
             action: 'ReplySuccess',
             custom: ['Reply', categories, subcategory, 'ReplySuccess', this.reply.id].join('::')
         });
+
+        function onTrackData(trackingData) {
+            $('#partials-tracking-view').trigger('update', trackingData);
+        }
     },
     validate: function(field) {
         var name = field.attr('name');

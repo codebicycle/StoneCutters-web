@@ -11,7 +11,7 @@ module.exports = {
         urls: [
             'help',
             'help/:active'
-        ]        
+        ]
     },
     'pages#allstates': {
         urls: [
@@ -30,5 +30,8 @@ module.exports = {
     },
     'pages#didyousell': {
         url: 'clm/did-you-sell'
+    },
+    'pages#mobilepromo': {
+        url: 'mobilepromopage'
     }
 };
