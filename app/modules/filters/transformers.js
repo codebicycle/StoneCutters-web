@@ -27,8 +27,8 @@ function select(filter, options) {
 
     if (values && values.length) {
         _.map(values, function each(value) {
-            if (value.id && typeof value.id === 'string' && ~value.id.indexOf('_')) {
-                value.id = value.id.replace(/_/g, '+');
+            if (value.id && typeof value.id === 'string' && (~value.id.indexOf('_') || ~value.id.indexOf('-'))) {
+                value.id = value.id.replace(/_/g, '+').replace(/-/g, '*');
             }
             return value;
         });

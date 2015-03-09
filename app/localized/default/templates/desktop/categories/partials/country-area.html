@@ -7,7 +7,7 @@
         <p class="cities-title icons icon-pin">{{ dictionary["misc.FindAdsCity"] }}</p>
         <ul class="list-cities">
             {% for city in topCities %}
-                {% if loop.index < maxTopCities %}
+                {% if loop.index <= maxTopCities %}
                     <li>
                         <a title="{{ city.anchor }}" href="{{ '/nf/all-results' | link({location: city.url}) }}">{{ city.anchor }}</a>
                     </li>

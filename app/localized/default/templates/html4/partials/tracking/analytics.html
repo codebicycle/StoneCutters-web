@@ -1,3 +1,4 @@
+{% if tracking.params and tracking.params.analytics %}
 <script>
     (function() {
         var id = 'ga-lib';
@@ -35,3 +36,4 @@
         tracker._trackPageview('{{ tracking.params.analytics.page }}');
     });
 </script>
+{% endif %}

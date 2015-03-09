@@ -28,6 +28,9 @@ module.exports = {
     'pages#interstitial': {
         url: 'interstitial'
     },
+    'pages#mobilepromo': {
+        url: 'mobilepromopage'
+    },
     'pages#comingsoon': {
         url: 'comingsoon'
     },

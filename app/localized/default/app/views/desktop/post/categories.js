@@ -1,10 +1,10 @@
 'use strict';
 
-var Base = require('../../../../../common/app/bases/view');
-var helpers = require('../../../../../../helpers');
-var tracking = require('../../../../../../modules/tracking');
 var _ = require('underscore');
 var asynquence = require('asynquence');
+var Base = require('../../../../../common/app/bases/view');
+var helpers = require('../../../../../../helpers');
+var Tracking = require('../../../../../../modules/tracking');
 var User = require('../../../../../../models/user');
 
 module.exports = Base.extend({
@@ -72,9 +72,11 @@ module.exports = Base.extend({
         $('.category[data-id="' + categoryId + '"]').addClass('select');
         $('.child-categories-list').removeClass('select');
         $('.child-categories-list[data-id="' + categoryId + '"]').addClass('select');
-        $('html, body').animate({
-            scrollTop: this.parentView.$('#posting-images-view').offset().top
-        }, 750);
+        if (!this.parentView.editing) {
+            $('html, body').animate({
+                scrollTop: this.parentView.$('#posting-images-view').offset().top
+            }, 750);
+        }
 
         var fetch = function(done) {
             this.app.fetch({
@@ -92,12 +94,17 @@ module.exports = Base.extend({
         }.bind(this);
 
         var track = function(done, res) {
-            var $view = $('#partials-tracking-view');
+            var tracking = new Tracking({}, {
+                app: this.app
+            });
 
-            tracking.reset();
             tracking.setPage('desktop_step2');
-            $view.trigger('update', tracking.generateURL.call(this));
-            done(res);
+            tracking.generate(onTrackData.bind(this));
+
+            function onTrackData(trackingData) {
+                $('#partials-tracking-view').trigger('update', trackingData);
+                done(res);
+            }
         }.bind(this);
 
         var success = function(res) {

@@ -155,27 +155,25 @@ module.exports = {
             },
             hydra: {
                 enabled: false,
-                platforms: []
+                platforms: ['desktop']
             },
             tagmanager: {
                 enabled: false,
-                platforms: []
-            },
-            facebook: {
-                enabled: false,
-                platforms: ['html4', 'html5']
+                platforms: ['desktop']
             },
             allpages: {
                 enabled: false,
                 platforms: ['html4', 'html5']
             },
             keyade: {
-                enabled: true,
-                platforms: ['wap', 'html4', 'html5', 'desktop']
+                enabled: true
             },
             ninja: {
                 enabled: true,
-                platforms: ['desktop']
+                platforms: ['desktop'],
+                noscript: {
+                    platforms: ['wap', 'html4']
+                }
             },
             adroll: {
                 enabled: false,
@@ -234,6 +232,12 @@ module.exports = {
             module: 'suggestion',
             layout: 'default',
             link: 'http://samurai.onap.io/samurai.js'
+        }
+    },
+    help: {
+        linkblog: {
+            href: 'http://blog.olx.com',
+            target: '_blank'
         }
     }
 };

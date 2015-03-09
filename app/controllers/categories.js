@@ -5,7 +5,6 @@ var asynquence = require('asynquence');
 var URLParser = require('url');
 var middlewares = require('../middlewares');
 var helpers = require('../helpers');
-var tracking = require('../modules/tracking');
 var Paginator = require('../modules/paginator');
 var Seo = require('../modules/seo');
 var FeatureAd = require('../models/feature_ad');
@@ -303,14 +302,14 @@ function handleItems(params, promise, gallery) {
             this.app.seo.addMetatag('googlebot', 'noindex, follow');
         }
 
-        tracking.setPage('listing');
-        tracking.addParam('category', category.toJSON());
+        this.app.tracking.setPage('listing');
+        this.app.tracking.set('category', category.toJSON());
         if (subcategory) {
-            tracking.addParam('subcategory', subcategory.toJSON());
+            this.app.tracking.set('subcategory', subcategory.toJSON());
         }
-        tracking.addParam('page', query.page);
-        tracking.addParam('filters', items.filters);
-        tracking.addParam('paginator', items.paginator);
+        this.app.tracking.set('page', query.page);
+        this.app.tracking.set('filters', items.filters);
+        this.app.tracking.set('paginator', items.paginator);
 
         done({
             type: 'items',
@@ -372,7 +371,7 @@ function handleShow(params, promise) {
         this.app.seo.addMetatag('title', category.get('trName'));
         this.app.seo.addMetatag('description', category.get('trName'));
 
-        tracking.addParam('category', category.toJSON());
+        this.app.tracking.set('category', category.toJSON());
 
         done({
             type: 'categories',

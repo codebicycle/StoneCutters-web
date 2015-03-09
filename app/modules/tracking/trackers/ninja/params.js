@@ -2,6 +2,7 @@
 
 var _ = require('underscore');
 var configTracking = require('../../config');
+var config = require('../../../../../shared/config');
 var utils = require('../../../../../shared/utils');
 var sorts = {
     price: 'price asc',
@@ -13,6 +14,7 @@ function setDefaults(params, options) {
     var user = this.app.session.get('user');
     var location = this.app.session.get('location');
     var platform = this.app.session.get('platform');
+    var platforms = config.getForMarket(location.url, ['tracking', 'trackers', 'ninja', 'noscript', 'platforms'], []);
 
     params.language = this.app.session.get('selectedLanguage');
     if (location.children && location.children.length) {
@@ -39,6 +41,9 @@ function setDefaults(params, options) {
     if (options.subcategory) {
         params.categoryLevel2Id = options.subcategory.id;
         params.categoryLevel2Name = options.subcategory.name;
+    }
+    if (_.contains(platforms, this.app.session.get('platform'))) {
+        params.clientId = this.app.session.get('clientId');
     }
 }
 
