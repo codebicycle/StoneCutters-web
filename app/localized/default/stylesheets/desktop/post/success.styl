@@ -71,39 +71,45 @@
             margin: 0;
         }
 
-        .item-price {
-            height: 28px;
-            left: 10px;
-            margin: 0;
-            position: absolute;
-            tab-arrow(right, $violet, $violet, 1px, 24px, 1000);
-            top: 125px;
-            z-index: 1;
-
-            .price {
-                font-size: $l;
-                line-height: 1;
-            }
-            .price, .price-type {
-                font-weight: bold;
-            }
-            .price-type:last-child {
-                font-size: $xs;
+        .item-success-image {
+            clear-fix();
+            position: relative;
+            
+            .item-price {
+                height: 28px;
+                left: -10px;
                 margin: 0;
-                line-height: 1;
-            }
-            .price-type:only-child, .price:only-child {
-                font-size: $l;
-                margin: 4px 0 0 0;
-            }
-            .price-negotiable {
-                font-size: $xs;
-            }
-            .price-negotiable:only-child {
-                font-size: $ll;
-                margin-top: 0;
+                position: absolute;
+                tab-arrow(right, $violet, $violet, 1px, 24px, 1000);
+                top: 20px;
+                z-index: 1;
+
+                .price {
+                    font-size: $l;
+                    line-height: 1;
+                }
+                .price, .price-type {
+                    font-weight: bold;
+                }
+                .price-type:last-child {
+                    font-size: $xs;
+                    margin: 0;
+                    line-height: 1;
+                }
+                .price-type:only-child, .price:only-child {
+                    font-size: $l;
+                    margin: 4px 0 0 0;
+                }
+                .price-negotiable {
+                    font-size: $xs;
+                }
+                .price-negotiable:only-child {
+                    font-size: $ll;
+                    margin-top: 0;
+                }
             }
         }
+        
 
         .item-title {
             font-size: $xl;

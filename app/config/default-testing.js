@@ -199,7 +199,7 @@ module.exports = {
     mails: {
         domain: {
             'www.olx.com.ng': 'olx.com',
-            'www.olx.com.ke': 'olx.com',
+            'www.olx.co.ke': 'olx.com',
             'www.olx.it': 'olx.com',
             'www.olx.fr': 'olx.com',
             'www.olx.es': 'olx.com',
@@ -228,7 +228,7 @@ module.exports = {
         legal: {
             'default':'legal',
             'www.olx.com.ng': 'support-ng',
-            'www.olx.com.ke': 'support-ke'
+            'www.olx.co.ke': 'support-ke'
         },
         zendesk: {
             'default': {
