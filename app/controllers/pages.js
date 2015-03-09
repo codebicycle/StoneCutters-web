@@ -170,7 +170,7 @@ function didyousell(params, callback) {
         var anonymousItem;
 
         var redirect = function(done) {
-            if (platform === 'wap') {
+            if (platform !== 'desktop') {
                 done.abort();
                 return helpers.common.redirect.call(this, '/');
             }
@@ -181,8 +181,7 @@ function didyousell(params, callback) {
             if (itemDelete !== 'yes') {
                 return done();
             }
-            console.log(itemId);
-            console.log(securityKey);
+            
             helpers.dataAdapter.post(this.app.req, '/items/' + itemId + '/delete', {
                 query: {
                     securityKey: securityKey,
