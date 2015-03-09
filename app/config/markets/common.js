@@ -1,6 +1,7 @@
 module.exports = {
     layoutOptions: {
-        direction: 'ltr'
+        direction: 'ltr',
+        digits: 'western-arabic'
     },
     ads: {
         quantity: {
