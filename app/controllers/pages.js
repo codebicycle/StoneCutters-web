@@ -17,7 +17,7 @@ module.exports = {
     allstates: middlewares(allstates),
     sitemap: middlewares(sitemap),
     sitemapByDate: middlewares(sitemapByDate),
-    didyousell: middlewares(didyousell)
+    didyousell: middlewares(didyousell),
     mobilepromo: middlewares(mobilepromo)
 };
 
@@ -182,7 +182,7 @@ function didyousell(params, callback) {
                  helpers.dataAdapter.post(this.app.req, '/items/' + itemId + '/delete', {
                     query: {
                         securityKey: securityKey,
-                        reason: 1
+                        reason: 2
                     },
                     cache: false
                 }, done.errfcb);
@@ -227,9 +227,6 @@ function didyousell(params, callback) {
 
         var success = function(res) {
             var item = res.item;
-            var subcategory = this.dependencies.categories.search(item.get('category').id);
-            var category;
-            var url;
 
             callback(null, {
                 include: ['item'],
