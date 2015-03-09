@@ -2,7 +2,7 @@
 
 var _ = require('underscore');
 var Base = require('../../../../../common/app/bases/view').requireView('users/myolx');
-var Thread = require('../../../../../../models/conversation');
+var Conversation = require('../../../../../../models/conversation');
 var User = require('../../../../../../models/user');
 var States = require('../../../../../../collections/states');
 var Items = require('../../../../../../collections/items');
@@ -23,7 +23,7 @@ module.exports = Base.extend({
         });
     },
     getThread: function() {
-        this.thread = this.thread || (this.options.thread && this.options.thread.toJSON ? this.options.thread : new Thread(this.options.thread || {}, {
+        this.thread = this.thread || (this.options.thread && this.options.thread.toJSON ? this.options.thread : new Conversation(this.options.thread || {}, {
             app: this.app
         }));
         return this.thread;
