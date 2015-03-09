@@ -11,7 +11,7 @@ var statsd = require('../../../../../../../shared/statsd')();
 module.exports = Base.extend({
     className: 'users_conversation_view',
     events: {
-        'blur textarea, input:not([type=submit], [type=hidden])': 'onBlur',
+        'change textarea, input:not([type=submit], [type=hidden])': 'onChange',
         'submit': 'onSubmit'
     },
     getTemplateData: function() {
@@ -36,7 +36,7 @@ module.exports = Base.extend({
         }
         this.rendered = true;
     },
-    onBlur: function(event) {
+    onChange: function(event) {
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();
