@@ -22,8 +22,8 @@ module.exports = Base.extend({
     },
     postRender: function() {
         var conversation = this.$('ul.conversation');
-        this.scrollBottom(conversation);
 
+        this.scrollBottom(conversation);
         if (!this.rendered) {
             this.conversation = new Conversation({
                 country: this.app.session.get('location').abbreviation,
@@ -59,7 +59,6 @@ module.exports = Base.extend({
             .val(change.bind(this));
 
         function validate(done) {
-
             if (!this.validate(this.$('[data-messageText]'))) {
                 return done.abort();
             }
@@ -111,6 +110,7 @@ module.exports = Base.extend({
     },
     scrollBottom: function(conversation) {
         var height = conversation[0].scrollHeight;
+
         conversation.scrollTop(height);
     }
 });
