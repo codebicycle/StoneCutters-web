@@ -10,7 +10,6 @@ var statsd = require('../../../../../../../shared/statsd')();
 
 module.exports = Base.extend({
     className: 'users_conversation_view',
-    regexpFindPage: /-p-[0-9]+/,
     events: {
         'blur textarea, input:not([type=submit], [type=hidden])': 'onBlur',
         'submit': 'onSubmit'
@@ -54,6 +53,7 @@ module.exports = Base.extend({
         asynquence().or(fail.bind(this))
             .then(validate.bind(this))
             .then(submit.bind(this))
+            .then(success.bind(this))
             .val(change.bind(this));
 
         function validate(done) {
@@ -69,13 +69,25 @@ module.exports = Base.extend({
             this.conversation.reply(done);
         }
 
-        function change(reply) {
-            if (this.app.session.get('path').match(this.regexpFindPage)) {
-                this.app.router.redirectTo('/myolx/conversation/' + this.conversation.get('threadId'));
-            }
-            else {
-                this.app.router.redirectTo('/myolx/conversation/' + this.conversation.get('threadId') + '-p-1');
-            }
+        function success(done) {
+            this.app.fetch({
+                    thread: {
+                    model: 'Conversation',
+                    params: {
+                        token: this.conversation.get('user').token,
+                        userId: this.conversation.get('user').userId,
+                        threadId: this.conversation.get('threadId'),
+                        pageSize: 300
+                    }
+                }
+            }, {
+                readFromCache: false
+            }, done.errfcb);
+        }
+
+        function change(res) {
+            this.thread = res.thread;
+            this.render();
         }
 
         function fail(err) {
