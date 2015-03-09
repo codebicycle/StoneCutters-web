@@ -52,7 +52,7 @@ function translate(source, options) {
     if (source && options.from !== options.to && SYMBOLS[options.from] && SYMBOLS[options.to]) {
         source = source.toString();
         _.times(10, function translate(digit) {
-            source = source.replace(SYMBOLS[options.from][digit], SYMBOLS[options.to][digit]);
+            source = source.split(SYMBOLS[options.from][digit]).join(SYMBOLS[options.to][digit]);
         });
     }
     return source;
