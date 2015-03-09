@@ -139,6 +139,11 @@ module.exports = Base.extend({
         event.stopImmediatePropagation();
 
         var $target = $(event.currentTarget);
+        var $fieldCat = this.$('.posting-categories-list');
+
+        if ($fieldCat.closest('.field-wrapper').hasClass('error')) {
+           $fieldCat.closest('.field-wrapper').removeClass('error').find('.error.message').remove();
+        }
 
         $('a.category').removeClass('select');
         $('.child-categories-list').removeClass('select');

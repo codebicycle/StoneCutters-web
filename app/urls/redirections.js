@@ -132,6 +132,12 @@ module.exports = {
     'redirections#pictures': {
         url: /^\/pictures\/.*/
     },
+    'redirections#users': {
+        urls: [
+            'users/:username',
+            '/^\/users\/.*/'
+        ]
+    },
     'redirections#userlistings': {
         url: /^\/userlistings\/.*/
     }
