@@ -178,16 +178,18 @@ function didyousell(params, callback) {
         }.bind(this);
 
         var deleteItem = function(done) {
-            if (itemDelete === 'yes') {
-                 helpers.dataAdapter.post(this.app.req, '/items/' + itemId + '/delete', {
-                    query: {
-                        securityKey: securityKey,
-                        reason: 2
-                    },
-                    cache: false
-                }, done.errfcb);
+            if (itemDelete !== 'yes') {
+                return done();
             }
-            done();
+            console.log(itemId);
+            console.log(securityKey);
+            helpers.dataAdapter.post(this.app.req, '/items/' + itemId + '/delete', {
+                query: {
+                    securityKey: securityKey,
+                    reason: 2
+                },
+                cache: false
+            }, done.errfcb);
         }.bind(this);
 
         var prepare = function(done) {
@@ -225,7 +227,7 @@ function didyousell(params, callback) {
             }, done.errfcb);
         }.bind(this);
 
-        var success = function(res) {
+        var success = function(res, body) {
             var item = res.item;
 
             callback(null, {
