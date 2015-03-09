@@ -1,31 +1,52 @@
-{% from macros import Breadcrumb, BreadcrumbHome, Errors, FieldText, FieldTextArea %}
+{% from macros import Breadcrumb, BreadcrumbHome, Errors %}
 {% set link = (breadcrumb | link) %}
-{{ Breadcrumb(dictionary, link, dictionary["contactseller_form.ReplyToListing"]) }}
+{{ Breadcrumb(dictionary, link, dictionary["itemslisting.ContactSeller"]) }}
 {% if form and form.errors %}{{ Errors(form.errors) }}{% endif %}
 <div id="reply">
     <form action="{{ ['/items/', item.id, '/reply'] | join('') | link }}" method="POST" enctype="multipart/form-data">
-        <a style="display: block;" tabindex="1" href="{{ item | slugToUrl | link }}">
-            <h4>{{ item.title }}</h4>
-        </a>
+        {% if user %}
+            <div class="formField user-info">
+                <label>{{user.username}}</label>
+                <label>{{user.email}}</label>
+                <input type="hidden" value="{{ user.username }}" class="name" name="name">
+                <input type="hidden" value="{{ user.email }}" name="email" class="email">
+            </div>
+        {% endif %}
+
         <div class="formField">
-            <label>{{ dictionary["contactseller_form.55"] }} {{ item.contactName if item.contactName else "anonymous" }}</label>
+            <strong>{{ dictionary["mybids.ContactSeller"] }}</strong>
         </div>
 
-        {% for field in fields %}
-            {% if  field.name == 'message' %}
-                {{ FieldTextArea(dictionary[field.label], field.name, field.mandatory, form) }}
-            {% else %}
-                {{ FieldText(dictionary[field.label], field.name, field.mandatory, form, user) }}
-            {% endif %}
-        {% endfor %}
+        <div class="formField">
+            <label>* {{ dictionary["replymessage.Message"] }}</label>
+            <textarea id="text-message" name="message" class="textarea">{{ form.values.message if form.values.message }}</textarea>
+            <small class="placeholder">{{ dictionary["misc.EnterMessage"] }}</small>
+        </div>
+
+        {% if not user %}
+            <div class="formField">
+                <label>* {{ dictionary["replymessage.Name"] }}</label>
+                <input type="text" name="name" id="text-name" value="{{ form.values.name if form.values.name }}">
+                <small class="placeholder">{{ dictionary["misc.EnterName"] }}</small>
+            </div>
+
+            <div class="formField">
+                <label>* {{ dictionary["replymessage.Email"] }}</label>
+                <input type="text" name="email" id="text-email" value="{{ form.values.email if form.values.email }}" >
+                <small class="placeholder">{{ dictionary["misc.EnterEmail"] }}</small>
+            </div>
+        {% endif %}
+        <div class="formField">
+            <label>{{ dictionary["itemgeneraldetails.Phone"] }}</label>
+            <input type="text" name="phone" id="text-phone" value="{{ form.values.phone if form.values.phone }}">
+            <small class="placeholder">{{ dictionary["misc.EnterPhoneNumber"] }}</small>
+        </div>
 
         <div class="formField">
-            <small>* {{ dictionary["wap_posting_step4.mandatoryField"] }}</small>
+            <small class="mandatory">* {{ dictionary["wap_posting_step4.mandatoryField"] }}</small>
         </div>
         <div class="formActions">
-            <div class="btn-adjust btnOrange btnForm">
-                <input type="submit" value="{{ dictionary["contactseller_form.60"] }}" name="submit" class="btns orange" data-qa="reply-send-button" >
-            </div>
+            <input type="submit" value="{{ dictionary["myolx.Send"] }}" name="submit" class="btns green" data-qa="reply-send-button" >
         </div>
 
 
@@ -35,3 +56,12 @@
 {{ BreadcrumbHome(dictionary, link, ('/' | link)) }}
 
 {% view 'partials/tracking' %}
+
+
+        {#{% for field in fields %}
+            {% if  field.name == 'message' %}
+                {{ FieldTextArea(dictionary[field.label], field.name, field.mandatory, form) }}
+            {% else %}
+                {{ FieldText(dictionary[field.label], field.name, field.mandatory, form, user) }}
+            {% endif %}
+        {% endfor %#}
