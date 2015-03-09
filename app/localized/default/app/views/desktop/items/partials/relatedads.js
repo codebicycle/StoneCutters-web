@@ -6,7 +6,7 @@ var translations = require('../../../../../../../../shared/translations');
 var config = require('../../../../../../../../shared/config');
 
 module.exports = Base.extend({
-    id: 'related-ads',
+    id: 'relateds',
     postRender: function() {
         var location = this.app.session.get('location');
 
