@@ -73,6 +73,7 @@ module.exports = Base.extend({
         var options = {};
 
         if ($field.attr('name') === 'priceC') {
+            $field.val($field.val().replace(/[^0-9.,]/gi, ''));
             options.skipValidation = $field.val() === '' && _.contains(['NEGOTIABLE', 'FREE'], ($('#field-priceType').val() || '').toUpperCase());
             this.$('select').trigger('change');
         }
