@@ -243,7 +243,9 @@ module.exports = Base.extend({
             }
 
             $field.removeClass('validating');
-            $(document).scrollTop(this.$el.offset().top);
+            $('html, body').animate({
+                scrollTop: this.$el.offset().top
+            }, 750);
         } else {
 
             if ($field.attr('required') && !value.trim().length) {
@@ -337,6 +339,9 @@ module.exports = Base.extend({
                 $field.parent().append('<small class="error message">' + message + '</small>');
             }
         }.bind(this));
+        $('html, body').animate({
+            scrollTop: $('small.error,message').first().parent().offset().top - 20
+        }, 750);
         this.$('#posting-errors-view').trigger('update');
     },
     onErrorClean: function(event, field) {
@@ -347,7 +352,7 @@ module.exports = Base.extend({
         var $field = $(field);
 
         $field.closest('.field-wrapper').removeClass('error').removeClass('success');
-        $field.find('.error.message').html('');
+        $field.parent().find('small.error.message').remove();
     },
     onPriceReset: function(event) {
         event.preventDefault();
@@ -372,8 +377,37 @@ module.exports = Base.extend({
         this.item.set('ipAddress', this.app.session.get('ip'));
 
         asynquence().or(fail.bind(this))
+            .then(check.bind(this))
+            .then(validate.bind(this))
             .then(post.bind(this))
             .val(success.bind(this));
+
+        function check(done) {
+            var errors = $('small.error,message');
+
+            if (errors.length) {
+                done.abort();
+                this.$('#posting-contact-view').trigger('enablePost');
+                return $('html, body').animate({
+                    scrollTop: errors.first().parent().offset().top - 20
+                }, 750);
+            }
+            done();
+        }
+
+        function validate(done) {
+            var promise = asynquence(true).or(done.fail);
+
+            validation.call(this, '#posting-description-view');
+            promise.then(check.bind(this));
+            promise.val(done);
+
+            function validation(view) {
+                promise.then(function(next, result) {
+                    this.$(view).trigger('validate', [next, result]);
+                }.bind(this));
+            }
+        }
 
         function post(done) {
             this.item.post(done);

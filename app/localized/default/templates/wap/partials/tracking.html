@@ -2,4 +2,6 @@
     {% for url in tracking.urls %}
         <img src="{{url}}" class="tracking" width="1" height="1">
     {% endfor %}
+
+    {% include (template + '/partials/tracking/ninja.html') %}
 {% endif %}

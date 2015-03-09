@@ -23,13 +23,16 @@ module.exports = Base.extend({
         var support = config.get(['mails', 'support', location.url], 'support') + '@' + mailDomain;
         var legal = config.get(['mails', 'legal', location.url], 'legal') + '@' + mailDomain;
         var selectedLanguage = this.app.session.get('selectedLanguage').split('-')[0];
+        var linkblog = config.getForMarket(this.app.session.get('location').url, ['help','linkblog'], false);
 
         return _.extend({}, data, {
             mails: {
                 support: support,
                 legal: legal,
+
             },
-            selectedLanguage : selectedLanguage
+            selectedLanguage: selectedLanguage,
+            linkblog: linkblog
         });
     },
     helpToggleContent: function(event) {

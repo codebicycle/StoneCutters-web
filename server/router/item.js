@@ -312,7 +312,7 @@ module.exports = function(app, dataAdapter) {
             }
 
             function success(data) {
-                var url = '/nf/search' + (data.search ? ('/' + data.search) : '');
+                var url = data.search ? ('/nf/search/' + data.search) : '/nf/all-results';
 
                 res.redirect(utils.link(url, req.rendrApp));
             }

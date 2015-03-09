@@ -40,5 +40,7 @@ module.exports = {
     adtype: 'SELECT',
     distance: 'SELECT',
     condition: 'SELECT',
+    flo: 'SELECT',
+    slo: 'SELECT',
     sort: 'SELECT'
 };

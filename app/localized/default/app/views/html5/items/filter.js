@@ -1,10 +1,8 @@
 'use strict';
 
-var Base = require('../../../../../common/app/bases/view').requireView('items/filter');
 var _ = require('underscore');
+var Base = require('../../../../../common/app/bases/view').requireView('items/filter');
 var helpers = require('../../../../../../helpers');
-
-var tracking = require('../../../../../../modules/tracking');
 var Filters = require('../../../../../../modules/filters');
 
 module.exports = Base.extend({

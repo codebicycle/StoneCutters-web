@@ -432,5 +432,11 @@ module.exports = {
         html5: {
             enabled: true
         }
+    },
+    help: {
+        linkblog: {
+            href: 'http://hello.olx.co.za',
+            target: '_blank'
+        }
     }
 };

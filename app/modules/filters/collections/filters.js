@@ -11,8 +11,8 @@ var filters = utils.get(config, ['filters'], {});
 var sorts = utils.get(config, ['sorts'], {});
 var defaultOrderByName = Object.keys(filters);
 var defaultOrderByType = ['BOOLEAN', 'SELECT', 'RANGE'];
-var regexpReplace = /-([a-zA-Z0-9]+)_([a-zA-Z0-9_\.\+]*)/g;
-var regexpFind = /-[a-zA-Z0-9]+_[a-zA-Z0-9_\.\+]*/g;
+var regexpReplace = /-([a-zA-Z0-9]+)_([a-zA-Z0-9_\.\+\*]*)/g;
+var regexpFind = /-[a-zA-Z0-9]+_[a-zA-Z0-9_\.\+\*]*/g;
 var regexpSort = /([a-zA-Z0-9_]*)(desc)/g;
 var booleans = ['true', 'false'];
 var Base;
@@ -250,7 +250,7 @@ function format() {
                 break;
             case 'SELECT':
                 url.push(_.map(value, function each(val) {
-                    return val.replace(/_/g, '+');
+                    return val.replace(/_/g, '+').replace(/-/g, '*');
                 }).join('_'));
                 break;
             case 'BOOLEAN':
@@ -292,8 +292,11 @@ function smaugize() {
                 if (name === 'f.neighborhood') {
                     separator = ' OR ';
                 }
+                else if (name === 'f.flo' || name === 'f.slo') {
+                    separator = '-';
+                }
                 params[name] = _.map(value, function each(val) {
-                    return val.replace(/\+/g, '_');
+                    return val.replace(/\+/g, '_').replace(/\*/g, '-');
                 }).join(separator);
                 break;
             case 'RANGE':
