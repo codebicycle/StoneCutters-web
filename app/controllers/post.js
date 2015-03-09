@@ -4,7 +4,6 @@ var _ = require('underscore');
 var asynquence = require('asynquence');
 var middlewares = require('../middlewares');
 var helpers = require('../helpers');
-var tracking = require('../modules/tracking');
 var Item = require('../models/item');
 var FeatureAd = require('../models/feature_ad');
 var config = require('../../shared/config');
@@ -262,7 +261,7 @@ function flow(params, callback) {
         function postingController(postingSession, cities, item, fields) {
             var currentLocation = {};
 
-            tracking.setPage('desktop_step1');
+            this.app.tracking.setPage('desktop_step1');
             if (location.current) {
                 switch (location.current.type) {
                     case 'state':
@@ -332,7 +331,7 @@ function flow(params, callback) {
         }
 
         function postingCategoriesController() {
-            tracking.setPage('categories');
+            this.app.tracking.setPage('categories');
             callback(null, 'post/categories', {});
         }
 
@@ -491,10 +490,11 @@ function form(params, callback) {
             var category = this.dependencies.categories.get(params.categoryId);
             var subcategory = category.get('children').get(params.subcategoryId);
 
-            tracking.addParam('category', category.toJSON());
-            tracking.addParam('subcategory', subcategory.toJSON());
             this.app.seo.addMetatag('robots', 'noindex, nofollow');
             this.app.seo.addMetatag('googlebot', 'noindex, nofollow');
+
+            this.app.tracking.set('category', category.toJSON());
+            this.app.tracking.set('subcategory', subcategory.toJSON());
 
             callback(null, {
                 postingSession: _postingSession.get('postingSession'),
@@ -534,8 +534,6 @@ function success(params, callback) {
         asynquence().or(fail.bind(this))
             .then(prepare.bind(this))
             .then(fetch.bind(this))
-            .then(check.bind(this))
-            .then(fetchRelated.bind(this))
             .then(fetchFeatured.bind(this))
             .val(successFetch.bind(this));
 
@@ -562,49 +560,15 @@ function success(params, callback) {
             }, done.errfcb);
         }
 
-        function check(done, resItem) {
-            if (!resItem.item) {
-                return done.fail(null, {});
-            }
-            done(resItem.item);
-        }
-
-        function fetchRelated(done, _item) {
-            this.app.fetch({
-                relatedItems: {
-                    collection : 'Items',
-                    params: {
-                        location: siteLocation,
-                        offset: 0,
-                        pageSize: 10,
-                        relatedAds: itemId
-                    }
-                }
-            }, {
-                readFromCache: false
-            }, function afterFetch(err, res) {
-                if (err) {
-                    err = null;
-                    res = {
-                        relatedItems: []
-                    };
-                }
-                else {
-                    res.relatedItems = res.relatedItems.toJSON();
-                }
-                done(_item, res.relatedItems);
-            }.bind(this));
-        }
-
-        function fetchFeatured(done, item, relateds) {
+        function fetchFeatured(done, response) {
             if (!FeatureAd.isEnabled(this.app)) {
-                return done(item, relateds);
+                return done(response.item);
             }
             this.app.fetch({
                 featuread: {
                     model : 'Feature_ad',
                     params: {
-                        id: item.get('id'),
+                        id: response.item.get('id'),
                         locate: this.app.session.get('selectedLanguage')
                     }
                 }
@@ -614,12 +578,12 @@ function success(params, callback) {
                 if (err) {
                     res = {};
                 }
-                item.set('featured', res.featuread);
-                done(item, relateds);
+                response.item.set('featured', res.featuread);
+                done(response.item);
             }.bind(this));
         }
 
-        function successFetch(_item, _relatedItems) {
+        function successFetch(_item) {
             var item = _item.toJSON();
             var subcategory = this.dependencies.categories.search(item.category.id);
             var category;
@@ -631,18 +595,19 @@ function success(params, callback) {
             parentId = subcategory.get('parentId');
             category = parentId ? this.dependencies.categories.get(parentId) : subcategory;
 
-            tracking.addParam('item', item);
-            tracking.addParam('category', category.toJSON());
-            tracking.addParam('subcategory', subcategory.toJSON());
             this.app.seo.addMetatag('robots', 'noindex, nofollow');
             this.app.seo.addMetatag('googlebot', 'noindex, nofollow');
+
+            this.app.tracking.set('item', item);
+            this.app.tracking.set('category', category.toJSON());
+            this.app.tracking.set('subcategory', subcategory.toJSON());
+
             callback(null, {
                 user: user,
                 item: item,
                 securityKey: securityKey,
                 category: category.toJSON(),
-                subcategory: subcategory.toJSON(),
-                relatedItems: _relatedItems
+                subcategory: subcategory.toJSON()
             });
         }
 
@@ -782,9 +747,10 @@ function edit(params, callback) {
             else {
                 _form = form;
             }
-            tracking.addParam('item', item);
-            tracking.addParam('category', category.toJSON());
-            tracking.addParam('subcategory', subcategory.toJSON());
+            this.app.tracking.set('item', item);
+            this.app.tracking.set('category', category.toJSON());
+            this.app.tracking.set('subcategory', subcategory.toJSON());
+
             callback(null, {
                 item: item,
                 user: user,
@@ -838,7 +804,12 @@ function editsuccess(params, callback) {
         var languages = this.app.session.get('languages');
         var anonymousItem;
 
-        var prepare = function(done) {
+        asynquence().or(fail.bind(this))
+            .then(prepare.bind(this))
+            .then(fetch.bind(this))
+            .val(successFetch.bind(this));
+
+        function prepare(done) {
             if (user) {
                 params.token = user.token;
             }
@@ -859,9 +830,9 @@ function editsuccess(params, callback) {
             delete params.title;
             delete params.sk;
             done();
-        }.bind(this);
+        }
 
-        var findItem = function(done) {
+        function fetch(done) {
             this.app.fetch({
                 item: {
                     model: 'Item',
@@ -870,78 +841,38 @@ function editsuccess(params, callback) {
             }, {
                 readFromCache: false
             }, done.errfcb);
-        }.bind(this);
+        }
 
-        var checkItem = function(done, resItem) {
-            if (!resItem.item) {
-                return done.fail(null, {});
-            }
-            done(resItem.item);
-        }.bind(this);
-
-        var findRelatedItems = function(done, _item) {
-            this.app.fetch({
-                relatedItems: {
-                    collection : 'Items',
-                    params: {
-                        location: siteLocation,
-                        offset: 0,
-                        pageSize: 10,
-                        relatedAds: itemId
-                    }
-                }
-            }, {
-                readFromCache: false
-            }, function afterFetch(err, res) {
-                if (err) {
-                    err = null;
-                    res = {
-                        relatedItems: []
-                    };
-                }
-                else {
-                    res.relatedItems = res.relatedItems.toJSON();
-                }
-                done(_item, res.relatedItems);
-            }.bind(this));
-        }.bind(this);
-
-        var success = function(_item, _relatedItems) {
-            var item = _item.toJSON();
+        function successFetch(response) {
+            var item = response.item.toJSON();
             var subcategory = this.dependencies.categories.search(item.category.id);
             var category;
             var parentId;
 
             if (!subcategory) {
-                return error();
+                return fail();
             }
             parentId = subcategory.get('parentId');
             category = parentId ? this.dependencies.categories.get(parentId) : subcategory;
 
-            tracking.addParam('item', item);
-            tracking.addParam('category', category.toJSON());
-            tracking.addParam('subcategory', subcategory.toJSON());
             this.app.seo.addMetatag('robots', 'noindex, nofollow');
             this.app.seo.addMetatag('googlebot', 'noindex, nofollow');
+
+            this.app.tracking.set('item', item);
+            this.app.tracking.set('category', category.toJSON());
+            this.app.tracking.set('subcategory', subcategory.toJSON());
+
             callback(null, {
                 user: user,
                 item: item,
                 sk: securityKey,
                 category: category.toJSON(),
-                subcategory: subcategory.toJSON(),
-                relatedItems: _relatedItems
+                subcategory: subcategory.toJSON()
             });
-        }.bind(this);
+        }
 
-        var error = function(err, res) {
+        function fail(err, res) {
             return helpers.common.error.call(this, err, res, callback);
-        }.bind(this);
-
-        asynquence().or(error)
-            .then(prepare)
-            .then(findItem)
-            .then(checkItem)
-            .then(findRelatedItems)
-            .val(success);
+        }
     }
 }

@@ -51,6 +51,7 @@ module.exports = function itemRouter(app, dataAdapter) {
                     },
                     subject: '[' + data.area + '] ' + data.subject,
                     comment: {
+                        public: false,
                         body: data.message
                     }
                 };

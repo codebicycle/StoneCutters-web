@@ -70,11 +70,15 @@ module.exports = Base.extend({
         event.stopImmediatePropagation();
 
         var $field = $(event.target);
+        var options = {};
 
         if ($field.attr('name') === 'priceC') {
+            $field.val($field.val().replace(/[^0-9.,]/gi, ''));
+            options.skipValidation = $field.val() === '' && _.contains(['NEGOTIABLE', 'FREE'], ($('#field-priceType').val() || '').toUpperCase());
             this.$('select').trigger('change');
         }
-        this.parentView.$el.trigger('fieldSubmit', [$field]);
+
+        this.parentView.$el.trigger('fieldSubmit', [$field, options]);
     },
     onPriceTypeChange: function(event) {
         var $field = $(event.target);

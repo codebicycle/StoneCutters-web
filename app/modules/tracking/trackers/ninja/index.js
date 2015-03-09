@@ -3,6 +3,7 @@
 var _ = require('underscore');
 var config = require('../../../../../shared/config');
 var params = require('./params');
+var noscript = require('./noscript');
 var env = config.get(['environment', 'type'], 'production');
 
 function isPlatformEnabled(platforms) {
@@ -49,5 +50,6 @@ function getConfig(page, options) {
 module.exports = {
     isEnabled: isEnabled,
     getParams: getParams,
-    getConfig: getConfig
+    getConfig: getConfig,
+    prepareNoScript: noscript.prepare
 };

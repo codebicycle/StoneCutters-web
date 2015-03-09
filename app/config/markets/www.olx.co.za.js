@@ -400,6 +400,10 @@ module.exports = {
                 anchor: 'KwaZulu-Natal'
             },
             {
+                url: 'northerncape.olx.co.za',
+                anchor: 'Northern Cape'
+            },
+            {
                 url: 'freestate.olx.co.za',
                 anchor: 'Free State'
             },
@@ -412,11 +416,11 @@ module.exports = {
                 anchor: 'Mpumalanga'
             },
             {
-                url: 'limpopo.olx.co.za',
+                url: 'northwest.olx.co.za',
                 anchor: 'North West'
             },
             {
-                url: 'northwest.olx.co.za',
+                url: 'limpopo.olx.co.za',
                 anchor: 'Limpopo'
             }
         ]
@@ -427,6 +431,12 @@ module.exports = {
         },
         html5: {
             enabled: true
+        }
+    },
+    help: {
+        linkblog: {
+            href: 'http://hello.olx.co.za',
+            target: '_blank'
         }
     }
 };
