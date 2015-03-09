@@ -237,11 +237,8 @@ module.exports = Base.extend({
 
             if (!$fieldCat.closest('.field-wrapper').hasClass('error')) {
                 $fieldCat.closest('.field-wrapper').addClass('error').removeClass('success');
-                _.each(messages, function (message) {
-                    $fieldCat.parent().append('<small class="error message">' + message + '</small>');
-                });
+                $fieldCat.parent().append('<small class="error message">' + messages[!$('.child-categories-list').is(':visible') ? 0 : 1] + '</small>');
             }
-
             $field.removeClass('validating');
             $('html, body').animate({
                 scrollTop: this.$el.offset().top
