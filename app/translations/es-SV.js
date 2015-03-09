@@ -158,7 +158,7 @@ module.exports = {
     'listingpageitemslisting.ZeroResultsPage': 'Disculpe, pero no hemos encontrado resultados en <<CATEGORY>> de <<REGION>>.',
     'netvibes_myolx.content.NoActiveListings': 'Actualmente no tiene publicaciones activas.',
     'netvibes_myolx.content.NoMessages': 'Ahorita no tiene mensajes.',
-    'netvibes_myolx.content.Views': 'Le\xEDdo',
+    'netvibes_myolx.content.Views': 'Visitas',
     'supportform.Department': 'Departamento:',
     'supportform.FillForm': 'Por favor, completa el formulario para contactarte con nuestro Equipo de Soporte.',
     'supportform.Message': 'Mensaje:',
