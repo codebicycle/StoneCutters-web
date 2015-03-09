@@ -13,8 +13,7 @@
             </tbody>
         </table>
         {% view 'locations/select' %}
-        {% set templateName = template + '/partials/search.html' %}
-        {% include templateName %}
+        {% view 'partials/search' %}
         <table width="100%" cellspacing="0" cellpadding="4" border="0" align="left" bgcolor="#FFFFFF">
             {% for subcategory in category.children.toJSON() %}
                 <tr>

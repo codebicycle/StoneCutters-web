@@ -15,7 +15,8 @@ module.exports = {
     error: middlewares(error),
     allstates: middlewares(allstates),
     sitemap: middlewares(sitemap),
-    sitemapByDate: middlewares(sitemapByDate)
+    sitemapByDate: middlewares(sitemapByDate),
+    mobilepromo: middlewares(mobilepromo)
 };
 
 function terms(params, callback) {
@@ -281,4 +282,31 @@ function sitemapByDate(params, callback) {
     helpers.common.redirect.call(this, '/', null, {
         status: 302
     });
+}
+
+function mobilepromo(params, callback) {
+    helpers.controllers.control.call(this, params, controller);
+
+    function controller() {
+        var redirect = function(done) {
+            var platform = this.app.session.get('platform');
+
+            if (platform !== 'desktop') {
+                return done.fail();
+            }
+            done();
+        }.bind(this);
+
+        var success = function() {
+            callback(null, {});
+        }.bind(this);
+
+        var error = function(err, res) {
+            return helpers.common.redirect.call(this, '/');
+        }.bind(this);
+
+        asynquence().or(error)
+            .then(redirect)
+            .val(success);
+    }
 }

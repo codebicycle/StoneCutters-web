@@ -87,14 +87,14 @@ function login(done) {
         if (!this.has('new')) {
             statsd.increment([this.get('country'), 'login', 'success', this.get('platform')]);
         }
-        done();
+        this.callback(done)();
     }
 
     function fail(err) {
         if (!this.has('new')) {
             statsd.increment([this.get('country'), 'login', 'error', err.statusCode, this.get('platform')]);
         }
-        done.fail(err);
+        this.fail(done)(err);
     }
 }
 
@@ -114,12 +114,12 @@ function lostpassword(done) {
 
     function success() {
         statsd.increment([this.get('country'), 'lostpassword', 'success', this.get('platform')]);
-        done();
+        this.callback(done)();
     }
 
     function fail(err) {
         statsd.increment([this.get('country'), 'lostpassword', 'error', err.statusCode, this.get('platform')]);
-        done.fail(err);
+        this.fail(done)(err);
     }
 }
 
@@ -132,6 +132,7 @@ function register(done) {
 
     function prepare(done) {
         var query = {
+            languageId: this.get('languageId'),
             platform: this.get('platform')
         };
 
@@ -157,12 +158,12 @@ function register(done) {
 
     function success() {
         statsd.increment([this.get('country'), 'register', 'success', this.get('platform')]);
-        done();
+        this.callback(done)();
     }
 
     function fail(err) {
         statsd.increment([this.get('country'), 'register', 'error', err.statusCode, this.get('platform')]);
-        done.fail(err);
+        this.fail(done)(err);
     }
 }
 
@@ -185,12 +186,12 @@ function registerConfirm(done) {
     function success(res, body) {
         this.set(body);
         statsd.increment([this.get('country'), 'register','confirm', 'success', this.get('platform')]);
-        done();
+        this.callback(done)();
     }
 
     function fail(err) {
         statsd.increment([this.get('country'), 'register','confirm', 'error', err.statusCode, this.get('platform')]);
-        done.fail(err);
+        this.fail(done)(err);
     }
 }
 
@@ -235,12 +236,12 @@ function reply(done, data) {
 
     function success(reply) {
         statsd.increment([this.get('country'), 'reply', 'success', this.get('platform')]);
-        done(reply);
+        this.callback(done)(reply);
     }
 
     function fail(err) {
         statsd.increment([this.get('country'), 'reply', 'error', err.statusCode, this.get('platform')]);
-        done.fail(err);
+        this.fail(done)(err);
     }
 }
 
@@ -257,12 +258,12 @@ function registerWithFacebook(done) {
 
     function success(res) {
         statsd.increment([this.get('country'), 'facebookRegister', 'success', this.get('platform')]);
-        done(res);
+        this.callback(done)(res);
     }
 
     function fail(err) {
         statsd.increment([this.get('country'), 'facebookRegister', 'error', err.statusCode, this.get('platform')]);
-        done.fail(err);
+        this.fail(done)(err);
     }
 }
 
@@ -290,12 +291,12 @@ function authenticateWithFacebook(done) {
 
     function success() {
         statsd.increment([this.get('country'), 'facebookLogin', 'success', this.get('platform')]);
-        done();
+        this.callback(done)();
     }
 
     function fail(err) {
         statsd.increment([this.get('country'), 'facebookLogin', 'error', err.statusCode, this.get('platform')]);
-        done.fail(err);
+        this.fail(done)(err);
     }
 }
 
@@ -316,12 +317,12 @@ function edit(done) {
 
     function success(response, profile) {
         statsd.increment([this.get('country'), 'profile', this.get('intent'), 'success', this.get('platform')]);
-        done();
+        this.callback(done)();
     }
 
     function fail(err) {
         statsd.increment([this.get('country'), 'profile', this.get('intent'), 'error', err.statusCode, this.get('platform')]);
-        done.fail(err);
+        this.fail(done)(err);
     }
 }
 
@@ -350,12 +351,12 @@ function changePassword(done) {
 
     function success(response, profile) {
         statsd.increment([this.get('country'), 'profile', 'password', 'success', this.get('platform')]);
-        done();
+        this.callback(done)();
     }
 
     function fail(err) {
         statsd.increment([this.get('country'), 'profile', 'password', 'error', err.statusCode, this.get('platform')]);
-        done.fail(err);
+        this.fail(done)(err);
     }
 }
 

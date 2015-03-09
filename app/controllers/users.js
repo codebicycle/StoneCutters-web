@@ -42,70 +42,64 @@ function register(params, callback) {
         var platform = this.app.session.get('platform');
         var user;
 
-        var redirect = function(done) {
-          if (platform === 'wap') {
-              done.abort();
-              return helpers.common.redirect.call(this, '/');
-          }
-          user = this.app.session.get('user');
-          if (user) {
-              done.abort();
-              return helpers.common.redirect.call(this, '/', null, {
-                  status: 302
-              });
-          }
-          done();
-        }.bind(this);
+        asynquence().or(fail.bind(this))
+            .then(redirect.bind(this))
+            .then(registerConfirm.bind(this))
+            .val(success.bind(this));
 
-        var check = function(done) {
-          var languages;
+        function redirect(done) {
+            if (platform === 'wap') {
+                done.abort();
+                return helpers.common.redirect.call(this, '/');
+            }
+            if (this.app.session.get('user')) {
+                done.abort();
+                return helpers.common.redirect.call(this, '/', null, {
+                    status: 302
+                });
+            }
+            done();
+        }
 
-          if (params.hash && params.username) {
-            languages = this.app.session.get('languages');
+        function registerConfirm(done) {
+            if (!params.hash || !params.username) {
+                return done();
+            }
             user = new User({
-              languageId: languages._byId[this.app.session.get('selectedLanguage')].id,
-              country: this.app.session.get('location').name,
-              username: params.username,
-              hash: params.hash,
-              platform: platform,
-              noMD5: true
+                languageId: this.app.session.get('languageId'),
+                country: this.app.session.get('location').name,
+                username: params.username,
+                hash: params.hash,
+                platform: platform,
+                noMD5: true
             }, {
-              app: this.app
+                app: this.app
             });
-            return user.registerConfirm(done);
-          }
-          done(false);
-        }.bind(this);
+            user.registerConfirm(confirmed);
 
-        var login = function(done, isConfirm) {
-          if (isConfirm) {
-            return user.login(done);
-          }
-          done(false);
-        }.bind(this);
+            function confirmed(err) {
+                if (err) {
+                    return done();
+                }
+                user.login(done);
+            }
+        }
 
-        var success = function(isLogin) {
-          if (isLogin !== false) {
-            return helpers.common.redirect.call(this, '/', null, {
-              status: 302
+        function success() {
+            if (user) {
+                return helpers.common.redirect.call(this, '/', null, {
+                    status: 302
+                });
+            }
+            callback(null, {
+                form: this.form,
+                agreeTerms: params.agreeTerms
             });
-          }
-          callback(null, {
-              form: this.form,
-              agreeTerms: params.agreeTerms
-          });
-        }.bind(this);
+        }
 
-        var error = function(err, res) {
-          return helpers.common.error.call(this, err, res, callback);
-        }.bind(this);
-
-        asynquence().or(error)
-        .then(redirect)
-        .then(check)
-        .then(login)
-        .val(success);
-
+        function fail(err, res) {
+            return helpers.common.error.call(this, err, res, callback);
+        }
     }
 }
 
@@ -226,51 +220,54 @@ function myads(params, callback) {
     helpers.controllers.control.call(this, params, controller);
 
     function controller() {
-        var page = params ? params.page : undefined;
-        var deleted;
-        var _params;
-        var user;
+        var platform = this.app.session.get('platform');
+        var user = this.app.session.get('user');
+        var page = params.page;
+        var deleted = params.deleted;
 
-        var redirect = function(done) {
-            var platform = this.app.session.get('platform');
+        delete params.deleted;
+        asynquence().or(fail.bind(this))
+            .then(redirect.bind(this))
+            .then(prepare.bind(this))
+            .then(fetch.bind(this))
+            .then(paginate.bind(this))
+            .then(fetchFeatured.bind(this))
+            .val(success.bind(this));
 
+        function redirect(done) {
             if (platform === 'wap') {
                 return helpers.common.redirect.call(this, '/');
             }
-            user = this.app.session.get('user');
             if (!user) {
                 return helpers.common.redirect.call(this, '/login', null, {
                     status: 302
                 });
             }
             done();
-        }.bind(this);
+        }
 
-        var prepare = function(done) {
+        function prepare(done) {
             Paginator.prepare(this.app, params, 'myAds');
-            deleted = params.deleted;
-            delete params.deleted;
-            _params = _.extend({}, params, {
-                token: user.token,
-                userId: user.userId,
-                languageId: this.app.session.get('languages')._byId[this.app.session.get('selectedLanguage')].id,
-                item_type: 'myAds'
-            });
             done();
-        }.bind(this);
+        }
 
-        var findAds = function(done) {
+        function fetch(done) {
             this.app.fetch({
                 items: {
                     collection: 'Items',
-                    params: _params
+                    params: _.extend({}, params, {
+                        token: user.token,
+                        userId: user.userId,
+                        languageId: this.app.session.get('languageId'),
+                        item_type: 'myAds'
+                    })
                 }
             }, {
                 readFromCache: false
             }, done.errfcb);
-        }.bind(this);
+        }
 
-        var paginate = function(done, response) {
+        function paginate(done, response) {
             var url = '/myolx/myadslisting';
             var realPage;
 
@@ -286,9 +283,9 @@ function myads(params, callback) {
                 return helpers.common.redirect.call(this, [url, '-p-', realPage].join(''));
             }
             done(response.items);
-        }.bind(this);
+        }
 
-        var findFeatured = function(done, items) {
+        function fetchFeatured(done, items) {
             if (!FeatureAd.isEnabled(this.app)) {
                 return done(items);
             }
@@ -318,16 +315,15 @@ function myads(params, callback) {
                     }.bind(this));
                 }.bind(this));
             }, this);
-            promise.val(function findFeaturedSuccess() {
+            promise.val(function fetchSuccess() {
                 done(items);
             });
-        }.bind(this);
+        }
 
-        var success = function(items) {
+        function success(items) {
             var location = this.app.session.get('location');
             var isRenewEnabled = config.getForMarket(location.url, ['ads', 'renew', 'enabled'],false);
             var isRebumpEnabled = config.getForMarket(location.url, ['ads', 'rebump', 'enabled'],false);
-            var platform = this.app.session.get('platform');
             var view = 'users/myads';
             var data = {
                 include: ['items'],
@@ -347,20 +343,11 @@ function myads(params, callback) {
             this.app.seo.addMetatag('robots', 'noindex, nofollow');
             this.app.seo.addMetatag('googlebot', 'noindex, nofollow');
             callback(null, view, data);
-        }.bind(this);
+        }
 
-        var error = function(err, res) {
+        function fail(err, res) {
             return helpers.common.error.call(this, err, res, callback);
-        }.bind(this);
-
-
-        asynquence().or(error)
-            .then(redirect)
-            .then(prepare)
-            .then(findAds)
-            .then(paginate)
-            .then(findFeatured)
-            .val(success);
+        }
     }
 }
 
@@ -815,7 +802,6 @@ function conversation(params, callback) {
         }.bind(this);
 
         var error = function(err, res) {
-            console.log(err);
             return helpers.common.error.call(this, err, res, callback);
         }.bind(this);
 

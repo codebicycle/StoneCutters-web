@@ -29,5 +29,26 @@ module.exports = {
                 }
             }
         }
+    },
+    tracking: {
+        enabled: true,
+        trackers: {
+            analytics: {
+                enabled: false,
+                server: {
+                    enabled: false,
+                    event: false
+                },
+                client: {
+                    enabled: false
+                }
+            },
+            keyade: {
+                enabled: false
+            },
+            ninja: {
+                enabled: false
+            }
+        }
     }
 };
