@@ -237,12 +237,7 @@ module.exports = Base.extend({
 
             if (!$fieldCat.closest('.field-wrapper').hasClass('error')) {
                 $fieldCat.closest('.field-wrapper').addClass('error').removeClass('success');
-                if ($('.child-categories-list').is(':visible')) {
-                    $fieldCat.parent().append('<small class="error message">' + messages[1] + '</small>');
-                }
-                else {
-                    $fieldCat.parent().append('<small class="error message">' + messages[0] + '</small>');
-                }
+                $fieldCat.parent().append('<small class="error message">' + messages[!$('.child-categories-list').is(':visible') ? 0 : 1] + '</small>');
             }
             $field.removeClass('validating');
             $('html, body').animate({
