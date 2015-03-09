@@ -29,7 +29,7 @@ function toLatin(input) {
     }
     output = input.toString();
     _.times(10, function translate(digit) {
-        output = output.replace(EXPRESSIONS.persian[digit], digit.toString());
+        output = output.split(EXPRESSIONS.persian[digit]).join(digit.toString());
     });
     return output;
 }
@@ -42,7 +42,7 @@ function toPersian(input) {
     }
     output = input.toString();
     _.times(10, function translate(digit) {
-        output = output.replace(EXPRESSIONS.latin[digit], EXPRESSIONS.persian[digit]);
+        output = output.split(EXPRESSIONS.latin[digit]).join(EXPRESSIONS.persian[digit]);
     });
     return output;
 }
