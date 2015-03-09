@@ -33,6 +33,8 @@ module.exports = Base.extend({
             });
         }
         this.rendered = true;
+        this.app.router.once('action:end', this.onStart);
+        this.app.router.once('action:start', this.onEnd.bind(this));
     },
     onBlur: function(event) {
         event.preventDefault();
@@ -133,6 +135,12 @@ module.exports = Base.extend({
             this.$('[data-messageText]').removeClass('error');
             return true;
         }
+    },
+    onStart: function(event) {
+        this.appView.trigger('conversation:start');
+    },
+    onEnd: function(event) {
+        this.app.router.appView.trigger('conversation:end');
     }
 });
 
