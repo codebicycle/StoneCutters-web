@@ -45,19 +45,19 @@ module.exports = {
     },
     'users#myads': {
         urls: [
-            'myolx/myadslisting-p-:page([0-9]+)',
+            'myolx/myadslisting-p-{{page}}',
             'myolx/myadslisting'
         ]
     },
     'users#favorites': {
         urls: [
-            'myolx/favoritelisting-p-:page([0-9]+)',
+            'myolx/favoritelisting-p-{{page}}',
             'myolx/favoritelisting'
         ]
     },
     'users#messages': {
         urls: [
-            'myolx/myolxmessages-p-:page([0-9]+)',
+            'myolx/myolxmessages-p-{{page}}',
             'myolx/myolxmessages'
         ]
     },
@@ -66,7 +66,7 @@ module.exports = {
     },
     'users#conversations': {
         urls: [
-            'myolx/conversations-p-:page([0-9]+)',
+            'myolx/conversations-p-{{page}}',
             'myolx/conversations'
         ]
     },
@@ -78,7 +78,7 @@ module.exports = {
     },
     'users#conversation': {
         urls: [
-            'myolx/conversation/:threadId-p-:page([0-9]+)',
+            'myolx/conversation/:threadId-p-{{page}}',
             'myolx/conversation/:threadId'
         ]
     }
