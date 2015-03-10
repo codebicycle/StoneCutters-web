@@ -21,6 +21,6 @@
             })();
         </script>
     {% else %}
-        {{ tracking.params.ninja.noscript }}
+        <iframe src="{{ tracking.params.ninja.noscript }}" width="1" height="1" marginwidth="1" marginheight="1" frameborder="0"></iframe>
     {% endif %}
 {% endif %}

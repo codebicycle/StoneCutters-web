@@ -31,7 +31,7 @@
             <p><a href="{{ item.slug.replace(domain, fullDomain) | replace('en/', '') }}">{{ item.title }}</a>
         </div>
     </div>
-    <ul>
+    <ul class="conversation">
     {% for message in thread.get('messages') %}
         <li class="conversation-chat">
             {% set name = thread.get('senders')[0].name %}

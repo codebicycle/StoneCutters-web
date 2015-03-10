@@ -14,7 +14,8 @@ var phpRedirections = {
     myolx: 'myolx/myadslisting',
     yourads: 'myolx/myadslisting',
     buyfeaturedad: 'myolx/buyfeaturedad',
-    featured_ad: 'featured_ad'
+    featured_ad: 'featured_ad',
+    mobilepromopage: 'mobilepromopage'
 };
 var phpPaths = Object.keys(phpRedirections);
 
@@ -154,11 +155,11 @@ module.exports = {
     },
     unsubscribe: function(params, callback) {
         params.hash = params.hash.replace(/ /g,'+');
-        helpers.common.redirect.call(this, 'myolx/conversation/unsubscribe/' + encodeURIComponent(params.hash));
+        helpers.common.redirect.call(this, '/myolx/conversation/unsubscribe/' + encodeURIComponent(params.hash));
     },
     report: function(params, callback) {
         params.hash = params.hash.replace(/ /g,'+');
-        helpers.common.redirect.call(this, 'myolx/conversation/report/' + encodeURIComponent(params.hash));
+        helpers.common.redirect.call(this, '/myolx/conversation/report/' + encodeURIComponent(params.hash));
     },
     php: function(params, callback) {
         if (_.contains(phpPaths, params.path)) {
