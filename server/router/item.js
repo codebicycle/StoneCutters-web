@@ -185,7 +185,7 @@ module.exports = function(app, dataAdapter) {
             }
 
             function success(done) {
-                var url = '/posting/success/' + item.get('id') + '?sk=' + item.get('securityKey');
+                var url = '/' + (editing ? 'edititem' : 'posting') + '/success/' + item.get('id') + '?sk=' + item.get('securityKey');
 
                 req.rendrApp.session.persist({
                     itemId: item.get('id')
