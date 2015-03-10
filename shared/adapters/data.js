@@ -73,17 +73,20 @@ DataAdapter.prototype.serverRequest = function(req, api, options, callback) {
 
         function after(err, body) {
             if (err) {
+                statsd.increment(['all', 'memcached', 'get', 'error']);
                 done.abort();
                 return callback(err, {
                     statusCode: 598
                 });
             }
             else if (body) {
+                statsd.increment(['all', 'memcached', 'get', 'hit']);
                 done.abort();
                 return callback(null, {
                     statusCode: 200
                 }, body);
             }
+            statsd.increment(['all', 'memcached', 'get', 'miss']);
             done();
         }
     }
@@ -146,7 +149,9 @@ DataAdapter.prototype.serverRequest = function(req, api, options, callback) {
 
     function success(res, body) {
         if (api.store) {
-            memcached.set(key, body, 360, utils.noop);
+            memcached.set(key, body, 360, function callback(err) {
+                statsd.increment(['all', 'memcached', 'set', err ? 'error' : 'success']);
+            });
         }
         callback(null, res, body);
     }
@@ -362,7 +367,7 @@ DataAdapter.prototype.ajaxParams = function(api, options) {
         });
         api.data = data;
     }
-    
+
     return api;
 };
 

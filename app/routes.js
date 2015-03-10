@@ -2,39 +2,27 @@
 
 var _ = require('underscore');
 var urls = require('./urls');
+var config = require('./urls/config');
 var isServer = typeof window === 'undefined';
 
-var urlParsers = [
-    {
-        regexp: /\/\?(:\w+)(\(\[[0-9a-zA-Z\-\._]+\][+*]\))?\?/g,
-        value: '(/)($1)'
-    },
-    {
-        regexp: /\/(:\w+)(\(\[[0-9a-zA-Z\-\._]+\][+*]\))?\?$/g,
-        value: '(/)($1)'
-    },
-    {
-        regexp: /(:\w+)(\(\[[0-9a-zA-Z\-\._]+\][+*]\))?\?/g,
-        value: '($1)'
-    },
-    {
-        regexp: /(:\w+)\(\[[0-9a-zA-Z\-\._]+\][+*]\)/g,
-        value: '$1'
-    }
-];
-
-function replace(url, parser) {
-    return url.replace(parser.regexp, parser.value);
+function parse(url) {
+    _.each(config.regexps, function(parser) {
+        url = url.replace(parser.regexp, parser.value);
+    });
+    return url;
 }
 
-function parse(url) {
-    _.each(urlParsers, function(parser) {
-        url = replace(url, parser);
+function replace(url) {
+    _.each(config.params, function(value, name) {
+        url = url.replace('{{' + name + '}}', value);
     });
     return url;
 }
 
 function add(match, url, view) {
+    if (_.isString(url)) {
+        url = replace(url);
+    }
     if (!isServer && _.isString(url)) {
         url = parse(url);
     }

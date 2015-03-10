@@ -99,31 +99,31 @@ module.exports = {
     },
     'redirections#allresultsig': {
         urls: [
-            'nf/all-results-ig-p-:page/-:filters([a-zA-Z0-9_\\-\\.~]+)',
+            'nf/all-results-ig-p-:page/-{{filters}}',
             'nf/all-results-ig-p-:page'
         ]
     },
     'redirections#searchfilterig': {
         urls: [
-            'nf/:title-cat-:catId([0-9]+)-p-:page([0-9]+)-ig/:search/-:filters([a-zA-Z0-9_\\-\\.~]+)',
-            'nf/-cat-:catId([0-9]+)-p-:page([0-9]+)-ig/:search/-:filters([a-zA-Z0-9_\\-\\.~]+)',
-            'nf/cat-:catId([0-9]+)-p-:page([0-9]+)-ig/:search/-:filters([a-zA-Z0-9_\\-\\.~]+)',
-            'nf/:title-cat-:catId([0-9]+)-ig/:search/-:filters([a-zA-Z0-9_\\-\\.~]+)',
-            'nf/-cat-:catId([0-9]+)-ig/:search/-:filters([a-zA-Z0-9_\\-\\.~]+)',
-            'nf/cat-:catId([0-9]+)-ig/:search/-:filters([a-zA-Z0-9_\\-\\.~]+)'
+            'nf/:title-cat-{{catId}}-p-{{page}}-ig/:search/-{{filters}}',
+            'nf/-cat-{{catId}}-p-{{page}}-ig/:search/-{{filters}}',
+            'nf/cat-{{catId}}-p-{{page}}-ig/:search/-{{filters}}',
+            'nf/:title-cat-{{catId}}-ig/:search/-{{filters}}',
+            'nf/-cat-{{catId}}-ig/:search/-{{filters}}',
+            'nf/cat-{{catId}}-ig/:search/-{{filters}}'
         ]
     },
     'redirections#searchfilter': {
         urls: [
-            'nf/:title-cat-:catId([0-9]+)-p-:page([0-9]+)/:search/-:filters([a-zA-Z0-9_\\-\\.~]+)',
-            'nf/-cat-:catId([0-9]+)-p-:page([0-9]+)/:search/-:filters([a-zA-Z0-9_\\-\\.~]+)',
-            'nf/cat-:catId([0-9]+)-p-:page([0-9]+)/:search/-:filters([a-zA-Z0-9_\\-\\.~]+)'
+            'nf/:title-cat-{{catId}}-p-{{page}}/:search/-{{filters}}',
+            'nf/-cat-{{catId}}-p-{{page}}/:search/-{{filters}}',
+            'nf/cat-{{catId}}-p-{{page}}/:search/-{{filters}}'
         ]
     },
     'redirections#staticSearch': {
         urls: [
-            'q/:search/c-:catId([0-9]+)/p-:page([0-9]+)',
-            'q/:search/p-:page([0-9]+)'
+            'q/:search/c-{{catId}}/p-{{page}}',
+            'q/:search/p-{{page}}'
         ]
     },
     'redirections#staticSearchMobile': {
@@ -131,6 +131,12 @@ module.exports = {
     },
     'redirections#pictures': {
         url: /^\/pictures\/.*/
+    },
+    'redirections#users': {
+        urls: [
+            'users/:username',
+            '/^\/users\/.*/'
+        ]
     },
     'redirections#userlistings': {
         url: /^\/userlistings\/.*/

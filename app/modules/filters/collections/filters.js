@@ -119,9 +119,10 @@ function _add(filter, options) {
 }
 
 function checkTransform(filter) {
+    var excluded = _.contains(transformers.exceptions.byType[filter.get('type')], filter.get('name'));
     var transformer = transformers.byType[filter.get('type')];
 
-    if (transformer) {
+    if (!excluded && transformer) {
         filter = transformer.call(this, filter, {
             app: this.app
         });
@@ -210,7 +211,7 @@ function parseFilter(filter) {
     filter = {
         name: keyValue[0]
     };
-    filter.type = filters[filter.name];
+    filter.type = filters[filter.name].type;
     filter.current = parseValue(keyValue[1], filter.type);
     return filter;
 }
@@ -231,10 +232,12 @@ function format() {
     var url = [];
     var value;
     var name;
+    var type;
     var sort;
 
-    this.each(function(filter) {
+    this.each(function each(filter) {
         name = filter.get('name');
+        type = filter.get('type');
         if (!filter.has('current') || name === 'sort') {
             return;
         }
@@ -242,16 +245,17 @@ function format() {
         url.push(name);
         url.push('_');
         value = filter.get('current');
-        switch (filter.get('type')) {
+        if (transformers[type] && transformers[type].format) {
+            value = transformers[type].format(value);
+        }
+        switch (type) {
             case 'RANGE':
                 url.push(value.from);
                 url.push('_');
                 url.push(value.to);
                 break;
             case 'SELECT':
-                url.push(_.map(value, function each(val) {
-                    return val.replace(/_/g, '+').replace(/-/g, '*');
-                }).join('_'));
+                url.push(value.join('_'));
                 break;
             case 'BOOLEAN':
                 url.push(value);
@@ -272,32 +276,27 @@ function smaugize() {
     var params = {};
     var sort;
     var name;
+    var type;
     var value;
-    var separator;
 
     if (!this.length) {
         return params;
     }
     this.each(function(filter) {
         name = filter.get('name');
+        type = filter.get('type');
         value = filter.get('current');
 
         if (value === 'false' || name === 'sort') {
             return;
         }
         name = 'f.' + name;
-        switch (filter.get('type')) {
+        if (transformers[type] && transformers[type].smaugize) {
+            value = transformers[type].smaugize(value);
+        }
+        switch (type) {
             case 'SELECT':
-                separator = 'OR';
-                if (name === 'f.neighborhood') {
-                    separator = ' OR ';
-                }
-                else if (name === 'f.flo' || name === 'f.slo') {
-                    separator = '-';
-                }
-                params[name] = _.map(value, function each(val) {
-                    return val.replace(/\+/g, '_').replace(/\*/g, '-');
-                }).join(separator);
+                params[name] = value.join(utils.get(filters, [filter.get('name'), 'options', 'separator'], 'OR'));
                 break;
             case 'RANGE':
                 params[name] = [value.from, 'TO', value.to].join('');

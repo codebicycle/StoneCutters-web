@@ -275,6 +275,13 @@ function flow(params, callback) {
                         break;
                 }
             }
+            if (item) {
+                item.set({
+                    _location: item.get('location')
+                }, {
+                    unset: false
+                });
+            }
 
             callback(null, 'post/index', {
                 postingSession: postingSession.get('postingSession'),

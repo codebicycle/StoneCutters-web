@@ -21,13 +21,14 @@
     {% if not user.email %}
         <h3>{{ dictionary["itemgeneraldetails.PersonalInfo"] }}</h3>
         <div class="field">
-            <label>{{ dictionary["replymessage.Name"] }}</label>
+            <label>* {{ dictionary["replymessage.Name"] }}</label>
             <input type="text" value="{{ user.username if user.username }}" class="name" name="name">
             <small class="placeholder">{{ dictionary["misc.EnterName"] }}</small>
+            <small class="name error hide"></small>
         </div>
         <div class="field">
             <label>* {{ dictionary["replymessage.Email"] }}</label>
-            <input type="email" value="{{ user.email if user.email }}" class="email" name="email">
+            <input type="text" value="{{ user.email if user.email }}" class="email" name="email">
             <small class="placeholder">{{ dictionary["misc.EnterEmail"] }}</small>
             <small class="email error hide"></small>
         </div>

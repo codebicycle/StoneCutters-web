@@ -16,7 +16,7 @@ module.exports = Base.extend({
     className: 'items_reply_view',
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
-        data.fields = [{ name: 'message', label: 'replymessage.Message', mandatory: 'true'},{name: 'name', label: 'replymessage.Name', mandatory: 'false'}, {name: 'email', label: 'replymessage.Email', mandatory: 'true'}, {name: 'phone', label: 'itemgeneraldetails.Phone'}];
+        data.fields = [{ name: 'message', label: 'replymessage.Message', mandatory: 'true'},{name: 'name', label: 'replymessage.Name', mandatory: 'true'}, {name: 'email', label: 'replymessage.Email', mandatory: 'true'}, {name: 'phone', label: 'itemgeneraldetails.Phone'}];
 
         return _.extend({}, data, {});
     },
@@ -76,12 +76,13 @@ module.exports = Base.extend({
 
         function validate(done) {
             var hasErrors = false;
+            var isValid;
 
             _.each(this.$fields, function each(field) {
-                var isValid = this.validate($(field));
-
+                isValid = this.validate($(field));
                 hasErrors = hasErrors || !isValid;
             }, this);
+
             if (hasErrors) {
                 return done.fail();
             }
@@ -148,7 +149,7 @@ module.exports = Base.extend({
         var isEmpty;
 
         this.addData(field);
-        if (name === 'phone' || name === 'name') {
+        if (name === 'phone') {
             return true;
         }
         isEmpty = this.isEmpty(name, value);
@@ -167,7 +168,7 @@ module.exports = Base.extend({
         return this.setError(rEmail.test(value), name, this.dictionary['postingerror.InvalidEmailAddress']);
     },
     setError: function (isValid, name, text) {
-        var tip = this.$('input[name="'+name+'"],textarea[name="'+name+'"]').parents('.field').find('.placeholder');
+        var tip = this.$('input[name="'+name+'"], textarea[name="'+name+'"]').parents('.field').find('.placeholder');
         if (isValid) {
             tip.show();
         }
