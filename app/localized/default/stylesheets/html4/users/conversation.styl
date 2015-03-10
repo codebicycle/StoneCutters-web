@@ -1,0 +1,92 @@
+.users_conversation_view {
+    .conversation-item {
+        border-bottom: 1px solid #cccccc;
+        height: 50px;
+        padding: 10px;
+
+        .conversation-image {
+            background-color: #ccc;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            float: left;
+            height: 50px;
+            margin: 0 8px 0 0;
+            overflow: hidden;
+            width: 50px;
+        }
+        .item-info {
+            height: 50px;
+            overflow: hidden;
+            position: relative;
+
+            .conversation-senderName, .item-title {
+                clear: left;
+                float: left;
+            }
+            .conversation-senderName, .item-date {
+                font-size: 11px;
+                color: #b1b1b1;
+            }
+            .item-title {
+                color: #666666;
+                font-size: 13px;
+                height: 32px;
+                margin: 5px 0 0 0;
+                overflow: hidden;
+                width: 80%;
+            }
+            .item-date {
+                float: right;
+            }
+            .item-price {
+                bottom: 0;
+                color: #ff7800;
+                font-size: 15px;
+                font-weight: bold;
+                position: absolute;
+                right: 0;
+            }
+        }
+
+    }
+    .conversation {
+        padding: 0 0 10px;
+        .message {
+            border-bottom: 1px solid #cccccc;
+            padding: 10px;
+
+            &.is-mine {
+                background-color: #f9fddf;
+            }
+
+            .name, .text, .date {
+                display: block;
+            }
+            .name, .text {
+                color: #474747;
+            }
+            .name, .date {
+                font-size: 11px;
+            }
+            .name {
+                font-weight: bold;
+            }
+            .text {
+                font-size: 13px;
+                margin: 2px 0;
+            }
+            .date {
+                color: #b1b1b1;
+            }
+        }
+    }
+    .formActions, .formField {
+        padding: 0 10px 10px;
+    }
+    .formField {
+        input {
+            background-color: #ffffff;
+        }
+    }
+}

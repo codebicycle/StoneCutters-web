@@ -1,0 +1,63 @@
+.users_conversations_view {
+    .conversations-listing {
+        li {
+            border-bottom: 1px solid #cccccc;
+            height: 50px;
+            padding: 10px;
+
+            a {
+                color: #333333;
+                display: block;
+            }
+            .conversation-image {
+                background-position: center;
+                background-repeat: no-repeat;
+                background-size: cover;
+                float: left;
+                height: 50px;
+                margin: 0 8px 0 0;
+                width: 50px;
+                overflow: hidden;
+                background-color: #ccc;
+            }
+            .conversation-info {
+                height: 50px;
+                overflow: hidden;
+                position: relative;
+
+                .conversation-contactName, .conversation-item-title, .conversation-messageText {
+                    clear: left;
+                    float: left;
+                }
+                .conversation-item-title, .conversation-messageText, .conversation-messageDate {
+                    font-size: 11px;
+                }
+                .conversation-messageDate, .conversation-contactName {
+                    color: #666666;
+                }
+                .conversation-item-title, .conversation-messageText {
+                    color: #b1b1b1;
+                }
+                .conversation-contactName {
+                    font-size: 13px;
+                }
+                .conversation-item-title {
+                    overflow: hidden;
+                    height: 18px;
+                    line-height: 18px;
+                }
+                .conversation-messageDate {
+                    float: right;
+                }
+                &.unread {
+                    .conversation-messageText, .conversation-contactName, .conversation-messageDate {
+                        font-weight: bold;
+                    }
+                    .conversation-messageText {
+                        color: #ff7800;
+                    }
+                }
+            }
+        }
+    }
+}

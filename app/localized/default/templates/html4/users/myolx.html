@@ -10,9 +10,11 @@
         <li>
             <a href="{{ 'myolx/favoritelisting' | link }}" data-qa="my-favorites-link" >{{ dictionary["myolx.MyFavorites"] }}</a>
         </li>
-        <li>
-            <a href="{{ '/myolx/conversations' | link }}" data-qa="my-messages-link" >{{ dictionary["myolx.Messages"] }}</a>
-        </li>
+        {% if isHermesEnabled %}
+            <li>
+                <a href="{{ '/myolx/conversations' | link }}" data-qa="my-messages-link" >{{ dictionary["myolx.Messages"] }}</a>
+            </li>
+        {% endif %}
         <li class="last">
             <a href="{{ '/logout' | link }}" data-qa="logout-link" >{{ dictionary["myolx.SignOut"] }}</a>
         </li>

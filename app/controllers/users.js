@@ -629,10 +629,10 @@ function conversations(params, callback) {
         var conversation;
         var _params;
         var user;
-        var view = 'users/myolx';
+        var view = 'users/conversations';
 
         var redirect = function(done) {
-            if (platform !== 'desktop' && platform !== 'html5') {
+            if (platform === 'wap') {
                 return done.fail();
             }
             user = this.app.session.get('user');
@@ -691,8 +691,8 @@ function conversations(params, callback) {
             this.app.seo.addMetatag('robots', 'noindex, nofollow');
             this.app.seo.addMetatag('googlebot', 'noindex, nofollow');
 
-            if (platform === 'html5') {
-                view = 'users/conversations';
+            if (platform === 'desktop') {
+                view = 'users/myolx';
             }
             callback(null, view, {
                 include: ['conversations', 'items'],
@@ -727,11 +727,11 @@ function conversation(params, callback) {
         var thread;
         var _params;
         var user;
-        var view = 'users/myolx';
+        var view = 'users/conversation';
         var pageSize = 'myConv';
 
         var redirect = function(done) {
-            if (platform !== 'desktop' && platform !== 'html5') {
+            if (platform === 'wap') {
                 return done.fail();
             }
             user = this.app.session.get('user');
@@ -789,8 +789,8 @@ function conversation(params, callback) {
             this.app.seo.addMetatag('robots', 'noindex, nofollow');
             this.app.seo.addMetatag('googlebot', 'noindex, nofollow');
 
-            if (platform === 'html5') {
-                view = 'users/conversation';
+            if (platform === 'desktop') {
+                view = 'users/myolx';
             }
 
             callback(null, view, {

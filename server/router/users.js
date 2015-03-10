@@ -7,6 +7,7 @@ module.exports = function userRouter(app) {
     var formidable = require('../modules/formidable');
     var statsd  = require('../modules/statsd')();
     var User = require('../../app/models/user');
+    var Conversation = require('../../app/models/conversation');
 
     function login() {
         app.post('/login', handler);
@@ -270,10 +271,81 @@ module.exports = function userRouter(app) {
         return handler;
     }
 
+    function reply() {
+        app.post('/myolx/conversation/:threadId', handler);
+
+        function handler(req, res, next) {
+            var threadId = req.param('threadId', null);
+            var conversation;
+            var reply;
+
+            function parse(done) {
+                formidable.parse(req, done.errfcb);
+            }
+
+            function prepare(done, data) {
+                var user = req.rendrApp.session.get('user');
+
+                reply = data;
+                conversation = new Conversation({
+                    country: req.rendrApp.session.get('location').abbreviation,
+                    platform: req.rendrApp.session.get('platform'),
+                    user: user,
+                    threadId: threadId,
+                    message: data.message
+                }, {
+                    app: req.rendrApp
+                });
+                done();
+            }
+
+            function submit(done) {
+                conversation.reply(done);
+            }
+
+            function store(done, reply) {
+                req.rendrApp.session.persist({
+                    replyId: reply.id
+                });
+                done();
+            }
+
+            function success() {
+                var url = '/myolx/conversation/' + threadId;
+
+                res.redirect(utils.link(url, req.rendrApp));
+                end();
+            }
+
+            function error(err) {
+                var url = '/myolx/conversation/' + threadId;
+
+                formidable.error(req, url.split('?').shift(), err, reply, function redirect(url) {
+                    res.redirect(utils.link(url, req.rendrApp));
+                    end(err);
+                });
+            }
+
+            function end(err) {
+                if (next && next.errfcb) {
+                    next.errfcb(err);
+                }
+            }
+
+            asynquence().or(error)
+                .then(parse)
+                .then(prepare)
+                .then(submit)
+                //.then(store)
+                .val(success);
+        }
+    }
+
     return {
         login: login(),
         register: register(),
         lostpassword: lostpassword(),
-        registerwithConfirmation: registerwithConfirmation()
+        registerwithConfirmation: registerwithConfirmation(),
+        reply: reply()
     };
 };
