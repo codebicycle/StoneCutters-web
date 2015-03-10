@@ -119,9 +119,10 @@ function _add(filter, options) {
 }
 
 function checkTransform(filter) {
+    var excluded = _.contains(transformers.exceptions.byType[filter.get('type')], filter.get('name'));
     var transformer = transformers.byType[filter.get('type')];
 
-    if (transformer) {
+    if (!excluded && transformer) {
         filter = transformer.call(this, filter, {
             app: this.app
         });
@@ -234,7 +235,7 @@ function format() {
     var type;
     var sort;
 
-    this.each(function(filter) {
+    this.each(function each(filter) {
         name = filter.get('name');
         type = filter.get('type');
         if (!filter.has('current') || name === 'sort') {

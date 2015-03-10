@@ -16,12 +16,6 @@ module.exports = {
     'users#logout': {
         url: 'logout'
     },
-    'users#userprofile': {
-        urls: [
-            'users/:username',
-            '/^\/users\/.*/'
-        ]
-    },
     'users#myolx': {
         url: 'myolx'
     },

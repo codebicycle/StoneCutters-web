@@ -49,21 +49,21 @@ function getHydraUrl(ninja) {
         query.iv = iv.trim();
     }
     query.gp = (_.contains(trackPages, ninja.params.trackPage) ? ninja.params.trackPage : 'other').toLowerCase();
-    query.t = (new Date()).getTime();
 
     return utils.params(url, query);
 }
 
-function getQuery(params, config) {   
+function getQuery(params, config) {
     var query = _.extend({}, params, config);
 
     if (query.extraPageName) {
         query.extraPageName = JSON.stringify(query.extraPageName);
     }
+    query.t = _.now();
     return query;
 }
 
-function log(e, name) {   
+function log(e, name) {
     console.log('[OLX_DEBUG]', 'Tracking not found |', name, e ? (e instanceof Error ? JSON.stringify(e.stack) : JSON.stringify(e)) : '');
 }
 

@@ -32,6 +32,11 @@ module.exports = {
     SELECT: {
         smaugize: selectSmaugize,
         format: selectFormat
+    },
+    exceptions: {
+        byType: {
+            SELECT: ['state', 'city']
+        }
     }
 };
 
