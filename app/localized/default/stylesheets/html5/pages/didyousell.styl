@@ -3,9 +3,9 @@
 }
 
 .notification-message {
-    background-color: #eeffcc;
+    background-color: $ligthGreen;
     border-radius(3px);
-    border: 1px solid #ccdd77;
+    border: 1px solid $greenBorders;
     clear-fix();
     margin: 20px;
     min-height: 50px;
@@ -14,22 +14,22 @@
     text-align: center;
    
     h4 {
-        color: #2d2d2d;
-        font-size: 20px;
+        color: $lightBlack;
+        font-size: $l;
         line-height: 1.4;
         margin: 0;
     }
     p {
-        color: #2d2d2d;
-        font-size: 14px;
+        color: $lightBlack;
+        font-size: $s;
         line-height: 1.4;
         margin: 0;
     }
     .icon-happy {
         background-image: url(imageUrl/images/html5/icons/icon_cara-verde.png);
+        display: inline-block;
         height: 36px;
         width: 37px;
-        display: inline-block;
     }
 }
 .notification-keep-posting {
@@ -41,13 +41,13 @@
     text-align: center;
 
     h3 {
-        color: #4a307c;
-        font-size: 18px;
+        color: #darkBlue;
+        font-size: $l;
     }
 
     p {
-        color: #2d2d2d;
-        font-size: 16px;
+        color: $lightBlack;
+        font-size: $m;
     }
     .categories-icons {
         background-image: url(imageUrl/images/html5/icons/icons_category.png);
@@ -70,8 +70,8 @@
     text-align: center;
 
     h2 {
-        color: #2d2d2d;
-        font-size: 20px;
+        color: $lightBlack;
+        font-size: $l;
         margin: 0 0 5px 0;
         padding: 0 10px;
         text-align: center;
@@ -80,7 +80,7 @@
     p {
         color: $black;
         float: left;
-        font-size: 16px;
+        font-size: $m;
         margin-bottom: 25px;
         text-align: center;
     }
@@ -101,14 +101,14 @@
 
         h3 {
             color: $black;
-            font-size: 16px;
+            font-size: $m;
             font-weight: bold;
-            text-align: left;
             margin-bottom: 5px;
+            text-align: left;
         }
         p {
             color: $black;
-            font-size: 12px;
+            font-size: $xs;
             text-align: left;
         }
         div {
@@ -119,21 +119,21 @@
         .btns {
             border: 1px solid $greyBorders;
             color: $orange;
-            font-size: 14px;
-            font-weight: bold;
             float: left;
+            font-size: $s;
+            font-weight: bold;
         }
     }
     .icons {
         background-repeat: no-repeat;
         display: inline-block;
+        float: left;
         height: 37px;
         width: 37px;
-        float: left;
     }
     .icon-lamp {
-        clear-fix();
         background-image: url(imageUrl/images/html5/icons/icon_lampara-azul.png);
+        clear-fix();
         float: none;
         height: 41px;
         margin: auto;
