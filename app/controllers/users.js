@@ -728,7 +728,7 @@ function conversation(params, callback) {
         var _params;
         var user;
         var view = 'users/myolx';
-        var pageSize = platform === 'html5' ? 'myConvHtml5' : 'myConv';
+        var pageSize = 'myConv';
 
         var redirect = function(done) {
             if (platform !== 'desktop' && platform !== 'html5') {
@@ -759,7 +759,7 @@ function conversation(params, callback) {
         var fetch = function(done) {
             this.app.fetch({
                 thread: {
-                    model: 'Thread',
+                    model: 'Conversation',
                     params: _params
                 }
             }, {

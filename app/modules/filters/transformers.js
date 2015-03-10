@@ -19,6 +19,11 @@ module.exports = {
         carbrand: carbrand,
         carmodel: carmodel,
         age: age
+    },
+    exceptions: {
+        byType: {
+            SELECT: ['state', 'city']
+        }
     }
 };
 
