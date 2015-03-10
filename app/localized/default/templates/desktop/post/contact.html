@@ -52,7 +52,7 @@
 
 
 <fieldset class="seller-post">
-    <input type="submit" value="{{ dictionary['wap_posting_step5.Post'] }}" class="posting" data-qa="submit-button" />
+    <input type="submit" value="{{ dictionary["wap_posting_step5.Post"] }}" class="posting" data-qa="submit-button" />
     <small class="hint message">{{ dictionary["misc.ByPublishingYouAgreeTerms"] | replace('<<LINK_TO_TERMS_AND_CONDITIONS>>', '<a class="open-modal" href="#" rel="nofollow" data-modal="terms-modal">') | replace('<</ LINK_TO_TERMS_AND_CONDITIONS>>', '</a>') }}</small>
 </fieldset>
 {% view 'modals/terms' %}

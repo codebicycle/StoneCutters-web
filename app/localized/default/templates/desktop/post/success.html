@@ -10,7 +10,7 @@
         {% if item.status.editable %}
             <div class="header-edit">
                 <p>{{ dictionary["posting_photos.NeedChangeAd"] }} </p>
-                    <a href="{{ item.slug.replace(domain, fullDomain) | editSlug(item.id) }}?sk={{ securityKey }}" class="icons icon-edit" title="{{ dictionary['messages_site_class.ClickEdit'] }}">{{ dictionary["posting_publishbutton.EditYourAd_ZA"] }}</a>
+                    <a href="{{ item.slug.replace(domain, fullDomain) | editSlug(item.id) }}?sk={{ securityKey }}" class="icons icon-edit" title="{{ dictionary["messages_site_class.ClickEdit"] }}">{{ dictionary["posting_publishbutton.EditYourAd_ZA"] }}</a>
             </div>
         {% endif %}
         <div class="wrapper">
@@ -31,7 +31,7 @@
         <div class="header-edit">
             <p>{{ dictionary["postingheader.ContactDetails"] }} </p>
             {% if item.status.editable %}
-                <a href="{{ item.slug.replace(domain, fullDomain) | editSlug(item.id) }}?sk={{ securityKey }}" class="icons icon-edit" title="{{ dictionary['messages_site_class.ClickEdit'] }}">{{ dictionary["seccion-40.1528"] | capitalize }}</a>
+                <a href="{{ item.slug.replace(domain, fullDomain) | editSlug(item.id) }}?sk={{ securityKey }}" class="icons icon-edit" title="{{ dictionary["messages_site_class.ClickEdit"] }}">{{ dictionary["seccion-40.1528"] | capitalize }}</a>
             {% endif %}
         </div>
         <div class="user-info">
