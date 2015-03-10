@@ -191,6 +191,7 @@ module.exports = Base.extend({
         event.stopImmediatePropagation();
 
         var $loading = $('body > .loading').show();
+        var editing = this.getItem().has('id');
 
         this.item.set('languageId', this.app.session.get('languageId'));
         this.item.set('platform', this.app.session.get('platform'));
@@ -207,7 +208,7 @@ module.exports = Base.extend({
 
         function success() {
             var category = 'Posting';
-            var action = 'PostingSuccess';
+            var action = (editing ? 'Edit' : 'Posting') + 'Success';
 
             this.track({
                 category: category,
@@ -215,7 +216,7 @@ module.exports = Base.extend({
                 custom: [category, this.item.get('category').parentId || '-', this.item.get('category').id || '-', action, this.item.get('id')].join('::')
             });
             this.app.router.once('action:end', always);
-            helpers.common.redirect.call(this.app.router, '/posting/success/' + this.item.get('id') + '?sk=' + this.item.get('securityKey'), null, {
+            helpers.common.redirect.call(this.app.router, ['/', (editing ? 'edititem' : 'posting'), '/success/', this.item.get('id'), '?sk=', this.item.get('securityKey')].join(''), null, {
                 status: 200
             });
         }
