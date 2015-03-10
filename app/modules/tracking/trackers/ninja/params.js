@@ -10,6 +10,19 @@ var sorts = {
     datedesc: 'date desc'
 };
 
+function getCurrentPath(path) {
+    if (path.charAt(0) === '/' && path.length > 1) {
+        path = path.slice(1);
+    }
+    if (path.charAt(path.length - 1) === '/' && path.length > 1) {
+        path = path.slice(0, path.length - 1);
+    }
+    if (path === '/' || path === '') {
+        path = 'home';
+    }
+    return path;
+}
+
 function setDefaults(params, options) {
     var user = this.app.session.get('user');
     var location = this.app.session.get('location');
@@ -44,6 +57,9 @@ function setDefaults(params, options) {
     }
     if (_.contains(platforms, this.app.session.get('platform'))) {
         params.clientId = this.app.session.get('clientId');
+    }
+    if (!params.trackPage) {
+        params.trackPage = getCurrentPath(this.app.session.get('path'));
     }
 }
 
