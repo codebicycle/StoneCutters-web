@@ -1,10 +1,11 @@
 'use strict';
 
+var _ = require('underscore');
+var asynquence = require('asynquence');
+var statsd = require('../../../../../../../shared/statsd')();
 var Base = require('../../../../../common/app/bases/view');
 var Item = require('../../../../../../models/item');
 var helpers = require('../../../../../../helpers');
-var asynquence = require('asynquence');
-var _ = require('underscore');
 
 module.exports = Base.extend({
     className: 'posting-images-view field-wrapper',
@@ -73,6 +74,7 @@ module.exports = Base.extend({
         function validate(done) {
             if (image.size > 5242880) {
                 done.abort();
+                statsd.increment([this.app.session.get('location').abbreviation, 'posting', 'error', 'size', this.app.session.get('platform')]);
                 return $container.removeClass('loading');
             }
             done();
