@@ -2,11 +2,9 @@
 
 var _ = require('underscore');
 var Backbone = require('backbone');
-var Base;
 var Localstorage;
 
 Backbone.noConflict();
-Base = Backbone.Model;
 
 Localstorage = Backbone.Model.extend({
     initialize: function(attrs, options) {
