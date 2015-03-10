@@ -90,9 +90,7 @@
                     {% endif %}
                 </h3>
                 <div class="tips">
-                    <span>{{ item.messages }} {{ dictionary["myolx.Messages"] }}</span>
-                    <span>{{ item.visits }} {{ dictionary["netvibes_myolx.content.Views"] }}</span>
-                    <span>{{ dictionary["misc.SinceDate"] | replace('<<DATE>>', item.date.timestamp | date("MMM DD, YYYY")) }}</span>
+                    <span>{{ dictionary["listingpageitemslisting.Posted"] }} {{ item.date.timestamp | date("MMM DD, YYYY") }}</span>
                 </div>
                 {% if item.status == 'rejected' %}
                     <div class="text">
