@@ -535,6 +535,7 @@ module.exports = {
     'misc.GetTheFreeApp': 'DESCARGA LA APP GRATIS',
     'misc.HowToContact': '\xBFC\xF3mo puedo comunicarme con OLX?',
     'misc.JustEmail': 'S\xF3lo necesitas dejar tu correo electr\xF3nico',
+    'misc.KeepSelling': '\xA1Sigue vendiendo!',
     'misc.LegalQuestions': 'Para consultas legales',
     'misc.LessThan': 'Menos de',
     'misc.LessThan2': 'Publicas en menos de 2 minutos',

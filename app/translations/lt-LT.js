@@ -535,6 +535,7 @@ module.exports = {
     'misc.GetTheFreeApp': 'GAUKITE NEMOKAM\u0104 PROGRAM\u0116L\u0118',
     'misc.HowToContact': 'How can I contact OLX?',
     'misc.JustEmail': 'Reikia tik J\u016Bs\u0173 el. pa\u0161to adreso',
+    'misc.KeepSelling': 'Pardavin\u0117kite!',
     'misc.LegalQuestions': 'For legal questions',
     'misc.LessThan': 'Ma\u017Eiau nei',
     'misc.LessThan2': 'Paskelbkite savo skelbim\u0105 grei\u010Diau nei per 2 minutes',

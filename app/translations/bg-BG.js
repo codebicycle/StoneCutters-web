@@ -535,6 +535,7 @@ module.exports = {
     'misc.GetTheFreeApp': '\u0418\u0417\u0422\u0415\u0413\u041B\u0415\u0422\u0415 \u0411\u0415\u0417\u041F\u041B\u0410\u0422\u041D\u041E\u0422\u041E \u041F\u0420\u0418\u041B\u041E\u0416\u0415\u041D\u0418\u0415',
     'misc.HowToContact': 'How can I contact OLX?',
     'misc.JustEmail': 'Just your email is needed',
+    'misc.KeepSelling': '\u041F\u0440\u043E\u0434\u044A\u043B\u0436\u0430\u0432\u0430\u0439\u0442\u0435 \u0434\u0430 \u043F\u0440\u043E\u0434\u0430\u0432\u0430\u0442\u0435!',
     'misc.LegalQuestions': 'For legal questions',
     'misc.LessThan': '\u041F\u043E-\u043C\u0430\u043B\u043A\u043E \u043E\u0442',
     'misc.LessThan2': 'Post your ad in less than 2 minutes',

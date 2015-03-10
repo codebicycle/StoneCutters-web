@@ -535,6 +535,7 @@ module.exports = {
     'misc.GetTheFreeApp': 'Z\xCDSKAT APLIKACI ZDARMA',
     'misc.HowToContact': 'How can I contact OLX?',
     'misc.JustEmail': 'Pot\u0159eba je pouze v\xE1\u0161 e-mail',
+    'misc.KeepSelling': 'Prod\xE1vejte d\xE1le!',
     'misc.LegalQuestions': 'For legal questions',
     'misc.LessThan': 'M\xE9n\u011B ne\u017E',
     'misc.LessThan2': 'Zadejte inzer\xE1t za m\xE9n\u011B ne\u017E 2 minuty',

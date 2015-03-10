@@ -535,6 +535,7 @@ module.exports = {
     'misc.GetTheFreeApp': 'PREUZMITE BESPLATNU APLIKACIJU',
     'misc.HowToContact': 'How can I contact OLX?',
     'misc.JustEmail': 'Potrebna je samo va\u0161a e-adresa',
+    'misc.KeepSelling': 'Nastavite da prodajete!',
     'misc.LegalQuestions': 'For legal questions',
     'misc.LessThan': 'Manje od',
     'misc.LessThan2': 'Postavite oglas za manje od 2 minuta',

@@ -535,6 +535,7 @@ module.exports = {
     'misc.GetTheFreeApp': 'HANKI ILMAINEN SOVELLUS',
     'misc.HowToContact': 'How can I contact OLX?',
     'misc.JustEmail': 'Vain s\xE4hk\xF6postiosoitteesi vaaditaan',
+    'misc.KeepSelling': 'Jatka myymist\xE4!',
     'misc.LegalQuestions': 'For legal questions',
     'misc.LessThan': 'M\xE9n\u011B ne\u017E',
     'misc.LessThan2': 'Julkaise ilmoituksesi alle 2 minuutissa',

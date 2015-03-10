@@ -535,6 +535,7 @@ module.exports = {
     'misc.GetTheFreeApp': 'KUNIN ANG LIBRENG APP',
     'misc.HowToContact': 'How can I contact OLX?',
     'misc.JustEmail': 'Email lang ninyo ang kailangan',
+    'misc.KeepSelling': 'Magbenta ng Magbenta!',
     'misc.LegalQuestions': 'For legal questions',
     'misc.LessThan': 'Mas maliit kaysa',
     'misc.LessThan2': 'Na-post ninyo ang inyong anunsyo nang wala pang 2 minuto',

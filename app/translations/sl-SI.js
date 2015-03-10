@@ -535,6 +535,7 @@ module.exports = {
     'misc.GetTheFreeApp': 'DOBI BREZPLA\u010CNO APLIKACIJO',
     'misc.HowToContact': 'How can I contact OLX?',
     'misc.JustEmail': 'Just your email is needed',
+    'misc.KeepSelling': 'Keep Selling!',
     'misc.LegalQuestions': 'For legal questions',
     'misc.LessThan': 'Manj kot',
     'misc.LessThan2': 'Post your ad in less than 2 minutes',

@@ -535,6 +535,7 @@ module.exports = {
     'misc.GetTheFreeApp': 'PATA PROG YA BURE',
     'misc.HowToContact': 'Je, ni vipi naweza kuwasiliana na OLX?',
     'misc.JustEmail': 'Barua pepe yako tu inahitajika',
+    'misc.KeepSelling': 'Endelea Kuuza!',
     'misc.LegalQuestions': 'Kwa maswali ya kisheria',
     'misc.LessThan': 'Chini ya',
     'misc.LessThan2': 'Chapisha tangazo lako katika chini ya dakika 2',

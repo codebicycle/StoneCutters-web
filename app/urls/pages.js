@@ -30,5 +30,8 @@ module.exports = {
     },
     'pages#mobilepromo': {
         url: 'mobilepromopage'
+    },
+    'pages#thanks': {
+        url: 'thanks'
     }
 };

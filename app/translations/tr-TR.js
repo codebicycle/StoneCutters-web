@@ -535,6 +535,7 @@ module.exports = {
     'misc.GetTheFreeApp': 'UYGULAMAYI \xDCCRETS\u0130Z \u0130ND\u0130R\u0130N',
     'misc.HowToContact': 'How can I contact OLX?',
     'misc.JustEmail': 'Sadece e-postan\u0131z gerekir',
+    'misc.KeepSelling': 'Sat\u0131\u015Fa Devam Edin!',
     'misc.LegalQuestions': 'For legal questions',
     'misc.LessThan': '\u015Eundan daha az:',
     'misc.LessThan2': '2 dakikadan k\u0131sa s\xFCrede ilan\u0131n\u0131z\u0131 g\xF6nderin',

@@ -535,6 +535,7 @@ module.exports = {
     'misc.GetTheFreeApp': 'DAPATKAN APLIKASI PERCUMA',
     'misc.HowToContact': 'How can I contact OLX?',
     'misc.JustEmail': 'Hanya e-mel anda diperlukan',
+    'misc.KeepSelling': 'Teruskan Menjual!',
     'misc.LegalQuestions': 'For legal questions',
     'misc.LessThan': 'kurang daripada',
     'misc.LessThan2': 'Siar iklan anda dalam masa kurang daripada 2 minit',

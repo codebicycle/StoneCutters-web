@@ -535,6 +535,7 @@ module.exports = {
     'misc.GetTheFreeApp': 'HANKIGE TASUTA RAKENDUS',
     'misc.HowToContact': 'How can I contact OLX?',
     'misc.JustEmail': 'Vaja on ainult teie e-posti aadressi',
+    'misc.KeepSelling': 'J\xE4tkake m\xFC\xFCmist!',
     'misc.LegalQuestions': 'For legal questions',
     'misc.LessThan': 'V\xE4hem kui',
     'misc.LessThan2': 'Kuulutuse postitamiseks kulub v\xE4hem kui  kaks minutit',

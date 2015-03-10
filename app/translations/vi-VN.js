@@ -535,6 +535,7 @@ module.exports = {
     'misc.GetTheFreeApp': 'T\u1EA2I \u1EE8NG D\u1EE4NG MI\u1EC4N PH\xCD',
     'misc.HowToContact': 'T\xF4i c\xF3 th\u1EC3 li\xEAn h\u1EC7 v\u1EDBi OLX b\u1EB1ng c\xE1ch n\xE0o?',
     'misc.JustEmail': 'Ch\u1EC9 c\u1EA7n email c\u1EE7a b\u1EA1n',
+    'misc.KeepSelling': 'Ti\u1EBFp t\u1EE5c b\xE1n!',
     'misc.LegalQuestions': 'D\xE0nh cho c\xE1c c\xE2u h\u1ECFi v\u1EC1 ph\xE1p ch\u1EBF',
     'misc.LessThan': '\xCDt h\u01A1n',
     'misc.LessThan2': 'B\u1EA1n \u0111\u0103ng rao v\u1EB7t c\u1EE7a m\xECnh trong ch\u01B0a \u0111\u1EA7y 2 ph\xFAt',

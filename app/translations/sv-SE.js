@@ -535,6 +535,7 @@ module.exports = {
     'misc.GetTheFreeApp': 'F\xC5 GRATISAPPEN',
     'misc.HowToContact': 'How can I contact OLX?',
     'misc.JustEmail': 'Bara ditt e-postkonto beh\xF6vs',
+    'misc.KeepSelling': 'Forts\xE4tta att s\xE4lja!',
     'misc.LegalQuestions': 'For legal questions',
     'misc.LessThan': 'Mindre \xE4n',
     'misc.LessThan2': 'Du publicerar annonsen p\xE5 mindre \xE4n 2 minuter',

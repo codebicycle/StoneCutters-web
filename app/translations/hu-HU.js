@@ -535,6 +535,7 @@ module.exports = {
     'misc.GetTheFreeApp': 'T\xD6LTSE LE AZ INGYENES ALKALMAZ\xC1ST',
     'misc.HowToContact': 'How can I contact OLX?',
     'misc.JustEmail': 'Csak az e-mail c\xEDm\xE9t kell megadnia',
+    'misc.KeepSelling': 'Folytassa az \xE9rt\xE9kes\xEDt\xE9st!',
     'misc.LegalQuestions': 'For legal questions',
     'misc.LessThan': 'Kevesebb, mint',
     'misc.LessThan2': 'Adja fel hirdet\xE9s\xE9t 2 percen bel\xFCl',

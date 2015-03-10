@@ -1,0 +1,13 @@
+<div class="content-thanks">
+	<h1>¡Gracias por publicarde nuevo!</h1>
+	<img alt="" src="{{ ('/images/desktop/marketing/thanks/thanks_loop.gif') | static }}"/>
+</div>
+<div class="content-keep-posting">
+	<img class="girl" alt="" src="{{ ('/images/desktop/marketing/thanks/girl.jpg') | static }}" />
+	<div class="keep-posting-block">
+		<h2>{{dictionary["misc.KeepSelling"]}}</h2>
+		<p>Publicá todos los avisos que quieras.</p>
+		<p>Seguro tenés algo queya no usás.</p>
+		<a href="{{ '/posting' | link }}" rel="nofollow" class="posting {{ 'disabled' if currentRoute.controller == 'post' and currentRoute.action == 'flow' }}" role="button" data-qa="post-button" >{{ dictionary["misc.PostButton"] }}</a>
+	</div>
+</div>
