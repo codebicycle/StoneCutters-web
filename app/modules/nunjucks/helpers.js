@@ -90,33 +90,30 @@ module.exports = function(nunjucks) {
     return str.toLowerCase().replace(/[^\w ]+/g,'').replace(/ +/g,'-');
     }
 
-    function randomInt(max) {
-        return Math.floor(Math.random() * max);
-    }
-
     function shuffleItems(items, shops){
+        var slice = 10;
         var shuffle = [];
         var itemIndex = 0;
         var shopIndex = 0;
-        var shopIndices = [];
-        var length = items.length + shops.length;
 
-        for(var k = 0; k < shops.length; k++) {
-            var index = ( k * 10 ) + randomInt(10);
-            shopIndices[k] = index;           
-        }
+        for (var i = 0; i < shops.length; i++) {
+            var index =  Math.floor(Math.random() * slice);
 
-        for (var i = 0; i < length; i++) {
-
-            var isShop = _.contains(shopIndices, i);
-            if (isShop) {
-                shuffle[i] = { "index": shopIndex, "type": "shop"};
-                shopIndex++;
-            } else {
-                shuffle[i] = { "index": itemIndex, "type": "item"};
-                itemIndex++;                
+            for (var j = 0; j < slice; j++) {
+                if ( index == j ) {
+                   shuffle.push({ "index": i, "type": "shop"});
+                   shopIndex += 1; 
+                } else {
+                   shuffle.push({ "index": itemIndex, "type": "item"});
+                   itemIndex += 1;  
+                }
             }
         }
+
+        for (var k = itemIndex; k < items.length; k++) {
+            shuffle.push({ "index": k, "type": "item"});
+        }
+
         return shuffle;
 
     }
@@ -125,7 +122,7 @@ module.exports = function(nunjucks) {
         var locations = '';
 
         if (shops) {
-            for(var i = 0; i < shops.length; i++) {
+            for (var i = 0; i < shops.length; i++) {
                 var location = shops[i].location;
                 if ( location ) {
                     locations = locations + location.lat + "," + location.lon + "|";
@@ -133,7 +130,6 @@ module.exports = function(nunjucks) {
             }            
         }
 
-        console.log('locations', locations);
         return locations;
     }
 
@@ -154,7 +150,6 @@ module.exports = function(nunjucks) {
         hijri: helpers.hijri,
         persianDigits: helpers.numbers.toPersian,
         latinDigits: helpers.numbers.toLatin,
-        randomInt: randomInt,
         shuffleItems: shuffleItems,
         getLocations: getLocations
 
