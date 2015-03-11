@@ -4,8 +4,8 @@
             <div class="popup-container {{ 'nbh' if neighborhoods and neighborhoods.length }}">
                 {% if neighborhoods and neighborhoods.length %}
                 <div class="return" style="">
-                        <a href="" class="changecity"></a>
-                        <span>Cambiar Ciudad</span>
+                    <a href="" class="changecity"></a>
+                    <span>{{ dictionary["countryoptions.ChangeCity"] }}</span>
                 </div>
                 {% endif %}
                 <div class="content">
@@ -29,7 +29,7 @@
                         </div>
                     {% endif %}
                     {% if neighborhoods and neighborhoods.length %}
-                        <div class="popup-title">Barrios</div>
+                        <div class="popup-title">{{ dictionary["misc.Neighborhood-1"] }}</div>
                         <div>
                             <ul>
                                 {% for neighborhood in neighborhoods %}
