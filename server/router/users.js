@@ -248,7 +248,7 @@ module.exports = function userRouter(app) {
             }
 
             function error(err) {
-                formidable.error(req, '/register', err, user.toJSON(), function redirect(url) {
+                formidable.error(req, '/register', Array.isArray(err) ? err : [err], user ? user.toJSON() : undefined, function redirect(url) {
                     res.redirect(301, utils.link(url, req.rendrApp));
                     end(err);
                 });

@@ -2,23 +2,36 @@
 
 var _ = require('underscore');
 var translations = require('../../../shared/translations');
+var selectReplaces = {
+    regexpFind: /_|-/g,
+    characters: {
+        '_': '+',
+        '-': '*'
+    }
+};
 
 module.exports = {
     byType: {
         SELECT: select
     },
     byName: {
-        city: city,
-        state: state,
         neighborhood: neighborhood,
         kilometers: kilometers,
         bathrooms: bathrooms,
         bedrooms: bedrooms,
-        surface: surface,
-        year: year,
         carbrand: carbrand,
         carmodel: carmodel,
-        age: age
+        surface: surface,
+        state: state,
+        city: city,
+        year: year,
+        age: age,
+        flo: flo,
+        slo: slo
+    },
+    SELECT: {
+        smaugize: selectSmaugize,
+        format: selectFormat
     },
     exceptions: {
         byType: {
@@ -32,8 +45,10 @@ function select(filter, options) {
 
     if (values && values.length) {
         _.map(values, function each(value) {
-            if (value.id && typeof value.id === 'string' && (~value.id.indexOf('_') || ~value.id.indexOf('-'))) {
-                value.id = value.id.replace(/_/g, '+').replace(/-/g, '*');
+            if (value.id && typeof value.id === 'string' && value.id.match(selectReplaces.regexpFind)) {
+                value.id = value.id.replace(selectReplaces.regexpFind, function replace(c) {
+                    return selectReplaces.characters[c];
+                });
             }
             return value;
         });
@@ -170,6 +185,24 @@ function carmodel(filter, options) {
     return filter;
 }
 
+function flo(filter, options) {
+    filter = checkSelectValue(filter, options);
+    filter = checkDescription(filter, options, '');
+    return filter;
+}
+
+function slo(filter, options) {
+    if (!this.has('flo') || !this.get('flo').has('current')) {
+        return;
+    }
+    if (this.get('flo').get('current').length > 1) {
+        return;
+    }
+    filter = checkSelectValue(filter, options);
+    filter = checkDescription(filter, options, '');
+    return filter;
+}
+
 function age(filter, options) {
     var dictionary = translations.get(options.app.session.get('selectedLanguage'));
 
@@ -229,9 +262,31 @@ function checkDescription(filter, options, key) {
     var dictionary;
     if (!filter.has('description')) {
         dictionary = translations.get(options.app.session.get('selectedLanguage'));
-        filter.set('description', dictionary[key], {
+        filter.set('description', dictionary[key] || '', {
             unset: false
         });
     }
     return filter;
+}
+
+function selectSmaugize(values) {
+    return selectReplace(values, /\+|\*/g, _.invert(selectReplaces.characters));
+}
+
+function selectFormat(values) {
+    return selectReplace(values, /_|-/g, selectReplaces.characters);
+}
+
+function selectReplace(values, regexp, characters) {
+    if (values && values.length) {
+        values = _.map(values, function each(value) {
+            if (typeof value === 'string' && value.match(regexp)) {
+                value = value.replace(regexp, function replace(c) {
+                    return characters[c] || c;
+                });
+            }
+            return value;
+        });
+    }
+    return values;
 }

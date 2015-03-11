@@ -5,7 +5,7 @@ module.exports = {
         url: 'location'
     },
     'post#success': {
-        url: 'posting/success/:itemId'
+        url: 'posting/success/{{itemId}}'
     },
     'post#flowMarketing': {
         url :'posting/landing_mo'
@@ -20,15 +20,15 @@ module.exports = {
         url :'posting'
     },
     'post#flow#edit': {
-        url: 'myolx/edititem/:itemId'
+        url: 'myolx/edititem/{{itemId}}'
     },
     'post#renew': {
-        url: 'myolx/renewitem/:itemId'
+        url: 'myolx/renewitem/{{itemId}}'
     },
     'post#rebump': {
-        url: 'myolx/rebump/:itemId'
+        url: 'myolx/rebump/{{itemId}}'
     },
     'post#editsuccess': {
-        url: 'edititem/success/:itemId'
+        url: 'edititem/success/{{itemId}}'
     },
 };

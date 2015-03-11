@@ -10,6 +10,7 @@ var CollectionStore = require('./bases/collectionStore');
 var nunjucks = require('./modules/nunjucks');
 var Seo = require('./modules/seo');
 var helpers = require('./helpers');
+var Localstorage = require('./modules/localstorage');
 
 module.exports = Base.extend({
     defaults: {
@@ -27,6 +28,9 @@ module.exports = Base.extend({
         this.templateAdapter.registerExtensions(nunjucks.extensions);
     },
     start: function() {
+        if (!utils.isServer) {
+            this.localstorage = new Localstorage();
+        }
         this.router.on('action:start', function onStart() {
             this.set({
                 loading: true
