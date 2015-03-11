@@ -14,7 +14,7 @@ function log() {
         return console.log.apply(console, arguments);
     }
     $.ajax({
-        url: ['/tracking/log.gif'].join(''),
+        url: '/tracking/log.gif',
         method: 'get',
         data: {
             message: _.toArray(arguments).join(' ')
