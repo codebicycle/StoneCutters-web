@@ -20,6 +20,9 @@ module.exports = {
         },
         home_block_banner_top: {
             image: 'marketing-box-image-za'
+        },
+        thanksPage: {
+            videoUrl: 'thank-you-video-en'
         }
     },
     successPage: {

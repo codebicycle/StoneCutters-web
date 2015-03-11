@@ -1,39 +1,39 @@
 .pages-thanks-view {
-    .content-thanks,
-    .content-keep-posting {
-        box();
-    }
+
     .content-thanks {
+        box();
         margin-bottom: 20px;
+        padding-bottom: 30px;
         text-align: center;
+
+        p {
+            margin: 20px 0;
+            font-size: $m;
+
+            &.thanks-you {
+                font-size: $s;
+            }
+        }
 
         h1 {
             color: $violet;
+            font-size: $xl;
+            font-weight: bold;
         }
-    }
+        .posting {
+            display: inline-block;
+        }
+        .content-video {
+            background: url(imageUrl/images/desktop/marketing/thanks/frase.gif) no-repeat left 30px center;
+            width: 100%;
 
-    .content-keep-posting {
-        clear-fix();
-
-        .keep-posting-block {
-            float: left;
-
-            h2 {
-                color: $orange;
-                margin: 0 0 14px;
-            }
-
-            p {
-                margin: 0 0 10px;
-            }
-
-            .posting{
-                display: block;
+            &.content-video-en {
+                background: url(imageUrl/images/desktop/marketing/thanks/phrase.gif) no-repeat left 30px center;
             }
         }
-        .girl {
-            float: left;
-            margin-right: 8px;
+        .content-thanks-you {
+            background: url(imageUrl/images/desktop/marketing/thanks/items.jpg) no-repeat center bottom;
+            padding-bottom: 100px;
         }
     }
 }

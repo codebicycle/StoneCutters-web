@@ -318,9 +318,15 @@ function thanks(params, callback) {
     function controller() {
         var redirect = function(done) {
             var platform = this.app.session.get('platform');
+            var location = this.app.session.get('location');
 
-            if (platform !== 'desktop') {
+            if (platform !== 'desktop' && platform !== 'html5') {
                 return done.fail();
+            }
+
+            if(!helpers.features.isEnabled.call(this, 'landingThanks', platform, location.url)) {
+                done.abort();
+                return helpers.common.redirect.call(this, '/');
             }
             done();
         }.bind(this);
