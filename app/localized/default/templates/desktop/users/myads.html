@@ -90,13 +90,13 @@
                     {% endif %}
                 </h3>
                 <div class="tips">
-                    <span>{{ item.messages }} {{ dictionary["myolx.Messages"] }}</span>
-                    <span>{{ item.visits }} {{ dictionary["netvibes_myolx.content.Views"] }}</span>
-                    <span>{{ dictionary["misc.SinceDate"] | replace('<<DATE>>', item.date.timestamp | date("MMM DD, YYYY")) }}</span>
+                    <span>{{ dictionary["listingpageitemslisting.Posted"] }} {{ item.date.timestamp | date("MMM DD, YYYY") }}</span>
                 </div>
-                <div class="text">
-                    {{ item.message }}
-                </div>
+                {% if item.status == 'rejected' %}
+                    <div class="text">
+                        {{ item.message }}
+                    </div>
+                {% endif %}
                 <div class="buttons">
                     {% set itemDate = item.date.timestamp.replace('T',' ') | dateDiff(currentTime, 'json') %}
                     {% set itemDays = itemDate.days %}

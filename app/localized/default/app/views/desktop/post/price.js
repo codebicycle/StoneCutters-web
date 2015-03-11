@@ -3,6 +3,7 @@
 var Base = require('../../../../../common/app/bases/view');
 var helpers = require('../../../../../../helpers');
 var _ = require('underscore');
+var rPrice = /[^0-9]/gi;
 
 module.exports = Base.extend({
     tagName: 'section',
@@ -73,6 +74,7 @@ module.exports = Base.extend({
         var options = {};
 
         if ($field.attr('name') === 'priceC') {
+            $field.val($field.val().replace(rPrice, ''));
             options.skipValidation = $field.val() === '' && _.contains(['NEGOTIABLE', 'FREE'], ($('#field-priceType').val() || '').toUpperCase());
             this.$('select').trigger('change');
         }

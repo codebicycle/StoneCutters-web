@@ -203,7 +203,7 @@ module.exports = Base.extend({
 
         options = _.clone(options);
 
-        var fetch = function(done) {
+        function fetch(done) {
             this.app.fetch({
                 neighborhoods: {
                     collection: 'Neighborhoods',
@@ -217,10 +217,12 @@ module.exports = Base.extend({
                 writeToCache: false,
                 store: false
             }, done.errfcb);
-        }.bind(this);
+        }
 
-        var parse = function(done, response) {
+        function parse(done, response) {
             var responseSorted = _.sortBy(response.neighborhoods.toJSON(), 'name');
+            var location = this.app.session.get('location').abbreviation;
+            var translation = (location !== 'ZA') ? 'item.SelectA_Neighborhood' : 'misc.SelectSuburb';
 
             neighborhoods = _.map(responseSorted, function each(neighborhood) {
                 return {
@@ -231,19 +233,15 @@ module.exports = Base.extend({
             if (neighborhoods.length) {
                 neighborhoods.unshift({
                     key: '',
-                    value: translations.get(this.app.session.get('selectedLanguage'))['item.SelectA_Neighborhood']
+                    value: translations.get(this.app.session.get('selectedLanguage'))[translation]
                 });
             }
             done(neighborhoods);
-        }.bind(this);
+        }
 
-        var error = function(error) {
-            console.log(error); // TODO: HANDLE ERRORS
-        }.bind(this);
-
-        var success = function(neighborhoods) {
+        function success(done, neighborhoods) {
             options.skipValidation = true;
-            
+
             if (neighborhoods.length) {
                 $neighborhoods.removeAttr('disabled').attr('required', true).empty();
                 $neighborhoods.parents('.field-wrapper').removeClass('hide');
@@ -255,13 +253,52 @@ module.exports = Base.extend({
             else {
                 this.resetNeighborhoods();
             }
-        }.bind(this);
+            done(neighborhoods);
+        }
 
-        asynquence().or(error)
-            .then(fetch)
-            .then(parse)
-            .val(success);
+        function check(neighborhoods) {
+            var neighborhood;
 
+            if (neighborhoods.length) {
+                neighborhood = this.getNeighborhood();
+                if (neighborhood) {
+                    neighborhood = $neighborhoods.find('option[value=' + neighborhood.id + ']').attr('selected', true);
+                    if (neighborhood.length) {
+                        $neighborhoods.trigger('change');
+                    }
+                }
+            }
+        }
+
+        function fail(error) {
+            console.log(error); // TODO: HANDLE ERRORS
+        }
+
+        asynquence().or(fail.bind(this))
+            .then(fetch.bind(this))
+            .then(parse.bind(this))
+            .then(success.bind(this))
+            .val(check.bind(this));
+
+    },
+    getNeighborhood: function() {
+        var item = this.parentView.parentView.getItem();
+        var location = item.get('_location');
+        var neighborhood;
+
+        if (!location) {
+            return neighborhood;
+        }
+        if (location.children && location.children.length) {
+            location = location.children[0];
+            if (location.children && location.children.length) {
+                location = location.children[0];
+                if (location.children && location.children.length) {
+                    neighborhood = location.children[0];
+                }
+            }
+        }
+        return neighborhood;
     },
     resetNeighborhoods: function() {
         var $neighborhoods = this.$('#field-neighborhood');

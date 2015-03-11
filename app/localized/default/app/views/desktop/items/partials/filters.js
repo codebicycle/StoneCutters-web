@@ -108,7 +108,7 @@ module.exports = Base.extend({
         var valueFrom = $from.val();
         var valueTo = $to.val();
 
-        if (Number(valueFrom) > Number(valueTo)) {
+        if (valueFrom && valueTo && Number(valueFrom) > Number(valueTo)) {
             var tempValueTo = valueTo;
 
             valueTo = valueFrom;
