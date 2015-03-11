@@ -3,7 +3,10 @@
 {{ Breadcrumb(dictionary, link, dictionary["myolx.Messages"]) }}
 
 {% if conversations.length == 0 %}
-    <p class="top-conversations">{{ dictionary["netvibes_myolx.content.NoMessages"] }}</p>
+    <div class="no-conversations">
+        <img src="{{ '/images/html4/no-message.png' | static }}">
+        <p>{{ dictionary["netvibes_myolx.content.NoMessages"] }}</p>
+    </div>
 {% else %}
     <ul class="conversations-listing">
         {% for conversation in conversations %}
@@ -18,7 +21,7 @@
                             <p class="conversation-messageDate">{{ conversation.messageDate | date(false, true) }}</p>
                             <span class="conversation-contactName">{{ conversation.contactName }}</span>
                             <h2 class="conversation-item-title">{{ item.get('title') }}</h2>
-                            <span class="conversation-messageText">{{ conversation.messageText | truncate( 100, True, '...') }}</span>
+                            <span class="conversation-messageText">{{ conversation.messageText | truncate( 30, True, '...') }}</span>
                         </a>
                     </div>
                 </li>

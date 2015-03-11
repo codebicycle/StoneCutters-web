@@ -1,4 +1,18 @@
 .users_conversations_view {
+    .no-conversations {
+        text-align: center;
+        padding: 20px 10px;
+        img {
+            width: 60%;
+            max-width: 197px;
+        }
+        p {
+            color: #ff7800;
+            font-size: 16px;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+    }
     .conversations-listing {
         li {
             border-bottom: 1px solid #cccccc;
@@ -45,6 +59,10 @@
                     overflow: hidden;
                     height: 18px;
                     line-height: 18px;
+                }
+                .conversation-messageText {
+                    height: 13px;
+                    overflow: hidden;
                 }
                 .conversation-messageDate {
                     float: right;

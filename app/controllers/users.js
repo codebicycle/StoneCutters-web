@@ -724,11 +724,12 @@ function conversation(params, callback) {
         var location = this.app.session.get('location');
         var languages = this.app.session.get('languages');
         var page = params ? params.page : undefined;
+        var view = 'users/conversation';
+        var pageSize = 'myConv';
         var thread;
         var _params;
         var user;
-        var view = 'users/conversation';
-        var pageSize = 'myConv';
+        var conversation;
 
         var redirect = function(done) {
             if (platform === 'wap') {
@@ -785,6 +786,13 @@ function conversation(params, callback) {
             done(res);
         }.bind(this);
 
+        var markAsRead = function(done, res) {
+            conversation = res.thread;
+            conversation.set('user', user);
+            conversation.set('platform', platform);
+            conversation.markAsRead(done);
+        }.bind(this);
+
         var success = function(response) {
             this.app.seo.addMetatag('robots', 'noindex, nofollow');
             this.app.seo.addMetatag('googlebot', 'noindex, nofollow');
@@ -794,10 +802,10 @@ function conversation(params, callback) {
             }
 
             callback(null, view, {
-                thread: response.thread,
+                thread: conversation,
                 include: ['thread'],
                 viewname: 'conversation',
-                paginator: response.thread.paginator
+                paginator: conversation.paginator
             });
         }.bind(this);
 
@@ -810,6 +818,7 @@ function conversation(params, callback) {
             .then(prepare)
             .then(fetch)
             .then(paginate)
+            .then(markAsRead)
             .val(success);
     }
 }
