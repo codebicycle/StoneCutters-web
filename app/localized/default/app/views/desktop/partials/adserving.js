@@ -158,7 +158,7 @@ module.exports = Base.extend({
             href = href.replace(':' + window.top.location.port, '');
         }
 
-        return (href).replace(window.top.location.search, '').replace(window.top.location.hash, '');
+        return href.replace(window.top.location.search, '').replace(window.top.location.hash, '');
     }
 });
 
