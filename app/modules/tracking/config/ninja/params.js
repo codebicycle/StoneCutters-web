@@ -73,7 +73,7 @@ module.exports = {
         sellerType: 'private'
     },
     'items#delete': {
-        trackPage: 'itemDelete',
+        trackPage: 'myAccount',
         sellerType: 'private'
     },
     'items#filter': {
