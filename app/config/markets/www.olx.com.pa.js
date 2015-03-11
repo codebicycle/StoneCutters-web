@@ -1,6 +1,7 @@
 module.exports = {
     categoryTree: {
-        order: [185, 186, 362, 187, 16, 191, 190]
+        order: [830, 800, 806, 815, 853, 881, 859, 811, 938, 191, 362, 16, 821],
+        columns: [4, 3, 3]
     },
     countryMapStyle: 'special',
     socials: {
