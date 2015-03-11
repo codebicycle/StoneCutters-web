@@ -8,7 +8,11 @@
             <div></div>
             <p>
                 {% block noResultsMsg %}
-                    {{ dictionary["listingpageitemslisting.ZeroResultsPage"] | replace('<<CATEGORY>>', '<strong>' + category.trName + ', ' + subcategory.trName + '</strong>') | replace('<<REGION>>', location.current.name if location.current.name else location.name) }}
+                    {% if category.trName and subcategory.trName %}
+                        {{ dictionary["listingpageitemslisting.ZeroResultsPage"] | replace('<<CATEGORY>>', '<strong>' + category.trName + ', ' + subcategory.trName + '</strong>') | replace('<<REGION>>', location.current.name if location.current.name else location.name )}}
+                    {% else %}
+                        {{ dictionary["listingpageitemslisting.WeAreSorryNoResults"] }}
+                    {% endif %}
                 {% endblock %}
             </p>
             <a class="btns orange" href="{{ '/' | link }}" >{{ dictionary["registrationconfirmsuccesstext.Browse"] | replace('<<BRAND>>','OLX') }}</a>

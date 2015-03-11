@@ -8,11 +8,11 @@
         <div class="emtyList">
             <div></div>
             <p>
-                {% if location.current.name %}
-                    {{ dictionary["listingpageitemslisting.ZeroResultsPage"] | replace('<<CATEGORY>>', '<strong>' + category.trName + ', ' + subcategory.trName + '</strong>') | replace('<<REGION>>',location.current.name)}}
-                {% else %}
-                    {{ dictionary["listingpageitemslisting.ZeroResultsPage"] | replace('<<CATEGORY>>', '<strong>' + category.trName + ', ' + subcategory.trName + '</strong>') | replace('<<REGION>>',location.name)}}
-                {% endif %}
+            {% if category.trName and subcategory.trName %}
+                {{ dictionary["listingpageitemslisting.ZeroResultsPage"] | replace('<<CATEGORY>>', '<strong>' + category.trName + ', ' + subcategory.trName + '</strong>') | replace('<<REGION>>', location.current.name if location.current.name else location.name )}}
+            {% else %}
+                {{ dictionary["listingpageitemslisting.WeAreSorryNoResults"] }}
+            {% endif %}
             </p>
             <a class="btns orange" href="{{ '/' | link }}" >{{ dictionary["registrationconfirmsuccesstext.Browse"] | replace('<<BRAND>>','OLX') }}</a>
         </div>

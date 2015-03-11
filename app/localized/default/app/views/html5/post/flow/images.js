@@ -1,10 +1,11 @@
 'use strict';
 
+var _ = require('underscore');
+var asynquence = require('asynquence');
+var statsd = require('../../../../../../../../shared/statsd')();
 var Base = require('../../../../../../common/app/bases/view');
 var translations = require('../../../../../../../../shared/translations');
 var helpers = require('../../../../../../../helpers');
-var asynquence = require('asynquence');
-var _ = require('underscore');
 
 module.exports = Base.extend({
     className: 'post_flow_images_view disabled',
@@ -13,7 +14,7 @@ module.exports = Base.extend({
     pending: 0,
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
-        
+
         return _.extend({}, data, {
             slots: 6
         });
@@ -54,7 +55,7 @@ module.exports = Base.extend({
         var images = this.parentView.getItem().get('images');
         var $file = $(event.currentTarget).parent();
         var $files = this.$('.file');
-        
+
         if (images.length) {
             position = $files.index($file);
             if (!images[position]) {
@@ -96,10 +97,19 @@ module.exports = Base.extend({
         var $image = $file.find('.display');
 
         asynquence().or(fail.bind(this))
+            .then(validate.bind(this))
             .then(reset.bind(this))
             .then(post.bind(this))
             .then(success.bind(this))
             .val(done.bind(this));
+
+        function validate(done) {
+            if (image.size > 5242880) {
+                statsd.increment([this.app.session.get('location').abbreviation, 'posting', 'error', 'size', this.app.session.get('platform')]);
+                return done.abort();
+            }
+            done();
+        }
 
         function reset(done) {
             $file.removeClass('loaded');
