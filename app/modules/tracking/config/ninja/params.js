@@ -15,7 +15,7 @@ module.exports = {
         resultSetFormat: 'gallery'
     },
     'categories#show': {
-        trackPage: 'resultSet_subcategories',
+        trackPage: 'selectSubCategory',
         resultSetType: 'browse',
         resultSetFormat: 'list'
     },
@@ -72,8 +72,15 @@ module.exports = {
         trackPage: 'item',
         sellerType: 'private'
     },
-    'locations#list': {
-        trackPage: 'resultSet_locations'
+    'items#delete': {
+        trackPage: 'itemDelete',
+        sellerType: 'private'
+    },
+    'items#filter': {
+        trackPage: 'selectFilters'
+    },
+    'items#sort': {
+        trackPage: 'selectSort'
     },
     'post#location': {
         trackPage: 'postingFormStep1'
@@ -108,8 +115,14 @@ module.exports = {
     'users#register': {
         trackPage: 'registerFormStep1'
     },
+    'users#registersuccess': {
+        trackPage: 'registerSent'
+    },
     'users#login': {
         trackPage: 'login'
+    },
+    'users#myolx': {
+        trackPage: 'myAccount'
     },
     'users#myads': {
         trackPage: 'myAccount'
@@ -120,7 +133,25 @@ module.exports = {
     'users#messages': {
         trackPage: 'myAccount'
     },
+    'users#readmessages': {
+        trackPage: 'myAccount'
+    },
     'users#lostpassword': {
+        trackPage: 'myAccount'
+    },
+    'users#conversation': {
+        trackPage: 'myAccount'
+    },
+    'users#conversations': {
+        trackPage: 'myAccount'
+    },
+    'users#report': {
+        trackPage: 'myAccount'
+    },
+    'users#unsubscribe': {
+        trackPage: 'myAccount'
+    },
+    'users#editpersonalinfo': {
         trackPage: 'myAccount'
     },
     'pages#terms': {
@@ -143,5 +174,8 @@ module.exports = {
     },
     'pages#about': {
         trackPage: 'about'
+    },
+    'locations#list': {
+        trackPage: 'selectCity'
     }
 };

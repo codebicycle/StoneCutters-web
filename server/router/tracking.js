@@ -397,6 +397,21 @@ module.exports = function trackingRouter(app, dataAdapter) {
         }
     })();
 
+    (function log() {
+        app.get('/tracking/log.gif', handler);
+
+        function handler(req, res) {
+            res.on('finish', function onResponseFinish() {
+                console.log(req.param('message'));
+            });
+
+            res.set('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-age=0, max-stale=0, post-check=0, pre-check=0');
+            res.set('Content-Type', 'image/gif');
+            res.set('Content-Length', gif.length);
+            res.end(gif);
+        }
+    })();
+
     function isBot(userAgent, platform, osName, osVersion) {
         if (/googlebot/i.test(userAgent)) {
             return 'google';
