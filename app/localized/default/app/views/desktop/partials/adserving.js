@@ -152,7 +152,13 @@ module.exports = Base.extend({
         return document.referrer.match(/^[a-zA-Z0-9:\/\/]*\.google\.[a-zA-Z.]+/) && (document.location.search.indexOf('invite=') == -1);
     },
     getTopLocation: function() {
-        return (window.top.location.href || '').replace(':' + window.top.location.port, '').replace(window.top.location.search, '').replace(window.top.location.hash, '');
+        var href = window.top.location.href || '';
+
+        if (window.top.location.port) {
+            href = href.replace(':' + window.top.location.port, '');
+        }
+
+        return (href).replace(window.top.location.search, '').replace(window.top.location.hash, '');
     }
 });
 
