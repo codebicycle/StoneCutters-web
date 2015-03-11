@@ -29,7 +29,6 @@ function setDefaults(params, options) {
     var location = this.app.session.get('location');
     var platform = this.app.session.get('platform');
     var platforms = config.getForMarket(location.url, ['tracking', 'trackers', 'ninja', 'noscript', 'platforms'], []);
-    var currentRoute;
 
     params.language = this.app.session.get('selectedLanguage');
     if (location.children && location.children.length) {
@@ -61,8 +60,7 @@ function setDefaults(params, options) {
         params.clientId = this.app.session.get('clientId');
     }
     if (!params.trackPage) {
-        currentRoute = this.app.session.get('currentRoute');
-        logger.log('[OLX_DEBUG]', 'Tracking | Ninja not contains trackPage in', currentRoute.controller + '#' + currentRoute.action, '|', platform);
+        logger.log('[OLX_DEBUG]', 'Tracking | Ninja not contains trackPage in', _.values(this.app.session.get('currentRoute')).join('#'), '|', platform);
         params.trackPage = getCurrentPath(this.app.session.get('path'));
     }
 }
