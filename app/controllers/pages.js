@@ -170,7 +170,7 @@ function didyousell(params, callback) {
         var anonymousItem;
 
         var redirect = function(done) {
-            if (platform === 'wap') {
+            if (platform !== 'desktop') {
                 done.abort();
                 return helpers.common.redirect.call(this, '/');
             }
