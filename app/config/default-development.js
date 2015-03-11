@@ -125,8 +125,8 @@ module.exports = {
                 countries: []
             },
             hermes: {
-                worldwide: false,
-                countries: ['www.olx.com.ng', 'www.olx.com.ar', 'www.olx.com.co', 'www.olx.co.za', 'www.olx.com.uy', 'www.olx.com.sv', 'www.olx.com.gt', 'www.olx.com.ve', 'www.olx.com.ec', 'www.olx.com.pe', 'www.olx.com.bo', 'www.olx.co.cr', 'www.olx.hn', 'www.olx.com.ni', 'www.olx.com.pa', 'wwww.olx.com.py', 'www.olx.co.tz', 'www.olx.cl', 'www.olx.com.mx']
+                worldwide: true,
+                countries: ['www.olx.es', 'www.olx.ae', 'www.olx.it', 'www.olx.com', 'www.olx.fr', 'www.olx.ir']
             },
             newItemPage: {
                 worldwide: true,
@@ -149,8 +149,8 @@ module.exports = {
         },
         desktop: {
             hermes: {
-                worldwide: false,
-                countries: ['www.olx.com.ng', 'www.olx.com.ar', 'www.olx.com.co', 'www.olx.co.za', 'www.olx.com.uy', 'www.olx.com.sv', 'www.olx.com.gt', 'www.olx.com.ve', 'www.olx.com.ec', 'www.olx.com.pe', 'www.olx.com.bo', 'www.olx.co.cr', 'www.olx.hn', 'www.olx.com.ni', 'www.olx.com.pa', 'wwww.olx.com.py', 'www.olx.co.tz']
+                worldwide: true,
+                countries: ['www.olx.es', 'www.olx.ae', 'www.olx.it', 'www.olx.com', 'www.olx.fr', 'www.olx.ir']
             },
             contactForm: {
                 worldwide: false,
