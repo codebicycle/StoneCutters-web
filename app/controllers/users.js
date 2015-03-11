@@ -717,7 +717,9 @@ function conversations(params, callback) {
 }
 
 function conversation(params, callback) {
-    helpers.controllers.control.call(this, params, controller);
+    helpers.controllers.control.call(this, params, {
+        isForm: true
+    }, controller);
 
     function controller() {
         var platform = this.app.session.get('platform');
@@ -725,7 +727,7 @@ function conversation(params, callback) {
         var languages = this.app.session.get('languages');
         var page = params ? params.page : undefined;
         var view = 'users/conversation';
-        var pageSize = 'myConv';
+        var pageSize = platform === 'html4' ? 'myConvHtml4' : 'myConv';
         var thread;
         var _params;
         var user;
@@ -805,7 +807,8 @@ function conversation(params, callback) {
                 thread: conversation,
                 include: ['thread'],
                 viewname: 'conversation',
-                paginator: conversation.paginator
+                paginator: conversation.paginator,
+                form: this.form
             });
         }.bind(this);
 

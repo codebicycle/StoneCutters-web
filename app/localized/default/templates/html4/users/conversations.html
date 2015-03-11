@@ -13,11 +13,11 @@
             {% if items.get(conversation.itemId) %}
                 <li>
                     {% set item = items.get(conversation.itemId) %}
-                    <a href="{{ ('/myolx/conversation/' + conversation.threadId) | link }}">
+                    <a href="{{ ('/myolx/conversation/' + conversation.threadId + '#message') | link }}">
                         <div class="conversation-image" style="background-image: url({{ item.get('thumbnail') if item.get('thumbnail') else ('/images/html4/noPhoto.png' | static) }});" alt="{{ item.get('title') }}"></div>
                     </a>
                     <div class="conversation-info{{ ' unread' if not conversation.read}}">
-                        <a href="{{ ('/myolx/conversation/' + conversation.threadId) | link }}">
+                        <a href="{{ ('/myolx/conversation/' + conversation.threadId + '#message') | link }}">
                             <p class="conversation-messageDate">{{ conversation.messageDate | date(false, true) }}</p>
                             <span class="conversation-contactName">{{ conversation.contactName }}</span>
                             <h2 class="conversation-item-title">{{ item.get('title') }}</h2>
@@ -29,9 +29,10 @@
         {% endfor %}
     </ul>
 {% endif %}
-{#% if paginator and paginator.isEnabled() %}
+
+{% if paginator and paginator.isEnabled() %}
     {% include (template + '/users/partials/pagination.html') %}
-{% endif %#}
+{% endif %}
 
 {{ BreadcrumbHome(dictionary, link, ('/' | link)) }}
 

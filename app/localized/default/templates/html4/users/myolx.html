@@ -12,7 +12,7 @@
         </li>
         {% if isHermesEnabled %}
             <li>
-                <a href="{{ '/myolx/conversations' | link }}" data-qa="my-messages-link" >{{ dictionary["myolx.Messages"] }}</a>
+                <a href="{{ '/myolx/conversations' | link }}" data-qa="my-messages-link" >{{ dictionary["myolx.Messages"] }}{{ '<span class="dot"></span>' if user.unreadConversationsCount }}</a>
             </li>
         {% endif %}
         <li class="last">

@@ -53,11 +53,16 @@
 
 <form action="{{ ('/myolx/conversation/' + thread.get('threadId')) | link }}" method="POST" enctype="multipart/form-data">
     <div class="formField">
-        <input type="text" value="" data-messageText name="message" />
+        <a href="" name="message"></a>
+        <input type="text" value="{{ form.values.message if form.values.message }}" data-messageText name="message" {{ 'class="error"' if form and form.errors }} />
     </div>
     <div class="formActions">
         <input type="submit" value="{{ dictionary["myolx.Reply"] }}" name="submit" class="btns green" data-qa="reply-send-button" >
     </div>
 </form>
+
+{% if paginator and paginator.isEnabled() %}
+    {% include (template + '/users/partials/pagination.html') %}
+{% endif %}
 
 {{ BreadcrumbHome(dictionary, link, ('/' | link)) }}

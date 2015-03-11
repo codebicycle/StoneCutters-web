@@ -10,7 +10,8 @@ var middlewares = {
     interstitial: require('./interstitial'),
     dependencies: require('./dependencies'),
     search: require('./search'),
-    metrics: require('./metrics')
+    metrics: require('./metrics'),
+    conversations: require('./conversations')
 };
 
 module.exports = function(controller, exclude) {

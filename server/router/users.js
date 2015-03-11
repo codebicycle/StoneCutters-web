@@ -290,6 +290,7 @@ module.exports = function userRouter(app) {
                 conversation = new Conversation({
                     country: req.rendrApp.session.get('location').abbreviation,
                     platform: req.rendrApp.session.get('platform'),
+                    languageId: req.rendrApp.session.get('languageId'),
                     user: user,
                     threadId: threadId,
                     message: data.message
@@ -303,22 +304,15 @@ module.exports = function userRouter(app) {
                 conversation.reply(done);
             }
 
-            function store(done, reply) {
-                req.rendrApp.session.persist({
-                    replyId: reply.id
-                });
-                done();
-            }
-
             function success() {
-                var url = '/myolx/conversation/' + threadId;
+                var url = '/myolx/conversation/' + threadId + '#message';
 
                 res.redirect(utils.link(url, req.rendrApp));
                 end();
             }
 
             function error(err) {
-                var url = '/myolx/conversation/' + threadId;
+                var url = '/myolx/conversation/' + threadId + '#message';
 
                 formidable.error(req, url.split('?').shift(), err, reply, function redirect(url) {
                     res.redirect(utils.link(url, req.rendrApp));
@@ -336,7 +330,6 @@ module.exports = function userRouter(app) {
                 .then(parse)
                 .then(prepare)
                 .then(submit)
-                //.then(store)
                 .val(success);
         }
     }
