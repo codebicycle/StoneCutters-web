@@ -184,7 +184,7 @@ function postImages(done) {
     }, callback.bind(this));
 
     function callback(err, response, ids) {
-        this.logPostImages(!this.get('id') ? 'posting' : 'editing', response.statusCode, err);
+        this.logPostImages(!this.get('id') ? 'posting' : 'editing', response.statusCode, (err ? (_.isString(err) ? ids : err) : undefined));
         if (!err) {
             _.each(newImages, function each(image, i) {
                 image.id = ids[i];

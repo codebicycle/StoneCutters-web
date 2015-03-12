@@ -318,7 +318,7 @@ module.exports = Base.extend({
         var $field;
         var $error;
 
-        $('small.error,message').each(function eachErrors() {
+        $('small.error.message:not(.exclude)').each(function eachErrors() {
             $error = $(this);
             $error.parent().find('.error').removeClass('error');
             $error.remove();
@@ -337,7 +337,7 @@ module.exports = Base.extend({
             }
         }.bind(this));
         $('html, body').animate({
-            scrollTop: $('small.error,message').first().parent().offset().top - 20
+            scrollTop: $('small.error.message').first().parent().offset().top - 20
         }, 750);
         this.$('#posting-errors-view').trigger('update');
     },
@@ -380,7 +380,7 @@ module.exports = Base.extend({
             .val(success.bind(this));
 
         function check(done) {
-            var errors = $('small.error,message');
+            var errors = $('small.error.message:not(.exclude)');
 
             if (errors.length) {
                 done.abort();
