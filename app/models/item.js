@@ -331,6 +331,7 @@ function toData(includeImages) {
     delete data.slug;
     delete data.priceTypeData;
     delete data.additionalLocation;
+    delete data._location;
     _.each(Object.keys(data), function each(key) {
         if (data[key] === undefined || data[key] === null || (typeof data[key] === 'string' && !data[key])) {
             delete data[key];
