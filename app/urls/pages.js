@@ -28,6 +28,9 @@ module.exports = {
     'pages#interstitial': {
         url: 'interstitial'
     },
+    'pages#didyousell': {
+        url: 'clm/did-you-sell'
+    },
     'pages#mobilepromo': {
         url: 'mobilepromopage'
     },

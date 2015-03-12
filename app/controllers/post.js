@@ -275,6 +275,13 @@ function flow(params, callback) {
                         break;
                 }
             }
+            if (item) {
+                item.set({
+                    _location: item.get('location')
+                }, {
+                    unset: false
+                });
+            }
 
             callback(null, 'post/index', {
                 postingSession: postingSession.get('postingSession'),
@@ -805,9 +812,19 @@ function editsuccess(params, callback) {
         var anonymousItem;
 
         asynquence().or(fail.bind(this))
+            .then(redirect.bind(this))
             .then(prepare.bind(this))
             .then(fetch.bind(this))
             .val(successFetch.bind(this));
+
+        function redirect(done) {
+            var platform = this.app.session.get('platform');
+
+            if (platform === 'wap') {
+                return done.fail();
+            }
+            done();
+        }
 
         function prepare(done) {
             if (user) {

@@ -2,6 +2,7 @@
 
 var _ = require('underscore');
 var configTracking = require('../../config');
+var logger = require('../../../logger');
 var config = require('../../../../../shared/config');
 var utils = require('../../../../../shared/utils');
 var sorts = {
@@ -9,6 +10,19 @@ var sorts = {
     pricedesc: 'price desc',
     datedesc: 'date desc'
 };
+
+function getCurrentPath(path) {
+    if (path.charAt(0) === '/' && path.length > 1) {
+        path = path.slice(1);
+    }
+    if (path.charAt(path.length - 1) === '/' && path.length > 1) {
+        path = path.slice(0, path.length - 1);
+    }
+    if (path === '/' || path === '') {
+        path = 'home';
+    }
+    return path;
+}
 
 function setDefaults(params, options) {
     var user = this.app.session.get('user');
@@ -44,6 +58,10 @@ function setDefaults(params, options) {
     }
     if (_.contains(platforms, this.app.session.get('platform'))) {
         params.clientId = this.app.session.get('clientId');
+    }
+    if (!params.trackPage) {
+        logger.log('[OLX_DEBUG]', 'Tracking | Ninja not contains trackPage in', _.values(this.app.session.get('currentRoute')).join('#'), '|', platform);
+        params.trackPage = getCurrentPath(this.app.session.get('path'));
     }
 }
 
