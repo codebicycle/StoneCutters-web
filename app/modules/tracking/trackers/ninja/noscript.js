@@ -1,36 +1,56 @@
 'use strict';
 
 var _ = require('underscore');
+var configTracking = require('../../config');
 var utils = require('../../../../../shared/utils');
-var trackPages = [
-    'home',
-    'resultset',
-    'item',
-    'replyform',
-    'replysent',
-    'postingformstep1',
-    'postingformstep2',
-    'postingformstep3',
-    'postingsent',
-    'editformstep1',
-    'editformstep2',
-    'editformstep3',
-    'editsent',
-    'notfound'
-];
+var Adapter = require('../../../../../shared/adapters/base');
+var trackPages = _.map(utils.get(configTracking, ['ninja', 'params'], {}), extractTrackPage);
+
+function extractTrackPage(params) {
+    return params.trackPage;
+}
 
 function prepare(done, ctx, ninja) {
+    var url;
+
     try {
-        ctx.params.ninja.noscript = getIframeUrl.call(this, ninja);
+        url = getIframeUrl.call(this, ninja);
+        requestIframeUrl.call(this, url, onResponse.bind(this));
     } catch(e) {
-        log(e, 'ninja GA and ATI');
+        log(e, 'ninja all');
+        done();
     }
-    try {
-        ctx.urls.push(getHydraUrl.call(this, ninja));
-    } catch(e) {
-        log(e, 'ninja HYDRA');
+
+    function onResponse(err, res, body) {
+        try {
+            if (err) {
+                ctx.params.ninja.noscript = ['<iframe src="', url, '" width="1" height="1" marginwidth="1" marginheight="1" frameborder="0"></iframe>'].join('');
+            }
+            else {
+                ctx.params.ninja.noscript = body;
+            }
+        } catch(e) {
+            log(e, 'ninja GA and ATI');
+        }
+        try {
+            ctx.urls.push(getHydraUrl.call(this, ninja));
+        } catch(e) {
+            log(e, 'ninja HYDRA');
+        }
+        done();
     }
-    done();
+}
+
+function requestIframeUrl(url, callback) {
+    var adapter = new Adapter({});
+
+    adapter.request(this.app.req, {
+        method: 'GET',
+        url: url
+    }, {
+        timeout: 500,
+        onTimeout: callback
+    }, callback);
 }
 
 function getIframeUrl(ninja) {
