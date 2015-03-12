@@ -16,7 +16,7 @@
     .conversations-listing {
         li {
             border-bottom: 1px solid #cccccc;
-            height: 50px;
+            height: 60px;
             padding: 10px;
 
             a {
@@ -28,19 +28,20 @@
                 background-repeat: no-repeat;
                 background-size: cover;
                 float: left;
-                height: 50px;
+                height: 60px;
                 margin: 0 8px 0 0;
-                width: 50px;
+                width: 60px;
                 overflow: hidden;
             }
             .conversation-info {
-                height: 50px;
+                height: 60px;
                 overflow: hidden;
                 position: relative;
 
-                .conversation-contactName, .conversation-item-title, .conversation-messageText {
+                .conversation-contactName, .conversation-item-title, .conversation-messageText, .conversation-messageDate {
                     clear: left;
                     float: left;
+                    overflow: hidden;
                 }
                 .conversation-item-title, .conversation-messageText, .conversation-messageDate {
                     font-size: 11px;
@@ -53,18 +54,10 @@
                 }
                 .conversation-contactName {
                     font-size: 13px;
+                    height: 17px;
                 }
-                .conversation-item-title {
-                    overflow: hidden;
-                    height: 18px;
-                    line-height: 18px;
-                }
-                .conversation-messageText {
-                    height: 13px;
-                    overflow: hidden;
-                }
-                .conversation-messageDate {
-                    float: right;
+                .conversation-messageText, .conversation-item-title, .conversation-messageDate {
+                    height: 15px;
                 }
                 &.unread {
                     .conversation-messageText, .conversation-contactName, .conversation-messageDate {

@@ -24,8 +24,8 @@
     <div class="item-info">
         <a href="{{ item | slugToUrl | link | replace('en/', '') }}">
             <span class="item-date">{{ item.date.timestamp | date("MMM DD, YYYY") }}</span>
+            <span class="item-title">{{ item.title | truncate( 40, True, '...') }}</span>
             <p class="conversation-senderName">{{ senderName }}</p>
-            <span class="item-title">{{ item.title | truncate( 80, True, '...') }}</span>
             {% if item.price.displayPrice %}
                 <span class="item-price">{{ item.price.displayPrice }}</span>
             {% endif %}
