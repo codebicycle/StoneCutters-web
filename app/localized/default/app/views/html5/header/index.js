@@ -246,30 +246,14 @@ module.exports = Base.extend({
     unreadConversations: function() {
         var user = this.app.session.get('user');
 
-        asynquence()
-            .then(unreadCheck.bind(this))
-            .val(success.bind(this));
-
-        function unreadCheck(done) {
-            helpers.dataAdapter.get(this.app.req, '/conversations/unread/count', {
-                query: {
-                    token: user.token,
-                    userId: user.userId,
-                    location: this.app.session.get('location').url,
-                    platform: this.app.session.get('platform')
-                },
-                cache: false,
-                json: true
-            }, done.errfcb);
+        if (user.unreadConversationsCount) {
+            this.notifications = true;
+            return this.$('.notification').css('display', 'block');
         }
-
-        function success(res, body) {
-            if (body.count) {
-                this.notifications = true;
-                return this.$('.notification').css('display', 'block');
-            }
+        else {
             this.notifications = false;
             return this.$('.notification').css('display', 'none');
         }
+
     }
 });
