@@ -6,7 +6,6 @@ var URLParser = require('url');
 var utils = require('../../../shared/utils');
 var config = require('../../../shared/config');
 var configSeo = require('./config');
-var environment = config.get(['environment', 'type'], 'production');
 var defaultConfig = config.get(['markets', 'common', 'seo']);
 var INSTANCE;
 
