@@ -4,7 +4,7 @@ var _ = require('underscore');
 var configTracking = require('../../config');
 var utils = require('../../../../../shared/utils');
 var Adapter = require('../../../../../shared/adapters/base');
-var trackPages = _.map(utils.get(configTracking, ['ninja', 'params'], {}), extractTrackPage);
+var trackPages = utils.get(configTracking, ['ninja', 'pages'], []);
 
 function extractTrackPage(params) {
     return params.trackPage;

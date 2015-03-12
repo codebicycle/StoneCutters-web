@@ -172,7 +172,7 @@ module.exports = {
                 enabled: true,
                 platforms: ['desktop'],
                 noscript: {
-                    platforms: ['wap', 'html4']
+                    platforms: ['wap', 'html4', 'html5', 'desktop']
                 }
             },
             adroll: {
