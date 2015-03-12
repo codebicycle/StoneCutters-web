@@ -17,7 +17,7 @@ module.exports = {
     allstates: middlewares(allstates),
     sitemap: middlewares(sitemap),
     sitemapByDate: middlewares(sitemapByDate),
-    thanks: middlewares(thanks)
+    thanks: middlewares(thanks),
     didyousell: middlewares(didyousell),
     mobilepromo: middlewares(mobilepromo)
 };
@@ -182,7 +182,6 @@ function didyousell(params, callback) {
             if (itemDelete !== 'yes') {
                 return done();
             }
-
             helpers.dataAdapter.post(this.app.req, '/items/' + itemId + '/delete', {
                 query: {
                     securityKey: securityKey,
