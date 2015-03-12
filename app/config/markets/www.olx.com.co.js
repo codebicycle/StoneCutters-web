@@ -75,7 +75,10 @@ module.exports = {
                 title: 'OLX Colombia - Poker - Vender es fácil',
                 id: 'KuwFa8fSuiM'
             }
-        ]
+        ],
+        thanksPage: {
+            videoUrl: 'thank-you-video-es'
+        }
     },
     successPage: {
         keepPosting: [
