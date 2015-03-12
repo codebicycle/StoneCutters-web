@@ -4,6 +4,7 @@ var _ = require('underscore');
 var configTracking = require('../../config');
 var utils = require('../../../../../shared/utils');
 var Adapter = require('../../../../../shared/adapters/base');
+var statsd = require('../../../../../shared/statsd')();
 var trackPages = utils.get(configTracking, ['ninja', 'pages'], []);
 
 function extractTrackPage(params) {
@@ -49,7 +50,10 @@ function requestIframeUrl(url, callback) {
         url: url
     }, {
         timeout: 500,
-        onTimeout: callback
+        onTimeout: function onTimeout() {
+            statsd.increment([this.app.session.get('location').abbreviation, 'tracking', 'ninja', 'error', 'timeout', this.app.session.get('platform')]);
+            callback(true);
+        }.bind(this)
     }, callback);
 }
 
