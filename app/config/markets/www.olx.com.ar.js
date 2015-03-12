@@ -1,7 +1,9 @@
 module.exports = {
     categoryTree: {
-        order: [830, 362, 16, 800, 815, 821, 806, 853, 859, 811],
-        columns: [3, 3, 2]
+        'default': {
+            order: [830, 362, 16, 800, 815, 821, 806, 853, 859, 811],
+            columns: [3, 3, 2]
+        }
     },
     marketing: {
         post_banner: {

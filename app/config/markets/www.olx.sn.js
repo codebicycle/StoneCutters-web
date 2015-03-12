@@ -1,6 +1,8 @@
 module.exports = {
     categoryTree: {
-        columns: [2, 2, 2]
+        'default': {
+            columns: [2, 2, 2]
+        }
     },
     marketing: {
         post_banner: {

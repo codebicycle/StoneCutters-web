@@ -1,7 +1,9 @@
 module.exports = {
     categoryTree: {
-        order: [830, 800, 811, 815, 853, 362, 859, 806, 821 ,16],
-        columns: [3, 3, 2]
+        'default': {
+            order: [830, 800, 811, 815, 853, 362, 859, 806, 821 ,16],
+            columns: [3, 3, 2]
+        }
     },
     adserving: {
         slots: {
