@@ -1,5 +1,5 @@
 {% from macros import Breadcrumb, BreadcrumbHome %}
-{% set link = (breadcrumb | link) %}
+{% set link = '/myolx/conversations' | link %}
 {{ Breadcrumb(dictionary, link, dictionary["myolx.Messages"]) }}
 
 {% set item = thread.get('item') %}

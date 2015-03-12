@@ -144,8 +144,8 @@ module.exports = {
             },
             hermes: {
                 worldwide: false,
-                countries: ['www.olx.com.ar']
-            },
+                countries: ['www.olx.com.uy']
+            }
         },
         desktop: {
             hermes: {
