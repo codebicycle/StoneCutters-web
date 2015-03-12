@@ -1,0 +1,16 @@
+{% view 'locations/select' %}
+{% view 'partials/search' %}
+
+{% from macros import Breadcrumb, BreadcrumbHome %}
+{% set link = (breadcrumb | link) %}
+{{ Breadcrumb(dictionary, link, dictionary["defaultfooter.PublishFreeAd"]) }}
+
+<div id="success">
+    <div>
+        <h2>{{ dictionary["myolx.SuccessfullyUnsubscribed"] }}</h2>
+    </div>
+</div>
+
+{{ BreadcrumbHome(dictionary, link, ('/' | link)) }}
+
+{% view 'partials/tracking' %}
