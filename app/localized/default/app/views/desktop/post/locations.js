@@ -221,6 +221,8 @@ module.exports = Base.extend({
 
         function parse(done, response) {
             var responseSorted = _.sortBy(response.neighborhoods.toJSON(), 'name');
+            var location = this.app.session.get('location').abbreviation;
+            var translation = (location !== 'ZA') ? 'item.SelectA_Neighborhood' : 'misc.SelectSuburb';
 
             neighborhoods = _.map(responseSorted, function each(neighborhood) {
                 return {
@@ -231,7 +233,7 @@ module.exports = Base.extend({
             if (neighborhoods.length) {
                 neighborhoods.unshift({
                     key: '',
-                    value: translations.get(this.app.session.get('selectedLanguage'))['item.SelectA_Neighborhood']
+                    value: translations.get(this.app.session.get('selectedLanguage'))[translation]
                 });
             }
             done(neighborhoods);
@@ -239,7 +241,7 @@ module.exports = Base.extend({
 
         function success(done, neighborhoods) {
             options.skipValidation = true;
-            
+
             if (neighborhoods.length) {
                 $neighborhoods.removeAttr('disabled').attr('required', true).empty();
                 $neighborhoods.parents('.field-wrapper').removeClass('hide');
