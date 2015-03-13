@@ -13,12 +13,14 @@ module.exports = Base.extend({
     events: {
         'click [data-footer-slidedown]': 'slideDownContent',
         'click [data-footer-tab]': 'slideFooter',
-        'click [data-footer-content] ul li': 'cleanClases'
+        'click [data-footer-content] ul li': 'cleanClases',
+        'click [data-modal-shadow], [data-modal-close]': 'onCloseModal'
     },
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
         var location = this.app.session.get('location');
         var socials = config.getForMarket(location.url, ['socials'], '');
+        var marketing = config.getForMarket(location.url, ['marketing'], '');
         var states = data.states;
         var currentState = {};
         var selectedLanguage = this.app.session.get('selectedLanguage').split('-')[0];
@@ -36,6 +38,7 @@ module.exports = Base.extend({
             selectedLanguage: selectedLanguage,
             socials: socials,
             isFeaturedCountry: isFeaturedCountry,
+            migrationModal: marketing.migrationModal,
             currentState: {
                 hostname: currentState.hostname,
                 name: currentState.name
@@ -43,6 +46,12 @@ module.exports = Base.extend({
         });
     },
     postRender: function() {
+        //if (this.app.session.get('schibsted')) {
+            $('#migrations-modal').trigger('show');
+            window.setTimeout(function onTimeout(){
+                $('#migrations-modal').trigger('hide');
+            }, 10000);
+        //}
         if (this.firstRender) {
             $('body').on('click', function(event){
                 var $slide = this.$('[data-footer-content]');
@@ -104,5 +113,11 @@ module.exports = Base.extend({
                 }
             });
         }
+    },
+    onCloseModal: function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+        $('#migrations-modal').trigger('hide');
     }
 });
