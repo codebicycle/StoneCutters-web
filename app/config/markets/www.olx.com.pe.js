@@ -303,5 +303,30 @@ module.exports = {
         html5: {
             enabled: true
         }
+    },
+    featured: {
+        enabled: true,
+        quantity: {
+            total: 4,
+            top: 2,
+            bottom: 2
+        },
+        section: {
+            'categories#list': {
+                enabled: false
+            },
+            'users#myads': {
+                enabled: false
+            },
+            'post#flow': {
+                enabled: false
+            },
+            'post#success': {
+                enabled: false
+            },
+            'post#flowMarketing': {
+                enabled: false
+            }
+        }
     }
 };
