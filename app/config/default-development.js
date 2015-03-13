@@ -135,6 +135,10 @@ module.exports = {
             optimizely: {
                 worldwide: false,
                 countries: ['www.olx.com.gh']
+            },
+            landingThanks: {
+                worldwide: false,
+                countries: ['www.olx.com.ar', 'www.olx.com.co','www.olx.co.za']
             }
         },
         html4: {
@@ -159,6 +163,10 @@ module.exports = {
             optimizely: {
                 worldwide: false,
                 countries: ['www.olx.com.gh']
+            },
+            landingThanks: {
+                worldwide: false,
+                countries: ['www.olx.com.ar', 'www.olx.com.co','www.olx.co.za']
             }
         }
     },

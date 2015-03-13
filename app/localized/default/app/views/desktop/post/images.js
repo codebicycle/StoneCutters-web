@@ -34,6 +34,7 @@ module.exports = Base.extend({
         var $container = $image.parent();
         var $input = this.$('#' + $container.data('input'));
 
+        this.$('small.hint.message').removeClass('error');
         $input.click();
     },
     onRemoveClick: function(event) {
@@ -75,6 +76,7 @@ module.exports = Base.extend({
             if (image.size > 5242880) {
                 done.abort();
                 statsd.increment([this.app.session.get('location').abbreviation, 'posting', 'error', 'size', this.app.session.get('platform')]);
+                this.$('small.hint.message').addClass('error');
                 return $container.removeClass('loading');
             }
             done();
@@ -92,12 +94,15 @@ module.exports = Base.extend({
 
         function done() {
             this.$el.trigger('imageLoadEnd');
+            this.$('small.hint.message').removeClass('error');
             $container.removeClass('loading');
         }
 
         function fail(err) {
             this.$el.trigger('imageLoadEnd');
             this.parentView.getItem().get('images').splice(index, 1);
+            this.$('small.hint.message').addClass('error');
+            $container.removeClass('loading');
             $input.val('');
         }
     },

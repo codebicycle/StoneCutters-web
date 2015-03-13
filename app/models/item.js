@@ -184,7 +184,7 @@ function postImages(done) {
     }, callback.bind(this));
 
     function callback(err, response, ids) {
-        this.logPostImages(!this.get('id') ? 'posting' : 'editing', response.statusCode, err);
+        this.logPostImages(!this.get('id') ? 'posting' : 'editing', response.statusCode, (err ? (_.isString(err) ? ids : err) : undefined));
         if (!err) {
             _.each(newImages, function each(image, i) {
                 image.id = ids[i];
@@ -331,6 +331,7 @@ function toData(includeImages) {
     delete data.slug;
     delete data.priceTypeData;
     delete data.additionalLocation;
+    delete data._location;
     _.each(Object.keys(data), function each(key) {
         if (data[key] === undefined || data[key] === null || (typeof data[key] === 'string' && !data[key])) {
             delete data[key];
