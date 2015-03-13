@@ -48,11 +48,11 @@ function requestIframeUrl(url, callback) {
 
     adapter.request(this.app.req, {
         method: 'GET',
-        url: url
-    }, {
+        url: url,
         headers: {
             Referer: utils.fullizeUrl(this.app.session.get('url'), this.app)
-        },
+        }
+    }, {
         timeout: 100,
         onTimeout: function onTimeout() {
             statsd.increment([this.app.session.get('location').abbreviation, 'tracking', 'ninja', 'error', 'timeout', this.app.session.get('platform')]);
