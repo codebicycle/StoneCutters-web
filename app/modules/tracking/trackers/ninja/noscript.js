@@ -71,7 +71,7 @@ function getIframeUrl(ninja) {
 function getHydraUrl(ninja) {
     var url = ['http://', (ninja.config.environment ? 'tracking-dev.onap.io/h/' : 'tracking.olx-st.com/h/v2/'), 'ns?'].join('');
     var query = getQuery(ninja.params, ninja.config);
-    var iv = utils.params(this.app.session.get('referer') || '', 'invite');
+    var iv = utils.params(this.app.session.get('url') || '', 'invite');
 
     if (iv) {
         query.iv = iv.trim();
