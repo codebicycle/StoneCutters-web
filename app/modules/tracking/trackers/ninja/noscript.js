@@ -14,6 +14,10 @@ function extractTrackPage(params) {
 function prepare(done, ctx, ninja) {
     var url;
 
+    ctx.params.ninja.noscript = {
+        urls: []
+    };
+
     try {
         url = getIframeUrl.call(this, ninja);
         requestIframeUrl.call(this, url, onResponse.bind(this));
@@ -25,18 +29,17 @@ function prepare(done, ctx, ninja) {
     function onResponse(err, res, body) {
         try {
             if (err) {
-                ctx.params.ninja.isIFrame = true;
-                ctx.params.ninja.noscript = url;
+                ctx.params.ninja.noscript.iframe = url;
             }
             else {
                 statsd.increment([this.app.session.get('location').abbreviation, 'tracking', 'ninja', 'success', this.app.session.get('platform')]);
-                ctx.params.ninja.noscript = body;
+                ctx.params.ninja.noscript.body = body;
             }
         } catch(e) {
             log(e, 'ninja GA and ATI');
         }
         try {
-            ctx.urls.push(getHydraUrl.call(this, ninja));
+            ctx.params.ninja.noscript.urls.push(getHydraUrl.call(this, ninja));
         } catch(e) {
             log(e, 'ninja HYDRA');
         }
