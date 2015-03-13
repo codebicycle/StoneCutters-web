@@ -47,9 +47,9 @@ module.exports = {
         desktop: ['www.olx.co.za', 'www.olx.com.bo']
     },
     icons: {
-        wap: ['www.olx.com.ar', 'www.olx.com.bd', 'www.olx.cm', 'www.olx.com.co', 'www.olx.com.ec', 'www.olx.com.sv', 'www.olx.com.gh', 'www.olx.com.gt', 'www.olx.in', 'www.olx.co.ke', 'www.olx.com.ng', 'www.olx.com.pe', 'www.olx.sn', 'www.olx.co.za', 'www.olx.com.ve', 'www.olx.com.pk', 'www.olx.co.ug', 'www.olx.com.uy', 'www.olx.ir'],
-        html4: ['www.olx.com.ar', 'www.olx.com.bd', 'www.olx.cm', 'www.olx.com.co', 'www.olx.com.ec', 'www.olx.com.sv', 'www.olx.com.gh', 'www.olx.com.gt', 'www.olx.in', 'www.olx.co.ke', 'www.olx.com.ng', 'www.olx.com.pe', 'www.olx.sn', 'www.olx.co.za', 'www.olx.com.ve', 'www.olx.com.pk', 'www.olx.co.ug', 'www.olx.com.uy', 'www.olx.ir'],
-        html5: ['www.olx.com.ar', 'www.olx.com.bd', 'www.olx.cm', 'www.olx.com.co', 'www.olx.com.ec', 'www.olx.com.sv', 'www.olx.com.gh', 'www.olx.com.gt', 'www.olx.in', 'www.olx.co.ke', 'www.olx.com.ng', 'www.olx.com.pe', 'www.olx.sn', 'www.olx.co.za', 'www.olx.com.ve', 'www.olx.com.pk', 'www.olx.co.ug', 'www.olx.com.uy', 'www.olx.ir']
+        wap: ['www.olx.com.ar', 'www.olx.com.bd', 'www.olx.cm', 'www.olx.com.co', 'www.olx.com.ec', 'www.olx.com.sv', 'www.olx.com.gh', 'www.olx.com.gt', 'www.olx.in', 'www.olx.co.ke', 'www.olx.com.ng', 'www.olx.com.pe', 'www.olx.sn', 'www.olx.co.za', 'www.olx.com.ve', 'www.olx.com.pk', 'www.olx.co.ug', 'www.olx.com.uy', 'www.olx.ir', 'www.olx.com.pa'],
+        html4: ['www.olx.com.ar', 'www.olx.com.bd', 'www.olx.cm', 'www.olx.com.co', 'www.olx.com.ec', 'www.olx.com.sv', 'www.olx.com.gh', 'www.olx.com.gt', 'www.olx.in', 'www.olx.co.ke', 'www.olx.com.ng', 'www.olx.com.pe', 'www.olx.sn', 'www.olx.co.za', 'www.olx.com.ve', 'www.olx.com.pk', 'www.olx.co.ug', 'www.olx.com.uy', 'www.olx.ir', 'www.olx.com.pa'],
+        html5: ['www.olx.com.ar', 'www.olx.com.bd', 'www.olx.cm', 'www.olx.com.co', 'www.olx.com.ec', 'www.olx.com.sv', 'www.olx.com.gh', 'www.olx.com.gt', 'www.olx.in', 'www.olx.co.ke', 'www.olx.com.ng', 'www.olx.com.pe', 'www.olx.sn', 'www.olx.co.za', 'www.olx.com.ve', 'www.olx.com.pk', 'www.olx.co.ug', 'www.olx.com.uy', 'www.olx.ir', 'www.olx.com.pa']
     },
     terms: {
         wap: ['www.jaovat.com', 'www.olx.fr', 'www.olx.es', 'www.olx.ir', 'www.olx.cl', 'www.olx.com.uy', 'www.olx.com.py', 'www.olx.com.pe', 'www.olx.com.ve', 'www.olx.com.co', 'www.olx.com.ec', 'www.olx.com.pa', 'www.olx.co.cr', 'www.olx.com.ni', 'www.olx.hn', 'www.olx.com.sv', 'www.olx.com.gt', 'www.olx.com.mx', 'www.olx.com.bo', 'www.olx.com.ar'],
@@ -127,8 +127,8 @@ module.exports = {
                 countries: []
             },
             hermes: {
-                worldwide: false,
-                countries: ['www.olx.com.ng', 'www.olx.com.ar', 'www.olx.com.co', 'www.olx.co.za', 'www.olx.com.uy', 'www.olx.com.sv', 'www.olx.com.gt', 'www.olx.com.ve', 'www.olx.com.ec', 'www.olx.com.pe', 'www.olx.com.bo', 'www.olx.co.cr', 'www.olx.hn', 'www.olx.com.ni', 'www.olx.com.pa', 'wwww.olx.com.py', 'www.olx.co.tz', 'www.olx.cl', 'www.olx.com.mx']
+                worldwide: true,
+                countries: ['www.olx.es', 'www.olx.ae', 'www.olx.it', 'www.olx.com', 'www.olx.fr', 'www.olx.ir']
             },
             newItemPage: {
                 worldwide: true,
@@ -137,18 +137,26 @@ module.exports = {
             optimizely: {
                 worldwide: false,
                 countries: ['www.olx.com.gh']
+            },
+            landingThanks: {
+                worldwide: false,
+                countries: ['www.olx.com.ar', 'www.olx.com.co','www.olx.co.za']
             }
         },
         html4: {
             interstitialByADX: {
                 worldwide: true,
                 countries: []
+            },
+            hermes: {
+                worldwide: false,
+                countries: ['www.olx.com.uy']
             }
         },
         desktop: {
             hermes: {
-                worldwide: false,
-                countries: ['www.olx.com.ng', 'www.olx.com.ar', 'www.olx.com.co', 'www.olx.co.za', 'www.olx.com.uy', 'www.olx.com.sv', 'www.olx.com.gt', 'www.olx.com.ve', 'www.olx.com.ec', 'www.olx.com.pe', 'www.olx.com.bo', 'www.olx.co.cr', 'www.olx.hn', 'www.olx.com.ni', 'www.olx.com.pa', 'wwww.olx.com.py', 'www.olx.co.tz']
+                worldwide: true,
+                countries: ['www.olx.es', 'www.olx.ae', 'www.olx.it', 'www.olx.com', 'www.olx.fr', 'www.olx.ir']
             },
             contactForm: {
                 worldwide: false,
@@ -157,6 +165,10 @@ module.exports = {
             optimizely: {
                 worldwide: false,
                 countries: ['www.olx.com.gh']
+            },
+            landingThanks: {
+                worldwide: false,
+                countries: ['www.olx.com.ar', 'www.olx.com.co','www.olx.co.za']
             }
         }
     },

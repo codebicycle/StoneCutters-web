@@ -23,7 +23,7 @@
                                 <span class="name">{{ conversation.contactName }}</span>
                                 <span class="date">{{ conversation.messageDate | date(false, true) }}</span>
                             </div>
-                            <span class="title">{{ item.get('title') | truncate( 50, True, '...') }}</span>
+                            <span class="title">{{ item.get('title') | truncate( 40, True, '...') }}</span>
                             <p class="message">{{ conversation.messageText | truncate( 40, True, '...') }}</p>
                         </div>
                     </a>

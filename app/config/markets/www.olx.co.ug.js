@@ -1,7 +1,9 @@
 module.exports = {
     categoryTree: {
-        order: [830, 800, 811, 806, 362, 815, 859, 16, 821],
-        columns: [3, 2, 2]
+        'default': {
+            order: [830, 800, 811, 806, 362, 815, 859, 16, 821],
+            columns: [3, 2, 2]
+        }
     },
     tracking: {
         trackers: {
@@ -13,10 +15,7 @@ module.exports = {
             },
             ninja: {
                 enabled: true,
-                platforms: ['desktop', 'html5', 'html4', 'wap'],
-                noscript: {
-                    platforms: ['html4', 'wap']
-                }
+                platforms: ['desktop', 'html5', 'html4', 'wap']
             }
         },
     },

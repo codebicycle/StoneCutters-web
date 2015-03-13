@@ -1,7 +1,9 @@
 module.exports = {
     categoryTree: {
-        order: [830, 800, 362, 806, 859, 16, 187, 815, 191, 186, 811, 190],
-        columns: [4, 3, 3]
+        'default': {
+            order: [830, 800, 362, 806, 859, 16, 187, 815, 191, 186, 811, 190],
+            columns: [4, 3, 3]
+        }
     },
     socials: {
         links: [

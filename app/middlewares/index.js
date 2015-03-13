@@ -9,7 +9,9 @@ var middlewares = {
     languages: require('./languages'),
     interstitial: require('./interstitial'),
     dependencies: require('./dependencies'),
-    search: require('./search')
+    search: require('./search'),
+    metrics: require('./metrics'),
+    conversations: require('./conversations')
 };
 
 module.exports = function(controller, exclude) {

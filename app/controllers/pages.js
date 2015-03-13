@@ -17,6 +17,7 @@ module.exports = {
     allstates: middlewares(allstates),
     sitemap: middlewares(sitemap),
     sitemapByDate: middlewares(sitemapByDate),
+    thanks: middlewares(thanks),
     didyousell: middlewares(didyousell),
     mobilepromo: middlewares(mobilepromo),
     shops: middlewares(shops),
@@ -172,7 +173,7 @@ function didyousell(params, callback) {
         var anonymousItem;
 
         var redirect = function(done) {
-            if (platform !== 'desktop') {
+            if (platform === 'wap') {
                 done.abort();
                 return helpers.common.redirect.call(this, '/');
             }
@@ -183,7 +184,6 @@ function didyousell(params, callback) {
             if (itemDelete !== 'yes') {
                 return done();
             }
-            
             helpers.dataAdapter.post(this.app.req, '/items/' + itemId + '/delete', {
                 query: {
                     securityKey: securityKey,
@@ -402,6 +402,39 @@ function mobilepromo(params, callback) {
 
         var error = function(err, res) {
             return helpers.common.redirect.call(this, '/');
+        }.bind(this);
+
+        asynquence().or(error)
+            .then(redirect)
+            .val(success);
+    }
+}
+
+function thanks(params, callback) {
+    helpers.controllers.control.call(this, params, controller);
+
+    function controller() {
+        var redirect = function(done) {
+            var platform = this.app.session.get('platform');
+            var location = this.app.session.get('location');
+
+            if (platform !== 'desktop' && platform !== 'html5') {
+                return done.fail();
+            }
+
+            if(!helpers.features.isEnabled.call(this, 'landingThanks', platform, location.url)) {
+                done.abort();
+                return helpers.common.redirect.call(this, '/');
+            }
+            done();
+        }.bind(this);
+
+        var success = function() {
+            callback(null, {});
+        }.bind(this);
+
+        var error = function(err, res) {
+            return helpers.common.error.call(this, err, res, callback);
         }.bind(this);
 
         asynquence().or(error)

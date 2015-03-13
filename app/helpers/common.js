@@ -9,7 +9,7 @@ if (typeof window === 'undefined') {
 }
 
 module.exports = (function() {
-    var env = config.get(['environment', 'type'], 'development');
+    var env = config.get(['environment', 'type'], 'production');
 
     var linkIgParsers = (function() {
         var regexpFindPage = /-p-[0-9]+/;
@@ -115,13 +115,13 @@ module.exports = (function() {
     }
 
     function categoryOrder(categories, country) {
-        var categoryTree = config.getForMarket(country, ['categoryTree'], '');
+        var categoryTree = config.getForMarket(country, ['categoryTree', env], config.getForMarket(country, ['categoryTree', 'default']));
         var list = [];
 
         if (categoryTree) {
             if (categoryTree.order) {
-                _.each(categoryTree.order, function(obj, i){
-                    _.find(categories, function(obj){
+                _.each(categoryTree.order, function each(obj, i){
+                    _.find(categories, function each(obj){
                         return obj.id == categoryTree.order[i] ? list.push(obj) : false;
                     });
                 });

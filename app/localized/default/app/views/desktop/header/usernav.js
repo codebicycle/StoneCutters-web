@@ -32,27 +32,10 @@ module.exports = Base.extend({
     unreadConversations: function() {
         var user = this.app.session.get('user');
 
-        asynquence()
-            .then(unreadCheck.bind(this))
-            .val(success.bind(this));
-
-        function unreadCheck(done) {
-            helpers.dataAdapter.get(this.app.req, '/conversations/unread/count', {
-                query: {
-                    token: user.token,
-                    userId: user.userId,
-                    location: this.app.session.get('location').url,
-                    platform: this.app.session.get('platform')
-                },
-                cache: false,
-                json: true
-            }, done.errfcb);
+        if (user.unreadConversationsCount) {
+            this.$('.count').text('(' + user.unreadConversationsCount + ')');
         }
-
-        function success(res, body) {
-            if (body.count) {
-                return this.$('.count').text('(' + body.count + ')');
-            }
+        else {
             return this.$('.count').empty();
         }
     }

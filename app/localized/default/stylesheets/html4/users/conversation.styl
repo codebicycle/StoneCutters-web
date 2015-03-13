@@ -1,0 +1,93 @@
+.users_conversation_view {
+    .conversation-item {
+        border-bottom: 2px solid #cccccc;
+        height: 55px;
+        padding: 10px;
+
+        .conversation-image {
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            float: left;
+            height: 55px;
+            margin: 0 8px 0 0;
+            overflow: hidden;
+            width: 55px;
+        }
+        .item-info {
+            height: 55px;
+            overflow: hidden;
+            position: relative;
+
+            .conversation-senderName, .item-title, .item-date {
+                clear: left;
+                float: left;
+            }
+            .conversation-senderName, .item-date {
+                font-size: 11px;
+                color: #b1b1b1;
+            }
+            .item-title {
+                color: #666666;
+                font-size: 13px;
+                height: 22px;
+                line-height: 20px;
+                margin: 5px 0 0 0;
+                overflow: hidden;
+                width: 100%;
+            }
+            .item-price {
+                top: 0;
+                color: #ff7800;
+                font-size: 14px;
+                font-weight: bold;
+                position: absolute;
+                right: 0;
+            }
+        }
+
+    }
+    .conversation {
+        padding: 0 0 10px;
+        .message {
+            border-bottom: 1px solid #cccccc;
+            padding: 10px;
+
+            &.is-mine {
+                background-color: #f9fddf;
+            }
+
+            .name, .text, .date {
+                display: block;
+            }
+            .name, .text {
+                color: #474747;
+            }
+            .name, .date {
+                font-size: 11px;
+            }
+            .name {
+                font-weight: bold;
+            }
+            .text {
+                font-size: 13px;
+                margin: 2px 0;
+                word-wrap: break-word;
+            }
+            .date {
+                color: #b1b1b1;
+            }
+        }
+    }
+    .formActions, .formField {
+        padding: 0 10px 10px;
+    }
+    .formField {
+        input {
+            background-color: #ffffff;
+            &.error {
+                border-color: #f00f00;
+            }
+        }
+    }
+}

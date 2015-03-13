@@ -85,7 +85,7 @@ function show(params, callback, gallery) {
     function controller() {
 
         var redirect = function(done){
-            var categoryId = Seo.isCategoryDeprecated(params.catId);
+            var categoryId = Seo.isCategoryRedirected(this.app.session.get('location').url, params.catId);
 
             gallery = gallery || '';
 

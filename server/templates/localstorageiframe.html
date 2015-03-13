@@ -25,6 +25,7 @@
                 if (isSafe(event.origin)) {
                     var eventData  = JSON.parse(event.data);
                     var response = null;
+
                     switch (eventData.data.action) {
                         case "set":
                             store.set(eventData.data.key, eventData.data.value);
@@ -53,6 +54,9 @@
                             for (var key in eventData.data.keys) {
                                 store.remove( eventData.data.keys[key] );
                             }
+                            break;
+                        case "getAll":
+                            response = store.getAll();
                             break;
                     }
                     event.source.postMessage(JSON.stringify({id: eventData.id, response: response}), event.origin);

@@ -10,7 +10,7 @@ module.exports = {
             myMsgs: 15,
             myConvs: 15,
             myConv: 300,
-            myConvHtml5: 300
+            myConvHtml4: 10
         },
         renew: {
             enabled: true,
@@ -172,7 +172,7 @@ module.exports = {
                 enabled: true,
                 platforms: ['desktop'],
                 noscript: {
-                    platforms: ['wap', 'html4']
+                    platforms: ['wap', 'html4', 'html5', 'desktop']
                 }
             },
             adroll: {

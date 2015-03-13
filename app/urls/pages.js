@@ -37,6 +37,9 @@ module.exports = {
     'pages#comingsoon': {
         url: 'comingsoon'
     },
+    'pages#thanks': {
+        url: 'thanks'
+    },
     'pages#shops': {
         url: 'shops'
     },
