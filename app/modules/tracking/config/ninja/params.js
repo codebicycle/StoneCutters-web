@@ -15,7 +15,7 @@ module.exports = {
         resultSetFormat: 'gallery'
     },
     'categories#show': {
-        trackPage: 'selectSubCategory',
+        trackPage: 'selectCategoryLevel2',
         resultSetType: 'browse',
         resultSetFormat: 'list'
     },
