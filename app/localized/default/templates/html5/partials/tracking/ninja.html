@@ -1,26 +1,27 @@
 {% if tracking.params and tracking.params.ninja %}
-    {% if not tracking.params.ninja.noscript %}
-        <script type="text/javascript">
-            window.dataLayer = window.dataLayer || [];
-            window.dataLayer.push({'cleanup': function() {
-                window.dataLayer.push({% json tracking.params.ninja.params %});
-            }});
+    <script type="text/javascript">
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({'cleanup': function() {
+            window.dataLayer.push({% json tracking.params.ninja.params %});
+        }});
 
-            (function() {
-                window.configTracking = {% json tracking.params.ninja.config %};
+        (function() {
+            window.configTracking = {% json tracking.params.ninja.config %};
 
-                var ninja = document.getElementById('ninja-lib');
-                if (!ninja) {
-                    ninja = document.createElement('script');
-                    ninja.type = 'text/javascript';
-                    ninja.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'ninja.onap.io/ninja.js';
-                    ninja.async = true;
-                    ninja.id = 'ninja-lib';
-                    document.getElementsByTagName('head')[0].appendChild(ninja);
-                }
-            })();
-        </script>
-    {% else %}
-        <iframe src="{{ tracking.params.ninja.noscript }}" width="1" height="1" marginwidth="1" marginheight="1" frameborder="0"></iframe>
+            var ninja = document.getElementById('ninja-lib');
+            if (!ninja) {
+                ninja = document.createElement('script');
+                ninja.type = 'text/javascript';
+                ninja.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'ninja.onap.io/ninja.js';
+                ninja.async = true;
+                ninja.id = 'ninja-lib';
+                document.getElementsByTagName('head')[0].appendChild(ninja);
+            }
+        })();
+    </script>
+    {% if tracking.params.ninja.noscript %}
+        <noscript>
+            {{ tracking.params.ninja.noscript }}
+        </noscript>
     {% endif %}
 {% endif %}

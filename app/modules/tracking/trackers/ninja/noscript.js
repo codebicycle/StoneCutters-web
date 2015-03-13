@@ -1,36 +1,64 @@
 'use strict';
 
 var _ = require('underscore');
+var configTracking = require('../../config');
 var utils = require('../../../../../shared/utils');
-var trackPages = [
-    'home',
-    'resultset',
-    'item',
-    'replyform',
-    'replysent',
-    'postingformstep1',
-    'postingformstep2',
-    'postingformstep3',
-    'postingsent',
-    'editformstep1',
-    'editformstep2',
-    'editformstep3',
-    'editsent',
-    'notfound'
-];
+var Adapter = require('../../../../../shared/adapters/base');
+var statsd = require('../../../../../shared/statsd')();
+var trackPages = utils.get(configTracking, ['ninja', 'pages'], []);
+
+function extractTrackPage(params) {
+    return params.trackPage;
+}
 
 function prepare(done, ctx, ninja) {
+    var url;
+
     try {
-        ctx.params.ninja.noscript = getIframeUrl.call(this, ninja);
+        url = getIframeUrl.call(this, ninja);
+        requestIframeUrl.call(this, url, onResponse.bind(this));
     } catch(e) {
-        log(e, 'ninja GA and ATI');
+        log(e, 'ninja all');
+        done();
     }
-    try {
-        ctx.urls.push(getHydraUrl.call(this, ninja));
-    } catch(e) {
-        log(e, 'ninja HYDRA');
+
+    function onResponse(err, res, body) {
+        try {
+            if (err) {
+                ctx.params.ninja.noscript = ['<iframe src="', url, '" width="1" height="1" marginwidth="1" marginheight="1" frameborder="0"></iframe>'].join('');
+            }
+            else {
+                statsd.increment([this.app.session.get('location').abbreviation, 'tracking', 'ninja', 'success', this.app.session.get('platform')]);
+                ctx.params.ninja.noscript = body;
+            }
+        } catch(e) {
+            log(e, 'ninja GA and ATI');
+        }
+        try {
+            ctx.urls.push(getHydraUrl.call(this, ninja));
+        } catch(e) {
+            log(e, 'ninja HYDRA');
+        }
+        done();
     }
-    done();
+}
+
+function requestIframeUrl(url, callback) {
+    var adapter = new Adapter({});
+
+    adapter.request(this.app.req, {
+        method: 'GET',
+        url: url,
+        headers: {
+            Referer: utils.fullizeUrl(this.app.session.get('url'), this.app)
+        }
+    }, {
+        timeout: 100,
+        onTimeout: function onTimeout() {
+            statsd.increment([this.app.session.get('location').abbreviation, 'tracking', 'ninja', 'error', 'timeout', this.app.session.get('platform')]);
+            callback(true);
+        }.bind(this)
+    }, callback);
 }
 
 function getIframeUrl(ninja) {

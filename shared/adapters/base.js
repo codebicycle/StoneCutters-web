@@ -53,10 +53,14 @@ BaseAdapter.prototype.serverRequest = function(req, api, options, callback) {
     }
 
     function request(done) {
-        restler.request(api.url, api)
+        var request = restler.request(api.url, api)
             .on('success', success)
             .on('fail', fail)
             .on('error', fail);
+
+        if (api.timeout !== undefined && api.onTimeout) {
+            request.on('timeout', api.onTimeout);
+        }
 
         function success(body, res) {
             elapsed = getElapsed(start, elapsed);
