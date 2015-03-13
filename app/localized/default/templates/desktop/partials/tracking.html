@@ -13,5 +13,5 @@
 
     {% include (template + '/partials/tracking/hydra.html') %}
 
-    <div id="tracking-data" class="hide">{% json tracking.params %}</div>
+    <div id="tracking-data" class="hide">{{ tracking.params | json('ninja') }}</div>
 {% endif %}

@@ -68,7 +68,6 @@ module.exports = function(nunjucks) {
         return helpers.common.static.apply(this.ctx, arguments);
     }
     
-
     function rangeToArray(start, end, options) {
         var array = [];
         var i;
@@ -84,6 +83,13 @@ module.exports = function(nunjucks) {
             array.push(end);
         }
         return array;
+    }
+
+    function json(obj) {
+        if (arguments.length) {
+            obj = _.omit.apply(_, arguments);
+        }
+        return JSON.stringify(obj);
     }
 
     return {
@@ -102,6 +108,6 @@ module.exports = function(nunjucks) {
         hijri: helpers.hijri,
         persianDigits: helpers.numbers.toPersian,
         latinDigits: helpers.numbers.toLatin,
-
+        json: json
     };
 };
