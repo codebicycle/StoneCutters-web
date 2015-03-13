@@ -1,7 +1,7 @@
 #header {
 
 	position: relative;
-	height: 48px;
+	height: 50px;
 	background-color: #4275BA;
 
 	span {
@@ -15,9 +15,9 @@
 		a {
 
 			display: block;
-			width: 94px;
-			height: 48px;
-			background: transparent url(imageUrl/images/html4/logoMenu.png) no-repeat center center;
+			width: 74px;
+			height: 50px;
+			background: transparent url(imageUrl/images/html4/logo.png) no-repeat center center;
 			text-indent: -9000px;
 
 		}
@@ -36,52 +36,44 @@
 
 			float: left;
 			height: 36px;
-			padding: 6px 0 6px 6px;
+			padding: 8px 0 6px 6px;
+			min-width: 38px;
 
-			a {
-
+			.post, .user {
 				display: block;
-				height: 27px;
-				padding: 7px 8px 0;
-				border-radius: 4px;
-				cursor: pointer;
 
+				cursor: pointer;
 			}
 
 			.user {
-
-				width: 16px;
-				background-color: #355E97;
-				background-repeat: no-repeat;
-				background-position: center center;
-				border: thin solid #2C4B77;
+				width: 38px;
+				height: 37px;
+				padding: 0;
 				text-indent: -9000px;
-
+				position: absolute;
+				top: 3px;
 			}
 
 			.loggedOut {
-
-				background-image: url(imageUrl/images/html4/userLogOut.png);
-				background-position: 1px 1px;
-
+				background-image: url(imageUrl/images/html4/logout.png);
 			}
 
 			.loggedIn {
-
-				background-image: url(imageUrl/images/html4/userLogIn.png);
-				background-position: 0 1px;
-
+				background-image: url(imageUrl/images/html4/login.png);
 			}
 
 			.loggedInUnreadMessages {
+				background-image: url(imageUrl/images/html4/login-msg.png);
+			}
 
-				background-image: url(imageUrl/images/html4/userLogInMsg.png);
-				background-position: 0 1px;
-
+			.loggedInMyOlx {
+				background-image: url(imageUrl/images/html4/login-menu.png);
 			}
 
 			.post {
-
+				height: 24px;
+				padding: 7px 8px 0;
+				border-radius: 4px;
 				background-color: #E0771B;
 				border: thin solid #C44D13;
 				font-weight: bold;

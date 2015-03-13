@@ -5,7 +5,10 @@
     <span><a href="{{ '/' | link }}">{{ location.url | replace('www.', '') }}</a></span>
     <ul>
         {% if user %}
-            {% set status = 'loggedInUnreadMessages' if user.unreadMessagesCount else 'loggedIn' %}
+            {% set status = 'loggedInUnreadMessages' if user.unreadConversationsCount else 'loggedIn' %}
+            {% if currentRoute.action == 'myolx' %}
+                {% set status = 'loggedInMyOlx' %}
+            {% endif %}
             {% set url = '/myolx' %}
             {% set dataQa = 'my-olx-loggedIn' %}
             {% set text = dictionary["homeheader.My OLX"] %}

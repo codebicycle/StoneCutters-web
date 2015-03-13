@@ -1,0 +1,73 @@
+.users_conversations_view {
+    .no-conversations {
+        text-align: center;
+        padding: 20px 10px;
+        img {
+            width: 60%;
+            max-width: 197px;
+        }
+        p {
+            color: #ff7800;
+            font-size: 16px;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+    }
+    .conversations-listing {
+        li {
+            border-bottom: 1px solid #cccccc;
+            height: 60px;
+            padding: 10px;
+
+            a {
+                color: #333333;
+                display: block;
+            }
+            .conversation-image {
+                background-position: center;
+                background-repeat: no-repeat;
+                background-size: cover;
+                float: left;
+                height: 60px;
+                margin: 0 8px 0 0;
+                width: 60px;
+                overflow: hidden;
+            }
+            .conversation-info {
+                height: 60px;
+                overflow: hidden;
+                position: relative;
+
+                .conversation-contactName, .conversation-item-title, .conversation-messageText, .conversation-messageDate {
+                    clear: left;
+                    float: left;
+                    overflow: hidden;
+                }
+                .conversation-item-title, .conversation-messageText, .conversation-messageDate {
+                    font-size: 11px;
+                }
+                .conversation-messageDate, .conversation-contactName {
+                    color: #666666;
+                }
+                .conversation-item-title, .conversation-messageText {
+                    color: #b1b1b1;
+                }
+                .conversation-contactName {
+                    font-size: 13px;
+                    height: 17px;
+                }
+                .conversation-messageText, .conversation-item-title, .conversation-messageDate {
+                    height: 15px;
+                }
+                &.unread {
+                    .conversation-messageText, .conversation-contactName, .conversation-messageDate {
+                        font-weight: bold;
+                    }
+                    .conversation-messageText {
+                        color: #ff7800;
+                    }
+                }
+            }
+        }
+    }
+}

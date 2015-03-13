@@ -629,10 +629,10 @@ function conversations(params, callback) {
         var conversation;
         var _params;
         var user;
-        var view = 'users/myolx';
+        var view = 'users/conversations';
 
         var redirect = function(done) {
-            if (platform !== 'desktop' && platform !== 'html5') {
+            if (platform === 'wap') {
                 return done.fail();
             }
             user = this.app.session.get('user');
@@ -691,8 +691,8 @@ function conversations(params, callback) {
             this.app.seo.addMetatag('robots', 'noindex, nofollow');
             this.app.seo.addMetatag('googlebot', 'noindex, nofollow');
 
-            if (platform === 'html5') {
-                view = 'users/conversations';
+            if (platform === 'desktop') {
+                view = 'users/myolx';
             }
             callback(null, view, {
                 include: ['conversations', 'items'],
@@ -717,21 +717,24 @@ function conversations(params, callback) {
 }
 
 function conversation(params, callback) {
-    helpers.controllers.control.call(this, params, controller);
+    helpers.controllers.control.call(this, params, {
+        isForm: true
+    }, controller);
 
     function controller() {
         var platform = this.app.session.get('platform');
         var location = this.app.session.get('location');
         var languages = this.app.session.get('languages');
         var page = params ? params.page : undefined;
+        var view = 'users/conversation';
+        var pageSize = platform === 'html4' ? 'myConvHtml4' : 'myConv';
         var thread;
         var _params;
         var user;
-        var view = 'users/myolx';
-        var pageSize = 'myConv';
+        var conversation;
 
         var redirect = function(done) {
-            if (platform !== 'desktop' && platform !== 'html5') {
+            if (platform === 'wap') {
                 return done.fail();
             }
             user = this.app.session.get('user');
@@ -785,19 +788,27 @@ function conversation(params, callback) {
             done(res);
         }.bind(this);
 
+        var markAsRead = function(done, res) {
+            conversation = res.thread;
+            conversation.set('user', user);
+            conversation.set('platform', platform);
+            conversation.markAsRead(done);
+        }.bind(this);
+
         var success = function(response) {
             this.app.seo.addMetatag('robots', 'noindex, nofollow');
             this.app.seo.addMetatag('googlebot', 'noindex, nofollow');
 
-            if (platform === 'html5') {
-                view = 'users/conversation';
+            if (platform === 'desktop') {
+                view = 'users/myolx';
             }
 
             callback(null, view, {
-                thread: response.thread,
+                thread: conversation,
                 include: ['thread'],
                 viewname: 'conversation',
-                paginator: response.thread.paginator
+                paginator: conversation.paginator,
+                form: this.form
             });
         }.bind(this);
 
@@ -810,6 +821,7 @@ function conversation(params, callback) {
             .then(prepare)
             .then(fetch)
             .then(paginate)
+            .then(markAsRead)
             .val(success);
     }
 }
