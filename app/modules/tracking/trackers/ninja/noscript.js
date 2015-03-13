@@ -25,7 +25,8 @@ function prepare(done, ctx, ninja) {
     function onResponse(err, res, body) {
         try {
             if (err) {
-                ctx.params.ninja.noscript = ['<iframe src="', url, '" width="1" height="1" marginwidth="1" marginheight="1" frameborder="0"></iframe>'].join('');
+                ctx.params.ninja.isIFrame = true;
+                ctx.params.ninja.noscript = url;
             }
             else {
                 statsd.increment([this.app.session.get('location').abbreviation, 'tracking', 'ninja', 'success', this.app.session.get('platform')]);
@@ -44,13 +45,14 @@ function prepare(done, ctx, ninja) {
 }
 
 function requestIframeUrl(url, callback) {
+    var referer = this.app.session.get('url');
     var adapter = new Adapter({});
 
     adapter.request(this.app.req, {
         method: 'GET',
         url: url,
         headers: {
-            Referer: utils.fullizeUrl(this.app.session.get('url'), this.app)
+            Referer: utils.fullizeUrl(referer, this.app)
         }
     }, {
         timeout: 100,
@@ -71,7 +73,7 @@ function getIframeUrl(ninja) {
 function getHydraUrl(ninja) {
     var url = ['http://', (ninja.config.environment ? 'tracking-dev.onap.io/h/' : 'tracking.olx-st.com/h/v2/'), 'ns?'].join('');
     var query = getQuery(ninja.params, ninja.config);
-    var iv = utils.params(this.app.session.get('referer') || '', 'invite');
+    var iv = utils.params(this.app.session.get('url') || '', 'invite');
 
     if (iv) {
         query.iv = iv.trim();
