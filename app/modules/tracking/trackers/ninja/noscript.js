@@ -28,6 +28,7 @@ function prepare(done, ctx, ninja) {
                 ctx.params.ninja.noscript = ['<iframe src="', url, '" width="1" height="1" marginwidth="1" marginheight="1" frameborder="0"></iframe>'].join('');
             }
             else {
+                statsd.increment([this.app.session.get('location').abbreviation, 'tracking', 'ninja', 'success', this.app.session.get('platform')]);
                 ctx.params.ninja.noscript = body;
             }
         } catch(e) {
@@ -49,7 +50,10 @@ function requestIframeUrl(url, callback) {
         method: 'GET',
         url: url
     }, {
-        timeout: 500,
+        headers: {
+            Referer: utils.fullizeUrl(this.app.session.get('url'), this.app)
+        },
+        timeout: 100,
         onTimeout: function onTimeout() {
             statsd.increment([this.app.session.get('location').abbreviation, 'tracking', 'ninja', 'error', 'timeout', this.app.session.get('platform')]);
             callback(true);
