@@ -21,7 +21,11 @@
     </script>
     {% if tracking.params.ninja.noscript %}
         <noscript>
-            {{ tracking.params.ninja.noscript }}
+            {% if tracking.params.ninja.isIFrame %}
+                <iframe src="{{ tracking.params.ninja.noscript }}" width="1" height="1" marginwidth="1" marginheight="1" frameborder="0"></iframe>
+            {% else %}
+                {{ tracking.params.ninja.noscript }}
+            {% endif %}
         </noscript>
     {% endif %}
 {% endif %}
