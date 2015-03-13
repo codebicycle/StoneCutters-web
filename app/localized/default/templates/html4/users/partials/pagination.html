@@ -1,0 +1,14 @@
+<div id="itemPagination">
+    <a href="{{ (paginator.get('previous') | link) if paginator.has('previous') else '#' }}" class="arrow {{ "leftA" if paginator.has('previous') else "leftD" }}"></a>
+    <div class="center">
+        {% for page in paginator.pages(5) %}
+            {% if page.isCurrent %}
+                <strong {{ 'class="last"' if paginator.isLast(page.page) }}>{{ page.page }}</strong>
+            {% else %}
+                <a href="{{ page.url | link }}" {{ ' class="last"' if paginator.isLast(page.page) }}>{{ page.page }}</a>
+            {% endif %}
+        {% endfor %}
+    </div>
+    <a href="{{ (paginator.get('next') | link) if paginator.has('next') else '#' }}" class="arrow {{ "rightA" if paginator.has('next') else "rightD" }}"></a>
+</div>
+<div id="itemPaginationCaption">&#160;</div>

@@ -24,7 +24,7 @@ function getCurrentPath(path) {
     return path;
 }
 
-function setDefaults(params, options) {
+function setDefaults(params, options, page) {
     var user = this.app.session.get('user');
     var location = this.app.session.get('location');
     var platform = this.app.session.get('platform');
@@ -60,7 +60,7 @@ function setDefaults(params, options) {
         params.clientId = this.app.session.get('clientId');
     }
     if (!params.trackPage) {
-        logger.log('[OLX_DEBUG]', 'Tracking | Ninja not contains trackPage in', _.values(this.app.session.get('currentRoute')).join('#'), '|', platform);
+        logger.log('[OLX_DEBUG]', 'Tracking | Ninja not contains trackPage in', page, '|', platform);
         params.trackPage = getCurrentPath(this.app.session.get('path'));
     }
 }
@@ -100,7 +100,7 @@ function setExtras(params, options) {
 function get(page, options) {
     var params = utils.get(configTracking, ['ninja', 'params', page], {});
 
-    setDefaults.call(this, params, options);
+    setDefaults.call(this, params, options, page);
     setCustoms.call(this, params, options);
     setExtras.call(this, params, options);
     return params;
