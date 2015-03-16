@@ -1,7 +1,7 @@
 module.exports = {
     categoryTree: {
-        testing: {
-            order: [16, 806, 830, 938, 191, 811, 853, 362, 815, 859, 800, 821, 881],
+        development: {
+            order: [830, 362, 811, 191, 800, 815, 938, 806, 853, 16, 881, 859, 821],
             columns: [4, 3, 3],
             redirections: {
                 '864': 881,
