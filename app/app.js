@@ -29,7 +29,9 @@ module.exports = Base.extend({
     },
     start: function() {
         if (!utils.isServer) {
-            this.localstorage = new Localstorage();
+            this.localstorage = new Localstorage({}, {
+                app: this
+            });
         }
         this.router.on('action:start', function onStart() {
             this.set({
