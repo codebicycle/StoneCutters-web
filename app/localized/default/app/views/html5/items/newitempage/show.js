@@ -50,6 +50,14 @@ module.exports = Base.extend({
         $('.footer_footer_view').css('margin-bottom', marginActions + 'px');
         this.$(window).on('resize', this.resize).trigger('resize');
         this.paginationSize();
+        if (this.app.localstorage.ready) {
+            this.$el.trigger('localstorageReady');
+        }
+        else {
+            this.listenTo(this.app.localstorage, 'ready', function visitedItems() {
+                this.$el.trigger('localstorageReady');
+            }.bind(this));
+        }
     },
     events: {
         'click section#itemPage section.onePicture .slide div' : 'showOnePicture',
@@ -62,7 +70,8 @@ module.exports = Base.extend({
         'click .fav': 'favorites',
         'click .share': 'share',
         'click .popup-close': 'popupClose',
-        'onpopstate window': 'onPopState'
+        'onpopstate window': 'onPopState',
+        'localstorageReady': 'onLocalstorageReady'
     },
     showMessage: function() {
         var $msg = this.$('.msg-resulted');
@@ -273,6 +282,18 @@ module.exports = Base.extend({
             app: this.app
         }));
         return this.categories;
+    },
+    onLocalstorageReady: function() {
+        if (helpers.features.isEnabled.call(this, 'visitedItems')) {
+            var id = this.getItem().get('id');
+            var list = this.app.localstorage.get('visited') || [];
+
+            if (!_.contains(list, id)) {
+                this.app.localstorage.unset('visited', {silent: true});
+                list.unshift(id);
+                this.app.localstorage.set('visited', list.slice(0, 10));
+            }
+        }
     }
 });
 

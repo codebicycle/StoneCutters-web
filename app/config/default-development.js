@@ -139,6 +139,10 @@ module.exports = {
             landingThanks: {
                 worldwide: false,
                 countries: ['www.olx.com.ar', 'www.olx.com.co','www.olx.co.za']
+            },
+            visitedItems: {
+                worldwide: false,
+                countries: ['www.olx.com.ar']
             }
         },
         html4: {
@@ -167,6 +171,10 @@ module.exports = {
             landingThanks: {
                 worldwide: false,
                 countries: ['www.olx.com.ar', 'www.olx.com.co','www.olx.co.za']
+            },
+            visitedItems: {
+                worldwide: false,
+                countries: ['www.olx.com.ar']
             }
         }
     },
