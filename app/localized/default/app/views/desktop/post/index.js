@@ -77,12 +77,13 @@ module.exports = Base.extend({
             if (this.getUrlParam('cat') !== undefined || this.getUrlParam('subcat')  !== undefined) {
                 var parentCategoryId =  this.getUrlParam('cat');
                 var subCategoryId = this.getUrlParam('subcat');
+
                 if( parentCategoryId === undefined ) {
                     var categories = this.app.dependencies.categories;
                     var subCategory = categories.search(subCategoryId);
+
                     parentCategoryId = subCategory.attributes.parentId;
                 }
-
                 paramCategory = {
                     parentCategory: parentCategoryId,
                     subCategory: subCategoryId
