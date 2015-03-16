@@ -1,4 +1,4 @@
-'use strict';
+ 'use strict';
 
 var Base = require('../../../../../common/app/bases/view');
 var Item = require('../../../../../../models/item');
@@ -74,10 +74,18 @@ module.exports = Base.extend({
             this.$('#posting-locations-view').trigger('formRendered');
         }
         else {
-            if (this.getUrlParam('cat') !== undefined) {
+            if (this.getUrlParam('cat') !== undefined || this.getUrlParam('subcat')  !== undefined) {
+                var parentCategoryId =  this.getUrlParam('cat');
+                var subCategoryId = this.getUrlParam('subcat');
+                if( parentCategoryId === undefined ) {
+                    var categories = this.app.dependencies.categories;
+                    var subCategory = categories.search(subCategoryId);
+                    parentCategoryId = subCategory.attributes.parentId;
+                }
+
                 paramCategory = {
-                    parentCategory: this.getUrlParam('cat'),
-                    subCategory: this.getUrlParam('subcat')
+                    parentCategory: parentCategoryId,
+                    subCategory: subCategoryId
                 };
                 this.$('#posting-categories-view').trigger('getQueryCategory', paramCategory);
             }
