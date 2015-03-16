@@ -1,15 +1,14 @@
 'use strict';
 
-var Base = require('../bases/collection');
 var _ = require('underscore');
+var Base = require('../bases/collection');
 var Shop = require('../models/shop');
 var helpers = require('../helpers');
 var config = require('../../shared/config');
 var HOST = config.get(['mario', 'host'], 'mario.apps.olx.com');
+
 module.exports = Base.extend({
     model: Shop,
-    initialize: function() {
-    },
     url: function() {
         return "/shops/get";
     },
@@ -26,8 +25,6 @@ module.exports = Base.extend({
         console.log('[OLX_DEBUG] Empty item listing response');
         this.meta = {};
         return [];
-    },
-    paginate: function (url, query, options) {
     },
     fetch: function(options) {
         options = options || {};
