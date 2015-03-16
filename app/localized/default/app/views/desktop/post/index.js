@@ -184,7 +184,7 @@ module.exports = Base.extend({
                 }
             }
             field.name = $field.attr('name');
-            field.value = $field.val();
+            field.value = this.getValue($field);
         }
         if (shouldValidateField) {
             if (canValidateFields) {
@@ -212,6 +212,12 @@ module.exports = Base.extend({
             this.handleBack();
         }
     },
+    getValue: function(ele) {
+        if (ele[0].type !== 'checkbox') {
+            return ele[0].value;
+        }
+        return ele[0].checked ? ele[0].value : '';
+     },
     handleBack: function() {
         this.edited = true;
         history.pushState(null, '', window.location.pathname + window.location.search);
