@@ -91,7 +91,7 @@ module.exports = {
 
                 if (modelName == 'shops') {
                     //make an exception with shops, don´t throw error
-                    callback(null, model);
+                    return callback(null, model);
                 }
                 var body, respOutput, err;
 
