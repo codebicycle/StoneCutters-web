@@ -16,7 +16,8 @@
                 <div>
                     <h3>{{ dictionary["misc.LowerPrice"] }}</h3>
                     <p>{{ dictionary["misc.MoreAccessiblePrice"] }}</p>
-                    <a href="{{ '/myolx/edititem/' | link }}/{{ item.itemid }}?sk={{ sk }}" class="btns white">{{ dictionary["misc.ChangePrice"] }}</a>
+                    {% set url = '/myolx/edititem/' + item.itemid + '?sk=' + sk %}
+                    <a href="{{ url | link }}" class="btns white">{{ dictionary["misc.ChangePrice"] }}</a>
                 </div>
             </article>
             <article>
