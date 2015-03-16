@@ -87,12 +87,17 @@ module.exports = {
                 callback(null, model);
             },
             error: function(model, resp, options) {
+                var modelName = fetcher.modelUtils.modelName(model.constructor);
                 var body, respOutput, err;
 
+                if (modelName === 'shops') {
+                    // make an exception with shops, don´t throw error
+                    return callback(null, model);
+                }
                 body = resp.body;
                 resp.body = typeof body === 'string' ? body.slice(0, 150) : body;
                 respOutput = JSON.stringify(resp);
-                err = new Error("ERROR fetching model '" + fetcher.modelUtils.modelName(model.constructor) + "' with options '" + JSON.stringify(options) + "'. Response: " + respOutput);
+                err = new Error("ERROR fetching model '" + modelName + "' with options '" + JSON.stringify(options) + "'. Response: " + respOutput);
                 err.status = resp.status;
                 err.body = body;
                 callback(err);
