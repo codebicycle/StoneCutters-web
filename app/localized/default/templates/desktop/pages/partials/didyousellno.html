@@ -1,57 +1,58 @@
-    <div class="didYouSellNo page-standart">
-        <h2>{{ dictionary["misc.HelpSell"] }}</h2>
-        <p>{{ dictionary["misc.FollowToIncrease"] }}</p>
-        <div class="didYouSellOptions">
-            <article>
-                <span class="icons icon-fb-round"></span>
-                <div>
-                    <h3>{{ dictionary["misc.ShareAd"] }}</h3>
-                    <p>{{ dictionary["misc.UseNetworks"] }}</p>
-                    <div class="facebook-share" data-share-facebook data-share-url="{{ item.slug }}">
-                        <span class="icons icon-facebook"></span>
-                        <p>{{ dictionary["item.ShareAd"] }}</p>
-                    </div>
+{% set url = '/myolx/edititem/' + item.itemid + '?sk=' + sk %}
+<div class="didYouSellNo page-standart">
+    <h2>{{ dictionary["misc.HelpSell"] }}</h2>
+    <p>{{ dictionary["misc.FollowToIncrease"] }}</p>
+    <div class="didYouSellOptions">
+        <article>
+            <span class="icons icon-fb-round"></span>
+            <div>
+                <h3>{{ dictionary["misc.ShareAd"] }}</h3>
+                <p>{{ dictionary["misc.UseNetworks"] }}</p>
+                <div class="facebook-share" data-share-facebook data-share-url="{{ item.slug }}">
+                    <span class="icons icon-facebook"></span>
+                    <p>{{ dictionary["item.ShareAd"] }}</p>
                 </div>
-            </article>
-            <article>
-                <span class="icons icon-money-round"></span>
-                <div>
-                    <h3>{{ dictionary["misc.LowerPrice"] }}</h3>
-                    <p>{{ dictionary["misc.MoreAccessiblePrice"] }}</p>
-                    <a href="{{ "/myolx/edititem/" | link }}/{{ item.itemid }}?sk={{ sk }}">{{ dictionary["misc.ChangePrice"] }}</a>
-                </div>
-            </article>
-            <article>
-                <span class="icons icon-edit"></span>
-                <div>
-                    <h3>{{ dictionary["misc.ChooseCatchyTitle"] }}</h3>
-                    <p>{{ dictionary["misc.ClearTitleAttractsBuyers"] }}</p>
-                    <a href="{{ "/myolx/edititem/" | link }}/{{ item.itemid }}?sk={{ sk }}">{{ dictionary["crm_new_version.EditUrTitleNow"] }}</a>
-                </div>
-            </article>
-            <article>
-                <span class="icons icon-camera"></span>
-                <div>
-                    <h3>{{ dictionary["misc.MorePhotos"] }}</h3>
-                    <p>{{ dictionary["misc.LotsOfPhotos"] }}</p>
-                    <a href="{{ "/myolx/edititem/" | link }}/{{ item.itemid }}?sk={{ sk }}">{{ dictionary["misc.UploadMorePhotos"] }}</a>
-                </div>
-            </article>
-            <article>
-                <span class="icons icon-tag"></span>
-                <div>
-                    <h3>{{ dictionary["misc.PostMoreAds"] }}</h3>
-                    <p>{{ dictionary["misc.IncreaseBuyersConfidence"] }}</p>
-                    <a href="{{ "/posting" | link }}">{{ dictionary["defaultheader.PostAnAd"] }}</a>
-                </div>
-            </article>
-            <article>
-                <span class="icons icon-description"></span>
-                <div>
-                    <h3>{{ dictionary["misc.ImproveYourDescription"] }}</h3>
-                    <p>{{ dictionary["misc.IncludeMoreDetails"] }}</p>
-                    <a href="{{ "/myolx/edititem/" | link }}/{{ item.itemid }}?sk={{ sk }}">{{ dictionary["crm_new_version.EditDescriptionNow"] }}</a>
-                </div>
-            </article>
-        </div>
+            </div>
+        </article>
+        <article>
+            <span class="icons icon-money-round"></span>
+            <div>
+                <h3>{{ dictionary["misc.LowerPrice"] }}</h3>
+                <p>{{ dictionary["misc.MoreAccessiblePrice"] }}</p>
+                <a href="{{ url | link }}">{{ dictionary["misc.ChangePrice"] }}</a>
+            </div>
+        </article>
+        <article>
+            <span class="icons icon-edit"></span>
+            <div>
+                <h3>{{ dictionary["misc.ChooseCatchyTitle"] }}</h3>
+                <p>{{ dictionary["misc.ClearTitleAttractsBuyers"] }}</p>
+                <a href="{{ url | link }}">{{ dictionary["crm_new_version.EditUrTitleNow"] }}</a>
+            </div>
+        </article>
+        <article>
+            <span class="icons icon-camera"></span>
+            <div>
+                <h3>{{ dictionary["misc.MorePhotos"] }}</h3>
+                <p>{{ dictionary["misc.LotsOfPhotos"] }}</p>
+                <a href="{{ url | link }}">{{ dictionary["misc.UploadMorePhotos"] }}</a>
+            </div>
+        </article>
+        <article>
+            <span class="icons icon-tag"></span>
+            <div>
+                <h3>{{ dictionary["misc.PostMoreAds"] }}</h3>
+                <p>{{ dictionary["misc.IncreaseBuyersConfidence"] }}</p>
+                <a href="{{ "/posting" | link }}">{{ dictionary["defaultheader.PostAnAd"] }}</a>
+            </div>
+        </article>
+        <article>
+            <span class="icons icon-description"></span>
+            <div>
+                <h3>{{ dictionary["misc.ImproveYourDescription"] }}</h3>
+                <p>{{ dictionary["misc.IncludeMoreDetails"] }}</p>
+                <a href="{{ "/myolx/edititem/" | link }}/{{ item.itemid }}?sk={{ sk }}">{{ dictionary["crm_new_version.EditDescriptionNow"] }}</a>
+            </div>
+        </article>
     </div>
+</div>
