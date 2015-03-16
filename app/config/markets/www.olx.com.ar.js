@@ -1,8 +1,8 @@
 module.exports = {
     categoryTree: {
         'default': {
-            order: [830, 362, 16, 800, 815, 821, 806, 853, 859, 811],
-            columns: [3, 3, 2]
+            order: [16, 806, 830, 938, 191, 811, 853, 362, 815, 859, 800, 821, 881],
+            columns: [4, 3, 3]
         }
     },
     marketing: {
