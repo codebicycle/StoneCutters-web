@@ -1,0 +1,16 @@
+{% from macros import Breadcrumb, BreadcrumbHome %}
+{% set link = ((breadcrumb if breadcrumb else '/') | link) %}
+{{ Breadcrumb(dictionary, link, 'Store') }}
+<div class="errorPage coming-soon">
+    <img src="{{ '/images/html4/stores/store-icon.png' | static }}" align="middle" />
+    <p class="center"><strong>OLX Stores are coming!</strong></p>
+    {% set homeLink = ('/' | link ) %}
+    <p>
+        <strong>Yes, you’re on the right page.<br>
+        No, They’re not ready yet. Sorry!</strong><br>
+        Be sure that we are definitely working on them. Meanwhile, <a href="{{ homeLink }}">continue finding great stuff.</a>
+    </p>
+</div>
+{{ BreadcrumbHome(dictionary, link, ('/' | link)) }}
+
+{% view 'partials/tracking' %}

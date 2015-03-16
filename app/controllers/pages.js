@@ -19,7 +19,9 @@ module.exports = {
     sitemapByDate: middlewares(sitemapByDate),
     thanks: middlewares(thanks),
     didyousell: middlewares(didyousell),
-    mobilepromo: middlewares(mobilepromo)
+    mobilepromo: middlewares(mobilepromo),
+    shops: middlewares(shops),
+    shop: middlewares(shop)
 };
 
 function terms(params, callback) {
@@ -439,6 +441,32 @@ function thanks(params, callback) {
         function fail(err, res) {
             return helpers.common.error.call(this, err, res, callback);
         }
+    }
+}
+
+function shops(params, callback) {
+    helpers.controllers.control.call(this, params, controller);
+
+    function controller() {
+        var platform = this.app.session.get('platform');
+
+        if (platform !== 'html4') {
+            return helpers.common.redirect.call(this, '/');
+        }
+        callback(null, {});
+    }
+}
+
+function shop(params, callback) {
+    helpers.controllers.control.call(this, params, controller);
+
+    function controller() {
+        var platform = this.app.session.get('platform');
+
+        if (platform !== 'html4') {
+            return helpers.common.redirect.call(this, '/');
+        }
+        callback(null, {});
     }
 }
 

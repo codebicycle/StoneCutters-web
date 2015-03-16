@@ -92,6 +92,53 @@ module.exports = function(nunjucks) {
         return JSON.stringify(obj);
     }
 
+    function convertToSlug(str) {
+    return str.toLowerCase().replace(/[^\w ]+/g,'').replace(/ +/g,'-');
+    }
+
+    function shuffleItems(items, shops){
+        var slice = 10;
+        var shuffle = [];
+        var itemIndex = 0;
+        var shopIndex = 0;
+
+        for (var i = 0; i < shops.length; i++) {
+            var index =  Math.floor(Math.random() * slice);
+
+            for (var j = 0; j < slice; j++) {
+                if ( index == j ) {
+                   shuffle.push({ "index": i, "type": "shop"});
+                   shopIndex += 1; 
+                } else {
+                   shuffle.push({ "index": itemIndex, "type": "item"});
+                   itemIndex += 1;  
+                }
+            }
+        }
+
+        for (var k = itemIndex; k < items.length; k++) {
+            shuffle.push({ "index": k, "type": "item"});
+        }
+
+        return shuffle;
+
+    }
+
+    function getLocations(shops){
+        var locations = '';
+
+        if (shops) {
+            for (var i = 0; i < shops.length; i++) {
+                var location = shops[i].location;
+                if ( location ) {
+                    locations = locations + location.lat + "," + location.lon + "|";
+                }
+            }            
+        }
+
+        return locations;
+    }
+
     return {
         is: is,
         log: log,
@@ -102,12 +149,15 @@ module.exports = function(nunjucks) {
         encode: encode,
         'static': statics,
         rangeToArray: rangeToArray,
+        convertToSlug: convertToSlug,
         countFormat: countFormat,
         editSlug: editSlug,
         slugToUrl: helpers.common.slugToUrl,
         hijri: helpers.hijri,
         persianDigits: helpers.numbers.toPersian,
         latinDigits: helpers.numbers.toLatin,
-        json: json
+        json: json,
+        shuffleItems: shuffleItems,
+        getLocations: getLocations
     };
 };
