@@ -101,41 +101,52 @@ module.exports = function(nunjucks) {
         var shuffle = [];
         var itemIndex = 0;
         var shopIndex = 0;
+        var index;
+        var i;
+        var j;
 
-        for (var i = 0; i < shops.length; i++) {
-            var index =  Math.floor(Math.random() * slice);
+        for (i = 0; i < shops.length; i++) {
+            index =  Math.floor(Math.random() * slice);
 
-            for (var j = 0; j < slice; j++) {
+            for (j = 0; j < slice; j++) {
                 if ( index == j ) {
-                   shuffle.push({ "index": i, "type": "shop"});
-                   shopIndex += 1; 
-                } else {
-                   shuffle.push({ "index": itemIndex, "type": "item"});
-                   itemIndex += 1;  
+                    shuffle.push({
+                        index: i,
+                        type: 'shop'
+                    });
+                    shopIndex += 1; 
+                }
+                else {
+                    shuffle.push({
+                        index: itemIndex,
+                        type: 'item'
+                    });
+                    itemIndex += 1;
                 }
             }
         }
-
-        for (var k = itemIndex; k < items.length; k++) {
-            shuffle.push({ "index": k, "type": "item"});
+        for (i = itemIndex; i < items.length; i++) {
+            shuffle.push({
+                index: i,
+                type: 'item'
+            });
         }
-
         return shuffle;
-
     }
 
     function getLocations(shops){
         var locations = '';
+        var location;
+        var i;
 
         if (shops) {
-            for (var i = 0; i < shops.length; i++) {
-                var location = shops[i].location;
-                if ( location ) {
-                    locations = locations + location.lat + "," + location.lon + "|";
+            for (i = 0; i < shops.length; i++) {
+                if (shops[i].location) {
+                    location = shops[i].location;
+                    locations = locations + location.lat + ',' + location.lon + '|';
                 }
             }            
         }
-
         return locations;
     }
 

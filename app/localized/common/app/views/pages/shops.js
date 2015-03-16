@@ -1,8 +1,7 @@
 'use strict';
 
-var Base = require('../../bases/view');
 var _ = require('underscore');
-var restler = require('restler');
+var Base = require('../../bases/view');
 var breadcrumb = require('../../../../../modules/breadcrumb');
 var Shops = require('../../../../../modules/shops');
 
