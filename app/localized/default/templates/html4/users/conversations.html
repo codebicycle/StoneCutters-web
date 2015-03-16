@@ -1,0 +1,39 @@
+{% from macros import Breadcrumb, BreadcrumbHome %}
+{% set link = (breadcrumb | link) %}
+{{ Breadcrumb(dictionary, link, dictionary["myolx.Messages"]) }}
+
+{% if conversations.length == 0 %}
+    <div class="no-conversations">
+        <img src="{{ '/images/html4/no-message.png' | static }}">
+        <p>{{ dictionary["netvibes_myolx.content.NoMessages"] }}</p>
+    </div>
+{% else %}
+    <ul class="conversations-listing">
+        {% for conversation in conversations %}
+            {% if items.get(conversation.itemId) %}
+                <li>
+                    {% set item = items.get(conversation.itemId) %}
+                    <a href="{{ ('/myolx/conversation/' + conversation.threadId + '#message') | link }}">
+                        <div class="conversation-image" style="background-image: url({{ item.get('thumbnail') if item.get('thumbnail') else ('/images/html4/noPhoto.png' | static) }});" alt="{{ item.get('title') }}"></div>
+                    </a>
+                    <div class="conversation-info{{ ' unread' if not conversation.read}}">
+                        <a href="{{ ('/myolx/conversation/' + conversation.threadId + '#message') | link }}">
+                            <p class="conversation-messageDate">{{ conversation.messageDate | date(false, true) }}</p>
+                            <span class="conversation-contactName">{{ conversation.contactName }}</span>
+                            <h2 class="conversation-item-title">{{ item.get('title') }}</h2>
+                            <span class="conversation-messageText">{{ conversation.messageText | truncate( 30, True, '...') }}</span>
+                        </a>
+                    </div>
+                </li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+{% endif %}
+
+{% if paginator and paginator.isEnabled() %}
+    {% include (template + '/users/partials/pagination.html') %}
+{% endif %}
+
+{{ BreadcrumbHome(dictionary, link, ('/' | link)) }}
+
+{% view 'partials/tracking' %}

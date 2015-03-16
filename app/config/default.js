@@ -147,6 +147,10 @@ module.exports = {
             interstitialByADX: {
                 worldwide: true,
                 countries: []
+            },
+            hermes: {
+                worldwide: true,
+                countries: ['www.olx.es', 'www.olx.ae', 'www.olx.it', 'www.olx.com', 'www.olx.fr', 'www.olx.ir']
             }
         },
         desktop: {

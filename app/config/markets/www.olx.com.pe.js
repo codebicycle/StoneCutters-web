@@ -72,10 +72,7 @@ module.exports = {
             },
             ninja: {
                 enabled: true,
-                platforms: ['desktop', 'html5', 'html4', 'wap'],
-                noscript: {
-                    platforms: ['html4', 'wap']
-                }
+                platforms: ['desktop', 'html5', 'html4', 'wap']
             }
         },
     },
@@ -302,6 +299,31 @@ module.exports = {
         },
         html5: {
             enabled: true
+        }
+    },
+    featured: {
+        enabled: true,
+        quantity: {
+            total: 4,
+            top: 2,
+            bottom: 2
+        },
+        section: {
+            'categories#list': {
+                enabled: false
+            },
+            'users#myads': {
+                enabled: false
+            },
+            'post#flow': {
+                enabled: false
+            },
+            'post#success': {
+                enabled: false
+            },
+            'post#flowMarketing': {
+                enabled: false
+            }
         }
     }
 };

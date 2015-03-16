@@ -72,7 +72,7 @@ module.exports = Base.extend({
         $('.category[data-id="' + categoryId + '"]').addClass('select');
         $('.child-categories-list').removeClass('select');
         $('.child-categories-list[data-id="' + categoryId + '"]').addClass('select');
-        if (!this.parentView.editing) {
+        if (!this.parentView.editing && this.parentView.getUrlParam('subcat') === undefined) {
             $('html, body').animate({
                 scrollTop: this.parentView.$('#posting-images-view').offset().top
             }, 750);

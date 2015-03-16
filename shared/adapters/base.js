@@ -42,7 +42,8 @@ BaseAdapter.prototype.serverRequest = function(req, api, options, callback) {
             options = {};
         }
         api = this.apiDefaults(api, req);
-        api = _.extend(api, options);
+        api = _.extend({}, api, options);
+        api.headers = _.extend({}, api.headers, options.headers);
         if (req.rendrApp.session) {
             api.query = api.query || {};
             if (api.method.toUpperCase() !== 'GET') {
@@ -53,10 +54,14 @@ BaseAdapter.prototype.serverRequest = function(req, api, options, callback) {
     }
 
     function request(done) {
-        restler.request(api.url, api)
+        var request = restler.request(api.url, api)
             .on('success', success)
             .on('fail', fail)
             .on('error', fail);
+
+        if (api.timeout !== undefined && api.onTimeout) {
+            request.on('timeout', api.onTimeout);
+        }
 
         function success(body, res) {
             elapsed = getElapsed(start, elapsed);
@@ -130,7 +135,7 @@ BaseAdapter.prototype.clientRequest = function(req, api, options, callback) {
 
         function success(body, textStatus, res) {
             elapsed = getElapsed(start, elapsed);
-            logger.log('%s %d %s %s', options.type.toUpperCase(), res.status, options.url, elapsed);
+            logger.log('%s %d %s %s', api.type.toUpperCase(), res.status, api.url, elapsed);
             succeeded.apply(this, arguments);
             done(null, {
                 readyState: res.readyState,
@@ -143,7 +148,7 @@ BaseAdapter.prototype.clientRequest = function(req, api, options, callback) {
 
         function fail(res, textStatus, err) {
             elapsed = getElapsed(start, elapsed);
-            logger.error('%s %d %s %j %s', options.type.toUpperCase(), res.status, options.url, err, elapsed);
+            logger.error('%s %d %s %j %s', api.type.toUpperCase(), res.status, api.url, err, elapsed);
             failed.apply(this, arguments);
             done(err || {
                 statusCode: res.status
@@ -234,7 +239,8 @@ BaseAdapter.prototype.apiDefaults = function(api, req) {
 BaseAdapter.prototype.ajaxParams = function(api, options) {
     var data;
 
-    _.extend(api, options);
+    api = _.extend({}, api, options);
+    api.headers = _.extend({}, api.headers, options.headers);
     if (api.query) {
         api.url = utils.params(api.url, api.query);
     }

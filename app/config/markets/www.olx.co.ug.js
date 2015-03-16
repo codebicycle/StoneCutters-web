@@ -15,10 +15,7 @@ module.exports = {
             },
             ninja: {
                 enabled: true,
-                platforms: ['desktop', 'html5', 'html4', 'wap'],
-                noscript: {
-                    platforms: ['html4', 'wap']
-                }
+                platforms: ['desktop', 'html5', 'html4', 'wap']
             }
         },
     },

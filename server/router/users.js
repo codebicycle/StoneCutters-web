@@ -7,6 +7,7 @@ module.exports = function userRouter(app) {
     var formidable = require('../modules/formidable');
     var statsd  = require('../modules/statsd')();
     var User = require('../../app/models/user');
+    var Conversation = require('../../app/models/conversation');
 
     function login() {
         app.post('/login', handler);
@@ -247,7 +248,7 @@ module.exports = function userRouter(app) {
             }
 
             function error(err) {
-                formidable.error(req, '/register', Array.isArray(err) ? err : [err], user ? user.toJSON() : undefined, function redirect(url) {
+                formidable.error(req, '/register', err, user.toJSON(), function redirect(url) {
                     res.redirect(301, utils.link(url, req.rendrApp));
                     end(err);
                 });
@@ -270,10 +271,74 @@ module.exports = function userRouter(app) {
         return handler;
     }
 
+    function reply() {
+        app.post('/myolx/conversation/:threadId', handler);
+
+        function handler(req, res, next) {
+            var threadId = req.param('threadId', null);
+            var conversation;
+            var reply;
+
+            function parse(done) {
+                formidable.parse(req, done.errfcb);
+            }
+
+            function prepare(done, data) {
+                var user = req.rendrApp.session.get('user');
+
+                reply = data;
+                conversation = new Conversation({
+                    country: req.rendrApp.session.get('location').abbreviation,
+                    platform: req.rendrApp.session.get('platform'),
+                    languageId: req.rendrApp.session.get('languageId'),
+                    user: user,
+                    threadId: threadId,
+                    message: data.message
+                }, {
+                    app: req.rendrApp
+                });
+                done();
+            }
+
+            function submit(done) {
+                conversation.reply(done);
+            }
+
+            function success() {
+                var url = '/myolx/conversation/' + threadId + '#message';
+
+                res.redirect(utils.link(url, req.rendrApp));
+                end();
+            }
+
+            function error(err) {
+                var url = '/myolx/conversation/' + threadId + '#message';
+
+                formidable.error(req, url.split('?').shift(), err, reply, function redirect(url) {
+                    res.redirect(utils.link(url, req.rendrApp));
+                    end(err);
+                });
+            }
+
+            function end(err) {
+                if (next && next.errfcb) {
+                    next.errfcb(err);
+                }
+            }
+
+            asynquence().or(error)
+                .then(parse)
+                .then(prepare)
+                .then(submit)
+                .val(success);
+        }
+    }
+
     return {
         login: login(),
         register: register(),
         lostpassword: lostpassword(),
-        registerwithConfirmation: registerwithConfirmation()
+        registerwithConfirmation: registerwithConfirmation(),
+        reply: reply()
     };
 };

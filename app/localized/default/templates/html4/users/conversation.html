@@ -1,0 +1,68 @@
+{% from macros import Breadcrumb, BreadcrumbHome %}
+{% set link = '/myolx/conversations' | link %}
+{{ Breadcrumb(dictionary, link, dictionary["myolx.Messages"]) }}
+
+{% set item = thread.get('item') %}
+
+{% if item.user.id != thread.get('userId') %}
+    {% set phone = item.phone %}
+    {% set senderName = item.user.username %}
+{% elif thread.get('senders')[1] and thread.get('senders')[1].isMine %}
+    {% set senderName = thread.get('senders')[0].name %}
+    {% set phone = thread.get('senders')[0].phone %}
+{% elif thread.get('senders')[0].isMine %}
+    {% set senderName = thread.get('senders')[1].name %}
+    {% set phone = thread.get('senders')[1].phone %}
+{% else %}
+    {% set senderName = thread.get('senders')[0].name %}
+{% endif %}
+
+<div class="conversation-item">
+    <a href="{{ item | slugToUrl | link | replace('en/', '') }}">
+        <div class="conversation-image" style="background-image: url({{ item.images[0].thumbnail if item.images.length else ('/images/html4/noPhoto.png' | static) }});" alt="{{ item.title }}"></div>
+    </a>
+    <div class="item-info">
+        <a href="{{ item | slugToUrl | link | replace('en/', '') }}">
+            <span class="item-date">{{ item.date.timestamp | date("MMM DD, YYYY") }}</span>
+            <span class="item-title">{{ item.title | truncate( 40, True, '...') }}</span>
+            <p class="conversation-senderName">{{ senderName }}</p>
+            {% if item.price.displayPrice %}
+                <span class="item-price">{{ item.price.displayPrice }}</span>
+            {% endif %}
+        </a>
+    </div>
+</div>
+
+<ul class="conversation">
+    {% for message in thread.get('messages') %}
+        <li class="message{{ ' is-mine' if message.isMine }}">
+            {% set name = thread.get('senders')[0].name %}
+            {% if message.isMine %}
+                {% set name = dictionary["myolx.You"] %}
+            {% elif thread.get('senders')[1] and thread.get('senders')[1].isMine %}
+                {% set name = thread.get('senders')[0].name %}
+            {% elif thread.get('senders')[0].isMine %}
+                {% set name = thread.get('senders')[1].name %}
+            {% endif %}
+            <span class="name">{{ name }}</span>
+            <p class="text">{{ message.text }}</p>
+            <span class="date"><time>{{ message.date.since.day if message.date.since.day }} {{ dictionary[message.date.since.dictionary] }}{{ (',' + message.date.since.hour) if message.date.since.hour }} {{ (' ' + yearToShow) if yearToShow }}</time></span>
+        </li>
+    {% endfor %}
+</ul>
+
+<form action="{{ ('/myolx/conversation/' + thread.get('threadId')) | link }}" method="POST" enctype="multipart/form-data">
+    <div class="formField">
+        <a href="" name="message"></a>
+        <input type="text" value="{{ form.values.message if form.values.message }}" data-messageText name="message" {{ 'class="error"' if form and form.errors }} />
+    </div>
+    <div class="formActions">
+        <input type="submit" value="{{ dictionary["myolx.Reply"] }}" name="submit" class="btns green" data-qa="reply-send-button" >
+    </div>
+</form>
+
+{% if paginator and paginator.isEnabled() %}
+    {% include (template + '/users/partials/pagination.html') %}
+{% endif %}
+
+{{ BreadcrumbHome(dictionary, link, ('/' | link)) }}

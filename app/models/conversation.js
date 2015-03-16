@@ -13,6 +13,7 @@ module.exports = Base.extend({
 	report: report,
 	unsubscribe: unsubscribe,
     reply: reply,
+    markAsRead: markAsRead,
     toData: toData,
     paginate: paginate,
     parse: parse
@@ -54,32 +55,64 @@ function reply(done) {
         .then(submit.bind(this))
         .val(success.bind(this));
 
-        function prepare(done) {
-            var query = {
-                token: this.get('user').token,
-                userId: this.get('user').userId,
-                platform: this.get('platform'),
-            };
+    function prepare(done) {
+        var query = {
+            token: this.get('user').token,
+            userId: this.get('user').userId,
+            platform: this.get('platform'),
+        };
 
-            done(query);
-        }
+        done(query);
+    }
 
-        function submit(done, query) {
-            dataAdapter.post(this.app.req, '/conversations/' + this.get('threadId') + '/reply', {
-                query: query,
-                data: this.toData()
-            }, done.errfcb);
-        }
+    function submit(done, query) {
+        dataAdapter.post(this.app.req, '/conversations/' + this.get('threadId') + '/reply', {
+            query: query,
+            data: this.toData()
+        }, done.errfcb);
+    }
 
-        function success(reply) {
-            statsd.increment([this.get('country'), 'conversations', 'reply', 'success', this.get('platform')]);
-            done(reply);
-        }
+    function success(reply) {
+        statsd.increment([this.get('country'), 'conversations', 'reply', 'success', this.get('platform')]);
+        done(reply);
+    }
 
-        function fail(err) {
-            statsd.increment([this.get('country'), 'conversations', 'reply', 'error', this.get('platform')]);
-            done.fail(err);
-        }
+    function fail(err) {
+        statsd.increment([this.get('country'), 'conversations', 'reply', 'error', this.get('platform')]);
+        done.fail(err);
+    }
+
+}
+
+function markAsRead(done) {
+    asynquence().or(fail.bind(this))
+        .then(prepare.bind(this))
+        .then(submit.bind(this))
+        .val(success.bind(this));
+
+    function prepare(done) {
+        var query = {
+            token: this.get('user').token,
+            userId: this.get('user').userId,
+            platform: this.get('platform'),
+        };
+
+        done(query);
+    }
+
+    function submit(done, query) {
+        dataAdapter.post(this.app.req, '/conversations/' + this.get('threadId') + '/read', {
+            query: query,
+        }, done.errfcb);
+    }
+
+    function success(res) {
+        done(res);
+    }
+
+    function fail(err) {
+        done.fail(err);
+    }
 
 }
 

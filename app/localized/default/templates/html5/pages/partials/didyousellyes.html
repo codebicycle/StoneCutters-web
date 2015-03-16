@@ -1,7 +1,8 @@
 <section id="notification-message" class="notification-message icons icon-happy">
     <span class="icons icon-happy"></span>
-    <h4>{{ dictionary["posting_step4.WellDoneAdCreated"] }}</h4>
-    <p>{{ dictionary["posting_fields_1.IfAdApprovedYouWillReceiveEmailConfirmation"] }}</p>
+    <h4>{{ dictionary["misc.GladYouSold"] }}</h4>
+    <p>{{ dictionary["misc.AdNotInResults"] | replace('<<AD_TITLE>>', '<b>' + item.title + '</b>' )}}</p>
+    <p>{{ dictionary["misc.Tx4Posting"] }}</p>
 </section>
 
 <section id="notification-keep-posting" class="notification-keep-posting">
