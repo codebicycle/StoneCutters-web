@@ -3,6 +3,19 @@
 {% from macros import Breadcrumb, BreadcrumbHome %}
 {% set link = (breadcrumb | link) %}
 {{ Breadcrumb(dictionary, link, subcategory.trName) }}
+
+{% if shopsAlternative == 'adlikestore_map' or shopsAlternative == 'calltoactions_map' %}
+    {% set locations = shops | getLocations %}
+    {% if locations and meta.total > 0 %}
+        <div class="mapShops">
+            <p class="nearby">Shops nearby:</p>
+            <a href="{{ '/shops' | link({shops_experiment_from: 'listing-shop-from-map'}) }}">
+                <img src="http://maps.googleapis.com/maps/api/staticmap?size=360x100&markers={{locations}}&sensor=false&key=AIzaSyCvUuhf4uzrk7XJLdmPkySaafVoU7vrTZ4" />
+            </a>
+        </div>
+    {% endif %}
+{% endif %}
+
 <div id="itemListing">
     {% if meta.total == 0 %}
         <div class="emtyList">
@@ -18,23 +31,58 @@
         </div>
     {% else %}
         <ul class="itemListing">
-            {% for item in items %}
-                <li>
-                    <a href="{{ item | slugToUrl | link }}" data-qa="list-item">
-                        <div class="imageCont" style="background-image: url({{ item.thumbnail if item.thumbnail else ('/images/html4/noPhoto.png' | static) }});"></div>
-                    </a>
-                    <div class="itemInfo">
-                        <p class="itemPrice">{{ item.price.displayPrice }}</p>
-                        <span>{{ item.date.since.day if item.date.since.day }} {{ dictionary[item.date.since.dictionary] }}{{ (', ' + item.date.since.hour) if item.date.since.hour }}</span>
-                        <div class="centerCont">
-                            <a href="{{ item | slugToUrl | link }}">
-                                <h2>{{ item.title }}</h2>
-                            </a>
+            {% if shopsAlternative != '' and shopsAlternative != 'items' %}
+                {% set shuffle = items | shuffleItems(shops) %}
+                {% for element in shuffle %}
+                    {% if element.type == 'shop' %}
+                        {% set shop = shops[element.index] %}
+                        {% if shop %}
+                            {% if shopsAlternative == 'adlikestore' or shopsAlternative == 'adlikestore_map' %}
+                                {% include (template + '/items/adlikestore.html') %}
+                            {% elif shopsAlternative == 'calltoactions' or shopsAlternative == 'calltoactions_map' %}
+                                {% include (template + '/items/calltoactions.html') %}
+                            {% endif %}
+                        {% endif %}
+                    {% else %}
+                        {% set item = items[element.index] %}
+                        {% if item %}
+                            <li>
+                                <a href="{{ item | slugToUrl | link }}">
+                                    <div class="imageCont" style="background-image: url({{ item.thumbnail if item.thumbnail else ('/images/html4/noPhoto.png' | static) }});"></div>
+                                </a>
+                                <div class="itemInfo">
+                                    <p class="itemPrice">{{ item.price.displayPrice }}</p>
+                                    <span>{{ item.date.since.day if item.date.since.day }} {{ dictionary[item.date.since.dictionary] }}{{ (', ' + item.date.since.hour) if item.date.since.hour }}</span>
+                                    <div class="centerCont">
+                                        <a href="{{ item | slugToUrl | link }}">
+                                            <h2>{{ item.title }}</h2>
+                                        </a>
+                                    </div>
+                                    <span>{{ item.displayLocation }}</span>
+                                </div>
+                            </li>
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+            {% else %}
+                {% for item in items %}
+                    <li>
+                        <a href="{{ item | slugToUrl | link }}">
+                            <div class="imageCont" style="background-image: url({{ item.thumbnail if item.thumbnail else ('/images/html4/noPhoto.png' | static) }});"></div>
+                        </a>
+                        <div class="itemInfo">
+                            <p class="itemPrice">{{ item.price.displayPrice }}</p>
+                            <span>{{ item.date.since.day if item.date.since.day }} {{ dictionary[item.date.since.dictionary] }}{{ (', ' + item.date.since.hour) if item.date.since.hour }}</span>
+                            <div class="centerCont">
+                                <a href="{{ item | slugToUrl | link }}">
+                                    <h2>{{ item.title }}</h2>
+                                </a>
+                            </div>
+                            <span>{{ item.displayLocation }}</span>
                         </div>
-                        <span>{{ item.displayLocation }}</span>
-                    </div>
-                </li>
-            {% endfor %}
+                    </li>
+                {% endfor %}
+            {% endif %}
         </ul>
         {% if paginator and paginator.isEnabled() %}
             {% include (template + '/items/pagination.html') %}
