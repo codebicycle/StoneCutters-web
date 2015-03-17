@@ -146,11 +146,8 @@ function getNumberPerCategory(service) {
     if (service === 'ADX') {
         return typeof number === 'undefined' ? 1 : number;
     }
-    if (action == 'statics') {
+    if (!cat || action === 'statics') {
         cat = action;
-    }
-    else if (!cat) {
-        cat = this.app.session.get('currentRoute').action;
     }
 
     return utils.get(this.config, ['numberPerCategoryCSA', cat], number);
