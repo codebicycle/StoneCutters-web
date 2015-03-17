@@ -299,7 +299,11 @@ function toData(includeImages) {
     if (_.isObject(data.priceC)) {
         data.priceC = data.priceC.amount;
     }
-    if (data.priceC) {
+    if (data.priceC && !data.priceType) {
+        data.priceC = parseFloat(data.priceC);
+        data.priceType = 'FIXED';
+    }
+    else if (data.priceC) {
         data.priceC = parseFloat(data.priceC);
     }
     else if (data.priceType) {

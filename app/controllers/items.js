@@ -7,6 +7,7 @@ var helpers = require('../helpers');
 var Filters = require('../modules/filters');
 var Item = require('../models/item');
 var config = require('../../shared/config');
+var Shops = require('../modules/shops');
 
 module.exports = {
     show: middlewares(show),
@@ -34,6 +35,8 @@ function show(params, callback) {
         var platform = this.app.session.get('platform');
         var newItemPage = helpers.features.isEnabled.call(this, 'newItemPage');
         var anonymousItem;
+        
+        new Shops(this).evaluate(params);
 
         var promise = asynquence().or(fail.bind(this))
             .then(prepare.bind(this))

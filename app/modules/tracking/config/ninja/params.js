@@ -97,6 +97,30 @@ module.exports = {
     'post#flow#categories': {
         trackPage: 'postingFormStep2'
     },
+    'post#flowMarketing': {
+        trackPage: 'postingFormStep1'
+    },
+    'post#flowMarketing#desktop_step1': {
+        trackPage: 'postingFormStep1'
+    },
+    'post#flowMarketing#desktop_step2': {
+        trackPage: 'postingFormStep2'
+    },
+    'post#flowMarketing#categories': {
+        trackPage: 'postingFormStep2'
+    },
+    'post#renew': {
+        trackPage: 'postingFormStep1'
+    },
+    'post#renew#desktop_step1': {
+        trackPage: 'postingFormStep1'
+    },
+    'post#renew#desktop_step2': {
+        trackPage: 'postingFormStep2'
+    },
+    'post#renew#categories': {
+        trackPage: 'postingFormStep2'
+    },
     'post#subcategories': {
         trackPage: 'postingFormStep2'
     },
