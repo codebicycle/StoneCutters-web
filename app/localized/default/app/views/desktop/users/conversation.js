@@ -66,7 +66,7 @@ module.exports = Base.extend({
         }
 
         function submit(done) {
-            this.$('.spinner, .reply-send').toggle();
+            this.$('.spinner').removeClass('hide');
             this.conversation.reply(done);
         }
 
@@ -92,7 +92,7 @@ module.exports = Base.extend({
         }
 
         function fail(err) {
-            this.$('.spinner, .reply-send').toggle();
+            this.$('.spinner').addClass('hide');
             this.$('[data-messageText]').addClass('error');
         }
     },
