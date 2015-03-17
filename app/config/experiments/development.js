@@ -22,7 +22,7 @@ module.exports = {
         }
     },
     html4ShowShops: {
-        enabled: false,
+        enabled: true,
         platforms: ['html4'],
         markets: ['ke'],
         name: 'show-shops',
@@ -34,5 +34,5 @@ module.exports = {
             CALL_TO_ACTION_MAP: 'calltoactions_map'
         },
         firstClick: true
-    }    
+    }
 };
