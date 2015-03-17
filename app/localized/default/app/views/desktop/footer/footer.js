@@ -1,9 +1,10 @@
 'use strict';
 
+var _ = require('underscore');
 var Base = require('../../../../../common/app/bases/view').requireView('footer/footer');
+var utils = require('../../../../../../../shared/utils');
 var config = require('../../../../../../../shared/config');
 var FeatureAd = require('../../../../../../models/feature_ad');
-var _ = require('underscore');
 
 module.exports = Base.extend({
     tagName: 'footer',
@@ -46,12 +47,12 @@ module.exports = Base.extend({
         });
     },
     postRender: function() {
-        //if (this.app.session.get('schibsted')) {
+        if (utils.getUrlParam('from') === 'schibsted') {
             $('#migrations-modal').trigger('show');
             window.setTimeout(function onTimeout(){
                 $('#migrations-modal').trigger('hide');
             }, 10000);
-        //}
+        }
         if (this.firstRender) {
             $('body').on('click', function(event){
                 var $slide = this.$('[data-footer-content]');
