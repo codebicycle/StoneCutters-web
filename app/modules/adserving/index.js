@@ -141,11 +141,15 @@ function getClientId(service) {
 function getNumberPerCategory(service) {
     var number = this.config.params.number;
     var cat = getCategoryId.call(this);
+    var action = this.app.session.get('currentRoute').action;
 
     if (service === 'ADX') {
         return typeof number === 'undefined' ? 1 : number;
     }
-    if (!cat) {
+    if (action == 'statics') {
+        cat = action;
+    }
+    else if (!cat) {
         cat = this.app.session.get('currentRoute').action;
     }
 
