@@ -33,9 +33,11 @@ module.exports = Base.extend({
         var user = this.app.session.get('user');
 
         if (user.unreadConversationsCount) {
-            this.$('.count').text('(' + user.unreadConversationsCount + ')');
+            this.$('.count').text(user.unreadConversationsCount);
+            this.$('.count').removeClass('hide');
         }
         else {
+            this.$('.count').addClass('hide');
             return this.$('.count').empty();
         }
     }
