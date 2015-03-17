@@ -48,9 +48,8 @@ function prepare(done, ctx, ninja) {
 }
 
 function requestIframeUrl(url, callback) {
-    var referer = this.app.session.get('url');
     var adapter = new Adapter({});
-    var options = getRequestOptions.call(this);
+    var options = getRequestOptions.call(this, url);
 
     adapter.request(this.app.req, options, {
         timeout: 100,
@@ -61,7 +60,7 @@ function requestIframeUrl(url, callback) {
     }, callback);
 }
 
-function getRequestOptions() {
+function getRequestOptions(url) {
     var options = {
         method: 'GET',
         url: url
@@ -69,7 +68,7 @@ function getRequestOptions() {
 
     if (utils.isServer) {
         options.headers = {
-            Referer: utils.fullizeUrl(referer, this.app)
+            Referer: utils.fullizeUrl(this.app.session.get('url'), this.app)
         };
     }
     return options;
