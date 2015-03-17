@@ -7,7 +7,6 @@ var helpers = require('../helpers');
 var Paginator = require('../modules/paginator');
 var User = require('../models/user');
 var Conversation = require('../models/conversation');
-var Conversationmail = require('../models/conversationmail');
 var FeatureAd = require('../models/feature_ad');
 var config = require('../../shared/config');
 
@@ -756,7 +755,8 @@ function conversation(params, callback) {
             delete params.thread;
             _params = _.extend({}, params, {
                 token: user.token,
-                userId: user.userId
+                userId: user.userId,
+                conversation_type: 'login',
             });
             done();
         }.bind(this);
@@ -836,11 +836,11 @@ function conversationmail(params, callback) {
         var location = this.app.session.get('location');
         var languages = this.app.session.get('languages');
         var page = params ? params.page : undefined;
-        var hash;
-        var _params;
-        var user;
         var view = 'users/myolx';
         var pageSize = platform === 'html5' ? 'myConvHtml5' : 'myConv';
+        var conversation;
+        var _params;
+        var user;
 
         var redirect = function(done) {
             if (platform !== 'desktop' && platform !== 'html5') {
@@ -854,6 +854,7 @@ function conversationmail(params, callback) {
             Paginator.prepare(this.app, params, pageSize);
             params.location = location.url;
             params.languageId = languages._byId[this.app.session.get('selectedLanguage')].id;
+            params.conversation_type = 'hash';
 
             done();
         }.bind(this);
@@ -861,7 +862,7 @@ function conversationmail(params, callback) {
         var fetch = function(done) {
             this.app.fetch({
                 thread: {
-                    model: 'Conversationmail',
+                    model: 'Conversation',
                     params: params
                 }
             }, {
@@ -887,6 +888,14 @@ function conversationmail(params, callback) {
             done(res);
         }.bind(this);
 
+        var markAsRead = function(done, res) {
+            conversation = res.thread;
+            conversation.set('platform', platform);
+            conversation.set('location', location.url);
+            conversation.set('hash', params.hash);
+            conversation.markAsRead(done);
+        }.bind(this);
+
         var success = function(response) {
             this.app.seo.addMetatag('robots', 'noindex, nofollow');
             this.app.seo.addMetatag('googlebot', 'noindex, nofollow');
@@ -896,11 +905,11 @@ function conversationmail(params, callback) {
             }
 
             callback(null, view, {
-                thread: response.thread,
+                thread: conversation,
                 include: ['thread'],
                 viewname: 'conversation',
-                paginator: response.thread.paginator,
-                frommail: true
+                paginator: conversation.paginator,
+                form: this.form
             });
         }.bind(this);
 
@@ -914,6 +923,7 @@ function conversationmail(params, callback) {
             .then(prepare)
             .then(fetch)
             .then(paginate)
+            .then(markAsRead)
             .val(success);
     }
 }

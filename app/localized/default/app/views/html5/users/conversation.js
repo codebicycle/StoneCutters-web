@@ -17,22 +17,11 @@ module.exports = Base.extend({
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
 
-        data.thread = this.getThread();
+        data.thread = this.getConversation();
         return data;
     },
     postRender: function() {
         this.checkPosition();
-        if (!this.rendered) {
-            this.conversation = new Conversation({
-                country: this.app.session.get('location').abbreviation,
-                platform: this.app.session.get('platform'),
-                user: this.app.session.get('user'),
-                threadId: this.getThread().get('threadId')
-            }, {
-                app: this.app
-            });
-        }
-        this.rendered = true;
         this.app.router.once('action:end', this.onStart);
         this.app.router.once('action:start', this.onEnd.bind(this));
     },
@@ -44,7 +33,7 @@ module.exports = Base.extend({
         var field = $(event.target);
 
         if (this.validate(field)) {
-            this.conversation.set(field.attr('name'), field.val());
+            this.getConversation().set(field.attr('name'), field.val());
         }
     },
     onSubmit: function(event) {
@@ -52,9 +41,12 @@ module.exports = Base.extend({
         event.stopPropagation();
         event.stopImmediatePropagation();
 
+        var params = {};
+
         asynquence().or(fail.bind(this))
             .then(validate.bind(this))
             .then(submit.bind(this))
+            .then(prepare.bind(this))
             .then(success.bind(this))
             .val(change.bind(this));
 
@@ -69,19 +61,29 @@ module.exports = Base.extend({
         function submit(done) {
             this.$('.reply-send').addClass('hide');
             this.$('.spinner').removeClass('hide');
-            this.conversation.reply(done);
+            this.getConversation().reply(done);
+        }
+
+        function prepare(done) {
+            params.pageSize = 300;
+            params.conversation_type = this.parentView.getConversation().get('conversation_type');
+
+            if (this.parentView.getConversation().get('conversation_type') === 'login') {
+                params.token = this.parentView.getConversation().get('user').token;
+                params.userId = this.parentView.getConversation().get('user').userId;
+                params.threadId = this.parentView.getConversation().get('threadId');
+            }
+            else {
+                params.hash = this.parentView.getConversation().get('hash');
+            }
+            done();
         }
 
         function success(done) {
             this.app.fetch({
                     thread: {
                     model: 'Conversation',
-                    params: {
-                        token: this.conversation.get('user').token,
-                        userId: this.conversation.get('user').userId,
-                        threadId: this.conversation.get('threadId'),
-                        pageSize: 300
-                    }
+                    params: params
                 }
             }, {
                 readFromCache: false
@@ -89,7 +91,10 @@ module.exports = Base.extend({
         }
 
         function change(res) {
-            this.thread = res.thread;
+            this.conversation = res.conversation;
+            this.getConversation().set('user', this.app.session.get('user'));
+            this.getConversation().set('platform', this.app.session.get('platform'));
+            this.getConversation().set('location', this.app.session.get('location').url);
             this.render();
         }
 
@@ -120,11 +125,11 @@ module.exports = Base.extend({
             }, 200);
         }, 100);
     },
-    getThread: function() {
-        this.thread = this.thread || (this.options.thread && this.options.thread.toJSON ? this.options.thread : new Conversation(this.options.thread || {}, {
+    getConversation: function() {
+        this.conversation = this.conversation || (this.options.thread && this.options.thread.toJSON ? this.options.thread : new Conversation(this.options.thread || {}, {
             app: this.app
         }));
-        return this.thread;
+        return this.conversation;
     },
     validate: function(field) {
         if (!field.val()) {
