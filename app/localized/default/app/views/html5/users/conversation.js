@@ -51,7 +51,6 @@ module.exports = Base.extend({
             .val(change.bind(this));
 
         function validate(done) {
-
             if (!this.validate(this.$('[data-messageText]'))) {
                 return done.abort();
             }
@@ -66,22 +65,22 @@ module.exports = Base.extend({
 
         function prepare(done) {
             params.pageSize = 300;
-            params.conversation_type = this.parentView.getConversation().get('conversation_type');
+            params.conversation_type = this.getConversation().get('conversation_type');
 
-            if (this.parentView.getConversation().get('conversation_type') === 'login') {
-                params.token = this.parentView.getConversation().get('user').token;
-                params.userId = this.parentView.getConversation().get('user').userId;
-                params.threadId = this.parentView.getConversation().get('threadId');
+            if (this.getConversation().get('conversation_type') === 'login') {
+                params.token = this.getConversation().get('user').token;
+                params.userId = this.getConversation().get('user').userId;
+                params.threadId = this.getConversation().get('threadId');
             }
             else {
-                params.hash = this.parentView.getConversation().get('hash');
+                params.hash = this.getConversation().get('hash');
             }
             done();
         }
 
         function success(done) {
             this.app.fetch({
-                    thread: {
+                conversation: {
                     model: 'Conversation',
                     params: params
                 }
