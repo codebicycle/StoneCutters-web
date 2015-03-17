@@ -50,20 +50,29 @@ function prepare(done, ctx, ninja) {
 function requestIframeUrl(url, callback) {
     var referer = this.app.session.get('url');
     var adapter = new Adapter({});
+    var options = getRequestOptions.call(this);
 
-    adapter.request(this.app.req, {
-        method: 'GET',
-        url: url,
-        headers: {
-            Referer: utils.fullizeUrl(referer, this.app)
-        }
-    }, {
+    adapter.request(this.app.req, options, {
         timeout: 100,
         onTimeout: function onTimeout() {
             statsd.increment([this.app.session.get('location').abbreviation, 'tracking', 'ninja', 'error', 'timeout', this.app.session.get('platform')]);
             callback(true);
         }.bind(this)
     }, callback);
+}
+
+function getRequestOptions() {
+    var options = {
+        method: 'GET',
+        url: url
+    };
+
+    if (utils.isServer) {
+        options.headers = {
+            Referer: utils.fullizeUrl(referer, this.app)
+        };
+    }
+    return options;
 }
 
 function getIframeUrl(ninja) {
