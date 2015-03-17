@@ -1,5 +1,5 @@
 .posting-price-view {
-	
+
 	.field-controls {
 
 		.text-field {
@@ -14,32 +14,53 @@
 			border-radius: 0;
 
 		}
-		
+
 		#field-currency_type {
 
 			width: 15%;
-				border-right-width: 0;
-				border-radius: 3px 0 0 3px;
+			border-right-width: 0;
+			border-radius: 3px 0 0 3px;
 
 		}
-		
+
 		#field-priceType {
 
 			width: 25%;
-				border-left-width: 0;
-				border-radius: 0 3px 3px 0;
-
+			border-left-width: 0;
+			border-radius: 0 3px 3px 0;
+			&.negotiable {
+				width: auto;
+				margin-left: 2px;
+				display: inline-block;
+				vertical-align: middle;
+			}
 		}
-		
+
+		.price-negotiable {
+			border-radius(0 3px 3px 0 );
+			border: 1px solid $greyBorders;
+			border-left: 0;
+			box-sizing: border-box;
+			color: $black;
+			display: inline-block;
+			height: 36px;
+			line-height: 36px;
+			vertical-align: middle;
+			width: 25%;
+			text-align: right;
+			padding-right: 10px;
+		}
+
+
 		.message {
 
 			float: left;
 			width: 100%;
 
 		}
-	
+
 	}
-	
+
 	.field-wrapper {
 
 		&.success,
@@ -55,7 +76,7 @@
 				}
 
 			}
-		
+
 		}
 
 	}

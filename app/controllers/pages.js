@@ -19,7 +19,9 @@ module.exports = {
     sitemapByDate: middlewares(sitemapByDate),
     thanks: middlewares(thanks),
     didyousell: middlewares(didyousell),
-    mobilepromo: middlewares(mobilepromo)
+    mobilepromo: middlewares(mobilepromo),
+    shops: middlewares(shops),
+    shop: middlewares(shop)
 };
 
 function terms(params, callback) {
@@ -412,7 +414,11 @@ function thanks(params, callback) {
     helpers.controllers.control.call(this, params, controller);
 
     function controller() {
-        var redirect = function(done) {
+        asynquence().or(fail.bind(this))
+            .then(redirect.bind(this))
+            .val(success.bind(this));
+
+        function redirect(done) {
             var platform = this.app.session.get('platform');
             var location = this.app.session.get('location');
 
@@ -425,19 +431,42 @@ function thanks(params, callback) {
                 return helpers.common.redirect.call(this, '/');
             }
             done();
-        }.bind(this);
+        }
 
-        var success = function() {
+        function success() {
+            this.app.seo.addMetatag('title', 'Thank You! & Gracias! & Obrigado!');
             callback(null, {});
-        }.bind(this);
+        }
 
-        var error = function(err, res) {
+        function fail(err, res) {
             return helpers.common.error.call(this, err, res, callback);
-        }.bind(this);
+        }
+    }
+}
 
-        asynquence().or(error)
-            .then(redirect)
-            .val(success);
+function shops(params, callback) {
+    helpers.controllers.control.call(this, params, controller);
+
+    function controller() {
+        var platform = this.app.session.get('platform');
+
+        if (platform !== 'html4') {
+            return helpers.common.redirect.call(this, '/');
+        }
+        callback(null, {});
+    }
+}
+
+function shop(params, callback) {
+    helpers.controllers.control.call(this, params, controller);
+
+    function controller() {
+        var platform = this.app.session.get('platform');
+
+        if (platform !== 'html4') {
+            return helpers.common.redirect.call(this, '/');
+        }
+        callback(null, {});
     }
 }
 

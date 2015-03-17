@@ -96,7 +96,19 @@
                 {% if field.fieldType == 'text' %}
                     {{ TextInput(name = field.name, required = field.mandatory, value = field.value.value ) }}
                 {% elif field.fieldType == 'combobox' %}
-                    {{ Select(name = field.name, required = field.mandatory, options = field.values, selected = field.value.key) }}
+                    {% if field.name == 'priceType' and field.values.length > 2 %}
+                        {% set selected = false %}
+                        {% if field.value and field.value.key ==  'NEGOTIABLE' %}
+                            {% set selected = true %}
+                        {% endif %}
+                        {% for value in field.values %}
+                            {% if value.key ==  'NEGOTIABLE' %}
+                                <label class="price-negotiable text-field">{{ value.value }} <input id="field-{{ field.name }}" class="negotiable" type="checkbox" value="{{ value.key }}" {{ 'checked' if selected }} name="{{ field.name }}"></label>
+                            {% endif %}
+                        {% endfor %}
+                    {% else %}
+                        {{ Select(name = field.name, required = field.mandatory, options = field.values, selected = field.value.key) }}
+                    {% endif %}
                 {% endif %}
             {% endfor %}
             {% if hint %}

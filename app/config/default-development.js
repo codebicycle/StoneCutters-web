@@ -40,7 +40,7 @@ module.exports = {
     },
     localization: {
         wap: ['www.olx.co.za', 'www.olx.ir', 'www.olx.hn'],
-        html4: ['www.olx.co.za', 'www.olx.ir', 'www.olx.hn'],
+        html4: ['www.olx.co.za', 'www.olx.ir', 'www.olx.hn', 'www.olx.co.ke'],
         html5: ['www.olx.ir', 'www.olx.hn'],
         desktop: ['www.olx.co.za', 'www.olx.com.bo']
     },
@@ -147,8 +147,8 @@ module.exports = {
                 countries: []
             },
             hermes: {
-                worldwide: false,
-                countries: ['www.olx.com.uy']
+                worldwide: true,
+                countries: ['www.olx.es', 'www.olx.ae', 'www.olx.it', 'www.olx.com', 'www.olx.fr', 'www.olx.ir']
             }
         },
         desktop: {

@@ -26,7 +26,7 @@
         margin: 0;
     }
     .icon-happy {
-        background-image: url(imageUrl/images/html5/icons/icon_cara-verde.png);
+        background-image: url(imageUrl/images/html5/icon_cara-verde.png);
         display: inline-block;
         height: 36px;
         width: 37px;
@@ -44,13 +44,16 @@
         color: #darkBlue;
         font-size: $l;
     }
+    img {
+        width: 80%;
+    }
 
     p {
         color: $lightBlack;
         font-size: $m;
     }
     .categories-icons {
-        background-image: url(imageUrl/images/html5/icons/icons_category.png);
+        background-image: url(imageUrl/images/html5/icons_category.png);
         background-repeat: no-repeat;
         display: inline-block;
         height: 28px;
@@ -66,6 +69,7 @@
     border: 1px solid $greyBorders;
     clear-fix();
     margin: 20px 10px;
+    overflow: hidden;
     padding: 10px 0;
     text-align: center;
 
@@ -79,9 +83,9 @@
 
     p {
         color: $black;
-        float: left;
         font-size: $m;
         margin-bottom: 25px;
+        padding: 10px 10px 10px 0;
         text-align: center;
     }
     .didYouSellOptions {
@@ -93,10 +97,9 @@
     }
     article {
         border-top: 1px solid $greyBorders;
+        clear-fix();
         display: inline-block;
-        float: left;
-        height: 100px;
-        padding: 10px 10px 15px 10px;
+        padding: 30px 10px 20px 10px;
         width: 97%
 
         h3 {
@@ -106,7 +109,11 @@
             margin-bottom: 5px;
             text-align: left;
         }
+        a {
+            clear-fix();    
+        }
         p {
+            clear-fix();
             color: $black;
             font-size: $xs;
             text-align: left;
@@ -130,9 +137,10 @@
         float: left;
         height: 37px;
         width: 37px;
+        margin-top: -5px;
     }
     .icon-lamp {
-        background-image: url(imageUrl/images/html5/icons/icon_lampara-azul.png);
+        background-image: url(imageUrl/images/html5/icon_lampara-azul.png);
         clear-fix();
         float: none;
         height: 41px;
@@ -140,14 +148,14 @@
         width: 38px;
     }
     .icon-fb-round {
-        background-image: url(imageUrl/images/html5/icons/icon_facebook.png);
+        background-image: url(imageUrl/images/html5/icon_facebook.png);
     }
     .icon-ticket {
-        background-image: url(imageUrl/images/html5/icons/icon_ticket.png);
+        background-image: url(imageUrl/images/html5/icon_ticket.png);
         width: 40px;
     } 
     .icon-post {
-        background-image: url(imageUrl/images/html5/icons/icon_post.png);
+        background-image: url(imageUrl/images/html5/icon_post.png);
         height: 48px;
     }
     .facebookButton {

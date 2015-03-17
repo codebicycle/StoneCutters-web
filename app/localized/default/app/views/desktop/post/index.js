@@ -74,10 +74,19 @@ module.exports = Base.extend({
             this.$('#posting-locations-view').trigger('formRendered');
         }
         else {
-            if (this.getUrlParam('cat') !== undefined) {
+            if (this.getUrlParam('cat') !== undefined || this.getUrlParam('subcat')  !== undefined) {
+                var parentCategoryId =  this.getUrlParam('cat');
+                var subCategoryId = this.getUrlParam('subcat');
+
+                if( parentCategoryId === undefined ) {
+                    var categories = this.app.dependencies.categories;
+                    var subCategory = categories.search(subCategoryId);
+
+                    parentCategoryId = subCategory.attributes.parentId;
+                }
                 paramCategory = {
-                    parentCategory: this.getUrlParam('cat'),
-                    subCategory: this.getUrlParam('subcat')
+                    parentCategory: parentCategoryId,
+                    subCategory: subCategoryId
                 };
                 this.$('#posting-categories-view').trigger('getQueryCategory', paramCategory);
             }
@@ -184,7 +193,7 @@ module.exports = Base.extend({
                 }
             }
             field.name = $field.attr('name');
-            field.value = $field.val();
+            field.value = this.getValue($field);
         }
         if (shouldValidateField) {
             if (canValidateFields) {
@@ -212,6 +221,12 @@ module.exports = Base.extend({
             this.handleBack();
         }
     },
+    getValue: function(ele) {
+        if (ele[0].type !== 'checkbox') {
+            return ele[0].value;
+        }
+        return ele[0].checked ? ele[0].value : '';
+     },
     handleBack: function() {
         this.edited = true;
         history.pushState(null, '', window.location.pathname + window.location.search);
