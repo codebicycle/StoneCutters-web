@@ -579,12 +579,22 @@ function allresults(params, callback, gallery) {
         }.bind(this);
 
         var fetch = function(done, res) {
-            this.app.fetch({
+            var collections = {
                 items: {
                     collection: 'Items',
                     params: params
-                }
-            }, {
+                } 
+            };
+            var shops = new Shops(this);
+            if (shops.enabled()) {
+                collections.shops = {
+                    collection: 'Shops',
+                    params: _.clone(params),
+                };
+                collections.shops.params.pageSize = 3;
+                collections.shops.params.offset = 3 * (params.offset / params.pageSize);
+            }
+            this.app.fetch(collections, {
                 readFromCache: false
             }, function afterFetch(err, response) {
                 if (err) {
@@ -634,10 +644,10 @@ function allresults(params, callback, gallery) {
                 done.abort();
                 return helpers.common.redirect.call(this, url + '-p-' + realPage);
             }
-            done(res.items);
+            done(res.items, res.shops);
         }.bind(this);
 
-        var success = function(items) {
+        var success = function(items, shops) {
             var meta = items.meta;
 
             this.app.seo.setContent(items.meta);
@@ -651,6 +661,7 @@ function allresults(params, callback, gallery) {
             callback(null, {
                 categories: this.dependencies.categories.toJSON(),
                 items: items.toJSON(),
+                shops: shops !== undefined ? shops.toJSON() : [],
                 meta: meta,
                 filters: items.filters,
                 paginator: items.paginator
