@@ -1,6 +1,7 @@
 'use strict';
 
 var Base = require('../../../../../../common/app/bases/view').requireView('categories/partials/country-area');
+var statsd = require('../../../../../../../../shared/statsd')();
 
 module.exports = Base.extend({
     events: {

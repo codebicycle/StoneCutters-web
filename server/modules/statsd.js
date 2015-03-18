@@ -1,5 +1,6 @@
 'use strict';
 
+var _ = require('underscore');
 var config = require('../config').get('statsD', {
     client: {
         host: 'graphite-server',
@@ -24,9 +25,12 @@ var rDot = /\./g;
 var Client = function(options) {
     var statsD = new StatsD(config.client);
 
-    function increment(metric, value) {
+    function increment(metric, value, options) {
         if (!(metric = stringify(metric))) {
             return;
+        }
+        if (_.isObject(value)) {
+            value = undefined;
         }
         statsD.increment(metric, value);
     }
@@ -70,6 +74,9 @@ function stringify(metric, value) {
     metric = metric.toLowerCase().replace(rSpace, SPACE).replace(rDot, DOT).replace(rSeparator, SEPARATOR);
     if (config.enabled || config.debug) {
         logger.log(metric + ': ' + (value || 1));
+    }
+    if (!metric.indexOf('dgd')) {
+        console.log(metric);
     }
     return metric;
 }

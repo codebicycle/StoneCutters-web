@@ -1,10 +1,11 @@
 'use strict';
 
-var Base = require('../../../../../common/app/bases/view').requireView('categories/list');
 var _ = require('underscore');
+var Base = require('../../../../../common/app/bases/view').requireView('categories/list');
 var helpers = require('../../../../../../helpers');
-var config = require('../../../../../../../shared/config');
 var Chat = require('../../../../../../modules/chat');
+var config = require('../../../../../../../shared/config');
+var statsd = require('../../../../../../../shared/statsd')();
 
 module.exports = Base.extend({
     tagName: 'main',
@@ -12,7 +13,8 @@ module.exports = Base.extend({
     className: 'categories-list-view',
     events: {
         'click .open-modal': 'onOpenModal',
-        'click [data-modal-shadow], [data-modal-close]': 'onCloseModal'
+        'click [data-modal-shadow], [data-modal-close]': 'onCloseModal',
+        'click [data-dgd-track]': 'onClickDgdTrack'
     },
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
@@ -65,5 +67,17 @@ module.exports = Base.extend({
         event.stopPropagation();
         event.stopImmediatePropagation();
         $('#location-modal').trigger('hide');
+    },
+    onClickDgdTrack: function(event) {
+        var $elem = $(event.currentTarget);
+        var type = $elem.data('dgd-track');
+        var options;
+
+        if (type === 'city') {
+            options = {
+                async: false
+            };
+        }
+        statsd.increment(['dgd', this.app.session.get('location').abbreviation, 'home', type, this.app.session.get('platform')], options);
     }
 });

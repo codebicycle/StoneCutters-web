@@ -105,32 +105,36 @@ module.exports = function(nunjucks) {
         var i;
         var j;
 
-        for (i = 0; i < shops.length; i++) {
-            index =  Math.floor(Math.random() * slice);
+        if (shops) {
+            for (i = 0; i < shops.length; i++) {
+                index =  Math.floor(Math.random() * slice);
 
-            for (j = 0; j < slice; j++) {
-                if ( index == j ) {
-                    shuffle.push({
-                        index: i,
-                        type: 'shop'
-                    });
-                    shopIndex += 1; 
-                }
-                else {
-                    shuffle.push({
-                        index: itemIndex,
-                        type: 'item'
-                    });
-                    itemIndex += 1;
+                for (j = 0; j < slice; j++) {
+                    if ( index == j ) {
+                        shuffle.push({
+                            index: i,
+                            type: 'shop'
+                        });
+                        shopIndex += 1; 
+                    }
+                    else {
+                        shuffle.push({
+                            index: itemIndex,
+                            type: 'item'
+                        });
+                        itemIndex += 1;
+                    }
                 }
             }
         }
+        
         for (i = itemIndex; i < items.length; i++) {
             shuffle.push({
                 index: i,
                 type: 'item'
             });
         }
+ 
         return shuffle;
     }
 

@@ -66,7 +66,8 @@ module.exports = Base.extend({
         }
 
         function submit(done) {
-            this.$('.spinner, .reply-send').toggle();
+            this.$('.spinner').removeClass('display-none');
+            this.$('.btn.orange').addClass('display-none');
             this.conversation.reply(done);
         }
 
@@ -92,18 +93,19 @@ module.exports = Base.extend({
         }
 
         function fail(err) {
-            this.$('.spinner, .reply-send').toggle();
+            this.$('.spinner').addClass('display-none');
+            this.$('.btn.orange').removeClass('display-none');
             this.$('[data-messageText]').addClass('error');
         }
     },
     validate: function(field) {
         if (!field.val()) {
-            this.$('[data-error]').removeClass('hide');
+            this.$('[data-error]').removeClass('display-none');
             this.$('[data-messageText]').addClass('error');
             return false;
         }
         else {
-            this.$('[data-error]').addClass('hide');
+            this.$('[data-error]').addClass('display-none');
             this.$('[data-messageText]').removeClass('error');
             return true;
         }

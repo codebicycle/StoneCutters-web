@@ -43,20 +43,27 @@ module.exports = Base.extend({
         event.stopPropagation();
         event.stopImmediatePropagation();
 
-        if(!$(event.currentTarget).hasClass('active')) {
-            var $image = $(event.currentTarget).find('img');
-            var image = $image.data('image');
-            var currentImage = $image.attr('src');
-            var currentImageAlt = $image.attr('alt');
-            var newImg = new Image();
+        var $elem = $(event.currentTarget);
+        var $image;
+        var $galleryImage;
+        var newImage;
+        var image;
+        var alt;
+
+        if(!$elem.hasClass('active')) {
+            $image = $elem.find('img');
+            $galleryImage = $('[data-gallery-image]');
+            image = $image.data('image');
+            alt = $image.attr('alt');
+            newImage = new Image();
 
             $('[data-gallery-thumb]').removeClass('active');
-            $(event.currentTarget).addClass('active');
+            $elem.addClass('active');
             $('[data-gallery-image]').attr('src', '').attr('alt', '').addClass('spinner');
 
-            newImg.src = image;
-            newImg.onload = function() {
-                $('[data-gallery-image]').removeClass('spinner').attr('src', image).attr('alt', currentImageAlt);
+            newImage.src = image;
+            newImage.onload = function() {
+                $galleryImage.removeClass('spinner').attr('src', image).attr('alt', alt);
             };
         }
     },
@@ -116,7 +123,14 @@ module.exports = Base.extend({
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();
-        $('#modal-image-gallery').trigger('show');
+
+        var $image = $('[data-gallery-thumb].active');
+        var args;
+
+        if ($image.length) {
+            args = [$image.data('gallery-thumb')];
+        }
+        $('#modal-image-gallery').trigger('show', args);
     },
     onCloseModal: function(event) {
         event.preventDefault();

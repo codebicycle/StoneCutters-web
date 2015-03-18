@@ -10,6 +10,7 @@ var FeatureAd = require('../models/feature_ad');
 var config = require('../../shared/config');
 var utils = require('../../shared/utils');
 var config = require('../../shared/config');
+var statsd = require('../../shared/statsd')();
 var Shops = require('../modules/shops');
 
 module.exports = {
@@ -74,6 +75,7 @@ function search(params, callback, gallery) {
             .then(fetch.bind(this))
             .then(filters.bind(this))
             .then(paginate.bind(this))
+            .then(metrics.bind(this))
             .val(success.bind(this));
 
         function redirect(done) {
@@ -244,6 +246,28 @@ function search(params, callback, gallery) {
             done(res.items, res.shops);
         }
 
+        function metrics(done, items, shops) {
+            var type = (gallery ? 'gallery' : 'listing');
+            var quantity = 'empty';
+
+            if (items.meta.total) {
+                if (items.meta.total <= 10) {
+                    quantity = 10;
+                }
+                else if (items.meta.total <= 50) {
+                    quantity = 50;
+                }
+                else if (items.meta.total <= 100) {
+                    quantity = 100;
+                }
+                else {
+                    quantity = 'enough';
+                }
+            }
+            statsd.increment(['dgd', this.app.session.get('location').abbreviation, 'search', 'qty', type, quantity, this.app.session.get('platform')]);
+            done(items, shops);
+        }
+
         function success(items, shops) {
             var _category = category ? category.toJSON() : undefined;
             var _subcategory = subcategory ? subcategory.toJSON() : undefined;
@@ -262,6 +286,9 @@ function search(params, callback, gallery) {
             this.app.tracking.set('filters', items.filters);
             this.app.tracking.set('paginator', items.paginator);
 
+            this.app.session.persist({
+                currentSearch: query.search
+            });
             this.app.session.update({
                 dataPage: {
                     search: query.search,
@@ -579,12 +606,22 @@ function allresults(params, callback, gallery) {
         }.bind(this);
 
         var fetch = function(done, res) {
-            this.app.fetch({
+            var collections = {
                 items: {
                     collection: 'Items',
                     params: params
-                }
-            }, {
+                } 
+            };
+            var shops = new Shops(this);
+            if (shops.enabled()) {
+                collections.shops = {
+                    collection: 'Shops',
+                    params: _.clone(params),
+                };
+                collections.shops.params.pageSize = 3;
+                collections.shops.params.offset = 3 * (params.offset / params.pageSize);
+            }
+            this.app.fetch(collections, {
                 readFromCache: false
             }, function afterFetch(err, response) {
                 if (err) {
@@ -634,10 +671,10 @@ function allresults(params, callback, gallery) {
                 done.abort();
                 return helpers.common.redirect.call(this, url + '-p-' + realPage);
             }
-            done(res.items);
+            done(res.items, res.shops);
         }.bind(this);
 
-        var success = function(items) {
+        var success = function(items, shops) {
             var meta = items.meta;
 
             this.app.seo.setContent(items.meta);
@@ -651,6 +688,7 @@ function allresults(params, callback, gallery) {
             callback(null, {
                 categories: this.dependencies.categories.toJSON(),
                 items: items.toJSON(),
+                shops: shops !== undefined ? shops.toJSON() : [],
                 meta: meta,
                 filters: items.filters,
                 paginator: items.paginator
