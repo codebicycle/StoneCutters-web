@@ -18,8 +18,11 @@ function prepare(params, done) {
     }
     this.app.session.clear('page');
     this.app.session.clear('dataPage');
+    this.app.session.clear('currentSearch');
+    this.app.session.persist({
+        currentRoute: this.currentRoute
+    });
     this.app.session.update({
-        currentRoute: this.currentRoute,
         params: params
     });
     if (params && params.filters && !utils.startsWith(params.filters, '-')) {
