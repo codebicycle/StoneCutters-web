@@ -57,11 +57,6 @@ module.exports = Base.extend({
             done();
         }
 
-        function submit(done) {
-            this.$('.spinner').removeClass('hide');
-            this.parentView.getConversation().reply(done);
-        }
-
         function prepare(done) {
             params.pageSize = 300;
             params.conversation_type = this.parentView.getConversation().get('conversation_type');
@@ -75,6 +70,12 @@ module.exports = Base.extend({
                 params.hash = this.parentView.getConversation().get('hash');
             }
             done();
+        }
+
+        function submit(done) {
+            this.$('.spinner').removeClass('display-none');
+            this.$('.btn.orange').addClass('display-none');
+            this.parentView.getConversation().reply(done);
         }
 
         function success(done) {
@@ -98,18 +99,19 @@ module.exports = Base.extend({
         }
 
         function fail(err) {
-            this.$('.spinner').addClass('hide');
+            this.$('.spinner').addClass('display-none');
+            this.$('.btn.orange').removeClass('display-none');
             this.$('[data-messageText]').addClass('error');
         }
     },
     validate: function(field) {
         if (!field.val()) {
-            this.$('[data-error]').removeClass('hide');
+            this.$('[data-error]').removeClass('display-none');
             this.$('[data-messageText]').addClass('error');
             return false;
         }
         else {
-            this.$('[data-error]').addClass('hide');
+            this.$('[data-error]').addClass('display-none');
             this.$('[data-messageText]').removeClass('error');
             return true;
         }

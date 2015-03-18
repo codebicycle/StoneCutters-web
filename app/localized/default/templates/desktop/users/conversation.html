@@ -50,8 +50,8 @@
     <div class="conversation-input">
         <form data-message-reply data-threadId="{{ thread.get('threadId') }}">
             <textarea data-messageText class="text-field"  name="message" ></textarea>
-            <p data-error class="error hide">{{ dictionary["misc.please-comp-msg"] }}</p>
-            <div class="spinner hide"></div>
+            <p data-error class="error display-none">{{ dictionary["misc.please-comp-msg"] }}</p>
+            <div class="spinner display-none"></div>
             <button class="btn orange" type="submit">{{ dictionary["myolx.Reply"] }}</button>
             {% if phone %}
                 <span class="phone">{{ dictionary["posting_footerlist.phoneNumber"] }}: {{ phone }}</span>
