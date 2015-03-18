@@ -21,14 +21,16 @@ function prepareNavigation(data) {
     }
 }
 
-function get(data) {
+function get(data, options) {
     var currentRoute = data.app.session.get('currentRoute');
     var referer = data.app.session.get('referer');
     var breadcrumb;
     var controller;
 
+    options = options || {};
+
     prepareNavigation(data);
-    if (currentRoute.controller !== this.name.split('/').shift()) {
+    if (currentRoute.controller !== this.name.split('/').shift() && !options.force) {
         return data.app.session.get('breadcrumb');
     }
     controller = rules[currentRoute.controller];
@@ -43,6 +45,30 @@ function get(data) {
     return breadcrumb;
 }
 
+function getCancel(data) {
+    var currentRoute = this.app.session.get('currentRoute');
+    var breadcrumb = '/';
+    var url;
+
+    switch (currentRoute.action) {
+        case 'register':
+        case 'lostpassword':
+            breadcrumb = '/login';
+            break;
+        case 'reply':
+            breadcrumb = this.app.session.get('path').replace('/reply', '');
+            break;
+        case 'filter':
+            breadcrumb = this.app.session.get('path').replace('/filter', '');
+            break;
+        case 'sort':
+            breadcrumb = this.app.session.get('path').replace('/sort', '');
+            break;
+    }
+    return breadcrumb;
+}
+
 module.exports = {
-    get: get
+    get: get,
+    getCancel: getCancel
 };
