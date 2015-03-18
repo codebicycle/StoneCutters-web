@@ -2,7 +2,7 @@ module.exports = {
     categoryTree: {
         'default': {
             order: [830, 362, 811, 191, 800, 815, 938, 806, 853, 16, 881, 859, 821],
-            columns: [4, 3, 3],
+            columns: [4, 3, 3, 3],
             redirections: {
                 '864': 881,
                 '863': 861,
