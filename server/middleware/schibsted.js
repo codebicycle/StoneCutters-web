@@ -13,7 +13,7 @@ module.exports = function(dataAdapter, excludedUrls) {
             });
             var host = req.headers.host;
             var url = '/';
-            var query;
+            var query = {};
             var parts;
 
             if (!from) {
@@ -21,51 +21,80 @@ module.exports = function(dataAdapter, excludedUrls) {
             }
             host = host.replace(from, schibsted[from].to);
             parts = req.path.split('/').slice(1);
+            if (!utils.startsWith(host, 'm.')) {
+                if (parseRegion(parts[0])) {
+                    parts = parts.slice(1);
+                }
+                if (parseArea(parts[0])) {
+                    parts = parts.slice(1);
+                }
+                if (parseCategory(parts[0])) {
+                    parts = parts.slice(1);
+                }
+            }
+            else {
+                _.each(req.originalUrl.split('?').pop().split('&'), function each(param) {
+                    param = param.split('=');
+                    query[param[0]] = param[1];
+                });
+                parseRegion(query.ca, true);
+                parseArea(query.m, true);
+                parseCategory(query.cg, true);
+            }
 
-            (function parseRegion() {
-                var region = parts[0];
+            function parseRegion(region, isM) {
+                var id;
+                var to;
 
                 if (!region) {
                     return;
                 }
                 region = decodeURIComponent(region).split('-').shift();
-                if (!schibsted[from].regions[region]) {
+                id = isM ? schibsted[from].regionsIds[region] : region;
+                to = schibsted[from].regions[id];
+                if (!to) {
                     return;
                 }
-                host = host.replace(host.split('.').shift(), schibsted[from].regions[region]);
-                parts = parts.slice(1);
-            })();
+                host = host.replace(host.split('.').shift(), to);
+                return true;
+            }
 
-            (function parseArea() {
-                var area = parts[0];
+            function parseArea(area, isM) {
+                var id;
+                var to;
 
                 if (!area) {
                     return;
                 }
                 area = decodeURIComponent(area).split('-').shift();
-                if (!schibsted[from].areas[area]) {
+                id = isM ? schibsted[from].areasIds[area] : area;
+                to = schibsted[from].areas[id];
+                if (!to) {
                     return;
                 }
-                host = host.replace(host.split('.').shift(), schibsted[from].areas[area]);
-                parts = parts.slice(1);
-            })();
+                host = host.replace(host.split('.').shift(), to);
+                return true;
+            }
 
-            (function parseCategory() {
-                var category = parts[0];
+            function parseCategory(category, isM) {
+                var id;
+                var to;
 
                 if (!category) {
                     return;
                 }
                 category = decodeURIComponent(category).split('-').shift();
-                if (!schibsted[from].categories[category]) {
+                id = isM ? schibsted[from].categoriesIds[category] : category;
+                to = schibsted[from].categories[id];
+                if (!to) {
                     url = '/nf/all-results';
-                    return;
+                    return true;
                 }
-                url = '/' + schibsted[from].categories[category];
-                parts = parts.slice(1);
-            })();
+                url = '/' + to;
+                return true;
+            }
 
-            url = 'http://' + host.replace(from, schibsted[from].to) + url;
+            url = 'http://' + host + url;
             url = utils.params(url, 'from', 'schibsted');
             return res.redirect(301, url);
         };
