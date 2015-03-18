@@ -51,7 +51,7 @@ module.exports = Base.extend({
         var $elem = $(event.currentTarget);
         var order = $elem.data('dgd-track');
 
-        statsd.increment(['dgd', this.app.session.get('location').abbreviation, 'search', 'category', order, this.app.session.get('platform')]);
+        statsd.increment([this.app.session.get('location').abbreviation, 'dgd', 'search', 'category', order, this.app.session.get('platform')]);
     }
 });
 
