@@ -273,75 +273,14 @@ module.exports = function userRouter(app) {
 
     function reply() {
         app.post('/myolx/conversation/:threadId', handler);
-
-        function handler(req, res, next) {
-            var threadId = req.param('threadId', null);
-            var conversation;
-            var reply;
-
-            function parse(done) {
-                formidable.parse(req, done.errfcb);
-            }
-
-            function prepare(done, data) {
-                var user = req.rendrApp.session.get('user');
-
-                reply = data;
-                conversation = new Conversation({
-                    country: req.rendrApp.session.get('location').abbreviation,
-                    location: req.rendrApp.session.get('location').url,
-                    platform: req.rendrApp.session.get('platform'),
-                    languageId: req.rendrApp.session.get('languageId'),
-                    user: user,
-                    threadId: threadId,
-                    message: data.message
-                }, {
-                    app: req.rendrApp
-                });
-                done();
-            }
-
-            function submit(done) {
-                conversation.reply(done);
-            }
-
-            function success() {
-                var url = '/myolx/conversation/' + threadId + '#message';
-
-                res.redirect(utils.link(url, req.rendrApp));
-                end();
-            }
-
-            function error(err) {
-                var url = '/myolx/conversation/' + threadId + '#message';
-
-                formidable.error(req, url.split('?').shift(), err, reply, function redirect(url) {
-                    res.redirect(utils.link(url, req.rendrApp));
-                    end(err);
-                });
-            }
-
-            function end(err) {
-                if (next && next.errfcb) {
-                    next.errfcb(err);
-                }
-            }
-
-            asynquence().or(error)
-                .then(parse)
-                .then(prepare)
-                .then(submit)
-                .val(success);
-        }
-    }
-
-    function replyMail() {
         app.post('/myolx/conversation/mail/:hash', handler);
 
         function handler(req, res, next) {
+            var threadId = req.param('threadId', null);
             var hash = req.param('hash', null);
             var conversation;
             var reply;
+            var url;
 
             function parse(done) {
                 formidable.parse(req, done.errfcb);
@@ -356,12 +295,19 @@ module.exports = function userRouter(app) {
                     location: req.rendrApp.session.get('location').url,
                     platform: req.rendrApp.session.get('platform'),
                     languageId: req.rendrApp.session.get('languageId'),
-                    hash: hash,
                     message: data.message
                 }, {
                     app: req.rendrApp
                 });
-                hash = encodeURIComponent(hash);
+                if (threadId) {
+                    conversation.set('user', user);
+                    conversation.set('threadId', threadId);
+                    url = '/myolx/conversation/' + threadId + '#message';
+                }
+                else if (hash) {
+                    conversation.set('hash', hash);
+                    url = '/myolx/conversation/mail/' + encodeURIComponent(hash) + '#message';
+                }
                 done();
             }
 
@@ -370,15 +316,11 @@ module.exports = function userRouter(app) {
             }
 
             function success() {
-                var url = '/myolx/conversation/mail/' + hash + '#message';
-
                 res.redirect(utils.link(url, req.rendrApp));
                 end();
             }
 
             function error(err) {
-                var url = '/myolx/conversation/mail/' + hash + '#message';
-
                 formidable.error(req, url.split('?').shift(), err, reply, function redirect(url) {
                     res.redirect(utils.link(url, req.rendrApp));
                     end(err);
@@ -404,7 +346,6 @@ module.exports = function userRouter(app) {
         register: register(),
         lostpassword: lostpassword(),
         registerwithConfirmation: registerwithConfirmation(),
-        reply: reply(),
-        replyMail: replyMail()
+        reply: reply()
     };
 };
