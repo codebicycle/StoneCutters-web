@@ -18,7 +18,7 @@
                 <ul class="sub-categories {{ filter.name }}">
                     {% for value in filter.value %}
                         <li>
-                            <a href="#" data-filter-id="{{ value.id }}" data-filter-name="{{ value.value }}" data-filter-slug="{{ value.slug }}" >{{ value.value }} <span class="count">{{ value.count }}</span></a>
+                            <a href="#" data-filter-id="{{ value.id }}" data-filter-name="{{ value.value }}" data-filter-slug="{{ value.slug }}" data-dgd-track="{{ loop.index }}">{{ value.value }} <span class="count">{{ value.count }}</span></a>
                         </li>
                     {% endfor %}
                 </ul>
