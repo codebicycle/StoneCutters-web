@@ -24,6 +24,20 @@ function getCurrentPath(path) {
     return path;
 }
 
+function getDefaults(options, page) {
+    var params = utils.get(configTracking, ['ninja', 'params', page]);
+    var pageName;
+
+    if (!params) {
+        pageName = page.split('#');
+        if (pageName.length > 2) {
+            pageName.pop();
+            params = utils.get(configTracking, ['ninja', 'params', pageName.join('#')]);
+        }
+    }
+    return params || {};
+}
+
 function setDefaults(params, options, page) {
     var user = this.app.session.get('user');
     var location = this.app.session.get('location');
@@ -98,7 +112,7 @@ function setExtras(params, options) {
 }
 
 function get(page, options) {
-    var params = utils.get(configTracking, ['ninja', 'params', page], {});
+    var params = getDefaults.call(this, options, page);
 
     setDefaults.call(this, params, options, page);
     setCustoms.call(this, params, options);
