@@ -10,6 +10,7 @@ var FeatureAd = require('../models/feature_ad');
 var config = require('../../shared/config');
 var utils = require('../../shared/utils');
 var config = require('../../shared/config');
+var statsd = require('../../shared/statsd')();
 var Shops = require('../modules/shops');
 
 module.exports = {
@@ -74,6 +75,7 @@ function search(params, callback, gallery) {
             .then(fetch.bind(this))
             .then(filters.bind(this))
             .then(paginate.bind(this))
+            .then(metrics.bind(this))
             .val(success.bind(this));
 
         function redirect(done) {
@@ -244,6 +246,28 @@ function search(params, callback, gallery) {
             done(res.items, res.shops);
         }
 
+        function metrics(done, items, shops) {
+            var type = (gallery ? 'gallery' : 'listing');
+            var quantity = 'empty';
+
+            if (items.meta.total) {
+                if (items.meta.total <= 10) {
+                    quantity = 10;
+                }
+                else if (items.meta.total <= 50) {
+                    quantity = 50;
+                }
+                else if (items.meta.total <= 100) {
+                    quantity = 100;
+                }
+                else {
+                    quantity = 'enough';
+                }
+            }
+            statsd.increment(['dgd', this.app.session.get('location').abbreviation, 'search', 'qty', type, quantity, this.app.session.get('platform')]);
+            done(items, shops);
+        }
+
         function success(items, shops) {
             var _category = category ? category.toJSON() : undefined;
             var _subcategory = subcategory ? subcategory.toJSON() : undefined;
@@ -262,6 +286,9 @@ function search(params, callback, gallery) {
             this.app.tracking.set('filters', items.filters);
             this.app.tracking.set('paginator', items.paginator);
 
+            this.app.session.persist({
+                currentSearch: query.search
+            });
             this.app.session.update({
                 dataPage: {
                     search: query.search,
