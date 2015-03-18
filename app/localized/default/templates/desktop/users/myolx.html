@@ -9,7 +9,7 @@
 <ul class="myolxmenu">
     {% if frommail and not user %}
         <li class="{{ messagesClass }}{{ ' messages' if not isHermesEnabled }}">
-            <a href="{{ '/login' if isHermesEnabled else '/myolx/myolxmessages' | link }}">{{ dictionary["myolx.Messages"] }}</a>
+            <a href="{{ '/login' | link }}">{{ dictionary["myolx.Messages"] }}</a>
         </li>
     {% else %}
         <li class="{{ 'active' if viewname == 'myads' else '' }}">

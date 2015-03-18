@@ -906,7 +906,8 @@ function conversationmail(params, callback) {
                 include: ['thread'],
                 viewname: 'conversation',
                 paginator: conversation.paginator,
-                form: this.form
+                form: this.form,
+                frommail: true
             });
         }.bind(this);
 
