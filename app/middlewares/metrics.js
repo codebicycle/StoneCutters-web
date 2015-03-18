@@ -19,7 +19,7 @@ function searchRefine(params) {
             previousSearch = this.app.session.get('currentSearch');
 
             if ((params || {}).search !== previousSearch) {
-                statsd.increment(['dgd', this.app.session.get('location').abbreviation, 'search', 'refine', this.app.session.get('platform')]);
+                statsd.increment([this.app.session.get('location').abbreviation, 'dgd', 'search', 'refine', this.app.session.get('platform')]);
             }
         }
     }

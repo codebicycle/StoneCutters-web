@@ -264,7 +264,7 @@ function search(params, callback, gallery) {
                     quantity = 'enough';
                 }
             }
-            statsd.increment(['dgd', this.app.session.get('location').abbreviation, 'search', 'qty', type, quantity, this.app.session.get('platform')]);
+            statsd.increment([this.app.session.get('location').abbreviation, 'dgd', 'search', 'qty', type, quantity, this.app.session.get('platform')]);
             done(items, shops);
         }
 
