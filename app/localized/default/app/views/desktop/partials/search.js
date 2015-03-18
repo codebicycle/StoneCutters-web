@@ -23,7 +23,7 @@ module.exports = Base.extend({
         var search = this.$('form').find('[name=search]').val();
         var url = search ? ('/nf/search/' + search) : '/nf/all-results';
 
-        statsd.increment(['dgd', this.app.session.get('location').abbreviation, 'home', 'search', (search ? 'with' : 'without') + '_term', this.app.session.get('platform')]);
+        statsd.increment([this.app.session.get('location').abbreviation, 'dgd', 'home', 'search', (search ? 'with' : 'without') + '_term', this.app.session.get('platform')]);
 
         helpers.common.redirect.call(this.app.router, url, null, {
             status: 200

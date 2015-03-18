@@ -79,6 +79,6 @@ module.exports = Base.extend({
                 async: false
             };
         }
-        statsd.increment(['dgd', this.app.session.get('location').abbreviation, 'home', type, this.app.session.get('platform')], options);
+        statsd.increment([this.app.session.get('location').abbreviation, 'dgd', 'home', type, this.app.session.get('platform')], options);
     }
 });
