@@ -12,6 +12,7 @@ var ninja = require('./ninja');
 var adroll = require('./adroll');
 var esi = require('../../esi');
 var config = require('../../../../shared/config');
+var utils = require('../../../../shared/utils');
 
 var trackers = {
     ati: ati,
@@ -87,11 +88,13 @@ function ninjaTrack(done, ctx, options) {
         if (ninja.isEnabled.call(this, options.page)) {
             ctx.params.ninja = ninja.getParams.call(this, options.page, options.query);
 
-            location = this.app.session.get('location');
-            platforms = config.getForMarket(location.url, ['tracking', 'trackers', 'ninja', 'noscript', 'platforms'], []);
-            if (_.contains(platforms, this.app.session.get('platform'))) {
-                ninja.prepareNoScript.call(this, done, ctx, ctx.params.ninja);
-                return;
+            if (utils.isServer) {
+                location = this.app.session.get('location');
+                platforms = config.getForMarket(location.url, ['tracking', 'trackers', 'ninja', 'noscript', 'platforms'], []);
+                if (_.contains(platforms, this.app.session.get('platform'))) {
+                    ninja.prepareNoScript.call(this, done, ctx, ctx.params.ninja);
+                    return;
+                }
             }
         }
     } catch(e) {

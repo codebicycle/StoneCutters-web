@@ -34,10 +34,10 @@ module.exports = Base.extend({
 
         if (user.unreadConversationsCount) {
             this.$('.count').text(user.unreadConversationsCount);
-            this.$('.count').removeClass('hide');
+            this.$('.count').removeClass('display-none');
         }
         else {
-            this.$('.count').addClass('hide');
+            this.$('.count').addClass('display-none');
             return this.$('.count').empty();
         }
     }

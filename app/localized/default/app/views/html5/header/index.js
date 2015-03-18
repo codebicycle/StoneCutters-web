@@ -1,12 +1,13 @@
 'use strict';
 
+var _ = require('underscore');
+var asynquence = require('asynquence');
 var Base = require('../../../../../common/app/bases/view').requireView('header/index');
+var helpers = require('../../../../../../helpers');
+var breadcrumb = require('../../../../../../modules/breadcrumb');
 var Sixpack = require('../../../../../../../shared/sixpack');
 var utils = require('../../../../../../../shared/utils');
 var config = require('../../../../../../../shared/config');
-var helpers = require('../../../../../../helpers');
-var asynquence = require('asynquence');
-var _ = require('underscore');
 
 module.exports = Base.extend({
     urlreferer: '',
@@ -220,18 +221,11 @@ module.exports = Base.extend({
         var data = Base.prototype.getTemplateData.call(this);
         var route = this.app.session.get('currentRoute').action;
 
-        this.urlreferer = data.referer || '/';
-
-        if (route === 'register' || route === 'lostpassword') {
-            this.urlreferer = '/login';
-        } else if (route === 'login') {
-            this.urlreferer = '/';
-        }
+        this.urlreferer = data.referer || breadcrumb.getCancel.call(this, data) || '/';
 
         this.$('.logo, .header-links').hide();
         this.$('.topBarFilters').removeClass('hide');
         this.$('.topBarFilters .title').text(data.dictionary[key]);
-
         this.$('.topBarFilters a').attr('data-tracking', route+'-cancel');
     },
     restore: function() {
