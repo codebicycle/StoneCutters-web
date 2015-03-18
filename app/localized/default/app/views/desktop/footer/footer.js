@@ -48,10 +48,7 @@ module.exports = Base.extend({
     },
     postRender: function() {
         if (utils.getUrlParam('from') === 'schibsted') {
-            $('#migrations-modal').trigger('show');
-            window.setTimeout(function onTimeout(){
-                $('#migrations-modal').trigger('hide');
-            }, 10000);
+            $('#migrations-modal').trigger('show').delay(10000).trigger('hide');
         }
         if (this.firstRender) {
             $('body').on('click', function(event){
