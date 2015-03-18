@@ -836,17 +836,14 @@ function conversationmail(params, callback) {
         var location = this.app.session.get('location');
         var languages = this.app.session.get('languages');
         var page = params ? params.page : undefined;
-        var view = 'users/myolx';
-        var pageSize = platform === 'html5' ? 'myConvHtml5' : 'myConv';
+        var view = 'users/conversation';
+        var pageSize = platform === 'html4' ? 'myConvHtml4' : 'myConv';
         var conversation;
-        var _params;
-        var user;
 
         var redirect = function(done) {
-            if (platform !== 'desktop' && platform !== 'html5') {
+            if (platform === 'wap') {
                 return done.fail();
             }
-
             done();
         }.bind(this);
 
@@ -900,8 +897,8 @@ function conversationmail(params, callback) {
             this.app.seo.addMetatag('robots', 'noindex, nofollow');
             this.app.seo.addMetatag('googlebot', 'noindex, nofollow');
 
-            if (platform === 'html5') {
-                view = 'users/conversation';
+            if (platform === 'desktop') {
+                view = 'users/myolx';
             }
 
             callback(null, view, {

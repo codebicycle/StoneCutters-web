@@ -289,6 +289,7 @@ module.exports = function userRouter(app) {
                 reply = data;
                 conversation = new Conversation({
                     country: req.rendrApp.session.get('location').abbreviation,
+                    location: req.rendrApp.session.get('location').url,
                     platform: req.rendrApp.session.get('platform'),
                     languageId: req.rendrApp.session.get('languageId'),
                     user: user,
@@ -334,11 +335,76 @@ module.exports = function userRouter(app) {
         }
     }
 
+    function replyMail() {
+        app.post('/myolx/conversation/mail/:hash', handler);
+
+        function handler(req, res, next) {
+            var hash = req.param('hash', null);
+            var conversation;
+            var reply;
+
+            function parse(done) {
+                formidable.parse(req, done.errfcb);
+            }
+
+            function prepare(done, data) {
+                var user = req.rendrApp.session.get('user');
+
+                reply = data;
+                conversation = new Conversation({
+                    country: req.rendrApp.session.get('location').abbreviation,
+                    location: req.rendrApp.session.get('location').url,
+                    platform: req.rendrApp.session.get('platform'),
+                    languageId: req.rendrApp.session.get('languageId'),
+                    hash: hash,
+                    message: data.message
+                }, {
+                    app: req.rendrApp
+                });
+                hash = encodeURIComponent(hash);
+                done();
+            }
+
+            function submit(done) {
+                conversation.reply(done);
+            }
+
+            function success() {
+                var url = '/myolx/conversation/mail/' + hash + '#message';
+
+                res.redirect(utils.link(url, req.rendrApp));
+                end();
+            }
+
+            function error(err) {
+                var url = '/myolx/conversation/mail/' + hash + '#message';
+
+                formidable.error(req, url.split('?').shift(), err, reply, function redirect(url) {
+                    res.redirect(utils.link(url, req.rendrApp));
+                    end(err);
+                });
+            }
+
+            function end(err) {
+                if (next && next.errfcb) {
+                    next.errfcb(err);
+                }
+            }
+
+            asynquence().or(error)
+                .then(parse)
+                .then(prepare)
+                .then(submit)
+                .val(success);
+        }
+    }
+
     return {
         login: login(),
         register: register(),
         lostpassword: lostpassword(),
         registerwithConfirmation: registerwithConfirmation(),
-        reply: reply()
+        reply: reply(),
+        replyMail: replyMail()
     };
 };
