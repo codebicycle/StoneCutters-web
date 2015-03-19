@@ -273,7 +273,7 @@ module.exports = function userRouter(app) {
 
     function reply() {
         app.post('/myolx/conversation/:threadId', handler);
-        app.post('/myolx/conversation/mail/:hash', handler);
+        app.post('/myolx/conversation/mail', handler);
 
         function handler(req, res, next) {
             var threadId = req.param('threadId', null);
@@ -299,14 +299,14 @@ module.exports = function userRouter(app) {
                 }, {
                     app: req.rendrApp
                 });
-                if (threadId) {
+                if (threadId && threadId !== 'mail') {
                     conversation.set('user', user);
                     conversation.set('threadId', threadId);
-                    url = '/myolx/conversation/' + threadId + '#message';
+                    url = '/myolx/conversation/' + threadId;
                 }
                 else if (hash) {
                     conversation.set('hash', hash);
-                    url = '/myolx/conversation/mail/' + encodeURIComponent(hash) + '#message';
+                    url = '/myolx/conversation/mail?hash=' + hash;
                 }
                 done();
             }

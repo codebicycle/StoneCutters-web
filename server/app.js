@@ -33,6 +33,7 @@ module.exports = function appUseConf(done) {
 
     function rendrConfiguration(rendrApp) {
         rendrApp.use(middleware.analytics());
+        rendrApp.use(middleware.schibsted());
         rendrApp.use(middleware.localstorageiframe());
         rendrApp.use(middleware.manifest());
         rendrApp.use(middleware.robots());

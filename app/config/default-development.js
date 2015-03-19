@@ -395,5 +395,6 @@ module.exports = {
         direct: {
             enabled: true
         }
-    }
+    },
+    schibsted: require('./schibsted')
 };

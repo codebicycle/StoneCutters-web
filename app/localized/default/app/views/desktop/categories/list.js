@@ -12,9 +12,8 @@ module.exports = Base.extend({
     id: 'categories-list-view',
     className: 'categories-list-view',
     events: {
-        'click [data-modal-close]': 'onCloseModal',
         'click .open-modal': 'onOpenModal',
-        'click [data-modal-shadow]': 'onCloseModal',
+        'click [data-modal-shadow], [data-modal-close]': 'onCloseModal',
         'click [data-dgd-track]': 'onClickDgdTrack'
     },
     getTemplateData: function() {

@@ -91,6 +91,19 @@ function keysToLowerCase(source) {
     return target;
 }
 
+function getUrlParam(param) {
+    var url = window.location.search.substring(1);
+    var query = url.split('&');
+
+    for (var i = 0; i < query.length; i++) {
+        var paramName = query[i].split('=');
+
+        if (paramName[0] == param) {
+            return paramName[1];
+        }
+    }
+}
+
 function noop() {}
 
 module.exports = _.extend({
@@ -102,5 +115,6 @@ module.exports = _.extend({
     sort: sort,
     toArray: toArray,
     keysToLowerCase: keysToLowerCase,
+    getUrlParam: getUrlParam,
     noop: noop
 }, qs, time, linker, string, crypto);
