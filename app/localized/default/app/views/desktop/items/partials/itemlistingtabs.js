@@ -12,6 +12,7 @@ module.exports = Base.extend({
     tagName: 'nav',
     events: {
         'change #order-by-select': 'sortFilter',
+        'click [data-dgd-track]': 'onClickDgdTrack'
     },
     postRender: function() {
         if (!this.filters) {
@@ -71,6 +72,16 @@ module.exports = Base.extend({
             type = 'search';
         }
         statsd.increment([this.app.session.get('location').abbreviation, 'dgd', 'sort', type, name, this.app.session.get('platform')]);
+    },
+    onClickDgdTrack: function(event) {
+        var currentRoute = this.app.session.get('currentRoute');
+        var tab = $(event.currentTarget).data('dgd-track');
+        var type = 'browse';
+
+        if (currentRoute.controller === 'searches' && _.contains(['filter', 'filterig', 'search', 'searchig'], currentRoute.action)) {
+            type = 'search';
+        }
+        statsd.increment([this.app.session.get('location').abbreviation, 'dgd', type, tab, this.app.session.get('platform')]);
     }
 });
 
