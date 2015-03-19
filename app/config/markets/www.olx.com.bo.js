@@ -45,6 +45,14 @@ module.exports = {
             },
             analytics: {
                 enabled: false
+            },
+            ninja: {
+                trackers: {
+                    others: {
+                        enabled: true,
+                        platforms: ['wap', 'html4', 'html5', 'desktop']
+                    }
+                }
             }
         }
     }

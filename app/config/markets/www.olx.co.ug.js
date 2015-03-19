@@ -5,6 +5,17 @@ module.exports = {
             columns: [3, 2, 2]
         }
     },
+    tracking: {
+        trackers: {
+            ninja: {
+                trackers: {
+                    others: {
+                        enabled: false
+                    }
+                }
+            }
+        }
+    },
     adserving: {
         enabled: false
     },
