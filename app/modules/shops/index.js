@@ -35,6 +35,22 @@ Shops.prototype.enabled = function() {
 	return !!this.getExperiment();
 };
 
+Shops.prototype.shouldGetShops = function() {
+    var experiment = this.getExperiment();
+
+    return (experiment && experiment.alternative != 'items');
+ };
+
+Shops.prototype.start = function(from, itemsCount, shopsCount) {
+    var experiment = this.getExperiment();
+    track.call(this, experiment.alternative, this.sixpack.clientId, { 
+        shops_experiment_from: from,
+        itemId: itemsCount,
+        shopId: shopsCount
+    }
+    );
+};
+
 Shops.prototype.evaluate = function(params) {
 	var experiment = this.getExperiment();
 	var clicked;
@@ -63,6 +79,8 @@ function convert(sixpack, experiment, from) {
 function track(alternative, clientId, params) {
     var adapter = new Adapter({});
     
+    console.log(alternative, clientId, params.shops_experiment_from, params.itemId, params.shopId);
+
     adapter.request(this.app.req, {
         method: 'GET',
         url: 'http://tracking.olx-st.com/h/minv/',

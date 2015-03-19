@@ -145,6 +145,7 @@ function handleItems(params, promise, gallery) {
     var subcategory;
     var query;
     var url;
+    var shopsModule = new Shops(this);
 
     var configure = function(done, _category, _subcategory) {
         var currentRouter = ['categories', 'items'];
@@ -222,8 +223,7 @@ function handleItems(params, promise, gallery) {
                 params: params
             } 
         };
-        var shops = new Shops(this);
-        if (shops.enabled()) {
+        if (shopsModule.shouldGetShops()) {
             collections.shops = {
                 collection: 'Shops',
                 params: _.clone(params),
@@ -310,6 +310,10 @@ function handleItems(params, promise, gallery) {
         this.app.tracking.set('page', query.page);
         this.app.tracking.set('filters', items.filters);
         this.app.tracking.set('paginator', items.paginator);
+
+        if (shopsModule.enabled()) {
+            shopsModule.start("fetch-categories", items.length, shops !== undefined ? shops.length : 0);
+        }
 
         done({
             type: 'items',
