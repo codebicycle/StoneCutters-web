@@ -282,7 +282,6 @@ module.exports = function userRouter(app) {
             var reply;
             var url;
 
-
             function parse(done) {
                 formidable.parse(req, done.errfcb);
             }
@@ -309,7 +308,6 @@ module.exports = function userRouter(app) {
                     conversation.set('hash', hash);
                     url = '/myolx/conversation/mail?hash=' + hash;
                 }
-                console.log(url);
                 done();
             }
 

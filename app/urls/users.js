@@ -72,7 +72,7 @@ module.exports = {
     },
     'users#conversationmail': {
         urls: [
-            'myolx/conversation/mail-p-:page([0-9]+)',
+            'myolx/conversation/mail-p-{{page}}',
             'myolx/conversation/mail'
         ]
     },
