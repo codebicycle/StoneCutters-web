@@ -26,5 +26,15 @@ module.exports = {
                 name: 'Móviles'
             }
         ]
+    },
+    tracking: {
+        trackers: {
+            ati: {
+                enabled: false
+            },
+            analytics: {
+                enabled: false
+            }
+        }
     }
 };
