@@ -288,11 +288,14 @@ function show(params, callback) {
 
         function origin() {
             var originData = this.app.session.get('origin');
+            var type = 'unknown';
+            var name = 'unknown';
 
-            if (!originData) {
-                return;
+            if (originData) {
+                type = originData.type;
+                name = originData.isGallery ? 'gallery' : 'listing';
             }
-            statsd.increment([this.app.session.get('location').abbreviation, 'dgd', 'item', originData.type, originData.isGallery ? 'gallery' : 'listing', this.app.session.get('platform')]);
+            statsd.increment([this.app.session.get('location').abbreviation, 'dgd', 'item', type, name, this.app.session.get('platform')]);
         }
 
         function fail(err, res) {

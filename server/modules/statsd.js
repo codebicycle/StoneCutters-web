@@ -75,5 +75,8 @@ function stringify(metric, value) {
     if (config.enabled || config.debug) {
         logger.log(metric + ': ' + (value || 1));
     }
+    if (~metric.indexOf('dgd.')) {
+        console.log('SERVER', metric, (~metric.indexOf('search.refine.') ? new Error().stack : ''));
+    }
     return metric;
 }
