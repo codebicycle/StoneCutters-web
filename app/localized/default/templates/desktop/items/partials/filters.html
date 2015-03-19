@@ -9,7 +9,7 @@
                 <span class="title filter-title" data-filter-name="{{ filter.name }}" data-filter-type="{{ filter.type }}">{{ filter.description }}<span class="icons icon-arrow-up"></span></span>
                 <div class="filter check-box {{ filter.name }}">
                     {% for value in filter.list %}
-                        <span class="link-range" data-filter-from="{{ value.from }}" data-filter-to="{{ value.to }}" data-filter-name="{{ filter.name }}" data-filter-type="{{ filter.type }}">{{ value.label }}</span>
+                        <span class="link-range" data-filter-from="{{ value.from }}" data-filter-to="{{ value.to }}" data-filter-name="{{ filter.name }}" data-filter-type="{{ filter.type }}" data-dgd-track-filter="{{ filter.name }}">{{ value.label }}</span>
                     {% endfor %}
                     {{ ('<span class="clean-filters" data-filter-name="' + filter.name + '" data-filter-type="' + filter.type + '" >[' + dictionary["item.Clear"] + ']</span>') if filters.isActive(filter.name) }}
                 </div>
@@ -18,7 +18,7 @@
                 <ul class="sub-categories {{ filter.name }}">
                     {% for value in filter.value %}
                         <li>
-                            <a href="#" data-filter-id="{{ value.id }}" data-filter-name="{{ value.value }}" data-filter-slug="{{ value.slug }}" data-dgd-track="{{ loop.index }}">{{ value.value }} <span class="count">{{ value.count }}</span></a>
+                            <a href="#" data-filter-id="{{ value.id }}" data-filter-name="{{ value.value }}" data-filter-slug="{{ value.slug }}" data-dgd-track="{{ loop.index }}" data-dgd-track-filter="{{ filter.name }}">{{ value.value }} <span class="count">{{ value.count }}</span></a>
                         </li>
                     {% endfor %}
                 </ul>
@@ -27,7 +27,7 @@
                 <div class="filter check-box {{ filter.name }}">
                     {% for value in filter.value %}
                         <label>
-                            <input type="checkbox" value="{{ value.id }}" data-filter-name="{{ filter.name }}" data-filter-type="{{ filter.type }}" {{ 'checked' if filters.has(filter.name, value.id) }}>
+                            <input type="checkbox" value="{{ value.id }}" data-filter-name="{{ filter.name }}" data-filter-type="{{ filter.type }}" {{ 'checked' if filters.has(filter.name, value.id) }} data-dgd-track-filter="{{ filter.name }}">
                             {{ value.value }} <span class="count">{{ value.count }}</span>
                         </label>
                         {% endfor %}
@@ -39,7 +39,7 @@
                     {% for input in filter.value  %}
                         <input type="text" placeholder="{{ filter.current[input.id] if filters.has(filter.name, input.id) else input.value }}" class="text-field" data-filter-id="{{ input.id }}" data-filter-value="{{ filter.current[input.id] if filters.has(filter.name, input.id) }}" />
                     {% endfor %}
-                    <button class="icons icon-check button range-submit" type="submit" data-filter-name="{{ filter.name }}" data-filter-type="{{ filter.type }}" ></button>
+                    <button class="icons icon-check button range-submit" type="submit" data-filter-name="{{ filter.name }}" data-filter-type="{{ filter.type }}" data-dgd-track-filter="{{ filter.name }}"></button>
                     {{ ('<span class="clean-filters" data-filter-name="' + filter.name + '" data-filter-type="' + filter.type + '" >[' + dictionary["item.Clear"] + ']</span>') if filters.isActive(filter.name) }}
                 </div>
             {% elif filter.type == 'BOOLEAN' %}
