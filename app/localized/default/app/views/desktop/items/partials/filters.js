@@ -4,11 +4,14 @@ var Base = require('../../../../../../common/app/bases/view');
 var _ = require('underscore');
 var helpers = require('../../../../../../../helpers');
 var Filters = require('../../../../../../../modules/filters');
+var statsd = require('../../../../../../../../shared/statsd')();
 
 module.exports = Base.extend({
     className: 'listing-filters',
     id: 'listing-filters',
     events: {
+        'click [data-dgd-track]': 'onClickDgdTrack',
+        'click [data-dgd-track-filter]': 'onClickFilter',
         'click .filter-title': 'toogleFilter',
         'click .clean-filters': 'cleanFilters',
         'click .check-box input': 'selectFilter',
@@ -210,6 +213,26 @@ module.exports = Base.extend({
             }
         }
         return path;
+    },
+    onClickDgdTrack: function(event) {
+        var currentRoute = this.app.session.get('currentRoute');
+        var order;
+
+        if (currentRoute.controller === 'searches' && _.contains(['filter', 'filterig', 'search', 'searchig'], currentRoute.action)) {
+            order = $(event.currentTarget).data('dgd-track');
+            statsd.increment([this.app.session.get('location').abbreviation, 'dgd', 'search', 'category', order, this.app.session.get('platform')]);
+        }
+    },
+    onClickFilter: function(event) {
+        var $filter = $(event.currentTarget);
+        var currentRoute = this.app.session.get('currentRoute');
+        var name = $filter.data('dgd-track-filter');
+        var type = 'browse';
+
+        if (currentRoute.controller === 'searches' && _.contains(['filter', 'filterig', 'search', 'searchig'], currentRoute.action)) {
+            type = 'search';
+        }
+        statsd.increment([this.app.session.get('location').abbreviation, 'dgd', 'filters', type, name, this.app.session.get('platform')]);
     }
 });
 
