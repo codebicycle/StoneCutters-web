@@ -43,6 +43,7 @@ module.exports = {
         'pages#sitemap': 'sitemapcalendar',
         'pages#about': 'static/about',
         'users#conversation': 'myolx/conversation',
+        'users#conversationmail': 'myolx/conversation/mail',
         'users#conversations': 'myolx/conversations'
     }
 };

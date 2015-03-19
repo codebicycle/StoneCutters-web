@@ -7,17 +7,24 @@
     {% set configClass = 'active' %}
 {% endif %}
 <ul class="myolxmenu">
-    <li class="{{ 'active' if viewname == 'myads' else '' }}">
-        <a href="{{ '/myolx/myadslisting' | link }}">{{ dictionary["defaulthtmlhead.My Listings"] }}</a>
-    </li><!--
-    --><li class="{{ 'active' if viewname == 'favorites' else '' }}">
-        <a href="{{ '/myolx/favoritelisting' | link }}">{{ dictionary["defaulthtmlhead.My Favorites"] }}</a>
-    </li><!--
-    --><li class="{{ configClass }}">
-        <a href="{{ '/myolx/configuration' | link }}">{{ dictionary["misc.Settings"] }}</a>
-    </li><!--
-    --><li class="{{ messagesClass }}{{ ' messages' if not isHermesEnabled }}">
-        <a href="{{ '/myolx/conversations' if isHermesEnabled else '/myolx/myolxmessages' | link }}">{{ dictionary["myolx.Messages"] }}</a>
+    {% if frommail and not user %}
+        <li class="{{ messagesClass }}{{ ' messages' if not isHermesEnabled }}">
+            <a href="{{ '/login' | link }}">{{ dictionary["myolx.Messages"] }}</a>
+        </li>
+    {% else %}
+        <li class="{{ 'active' if viewname == 'myads' else '' }}">
+            <a href="{{ '/myolx/myadslisting' | link }}">{{ dictionary["defaulthtmlhead.My Listings"] }}</a>
+        </li><!--
+        --><li class="{{ 'active' if viewname == 'favorites' else '' }}">
+            <a href="{{ '/myolx/favoritelisting' | link }}">{{ dictionary["defaulthtmlhead.My Favorites"] }}</a>
+        </li><!--
+        --><li class="{{ configClass }}">
+            <a href="{{ '/myolx/configuration' | link }}">{{ dictionary["misc.Settings"] }}</a>
+        </li><!--
+        --><li class="{{ messagesClass }}{{ ' messages' if not isHermesEnabled }}">
+            <a href="{{ '/myolx/conversations' if isHermesEnabled else '/myolx/myolxmessages' | link }}">{{ dictionary["myolx.Messages"] }}</a>
+        </li>
+    {% endif %}
 </ul>
 
 {% view 'users/' + viewname  %}

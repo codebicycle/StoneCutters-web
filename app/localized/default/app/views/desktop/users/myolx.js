@@ -22,11 +22,11 @@ module.exports = Base.extend({
             app: this.app
         });
     },
-    getThread: function() {
-        this.thread = this.thread || (this.options.thread && this.options.thread.toJSON ? this.options.thread : new Conversation(this.options.thread || {}, {
+    getConversation: function() {
+        this.conversation = this.conversation || (this.options.thread && this.options.thread.toJSON ? this.options.thread : new Conversation(this.options.thread || {}, {
             app: this.app
         }));
-        return this.thread;
+        return this.conversation;
     },
     getProfile: function(profile) {
         this.profile = this.profile || (this.options.profile && this.options.profile.toJSON ? this.options.profile : new User(profile || this.options.profile || {}, {
