@@ -170,7 +170,7 @@ module.exports = {
             },
             ninja: {
                 enabled: true,
-                platforms: ['wap', 'html4', 'html5', 'desktop'],
+                platforms: ['desktop'],
                 noscript: {
                     platforms: ['wap', 'html4', 'html5', 'desktop']
                 },
