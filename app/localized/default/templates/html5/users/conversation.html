@@ -42,7 +42,7 @@
 <form class="conversation-input" data-message-reply>
     <input type="text" value="" data-messageText name="message" />
     <img class="spinner hide" src="{{ '/images/desktop/spinner-bgWhite.gif' | static }}" alt="">
-    <button class="reply-send">{{ dictionary["myolx.Reply"] }}</button>
+    <button class="reply-send" data-qa="reply-send-button">{{ dictionary["myolx.Reply"] }}</button>
 </form>
 
 {% view 'partials/tracking' %}
