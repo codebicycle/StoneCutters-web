@@ -111,7 +111,6 @@ function show(params, callback, gallery) {
                 category = categories.get(subcategory.get('parentId'));
             }
             slug = helpers.common.slugToUrl((subcategory || category).toJSON());
-            console.log(gallery);
             return helpers.common.redirect.call(this, [slug, gallery].join(''));
         }
 
