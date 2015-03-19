@@ -15,7 +15,7 @@ module.exports = Base.extend({
         var shops = new Shops(this);
         
         shops.evaluate({
-            shops_experiment_from: 'listing_shop_from_page'
+            shops_experiment_from: 'listing-shop-from-page'
         });
         
         return _.extend({}, data, {

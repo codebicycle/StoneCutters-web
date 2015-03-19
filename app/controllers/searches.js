@@ -66,6 +66,7 @@ function search(params, callback, gallery) {
         var url;
         var category;
         var subcategory;
+        var shopsModule = new Shops(this);
 
         asynquence().or(fail.bind(this))
             .then(buildUrl.bind(this))
@@ -206,8 +207,7 @@ function search(params, callback, gallery) {
                     params: params
                 } 
             };
-            var shops = new Shops(this);
-            if (shops.enabled()) {
+            if (shopsModule.shouldGetShops()) {
                 collections.shops = {
                     collection: 'Shops',
                     params: _.clone(params),
@@ -317,6 +317,9 @@ function search(params, callback, gallery) {
                     subcategory: _subcategory ? _subcategory.id : undefined
                 }
             });
+            if (shopsModule.enabled()) {
+                shopsModule.start("fetch-search", items.length, shops !== undefined ? shops.length : 0);
+            }
 
             callback(null, ['searches/search', gallery.replace('-', '')].join(''), {
                 items: items.toJSON(),
@@ -594,6 +597,7 @@ function allresults(params, callback, gallery) {
         var languages = this.app.session.get('languages');
         var url = ['/nf/all-results', gallery || ''].join('');
         var query;
+        var shopsModule = new Shops(this);
 
         var redirect = function(done) {
             var maxPage = config.getForMarket(location, ['ads', 'maxPage', 'allResults'], 500);
@@ -651,8 +655,7 @@ function allresults(params, callback, gallery) {
                     params: params
                 } 
             };
-            var shops = new Shops(this);
-            if (shops.enabled()) {
+            if (shopsModule.shouldGetShops()) {
                 collections.shops = {
                     collection: 'Shops',
                     params: _.clone(params),
@@ -723,6 +726,10 @@ function allresults(params, callback, gallery) {
             this.app.tracking.set('page_nb', meta.totalPages);
             this.app.tracking.set('filters', items.filters);
             this.app.tracking.set('paginator', items.paginator);
+
+            if (shopsModule.enabled()) {
+                shopsModule.start("fetch-allresults", items.length, shops !== undefined ? shops.length : 0);
+            }
 
             callback(null, {
                 categories: this.dependencies.categories.toJSON(),
