@@ -25,6 +25,9 @@ module.exports = {
         },
         thanksPage: {
             videoUrl: 'thank-you-video-es'
+        },
+        migrationModal: {
+            image: 'migrations-ar.jpg'
         }
     },
     successPage: {
