@@ -176,12 +176,10 @@ module.exports = {
                 },
                 trackers: {
                     others: {
-                        enabled: true,
-                        platforms: ['desktop']
+                        enabled: true
                     },
                     hydra: {
-                        enabled: true,
-                        platforms: ['wap', 'html4', 'html5', 'desktop']
+                        enabled: true
                     }
                 }
             },
