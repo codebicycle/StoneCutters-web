@@ -90,7 +90,6 @@ module.exports = Base.extend({
         }
 
         function change(res) {
-            console.log(res.conversation);
             this.parentView.conversation = res.conversation;
             this.parentView.getConversation().set('user', this.app.session.get('user'));
             this.parentView.getConversation().set('platform', this.app.session.get('platform'));
