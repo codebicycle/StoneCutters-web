@@ -1,5 +1,7 @@
 <div class="conversation">
-    <a href="{{ '/myolx/conversations' | link }}" class="back icons icon-arrow-left">{{ dictionary["misc.ReturnToMsgs"] }}</a>
+    {% if user %}
+        <a href="{{ '/myolx/conversations' | link }}" class="back icons icon-arrow-left">{{ dictionary["misc.ReturnToMsgs"] }}</a>
+    {% endif %}
     {% set item = thread.get('item') %}
     <div class="conversation-item">
         <a href="{{ item.slug.replace(domain, fullDomain) | replace('en/', '') }}">
