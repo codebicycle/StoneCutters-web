@@ -1,9 +1,9 @@
 module.exports = {
     categoryTree: {
-        production: {
+        'default': {
             order: [185, 186, 362, 187, 16, 191, 190]
         },
-        'default': {
+        testing: {
             order: [830, 853, 938, 821, 800, 881, 362, 806, 859, 16, 815, 811, 191],
             columns: [4, 3, 3],
             redirections: {
