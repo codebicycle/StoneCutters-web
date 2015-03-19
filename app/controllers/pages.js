@@ -21,7 +21,8 @@ module.exports = {
     didyousell: middlewares(didyousell),
     mobilepromo: middlewares(mobilepromo),
     shops: middlewares(shops),
-    shop: middlewares(shop)
+    shop: middlewares(shop),
+    republish: middlewares(republish)
 };
 
 function terms(params, callback) {
@@ -466,6 +467,14 @@ function shop(params, callback) {
         if (platform !== 'html4') {
             return helpers.common.redirect.call(this, '/');
         }
+        callback(null, {});
+    }
+}
+
+function republish(params, callback) {
+    helpers.controllers.control.call(this, params, controller);
+
+    function controller() {
         callback(null, {});
     }
 }

@@ -1,0 +1,146 @@
+.landings_mobilepromo_view {
+    .banner-mobilepromo {
+        clear-fix();
+        box(url(imageUrl/images/desktop/marketing/mobilepromo/devices.jpg) bottom right $white no-repeat, $greyBorders, 3px, 0, solid, 1px);
+        position: relative;
+        height: 430px;
+        margin-bottom: 20px;
+        .left-column {
+            padding: 40px 0 0 20px;
+            width: 260px;
+            .title {
+                font-size: $xl;
+                font-weight: bold;
+                margin: 0;
+            }
+        }
+        .bottom-column,
+        .downloads {
+            box-sizing: border-box;
+        }
+        .bottom-column {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, .4);
+            height: 146px;
+            padding: 20px;
+            .title {
+                margin: 0;
+                color: $white;
+                font-size: $m;
+                padding-bottom: 10px;
+                font-weight: bold;
+            }
+            .downloads {
+                ul-reset();
+                box($white, '', 5px, 10px, none, 1px);
+                box-shadow(0 0 5px 0 rgba(0, 0, 0, .5));
+                background-image: linear-gradient(to bottom, rgba(255, 255, 255, .09) 45%, rgba(0, 0, 0, .09) 55%);
+                li {
+                    display: inline-block;
+                    padding: 0 5px;
+                    &:not(:last-child) {
+                        margin-right: 10px;
+                    }
+                    vertical-align: middle;
+                    a {
+                        display: block;
+                        text-indent: -10000em;
+                        &.appstore {
+                            width: 260px;
+                            height: 40px;
+                            background-image: url(imageUrl/images/desktop/marketing/mobilepromo/itunes.png);
+                        }
+                        &.googleplay {
+                            width: 143px;
+                            height: 34px;
+                            background-image: url(imageUrl/images/desktop/marketing/mobilepromo/google-play.png);
+                        }
+                        &.nokia {
+                            width: 53px;
+                            height: 58px;
+                            background-image: url(imageUrl/images/desktop/marketing/mobilepromo/nokia.png);
+                        }
+                        &.windowsphone {
+                            width: 176px;
+                            height: 24px;
+                            background-image: url(imageUrl/images/desktop/marketing/mobilepromo/windows-phone.png);
+                        }
+                        &.blackberry {
+                            width: 118px;
+                            height: 42px;
+                            background-image: url(imageUrl/images/desktop/marketing/mobilepromo/blackberry.png);
+                        }
+                        &.amazon {
+                            width: 54px;
+                            height: 54px;
+                            background-image: url(imageUrl/images/desktop/marketing/mobilepromo/amazon.png);
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .content {
+        box($white, $greyBorders, 3px, 20px, solid, 1px);
+        margin-bottom: 20px;
+        .title {
+            border-bottom: 1px solid $greyBorders;
+            font-size: $l;
+            margin: 0;
+            padding-bottom: 5px;
+        }
+        .different-phone {
+            background: url(imageUrl/images/desktop/marketing/mobilepromo/mobile-promo-phone.jpg) left top $white no-repeat;
+            padding-left: 110px;
+            p {
+                line-height: $l;
+            }
+        }
+        .benefits {
+            ul-reset();
+            overflow: hidden;
+            margin-top: 30px;
+            li {
+                display: inline-block;
+                vertical-align: top;
+                margin-bottom: 25px;
+                box-sizing: border-box;
+                padding: 0 20px 0 75px;
+                width: 33.3%;
+                position: relative;
+                font-size: $m;
+                line-height: $l;
+                &::before {
+                    position: absolute;
+                    left: 10px;
+                    top: 3px;
+                    color: $green;
+                    font-size: $xxxl;
+                }
+            }
+        }
+        .bullets {
+            ul-reset();
+            overflow: hidden;
+            margin-top: 20px;
+            li {
+                &::before {
+                    background: $green;
+                    border-radius(7px);
+                    color: $white;
+                    font-size: remify(8px);
+                    height: 11px;
+                    text-align: center;
+                    padding-top: 4px;
+                    width: 15px;
+                    margin-right: 5px;
+                }
+                font-weight: bold;
+                margin-bottom: 10px;
+                vertical-align: bottom;
+            }
+        }
+    }
+}
