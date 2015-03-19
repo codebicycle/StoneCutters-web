@@ -62,17 +62,6 @@ module.exports = {
             }
         ]
     },
-    tracking: {
-        trackers: {
-            ninja: {
-                trackers: {
-                    others: {
-                        enabled: false
-                    }
-                }
-            }
-        }
-    },
     adserving: {
         slots: {
             listing: {

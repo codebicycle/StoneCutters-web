@@ -36,12 +36,8 @@ module.exports = {
                 enabled: false
             },
             ninja: {
-                trackers: {
-                    others: {
-                        enabled: true,
-                        platforms: ['wap', 'html4', 'html5', 'desktop']
-                    }
-                }
+                enabled: true,
+                platforms: ['desktop', 'html5', 'html4', 'wap']
             }
         }
     }
