@@ -1,13 +1,14 @@
 'use strict';
 
-var Base = require('../../../../../common/app/bases/view');
-var Item = require('../../../../../../models/item');
-var helpers = require('../../../../../../helpers');
 var _ = require('underscore');
 var asynquence = require('asynquence');
-var translations = require('../../../../../../../shared/translations');
+var Base = require('../../../../../common/app/bases/view');
+var Item = require('../../../../../../models/item');
 var Chat = require('../../../../../../modules/chat');
+var helpers = require('../../../../../../helpers');
+var translations = require('../../../../../../../shared/translations');
 var config = require('../../../../../../../shared/config');
+var utils = require('../../../../../../../shared/utils');
 
 function onpopstate(event) {
     var $loading = $('body > .loading');
@@ -74,9 +75,9 @@ module.exports = Base.extend({
             this.$('#posting-locations-view').trigger('formRendered');
         }
         else {
-            if (this.getUrlParam('cat') !== undefined || this.getUrlParam('subcat')  !== undefined) {
-                var parentCategoryId =  this.getUrlParam('cat');
-                var subCategoryId = this.getUrlParam('subcat');
+            if (utils.getUrlParam('cat') !== undefined || utils.getUrlParam('subcat')  !== undefined) {
+                var parentCategoryId =  utils.getUrlParam('cat');
+                var subCategoryId = utils.getUrlParam('subcat');
 
                 if( parentCategoryId === undefined ) {
                     var categories = this.app.dependencies.categories;
@@ -478,18 +479,6 @@ module.exports = Base.extend({
             app: this.app
         }));
         return this.item;
-    },
-    getUrlParam: function(param) {
-        var url = window.location.search.substring(1);
-        var query = url.split('&');
-        for (var i = 0; i < query.length; i++)
-        {
-            var paramName = query[i].split('=');
-            if (paramName[0] == param)
-            {
-                return paramName[1];
-            }
-        }
     }
 });
 
