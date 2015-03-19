@@ -35,7 +35,10 @@ module.exports = {
                 title: 'OLX Venezuela - Comercial Raqueta de tenis - Vender es fácil',
                 id: 'HrIK2dtJ7j8'
             }
-        ]
+        ],
+        migrationModal: {
+            image: 'migrations-ve.jpg'
+        }
     },
     successPage: {
         keepPosting: [
