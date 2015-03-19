@@ -50,8 +50,12 @@
         </li>
     {% endfor %}
 </ul>
-
-<form action="{{ ('/myolx/conversation/' + thread.get('threadId')) | link }}" method="POST" enctype="multipart/form-data">
+{% if thread.has('threadId')  %}
+    {% set action = '/myolx/conversation/' + thread.get('threadId') %}
+{% elif thread.has('hash') %}
+    {% set action = '/myolx/conversation/mail/' + thread.get('hash') | urlencode %}
+{% endif %}
+<form action="{{ action | link }}" method="POST" enctype="multipart/form-data">
     <div class="formField">
         <a href="" name="message"></a>
         <input type="text" value="{{ form.values.message if form.values.message }}" data-messageText name="message" {{ 'class="error"' if form and form.errors }} />

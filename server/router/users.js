@@ -273,11 +273,14 @@ module.exports = function userRouter(app) {
 
     function reply() {
         app.post('/myolx/conversation/:threadId', handler);
+        app.post('/myolx/conversation/mail/:hash', handler);
 
         function handler(req, res, next) {
             var threadId = req.param('threadId', null);
+            var hash = req.param('hash', null);
             var conversation;
             var reply;
+            var url;
 
             function parse(done) {
                 formidable.parse(req, done.errfcb);
@@ -289,14 +292,22 @@ module.exports = function userRouter(app) {
                 reply = data;
                 conversation = new Conversation({
                     country: req.rendrApp.session.get('location').abbreviation,
+                    location: req.rendrApp.session.get('location').url,
                     platform: req.rendrApp.session.get('platform'),
                     languageId: req.rendrApp.session.get('languageId'),
-                    user: user,
-                    threadId: threadId,
                     message: data.message
                 }, {
                     app: req.rendrApp
                 });
+                if (threadId) {
+                    conversation.set('user', user);
+                    conversation.set('threadId', threadId);
+                    url = '/myolx/conversation/' + threadId + '#message';
+                }
+                else if (hash) {
+                    conversation.set('hash', hash);
+                    url = '/myolx/conversation/mail/' + encodeURIComponent(hash) + '#message';
+                }
                 done();
             }
 
@@ -305,15 +316,11 @@ module.exports = function userRouter(app) {
             }
 
             function success() {
-                var url = '/myolx/conversation/' + threadId + '#message';
-
                 res.redirect(utils.link(url, req.rendrApp));
                 end();
             }
 
             function error(err) {
-                var url = '/myolx/conversation/' + threadId + '#message';
-
                 formidable.error(req, url.split('?').shift(), err, reply, function redirect(url) {
                     res.redirect(utils.link(url, req.rendrApp));
                     end(err);

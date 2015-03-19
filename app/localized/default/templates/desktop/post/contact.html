@@ -9,7 +9,8 @@
 	label: dictionary["itemslisting.NewContactName"],
 	fieldType: "text",
 	dataType: "string",
-	value: item.get('contactName')
+	value: item.get('contactName'),
+	autocomplete: true
 } %}
 
 {% set emailField = {
@@ -19,7 +20,8 @@
 	label: dictionary["seccion-35.559"],
 	fieldType: "text",
 	dataType: "string",
-	value: user.email
+	value: user.email,
+	autocomplete: true
 } %}
 
 {% set phoneField = {
