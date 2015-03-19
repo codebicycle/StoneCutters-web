@@ -840,6 +840,7 @@ function conversationmail(params, callback) {
         var pageSize = platform === 'html4' ? 'myConvHtml4' : 'myConv';
         var conversation;
 
+
         var redirect = function(done) {
             if (platform === 'wap') {
                 return done.fail();
@@ -852,6 +853,7 @@ function conversationmail(params, callback) {
             params.location = location.url;
             params.languageId = languages._byId[this.app.session.get('selectedLanguage')].id;
             params.conversation_type = 'hash';
+            params.hash = params.hash.replace(/ /g,'+');
 
             done();
         }.bind(this);
@@ -868,19 +870,19 @@ function conversationmail(params, callback) {
         }.bind(this);
 
         var paginate = function(done, res) {
-            var url = 'myolx/conversationmail/' + params.hash;
+            var url = 'myolx/conversation/mail[page]?hash=' + params.hash;
             var realPage;
 
             if (page == 1) {
                 done.abort();
-                return helpers.common.redirect.call(this, url);
+                return helpers.common.redirect.call(this, url.replace('[page]', ''));
             }
-            realPage = res.thread.paginate([url, '[page]'].join(''), params, {
+            realPage = res.thread.paginate(url, params, {
                 page: page
             });
             if (realPage) {
                 done.abort();
-                return helpers.common.redirect.call(this, [url, '-p-', realPage].join(''));
+                return helpers.common.redirect.call(this, url.replace('[page]', '-p-' + realPage));
             }
             done(res);
         }.bind(this);

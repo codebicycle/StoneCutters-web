@@ -70,16 +70,16 @@ module.exports = {
     'users#unsubscribe': {
         url: 'myolx/conversation/unsubscribe/:hash'
     },
+    'users#conversationmail': {
+        urls: [
+            'myolx/conversation/mail-p-:page([0-9]+)',
+            'myolx/conversation/mail'
+        ]
+    },
     'users#conversation': {
         urls: [
             'myolx/conversation/:threadId-p-{{page}}',
             'myolx/conversation/:threadId'
-        ]
-    },
-    'users#conversationmail': {
-        urls: [
-            'myolx/conversation/mail/:hash-p-:page([0-9]+)',
-            'myolx/conversation/mail/:hash'
         ]
     }
 };
