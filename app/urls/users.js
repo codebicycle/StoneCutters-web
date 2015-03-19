@@ -75,5 +75,11 @@ module.exports = {
             'myolx/conversation/:threadId-p-{{page}}',
             'myolx/conversation/:threadId'
         ]
+    },
+    'users#conversationmail': {
+        urls: [
+            'myolx/conversation/mail/:hash-p-:page([0-9]+)',
+            'myolx/conversation/mail/:hash'
+        ]
     }
 };

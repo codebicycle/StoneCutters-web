@@ -169,6 +169,9 @@ module.exports = {
     'users#conversations': {
         trackPage: 'myAccount'
     },
+    'users#conversationmail': {
+        trackPage: 'myAccount'
+    },
     'users#report': {
         trackPage: 'myAccount'
     },

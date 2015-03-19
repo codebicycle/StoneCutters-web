@@ -14,8 +14,7 @@ function isEnabled(location) {
 }
 
 function isCategoryRedirected(location, categoryId) {
-    //return config.getForMarket(location, ['categoryTree', environment, 'redirections', categoryId], config.getForMarket(location, ['categoryTree', 'default', 'redirections', categoryId]));
-    return false;
+    return config.getForMarket(location, ['categoryTree', environment, 'redirections', categoryId], config.getForMarket(location, ['categoryTree', 'default', 'redirections', categoryId]));
 }
 
 function desktopizeReplace(url, params) {
