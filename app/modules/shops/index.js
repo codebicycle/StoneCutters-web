@@ -79,8 +79,6 @@ function convert(sixpack, experiment, from) {
 function track(alternative, clientId, params) {
     var adapter = new Adapter({});
     
-    console.log(alternative, clientId, params.shops_experiment_from, params.itemId, params.shopId);
-
     adapter.request(this.app.req, {
         method: 'GET',
         url: 'http://tracking.olx-st.com/h/minv/',
