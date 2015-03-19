@@ -11,7 +11,8 @@ var middlewares = {
     dependencies: require('./dependencies'),
     search: require('./search'),
     metrics: require('./metrics'),
-    conversations: require('./conversations')
+    conversations: require('./conversations'),
+    origin: require('./origin')
 };
 
 module.exports = function(controller, exclude) {
