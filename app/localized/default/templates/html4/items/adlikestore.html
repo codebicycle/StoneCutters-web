@@ -7,7 +7,11 @@
             <div class="centerCont">
                 <h2>{{ shop.name }}</h2>
             </div>
-            <span>{{ shop.address }}</span>
+            {% if shop.description %}
+                <span>{{ shop.description | truncate("80", "...") }}</span>
+            {% else %}
+                <span>{{ shop.address }}</span>
+            {% endif %}
         </div>
     </a>
 </li>
