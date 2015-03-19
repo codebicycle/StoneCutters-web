@@ -3,7 +3,6 @@
 var _ = require('underscore');
 var Base = require('../../../../../common/app/bases/view').requireView('searches/search');
 var helpers = require('../../../../../../helpers');
-var statsd = require('../../../../../../../shared/statsd')();
 
 module.exports = Base.extend({
     id: 'searches-search-view',
@@ -14,9 +13,6 @@ module.exports = Base.extend({
     regexpReplacePage: /(-p-[0-9]+)/,
     regexpReplaceCategory: /([a-zA-Z0-9-]+-cat-[0-9]+)/,
     regexpFindNeighborhood: /-neighborhood_[0-9_]+/,
-    events: {
-        'click [data-dgd-track]': 'onClickDgdTrack'
-    },
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
         var link = this.refactorPath(this.app.session.get('path'));
@@ -46,12 +42,6 @@ module.exports = Base.extend({
             path = path.substring(0, path.length - 1);
         }
         return path;
-    },
-    onClickDgdTrack: function(event) {
-        var $elem = $(event.currentTarget);
-        var order = $elem.data('dgd-track');
-
-        statsd.increment(['dgd', this.app.session.get('location').abbreviation, 'search', 'category', order, this.app.session.get('platform')]);
     }
 });
 

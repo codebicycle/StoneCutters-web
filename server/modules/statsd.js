@@ -75,8 +75,5 @@ function stringify(metric, value) {
     if (config.enabled || config.debug) {
         logger.log(metric + ': ' + (value || 1));
     }
-    if (!metric.indexOf('dgd')) {
-        console.log(metric);
-    }
     return metric;
 }

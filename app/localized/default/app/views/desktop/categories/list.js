@@ -12,9 +12,8 @@ module.exports = Base.extend({
     id: 'categories-list-view',
     className: 'categories-list-view',
     events: {
-        'click [data-modal-close]': 'onCloseModal',
         'click .open-modal': 'onOpenModal',
-        'click [data-modal-shadow]': 'onCloseModal',
+        'click [data-modal-shadow], [data-modal-close]': 'onCloseModal',
         'click [data-dgd-track]': 'onClickDgdTrack'
     },
     getTemplateData: function() {
@@ -79,6 +78,6 @@ module.exports = Base.extend({
                 async: false
             };
         }
-        statsd.increment(['dgd', this.app.session.get('location').abbreviation, 'home', type, this.app.session.get('platform')], options);
+        statsd.increment([this.app.session.get('location').abbreviation, 'dgd', 'home', type, this.app.session.get('platform')], options);
     }
 });

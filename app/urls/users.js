@@ -70,6 +70,12 @@ module.exports = {
     'users#unsubscribe': {
         url: 'myolx/conversation/unsubscribe/:hash'
     },
+    'users#conversationmail': {
+        urls: [
+            'myolx/conversation/mail-p-{{page}}',
+            'myolx/conversation/mail'
+        ]
+    },
     'users#conversation': {
         urls: [
             'myolx/conversation/:threadId-p-{{page}}',

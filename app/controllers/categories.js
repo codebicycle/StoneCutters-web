@@ -83,20 +83,38 @@ function show(params, callback, gallery) {
     }, controller);
 
     function controller() {
+        var promise = asynquence().or(fail.bind(this))
+            .then(redirect.bind(this))
+            .then(router.bind(this));
 
-        var redirect = function(done){
+        function redirect(done) {
             var categoryId = Seo.isCategoryRedirected(this.app.session.get('location').url, params.catId);
+            var categories = this.dependencies.categories;
+            var category;
+            var subcategory;
+            var slug;
 
             gallery = gallery || '';
-
-            if (categoryId) {
-                done.abort();
-                return helpers.common.redirect.call(this, ['/cat-', categoryId, gallery].join(''));
+            if (!categoryId) {
+                return done();
             }
-            done();
-        }.bind(this);
+            done.abort();
+            category = categories.search(categoryId);
+            if (!category) {
+                category = categories.get(categoryId);
+                if (!category) {
+                    return helpers.common.redirect.call(this, '/');
+                }
+            }
+            if (category.has('parentId')) {
+                subcategory = category;
+                category = categories.get(subcategory.get('parentId'));
+            }
+            slug = helpers.common.slugToUrl((subcategory || category).toJSON());
+            return helpers.common.redirect.call(this, [slug, gallery].join(''));
+        }
 
-        var router = function(done) {
+        function router(done) {
             var category = this.dependencies.categories.get(params.catId);
             var platform = this.app.session.get('platform');
             var subcategory;
@@ -118,21 +136,17 @@ function show(params, callback, gallery) {
             else {
                 handleShow.call(this, params, promise);
             }
-            promise.val(success);
+            promise.val(success.bind(this));
             done(category, subcategory);
-        }.bind(this);
+        }
 
-        var success = function(_result) {
+        function success(_result) {
             callback(null, _result);
-        }.bind(this);
+        }
 
-        var error = function(err, res) {
+        function fail(err, res) {
             return helpers.common.error.call(this, err, res, callback);
-        }.bind(this);
-
-        var promise = asynquence().or(error)
-            .then(redirect)
-            .then(router);
+        }
     }
 }
 
@@ -145,6 +159,7 @@ function handleItems(params, promise, gallery) {
     var subcategory;
     var query;
     var url;
+    var shopsModule = new Shops(this);
 
     var configure = function(done, _category, _subcategory) {
         var currentRouter = ['categories', 'items'];
@@ -220,10 +235,9 @@ function handleItems(params, promise, gallery) {
             items: {
                 collection: 'Items',
                 params: params
-            } 
+            }
         };
-        var shops = new Shops(this);
-        if (shops.enabled()) {
+        if (shopsModule.shouldGetShops()) {
             collections.shops = {
                 collection: 'Shops',
                 params: _.clone(params),
@@ -310,6 +324,10 @@ function handleItems(params, promise, gallery) {
         this.app.tracking.set('page', query.page);
         this.app.tracking.set('filters', items.filters);
         this.app.tracking.set('paginator', items.paginator);
+
+        if (shopsModule.enabled()) {
+            shopsModule.start("fetch-categories", items.length, shops !== undefined ? shops.length : 0);
+        }
 
         done({
             type: 'items',

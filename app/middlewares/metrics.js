@@ -13,14 +13,19 @@ function searchRefine(params) {
     var previousRoute = this.app.session.get('currentRoute');
     var currentRoute = this.currentRoute;
     var previousSearch;
+    var clear;
 
     if (_.isEqual(currentRoute, previousRoute)) {
+        clear = true;
         if (currentRoute.controller === 'searches' && _.contains(['filter', 'filterig', 'search', 'searchig'], currentRoute.action)) {
+            clear = false;
             previousSearch = this.app.session.get('currentSearch');
-
             if ((params || {}).search !== previousSearch) {
-                statsd.increment(['dgd', this.app.session.get('location').abbreviation, 'search', 'refine', this.app.session.get('platform')]);
+                return statsd.increment([this.app.session.get('location').abbreviation, 'dgd', 'search', 'refine', this.app.session.get('platform')]);
             }
         }
+    }
+    if (clear) {
+        this.app.session.clear('currentSearch');
     }
 }

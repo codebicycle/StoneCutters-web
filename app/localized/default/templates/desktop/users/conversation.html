@@ -1,5 +1,7 @@
 <div class="conversation">
-    <a href="{{ '/myolx/conversations' | link }}" class="back icons icon-arrow-left">{{ dictionary["misc.ReturnToMsgs"] }}</a>
+    {% if user %}
+        <a href="{{ '/myolx/conversations' | link }}" class="back icons icon-arrow-left">{{ dictionary["misc.ReturnToMsgs"] }}</a>
+    {% endif %}
     {% set item = thread.get('item') %}
     <div class="conversation-item">
         <a href="{{ item.slug.replace(domain, fullDomain) | replace('en/', '') }}">
@@ -10,7 +12,7 @@
             </figure>
         </a>
         <div class="conversation-item-data">
-            {% if item.user.id != thread.get('userId') %}
+            {% if thread.has('userId') and item.user.id != thread.get('userId') %}
                 {% set phone = item.phone %}
                 {% set senderName = item.user.username %}
             {% elif thread.get('senders')[1] and thread.get('senders')[1].isMine %}
