@@ -94,11 +94,11 @@ function show(params, callback, gallery) {
             var subcategory;
             var slug;
 
+            gallery = gallery || '';
             if (!categoryId) {
                 return done();
             }
             done.abort();
-            gallery = gallery || '';
             category = categories.search(categoryId);
             if (!category) {
                 category = categories.get(categoryId);
