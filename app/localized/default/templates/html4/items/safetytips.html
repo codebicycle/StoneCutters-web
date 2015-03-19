@@ -1,0 +1,16 @@
+<h1>safety tips</h1>
+{% from macros import Breadcrumb, BreadcrumbHome, Errors %}
+{% set link = (breadcrumb | link) %}
+{{ Breadcrumb(dictionary, link, dictionary["itemslisting.ContactSeller"]) }}
+
+{% if item.intent == 'call' %}
+	<a href="tel:{{ item.phone }}" class="btns orange">{{ dictionary["misc.Call"] }}</a>
+{% elif item.intent == 'email' %}
+	<a href="{{ ['/iid-', item.id, '/reply'] | join('') | link }}" class="btns orange" data-qa="reply-button" >{{ dictionary["register_mail.Email"] }}</a>
+{% elif item.intent == 'sms' %}
+	<a href="sms:{{ item.phone }}" class="btns orange">{{ dictionary["itempagepostcomment.Sms"] }}</a>
+{% endif %}
+
+{{ BreadcrumbHome(dictionary, link, ('/' | link)) }}
+{% view 'partials/tracking' %}
+

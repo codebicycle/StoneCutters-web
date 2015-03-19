@@ -18,7 +18,8 @@ module.exports = {
     favorite: middlewares(favorite),
     'delete': middlewares(deleteitem),
     filter: middlewares(filter),
-    sort: middlewares(sort)
+    sort: middlewares(sort),
+    safetytips: middlewares(safetytips)
 };
 
 function show(params, callback) {
@@ -35,7 +36,9 @@ function show(params, callback) {
         var platform = this.app.session.get('platform');
         var newItemPage = helpers.features.isEnabled.call(this, 'newItemPage');
         var anonymousItem;
-        
+        var location = this.app.session.get('location');
+        var isSafetyTipsEnabled = helpers.features.isEnabled.call(this, 'safetyTips', platform, location.url);
+
         new Shops(this).evaluate(params);
 
         var promise = asynquence().or(fail.bind(this))
@@ -279,7 +282,8 @@ function show(params, callback) {
                 category: category,
                 favorite: favorite,
                 sent: params.sent,
-                categories: this.dependencies.categories.toJSON()
+                categories: this.dependencies.categories.toJSON(),
+                isSafetyTipsEnabled: isSafetyTipsEnabled
             });
         }
 
@@ -608,6 +612,95 @@ function reply(params, callback) {
     }
 }
 
+function safetytips(params, callback) {
+    helpers.controllers.control.call(this, params, controller);
+
+    function controller() {
+       var itemId = params.itemId;
+       var platform = this.app.session.get('platform');
+       var location = this.app.session.get('location');
+
+        asynquence().or(fail.bind(this))
+            .then(redirect.bind(this))
+            .then(prepare.bind(this))
+            .then(findItem.bind(this))
+            .then(checkItem.bind(this))
+            .then(featureValidation.bind(this))
+            .val(success.bind(this));
+
+        function redirect(done) {
+            if (platform !== 'html4') {
+                return done.fail();
+            }
+            done();
+        }
+
+        function prepare(done) {
+           params.id = params.itemId;
+           delete params.itemId;
+           done();
+        }
+
+        function findItem(done) {
+           this.app.fetch({
+               item: {
+                   model: 'Item',
+                   params: params
+               }
+           }, {
+               readFromCache: false
+           }, done.errfcb);
+        }
+
+        function checkItem(done, res) {
+           if (!res.item) {
+               return done.fail();
+           }
+           done(res.item);
+        }
+
+        function featureValidation(done, _item) {
+            var isEnabled = helpers.features.isEnabled.call(this, 'safetyTips', platform, location.url);
+            var isValidAction = _.contains(['sms', 'call', 'email'], params.intent);
+            var slug = helpers.common.slugToUrl(_item.toJSON());
+
+            if (!(isEnabled && isValidAction) || (_item.get('phone') === '' && params.intent !== 'email' )) {
+               return helpers.common.redirect.call(this, ('/' + slug));
+            }
+            done(_item);
+        }
+
+        function success(_item) {
+            var item = _item.toJSON();
+            var subcategory = this.dependencies.categories.search(item.category.id);
+            var category;
+            var parentId;
+
+            if (!subcategory) {
+               return fail();
+            }
+            parentId = subcategory.get('parentId');
+            category = parentId ? this.dependencies.categories.get(parentId) : subcategory;
+
+            this.app.seo.addMetatag('robots', 'noindex, nofollow');
+            this.app.seo.addMetatag('googlebot', 'noindex, nofollow');
+
+            this.app.tracking.setPage(params.intent);
+            this.app.tracking.set('item', item);
+            this.app.tracking.set('category', category.toJSON());
+            this.app.tracking.set('subcategory', subcategory.toJSON());
+
+            callback(null, {
+                item: item
+            });
+        }
+
+        function fail(err, res) {
+           return helpers.common.error.call(this, err, res, callback);
+        }
+    }
+}
+
 function success(params, callback) {
     helpers.controllers.control.call(this, params, controller);
 
@@ -887,3 +980,5 @@ function sort(params, callback) {
             .val(success);
     }
 }
+
+

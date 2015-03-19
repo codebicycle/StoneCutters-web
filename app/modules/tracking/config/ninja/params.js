@@ -60,6 +60,15 @@ module.exports = {
     'items#reply': {
         trackPage: 'replyForm'
     },
+    'items#safetytips#email': {
+        trackPage: 'tap_email'
+    },
+    'items#safetytips#call': {
+        trackPage: 'tap_call'
+    },
+    'items#safetytips#sms': {
+        trackPage: 'tap_sms'
+    },
     'items#show': {
         trackPage: 'item',
         sellerType: 'private'
