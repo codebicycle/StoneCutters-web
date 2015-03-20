@@ -19,6 +19,9 @@ module.exports = function(dataAdapter, excludedUrls) {
             if (!from) {
                 return next();
             }
+            if (utils.startsWith(host, from)) {
+                host = 'www.' + host;
+            }
             host = host.replace(from, schibsted[from].to);
             parts = req.path.split('/').slice(1);
             if (!utils.startsWith(host, 'm.')) {

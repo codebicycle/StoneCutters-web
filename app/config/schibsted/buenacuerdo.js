@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = {
-    to: '.olx.com.ar',
+    to: 'olx.com.ar',
     regions: {
         'argentina': 'www',
         'buenos_aires': 'buenosaires',
