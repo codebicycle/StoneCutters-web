@@ -980,5 +980,3 @@ function sort(params, callback) {
             .val(success);
     }
 }
-
-
