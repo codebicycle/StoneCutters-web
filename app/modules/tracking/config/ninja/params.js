@@ -61,13 +61,13 @@ module.exports = {
         trackPage: 'replyForm'
     },
     'items#safetytips#email': {
-        trackPage: 'tap_email'
+        trackPage: 'tapEmail'
     },
     'items#safetytips#call': {
-        trackPage: 'tap_call'
+        trackPage: 'tapCall'
     },
     'items#safetytips#sms': {
-        trackPage: 'tap_sms'
+        trackPage: 'tapSms'
     },
     'items#show': {
         trackPage: 'item',
