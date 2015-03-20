@@ -7,6 +7,7 @@ var helpers = require('../helpers');
 var Filters = require('../modules/filters');
 var Item = require('../models/item');
 var config = require('../../shared/config');
+var statsd = require('../../shared/statsd')();
 var Shops = require('../modules/shops');
 
 module.exports = {
@@ -46,7 +47,9 @@ function show(params, callback) {
         if (!config.getForMarket(this.app.session.get('location').url, ['relatedAds', platform, 'enabled'], false)) {
             promise.then(fetchRelateds.bind(this));
         }
-        promise.val(success.bind(this));
+        promise
+            .val(success.bind(this))
+            .val(origin.bind(this));
 
         function prepare(done) {
             if (user) {
@@ -281,6 +284,18 @@ function show(params, callback) {
                 sent: params.sent,
                 categories: this.dependencies.categories.toJSON()
             });
+        }
+
+        function origin() {
+            var originData = this.app.session.get('origin');
+            var type = 'unknown';
+            var name = 'unknown';
+
+            if (originData) {
+                type = originData.type;
+                name = originData.isGallery ? 'gallery' : 'listing';
+            }
+            statsd.increment([this.app.session.get('location').abbreviation, 'dgd', 'item', type, name, this.app.session.get('platform')]);
         }
 
         function fail(err, res) {
