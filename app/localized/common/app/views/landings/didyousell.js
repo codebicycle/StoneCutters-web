@@ -5,7 +5,7 @@ var _ = require('underscore');
 var config = require('../../../../../../shared/config');
 
 module.exports = Base.extend({
-    className: 'pages_didyousell_view',
+    className: 'landings_didyousell_view',
 
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
@@ -18,4 +18,4 @@ module.exports = Base.extend({
     }
 });
 
-module.exports.id = 'pages/didyousell';
+module.exports.id = 'landings/didyousell';

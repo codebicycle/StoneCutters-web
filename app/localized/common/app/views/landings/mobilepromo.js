@@ -5,7 +5,7 @@ var _ = require('underscore');
 var breadcrumb = require('../../../../../modules/breadcrumb');
 
 module.exports = Base.extend({
-    className: 'pages_mobilepromo_view',
+    className: 'landings_mobilepromo_view',
     wapAttributes: {
         cellpadding: 0
     },
@@ -18,4 +18,4 @@ module.exports = Base.extend({
     }
 });
 
-module.exports.id = 'pages/mobilepromo';
+module.exports.id = 'landings/mobilepromo';
