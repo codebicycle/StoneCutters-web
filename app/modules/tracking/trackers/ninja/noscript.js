@@ -31,7 +31,6 @@ function isEnabled(type) {
     return enabled;
 }
 
-
 function prepare(done, ctx, ninja) {
     var url;
 
