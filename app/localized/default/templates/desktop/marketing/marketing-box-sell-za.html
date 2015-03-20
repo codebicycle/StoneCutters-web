@@ -1,10 +1,5 @@
-<div class="marketing-box-sell marketing-box-sell-za appStores language-{{ selectedLanguage }}">
-    <img src="{{ ('/images/desktop/marketing/home-banner/' + marketing.home_block_banner_top.image + '.png') | static }}" class="image" usemap="#landing-banner">
-    <map name="landing-banner">
-        <area shape="rect" coords="0,0,380,288" href="{{ '/posting/landing_mo' | link }}" rel="nofollow"></area>
-    </map>
-    <div class="container-stores">
-        <a class="google-play-{{ selectedLanguage }}" href="https://play.google.com/store/apps/details?id=com.olx.olx" rel="nofollow"></a>
-        <a class="app-store-{{ selectedLanguage }}" href="https://itunes.apple.com/app/olx-classifieds/id382059698" rel="nofollow"></a>
-    </div>
+<div class="marketing-box-sell marketing-box-sell-za scratch-campaign language-{{ selectedLanguage }}">
+    <a href="{{ '/posting/landing_mo' | link }}" rel="nofollow">
+        <img src="{{ ('/images/desktop/marketing/home-banner/' + marketing.home_block_banner_top.image + '.jpg') | static }}" class="image" usemap="#landing-banner">
+    </a>
 </div>
