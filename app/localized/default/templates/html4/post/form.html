@@ -57,7 +57,7 @@
         {% for field in fields.contactInformation %}
             {% if field.fieldType == 'text' %}
                 {% if field.name != 'streetAddress' %}
-                    {% set autocomplete = 'on' if (field.name == 'contactName') else 'off' %}
+                    {% set autocomplete = 'on' if (field.name == 'contactName' or field.name == 'email' or field.name == 'phone') else 'off' %}
                     {{ FieldText(field.label, field.name, field.mandatory, form,  user, autocomplete) }}
                 {% endif %}
             {% elif field.fieldType == 'combobox' %}

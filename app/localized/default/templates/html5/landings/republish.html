@@ -1,0 +1,16 @@
+<aside id="notification-message" class="notification-message">
+	<span class="icons icon-check"></span>
+    <h4>¡Muy bien! Tu aviso ya fue renovado.</h4>
+    <p>Acabás de extender el tiempo de publicación de tu aviso por otros 20 días.</p>
+</aside>
+
+<section id="notification-keep-posting" class="notification-keep-posting">
+    <h3 class="title">{{ dictionary["misc.SellUnused"] }}</h3>
+    <span class="categories-icons"></span>
+    <div class="btnPost">
+        <a href="{{ '/posting' | link }}" class="btns orange" data-qa="post-button">{{ dictionary["crm_new_version.KeepPosting"] }}</a>
+    </div>
+</section>
+
+
+{% view 'partials/tracking' %}

@@ -610,7 +610,7 @@ module.exports = {
     'misc.UploadMorePhotos': 'Subir m\xE1s fotos',
     'misc.UseNetworks': 'Utiliza las redes sociales para aumentar la exposici\xF3n de tu aviso.',
     'misc.ViewOptions': 'Ver opciones',
-    'misc.WantToGoBack': 'Est\xE1s seguro(a) que deseas devolverte?',
+    'misc.WantToGoBack': 'Est\xE1s seguro(a) que deseas volver?',
     'misc.well-done': '\xA1Bien hecho! Tu aviso ha sido modificado exitosamente y se activar\xE1 en breve.',
     'misc.WithoutCommission': 'sin comisi\xF3n',
     'misc.WithPicsOnly': 'Avisos con fotos \xFAnicamente',
