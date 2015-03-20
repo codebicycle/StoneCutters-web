@@ -794,6 +794,7 @@ function conversation(params, callback) {
             conversation = res.thread;
             conversation.set('user', user);
             conversation.set('platform', platform);
+            conversation.set('country', location.abbreviation);
             conversation.markAsRead(done);
         }.bind(this);
 
@@ -892,6 +893,7 @@ function conversationmail(params, callback) {
             conversation.set('platform', platform);
             conversation.set('location', location.url);
             conversation.set('hash', params.hash);
+            conversation.set('country', location.abbreviation);
             conversation.markAsRead(done);
         }.bind(this);
 

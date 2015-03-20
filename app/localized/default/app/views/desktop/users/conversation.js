@@ -94,6 +94,7 @@ module.exports = Base.extend({
             this.parentView.getConversation().set('user', this.app.session.get('user'));
             this.parentView.getConversation().set('platform', this.app.session.get('platform'));
             this.parentView.getConversation().set('location', this.app.session.get('location').url);
+            this.parentView.getConversation().set('country', this.app.session.get('location').abbreviation);
             this.render();
         }
 
