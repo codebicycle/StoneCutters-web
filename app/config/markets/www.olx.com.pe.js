@@ -62,20 +62,6 @@ module.exports = {
             }
         ]
     },
-    tracking: {
-        trackers: {
-            ati: {
-                enabled: false
-            },
-            analytics: {
-                enabled: false
-            },
-            ninja: {
-                enabled: true,
-                platforms: ['desktop', 'html5', 'html4', 'wap']
-            }
-        },
-    },
     adserving: {
         slots: {
             listing: {

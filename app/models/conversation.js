@@ -106,11 +106,13 @@ function reply(done) {
 
     function success(reply) {
         statsd.increment([this.get('country'), 'conversations', 'reply', 'success', this.get('platform')]);
+        statsd.increment([this.get('country'), 'conversations', 'reply', 'success', this.get('conversation_type'), this.get('platform')]);
         done(reply);
     }
 
     function fail(err) {
         statsd.increment([this.get('country'), 'conversations', 'reply', 'error', this.get('platform')]);
+        statsd.increment([this.get('country'), 'conversations', 'reply', 'error', this.get('conversation_type'), this.get('platform')]);
         done.fail(err);
     }
 

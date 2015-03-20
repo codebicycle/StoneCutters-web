@@ -173,6 +173,14 @@ module.exports = {
                 platforms: ['desktop'],
                 noscript: {
                     platforms: ['wap', 'html4', 'html5', 'desktop']
+                },
+                trackers: {
+                    others: {
+                        enabled: true
+                    },
+                    hydra: {
+                        enabled: true
+                    }
                 }
             },
             adroll: {
