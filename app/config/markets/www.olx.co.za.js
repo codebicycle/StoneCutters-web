@@ -21,7 +21,7 @@ module.exports = {
             image: 'post-africa-object'
         },
         home_block_banner_top: {
-            image: 'marketing-box-image-za'
+            image: 'scratch-y-win-campaign'
         },
         thanksPage: {
             videoUrl: 'thank-you-video-en'
