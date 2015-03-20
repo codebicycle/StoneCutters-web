@@ -94,6 +94,7 @@ module.exports = Base.extend({
             this.getConversation().set('user', this.app.session.get('user'));
             this.getConversation().set('platform', this.app.session.get('platform'));
             this.getConversation().set('location', this.app.session.get('location').url);
+            this.getConversation().set('country', this.app.session.get('location').abbreviation);
             this.render();
         }
 
