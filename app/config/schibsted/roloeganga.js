@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = {
-    to: '.olx.com.ve',
+    to: 'olx.com.ve',
     regions: {
         'amazonas': 'amazonas',
         'anzoategui': 'anzoategui',
