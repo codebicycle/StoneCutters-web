@@ -5,6 +5,7 @@ module.exports = function(dataAdapter, excludedUrls) {
     return function loader() {
         var _ = require('underscore');
         var utils = require('../../shared/utils');
+        var statsd = require('../../shared/statsd')();
         var schibsted = require('../../shared/config').get('schibsted', {});
 
         return function middleware(req, res, next) {
@@ -15,14 +16,17 @@ module.exports = function(dataAdapter, excludedUrls) {
             var url = '/';
             var query = {};
             var parts;
+            var subdomain = 'www';
 
             if (!from) {
                 return next();
             }
             if (utils.startsWith(host, from)) {
+                subdomain = 'empty';
                 host = 'www.' + host;
             }
             else if (utils.startsWith(host, 'www2.')) {
+                subdomain = 'www2';
                 host = host.replace('www2.', 'www.');
             }
             host = host.replace(from, schibsted[from].to);
@@ -39,6 +43,7 @@ module.exports = function(dataAdapter, excludedUrls) {
                 }
             }
             else {
+                subdomain = 'm';
                 _.each(req.originalUrl.split('?').pop().split('&'), function each(param) {
                     param = param.split('=');
                     query[param[0]] = param[1];
@@ -100,6 +105,7 @@ module.exports = function(dataAdapter, excludedUrls) {
                 return true;
             }
 
+            statsd.increment([schibsted[from].location, 'middleware', 'schibsted', from.split('.').shift(), subdomain]);
             url = 'http://' + host + url;
             url = utils.params(url, 'from', 'schibsted');
             return res.redirect(301, url);

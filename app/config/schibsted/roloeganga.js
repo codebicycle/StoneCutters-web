@@ -2,6 +2,7 @@
 
 module.exports = {
     to: 'olx.com.ve',
+    location: 'vz',
     regions: {
         'amazonas': 'amazonas',
         'anzoategui': 'anzoategui',
