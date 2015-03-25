@@ -68,12 +68,16 @@ Shops.prototype.evaluate = function(params) {
 };
 
 function convert(sixpack, experiment, from) {
-	if (experiment.alternative === 'items' && !from) {
-		return sixpack.convert(experiment);
-	}
-	if (experiment.alternative !== 'items' && from) {
-		return sixpack.convert(experiment);
-	}
+
+    if (from) {
+        if (experiment.alternative === 'items' && (from === 'listing-item-from-image' || from === 'listing-item-from-title')) {
+            return sixpack.convert(experiment);
+        }
+
+        if (experiment.alternative !== 'items' && from !== 'listing-item-from-image' && from !== 'listing-item-from-title') {
+            return sixpack.convert(experiment);
+        }
+    }
 }
 
 function track(alternative, clientId, params) {
