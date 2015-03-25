@@ -2,6 +2,7 @@
 
 module.exports = {
     to: 'olx.com.ar',
+    location: 'ar',
     regions: {
         'argentina': 'www',
         'buenos_aires': 'buenosaires',

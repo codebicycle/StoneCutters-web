@@ -3,6 +3,7 @@
 var Base = require('../../../../../../common/app/bases/view');
 var _ = require('underscore');
 var helpers = require('../../../../../../../helpers');
+var Categories = require('../../../../../../../collections/categories');
 var Filters = require('../../../../../../../modules/filters');
 var statsd = require('../../../../../../../../shared/statsd')();
 
@@ -17,7 +18,8 @@ module.exports = Base.extend({
         'click .check-box input': 'selectFilter',
         'click .range-submit': 'rangeFilterInputs',
         'click .link-range': 'rangeFilterLinks',
-        'click .sub-categories li a': 'categoryFilter',
+        'click .filter-category li a': 'categoryFilter',
+        'click .filter-subcategory li a': 'subcategoryFilter',
         'keydown .range input': 'onlyNumbers'
     },
     postRender: function() {
@@ -179,6 +181,38 @@ module.exports = Base.extend({
         path = this.refactorPath(path);
         this.app.router.redirectTo(path);
     },
+    subcategoryFilter: function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+
+        var $target = $(event.currentTarget);
+        var filterSlug = $target.data('filter-slug');
+        var currentSlug;
+        var categories;
+        var category;
+        var filterId;
+        var path;
+
+        if (!filterSlug) {
+            filterId = $target.data('filter-id');
+            categories = this.getCategories();
+
+            category = categories.search(filterId);
+            if (!category) {
+                category = categories.get(filterId);
+                if (!category) {
+                    return;
+                }
+            }
+            filterSlug = helpers.common.slugToUrl(category.toJSON());
+            currentSlug = this.app.session.get('path').split('/').slice(2).shift();
+        }
+
+        path = this.replacePath(filterSlug, currentSlug);
+        path = this.refactorPath(path);
+        this.app.router.redirectTo(path);
+    },
     onlyNumbers: function(event) {
         if ($.inArray(event.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 || (event.keyCode == 65 && event.ctrlKey === true) || (event.keyCode >= 35 && event.keyCode <= 39)) {
             return;
@@ -187,7 +221,7 @@ module.exports = Base.extend({
             event.preventDefault();
         }
     },
-    replacePath: function(replace) {
+    replacePath: function(replace, currentPath) {
         var path = this.app.session.get('path');
         var currentRoute = this.app.session.get('currentRoute');
         var url;
@@ -197,7 +231,7 @@ module.exports = Base.extend({
             url.push(path.replace('/q/', '').split('/').shift());
             return url.join('');
         }
-        return path.replace('/search/', replace);
+        return path.replace(currentPath || '/search/', replace);
     },
     getPath: function() {
         var path = this.app.session.get('path');
@@ -233,6 +267,12 @@ module.exports = Base.extend({
             type = 'search';
         }
         statsd.increment([this.app.session.get('location').abbreviation, 'dgd', 'filters', type, name, this.app.session.get('platform')]);
+    },
+    getCategories: function() {
+        this.categories = this.categories || (this.options.categories && this.options.categories.toJSON ? this.options.categories : new Categories(this.options.categories || {}, {
+            app: this.app
+        }));
+        return this.categories;
     }
 });
 
