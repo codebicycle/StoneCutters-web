@@ -1,5 +1,5 @@
-{% if category and search %}
-    <span class="title">{{ category.get('trName') }}</span>
+{% if currentCategory and search %}
+    <span class="title">{{ dictionary["itemslisting.NavigatorByCategory"] }}</span>
     <a href="{{ ('/nf/search/' + search) | linkig }}" rel="nofollow"  class="icons icon-arrow-left">{{ dictionary["listingpageitemslisting.AllCategories"] }}</a>
 {% endif %}
 {% if filters %}
@@ -15,14 +15,28 @@
                 </div>
             {% elif filter.type == 'SELECT' and filter.name == 'parentcategory' %}
                 <span class="title filter-title" data-filter-name="{{ filter.name }}" data-filter-type="{{ filter.type }}">{{ filter.description }}<span class="icons icon-arrow-up"></span></span>
-                <ul class="sub-categories {{ filter.name }}">
+                <ul class="sub-categories filter-category {{ filter.name }}">
                     {% for value in filter.value %}
                         <li>
                             <a href="#" data-filter-id="{{ value.id }}" data-filter-name="{{ value.value }}" data-filter-slug="{{ value.slug }}" data-dgd-track="{{ loop.index }}" data-dgd-track-filter="{{ filter.name }}">{{ value.value }} <span class="count">{{ value.count }}</span></a>
                         </li>
                     {% endfor %}
                 </ul>
-            {% elif filter.type == 'SELECT' and filter.name != 'neighborhood' and filter.value.length > 1 %}
+            {% elif filter.type == 'SELECT' and filter.name == 'category' and search %}
+                {% if not currentCategory.has('parentId') %}
+                    <span class="category-selected arrow icons icon-cat-{{ category.get('id') }}">{{ category.get('trName') }} <span>{{ meta.total }}</span></span>
+                    <ul class="sub-categories filter-subcategory">
+                        {% for value in filter.value %}
+                            <li>
+                                <a href="#" data-filter-id="{{ value.id }}" data-filter-slug="{{ value.slug }}" data-dgd-track-filter="{{ filter.name }}"><h2>{{value.value}}</h2> <span class="count">{{ value.count | countFormat }}</span></a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <a href="{{ ['/nf/', (category.toJSON() | slugToUrl), '/', search] | join | linkig }}" class="icons icon-cat-{{ category.get('id') }}" > {{ category.get('trName') }} </a>
+                    <span class="category-selected">{{ currentCategory.get('trName') }} <span>{{ meta.total }}</span></span>
+                {% endif %}
+            {% elif filter.type == 'SELECT' and filter.name != 'category' and filter.name != 'neighborhood' and filter.value.length > 1 %}
                 <span class="title filter-title" data-filter-name="{{ filter.name }}" data-filter-type="{{ filter.type }}">{{ filter.description }}<span class="icons icon-arrow-up"></span></span>
                 <div class="filter check-box {{ filter.name }}">
                     {% for value in filter.value %}
@@ -30,8 +44,8 @@
                             <input type="checkbox" value="{{ value.id }}" data-filter-name="{{ filter.name }}" data-filter-type="{{ filter.type }}" {{ 'checked' if filters.has(filter.name, value.id) }} data-dgd-track-filter="{{ filter.name }}">
                             {{ value.value }} <span class="count">{{ value.count }}</span>
                         </label>
-                        {% endfor %}
-                        {{ ('<span class="clean-filters" data-filter-name="' + filter.name + '" data-filter-type="' + filter.type + '" >[' + dictionary["item.Clear"] + ']</span>') if filters.isActive(filter.name) }}
+                    {% endfor %}
+                    {{ ('<span class="clean-filters" data-filter-name="' + filter.name + '" data-filter-type="' + filter.type + '" >[' + dictionary["item.Clear"] + ']</span>') if filters.isActive(filter.name) }}
                 </div>
             {% elif filter.type == 'RANGE' %}
                 <span class="title filter-title" data-filter-name="{{ filter.name }}">{{ filter.description }}<span class="icons icon-arrow-up"></span></span>
