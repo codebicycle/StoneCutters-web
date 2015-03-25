@@ -55,8 +55,8 @@ function getSettings() {
             seo: this.config.seo || 0
         });
 
-        if (settings.options.pubId && ~settings.options.pubId.indexOf('olx-za')) {
-            if (settings.options.channel && !_.contains(settings.options.channel.split(','), 'OLX_ZA')) {
+        if (settings.options.pubId && ~settings.options.pubId.toLowerCase().indexOf('olx-za')) {
+            if (settings.options.channel && !_.contains(settings.options.channel.toUpperCase().split(','), 'OLX_ZA')) {
                 logger.log('[OLX_DEBUG] :: ZA Revenues :: url:', utils.fullizeUrl(this.app.session.get('url'), this.app));
             }
         }
