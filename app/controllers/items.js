@@ -437,7 +437,6 @@ function map(params, callback) {
 
         var checkItem = function(done, resItem) {
             if (!resItem.item) {
-                done.abort();
                 return done.fail(null, {});
             }
             var item = resItem.item.toJSON();
@@ -666,7 +665,8 @@ function safetytips(params, callback) {
             var slug = helpers.common.slugToUrl(_item.toJSON());
 
             if (!(isEnabled && isValidAction) || (_item.get('phone') === '' && params.intent !== 'email' )) {
-               return helpers.common.redirect.call(this, ('/' + slug));
+                done.abort();
+                return helpers.common.redirect.call(this, ('/' + slug));
             }
             done(_item);
         }
