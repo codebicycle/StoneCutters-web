@@ -437,6 +437,7 @@ function map(params, callback) {
 
         var checkItem = function(done, resItem) {
             if (!resItem.item) {
+                done.abort();
                 return done.fail(null, {});
             }
             var item = resItem.item.toJSON();
