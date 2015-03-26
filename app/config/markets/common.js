@@ -247,5 +247,8 @@ module.exports = {
             href: 'http://blog.olx.com',
             target: '_blank'
         }
+    },
+    abundance: {
+        enabled: false
     }
 };

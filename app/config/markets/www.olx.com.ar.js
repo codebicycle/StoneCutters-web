@@ -281,5 +281,8 @@ module.exports = {
                 enabled: false
             }
         }
+    },
+    abundance: {
+        enabled: true
     }
 };
