@@ -37,11 +37,13 @@ function isValidLocation(location) {
     
     if (level === 'country') {
         isValid = true;
-    } else if (level === 'state') {
+    }
+    else if (level === 'state') {
         if (location.children && location.children.length && _.contains(ids, location.children[0].id)) {
             isValid = true;
         }
-    } else if(level === 'city') {
+    }
+    else if(level === 'city') {
         if (location.children && location.children.length) {
             location = location.children[0];
             if (location.children && location.children.length && _.contains(ids, location.children[0].id)) {
