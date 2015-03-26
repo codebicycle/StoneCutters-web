@@ -364,7 +364,7 @@ module.exports = Base.extend({
 
         var $field = $(field);
 
-        $field.closest('.field-wrapper').removeClass('error').removeClass('success');
+        $field.closest('.field-wrapper').removeClass('error success');
         $field.parent().find('small.error.message').remove();
     },
     onPriceReset: function(event) {
@@ -412,6 +412,7 @@ module.exports = Base.extend({
             var promise = asynquence(true).or(done.fail);
 
             validation.call(this, '#posting-description-view');
+            validation.call(this, '#posting-title-view');
             promise.then(check.bind(this));
             promise.val(done);
 

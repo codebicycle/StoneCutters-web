@@ -16,7 +16,7 @@ function Sixpack(options) {
     this.ip = options.ip;
     this.userAgent = options.userAgent;
     this.platform = options.platform;
-    this.market = (options.market || '').toLowerCase();
+    this.market = (options.market || 'all').toLowerCase();
     this.experiments = options.experiments || this.experiments();
     this.session = new sixpack.Session(this.clientId, config.host, this.ip, this.userAgent, config.timeout);
 }
@@ -81,7 +81,7 @@ Sixpack.prototype.className = function(experiment) {
 };
 
 Sixpack.prototype.name = function(experiment) {
-    return this.platform + '-' + experiment.name;
+    return this.platform + '-' + this.market + '-' + experiment.name;
 };
 
 Sixpack.prototype.callback = function(done) {
