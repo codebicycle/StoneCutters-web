@@ -1,6 +1,5 @@
 'use strict';
 
-var uuid = require('node-uuid');
 var _ = require('underscore');
 var Sixpack = require('../../../shared/sixpack');
 var config = require('../../../shared/config');
@@ -10,9 +9,9 @@ var shopHost = config.get(['mario', 'host'], 'mario.apps.olx.com');
 var isServer = utils.isServer;
 
 function Shops(options) {
-	this.app = options.app;
+    this.app = options.app;
     this.shopSessionId = this.app.session.get('shopSessionId');
-	this.sixpack = new Sixpack({
+    this.sixpack = new Sixpack({
         clientId: this.app.session.get('clientId'),
         platform: this.app.session.get('platform'),
         market: this.app.session.get('location').abbreviation,
@@ -21,20 +20,20 @@ function Shops(options) {
 }
 
 Shops.prototype.getExperiment = function() {
-	return this.sixpack.experiments.html4ShowShops;
+    return this.sixpack.experiments.html4ShowShops;
 };
 
 Shops.prototype.getAlternativeName = function() {
-	var experiment = this.getExperiment();
+    var experiment = this.getExperiment();
 
-	if (experiment && experiment.alternative) {
-		return experiment.alternative;
-	}
-	return '';
+    if (experiment && experiment.alternative) {
+        return experiment.alternative;
+    }
+    return '';
 };
 
 Shops.prototype.enabled = function() {
-	return !!this.getExperiment();
+    return !!this.getExperiment();
 };
 
 Shops.prototype.shouldGetShops = function() {
@@ -46,7 +45,7 @@ Shops.prototype.shouldGetShops = function() {
 Shops.prototype.start = function(from, itemsCount, shopsCount) {
     var experiment = this.getExperiment();
 
-    this.shopSessionId = uuid.v4();
+    this.shopSessionId = _.now();
     this.app.session.persist({
         shopSessionId: this.shopSessionId
     });
@@ -60,19 +59,19 @@ Shops.prototype.start = function(from, itemsCount, shopsCount) {
 };
 
 Shops.prototype.evaluate = function(params) {
-	var experiment = this.getExperiment();
-	var clicked;
+    var experiment = this.getExperiment();
+    var clicked;
 
     if (experiment) {
         clicked = this.app.session.get('isShopExperimented');
         if ((experiment.firstClick && !clicked) || !experiment.firstClick) {
-			convert(this.sixpack, experiment, params.shops_experiment_from);
+            convert(this.sixpack, experiment, params.shops_experiment_from);
             this.app.session.persist({
                 isShopExperimented: true
             });
         }
         track.call(this, experiment.alternative, this.sixpack.clientId, params);
-	}
+    }
 };
 
 function convert(sixpack, experiment, from) {
@@ -90,7 +89,7 @@ function convert(sixpack, experiment, from) {
 
 function track(alternative, clientId, params) {
     var adapter = new Adapter({});
-    
+
     adapter.request(this.app.req, {
         method: 'GET',
         url: 'http://tracking.olx-st.com/h/minv/',
@@ -110,6 +109,7 @@ function track(alternative, clientId, params) {
     function callback() {
         // Ignore response
     }
+
 }
 
 module.exports = Shops;
