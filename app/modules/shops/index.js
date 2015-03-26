@@ -10,6 +10,7 @@ var isServer = utils.isServer;
 
 function Shops(options) {
 	this.app = options.app;
+    this.shopSessionId = this.app.session.get('shopSessionId');
 	this.sixpack = new Sixpack({
         clientId: this.app.session.get('clientId'),
         platform: this.app.session.get('platform'),
@@ -42,7 +43,14 @@ Shops.prototype.shouldGetShops = function() {
  };
 
 Shops.prototype.start = function(from, itemsCount, shopsCount) {
+    var uuid = require('node-uuid');
     var experiment = this.getExperiment();
+
+    this.shopSessionId = uuid.v4();
+    this.app.session.persist({
+        shopSessionId: this.shopSessionId
+    });
+
     track.call(this, experiment.alternative, this.sixpack.clientId, { 
         shops_experiment_from: from,
         itemId: itemsCount,
@@ -92,6 +100,7 @@ function track(alternative, clientId, params) {
             shops_experiment_from: params.shops_experiment_from,
             itemId: params.itemId,
             shopId: params.shopId,
+            sessionId: this.shopSessionId,
             t: _.now()
         }
     }, {
