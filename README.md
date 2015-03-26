@@ -32,13 +32,30 @@ Details of the latest version can be found on the Project's Github Wiki.
 
     `sudo npm install -g nodemon`
 
-5. Download and install the node modules running:
+5. Download and install "n":
+
+    `sudo npm install -g n`
+
+6. Install Node 0.10.28:
+
+    `n 0.10.28` 
+
+7. Download and install the node modules running:
 
     `sudo npm install`
 
-6. Run ARWEN and enjoy it magic running:
+8. Install memcache:
 
-    `sudo grunt start`
+    * Mac users: https://glassonionblog.wordpress.com/2012/02/18/installing-memcached-on-mac-os-x-snow-leopard/
+    * Ubuntu users: run on the command line `sudo apt-get install memcached`	
+
+9. Run memcache as a deamon:
+
+   `memcached -d`
+
+10. Run ARWEN and enjoy her magic running:
+
+    `grunt start`
 
 
 ##  Documentation
