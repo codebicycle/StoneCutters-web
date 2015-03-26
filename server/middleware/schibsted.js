@@ -108,7 +108,7 @@ module.exports = function(dataAdapter, excludedUrls) {
             statsd.increment([schibsted[from].location, 'middleware', 'schibsted', from.split('.').shift(), subdomain]);
             url = 'http://' + host + url;
             url = utils.params(url, 'from', 'schibsted');
-            return res.redirect(301, url);
+            res.redirect(301, url);
         };
 
     };
