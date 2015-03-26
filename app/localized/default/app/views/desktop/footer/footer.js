@@ -25,7 +25,7 @@ module.exports = Base.extend({
         var states = data.states;
         var currentState = {};
         var selectedLanguage = this.app.session.get('selectedLanguage').split('-')[0];
-        var isFeaturedCountry = FeatureAd.isEnabled(this.app);
+        var isFeaturedCountry = FeatureAd.isEnabled(this.app, 'footer#footer');
 
         if(location.children.length) {
             _.each(states, function each(state, i){

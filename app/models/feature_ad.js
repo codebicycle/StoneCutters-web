@@ -35,13 +35,13 @@ function isPlatformEnabled(app, platforms) {
     return enabled;
 }
 
-FeatureAd.isEnabled = function isEnabled(app) {
-    var currentRoute = app.session.get('currentRoute');
+FeatureAd.isEnabled = function isEnabled(app, section) {
     var location = app.session.get('location');
     var env = config.get(['environment', 'type'], 'development');
-    var section = [currentRoute.controller, currentRoute.action].join('#');
     var enabled = FeatureAd.isLocationEnabled(location.url);
     var environments;
+
+    section = section || _.values(app.session.get('currentRoute')).join('#');
 
     if (enabled) {
         enabled = isPlatformEnabled(app, config.getForMarket(location.url, ['featured', 'platforms']));
@@ -52,11 +52,11 @@ FeatureAd.isEnabled = function isEnabled(app) {
             enabled = _.contains(environments, env);
         }
     }
-    if (enabled) {
-        enabled = config.getForMarket(location.url, ['featured', 'section', section, 'enabled'], true);
+    if (enabled && !config.getForMarket(location.url, ['featured', 'sections', 'all'], false)) {
+        enabled = config.getForMarket(location.url, ['featured', 'sections', section, 'enabled'], false);
     }
     if (enabled) {
-        environments = config.getForMarket(location.url, ['featured', 'section', section, 'environments']);
+        environments = config.getForMarket(location.url, ['featured', 'sections', section, 'environments']);
         if (environments) {
             enabled = _.contains(environments, env);
         }

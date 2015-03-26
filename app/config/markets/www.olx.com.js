@@ -32,6 +32,9 @@ module.exports = {
             total: 2,
             top: 1,
             bottom: 1
+        },
+        sections: {
+            all: true
         }
     }
 };
