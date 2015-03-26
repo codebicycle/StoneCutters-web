@@ -1,6 +1,5 @@
 'use strict';
 
-var S = require('string');
 var _ = require('underscore');
 var Base = require('../../../../../common/app/bases/view');
 var translations = require('../../../../../../../shared/translations');
@@ -8,26 +7,25 @@ var statsd = require('../../../../../../../shared/statsd')();
 
 module.exports = Base.extend({
     tagName: 'section',
-    id: 'posting-description-view',
-    className: 'posting-description-view',
+    id: 'posting-title-view',
+    className: 'posting-title-view',
     events: {
-        'blur #field-description': 'onBlur',
+        'blur #field-title': 'onBlur',
+        'keyup #field-title': 'characterCount',
         'validate': 'onValidate'
     },
     validations: {
-        description: {
-            message: 'misc.DescriptionCharacters_Mob',
+        title: {
+            message: 'misc.TitleCharacters_Mob',
             minLength: 10
         }
     },
     postRender: function() {
-        var $field = this.$('#field-description');
-
-        this.stripValue($field);
+        this.$('#field-title').trigger('keyup');
     },
     onBlur: function(event) {
         var $field = $(event.target);
-        var value = this.stripValue($field);
+        var value = this.trimValue($field);
 
         if ($field.data('data-value') !== value) {
             if (this.validate($field)) {
@@ -35,6 +33,8 @@ module.exports = Base.extend({
             }
 
             $field.data('data-value', value);
+
+            this.$('#field-title').trigger('keyup');
         }
     },
     onValidate: function(event, done, isValid) {
@@ -42,9 +42,17 @@ module.exports = Base.extend({
         event.stopPropagation();
         event.stopImmediatePropagation();
 
-        var isValidDescription = this.validate(this.$('#field-description'));
+        var isValidTitle = this.validate(this.$('#field-title'));
 
-        done(isValid && isValidDescription);
+        done(isValid && isValidTitle);
+    },
+    characterCount: function (event) {
+        var $input = $(event.currentTarget);
+        var $msg = $input.next('small');
+        var count = $msg.text().split(' ');
+
+        count[0] = $input.val().length;
+        $msg.text(count.join(' '));
     },
     validate: function(field) {
         var $field = this.$(field);
@@ -67,10 +75,9 @@ module.exports = Base.extend({
         }
         return valid;
     },
-    stripValue: function(field) {
+    trimValue: function(field) {
         var value = field.val();
 
-        value = S(value).stripTags().s;
         value = $.trim(value);
         field.val(value);
 
@@ -78,4 +85,4 @@ module.exports = Base.extend({
     }
 });
 
-module.exports.id = 'post/description';
+module.exports.id = 'post/title';

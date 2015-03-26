@@ -202,7 +202,8 @@ module.exports = {
             featuredAds: true,
             offset: 0
         },
-        section: {
+        sections: {
+            all: false,
             'categories#list': {
                 quantity: {
                     total: 6

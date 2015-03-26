@@ -34,5 +34,15 @@ module.exports = {
             CALL_TO_ACTION_MAP: 'calltoactions_map'
         },
         firstClick: true
+    },
+    desktopTest: {
+        enabled: true,
+        platforms: ['desktop'],
+        markets: ['co'],
+        name: 'test',
+        alternatives: {
+            TEST1: 'test1',
+            TEST2: 'test2'
+        }
     }
 };
