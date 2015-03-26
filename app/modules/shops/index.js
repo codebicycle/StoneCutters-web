@@ -1,5 +1,6 @@
 'use strict';
 
+var uuid = require('node-uuid');
 var _ = require('underscore');
 var Sixpack = require('../../../shared/sixpack');
 var config = require('../../../shared/config');
@@ -43,7 +44,6 @@ Shops.prototype.shouldGetShops = function() {
  };
 
 Shops.prototype.start = function(from, itemsCount, shopsCount) {
-    var uuid = require('node-uuid');
     var experiment = this.getExperiment();
 
     this.shopSessionId = uuid.v4();
