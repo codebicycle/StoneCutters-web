@@ -63,6 +63,9 @@ module.exports = {
         }
     },
     featured: {
-        enabled: true
+        enabled: true,
+        sections: {
+            all: true
+        }
     }
 };
