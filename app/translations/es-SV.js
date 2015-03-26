@@ -581,7 +581,7 @@ module.exports = {
     'misc.ReturnToMsgs': 'Volver a mis mensajes',
     'misc.return_ads': '<<LINK>>Regresar a mis mensajes<</LINK>>',
     'misc.SafetyTipsBuyers': 'Secretos de seguridad para compradores',
-    'misc.SayOLX': 'Cuando llames explica que vistes el anuncio en OLX',
+    'misc.SayOLX': 'Cuando llames, explica que vistes el anuncio en OLX',
     'misc.SeeAdIn2Hrs_Mob': 'Lo puedes ver en OLX dentro de unas dos horas',
     'misc.SeeLess': 'Ver menos',
     'misc.SeeMore': 'Ver m\xE1s',
