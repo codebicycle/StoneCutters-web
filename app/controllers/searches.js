@@ -58,6 +58,7 @@ function search(params, callback, gallery) {
         var languages = this.app.session.get('languages');
         var location = this.app.session.get('location');
         var path = this.app.session.get('path');
+        var shopsModule = new Shops(this);
         var starts = '/nf';
         var redirectParams = {
             replace: true
@@ -66,7 +67,6 @@ function search(params, callback, gallery) {
         var url;
         var category;
         var subcategory;
-        var shopsModule = new Shops(this);
 
         asynquence().or(fail.bind(this))
             .then(buildUrl.bind(this))
@@ -172,10 +172,22 @@ function search(params, callback, gallery) {
             params.abundance = true;
             params.languageId = languages._byId[this.app.session.get('selectedLanguage')].id;
             Paginator.prepare(this.app, params);
+
+            if (params.catId) {
+                if (subcategory) {
+                    params['f.category'] = subcategory.get('id');
+                }
+                if (category) {
+                    params['f.parentcategory'] = category.get('id');
+                }
+            }
+
             query = _.clone(params);
             delete params.search;
             delete params.page;
             delete params.filters;
+            delete params.catId;
+            delete params.categoryId;
 
             this.app.seo.addMetatag('robots', 'noindex, nofollow');
             this.app.seo.addMetatag('googlebot', 'noindex, nofollow');
@@ -201,21 +213,24 @@ function search(params, callback, gallery) {
         }
 
         function fetch(done, res) {
-            var collections = {
+            var spec = {
                 items: {
                     collection: 'Items',
                     params: params
                 } 
             };
+
             if (shopsModule.shouldGetShops()) {
-                collections.shops = {
+                spec.shops = {
                     collection: 'Shops',
-                    params: _.clone(params),
+                    params: _.extend({}, params, {
+                        pageSize: 3,
+                        offset: 3 * (params.offset / params.pageSize)
+                    }),
                 };
-                collections.shops.params.pageSize = 3;
-                collections.shops.params.offset = 3 * (params.offset / params.pageSize);
             }
-            this.app.fetch(collections, {
+
+            this.app.fetch(spec, {
                 readFromCache: false
             }, function afterFetch(err, response) {
                 if (err) {
@@ -328,7 +343,9 @@ function search(params, callback, gallery) {
                 filters: items.filters,
                 paginator: items.paginator,
                 search: query.search,
-                category: category
+                category: category,
+                subcategory: subcategory,
+                currentCategory: subcategory || category
             });
         }
 

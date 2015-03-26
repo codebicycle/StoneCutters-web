@@ -300,11 +300,13 @@ module.exports = function userRouter(app) {
                     app: req.rendrApp
                 });
                 if (threadId && threadId !== 'mail') {
+                    conversation.set('conversation_type', 'login');
                     conversation.set('user', user);
                     conversation.set('threadId', threadId);
                     url = '/myolx/conversation/' + threadId;
                 }
                 else if (hash) {
+                    conversation.set('conversation_type', 'hash');
                     conversation.set('hash', hash);
                     url = '/myolx/conversation/mail?hash=' + hash;
                 }

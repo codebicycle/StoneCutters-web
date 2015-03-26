@@ -8,7 +8,7 @@ module.exports = function convert(experiment, done) {
         url: '/tracking/sixpack.gif?experiment=' + experiment.key + '&platform=' + this.platform + '&market=' + this.market,
         cache: false
     })
-    .always(always);
+    .always(always.bind(this));
 
     function always() {
         this.callback(done)();

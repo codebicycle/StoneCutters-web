@@ -8,11 +8,11 @@ module.exports = {
             order: [830, 362, 811, 191, 800, 815, 938, 806, 853, 16, 881, 859, 821],
             columns: [4, 3, 3, 3],
             redirections: {
-                '864': 881,
-                '863': 861,
-                '868': 940,
+                '824': 191,
                 '876': 646,
-                '824': 201
+                '868': 940,
+                '864': 881,
+                '863': 859
             }
         }
     },
@@ -264,21 +264,34 @@ module.exports = {
             top: 2,
             bottom: 2
         },
-        section: {
-            'categories#list': {
-                enabled: false
+        sections: {
+            all: false,
+            'categories#show': {
+                enabled: true
             },
-            'users#myads': {
-                enabled: false
+            'categories#showig': {
+                enabled: true
             },
-            'post#flow': {
-                enabled: false
+            'searches#statics': {
+                enabled: true
             },
-            'post#success': {
-                enabled: false
+            'searches#allresultsig': {
+                enabled: true
             },
-            'post#flowMarketing': {
-                enabled: false
+            'searches#allresults': {
+                enabled: true
+            },
+            'searches#searchig': {
+                enabled: true
+            },
+            'searches#search': {
+                enabled: true
+            },
+            'searches#filterig': {
+                enabled: true
+            },
+            'searches#filter': {
+                enabled: true
             }
         }
     },
