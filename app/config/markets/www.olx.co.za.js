@@ -443,5 +443,12 @@ module.exports = {
             href: 'http://hello.olx.co.za',
             target: '_blank'
         }
+    },
+    tracking: {
+        trackers: {
+            floodlight: {
+                enabled: true
+            }
+        }
     }
 };

@@ -10,4 +10,5 @@ module.exports = {
     allpages: require('./allpages'),
     ninja: require('./ninja'),
     adroll: require('./adroll'),
+    floodlight: require('./floodlight')
 };

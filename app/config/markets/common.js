@@ -186,6 +186,10 @@ module.exports = {
             adroll: {
                 enabled: false,
                 platforms: ['desktop']
+            },
+            floodlight: {
+                enabled: false,
+                platforms: ['desktop']
             }
         }
     },
