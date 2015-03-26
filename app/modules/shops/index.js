@@ -38,7 +38,7 @@ Shops.prototype.enabled = function() {
 Shops.prototype.shouldGetShops = function() {
     var experiment = this.getExperiment();
 
-    return (experiment && experiment.alternative != 'items');
+    return (experiment && experiment.alternative !== 'items');
  };
 
 Shops.prototype.start = function(from, itemsCount, shopsCount) {
