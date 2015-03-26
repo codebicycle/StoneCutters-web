@@ -51,7 +51,7 @@ function fetchItems(done, res, neighbors) {
     }, callback);
     
     function callback(err, response) {
-        if (!err && response && response.items) {
+        if (!err && response && response.items && response.items.length > 10) {
             res.items.meta.abundance = {
                 total: response.items.length,
                 around: true,
