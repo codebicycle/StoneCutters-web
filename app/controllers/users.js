@@ -933,33 +933,39 @@ function report(params, callback) {
     helpers.controllers.control.call(this, params, controller);
 
     function controller() {
+        var promise = asynquence().or(fail.bind(this))
+            .then(prepare.bind(this));
         var conversation;
 
-        var prepare = function(done) {
+        if (this.app.session.get('platform') !== 'desktop') {
+            promise.then(fetch.bind(this));
+        }
+
+        promise.val(success.bind(this));
+
+        function prepare(done) {
             conversation = new Conversation({
                 hash: params.hash
             }, {
                 app: this.app
             });
             done();
-        }.bind(this);
+        }
 
-        var fetch = function(done,err) {
+        function fetch(done,err) {
             conversation.report(done);
-        }.bind(this);
+        }
 
-        var error = function(err, res) {
+        function fail(err, res) {
             return helpers.common.error.call(this, err, res, callback);
-        }.bind(this);
+        }
 
-        var success = function() {
-            callback(null, {});
-        }.bind(this);
-
-        asynquence().or(error)
-            .then(prepare)
-            .then(fetch)
-            .val(success);
+        function success() {
+            callback(null, {
+                conversation: conversation,
+                include: ['conversation']
+            });
+        }
     }
 }
 
@@ -967,18 +973,13 @@ function unsubscribe(params, callback) {
     helpers.controllers.control.call(this, params, controller);
 
     function controller() {
-        var conversation;
 
-        var prepare = function(done) {
-            conversation = new Conversation({
+        var fetch = function(done,err) {
+            var conversation = new Conversation({
                 hash: params.hash
             }, {
                 app: this.app
             });
-            done();
-        }.bind(this);
-
-        var fetch = function(done,err) {
             conversation.unsubscribe(done);
         }.bind(this);
 
@@ -991,7 +992,6 @@ function unsubscribe(params, callback) {
         }.bind(this);
 
         asynquence().or(error)
-            .then(prepare)
             .then(fetch)
             .val(success);
     }
