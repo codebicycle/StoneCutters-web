@@ -42,6 +42,13 @@ function processSeo(done) {
     done();
 }
 
+function schibsted(params, done) {
+    if (this.app.session.get('platform') === 'desktop' && params.from === 'schibsted') {
+        this.app.seo.addMetatag('canonical', common.fullizeUrl(utils.removeParams(this.app.session.get('url'), 'from'), this.app));
+    }
+    done();
+}
+
 function changeHeaders(headers, currentRoute) {
     var header;
 
@@ -137,7 +144,9 @@ module.exports = {
             .then(prepare.bind(this, params))
             .then(processTracking.bind(this));
         if (options.seo) {
-            promise.then(processSeo.bind(this));
+            promise
+                .then(processSeo.bind(this))
+                .then(schibsted.bind(this, params));
         }
         if (options.cache) {
             promise.val(changeHeaders.bind(this));
@@ -154,5 +163,6 @@ module.exports = {
             return common.redirect.call(this, '/500');
         }
     },
-    changeHeaders: changeHeaders
+    changeHeaders: changeHeaders,
+    schibsted: schibsted
 };
