@@ -1,0 +1,11 @@
+{% from macros import Field %}
+{% set titleField = {
+	dataType: "string",
+	fieldType: "text",
+	isOptional: "false",
+	label: dictionary["messages_auction_bid_class.7"],
+	mandatory: "true",
+	name: "title",
+	value: item.get('title')
+} %}
+{{ Field(hint = dictionary["postingtitlelisting.NumberOfCharactersForTitle"] | replace('<<NUMBER _OF_ENTERED_CHARACTERS>>', '0') | replace('<<NUMBER_OF_SUGGESTED_CHARACTERS>>', '60'), titleField) }}
