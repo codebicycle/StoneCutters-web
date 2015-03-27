@@ -173,7 +173,7 @@ function handleItems(params, promise, gallery) {
             page: currentRouter
         });
         helpers.controllers.changeHeaders.call(this, {}, currentRouter);
-        done();
+        helpers.controllers.schibsted.call(this, params, done);
     }.bind(this);
 
     var redirect = function(done) {
@@ -374,7 +374,7 @@ function handleShow(params, promise) {
             page: currentRouter
         });
         helpers.controllers.changeHeaders.call(this, {}, currentRouter);
-        done();
+        helpers.controllers.schibsted.call(this, params, done);
     }.bind(this);
 
     var redirect = function(done) {
