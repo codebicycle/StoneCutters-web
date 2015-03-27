@@ -154,6 +154,13 @@ module.exports = function(nunjucks) {
         return locations;
     }
 
+    function _wrapper(fn) {
+        fn = _[fn];
+        if (fn) {
+            return fn.apply(_, Array.prototype.slice.call(arguments, 1));
+        }
+    }
+
     return {
         is: is,
         log: log,
@@ -173,6 +180,7 @@ module.exports = function(nunjucks) {
         latinDigits: helpers.numbers.toLatin,
         json: json,
         shuffleItems: shuffleItems,
-        getLocations: getLocations
+        getLocations: getLocations,
+        _: _wrapper
     };
 };
