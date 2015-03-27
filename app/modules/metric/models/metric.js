@@ -18,7 +18,7 @@ function incrementGraphite(values, options) {
     var metric = [this.app.session.get('location').abbreviation];
 
     if (_.isArray(values)) {
-        values = _.object(['category', 'action', 'values'], values);
+        values = _.object(['category', 'action', 'value'], values);
     }
     values = values || {};
 
