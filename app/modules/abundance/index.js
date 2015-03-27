@@ -2,40 +2,52 @@
 
 var _ = require('underscore');
 var Backbone = require('backbone');
+var logger = require('../logger');
+var helpers = require('../../helpers');
+var Metric = require('../../modules/metric');
 var config = require('../../../shared/config');
 var statsd = require('../../../shared/statsd')();
-var helpers = require('../../helpers');
 
 Backbone.noConflict();
 
 function initialize(attrs, options) {
     this.app = options.app;
+    this.metric = new Metric({}, options);
 }
 
 function isEnabled() {
-    return config.getForMarket(this.app.session.get('location').url, ['abundance', 'enabled'], false);
+    var location = this.app.session.get('location');
+    var enabled = config.getForMarket(location.url, ['abundance', 'enabled'], false);
+
+    if (enabled) {
+        enabled = location.current && location.current.type === 'city';
+    }
+    return enabled;
 }
 
 function fetch(done, res) {
-    helpers.dataAdapter.get(this.app.req, ['/locations/' + this.app.session.get('siteLocation') + '/neighbors'].join(''), callback.bind(this));
+    var siteLocation = this.app.session.get('siteLocation');
+
+    helpers.dataAdapter.get(this.app.req, ['/locations/' + siteLocation + '/neighbors'].join(''), callback.bind(this));
+    logger.log('[OLX_DEBUG] DGD-2 ::', siteLocation);
 
     function callback(error, response, body) {
         var type = getListingType(this.app.session.get('currentRoute'));
         var quantity;
 
         if (error) {
-            statsd.increment([this.app.session.get('location').abbreviation, 'dgd', 'abundance', type, 'gollum', 'not_available', this.app.session.get('platform')]);
+            this.metric.increment(['dgd', 'abundance', [type, 'gollum', 'not_available']]);
             return done(res);
         }
         else if (!body || !body.neighbors) {
-            statsd.increment([this.app.session.get('location').abbreviation, 'dgd', 'abundance', type, 'gollum', 'not_body', this.app.session.get('platform')]);
+            this.metric.increment([ 'dgd', 'abundance', [type, 'gollum', 'not_body']]);
             return done(res);
         }
         quantity = body.neighbors.length || 'empty';
         if (body.neighbors.length > 5) {
             quantity = 'enough';
         }
-        statsd.increment([this.app.session.get('location').abbreviation, 'dgd', 'abundance', type, 'gollum', 'cities', quantity, this.app.session.get('platform')]);
+        this.metric.increment(['dgd', 'abundance', [type, 'gollum', 'cities', quantity]]);
         this.fetchItems(done, res, body.neighbors);
     }
 }
@@ -78,8 +90,8 @@ function fetchItems(done, res, neighbors) {
                 }
             }
             type = getListingType(this.app.session.get('currentRoute'));
-            statsd.increment([this.app.session.get('location').abbreviation, 'dgd', 'abundance', type, 'listing', 'view', this.app.session.get('platform')]);
-            statsd.increment([this.app.session.get('location').abbreviation, 'dgd', 'abundance', type, 'listing', 'results', quantity, this.app.session.get('platform')]);
+            this.metric.increment(['dgd', 'abundance', [type, 'listing', 'view']]);
+            this.metric.increment(['dgd', 'abundance', [type, 'listing', 'results', quantity]]);
         }
         done(res);
     }

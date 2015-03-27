@@ -3,6 +3,7 @@
 var _ = require('underscore');
 var Base = require('../../../../../common/app/bases/view').requireView('searches/search');
 var helpers = require('../../../../../../helpers');
+var Metric = require('../../../../../../modules/metric');
 
 module.exports = Base.extend({
     id: 'searches-search-view',
@@ -13,6 +14,9 @@ module.exports = Base.extend({
     regexpReplacePage: /(-p-[0-9]+)/,
     regexpReplaceCategory: /([a-zA-Z0-9-]+-cat-[0-9]+)/,
     regexpFindNeighborhood: /-neighborhood_[0-9_]+/,
+    events: {
+        'click [data-increment]': 'onClickIncrement'
+    },
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
         var link = this.refactorPath(this.app.session.get('path'));
@@ -42,6 +46,18 @@ module.exports = Base.extend({
             path = path.substring(0, path.length - 1);
         }
         return path;
+    },
+    onClickIncrement: function(event) {
+        var $elem = $(event.currentTarget);
+
+        this.app.session.persist({
+            origin: {
+                type: 'browse',
+                isGallery: this.id !== 'searches-search-view',
+                isAbundance: !!~($elem.data('increment-value') || '').indexOf('abundance')
+            }
+        });
+        Metric.incrementEventHandler.call(this, event);
     }
 });
 
