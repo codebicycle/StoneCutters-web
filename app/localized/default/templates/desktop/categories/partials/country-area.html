@@ -1,5 +1,5 @@
 <div class="country-area {{ countryMapClass }}">
-    <a href="{{ 'nf/all-results' | link }}" data-dgd-track="map">
+    <a href="{{ 'nf/all-results' | link }}" data-increment="true" data-increment-category="dgd" data-increment-action="home" data-increment-value="map">
         <img src="{{ ('/images/desktop/home_maps/' + location.abbreviation | lower + '.gif') | static }}" alt="Mapa de {{ location.name }}" />
     </a>
     <div class="content-description">
@@ -9,7 +9,7 @@
             {% for city in topCities %}
                 {% if loop.index <= maxTopCities %}
                     <li>
-                        <a title="{{ city.anchor }}" href="{{ '/nf/all-results' | link({location: city.url}) }}" data-dgd-track="topcity">{{ city.anchor }}</a>
+                        <a title="{{ city.anchor }}" href="{{ '/nf/all-results' | link({location: city.url}) }}" data-increment="true" data-increment-category="dgd" data-increment-action="home" data-increment-value="topcity" data-increment-options="{'async':false}" >{{ city.anchor }}</a>
                     </li>
                 {% endif %}
             {% endfor %}
