@@ -4,8 +4,8 @@ var _ = require('underscore');
 var Base = require('../../../../../common/app/bases/view').requireView('categories/list');
 var helpers = require('../../../../../../helpers');
 var Chat = require('../../../../../../modules/chat');
+var Metric = require('../../../../../../modules/metric');
 var config = require('../../../../../../../shared/config');
-var statsd = require('../../../../../../../shared/statsd')();
 
 module.exports = Base.extend({
     tagName: 'main',
@@ -14,7 +14,7 @@ module.exports = Base.extend({
     events: {
         'click .open-modal': 'onOpenModal',
         'click [data-modal-shadow], [data-modal-close]': 'onCloseModal',
-        'click [data-dgd-track]': 'onClickDgdTrack'
+        'click [data-increment]': Metric.incrementEventHandler
     },
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
@@ -67,17 +67,5 @@ module.exports = Base.extend({
         event.stopPropagation();
         event.stopImmediatePropagation();
         $('#location-modal').trigger('hide');
-    },
-    onClickDgdTrack: function(event) {
-        var $elem = $(event.currentTarget);
-        var type = $elem.data('dgd-track');
-        var options;
-
-        if (type === 'city') {
-            options = {
-                async: false
-            };
-        }
-        statsd.increment([this.app.session.get('location').abbreviation, 'dgd', 'home', type, this.app.session.get('platform')], options);
     }
 });

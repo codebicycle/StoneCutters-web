@@ -1,11 +1,10 @@
 'use strict';
 
+var _ = require('underscore');
+var asynquence = require('asynquence');
 var Base = require('../../../../../../common/app/bases/view').requireView('post/flow/index');
 var helpers = require('../../../../../../../helpers');
-var asynquence = require('asynquence');
-var _ = require('underscore');
 var translations = require('../../../../../../../../shared/translations');
-var statsd = require('../../../../../../../../shared/statsd')();
 var Item = require('../../../../../../../models/item');
 var Field = require('../../../../../../../models/field');
 var Categories = require('../../../../../../../collections/categories');

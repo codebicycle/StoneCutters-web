@@ -1,18 +1,18 @@
 'use strict';
 
-var Base = require('../../../../../../common/app/bases/view');
 var _ = require('underscore');
+var Base = require('../../../../../../common/app/bases/view');
 var helpers = require('../../../../../../../helpers');
 var Categories = require('../../../../../../../collections/categories');
 var Filters = require('../../../../../../../modules/filters');
-var statsd = require('../../../../../../../../shared/statsd')();
+var Metric = require('../../../../../../../modules/metric');
 
 module.exports = Base.extend({
     className: 'listing-filters',
     id: 'listing-filters',
     events: {
-        'click [data-dgd-track]': 'onClickDgdTrack',
-        'click [data-dgd-track-filter]': 'onClickFilter',
+        'click [data-increment]': Metric.incrementEventHandler,
+        'click [data-increment-filter]': 'onClickFilter',
         'click .filter-title': 'toogleFilter',
         'click .clean-filters': 'cleanFilters',
         'click .check-box input': 'selectFilter',
@@ -248,25 +248,14 @@ module.exports = Base.extend({
         }
         return path;
     },
-    onClickDgdTrack: function(event) {
-        var currentRoute = this.app.session.get('currentRoute');
-        var order;
-
-        if (currentRoute.controller === 'searches' && _.contains(['filter', 'filterig', 'search', 'searchig'], currentRoute.action)) {
-            order = $(event.currentTarget).data('dgd-track');
-            statsd.increment([this.app.session.get('location').abbreviation, 'dgd', 'search', 'category', order, this.app.session.get('platform')]);
-        }
-    },
     onClickFilter: function(event) {
         var $filter = $(event.currentTarget);
-        var currentRoute = this.app.session.get('currentRoute');
-        var name = $filter.data('dgd-track-filter');
-        var type = 'browse';
+        var name = $filter.data('increment-filter');
 
-        if (currentRoute.controller === 'searches' && _.contains(['filter', 'filterig', 'search', 'searchig'], currentRoute.action)) {
-            type = 'search';
+        if (!this.metric) {
+            this.metric = new Metric({}, this);
         }
-        statsd.increment([this.app.session.get('location').abbreviation, 'dgd', 'filters', type, name, this.app.session.get('platform')]);
+        this.metric.increment(['dgd', 'filters', [this.metric.getListingType(), name]]);
     },
     getCategories: function() {
         this.categories = this.categories || (this.options.categories && this.options.categories.toJSON ? this.options.categories : new Categories(this.options.categories || {}, {
