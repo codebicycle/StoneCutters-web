@@ -1,8 +1,9 @@
 'use strict';
 
-var Base = require('../../../../../common/app/bases/view').requireView('partials/tracking');
 var _ = require('underscore');
+var Base = require('../../../../../common/app/bases/view').requireView('partials/tracking');
 var helpers = require('../../../../../../helpers');
+var Tracking = require('../../../../../../modules/tracking');
 
 module.exports = Base.extend({
     id: 'partials-tracking-view',
@@ -52,7 +53,9 @@ module.exports = Base.extend({
         event.stopImmediatePropagation();
 
         if (tracking && tracking.params) {
-            this.$el.trigger('trackAnalytics', tracking);
+            if (Tracking.analytics.isClientEnabled.call(this)) {
+                this.$el.trigger('trackAnalytics', tracking);
+            }
         }
     },
     onTrackAnalytics: function(event, tracking) {

@@ -2,8 +2,8 @@
 
 var _ = require('underscore');
 var Base = require('../../../../../common/app/bases/view').requireView('header/index');
+var Metric = require('../../../../../../modules/metric');
 var Sixpack = require('../../../../../../../shared/sixpack');
-var statsd = require('../../../../../../../shared/statsd')();
 
 module.exports = Base.extend({
     tagName: 'header',
@@ -11,7 +11,7 @@ module.exports = Base.extend({
     className: 'header-view',
     events: {
         'click .posting': 'onPostClick',
-        'click [data-dgd-track]': 'onClickDgdTrack'
+        'click [data-increment]': Metric.incrementEventHandler
     },
     postRender: function() {
         this.app.router.appView.on('posting:start', this.onPostingStart.bind(this));
@@ -35,11 +35,5 @@ module.exports = Base.extend({
     onPostingEnd: function() {
         $('.posting, .search-form').removeClass('disabled');
         $('.posting-title').addClass('disabled');
-    },
-    onClickDgdTrack: function(event) {
-        var $elem = $(event.currentTarget);
-        var type = $elem.data('dgd-track');
-
-        statsd.increment([this.app.session.get('location').abbreviation, 'dgd', 'home', type, this.app.session.get('platform')]);
     }
 });

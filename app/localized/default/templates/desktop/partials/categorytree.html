@@ -8,7 +8,7 @@
 <ul class="category-list category-list-first">
 	{% for category in categories %}
 		<li class="category">
-			<a class="category-link" href="{{ category | slugToUrl | link }}" data-dgd-track="category.{{category.id}}">
+			<a class="category-link" href="{{ category | slugToUrl | link }}" data-increment="true" data-increment-category="dgd" data-increment-action="home" data-increment-value="category.{{category.id}}">
 				{% block icon %}<span class="icon cat-{{ category.id }}"></span>{% endblock %}
 				<h3>{{ category.trName }}</h3>
 			</a>
@@ -16,12 +16,12 @@
 			{% if category.id == '190' and location.url == 'www.olx.co.tz' %}
 				{% for subcategory in category.children.toJSON() %}
 					{% if loop.index < 28 %}
-						<li><a href="{{ subcategory | slugToUrl | link }}" data-dgd-track="subcategory.{{subcategory.id}}">{{ subcategory.trName }}</a></li>
+						<li><a href="{{ subcategory | slugToUrl | link }}" data-increment="true" data-increment-category="dgd" data-increment-action="home" data-increment-value="subcategory.{{subcategory.id}}">{{ subcategory.trName }}</a></li>
 					{% endif %}
 				{% endfor %}
 			{% else %}
 				{% for subcategory in category.children.toJSON() %}
-					<li><a href="{{ subcategory | slugToUrl | link }}" data-dgd-track="subcategory.{{subcategory.id}}">{{ subcategory.trName }}</a></li>
+					<li><a href="{{ subcategory | slugToUrl | link }}" data-increment="true" data-increment-category="dgd" data-increment-action="home" data-increment-value="subcategory.{{subcategory.id}}">{{ subcategory.trName }}</a></li>
 				{% endfor %}
 			{% endif %}
 			</ul>
