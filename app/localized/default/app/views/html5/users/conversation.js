@@ -6,7 +6,6 @@ var asynquence = require('asynquence');
 var Base = require('../../../../../common/app/bases/view').requireView('users/conversation');
 var Conversation = require('../../../../../../models/conversation');
 var helpers = require('../../../../../../helpers');
-var statsd = require('../../../../../../../shared/statsd')();
 
 module.exports = Base.extend({
     className: 'users_conversation_view',

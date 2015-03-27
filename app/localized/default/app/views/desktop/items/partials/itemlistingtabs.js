@@ -5,7 +5,6 @@ var Base = require('../../../../../../common/app/bases/view');
 var helpers = require('../../../../../../../helpers');
 var Filters = require('../../../../../../../modules/filters');
 var Metric = require('../../../../../../../modules/metric');
-var statsd = require('../../../../../../../../shared/statsd')();
 
 module.exports = Base.extend({
     className: 'listing-tabs',
@@ -66,13 +65,10 @@ module.exports = Base.extend({
         return path;
     },
     metricSort: function(name) {
-        var currentRoute = this.app.session.get('currentRoute');
-        var type = 'browse';
-
-        if (currentRoute.controller === 'searches' && _.contains(['filter', 'filterig', 'search', 'searchig'], currentRoute.action)) {
-            type = 'search';
+        if (!this.metric) {
+            this.metric = new Metric({}, this);
         }
-        statsd.increment([this.app.session.get('location').abbreviation, 'dgd', 'sort', type, name, this.app.session.get('platform')]);
+        this.metric.increment(['dgd', 'sort', [this.metric.getListingType(), name]]);
     }
 });
 

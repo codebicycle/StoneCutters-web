@@ -22,7 +22,7 @@ Details of the latest version can be found on the Project's Github Wiki.
 
 1. Download and install the last version of NodeJS from http://nodejs.org/ (follow the instructions inside the Readme file.)
 
-2. Clone ARWEN's repo using the following URL: [git@github.com:olx-inc/arwen.git](git@github.com:olx-inc/arwen.git)
+2. Clone ARWEN's repo using the following URL: [git@github.com:olx-inc/mobile-webapp.git](git@github.com:olx-inc/mobile-webapp.git)
 
 3. Go into the ARWEN folder and run the following command to install Grunt.
 
@@ -36,9 +36,9 @@ Details of the latest version can be found on the Project's Github Wiki.
 
     `sudo npm install -g n`
 
-6. Install Node 0.10.28:
+6. Install Node 0.10.38:
 
-    `n 0.10.28` 
+    `sudo n 0.10.38` 
 
 7. Download and install the node modules running:
 

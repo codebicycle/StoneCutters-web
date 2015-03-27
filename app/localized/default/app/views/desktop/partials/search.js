@@ -2,7 +2,7 @@
 
 var Base = require('../../../../../common/app/bases/view').requireView('partials/search');
 var helpers = require('../../../../../../helpers');
-var statsd = require('../../../../../../../shared/statsd')();
+var Metric = require('../../../../../../modules/metric');
 
 module.exports = Base.extend({
     postRender: function() {
@@ -23,7 +23,10 @@ module.exports = Base.extend({
         var search = this.$('form').find('[name=search]').val();
         var url = search ? ('/nf/search/' + search) : '/nf/all-results';
 
-        statsd.increment([this.app.session.get('location').abbreviation, 'dgd', 'home', 'search', (search ? 'with' : 'without') + '_term', this.app.session.get('platform')]);
+        if (!this.metric) {
+            this.metric = new Metric({}, this);
+        }
+        this.metric.increment(['dgd', 'home', ['search', (search ? 'with' : 'without') + '_term']]);
 
         helpers.common.redirect.call(this.app.router, url, null, {
             status: 200

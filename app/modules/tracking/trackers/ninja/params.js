@@ -2,7 +2,6 @@
 
 var _ = require('underscore');
 var configTracking = require('../../config');
-var logger = require('../../../logger');
 var config = require('../../../../../shared/config');
 var utils = require('../../../../../shared/utils');
 var sorts = {
@@ -74,7 +73,6 @@ function setDefaults(params, options, page) {
         params.clientId = this.app.session.get('clientId');
     }
     if (!params.trackPage) {
-        logger.log('[OLX_DEBUG]', 'Tracking | Ninja not contains trackPage in', page, '|', platform);
         params.trackPage = getCurrentPath(this.app.session.get('path'));
     }
 }
