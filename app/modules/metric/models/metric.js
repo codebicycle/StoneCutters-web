@@ -30,9 +30,11 @@ function incrementGraphite(values, options) {
     }
     if (values.value) {
         if (_.isArray(values.value)) {
-            values.value = values.value.join('.');
+            metric = metric.concat(values.value);
         }
-        metric.push(values.value);
+        else {
+            metric.push(values.value);
+        }
     }
     metric.push(this.app.session.get('platform'));
     statsd.increment(metric, options);
