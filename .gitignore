@@ -46,3 +46,7 @@ public/images/*/icons
 
 mapping_hosts.js
 *.hosts
+
+# IntelliJ
+*.iml
+
