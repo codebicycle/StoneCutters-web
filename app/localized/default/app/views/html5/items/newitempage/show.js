@@ -6,7 +6,6 @@ var Base = require('../../../../../../common/app/bases/view').requireView('items
 var Categories = require('../../../../../../../collections/categories');
 var Item = require('../../../../../../../models/item');
 var helpers = require('../../../../../../../helpers');
-var statsd = require('../../../../../../../../shared/statsd')();
 var translations = require('../../../../../../../../shared/translations');
 var User = require('../../../../../../../models/user');
 
