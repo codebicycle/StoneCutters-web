@@ -35,7 +35,6 @@ function incrementGraphite(values, options) {
         metric.push(values.value);
     }
     metric.push(this.app.session.get('platform'));
-    console.log(metric, options);
     statsd.increment(metric, options);
 }
 
