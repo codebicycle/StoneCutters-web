@@ -292,6 +292,7 @@ module.exports = {
         }
     },
     abundance: {
-        enabled: true
+        enabled: true,
+        quantity: 25
     }
 };

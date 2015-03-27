@@ -20,6 +20,7 @@ function fetch(done, res) {
     helpers.dataAdapter.get(this.app.req, ['/locations/' + this.app.session.get('siteLocation') + '/neighbors'].join(''), callback.bind(this));
 
     function callback(error, response, body) {
+        var type = getListingType(this.app.session.get('currentRoute'));
         var quantity;
 
         if (error || !body || !body.neighbors) {
@@ -29,7 +30,7 @@ function fetch(done, res) {
         if (body.neighbors.length > 5) {
             quantity = 'enough';
         }
-        statsd.increment([this.app.session.get('location').abbreviation, 'dgd', 'abundance', getListingType(this.app.session.get('currentRoute')), 'gollum', 'cities', quantity, this.app.session.get('platform')]);
+        statsd.increment([this.app.session.get('location').abbreviation, 'dgd', 'abundance', type, 'gollum', 'cities', quantity, this.app.session.get('platform')]);
         this.fetchItems(done, res, body.neighbors);
     }
 }
@@ -40,7 +41,8 @@ function fetchItems(done, res, neighbors) {
             collection: 'Items',
             params: _.extend({}, this.get('params'), {
                 city: neighbors.join(' OR '),
-                location: this.app.session.get('location').url
+                location: this.app.session.get('location').url,
+                pageSize: config.getForMarket(this.app.session.get('location').url, ['abundance', 'quantity'], 25)
             })
         }
     }, {
@@ -50,23 +52,23 @@ function fetchItems(done, res, neighbors) {
     function callback(err, response) {
         var quantity;
         var type;
-        
+
         if (!err && response && response.items) {
             res.items.meta.abundance = {
-                total: response.items.length,
+                total: response.items.meta.total,
                 around: true,
                 data: response.items.toJSON()
             };
             quantity = 'empty';
-            if (response.items.length) {
+            if (response.items.meta.total) {
                 quantity = 'enough';
-                if (response.items.length <= 10) {
+                if (response.items.meta.total <= 10) {
                     quantity = 10;
                 }
-                else if (response.items.length <= 50) {
+                else if (response.items.meta.total <= 50) {
                     quantity = 50;
                 }
-                else if (response.items.length <= 100) {
+                else if (response.items.meta.total <= 100) {
                     quantity = 100;
                 }
             }
