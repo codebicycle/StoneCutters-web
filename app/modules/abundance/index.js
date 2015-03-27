@@ -79,7 +79,7 @@ function fetchItems(done, res, neighbors) {
 }
 
 function getListingType(currentRoute) {
-    type = 'browse';
+    var type = 'browse';
     if (currentRoute.controller === 'searches' && _.contains(['filter', 'filterig', 'search', 'searchig'], currentRoute.action)) {
         type = 'search';
     }
