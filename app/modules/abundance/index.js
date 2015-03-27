@@ -3,7 +3,7 @@
 var _ = require('underscore');
 var Backbone = require('backbone');
 var config = require('../../../shared/config');
-var Adapter = require('../../../shared/adapters/base');
+var helpers = require('../../helpers');
 
 Backbone.noConflict();
 
@@ -16,24 +16,13 @@ function isEnabled() {
 }
 
 function fetch(done, res) {
-    var adapter = new Adapter({});
-
-    adapter.request(this.app.req, {
-        method: 'GET',
-        url: 'http://autolocation-testing.olx.com/domains/' + this.app.session.get('siteLocation') + '/neighbors'
-    }, callback.bind(this));
+    helpers.dataAdapter.get(this.app.req, ['/locations/' + this.app.session.get('siteLocation') + '/neighbors'].join(''), callback.bind(this));
 
     function callback(error, response, body) {
-        if (error || !body) {
+        if (error || !body || !body.neighbors) {
             return done(res);
         }
-        try {
-            body = JSON.parse(body);
-        }
-        catch(e) {
-            return done(res);
-        }
-        this.fetchItems(done, res, body);        
+        this.fetchItems(done, res, body.neighbors);
     }
 }
 
