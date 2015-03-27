@@ -324,5 +324,16 @@ module.exports = {
                 enabled: true
             }
         }
+    },
+    tracking: {
+        trackers: {
+            ninja: {
+                trackers: {
+                    others: {
+                        enabled: false
+                    }
+                }
+            }
+        }
     }
 };

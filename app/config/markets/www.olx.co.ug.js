@@ -34,5 +34,16 @@ module.exports = {
                 name: 'Phones'
             }
         ]
+    },
+    tracking: {
+        trackers: {
+            ninja: {
+                trackers: {
+                    others: {
+                        enabled: false
+                    }
+                }
+            }
+        }
     }
 };
