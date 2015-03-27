@@ -40,9 +40,10 @@ function fetch(done, res) {
             return done(res);
         }
         else if (!body || !body.neighbors) {
-            this.metric.increment([ 'dgd', 'abundance', [type, 'gollum', 'not_body']]);
+            this.metric.increment(['dgd', 'abundance', [type, 'gollum', 'not_body']]);
             return done(res);
         }
+        body.neighbors = _.filter(body.neighbors, _.identity);
         quantity = body.neighbors.length || 'empty';
         if (body.neighbors.length > 5) {
             quantity = 'enough';
