@@ -6,7 +6,6 @@ var helpers = require('../../../../../../helpers');
 var Chat = require('../../../../../../modules/chat');
 var Metric = require('../../../../../../modules/metric');
 var config = require('../../../../../../../shared/config');
-var statsd = require('../../../../../../../shared/statsd')();
 
 module.exports = Base.extend({
     tagName: 'main',

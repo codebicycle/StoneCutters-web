@@ -4,7 +4,6 @@ var _ = require('underscore');
 var Base = require('../../../../../common/app/bases/view').requireView('header/index');
 var Metric = require('../../../../../../modules/metric');
 var Sixpack = require('../../../../../../../shared/sixpack');
-var statsd = require('../../../../../../../shared/statsd')();
 
 module.exports = Base.extend({
     tagName: 'header',
