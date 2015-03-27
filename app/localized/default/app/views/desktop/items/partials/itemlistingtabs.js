@@ -1,9 +1,10 @@
 'use strict';
 
-var Base = require('../../../../../../common/app/bases/view');
 var _ = require('underscore');
+var Base = require('../../../../../../common/app/bases/view');
 var helpers = require('../../../../../../../helpers');
 var Filters = require('../../../../../../../modules/filters');
+var Metric = require('../../../../../../../modules/metric');
 var statsd = require('../../../../../../../../shared/statsd')();
 
 module.exports = Base.extend({
@@ -12,7 +13,7 @@ module.exports = Base.extend({
     tagName: 'nav',
     events: {
         'change #order-by-select': 'sortFilter',
-        'click [data-dgd-track]': 'onClickDgdTrack'
+        'click [data-increment]': Metric.incrementEventHandler
     },
     postRender: function() {
         if (!this.filters) {
@@ -72,16 +73,6 @@ module.exports = Base.extend({
             type = 'search';
         }
         statsd.increment([this.app.session.get('location').abbreviation, 'dgd', 'sort', type, name, this.app.session.get('platform')]);
-    },
-    onClickDgdTrack: function(event) {
-        var currentRoute = this.app.session.get('currentRoute');
-        var tab = $(event.currentTarget).data('dgd-track');
-        var type = 'browse';
-
-        if (currentRoute.controller === 'searches' && _.contains(['filter', 'filterig', 'search', 'searchig'], currentRoute.action)) {
-            type = 'search';
-        }
-        statsd.increment([this.app.session.get('location').abbreviation, 'dgd', type, tab, this.app.session.get('platform')]);
     }
 });
 
