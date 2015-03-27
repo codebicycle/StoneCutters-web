@@ -23,7 +23,12 @@ function fetch(done, res) {
         var type = getListingType(this.app.session.get('currentRoute'));
         var quantity;
 
-        if (error || !body || !body.neighbors) {
+        if (error) {
+            statsd.increment([this.app.session.get('location').abbreviation, 'dgd', 'abundance', type, 'gollum', 'not_available', this.app.session.get('platform')]);
+            return done(res);
+        }
+        else if (!body || !body.neighbors) {
+            statsd.increment([this.app.session.get('location').abbreviation, 'dgd', 'abundance', type, 'gollum', 'not_body', this.app.session.get('platform')]);
             return done(res);
         }
         quantity = body.neighbors.length || 'empty';
