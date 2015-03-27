@@ -7,6 +7,8 @@ var asynquence = require('asynquence');
 var Conversation = require('../../../../../../models/conversation');
 
 module.exports = Base.extend({
+    tagName: 'main',
+    id: 'users-report',
     className: 'users-report',
     events: {
         'click [data-action-report]': 'report'
@@ -15,6 +17,10 @@ module.exports = Base.extend({
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();
+
+        var $progressBar = $('#progressBar');
+        $progressBar.show();
+        $progressBar.width('80%');
 
         asynquence().or(fail.bind(this))
             .then(fetch.bind(this))
@@ -26,11 +32,17 @@ module.exports = Base.extend({
         }
 
         function success() {
-            this.$('#notification-message').removeClass('hide');
+            $progressBar.hide();
+            $progressBar.width('0');
+            this.$('.page-standart').addClass('hide');
+            this.$('#report-success').removeClass('hide');
         }
 
         function fail() {
-
+            $progressBar.hide();
+            $progressBar.width('0');
+            this.$('.page-standart').addClass('hide');
+            this.$('#report-error').removeClass('hide');
         }
     },
     getConversation: function() {
