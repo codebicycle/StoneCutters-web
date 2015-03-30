@@ -244,12 +244,15 @@ function reply(done, data) {
         var originData = this.app.session.get('origin');
         var type = 'unknown';
         var name = 'unknown';
+        var abundance = 'traditional_item.reply';
 
         if (originData) {
             type = originData.type;
             name = originData.isGallery ? 'gallery' : 'listing';
+            abundance = originData.isAbundance ? 'abundance_item.reply' : abundance;
         }
         statsd.increment([this.app.session.get('location').abbreviation, 'dgd', 'reply', type, name, this.app.session.get('platform')]);
+        statsd.increment([this.app.session.get('location').abbreviation, 'dgd', 'abundance', type, abundance, this.app.session.get('platform')]);
     }
 
     function fail(err) {

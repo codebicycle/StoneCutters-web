@@ -22,7 +22,7 @@ module.exports = function(params, next) {
 
     function callback(err, response, body) {
         if (err) {
-            return next.fail(err);
+            return next();
         }
         user.unreadConversationsCount = body.count;
         this.app.session.persist({
