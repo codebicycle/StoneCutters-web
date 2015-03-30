@@ -3,6 +3,8 @@
         <img src="{{url}}" class="tracking" width="1" height="1">
     {% endfor %}
 
+    {% include (template + '/partials/tracking/floodlight.html') %}
+
     {% include (template + '/partials/tracking/tagmanager.html') %}
 
     {% include (template + '/partials/tracking/analytics.html') %}
