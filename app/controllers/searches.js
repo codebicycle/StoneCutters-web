@@ -13,6 +13,7 @@ var utils = require('../../shared/utils');
 var config = require('../../shared/config');
 var statsd = require('../../shared/statsd')();
 var Shops = require('../modules/shops');
+var Abundance = require('../modules/abundance');
 
 module.exports = {
     filterig: middlewares(filterig),
@@ -67,6 +68,7 @@ function search(params, callback, gallery) {
         var url;
         var category;
         var subcategory;
+        var abundance = new Abundance({}, this);
 
         asynquence().or(fail.bind(this))
             .then(buildUrl.bind(this))
@@ -76,6 +78,7 @@ function search(params, callback, gallery) {
             .then(prepare.bind(this))
             .then(fetchFeatured.bind(this))
             .then(fetch.bind(this))
+            .then(fetchAbundance.bind(this))
             .then(filters.bind(this))
             .then(paginate.bind(this))
             .then(metrics.bind(this))
@@ -241,6 +244,14 @@ function search(params, callback, gallery) {
                 }
                 done(response);
             });
+        }
+
+        function fetchAbundance(done, res) {
+            if (abundance.isEnabled() && res.items.meta.abundance) {
+                abundance.set('params', params);
+                return abundance.fetch(done, res);
+            }
+            done(res);
         }
 
         function filters(done, res) {
@@ -615,6 +626,7 @@ function allresults(params, callback, gallery) {
         var url = ['/nf/all-results', gallery || ''].join('');
         var query;
         var shopsModule = new Shops(this);
+        var abundance = new Abundance({}, this);
 
         var redirect = function(done) {
             var maxPage = config.getForMarket(location, ['ads', 'maxPage', 'allResults'], 500);
@@ -693,6 +705,14 @@ function allresults(params, callback, gallery) {
             });
         }.bind(this);
 
+        var fetchAbundance = function(done, res) {
+            if (abundance.isEnabled() && res.items.meta.abundance) {
+                abundance.set('params', params);
+                return abundance.fetch(done, res);
+            }
+            done(res);
+        }.bind(this);
+
         var filters = function(done, res) {
             var _filters;
             var filter;
@@ -767,6 +787,7 @@ function allresults(params, callback, gallery) {
             .then(prepare)
             .then(fetchFeatured)
             .then(fetch)
+            .then(fetchAbundance)
             .then(filters)
             .then(paginate)
             .val(success);
