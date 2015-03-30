@@ -2,8 +2,8 @@
 127.0.0.1       {LOCAL}
 
 #SMAUG
-#{SMAUG}             api-v2.olx.com    #environment
-190.210.62.60      api-v2.olx.com    #production
+{SMAUG}             api-v2.olx.com    #environment
+#190.210.62.60      api-v2.olx.com    #production
 
 #SPAMHANDLER
 {SPAMHANDLER}       sh.care.olx.com   #environment
@@ -701,5 +701,5 @@
 {IP}  jaovat.com        # Jaovat - Vietnam
 
 #IPSTATICS
-#{IPSTATICS} images01.olx-st.com images02.olx-st.com images03.olx-st.com images04.olx-st.com
-#{IPSTATICS} static01.olx-st.com static02.olx-st.com static03.olx-st.com static04.olx-st.com
+{IPSTATICS} images01.olx-st.com images02.olx-st.com images03.olx-st.com images04.olx-st.com
+{IPSTATICS} static01.olx-st.com static02.olx-st.com static03.olx-st.com static04.olx-st.com
