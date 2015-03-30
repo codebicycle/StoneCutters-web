@@ -17,6 +17,6 @@
 <section class="page-standart">
     <h1>{{ dictionary["misc.BestSupport"] }}</h1>
     <h3>{{ dictionary["misc.ChooseMostApplicable"] }}</h3>
-    <span data-action-report class="report-btn" >{{ dictionary["misc.ContainBadWords"] }}</span>
-    <a href="{{ '/help/contact' | link }}" class="contact-btn">{{ dictionary["misc.NeedSupport"] }}</a>
+    <span data-action-report class="report-btn" data-increment="true" data-increment-action="scam" >{{ dictionary["misc.ContainBadWords"] }}</span>
+    <a href="{{ '/help/contact' | link }}" class="contact-btn" data-increment="true" data-increment-action="contact" >{{ dictionary["misc.NeedSupport"] }}</a>
 </section>
