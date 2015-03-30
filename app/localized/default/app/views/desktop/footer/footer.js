@@ -5,6 +5,7 @@ var Base = require('../../../../../common/app/bases/view').requireView('footer/f
 var utils = require('../../../../../../../shared/utils');
 var config = require('../../../../../../../shared/config');
 var FeatureAd = require('../../../../../../models/feature_ad');
+var Metric = require('../../../../../../modules/metric');
 
 module.exports = Base.extend({
     tagName: 'footer',
@@ -15,7 +16,8 @@ module.exports = Base.extend({
         'click [data-footer-slidedown]': 'slideDownContent',
         'click [data-footer-tab]': 'slideFooter',
         'click [data-footer-content] ul li': 'cleanClases',
-        'click [data-modal-shadow], [data-modal-close]': 'onCloseModal'
+        'click [data-modal-shadow], [data-modal-close]': 'onCloseModal',
+        'click [data-increment]': Metric.incrementEventHandler
     },
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);

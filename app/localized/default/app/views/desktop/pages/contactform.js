@@ -2,6 +2,7 @@
 
 var Base = require('../../../../../common/app/bases/view').requireView('modals/modal', null, 'desktop');
 var _ = require('underscore');
+var Metric = require('../../../../../../modules/metric');
 
 module.exports = Base.extend({
     id: 'contact-form',
@@ -152,6 +153,10 @@ module.exports = Base.extend({
                     $(fields).each(function() {
                         this.val('');
                     });
+                    if (!this.metric) {
+                        this.metric = new Metric({}, this);
+                    }
+                    this.metric.increment(['zendesk', 'help', ['contact']]);
                 }
                 else {
                     this.$('[data-contact-form] .spinner').addClass('hide');
