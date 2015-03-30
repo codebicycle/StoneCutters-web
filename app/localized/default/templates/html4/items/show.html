@@ -48,20 +48,17 @@
     {% if item.status.contactable %}
         <div id="centerBtns">
             {% if item.phone %}
-                {% if device.uriSchemeTel %}
                     {% if isSafetyTipsEnabled %}
                         <a href="{{ ['/iid-', item.id, '/call'] | join('') | link }}" class="btns orange">{{ dictionary["misc.Call"] }}</a>
-                    {% else %}
-                        <a href="tel:{{ item.phone }}" class="btns orange">{{ dictionary["misc.Call"] }}</a>
-                    {% endif %}
-                {% endif %}
-                {% if device.uriSchemeSms %}
-                    {% if isSafetyTipsEnabled %}
                         <a href="{{ ['/iid-', item.id, '/sms'] | join('') | link }}" class="btns orange">{{ dictionary["itempagepostcomment.Sms"] }}</a>
                     {% else %}
-                        <a href="sms:{{ item.phone }}" class="btns orange">{{ dictionary["itempagepostcomment.Sms"] }}</a>
+                        {% if device.uriSchemeTel %}
+                            <a href="tel:{{ item.phone }}" class="btns orange">{{ dictionary["misc.Call"] }}</a>
+                        {% endif %}
+                        {% if device.uriSchemeSms %}
+                            <a href="sms:{{ item.phone }}" class="btns orange">{{ dictionary["itempagepostcomment.Sms"] }}</a>
+                        {% endif %}
                     {% endif %}
-                {% endif %}
             {% endif %}
             {% if item.email %}
                 {% if isSafetyTipsEnabled %}
