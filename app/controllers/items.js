@@ -254,6 +254,21 @@ function show(params, callback) {
                 url = helpers.common.removeParams(this.app.session.get('url'), 'location');
                 this.app.seo.addMetatag('canonical', helpers.common.fullizeUrl(url, this.app));
             }
+
+            this.app.seo.addMetatag('og:title', item.title);
+            this.app.seo.addMetatag('og:description', item.description);
+            this.app.seo.addMetatag('og:type', 'article');
+            this.app.seo.addMetatag('og:site_name', 'olx');
+            this.app.seo.addMetatag('og:url', item.slug);
+            if (item.images.length) {
+                this.app.seo.addMetatag('og:image', item.images[0].url);
+                this.app.seo.addMetatag('og:image:type', 'image/jpeg');
+            }
+            else {
+                this.app.seo.addMetatag('og:image', 'http://static01.olx-st.com/mobile-webapp/images/desktop/logo.png');
+                this.app.seo.addMetatag('og:image:type', 'image/png');
+            }
+
             this.app.tracking.set('item', item);
             this.app.tracking.set('category', category);
             this.app.tracking.set('subcategory', subcategory);
