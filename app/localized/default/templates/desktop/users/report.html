@@ -10,13 +10,13 @@
 <section id="report-error" class="hide">
     <aside id="notification-message" class="notification-message icons icon-sad">
         <h4>{{ dictionary["misc.ErrorPleaseTryLater"] }}</h4>
-        <p><a href="{{ '/help/contact' | link }}">I want support from customer service</a></p>
+        <p><a href="{{ '/help/contact' | link }}">{{ dictionary["misc.NeedSupport"] }}</a></p>
     </aside>
 </section>
 
 <section class="page-standart">
-    <h1>We want to make sure we are giving you the best support</h1>
-    <h3>Please choose one of the options below that is more applicable for your report</h3>
-    <span data-action-report class="report-btn" >The message contains bad words and/or is fraudulent</span>
-    <a href="{{ '/help/contact' | link }}" class="contact-btn">I want support from customer service</a>
+    <h1>{{ dictionary["misc.BestSupport"] }}</h1>
+    <h3>{{ dictionary["misc.ChooseMostApplicable"] }}</h3>
+    <span data-action-report class="report-btn" >{{ dictionary["misc.ContainBadWords"] }}</span>
+    <a href="{{ '/help/contact' | link }}" class="contact-btn">{{ dictionary["misc.NeedSupport"] }}</a>
 </section>
