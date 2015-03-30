@@ -153,7 +153,7 @@ module.exports = {
             },
             safetyTips: {
                 worldwide: false,
-                countries: []
+                countries: ['www.olx.co.za', 'www.olx.com.ng']
             }
         },
         desktop: {
