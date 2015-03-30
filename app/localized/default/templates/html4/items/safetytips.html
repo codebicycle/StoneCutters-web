@@ -19,20 +19,24 @@
     <div class="contact-info">
         <p>You will contact with</p>
         <p><strong>{{item.contactName}}</strong></p>
-
         {% if item.intent == 'call' %}
-            <div class="phone-number">
-                <img alt="" src="{{ "/images/html4/phone.png" | static }}" /><span>{{ item.phone }}</span>
-            </div>
-            <a href="tel:{{ item.phone }}" class="btns orange">{{ dictionary["misc.Call"] }}</a>
+                <div class="phone-number">
+                    <img alt="" src="{{ "/images/html4/phone.png" | static }}" /><span>{{ item.phone }}</span>
+                </div>
+            {% if isSafetyTipsEnabled and device.uriSchemeTel %}
+
+                <a href="tel:{{ item.phone }}" class="btns orange">{{ dictionary["misc.Call"] }}</a>
+            {% endif %}
         {% elif item.intent == 'sms' %}
             <div class="phone-number">
                 <img alt="" src="{{ "/images/html4/phone.png" | static }}" /><span>{{ item.phone }}</span>
             </div>
-            <a href="sms:{{ item.phone }}" class="btns orange">{{ dictionary["itempagepostcomment.Sms"] }}</a>
-    {% elif item.intent == 'email' %}
-        <a href="{{ ['/iid-', item.id, '/reply'] | join('') | link }}" class="btns orange email" data-qa="reply-button" >{{ dictionary["register_mail.Email"] }}</a>
-    {% endif %}
+            {% if device.uriSchemeSms %}
+                <a href="sms:{{ item.phone }}" class="btns orange">{{ dictionary["itempagepostcomment.Sms"] }}</a>
+            {% endif %}
+        {% elif item.intent == 'email' %}
+            <a href="{{ ['/iid-', item.id, '/reply'] | join('') | link }}" class="btns orange email" data-qa="reply-button" >{{ dictionary["register_mail.Email"] }}</a>
+        {% endif %}
     </div>
 
     <div class="tips">
