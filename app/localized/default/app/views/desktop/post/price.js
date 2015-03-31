@@ -2,6 +2,7 @@
 
 var Base = require('../../../../../common/app/bases/view');
 var helpers = require('../../../../../../helpers');
+var statsd = require('../../../../../../../shared/statsd')();
 var _ = require('underscore');
 var rPrice = /[^0-9]/gi;
 
@@ -41,20 +42,35 @@ module.exports = Base.extend({
         event.stopImmediatePropagation();
 
         var fields = [];
+        var hasPriceButNotCurrency = false;
 
         if (options.length) {
             _.each(['currency_type', 'priceC', 'priceType'], function find(name) {
-                fields.push(_.find(options, function search(field) {
+                var length = fields.length;
+                var field = _.find(options, function search(field) {
                     if (field.name === 'priceC') {
                         this.fieldLabel = field.label;
                         this.fieldName = field.name;
                         this.fieldMandatory = field.mandatory;
                     }
                     return field.name === name;
-                }.bind(this)));
+                }.bind(this));
+
+                if (field) {
+                    fields.push(field);
+                }
+                if (name === 'currency_type' && length === fields.length) {
+                    hasPriceButNotCurrency = true;
+                }
+                else if (name === 'priceC' && hasPriceButNotCurrency) {
+                    hasPriceButNotCurrency = length !== fields.length;
+                }
             }.bind(this));
             if (!_.isEqual(fields, this.fields)) {
                 this.fields = fields;
+                if (hasPriceButNotCurrency) {
+                    statsd.increment([this.app.session.get('location').abbreviation, this.parentView.editing ? 'editing' : 'posting', 'error', 'currency', 'fetch', this.app.session.get('platform')]);
+                }
                 this.parentView.$el.trigger('priceReset');
                 this.render();
             }
