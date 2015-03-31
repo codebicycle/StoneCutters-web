@@ -23,14 +23,17 @@ module.exports = Base.extend({
     },
     showNotification: function() {
         var user = this.app.session.get('user');
+        var hash = this.app.session.get('hash') || false;
+        //var hash = false;
         var isHermesEnabled = helpers.features.isEnabled.call(this, 'hermes');
 
-        if (user && isHermesEnabled) {
+        if ((user || hash) && isHermesEnabled) {
             this.unreadConversations();
         }
     },
     unreadConversations: function() {
         var user = this.app.session.get('user');
+        var hash = this.app.session.get('hash');
 
         if (user.unreadConversationsCount) {
             this.$('.count').text(user.unreadConversationsCount);
