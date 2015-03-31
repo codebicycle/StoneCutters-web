@@ -6,6 +6,7 @@ module.exports = function() {
     var asynquence = require('asynquence');
     var app = asynquence().or(uncaughtError);
     var logger = require('../shared/logger')('server');
+    var hostname = require('os').hostname().replace(/^[0-9]+-/, '');
 
     function uncaughtError(error) {
         var log = '%j';
@@ -23,7 +24,7 @@ module.exports = function() {
         require('heapdump');
     }
 
-    if (config.get(['newrelic', 'enabled'], false)) {
+    if (config.get(['newrelic', 'enabled'], false) && (process.env.NODE_ENV !== 'production' || hostname === 'app30-mobile-webapp1')) {
         require('newrelic');
     }
 
