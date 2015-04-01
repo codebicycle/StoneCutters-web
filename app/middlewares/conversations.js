@@ -1,16 +1,26 @@
 'use strict';
 
 var helpers = require('../helpers');
+var utils = require('../../shared/utils');
 
 module.exports = function(params, next) {
     var user = this.app.session.get('user');
-    //var hash = this.app.session.get('hash') || false;
-    var hash = false;
+    var hash = this.app.session.get('hash');
     var query = {
         location: this.app.session.get('location').url,
         platform: this.app.session.get('platform')
     };
     var url;
+
+    /*this.app.session.persist({
+        hash: 'mailhash@olx.com'
+    });
+    this.app.session.persist({
+        //messages : body.count
+        messages: 10
+    }, {
+        maxAge: utils.DAY
+    });*/
 
     if (!user && !hash) {
         return next();
@@ -36,10 +46,18 @@ module.exports = function(params, next) {
         if (err) {
             return next();
         }
-        user.unreadConversationsCount = body.count;
-        this.app.session.persist({
-            user: user
-        });
+        if (user) {
+            user.unreadConversationsCount = body.count;
+            this.app.session.persist({
+                user: user
+            });
+        }
+        else {
+            this.app.session.persist({
+                //messages : body.count
+                messages: 10
+            });
+        }
         next();
     }
 

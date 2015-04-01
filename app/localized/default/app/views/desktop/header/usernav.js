@@ -12,9 +12,11 @@ module.exports = Base.extend({
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
         var isHermesEnabled = helpers.features.isEnabled.call(this, 'hermes');
+        var messages = this.app.session.get('messages');
 
         return _.extend({}, data, {
-            isHermesEnabled: isHermesEnabled
+            isHermesEnabled: isHermesEnabled,
+            messages: messages
         });
     },
     postRender: function () {
@@ -23,20 +25,23 @@ module.exports = Base.extend({
     },
     showNotification: function() {
         var user = this.app.session.get('user');
-        var hash = this.app.session.get('hash') || false;
-        //var hash = false;
+        var messages = this.app.session.get('messages');
         var isHermesEnabled = helpers.features.isEnabled.call(this, 'hermes');
 
-        if ((user || hash) && isHermesEnabled) {
+        if ((user || messages) && isHermesEnabled) {
             this.unreadConversations();
         }
     },
     unreadConversations: function() {
         var user = this.app.session.get('user');
-        var hash = this.app.session.get('hash');
+        var messages = this.app.session.get('messages');
 
-        if (user.unreadConversationsCount) {
+        if (user && user.unreadConversationsCount) {
             this.$('.count').text(user.unreadConversationsCount);
+            this.$('.count').removeClass('display-none');
+        }
+        else if (messages) {
+            this.$('.count').text(messages);
             this.$('.count').removeClass('display-none');
         }
         else {
