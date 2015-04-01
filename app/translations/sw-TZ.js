@@ -515,7 +515,7 @@ module.exports = {
     'misc.ClickHere': 'Bonyeza hapa',
     'misc.ContactDetails_Mob': 'Maelezo ya mwasiliani',
     'misc.ContactInformation_Mob': 'Taarifa ya Kuwasiliana',
-    'misc.ContainBadWords': 'Ujumbe huo una maneno mabaya na/au ya ulaghai',
+    'misc.ContainBadWords': 'Ujumbe huo una maneno mabaya na/au ni ya ulaghai',
     'misc.ContinueMobileSite': 'Endelea kwa tovuti bebezi',
     'misc.CreateAnotherAd_Mob': 'Unda tangazo lingine',
     'misc.CreateYourFreeAd_Mob': 'Unda tangazo lako bure',
