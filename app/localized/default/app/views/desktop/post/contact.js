@@ -160,7 +160,8 @@ module.exports = Base.extend({
         var $field = $('[name="email"]');
         var category = this.parentView.getItem().get('category');
         var options = {
-            pendingValidation: (category.id === undefined || category.parentId === undefined)
+            pendingValidation: (category.id === undefined || category.parentId === undefined),
+            skipValidation: true
         };
 
         $field.removeClass('validating');
@@ -185,7 +186,7 @@ module.exports = Base.extend({
         statsd.increment([this.app.session.get('location').abbreviation, this.emailValid.get('currentPage'), 'success', 'email', 'click', this.app.session.get('platform')]);
 
         $field.val($(event.currentTarget).data('content'));
-        this.parentView.$el.trigger('fieldSubmit', [$field, options]);
+        this.onBlurEmail();
     }
 });
 
