@@ -387,7 +387,7 @@ module.exports = function trackingRouter(app, dataAdapter) {
                     market: market
                 });
 
-                sixpack.convert(sixpack.experiments[experiment]);
+                sixpack.convert(sixpack.experiments[experiment], req.param('kpi'));
             });
 
             res.set('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-age=0, max-stale=0, post-check=0, pre-check=0');
