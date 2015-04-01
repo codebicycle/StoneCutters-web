@@ -123,7 +123,7 @@ module.exports = Base.extend({
         this.dictionary = translations.get(this.app.session.get('selectedLanguage'));
         
         $('small.did-you-mean').remove();
-console.log('success');
+
         if (!data.is_valid) {
             isError = 'error';
 
@@ -152,7 +152,7 @@ console.log('success');
         var options = {
             pendingValidation: (category.id === undefined || category.parentId === undefined)
         };
-console.log('validationError');
+
         $field.removeClass('validating');
         this.parentView.$el.trigger('fieldSubmit', [$field, options]);
         statsd.increment([this.app.session.get('location').abbreviation, this.emailValid.get('currentPage'), 'error', 'email', 'error', this.app.session.get('platform')]);
