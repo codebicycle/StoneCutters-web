@@ -1,17 +1,30 @@
 'use strict';
 
-var Base = require('../../../../../../common/app/bases/view');
 var _ = require('underscore');
+var asynquence = require('asynquence');
+var Base = require('../../../../../../common/app/bases/view');
+var config = require('../../../../../../../../shared/config');
+var translations = require('../../../../../../../../shared/translations');
+var EmailValidator = require('../../../../../../../modules/emailValidator');
+var statsd = require('../../../../../../../../shared/statsd')();
 var rEmail = /[-0-9a-zA-Z.+_]+@[-0-9a-zA-Z.+_]+\.[a-zA-Z]{2,4}/;
 var rPhone = /^[\d -]+$/;
-var translations = require('../../../../../../../../shared/translations');
-var statsd = require('../../../../../../../../shared/statsd')();
-var asynquence = require('asynquence');
 
 module.exports = Base.extend({
     className: 'post_flow_contact_view disabled',
     tagName: 'section',
     id: 'contact',
+    events: {
+        'show': 'onShow',
+        'hide': 'onHide',
+        'fieldsChange': 'onFieldsChange',
+        'change': 'onChange',
+        'click .location': 'onLocationClick',
+        'locationChange': 'onLocationChange',
+        'submit': 'onSubmit',
+        'blur [name="email"]': 'onEmailValidate',
+        'click .did-you-mean': 'fillEmail'
+    },
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
         var item = this.parentView.getItem ? this.parentView.getItem() : undefined;
@@ -52,15 +65,6 @@ module.exports = Base.extend({
         if( location && location.url && !this.neighborhoodSelected) {
             this.onNeighborhood();
         }
-    },
-    events: {
-        'show': 'onShow',
-        'hide': 'onHide',
-        'fieldsChange': 'onFieldsChange',
-        'change': 'onChange',
-        'click .location': 'onLocationClick',
-        'locationChange': 'onLocationChange',
-        'submit': 'onSubmit'
     },
     onNeighborhood: function() {
         var fetch = function(done) {
@@ -145,7 +149,7 @@ module.exports = Base.extend({
         var $field = $(event.target);
 
         $field.val(this.cleanValue($field.val()));
-        this.parentView.getItem().set($field.attr('name'), $field.val());
+        this.parentView.getItem().set($field.attr('name'), $field.val());        
     },
     onLocationClick: function(event) {
         event.preventDefault();
@@ -171,50 +175,101 @@ module.exports = Base.extend({
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();
+       
+        var promise = asynquence(true).or(fail.bind(this));
 
-        if (this.validate()) {
-            this.parentView.$el.trigger('flow', [this.id, '']);
-        }
-    },
-    validate: function() {
-        var $contactName = this.$('input[name=contactName]').removeClass('error');
-        var $phone = this.$('input[name=phone]').removeClass('error');
-        var $email = this.$('input[name=email]').removeClass('error');
-        var $location = this.$('.location').removeClass('error');
-        var failed = false;
-        var location = this.app.session.get('location').abbreviation;
+        this.validate(promise);
+        promise.val(success.bind(this));
 
-        this.$el.removeClass('error').find('small').remove();
-        if (!$contactName.val().length) {
-            failed = true;
-            $contactName.addClass('error').after('<small class="error">' + translations.get(this.app.session.get('selectedLanguage'))['misc.EnterNameForBuyers_Mob'] + '</small>');
-            statsd.increment([location, 'posting', 'invalid', this.app.session.get('platform'), 'contactName']);
-        }
-        if ($phone.val() !== '' && !rPhone.test($phone.val())) {
-            failed = true;
-            $phone.addClass('error').after('<small class="error">' + translations.get(this.app.session.get('selectedLanguage'))['misc.PhoneNumberNotValid'] + '</small>');
-        }
-        if (!rEmail.test($email.val())) {
-            failed = true;
-            $email.addClass('error').after('<small class="error">' + translations.get(this.app.session.get('selectedLanguage'))['postingerror.InvalidEmail'] + '</small>');
-            statsd.increment([location, 'posting', 'invalid', this.app.session.get('platform'), 'email']);
-        }
-        if (this.existNeighborhoods) {
-            if (!this.neighborhoodSelected) {
-                failed = true;
-                $location.addClass('error').after('<small class="error">' + translations.get(this.app.session.get('selectedLanguage'))['countryoptions.SelectANeighborhood'] + '</small>');
-                statsd.increment([location, 'posting', 'invalid', this.app.session.get('platform'), 'city']);
+        function success(isValid) {
+            if (isValid) {
+                this.parentView.$el.trigger('flow', [this.id, '']);
+            }
+            else {
+                this.$el.addClass('error');
             }
         }
-        else if (!this.parentView.getItem().getLocation()) {
-            failed = true;
-            $location.addClass('error').after('<small class="error">' + translations.get(this.app.session.get('selectedLanguage'))['misc.AdNeedsLocation_Mob'] + '</small>');
-            statsd.increment([location, 'posting', 'invalid', this.app.session.get('platform'), 'city']);
+
+        function fail() {
+            console.log('falle');
         }
-        if (failed) {
-            this.$el.addClass('error');
+    },
+    validate: function(promise) {
+        var location = this.app.session.get('location').abbreviation;
+
+        promise.then(prepare.bind(this));
+        promise.then(validateContactName.bind(this));
+        promise.then(validatePhone.bind(this));
+        promise.then(validateEmail.bind(this));
+        promise.then(validateLocation.bind(this));
+
+        function prepare(done, isValid) {
+            this.$el.removeClass('error').find('small').remove();
+            done(isValid);
         }
-        return !failed;
+
+        function validateContactName(done, isValid) {
+            var $contactName = this.$('input[name=contactName]').removeClass('error');
+            
+            if (!$contactName.val().length) {
+                isValid = false;
+                $contactName.addClass('error').after('<small class="error">' + translations.get(this.app.session.get('selectedLanguage'))['misc.EnterNameForBuyers_Mob'] + '</small>');
+                statsd.increment([location, 'posting', 'invalid', this.app.session.get('platform'), 'contactName']);
+            }
+            done(isValid);
+        }
+
+        function validatePhone(done, isValid) {
+            var $phone = this.$('input[name=phone]').removeClass('error');
+            
+            if ($phone.val() !== '' && !rPhone.test($phone.val())) {
+                isValid = false;
+                $phone.addClass('error').after('<small class="error">' + translations.get(this.app.session.get('selectedLanguage'))['misc.PhoneNumberNotValid'] + '</small>');
+            }
+            done(isValid);
+        }
+
+        function validateEmail(done, isValid) {
+            var $email = this.$('input[name=email]').removeClass('error');
+            
+            if (!rEmail.test($email.val())) {
+                isValid = false;
+                $email.addClass('error').after('<small class="error">' + translations.get(this.app.session.get('selectedLanguage'))['postingerror.InvalidEmail'] + '</small>');
+                statsd.increment([location, 'posting', 'invalid', this.app.session.get('platform'), 'email']);
+            }
+            else {
+                return this.onEmailValidate({
+                    success: function onSuccess(data) {
+                        done(data.is_valid);
+                        this.successValidation(data);
+                    }.bind(this),
+                    error: function onError() {
+                        this.validationError();
+                        done(isValid);
+                    }.bind(this)
+                });
+            }
+            done(isValid);
+        }
+
+        function validateLocation(done, isValid) {
+            var $location = this.$('.location').removeClass('error');
+
+            if (this.existNeighborhoods) {
+                if (!this.neighborhoodSelected) {
+                    isValid = false;
+                    $location.addClass('error').after('<small class="error">' + translations.get(this.app.session.get('selectedLanguage'))['countryoptions.SelectANeighborhood'] + '</small>');
+                    statsd.increment([location, 'posting', 'invalid', this.app.session.get('platform'), 'city']);
+                }
+            }
+            else if (!this.parentView.getItem().getLocation()) {
+                isValid = false;
+                $location.addClass('error').after('<small class="error">' + translations.get(this.app.session.get('selectedLanguage'))['misc.AdNeedsLocation_Mob'] + '</small>');
+                statsd.increment([location, 'posting', 'invalid', this.app.session.get('platform'), 'city']);
+            }
+
+            done(isValid);
+        }
     },
     cleanValue: function(value) {
         value = value.replace(/\s{2,}/g, ' ');
@@ -223,6 +278,84 @@ module.exports = Base.extend({
             value.toLowerCase();
         }
         return value;
+    },
+    onEmailValidate: function(options) {
+        console.log('lalala');
+        var locationUrl = this.app.session.get('location').url;
+        
+        if (config.getForMarket(locationUrl, ['validator', 'email', 'enabled'], false)) {
+            var currentPage = this.editing ? 'editing' : 'posting';
+            var $field = this.$('[name="email"]');
+            var value = $field.val();
+
+            if (this.emailValid) {
+                this.emailValid = null;
+            }
+            options = _.defaults({}, options, {
+                element: $field,
+                success: this.successValidation.bind(this),
+                error: this.validationError.bind(this),
+                currentPage: currentPage
+            });
+
+            this.emailValid = new EmailValidator(options, {
+                app: this.app
+            });            
+        }
+    },
+    successValidation: function (data) {
+        console.log('success');
+        var $field = this.$('input[name=email]').removeClass('error');
+        var category = this.parentView.getItem().get('category');
+        var options = {
+            pendingValidation: (category.id === undefined || category.parentId === undefined)
+        };
+        var isError = '';
+
+        this.dictionary = translations.get(this.app.session.get('selectedLanguage'));
+        
+        $('small.did-you-mean').remove();
+
+        if (!data.is_valid) {
+            isError = 'error ';
+
+            $field.addClass('error');
+            if (!data.did_you_mean) {
+                console.log('not did-you-mean');
+                $field.addClass('error').after('<small class="error">' + this.dictionary["postingerror.InvalidEmail"] + '</small>');
+            }
+            statsd.increment([this.app.session.get('location').abbreviation, this.emailValid.get('currentPage'), 'error', 'email', 'success', this.app.session.get('platform')]);
+        }
+        else {
+            statsd.increment([this.app.session.get('location').abbreviation, this.emailValid.get('currentPage'), 'success', 'email', 'success', this.app.session.get('platform')]);
+        }
+        if (data.did_you_mean) {
+            console.log('did-you-mean', $field);
+            $field.after('<small class="' + isError + 'message did-you-mean" data-content="' + data.did_you_mean + '">¿Has querido decir <a href="#">' + data.did_you_mean + '</a>?</small>');
+        }
+    },
+    validationError: function() {
+        statsd.increment([this.app.session.get('location').abbreviation, this.emailValid.get('currentPage'), 'error', 'email', 'error', this.app.session.get('platform')]);
+    },
+    fillEmail: function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+
+        var $field = this.$('input[name=email]');
+        var category = this.parentView.getItem().get('category');
+        var options = {
+            pendingValidation: (category.id === undefined || category.parentId === undefined)
+        };
+
+        if ($('small.did-you-mean')) {
+            $field.parent().find('small.did-you-mean').remove();
+        }
+        
+        statsd.increment([this.app.session.get('location').abbreviation, this.emailValid.get('currentPage'), 'success', 'email', 'click', this.app.session.get('platform')]);
+        $field.val($(event.currentTarget).data('content'));
+        this.parentView.getItem().set($field.attr('name'), $field.val());
+        this.validate();
     }
 });
 

@@ -59,6 +59,7 @@ module.exports = Base.extend({
         this.neighborhoods = [];
         this.render();
         this.parentView.$el.trigger('locationSubmit', [translations.get(this.app.session.get('selectedLanguage'))['postingerror.InvalidLocation']]);
+        this.$('#contact').trigger('onBlurEmail');
     },
     onClickBack: function(event) {
         event.preventDefault();
