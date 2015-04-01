@@ -13,7 +13,6 @@ module.exports = Base.extend({
     className: 'users-report',
     events: {
         'click [data-increment]': Metric.incrementEventHandler,
-        'click [data-increment-action]': 'onClickAction',
         'click [data-action-report]': 'report'
     },
     report: function(event) {
@@ -53,15 +52,5 @@ module.exports = Base.extend({
             app: this.app
         }));
         return this.conversation;
-    },
-    onClickAction: function(event) {
-        var $current = $(event.currentTarget);
-        var action = $current.data('increment-action');
-
-        if (!this.metric) {
-            this.metric = new Metric({}, this);
-        }
-        this.metric.increment(['conversations', 'report', [action]]);
     }
-
 });
