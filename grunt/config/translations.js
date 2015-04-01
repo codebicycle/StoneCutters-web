@@ -55,6 +55,7 @@ module.exports = {
         'postingerror.PleaseCompleteThisField',
         'postingerror.InvalidLocation',
         'postingerror.InvalidEmailAddress',
+        'postingerror.InvalidEmail',
         'postingerror.PleaseEnterANumericalValue',
         'misc.PhoneNumberNotValid',
         'misc.WantToGoBack',

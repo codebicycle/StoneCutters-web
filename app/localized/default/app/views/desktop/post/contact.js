@@ -132,7 +132,7 @@ module.exports = Base.extend({
 
         this.dictionary = translations.get(this.app.session.get('selectedLanguage'));
         
-        $('small.did-you-mean').remove();
+        this.$('.did-you-mean').remove();
 
         if (!data.is_valid) {
             isError = 'error';
