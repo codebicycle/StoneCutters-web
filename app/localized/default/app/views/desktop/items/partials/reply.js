@@ -13,11 +13,11 @@ var rEmail = /^[_a-zA-Z0-9-]+(\.[_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*
 module.exports = Base.extend({
     className: function() {
         var sixpack = new Sixpack({
-                clientId: this.app.session.get('clientId'),
-                platform: this.app.session.get('platform'),
-                market: this.app.session.get('location').abbreviation,
-                experiments: this.app.session.get('experiments')
-            });
+            clientId: this.app.session.get('clientId'),
+            platform: this.app.session.get('platform'),
+            market: this.app.session.get('location').abbreviation,
+            experiments: this.app.session.get('experiments')
+        });
         
         var sixpackClass = sixpack.className(sixpack.experiments.desktopDGD23ShowSimplifiedReplyForm);
         
@@ -42,10 +42,18 @@ module.exports = Base.extend({
         this.$fields = this.$('textarea, input:not([type=submit], [type=hidden])');
     },
     events: {
+        'focus textarea': 'onFocus',
         'blur textarea, input:not([type=submit], [type=hidden])': 'onBlur',
         'submit': 'onSubmit',
         'reset': 'onReset',
         'click .replySuccess': 'onReplySuccessClick'
+    },
+    onFocus: function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+
+        this.$('[for=name], [for=email], [for=phone]').addClass('visible');
     },
     onBlur: function(event) {
         event.preventDefault();
@@ -59,6 +67,13 @@ module.exports = Base.extend({
         }
     },
     onSubmit: function(event) {
+        var sixpack = new Sixpack({
+            clientId: this.app.session.get('clientId'),
+            platform: this.app.session.get('platform'),
+            market: this.app.session.get('location').abbreviation,
+            experiments: this.app.session.get('experiments')
+        });
+        
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();
@@ -91,10 +106,17 @@ module.exports = Base.extend({
         }
 
         function success(reply) {
+            if (reply.phone) {
+                sixpack.convert(sixpack.experiments.desktopDGD23ShowSimplifiedReplyForm, 'phone-filled');
+            }
+            
             event.target.reset();
             this.$spinner.addClass('hide');
             this.$success.removeClass('hide');
             this.trackSuccess(reply);
+            
+            sixpack.convert(sixpack.experiments.desktopDGD23ShowSimplifiedReplyForm);
+            
         }
 
         function fail(err) {
