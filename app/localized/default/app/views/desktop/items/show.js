@@ -9,6 +9,7 @@ module.exports = Base.extend({
     tagName: 'main',
     id: 'items-show-view',
     className: 'items-show-view',
+
     getItem: function() {
         this.item = this.item || (this.options.item && this.options.item.toJSON ? this.options.item : new Item(this.options.item || {}, {
             app: this.app

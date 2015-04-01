@@ -3,6 +3,7 @@
 var _ = require('underscore');
 var asynquence = require('asynquence');
 var Base = require('../../../../../../common/app/bases/view');
+var Sixpack = require('../../../../../../../../shared/sixpack');
 var User = require('../../../../../../../models/user');
 var Tracking = require('../../../../../../../modules/tracking');
 var helpers = require('../../../../../../../helpers');
@@ -10,7 +11,18 @@ var translations = require('../../../../../../../../shared/translations');
 var rEmail = /^[_a-zA-Z0-9-]+(\.[_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*(\.[a-zA-Z]{2,6})$/;
 
 module.exports = Base.extend({
-    className: 'item-contact-form',
+    className: function() {
+        var sixpack = new Sixpack({
+                clientId: this.app.session.get('clientId'),
+                platform: this.app.session.get('platform'),
+                market: this.app.session.get('location').abbreviation,
+                experiments: this.app.session.get('experiments')
+            });
+        
+        var sixpackClass = sixpack.className(sixpack.experiments.desktopDGD23ShowSimplifiedReplyForm);
+        
+        return 'item-contact-form' + (sixpackClass ? ' ' : '') + sixpackClass;
+    },
     id: 'item-contact-form',
     tagName: 'section',
     postRender: function() {
