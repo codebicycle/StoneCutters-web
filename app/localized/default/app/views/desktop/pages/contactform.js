@@ -147,20 +147,21 @@ module.exports = Base.extend({
             url: url,
             data: data,
             success: function onSuccess(data) {
+                if (!this.metric) {
+                    this.metric = new Metric({}, this);
+                }
                 if (data.send) {
                     this.submitSuccess();
 
                     $(fields).each(function() {
                         this.val('');
                     });
-                    if (!this.metric) {
-                        this.metric = new Metric({}, this);
-                    }
-                    this.metric.increment(['zendesk', 'help', ['contact']]);
+                    this.metric.increment(['zendesk', 'help', ['contact', 'success']]);
                 }
                 else {
                     this.$('[data-contact-form] .spinner').addClass('hide');
                     this.$('[data-contact-form] [data-reply="error"]').removeClass('hide');
+                    this.metric.increment(['zendesk', 'help', ['contact', 'fail']]);
                 }
             }.bind(this)
         });
