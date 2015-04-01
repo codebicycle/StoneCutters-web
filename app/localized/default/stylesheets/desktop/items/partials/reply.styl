@@ -1,12 +1,11 @@
-#item-contact-form.experiment-desktop-dgd23-show-simplified-reply-form.alternative-show-simplified-reply-form [for=phone],
-#item-contact-form.experiment-desktop-dgd23-show-simplified-reply-form.alternative-show-simplified-reply-form [for=email],
-#item-contact-form.experiment-desktop-dgd23-show-simplified-reply-form.alternative-show-simplified-reply-form [for=name] {
-    display: none;
-}
-
-#item-contact-form.experiment-desktop-dgd23-show-simplified-reply-form.alternative-show-simplified-reply-form [for=phone].visible,
-#item-contact-form.experiment-desktop-dgd23-show-simplified-reply-form.alternative-show-simplified-reply-form [for=email].visible,
-#item-contact-form.experiment-desktop-dgd23-show-simplified-reply-form.alternative-show-simplified-reply-form [for=name].visible {
-    display: inline;
+.alternative-show-simplified-reply-form {
+    [for=phone],
+    [for=email],
+    [for=name] {
+        display: none;
+        &.visible {
+            display: inline;
+        }
+    }
 }
 
