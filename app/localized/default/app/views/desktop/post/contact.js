@@ -87,7 +87,7 @@ module.exports = Base.extend({
             var $field = this.$('[name="email"]');
             var value = $field.val();
 
-            if ($field.data('data-value') !== value) {
+            if ($field.data('value') !== value) {
                 if (this.emailValid) {
                     this.emailValid = null;
                 }
@@ -101,7 +101,7 @@ module.exports = Base.extend({
                     app: this.app
                 });
 
-                $field.data('data-value', value);
+                $field.data('value', value);
             }
         }
     },
@@ -115,14 +115,15 @@ module.exports = Base.extend({
         var $field = this.$('[name="email"]');
         var category = this.parentView.getItem().get('category');
         var options = {
-            pendingValidation: (category.id === undefined || category.parentId === undefined)
+            pendingValidation: (category.id === undefined || category.parentId === undefined),
+            skipValidation: true
         };
         var isError = '';
 
         this.dictionary = translations.get(this.app.session.get('selectedLanguage'));
         
         $('small.did-you-mean').remove();
-
+console.log('success');
         if (!data.is_valid) {
             isError = 'error';
 
@@ -146,6 +147,14 @@ module.exports = Base.extend({
         $field.removeClass('validating');
     },
     validationError: function () {
+        var $field = $('[name="email"]');
+        var category = this.parentView.getItem().get('category');
+        var options = {
+            pendingValidation: (category.id === undefined || category.parentId === undefined)
+        };
+console.log('validationError');
+        $field.removeClass('validating');
+        this.parentView.$el.trigger('fieldSubmit', [$field, options]);
         statsd.increment([this.app.session.get('location').abbreviation, this.emailValid.get('currentPage'), 'error', 'email', 'error', this.app.session.get('platform')]);
     },
     fillEmail: function(event) {

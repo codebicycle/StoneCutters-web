@@ -47,7 +47,6 @@ function run_validator(address, options) {
         return;
     }
     $.ajax(prepare(ctx));
-    timeout(ctx);
 }
 
 function check(ctx) {
@@ -86,7 +85,8 @@ function prepare(ctx) {
         dataType: 'jsonp',
         crossDomain: true,
         success: success,
-        error: error
+        error: error,
+        timeout: 3000
     });
 
     function success(data, status) {
@@ -109,19 +109,4 @@ function prepare(ctx) {
     }
 
     return options;
-}
-
-function timeout(ctx) {
-    setTimeout(function onTimeout() {
-        var message = 'Error occurred, unable to validate address.';
-
-        if (!ctx.success) {
-            if (ctx.options && ctx.options.error) {
-                ctx.options.error(message);
-            }
-            else {
-                console.log(message);
-            }
-        }
-    }, 30000);
 }
