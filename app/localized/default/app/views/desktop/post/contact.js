@@ -143,17 +143,17 @@ module.exports = Base.extend({
             if (!data.did_you_mean) {
                 $field.parent().append('<small class="error message">' + this.dictionary["postingerror.InvalidEmail"] + '</small>');
             }
-
-            statsd.increment([this.app.session.get('location').abbreviation, this.emailValid.get('currentPage'), 'error', 'email', 'success', this.app.session.get('platform')]);
         }
         else {
             $field.closest('.field-wrapper').addClass('success').removeClass('error');
             this.parentView.$el.trigger('fieldSubmit', [$field, options]);
-            statsd.increment([this.app.session.get('location').abbreviation, this.emailValid.get('currentPage'), 'success', 'email', 'success', this.app.session.get('platform')]);
         }
         if (data.did_you_mean) {
             $field.parent().append('<small class="' + isError + ' message did-you-mean" data-content="' + data.did_you_mean + '">¿Has querido decir <a href="#">' + data.did_you_mean + '</a>?</small>');
         }
+
+        statsd.increment([this.app.session.get('location').abbreviation, this.emailValid.get('currentPage'), data.is_valid ? 'success' : 'error', 'email', 'success', this.app.session.get('platform')]);
+
         $field.removeClass('validating');
     },
     validationError: function () {
