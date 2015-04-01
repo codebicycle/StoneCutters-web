@@ -23,6 +23,7 @@ module.exports = Base.extend({
         'fieldsChange': 'onFieldsChange',
         'formRendered': 'onFormRendered',
         'blur [name="email"]': 'onBlurEmail',
+        'change [name="email"]': 'onBlurEmail',
         'click .did-you-mean': 'fillEmail'
     },
     onPhoneChange: function(event) {
@@ -86,6 +87,15 @@ module.exports = Base.extend({
             var currentPage = this.editing ? 'editing' : 'posting';
             var $field = this.$('[name="email"]');
             var value = $field.val();
+            
+            if (!value) {
+                var category = this.parentView.getItem().get('category');
+                var options = {
+                    pendingValidation: (category.id === undefined || category.parentId === undefined),
+                };
+
+                return this.parentView.$el.trigger('fieldSubmit', [$field, options]);
+            }
 
             if ($field.data('value') !== value) {
                 if (this.emailValid) {
@@ -105,7 +115,7 @@ module.exports = Base.extend({
             }
         }
     },
-    inProgressValidation: function(target) {
+    inProgressValidation: function() {
         var $field = this.$('[name="email"]').addClass('validating');
 
         delete this.parentView.errors[$field.attr('name')];
