@@ -23,7 +23,8 @@ module.exports = Base.extend({
         'locationChange': 'onLocationChange',
         'submit': 'onSubmit',
         'blur [name="email"]': 'onEmailValidate',
-        'click .did-you-mean': 'fillEmail'
+        'click .did-you-mean': 'fillEmail',
+        'validate': 'onValidate'
     },
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
@@ -169,6 +170,31 @@ module.exports = Base.extend({
         this.render();
         if (show) {
             this.$el.trigger('show');
+            this.$el.trigger('validate');
+        }
+    },
+    onValidate: function(event, options) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+
+        var promise = asynquence(true).or(fail.bind(this));
+
+        options = options || {};
+
+        this.validate(promise);
+        promise.val(success.bind(this));
+
+        function success(isValid) {
+            if (options.success) {
+                options.success(isValid);
+            }
+        }
+
+        function fail() {
+            if (options.fail) {
+                options.fail();
+            }
         }
     },
     onSubmit: function(event) {
@@ -176,10 +202,9 @@ module.exports = Base.extend({
         event.stopPropagation();
         event.stopImmediatePropagation();
        
-        var promise = asynquence(true).or(fail.bind(this));
-
-        this.validate(promise);
-        promise.val(success.bind(this));
+        this.$el.trigger('validate', [{
+            success: success.bind(this)
+        }]);
 
         function success(isValid) {
             if (isValid) {
@@ -188,10 +213,6 @@ module.exports = Base.extend({
             else {
                 this.$el.addClass('error');
             }
-        }
-
-        function fail() {
-            console.log('falle');
         }
     },
     validate: function(promise) {
@@ -280,7 +301,6 @@ module.exports = Base.extend({
         return value;
     },
     onEmailValidate: function(options) {
-        console.log('lalala');
         var locationUrl = this.app.session.get('location').url;
         
         if (config.getForMarket(locationUrl, ['validator', 'email', 'enabled'], false)) {
@@ -304,7 +324,6 @@ module.exports = Base.extend({
         }
     },
     successValidation: function (data) {
-        console.log('success');
         var $field = this.$('input[name=email]').removeClass('error');
         var category = this.parentView.getItem().get('category');
         var options = {
@@ -321,7 +340,6 @@ module.exports = Base.extend({
 
             $field.addClass('error');
             if (!data.did_you_mean) {
-                console.log('not did-you-mean');
                 $field.addClass('error').after('<small class="error">' + this.dictionary["postingerror.InvalidEmail"] + '</small>');
             }
             statsd.increment([this.app.session.get('location').abbreviation, this.emailValid.get('currentPage'), 'error', 'email', 'success', this.app.session.get('platform')]);
@@ -330,7 +348,6 @@ module.exports = Base.extend({
             statsd.increment([this.app.session.get('location').abbreviation, this.emailValid.get('currentPage'), 'success', 'email', 'success', this.app.session.get('platform')]);
         }
         if (data.did_you_mean) {
-            console.log('did-you-mean', $field);
             $field.after('<small class="' + isError + 'message did-you-mean" data-content="' + data.did_you_mean + '">¿Has querido decir <a href="#">' + data.did_you_mean + '</a>?</small>');
         }
     },
@@ -355,7 +372,7 @@ module.exports = Base.extend({
         statsd.increment([this.app.session.get('location').abbreviation, this.emailValid.get('currentPage'), 'success', 'email', 'click', this.app.session.get('platform')]);
         $field.val($(event.currentTarget).data('content'));
         this.parentView.getItem().set($field.attr('name'), $field.val());
-        this.validate();
+        this.$el.trigger('validate');
     }
 });
 
