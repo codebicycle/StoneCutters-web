@@ -79,13 +79,8 @@ module.exports = Base.extend({
         }
 
         function success(reply) {
-            console.log(reply);
             event.target.reset();
-            if (reply.hash) {
-                this.app.session.persist({
-                    hash: reply.hash
-                });
-            }
+
             this.$spinner.addClass('hide');
             this.$success.removeClass('hide');
             this.trackSuccess(reply);

@@ -73,9 +73,10 @@ module.exports = Base.extend({
     },
     showNotification: function() {
         var user = this.app.session.get('user');
+        var messages = this.app.session.get('messages');
         var isHermesEnabled = helpers.features.isEnabled.call(this, 'hermes');
 
-        if (user && isHermesEnabled) {
+        if ((user || messages) && isHermesEnabled) {
             this.unreadConversations();
         }
 
@@ -239,14 +240,19 @@ module.exports = Base.extend({
     },
     unreadConversations: function() {
         var user = this.app.session.get('user');
+        var messages = this.app.session.get('messages');
 
-        if (user.unreadConversationsCount) {
+        if (user && user.unreadConversationsCount) {
             this.notifications = true;
-            return this.$('.notification').css('display', 'block');
+            this.$('.notification').css('display', 'block');
+        }
+        else if (messages) {
+            this.notifications = true;
+            this.$('.notification').css('display', 'block');
         }
         else {
             this.notifications = false;
-            return this.$('.notification').css('display', 'none');
+            this.$('.notification').css('display', 'none');
         }
 
     }

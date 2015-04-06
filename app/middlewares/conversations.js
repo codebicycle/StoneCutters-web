@@ -10,17 +10,6 @@ module.exports = function(params, next) {
         location: this.app.session.get('location').url,
         platform: this.app.session.get('platform')
     };
-    var url;
-
-    /*this.app.session.persist({
-        hash: 'mailhash@olx.com'
-    });
-    this.app.session.persist({
-        //messages : body.count
-        messages: 10
-    }, {
-        maxAge: utils.DAY
-    });*/
 
     if (!user && !hash) {
         return next();
@@ -28,15 +17,12 @@ module.exports = function(params, next) {
     else if (user) {
         query.token = user.token;
         query.userId = user.userId;
-
-        url = '/conversations/unread/count';
     }
     else if (hash) {
-        query.hash = hash;
-        url = '/conversations/unread/count';
+        query.email = hash;
     }
 
-    helpers.dataAdapter.get(this.app.req, url, {
+    helpers.dataAdapter.get(this.app.req, '/conversations/unread/count', {
         query: query,
         cache: false,
         json: true
