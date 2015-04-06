@@ -108,18 +108,6 @@ module.exports = Base.extend({
                     return this.parentView.$el.trigger('fieldSubmit', [$field, options]);
                 }
 
-                    // if (this.emailValid) {
-                    //     this.emailValid = null;
-                    // }
-                    // this.emailValid = new EmailValidator({
-                    //     element: $field,
-                    //     progress: this.inProgressValidation.bind(this),
-                    //     success: this.successValidation.bind(this),
-                    //     error: this.validationError.bind(this),
-                    //     currentPage: currentPage
-                    // }, {
-                    //     app: this.app
-                    // });
                     this.validate($.noop, $field);
 
                     $field.data('value', value);
