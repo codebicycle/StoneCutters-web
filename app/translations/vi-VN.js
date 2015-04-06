@@ -591,6 +591,7 @@ module.exports = {
     'misc.SeeMore': 'Xem th\xEAm',
     'misc.SelectAnOption_BR': 'Ch\u1ECDn t\xF9y ch\u1ECDn.',
     'misc.SelectCategory': 'Ch\u1ECDn h\u1EA1ng m\u1EE5c',
+    'misc.SelectSuburb': 'H\xE3y ch\u1ECDn m\u1ED9t v\xF9ng ngo\u1EA1i \xF4',
     'misc.Sell-Unused': 'H\xE3y b\xE1n nh\u1EEFng g\xEC b\u1EA1n kh\xF4ng s\u1EED d\u1EE5ng',
     'misc.SellingIsEasy': 'B\xE1n h\xE0ng th\u1EADt d\u1EC5 d\xE0ng',
     'misc.SellToo-ZA': 'H\xE3y c\u0169ng b\u1EAFt \u0111\u1EA7u b\xE1n h\xE0ng tr\xEAn OLX th\xF4i!',
