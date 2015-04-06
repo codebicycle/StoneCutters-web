@@ -292,6 +292,7 @@ module.exports = {
     'myolx.MyAds': 'Hirdet\xE9seim',
     'myolx.MyBrand': 'Saj\xE1t OLX',
     'myolx.MyFavorites': 'Kedvenceim',
+    'myolx.MyMessages': '\xDCzeneteim',
     'myolx.MyOLX': 'Saj\xE1t OLX',
     'myolx.Reply': 'V\xE1lasz',
     'myolx.ReplyToThisMessage': 'V\xE1lasz erre az \xFCzenetre',

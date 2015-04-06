@@ -292,6 +292,7 @@ module.exports = {
     'myolx.MyAds': 'Anons Mwen yo',
     'myolx.MyBrand': 'OLX Mwen',
     'myolx.MyFavorites': 'Favori mwen yo',
+    'myolx.MyMessages': 'Mesaj mwen yo',
     'myolx.MyOLX': 'OLX Mwen',
     'myolx.Reply': 'Reponn',
     'myolx.ReplyToThisMessage': 'Reponn a mesaj sa',

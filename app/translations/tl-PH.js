@@ -292,6 +292,7 @@ module.exports = {
     'myolx.MyAds': 'Aking mga Patalastas',
     'myolx.MyBrand': 'Aking OLX',
     'myolx.MyFavorites': 'Aking mga Paborito',
+    'myolx.MyMessages': 'Mga Mensahe Ko',
     'myolx.MyOLX': 'Aking OLX',
     'myolx.Reply': 'Tugon',
     'myolx.ReplyToThisMessage': 'Tumugon sa mensaheng ito',

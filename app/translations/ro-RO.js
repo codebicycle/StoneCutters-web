@@ -292,6 +292,7 @@ module.exports = {
     'myolx.MyAds': 'Anun\u0163urile mele',
     'myolx.MyBrand': 'OLX-ul Meu',
     'myolx.MyFavorites': 'Favoritele Mele',
+    'myolx.MyMessages': 'Mesajele Mele',
     'myolx.MyOLX': 'OLX-ul Meu',
     'myolx.Reply': 'R\u0103spunde',
     'myolx.ReplyToThisMessage': 'R\u0103spunde la acest email',

@@ -39,5 +39,8 @@ module.exports = {
     },
     'pages#shop': {
         url: 'shop/:shopId/:shopName'
+    },
+    'pages#available': {
+        url: 'available'
     }
 };

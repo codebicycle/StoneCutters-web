@@ -292,6 +292,7 @@ module.exports = {
     'myolx.MyAds': 'Mano skelbimai',
     'myolx.MyBrand': 'Mano OLX',
     'myolx.MyFavorites': 'Mano m\u0117gstamiausieji',
+    'myolx.MyMessages': 'Mano prane\u0161imai',
     'myolx.MyOLX': 'Mano OLX',
     'myolx.Reply': 'Atsakyti',
     'myolx.ReplyToThisMessage': 'Atsakyti \u012F \u0161\u012F prane\u0161im\u0105',

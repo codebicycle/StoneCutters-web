@@ -292,6 +292,7 @@ module.exports = {
     'myolx.MyAds': 'Augl\xFDsingarnar m\xEDnar',
     'myolx.MyBrand': 'Mitt OLX',
     'myolx.MyFavorites': 'Upp\xE1haldi\xF0 mitt',
+    'myolx.MyMessages': 'Skilabo\xF0',
     'myolx.MyOLX': 'Mitt OLX',
     'myolx.Reply': 'Svara',
     'myolx.ReplyToThisMessage': 'Svara \xFEessum skilabo\xF0um',

@@ -292,6 +292,7 @@ module.exports = {
     'myolx.MyAds': '\u6211\u7684\u5E7F\u544A',
     'myolx.MyBrand': '\u6211\u7684OLX',
     'myolx.MyFavorites': '\u6211\u7684\u6700\u7231',
+    'myolx.MyMessages': '\u6211\u7684\u7559\u8A00',
     'myolx.MyOLX': '\u6211\u7684OLX',
     'myolx.Reply': '\u56DE\u590D',
     'myolx.ReplyToThisMessage': '\u56DE\u590D\u6B64\u7559\u8A00',

@@ -292,6 +292,7 @@ module.exports = {
     'myolx.MyAds': 'Moji oglasi',
     'myolx.MyBrand': 'Moj OLX',
     'myolx.MyFavorites': 'Moji priljubljeni',
+    'myolx.MyMessages': 'Moja sporo\u010Dila',
     'myolx.MyOLX': 'Moj OLX',
     'myolx.Reply': 'Odgovori',
     'myolx.ReplyToThisMessage': 'Odgovori na to sporo\u010Dilo',

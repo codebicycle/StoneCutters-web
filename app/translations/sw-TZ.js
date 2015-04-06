@@ -292,6 +292,7 @@ module.exports = {
     'myolx.MyAds': 'Matangazo Yangu',
     'myolx.MyBrand': 'OLX Yangu',
     'myolx.MyFavorites': 'Vibwedo Vyangu',
+    'myolx.MyMessages': 'Ujumbe Zangu',
     'myolx.MyOLX': 'My OLX',
     'myolx.Reply': 'JIbu',
     'myolx.ReplyToThisMessage': 'Jibu kwa ujumbe huu',

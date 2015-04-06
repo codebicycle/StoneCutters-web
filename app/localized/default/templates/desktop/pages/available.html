@@ -1,0 +1,12 @@
+<section id="available-success" >
+    <aside id="notification-message" class="notification-message icons icon-happy">
+        <h4>Thanks! Your ad will remain available in OLX!</h4>
+        {% if user %}
+            <p><a href="{{ '/myolx/conversations' | link }}">{{ dictionary["myolx.MyMessages"] }}</a></p>
+        {% endif %}
+    </aside>
+
+    {% view 'post/keepposting' %}
+</section>
+
+{% view 'partials/tracking' %}

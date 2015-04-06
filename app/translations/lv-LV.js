@@ -292,6 +292,7 @@ module.exports = {
     'myolx.MyAds': 'Mani sludin\u0101jumi',
     'myolx.MyBrand': 'Mans OLX',
     'myolx.MyFavorites': 'Mani favor\u012Bti',
+    'myolx.MyMessages': 'Mani zi\u0146ojumi',
     'myolx.MyOLX': 'Mans OLX',
     'myolx.Reply': 'Atbild\u0113t',
     'myolx.ReplyToThisMessage': 'Atbild\u0113t uz \u0161o sludin\u0101jumu',

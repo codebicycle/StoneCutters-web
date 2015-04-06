@@ -292,6 +292,7 @@ module.exports = {
     'myolx.MyAds': 'Mine annoncer',
     'myolx.MyBrand': 'Min OLX',
     'myolx.MyFavorites': 'Mine favoritter',
+    'myolx.MyMessages': 'Mine beskeder',
     'myolx.MyOLX': 'Min OLX',
     'myolx.Reply': 'Besvar',
     'myolx.ReplyToThisMessage': 'Svar p\xE5 denne meddelelse',

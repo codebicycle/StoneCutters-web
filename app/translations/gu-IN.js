@@ -292,6 +292,7 @@ module.exports = {
     'myolx.MyAds': '\u0AAE\u0ABE\u0AB0\u0AC0 \u0AAF\u0ABE\u0AA6\u0AC0\u0A93',
     'myolx.MyBrand': '\u0AAE\u0ABE\u0AB0\u0AC0 OLX',
     'myolx.MyFavorites': '\u0AAE\u0ABE\u0AB0\u0ABE \u0AAB\u0AC7\u0AB5\u0AB0\u0ABF\u0A9F\u0ACD\u0AB8',
+    'myolx.MyMessages': '\u0AAE\u0ABE\u0AB0\u0ABE \u0AB8\u0A82\u0AA6\u0AC7\u0AB6\u0ABE\u0A93',
     'myolx.MyOLX': 'My OLX',
     'myolx.Reply': '\u0A9C\u0AB5\u0ABE\u0AAC \u0A86\u0AAA\u0ACB',
     'myolx.ReplyToThisMessage': '\u0A86 \u0AB8\u0A82\u0AA6\u0AC7\u0AB6\u0ABE\u0AA8\u0ACB \u0A9C\u0AB5\u0ABE\u0AAC \u0A86\u0AAA\u0ACB',

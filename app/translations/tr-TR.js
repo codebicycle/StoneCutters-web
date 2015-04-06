@@ -292,6 +292,7 @@ module.exports = {
     'myolx.MyAds': '\u0130lanlar\u0131m',
     'myolx.MyBrand': 'OLX Bana \xD6zel',
     'myolx.MyFavorites': 'Favorilerim',
+    'myolx.MyMessages': '\u0130letilerim',
     'myolx.MyOLX': 'OLX Bana \xD6zel',
     'myolx.Reply': 'Yan\u0131tla',
     'myolx.ReplyToThisMessage': 'Bu iletiyi yan\u0131tla',

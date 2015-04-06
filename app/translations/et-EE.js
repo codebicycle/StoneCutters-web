@@ -292,6 +292,7 @@ module.exports = {
     'myolx.MyAds': 'Minu kataloogid',
     'myolx.MyBrand': 'Minu OLX',
     'myolx.MyFavorites': 'Minu lemmikud',
+    'myolx.MyMessages': 'Minu s\xF5numid',
     'myolx.MyOLX': 'Minu OLX',
     'myolx.Reply': 'Vasta',
     'myolx.ReplyToThisMessage': 'Vasta sellele s\xF5numile',

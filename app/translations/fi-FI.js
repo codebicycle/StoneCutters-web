@@ -292,6 +292,7 @@ module.exports = {
     'myolx.MyAds': 'Omat ilmoitukset',
     'myolx.MyBrand': 'Oma OLX',
     'myolx.MyFavorites': 'Omat suosikit',
+    'myolx.MyMessages': 'Omat viestit',
     'myolx.MyOLX': 'Oma OLX',
     'myolx.Reply': 'Vastaa',
     'myolx.ReplyToThisMessage': 'Vastaa t\xE4h\xE4n viestiin',

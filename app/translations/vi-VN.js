@@ -292,6 +292,7 @@ module.exports = {
     'myolx.MyAds': 'Rao V\u1EB7t C\u1EE7a T\xF4i',
     'myolx.MyBrand': 'OLX c\u1EE7a t\xF4i',
     'myolx.MyFavorites': 'M\u1EE5c y\xEAu th\xEDch c\u1EE7a t\xF4i',
+    'myolx.MyMessages': 'Tin nh\u1EAFn c\u1EE7a t\xF4i',
     'myolx.MyOLX': 'OLX c\u1EE7a t\xF4i',
     'myolx.Reply': 'Tr\u1EA3 l\u1EDDi',
     'myolx.ReplyToThisMessage': 'Tr\u1EA3 l\u1EDDi tin n\xE0y',
