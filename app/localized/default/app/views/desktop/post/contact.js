@@ -1,12 +1,12 @@
 'use strict';
 
+var _ = require('underscore');
 var Base = require('../../../../../common/app/bases/view');
-var helpers = require('../../../../../../helpers');
 var config = require('../../../../../../../shared/config');
 var EmailValidator = require('../../../../../../modules/emailValidator');
-var translations = require('../../../../../../../shared/translations');
+var helpers = require('../../../../../../helpers');
 var statsd = require('../../../../../../../shared/statsd')();
-var _ = require('underscore');
+var translations = require('../../../../../../../shared/translations');
 
 module.exports = Base.extend({
     tagName: 'section',
@@ -23,8 +23,19 @@ module.exports = Base.extend({
         'fieldsChange': 'onFieldsChange',
         'formRendered': 'onFormRendered',
         'blur [name="email"]': 'onBlurEmail',
-        'change [name="email"]': 'onBlurEmail',
-        'click .did-you-mean': 'fillEmail'
+        'click .did-you-mean': 'fillEmail',
+        'validate': 'onValidate'
+    },
+    onValidate: function(event, done, isValid) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+
+        this.validate(success, this.$('[name="email"]'));
+
+        function success(isValidEmail) {
+            done(isValid && isValidEmail);
+        }
     },
     onPhoneChange: function(event) {
         var $phone = $(event.target);
@@ -82,38 +93,60 @@ module.exports = Base.extend({
     },
     onBlurEmail: function() {
         var locationUrl = this.app.session.get('location').url;
+        var $field = this.$('[name="email"]');
+        var value = $field.val();
+        
+        if ($field.data('value') !== value) {   
+            if (config.getForMarket(locationUrl, ['validator', 'email', 'enabled'], false)) {
+                var currentPage = this.editing ? 'editing' : 'posting';
+                if (!value) {
+                    var category = this.parentView.getItem().get('category');
+                    var options = {
+                        pendingValidation: (category.id === undefined || category.parentId === undefined),
+                    };
 
-        if (config.getForMarket(locationUrl, ['validator', 'email', 'enabled'], false)) {
-            var currentPage = this.editing ? 'editing' : 'posting';
-            var $field = this.$('[name="email"]');
-            var value = $field.val();
-            
-            if (!value) {
-                var category = this.parentView.getItem().get('category');
-                var options = {
-                    pendingValidation: (category.id === undefined || category.parentId === undefined),
-                };
-
-                return this.parentView.$el.trigger('fieldSubmit', [$field, options]);
-            }
-
-            if ($field.data('value') !== value) {
-                if (this.emailValid) {
-                    this.emailValid = null;
+                    return this.parentView.$el.trigger('fieldSubmit', [$field, options]);
                 }
-                this.emailValid = new EmailValidator({
-                    element: $field,
-                    progress: this.inProgressValidation.bind(this),
-                    success: this.successValidation.bind(this),
-                    error: this.validationError.bind(this),
-                    currentPage: currentPage
-                }, {
-                    app: this.app
-                });
 
-                $field.data('value', value);
-            }
+                    // if (this.emailValid) {
+                    //     this.emailValid = null;
+                    // }
+                    // this.emailValid = new EmailValidator({
+                    //     element: $field,
+                    //     progress: this.inProgressValidation.bind(this),
+                    //     success: this.successValidation.bind(this),
+                    //     error: this.validationError.bind(this),
+                    //     currentPage: currentPage
+                    // }, {
+                    //     app: this.app
+                    // });
+                    this.validate($.noop, $field);
+
+                    $field.data('value', value);
+                }
         }
+    },
+    validate: function(done, $field) {
+        var currentPage = this.editing ? 'editing' : 'posting';
+
+        if (this.emailValid) {
+            this.emailValid = null;
+        }
+        this.emailValid = new EmailValidator({
+            element: $field,
+            progress: this.inProgressValidation.bind(this),
+            success: function onSuccess(data) {
+                done(data.is_valid);
+                this.successValidation(data);
+            }.bind(this),
+            error: function onError() {
+                this.validationError();
+                done(true);
+            }.bind(this),
+            currentPage: currentPage
+        }, {
+            app: this.app
+        });
     },
     inProgressValidation: function() {
         var $field = this.$('[name="email"]').addClass('validating');
