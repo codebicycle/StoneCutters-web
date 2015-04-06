@@ -413,6 +413,7 @@ module.exports = Base.extend({
 
             validation.call(this, '#posting-description-view');
             validation.call(this, '#posting-title-view');
+            validation.call(this, '#posting-contact-view');
             promise.then(check.bind(this));
             promise.val(done);
 
