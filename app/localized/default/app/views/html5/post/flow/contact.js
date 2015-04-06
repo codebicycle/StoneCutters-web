@@ -340,6 +340,9 @@ module.exports = Base.extend({
 
             $field.addClass('error');
             if (!data.did_you_mean) {
+                if ($field.siblings('small.error')) {
+                    $field.removeClass('error').siblings('small').remove();
+                }
                 $field.addClass('error').after('<small class="error">' + this.dictionary["postingerror.InvalidEmail"] + '</small>');
             }
             statsd.increment([this.app.session.get('location').abbreviation, this.emailValid.get('currentPage'), 'error', 'email', 'success', this.app.session.get('platform')]);
