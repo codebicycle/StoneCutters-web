@@ -23,6 +23,7 @@ module.exports = {
     readmessages: middlewares(readmessages),
     conversations: middlewares(conversations),
     conversation: middlewares(conversation),
+    conversationmail: middlewares(conversationmail),
     unsubscribe: middlewares(unsubscribe),
     report: middlewares(report),
     editpersonalinfo: middlewares(editpersonalinfo)
@@ -629,10 +630,10 @@ function conversations(params, callback) {
         var conversation;
         var _params;
         var user;
-        var view = 'users/myolx';
+        var view = 'users/conversations';
 
         var redirect = function(done) {
-            if (platform !== 'desktop' && platform !== 'html5') {
+            if (platform === 'wap') {
                 return done.fail();
             }
             user = this.app.session.get('user');
@@ -691,8 +692,8 @@ function conversations(params, callback) {
             this.app.seo.addMetatag('robots', 'noindex, nofollow');
             this.app.seo.addMetatag('googlebot', 'noindex, nofollow');
 
-            if (platform === 'html5') {
-                view = 'users/conversations';
+            if (platform === 'desktop') {
+                view = 'users/myolx';
             }
             callback(null, view, {
                 include: ['conversations', 'items'],
@@ -717,21 +718,24 @@ function conversations(params, callback) {
 }
 
 function conversation(params, callback) {
-    helpers.controllers.control.call(this, params, controller);
+    helpers.controllers.control.call(this, params, {
+        isForm: true
+    }, controller);
 
     function controller() {
         var platform = this.app.session.get('platform');
         var location = this.app.session.get('location');
         var languages = this.app.session.get('languages');
         var page = params ? params.page : undefined;
+        var view = 'users/conversation';
+        var pageSize = platform === 'html4' ? 'myConvHtml4' : 'myConv';
         var thread;
         var _params;
         var user;
-        var view = 'users/myolx';
-        var pageSize = platform === 'html5' ? 'myConvHtml5' : 'myConv';
+        var conversation;
 
         var redirect = function(done) {
-            if (platform !== 'desktop' && platform !== 'html5') {
+            if (platform === 'wap') {
                 return done.fail();
             }
             user = this.app.session.get('user');
@@ -751,7 +755,8 @@ function conversation(params, callback) {
             delete params.thread;
             _params = _.extend({}, params, {
                 token: user.token,
-                userId: user.userId
+                userId: user.userId,
+                conversation_type: 'login',
             });
             done();
         }.bind(this);
@@ -759,7 +764,7 @@ function conversation(params, callback) {
         var fetch = function(done) {
             this.app.fetch({
                 thread: {
-                    model: 'Thread',
+                    model: 'Conversation',
                     params: _params
                 }
             }, {
@@ -785,19 +790,28 @@ function conversation(params, callback) {
             done(res);
         }.bind(this);
 
+        var markAsRead = function(done, res) {
+            conversation = res.thread;
+            conversation.set('user', user);
+            conversation.set('platform', platform);
+            conversation.set('country', location.abbreviation);
+            conversation.markAsRead(done);
+        }.bind(this);
+
         var success = function(response) {
             this.app.seo.addMetatag('robots', 'noindex, nofollow');
             this.app.seo.addMetatag('googlebot', 'noindex, nofollow');
 
-            if (platform === 'html5') {
-                view = 'users/conversation';
+            if (platform === 'desktop') {
+                view = 'users/myolx';
             }
 
             callback(null, view, {
-                thread: response.thread,
+                thread: conversation,
                 include: ['thread'],
                 viewname: 'conversation',
-                paginator: response.thread.paginator
+                paginator: conversation.paginator,
+                form: this.form
             });
         }.bind(this);
 
@@ -810,6 +824,107 @@ function conversation(params, callback) {
             .then(prepare)
             .then(fetch)
             .then(paginate)
+            .then(markAsRead)
+            .val(success);
+    }
+}
+
+function conversationmail(params, callback) {
+    helpers.controllers.control.call(this, params, controller);
+
+    function controller() {
+        var platform = this.app.session.get('platform');
+        var location = this.app.session.get('location');
+        var languages = this.app.session.get('languages');
+        var page = params ? params.page : undefined;
+        var view = 'users/conversation';
+        var pageSize = platform === 'html4' ? 'myConvHtml4' : 'myConv';
+        var conversation;
+
+
+        var redirect = function(done) {
+            if (platform === 'wap') {
+                return done.fail();
+            }
+            done();
+        }.bind(this);
+
+        var prepare = function(done) {
+            Paginator.prepare(this.app, params, pageSize);
+            params.location = location.url;
+            params.languageId = languages._byId[this.app.session.get('selectedLanguage')].id;
+            params.conversation_type = 'hash';
+            params.hash = params.hash.replace(/ /g,'+');
+
+            done();
+        }.bind(this);
+
+        var fetch = function(done) {
+            this.app.fetch({
+                thread: {
+                    model: 'Conversation',
+                    params: params
+                }
+            }, {
+                readFromCache: false
+            }, done.errfcb);
+        }.bind(this);
+
+        var paginate = function(done, res) {
+            var url = 'myolx/conversation/mail[page]?hash=' + params.hash;
+            var realPage;
+
+            if (page == 1) {
+                done.abort();
+                return helpers.common.redirect.call(this, url.replace('[page]', ''));
+            }
+            realPage = res.thread.paginate(url, params, {
+                page: page
+            });
+            if (realPage) {
+                done.abort();
+                return helpers.common.redirect.call(this, url.replace('[page]', '-p-' + realPage));
+            }
+            done(res);
+        }.bind(this);
+
+        var markAsRead = function(done, res) {
+            conversation = res.thread;
+            conversation.set('platform', platform);
+            conversation.set('location', location.url);
+            conversation.set('hash', params.hash);
+            conversation.set('country', location.abbreviation);
+            conversation.markAsRead(done);
+        }.bind(this);
+
+        var success = function(response) {
+            this.app.seo.addMetatag('robots', 'noindex, nofollow');
+            this.app.seo.addMetatag('googlebot', 'noindex, nofollow');
+
+            if (platform === 'desktop') {
+                view = 'users/myolx';
+            }
+
+            callback(null, view, {
+                thread: conversation,
+                include: ['thread'],
+                viewname: 'conversation',
+                paginator: conversation.paginator,
+                form: this.form,
+                frommail: true
+            });
+        }.bind(this);
+
+        var error = function(err, res) {
+            return helpers.common.error.call(this, err, res, callback);
+        }.bind(this);
+
+        asynquence().or(error)
+            .then(redirect)
+            .then(prepare)
+            .then(fetch)
+            .then(paginate)
+            .then(markAsRead)
             .val(success);
     }
 }
@@ -818,33 +933,39 @@ function report(params, callback) {
     helpers.controllers.control.call(this, params, controller);
 
     function controller() {
+        var promise = asynquence().or(fail.bind(this))
+            .then(prepare.bind(this));
         var conversation;
 
-        var prepare = function(done) {
+        if (this.app.session.get('platform') !== 'desktop') {
+            promise.then(fetch.bind(this));
+        }
+
+        promise.val(success.bind(this));
+
+        function prepare(done) {
             conversation = new Conversation({
                 hash: params.hash
             }, {
                 app: this.app
             });
             done();
-        }.bind(this);
+        }
 
-        var fetch = function(done,err) {
+        function fetch(done,err) {
             conversation.report(done);
-        }.bind(this);
+        }
 
-        var error = function(err, res) {
+        function fail(err, res) {
             return helpers.common.error.call(this, err, res, callback);
-        }.bind(this);
+        }
 
-        var success = function() {
-            callback(null, {});
-        }.bind(this);
-
-        asynquence().or(error)
-            .then(prepare)
-            .then(fetch)
-            .val(success);
+        function success() {
+            callback(null, {
+                conversation: conversation,
+                include: ['conversation']
+            });
+        }
     }
 }
 
@@ -852,18 +973,13 @@ function unsubscribe(params, callback) {
     helpers.controllers.control.call(this, params, controller);
 
     function controller() {
-        var conversation;
 
-        var prepare = function(done) {
-            conversation = new Conversation({
+        var fetch = function(done,err) {
+            var conversation = new Conversation({
                 hash: params.hash
             }, {
                 app: this.app
             });
-            done();
-        }.bind(this);
-
-        var fetch = function(done,err) {
             conversation.unsubscribe(done);
         }.bind(this);
 
@@ -876,7 +992,6 @@ function unsubscribe(params, callback) {
         }.bind(this);
 
         asynquence().or(error)
-            .then(prepare)
             .then(fetch)
             .val(success);
     }

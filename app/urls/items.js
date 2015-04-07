@@ -2,28 +2,31 @@
 
 module.exports = {
     'items#delete': {
-        url: 'myolx/deleteitem/:itemId'
+        url: 'myolx/deleteitem/{{itemId}}'
     },
     'items#success': {
-        url: 'iid-:itemId([0-9]+)/reply/success'
+        url: 'iid-{{itemId}}/reply/success'
     },
     'items#reply': {
-        url: 'iid-:itemId([0-9]+)/reply'
+        url: 'iid-{{itemId}}/reply'
     },
     'items#gallery': {
-        url: ':title-iid-:itemId([0-9]+)/gallery'
+        url: ':title-iid-{{itemId}}/gallery'
     },
     'items#map': {
-        url: ':title-iid-:itemId([0-9]+)/map'
+        url: ':title-iid-{{itemId}}/map'
     },
     'items#show': {
         urls: [
-            ':title-iid-:itemId([0-9]+)',
-            '-iid-:itemId([0-9]+)',
-            'iid-:itemId([0-9]+)'
+            ':title-iid-{{itemId}}',
+            '-iid-{{itemId}}',
+            'iid-{{itemId}}'
         ]
     },
     'items#favorite': {
-        url: 'items/:itemId/favorite/?:intent?'
+        url: 'items/{{itemId}}/favorite/?:intent?'
+    },
+    'items#safetytips': {
+        url: 'iid-{{itemId}}/?:intent?'
     }
 };

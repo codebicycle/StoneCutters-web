@@ -7,14 +7,14 @@ var utils = require('../../../shared/utils');
 var config = require('../../../shared/config');
 var configSeo = require('./config');
 var defaultConfig = config.get(['markets', 'common', 'seo']);
-var INSTANCE;
+var environment = config.get(['environment', 'type'], 'production');
 
 function isEnabled(location) {
     return config.getForMarket(location, ['seo', 'enabled'], defaultConfig.enabled);
 }
 
-function isCategoryDeprecated(categoryId) {
-    return configSeo.categories.closed[categoryId] || configSeo.categories.migrated[categoryId];
+function isCategoryRedirected(location, categoryId) {
+    return config.getForMarket(location, ['categoryTree', environment, 'redirections', categoryId], config.getForMarket(location, ['categoryTree', 'default', 'redirections', categoryId]));
 }
 
 function desktopizeReplace(url, params) {
@@ -72,7 +72,7 @@ function desktopizeUrl(url, options, params) {
 }
 module.exports = _.extend(Seo, {
     isEnabled: isEnabled,
-    isCategoryDeprecated: isCategoryDeprecated,
+    isCategoryRedirected: isCategoryRedirected,
     desktopizeUrl: desktopizeUrl
 });
 

@@ -2,6 +2,7 @@
 
 var _ = require('underscore');
 var asynquence = require('asynquence');
+var utils = require('../../../../../../../shared/utils');
 var Base = require('../../../../../common/app/bases/view');
 var helpers = require('../../../../../../helpers');
 var Tracking = require('../../../../../../modules/tracking');
@@ -72,7 +73,7 @@ module.exports = Base.extend({
         $('.category[data-id="' + categoryId + '"]').addClass('select');
         $('.child-categories-list').removeClass('select');
         $('.child-categories-list[data-id="' + categoryId + '"]').addClass('select');
-        if (!this.parentView.editing) {
+        if (!this.parentView.editing && utils.getUrlParam('subcat') === undefined) {
             $('html, body').animate({
                 scrollTop: this.parentView.$('#posting-images-view').offset().top
             }, 750);
@@ -139,6 +140,11 @@ module.exports = Base.extend({
         event.stopImmediatePropagation();
 
         var $target = $(event.currentTarget);
+        var $fieldCat = this.$('.posting-categories-list');
+
+        if ($fieldCat.closest('.field-wrapper').hasClass('error')) {
+           $fieldCat.closest('.field-wrapper').removeClass('error').find('.error.message').remove();
+        }
 
         $('a.category').removeClass('select');
         $('.child-categories-list').removeClass('select');

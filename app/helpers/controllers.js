@@ -18,8 +18,10 @@ function prepare(params, done) {
     }
     this.app.session.clear('page');
     this.app.session.clear('dataPage');
+    this.app.session.persist({
+        currentRoute: this.currentRoute
+    });
     this.app.session.update({
-        currentRoute: this.currentRoute,
         params: params
     });
     if (params && params.filters && !utils.startsWith(params.filters, '-')) {
@@ -37,6 +39,13 @@ function processTracking(done) {
 
 function processSeo(done) {
     this.app.seo.reset(this.app);
+    done();
+}
+
+function schibsted(params, done) {
+    if (this.app.session.get('platform') === 'desktop' && params.from === 'schibsted') {
+        this.app.seo.addMetatag('canonical', common.fullizeUrl(utils.removeParams(this.app.session.get('url'), 'from'), this.app));
+    }
     done();
 }
 
@@ -135,7 +144,9 @@ module.exports = {
             .then(prepare.bind(this, params))
             .then(processTracking.bind(this));
         if (options.seo) {
-            promise.then(processSeo.bind(this));
+            promise
+                .then(processSeo.bind(this))
+                .then(schibsted.bind(this, params));
         }
         if (options.cache) {
             promise.val(changeHeaders.bind(this));
@@ -152,5 +163,6 @@ module.exports = {
             return common.redirect.call(this, '/500');
         }
     },
-    changeHeaders: changeHeaders
+    changeHeaders: changeHeaders,
+    schibsted: schibsted
 };

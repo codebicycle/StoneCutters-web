@@ -1,7 +1,8 @@
 'use strict';
 
-var Base = require('../../../../../common/app/bases/view').requireView('partials/tracking');
 var _ = require('underscore');
+var Base = require('../../../../../common/app/bases/view').requireView('partials/tracking');
+var Tracking = require('../../../../../../modules/tracking');
 
 module.exports = Base.extend({
     tagName: 'section',
@@ -52,8 +53,12 @@ module.exports = Base.extend({
         event.stopImmediatePropagation();
 
         if (tracking && tracking.params) {
-            this.$el.trigger('trackAti', tracking);
-            this.$el.trigger('trackAnalytics', tracking);
+            if (Tracking.ati.isClientEnabled.call(this)) {
+                this.$el.trigger('trackAti', tracking);
+            }
+            if (Tracking.analytics.isClientEnabled.call(this)) {
+                this.$el.trigger('trackAnalytics', tracking);
+            }
             this.$el.trigger('trackHydra', tracking);
         }
     },

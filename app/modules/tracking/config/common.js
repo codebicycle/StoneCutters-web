@@ -8,6 +8,9 @@ module.exports = {
         'categories#show': '[category-name]/subcategory_list',
         'items#success': '[category-name]/[subcategory-id]/reply/[item_attributes]',
         'items#reply': '[category-name]/[subcategory-id]/contact_form/[item_attributes]',
+        'items#safetytips#email': '[category-name]/[subcategory-id]/tap_email/[item_attributes]',
+        'items#safetytips#call': '[category-name]/[subcategory-id]/tap_call/[item_attributes]',
+        'items#safetytips#sms': '[category-name]/[subcategory-id]/tap_sms/[item_attributes]',
         'items#map': 'item/locate_in_map/[item_attributes]',
         'items#show': '[category-name]/[subcategory-id]/item/[item_attributes]',
         'items#gallery': '[category-name]/[subcategory-id]/item/[item_attributes]/gallery',
@@ -43,6 +46,7 @@ module.exports = {
         'pages#sitemap': 'sitemapcalendar',
         'pages#about': 'static/about',
         'users#conversation': 'myolx/conversation',
+        'users#conversationmail': 'myolx/conversation/mail',
         'users#conversations': 'myolx/conversations'
     }
 };

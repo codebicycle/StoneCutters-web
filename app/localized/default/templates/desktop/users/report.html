@@ -1,4 +1,22 @@
-<aside id="notification-message" class="notification-message icons icon-time">
-    <h4>{{ dictionary["misc.SuccessfulReport"] }}</h4>
-    <p>{{ dictionary["misc.ReportTracked"] }}</p>
-</aside>
+<section id="report-success" class="hide">
+    <aside id="notification-message" class="notification-message icons icon-time">
+        <h4>{{ dictionary["misc.SuccessfulReport"] }}</h4>
+        <p>{{ dictionary["misc.ReportTracked"] }}</p>
+    </aside>
+
+    {% view 'post/keepposting' %}
+</section>
+
+<section id="report-error" class="hide">
+    <aside id="notification-message" class="notification-message icons icon-sad">
+        <h4>{{ dictionary["misc.ErrorPleaseTryLater"] }}</h4>
+        <p><a href="{{ '/help/contact' | link }}">{{ dictionary["misc.NeedSupport"] }}</a></p>
+    </aside>
+</section>
+
+<section class="page-standart">
+    <h1>{{ dictionary["misc.BestSupport"] }}</h1>
+    <h3>{{ dictionary["misc.ChooseMostApplicable"] }}</h3>
+    <span data-action-report class="report-btn" data-increment="true" data-increment-category="conversations" data-increment-action="report" data-increment-value="scam" >{{ dictionary["misc.ContainBadWords"] }}</span>
+    <a href="{{ '/help/contact' | link }}" class="contact-btn" data-increment="true" data-increment-category="conversations" data-increment-action="report" data-increment-value="contact" >{{ dictionary["misc.NeedSupport"] }}</a>
+</section>

@@ -2,7 +2,7 @@
 {% set currentCategory = subcategory or category  %}
 <div class="related-category icons icon-tag">
     <h3>{{ dictionary["misc.EverythingSells"]|replace('<<BRAND>>','OLX') }}</h3>
-    <p>{{ dictionary["item.AdNotAvailable"]|replace('<<AD_TITLE>>', item.title) }} {{ dictionary["item.SeeMoreAds"]|replace('<<LINK_TO_CATEGORY>>', '') }} <a href="{{ currentCategory | slugToUrl | link }}">{{ item.category.name }}</a></p>
+    <p>{{ dictionary["item.AdNotAvailable"]|replace('<<AD_TITLE>>', item.title) }}{% if currentCategory %} {{ dictionary["item.SeeMoreAds"]|replace('<<LINK_TO_CATEGORY>>', '') }} <a href="{{ currentCategory | slugToUrl | link }}">{{ item.category.name }}</a>{% endif %}</p>
 </div>
 
 {% if items and items.length > 0 %}
@@ -17,3 +17,5 @@
         </section>
     </div>
 {% endif %}
+
+{% view 'partials/tracking' %}

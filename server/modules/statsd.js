@@ -1,5 +1,6 @@
 'use strict';
 
+var _ = require('underscore');
 var config = require('../config').get('statsD', {
     client: {
         host: 'graphite-server',
@@ -24,9 +25,12 @@ var rDot = /\./g;
 var Client = function(options) {
     var statsD = new StatsD(config.client);
 
-    function increment(metric, value) {
+    function increment(metric, value, options) {
         if (!(metric = stringify(metric))) {
             return;
+        }
+        if (_.isObject(value)) {
+            value = undefined;
         }
         statsD.increment(metric, value);
     }

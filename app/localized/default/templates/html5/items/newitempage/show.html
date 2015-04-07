@@ -132,8 +132,8 @@
         <div class="actionscontent">
 
         {% if item.email and not item.phone %}
-            <div class="action email trackMe fullWidth" data-tracking="Reply-ClickEmail" data-qa="reply-button" >
-                <a href="{{ ['iid-', item.id, '/reply'] | join('') | link }}">
+            <div class="action email trackMe fullWidth" data-tracking="Reply-ClickEmail">
+                <a href="{{ ['iid-', item.id, '/reply'] | join('') | link }}" data-qa="reply-button">
                     <span>{{ dictionary["replymessage.Email"] }}</span>
                 </a>
             </div>
@@ -151,8 +151,8 @@
                     </a>
                     <p class="separator"></p>
                 </div>
-                <div class="action email trackMe" data-tracking="Reply-ClickEmail" data-qa="reply-button" >
-                    <a href="{{ ['iid-', item.id, '/reply'] | join('') | link }}">
+                <div class="action email trackMe" data-tracking="Reply-ClickEmail" >
+                    <a href="{{ ['iid-', item.id, '/reply'] | join('') | link }}" data-qa="reply-button" >
                         <span>{{ dictionary["replymessage.Email"] }}</span>
                     </a>
                 </div>
@@ -163,8 +163,8 @@
                     </a>
                     <p class="separator"></p>
                 </div>
-                <div class="action email trackMe midWidth" data-tracking="Reply-ClickEmail" data-qa="reply-button" >
-                    <a href="{{ ['iid-', item.id, '/reply'] | join('') | link }}">
+                <div class="action email trackMe midWidth" data-tracking="Reply-ClickEmail" >
+                    <a href="{{ ['iid-', item.id, '/reply'] | join('') | link }}" data-qa="reply-button" >
                         <span>{{ dictionary["replymessage.Email"] }}</span>
                     </a>
                 </div>
@@ -175,14 +175,14 @@
                     </a>
                     <p class="separator"></p>
                 </div>
-                <div class="action email trackMe midWidth" data-tracking="Reply-ClickEmail" data-qa="reply-button" >
-                    <a href="{{ ['iid-', item.id, '/reply'] | join('') | link }}">
+                <div class="action email trackMe midWidth" data-tracking="Reply-ClickEmail"  >
+                    <a href="{{ ['iid-', item.id, '/reply'] | join('') | link }}" data-qa="reply-button" >
                         <span>{{ dictionary["replymessage.Email"] }}</span>
                     </a>
                 </div>
             {% else %}
-                <div class="action email trackMe fullWidth" data-tracking="Reply-ClickEmail" data-qa="reply-button" >
-                    <a href="{{ ['iid-', item.id, '/reply'] | join('') | link }}">
+                <div class="action email trackMe fullWidth" data-tracking="Reply-ClickEmail" >
+                    <a href="{{ ['iid-', item.id, '/reply'] | join('') | link }}" data-qa="reply-button" >
                         <span>{{ dictionary["replymessage.Email"] }}</span>
                     </a>
                 </div>

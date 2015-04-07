@@ -5,15 +5,18 @@
     <span><a href="{{ '/' | link }}">{{ location.url | replace('www.', '') }}</a></span>
     <ul>
         {% if user %}
-            {% set status = 'loggedInUnreadMessages' if user.unreadMessagesCount else 'loggedIn' %}
+            {% set status = 'loggedInUnreadMessages' if user.unreadConversationsCount else 'loggedIn' %}
+            {% if currentRoute.action == 'myolx' %}
+                {% set status = 'loggedInMyOlx' %}
+            {% endif %}
             {% set url = '/myolx' %}
             {% set dataQa = 'my-olx-loggedIn' %}
-            {% set text = dictionary['homeheader.My OLX'] %}
+            {% set text = dictionary["homeheader.My OLX"] %}
         {% else %}
             {% set status = 'loggedOut' %}
             {% set url = '/login' %}
             {% set dataQa = 'my-olx-loggedOut' %}
-            {% set text = dictionary['homeheader.Sign_In'] %}
+            {% set text = dictionary["homeheader.Sign_In"] %}
         {% endif %}
          <li>
             <a class="user {{ status }}" href="{{ url | link }}" title="{{ text }}" data-qa="{{ dataQa }}">{{ text }}</a>

@@ -3,6 +3,7 @@
 var _ = require('underscore');
 var Backbone = require('backbone');
 var configAdServing = require('./config');
+var logger = require('../../modules/logger');
 var config = require('../../../shared/config');
 var utils = require('../../../shared/utils');
 var Categories = require('../../collections/categories');
@@ -43,6 +44,7 @@ function getSettings() {
             hl: this.app.session.get('selectedLanguage').split('-').shift()
         });
 
+
         if (settings.params.adIconUrl && this.config.language) {
             settings.params.adIconUrl = settings.params.adIconUrl.replace(this.config.language.pattern, _.contains(this.config.language.list, settings.options.hl) ? settings.options.hl : this.config.language['default']);
         }
@@ -52,8 +54,17 @@ function getSettings() {
             service: service,
             seo: this.config.seo || 0
         });
-    }
 
+        try {
+            if (settings.options.pubId && ~settings.options.pubId.toLowerCase().indexOf('olx-za')) {
+                if (settings.options.channel && !_.contains(settings.options.channel.toUpperCase().split(','), 'OLX_ZA')) {
+                    logger.log('[OLX_DEBUG] :: ZA Revenues :: url:', utils.fullizeUrl(this.app.session.get('url'), this.app));
+                }
+            }
+        } catch (e) {
+            // Ignore
+        }
+    }
     this.set('settings', settings);
     return settings;
 }
@@ -111,13 +122,13 @@ function createChannels(service) {
 function getClientId(service) {
     var configType = utils.get(configAdServing, service, {});
     var pubId = utils.get(configType, ['default', 'options', 'pubId'], '');
-    if (service === 'ADX') {
-        return pubId;
-    }
     var countryCode = this.app.session.get('location').abbreviation.toLowerCase();
     var currentRoute = this.app.session.get('currentRoute');
     var clientId = [];
 
+    if (service === 'ADX') {
+        return pubId;
+    }
     clientId.push(pubId);
 
     if (_.contains(configType.clientsIds, countryCode)) {
@@ -134,12 +145,13 @@ function getClientId(service) {
 function getNumberPerCategory(service) {
     var number = this.config.params.number;
     var cat = getCategoryId.call(this);
+    var action = this.app.session.get('currentRoute').action;
 
     if (service === 'ADX') {
         return typeof number === 'undefined' ? 1 : number;
     }
-    if (!cat) {
-        cat = this.app.session.get('currentRoute').action;
+    if (!cat || action === 'statics') {
+        cat = action;
     }
 
     return utils.get(this.config, ['numberPerCategoryCSA', cat], number);

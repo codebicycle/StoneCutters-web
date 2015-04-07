@@ -6,6 +6,7 @@ var middlewares = require('../middlewares');
 var helpers = require('../helpers');
 var config = require('../../shared/config');
 var statsd = require('../../shared/statsd')();
+var Item = require('../models/item');
 
 module.exports = {
     terms: middlewares(terms),
@@ -16,7 +17,9 @@ module.exports = {
     allstates: middlewares(allstates),
     sitemap: middlewares(sitemap),
     sitemapByDate: middlewares(sitemapByDate),
-    mobilepromo: middlewares(mobilepromo)
+    thanks: middlewares(thanks),
+    shops: middlewares(shops),
+    shop: middlewares(shop)
 };
 
 function terms(params, callback) {
@@ -284,29 +287,62 @@ function sitemapByDate(params, callback) {
     });
 }
 
-function mobilepromo(params, callback) {
+function thanks(params, callback) {
     helpers.controllers.control.call(this, params, controller);
 
     function controller() {
-        var redirect = function(done) {
-            var platform = this.app.session.get('platform');
+        asynquence().or(fail.bind(this))
+            .then(redirect.bind(this))
+            .val(success.bind(this));
 
-            if (platform !== 'desktop') {
+        function redirect(done) {
+            var platform = this.app.session.get('platform');
+            var location = this.app.session.get('location');
+
+            if (platform !== 'desktop' && platform !== 'html5') {
                 return done.fail();
             }
+
+            if(!helpers.features.isEnabled.call(this, 'landingThanks', platform, location.url)) {
+                done.abort();
+                return helpers.common.redirect.call(this, '/');
+            }
             done();
-        }.bind(this);
+        }
 
-        var success = function() {
+        function success() {
+            this.app.seo.addMetatag('title', 'Thank You! & Gracias! & Obrigado!');
             callback(null, {});
-        }.bind(this);
+        }
 
-        var error = function(err, res) {
+        function fail(err, res) {
+            return helpers.common.error.call(this, err, res, callback);
+        }
+    }
+}
+
+function shops(params, callback) {
+    helpers.controllers.control.call(this, params, controller);
+
+    function controller() {
+        var platform = this.app.session.get('platform');
+
+        if (platform !== 'html4') {
             return helpers.common.redirect.call(this, '/');
-        }.bind(this);
+        }
+        callback(null, {});
+    }
+}
 
-        asynquence().or(error)
-            .then(redirect)
-            .val(success);
+function shop(params, callback) {
+    helpers.controllers.control.call(this, params, controller);
+
+    function controller() {
+        var platform = this.app.session.get('platform');
+
+        if (platform !== 'html4') {
+            return helpers.common.redirect.call(this, '/');
+        }
+        callback(null, {});
     }
 }

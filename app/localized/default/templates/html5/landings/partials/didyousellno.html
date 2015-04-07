@@ -1,0 +1,32 @@
+    <div class="didYouSellNo page-standart">
+        <span class="icons icon-lamp"></span>
+        <h2>{{ dictionary["misc.HelpSell"] }}</h2>
+        <p>{{ dictionary["misc.FollowToIncrease"] }}</p>
+        <div class="didYouSellOptions">
+            <article>
+                <span class="icons icon-fb-round"></span>
+                <div>
+                    <h3>{{ dictionary["misc.ShareAd"] }}</h3>
+                    <p>{{ dictionary["misc.UseNetworks"] }}</p>
+                    <a href="https://www.facebook.com/sharer/sharer.php?u={{ item.slug }}" target="_blank" class="facebookButton"></a>
+                </div>
+            </article>
+            <article>
+                <span class="icons icon-ticket"></span>
+                <div>
+                    <h3>{{ dictionary["misc.LowerPrice"] }}</h3>
+                    <p>{{ dictionary["misc.MoreAccessiblePrice"] }}</p>
+                    {% set url = '/myolx/edititem/' + item.itemid + '?sk=' + sk %}
+                    <a href="{{ url | link }}" class="btns white">{{ dictionary["misc.ChangePrice"] }}</a>
+                </div>
+            </article>
+            <article>
+                <span class="icons icon-post"></span>
+                <div>
+                    <h3>{{ dictionary["misc.PostMoreAds"] }}</h3>
+                    <p>{{ dictionary["misc.IncreaseBuyersConfidence"] }}</p>
+                    <a href="{{ '/posting' | link }}" class="btns white">{{ dictionary["defaultheader.PostAnAd"] }}</a>
+                </div>
+            </article>
+        </div>
+    </div>

@@ -1,6 +1,8 @@
 module.exports = {
     categoryTree: {
-        order: [185, 186, 362, 187, 16, 191, 190]
+        'default': {
+            order: [185, 186, 362, 187, 16, 191, 190]
+        }
     },
     successPage: {
         keepPosting: [
@@ -25,6 +27,9 @@ module.exports = {
         ]
     },
     featured: {
-        enabled: true
+        enabled: true,
+        sections: {
+            all: true
+        }
     }
 };

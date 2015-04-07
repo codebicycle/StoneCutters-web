@@ -6,35 +6,25 @@ var asynquence = require('asynquence');
 var Base = require('../../../../../common/app/bases/view').requireView('users/conversation');
 var Conversation = require('../../../../../../models/conversation');
 var helpers = require('../../../../../../helpers');
-var statsd = require('../../../../../../../shared/statsd')();
 
 module.exports = Base.extend({
     className: 'users_conversation_view',
-    regexpFindPage: /-p-[0-9]+/,
     events: {
-        'blur textarea, input:not([type=submit], [type=hidden])': 'onBlur',
+        'change textarea, input:not([type=submit], [type=hidden])': 'onChange',
         'submit': 'onSubmit'
     },
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
 
-        data.thread = this.parentView.getThread();
+        data.thread = this.parentView.getConversation();
         return data;
     },
     postRender: function() {
-        if (!this.rendered) {
-            this.conversation = new Conversation({
-                country: this.app.session.get('location').abbreviation,
-                platform: this.app.session.get('platform'),
-                user: this.app.session.get('user'),
-                threadId: this.parentView.getThread().get('threadId')
-            }, {
-                app: this.app
-            });
-        }
-        this.rendered = true;
+        var conversation = this.$('ul.conversation');
+
+        this.scrollBottom(conversation);
     },
-    onBlur: function(event) {
+    onChange: function(event) {
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();
@@ -42,7 +32,7 @@ module.exports = Base.extend({
         var field = $(event.target);
 
         if (this.validate(field)) {
-            this.conversation.set(field.attr('name'), field.val());
+            this.parentView.getConversation().set(field.attr('name'), field.val());
         }
     },
     onSubmit: function(event) {
@@ -50,49 +40,85 @@ module.exports = Base.extend({
         event.stopPropagation();
         event.stopImmediatePropagation();
 
+        var params = {};
+
         asynquence().or(fail.bind(this))
             .then(validate.bind(this))
             .then(submit.bind(this))
+            .then(prepare.bind(this))
+            .then(success.bind(this))
             .val(change.bind(this));
 
         function validate(done) {
-
             if (!this.validate(this.$('[data-messageText]'))) {
                 return done.abort();
             }
             done();
         }
 
-        function submit(done) {
-            this.$('.spinner, .reply-send').toggle();
-            this.conversation.reply(done);
-        }
+        function prepare(done) {
+            params.pageSize = 300;
+            params.conversation_type = this.parentView.getConversation().get('conversation_type');
 
-        function change() {
-            if (this.app.session.get('path').match(this.regexpFindPage)) {
-                this.app.router.redirectTo('/myolx/conversation/' + this.conversation.get('threadId'));
+            if (this.parentView.getConversation().get('conversation_type') === 'login') {
+                params.token = this.parentView.getConversation().get('user').token;
+                params.userId = this.parentView.getConversation().get('user').userId;
+                params.threadId = this.parentView.getConversation().get('threadId');
             }
             else {
-                this.app.router.redirectTo('/myolx/conversation/' + this.conversation.get('threadId') + '-p-1');
+                params.hash = this.parentView.getConversation().get('hash');
             }
+            done();
+        }
+
+        function submit(done) {
+            this.$('.spinner').removeClass('display-none');
+            this.$('.btn.orange').addClass('display-none');
+            this.parentView.getConversation().reply(done);
+        }
+
+        function success(done) {
+            this.app.fetch({
+                conversation: {
+                    model: 'Conversation',
+                    params: params
+                }
+            }, {
+                readFromCache: false
+            }, done.errfcb);
+        }
+
+        function change(res) {
+            this.parentView.conversation = res.conversation;
+            this.parentView.getConversation().set('user', this.app.session.get('user'));
+            this.parentView.getConversation().set('platform', this.app.session.get('platform'));
+            this.parentView.getConversation().set('location', this.app.session.get('location').url);
+            this.parentView.getConversation().set('country', this.app.session.get('location').abbreviation);
+            this.render();
         }
 
         function fail(err) {
-            this.$('.spinner, .reply-send').toggle();
+            this.$('.spinner').addClass('display-none');
+            this.$('.btn.orange').removeClass('display-none');
             this.$('[data-messageText]').addClass('error');
         }
     },
     validate: function(field) {
         if (!field.val()) {
-            this.$('[data-error]').removeClass('hide');
+            this.$('[data-error]').removeClass('display-none');
             this.$('[data-messageText]').addClass('error');
             return false;
         }
         else {
-            this.$('[data-error]').addClass('hide');
+            this.$('[data-error]').addClass('display-none');
             this.$('[data-messageText]').removeClass('error');
             return true;
         }
+    },
+    scrollBottom: function(conversation) {
+        var height = conversation[0].scrollHeight;
+
+        conversation.scrollTop(height);
     }
 });
 

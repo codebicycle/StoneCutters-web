@@ -4,7 +4,7 @@
             {{ dictionary["popularsearchesbody.PopularOn"] | replace('<<OLX_DOMAIN>>','OLX') }}
             <span class="icons icon-arrow"></span>
         </p>
-        <div class="footer-slide-content hide" data-footer-content >
+        <div class="footer-slide-content" data-footer-content >
             <a title="close" data-footer-slidedown class="icons icon-close" href="#"></a>
             {% view 'footer/popular' %}
         </div>
@@ -15,7 +15,7 @@
             {{ dictionary["defaultheader.CloseToYou"] | replace('<<BRAND>>','OLX') }}
             <span class="icons icon-arrow"></span>
         </p>
-        <div class="footer-slide-content hide" data-footer-content >
+        <div class="footer-slide-content" data-footer-content >
             <a title="close" data-footer-slidedown class="icons icon-close" href="#"></a>
             {% view 'footer/countries' %}
         </div>
@@ -26,19 +26,19 @@
             {{ dictionary["biderrorheader.Help"] }}
             <span class="icons icon-arrow"></span>
         </p>
-        <div class="footer-slide-content hide" data-footer-content >
+        <div class="footer-slide-content" data-footer-content >
             <a title="close" data-footer-slidedown class="icons icon-close" href="#"></a>
             <div class="title-bar">
                 <h3 class="title">{{ dictionary["biderrorheader.Help"] }}</h3>
             </div>
             <ul class="footer-help-slide">
-                <li><a rel="nofollow" href="{{ '/help' | link }}">{{ dictionary["biderrorheader.Help"] }}</a></li>
+                <li><a rel="nofollow" href="{{ '/help' | link }}" data-increment="true" data-increment-category="zendesk" data-increment-action="footer" data-increment-value="help">{{ dictionary["biderrorheader.Help"] }}</a></li>
                 {% if isFeaturedCountry %}
-                    <li><a rel="nofollow" href="{{ '/featured_listings' | link }}">{{ dictionary["featured_listings.HowDoIFeatureMyAd"] }}</a></li>
+                    <li><a rel="nofollow" href="{{ '/featured_listings' | link }}" data-increment="true" data-increment-category="zendesk" data-increment-action="footer" data-increment-value="how_to_feature">{{ dictionary["featured_listings.HowDoIFeatureMyAd"] }}</a></li>
                 {% endif %}
-                <li><a rel="nofollow" href="{{ '/terms' | link }}">{{ dictionary["register_form.termsAgreeB"] }}</a></li>
-                <li><a rel="nofollow" href="{{ '/help/about' | link }}">{{ dictionary["defaultfooter.About OLX"] }} </a></li>
-                <li><a rel="nofollow"  href="{{ '/help/contact' | link }}">{{ dictionary["contact_us.ContactBrand"] }} </a></li>
+                <li><a rel="nofollow" href="{{ '/terms' | link }}" data-increment="true" data-increment-category="zendesk" data-increment-action="footer" data-increment-value="terms">{{ dictionary["register_form.termsAgreeB"] }}</a></li>
+                <li><a rel="nofollow" href="{{ '/help/about' | link }}" data-increment="true" data-increment-category="zendesk" data-increment-action="footer" data-increment-value="about">{{ dictionary["defaultfooter.About OLX"] }} </a></li>
+                <li><a rel="nofollow" href="{{ '/help/contact' | link }}" data-increment="true" data-increment-category="zendesk" data-increment-action="footer" data-increment-value="contact">{{ dictionary["contact_us.ContactBrand"] }} </a></li>
             </ul>
         </div>
     </div>
@@ -46,7 +46,7 @@
     {% include (template + '/marketing/appStores.html') %}
 </div>
 <div class="container">
-    <p class="text">{{ dictionary["defaulthtmlhead.FreeClassifiedsInArea"] | replace('<AREA>',location.name) }}  - Copyright &copy; 2006-2015 OLX, Inc.</p>
+    <p class="text">{{ dictionary["defaulthtmlhead.FreeClassifiedsInArea"] | replace('<AREA>',location.name) }}  - Copyright &copy; 2006-2015 OLX{{', Inc' if showInc}}</p>
     {% if socials %}
         <ul class="social">
         {% for social in socials %}
@@ -55,3 +55,7 @@
         </ul>
     {% endif %}
 </div>
+
+{% if migrationModal %}
+    {% view 'modals/migrations' %}
+{% endif %}

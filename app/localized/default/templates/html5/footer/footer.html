@@ -1,5 +1,5 @@
 {% view 'footer/downloadapp' %}
 {% view 'footer/languages' %}
 
-<p>Copyright &copy; 2006-2015 OLX, Inc.</p>
+<p>Copyright &copy; 2006-2015 OLX{{', Inc' if showInc}}</p>
 <p class="free">{{ dictionary["defaulthtmlhead.FreeClassifiedsInArea"] | replace('<AREA>', location.name) }}</p>

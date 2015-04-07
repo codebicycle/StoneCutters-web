@@ -5,10 +5,15 @@ var asynquence = require('asynquence');
 var URLParser = require('url');
 var middlewares = require('../middlewares');
 var helpers = require('../helpers');
+var Seo = require('../modules/seo');
 var Paginator = require('../modules/paginator');
 var FeatureAd = require('../models/feature_ad');
 var config = require('../../shared/config');
 var utils = require('../../shared/utils');
+var config = require('../../shared/config');
+var statsd = require('../../shared/statsd')();
+var Shops = require('../modules/shops');
+var Abundance = require('../modules/abundance');
 
 module.exports = {
     filterig: middlewares(filterig),
@@ -52,39 +57,32 @@ function search(params, callback, gallery) {
         var page = params ? params.page : undefined;
         var platform = this.app.session.get('platform');
         var languages = this.app.session.get('languages');
+        var location = this.app.session.get('location');
         var path = this.app.session.get('path');
+        var shopsModule = new Shops(this);
         var starts = '/nf';
+        var redirectParams = {
+            replace: true
+        };
         var query;
         var url;
         var category;
         var subcategory;
-        var redirectParams = {
-            replace: true
-        };
+        var abundance = new Abundance({}, this);
 
         asynquence().or(fail.bind(this))
-            .then(redirect.bind(this))
             .then(buildUrl.bind(this))
+            .then(redirect.bind(this))
             .then(configure.bind(this))
             .then(check.bind(this))
             .then(prepare.bind(this))
             .then(fetchFeatured.bind(this))
             .then(fetch.bind(this))
+            .then(fetchAbundance.bind(this))
             .then(filters.bind(this))
             .then(paginate.bind(this))
+            .then(metrics.bind(this))
             .val(success.bind(this));
-
-        function redirect(done) {
-            if (!params.search || _.isEmpty(params.search.trim()) || params.search === 'undefined') {
-                done.abort();
-                return helpers.common.redirect.call(this, '/nf/all-results', null, redirectParams);
-            }
-            if (!utils.startsWith(path, starts)) {
-                done.abort();
-                return helpers.common.redirect.call(this, [starts, path].join(''));
-            }
-            done();
-        }
 
         function buildUrl(done) {
             url = [starts, '/'];
@@ -104,22 +102,53 @@ function search(params, callback, gallery) {
             done();
         }
 
-        function configure(done) {
+        function findCategory(categoryId) {
             var categories = this.dependencies.categories;
 
-            if (params.catId) {
-                category = categories.search(params.catId);
+            category = categories.search(categoryId);
+            if (!category) {
+                category = categories.get(categoryId);
                 if (!category) {
-                    category = categories.get(params.catId);
-                    if (!category) {
-                        done.abort();
+                    return false;
+                }
+            }
+            if (category.has('parentId')) {
+                subcategory = category;
+                category = categories.get(subcategory.get('parentId'));
+            }
+            return true;
+        }
+
+        function redirect(done) {
+            var categoryId;
+            var slug;
+
+            if (!params.search || _.isEmpty(params.search.trim()) || params.search === 'undefined') {
+                done.abort();
+                return helpers.common.redirect.call(this, '/nf/all-results', null, redirectParams);
+            }
+            if (!utils.startsWith(path, starts)) {
+                done.abort();
+                return helpers.common.redirect.call(this, [starts, path].join(''));
+            }
+            if (params.catId) {
+                categoryId = Seo.isCategoryRedirected(location.url, params.catId);
+                if (categoryId) {
+                    done.abort();
+                    if (!findCategory.call(this, categoryId)) {
                         return helpers.common.redirect.call(this, '/');
                     }
+                    slug = helpers.common.slugToUrl((subcategory || category).toJSON());
+                    return helpers.common.redirect.call(this, [url.replace(params.title + '-cat-' + params.catId, slug), '/', gallery].join(''));
                 }
-                if (category.has('parentId')) {
-                    subcategory = category;
-                    category = categories.get(subcategory.get('parentId'));
-                }
+            }
+            done();
+        }
+
+        function configure(done) {
+            if (params.catId && !category && !findCategory.call(this, params.catId)) {
+                done.abort();
+                return helpers.common.redirect.call(this, '/');
             }
             done();
         }
@@ -146,10 +175,22 @@ function search(params, callback, gallery) {
             params.abundance = true;
             params.languageId = languages._byId[this.app.session.get('selectedLanguage')].id;
             Paginator.prepare(this.app, params);
+
+            if (params.catId) {
+                if (subcategory) {
+                    params['f.category'] = subcategory.get('id');
+                }
+                if (category) {
+                    params['f.parentcategory'] = category.get('id');
+                }
+            }
+
             query = _.clone(params);
             delete params.search;
             delete params.page;
             delete params.filters;
+            delete params.catId;
+            delete params.categoryId;
 
             this.app.seo.addMetatag('robots', 'noindex, nofollow');
             this.app.seo.addMetatag('googlebot', 'noindex, nofollow');
@@ -175,12 +216,24 @@ function search(params, callback, gallery) {
         }
 
         function fetch(done, res) {
-            this.app.fetch({
+            var spec = {
                 items: {
                     collection: 'Items',
                     params: params
-                }
-            }, {
+                } 
+            };
+
+            if (shopsModule.shouldGetShops()) {
+                spec.shops = {
+                    collection: 'Shops',
+                    params: _.extend({}, params, {
+                        pageSize: 3,
+                        offset: 3 * (params.offset / params.pageSize)
+                    }),
+                };
+            }
+
+            this.app.fetch(spec, {
                 readFromCache: false
             }, function afterFetch(err, response) {
                 if (err) {
@@ -191,6 +244,14 @@ function search(params, callback, gallery) {
                 }
                 done(response);
             });
+        }
+
+        function fetchAbundance(done, res) {
+            if (abundance.isEnabled() && res.items.meta.abundance) {
+                abundance.set('params', params);
+                return abundance.fetch(done, res);
+            }
+            done(res);
         }
 
         function filters(done, res) {
@@ -229,10 +290,32 @@ function search(params, callback, gallery) {
                 done.abort();
                 return helpers.common.redirect.call(this, [url, '/-p-', realPage, gallery].join(''));
             }
-            done(res.items);
+            done(res.items, res.shops);
         }
 
-        function success(items) {
+        function metrics(done, items, shops) {
+            var type = (gallery ? 'gallery' : 'listing');
+            var quantity = 'empty';
+
+            if (items.meta.total) {
+                if (items.meta.total <= 10) {
+                    quantity = 10;
+                }
+                else if (items.meta.total <= 50) {
+                    quantity = 50;
+                }
+                else if (items.meta.total <= 100) {
+                    quantity = 100;
+                }
+                else {
+                    quantity = 'enough';
+                }
+            }
+            statsd.increment([location.abbreviation, 'dgd', 'search', 'qty', type, quantity, platform]);
+            done(items, shops);
+        }
+
+        function success(items, shops) {
             var _category = category ? category.toJSON() : undefined;
             var _subcategory = subcategory ? subcategory.toJSON() : undefined;
 
@@ -250,6 +333,9 @@ function search(params, callback, gallery) {
             this.app.tracking.set('filters', items.filters);
             this.app.tracking.set('paginator', items.paginator);
 
+            this.app.session.persist({
+                currentSearch: query.search
+            });
             this.app.session.update({
                 dataPage: {
                     search: query.search,
@@ -257,14 +343,20 @@ function search(params, callback, gallery) {
                     subcategory: _subcategory ? _subcategory.id : undefined
                 }
             });
+            if (shopsModule.enabled()) {
+                shopsModule.start("fetch-search", items.length, shops !== undefined ? shops.length : 0);
+            }
 
             callback(null, ['searches/search', gallery.replace('-', '')].join(''), {
                 items: items.toJSON(),
+                shops: shops !== undefined ? shops.toJSON() : [],
                 meta: items.meta,
                 filters: items.filters,
                 paginator: items.paginator,
                 search: query.search,
-                category: category
+                category: category,
+                subcategory: subcategory,
+                currentCategory: subcategory || category
             });
         }
 
@@ -280,6 +372,7 @@ function statics(params, callback) {
     function controller() {
         var page = params ? params.page : undefined;
         var platform = this.app.session.get('platform');
+        var location = this.app.session.get('location');
         var languages = this.app.session.get('languages');
         var url = ['/q/', params.search, (params.catId ? ['/c-', params.catId].join('') : '')].join('');
         var query;
@@ -297,30 +390,47 @@ function statics(params, callback) {
             .then(paginate.bind(this))
             .val(success.bind(this));
 
+        function findCategory(categoryId) {
+            var categories = this.dependencies.categories;
+
+            category = categories.search(categoryId);
+            if (!category) {
+                category = categories.get(categoryId);
+                if (!category) {
+                    return false;
+                }
+            }
+            if (category.has('parentId')) {
+                subcategory = category;
+                category = categories.get(subcategory.get('parentId'));
+            }
+            return true;
+        }
+
         function redirect(done) {
+            var categoryId;
+
             if (params.search && params.search.toLowerCase() === 'gumtree' && this.app.session.get('location').url === 'www.olx.co.za') {
                 done.abort();
                 return helpers.common.redirect.call(this, '/q/-');
+            }
+            if (params.catId) {
+                categoryId = Seo.isCategoryRedirected(location.url, params.catId);
+                if (categoryId) {
+                    done.abort();
+                    if (!findCategory.call(this, categoryId)) {
+                        return helpers.common.redirect.call(this, '/');
+                    }
+                    return helpers.common.redirect.call(this, this.app.session.get('path').replace('/c-' + params.catId, '/c-' + categoryId));
+                }
             }
             done();
         }
 
         function configure(done) {
-            var categories = this.dependencies.categories;
-
-            if (params.catId) {
-                category = categories.search(params.catId);
-                if (!category) {
-                    category = categories.get(params.catId);
-                    if (!category) {
-                        done.abort();
-                        return helpers.common.redirect.call(this, '/');
-                    }
-                }
-                if (category.has('parentId')) {
-                    subcategory = category;
-                    category = categories.get(subcategory.get('parentId'));
-                }
+            if (params.catId && !category && !findCategory.call(this, params.catId)) {
+                done.abort();
+                return helpers.common.redirect.call(this, '/');
             }
             done();
         }
@@ -515,6 +625,8 @@ function allresults(params, callback, gallery) {
         var languages = this.app.session.get('languages');
         var url = ['/nf/all-results', gallery || ''].join('');
         var query;
+        var shopsModule = new Shops(this);
+        var abundance = new Abundance({}, this);
 
         var redirect = function(done) {
             var maxPage = config.getForMarket(location, ['ads', 'maxPage', 'allResults'], 500);
@@ -566,12 +678,21 @@ function allresults(params, callback, gallery) {
         }.bind(this);
 
         var fetch = function(done, res) {
-            this.app.fetch({
+            var collections = {
                 items: {
                     collection: 'Items',
                     params: params
-                }
-            }, {
+                } 
+            };
+            if (shopsModule.shouldGetShops()) {
+                collections.shops = {
+                    collection: 'Shops',
+                    params: _.clone(params),
+                };
+                collections.shops.params.pageSize = 3;
+                collections.shops.params.offset = 3 * (params.offset / params.pageSize);
+            }
+            this.app.fetch(collections, {
                 readFromCache: false
             }, function afterFetch(err, response) {
                 if (err) {
@@ -582,6 +703,14 @@ function allresults(params, callback, gallery) {
                 }
                 done(response);
             });
+        }.bind(this);
+
+        var fetchAbundance = function(done, res) {
+            if (abundance.isEnabled() && res.items.meta.abundance) {
+                abundance.set('params', params);
+                return abundance.fetch(done, res);
+            }
+            done(res);
         }.bind(this);
 
         var filters = function(done, res) {
@@ -621,10 +750,10 @@ function allresults(params, callback, gallery) {
                 done.abort();
                 return helpers.common.redirect.call(this, url + '-p-' + realPage);
             }
-            done(res.items);
+            done(res.items, res.shops);
         }.bind(this);
 
-        var success = function(items) {
+        var success = function(items, shops) {
             var meta = items.meta;
 
             this.app.seo.setContent(items.meta);
@@ -635,9 +764,14 @@ function allresults(params, callback, gallery) {
             this.app.tracking.set('filters', items.filters);
             this.app.tracking.set('paginator', items.paginator);
 
+            if (shopsModule.enabled()) {
+                shopsModule.start("fetch-allresults", items.length, shops !== undefined ? shops.length : 0);
+            }
+
             callback(null, {
                 categories: this.dependencies.categories.toJSON(),
                 items: items.toJSON(),
+                shops: shops !== undefined ? shops.toJSON() : [],
                 meta: meta,
                 filters: items.filters,
                 paginator: items.paginator
@@ -653,6 +787,7 @@ function allresults(params, callback, gallery) {
             .then(prepare)
             .then(fetchFeatured)
             .then(fetch)
+            .then(fetchAbundance)
             .then(filters)
             .then(paginate)
             .val(success);

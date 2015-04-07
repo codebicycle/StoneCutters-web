@@ -200,7 +200,8 @@ function reply(done, data) {
         .then(prepare.bind(this))
         .then(submit.bind(this))
         .then(check.bind(this))
-        .val(success.bind(this));
+        .val(success.bind(this))
+        .val(origin.bind(this));
 
     function prepare(done) {
         var query = {
@@ -237,6 +238,21 @@ function reply(done, data) {
     function success(reply) {
         statsd.increment([this.get('country'), 'reply', 'success', this.get('platform')]);
         this.callback(done)(reply);
+    }
+
+    function origin() {
+        var originData = this.app.session.get('origin');
+        var type = 'unknown';
+        var name = 'unknown';
+        var abundance = 'traditional_item.reply';
+
+        if (originData) {
+            type = originData.type;
+            name = originData.isGallery ? 'gallery' : 'listing';
+            abundance = originData.isAbundance ? 'abundance_item.reply' : abundance;
+        }
+        statsd.increment([this.app.session.get('location').abbreviation, 'dgd', 'reply', type, name, this.app.session.get('platform')]);
+        statsd.increment([this.app.session.get('location').abbreviation, 'dgd', 'abundance', type, abundance, this.app.session.get('platform')]);
     }
 
     function fail(err) {

@@ -1,6 +1,6 @@
 'use strict';
 
-function startsWith(str, starts){
+function startsWith(str, starts) {
     if (starts === '') {
         return true;
     }
@@ -12,7 +12,7 @@ function startsWith(str, starts){
     return str.length >= starts.length && str.slice(0, starts.length) === starts;
 }
 
-function endsWith(str, ends){
+function endsWith(str, ends) {
     if (ends === '') {
         return true;
     }

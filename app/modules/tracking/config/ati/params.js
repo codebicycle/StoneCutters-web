@@ -121,6 +121,57 @@ module.exports = {
             action_type: 'message_form'
         }
     },
+    'items#safetytips#email': {
+        process: true,
+        names: {
+            page_name: 'tap_email',
+            category: '',
+            ad_category: '',
+            ad_subcategory: '',
+            ad_id: '',
+            ad_photo: 0,
+            poster_id: '0',
+            poster_type: 'registered_no',
+            posting_to_action: '',
+            action_type: 'tap_email',
+            geo1: '',
+            geo2: ''
+        }
+    },
+    'items#safetytips#sms': {
+        process: true,
+        names: {
+            page_name: 'tap_sms',
+            category: '',
+            ad_category: '',
+            ad_subcategory: '',
+            ad_id: '',
+            ad_photo: 0,
+            poster_id: '0',
+            poster_type: 'registered_no',
+            posting_to_action: '',
+            action_type: 'tap_sms',
+            geo1: '',
+            geo2: ''
+        }
+    },
+    'items#safetytips#call': {
+        process: true,
+        names: {
+            page_name: 'tap_call',
+            category: '',
+            ad_category: '',
+            ad_subcategory: '',
+            ad_id: '',
+            ad_photo: 0,
+            poster_id: '0',
+            poster_type: 'registered_no',
+            posting_to_action: '',
+            action_type: 'tap_call',
+            geo1: '',
+            geo2: ''
+        }
+    },
     'items#show': {
         process: true,
         names: {

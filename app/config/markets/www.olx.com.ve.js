@@ -1,7 +1,9 @@
 module.exports = {
     categoryTree: {
-        order: [830, 800, 811, 806, 362, 815, 859, 16, 821],
-        columns: [3, 2, 2]
+        'default': {
+            order: [830, 800, 811, 806, 362, 815, 859, 16, 821],
+            columns: [3, 2, 2]
+        }
     },
     socials: {
         links: [
@@ -33,7 +35,10 @@ module.exports = {
                 title: 'OLX Venezuela - Comercial Raqueta de tenis - Vender es fácil',
                 id: 'HrIK2dtJ7j8'
             }
-        ]
+        ],
+        migrationModal: {
+            image: 'migrations-ve.jpg'
+        }
     },
     successPage: {
         keepPosting: [

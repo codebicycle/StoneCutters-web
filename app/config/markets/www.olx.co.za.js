@@ -11,8 +11,10 @@ module.exports = {
         }
     },
     categoryTree: {
-        order: [806, 815, 821, 881, 800, 185, 16, 853, 362, 811, 600, 191],
-        columns: [3, 3, 3]
+        'default': {
+            order: [806, 815, 821, 881, 800, 185, 16, 853, 362, 811, 600, 191],
+            columns: [3, 3, 3]
+        }
     },
     marketing: {
         post_banner: {
@@ -20,6 +22,9 @@ module.exports = {
         },
         home_block_banner_top: {
             image: 'marketing-box-image-za'
+        },
+        thanksPage: {
+            videoUrl: 'thank-you-video-en'
         }
     },
     successPage: {
@@ -437,6 +442,13 @@ module.exports = {
         linkblog: {
             href: 'http://hello.olx.co.za',
             target: '_blank'
+        }
+    },
+    tracking: {
+        trackers: {
+            floodlight: {
+                enabled: true
+            }
         }
     }
 };

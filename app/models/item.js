@@ -184,7 +184,7 @@ function postImages(done) {
     }, callback.bind(this));
 
     function callback(err, response, ids) {
-        this.logPostImages(!this.get('id') ? 'posting' : 'editing', response.statusCode, err);
+        this.logPostImages(!this.get('id') ? 'posting' : 'editing', response.statusCode, (err ? (_.isString(err) ? ids : err) : undefined));
         if (!err) {
             _.each(newImages, function each(image, i) {
                 image.id = ids[i];
@@ -196,13 +196,16 @@ function postImages(done) {
 
 function postFields(done) {
     var id = this.get('id');
+    var type = !id ? 'posting' : 'editing';
     var user = this.app.session.get('user');
     var renew =  this.get('renew') || false;
+    var platform = this.app.session.get('platform');
+    var locale = this.app.session.get('location').abbreviation;
     var action = 'edit';
     var query = {
         postingSession: this.get('postingSession'),
         languageId: this.app.session.get('languageId'),
-        platform: this.app.session.get('platform')
+        platform: platform
     };
     var data;
 
@@ -220,7 +223,9 @@ function postFields(done) {
     }
 
     data = this.toData(true);
-
+    if (data.priceC && !data.currency_type) {
+        statsd.increment([locale, type, 'error', 'currency', 'post', platform]);
+    }
     helpers.dataAdapter.post(this.app.req, '/items' + (!id ? '' : ['', id, action].join('/')), {
         data: data,
         query: query
@@ -230,7 +235,7 @@ function postFields(done) {
         if (!err && item) {
             this.set(item);
         }
-        this.logPost(!id ? 'posting' : 'editing', response.statusCode, err);
+        this.logPost(type, response.statusCode, err);
         this.errfcb(done)(err, response, item);
     }
 }
@@ -299,7 +304,11 @@ function toData(includeImages) {
     if (_.isObject(data.priceC)) {
         data.priceC = data.priceC.amount;
     }
-    if (data.priceC) {
+    if (data.priceC && !data.priceType) {
+        data.priceC = parseFloat(data.priceC);
+        data.priceType = 'FIXED';
+    }
+    else if (data.priceC) {
         data.priceC = parseFloat(data.priceC);
     }
     else if (data.priceType) {
@@ -331,6 +340,7 @@ function toData(includeImages) {
     delete data.slug;
     delete data.priceTypeData;
     delete data.additionalLocation;
+    delete data._location;
     _.each(Object.keys(data), function each(key) {
         if (data[key] === undefined || data[key] === null || (typeof data[key] === 'string' && !data[key])) {
             delete data[key];

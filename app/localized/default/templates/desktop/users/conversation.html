@@ -1,5 +1,7 @@
 <div class="conversation">
-    <a href="{{ '/myolx/conversations' | link }}" class="back icons icon-arrow-left">{{ dictionary["misc.ReturnToMsgs"] }}</a>
+    {% if user %}
+        <a href="{{ '/myolx/conversations' | link }}" class="back icons icon-arrow-left">{{ dictionary["misc.ReturnToMsgs"] }}</a>
+    {% endif %}
     {% set item = thread.get('item') %}
     <div class="conversation-item">
         <a href="{{ item.slug.replace(domain, fullDomain) | replace('en/', '') }}">
@@ -10,7 +12,7 @@
             </figure>
         </a>
         <div class="conversation-item-data">
-            {% if item.user.id != thread.get('userId') %}
+            {% if thread.has('userId') and item.user.id != thread.get('userId') %}
                 {% set phone = item.phone %}
                 {% set senderName = item.user.username %}
             {% elif thread.get('senders')[1] and thread.get('senders')[1].isMine %}
@@ -29,7 +31,7 @@
             <p><a href="{{ item.slug.replace(domain, fullDomain) | replace('en/', '') }}">{{ item.title }}</a>
         </div>
     </div>
-    <ul>
+    <ul class="conversation">
     {% for message in thread.get('messages') %}
         <li class="conversation-chat">
             {% set name = thread.get('senders')[0].name %}
@@ -48,9 +50,9 @@
     <div class="conversation-input">
         <form data-message-reply data-threadId="{{ thread.get('threadId') }}">
             <textarea data-messageText class="text-field"  name="message" ></textarea>
-            <p data-error class="error hide">{{ dictionary["misc.please-comp-msg"] }}</p>
-            <div class="spinner hide"></div>
-            <button class="btn orange" type="submit">{{ dictionary["myolx.Reply"] }}</button>
+            <p data-error class="error display-none">{{ dictionary["misc.please-comp-msg"] }}</p>
+            <div class="spinner display-none"></div>
+            <button class="btn orange" type="submit" data-qa="reply-send-button">{{ dictionary["myolx.Reply"] }}</button>
             {% if phone %}
                 <span class="phone">{{ dictionary["posting_footerlist.phoneNumber"] }}: {{ phone }}</span>
             {% endif %}

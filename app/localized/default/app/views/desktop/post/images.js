@@ -1,10 +1,11 @@
 'use strict';
 
+var _ = require('underscore');
+var asynquence = require('asynquence');
+var statsd = require('../../../../../../../shared/statsd')();
 var Base = require('../../../../../common/app/bases/view');
 var Item = require('../../../../../../models/item');
 var helpers = require('../../../../../../helpers');
-var asynquence = require('asynquence');
-var _ = require('underscore');
 
 module.exports = Base.extend({
     className: 'posting-images-view field-wrapper',
@@ -33,6 +34,7 @@ module.exports = Base.extend({
         var $container = $image.parent();
         var $input = this.$('#' + $container.data('input'));
 
+        this.$('small.hint.message').removeClass('error');
         $input.click();
     },
     onRemoveClick: function(event) {
@@ -73,6 +75,8 @@ module.exports = Base.extend({
         function validate(done) {
             if (image.size > 5242880) {
                 done.abort();
+                statsd.increment([this.app.session.get('location').abbreviation, 'posting', 'error', 'size', this.app.session.get('platform')]);
+                this.$('small.hint.message').addClass('error');
                 return $container.removeClass('loading');
             }
             done();
@@ -90,12 +94,15 @@ module.exports = Base.extend({
 
         function done() {
             this.$el.trigger('imageLoadEnd');
+            this.$('small.hint.message').removeClass('error');
             $container.removeClass('loading');
         }
 
         function fail(err) {
             this.$el.trigger('imageLoadEnd');
             this.parentView.getItem().get('images').splice(index, 1);
+            this.$('small.hint.message').addClass('error');
+            $container.removeClass('loading');
             $input.val('');
         }
     },

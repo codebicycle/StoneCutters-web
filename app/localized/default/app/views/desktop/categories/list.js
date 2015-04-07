@@ -1,19 +1,20 @@
 'use strict';
 
-var Base = require('../../../../../common/app/bases/view').requireView('categories/list');
 var _ = require('underscore');
+var Base = require('../../../../../common/app/bases/view').requireView('categories/list');
 var helpers = require('../../../../../../helpers');
-var config = require('../../../../../../../shared/config');
 var Chat = require('../../../../../../modules/chat');
+var Metric = require('../../../../../../modules/metric');
+var config = require('../../../../../../../shared/config');
 
 module.exports = Base.extend({
     tagName: 'main',
     id: 'categories-list-view',
     className: 'categories-list-view',
     events: {
-        'click [data-modal-close]': 'onCloseModal',
         'click .open-modal': 'onOpenModal',
-        'click [data-modal-shadow]': 'onCloseModal'
+        'click [data-modal-shadow], [data-modal-close]': 'onCloseModal',
+        'click [data-increment]': Metric.incrementEventHandler
     },
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);

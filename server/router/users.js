@@ -7,6 +7,7 @@ module.exports = function userRouter(app) {
     var formidable = require('../modules/formidable');
     var statsd  = require('../modules/statsd')();
     var User = require('../../app/models/user');
+    var Conversation = require('../../app/models/conversation');
 
     function login() {
         app.post('/login', handler);
@@ -270,10 +271,83 @@ module.exports = function userRouter(app) {
         return handler;
     }
 
+    function reply() {
+        app.post('/myolx/conversation/:threadId', handler);
+        app.post('/myolx/conversation/mail', handler);
+
+        function handler(req, res, next) {
+            var threadId = req.param('threadId', null);
+            var hash = req.param('hash', null);
+            var conversation;
+            var reply;
+            var url;
+
+            function parse(done) {
+                formidable.parse(req, done.errfcb);
+            }
+
+            function prepare(done, data) {
+                var user = req.rendrApp.session.get('user');
+
+                reply = data;
+                conversation = new Conversation({
+                    country: req.rendrApp.session.get('location').abbreviation,
+                    location: req.rendrApp.session.get('location').url,
+                    platform: req.rendrApp.session.get('platform'),
+                    languageId: req.rendrApp.session.get('languageId'),
+                    message: data.message
+                }, {
+                    app: req.rendrApp
+                });
+                if (threadId && threadId !== 'mail') {
+                    conversation.set('conversation_type', 'login');
+                    conversation.set('user', user);
+                    conversation.set('threadId', threadId);
+                    url = '/myolx/conversation/' + threadId;
+                }
+                else if (hash) {
+                    conversation.set('conversation_type', 'hash');
+                    conversation.set('hash', hash);
+                    url = '/myolx/conversation/mail?hash=' + hash;
+                }
+                done();
+            }
+
+            function submit(done) {
+                conversation.reply(done);
+            }
+
+            function success() {
+                res.redirect(utils.link(url, req.rendrApp));
+                end();
+            }
+
+            function error(err) {
+                formidable.error(req, url.split('?').shift(), err, reply, function redirect(url) {
+                    res.redirect(utils.link(url, req.rendrApp));
+                    end(err);
+                });
+            }
+
+            function end(err) {
+                if (next && next.errfcb) {
+                    next.errfcb(err);
+                }
+            }
+
+            asynquence().or(error)
+                .then(parse)
+                .then(prepare)
+                .then(submit)
+                .val(success);
+        }
+    }
+
     return {
         login: login(),
         register: register(),
         lostpassword: lostpassword(),
-        registerwithConfirmation: registerwithConfirmation()
+        registerwithConfirmation: registerwithConfirmation(),
+        reply: reply()
     };
 };

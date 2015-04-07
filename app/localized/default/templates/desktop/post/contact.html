@@ -9,7 +9,8 @@
 	label: dictionary["itemslisting.NewContactName"],
 	fieldType: "text",
 	dataType: "string",
-	value: item.get('contactName')
+	value: item.get('contactName'),
+	autocomplete: true
 } %}
 
 {% set emailField = {
@@ -19,7 +20,8 @@
 	label: dictionary["seccion-35.559"],
 	fieldType: "text",
 	dataType: "string",
-	value: user.email
+	value: user.email,
+	autocomplete: true
 } %}
 
 {% set phoneField = {
@@ -29,7 +31,8 @@
 	label: dictionary["posting_footerlist.phoneNumber"],
 	fieldType: "text",
 	dataType: "string",
-	value: item.get('phone')
+	value: item.get('phone'),
+	autocomplete: true
 } %}
 
 {% set adressField = {
@@ -52,7 +55,7 @@
 
 
 <fieldset class="seller-post">
-    <input type="submit" value="{{ dictionary['wap_posting_step5.Post'] }}" class="posting" data-qa="submit-button" />
+    <input type="submit" value="{{ dictionary["wap_posting_step5.Post"] }}" class="posting" data-qa="submit-button" />
     <small class="hint message">{{ dictionary["misc.ByPublishingYouAgreeTerms"] | replace('<<LINK_TO_TERMS_AND_CONDITIONS>>', '<a class="open-modal" href="#" rel="nofollow" data-modal="terms-modal">') | replace('<</ LINK_TO_TERMS_AND_CONDITIONS>>', '</a>') }}</small>
 </fieldset>
 {% view 'modals/terms' %}

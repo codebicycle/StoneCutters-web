@@ -112,6 +112,10 @@ ul.normalList li a {
 	border: 1px solid #2C4B77;
 	background: #355E97;
 }
+.btns.green {
+	border: 1px solid #8c9603;
+	background: #a8b301;
+}
 .emtyList {
 	padding: 28px 14px;
 	font-size: 14px;
@@ -307,5 +311,125 @@ ul.itemListing li .itemInfo .itemPrice {
 	float: right;
 	font-size: 16px;
 	color: #fd7600;
-	margin: 0 8px 0 0;
+	margin: 5px 8px 0 0;
+}
+
+/*---- shops ----*/
+.mapShops {
+	margin-bottom: 5px;
+	.nearby {
+		border-bottom: 1px solid #8900d0;
+		color: #8900d0;
+		text-align: center;
+		font-size: 12px;
+		padding: 5px 0;
+	}
+}
+.itemListing {
+	.adLikeStore,
+	.callToAction {
+		background: #f7f7f7;
+		.imageCont {
+			background: #fff;
+		}
+	}
+	.adLikeStore {
+		a {
+			position: relative;
+		}
+		.itemInfo {
+			padding-right: 10px;
+		}
+		.flag {
+			position: absolute;
+			width: 35%;
+			max-width: 150px;
+			height: 21px;
+		}
+		.centerCont {
+			height: auto !important;
+			padding: 5px 0 10px 0;
+			h2 {
+				font-size: 14px;
+				color: #333;
+			}
+		}
+	}
+	.callToAction {
+		height: 120px;
+		.imageCont {
+			border-bottom: 1px solid #ececec;
+		}
+		.buttons {
+			float: left;
+			width: 100%;
+			position: relative;
+			.name {
+				color: #777;
+				float: left;
+				font-size: 11px;
+				font-style: italic;
+				background: url(imageUrl/images/html4/stores/storeIcon.png) 0 50% no-repeat;
+				padding: 1px 0 1px 20px;
+				margin-left: 5px;
+			}
+			ul {
+				position: absolute;
+				right: 5px;
+				top: -5px;
+				li {
+					width: auto;
+					height: auto;
+					display: inline-block;
+					border: 0;
+				}
+				a {
+					text-indent: -9999px;
+					width: 25px;
+					height: 21px;
+					border: 1px solid #ddd;
+					border-radius: 2px;
+					&.mail {
+						background: url(imageUrl/images/html4/stores/mail.png) 50% 0 no-repeat #fff;
+					}
+					&.phone {
+						background: url(imageUrl/images/html4/stores/phone.png) 50% 2px no-repeat #fff;
+					}
+					&.sms {
+						background: url(imageUrl/images/html4/stores/sms.png) 50% 3px no-repeat #fff;
+					}
+				}
+				&.green-icons {
+					a {
+						&.mail {
+							background: url(imageUrl/images/html4/stores/mail_green.png) 50% 0 no-repeat #fff;
+						}
+						&.phone {
+							background: url(imageUrl/images/html4/stores/phone_green.png) 50% 2px no-repeat #fff;
+						}
+						&.sms {
+							background: url(imageUrl/images/html4/stores/sms_green.png) 50% 3px no-repeat #fff;
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+.errorPage {
+	&.coming-soon {
+		img {
+			width: 140px;
+			display: block;
+			margin: 30px auto 10px;
+		}
+		p.center {
+			text-align: center;
+			font-size: 22px;
+		}
+		p {
+			margin-bottom: 10px;
+		}
+	}
 }

@@ -3,6 +3,8 @@
         <img src="{{url}}" class="tracking" width="1" height="1">
     {% endfor %}
 
+    {% include (template + '/partials/tracking/floodlight.html') %}
+
     {% include (template + '/partials/tracking/tagmanager.html') %}
 
     {% include (template + '/partials/tracking/analytics.html') %}
@@ -13,5 +15,5 @@
 
     {% include (template + '/partials/tracking/hydra.html') %}
 
-    <div id="tracking-data" class="hide">{% json tracking.params %}</div>
+    <div id="tracking-data" class="hide">{{ tracking.params | json('ninja') }}</div>
 {% endif %}

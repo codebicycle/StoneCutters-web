@@ -7,6 +7,8 @@ var helpers = require('../helpers');
 var Filters = require('../modules/filters');
 var Item = require('../models/item');
 var config = require('../../shared/config');
+var statsd = require('../../shared/statsd')();
+var Shops = require('../modules/shops');
 
 module.exports = {
     show: middlewares(show),
@@ -17,7 +19,8 @@ module.exports = {
     favorite: middlewares(favorite),
     'delete': middlewares(deleteitem),
     filter: middlewares(filter),
-    sort: middlewares(sort)
+    sort: middlewares(sort),
+    safetytips: middlewares(safetytips)
 };
 
 function show(params, callback) {
@@ -34,6 +37,10 @@ function show(params, callback) {
         var platform = this.app.session.get('platform');
         var newItemPage = helpers.features.isEnabled.call(this, 'newItemPage');
         var anonymousItem;
+        var location = this.app.session.get('location');
+        var isSafetyTipsEnabled = helpers.features.isEnabled.call(this, 'safetyTips', platform, location.url);
+
+        new Shops(this).evaluate(params);
 
         var promise = asynquence().or(fail.bind(this))
             .then(prepare.bind(this))
@@ -43,7 +50,9 @@ function show(params, callback) {
         if (!config.getForMarket(this.app.session.get('location').url, ['relatedAds', platform, 'enabled'], false)) {
             promise.then(fetchRelateds.bind(this));
         }
-        promise.val(success.bind(this));
+        promise
+            .val(success.bind(this))
+            .val(origin.bind(this));
 
         function prepare(done) {
             if (user) {
@@ -245,6 +254,21 @@ function show(params, callback) {
                 url = helpers.common.removeParams(this.app.session.get('url'), 'location');
                 this.app.seo.addMetatag('canonical', helpers.common.fullizeUrl(url, this.app));
             }
+
+            this.app.seo.addMetatag('og:title', item.title);
+            this.app.seo.addMetatag('og:description', item.description);
+            this.app.seo.addMetatag('og:type', 'article');
+            this.app.seo.addMetatag('og:site_name', 'olx');
+            this.app.seo.addMetatag('og:url', item.slug);
+            if (item.images.length) {
+                this.app.seo.addMetatag('og:image', item.images[0].url);
+                this.app.seo.addMetatag('og:image:type', 'image/jpeg');
+            }
+            else {
+                this.app.seo.addMetatag('og:image', 'http://static01.olx-st.com/mobile-webapp/images/desktop/logo.png');
+                this.app.seo.addMetatag('og:image:type', 'image/png');
+            }
+
             this.app.tracking.set('item', item);
             this.app.tracking.set('category', category);
             this.app.tracking.set('subcategory', subcategory);
@@ -276,8 +300,21 @@ function show(params, callback) {
                 category: category,
                 favorite: favorite,
                 sent: params.sent,
-                categories: this.dependencies.categories.toJSON()
+                categories: this.dependencies.categories.toJSON(),
+                isSafetyTipsEnabled: isSafetyTipsEnabled
             });
+        }
+
+        function origin() {
+            var originData = this.app.session.get('origin');
+            var type = 'unknown';
+            var name = 'unknown';
+
+            if (originData) {
+                type = originData.type;
+                name = originData.isGallery ? 'gallery' : 'listing';
+            }
+            statsd.increment([this.app.session.get('location').abbreviation, 'dgd', 'item', type, name, this.app.session.get('platform')]);
         }
 
         function fail(err, res) {
@@ -601,6 +638,96 @@ function reply(params, callback) {
 
         function error(err, res) {
             return helpers.common.error.call(this, err, res, callback);
+        }
+    }
+}
+
+function safetytips(params, callback) {
+    helpers.controllers.control.call(this, params, controller);
+
+    function controller() {
+       var itemId = params.itemId;
+       var platform = this.app.session.get('platform');
+       var location = this.app.session.get('location');
+
+        asynquence().or(fail.bind(this))
+            .then(redirect.bind(this))
+            .then(prepare.bind(this))
+            .then(findItem.bind(this))
+            .then(checkItem.bind(this))
+            .then(featureValidation.bind(this))
+            .val(success.bind(this));
+
+        function redirect(done) {
+            if (platform !== 'html4') {
+                return done.fail();
+            }
+            done();
+        }
+
+        function prepare(done) {
+           params.id = params.itemId;
+           delete params.itemId;
+           done();
+        }
+
+        function findItem(done) {
+           this.app.fetch({
+               item: {
+                   model: 'Item',
+                   params: params
+               }
+           }, {
+               readFromCache: false
+           }, done.errfcb);
+        }
+
+        function checkItem(done, res) {
+           if (!res.item) {
+               return done.fail();
+           }
+           done(res.item);
+        }
+
+        function featureValidation(done, _item) {
+            var isEnabled = helpers.features.isEnabled.call(this, 'safetyTips', platform, location.url);
+            var isValidAction = _.contains(['sms', 'call', 'email'], params.intent);
+            var slug = helpers.common.slugToUrl(_item.toJSON());
+
+            if (!(isEnabled && isValidAction) || (_item.get('phone') === '' && params.intent !== 'email' )) {
+                done.abort();
+                return helpers.common.redirect.call(this, ('/' + slug));
+            }
+            done(_item);
+        }
+
+        function success(_item) {
+            var item = _item.toJSON();
+            var subcategory = this.dependencies.categories.search(item.category.id);
+            var category;
+            var parentId;
+
+            if (!subcategory) {
+               return fail();
+            }
+            parentId = subcategory.get('parentId');
+            category = parentId ? this.dependencies.categories.get(parentId) : subcategory;
+
+            this.app.seo.addMetatag('robots', 'noindex, nofollow');
+            this.app.seo.addMetatag('googlebot', 'noindex, nofollow');
+
+            this.app.tracking.setPage(params.intent);
+            this.app.tracking.set('item', item);
+            this.app.tracking.set('category', category.toJSON());
+            this.app.tracking.set('subcategory', subcategory.toJSON());
+
+            callback(null, {
+                item: item
+            });
+        }
+
+        function fail(err, res) {
+           return helpers.common.error.call(this, err, res, callback);
         }
     }
 }

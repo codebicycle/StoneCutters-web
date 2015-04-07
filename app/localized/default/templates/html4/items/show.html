@@ -48,18 +48,27 @@
     {% if item.status.contactable %}
         <div id="centerBtns">
             {% if item.phone %}
-                {% if device.uriSchemeTel %}
-                    <a href="tel:{{ item.phone }}" class="btns orange">{{ dictionary["misc.Call"] }}</a>
-                {% endif %}
-                {% if device.uriSchemeSms %}
-                    <a href="sms:{{ item.phone }}" class="btns orange">{{ dictionary["itempagepostcomment.Sms"] }}</a>
-                {% endif %}
+                    {% if isSafetyTipsEnabled %}
+                        <a href="{{ ['/iid-', item.id, '/call'] | join('') | link }}" class="btns orange">{{ dictionary["misc.Call"] }}</a>
+                        <a href="{{ ['/iid-', item.id, '/sms'] | join('') | link }}" class="btns orange">{{ dictionary["itempagepostcomment.Sms"] }}</a>
+                    {% else %}
+                        {% if device.uriSchemeTel %}
+                            <a href="tel:{{ item.phone }}" class="btns orange">{{ dictionary["misc.Call"] }}</a>
+                        {% endif %}
+                        {% if device.uriSchemeSms %}
+                            <a href="sms:{{ item.phone }}" class="btns orange">{{ dictionary["itempagepostcomment.Sms"] }}</a>
+                        {% endif %}
+                    {% endif %}
             {% endif %}
             {% if item.email %}
-                <a href="{{ ['/iid-', item.id, '/reply'] | join('') | link }}" class="btns orange" data-qa="reply-button" >{{ dictionary["register_mail.Email"] }}</a>
+                {% if isSafetyTipsEnabled %}
+                    <a href="{{ ['/iid-', item.id, '/email'] | join('') | link }}" class="btns orange" data-qa="reply-button" >{{ dictionary["register_mail.Email"] }}</a>
+                {% else %}
+                    <a href="{{ ['/iid-', item.id, '/reply'] | join('') | link }}" class="btns orange" data-qa="reply-button" >{{ dictionary["register_mail.Email"] }}</a>
+                {% endif %}
             {% endif %}
         </div>
-        {% if item.phone %}
+        {% if item.phone and not isSafetyTipsEnabled %}
             <div id="phone">
                 <img alt="" src="{{ "/images/html4/phone.png" | static }}">
                 <span>{{ item.phone }}</span>

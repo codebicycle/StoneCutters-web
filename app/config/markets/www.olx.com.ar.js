@@ -1,7 +1,16 @@
 module.exports = {
     categoryTree: {
-        order: [830, 362, 16, 800, 815, 821, 806, 853, 859, 811],
-        columns: [3, 3, 2]
+        'default': {
+            order: [830, 362, 811, 191, 800, 815, 938, 806, 853, 16, 881, 859, 821],
+            columns: [4, 3, 3, 3],
+            redirections: {
+                '824': 191,
+                '876': 646,
+                '868': 940,
+                '864': 881,
+                '863': 859
+            }
+        }
     },
     marketing: {
         post_banner: {
@@ -9,6 +18,12 @@ module.exports = {
         },
         home_block_banner_image: {
             image: 'marketing-box-image'
+        },
+        thanksPage: {
+            videoUrl: 'thank-you-video-es'
+        },
+        migrationModal: {
+            image: 'migrations-ar.jpg'
         }
     },
     successPage: {
@@ -245,22 +260,39 @@ module.exports = {
             top: 2,
             bottom: 2
         },
-        section: {
-            'categories#list': {
-                enabled: false
+        sections: {
+            all: false,
+            'categories#show': {
+                enabled: true
             },
-            'users#myads': {
-                enabled: false
+            'categories#showig': {
+                enabled: true
             },
-            'post#flow': {
-                enabled: false
+            'searches#statics': {
+                enabled: true
             },
-            'post#success': {
-                enabled: false
+            'searches#allresultsig': {
+                enabled: true
             },
-            'post#flowMarketing': {
-                enabled: false
+            'searches#allresults': {
+                enabled: true
+            },
+            'searches#searchig': {
+                enabled: true
+            },
+            'searches#search': {
+                enabled: true
+            },
+            'searches#filterig': {
+                enabled: true
+            },
+            'searches#filter': {
+                enabled: true
             }
         }
+    },
+    abundance: {
+        enabled: true,
+        quantity: 25
     }
 };

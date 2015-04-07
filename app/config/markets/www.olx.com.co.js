@@ -1,7 +1,21 @@
 module.exports = {
     categoryTree: {
-        order: [830, 16, 811, 806, 362, 815, 859, 800, 821],
-        columns: [3, 2, 2]
+        'default': {
+            order: [806, 830, 800, 362, 1028, 1016, 859, 1013, 1007, 1022, 811, 16, 1040, 815, 1046, 821],
+            columns: [4, 4, 4],
+            redirections: {
+                '803': 1016,
+                '824': 1046,
+                '808': 1028,
+                '388': 363,
+                '876': 1047,
+                '866': 1040,
+                '802': 1022,
+                '864': 1007,
+                '812': 1059,
+                '816': 1054
+            }
+        }
     },
     socials: {
         links: [
@@ -58,7 +72,10 @@ module.exports = {
                 title: 'OLX Colombia - Poker - Vender es fácil',
                 id: 'KuwFa8fSuiM'
             }
-        ]
+        ],
+        thanksPage: {
+            videoUrl: 'thank-you-video-es'
+        }
     },
     successPage: {
         keepPosting: [

@@ -16,7 +16,10 @@
     }
     ul {
         ul-reset();
-        padding: 0 115px;
+        width: 735px;
+        max-height: 445px;
+        overflow-y: auto;
+        margin: 5px auto;
     }
 
     .conversation-item {
@@ -73,6 +76,7 @@
     .conversation-chat {
         border-top: 1px solid $greyBorders;
         padding: 20px 30px;
+        margin: 0 5px 0 0;
         &:first-child {
             border: none;
         }
@@ -91,6 +95,7 @@
         clear-fix();
         box($yellow, $yellowBorders, 3px, 0, solid, 1px);
         padding: 10px 110px;
+        min-height: 128px;
 
         textarea {
             height: 90px;
@@ -116,6 +121,9 @@
         .phone {
             float: left;
             padding: 5px 0;
+        }
+        .spinner {
+            float: right;
         }
     }
 }

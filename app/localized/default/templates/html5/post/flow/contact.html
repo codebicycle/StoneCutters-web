@@ -1,27 +1,28 @@
 <form>
-	{% from macros import FieldText, FieldTextArea, FieldCombobox %}
-	{% for field in fields %}
-	    {% if  field.name == 'phone' %}
-	        {{ FieldText(field.label, field.name, false, form, user, 'number') }} {# override phone mandatory property until smaug fix #}
-	    {% elif field.name == 'email' %}
-	    	{{ FieldText(field.label, field.name, field.mandatory, form, user, 'email') }}
-	    {% elif field.fieldType == 'text' %}
-	        {{ FieldText(field.label, field.name, field.mandatory, form,  user) }}
-	    {% elif field.fieldType == 'combobox' %}
-	        {{ FieldCombobox(field.label, field.name, field.mandatory, form,  user, field.values) }}
-	    {% endif %}
-	{% endfor %}
-	<label>{{ dictionary["homeheader.Selected_Region"] }}</label>
-	<div class="location" data-qa="location-list" >
-		{% if location.children and location.children.length > 0 %}
-			{{ location.children[0].name }}
-		{% elif location and location.name  %}
-			{{ location.name }}
-		{% else %}
-			{{ dictionary["topcities.SelectLocation"] }}
-		{% endif %}
-	</div>
-	<div class="btnCenter">
-	    <input type="submit" value="{{ dictionary["posting_buttonpublish.buttonstep1"] }}" class="btns orange" data-qa="contact-continue-button" >
-	</div>
+    {% from macros import FieldText, FieldTextArea, FieldCombobox %}
+    {% for field in fields %}
+        {% if  field.name == 'phone' %}
+            {{ FieldText(field.label, field.name, false, form, user, 'number', 'phone') }} {# override phone mandatory property until smaug fix #}
+        {% elif field.name == 'email' %}
+            {{ FieldText(field.label, field.name, field.mandatory, form, user, 'email', 'email') }}
+        {% elif field.fieldType == 'text' %}
+            {% set autocomplete = 'given-name' if (field.name == 'contactName') else 'off' %}
+            {{ FieldText(field.label, field.name, field.mandatory, form,  user, 'text', autocomplete) }}
+        {% elif field.fieldType == 'combobox' %}
+            {{ FieldCombobox(field.label, field.name, field.mandatory, form,  user, field.values) }}
+        {% endif %}
+    {% endfor %}
+    <label>{{ dictionary["homeheader.Selected_Region"] }}</label>
+    <div class="location" data-qa="location-list" >
+        {% if location.children and location.children.length > 0 %}
+            {{ location.children[0].name }}
+        {% elif location and location.name  %}
+            {{ location.name }}
+        {% else %}
+            {{ dictionary["topcities.SelectLocation"] }}
+        {% endif %}
+    </div>
+    <div class="btnCenter">
+        <input type="submit" value="{{ dictionary["posting_buttonpublish.buttonstep1"] }}" class="btns orange" data-qa="contact-continue-button" >
+    </div>
 </form>

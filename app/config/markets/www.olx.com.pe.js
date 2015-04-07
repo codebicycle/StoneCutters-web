@@ -1,7 +1,9 @@
 module.exports = {
     categoryTree: {
-        order: [830, 800, 811, 806, 362, 815, 859, 16, 821],
-        columns: [3, 2, 2]
+        'default': {
+            order: [830, 800, 811, 806, 362, 815, 859, 16, 821],
+            columns: [3, 2, 2]
+        }
     },
     socials: {
         links: [
@@ -59,23 +61,6 @@ module.exports = {
                 name: 'Teléfonos'
             }
         ]
-    },
-    tracking: {
-        trackers: {
-            ati: {
-                enabled: false
-            },
-            analytics: {
-                enabled: false
-            },
-            ninja: {
-                enabled: true,
-                platforms: ['desktop', 'html5', 'html4', 'wap'],
-                noscript: {
-                    platforms: ['html4', 'wap']
-                }
-            }
-        },
     },
     adserving: {
         slots: {
@@ -299,6 +284,49 @@ module.exports = {
             enabled: true
         },
         html5: {
+            enabled: true
+        }
+    },
+    featured: {
+        enabled: true,
+        quantity: {
+            total: 4,
+            top: 2,
+            bottom: 2
+        },
+        sections: {
+            all: false,
+            'categories#show': {
+                enabled: true
+            },
+            'categories#showig': {
+                enabled: true
+            },
+            'searches#statics': {
+                enabled: true
+            },
+            'searches#allresultsig': {
+                enabled: true
+            },
+            'searches#allresults': {
+                enabled: true
+            },
+            'searches#searchig': {
+                enabled: true
+            },
+            'searches#search': {
+                enabled: true
+            },
+            'searches#filterig': {
+                enabled: true
+            },
+            'searches#filter': {
+                enabled: true
+            }
+        }
+    },
+    validator: {
+        email: {
             enabled: true
         }
     }

@@ -1,13 +1,14 @@
 'use strict';
 
-var Base = require('../../../../../common/app/bases/view');
-var Item = require('../../../../../../models/item');
-var helpers = require('../../../../../../helpers');
 var _ = require('underscore');
 var asynquence = require('asynquence');
-var translations = require('../../../../../../../shared/translations');
+var Base = require('../../../../../common/app/bases/view');
+var Item = require('../../../../../../models/item');
 var Chat = require('../../../../../../modules/chat');
+var helpers = require('../../../../../../helpers');
+var translations = require('../../../../../../../shared/translations');
 var config = require('../../../../../../../shared/config');
+var utils = require('../../../../../../../shared/utils');
 
 function onpopstate(event) {
     var $loading = $('body > .loading');
@@ -74,10 +75,19 @@ module.exports = Base.extend({
             this.$('#posting-locations-view').trigger('formRendered');
         }
         else {
-            if (this.getUrlParam('cat') !== undefined) {
+            if (utils.getUrlParam('cat') !== undefined || utils.getUrlParam('subcat')  !== undefined) {
+                var parentCategoryId =  utils.getUrlParam('cat');
+                var subCategoryId = utils.getUrlParam('subcat');
+
+                if( parentCategoryId === undefined ) {
+                    var categories = this.app.dependencies.categories;
+                    var subCategory = categories.search(subCategoryId);
+
+                    parentCategoryId = subCategory.attributes.parentId;
+                }
                 paramCategory = {
-                    parentCategory: this.getUrlParam('cat'),
-                    subCategory: this.getUrlParam('subcat')
+                    parentCategory: parentCategoryId,
+                    subCategory: subCategoryId
                 };
                 this.$('#posting-categories-view').trigger('getQueryCategory', paramCategory);
             }
@@ -184,7 +194,7 @@ module.exports = Base.extend({
                 }
             }
             field.name = $field.attr('name');
-            field.value = $field.val();
+            field.value = this.getValue($field);
         }
         if (shouldValidateField) {
             if (canValidateFields) {
@@ -212,6 +222,12 @@ module.exports = Base.extend({
             this.handleBack();
         }
     },
+    getValue: function(ele) {
+        if (ele[0].type !== 'checkbox') {
+            return ele[0].value;
+        }
+        return ele[0].checked ? ele[0].value : '';
+     },
     handleBack: function() {
         this.edited = true;
         history.pushState(null, '', window.location.pathname + window.location.search);
@@ -237,11 +253,8 @@ module.exports = Base.extend({
 
             if (!$fieldCat.closest('.field-wrapper').hasClass('error')) {
                 $fieldCat.closest('.field-wrapper').addClass('error').removeClass('success');
-                _.each(messages, function (message) {
-                    $fieldCat.parent().append('<small class="error message">' + message + '</small>');
-                });
+                $fieldCat.parent().append('<small class="error message">' + messages[!$('.child-categories-list').is(':visible') ? 0 : 1] + '</small>');
             }
-
             $field.removeClass('validating');
             $('html, body').animate({
                 scrollTop: this.$el.offset().top
@@ -321,7 +334,7 @@ module.exports = Base.extend({
         var $field;
         var $error;
 
-        $('small.error,message').each(function eachErrors() {
+        $('small.error.message:not(.exclude)').each(function eachErrors() {
             $error = $(this);
             $error.parent().find('.error').removeClass('error');
             $error.remove();
@@ -340,7 +353,7 @@ module.exports = Base.extend({
             }
         }.bind(this));
         $('html, body').animate({
-            scrollTop: $('small.error,message').first().parent().offset().top - 20
+            scrollTop: $('small.error.message').first().parent().offset().top - 20
         }, 750);
         this.$('#posting-errors-view').trigger('update');
     },
@@ -351,7 +364,7 @@ module.exports = Base.extend({
 
         var $field = $(field);
 
-        $field.closest('.field-wrapper').removeClass('error').removeClass('success');
+        $field.closest('.field-wrapper').removeClass('error success');
         $field.parent().find('small.error.message').remove();
     },
     onPriceReset: function(event) {
@@ -383,7 +396,7 @@ module.exports = Base.extend({
             .val(success.bind(this));
 
         function check(done) {
-            var errors = $('small.error,message');
+            var errors = $('small.error.message:not(.exclude)');
 
             if (errors.length) {
                 done.abort();
@@ -399,6 +412,8 @@ module.exports = Base.extend({
             var promise = asynquence(true).or(done.fail);
 
             validation.call(this, '#posting-description-view');
+            validation.call(this, '#posting-title-view');
+            validation.call(this, '#posting-contact-view');
             promise.then(check.bind(this));
             promise.val(done);
 
@@ -466,18 +481,6 @@ module.exports = Base.extend({
             app: this.app
         }));
         return this.item;
-    },
-    getUrlParam: function(param) {
-        var url = window.location.search.substring(1);
-        var query = url.split('&');
-        for (var i = 0; i < query.length; i++)
-        {
-            var paramName = query[i].split('=');
-            if (paramName[0] == param)
-            {
-                return paramName[1];
-            }
-        }
     }
 });
 
