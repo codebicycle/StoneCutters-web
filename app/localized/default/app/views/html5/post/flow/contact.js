@@ -309,7 +309,7 @@ module.exports = Base.extend({
             app: this.app
         });
 
-        if (this.emailValid.isEnabled()) {
+        if (this.emailValid.isEnabled() && value) {
             this.emailValid.run(_.defaults({}, options || {}, {
                 success: this.successValidation.bind(this),
                 error: this.validationError.bind(this)
