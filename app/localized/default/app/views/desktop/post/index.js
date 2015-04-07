@@ -9,6 +9,8 @@ var helpers = require('../../../../../../helpers');
 var translations = require('../../../../../../../shared/translations');
 var config = require('../../../../../../../shared/config');
 var utils = require('../../../../../../../shared/utils');
+var Sixpack = require('../../../../../../../shared/sixpack');
+var statsd = require('../../../../../../../shared/statsd')();
 
 function onpopstate(event) {
     var $loading = $('body > .loading');
@@ -26,7 +28,19 @@ function onpopstate(event) {
 module.exports = Base.extend({
     tagName: 'main',
     id: 'posting-view',
-    className: 'posting-view',
+    className: function() {
+        this.sixpack = new Sixpack({
+            platform: this.app.session.get('platform'),
+            market: this.app.session.get('location').abbreviation,
+            clientId: this.app.session.get('clientId'),
+            ip: this.app.session.get('ip'),
+            userAgent: this.app.session.get('userAgent'),
+            experiments: this.app.session.get('experiments')
+        });
+        var sixpackClass = this.sixpack.className(this.sixpack.experiments.desktopCategorySelector);
+
+        return 'posting-view' + (this.getItem().has('id') ? ' edition' : '') + (sixpackClass ? ' ' : '') + sixpackClass;
+    },
     events: {
         'focus .text-field': 'fieldFocus',
         'blur .text-field': 'fieldFocus',
@@ -49,16 +63,26 @@ module.exports = Base.extend({
         this.errors = {};
         this.formErrors = [];
         this.dictionary = translations.get(this.app.session.get('selectedLanguage'));
+        this.CategorySelectorConfig = config.get(['categoryselector'], {});
     },
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
         var location = this.app.session.get('location');
         var customerContact = config.getForMarket(location.url, ['post_customer_contact'], '');
+        var sixpack = new Sixpack({
+            platform: this.app.session.get('platform'),
+            market: this.app.session.get('location').abbreviation,
+            clientId: this.app.session.get('clientId'),
+            ip: this.app.session.get('ip'),
+            userAgent: this.app.session.get('userAgent'),
+            experiments: this.app.session.get('experiments')
+        });
 
         return _.extend({}, data, {
             item: this.getItem(data.item),
             customerContact: customerContact,
-            chatEnabled: Chat.isEnabled.call(this)
+            chatEnabled: Chat.isEnabled.call(this),
+            experiments: this.getItem().has('id') ? {} : sixpack.experiments
         });
     },
     postRender: function() {
@@ -127,7 +151,6 @@ module.exports = Base.extend({
             return field.name === 'email';
         });
         var email = field.value ? field.value.value : '';
-
 
         this.item.get('category').parentId = subcategory.parentId;
         this.item.get('category').id = subcategory.id;
@@ -480,6 +503,164 @@ module.exports = Base.extend({
             app: this.app
         }));
         return this.item;
+    },
+    CategorySelector: function(value) {
+        if (!this.sixpack.experiments.desktopCategorySelector || this.editing) {
+            return;
+        }
+        var $catSelector = $('#posting-categories-view .posting-category-selector');
+
+        $.ajax({
+            type: 'GET',
+            url: this.CategorySelectorConfig.api,
+            dataType: 'json',
+            timeout: this.CategorySelectorConfig.timeout,
+            cache: false,
+            context: this,
+            data: {
+                title: value
+            },
+            beforeSend: function onBeforeSend() {
+                $catSelector.addClass('loading');
+            },
+            success: function onSuccess(data) {
+                this.CategorySelectorDecideIU(data.response.suggestions);
+            },
+            complete: function onComplete() {
+                $catSelector.removeClass('loading');
+            },
+            error: function onError(result) {
+                $catSelector.removeClass('loading');
+                this.CategorySelectorTrack('api-error');
+            }
+        });
+    },
+    CategorySelectorGetCategory: function(id) {
+        var categories = this.app.dependencies.categories;
+        var cat;
+        var subcat;
+        var category = {};
+        var subcategory = {};
+
+        if (id) {
+            subcat = categories.search(id);
+            cat =  categories.get(subcat.attributes.parentId);
+            if (subcat && cat) {
+                category = {
+                    id: subcat.attributes.parentId,
+                    name: cat.get('trName')
+                };
+                subcategory = {
+                    id: id,
+                    name: subcat.get('trName')
+                };
+            }
+        }
+        return {
+            category: category,
+            subcategory: subcategory
+        };
+    },
+    CategorySelectorDecideIU: function(response) {
+        var alternative = _.last($('#posting-view').attr('class').split(' '));
+        var cat;
+        if (response.length>0) {
+            if (alternative === 'alternative-single' || response.length === 1) {
+                response = [_.first(response)];
+                cat = this.CategorySelectorGetCategory(response[0].categoryId);
+                if (cat.category) {
+                    $('#posting-categories-view').trigger('getQueryCategory', [{
+                        parentCategory: cat.category.id,
+                        subCategory: cat.subcategory.id
+                    }]);
+                    return;
+                }
+            }
+        }
+        this.CategorySelectorBuildIU(response);
+    },
+    CategorySelectorBuildIU: function(response) {
+        if (!this.sixpack.experiments.desktopCategorySelector || this.editing) {
+            return;
+        }
+
+        var strHtml = '';
+        var tpl = '<li class="icons icon-cat-{categoryId} {classname}"><span>{subcatename}<br><small>en {catename}</small></span> <a href="#" data-category="{dataCategory}" data-action="{dataAction}" data-track="cat-option-{index}">{buttontext}</a></li>';
+        var tplMore = '<li class="{classname}"><a href="#" data-action="{dataAction}" data-track="cat-others">{text}</a></li>';
+        var options = {};
+
+        if (response.length === 1) {
+            options = {
+                classname: 'selected',
+                buttontext: 'Cambiar categoría',
+                action: 'Change'
+            };
+        }
+        else {
+            options = {
+                classname: 'suggest',
+                buttontext: 'Elegir esta categoría',
+                action: 'Choose',
+                more: {
+                    classname: 'more',
+                    text: 'Elegir entre todas las categorías',
+                    action: 'Change'
+                }
+            };
+        }
+
+        _.each(response, function(suggest, index){
+            var category = this.CategorySelectorGetCategory(suggest.categoryId);
+
+            strHtml += tpl.replace('{categoryId}', category.category.id)
+            .replace('{classname}', options.classname)
+            .replace('{subcatename}', category.subcategory.name)
+            .replace('{catename}', category.category.name)
+            .replace('{buttontext}', options.buttontext)
+            .replace('{dataCategory}', category.category.id + ',' + category.subcategory.id)
+            .replace('{dataAction}', options.action)
+            .replace('{index}', ++index);
+        }, this);
+
+        if (strHtml) {
+            if (options.more) {
+                strHtml += tplMore.replace('{classname}', options.more.classname)
+                .replace('{text}', options.more.text)
+                .replace('{dataAction}', options.more.action);
+            }
+            $('.posting-categories-list').hide();
+        }
+
+        $('#posting-categories-view .posting-categories-suggested').html(strHtml).find('li a').on('click', { context: this }, function(event) {
+            event.preventDefault();
+            event.stopPropagation();
+            event.stopImmediatePropagation();
+
+            var cat;
+            var $this = event.data.context;
+            var $element = $(event.currentTarget);
+            var track = $element.data('track');
+
+            if ($element.data('action') === 'Choose') {
+                cat = $element.data('category').split(',');
+                $('#posting-categories-view').trigger('getQueryCategory', [{
+                    parentCategory: cat[0],
+                    subCategory: cat[1]
+                }]);
+            }
+            else {
+                $('.posting-categories-suggested').empty();
+                $('.posting-categories-list').show();
+            }
+            $this.CategorySelectorConvertion(track);
+        });
+        $('#posting-category-selector-button').toggle(!strHtml);
+    },
+    CategorySelectorConvertion: function(key) {
+        this.sixpack.convert(this.sixpack.experiments.desktopCategorySelector, key);
+    },
+    CategorySelectorTrack: function(key) {
+        statsd.increment([this.app.session.get('location').abbreviation, 'growth', this.app.session.get('platform'), 'category-selector', key]);
     }
 });
 

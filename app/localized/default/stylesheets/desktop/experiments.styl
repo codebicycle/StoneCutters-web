@@ -1,0 +1,121 @@
+.experiment-category-selector {
+    .posting-category-selector {
+        float: left;
+        width: 440px;
+
+        #posting-category-selector-button {
+            action-button($greyBoxBg, $black, 3px, 10px 30px, 0);
+            font-size: $s;
+            line-height: $s;
+        }
+
+        &.loading {
+            #posting-category-selector-button {
+                color: $disableText;
+                cursor: wait;
+                background-color: #eee;
+
+                &:hover {
+                    background-color: #eee;
+                }
+            }
+
+            &::after {
+                background: transparent url(imageUrl/images/desktop/validating.gif) no-repeat;
+                content: '';
+                display: inline-block;
+                margin: 9px;
+                square(16px);
+                vertical-align: top;
+            }
+
+            .posting-categories-suggested {
+                display: none;
+            }
+
+            & + .posting-categories-list {
+                display: none !important;
+            }
+        }
+
+        .posting-categories-suggested {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+
+            .suggest, .selected {
+                border-radius(3px);
+                border: 1px solid $greyBoxBg;
+                margin-bottom: 3px;
+                overflow: hidden;
+                padding: 10px;
+
+                span {
+                    display: inline-block;
+                    font-size: $m;
+                    line-height: 1;
+                    width: 240px;
+                }
+
+                small {
+                    color: $greyStrong;
+                    font-size: $xs;
+                }
+
+                a {
+                    display: inline-block;
+                    float: right;
+                    font-size: $xs;
+
+                    &:hover {
+                        text-decoration: none;
+                    }
+                }
+            }
+
+            .suggest {
+                background-color: $greyBoxBg;
+                color: $blue;
+
+                a {
+                    action-button($greyBoxBg, $black, 3px, 5px 10px, 0);
+                }
+
+                &:first-child {
+                    border-color: $greyBorders;
+                    background-color: $white;
+                    color: $black;
+                }
+            }
+
+            .icons::before {
+                font-size: 26px;
+                margin-right: 10px;
+                vertical-align: top;
+            }
+
+            .selected {
+                border-color: $green;
+                background-color: $white;
+                color: $black;
+
+                a {
+                    action-button($green, $white, 3px, 5px 10px, 0);
+                }
+            }
+
+            .more {
+                float: right;
+
+                a {
+                    color: $blue;
+                    font-size: $xs;
+                }
+            }
+        }
+    }
+
+    &:not(.edition) .posting-categories-list {
+        display: none;
+    }
+}

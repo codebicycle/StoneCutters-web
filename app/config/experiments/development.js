@@ -44,5 +44,15 @@ module.exports = {
             TEST1: 'test1',
             TEST2: 'test2'
         }
+    },
+    desktopCategorySelector: {
+        enabled: true,
+        platforms: ['desktop'],
+        markets: ['ar'],
+        name: 'category-selector',
+        alternatives: {
+            SUGGESTED: 'suggested',
+            SINGLE: 'single'
+        }
     }
 };

@@ -1,4 +1,10 @@
 <label class="field-label">* {{ dictionary["itemslisting.NavigatorByCategory"] }}</label>
+{% if experiments.desktopCategorySelector %}
+    <div class="posting-category-selector">
+        <button type="button" id="posting-category-selector-button">Seleccioná una categoría</button>
+        <ul class="posting-categories-suggested"></ul>
+    </div>
+{% endif %}
 <ul class="posting-categories-list">
 {% for category in categories %}
     <li>

@@ -33,6 +33,10 @@ module.exports = {
             maxPageSize: 27
         }
     },
+    categoryselector: {
+        api: 'http://10.4.12.67:9595/rest/suggest/www.olx.com.ar',
+        timeout: 100
+    },
     staticAccept: ['css', 'js', 'apk', 'zip'],
     imageAccept: ['jpg', 'jpeg', 'png', 'gif', 'ico'],
     environment: {

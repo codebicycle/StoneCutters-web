@@ -16,8 +16,8 @@ module.exports = Base.extend({
         'click .posting-categories-list a.category': 'onCategoryClick',
         'click .child-categories-list a': 'onSubCategoryClick',
         'editCategory': 'onEditCategory',
-        'getQueryCategory': 'onGetQueryCategory'
-
+        'getQueryCategory': 'onGetQueryCategory',
+        'click #posting-category-selector-button': 'showModal'
     },
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
@@ -25,6 +25,10 @@ module.exports = Base.extend({
         return _.extend({}, data, {
             categories: data.categories.toJSON()
         });
+    },
+    showModal: function(event) {
+        $('.posting-categories-list').show();
+        $('#posting-category-selector-button').hide();
     },
     onEditCategory: function(event, category) {
         this.$('.posting-categories-list a[data-id=' + category.parentId + ']').trigger('click', ['edit']);
@@ -56,6 +60,8 @@ module.exports = Base.extend({
         if (params.intent === 'post') {
             params.location = this.app.session.get('siteLocation');
             params.categoryId = subcategoryId;
+
+            this.parentView.CategorySelectorBuildIU([params]); //AB test : category-selector
         }
         else {
             params.itemId = this.parentView.getItem().get('id');

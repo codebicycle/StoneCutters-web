@@ -7,11 +7,17 @@
             {% view 'marketing/postBanner' %}
         {% endif %}
         {% view 'post/errors' %}
-    	{% view 'post/categories' %}
-    	{% view 'post/images' %}
-        {% view 'post/title' %}
-    	{% view 'post/description' %}
-    	{% view 'post/price' %}
+        {% if experiments.desktopCategorySelector %}
+            {% view 'post/title' %}
+            {% view 'post/images' %}
+            {% view 'post/categories' %}
+        {% else %}
+            {% view 'post/categories' %}
+            {% view 'post/images' %}
+            {% view 'post/title' %}
+        {% endif %}
+        {% view 'post/description' %}
+        {% view 'post/price' %}
         {% view 'post/optionals' %}
     </section>
     {% view 'post/contact' %}
