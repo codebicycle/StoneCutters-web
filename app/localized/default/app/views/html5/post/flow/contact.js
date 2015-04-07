@@ -354,18 +354,17 @@ module.exports = Base.extend({
                 }
                 $field.addClass('error').after('<small class="error">' + this.dictionary["postingerror.InvalidEmail"] + '</small>');
             }
-            statsd.increment([this.app.session.get('location').abbreviation, this.emailValid.get('currentPage'), 'error', 'email', 'success', this.app.session.get('platform')]);
         }
         else {
             $field.removeClass('error').siblings('small').remove();
-            statsd.increment([this.app.session.get('location').abbreviation, this.emailValid.get('currentPage'), 'success', 'email', 'success', this.app.session.get('platform')]);
         }
         if (data.did_you_mean) {
             $field.after('<small class="' + isError + 'message did-you-mean" data-content="' + data.did_you_mean + '">¿Has querido decir <a href="#">' + data.did_you_mean + '</a>?</small>');
         }
+        statsd.increment([location, 'posting', data.is_valid ? 'valid' : 'invalid', this.app.session.get('platform'), 'mailgun']);
     },
     validationError: function() {
-        statsd.increment([this.app.session.get('location').abbreviation, this.emailValid.get('currentPage'), 'error', 'email', 'error', this.app.session.get('platform')]);
+        statsd.increment([location, 'posting', 'invalid', this.app.session.get('platform'), 'mailgun']);
     },
     fillEmail: function(event) {
         event.preventDefault();

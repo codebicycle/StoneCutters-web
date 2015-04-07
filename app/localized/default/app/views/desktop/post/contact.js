@@ -189,7 +189,7 @@ module.exports = Base.extend({
             $field.parent().append('<small class="' + isError + ' message did-you-mean" data-content="' + data.did_you_mean + '">¿Has querido decir <a href="#">' + data.did_you_mean + '</a>?</small>');
         }
 
-        statsd.increment([this.app.session.get('location').abbreviation, this.emailValid.get('currentPage'), data.is_valid ? 'success' : 'error', 'email', 'success', this.app.session.get('platform')]);
+        statsd.increment([this.app.session.get('location').abbreviation, this.emailValid.get('currentPage'), data.is_valid ? 'success' : 'error', 'mailgun', 'success', this.app.session.get('platform')]);
 
         $field.removeClass('validating');
     },
@@ -203,7 +203,7 @@ module.exports = Base.extend({
 
         $field.removeClass('validating');
         this.parentView.$el.trigger('fieldSubmit', [$field, options]);
-        statsd.increment([this.app.session.get('location').abbreviation, this.emailValid.get('currentPage'), 'error', 'email', 'error', this.app.session.get('platform')]);
+        statsd.increment([this.app.session.get('location').abbreviation, this.emailValid.get('currentPage'), 'error', 'mailgun', 'error', this.app.session.get('platform')]);
     },
     fillEmail: function(event) {
         event.preventDefault();
