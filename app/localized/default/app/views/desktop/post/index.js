@@ -432,11 +432,6 @@ module.exports = Base.extend({
             var category = 'Posting';
             var action = 'PostingSuccess';
             var successPage = this.editing ? '/edititem/success/' : '/posting/success/';
-            if (done.hash) {
-                this.app.session.persist({
-                    hash: done.hash
-                });
-            }
 
             this.$('#posting-contact-view').trigger('enablePost');
 
