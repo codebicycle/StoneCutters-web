@@ -56,10 +56,11 @@ function isValidLocation(location) {
 
 function getParams(page, options) {
     var params = {};
-    
-    params.id = utils.get(configTracking, ['floodlight', 'section', _.values(this.app.session.get('currentRoute')).join('#')], {});
+    var section = _.values(this.app.session.get('currentRoute')).join('#');
+
+    params.id = utils.get(configTracking, ['floodlight', 'section', section], {});
     params.random = (Math.random() + '') * 10000000000000;
-    if (options.category) {
+    if (options.category && section === 'categories#show') {
         params.catId = options.category.id;
         if (options.subcategory) {
             params.catId = options.subcategory.id;
