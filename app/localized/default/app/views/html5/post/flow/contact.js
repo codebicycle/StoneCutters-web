@@ -259,12 +259,12 @@ module.exports = Base.extend({
                 statsd.increment([location, 'posting', 'invalid', this.app.session.get('platform'), 'email']);
             }
             else {
-                return this.onEmailValidate({
-                    success: function onSuccess(data) {
-                        done(data.is_valid);
+                return this.validateEmail({
+                    success: function success(data) {
+                        done(isValid && data.is_valid);
                         this.successValidation(data);
                     }.bind(this),
-                    error: function onError() {
+                    error: function error() {
                         this.validationError();
                         done(isValid);
                     }.bind(this)
@@ -292,6 +292,35 @@ module.exports = Base.extend({
             done(isValid);
         }
     },
+    validateEmail: function(options) {
+        var locationUrl = this.app.session.get('location').url;
+        var currentPage = this.editing ? 'editing' : 'posting';
+        var $field = this.$('[name="email"]');
+        var value = $field.val();
+
+        if (this.emailValid) {
+            this.emailValid = null;
+        }
+        this.emailValid = new EmailValidator({
+            element: $field,
+            currentPage: currentPage
+
+        }, {
+            app: this.app
+        });
+
+        if (this.emailValid.isEnabled() && value) {
+            this.emailValid.run(_.defaults({}, options || {}, {
+                success: this.successValidation.bind(this),
+                error: this.validationError.bind(this)
+            }));
+        }
+        else if (options && options.success) {
+            options.success({
+                is_valid: true
+            });
+        }
+    },
     cleanValue: function(value) {
         value = value.replace(/\s{2,}/g, ' ');
         value.trim();
@@ -300,28 +329,8 @@ module.exports = Base.extend({
         }
         return value;
     },
-    onEmailValidate: function(options) {
-        var locationUrl = this.app.session.get('location').url;
-        
-        if (config.getForMarket(locationUrl, ['validator', 'email', 'enabled'], false)) {
-            var currentPage = this.editing ? 'editing' : 'posting';
-            var $field = this.$('[name="email"]');
-            var value = $field.val();
-
-            if (this.emailValid) {
-                this.emailValid = null;
-            }
-            options = _.defaults({}, options, {
-                element: $field,
-                success: this.successValidation.bind(this),
-                error: this.validationError.bind(this),
-                currentPage: currentPage
-            });
-
-            this.emailValid = new EmailValidator(options, {
-                app: this.app
-            });            
-        }
+    onEmailValidate: function(event) {
+        this.validateEmail();
     },
     successValidation: function (data) {
         var $field = this.$('input[name=email]').removeClass('error');
