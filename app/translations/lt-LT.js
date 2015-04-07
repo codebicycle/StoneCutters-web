@@ -592,6 +592,7 @@ module.exports = {
     'misc.SeeMore': 'Rodyti daugiau',
     'misc.SelectAnOption_BR': 'Pasirinkite nuostat\u0105.',
     'misc.SelectCategory': 'Select Category',
+    'misc.SelectSuburb': 'Select a suburb',
     'misc.Sell-Unused': 'Sell what you don\xB4t use',
     'misc.SellingIsEasy': 'Parduoti paprasta',
     'misc.SellToo-ZA': 'Start selling on OLX too!',

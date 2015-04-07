@@ -592,6 +592,7 @@ module.exports = {
     'misc.SeeMore': 'Vedi di Pi\xF9',
     'misc.SelectAnOption_BR': 'Seleziona un\\\'opzione.',
     'misc.SelectCategory': 'Seleziona Categoria',
+    'misc.SelectSuburb': 'Seleziona un sobborgo',
     'misc.Sell-Unused': 'Vendi ci\xF2 che non usi',
     'misc.SellingIsEasy': 'Vendere \xE8 facile',
     'misc.SellToo-ZA': 'Inizia anche tu a vendere su OLX!',

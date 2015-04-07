@@ -324,5 +324,10 @@ module.exports = {
                 enabled: true
             }
         }
+    },
+    validator: {
+        email: {
+            enabled: true
+        }
     }
 };

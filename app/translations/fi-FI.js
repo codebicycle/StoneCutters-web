@@ -592,6 +592,7 @@ module.exports = {
     'misc.SeeMore': 'Katso lis\xE4\xE4',
     'misc.SelectAnOption_BR': 'Valitse vaihtoehto.',
     'misc.SelectCategory': 'Select Category',
+    'misc.SelectSuburb': 'Select a suburb',
     'misc.Sell-Unused': 'Sell what you don\xB4t use',
     'misc.SellingIsEasy': 'Myyminen on helppoa',
     'misc.SellToo-ZA': 'Start selling on OLX too!',

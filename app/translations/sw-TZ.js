@@ -592,6 +592,7 @@ module.exports = {
     'misc.SeeMore': 'Angalia Zaidi',
     'misc.SelectAnOption_BR': 'Chagua chaguo.',
     'misc.SelectCategory': 'Teua Kundi',
+    'misc.SelectSuburb': 'Teua kitongoji',
     'misc.Sell-Unused': 'Uza kile hutumii',
     'misc.SellingIsEasy': 'Kuuza ni rahisi',
     'misc.SellToo-ZA': 'Anza kuuza kwa OLX pia!',

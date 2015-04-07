@@ -592,6 +592,7 @@ module.exports = {
     'misc.SeeMore': '\u0986\u09B0\u09CB \u09A6\u09C7\u0996\u09C1\u09A8',
     'misc.SelectAnOption_BR': '\u0995\u09CB\u09A8 \u09AC\u09BF\u0995\u09B2\u09CD\u09AA \u09A8\u09BF\u09B0\u09CD\u09AC\u09BE\u099A\u09A8 \u0995\u09B0\u09C1\u09A8\u0964',
     'misc.SelectCategory': 'Select Category',
+    'misc.SelectSuburb': 'Select a suburb',
     'misc.Sell-Unused': 'Sell what you don\xB4t use',
     'misc.SellingIsEasy': '\u09AC\u09BF\u0995\u09CD\u09B0\u09BF \u0995\u09B0\u09BE \u09B8\u09B9\u099C',
     'misc.SellToo-ZA': 'Start selling on OLX too!',

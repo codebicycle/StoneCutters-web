@@ -592,6 +592,7 @@ module.exports = {
     'misc.SeeMore': 'T\xF6bb',
     'misc.SelectAnOption_BR': 'V\xE1lasszon egy lehet\u0151s\xE9get.',
     'misc.SelectCategory': 'Select Category',
+    'misc.SelectSuburb': 'Select a suburb',
     'misc.Sell-Unused': 'Sell what you don\xB4t use',
     'misc.SellingIsEasy': 'Eladni gyerekj\xE1t\xE9k',
     'misc.SellToo-ZA': 'Start selling on OLX too!',

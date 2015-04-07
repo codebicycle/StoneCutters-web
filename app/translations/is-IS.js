@@ -592,6 +592,7 @@ module.exports = {
     'misc.SeeMore': 'Sj\xE1 meira',
     'misc.SelectAnOption_BR': 'Veldu valkost.',
     'misc.SelectCategory': 'Select Category',
+    'misc.SelectSuburb': 'Select a suburb',
     'misc.Sell-Unused': 'Sell what you don\xB4t use',
     'misc.SellingIsEasy': 'Au\xF0velt a\xF0 selja',
     'misc.SellToo-ZA': 'Start selling on OLX too!',

@@ -55,6 +55,7 @@ module.exports = {
         'postingerror.PleaseCompleteThisField',
         'postingerror.InvalidLocation',
         'postingerror.InvalidEmailAddress',
+        'postingerror.InvalidEmail',
         'postingerror.PleaseEnterANumericalValue',
         'misc.PhoneNumberNotValid',
         'misc.WantToGoBack',
@@ -95,6 +96,7 @@ module.exports = {
         'messages_date_format.minutes_n',
         'posting_fields_1.addAnotherPhoto',
         'posting_photosprogress.wait',
-        'item.SelectA_Neighborhood'
+        'item.SelectA_Neighborhood',
+        'misc.SelectSuburb'
     ]
 };
