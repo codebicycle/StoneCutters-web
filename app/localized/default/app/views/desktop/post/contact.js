@@ -126,7 +126,7 @@ module.exports = Base.extend({
             app: this.app
         });
 
-        if (this.emailValid.isEnabled()) {
+        if (this.emailValid.isEnabled() && $field.val()) {
             this.emailValid.run({
                 progress: this.inProgressValidation.bind(this),
                 always: this.alwaysValidation.bind(this),
