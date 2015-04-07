@@ -5,7 +5,7 @@ var Base = require('../bases/collection');
 var Shop = require('../models/shop');
 var helpers = require('../helpers');
 var config = require('../../shared/config');
-var HOST = config.get(['shops', 'host'], 'mario-LB-69977862.us-east-1.elb.amazonaws.com');
+var HOST = config.get(['mario', 'host'], 'mario-LB-69977862.us-east-1.elb.amazonaws.com');
 
 module.exports = Base.extend({
     model: Shop,
