@@ -3,6 +3,7 @@
 var _ = require('underscore');
 var Backbone = require('backbone');
 var config = require('../../../shared/config');
+var utils = require('../../../shared/utils');
 var Base;
 
 Backbone.noConflict();
@@ -10,14 +11,6 @@ Base = Backbone.Model;
 
 function initialize(attrs, options) {
     this.app = options.app;
-    if (this.isEnabled()) {
-        attrs.element.mailgun_validator({
-           api_key: config.getForMarket(this.app.session.get('location').url, ['validator', 'email', 'key']),
-           in_progress: this.get('progress') || _.noop,
-           success: this.get('success') || _.noop,
-           error: this.get('error') || _.noop
-        });
-    }
 }
 
 function isPlatformEnabled(platforms) {
@@ -39,7 +32,28 @@ function isEnabled() {
     return enabled;
 }
 
+function run(options) {
+    var element = this.get('element');
+
+    options = _.defaults({}, options || {}, {
+        key: config.getForMarket(this.app.session.get('location').url, ['validator', 'email', 'key']),
+        progress: this.get('progress') || utils.noop,
+        success: this.get('success') || utils.noop,
+        error: this.get('error') || utils.noop,
+        always: this.get('always') || utils.noop
+    });
+
+    element.mailgun_validator({
+       api_key: options.key,
+       in_progress: options.progress,
+       success: options.success,
+       error: options.error,
+       always: options.always
+    });
+}
+
 module.exports = Base.extend({
     initialize: initialize,
-    isEnabled: isEnabled
+    isEnabled: isEnabled,
+    run: run
 });
