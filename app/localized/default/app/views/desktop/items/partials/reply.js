@@ -7,7 +7,6 @@ var User = require('../../../../../../../models/user');
 var Tracking = require('../../../../../../../modules/tracking');
 var helpers = require('../../../../../../../helpers');
 var translations = require('../../../../../../../../shared/translations');
-var statsd = require('../../../../../../../../shared/statsd')();
 var rEmail = /^[_a-zA-Z0-9-]+(\.[_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*(\.[a-zA-Z]{2,6})$/;
 
 module.exports = Base.extend({

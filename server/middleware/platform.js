@@ -111,6 +111,9 @@ module.exports = function(dataAdapter, excludedUrls) {
                 if (session.siteLocation) {
                     url = utils.params(url, 'location', session.siteLocation);
                 }
+                if (req.param('from') === 'schibsted') {
+                    url = utils.removeParams(url, 'from');
+                }
                 return url;
             }
 

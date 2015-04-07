@@ -2,6 +2,7 @@
 
 var _ = require('underscore');
 var Base = require('../../../../../common/app/bases/view').requireView('header/index');
+var Metric = require('../../../../../../modules/metric');
 var Sixpack = require('../../../../../../../shared/sixpack');
 
 module.exports = Base.extend({
@@ -9,7 +10,10 @@ module.exports = Base.extend({
     id: 'header-view',
     className: 'header-view',
     events: {
-        'click .posting': 'onPostClick'
+        'click .posting': 'onPostClick',
+        'click .brand': 'onLogoClick',
+        'blur .search-form': 'onSearchBlur',
+        'click [data-increment]': Metric.incrementEventHandler
     },
     postRender: function() {
         this.app.router.appView.on('posting:start', this.onPostingStart.bind(this));
@@ -25,6 +29,29 @@ module.exports = Base.extend({
         });
 
         sixpack.convert(sixpack.experiments.desktopTest);
+        sixpack.convert(sixpack.experiments.fractionKPIsTest);
+    },
+    onLogoClick: function() {
+        var sixpack = new Sixpack({
+            clientId: this.app.session.get('clientId'),
+            ip: this.app.session.get('ip'),
+            userAgent: this.app.session.get('userAgent'),
+            platform: this.app.session.get('platform'),
+            market: this.app.session.get('location').abbreviation
+        });
+
+        sixpack.convert(sixpack.experiments.fractionKPIsTest, 'logo');
+    },
+    onSearchBlur: function() {
+        var sixpack = new Sixpack({
+            clientId: this.app.session.get('clientId'),
+            ip: this.app.session.get('ip'),
+            userAgent: this.app.session.get('userAgent'),
+            platform: this.app.session.get('platform'),
+            market: this.app.session.get('location').abbreviation
+        });
+
+        sixpack.convert(sixpack.experiments.fractionKPIsTest, 'search');
     },
     onPostingStart: function() {
         $('.posting, .search-form').addClass('disabled');

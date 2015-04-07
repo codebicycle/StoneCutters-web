@@ -20,29 +20,29 @@ module.exports = {
         },
         desktop: {
             siteId: 537448,
-            logServer: 'logw306'
+            logServer: 'logc269'
         }
     },
     testing: {
         'default': {
             siteId: 537448,
-            logServer: 'logw306',
+            logServer: 'logc269',
             secureLogServer: 'logws306'
         },
         desktop: {
             siteId: 537448,
-            logServer: 'logw306'
+            logServer: 'logc269'
         }
     },
     staging: {
         'default': {
             siteId: 537448,
-            logServer: 'logw306',
+            logServer: 'logc269',
             secureLogServer: 'logws306'
         },
         desktop: {
             siteId: 537448,
-            logServer: 'logw306'
+            logServer: 'logc269'
         }
     },
     //Argentina+

@@ -1,10 +1,6 @@
 module.exports = {
     categoryTree: {
         'default': {
-            order: [830, 362, 16, 800, 815, 821, 806, 853, 859, 811],
-            columns: [3, 3, 2]
-        },
-        testing: {
             order: [830, 362, 811, 191, 800, 815, 938, 806, 853, 16, 881, 859, 821],
             columns: [4, 3, 3, 3],
             redirections: {
@@ -294,5 +290,9 @@ module.exports = {
                 enabled: true
             }
         }
+    },
+    abundance: {
+        enabled: true,
+        quantity: 25
     }
 };

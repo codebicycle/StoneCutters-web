@@ -21,7 +21,7 @@ module.exports = {
             image: 'post-africa-object'
         },
         home_block_banner_top: {
-            image: 'scratch-y-win-campaign'
+            image: 'marketing-box-image-za'
         },
         thanksPage: {
             videoUrl: 'thank-you-video-en'
@@ -442,6 +442,13 @@ module.exports = {
         linkblog: {
             href: 'http://hello.olx.co.za',
             target: '_blank'
+        }
+    },
+    tracking: {
+        trackers: {
+            floodlight: {
+                enabled: true
+            }
         }
     }
 };

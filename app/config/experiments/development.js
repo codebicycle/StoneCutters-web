@@ -50,9 +50,23 @@ module.exports = {
         platforms: ['desktop'],
         markets: ['ar'],
         name: 'category-selector',
+        fraction: 0.5,
         alternatives: {
             SUGGESTED: 'suggested',
             SINGLE: 'single'
+        }
+    },
+    fractionKPIsTest: {
+        enabled: true,
+        platforms: ['desktop'],
+        markets: ['pe'],
+        name: 'fraction-kpi-test',
+        fraction: 0.5,
+        alternatives: {
+            TEST1: 'test1',
+            TEST2: 'test2',
+            TEST3: 'test3',
+            TEST4: 'test4'
         }
     }
 };

@@ -5,7 +5,6 @@ var asynquence = require('asynquence');
 var middlewares = require('../middlewares');
 var helpers = require('../helpers');
 var config = require('../../shared/config');
-var statsd = require('../../shared/statsd')();
 var Item = require('../models/item');
 
 module.exports = {

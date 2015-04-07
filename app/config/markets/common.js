@@ -170,13 +170,14 @@ module.exports = {
             },
             ninja: {
                 enabled: true,
-                platforms: ['desktop'],
+                platforms: ['wap', 'html4', 'html5', 'desktop'],
                 noscript: {
                     platforms: ['wap', 'html4', 'html5', 'desktop']
                 },
                 trackers: {
                     others: {
-                        enabled: true
+                        enabled: true,
+                        platforms: ['desktop']
                     },
                     hydra: {
                         enabled: true
@@ -184,6 +185,10 @@ module.exports = {
                 }
             },
             adroll: {
+                enabled: false,
+                platforms: ['desktop']
+            },
+            floodlight: {
                 enabled: false,
                 platforms: ['desktop']
             }
@@ -247,6 +252,16 @@ module.exports = {
         linkblog: {
             href: 'http://blog.olx.com',
             target: '_blank'
+        }
+    },
+    abundance: {
+        enabled: false
+    },
+    validator: {
+        email: {
+            enabled: false,
+            platforms: ['html5', 'desktop'],
+            key: 'pubkey-6f6d5eea08926fa815f65250086dfbbb'
         }
     }
 };

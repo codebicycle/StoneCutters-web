@@ -126,6 +126,18 @@ var rules = {
             saveNavigation(this);
             return '/' + helpers.common.slugToUrl(this.item);
         },
+        call: function() {
+            saveNavigation(this);
+            return '/' + helpers.common.slugToUrl(this.item);
+        },
+        sms: function() {
+            saveNavigation(this);
+            return '/' + helpers.common.slugToUrl(this.item);
+        },
+        email: function() {
+            saveNavigation(this);
+            return '/' + helpers.common.slugToUrl(this.item);
+        },
         success: function() {
             return '/' + helpers.common.slugToUrl(this.item);
         }

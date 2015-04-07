@@ -51,11 +51,13 @@ Sixpack.prototype.participateOne = function(experiment) {
 };
 
 Sixpack.prototype.participate = function(experiment, done) {
+    var fraction = experiment.fraction !== undefined ? experiment.fraction : 1;
+
     if (!experiment.force) {
-        this.session.participate(this.name(experiment), _.values(experiment.alternatives), callback.bind(this));
+        this.session.participate(this.name(experiment), _.values(experiment.alternatives), fraction, callback.bind(this));
     }
     else {
-        this.session.participate(this.name(experiment), _.values(experiment.alternatives), experiment.force, callback.bind(this));
+        this.session.participate(this.name(experiment), _.values(experiment.alternatives), fraction, experiment.force, callback.bind(this));
     }
 
     function callback(err, res) {

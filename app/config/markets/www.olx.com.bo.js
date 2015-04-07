@@ -37,19 +37,5 @@ module.exports = {
             testimonial: '¡Publiqué un celular a la mañana y al día siguiente ya lo había vendido!',
             image: '/images/desktop/raul.jpg',
         }
-    ],
-    tracking: {
-        trackers: {
-            ati: {
-                enabled: false
-            },
-            analytics: {
-                enabled: false
-            },
-            ninja: {
-                enabled: true,
-                platforms: ['desktop', 'html5', 'html4', 'wap']
-            }
-        }
-    }
+    ]
 };

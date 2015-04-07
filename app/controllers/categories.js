@@ -11,6 +11,7 @@ var FeatureAd = require('../models/feature_ad');
 var config = require('../../shared/config');
 var utils = require('../../shared/utils');
 var Shops = require('../modules/shops');
+var Abundance = require('../modules/abundance');
 
 module.exports = {
     list: middlewares(list),
@@ -160,6 +161,7 @@ function handleItems(params, promise, gallery) {
     var query;
     var url;
     var shopsModule = new Shops(this);
+    var abundance = new Abundance({}, this);
 
     var configure = function(done, _category, _subcategory) {
         var currentRouter = ['categories', 'items'];
@@ -171,7 +173,7 @@ function handleItems(params, promise, gallery) {
             page: currentRouter
         });
         helpers.controllers.changeHeaders.call(this, {}, currentRouter);
-        done();
+        helpers.controllers.schibsted.call(this, params, done);
     }.bind(this);
 
     var redirect = function(done) {
@@ -248,7 +250,7 @@ function handleItems(params, promise, gallery) {
         this.app.fetch(collections, {
             readFromCache: false
         }, function afterFetch(err, response) {
-            if (err) {
+            if (err || !response.items) {
                 return done.fail(err);
             }
             if (response && res && res.featureads) {
@@ -258,14 +260,19 @@ function handleItems(params, promise, gallery) {
         });
     }.bind(this);
 
+    var fetchAbundance = function(done, res) {
+        if (abundance.isEnabled() && res.items.meta.abundance) {
+            abundance.set('params', params);
+            return abundance.fetch(done, res);
+        }
+        done(res);
+    }.bind(this);
+
     var filters = function(done, res) {
         var url = this.app.session.get('url');
         var filter;
         var _filters;
 
-        if (!res.items) {
-            return done.fail(null, {});
-        }
         filter = query.filters;
         if (!filter || filter === 'undefined') {
             return done(res);
@@ -349,6 +356,7 @@ function handleItems(params, promise, gallery) {
     promise.then(prepare);
     promise.then(fetchFeatured);
     promise.then(fetch);
+    promise.then(fetchAbundance);
     promise.then(filters);
     promise.then(paginate);
     promise.then(success);
@@ -366,7 +374,7 @@ function handleShow(params, promise) {
             page: currentRouter
         });
         helpers.controllers.changeHeaders.call(this, {}, currentRouter);
-        done();
+        helpers.controllers.schibsted.call(this, params, done);
     }.bind(this);
 
     var redirect = function(done) {
