@@ -9,7 +9,7 @@ module.exports = Base.extend({
     id: 'searches-allresults-view',
     className: 'searches-allresults-view',
     tagName: 'main',
-    order: ['state', 'city', 'neighborhood'],
+    order: ['pricerange', 'carbrand', 'carmodel', 'state', 'city', 'neighborhood'],
     regexpFindPage: /-p-[0-9]+/,
     regexpReplacePage: /(-p-[0-9]+)/,
     events: {

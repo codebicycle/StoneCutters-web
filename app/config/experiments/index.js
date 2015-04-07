@@ -45,7 +45,20 @@ module.exports = {
             TEST2: 'test2'
         }
     },
-     desktopDGD23ShowSimplifiedReplyForm: {
+    fractionKPIsTest: {
+        enabled: true,
+        platforms: ['desktop'],
+        markets: ['pe'],
+        name: 'fraction-kpi-test',
+        fraction: 0.5,
+        alternatives: {
+            TEST1: 'test1',
+            TEST2: 'test2',
+            TEST3: 'test3',
+            TEST4: 'test4'
+        }
+    },
+    desktopDGD23ShowSimplifiedReplyForm: {
         enabled: false,
         platforms: ['desktop'],
         markets: ['ar', 'pe', 'co', 've', 'uy', 'ni', 'gt', 'za', 'ke', 'ng', 'ug', 'py', 'ec', 'bo', 'sn', 'es', 'cm', 'tz', 'hn', 'cr', 'pa', 'gh', 'sv'],
@@ -54,5 +67,5 @@ module.exports = {
             CONTROL: 'control',
             SHOW_SIMPLIFIED_REPLY_FORM: 'show-simplified-reply-form'
         }
-     }
+    }
 };
