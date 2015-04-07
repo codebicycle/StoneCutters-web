@@ -76,7 +76,7 @@ module.exports = Base.extend({
         var messages = this.app.session.get('messages');
         var isHermesEnabled = helpers.features.isEnabled.call(this, 'hermes');
 
-        if ((user || messages) && isHermesEnabled) {
+        if ((user || messages >= 0) && isHermesEnabled) {
             this.unreadConversations();
         }
 
@@ -246,7 +246,7 @@ module.exports = Base.extend({
             this.notifications = true;
             this.$('.notification').css('display', 'block');
         }
-        else if (messages) {
+        else if (messages && messages > 0) {
             this.notifications = true;
             this.$('.notification').css('display', 'block');
         }

@@ -40,8 +40,7 @@ module.exports = function(params, next) {
         }
         else {
             this.app.session.persist({
-                //messages : body.count
-                messages: 10
+                messages : body.count
             });
         }
         next();

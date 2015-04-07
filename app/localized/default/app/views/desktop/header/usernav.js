@@ -12,11 +12,9 @@ module.exports = Base.extend({
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
         var isHermesEnabled = helpers.features.isEnabled.call(this, 'hermes');
-        var messages = this.app.session.get('messages');
 
         return _.extend({}, data, {
-            isHermesEnabled: isHermesEnabled,
-            messages: messages
+            isHermesEnabled: isHermesEnabled
         });
     },
     postRender: function () {
@@ -28,7 +26,7 @@ module.exports = Base.extend({
         var messages = this.app.session.get('messages');
         var isHermesEnabled = helpers.features.isEnabled.call(this, 'hermes');
 
-        if ((user || messages) && isHermesEnabled) {
+        if ((user || messages >= 0) && isHermesEnabled) {
             this.unreadConversations();
         }
     },
@@ -40,12 +38,14 @@ module.exports = Base.extend({
             this.$('.count').text(user.unreadConversationsCount);
             this.$('.count').removeClass('display-none');
         }
-        else if (messages) {
+        else if (messages && messages > 0) {
             this.$('.count').text(messages);
             this.$('.count').removeClass('display-none');
+            this.$('.notificationsLogout').removeClass('display-none');
         }
         else {
             this.$('.count').addClass('display-none');
+            this.$('.notificationsLogout').addClass('display-none');
             return this.$('.count').empty();
         }
     }

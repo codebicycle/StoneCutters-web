@@ -1,9 +1,7 @@
 <ul class="list-without-styles">
     {% if not user %}
         <li><a href="{{ '/login' | link }}" rel="nofollow" data-qa="my-olx-loggedOut" >{{ dictionary["loginbox.Login"] }}</a> o<a href="{{ '/register' | link }}" rel="nofollow" data-qa="register-link" >{{ dictionary["postbox.RegisterNow"] }}</a></li>
-        {% if messages %}
-            <li><a href="{{ '/login' | link }}">{{ dictionary["myolx.Messages"] }} <span class="count display-none"></span></a></li>
-        {% endif %}
+        <li class="notificationsLogout display-none"><a href="{{ '/login' | link }}">{{ dictionary["myolx.Messages"] }} <span class="count"></span></a></li>
     {% else %}
         <li><a href="{{ '/myolx/myadslisting' | link }}" rel="nofollow">{{ dictionary["myolx.MyAds"] }}</a></li><!--
         --><li><a href="{{ '/myolx/favoritelisting' | link }}" rel="nofollow">{{ dictionary["myolx.MyFavorites"] }}</a></li><!--
