@@ -33,6 +33,10 @@ module.exports = {
             maxPageSize: 27
         }
     },
+    mario: {
+        protocol: 'http',
+        host: 'mario-LB-69977862.us-east-1.elb.amazonaws.com',
+    },
     staticAccept: ['css', 'js', 'apk', 'zip'],
     imageAccept: ['jpg', 'jpeg', 'png', 'gif', 'ico'],
     environment: {

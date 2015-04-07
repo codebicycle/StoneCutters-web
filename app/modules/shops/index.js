@@ -5,7 +5,6 @@ var Sixpack = require('../../../shared/sixpack');
 var config = require('../../../shared/config');
 var Adapter = require('../../../shared/adapters/base');
 var utils = require('../../../shared/utils');
-var shopHost = config.get(['mario', 'host'], 'mario.apps.olx.com');
 var isServer = utils.isServer;
 
 function Shops(options) {
