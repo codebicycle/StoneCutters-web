@@ -35,18 +35,15 @@ module.exports = Base.extend({
         var messages = this.app.session.get('messages');
 
         if (user && user.unreadConversationsCount) {
-            this.$('.count').text(user.unreadConversationsCount);
-            this.$('.count').removeClass('display-none');
+            this.$('.count').text(user.unreadConversationsCount).removeClass('display-none');
         }
         else if (messages && messages > 0) {
-            this.$('.count').text(messages);
-            this.$('.count').removeClass('display-none');
+            this.$('.count').text(messages).removeClass('display-none');
             this.$('.notificationsLogout').removeClass('display-none');
         }
         else {
-            this.$('.count').addClass('display-none');
+            this.$('.count').addClass('display-none').empty();
             this.$('.notificationsLogout').addClass('display-none');
-            return this.$('.count').empty();
         }
     }
 });
