@@ -8,7 +8,7 @@
         <span>{{ shop.address | truncate( 60, True) }}</span>
         <div class="centerCont">
             <a href="{{ shop.items[0] | slugToUrl | link({shops_experiment_from: 'listing-shop-item-title'}) | link({shopId: shop.id}) }}">
-                <h2>{{ shop.items[0].title | truncate( 20, True) }}</h2>
+                <h2>{{ shop.items[0].title }}</h2>
             </a>
         </div>
     </div>
