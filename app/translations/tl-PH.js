@@ -591,6 +591,7 @@ module.exports = {
     'misc.SeeMore': 'Tumingin Pa',
     'misc.SelectAnOption_BR': 'Pumili ng opsyon.',
     'misc.SelectCategory': 'Select Category',
+    'misc.SelectSuburb': 'Select a suburb',
     'misc.Sell-Unused': 'Sell what you don\xB4t use',
     'misc.SellingIsEasy': 'Madali ang pagbebenta',
     'misc.SellToo-ZA': 'Start selling on OLX too!',
