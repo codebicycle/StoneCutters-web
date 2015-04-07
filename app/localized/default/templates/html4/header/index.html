@@ -12,6 +12,11 @@
             {% set url = '/myolx' %}
             {% set dataQa = 'my-olx-loggedIn' %}
             {% set text = dictionary["homeheader.My OLX"] %}
+        {% elif messages %}
+            {% set status = 'loggedInUnreadMessages' %}
+            {% set url = '/login' %}
+            {% set dataQa = 'my-olx-loggedOut' %}
+            {% set text = dictionary["homeheader.Sign_In"] %}
         {% else %}
             {% set status = 'loggedOut' %}
             {% set url = '/login' %}

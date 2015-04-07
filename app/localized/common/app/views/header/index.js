@@ -16,6 +16,7 @@ module.exports = Base.extend({
         var banner = config.get(['migration', location.url, 'banner'], false);
         var languageAbbreviation = this.app.session.get('languages')._byId[this.app.session.get('selectedLanguage')].isocode.toLowerCase();
         var currentRoute = this.app.session.get('currentRoute');
+        var messages = this.app.session.get('messages');
         var postLinkUrl = false;
 
         if (location.url === 'www.olx.com.mx') {
@@ -32,7 +33,8 @@ module.exports = Base.extend({
             banner: banner ? data.template + '/partials/migration/banner-' + location.abbreviation.toLowerCase() + '.html' : false,
             languageAbbreviation: languageAbbreviation,
             isPostFlow: currentRoute.controller === 'post',
-            postLinkUrl: postLinkUrl
+            postLinkUrl: postLinkUrl,
+            messages: messages
         });
     },
     getPostLink: function() {
