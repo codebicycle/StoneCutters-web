@@ -15,4 +15,4 @@ module.exports = Base.extend({
     }
 });
 
-module.exports.id = 'pages/available';
+module.exports.id = 'landings/available';
