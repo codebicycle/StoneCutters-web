@@ -309,7 +309,7 @@ module.exports = Base.extend({
             app: this.app
         });
 
-        if (this.emailValid.isEnabled()) {
+        if (this.emailValid.isEnabled() && value) {
             this.emailValid.run(_.defaults({}, options || {}, {
                 success: this.successValidation.bind(this),
                 error: this.validationError.bind(this)
@@ -357,6 +357,7 @@ module.exports = Base.extend({
             statsd.increment([this.app.session.get('location').abbreviation, this.emailValid.get('currentPage'), 'error', 'email', 'success', this.app.session.get('platform')]);
         }
         else {
+            $field.removeClass('error').siblings('small').remove();
             statsd.increment([this.app.session.get('location').abbreviation, this.emailValid.get('currentPage'), 'success', 'email', 'success', this.app.session.get('platform')]);
         }
         if (data.did_you_mean) {
