@@ -6,7 +6,6 @@ var config = require('../../../../../../../shared/config');
 var EmailValidator = require('../../../../../../modules/emailValidator');
 var Metric = require('../../../../../../modules/metric');
 var helpers = require('../../../../../../helpers');
-var statsd = require('../../../../../../../shared/statsd')();
 var translations = require('../../../../../../../shared/translations');
 
 module.exports = Base.extend({
