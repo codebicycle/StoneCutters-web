@@ -58,15 +58,13 @@ function getParams(page, options) {
     var params = {};
     var section = _.values(this.app.session.get('currentRoute')).join('#');
 
-    params.id = utils.get(configTracking, ['floodlight', 'section', section], {});
+    params.id = utils.get(configTracking, ['floodlight', 'section', section]);
     params.random = (Math.random() + '') * 10000000000000;
     if (options.category && section === 'categories#show') {
         params.catId = options.category.id;
         if (options.subcategory) {
             params.catId = options.subcategory.id;
         }
-    } else {
-        params.catId = 0;
     }
     return params;
 }
