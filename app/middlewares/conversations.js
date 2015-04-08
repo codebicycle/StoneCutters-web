@@ -12,14 +12,19 @@ module.exports = function(params, next) {
     };
 
     if (!user && !hash) {
+        this.app.session.clear('messages');
         return next();
     }
     else if (user) {
         query.token = user.token;
         query.userId = user.userId;
+        if (hash) {
+            this.app.session.clear('messages');
+            this.app.session.clear('hash');
+        }
     }
     else if (hash) {
-        query.email = hash;
+        query.email = decodeURIComponent(hash);
     }
 
     helpers.dataAdapter.get(this.app.req, '/conversations/unread/count', {
