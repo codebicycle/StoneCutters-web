@@ -8,4 +8,5 @@
         --><li><a href="{{ '/myolx/conversations' if isHermesEnabled else '/myolx/myolxmessages' | link }}">{{ dictionary["myolx.Messages"] }} <span class="count display-none"></span></a></li><!--
         --><li><a href="{{ '/logout' | link }}" data-qa="logout-link" >{{ dictionary["myolx.SignOut"] }}</a></li>
     {% endif %}
+        <li><a href="{{ '/help' | link }}" class="icons icon-help-round" data-increment="true" data-increment-category="zendesk" data-increment-action="topbar" data-increment-value="icon"></a></li>
 </ul>
