@@ -11,20 +11,21 @@ var translations = require('../../../../../../../../shared/translations');
 var rEmail = /^[_a-zA-Z0-9-]+(\.[_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*(\.[a-zA-Z]{2,6})$/;
 
 module.exports = Base.extend({
+    id: 'item-contact-form',
+    tagName: 'section',
     className: function() {
         var sixpack = new Sixpack({
             clientId: this.app.session.get('clientId'),
+            ip: this.app.session.get('ip'),
+            userAgent: this.app.session.get('userAgent'),
             platform: this.app.session.get('platform'),
             market: this.app.session.get('location').abbreviation,
             experiments: this.app.session.get('experiments')
         });
-        
         var sixpackClass = sixpack.className(sixpack.experiments.desktopDGD23ShowSimplifiedReplyForm);
-        
-        return 'item-contact-form' + (sixpackClass ? ' ' : '') + sixpackClass;
+
+        return 'item-contact-form' + (sixpackClass ? (' ' + sixpackClass) : '');
     },
-    id: 'item-contact-form',
-    tagName: 'section',
     postRender: function() {
         this.dictionary = translations.get(this.app.session.get('selectedLanguage'));
         this.user = new User(_.extend({
@@ -69,6 +70,8 @@ module.exports = Base.extend({
     onSubmit: function(event) {
         var sixpack = new Sixpack({
             clientId: this.app.session.get('clientId'),
+            ip: this.app.session.get('ip'),
+            userAgent: this.app.session.get('userAgent'),
             platform: this.app.session.get('platform'),
             market: this.app.session.get('location').abbreviation,
             experiments: this.app.session.get('experiments')
@@ -106,17 +109,15 @@ module.exports = Base.extend({
         }
 
         function success(reply) {
+            event.target.reset();
+
             if (reply.phone) {
                 sixpack.convert(sixpack.experiments.desktopDGD23ShowSimplifiedReplyForm, 'phone-filled');
             }
-            
-            event.target.reset();
             this.$spinner.addClass('hide');
             this.$success.removeClass('hide');
             this.trackSuccess(reply);
-            
             sixpack.convert(sixpack.experiments.desktopDGD23ShowSimplifiedReplyForm);
-            
         }
 
         function fail(err) {
