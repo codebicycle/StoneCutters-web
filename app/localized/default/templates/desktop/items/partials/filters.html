@@ -24,7 +24,7 @@
                 </ul>
             {% elif filter.type == 'SELECT' and filter.name == 'category' and search %}
                 {% if not currentCategory.has('parentId') %}
-                    <span class="category-selected arrow icons icon-cat-{{ category.get('id') }}">{{ category.get('trName') }} <span>{{ meta.total | countFormat }}</span></span>
+                    <span class="category-selected arrow icons icon-cat-{{ category.get('id') }}">{{ category.get('trName') }} <span>{{ (meta.showTotal or meta.total) | countFormat }}</span></span>
                     <ul class="sub-categories filter-subcategory">
                         {% for value in filter.value %}
                             <li>
