@@ -10,7 +10,8 @@ var Item = require('../models/item');
 module.exports = {
     didyousell: middlewares(didyousell),
     mobilepromo: middlewares(mobilepromo),
-    republish: middlewares(republish)
+    republish: middlewares(republish),
+    available: middlewares(available)
 };
 
 function didyousell(params, callback) {
@@ -138,6 +139,19 @@ function republish(params, callback) {
     helpers.controllers.control.call(this, params, controller);
 
     function controller() {
+        callback(null, {});
+    }
+}
+
+function available(params, callback) {
+    helpers.controllers.control.call(this, params, controller);
+
+    function controller() {
+        var platform = this.app.session.get('platform');
+
+        if (platform === 'wap') {
+            return helpers.common.redirect.call(this, '/');
+        }
         callback(null, {});
     }
 }
