@@ -5,6 +5,7 @@ var _ = require('underscore');
 var helpers = require('../../../../../../../helpers');
 var asynquence = require('asynquence');
 var User = require('../../../../../../../models/user');
+var Metric = require('../../../../../../../modules/metric');
 
 module.exports = Base.extend({
     className: 'item-actions',
@@ -15,7 +16,9 @@ module.exports = Base.extend({
         'click [data-facebook-login]': 'facebookLogin',
         'click [data-modal-close]': 'onCloseModal',
         'click .open-modal[data-user=false]': 'onOpenModal',
-        'click [data-modal-shadow]': 'onCloseModal'
+        'click [data-modal-shadow]': 'onCloseModal',
+        'click [data-increment]': Metric.incrementEventHandler,
+        'click [data-flag]': 'onFlagAsSpamOrScam'
     },
     postRender: function() {
         this.listenTo(this.app, 'loginSuccess', this.loginSuccess);
@@ -65,6 +68,24 @@ module.exports = Base.extend({
                 $this.attr('href', '#');
             });
         }
+    },
+    onFlagAsSpamOrScam: function (e) {
+        var $this = $(e.currentTarget);
+        var dataUser = $this.data('user');
+
+        e.preventDefault();
+
+        var textDo = $this.attr('data-text-do');
+        var textDone = $this.attr('data-text-done');
+        
+        if ($this.attr('data-current') == 'do') {
+            // display overlay
+            $this.attr('data-current', 'done');
+            $this.attr('data-increment-value', 'reflagging');
+            $this.data('increment-value', 'reflagging');
+            $this.text(textDone);
+        }
+
     },
     login: function (event) {
         event.preventDefault();
