@@ -450,5 +450,10 @@ module.exports = {
                 enabled: true
             }
         }
+    },
+    validator: {
+        phoneMandatory: {
+            enabled: true
+        }
     }
 };

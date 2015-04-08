@@ -256,5 +256,10 @@ module.exports = {
         html5: {
             enabled: true
         }
+    },
+    validator: {
+        phoneMandatory: {
+            enabled: true
+        }
     }
 };

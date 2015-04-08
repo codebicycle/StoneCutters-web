@@ -26,6 +26,15 @@ module.exports = Base.extend({
         'click .did-you-mean': 'fillEmail',
         'validate': 'onValidate'
     },
+    getTemplateData: function() {
+        var locationUrl = this.app.session.get('location').url;
+        var data = Base.prototype.getTemplateData.call(this);
+        var isPhoneMandatory = config.getForMarket(locationUrl, ['validator', 'phoneMandatory', 'enabled'], false);
+
+        return _.extend({}, data, {
+            isPhoneMandatory: isPhoneMandatory
+        });
+    },
     onValidate: function(event, done, isValid) {
         event.preventDefault();
         event.stopPropagation();
