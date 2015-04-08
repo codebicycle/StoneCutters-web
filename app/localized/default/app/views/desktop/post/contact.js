@@ -126,7 +126,7 @@ module.exports = Base.extend({
             app: this.app
         });
 
-        if (this.emailValid.isEnabled()) {
+        if (this.emailValid.isEnabled() && $field.val()) {
             this.emailValid.run({
                 progress: this.inProgressValidation.bind(this),
                 always: this.alwaysValidation.bind(this),
@@ -177,6 +177,7 @@ module.exports = Base.extend({
             $field.closest('.field-wrapper').addClass('error').removeClass('success');
 
             if (!data.did_you_mean) {
+                $field.parent().find('.error.message').remove();
                 $field.parent().append('<small class="error message">' + this.dictionary["postingerror.InvalidEmail"] + '</small>');
             }
         }
