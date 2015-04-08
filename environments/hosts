@@ -5,6 +5,10 @@
 {SMAUG}             api-v2.olx.com    #environment
 #190.210.62.60      api-v2.olx.com    #production
 
+# SIXPACK
+192.168.8.206   sixpack-testing.olx.com
+192.168.16.206  sixpack-staging.olx.com
+
 #SPAMHANDLER
 {SPAMHANDLER}       sh.care.olx.com   #environment
 #162.242.207.113    sh.care.olx.com   #production
