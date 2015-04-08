@@ -514,6 +514,7 @@ module.exports = {
     'misc.ChooseMostApplicable': 'Elige la opci\xF3n que m\xE1s se ajuste a tu reporte:',
     'misc.ClearTitleAttractsBuyers': 'Un titulo mas claro y mas descriptivo atrae mas clientes.',
     'misc.ClickHere': 'haz click aqu\xED.',
+    'misc.ConactHelp': 'Contacto & Ayuda',
     'misc.ContactDetails_Mob': 'Detalles de contacto',
     'misc.ContactInformation_Mob': 'Informaci\xF3n de contacto',
     'misc.ContainBadWords': 'El mensaje contiene lenguaje inapropiado y/o fraudulento',
