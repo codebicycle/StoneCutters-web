@@ -681,6 +681,7 @@ module.exports = {
     'posting_removedsurvey.RemovedAdSurveyAnswer2': 'Vendu via un autre service',
     'posting_removedsurvey.RemovedAdSurveyAnswer3': 'D\xE9cid\xE9 de ne plus vendre l\'article',
     'posting_removedsurvey.WarningAdToBeRemoved': 'Votre annonce va \xEAtre retir\xE9e d\'OLX',
+    'crm_new_version.AdWillRemain': 'Thanks! Your ad will remain available in OLX!',
     'crm_new_version.CheckSpelling': 'V\xE9rifiez l\'orthographe',
     'crm_new_version.Continue': 'Souhaitez-vous poursuivre?',
     'crm_new_version.EditAnyway': 'Modifier quand m\xEAme',

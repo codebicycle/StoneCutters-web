@@ -681,6 +681,7 @@ module.exports = {
     'posting_removedsurvey.RemovedAdSurveyAnswer2': '\u03A0\u03BF\u03C5\u03BB\u03AE\u03B8\u03B7\u03BA\u03B5 \u03BC\u03AD\u03C3\u03C9 \u03AC\u03BB\u03BB\u03B7\u03C2 \u03C5\u03C0\u03B7\u03C1\u03B5\u03C3\u03AF\u03B1\u03C2',
     'posting_removedsurvey.RemovedAdSurveyAnswer3': '\u0391\u03C0\u03BF\u03C6\u03AC\u03C3\u03B9\u03C3\u03B1 \u03BD\u03B1 \u03BC\u03B7\u03BD \u03C4\u03B7\u03BD \u03C0\u03BF\u03C5\u03BB\u03AE\u03C3\u03C9',
     'posting_removedsurvey.WarningAdToBeRemoved': '\u0397 \u03B4\u03B9\u03B1\u03C6\u03AE\u03BC\u03B9\u03C3\u03B7 \u03C3\u03B1\u03C2 \u03B8\u03B1 \u03B1\u03C6\u03B1\u03B9\u03C1\u03B5\u03B8\u03B5\u03AF \u03B1\u03C0\u03CC \u03C4\u03BF OLX',
+    'crm_new_version.AdWillRemain': 'Thanks! Your ad will remain available in OLX!',
     'crm_new_version.CheckSpelling': '\u0395\u03BB\u03AD\u03B3\u03BE\u03C4\u03B5 \u03C4\u03B7\u03BD \u03BF\u03C1\u03B8\u03BF\u03B3\u03C1\u03B1\u03C6\u03AF\u03B1',
     'crm_new_version.Continue': 'Would you like to continue?|',
     'crm_new_version.EditAnyway': 'Edit anyway',

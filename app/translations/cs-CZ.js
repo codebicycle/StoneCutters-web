@@ -681,6 +681,7 @@ module.exports = {
     'posting_removedsurvey.RemovedAdSurveyAnswer2': 'Prodal(a) jsem to prost\u0159ednictv\xEDm jin\xE9 slu\u017Eby',
     'posting_removedsurvey.RemovedAdSurveyAnswer3': 'Rozhodl(a) jsem se to neprod\xE1vat',
     'posting_removedsurvey.WarningAdToBeRemoved': 'V\xE1\u0161 inzer\xE1t bude z OLXodstran\u011Bn',
+    'crm_new_version.AdWillRemain': 'Thanks! Your ad will remain available in OLX!',
     'crm_new_version.CheckSpelling': 'Zkontrolujte pravopis',
     'crm_new_version.Continue': 'Would you like to continue?|',
     'crm_new_version.EditAnyway': 'Edit anyway',

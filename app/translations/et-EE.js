@@ -681,6 +681,7 @@ module.exports = {
     'posting_removedsurvey.RemovedAdSurveyAnswer2': 'M\xFC\xFCdud teise teenusepakkuja kaudu',
     'posting_removedsurvey.RemovedAdSurveyAnswer3': 'Otsustasin mitte m\xFC\xFCa',
     'posting_removedsurvey.WarningAdToBeRemoved': 'Hetke p\xE4rast eemaldatakse Teie kuulutus OLXist',
+    'crm_new_version.AdWillRemain': 'Thanks! Your ad will remain available in OLX!',
     'crm_new_version.CheckSpelling': 'Kontrollige \xF5igekirja',
     'crm_new_version.Continue': 'Would you like to continue?|',
     'crm_new_version.EditAnyway': 'Edit anyway',

@@ -681,6 +681,7 @@ module.exports = {
     'posting_removedsurvey.RemovedAdSurveyAnswer2': 'Parduota kitu kanalu',
     'posting_removedsurvey.RemovedAdSurveyAnswer3': 'Nusprend\u017Eiau neparduoti',
     'posting_removedsurvey.WarningAdToBeRemoved': 'J\u016Bs\u0173 skelbimas bus pa\u0161alintas i\u0161 OLX',
+    'crm_new_version.AdWillRemain': 'Thanks! Your ad will remain available in OLX!',
     'crm_new_version.CheckSpelling': 'Patikrinkite ra\u0161yb\u0105',
     'crm_new_version.Continue': 'Would you like to continue?|',
     'crm_new_version.EditAnyway': 'Edit anyway',

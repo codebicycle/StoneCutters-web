@@ -681,6 +681,7 @@ module.exports = {
     'posting_removedsurvey.RemovedAdSurveyAnswer2': '\u0DC0\u0DD9\u0DB1\u0DAD\u0DCA \u0DC3\u0DDA\u0DC0\u0DCF\u0DC0\u0D9A\u0DCA \u0DAD\u0DD4\u0DC5\u0DD2\u0DB1\u0DCA \u0D85\u0DBD\u0DD9\u0DC0\u0DD2 \u0D9A\u0DBB\u0DB1 \u0DBD\u0DAF\u0DD2',
     'posting_removedsurvey.RemovedAdSurveyAnswer3': '\u0D91\u0DBA \u0D85\u0DBD\u0DD9\u0DC0\u0DD2 \u0DB1\u0DDC\u0D9A\u0DD2\u0DBB\u0DD3\u0DB8\u0DA7 \u0DAD\u0DD3\u0DBB\u0DAB\u0DBA \u0D9A\u0DBB\u0DB1 \u0DBD\u0DAF\u0DD2',
     'posting_removedsurvey.WarningAdToBeRemoved': '\u0D94\u0DB6\u0DDA \u0DAF\u0DD0\u0DB1\u0DCA\u0DC0\u0DD3\u0DB8 OLX \u0DC0\u0DD9\u0DAD\u0DD2\u0DB1\u0DCA \u0D89\u0DC0\u0DAD\u0DCA \u0D9A\u0DD2\u0DBB\u0DD3\u0DB8\u0DA7 \u0DB1\u0DD2\u0DBA\u0DB8\u0DD2\u0DAD\u0DBA',
+    'crm_new_version.AdWillRemain': 'Thanks! Your ad will remain available in OLX!',
     'crm_new_version.CheckSpelling': '\u0D94\u0DB6\u0DDA \u0D85\u0D9A\u0DCA\u0DC2\u0DBB \u0DC0\u0DD2\u0DB1\u0DCA\u200D\u0DBA\u0DCF\u0DC3\u0DBA \u0DB4\u0DBB\u0DD3\u0D9A\u0DCA\u0DC2\u0DCF \u0D9A\u0DBB\u0DB1\u0DCA\u0DB1',
     'crm_new_version.Continue': 'Would you like to continue?|',
     'crm_new_version.EditAnyway': 'Edit anyway',

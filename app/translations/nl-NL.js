@@ -681,6 +681,7 @@ module.exports = {
     'posting_removedsurvey.RemovedAdSurveyAnswer2': 'Verkocht via een andere dienst',
     'posting_removedsurvey.RemovedAdSurveyAnswer3': 'Besloten om het niet te verkopen',
     'posting_removedsurvey.WarningAdToBeRemoved': 'Uw advertentie staat op punt te worden verwijderd vanOLX',
+    'crm_new_version.AdWillRemain': 'Thanks! Your ad will remain available in OLX!',
     'crm_new_version.CheckSpelling': 'Controleer je spelling',
     'crm_new_version.Continue': 'Would you like to continue?|',
     'crm_new_version.EditAnyway': 'Edit anyway',

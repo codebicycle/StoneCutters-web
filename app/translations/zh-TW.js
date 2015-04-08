@@ -681,6 +681,7 @@ module.exports = {
     'posting_removedsurvey.RemovedAdSurveyAnswer2': '\u5DF2\u7D93\u901A\u904E\u5176\u4ED6\u670D\u52D9\u552E\u51FA',
     'posting_removedsurvey.RemovedAdSurveyAnswer3': '\u6C7A\u5B9A\u4E0D\u518D\u51FA\u552E',
     'posting_removedsurvey.WarningAdToBeRemoved': '\u60A8\u7684\u5EE3\u544A\u5373\u5C07\u5F9E OLX  \u79FB\u9664',
+    'crm_new_version.AdWillRemain': 'Thanks! Your ad will remain available in OLX!',
     'crm_new_version.CheckSpelling': '\u8ACB\u6AA2\u67E5\u62FC\u5BEB',
     'crm_new_version.Continue': 'Would you like to continue?|',
     'crm_new_version.EditAnyway': 'Edit anyway',

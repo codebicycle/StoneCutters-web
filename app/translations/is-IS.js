@@ -681,6 +681,7 @@ module.exports = {
     'posting_removedsurvey.RemovedAdSurveyAnswer2': 'Seldi \xED gegnum a\xF0ra \xFEj\xF3nustu',
     'posting_removedsurvey.RemovedAdSurveyAnswer3': '\xE1kva\xF0 a\xF0 h\xE6tta vi\xF0 s\xF6luna',
     'posting_removedsurvey.WarningAdToBeRemoved': 'Augl\xFDsingin \xFE\xEDn ver\xF0ur n\xFA fjarl\xE6g\xF0 af OLX',
+    'crm_new_version.AdWillRemain': 'Thanks! Your ad will remain available in OLX!',
     'crm_new_version.CheckSpelling': 'Athuga\xF0u stafsetninguna',
     'crm_new_version.Continue': 'Would you like to continue?|',
     'crm_new_version.EditAnyway': 'Edit anyway',

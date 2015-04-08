@@ -681,6 +681,7 @@ module.exports = {
     'posting_removedsurvey.RemovedAdSurveyAnswer2': 'Vann li nan yon l\xF2t s\xE8vis',
     'posting_removedsurvey.RemovedAdSurveyAnswer3': 'Deside pouw pa vann li',
     'posting_removedsurvey.WarningAdToBeRemoved': 'Anons ou-a pr\xE8ske soti nan OLX',
+    'crm_new_version.AdWillRemain': 'Thanks! Your ad will remain available in OLX!',
     'crm_new_version.CheckSpelling': 'Verifye \xF2tograf ou',
     'crm_new_version.Continue': 'Would you like to continue?|',
     'crm_new_version.EditAnyway': 'Edit anyway',

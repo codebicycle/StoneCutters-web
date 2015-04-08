@@ -681,6 +681,7 @@ module.exports = {
     'posting_removedsurvey.RemovedAdSurveyAnswer2': 'Iliuzwa kwa njia ya huduma nyingine',
     'posting_removedsurvey.RemovedAdSurveyAnswer3': 'Niliamua kutoiuza',
     'posting_removedsurvey.WarningAdToBeRemoved': 'Tangazo lako liko katibu kuondolewa kutoka OLX',
+    'crm_new_version.AdWillRemain': 'Asante! Tangazo lako litabaki linapatikana katika OLX!',
     'crm_new_version.CheckSpelling': 'Angalia lahaja yako',
     'crm_new_version.Continue': 'Je, ungependa kuendelea?|',
     'crm_new_version.EditAnyway': 'Hariri kivyovyote vile',

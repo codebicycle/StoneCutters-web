@@ -681,6 +681,7 @@ module.exports = {
     'posting_removedsurvey.RemovedAdSurveyAnswer2': 'Sudah terjual melalui layanan lain',
     'posting_removedsurvey.RemovedAdSurveyAnswer3': 'Memutuskan untuk tidak menjualnya',
     'posting_removedsurvey.WarningAdToBeRemoved': 'klan Anda akan dihapus dari OLX',
+    'crm_new_version.AdWillRemain': 'Thanks! Your ad will remain available in OLX!',
     'crm_new_version.CheckSpelling': 'Periksa ejaan Anda',
     'crm_new_version.Continue': 'Would you like to continue?|',
     'crm_new_version.EditAnyway': 'Edit anyway',

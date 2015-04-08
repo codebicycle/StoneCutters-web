@@ -681,6 +681,7 @@ module.exports = {
     'posting_removedsurvey.RemovedAdSurveyAnswer2': 'Ibinenta ito sa pamamagitan ng ibang serbisyo',
     'posting_removedsurvey.RemovedAdSurveyAnswer3': 'Napagpasiyahang huwag ito ibenta',
     'posting_removedsurvey.WarningAdToBeRemoved': 'Ang iyong anunsiyo ay aalisin na sa OLX',
+    'crm_new_version.AdWillRemain': 'Thanks! Your ad will remain available in OLX!',
     'crm_new_version.CheckSpelling': 'Tingnan ang inyong pagkabaybay',
     'crm_new_version.Continue': 'Would you like to continue?|',
     'crm_new_version.EditAnyway': 'Edit anyway',

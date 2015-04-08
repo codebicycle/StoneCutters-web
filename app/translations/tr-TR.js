@@ -681,6 +681,7 @@ module.exports = {
     'posting_removedsurvey.RemovedAdSurveyAnswer2': 'Ba\u015Fka bir hizmeti kullanarak satt\u0131m',
     'posting_removedsurvey.RemovedAdSurveyAnswer3': 'Satmaktan vazge\xE7tim',
     'posting_removedsurvey.WarningAdToBeRemoved': '\u0130lan\u0131n\u0131z OLX\'den kald\u0131r\u0131lmak \xFCzere',
+    'crm_new_version.AdWillRemain': 'Thanks! Your ad will remain available in OLX!',
     'crm_new_version.CheckSpelling': '\u0130mlaya dikkat edin',
     'crm_new_version.Continue': 'Would you like to continue?|',
     'crm_new_version.EditAnyway': 'Edit anyway',

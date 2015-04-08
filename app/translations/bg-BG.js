@@ -681,6 +681,7 @@ module.exports = {
     'posting_removedsurvey.RemovedAdSurveyAnswer2': '\u041F\u0440\u043E\u0434\u0430\u0434\u0435\u043D\u0430 \u043F\u0440\u0435\u0437 \u0434\u0440\u0443\u0433\u0430 \u0443\u0441\u043B\u0443\u0433\u0430',
     'posting_removedsurvey.RemovedAdSurveyAnswer3': '\u0420\u0435\u0448\u0438\u0445 \u0434\u0430 \u043D\u0435 \u043F\u0440\u043E\u0434\u0430\u0432\u0430\u043C',
     'posting_removedsurvey.WarningAdToBeRemoved': '\u041E\u0431\u044F\u0432\u0430\u0442\u0430 \u0412\u0438 \u0449\u0435 \u0431\u044A\u0434\u0435 \u043F\u0440\u0435\u043C\u0430\u0445\u043D\u0430\u0442\u0430 \u043E\u0442 OLX',
+    'crm_new_version.AdWillRemain': 'Thanks! Your ad will remain available in OLX!',
     'crm_new_version.CheckSpelling': '\u041F\u0440\u043E\u0432\u0435\u0440\u0435\u0442\u0435 \u043F\u0440\u0430\u0432\u043E\u043F\u0438\u0441\u0430',
     'crm_new_version.Continue': 'Would you like to continue?|',
     'crm_new_version.EditAnyway': 'Edit anyway',

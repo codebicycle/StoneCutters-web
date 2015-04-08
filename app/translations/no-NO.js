@@ -681,6 +681,7 @@ module.exports = {
     'posting_removedsurvey.RemovedAdSurveyAnswer2': 'Solgte den gjennom en annen tjeneste',
     'posting_removedsurvey.RemovedAdSurveyAnswer3': 'Valgte \xE5 ikke selge den',
     'posting_removedsurvey.WarningAdToBeRemoved': 'Annonsen din er i ferd med \xE5 bli fjernet fra OLX',
+    'crm_new_version.AdWillRemain': 'Thanks! Your ad will remain available in OLX!',
     'crm_new_version.CheckSpelling': 'Kontroller stavem\xE5ten',
     'crm_new_version.Continue': 'Would you like to continue?|',
     'crm_new_version.EditAnyway': 'Edit anyway',
