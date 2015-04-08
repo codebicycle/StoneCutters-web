@@ -61,7 +61,7 @@ module.exports = Base.extend({
             params.location = this.app.session.get('siteLocation');
             params.categoryId = subcategoryId;
 
-            this.parentView.CategorySelectorBuildIU([params]); //AB test : category-selector
+            this.parentView.categorySelectorBuildIU([params]); //AB test : category-selector
         }
         else {
             params.itemId = this.parentView.getItem().get('id');

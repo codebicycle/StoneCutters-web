@@ -10,7 +10,7 @@ var translations = require('../../../../../../../shared/translations');
 var config = require('../../../../../../../shared/config');
 var utils = require('../../../../../../../shared/utils');
 var Sixpack = require('../../../../../../../shared/sixpack');
-var statsd = require('../../../../../../../shared/statsd')();
+var Metric = require('../../../../../../modules/metric');
 
 function onpopstate(event) {
     var $loading = $('body > .loading');
@@ -32,11 +32,10 @@ module.exports = Base.extend({
         this.sixpack = new Sixpack({
             platform: this.app.session.get('platform'),
             market: this.app.session.get('location').abbreviation,
-            clientId: this.app.session.get('clientId'),
-            ip: this.app.session.get('ip'),
-            userAgent: this.app.session.get('userAgent'),
             experiments: this.app.session.get('experiments')
         });
+        this.sixpack.currentAlternative = this.sixpack.experiments.desktopCategorySelector ? this.sixpack.experiments.desktopCategorySelector.alternative : '';
+
         var sixpackClass = this.sixpack.className(this.sixpack.experiments.desktopCategorySelector);
 
         return 'posting-view' + (this.getItem().has('id') ? ' edition' : '') + (sixpackClass ? ' ' : '') + sixpackClass;
@@ -63,7 +62,7 @@ module.exports = Base.extend({
         this.errors = {};
         this.formErrors = [];
         this.dictionary = translations.get(this.app.session.get('selectedLanguage'));
-        this.CategorySelectorConfig = config.get(['categoryselector'], {});
+        this.categorySelectorConfig = config.get(['categoryselector'], {});
     },
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
@@ -72,17 +71,15 @@ module.exports = Base.extend({
         var sixpack = new Sixpack({
             platform: this.app.session.get('platform'),
             market: this.app.session.get('location').abbreviation,
-            clientId: this.app.session.get('clientId'),
-            ip: this.app.session.get('ip'),
-            userAgent: this.app.session.get('userAgent'),
             experiments: this.app.session.get('experiments')
         });
+        var currentAlternative = sixpack.experiments.desktopCategorySelector ? sixpack.experiments.desktopCategorySelector.alternative : '';
 
         return _.extend({}, data, {
             item: this.getItem(data.item),
             customerContact: customerContact,
             chatEnabled: Chat.isEnabled.call(this),
-            experiments: this.getItem().has('id') ? {} : sixpack.experiments
+            experiments: this.getItem().has('id') || currentAlternative === 'control' ? {} : sixpack.experiments
         });
     },
     postRender: function() {
@@ -135,6 +132,12 @@ module.exports = Base.extend({
         }
         this.app.router.once('action:end', this.onStart);
         this.app.router.once('action:start', this.onEnd);
+
+        if (!this.metric) {
+            this.metric = new Metric({}, {
+                app: this.app
+            });
+        }
     },
     fieldFocus: function(event) {
         $(event.currentTarget).closest('.field-wrapper').toggleClass('focus');
@@ -436,7 +439,6 @@ module.exports = Base.extend({
 
             validation.call(this, '#posting-description-view');
             validation.call(this, '#posting-title-view');
-            validation.call(this, '#posting-contact-view');
             promise.then(check.bind(this));
             promise.val(done);
 
@@ -505,17 +507,17 @@ module.exports = Base.extend({
         }));
         return this.item;
     },
-    CategorySelector: function(value) {
-        if (!this.sixpack.experiments.desktopCategorySelector || this.editing) {
+    categorySelector: function(value) {
+        if (!this.sixpack.experiments.desktopCategorySelector || this.sixpack.currentAlternative === 'control' || this.editing) {
             return;
         }
         var $catSelector = $('#posting-categories-view .posting-category-selector');
 
         $.ajax({
             type: 'GET',
-            url: this.CategorySelectorConfig.api,
+            url: this.categorySelectorConfig.api,
             dataType: 'json',
-            timeout: this.CategorySelectorConfig.timeout,
+            timeout: this.categorySelectorConfig.timeout,
             cache: false,
             context: this,
             data: {
@@ -525,18 +527,18 @@ module.exports = Base.extend({
                 $catSelector.addClass('loading');
             },
             success: function onSuccess(data) {
-                this.CategorySelectorDecideIU(data.response.suggestions);
+                this.categorySelectorDecideIU(data.response.suggestions);
             },
             complete: function onComplete() {
                 $catSelector.removeClass('loading');
             },
             error: function onError(result) {
                 $catSelector.removeClass('loading');
-                this.CategorySelectorTrack('api-error');
+                this.categorySelectorTrack('api-error');
             }
         });
     },
-    CategorySelectorGetCategory: function(id) {
+    categorySelectorGetCategory: function(id) {
         var categories = this.app.dependencies.categories;
         var cat;
         var subcat;
@@ -562,13 +564,11 @@ module.exports = Base.extend({
             subcategory: subcategory
         };
     },
-    CategorySelectorDecideIU: function(response) {
-        var alternative = _.last($('#posting-view').attr('class').split(' '));
+    categorySelectorDecideIU: function(response) {
         var cat;
         if (response.length>0) {
-            if (alternative === 'alternative-single' || response.length === 1) {
-                response = [_.first(response)];
-                cat = this.CategorySelectorGetCategory(response[0].categoryId);
+            if (this.sixpack.currentAlternative === 'single' || response.length === 1) {
+                cat = this.categorySelectorGetCategory(response[0].categoryId);
                 if (cat.category) {
                     $('#posting-categories-view').trigger('getQueryCategory', [{
                         parentCategory: cat.category.id,
@@ -578,10 +578,10 @@ module.exports = Base.extend({
                 }
             }
         }
-        this.CategorySelectorBuildIU(response);
+        this.categorySelectorBuildIU(response);
     },
-    CategorySelectorBuildIU: function(response) {
-        if (!this.sixpack.experiments.desktopCategorySelector || this.editing) {
+    categorySelectorBuildIU: function(response) {
+        if (!this.sixpack.experiments.desktopCategorySelector || this.sixpack.currentAlternative === 'control' || this.editing) {
             return;
         }
 
@@ -611,7 +611,7 @@ module.exports = Base.extend({
         }
 
         _.each(response, function(suggest, index){
-            var category = this.CategorySelectorGetCategory(suggest.categoryId);
+            var category = this.categorySelectorGetCategory(suggest.categoryId);
 
             strHtml += tpl.replace('{categoryId}', category.category.id)
             .replace('{classname}', options.classname)
@@ -653,15 +653,16 @@ module.exports = Base.extend({
                 $('.posting-categories-suggested').empty();
                 $('.posting-categories-list').show();
             }
-            $this.CategorySelectorConvertion(track);
+            $this.categorySelectorConvertion(track);
         });
+
         $('#posting-category-selector-button').toggle(!strHtml);
     },
-    CategorySelectorConvertion: function(key) {
+    categorySelectorConvertion: function(key) {
         this.sixpack.convert(this.sixpack.experiments.desktopCategorySelector, key);
     },
-    CategorySelectorTrack: function(key) {
-        statsd.increment([this.app.session.get('location').abbreviation, 'growth', this.app.session.get('platform'), 'category-selector', key]);
+    categorySelectorTrack: function(key) {
+        this.metric.increment(['growth', 'posting', ['category-selector', key]]);
     }
 });
 

@@ -28,13 +28,13 @@ module.exports = Base.extend({
         var $field = $(event.target);
         var value = this.trimValue($field);
 
-        if ($field.data('data-value') !== value) {
+        if ($field.data('value') !== value) {
             if (this.validate($field)) {
                 this.parentView.$el.trigger('fieldSubmit', [$field]);
-                this.parentView.CategorySelector(value); //AB test : category-selector
+                this.parentView.categorySelector(value); //AB test : category-selector
             }
 
-            $field.data('data-value', value);
+            $field.data('value', value);
 
             this.$('#field-title').trigger('keyup');
         }

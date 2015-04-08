@@ -35,7 +35,7 @@ module.exports = {
     },
     categoryselector: {
         api: 'http://10.4.12.67:9595/rest/suggest/www.olx.com.ar',
-        timeout: 100
+        timeout: 1500
     },
     mario: {
         protocol: 'http',

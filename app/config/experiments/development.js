@@ -52,6 +52,7 @@ module.exports = {
         name: 'category-selector',
         fraction: 0.5,
         alternatives: {
+            CONTROL: 'control',
             SUGGESTED: 'suggested',
             SINGLE: 'single'
         }
