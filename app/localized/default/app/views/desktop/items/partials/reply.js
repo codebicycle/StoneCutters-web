@@ -3,6 +3,7 @@
 var _ = require('underscore');
 var asynquence = require('asynquence');
 var Base = require('../../../../../../common/app/bases/view');
+var Sixpack = require('../../../../../../../../shared/sixpack');
 var User = require('../../../../../../../models/user');
 var Tracking = require('../../../../../../../modules/tracking');
 var helpers = require('../../../../../../../helpers');
@@ -10,9 +11,21 @@ var translations = require('../../../../../../../../shared/translations');
 var rEmail = /^[_a-zA-Z0-9-]+(\.[_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*(\.[a-zA-Z]{2,6})$/;
 
 module.exports = Base.extend({
-    className: 'item-contact-form',
     id: 'item-contact-form',
     tagName: 'section',
+    className: function() {
+        var sixpack = new Sixpack({
+            clientId: this.app.session.get('clientId'),
+            ip: this.app.session.get('ip'),
+            userAgent: this.app.session.get('userAgent'),
+            platform: this.app.session.get('platform'),
+            market: this.app.session.get('location').abbreviation,
+            experiments: this.app.session.get('experiments')
+        });
+        var sixpackClass = sixpack.className(sixpack.experiments.desktopDGD23ShowSimplifiedReplyForm);
+
+        return 'item-contact-form' + (sixpackClass ? (' ' + sixpackClass) : '');
+    },
     postRender: function() {
         this.dictionary = translations.get(this.app.session.get('selectedLanguage'));
         this.user = new User(_.extend({
@@ -30,10 +43,18 @@ module.exports = Base.extend({
         this.$fields = this.$('textarea, input:not([type=submit], [type=hidden])');
     },
     events: {
+        'focus textarea': 'onFocus',
         'blur textarea, input:not([type=submit], [type=hidden])': 'onBlur',
         'submit': 'onSubmit',
         'reset': 'onReset',
         'click .replySuccess': 'onReplySuccessClick'
+    },
+    onFocus: function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+
+        this.$('fieldset.name, fieldset.email, fieldset.phone').addClass('visible');
     },
     onBlur: function(event) {
         event.preventDefault();
@@ -47,6 +68,15 @@ module.exports = Base.extend({
         }
     },
     onSubmit: function(event) {
+        var sixpack = new Sixpack({
+            clientId: this.app.session.get('clientId'),
+            ip: this.app.session.get('ip'),
+            userAgent: this.app.session.get('userAgent'),
+            platform: this.app.session.get('platform'),
+            market: this.app.session.get('location').abbreviation,
+            experiments: this.app.session.get('experiments')
+        });
+        
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();
@@ -80,9 +110,14 @@ module.exports = Base.extend({
 
         function success(reply) {
             event.target.reset();
+
+            if (reply.phone) {
+                sixpack.convert(sixpack.experiments.desktopDGD23ShowSimplifiedReplyForm, 'phone-filled');
+            }
             this.$spinner.addClass('hide');
             this.$success.removeClass('hide');
             this.trackSuccess(reply);
+            sixpack.convert(sixpack.experiments.desktopDGD23ShowSimplifiedReplyForm);
         }
 
         function fail(err) {

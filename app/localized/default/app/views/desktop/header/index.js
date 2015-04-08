@@ -20,6 +20,8 @@ module.exports = Base.extend({
         this.app.router.appView.on('posting:end', this.onPostingEnd.bind(this));
     },
     onPostClick: function() {
+        var currentRoute = this.app.session.get('currentRoute');
+        
         var sixpack = new Sixpack({
             clientId: this.app.session.get('clientId'),
             ip: this.app.session.get('ip'),
@@ -30,6 +32,10 @@ module.exports = Base.extend({
 
         sixpack.convert(sixpack.experiments.desktopTest);
         sixpack.convert(sixpack.experiments.fractionKPIsTest);
+        
+        if (currentRoute.controller === 'items' && currentRoute.action === 'show') {
+            sixpack.convert(sixpack.experiments.desktopDGD23ShowSimplifiedReplyForm, 'publish');
+        }
     },
     onLogoClick: function() {
         var sixpack = new Sixpack({
