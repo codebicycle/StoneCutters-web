@@ -57,5 +57,16 @@ module.exports = {
             TEST3: 'test3',
             TEST4: 'test4'
         }
-    }
+    },
+    desktopDGD23ShowSimplifiedReplyForm: {
+        enabled: true,
+        platforms: ['desktop'],
+        markets: ['ar', 'pe', 'co', 've', 'uy', 'ni', 'gt', 'za', 'ke', 'ng', 'ug', 'py', 'ec', 'bo', 'sn', 'es', 'cm', 'tz', 'hn', 'cr',
+                  'pa', 'gh', 'sv'],
+        name: 'desktop-dgd23-show-simplified-reply-form',
+        alternatives: {
+            CONTROL: 'control',
+            SHOW_SIMPLIFIED_REPLY_FORM: 'show-simplified-reply-form'
+        }
+     }
 };

@@ -4,8 +4,8 @@ var _ = require('underscore');
 var Base = require('../../../../../common/app/bases/view');
 var config = require('../../../../../../../shared/config');
 var EmailValidator = require('../../../../../../modules/emailValidator');
+var Metric = require('../../../../../../modules/metric');
 var helpers = require('../../../../../../helpers');
-var statsd = require('../../../../../../../shared/statsd')();
 var translations = require('../../../../../../../shared/translations');
 
 module.exports = Base.extend({
@@ -34,6 +34,12 @@ module.exports = Base.extend({
         return _.extend({}, data, {
             isPhoneMandatory: isPhoneMandatory
         });
+    postRender: function() {
+        if (!this.metric) {
+            this.metric = new Metric({}, {
+                app: this.app
+            });
+        }
     },
     onValidate: function(event, done, isValid) {
         event.preventDefault();
@@ -198,7 +204,7 @@ module.exports = Base.extend({
             $field.parent().append('<small class="' + isError + ' message did-you-mean" data-content="' + data.did_you_mean + '">¿Has querido decir <a href="#">' + data.did_you_mean + '</a>?</small>');
         }
 
-        statsd.increment([this.app.session.get('location').abbreviation, this.emailValid.get('currentPage'), data.is_valid ? 'success' : 'error', 'email', 'success', this.app.session.get('platform')]);
+        this.metric.increment(['growth', 'posting', ['validation', 'mailgun', data.is_valid ? 'success' : 'error']]);
 
         $field.removeClass('validating');
     },
@@ -212,7 +218,7 @@ module.exports = Base.extend({
 
         $field.removeClass('validating');
         this.parentView.$el.trigger('fieldSubmit', [$field, options]);
-        statsd.increment([this.app.session.get('location').abbreviation, this.emailValid.get('currentPage'), 'error', 'email', 'error', this.app.session.get('platform')]);
+        this.metric.increment(['growth', 'posting', ['mailgun', 'apierror']]);
     },
     fillEmail: function(event) {
         event.preventDefault();
@@ -229,7 +235,7 @@ module.exports = Base.extend({
             $field.parent().find('small.message.exclude').remove();
         }
 
-        statsd.increment([this.app.session.get('location').abbreviation, this.emailValid.get('currentPage'), 'success', 'email', 'click', this.app.session.get('platform')]);
+        this.metric.increment(['growth', 'posting', ['mailgun', 'didyoumean']]);
 
         $field.val($(event.currentTarget).data('content'));
         this.onBlurEmail();
