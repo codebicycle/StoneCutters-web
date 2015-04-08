@@ -243,6 +243,8 @@ module.exports = {
     'item.Ended_New': 'Finalizado',
     'item.Rejected': 'Rechazado',
     'item.RemoveFromFavorites': 'Eliminar de favoritos',
+    'item.FlagAsSpamOrScam': 'Denunciar aviso',
+    'item.FlagAsSpamOrScamDone': 'Aviso denunciado',
     'item.SeeMoreAds': 'Ver m\xE1s avisos en <<LINK_TO_CATEGORY>>',
     'item.SelectA_Neighborhood': 'Seleccion\xE1 un barrio',
     'item.sex': 'Sexo',

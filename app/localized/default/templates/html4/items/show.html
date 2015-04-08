@@ -93,13 +93,17 @@
     <div class="highlight">{{ dictionary["itemgeneraldetails.Description"] }}</div>
 
     <p>{{ item.descriptionReplace }}</p>
-    {% if relatedItems.length %}
-        <div class="line"></div>
 
-        <div id="centerBtns">
+    <div class="line"></div>
+
+    <div id="centerBtns">
+        <a href="{{ ['/items/' , item.id , '/flag'] | join('') | link }}" class="btns grey flag-item">{{ dictionary["item.FlagAsSpamOrScam"] | replace(':','')}}</a>
+        
+        {% if relatedItems.length %}
             <a href="{{ relatedAdsLink | link }}" class="btns grey">{{ dictionary["itemgeneraldetails.OtherRelatedListings"] | replace(':','')}}</a>
-        </div>
-    {% endif %}
+        {% endif %}
+    </div>
+    
 </div>
 {{ BreadcrumbHome(dictionary, link, ('/' | link)) }}
 

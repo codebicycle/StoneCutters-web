@@ -243,6 +243,8 @@ module.exports = {
     'item.Ended_New': 'Ended',
     'item.Rejected': 'Rejected',
     'item.RemoveFromFavorites': 'Remove from favorites',
+    'item.FlagAsSpamOrScam': 'Flag ad',
+    'item.FlagAsSpamOrScamDone': 'Ad flagged',
     'item.SeeMoreAds': 'See more ads in <<LINK_TO_CATEGORY>>',
     'item.SelectA_Neighborhood': 'Select a neighborhood',
     'item.sex': 'Sex',

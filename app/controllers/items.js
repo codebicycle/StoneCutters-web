@@ -17,6 +17,7 @@ module.exports = {
     reply: middlewares(reply),
     success: middlewares(success),
     favorite: middlewares(favorite),
+    flag: middlewares(flag),
     'delete': middlewares(deleteitem),
     filter: middlewares(filter),
     sort: middlewares(sort),
@@ -918,6 +919,49 @@ function favorite(params, callback) {
     asynquence().or(error)
         .then(prepare)
         .then(add)
+        .val(success);
+}
+
+function flag(params, callback) {
+
+    var user;
+
+    var prepare = function(done) {
+        var platform = this.app.session.get('platform');
+        var url;
+
+        if (platform === 'wap') {
+            done.abort();
+            return helpers.common.redirect.call(this, '/');
+        }
+
+        user = !!this.app.session.get('user');
+        
+        // store metric here
+
+        console.log('interestín!', user);
+
+        done();
+    }.bind(this);
+
+    
+    var success = function() {
+        var url = (params.redirect || '/des-iid-' + params.itemId);
+
+        url = helpers.common.params(url);
+        helpers.common.redirect.call(this, url, null, {
+            status: 302
+        });
+    }.bind(this);
+
+    var error = function() {
+        helpers.common.redirect.call(this, params.redirect || '/des-iid-' + params.itemId, null, {
+            status: 302
+        });
+    }.bind(this);
+
+    asynquence().or(error)
+        .then(prepare)
         .val(success);
 }
 
