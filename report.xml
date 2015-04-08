@@ -1,0 +1,155 @@
+<testsuites name="Mocha Tests">
+<testsuite name="" tests="0" failures="0" skipped="0" timestamp="Wed, 08 Apr 2015 19:57:03 GMT" time="0.002">
+</testsuite>
+<testsuite name="app" tests="0" failures="0" skipped="0" timestamp="Wed, 08 Apr 2015 19:57:03 GMT" time="0.001">
+</testsuite>
+<testsuite name="app controllers" tests="0" failures="0" skipped="0" timestamp="Wed, 08 Apr 2015 19:57:03 GMT" time="0">
+</testsuite>
+<testsuite name="app controllers redirections" tests="0" failures="0" skipped="0" timestamp="Wed, 08 Apr 2015 19:57:03 GMT" time="0">
+</testsuite>
+<testsuite name="app controllers redirections .category" tests="2" failures="0" skipped="0" timestamp="Wed, 08 Apr 2015 19:57:03 GMT" time="0.032">
+<testcase classname="app controllers redirections .category" name="should be a method" time="0"/>
+<testcase classname="app controllers redirections .category" name="should redirect to /des-cat-:categoryId" time="0.004"/>
+</testsuite>
+<testsuite name="app controllers redirections .subcategory" tests="2" failures="0" skipped="0" timestamp="Wed, 08 Apr 2015 19:57:03 GMT" time="0.004">
+<testcase classname="app controllers redirections .subcategory" name="should be a method" time="0"/>
+<testcase classname="app controllers redirections .subcategory" name="should redirect to /des-cat-:categoryId-p-:page" time="0.002"/>
+</testsuite>
+<testsuite name="app" tests="0" failures="0" skipped="0" timestamp="Wed, 08 Apr 2015 19:57:03 GMT" time="0">
+</testsuite>
+<testsuite name="app models" tests="0" failures="0" skipped="0" timestamp="Wed, 08 Apr 2015 19:57:03 GMT" time="0">
+</testsuite>
+<testsuite name="app models item" tests="0" failures="0" skipped="0" timestamp="Wed, 08 Apr 2015 19:57:03 GMT" time="0">
+</testsuite>
+<testsuite name="app models item .validate" tests="5" failures="0" skipped="0" timestamp="Wed, 08 Apr 2015 19:57:03 GMT" time="0.035">
+<testcase classname="app models item .validate" name="should be a method" time="0"/>
+<testcase classname="app models item .validate" name="should validate a valid item" time="0.006"/>
+<testcase classname="app models item .validate" name="should not validate an empty item" time="0.003"/>
+<testcase classname="app models item .validate" name="should not validate an item with no title" time="0.002"/>
+<testcase classname="app models item .validate" name="should not validate an item with no description" time="0.002"/>
+</testsuite>
+<testsuite name="app" tests="0" failures="0" skipped="0" timestamp="Wed, 08 Apr 2015 19:57:03 GMT" time="0.002">
+</testsuite>
+<testsuite name="app models" tests="0" failures="0" skipped="0" timestamp="Wed, 08 Apr 2015 19:57:03 GMT" time="0.001">
+</testsuite>
+<testsuite name="app models user" tests="0" failures="0" skipped="0" timestamp="Wed, 08 Apr 2015 19:57:03 GMT" time="0">
+</testsuite>
+<testsuite name="app models user .login" tests="7" failures="0" skipped="0" timestamp="Wed, 08 Apr 2015 19:57:03 GMT" time="0.033">
+<testcase classname="app models user .login" name="should be a method" time="0"/>
+<testcase classname="app models user .login" name="should login a user with valid credentials" time="0.005"/>
+<testcase classname="app models user .login" name="should not login a user with no credentials" time="0.004"/>
+<testcase classname="app models user .login" name="should not login a user with no usernameOrEmail" time="0.003"/>
+<testcase classname="app models user .login" name="should not login a user with invalid usernameOrEmail" time="0.002"/>
+<testcase classname="app models user .login" name="should not login a user with no password" time="0.002"/>
+<testcase classname="app models user .login" name="should not login a user with invalid password" time="0.003"/>
+</testsuite>
+<testsuite name="app" tests="0" failures="0" skipped="0" timestamp="Wed, 08 Apr 2015 19:57:03 GMT" time="0">
+</testsuite>
+<testsuite name="app models" tests="0" failures="0" skipped="0" timestamp="Wed, 08 Apr 2015 19:57:03 GMT" time="0.001">
+</testsuite>
+<testsuite name="app models user" tests="0" failures="0" skipped="0" timestamp="Wed, 08 Apr 2015 19:57:03 GMT" time="0">
+</testsuite>
+<testsuite name="app models user .register" tests="6" failures="0" skipped="0" timestamp="Wed, 08 Apr 2015 19:57:03 GMT" time="0.021">
+<testcase classname="app models user .register" name="should be a method" time="0"/>
+<testcase classname="app models user .register" name="should register a valid user" time="0.003"/>
+<testcase classname="app models user .register" name="should not register an empty user" time="0.002"/>
+<testcase classname="app models user .register" name="should not register a user with no username" time="0.002"/>
+<testcase classname="app models user .register" name="should not register a user with no email" time="0.002"/>
+<testcase classname="app models user .register" name="should not register a user with no password" time="0.002"/>
+</testsuite>
+<testsuite name="app" tests="0" failures="0" skipped="0" timestamp="Wed, 08 Apr 2015 19:57:03 GMT" time="0">
+</testsuite>
+<testsuite name="app models" tests="0" failures="0" skipped="0" timestamp="Wed, 08 Apr 2015 19:57:03 GMT" time="0">
+</testsuite>
+<testsuite name="app models user" tests="0" failures="0" skipped="0" timestamp="Wed, 08 Apr 2015 19:57:03 GMT" time="0">
+</testsuite>
+<testsuite name="app models user .reply" tests="8" failures="0" skipped="0" timestamp="Wed, 08 Apr 2015 19:57:03 GMT" time="0.024">
+<testcase classname="app models user .reply" name="should be a method" time="0"/>
+<testcase classname="app models user .reply" name="should reply a valid user" time="0.003"/>
+<testcase classname="app models user .reply" name="should not reply an empty form" time="0.002"/>
+<testcase classname="app models user .reply" name="should not reply with no message" time="0.001"/>
+<testcase classname="app models user .reply" name="should not reply with no email" time="0.002"/>
+<testcase classname="app models user .reply" name="should not reply with no name" time="0.001"/>
+<testcase classname="app models user .reply" name="should reply with no phone" time="0.002"/>
+<testcase classname="app models user .reply" name="should reply with no token" time="0.002"/>
+</testsuite>
+<testsuite name="app" tests="0" failures="0" skipped="0" timestamp="Wed, 08 Apr 2015 19:57:03 GMT" time="0">
+</testsuite>
+<testsuite name="app modules" tests="0" failures="0" skipped="0" timestamp="Wed, 08 Apr 2015 19:57:03 GMT" time="0">
+</testsuite>
+<testsuite name="app modules esi" tests="1" failures="0" skipped="0" timestamp="Wed, 08 Apr 2015 19:57:03 GMT" time="0.004">
+<testcase classname="app modules esi" name="should be a method" time="0"/>
+</testsuite>
+<testsuite name="app" tests="0" failures="0" skipped="0" timestamp="Wed, 08 Apr 2015 19:57:03 GMT" time="0">
+</testsuite>
+<testsuite name="app modules" tests="0" failures="0" skipped="0" timestamp="Wed, 08 Apr 2015 19:57:03 GMT" time="0">
+</testsuite>
+<testsuite name="app modules seo" tests="0" failures="0" skipped="0" timestamp="Wed, 08 Apr 2015 19:57:03 GMT" time="0">
+</testsuite>
+<testsuite name="app modules seo AltGenerator" tests="11" failures="0" skipped="0" timestamp="Wed, 08 Apr 2015 19:57:03 GMT" time="0.049">
+<testcase classname="app modules seo AltGenerator" name="the generator should be an Array" time="0.001"/>
+<testcase classname="app modules seo AltGenerator" name="should have neighborhood at 1 position" time="0"/>
+<testcase classname="app modules seo AltGenerator" name="should have the text &quot;Picture Of&quot; at 2 position" time="0"/>
+<testcase classname="app modules seo AltGenerator" name="should have &quot;City&quot; at 3 position" time="0"/>
+<testcase classname="app modules seo AltGenerator" name="should have &quot;2nd level category&quot; at 4 position" time="0"/>
+<testcase classname="app modules seo AltGenerator" name="should have &quot;1nd level category&quot; at 5 position" time="0"/>
+<testcase classname="app modules seo AltGenerator" name="should have &quot;State&quot; at 6 position" time="0"/>
+<testcase classname="app modules seo AltGenerator" name="should have &quot;Country&quot; at 7 position" time="0"/>
+<testcase classname="app modules seo AltGenerator" name="should have &quot;Brand&quot; at 8 position" time="0"/>
+<testcase classname="app modules seo AltGenerator" name="should have &quot;Price&quot; at 9 position" time="0"/>
+<testcase classname="app modules seo AltGenerator" name="should have first 50 chars at 10 position" time="0.001"/>
+</testsuite>
+<testsuite name="app" tests="0" failures="0" skipped="0" timestamp="Wed, 08 Apr 2015 19:57:03 GMT" time="0">
+</testsuite>
+<testsuite name="app modules" tests="0" failures="0" skipped="0" timestamp="Wed, 08 Apr 2015 19:57:03 GMT" time="0.001">
+</testsuite>
+<testsuite name="app modules seo" tests="0" failures="0" skipped="0" timestamp="Wed, 08 Apr 2015 19:57:03 GMT" time="0">
+</testsuite>
+<testsuite name="app modules seo head" tests="1" failures="0" skipped="0" timestamp="Wed, 08 Apr 2015 19:57:03 GMT" time="0.01">
+<testcase classname="app modules seo head" name="true is true" time="0.003"/>
+</testsuite>
+<testsuite name="app" tests="0" failures="0" skipped="0" timestamp="Wed, 08 Apr 2015 19:57:03 GMT" time="0">
+</testsuite>
+<testsuite name="app modules" tests="0" failures="0" skipped="0" timestamp="Wed, 08 Apr 2015 19:57:03 GMT" time="0">
+</testsuite>
+<testsuite name="app modules seo" tests="4" failures="0" skipped="0" timestamp="Wed, 08 Apr 2015 19:57:03 GMT" time="0.017">
+<testcase classname="app modules seo" name="seo module should be enabled" time="0"/>
+<testcase classname="app modules seo" name="content should be set" time="0.002"/>
+<testcase classname="app modules seo" name="on set altImages should call to onChangeAltImages" time="0.007"/>
+<testcase classname="app modules seo" name="head metas should set on a head setters" time="0.001"/>
+</testsuite>
+<testsuite name="server" tests="0" failures="0" skipped="0" timestamp="Wed, 08 Apr 2015 19:57:03 GMT" time="0.001">
+</testsuite>
+<testsuite name="server router" tests="0" failures="0" skipped="0" timestamp="Wed, 08 Apr 2015 19:57:03 GMT" time="0">
+</testsuite>
+<testsuite name="server router users" tests="0" failures="0" skipped="0" timestamp="Wed, 08 Apr 2015 19:57:03 GMT" time="0">
+</testsuite>
+<testsuite name="server router users .login" tests="8" failures="0" skipped="0" timestamp="Wed, 08 Apr 2015 19:57:03 GMT" time="0.039">
+<testcase classname="server router users .login" name="should be a method" time="0"/>
+<testcase classname="server router users .login" name="should login a valid user" time="0.006"/>
+<testcase classname="server router users .login" name="should not login an empty user" time="0.004"/>
+<testcase classname="server router users .login" name="should redirect after success" time="0.003"/>
+<testcase classname="server router users .login" name="should redirect to / by default after success" time="0.003"/>
+<testcase classname="server router users .login" name="should redirect to &quot;redirect&quot; by default after success" time="0.002"/>
+<testcase classname="server router users .login" name="should not redirect after fail" time="0.003"/>
+<testcase classname="server router users .login" name="should not redirect but append &quot;redirect&quot; after fail" time="0.003"/>
+</testsuite>
+<testsuite name="server" tests="0" failures="0" skipped="0" timestamp="Wed, 08 Apr 2015 19:57:03 GMT" time="0">
+</testsuite>
+<testsuite name="server router" tests="0" failures="0" skipped="0" timestamp="Wed, 08 Apr 2015 19:57:03 GMT" time="0">
+</testsuite>
+<testsuite name="server router users" tests="0" failures="0" skipped="0" timestamp="Wed, 08 Apr 2015 19:57:03 GMT" time="0">
+</testsuite>
+<testsuite name="server router users .register" tests="10" failures="0" skipped="0" timestamp="Wed, 08 Apr 2015 19:57:03 GMT" time="0.048">
+<testcase classname="server router users .register" name="should be a method" time="0"/>
+<testcase classname="server router users .register" name="should register a valid user" time="0.003"/>
+<testcase classname="server router users .register" name="should not register a user with no username" time="0.003"/>
+<testcase classname="server router users .register" name="should not register a user with no email" time="0.004"/>
+<testcase classname="server router users .register" name="should not register a user with no password" time="0.006"/>
+<testcase classname="server router users .register" name="should not register an empty user" time="0.003"/>
+<testcase classname="server router users .register" name="should not register a user with no accepted terms" time="0.002"/>
+<testcase classname="server router users .register" name="should login after success" time="0.013"/>
+<testcase classname="server router users .register" name="should redirect to / by default after success" time="0.003"/>
+<testcase classname="server router users .register" name="should not redirect after fail" time="0.002"/>
+</testsuite>
+</testsuites>
