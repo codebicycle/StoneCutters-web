@@ -514,6 +514,7 @@ module.exports = {
     'misc.ChooseMostApplicable': 'From the options below please choose the one that is most applicable to your report',
     'misc.ClearTitleAttractsBuyers': 'A clearer and more descriptive title attracts more buyers',
     'misc.ClickHere': 'Click here',
+    'misc.ConactHelp': 'Contact & Help',
     'misc.ContactDetails_Mob': '\u03A3\u03C4\u03BF\u03B9\u03C7\u03B5\u03AF\u03B1 \u03B5\u03C0\u03B9\u03BA\u03BF\u03B9\u03BD\u03C9\u03BD\u03AF\u03B1\u03C2',
     'misc.ContactInformation_Mob': '\u03A0\u03BB\u03B7\u03C1\u03BF\u03C6\u03BF\u03C1\u03AF\u03B5\u03C2 \u03B5\u03C0\u03B9\u03BA\u03BF\u03B9\u03BD\u03C9\u03BD\u03AF\u03B1\u03C2',
     'misc.ContainBadWords': 'The message contains bad words and/or is fraudulent',

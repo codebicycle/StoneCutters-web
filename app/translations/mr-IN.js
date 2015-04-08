@@ -514,6 +514,7 @@ module.exports = {
     'misc.ChooseMostApplicable': 'From the options below please choose the one that is most applicable to your report',
     'misc.ClearTitleAttractsBuyers': '\u0938\u0941\u0938\u094D\u092A\u0937\u094D\u091F \u0906\u0923\u093F \u091C\u093E\u0938\u094D\u0924 \u0935\u0930\u094D\u0923\u0928\u093E\u0924\u094D\u092E\u0915 \u0936\u0940\u0930\u094D\u0937\u0915\u093E\u092E\u0941\u0933\u0947 \u091C\u093E\u0938\u094D\u0924 \u0917\u094D\u0930\u093E\u0939\u0915 \u0906\u0915\u0930\u094D\u0937\u093F\u0924 \u0939\u094B\u0924\u093E\u0924',
     'misc.ClickHere': '\u0907\u0925\u0947 \u091F\u093F\u091A\u0915\u0940 \u092E\u093E\u0930\u093E',
+    'misc.ConactHelp': 'Contact & Help',
     'misc.ContactDetails_Mob': '\u0938\u0902\u092A\u0930\u094D\u0915\u093E\u091A\u0947 \u0924\u092A\u0936\u0940\u0932',
     'misc.ContactInformation_Mob': '\u0938\u0902\u092A\u0930\u094D\u0915\u093E\u091A\u0940 \u092E\u093E\u0939\u093F\u0924\u0940',
     'misc.ContainBadWords': 'The message contains bad words and/or is fraudulent',
