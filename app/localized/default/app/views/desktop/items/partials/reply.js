@@ -76,7 +76,7 @@ module.exports = Base.extend({
             market: this.app.session.get('location').abbreviation,
             experiments: this.app.session.get('experiments')
         });
-        
+
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();

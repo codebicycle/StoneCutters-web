@@ -23,22 +23,27 @@ module.exports = Base.extend({
     },
     showNotification: function() {
         var user = this.app.session.get('user');
+        var messages = this.app.session.get('messages');
         var isHermesEnabled = helpers.features.isEnabled.call(this, 'hermes');
 
-        if (user && isHermesEnabled) {
+        if ((user || messages >= 0) && isHermesEnabled) {
             this.unreadConversations();
         }
     },
     unreadConversations: function() {
         var user = this.app.session.get('user');
+        var messages = this.app.session.get('messages');
 
-        if (user.unreadConversationsCount) {
-            this.$('.count').text(user.unreadConversationsCount);
-            this.$('.count').removeClass('display-none');
+        if (user && user.unreadConversationsCount) {
+            this.$('.count').text(user.unreadConversationsCount).removeClass('display-none');
+        }
+        else if (messages && messages > 0) {
+            this.$('.count').text(messages).removeClass('display-none');
+            this.$('.notificationsLogout').removeClass('display-none');
         }
         else {
-            this.$('.count').addClass('display-none');
-            return this.$('.count').empty();
+            this.$('.count').addClass('display-none').empty();
+            this.$('.notificationsLogout').addClass('display-none');
         }
     }
 });
