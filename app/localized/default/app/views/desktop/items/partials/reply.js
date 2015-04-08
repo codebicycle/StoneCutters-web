@@ -54,7 +54,7 @@ module.exports = Base.extend({
         event.stopPropagation();
         event.stopImmediatePropagation();
 
-        this.$('[for=name], [for=email], [for=phone]').addClass('visible');
+        this.$('fieldset[class=name], fieldset[class=email], fieldset[class=phone]').addClass('visible');
     },
     onBlur: function(event) {
         event.preventDefault();
