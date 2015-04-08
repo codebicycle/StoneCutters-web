@@ -10,7 +10,9 @@ var Item = require('../models/item');
 module.exports = {
     didyousell: middlewares(didyousell),
     mobilepromo: middlewares(mobilepromo),
-    republish: middlewares(republish)
+    republish: middlewares(republish),
+    asyncseller: middlewares(asyncseller),
+    asyncbuyer: middlewares(asyncbuyer)
 };
 
 function didyousell(params, callback) {
@@ -142,3 +144,103 @@ function republish(params, callback) {
     }
 }
 
+function asyncseller(params, callback) {
+    helpers.controllers.control.call(this, params, controller);
+
+    function controller() {
+        var languages = this.app.session.get('languages');
+
+        asynquence().or(error.bind(this))
+            .then(redirect.bind(this))
+            .then(prepare.bind(this))
+            .then(fetch.bind(this))
+            .then(check.bind(this))
+            .val(success.bind(this));
+
+        function redirect(done) {
+            var platform = this.app.session.get('platform');
+
+            if (platform === 'wap' || !params.itemId || !params.email) {
+                done.abort();
+                return helpers.common.redirect.call(this, '/');
+            }
+            done();
+        }
+
+        function prepare(done) {
+            params.id = params.itemId;
+            params.languageId = languages._byId[this.app.session.get('selectedLanguage')].id;
+            delete params.itemId;
+            done();
+        }
+
+        function fetch(done) {
+            this.app.fetch({
+                item: {
+                    model: 'Item',
+                    params: params
+                }
+            }, {
+                readFromCache: false
+            }, function afterFetch(err, res) {
+                if (!res) {
+                    res = {};
+                }
+                if (err || !res.item.get('status').open) {
+                    done.abort();
+                    return helpers.common.redirect.call(this, '/');
+                }
+                done(res);
+            }.bind(this));
+        }
+
+        function check(done, response) {
+            if (!response.item) {
+                done.abort();
+                return helpers.common.redirect.call(this, '/');
+            }
+            done(response.item);
+        }
+
+        function success(_item) {
+            var item = _item.toJSON();
+
+            callback(null, {
+                sellerEmail: params.email,
+                item: item
+            });
+        }
+
+        function error(err, res) {
+            return helpers.common.redirect.call(this, '/');
+        }
+    }
+}
+
+function asyncbuyer(params, callback) {
+    helpers.controllers.control.call(this, params, controller);
+
+    function controller() {
+        asynquence().or(error.bind(this))
+            .then(redirect.bind(this))
+            .val(success.bind(this));
+
+        function redirect(done) {
+            var platform = this.app.session.get('platform');
+
+            if (platform === 'wap') {
+                done.abort();
+                return helpers.common.redirect.call(this, '/');
+            }
+            done();
+        }
+
+        function success() {
+            callback(null, {});
+        }
+
+        function error(err, res) {
+            return helpers.common.redirect.call(this, '/');
+        }
+    }
+}

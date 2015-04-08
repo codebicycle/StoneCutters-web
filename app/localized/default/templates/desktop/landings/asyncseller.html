@@ -1,0 +1,27 @@
+<div class="steps">
+{% view 'landings/asyncpickup/step-1' %}
+{% view 'landings/asyncpickup/step-2' %}
+{% view 'landings/asyncpickup/step-3' %}
+{% view 'landings/asyncpickup/step-4' %}
+</div>
+<div class="success hide">
+    <div class="top">
+        <p class="title icons icon-check">Todo listo!</p>
+        <p>Gracias por confiar en nosotros.</p>
+    </div>
+    <div class="async-form border">
+        <p>Te enviaremos el <b>código de intercambio</b> por email cuando tu comprador nos confirme.</p>
+        <p><b>Deberás presenta el código recibido y tu dni en el punto de intercambio OLX</b> para dejar tu producto y para retirar tu dinero.</p>
+    </div>
+    {% include (template + '/landings/asyncpickup/kiosco-location.html') %}
+</div>
+<div class="error-page hide">
+    <div class="top">
+        <p class="title icons icon-close">Lo sentimos</p>
+        <p>Gracias por confiar en nosotros.</p>
+    </div>
+    <div class="async-form border">
+        <p class="msg-error"></p>
+    </div>
+    {% include (template + '/landings/asyncpickup/kiosco-location.html') %}
+</div>

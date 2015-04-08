@@ -1,0 +1,42 @@
+<div class="top">
+    <p class="title">Usar un Punto de entrega OLX</p>
+    <p>En <b>3 simples pasos</b> reservás un espacio seguro para que tu producto sea recogido.</p>
+</div>
+<div class="async-form border">
+    {% include (template + '/landings/asyncpickup/progressbar.html') %}
+    <div class="restrictions">
+        <span class="bold">Recordá que para usar un punto de entrega tu artículo debe:</span>
+        <ul>
+            <li>Ser no perecedero.</li>
+            <li>Valer menos de $2000</li>
+            <li>No puede medir más de X</li>
+        </ul>
+    </div>
+    <form>
+        <fieldset class="field-wrapper">
+            <label class="bold">Confirmanos un teléfono:</label>
+            <span>(Sólo lo usaremos nosotros para comunicarnos con vos)</span>
+            <input type="text" name="seller_phone" class="text-field" require="true" value="{{ item.phone if item.phone }}">
+        </fieldset>
+        <fieldset class="field-wrapper">
+            <span class="bold">El artículo que venderás es:</span>
+            <span class="titleAd">{{ item.title }}</span>
+        </fieldset>
+        <fieldset class="field-wrapper">
+            <label class="bold">¿Qué precio acordaste con tu comprador?</label>
+            <span class="currency">$</span>
+            <input type="text" name="price" class="text-field price" value="{{ item.price.amount if item.price.amount }}">
+        </fieldset>
+        <fieldset class="field-wrapper">
+            <label class="bold">Dimensiones de tu artículo:</label>
+            <select name="dimensionsId" class="text-field type-select dimensions">
+                <option value="1">50cm x 50cm x 50cm</option>
+                <option value="1">80cm x 80cm x 80cm</option>
+            </select>
+        </fieldset>
+        <input type="hidden" name="seller_email" value="{{ sellerEmail }}">
+        <input type="hidden" name="itemId" value="{{ item.id }}">
+        <span data-step="2" class="posting">Continuar</span>
+    </form>
+</div>
+{% include (template + '/landings/asyncpickup/kiosco-location.html') %}

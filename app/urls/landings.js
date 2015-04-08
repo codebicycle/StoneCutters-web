@@ -9,5 +9,11 @@ module.exports = {
     },
     'landings#republish': {
         url: 'landings/republish'
+    },
+    'landings#asyncseller': {
+        url: 'asyncseller'
+    },
+    'landings#asyncbuyer': {
+        url: 'asyncbuyer'
     }
 };
