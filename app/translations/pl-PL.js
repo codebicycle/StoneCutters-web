@@ -591,6 +591,7 @@ module.exports = {
     'misc.SeeMore': 'Zobacz wi\u0119cej',
     'misc.SelectAnOption_BR': 'Wybierz opcj\u0119.',
     'misc.SelectCategory': 'Select Category',
+    'misc.SelectSuburb': 'Select a suburb',
     'misc.Sell-Unused': 'Sell what you don\xB4t use',
     'misc.SellingIsEasy': 'Sprzedawanie jest \u0142atwe',
     'misc.SellToo-ZA': 'Start selling on OLX too!',

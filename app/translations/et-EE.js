@@ -591,6 +591,7 @@ module.exports = {
     'misc.SeeMore': 'Rohkem',
     'misc.SelectAnOption_BR': 'Valige suvand.',
     'misc.SelectCategory': 'Select Category',
+    'misc.SelectSuburb': 'Select a suburb',
     'misc.Sell-Unused': 'Sell what you don\xB4t use',
     'misc.SellingIsEasy': 'M\xFC\xFCa on lihtne',
     'misc.SellToo-ZA': 'Start selling on OLX too!',

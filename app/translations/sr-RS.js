@@ -591,6 +591,7 @@ module.exports = {
     'misc.SeeMore': 'Prika\u017Ei vi\u0161e',
     'misc.SelectAnOption_BR': 'Izaberite opciju.',
     'misc.SelectCategory': 'Select Category',
+    'misc.SelectSuburb': 'Select a suburb',
     'misc.Sell-Unused': 'Sell what you don\xB4t use',
     'misc.SellingIsEasy': 'Jednostavna prodaja',
     'misc.SellToo-ZA': 'Start selling on OLX too!',

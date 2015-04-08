@@ -591,6 +591,7 @@ module.exports = {
     'misc.SeeMore': 'Gade Plis',
     'misc.SelectAnOption_BR': 'Chwazi yon opsyon.',
     'misc.SelectCategory': 'Select Category',
+    'misc.SelectSuburb': 'Select a suburb',
     'misc.Sell-Unused': 'Sell what you don\xB4t use',
     'misc.SellingIsEasy': 'LI fasil pou vann',
     'misc.SellToo-ZA': 'Start selling on OLX too!',

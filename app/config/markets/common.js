@@ -256,5 +256,12 @@ module.exports = {
     },
     abundance: {
         enabled: false
+    },
+    validator: {
+        email: {
+            enabled: false,
+            platforms: ['html5', 'desktop'],
+            key: 'pubkey-6f6d5eea08926fa815f65250086dfbbb'
+        }
     }
 };
