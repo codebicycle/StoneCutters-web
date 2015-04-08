@@ -19,8 +19,7 @@ module.exports = {
     sitemapByDate: middlewares(sitemapByDate),
     thanks: middlewares(thanks),
     shops: middlewares(shops),
-    shop: middlewares(shop),
-    available: middlewares(available)
+    shop: middlewares(shop)
 };
 
 function terms(params, callback) {
@@ -342,19 +341,6 @@ function shop(params, callback) {
         var platform = this.app.session.get('platform');
 
         if (platform !== 'html4') {
-            return helpers.common.redirect.call(this, '/');
-        }
-        callback(null, {});
-    }
-}
-
-function available(params, callback) {
-    helpers.controllers.control.call(this, params, controller);
-
-    function controller() {
-        var platform = this.app.session.get('platform');
-
-        if (platform === 'wap') {
             return helpers.common.redirect.call(this, '/');
         }
         callback(null, {});

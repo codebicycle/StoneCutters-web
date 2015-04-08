@@ -9,5 +9,8 @@ module.exports = {
     },
     'landings#republish': {
         url: 'landings/republish'
+    },
+    'landings#available': {
+        url: 'available'
     }
 };
