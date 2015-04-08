@@ -257,6 +257,7 @@ module.exports = {
     'myolx.MyAds': 'Mijn advertenties',
     'myolx.MyBrand': 'Mijn OLX',
     'myolx.MyFavorites': 'Mijn favorieten',
+    'myolx.MyMessages': 'Mijn berichten',
     'myolx.MyOLX': 'Mijn OLX',
     'myolx.Reply': 'Beantwoorden',
     'myolx.ReplyToThisMessage': 'Dit bericht beantwoorden',

@@ -6,6 +6,7 @@ var Base = require('../../../../../../common/app/bases/view');
 var config = require('../../../../../../../../shared/config');
 var translations = require('../../../../../../../../shared/translations');
 var EmailValidator = require('../../../../../../../modules/emailValidator');
+var Metric = require('../../../../../../../modules/metric');
 var statsd = require('../../../../../../../../shared/statsd')();
 var rEmail = /[-0-9a-zA-Z.+_]+@[-0-9a-zA-Z.+_]+\.[a-zA-Z]{2,4}/;
 var rPhone = /^[\d -]+$/;
@@ -65,6 +66,11 @@ module.exports = Base.extend({
         location = this.parentView.getItem().getLocation();
         if( location && location.url && !this.neighborhoodSelected) {
             this.onNeighborhood();
+        }
+        if (!this.metric) {
+            this.metric = new Metric({}, {
+                app: this.app
+            });
         }
     },
     onNeighborhood: function() {
@@ -354,18 +360,17 @@ module.exports = Base.extend({
                 }
                 $field.addClass('error').after('<small class="error">' + this.dictionary["postingerror.InvalidEmail"] + '</small>');
             }
-            statsd.increment([this.app.session.get('location').abbreviation, this.emailValid.get('currentPage'), 'error', 'email', 'success', this.app.session.get('platform')]);
         }
         else {
             $field.removeClass('error').siblings('small').remove();
-            statsd.increment([this.app.session.get('location').abbreviation, this.emailValid.get('currentPage'), 'success', 'email', 'success', this.app.session.get('platform')]);
         }
         if (data.did_you_mean) {
             $field.after('<small class="' + isError + 'message did-you-mean" data-content="' + data.did_you_mean + '">¿Has querido decir <a href="#">' + data.did_you_mean + '</a>?</small>');
         }
+        this.metric.increment(['growth', 'posting', ['validation', 'mailgun', data.is_valid ? 'success' : 'error']]);
     },
     validationError: function() {
-        statsd.increment([this.app.session.get('location').abbreviation, this.emailValid.get('currentPage'), 'error', 'email', 'error', this.app.session.get('platform')]);
+        this.metric.increment(['growth', 'posting', ['mailgun', 'apierror']]);
     },
     fillEmail: function(event) {
         event.preventDefault();
@@ -382,7 +387,7 @@ module.exports = Base.extend({
             $field.parent().find('small.did-you-mean').remove();
         }
         
-        statsd.increment([this.app.session.get('location').abbreviation, this.emailValid.get('currentPage'), 'success', 'email', 'click', this.app.session.get('platform')]);
+        this.metric.increment(['growth', 'posting', ['mailgun', 'didyoumean']]);
         $field.val($(event.currentTarget).data('content'));
         this.parentView.getItem().set($field.attr('name'), $field.val());
         this.$el.trigger('validate');
