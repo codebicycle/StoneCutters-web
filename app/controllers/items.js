@@ -938,7 +938,7 @@ function flag(params, callback) {
 
         user = !!this.app.session.get('user');
         
-        metric = new Metric({}, this);
+        var metric = new Metric({}, this);
         metric.increment(['africa', 'item', 'flagging']);
 
         // TODO: pass arguments back to display overlay / reflagging
