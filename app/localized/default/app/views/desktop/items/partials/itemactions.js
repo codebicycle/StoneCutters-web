@@ -70,18 +70,16 @@ module.exports = Base.extend({
         }
     },
     onFlagAsSpamOrScam: function (e) {
-        var $this = $(e.currentTarget);
-        var dataUser = $this.data('user');
-
         e.preventDefault();
 
-        var textDo = $this.attr('data-text-do');
-        var textDone = $this.attr('data-text-done');
-        
-        if ($this.attr('data-current') == 'do') {
+        var $this = $(e.currentTarget);
+        var dataUser = $this.data('user');
+        var textDo = $this.data('text-do');
+        var textDone = $this.data('text-done');
+
+        if ($this.data('current') === 'do') {
             // display overlay
-            $this.attr('data-current', 'done');
-            $this.attr('data-increment-value', 'reflagging');
+            $this.data('current', 'done');
             $this.data('increment-value', 'reflagging');
             $this.text(textDone);
         }

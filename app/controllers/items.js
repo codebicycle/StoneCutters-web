@@ -34,6 +34,7 @@ function show(params, callback) {
         var itemId = params.itemId;
         var slugUrl = params.title;
         var favorite = params.favorite;
+        var flagged = params.flagged;
         var siteLocation = this.app.session.get('siteLocation');
         var languages = this.app.session.get('languages');
         var platform = this.app.session.get('platform');
@@ -180,6 +181,9 @@ function show(params, callback) {
                 if (favorite) {
                     slug = helpers.common.params(slug, 'favorite', favorite);
                 }
+                if (flagged) {
+                    slug = helpers.common.params(slug, 'flagged', flagged);
+                }
                 done.abort();
                 return helpers.common.redirect.call(this, slug);
             }
@@ -301,6 +305,7 @@ function show(params, callback) {
                 subcategory: subcategory,
                 category: category,
                 favorite: favorite,
+                flagged: flagged,
                 sent: params.sent,
                 categories: this.dependencies.categories.toJSON(),
                 isSafetyTipsEnabled: isSafetyTipsEnabled
@@ -927,15 +932,18 @@ function flag(params, callback) {
 
     var user;
 
-    var prepare = function(done) {
+    var redirect = function(done) {
         var platform = this.app.session.get('platform');
-        var url;
 
         if (platform === 'wap') {
             done.abort();
             return helpers.common.redirect.call(this, '/');
         }
 
+        done();
+    }.bind(this);
+
+    var flagger = function(done) {
         user = !!this.app.session.get('user');
         
         var metric = new Metric({}, this);
@@ -949,9 +957,11 @@ function flag(params, callback) {
     
     var success = function() {
         var url = (params.redirect || '/des-iid-' + params.itemId);
+        var query = {
+            flagged: true
+        };
 
-        url = helpers.common.params(url);
-        helpers.common.redirect.call(this, url, null, {
+        helpers.common.redirect.call(this, url, query, {
             status: 302
         });
     }.bind(this);
@@ -963,7 +973,8 @@ function flag(params, callback) {
     }.bind(this);
 
     asynquence().or(error)
-        .then(prepare)
+        .then(redirect)
+        .then(flagger)
         .val(success);
 }
 

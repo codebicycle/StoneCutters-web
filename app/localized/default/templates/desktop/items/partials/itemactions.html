@@ -19,15 +19,15 @@
 {% if not item.status.onReview %}
     {% set dataUser = true if user else false %}
     {% set favText = dictionary["item.RemoveFromFavorites"] %}
-    {% set reportText = dictionary["item.FlagAsSpamOrScam"] %}
-    {% set reportTextDone = dictionary["item.FlagAsSpamOrScamDone"] %}
+    {% set flagText = dictionary["item.FlagAsSpamOrScam"] %}
+    {% set flagTextDone = dictionary["item.FlagAsSpamOrScamDone"] %}
     {% set current =  'remove' %}
     {% if not item.isFavorite %}
         {% set current =  'add' %}
         {% set favText = dictionary["itemgeneraldetails.addFavorites"] %}
     {% endif %}
     <a class="{{ 'open-modal' if not dataUser }}" data-modal="favorites-modal" data-current="{{ current }}" data-user="{{ dataUser }}" data-fav="addToFavorites" data-itemId="{{ item.id }}" data-remove="{{ dictionary["item.RemoveFromFavorites"] }}" data-add="{{ dictionary["itemgeneraldetails.addFavorites"] }}" href="#" rel="nofollow" title="{{ favText }}">{{ favText }}</a>
-    <a class="{{ 'open-modal' }}" data-current="do" href="#" data-user="{{ dataUser }}" data-increment="true" data-increment-category="africa" data-flag="flagAsSpamOrScam" data-increment-action="item" data-increment-value="flagging" data-text-do="{{ reportText }}" data-text-done="{{ reportTextDone }}" href="#" rel="nofollow" title="{{ reportText }}" >{{ reportText }}</a>
+    <a class="{{ 'open-modal' }}" data-current="do" href="#" data-user="{{ dataUser }}" data-increment="true" data-increment-category="africa" data-flag="flagAsSpamOrScam" data-increment-action="item" data-increment-value="flagging" data-text-do="{{ flagText }}" data-text-done="{{ flagTextDone }}" href="#" rel="nofollow" title="{{ flagText }}" >{{ flagText }}</a>
 {% endif %}
 </div>
 
