@@ -22,7 +22,7 @@ module.exports = {
         }
     },
     html4ShowShops: {
-        enabled: false,
+        enabled: true,
         platforms: ['html4'],
         markets: ['ke'],
         name: 'show-shops',
@@ -36,7 +36,7 @@ module.exports = {
         firstClick: true
     },
     desktopTest: {
-        enabled: false,
+        enabled: true,
         platforms: ['desktop'],
         markets: ['co'],
         name: 'test',
@@ -46,7 +46,7 @@ module.exports = {
         }
     },
     fractionKPIsTest: {
-        enabled: false,
+        enabled: true,
         platforms: ['desktop'],
         markets: ['pe'],
         name: 'fraction-kpi-test',
@@ -59,7 +59,7 @@ module.exports = {
         }
     },
     desktopDGD23ShowSimplifiedReplyForm: {
-        enabled: false,
+        enabled: true,
         platforms: ['desktop'],
         markets: ['ar', 'pe', 'co', 've', 'uy', 'ni', 'gt', 'za', 'ke', 'ng', 'ug', 'py', 'ec', 'bo', 'sn', 'es', 'cm', 'tz', 'hn', 'cr', 'pa', 'gh', 'sv'],
         name: 'desktop-dgd23-show-simplified-reply-form',
