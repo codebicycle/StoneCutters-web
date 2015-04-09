@@ -80,7 +80,7 @@ module.exports = Base.extend({
         if ($this.data('current') === 'do') {
             // display overlay
             $this.data('current', 'done');
-            $this.data('increment-value', 'reflagging');
+            $this.data('increment-value', [dataUser ? 'auth' : 'anon', 'reflagging']);
             $this.text(textDone);
         }
 

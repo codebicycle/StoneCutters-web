@@ -930,8 +930,6 @@ function favorite(params, callback) {
 
 function flag(params, callback) {
 
-    var user;
-
     var redirect = function(done) {
         var platform = this.app.session.get('platform');
 
@@ -944,12 +942,11 @@ function flag(params, callback) {
     }.bind(this);
 
     var flagger = function(done) {
-        user = !!this.app.session.get('user');
-        
+        var user = !!this.app.session.get('user');
         var metric = new Metric({}, this);
-        metric.increment(['africa', 'item', 'flagging']);
-
-        // TODO: pass arguments back to display overlay / reflagging
+        var metricValue = [user ? 'auth' : 'anon', !params.flagged ? 'flagging' : 'reflagging'];
+        
+        metric.increment(['africa', 'item', metricValue]);
 
         done();
     }.bind(this);
