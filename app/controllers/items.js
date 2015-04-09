@@ -9,6 +9,7 @@ var Item = require('../models/item');
 var config = require('../../shared/config');
 var statsd = require('../../shared/statsd')();
 var Shops = require('../modules/shops');
+// var Metric = require('../modules/metric');
 
 module.exports = {
     show: middlewares(show),
@@ -937,9 +938,12 @@ function flag(params, callback) {
 
         user = !!this.app.session.get('user');
         
-        // store metric here
+        // if (!this.metric) {
+        // }
+        // this.metric = new Metric({}, this);
+        // this.metric.increment(['africa', 'item', 'flagging']);
 
-        console.log('interestín!', user);
+        // console.log('interestín!', user);
 
         done();
     }.bind(this);
