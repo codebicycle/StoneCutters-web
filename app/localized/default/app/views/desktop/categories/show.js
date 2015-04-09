@@ -20,7 +20,6 @@ module.exports = Base.extend({
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
         var link = this.refactorPath(this.app.session.get('path'));
-        var isUserSurveyEnabled;
 
         this.userSurvey = new UserSurvey({}, {
             app: this.app
@@ -28,13 +27,9 @@ module.exports = Base.extend({
         this.filters = data.filters;
         this.filters.order = this.order;
 
-        isUserSurveyEnabled = this.userSurvey.isEnabled();
-        if (isUserSurveyEnabled) {
-            this.userSurvey.trigger('show');
-        }
         return _.extend({}, data, {
             items: data.items,
-            isUserSurveyEnabled: isUserSurveyEnabled,
+            isUserSurveyEnabled: this.userSurvey.isEnabled(),
             nav: {
                 link: link,
                 linkig: helpers.common.linkig.call(this, link, null, 'showig'),

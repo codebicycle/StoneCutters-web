@@ -12,17 +12,13 @@ Base = Backbone.Model;
 
 function initialize(attrs, options) {
     this.app = options.app;
-    this.on('show', onShow, this);
 }
 
 function isEnabled(options) {
     var enabled = helpers.features.isEnabled.call(this, 'userSurvey');
     var acceptance;
     var dataPage;
-    
-    // if (enabled) {
-    //     enabled = this.app.session.get('userSurveyShow') !== '1';
-    // }
+
     if (enabled) {
         dataPage = this.app.session.get('dataPage');
 
@@ -39,7 +35,7 @@ function isEnabled(options) {
                     return memo.concat(searches);
                 }, []);
             }
-            enabled = _.contains(acceptance, dataPage.search);
+            enabled = _.contains(acceptance, String(dataPage.search).toLowerCase());
         }
         else {
             acceptance = utils.get(configSurvey, ['categories'], []);
@@ -47,12 +43,6 @@ function isEnabled(options) {
         }
     }
     return enabled;
-}
-
-function onShow() {
-    this.app.session.persist({
-        userSurveyShow: '1'
-    });
 }
 
 module.exports = Base.extend({
