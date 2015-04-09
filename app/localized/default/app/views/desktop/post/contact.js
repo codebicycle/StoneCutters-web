@@ -29,11 +29,12 @@ module.exports = Base.extend({
     getTemplateData: function() {
         var locationUrl = this.app.session.get('location').url;
         var data = Base.prototype.getTemplateData.call(this);
-        var isPhoneMandatory = config.getForMarket(locationUrl, ['validator', 'phoneMandatory', 'enabled'], false);
+        var isPhoneMandatory = config.getForMarket(locationUrl, ['validator', 'phone', 'enabled'], false);
 
         return _.extend({}, data, {
             isPhoneMandatory: isPhoneMandatory
         });
+    },
     postRender: function() {
         if (!this.metric) {
             this.metric = new Metric({}, {
