@@ -4,6 +4,7 @@ var _ = require('underscore');
 var Base = require('../../../../../common/app/bases/view').requireView('searches/search');
 var helpers = require('../../../../../../helpers');
 var Metric = require('../../../../../../modules/metric');
+var UserSurvey = require('../../../../../../modules/usersurvey');
 
 module.exports = Base.extend({
     id: 'searches-search-view',
@@ -20,12 +21,21 @@ module.exports = Base.extend({
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
         var link = this.refactorPath(this.app.session.get('path'));
+        var isUserSurveyEnabled;
 
+        this.userSurvey = new UserSurvey({}, {
+            app: this.app
+        });
         this.filters = data.filters;
         this.filters.order = this.order;
 
+        isUserSurveyEnabled = this.userSurvey.isEnabled();
+        if (isUserSurveyEnabled) {
+            this.userSurvey.trigger('show');
+        }
         return _.extend({}, data, {
             items: data.items,
+            isUserSurveyEnabled: isUserSurveyEnabled,
             nav: {
                 link: link,
                 linkig: helpers.common.linkig.call(this, link, null, 'searchig'),
