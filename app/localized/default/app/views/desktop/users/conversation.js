@@ -21,9 +21,9 @@ module.exports = Base.extend({
         return data;
     },
     postRender: function() {
-        var conversation = this.$('ul.conversation');
+        var $conversation = this.$('ul.conversation');
 
-        this.scrollBottom(conversation);
+        this.scrollBottom($conversation);
     },
     onChange: function(event) {
         event.preventDefault();
@@ -47,8 +47,8 @@ module.exports = Base.extend({
             .then(validate.bind(this))
             .then(submit.bind(this))
             .then(prepare.bind(this))
-            .then(success.bind(this))
-            .val(change.bind(this));
+            .then(success.bind(this));
+            //.val(change.bind(this));
 
         function validate(done) {
             if (!this.validate(this.$('[data-messageText]'))) {
@@ -79,14 +79,21 @@ module.exports = Base.extend({
         }
 
         function success(done) {
-            this.app.fetch({
+            var $conversation = this.$('ul.conversation');
+            var newMessage = '<li class="conversation-chat"><span class="name">Vos</span><span class="date"> - <time> Recien </time></span><p class="message">' + this.parentView.getConversation().get('message') + '</p></li>';
+            $conversation.append(newMessage);
+            this.scrollBottom($conversation);
+            this.$('.spinner').addClass('display-none');
+            this.$('.btn.orange').removeClass('display-none');
+            this.$('[data-messageText]').val('');
+            /*this.app.fetch({
                 conversation: {
                     model: 'Conversation',
                     params: params
                 }
             }, {
                 readFromCache: false
-            }, done.errfcb);
+            }, done.errfcb);*/
         }
 
         function change(res) {
@@ -95,7 +102,7 @@ module.exports = Base.extend({
             this.parentView.getConversation().set('platform', this.app.session.get('platform'));
             this.parentView.getConversation().set('location', this.app.session.get('location').url);
             this.parentView.getConversation().set('country', this.app.session.get('location').abbreviation);
-            this.render();
+            //this.render();
         }
 
         function fail(err) {
