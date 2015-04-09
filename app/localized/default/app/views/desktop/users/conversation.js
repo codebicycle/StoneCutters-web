@@ -11,7 +11,8 @@ module.exports = Base.extend({
     className: 'users_conversation_view',
     events: {
         'change textarea, input:not([type=submit], [type=hidden])': 'onChange',
-        'submit': 'onSubmit'
+        'submit': 'onSubmit',
+        'keydown textarea': 'ctrlEnter'
     },
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
@@ -119,6 +120,16 @@ module.exports = Base.extend({
         var height = conversation[0].scrollHeight;
 
         conversation.scrollTop(height);
+    },
+    ctrlEnter: function (event) {
+        if ((event.metaKey || event.ctrlKey) && event.keyCode == 13) {
+            var field = $(event.target);
+
+            if (this.validate(field)) {
+                this.parentView.getConversation().set(field.attr('name'), field.val());
+            }
+            this.$('form').trigger('submit');
+        }
     }
 });
 
