@@ -99,7 +99,7 @@
     {% set flagText = dictionary["item.FlagAsSpamOrScam"] if not flagged else dictionary["item.FlagAsSpamOrScamDone" ] %}
 
     <div id="centerBtns">
-        <a href="{{ ['/items/' , item.id , '/flag'] | join('') | link }}" class="btns grey flag-item">{{ flagText | replace(':','')}}</a>
+        <a href="{{ ['/items/' , item.id , '/flag'] | join('') | link }}" class="btns grey flag-item {{ 'flagged' if flagged }}">{{ flagText | replace(':','')}}</a>
         
         {% if relatedItems.length %}
             <a href="{{ relatedAdsLink | link }}" class="btns grey">{{ dictionary["itemgeneraldetails.OtherRelatedListings"] | replace(':','')}}</a>
