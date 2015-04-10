@@ -72,8 +72,7 @@
                         {% for field in fields.contactInformation %}
                             {% if field.fieldType == 'text' %}
                                 {% if field.name != 'streetAddress' %}
-                                    {% set mandatory = isPhoneMandatory if (field.name == 'phone') else field.mandatory %}
-                                    {{ FieldText(field.label, field.name, mandatory, form,  user) }}
+                                    {{ FieldText(field.label, field.name, field.mandatory, form,  user) }}
                                 {% endif %}
                             {% elif field.fieldType == 'combobox' %}
                                 {{ FieldCombobox(field.label, field.name , form, field.value) }}

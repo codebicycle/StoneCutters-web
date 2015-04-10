@@ -32,8 +32,6 @@ module.exports = Base.extend({
         var item = this.parentView.getItem ? this.parentView.getItem() : undefined;
         var current = this.app.session.get('location').current || {};
         var user = this.app.session.get('user');
-        var locationUrl = this.app.session.get('location').url;
-        var isPhoneMandatory = config.getForMarket(locationUrl, ['validator', 'phone', 'enabled'], false);
 
         return _.extend({}, data, {
             fields: this.fields || [],
@@ -49,8 +47,7 @@ module.exports = Base.extend({
                     return value;
                 }, this))
             } : {},
-            location: item ? item.getLocation() || current : current,
-            isPhoneMandatory: isPhoneMandatory.toString()
+            location: item ? item.getLocation() || current : current
         });
     },
     postRender: function() {
@@ -250,9 +247,11 @@ module.exports = Base.extend({
         }
 
         function validatePhone(done, isValid) {
+            var locationUrl = this.app.session.get('location').url;
+            var isPhoneMandatory = config.getForMarket(locationUrl, ['validator', 'phone', 'enabled'], false);
             var $phone = this.$('input[name=phone]').removeClass('error');
             
-            if (!$phone.val().length || ($phone.val() !== '' && !rPhone.test($phone.val()))) {
+            if ((isPhoneMandatory && $phone.val() === '') || ($phone.val() !== '' && !rPhone.test($phone.val()))) {
                 isValid = false;
                 $phone.addClass('error').after('<small class="error">' + translations.get(this.app.session.get('selectedLanguage'))['misc.PhoneNumberNotValid'] + '</small>');
             }
