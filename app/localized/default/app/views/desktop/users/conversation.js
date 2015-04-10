@@ -5,6 +5,7 @@ var async = require('async');
 var asynquence = require('asynquence');
 var Base = require('../../../../../common/app/bases/view').requireView('users/conversation');
 var Conversation = require('../../../../../../models/conversation');
+var translations = require('../../../../../../../shared/translations');
 var helpers = require('../../../../../../helpers');
 
 module.exports = Base.extend({
@@ -21,9 +22,10 @@ module.exports = Base.extend({
         return data;
     },
     postRender: function() {
-        var conversation = this.$('ul.conversation');
+        this.dictionary = translations.get(this.app.session.get('selectedLanguage'));
+        var $conversation = this.$('ul.conversation');
 
-        this.scrollBottom(conversation);
+        this.scrollBottom($conversation);
     },
     onChange: function(event) {
         event.preventDefault();
@@ -47,8 +49,7 @@ module.exports = Base.extend({
             .then(validate.bind(this))
             .then(submit.bind(this))
             .then(prepare.bind(this))
-            .then(success.bind(this))
-            .val(change.bind(this));
+            .val(success.bind(this));
 
         function validate(done) {
             if (!this.validate(this.$('[data-messageText]'))) {
@@ -79,23 +80,26 @@ module.exports = Base.extend({
         }
 
         function success(done) {
-            this.app.fetch({
-                conversation: {
-                    model: 'Conversation',
-                    params: params
-                }
-            }, {
-                readFromCache: false
-            }, done.errfcb);
-        }
+            var $conversation = this.$('ul.conversation');
+            var date = new Date();
+            var newMessage;
 
-        function change(res) {
-            this.parentView.conversation = res.conversation;
-            this.parentView.getConversation().set('user', this.app.session.get('user'));
-            this.parentView.getConversation().set('platform', this.app.session.get('platform'));
-            this.parentView.getConversation().set('location', this.app.session.get('location').url);
-            this.parentView.getConversation().set('country', this.app.session.get('location').abbreviation);
-            this.render();
+            date = {
+                year: date.getFullYear(),
+                month: date.getMonth() + 1,
+                day: date.getDate(),
+                hour: date.getHours(),
+                minute: date.getMinutes(),
+                second: date.getSeconds()
+            };
+            date = helpers.timeAgo(date);
+            date = this.dictionary[date.dictionary] + ' ' + date.hour;
+            newMessage = '<li class="conversation-chat"><span class="name">' + this.dictionary["myolx.You"] + '</span><span class="date"> - <time> ' + date + ' </time></span><p class="message">' + this.parentView.getConversation().get('message') + '</p></li>';
+            $conversation.append(newMessage);
+            this.scrollBottom($conversation);
+            this.$('.spinner').addClass('display-none');
+            this.$('.btn.orange').removeClass('display-none');
+            this.$('[data-messageText]').val('');
         }
 
         function fail(err) {

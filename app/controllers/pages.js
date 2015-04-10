@@ -311,7 +311,14 @@ function thanks(params, callback) {
         }
 
         function success() {
+            var location = this.app.session.get('location');
+
             this.app.seo.addMetatag('title', 'Thank You! & Gracias! & Obrigado!');
+
+            if (location.url == 'www.olx.com.ar') {
+                this.app.seo.addMetatag('og:image', helpers.common.static.call(this, '/images/desktop/marketing/thanks/FacebookShare_LATAM.jpg'));
+            }
+
             callback(null, {});
         }
 
