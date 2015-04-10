@@ -5,6 +5,7 @@ var async = require('async');
 var asynquence = require('asynquence');
 var Base = require('../../../../../common/app/bases/view').requireView('users/conversation');
 var Conversation = require('../../../../../../models/conversation');
+var translations = require('../../../../../../../shared/translations');
 var helpers = require('../../../../../../helpers');
 
 module.exports = Base.extend({
@@ -20,6 +21,7 @@ module.exports = Base.extend({
         return data;
     },
     postRender: function() {
+        this.dictionary = translations.get(this.app.session.get('selectedLanguage'));
         this.checkPosition();
         this.app.router.once('action:end', this.onStart);
         this.app.router.once('action:start', this.onEnd.bind(this));
@@ -46,8 +48,7 @@ module.exports = Base.extend({
             .then(validate.bind(this))
             .then(submit.bind(this))
             .then(prepare.bind(this))
-            .then(success.bind(this))
-            .val(change.bind(this));
+            .val(success.bind(this));
 
         function validate(done) {
             if (!this.validate(this.$('[data-messageText]'))) {
@@ -78,23 +79,26 @@ module.exports = Base.extend({
         }
 
         function success(done) {
-            this.app.fetch({
-                conversation: {
-                    model: 'Conversation',
-                    params: params
-                }
-            }, {
-                readFromCache: false
-            }, done.errfcb);
-        }
+            var $conversation = this.$('ul.conversation');
+            var date = new Date();
+            var newMessage;
 
-        function change(res) {
-            this.conversation = res.conversation;
-            this.getConversation().set('user', this.app.session.get('user'));
-            this.getConversation().set('platform', this.app.session.get('platform'));
-            this.getConversation().set('location', this.app.session.get('location').url);
-            this.getConversation().set('country', this.app.session.get('location').abbreviation);
-            this.render();
+            date = {
+                year: date.getFullYear(),
+                month: date.getMonth() + 1,
+                day: date.getDate(),
+                hour: date.getHours(),
+                minute: date.getMinutes(),
+                second: date.getSeconds()
+            };
+            date = helpers.timeAgo(date);
+            date = this.dictionary[date.dictionary] + ' ' + date.hour;
+            newMessage = '<li class="message is-mine"><span class="name">' + this.dictionary["myolx.You"] + '</span><p class="text">' + this.getConversation().get('message') + '</p><span class="date"><time> ' + date + ' </time></span></li>';
+            $conversation.append(newMessage);
+            this.checkPosition();
+            this.$('.spinner').addClass('hide');
+            this.$('.reply-send').removeClass('hide');
+            this.$('[data-messageText]').val('');
         }
 
         function fail(err) {
