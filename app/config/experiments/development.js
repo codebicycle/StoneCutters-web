@@ -59,7 +59,7 @@ module.exports = {
         }
     },
     desktopDGD23ShowSimplifiedReplyForm: {
-        enabled: false,
+        enabled: true,
         platforms: ['desktop'],
         markets: ['ar', 'pe', 'co', 've', 'uy', 'ni', 'gt', 'za', 'ke', 'ng', 'ug', 'py', 'ec', 'bo', 'sn', 'es', 'cm', 'tz', 'hn', 'cr',
                   'pa', 'gh', 'sv'],
