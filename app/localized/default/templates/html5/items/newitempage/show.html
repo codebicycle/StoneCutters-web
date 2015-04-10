@@ -95,8 +95,8 @@
         {% set favClass = 'remove' %}
         {% set favLink = '#' %}
         {% set favText = dictionary["item.RemoveFromFavorites"] %}
-        {% set flagText = dictionary["item.FlagAsSpamOrScam"] %}
-        {% set flagTextDone = dictionary["item.FlagAsSpamOrScamDone"] %}
+        {% set flagText = dictionary["item.FlagAsSpamOrScam"] or 'Flag item' %}
+        {% set flagTextDone = dictionary["item.FlagAsSpamOrScamDone"] or 'Item flagged' %}
         {% if not item.isFavorite %}
             {% set favClass = 'add' %}
             {% set favText = dictionary["itemgeneraldetails.addFavorites"] %}

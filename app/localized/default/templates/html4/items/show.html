@@ -96,13 +96,13 @@
 
     <div class="line"></div>
 
-    {% set flagText = dictionary["item.FlagAsSpamOrScam"] if not flagged else dictionary["item.FlagAsSpamOrScamDone" ] %}
+    {% set flagText = (dictionary["item.FlagAsSpamOrScam"] or 'Flag items') if not flagged else (dictionary["item.FlagAsSpamOrScamDone" ] or 'Item flagged') %}
 
     <div id="centerBtns">
         {% if flagItem.enabled %}
             <a href="{{ ['/items/' , item.id , '/flag', '?flagged=', flagged] | join('') | link }}" class="btns grey flag-item {{ 'flagged' if flagged }}">{{ flagText | replace(':','')}}</a>
         {% endif %}
-        
+
         {% if relatedItems.length %}
             <a href="{{ relatedAdsLink | link }}" class="btns grey">{{ dictionary["itemgeneraldetails.OtherRelatedListings"] | replace(':','')}}</a>
         {% endif %}

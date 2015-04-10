@@ -19,8 +19,8 @@
 {% if not item.status.onReview %}
     {% set dataUser = true if user else false %}
     {% set favText = dictionary["item.RemoveFromFavorites"] %}
-    {% set flagText = dictionary["item.FlagAsSpamOrScam"] %}
-    {% set flagTextDone = dictionary["item.FlagAsSpamOrScamDone"] %}
+    {% set flagText = dictionary["item.FlagAsSpamOrScam"] or 'Flag item' %}
+    {% set flagTextDone = dictionary["item.FlagAsSpamOrScamDone"] or 'Item flagged' %}
     {% set current =  'remove' %}
     {% if not item.isFavorite %}
         {% set current =  'add' %}
@@ -31,7 +31,7 @@
     {% if flagItem.enabled %}
         <a data-current="do" href="#" data-user="{{ dataUser }}" data-increment="true" data-increment-category="africa" data-flag="flagAsSpamOrScam" data-increment-action="item" data-increment-value="{{ 'auth' if dataUser else 'anon'}}.flagging" data-text-do="{{ flagText }}" data-text-done="{{ flagTextDone }}" href="#" rel="nofollow" title="{{ flagText }}" >{{ flagText }}</a>
     {% endif %}
-    
+
 {% endif %}
 </div>
 
