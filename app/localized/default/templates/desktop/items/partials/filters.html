@@ -18,13 +18,13 @@
                 <ul class="sub-categories filter-category {{ filter.name }}">
                     {% for value in filter.value %}
                         <li>
-                            <a href="#" data-filter-id="{{ value.id }}" data-filter-name="{{ value.value }}" data-filter-slug="{{ value.slug }}"{% if currentRoute.controller == 'searches' and ('contains' | _(['filter', 'filterig', 'search', 'searchig'], currentRoute.action)) %} data-increment="true" data-increment-category="dgd" data-increment-action="search" data-increment-value="category.{{ loop.index }}"{% endif %} data-increment-filter="{{ filter.name }}">{{ value.value }} <span class="count">{{ value.count }}</span></a>
+                            <a href="#" data-filter-id="{{ value.id }}" data-filter-name="{{ value.value }}" data-filter-slug="{{ value.slug }}"{% if currentRoute.controller == 'searches' and ('contains' | _(['filter', 'filterig', 'search', 'searchig'], currentRoute.action)) %} data-increment="true" data-increment-category="dgd" data-increment-action="search" data-increment-value="category.{{ loop.index }}"{% endif %} data-increment-filter="{{ filter.name }}">{{ value.value }} <span class="count">{{ value.count | countFormat }}</span></a>
                         </li>
                     {% endfor %}
                 </ul>
             {% elif filter.type == 'SELECT' and filter.name == 'category' and search %}
                 {% if not currentCategory.has('parentId') %}
-                    <span class="category-selected arrow icons icon-cat-{{ category.get('id') }}">{{ category.get('trName') }} <span>{{ meta.total }}</span></span>
+                    <span class="category-selected arrow icons icon-cat-{{ category.get('id') }}">{{ category.get('trName') }} <span>{{ (meta.showTotal or meta.total) | countFormat }}</span></span>
                     <ul class="sub-categories filter-subcategory">
                         {% for value in filter.value %}
                             <li>
@@ -34,7 +34,7 @@
                     </ul>
                 {% else %}
                     <a href="{{ ['/nf/', (category.toJSON() | slugToUrl), '/', search] | join | linkig }}" class="icons icon-cat-{{ category.get('id') }}" > {{ category.get('trName') }} </a>
-                    <span class="category-selected">{{ currentCategory.get('trName') }} <span>{{ meta.total }}</span></span>
+                    <span class="category-selected">{{ currentCategory.get('trName') }} <span>{{ meta.total | countFormat }}</span></span>
                 {% endif %}
             {% elif filter.type == 'SELECT' and filter.name != 'category' and filter.name != 'neighborhood' and filter.value.length > 1 %}
                 <span class="title filter-title" data-filter-name="{{ filter.name }}" data-filter-type="{{ filter.type }}">{{ filter.description }}<span class="icons icon-arrow-up"></span></span>
