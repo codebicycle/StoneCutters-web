@@ -8,9 +8,9 @@ module.exports = function(params, next) {
     var user = this.app.session.get('user');
 
     asynquence().or(next)
-        .then(prepare)
-        .then(fetch)
-        .val(success);
+        .then(prepare.bind(this))
+        .then(fetch.bind(this))
+        .val(success.bind(this));
 
     function prepare(done) {
         var hash = this.app.session.get('hash');
