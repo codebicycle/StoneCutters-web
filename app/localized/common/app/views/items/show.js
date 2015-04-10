@@ -3,6 +3,7 @@
 var Base = require('../../bases/view');
 var _ = require('underscore');
 var breadcrumb = require('../../../../../modules/breadcrumb');
+var config = require('../../../../../../shared/config');
 
 module.exports = Base.extend({
     className: 'items_show_view',
@@ -23,8 +24,12 @@ module.exports = Base.extend({
             data.item.descriptionReplace = data.item.description.replace(/(<([^>]+)>)/ig,'');
         }
 
+        var location = this.app.session.get('location');
+        var flagItem = config.getForMarket(location.url, ['flagItem']);
+
         return _.extend({}, data, {
-            breadcrumb: breadcrumb.get.call(this, data)
+            breadcrumb: breadcrumb.get.call(this, data),
+            flagItem: flagItem
         });
     }
 });

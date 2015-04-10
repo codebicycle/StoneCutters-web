@@ -9,6 +9,7 @@ var helpers = require('../../../../../../../helpers');
 var translations = require('../../../../../../../../shared/translations');
 var User = require('../../../../../../../models/user');
 var Metric = require('../../../../../../../modules/metric');
+var config = require('../../../../../../../../shared/config');
 
 module.exports = Base.extend({
     className: 'items_show_view',
@@ -23,13 +24,17 @@ module.exports = Base.extend({
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
         var showContact = true;
-
+        var location = this.app.session.get('location');
+        var flagItem = config.getForMarket(location.url, ['flagItem']);
+        
         if (data.item.user !== null && this.app.session.get('user') && this.app.session.get('user').userId === parseInt(data.item.user.id)) {
             showContact = false;
         }
+
         return _.extend({}, data, {
             newItemPage: helpers.features.isEnabled.call(this, 'newItemPage'),
-            showContact:  showContact
+            showContact:  showContact,
+            flagItem: flagItem
         });
     },
     postRender: function() {

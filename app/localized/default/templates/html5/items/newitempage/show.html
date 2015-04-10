@@ -103,12 +103,14 @@
             {% if not user %}
                 {% set favLink = (['/login?redirect=/items/', item.id, '/favorite'] | join('') | link) %}
             {% endif %}
-        {% endif %}
+        {% endif %} 
         <a data-itemId="{{ item.id }}" class="btnshare fav {{ favClass }}" href="{{ favLink }}" data-qa="{{ favClass }}-favorite" >{{ favText }}</a>
 
         <a href="#share" data-tracking="ItemPage-ClickShare" class="btnshare share trackMe" >{{ dictionary["item.ShareAd"] }}</a>
-                
-        <a href="#" class="btnshare flag" data-text-done="{{ flagTextDone }}" data-increment="true" data-increment-category="africa" data-increment-action="item" data-flag="flagAsSpamOrScam" data-increment-value="{{ 'auth' if user else 'anon' }}.flagging" >{{ flagText }}</a>
+        
+        {% if flagItem.enabled %}        
+            <a href="#" class="btnshare flag" data-text-done="{{ flagTextDone }}" data-increment="true" data-increment-category="africa" data-increment-action="item" data-flag="flagAsSpamOrScam" data-increment-value="{{ 'auth' if user else 'anon' }}.flagging" >{{ flagText }}</a>
+        {% endif %}
 
     </section>
     {% endif %}

@@ -450,5 +450,8 @@ module.exports = {
                 enabled: true
             }
         }
+    },
+    flagItem: {
+        enabled: true
     }
 };
