@@ -31,7 +31,7 @@ module.exports = Base.extend({
         if ($field.data('value') !== value) {
             if (this.validate($field)) {
                 this.parentView.$el.trigger('fieldSubmit', [$field]);
-                this.parentView.categorySelector(value); //AB test : category-selector
+                this.parentView.categorySuggestion(value); //AB test : category-suggestion
             }
 
             $field.data('value', value);

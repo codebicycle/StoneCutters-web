@@ -45,11 +45,11 @@ module.exports = {
             TEST2: 'test2'
         }
     },
-    desktopCategorySelector: {
+    categorySuggestion: {
         enabled: true,
         platforms: ['desktop'],
         markets: ['ar'],
-        name: 'category-selector',
+        name: 'category-suggestion',
         fraction: 0.5,
         alternatives: {
             CONTROL: 'control',

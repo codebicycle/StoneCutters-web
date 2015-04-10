@@ -1,7 +1,13 @@
 <label class="field-label">* {{ dictionary["itemslisting.NavigatorByCategory"] }}</label>
-{% if experiments.desktopCategorySelector %}
-    <div class="posting-category-selector">
-        <button type="button" id="posting-category-selector-button">Seleccioná una categoría</button>
+{% if experiments.categorySuggestion %}
+    <div class="posting-category-suggestion">
+        <button type="button" id="posting-category-suggestion-button">Seleccioná una categoría</button>
+        <template id="template-category">
+            <li class="icons icon-cat-{categoryid} {classname}"><span>{subcategoryname}<br><small>en {categoryname}</small></span> <a href="#" data-category="{categorydata}" data-increment-action="{action}" data-increment-value="cat-option-{index}">{buttontext}</a></li>
+        </template>
+        <template id="template-other-categories">
+            <li class="{classname}"><a href="#" data-increment-action="{action}" data-increment-value="cat-option-others">{text}</a></li>
+        </template>
         <ul class="posting-categories-suggested"></ul>
     </div>
 {% endif %}

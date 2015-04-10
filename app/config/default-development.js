@@ -33,8 +33,8 @@ module.exports = {
             maxPageSize: 27
         }
     },
-    categoryselector: {
-        api: 'http://10.4.12.67:9595/rest/suggest/www.olx.com.ar',
+    categorySuggestion: {
+        api: 'http://categorysuggestiontool-612498389.us-east-1.elb.amazonaws.com/rest/suggest/',
         timeout: 1500
     },
     mario: {
