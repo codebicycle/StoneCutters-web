@@ -50,7 +50,7 @@ module.exports = Base.extend({
                 }, this))
             } : {},
             location: item ? item.getLocation() || current : current,
-            isPhoneMandatory: isPhoneMandatory
+            isPhoneMandatory: isPhoneMandatory.toString()
         });
     },
     postRender: function() {
