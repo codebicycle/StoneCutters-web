@@ -95,6 +95,8 @@
         {% set favClass = 'remove' %}
         {% set favLink = '#' %}
         {% set favText = dictionary["item.RemoveFromFavorites"] %}
+        {% set flagText = dictionary["item.FlagAsSpamOrScam"] %}
+        {% set flagTextDone = dictionary["item.FlagAsSpamOrScamDone"] %}
         {% if not item.isFavorite %}
             {% set favClass = 'add' %}
             {% set favText = dictionary["itemgeneraldetails.addFavorites"] %}
@@ -104,7 +106,10 @@
         {% endif %}
         <a data-itemId="{{ item.id }}" class="btnshare fav {{ favClass }}" href="{{ favLink }}" data-qa="{{ favClass }}-favorite" >{{ favText }}</a>
 
-        <a href="#share" data-tracking="ItemPage-ClickShare" class="btnshare share trackMe">{{ dictionary["item.ShareAd"] }}</a>
+        <a href="#share" data-tracking="ItemPage-ClickShare" class="btnshare share trackMe" >{{ dictionary["item.ShareAd"] }}</a>
+                
+        <a href="#" class="btnshare flag" data-text-done="{{ flagTextDone }}" data-increment="true" data-increment-category="africa" data-increment-action="item" data-flag="flagAsSpamOrScam" data-increment-value="{{ 'auth' if user else 'anon' }}.flagging" >{{ flagText }}</a>
+
     </section>
     {% endif %}
 

@@ -8,6 +8,7 @@ var Item = require('../../../../../../../models/item');
 var helpers = require('../../../../../../../helpers');
 var translations = require('../../../../../../../../shared/translations');
 var User = require('../../../../../../../models/user');
+var Metric = require('../../../../../../../modules/metric');
 
 module.exports = Base.extend({
     className: 'items_show_view',
@@ -58,8 +59,10 @@ module.exports = Base.extend({
         'click .galActions .prev': 'previouImage',
         'click .galActions .pause': 'pause',
         'click #galCont .swiper-wrapper , #galContOne': 'hideTitleActions',
+        'click [data-increment]': Metric.incrementEventHandler,
         'click .fav': 'favorites',
         'click .share': 'share',
+        'click .flag': 'flag',
         'click .popup-close': 'popupClose',
         'onpopstate window': 'onPopState'
     },
@@ -212,6 +215,16 @@ module.exports = Base.extend({
         $('body').addClass('noscroll');
         history.pushState(null, "", window.location.pathname);
         $('#share').addClass('visible');
+    },
+    flag: function(e) {
+        e.preventDefault();
+
+        var $el = $(e.target);
+        var user = !!this.app.session.get('user');
+
+        $el.text($el.data('text-done'));
+        $el.data('increment-value', [user ? 'auth' : 'anon', 'reflagging']);
+
     },
     popupClose: function(e) {
         e.preventDefault();
