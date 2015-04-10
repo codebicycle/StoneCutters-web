@@ -19,33 +19,27 @@
             </tr>
         </table>
 
-        {% if item.images.length > 0 %}
+        {% if imagesTotal > 0 %}
             <table width="100%" cellspacing="0" cellpadding="4" border="0">
                 <tr>
                     <td align="center" valign="top" style="border-top: solid thin #808080;">
-                        {% set imgIndex = pos if item.images.length > 1 else 0 %}
                         <img src="{{ item.images[imgIndex].url }}" alt="{{ item.title }}" align="top" width="100%" style="display: block;" />
                     </td>
                 </tr>
-                {% if item.images.length > 1 %}
+                {% if imagesTotal > 1 %}
                     <tr>
                         <td align="center">
-                            <small style="display: block;">
-                                {% if pos > 0 %}
-                                    {% set posImage = "" %}
-                                    {% if pos - 1 > 0 %}
-                                        {% set posImage = "?pos=" + (pos - 1) %}
-                                    {% endif %}
-                                    <a rel="nofollow" href="{{ [item | slugToUrl, posImage] | join('') | link }}">&lt;</a> |
+                             <small style="display: block; color:red;">
+                                {% if prev %}
+                                    <a rel="nofollow" class="prev" href="{{ prev }}">&lt;</a> |
                                 {% else %}
                                     <font color="#CCCCCC">&lt;</font> |
                                 {% endif %}
-                                    {{ pos + 1 }} {{ dictionary["listingpageitemslisting.Of"] }} {{ item.images.length }}
-                                {% if pos < item.images.length - 1 %}
-                                    {% set posImage = '?pos=' + (pos + 1) %}
-                                     | <a rel="nofollow" href="{{ [item | slugToUrl, posImage] | join('') | link }}">&gt;</a>
+                                    {{ imagePos }} | {{ dictionary["listingpageitemslisting.Of"] }} {{ imgTotalTranslate }}
+                                {% if next %}
+                                    | <a rel="nofollow" class="next" href="{{ next }}">&gt;</a>
                                 {% else %}
-                                     | <font color="#CCCCCC">&gt;</font>
+                                    | <font color="#CCCCCC">&gt;</font>
                                 {% endif %}
                             </small>
                         </td>
