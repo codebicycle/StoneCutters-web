@@ -32,6 +32,8 @@ module.exports = Base.extend({
         var item = this.parentView.getItem ? this.parentView.getItem() : undefined;
         var current = this.app.session.get('location').current || {};
         var user = this.app.session.get('user');
+        var locationUrl = this.app.session.get('location').url;
+        var isPhoneMandatory = config.getForMarket(locationUrl, ['validator', 'phone', 'enabled'], false);
 
         return _.extend({}, data, {
             fields: this.fields || [],
@@ -47,7 +49,8 @@ module.exports = Base.extend({
                     return value;
                 }, this))
             } : {},
-            location: item ? item.getLocation() || current : current
+            location: item ? item.getLocation() || current : current,
+            isPhoneMandatory: isPhoneMandatory
         });
     },
     postRender: function() {

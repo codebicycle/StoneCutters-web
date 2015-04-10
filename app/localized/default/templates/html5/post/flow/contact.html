@@ -2,7 +2,7 @@
     {% from macros import FieldText, FieldTextArea, FieldCombobox %}
     {% for field in fields %}
         {% if  field.name == 'phone' %}
-            {{ FieldText(field.label, field.name, field.mandatory, form, user, 'number', 'phone') }}
+            {{ FieldText(field.label, field.name, isPhoneMandatory, form, user, 'number', 'phone') }} {# override phone mandatory property until smaug fix #}
         {% elif field.name == 'email' %}
             {{ FieldText(field.label, field.name, field.mandatory, form, user, 'email', 'email') }}
         {% elif field.fieldType == 'text' %}
