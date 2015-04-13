@@ -54,7 +54,7 @@ module.exports = Base.extend({
         event.stopPropagation();
         event.stopImmediatePropagation();
 
-        this.$('fieldset.name, fieldset.email, fieldset.phone').addClass('visible');
+        this.$('fieldset.name, fieldset.email, fieldset.phone').slideDown();
     },
     onBlur: function(event) {
         event.preventDefault();
@@ -76,7 +76,7 @@ module.exports = Base.extend({
             market: this.app.session.get('location').abbreviation,
             experiments: this.app.session.get('experiments')
         });
-        
+
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();

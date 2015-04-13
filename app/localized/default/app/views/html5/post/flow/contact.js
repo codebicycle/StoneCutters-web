@@ -287,14 +287,14 @@ module.exports = Base.extend({
         function validateLocation(done, isValid) {
             var $location = this.$('.location').removeClass('error');
 
-            if (this.existNeighborhoods) {
+            /*if (this.existNeighborhoods) {
                 if (!this.neighborhoodSelected) {
                     isValid = false;
                     $location.addClass('error').after('<small class="error">' + translations.get(this.app.session.get('selectedLanguage'))['countryoptions.SelectANeighborhood'] + '</small>');
                     statsd.increment([location, 'posting', 'invalid', this.app.session.get('platform'), 'city']);
                 }
             }
-            else if (!this.parentView.getItem().getLocation()) {
+            else */if (!this.parentView.getItem().getLocation()) {
                 isValid = false;
                 $location.addClass('error').after('<small class="error">' + translations.get(this.app.session.get('selectedLanguage'))['misc.AdNeedsLocation_Mob'] + '</small>');
                 statsd.increment([location, 'posting', 'invalid', this.app.session.get('platform'), 'city']);
