@@ -65,6 +65,7 @@ module.exports = {
     'itemslisting.Previous': 'Avan',
     'itemslisting.RefineYourSearch': 'Rafine Rech\xE8ch ou ',
     'itemslisting.SelectAll': 'Chwazi Tout',
+    'itemslisting.Sold': 'Vann deja',
     'loginbox.CreateYourAccount': 'Kreye yon kont gratis:',
     'loginbox.ForgotYourPassword': 'Ou bliye kod sekr\xE8 ou?',
     'loginbox.IAgreeToTheTermsAndConditionsOfBrand': 'Mwen dak\xF2k ak  <<LINK_TERMS_USE>>R\xE8gleman ak Kondisyon <</LINK_TERMS_USE>>  OLX yo.',

@@ -65,6 +65,7 @@ module.exports = {
     'itemslisting.Previous': 'Iepriek\u0161\u0113jais',
     'itemslisting.RefineYourSearch': 'Detaliz\u0113jiet mekl\u0113\u0161anu',
     'itemslisting.SelectAll': 'Atlas\u012Bt visu',
+    'itemslisting.Sold': 'P\u0101rdots',
     'loginbox.CreateYourAccount': 'Izveidojiet savu kontu bez maksas:',
     'loginbox.ForgotYourPassword': 'Aizmirs\u0101t paroli?',
     'loginbox.IAgreeToTheTermsAndConditionsOfBrand': 'Es piekr\u012Btu <<LINK_TERMS_USE>>noteikumiem un nosac\u012Bjumiem<</LINK_TERMS_USE>> attiec\u012Bb\u0101 uz OLX',

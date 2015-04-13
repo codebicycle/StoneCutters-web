@@ -12,7 +12,7 @@
     }
 
     .item {
-        &.featuredad {
+        &.featuredad, &.soldad {
             .items-date, .items-price, .items-info {
                 padding-top: 30px;
             }
@@ -98,26 +98,48 @@
             padding-top: 10px;
         }
         p.featuredad {
-            position: absolute;
-            left: 138px;
-            top: -3px;
-            height: 20px;
             .icon-star-circle {
                 color: $featureStarBg;
-                font-size: 26px;
-                position: absolute;
-                z-index: 10;
-                top: -7px;
-                left: 0;
                 &:before {
                     border:2px solid $white;
-                    border-radius(50%);
-                    background: $white;
                 }
             }
 
             em {
                 ribbon($green, $white);
+            }
+        }
+        p.soldad {
+            .icon-star-circle {
+                color: $yellowSold;
+                &:before {
+                    border:2px solid $white;
+                }
+            }
+
+            em {
+                ribbon($yellowSold, $white);
+            }
+        }
+        p.soldad, p.featuredad {
+            position: absolute;
+            left: 138px;
+            top: -3px;
+            height: 20px;
+
+            i {
+                background: $white;
+                font-size: 26px;
+                left: 0;
+                position: absolute;
+                top: -7px;
+                z-index: 10;
+                &:before {
+                    border-radius(50%);
+                }
+            }
+
+            em {
                 top: 0;
                 left: 24px;
                 padding-left: 22px;
@@ -126,6 +148,7 @@
                 text-align: center;
             }
         }
+
     }
     &.staticsearch {
         a {
