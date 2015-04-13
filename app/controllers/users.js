@@ -15,6 +15,7 @@ module.exports = {
     registersuccess: middlewares(registersuccess),
     login: middlewares(login),
     lostpassword: middlewares(lostpassword),
+    lostpasswordsuccess: middlewares(lostpasswordsuccess),
     logout: middlewares(logout),
     myolx: middlewares(myolx),
     myads: middlewares(myads),
@@ -124,23 +125,29 @@ function lostpassword(params, callback) {
     function controller() {
         var platform = this.app.session.get('platform');
 
-        if (platform !== 'desktop' && platform !== 'html5') {
+        if (platform === 'wap') {
             return helpers.common.redirect.call(this, '/', null, {
                status: 302
            });
         }
-        if (platform === 'html5' && params.success) {
-            return helpers.common.redirect.call(this, '/login', {
-                sent: true
-            }, {
-                status: 302
-            });
+        else if (params.success) {
+            return helpers.common.redirect.call(this, '/lostpasswordsuccess', null, {
+               status: 302
+           });
         }
 
         callback(null, {
             form: this.form,
             success: params.success
         });
+    }
+}
+
+function lostpasswordsuccess(params, callback) {
+    helpers.controllers.control.call(this, params, controller);
+
+    function controller() {
+        callback(null, 'users/lostpasswordsuccess', {});
     }
 }
 
