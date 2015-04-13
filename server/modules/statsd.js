@@ -75,6 +75,5 @@ function stringify(metric, value) {
     if (config.enabled || config.debug) {
         logger.log(metric + ': ' + (value || 1));
     }
-
     return metric;
 }
