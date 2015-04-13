@@ -19,8 +19,8 @@
 {% if not item.status.onReview %}
     {% set dataUser = true if user else false %}
     {% set favText = dictionary["item.RemoveFromFavorites"] %}
-    {% set flagText = dictionary["item.FlagAsSpamOrScam"] or 'Flag item' %}
-    {% set flagTextDone = dictionary["item.FlagAsSpamOrScamDone"] or 'Item flagged' %}
+    {% set flagText = dictionary["item.FlagAsSpamOrScam"] or 'Report item' %}
+    {% set flagTextDone = dictionary["item.FlagAsSpamOrScamDone"] or 'Item reported' %}
     {% set current =  'remove' %}
     {% if not item.isFavorite %}
         {% set current =  'add' %}

@@ -96,7 +96,7 @@
 
     <div class="line"></div>
 
-    {% set flagText = (dictionary["item.FlagAsSpamOrScam"] or 'Flag items') if not flagged else (dictionary["item.FlagAsSpamOrScamDone" ] or 'Item flagged') %}
+    {% set flagText = (dictionary["item.FlagAsSpamOrScam"] or 'Report item') if not flagged else (dictionary["item.FlagAsSpamOrScamDone" ] or 'Item reported') %}
 
     <div id="centerBtns">
         {% if flagItem.enabled %}
