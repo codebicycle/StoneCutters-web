@@ -13,11 +13,12 @@
         </div>
     </div>
     <div class="buttons">
-        <span class="name">{{ shop.name | truncate( 40, True) }}</span>
+        <span class="name">{{ shop.name | truncate( 40, True) }}<br><span style='color: #761c84' >Open today from 9am to 8pm</span></span>
         <ul class="green-icons">
             <li><a class="phone" href="{{ shop.items[0] | slugToUrl | link({shops_experiment_from: 'listing-shop-item-call', shopId: shop.id}) | link({shopId: shop.id}) }}">phone</a></li>
             <li><a class="mail" href="{{ shop.items[0] | slugToUrl | link({shops_experiment_from: 'listing-shop-item-email', shopId: shop.id}) | link({shopId: shop.id}) }}">mail</a></li>
             <li><a class="sms" href="{{ shop.items[0] | slugToUrl | link({shops_experiment_from: 'listing-shop-item-sms', shopId: shop.id}) | link({shopId: shop.id}) }}">sms</a></li>
         </ul>
     </div>
+
 </li>
