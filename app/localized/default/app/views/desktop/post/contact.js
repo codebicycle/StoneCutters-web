@@ -27,8 +27,8 @@ module.exports = Base.extend({
         'validate': 'onValidate'
     },
     getTemplateData: function() {
-        var locationUrl = this.app.session.get('location').url;
         var data = Base.prototype.getTemplateData.call(this);
+        var locationUrl = this.app.session.get('location').url;
         var isPhoneMandatory = config.getForMarket(locationUrl, ['validator', 'phone', 'enabled'], false);
 
         return _.extend({}, data, {
@@ -50,7 +50,14 @@ module.exports = Base.extend({
         this.validate(success, this.$('[name="email"]'));
 
         function success(isValidEmail) {
-            done(isValid && isValidEmail);
+            var locationUrl = this.app.session.get('location').url;
+            var isPhoneMandatory = config.getForMarket(locationUrl, ['validator', 'phone', 'enabled'], false);
+            var isValidPhone = true;
+
+            if (isPhoneMandatory && this.$('[name=phone]').val() === '') {
+                isValidPhone = false;
+            }
+            done(isValid && isValidEmail && isValidPhone);
         }
     },
     onPhoneChange: function(event) {
