@@ -17,4 +17,8 @@
     </section>
 </div>
 
+{% if isUserSurveyEnabled %}
+    {% include (template + "/partials/user-survey.html") %}
+{% endif %}
+
 {% view 'partials/tracking' %}

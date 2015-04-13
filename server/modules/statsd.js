@@ -32,7 +32,7 @@ var Client = function(options) {
         if (_.isObject(value)) {
             value = undefined;
         }
-        statsD.increment(metric, value);
+        statsD.increment(metric, value, undefined, log.bind(null, metric));
     }
 
     function gauge(metric, value) {
@@ -40,6 +40,16 @@ var Client = function(options) {
             return;
         }
         statsD.gauge(metric, value);
+    }
+
+    function log(metric, err) {
+        if (err) {
+            try {
+                console.log('[OLX_DEBUG]', 'Graphite not found |', metric, err instanceof Error ? JSON.stringify(err.stack) : err);
+            } catch (e) {
+                // Ignore
+            }
+        }
     }
 
     return {

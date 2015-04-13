@@ -4,8 +4,8 @@ var _ = require('underscore');
 var Base = require('../../../../../common/app/bases/view');
 var config = require('../../../../../../../shared/config');
 var EmailValidator = require('../../../../../../modules/emailValidator');
+var Metric = require('../../../../../../modules/metric');
 var helpers = require('../../../../../../helpers');
-var statsd = require('../../../../../../../shared/statsd')();
 var translations = require('../../../../../../../shared/translations');
 
 module.exports = Base.extend({
@@ -25,6 +25,13 @@ module.exports = Base.extend({
         'blur [name="email"]': 'onBlurEmail',
         'click .did-you-mean': 'fillEmail',
         'validate': 'onValidate'
+    },
+    postRender: function() {
+        if (!this.metric) {
+            this.metric = new Metric({}, {
+                app: this.app
+            });
+        }
     },
     onValidate: function(event, done, isValid) {
         event.preventDefault();
@@ -99,6 +106,7 @@ module.exports = Base.extend({
         if ($field.data('value') !== value) {   
             if (config.getForMarket(locationUrl, ['validator', 'email', 'enabled'], false)) {
                 var currentPage = this.editing ? 'editing' : 'posting';
+
                 if (!value) {
                     var category = this.parentView.getItem().get('category');
                     var options = {
@@ -107,11 +115,9 @@ module.exports = Base.extend({
 
                     return this.parentView.$el.trigger('fieldSubmit', [$field, options]);
                 }
-
-                    this.validate($.noop, $field);
-
-                    $field.data('value', value);
-                }
+                this.validate($.noop, $field);
+                $field.data('value', value);
+            }
         }
     },
     validate: function(done, $field) {
@@ -122,25 +128,41 @@ module.exports = Base.extend({
         }
         this.emailValid = new EmailValidator({
             element: $field,
-            progress: this.inProgressValidation.bind(this),
-            success: function onSuccess(data) {
-                done(data.is_valid);
-                this.successValidation(data);
-            }.bind(this),
-            error: function onError() {
-                this.validationError();
-                done(true);
-            }.bind(this),
             currentPage: currentPage
         }, {
             app: this.app
         });
+
+        if (this.emailValid.isEnabled() && $field.val()) {
+            this.emailValid.run({
+                progress: this.inProgressValidation.bind(this),
+                always: this.alwaysValidation.bind(this),
+                success: success.bind(this),
+                error: error.bind(this)
+            });
+        }
+        else {
+            return done(true);
+        }
+
+        function success(data) {
+            done(data.is_valid);
+            this.successValidation(data);
+        }
+
+        function error() {
+            this.validationError();
+            done(true);
+        }
     },
     inProgressValidation: function() {
         var $field = this.$('[name="email"]').addClass('validating');
 
         delete this.parentView.errors[$field.attr('name')];
         $field.siblings('.error.message').remove();
+    },
+    alwaysValidation: function() {
+        this.$('[name="email"]').removeClass('validating');
     },
     successValidation: function (data) {
         var $field = this.$('[name="email"]');
@@ -162,6 +184,7 @@ module.exports = Base.extend({
             $field.closest('.field-wrapper').addClass('error').removeClass('success');
 
             if (!data.did_you_mean) {
+                $field.parent().find('.error.message').remove();
                 $field.parent().append('<small class="error message">' + this.dictionary["postingerror.InvalidEmail"] + '</small>');
             }
         }
@@ -173,7 +196,7 @@ module.exports = Base.extend({
             $field.parent().append('<small class="' + isError + ' message did-you-mean" data-content="' + data.did_you_mean + '">¿Has querido decir <a href="#">' + data.did_you_mean + '</a>?</small>');
         }
 
-        statsd.increment([this.app.session.get('location').abbreviation, this.emailValid.get('currentPage'), data.is_valid ? 'success' : 'error', 'email', 'success', this.app.session.get('platform')]);
+        this.metric.increment(['growth', 'posting', ['validation', 'mailgun', data.is_valid ? 'success' : 'error']]);
 
         $field.removeClass('validating');
     },
@@ -187,7 +210,7 @@ module.exports = Base.extend({
 
         $field.removeClass('validating');
         this.parentView.$el.trigger('fieldSubmit', [$field, options]);
-        statsd.increment([this.app.session.get('location').abbreviation, this.emailValid.get('currentPage'), 'error', 'email', 'error', this.app.session.get('platform')]);
+        this.metric.increment(['growth', 'posting', ['mailgun', 'apierror']]);
     },
     fillEmail: function(event) {
         event.preventDefault();
@@ -204,7 +227,7 @@ module.exports = Base.extend({
             $field.parent().find('small.message.exclude').remove();
         }
 
-        statsd.increment([this.app.session.get('location').abbreviation, this.emailValid.get('currentPage'), 'success', 'email', 'click', this.app.session.get('platform')]);
+        this.metric.increment(['growth', 'posting', ['mailgun', 'didyoumean']]);
 
         $field.val($(event.currentTarget).data('content'));
         this.onBlurEmail();
