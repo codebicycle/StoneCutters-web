@@ -100,20 +100,24 @@
         p.featuredad {
             .icon-star-circle {
                 color: $featureStarBg;
+            }
+            i {
                 &:before {
-                    border:2px solid $white;
+                    background: $white;
                 }
             }
-
             em {
                 ribbon($green, $white);
             }
         }
         p.soldad {
-            .icon-star-circle {
-                color: $yellowSold;
+            .icon-check {
+                color: $white;
+                background: $yellowSold;
+            }
+            i {
                 &:before {
-                    border:2px solid $white;
+                    background: $yellowSold;
                 }
             }
 
@@ -134,7 +138,9 @@
                 position: absolute;
                 top: -7px;
                 z-index: 10;
+                border-radius(50%);
                 &:before {
+                    border:2px solid $white;
                     border-radius(50%);
                 }
             }
