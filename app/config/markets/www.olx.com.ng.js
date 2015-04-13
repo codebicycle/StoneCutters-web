@@ -264,5 +264,8 @@ module.exports = {
         html5: {
             enabled: true
         }
+    },
+    flagItem: {
+        enabled: true
     }
 };

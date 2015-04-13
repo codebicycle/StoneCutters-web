@@ -8,6 +8,8 @@ var Item = require('../../../../../../../models/item');
 var helpers = require('../../../../../../../helpers');
 var translations = require('../../../../../../../../shared/translations');
 var User = require('../../../../../../../models/user');
+var Metric = require('../../../../../../../modules/metric');
+var config = require('../../../../../../../../shared/config');
 
 module.exports = Base.extend({
     className: 'items_show_view',
@@ -22,13 +24,17 @@ module.exports = Base.extend({
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
         var showContact = true;
-
+        var location = this.app.session.get('location');
+        var flagItem = config.getForMarket(location.url, ['flagItem']);
+        
         if (data.item.user !== null && this.app.session.get('user') && this.app.session.get('user').userId === parseInt(data.item.user.id)) {
             showContact = false;
         }
+
         return _.extend({}, data, {
             newItemPage: helpers.features.isEnabled.call(this, 'newItemPage'),
-            showContact:  showContact
+            showContact:  showContact,
+            flagItem: flagItem
         });
     },
     postRender: function() {
@@ -58,8 +64,10 @@ module.exports = Base.extend({
         'click .galActions .prev': 'previouImage',
         'click .galActions .pause': 'pause',
         'click #galCont .swiper-wrapper , #galContOne': 'hideTitleActions',
+        'click [data-increment]': Metric.incrementEventHandler,
         'click .fav': 'favorites',
         'click .share': 'share',
+        'click .flag': 'flag',
         'click .popup-close': 'popupClose',
         'onpopstate window': 'onPopState'
     },
@@ -212,6 +220,16 @@ module.exports = Base.extend({
         $('body').addClass('noscroll');
         history.pushState(null, "", window.location.pathname);
         $('#share').addClass('visible');
+    },
+    flag: function(e) {
+        e.preventDefault();
+
+        var $el = $(e.target);
+        var user = !!this.app.session.get('user');
+
+        $el.text($el.data('text-done'));
+        $el.data('increment-value', [user ? 'auth' : 'anon', 'reflagging']);
+
     },
     popupClose: function(e) {
         e.preventDefault();
