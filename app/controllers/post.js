@@ -93,7 +93,7 @@ function flow(params, callback) {
         var isDesktop = platform === 'desktop';
         var itemId = params.itemId;
         var promise = asynquence().or(error.bind(this))
-            .then(check.bind(this))
+            .then(redirect.bind(this))
             .then(prepare.bind(this));
 
         if (isPostingFlow || isDesktop || itemId) {
@@ -103,17 +103,13 @@ function flow(params, callback) {
         }
         promise.val(success.bind(this));
 
-        function check(done) {
+        function redirect(done) {
             if(params.renew) {
                 if(!config.getForMarket(location.url, ['ads', 'renew', 'enabled'],false)) {
                     params.renew = false;
                     return done.fail({});
                 }
             }
-            done();
-        }
-
-        function prepare(done) {
             if ((!isPostingFlow && !isDesktop) && (!siteLocation || siteLocation.indexOf('www.') === 0)) {
                 done.abort();
                 return helpers.common.redirect.call(this, '/location?target=' + (itemId ? 'myolx/edititem/' + itemId : 'posting'), null, {
@@ -123,11 +119,11 @@ function flow(params, callback) {
             done();
         }
 
-        function fetch(done) {
-            var data = {};
+        function prepare(done) {
+            var spec = {};
             var locationUrl;
 
-            data.postingSession = {
+            spec.postingSession = {
                 model: 'PostingSession',
                 params: {}
             };
@@ -139,7 +135,7 @@ function flow(params, callback) {
                 else if (location.current.type === 'city') {
                     locationUrl = location.children[0].url;
                 }
-                data.cities = {
+                spec.cities = {
                     collection: 'Cities',
                     params: {
                         level: 'states',
@@ -150,14 +146,14 @@ function flow(params, callback) {
                 };
             }
             if (itemId) {
-                data.item = {
+                spec.item = {
                     model: 'Item',
                     params: {
                         id: itemId,
                         languageId: languageId
                     }
                 };
-                data.fields = {
+                spec.fields = {
                     model: 'Field',
                     params: {
                         intent: 'edit',
@@ -166,14 +162,17 @@ function flow(params, callback) {
                     }
                 };
                 if (user) {
-                    data.fields.params.token = user.token;
+                    spec.fields.params.token = user.token;
                 }
                 else if (params.sk) {
-                    data.fields.params.securityKey = params.sk;
+                    spec.fields.params.securityKey = params.sk;
                 }
             }
+            done(spec);
+        }
 
-            this.app.fetch(data, {
+        function fetch(done, spec) {
+            this.app.fetch(spec, {
                 readFromCache: !this.app.session.get('isServer')
             }, done.errfcb);
         }
@@ -209,22 +208,22 @@ function flow(params, callback) {
             this.app.seo.addMetatag('robots', 'noindex, nofollow');
             this.app.seo.addMetatag('googlebot', 'noindex, nofollow');
             if (isPostingFlow) {
-                if (redirect.call(this, res.item)) {
+                if (check.call(this, res.item)) {
                     return;
                 }
                 postingFlowController.call(this, res.postingSession, res.item, res.fields);
             }
             else if (isDesktop) {
-                if (redirect.call(this, res.item)) {
+                if (check.call(this, res.item)) {
                     return;
                 }
                 if (res.item && params.renew)  {
                     res.item.set('renew', true);
                 }
-                postingController.call(this, res.postingSession, res.cities, res.item, res.fields);
+                postingController.call(this, res);
             }
             else if (itemId) {
-                if (redirect.call(this, res.item)) {
+                if (check.call(this, res.item)) {
                     return;
                 }
                 postingFormController.call(this, res.postingSession, res.item, res.fields);
@@ -234,7 +233,7 @@ function flow(params, callback) {
             }
         }
 
-        function redirect(item) {
+        function check(item) {
             var protocol = this.app.session.get('protocol');
             var host = this.app.session.get('host');
             var shortHost = this.app.session.get('shortHost');
@@ -258,7 +257,7 @@ function flow(params, callback) {
             }
         }
 
-        function postingController(postingSession, cities, item, fields) {
+        function postingController(res) {
             var currentLocation = {};
 
             this.app.tracking.setPage('desktop_step1');
@@ -278,36 +277,36 @@ function flow(params, callback) {
             if (item) {
                 item.set({
                     _location: item.get('location')
-                }, {
-                    unset: false
                 });
             }
 
             callback(null, 'post/index', {
-                postingSession: postingSession.get('postingSession'),
-                cities: cities,
-                currentLocation: currentLocation,
                 include: ['item'],
-                item: item || new Item({}, {
+                item: res.item || new Item({}, {
                     app: this.app
                 }),
-                fields: fields,
+                postingSession: res.postingSession.get('postingSession'),
+                cities: res.cities,
+                fields: res.fields,
+                currentLocation: currentLocation,
                 marketing: params.marketing
             }, false);
         }
 
-        function postingFlowController(postingSession, item, fields) {
+        function postingFlowController(res) {
             callback(null, 'post/flow/index', {
-                postingSession: postingSession.get('postingSession'),
                 include: ['item', 'fields'],
-                item: item || new Item({}, {
+                item: res.item || new Item({}, {
                     app: this.app
                 }),
-                fields: fields
+                postingSession: res.postingSession.get('postingSession'),
+                fields: res.fields
             }, false);
         }
 
-        function postingFormController(postingSession, item, fields) {
+        function postingFormController(res) {
+            var item = res.item;
+
             item.set(_.object(_.map(item.get('optionals'), function each(optional) {
                 return optional.name;
             }), _.map(item.get('optionals'), function each(optional) {
@@ -321,12 +320,12 @@ function flow(params, callback) {
             }
             callback(null, 'post/form', {
                 item: item,
-                postingSession: postingSession.get('postingSession'),
+                postingSession: res.postingSession.get('postingSession'),
                 form: {
                     values: item.toJSON(),
                     errors: (this.app.session.get('form') || {}).errors
                 },
-                fields: fields.get('fields'),
+                fields: res.fields.get('fields'),
                 category: {
                     id: item.get('category').parentId
                 },

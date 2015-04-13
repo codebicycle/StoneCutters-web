@@ -3,12 +3,14 @@
 var _ = require('underscore');
 var asynquence = require('asynquence');
 var Base = require('../../../../../common/app/bases/view');
+var helpers = require('../../../../../../helpers');
 var Item = require('../../../../../../models/item');
 var Chat = require('../../../../../../modules/chat');
-var helpers = require('../../../../../../helpers');
-var translations = require('../../../../../../../shared/translations');
-var config = require('../../../../../../../shared/config');
+var Validator = require('../../../../../../modules/validator');
 var utils = require('../../../../../../../shared/utils');
+var config = require('../../../../../../../shared/config');
+var statsd = require('../../../../../../../shared/statsd')();
+var translations = require('../../../../../../../shared/translations');
 
 function onpopstate(event) {
     var $loading = $('body > .loading');
@@ -41,7 +43,9 @@ module.exports = Base.extend({
         'errorsUpdate': 'onErrorsUpdate',
         'error': 'onError',
         'errorClean': 'onErrorClean',
-        'priceReset': 'onPriceReset'
+        'priceReset': 'onPriceReset',
+        'showError': 'onShowError',
+        'hideError': 'onHideError'
     },
     initialize: function() {
         Base.prototype.initialize.call(this);
@@ -49,6 +53,9 @@ module.exports = Base.extend({
         this.errors = {};
         this.formErrors = [];
         this.dictionary = translations.get(this.app.session.get('selectedLanguage'));
+        this.validator = new Validator({}, {
+            app: this.app
+        });
     },
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
@@ -375,8 +382,26 @@ module.exports = Base.extend({
         _.each(['currency_type', 'priceC', 'priceType'], function clean(field) {
             this.item.unset(field);
             delete this.errors[field];
-        }.bind(this));
+        }, this);
         this.$el.trigger('errorsUpdate');
+    },
+    onShowError: function(event, field, options) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+
+        var $field = $(field);
+        var id = $field.attr('name') || $field.attr('id');
+
+        this.$('#posting-errors-view').trigger('showError', Array.prototype.slice.call(arguments, 0));
+        statsd.increment([this.app.session.get('locations').abbreviation, 'posting', 'invalid', this.app.session.get('platform'), id]);
+    },
+    onHideError: function(event, fields, context) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+
+        this.$('#posting-errors-view').trigger('hideError', Array.prototype.slice.call(arguments, 0));
     },
     onSubmit: function(event) {
         event.preventDefault();

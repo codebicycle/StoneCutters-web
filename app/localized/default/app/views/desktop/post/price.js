@@ -1,15 +1,19 @@
 'use strict';
 
-var Base = require('../../../../../common/app/bases/view');
-var helpers = require('../../../../../../helpers');
-var statsd = require('../../../../../../../shared/statsd')();
 var _ = require('underscore');
+var Base = require('../../../../../common/app/bases/view');
+var statsd = require('../../../../../../../shared/statsd')();
 var rPrice = /[^0-9]/gi;
 
 module.exports = Base.extend({
-    tagName: 'section',
     id: 'posting-price-view',
+    tagName: 'section',
     className: 'posting-price-view',
+    events: {
+        'fieldsChange': 'onFieldsChange',
+        'change': 'onChange',
+        'change #field-priceType': 'onPriceTypeChange'
+    },
     fields: false,
     fieldLabel: '',
     fieldName: '',
@@ -30,11 +34,6 @@ module.exports = Base.extend({
             name: this.fieldName || '',
             mandatory: this.fieldMandatory || ''
         });
-    },
-    events: {
-        'fieldsChange': 'onFieldsChange',
-        'change': 'onChange',
-        'change #field-priceType': 'onPriceTypeChange'
     },
     onFieldsChange: function(event, options) {
         event.preventDefault();
@@ -65,7 +64,7 @@ module.exports = Base.extend({
                 else if (name === 'priceC' && hasPriceButNotCurrency) {
                     hasPriceButNotCurrency = length !== fields.length;
                 }
-            }.bind(this));
+            }, this);
             if (!_.isEqual(fields, this.fields)) {
                 this.fields = fields;
                 if (hasPriceButNotCurrency) {

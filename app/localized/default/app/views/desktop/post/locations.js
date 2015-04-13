@@ -1,15 +1,18 @@
 'use strict';
 
-var Base = require('../../../../../common/app/bases/view');
-var helpers = require('../../../../../../helpers');
 var _ = require('underscore');
 var asynquence = require('asynquence');
+var Base = require('../../../../../common/app/bases/view');
 var translations = require('../../../../../../../shared/translations');
 
 module.exports = Base.extend({
     tagName: 'section',
     id: 'posting-locations-view',
     className: 'posting-locations-view',
+    initialize: function() {
+        Base.prototype.initialize.call(this);
+        this.dictionary = translations.get(this.app.session.get('selectedLanguage'));
+    },
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
         var states = data.states;
@@ -62,7 +65,7 @@ module.exports = Base.extend({
     addEmptyOption: function(list, text) {
         list.unshift({
             key: '',
-            value: translations.get(this.app.session.get('selectedLanguage'))[text]
+            value: this.dictionary[text]
         });
     },
     onFormRendered: function(event) {
@@ -169,7 +172,7 @@ module.exports = Base.extend({
             });
             cities.unshift({
                 key: '',
-                value: translations.get(this.app.session.get('selectedLanguage'))['countryoptions.Home_SelectCity']
+                value: this.dictionary['countryoptions.Home_SelectCity']
             });
             done(cities);
         }.bind(this);
@@ -233,7 +236,7 @@ module.exports = Base.extend({
             if (neighborhoods.length) {
                 neighborhoods.unshift({
                     key: '',
-                    value: translations.get(this.app.session.get('selectedLanguage'))[translation]
+                    value: this.dictionary[translation]
                 });
             }
             done(neighborhoods);
@@ -304,9 +307,8 @@ module.exports = Base.extend({
         var $neighborhoods = this.$('#field-neighborhood');
 
         delete this.parentView.parentView.errors.neighborhoods;
-        $neighborhoods.parents('.field-wrapper').addClass('hide').removeClass('error');
-        $neighborhoods.siblings('.error.message').remove();
         $neighborhoods.empty().attr('required', false);
+        this.parentView.$el.trigger('hideError', [$neighborhoods]);
     }
 });
 

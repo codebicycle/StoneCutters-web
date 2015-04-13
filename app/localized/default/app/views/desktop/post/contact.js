@@ -2,10 +2,9 @@
 
 var _ = require('underscore');
 var Base = require('../../../../../common/app/bases/view');
-var config = require('../../../../../../../shared/config');
-var EmailValidator = require('../../../../../../modules/emailValidator');
+var Mailgun = require('../../../../../../modules/validator/models/mailgun');
 var Metric = require('../../../../../../modules/metric');
-var helpers = require('../../../../../../helpers');
+var config = require('../../../../../../../shared/config');
 var translations = require('../../../../../../../shared/translations');
 
 module.exports = Base.extend({
@@ -27,22 +26,31 @@ module.exports = Base.extend({
         'validate': 'onValidate'
     },
     postRender: function() {
+        var $field = this.$('[name="email"]');
+
         if (!this.metric) {
             this.metric = new Metric({}, {
                 app: this.app
             });
         }
+        this.parentView.validator.register($field, {
+            rules: [{
+                id: 'mailgun',
+                message: this.dictionary['misc.DescriptionCharacters_Mob'].replace('<<NUMBER>>', ' ' + 10 + ' '),
+                fn: function validate(val) {
+                    return val.length < 10;
+                }
+            }]
+        }, true);
     },
     onValidate: function(event, done, isValid) {
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();
 
-        this.validate(success, this.$('[name="email"]'));
-
-        function success(isValidEmail) {
+        this.validate(this.$('[name="email"]'), function onComplete(isValidEmail) {
             done(isValid && isValidEmail);
-        }
+        });
     },
     onPhoneChange: function(event) {
         var $phone = $(event.target);
@@ -55,10 +63,8 @@ module.exports = Base.extend({
         event.stopImmediatePropagation();
         
         var $field = $(event.target);
-        var locationUrl = this.app.session.get('location').url;
-        var isMailgunEnabled = config.getForMarket(locationUrl, ['validator', 'email', 'enabled'], false);
 
-        if ($field.attr('name') !== 'email' || !isMailgunEnabled) {
+        if ($field.attr('name') !== 'email' || !Mailgun.isEnabled(this.app)) {
             this.parentView.$el.trigger('fieldSubmit', [$field, options]);
         }
     },
@@ -67,18 +73,6 @@ module.exports = Base.extend({
     },
     onEnablePost: function(event) {
         this.$('.posting').removeAttr('disabled');
-    },
-    onOpenModal: function(event) {
-        event.preventDefault();
-        event.stopPropagation();
-        event.stopImmediatePropagation();
-        $('#modal-terms-view').trigger('show');
-    },
-    onCloseModal: function(event) {
-        event.preventDefault();
-        event.stopPropagation();
-        event.stopImmediatePropagation();
-        $('#modal-terms-view').trigger('hide');
     },
     onFieldsChange: function(event, email) {
         event.preventDefault();
@@ -99,26 +93,43 @@ module.exports = Base.extend({
         }
     },
     onBlurEmail: function() {
-        var locationUrl = this.app.session.get('location').url;
         var $field = this.$('[name="email"]');
         var value = $field.val();
+        var category;
         
         if ($field.data('value') !== value) {   
-            if (config.getForMarket(locationUrl, ['validator', 'email', 'enabled'], false)) {
-                var currentPage = this.editing ? 'editing' : 'posting';
-
+            if (Mailgun.isEnabled(this.app)) {
                 if (!value) {
-                    var category = this.parentView.getItem().get('category');
-                    var options = {
+                    category = this.parentView.getItem().get('category');
+                    return this.parentView.$el.trigger('fieldSubmit', [$field, {
                         pendingValidation: (category.id === undefined || category.parentId === undefined),
-                    };
-
-                    return this.parentView.$el.trigger('fieldSubmit', [$field, options]);
+                    }]);
                 }
                 this.validate($.noop, $field);
                 $field.data('value', value);
             }
         }
+    },
+    validate: function(field, callback) {
+        var $field = $(field);
+        var valid = this.parentView.validator.validate($field, {
+            mailgun: {
+                progress: this.inProgressValidation.bind(this),
+                always: this.alwaysValidation.bind(this),
+                success: success.bind(this),
+                error: error.bind(this)
+            }
+        });
+        var details = this.parentView.validator.details($field);
+        
+        this.parentView.$el.trigger('hideError', [$field]);
+        if (!valid && details && details.length) {
+            this.parentView.$el.trigger('showError', [$field, {
+                message: details.pop()
+            });
+        }
+        (callback || $.noop)(valid);
+        return valid;
     },
     validate: function(done, $field) {
         var currentPage = this.editing ? 'editing' : 'posting';
@@ -231,6 +242,18 @@ module.exports = Base.extend({
 
         $field.val($(event.currentTarget).data('content'));
         this.onBlurEmail();
+    },
+    onOpenModal: function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+        $('#modal-terms-view').trigger('show');
+    },
+    onCloseModal: function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+        $('#modal-terms-view').trigger('hide');
     }
 });
 
