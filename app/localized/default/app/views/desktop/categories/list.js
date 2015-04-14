@@ -72,7 +72,7 @@ module.exports = Base.extend({
     },
     onCategoryClick: function(event) {
         var path = $(event.currentTarget).attr('href');
-        var experiment = this.app.sixpack.experiments.desktopDGDCategoryCars;
+        var experiment = this.app.sixpack.experiments.dgdCategoryCars;
 
         this.app.sixpack.convert(experiment);
         if (experiment && experiment.alternative && experiment.alternative === 'gallery' && this.isCategoryCars(path)) {
@@ -80,8 +80,8 @@ module.exports = Base.extend({
             event.stopPropagation();
             event.stopImmediatePropagation();
 
-            path = helpers.common.linkig.call(this, path, null, 'showig');
-            this.app.router.redirectTo(URLParser.parse(path).path);
+            path = URLParser.parse(path).path;
+            this.app.router.redirectTo(helpers.common.linkig.call(this, path, null, 'showig'));
         }
     },
     isCategoryCars: function(url) {

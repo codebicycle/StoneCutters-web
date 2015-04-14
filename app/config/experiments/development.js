@@ -69,11 +69,11 @@ module.exports = {
             SHOW_SIMPLIFIED_REPLY_FORM: 'show-simplified-reply-form'
         }
     },
-    desktopDGDCategoryCars: {
+    dgdCategoryCars: {
         enabled: true,
         platforms: ['desktop'],
-        markets: ['co'],
-        name: 'desktop-dgd-category-cars',
+        markets: ['ar'],
+        name: 'dgd-category-cars',
         alternatives: {
             CONTROL: 'control',
             GALLERY: 'gallery'
