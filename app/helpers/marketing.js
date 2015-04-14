@@ -28,6 +28,8 @@ module.exports = {
                     data.direct = common.static.call({
                         app: app
                     }, '/apps/OLX.Iran.1.1.apk');
+
+                    data.link = 'market://details?id=com.olx.iris';
                 }
                 data.forOsKey = 'misc.BrandFor_Mob';
                 data.forOs = ' Android';

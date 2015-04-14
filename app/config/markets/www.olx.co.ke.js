@@ -261,5 +261,8 @@ module.exports = {
         phone: {
             enabled: true
         }
+    },
+    flagItem: {
+        enabled: true
     }
 };
