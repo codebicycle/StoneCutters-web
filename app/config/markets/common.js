@@ -263,5 +263,8 @@ module.exports = {
             platforms: ['html5', 'desktop'],
             key: 'pubkey-6f6d5eea08926fa815f65250086dfbbb'
         }
+    },
+    flagItem: {
+        enabled: false
     }
 };

@@ -118,7 +118,7 @@ module.exports = {
             },
             interstitialByADX: {
                 worldwide: true,
-                countries: []
+                countries: ['www.olx.ir']
             },
             autoLocation: {
                 worldwide: true,
@@ -148,7 +148,7 @@ module.exports = {
         html4: {
             interstitialByADX: {
                 worldwide: true,
-                countries: []
+                countries: ['www.olx.ir']
             },
             hermes: {
                 worldwide: true,
