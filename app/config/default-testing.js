@@ -119,7 +119,7 @@ module.exports = {
             },
             interstitialByADX: {
                 worldwide: true,
-                countries: []
+                countries: ['www.olx.ir']
             },
             autoLocation: {
                 worldwide: true,
@@ -149,7 +149,7 @@ module.exports = {
         html4: {
             interstitialByADX: {
                 worldwide: true,
-                countries: []
+                countries: ['www.olx.ir']
             },
             hermes: {
                 worldwide: true,
@@ -157,7 +157,7 @@ module.exports = {
             },
             safetyTips: {
                 worldwide: false,
-                countries: ['www.olx.co.za', 'www.olx.com.ng']
+                countries: ['www.olx.co.za', 'www.olx.com.ng', 'www.olx.co.ke']
             }
         },
         desktop: {
