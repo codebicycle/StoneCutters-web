@@ -36,13 +36,23 @@ module.exports = {
         firstClick: true
     },
     desktopDGD23ShowSimplifiedReplyForm: {
-        enabled: false,
+        enabled: true,
         platforms: ['desktop'],
         markets: ['ar', 'co'],
         name: 'desktop-dgd23-show-simplified-reply-form',
         alternatives: {
             CONTROL: 'control',
             SHOW_SIMPLIFIED_REPLY_FORM: 'show-simplified-reply-form'
+        }
+    },
+    dgdCategoryCars: {
+        enabled: true,
+        platforms: ['desktop'],
+        markets: ['ar'],
+        name: 'dgd-category-cars',
+        alternatives: {
+            CONTROL: 'control',
+            GALLERY: 'gallery'
         }
     }
 };
