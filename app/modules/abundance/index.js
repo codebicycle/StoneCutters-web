@@ -2,7 +2,6 @@
 
 var _ = require('underscore');
 var Backbone = require('backbone');
-var logger = require('../logger');
 var helpers = require('../../helpers');
 var Metric = require('../../modules/metric');
 var config = require('../../../shared/config');
@@ -29,7 +28,6 @@ function fetch(done, res) {
     var siteLocation = this.app.session.get('siteLocation');
 
     helpers.dataAdapter.get(this.app.req, ['/locations/' + siteLocation + '/neighbors'].join(''), callback.bind(this));
-    logger.log('[OLX_DEBUG] DGD-2 ::', siteLocation);
 
     function callback(error, response, body) {
         var type = getListingType(this.app.session.get('currentRoute'));
