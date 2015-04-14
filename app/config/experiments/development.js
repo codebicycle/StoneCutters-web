@@ -28,9 +28,7 @@ module.exports = {
         name: 'show-shops',
         alternatives: {
             ITEMS: 'items',
-            AD_LIKE_STORE: 'adlikestore',
             CALL_TO_ACTION: 'calltoactions',
-            AD_LIKE_STORE_MAP: 'adlikestore_map',
             CALL_TO_ACTION_MAP: 'calltoactions_map'
         },
         firstClick: true
