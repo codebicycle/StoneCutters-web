@@ -50,7 +50,7 @@ module.exports = {
         platforms: ['desktop'],
         markets: ['ar'],
         name: 'category-suggestion',
-        fraction: 0.5,
+        fraction: 0.3,
         alternatives: {
             CONTROL: 'control',
             SUGGESTED: 'suggested',

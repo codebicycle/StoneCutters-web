@@ -45,6 +45,18 @@ module.exports = {
             TEST2: 'test2'
         }
     },
+    categorySuggestion: {
+        enabled: true,
+        platforms: ['desktop'],
+        markets: ['ar'],
+        name: 'category-suggestion',
+        fraction: 0.3,
+        alternatives: {
+            CONTROL: 'control',
+            SUGGESTED: 'suggested',
+            SINGLE: 'single'
+        }
+    },
     fractionKPIsTest: {
         enabled: true,
         platforms: ['desktop'],
@@ -57,7 +69,7 @@ module.exports = {
             TEST3: 'test3',
             TEST4: 'test4'
         }
-    },    
+    },
     desktopDGD23ShowSimplifiedReplyForm: {
         enabled: true,
         platforms: ['desktop'],
