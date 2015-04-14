@@ -70,11 +70,10 @@ module.exports = Base.extend({
         event.stopImmediatePropagation();
         $('#location-modal').trigger('hide');
     },
-    onCategoryClick: function(event) {
-        var path = $(event.currentTarget).attr('href');
+    onClickItem: function(event) {
+        var path = this.app.session.get('path');
         var experiment = this.app.sixpack.experiments.dgdCategoryCars;
 
-        this.app.sixpack.convert(experiment);
         if (experiment && experiment.alternative && experiment.alternative === 'gallery' && this.isCategoryCars(path)) {
             event.preventDefault();
             event.stopPropagation();

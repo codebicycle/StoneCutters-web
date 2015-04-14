@@ -35,16 +35,6 @@ module.exports = {
         },
         firstClick: true
     },
-    desktopTest: {
-        enabled: true,
-        platforms: ['desktop'],
-        markets: ['co'],
-        name: 'test',
-        alternatives: {
-            TEST1: 'test1',
-            TEST2: 'test2'
-        }
-    },
     desktopDGD23ShowSimplifiedReplyForm: {
         enabled: false,
         platforms: ['desktop'],
