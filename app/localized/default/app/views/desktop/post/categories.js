@@ -27,8 +27,8 @@ module.exports = Base.extend({
         });
     },
     showCategoryList: function(event) {
-        $('.posting-categories-list').fadeIn();
-        $('#posting-category-suggestion-button').hide();
+        this.$('.posting-categories-list').fadeIn();
+        this.$('#posting-category-suggestion-button').hide();
     },
     onEditCategory: function(event, category) {
         this.$('.posting-categories-list a[data-id=' + category.parentId + ']').trigger('click', ['edit']);

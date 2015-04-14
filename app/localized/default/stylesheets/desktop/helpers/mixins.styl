@@ -200,55 +200,6 @@ transition()
 transform()
     vendor('transform', arguments)
 
-preloader(firstColor, preloaderSize, animationSpeed)
-    position:relative;
-    width: preloaderSize;
-    height: preloaderSize;
-    .circles
-        position:absolute;
-        background-color: firstColor;
-        width: round(preloaderSize*15/66);
-        height: round(preloaderSize*15/66);
-        vendor('border-radius', round(preloaderSize*10/66));
-        vendor('animation-duration', round(animationSpeed*8/10, 2));
-        vendor('animation-name', bounce_circles);
-        vendor('animation-iteration-count', infinite);
-        vendor('animation-direction', linear);
-
-        &.circle1
-            left: 0;
-            top: round(preloaderSize*26/66);
-            vendor('animation-delay', round(animationSpeed*3/10, 2))
-        &.circle2
-            left: round(preloaderSize*7/66);
-            top: round(preloaderSize*7/66);
-            vendor('animation-delay', round(animationSpeed*4/10, 2))
-        &.circle3
-            top: 0;
-            left: round(preloaderSize*26/66);
-            vendor('animation-delay', round(animationSpeed*5/10, 2))
-        &.circle4
-            right: round(preloaderSize*7/66);
-            top: round(preloaderSize*7/66);
-            vendor('animation-delay', round(animationSpeed*6/10, 2))
-        &.circle5
-            right: 0;
-            top: round(preloaderSize*26/66);
-            vendor('animation-delay', round(animationSpeed*7/10, 2))
-        &.circle6
-            right: round(preloaderSize*7/66);
-            bottom: round(preloaderSize*7/66);
-            vendor('animation-delay', round(animationSpeed*8/10, 2))
-        &.circle7
-            left: round(preloaderSize*26/66);
-            bottom: 0;
-            vendor('animation-delay', round(animationSpeed*9/10, 2))
-        &.circle8
-            left: round(preloaderSize*7/66);
-            bottom: round(preloaderSize*7/66);
-            vendor('animation-delay', round(animationSpeed*10/10, 2))
-
-
 ul-reset()
     margin: 0
     padding: 0
