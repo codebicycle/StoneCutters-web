@@ -1,6 +1,7 @@
 'use strict';
 
 var _ = require('underscore');
+var URLParser = require('url');
 var Base = require('../../../../../common/app/bases/view').requireView('categories/list');
 var helpers = require('../../../../../../helpers');
 var Chat = require('../../../../../../modules/chat');
@@ -14,7 +15,8 @@ module.exports = Base.extend({
     events: {
         'click .open-modal': 'onOpenModal',
         'click [data-modal-shadow], [data-modal-close]': 'onCloseModal',
-        'click [data-increment]': Metric.incrementEventHandler
+        'click [data-increment]': Metric.incrementEventHandler,
+        'click li.category li a': 'onCategoryClick'
     },
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
@@ -67,5 +69,22 @@ module.exports = Base.extend({
         event.stopPropagation();
         event.stopImmediatePropagation();
         $('#location-modal').trigger('hide');
+    },
+    onCategoryClick: function(event) {
+        var path = $(event.currentTarget).attr('href');
+        var experiment = this.app.sixpack.experiments.desktopDGDCategoryCars;
+
+        this.app.sixpack.convert(experiment);
+        if (experiment && experiment.alternative && experiment.alternative === 'gallery' && this.isCategoryCars(path)) {
+            event.preventDefault();
+            event.stopPropagation();
+            event.stopImmediatePropagation();
+
+            path = helpers.common.linkig.call(this, path, null, 'showig');
+            this.app.router.redirectTo(URLParser.parse(path).path);
+        }
+    },
+    isCategoryCars: function(url) {
+        return _.contains([378], Number((url.match(/.+-cat-(\d+).*/) || [])[1] || 0));
     }
 });

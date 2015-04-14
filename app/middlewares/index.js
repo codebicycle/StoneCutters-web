@@ -12,7 +12,7 @@ var middlewares = {
     search: require('./search'),
     metrics: require('./metrics'),
     conversations: require('./conversations'),
-    origin: require('./origin')
+    sixpack: require('./sixpack')
 };
 
 module.exports = function(controller, exclude) {
