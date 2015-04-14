@@ -11,8 +11,6 @@ module.exports = Base.extend({
     className: 'header-view',
     events: {
         'click .posting': 'onPostClick',
-        'click .brand': 'onLogoClick',
-        'blur .search-form': 'onSearchBlur',
         'click [data-increment]': Metric.incrementEventHandler
     },
     postRender: function() {
@@ -31,33 +29,10 @@ module.exports = Base.extend({
         });
 
         sixpack.convert(sixpack.experiments.desktopTest);
-        sixpack.convert(sixpack.experiments.fractionKPIsTest);
         
         if (currentRoute.controller === 'items' && currentRoute.action === 'show') {
             sixpack.convert(sixpack.experiments.desktopDGD23ShowSimplifiedReplyForm, 'publish');
         }
-    },
-    onLogoClick: function() {
-        var sixpack = new Sixpack({
-            clientId: this.app.session.get('clientId'),
-            ip: this.app.session.get('ip'),
-            userAgent: this.app.session.get('userAgent'),
-            platform: this.app.session.get('platform'),
-            market: this.app.session.get('location').abbreviation
-        });
-
-        sixpack.convert(sixpack.experiments.fractionKPIsTest, 'logo');
-    },
-    onSearchBlur: function() {
-        var sixpack = new Sixpack({
-            clientId: this.app.session.get('clientId'),
-            ip: this.app.session.get('ip'),
-            userAgent: this.app.session.get('userAgent'),
-            platform: this.app.session.get('platform'),
-            market: this.app.session.get('location').abbreviation
-        });
-
-        sixpack.convert(sixpack.experiments.fractionKPIsTest, 'search');
     },
     onPostingStart: function() {
         $('.posting, .search-form').addClass('disabled');
