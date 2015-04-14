@@ -34,7 +34,7 @@ module.exports = {
     mario: {
         protocol: 'http',
         host: 'mario-LB-69977862.us-east-1.elb.amazonaws.com',
-    },    
+    },
     staticAccept: ['css', 'js', 'apk', 'zip'],
     imageAccept: ['jpg', 'jpeg', 'png', 'gif', 'ico'],
     environment: {
@@ -120,7 +120,7 @@ module.exports = {
             },
             interstitialByADX: {
                 worldwide: true,
-                countries: []
+                countries: ['www.olx.ir']
             },
             autoLocation: {
                 worldwide: true,
@@ -150,7 +150,7 @@ module.exports = {
         html4: {
             interstitialByADX: {
                 worldwide: true,
-                countries: []
+                countries: ['www.olx.ir']
             },
             hermes: {
                 worldwide: true,
