@@ -1,6 +1,54 @@
 .image-gallery {
     clear-fix();
-    overflow: hidden; /* remove this after JS implementation */
+    position: relative;
+
+    p.soldad {
+        .icon-star-circle {
+            color: $yellowSold;
+        }
+
+        em {
+            ribbon($yellowSold, $white);
+        }
+    }
+    p.featuredad {
+        .icon-star-circle {
+            color: $featureStarBg;
+        }
+
+        em {
+            ribbon($green, $white);
+        }
+    }
+    p.featuredad, p.soldad {
+        height: 20px;
+        left: -13px;
+        position: absolute;
+        top: 0;
+
+        i {
+            font-size: 26px;
+            left: 0;
+            position: absolute;
+            top: -7px;
+            z-index: 10;
+            &:before {
+                background: $white;
+                border-radius(50%);
+                border:2px solid $white;
+            }
+        }
+
+        em {
+            left: 24px;
+            padding-left: 22px;
+            position: absolute;
+            text-align: center;
+            top: 0;
+            width: 120px;
+            z-index: 1;
+        }
+    }
 
     .image-wrapper {
         border: 1px solid $greyBorders;

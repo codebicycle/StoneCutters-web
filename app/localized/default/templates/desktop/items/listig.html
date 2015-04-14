@@ -18,7 +18,13 @@
                     <p class="items-date">
                         {{ item.date.since.day if item.date.since.day }} {{ dictionary[item.date.since.dictionary] }}{{ (', ' + item.date.since.hour) if item.date.since.hour }}
                     </p>
-                    {% if item.isFeatured %}
+
+                    {% if item.isSold %}
+                        <p class="soldad">
+                            <i class="icons icon-star-circle"></i>
+                            <em>{{ dictionary["itemslisting.Sold"] }}</em>
+                        </p>
+                    {% elif item.isFeatured %}
                         <p class="featuredad">
                             <i class="icons icon-star-circle"></i>
                             <em>{{ dictionary["misc.FeaturedAd _BR"] }}</em>
@@ -47,12 +53,17 @@
                         <p class="items-date">
                             {{ item.date.since.day if item.date.since.day }} {{ dictionary[item.date.since.dictionary] }}{{ (', ' + item.date.since.hour) if item.date.since.hour }}
                         </p>
-                        {% if item.isFeatured %}
-                            <p class="featuredad">
-                                <i class="icons icon-star-circle"></i>
-                                <em>{{ dictionary["misc.FeaturedAd _BR"] }}</em>
-                            </p>
-                        {% endif %}
+                        {% if item.isSold %}
+                        <p class="soldad">
+                            <i class="icons icon-star-circle"></i>
+                            <em>{{ dictionary["itemslisting.Sold"] }}</em>
+                        </p>
+                    {% elif item.isFeatured %}
+                        <p class="featuredad">
+                            <i class="icons icon-star-circle"></i>
+                            <em>{{ dictionary["misc.FeaturedAd _BR"] }}</em>
+                        </p>
+                    {% endif %}
                     </a>
                 </li>
             {% endfor %}

@@ -111,13 +111,12 @@
             }
         }
         p.soldad {
-            .icon-check {
-                color: $white;
-                background: $yellowSold;
+            .icon-star-circle {
+                color: $yellowSold;
             }
             i {
                 &:before {
-                    background: $yellowSold;
+                    background: $white;
                 }
             }
 
@@ -126,19 +125,19 @@
             }
         }
         p.soldad, p.featuredad {
-            position: absolute;
-            left: 138px;
-            top: -3px;
             height: 20px;
+            left: 138px;
+            position: absolute;
+            top: -3px;
 
             i {
                 background: $white;
+                border-radius(50%);
                 font-size: 26px;
                 left: 0;
                 position: absolute;
                 top: -7px;
                 z-index: 10;
-                border-radius(50%);
                 &:before {
                     border:2px solid $white;
                     border-radius(50%);
@@ -146,12 +145,12 @@
             }
 
             em {
-                top: 0;
                 left: 24px;
                 padding-left: 22px;
                 position: absolute;
-                width: 120px;
                 text-align: center;
+                top: 0;
+                width: 120px;
             }
         }
 
