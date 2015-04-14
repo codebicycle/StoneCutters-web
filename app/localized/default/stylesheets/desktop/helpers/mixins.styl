@@ -194,11 +194,11 @@ btn-close(color, hovercolor)
         &::before
             color: hovercolor;
 
-transition(t)
-    vendor('transition', t)
+transition()
+    vendor('transition', arguments)
 
-transform(t)
-    vendor('transform', t)
+transform()
+    vendor('transform', arguments)
 
 preloader(firstColor, preloaderSize, animationSpeed)
     position:relative;
@@ -211,24 +211,9 @@ preloader(firstColor, preloaderSize, animationSpeed)
         height: round(preloaderSize*15/66);
         vendor('border-radius', round(preloaderSize*10/66));
         vendor('animation-duration', round(animationSpeed*8/10, 2));
-
-        -webkit-animation-name:bounce_circles;
-        -moz-animation-name:bounce_circles;
-        -ms-animation-name:bounce_circles;
-        -o-animation-name:bounce_circles;
-        animation-name:bounce_circles;
-
-        -moz-animation-iteration-count:infinite;
-        -webkit-animation-iteration-count:infinite;
-        -ms-animation-iteration-count:infinite;
-        -o-animation-iteration-count:infinite;
-        animation-iteration-count:infinite;
-
-        -moz-animation-direction:linear;
-        -webkit-animation-direction:linear;
-        -ms-animation-direction:linear;
-        -o-animation-direction:linear;
-        animation-direction:linear;
+        vendor('animation-name', bounce_circles);
+        vendor('animation-iteration-count', infinite);
+        vendor('animation-direction', linear);
 
         &.circle1
             left: 0;

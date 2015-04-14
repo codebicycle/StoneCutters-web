@@ -27,7 +27,7 @@ module.exports = Base.extend({
         });
     },
     showCategoryList: function(event) {
-        $('.posting-categories-list').show();
+        $('.posting-categories-list').fadeIn();
         $('#posting-category-suggestion-button').hide();
     },
     onEditCategory: function(event, category) {

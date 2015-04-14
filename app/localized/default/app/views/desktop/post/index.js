@@ -30,9 +30,12 @@ module.exports = Base.extend({
     id: 'posting-view',
     className: function() {
         this.sixpack = new Sixpack({
-            platform: this.app.session.get('platform'),
             market: this.app.session.get('location').abbreviation,
-            experiments: this.app.session.get('experiments')
+            platform: this.app.session.get('platform'),
+            experiments: this.app.session.get('experiments'),
+            clientId: this.app.session.get('clientId'),
+            ip: this.app.session.get('ip'),
+            userAgent: this.app.session.get('userAgent')
         });
         this.sixpack.currentAlternative = this.sixpack.experiments.categorySuggestion ? this.sixpack.experiments.categorySuggestion.alternative : '';
 
@@ -69,9 +72,12 @@ module.exports = Base.extend({
         var location = this.app.session.get('location');
         var customerContact = config.getForMarket(location.url, ['post_customer_contact'], '');
         var sixpack = new Sixpack({
-            platform: this.app.session.get('platform'),
             market: this.app.session.get('location').abbreviation,
-            experiments: this.app.session.get('experiments')
+            platform: this.app.session.get('platform'),
+            experiments: this.app.session.get('experiments'),
+            clientId: this.app.session.get('clientId'),
+            ip: this.app.session.get('ip'),
+            userAgent: this.app.session.get('userAgent')
         });
         var currentAlternative = sixpack.experiments.categorySuggestion ? sixpack.experiments.categorySuggestion.alternative : '';
 
@@ -461,6 +467,7 @@ module.exports = Base.extend({
             });
 
             this.sixpack.convert(this.sixpack.experiments.categorySuggestion);
+            this.categorySuggestionMetric(this.categorySuggestionFunnel);
 
             helpers.common.redirect.call(this.app.router, successPage + this.item.get('id') + '?sk=' + this.item.get('securityKey'), null, {
                 status: 200
@@ -504,8 +511,12 @@ module.exports = Base.extend({
         return this.item;
     },
     scrollSlideTo: function(element, value) {
+        var $element = $(element);
+        if (!$element.length) {
+            return false;
+        }
         return $('body').animate({
-            scrollTop: $(element).offset().top + (value ? value : 0)
+            scrollTop: $element.offset().top + (value ? value : 0)
         }, {
             queue: false,
             duration: 750
@@ -544,7 +555,7 @@ module.exports = Base.extend({
             },
             error: function onError(result) {
                 $catSelector.removeClass('loading');
-                this.categorySuggestionMetric('api-error');
+                this.categorySuggestionMetric(['api', result.statusText]);
             }
         });
     },
@@ -584,9 +595,16 @@ module.exports = Base.extend({
                         parentCategory: cat.category.id,
                         subCategory: cat.subcategory.id
                     }]);
+
+                    this.categorySuggestionTracker('on');
+
                     return;
                 }
             }
+            this.categorySuggestionTracker('on');
+        }
+        else {
+            this.categorySuggestionTracker('off');
         }
         this.categorySuggestionBuildIU(response);
     },
@@ -597,8 +615,9 @@ module.exports = Base.extend({
 
         var strHtml = '';
         var options = {};
+        var responseLength = response.length;
 
-        if (response.length === 1) {
+        if (responseLength === 1) {
             options = {
                 classname: 'selected',
                 buttontext: 'Cambiar categoría',
@@ -629,7 +648,7 @@ module.exports = Base.extend({
                 subcategoryname: category.subcategory.name,
                 buttontext: options.buttontext,
                 action: options.action,
-                index: ++index
+                index: ++index + '/' + responseLength
             });
         }, this);
 
@@ -641,10 +660,9 @@ module.exports = Base.extend({
                     action: options.more.action
                 });
             }
-            $('.posting-categories-list').hide();
         }
 
-        $('#posting-categories-view .posting-categories-suggested').html(strHtml).find('li a').on('click', { context: this }, function(event) {
+        $('#posting-categories-view .posting-categories-suggested').hide().html(strHtml).fadeIn().find('li a').on('click', { context: this }, function(event) {
             event.preventDefault();
             event.stopPropagation();
             event.stopImmediatePropagation();
@@ -662,16 +680,24 @@ module.exports = Base.extend({
             }
             else {
                 $('.posting-categories-suggested').empty();
-                $('.posting-categories-list').show();
+                $('.posting-categories-list').fadeIn();
             }
-            $this.categorySuggestionMetric([$element.data('increment-action'), $element.data('increment-value')]);
+            $this.categorySuggestionTracker($element.data('increment-value'));
         });
 
-        console.log(strHtml);
-
         $('#posting-category-suggestion-button').toggle(!strHtml);
+        $('.posting-categories-list').hide();
+    },
+    categorySuggestionTracker: function(crumb) {
+        if (!this.categorySuggestionFunnel) {
+            this.categorySuggestionFunnel = [];
+        }
+        this.categorySuggestionFunnel.push(crumb);
     },
     categorySuggestionMetric: function(keys) {
+        if (!this.sixpack.experiments.categorySuggestion || this.editing || !keys) {
+            return;
+        }
         this.metric.increment(['growth', 'posting', ['category-suggestion', 'alternative-' + this.sixpack.currentAlternative, keys.join(',')]]);
     }
 });
