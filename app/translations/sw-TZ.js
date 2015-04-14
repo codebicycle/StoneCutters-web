@@ -514,6 +514,7 @@ module.exports = {
     'misc.ChooseMostApplicable': 'Kutoka kwa chaguzi zilizoko hapo chini tafadhali chagua moja ile inatumika sana kwa ripoti yako',
     'misc.ClearTitleAttractsBuyers': 'Kichwa dhahiri na chenye maelezo zaidi huvutia wanunuzi zaidi',
     'misc.ClickHere': 'Bonyeza hapa',
+    'misc.ConactHelp': 'Mwasiliani na Msaada',
     'misc.ContactDetails_Mob': 'Maelezo ya mwasiliani',
     'misc.ContactInformation_Mob': 'Taarifa ya Kuwasiliana',
     'misc.ContainBadWords': 'Ujumbe huo una maneno mabaya na/au ni ya ulaghai',

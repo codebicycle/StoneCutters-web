@@ -4,11 +4,15 @@ var Base = require('../../../../../common/app/bases/view').requireView('header/u
 var helpers = require('../../../../../../helpers');
 var asynquence = require('asynquence');
 var _ = require('underscore');
+var Metric = require('../../../../../../modules/metric');
 
 module.exports = Base.extend({
 	tagName: 'aside',
 	id: 'user-nav-bar',
     className: 'header-usernav-view',
+    events: {
+        'click [data-increment]': Metric.incrementEventHandler
+    },
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
         var isHermesEnabled = helpers.features.isEnabled.call(this, 'hermes');

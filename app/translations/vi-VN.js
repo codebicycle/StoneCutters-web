@@ -514,6 +514,7 @@ module.exports = {
     'misc.ChooseMostApplicable': 'T\u1EEB c\xE1c l\u1EF1a ch\u1ECDn d\u01B0\u1EDBi \u0111\xE2y, ch\u1ECDn m\u1ED9t ph\xF9 h\u1EE3p nh\u1EA5t v\u1EDBi b\xE1o c\xE1o c\u1EE7a b\u1EA1n:',
     'misc.ClearTitleAttractsBuyers': 'M\u1ED9t ti\xEAu \u0111\u1EC1 r\xF5 r\xE0ng h\u01A1n v\xE0 nhi\u1EC1u m\xF4 t\u1EA3 h\u01A1n thu h\xFAt nhi\u1EC1u ng\u01B0\u1EDDi mua h\u01A1n',
     'misc.ClickHere': 'B\u1EA5m v\xE0o \u0111\xE2y',
+    'misc.ConactHelp': 'Contact & Help',
     'misc.ContactDetails_Mob': 'Chi ti\u1EBFt li\xEAn h\u1EC7',
     'misc.ContactInformation_Mob': 'Th\xF4ng tin Li\xEAn h\u1EC7',
     'misc.ContainBadWords': 'N\u1ED9i dung n\xE0y ch\u1EE9a c\xE1c t\u1EEB th\xF4 t\u1EE5c v\xE0/ho\u1EB7c mang t\xEDnh l\u1EEBa \u0111\u1EA3o.',
