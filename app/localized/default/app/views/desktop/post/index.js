@@ -6,10 +6,12 @@ var Base = require('../../../../../common/app/bases/view');
 var helpers = require('../../../../../../helpers');
 var Item = require('../../../../../../models/item');
 var Chat = require('../../../../../../modules/chat');
+var Metric = require('../../../../../../modules/metric');
 var Validator = require('../../../../../../modules/validator');
 var utils = require('../../../../../../../shared/utils');
 var config = require('../../../../../../../shared/config');
 var statsd = require('../../../../../../../shared/statsd')();
+var Sixpack = require('../../../../../../../shared/sixpack');
 var translations = require('../../../../../../../shared/translations');
 
 function onpopstate(event) {
@@ -28,7 +30,13 @@ function onpopstate(event) {
 module.exports = Base.extend({
     tagName: 'main',
     id: 'posting-view',
-    className: 'posting-view',
+    className: function() {
+        this.app.sixpack.currentAlternative = this.app.sixpack.experiments.growthCategorySuggestion ? this.app.sixpack.experiments.growthCategorySuggestion.alternative : '';
+
+        var sixpackClass = this.app.sixpack.className(this.app.sixpack.experiments.growthCategorySuggestion);
+
+        return 'posting-view' + (this.getItem().has('id') ? ' edition' : '') + (sixpackClass ? ' ' : '') + sixpackClass;
+    },
     events: {
         'focus .text-field': 'fieldFocus',
         'blur .text-field': 'fieldFocus',
@@ -56,16 +64,19 @@ module.exports = Base.extend({
         this.validator = new Validator({}, {
             app: this.app
         });
+        this.categorySuggestionConfig = config.get(['categorySuggestion'], {});
     },
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
         var location = this.app.session.get('location');
         var customerContact = config.getForMarket(location.url, ['post_customer_contact'], '');
+        var currentAlternative = this.app.sixpack.experiments.growthCategorySuggestion ? this.app.sixpack.experiments.growthCategorySuggestion.alternative : '';
 
         return _.extend({}, data, {
             item: this.getItem(data.item),
             customerContact: customerContact,
-            chatEnabled: Chat.isEnabled.call(this)
+            chatEnabled: Chat.isEnabled.call(this),
+            experiments: this.getItem().has('id') || currentAlternative === 'control' ? {} : this.app.sixpack.experiments
         });
     },
     postRender: function() {
@@ -118,6 +129,12 @@ module.exports = Base.extend({
         }
         this.app.router.once('action:end', this.onStart);
         this.app.router.once('action:start', this.onEnd);
+
+        if (!this.metric) {
+            this.metric = new Metric({}, {
+                app: this.app
+            });
+        }
     },
     fieldFocus: function(event) {
         $(event.currentTarget).closest('.field-wrapper').toggleClass('focus');
@@ -134,7 +151,6 @@ module.exports = Base.extend({
             return field.name === 'email';
         });
         var email = field.value ? field.value.value : '';
-
 
         this.item.get('category').parentId = subcategory.parentId;
         this.item.get('category').id = subcategory.id;
@@ -263,9 +279,7 @@ module.exports = Base.extend({
                 $fieldCat.parent().append('<small class="error message">' + messages[!$('.child-categories-list').is(':visible') ? 0 : 1] + '</small>');
             }
             $field.removeClass('validating');
-            $('html, body').animate({
-                scrollTop: this.$el.offset().top
-            }, 750);
+            this.scrollSlideTo(this.$el);
         } else {
 
             if ($field.attr('required') && !value.trim().length) {
@@ -359,9 +373,7 @@ module.exports = Base.extend({
                 $field.parent().append('<small class="error message">' + message + '</small>');
             }
         }.bind(this));
-        $('html, body').animate({
-            scrollTop: $('small.error.message').first().parent().offset().top - 20
-        }, 750);
+        this.scrollSlideTo($('small.error.message').first().parent(), -20);
         this.$('#posting-errors-view').trigger('update');
     },
     onErrorClean: function(event, field) {
@@ -426,9 +438,7 @@ module.exports = Base.extend({
             if (errors.length) {
                 done.abort();
                 this.$('#posting-contact-view').trigger('enablePost');
-                return $('html, body').animate({
-                    scrollTop: errors.first().parent().offset().top - 20
-                }, 750);
+                return this.scrollSlideTo(errors.first().parent(), -20);
             }
             done();
         }
@@ -438,7 +448,6 @@ module.exports = Base.extend({
 
             validation.call(this, '#posting-description-view');
             validation.call(this, '#posting-title-view');
-            validation.call(this, '#posting-contact-view');
             promise.then(check.bind(this));
             promise.val(done);
 
@@ -465,6 +474,9 @@ module.exports = Base.extend({
                 action: action,
                 custom: [category, this.item.get('category').parentId || '-', this.item.get('category').id || '-', action, this.item.get('id')].join('::')
             });
+
+            this.app.sixpack.convert(this.app.sixpack.experiments.growthCategorySuggestion);
+            this.categorySuggestionMetric(this.categorySuggestionFunnel);
 
             helpers.common.redirect.call(this.app.router, successPage + this.item.get('id') + '?sk=' + this.item.get('securityKey'), null, {
                 status: 200
@@ -506,6 +518,196 @@ module.exports = Base.extend({
             app: this.app
         }));
         return this.item;
+    },
+    scrollSlideTo: function(element, value) {
+        var $element = $(element);
+        if (!$element.length) {
+            return false;
+        }
+        return $('body').animate({
+            scrollTop: $element.offset().top + (value ? value : 0)
+        }, {
+            queue: false,
+            duration: 750
+        });
+    },
+    renderTemplate: function(tpl, data) {
+        return _.template($(tpl).html(), data, {
+            interpolate: /\{(.+?)\}/g
+        });
+    },
+    categorySuggestion: function(value) {
+        if (!this.app.sixpack.experiments.growthCategorySuggestion || this.app.sixpack.currentAlternative === 'control' || this.editing) {
+            return;
+        }
+        var $catSelector = $('#posting-categories-view .posting-category-suggestion');
+        var apiAdress = this.categorySuggestionConfig.api + this.app.session.get('location').url;
+
+        $.ajax({
+            type: 'GET',
+            url: apiAdress,
+            dataType: 'json',
+            timeout: this.categorySuggestionConfig.timeout,
+            cache: false,
+            context: this,
+            data: {
+                title: value
+            },
+            beforeSend: function onBeforeSend() {
+                $catSelector.addClass('loading');
+            },
+            success: function onSuccess(data) {
+                this.categorySuggestionDecideIU(data.response.suggestions);
+            },
+            complete: function onComplete() {
+                $catSelector.removeClass('loading');
+            },
+            error: function onError(result) {
+                $catSelector.removeClass('loading');
+                this.categorySuggestionMetric(['api', result.statusText]);
+            }
+        });
+    },
+    categorySuggestionGetCategory: function(id) {
+        var categories = this.app.dependencies.categories;
+        var cat;
+        var subcat;
+        var category = {};
+        var subcategory = {};
+
+        if (id) {
+            subcat = categories.search(id);
+            cat =  categories.get(subcat.attributes.parentId);
+            if (subcat && cat) {
+                category = {
+                    id: subcat.attributes.parentId,
+                    name: cat.get('trName')
+                };
+                subcategory = {
+                    id: id,
+                    name: subcat.get('trName')
+                };
+            }
+        }
+        return {
+            category: category,
+            subcategory: subcategory
+        };
+    },
+    categorySuggestionDecideIU: function(response) {
+        var cat;
+        if (response.length>0) {
+            if (this.app.sixpack.currentAlternative === 'single' || response.length === 1) {
+                cat = this.categorySuggestionGetCategory(response[0].categoryId);
+                if (cat.category) {
+                    $('#posting-categories-view').trigger('getQueryCategory', [{
+                        parentCategory: cat.category.id,
+                        subCategory: cat.subcategory.id
+                    }]);
+
+                    this.categorySuggestionTracker('on');
+
+                    return;
+                }
+            }
+            this.categorySuggestionTracker('on');
+        }
+        else {
+            this.categorySuggestionTracker('off');
+        }
+        this.categorySuggestionBuildIU(response);
+    },
+    categorySuggestionBuildIU: function(response) {
+        if (!this.app.sixpack.experiments.growthCategorySuggestion || this.app.sixpack.currentAlternative === 'control' || this.editing) {
+            return;
+        }
+
+        var strHtml = '';
+        var options = {};
+        var responseLength = response.length;
+
+        if (responseLength === 1) {
+            options = {
+                classname: 'selected',
+                buttontext: 'Cambiar categoría',
+                action: 'change'
+            };
+        }
+        else {
+            options = {
+                classname: 'suggest',
+                buttontext: 'Elegir esta categoría',
+                action: 'select',
+                more: {
+                    classname: 'more',
+                    text: 'Elegir entre todas las categorías',
+                    action: 'change'
+                }
+            };
+        }
+
+        _.each(response, function(suggest, index){
+            var category = this.categorySuggestionGetCategory(suggest.categoryId);
+
+            strHtml += this.renderTemplate('#template-category', {
+                classname: options.classname,
+                categoryid: category.category.id,
+                categoryname: category.category.name,
+                categorydata: category.category.id + ',' + category.subcategory.id,
+                subcategoryname: category.subcategory.name,
+                buttontext: options.buttontext,
+                action: options.action,
+                index: ++index + '/' + responseLength
+            });
+        }, this);
+
+        if (strHtml) {
+            if (options.more) {
+                strHtml += this.renderTemplate('#template-other-categories', {
+                    classname: options.more.classname,
+                    text: options.more.text,
+                    action: options.more.action
+                });
+            }
+        }
+
+        $('#posting-categories-view .posting-categories-suggested').hide().html(strHtml).fadeIn().find('li a').on('click', { context: this }, function(event) {
+            event.preventDefault();
+            event.stopPropagation();
+            event.stopImmediatePropagation();
+
+            var cat;
+            var $this = event.data.context;
+            var $element = $(event.currentTarget);
+
+            if ($element.data('increment-action') === 'select') {
+                cat = $element.data('category').split(',');
+                $('#posting-categories-view').trigger('getQueryCategory', [{
+                    parentCategory: cat[0],
+                    subCategory: cat[1]
+                }]);
+            }
+            else {
+                $('.posting-categories-suggested').empty();
+                $('.posting-categories-list').fadeIn();
+            }
+            $this.categorySuggestionTracker($element.data('increment-value'));
+        });
+
+        $('#posting-category-suggestion-button').toggle(!strHtml);
+        $('.posting-categories-list').hide();
+    },
+    categorySuggestionTracker: function(crumb) {
+        if (!this.categorySuggestionFunnel) {
+            this.categorySuggestionFunnel = [];
+        }
+        this.categorySuggestionFunnel.push(crumb);
+    },
+    categorySuggestionMetric: function(keys) {
+        if (!this.app.sixpack.experiments.growthCategorySuggestion || this.editing || !keys) {
+            return;
+        }
+        this.metric.increment(['growth', 'posting', ['category-suggestion', 'alternative-' + this.app.sixpack.currentAlternative, keys.join(',')]]);
     }
 });
 

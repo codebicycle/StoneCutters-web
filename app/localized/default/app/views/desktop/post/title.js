@@ -2,7 +2,9 @@
 
 var _ = require('underscore');
 var Base = require('../../../../../common/app/bases/view');
+var Categories = require('../../../../../../collections/categories');
 var translations = require('../../../../../../../shared/translations');
+var statsd = require('../../../../../../../shared/statsd')();
 
 module.exports = Base.extend({
     id: 'posting-title-view',
@@ -38,6 +40,7 @@ module.exports = Base.extend({
         if ($field.data('value') !== value) {
             if (this.validate($field)) {
                 this.parentView.$el.trigger('fieldSubmit', [$field]);
+                this.parentView.categorySuggestion(value); //AB test : category-suggestion
             }
             $field.data('value', value);
             $field.trigger('keyup');
