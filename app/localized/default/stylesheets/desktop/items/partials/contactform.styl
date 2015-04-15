@@ -77,9 +77,12 @@
             width: 92%;
         }
         input[type="submit"] {
-            action-button($orange, #fff, 3px, padding = 10px 0);
+            action-button($orange, $white, 3px, padding = 10px 0);
             font-size: $l;
             width: 100%;
+            &.disabled {
+                action-button($greyBorders, $greyStrong, 3px, padding = 10px 0);
+            }
         }
         p.replySuccess {
             box($yellowSuccess, $yellowSuccess, 3px, 10px 5px 10px 40px, solid, 0);
