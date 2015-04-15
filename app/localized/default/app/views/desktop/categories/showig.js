@@ -12,6 +12,7 @@ module.exports = Base.extend({
 
         delete data.nav.listAct;
         return _.extend({}, data, {
+            isItemAlternativeInfoEnabled: this.isItemAlternativeInfoEnabled(link),
             nav: {
                 link: link.replace('-ig', ''),
                 linkig: link,
@@ -19,6 +20,14 @@ module.exports = Base.extend({
                 current: 'showig'
             }
         });
+    },
+    isItemAlternativeInfoEnabled: function(path) {
+        var experiment = this.app.sixpack.experiments.dgdCategoryCars;
+
+        return (experiment && experiment.alternative && experiment.alternative === 'gallery' && this.isCategoryCars(path));
+    },
+    isCategoryCars: function(url) {
+        return _.contains([378], Number((url.match(/.+-cat-(\d+).*/) || [])[1] || 0));
     }
 });
 
