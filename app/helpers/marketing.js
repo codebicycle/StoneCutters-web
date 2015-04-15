@@ -40,7 +40,11 @@ module.exports = {
                 data.browserName = browserName;
             break;
             case 'iOS':
-                data.link = 'http://itunes.apple.com/es/app/olx-classifieds/id382059698';
+                if(location.url === 'www.olx.ir' && config.get(['iris', 'direct', 'enabled'], false)) {
+                    data.link = 'https://itunes.apple.com/us/app/olx-iran/id964574990';
+                } else {
+                    data.link = 'http://itunes.apple.com/es/app/olx-classifieds/id382059698';
+                }
                 data.forOsKey = 'misc.BrandFor_Mob';
                 data.forOs = 'iPhone';
                 data.freeInKey = 'misc.FreeIn_Mob';
