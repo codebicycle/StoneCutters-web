@@ -5,7 +5,6 @@ var asynquence = require('asynquence');
 var Base = require('../../../../../common/app/bases/view').requireView('header/index');
 var helpers = require('../../../../../../helpers');
 var breadcrumb = require('../../../../../../modules/breadcrumb');
-var Sixpack = require('../../../../../../../shared/sixpack');
 var utils = require('../../../../../../../shared/utils');
 var config = require('../../../../../../../shared/config');
 
@@ -13,12 +12,7 @@ module.exports = Base.extend({
     urlreferer: '',
     className: function() {
         var className = _.result(Base.prototype, 'className') || '';
-        var sixpack = new Sixpack({
-            platform: this.app.session.get('platform'),
-            market: this.app.session.get('location').abbreviation,
-            experiments: this.app.session.get('experiments')
-        });
-        var sixpackClass = sixpack.className(sixpack.experiments.html5HeaderPostButton);
+        var sixpackClass = this.app.sixpack.className(this.app.sixpack.experiments.html5HeaderPostButton);
 
         return className + (sixpackClass ? ' ' : '') + sixpackClass;
     },
@@ -102,13 +96,7 @@ module.exports = Base.extend({
         'click .postBtn': 'onPostClick'
     },
     onPostClick: function() {
-        var sixpack = new Sixpack({
-            platform: this.app.session.get('platform'),
-            market: this.app.session.get('location').abbreviation,
-            experiments: this.app.session.get('experiments')
-        });
-
-        sixpack.convert(sixpack.experiments.html5HeaderPostButton);
+        this.app.sixpack.convert(this.app.sixpack.experiments.html5HeaderPostButton);
     },
     isMenuOpen: false,
     onLoginClick: function(event) {

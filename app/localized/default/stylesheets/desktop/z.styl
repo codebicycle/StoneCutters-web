@@ -20,17 +20,18 @@ html {
 }
 
 input::-webkit-input-placeholder,
-textarea::-webkit-input-placeholder {
-    color: $greyStrong;
-}
-
+textarea::-webkit-input-placeholder,
 input::-moz-placeholder,
-textarea::-moz-placeholder {
+textarea::-moz-placeholder,
+input:-ms-input-placeholder,
+textarea:-ms-input-placeholder {
     color: $greyStrong;
 }
 
-input:-ms-input-placeholder, textarea:-ms-input-placeholder {
-    color: $greyStrong;
+input:-webkit-autofill,
+input:-webkit-autofill:focus {
+
+    -webkit-box-shadow: 0 0 0 1000px white inset;
 }
 
 main {

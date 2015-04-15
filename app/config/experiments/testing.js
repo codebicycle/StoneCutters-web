@@ -33,24 +33,36 @@ module.exports = {
         },
         firstClick: true
     },
-    desktopTest: {
-        enabled: true,
-        platforms: ['desktop'],
-        markets: ['co'],
-        name: 'test',
-        alternatives: {
-            TEST1: 'test1',
-            TEST2: 'test2'
-        }
-    },
     desktopDGD23ShowSimplifiedReplyForm: {
         enabled: true,
         platforms: ['desktop'],
-        markets: ['ar', 'pe', 'co', 've', 'uy', 'ni', 'gt', 'za', 'ke', 'ng', 'ug', 'py', 'ec', 'bo', 'sn', 'es', 'cm', 'tz', 'hn', 'cr', 'pa', 'gh', 'sv'],
+        markets: ['ar', 'co'],
         name: 'desktop-dgd23-show-simplified-reply-form',
         alternatives: {
             CONTROL: 'control',
             SHOW_SIMPLIFIED_REPLY_FORM: 'show-simplified-reply-form'
         }
-     }
+    },
+    growthCategorySuggestion: {
+        enabled: true,
+        platforms: ['desktop'],
+        markets: ['ar'],
+        name: 'growth-category-suggestion',
+        fraction: 0.3,
+        alternatives: {
+            CONTROL: 'control',
+            SUGGESTED: 'suggested',
+            SINGLE: 'single'
+        }
+    },
+    dgdCategoryCars: {
+        enabled: true,
+        platforms: ['desktop'],
+        markets: ['ar'],
+        name: 'dgd-category-cars',
+        alternatives: {
+            CONTROL: 'control',
+            GALLERY: 'gallery'
+        }
+    }
 };

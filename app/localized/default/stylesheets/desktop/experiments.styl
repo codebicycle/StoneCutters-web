@@ -1,0 +1,122 @@
+.experiment-growth-category-suggestion {
+    &.alternative-single,
+    &.alternative-suggested {
+        .posting-category-suggestion {
+            float: left;
+            width: 440px;
+
+            #posting-category-suggestion-button {
+                action-button($greyBoxBg, $black, 3px, 10px 30px, 0);
+                font-size: $s;
+                line-height: $s;
+            }
+
+            &.loading {
+                #posting-category-suggestion-button {
+                    background-color: #eee;
+                    color: $disableText;
+                    cursor: wait;
+
+                    &:hover {
+                        background-color: #eee;
+                    }
+                }
+
+                &::after {
+                    background: transparent url(imageUrl/images/desktop/validating.gif) no-repeat;
+                    content: '';
+                    display: inline-block;
+                    margin: 9px;
+                    square(16px);
+                    vertical-align: top;
+                }
+
+                .posting-categories-suggested {
+                    display: none;
+                }
+
+                & + .posting-categories-list {
+                    display: none !important;
+                }
+            }
+
+            .posting-categories-suggested {
+                ul-reset();
+
+                .suggest, .selected {
+                    border-radius(3px);
+                    border: 1px solid $greyBoxBg;
+                    margin-bottom: 3px;
+                    overflow: hidden;
+                    padding: 10px;
+
+                    span {
+                        display: inline-block;
+                        font-size: $m;
+                        line-height: 1;
+                        width: 240px;
+                    }
+
+                    small {
+                        color: $greyStrong;
+                        font-size: $xs;
+                    }
+
+                    a {
+                        display: inline-block;
+                        float: right;
+                        font-size: $xs;
+
+                        &:hover {
+                            text-decoration: none;
+                        }
+                    }
+                }
+
+                .suggest {
+                    background-color: $greyBoxBg;
+                    color: $blue;
+
+                    a {
+                        action-button($greyBoxBg, $black, 3px, 5px 10px, 0);
+                    }
+
+                    &:first-child {
+                        background-color: $white;
+                        border-color: $greyBorders;
+                        color: $black;
+                    }
+                }
+
+                .icons::before {
+                    font-size: 26px;
+                    margin-right: 10px;
+                    vertical-align: top;
+                }
+
+                .selected {
+                    background-color: $white;
+                    border-color: $green;
+                    color: $black;
+
+                    a {
+                        action-button($green, $white, 3px, 5px 10px, 0);
+                    }
+                }
+
+                .more {
+                    float: right;
+
+                    a {
+                        color: $blue;
+                        font-size: $xs;
+                    }
+                }
+            }
+        }
+
+        &:not(.edition) .posting-categories-list {
+            display: none;
+        }
+    }
+}

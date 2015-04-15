@@ -83,10 +83,21 @@
                 font-size: $xs;
             }
         }
-        .items-date {
+        .items-date,
+        .items-optional {
             color: $greyStrong;
             font-size: $xs;
         }
+        .items-optional {
+            display: inline-block;
+
+            &.mileage {
+                &::before {
+                    content: " - ";
+                }
+            }
+        }
+
         p.soldad {
             .icon-check-round {
                 color: $yellowSold;
@@ -95,7 +106,6 @@
             em {
                 ribbon($yellowSold, $white);
             }
-
         }
         p.featuredad {
             .icon-star-circle {
@@ -134,6 +144,5 @@
                 text-align: center;
             }
         }
-
     }
 }
