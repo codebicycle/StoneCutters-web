@@ -448,6 +448,7 @@ module.exports = Base.extend({
 
             validation.call(this, '#posting-description-view');
             validation.call(this, '#posting-title-view');
+            validation.call(this, '#posting-contact-view');
             promise.then(check.bind(this));
             promise.val(done);
 
@@ -524,7 +525,7 @@ module.exports = Base.extend({
         if (!$element.length) {
             return false;
         }
-        return $('body').animate({
+        return $('html, body').animate({
             scrollTop: $element.offset().top + (value ? value : 0)
         }, {
             queue: false,
