@@ -15,6 +15,7 @@ module.exports = {
     registersuccess: middlewares(registersuccess),
     login: middlewares(login),
     lostpassword: middlewares(lostpassword),
+    createpassword: middlewares(createpassword),
     logout: middlewares(logout),
     myolx: middlewares(myolx),
     myads: middlewares(myads),
@@ -141,6 +142,22 @@ function lostpassword(params, callback) {
             form: this.form,
             success: params.success
         });
+    }
+}
+
+function createpassword(params, callback) {
+    helpers.controllers.control.call(this, params, {
+        isForm: true
+    }, controller);
+
+    function controller() {
+        var platform = this.app.session.get('platform');
+
+        if (platform === 'wap') {
+            return helpers.common.redirect.call(this, '/');
+        }
+        
+        callback(null, {});
     }
 }
 

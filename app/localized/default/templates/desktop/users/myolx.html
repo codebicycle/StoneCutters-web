@@ -6,6 +6,12 @@
 {% if viewname == 'emailsnotification' or viewname == 'editpersonalinfo' or viewname == 'edituserprofile' or viewname == 'userprofile' or viewname == 'configuration' %}
     {% set configClass = 'active' %}
 {% endif %}
+
+<div id="notification-message" class="notification-message icons icon-check">
+    <h4>¡Muy bien! Ya tenés contraseña para poder usar tu cuenta de OLX</h4>
+    <p>Recordá que tu contraseña es confidencial y no la estaremos enviando por e-mail</p>
+</div>
+
 <ul class="myolxmenu">
     {% if frommail and not user %}
         <li class="{{ messagesClass }}{{ ' messages' if not isHermesEnabled }}">
