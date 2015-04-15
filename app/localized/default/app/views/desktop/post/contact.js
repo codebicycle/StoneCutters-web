@@ -26,6 +26,10 @@ module.exports = Base.extend({
         'click .did-you-mean': 'fillEmail',
         'validate': 'onValidate'
     },
+    initialize: function() {
+        Base.prototype.initialize.call(this);
+        this.dictionary = translations.get(this.app.session.get('selectedLanguage'));
+    },
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
         var locationUrl = this.app.session.get('location').url;
@@ -51,7 +55,6 @@ module.exports = Base.extend({
 
         function success(isValidEmail) {
             var isValidPhone = validatePhone.call(this);
-            
             done(isValid && isValidEmail && isValidPhone);
         }
 
@@ -198,8 +201,6 @@ module.exports = Base.extend({
             skipValidation: true
         };
         var isError = '';
-
-        this.dictionary = translations.get(this.app.session.get('selectedLanguage'));
         
         this.$('.did-you-mean').remove();
 
