@@ -37,8 +37,13 @@
                     <span class="category-selected">{{ currentCategory.get('trName') }} <span>{{ meta.total | countFormat }}</span></span>
                 {% endif %}
             {% elif filter.type == 'SELECT' and filter.name != 'category' and filter.name != 'neighborhood' and filter.value.length > 1 %}
-                <span class="title filter-title" data-filter-name="{{ filter.name }}" data-filter-type="{{ filter.type }}">{{ filter.description }}<span class="icons icon-arrow-up"></span></span>
-                <div class="filter check-box {{ filter.name }}">
+                {% if filter.name == 'carbrand' and isABTCategoryCarsEnabled %}
+                    {% set collapse = true %}
+                {% else %}
+                    {% set collapse = false %}
+                {% endif %}
+                <span class="title filter-title" data-filter-name="{{ filter.name }}" data-filter-type="{{ filter.type }}">{{ filter.description }}<span class="icons icon-arrow-up{{ ' icon-arrow-down' if collapse }}"></span></span>
+                <div class="filter check-box {{ filter.name }}"{{ ' style="display: none;"' if collapse }}>
                     {% for value in filter.value %}
                         <label>
                             <input type="checkbox" value="{{ value.id }}" data-filter-name="{{ filter.name }}" data-filter-type="{{ filter.type }}" {{ 'checked' if filters.has(filter.name, value.id) }} data-increment-filter="{{ filter.name }}">
