@@ -25,7 +25,8 @@ module.exports = Base.extend({
     logPostImages: logPostImages,
     toData: toData,
     remove: remove,
-    rebump: rebump
+    rebump: rebump,
+    stillAvailable: stillAvailable
 });
 
 module.exports.id = 'Item';
@@ -378,6 +379,18 @@ function rebump(done) {
             postingSession: this.get('postingSession'),
             platform: this.app.session.get('platform')
         },
+        data: {
+            location: this.app.session.get('location').url
+        }
+    }, callback.bind(this));
+
+    function callback(err, response) {
+        this.errfcb(done)(err);
+    }
+}
+
+function stillAvailable(done) {
+    helpers.dataAdapter.post(this.app.req, '/mtd/items/' + this.get('id') + '/stillAvailable', {
         data: {
             location: this.app.session.get('location').url
         }
