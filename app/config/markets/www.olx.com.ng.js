@@ -265,12 +265,11 @@ module.exports = {
             enabled: true
         }
     },
-    validator: {
-        phone: {
-            enabled: true
-        }
-    },
     flagItem: {
         enabled: true
+    },
+    emailHint: {
+        enabled: true,
+        hint: 'You need a valid email address to sell on OLX'
     }
 };

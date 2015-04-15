@@ -44,7 +44,7 @@
     </div>
 {% endmacro %}
 
-{% macro FieldText(label, name, mandatory, form, user, autocomplete='off') %}
+{% macro FieldText(label, name, mandatory, form, user, autocomplete='off', hint = false) %}
     <div class="formField">
         <label>{{ '* ' if mandatory == 'true' }}{{label}}</label>
         <input type="text" name="{{name}}" id="text-{{name}}" autocomplete="{{ autocomplete }}"
@@ -53,6 +53,9 @@
         {% elif (form and form.values and form.values[name]) or (name == 'name' and user)%}
             value="{{ form.values[name] if form.values[name] else user.username }}"
         {% endif %}>
+        {% if hint and name == 'email' %}
+            <small class="{{ 'icons icon-lock ' if field.name == 'email' }}hint message">{{ hint }}</small>
+        {% endif %}
     </div>
 {% endmacro %}
 
