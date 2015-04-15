@@ -22,6 +22,38 @@
         padding: 7px 10px;
         width: 100%;
     }
+
+    .notification-message {
+        background-color: $ligthGreen;
+        border-radius(3px);
+        border: 1px solid $greenBorders;
+        clear-fix();
+        margin: 20px;
+        min-height: 50px;
+        padding: 10px;
+        position: relative;
+        text-align: center;
+       
+        h4 {
+            color: $lightBlack;
+            font-size: 20px;
+            line-height: 1.4;
+            margin: 0;
+        }
+        p {
+            color: $lightBlack;
+            font-size: 14px;
+            line-height: 1.4;
+            margin: 0;
+        }
+        .icon-check {
+            background-image: url(imageUrl/images/html5/icon-check.png);
+            display: inline-block;
+            height: 36px;
+            width: 37px;
+        }
+    }
+
     .my-ads {
         .datetime, .title, .price {
             width: 44%;

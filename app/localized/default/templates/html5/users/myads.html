@@ -44,6 +44,14 @@
 <header class="breadcrumb">
     {{ dictionary["myolx.MyAds"] }}
 </header>
+
+{# condicional para mostrar el siguiente div en caso de venir del flow de recuperar password #}
+<div id="notification-message" class="notification-message">
+    <span class="icons icon-check"></span>
+    <h4>¡Muy bien! Ya tenés contraseña</h4>
+    <p>Recordá que tu contraseña es confidencial y no la estaremos enviando por e-mail</p>
+</div>
+
 <div id="messages" class="hide">
     <span>{{ dictionary["myolx.TheAdHasBeenDeleted"] }}</span>
 </div>

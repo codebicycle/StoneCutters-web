@@ -13,6 +13,9 @@ module.exports = {
     'users#lostpassword': {
         url: 'lostpassword'
     },
+    'users#createpassword': {
+        url: 'createpassword'
+    },
     'users#logout': {
         url: 'logout'
     },
