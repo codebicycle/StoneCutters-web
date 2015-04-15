@@ -515,7 +515,7 @@ module.exports = Base.extend({
         if (!$element.length) {
             return false;
         }
-        return $('body').animate({
+        return $('html, body').animate({
             scrollTop: $element.offset().top + (value ? value : 0)
         }, {
             queue: false,
