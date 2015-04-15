@@ -65,6 +65,7 @@ module.exports = {
     'itemslisting.Previous': 'Sebelumnya',
     'itemslisting.RefineYourSearch': 'Pertajam penelusuran Anda',
     'itemslisting.SelectAll': 'Pilih Semuanya',
+    'itemslisting.Sold': 'Telah terjual',
     'loginbox.CreateYourAccount': 'Buat akun Anda secara gratis:',
     'loginbox.ForgotYourPassword': 'Lupa kata sandi Anda?',
     'loginbox.IAgreeToTheTermsAndConditionsOfBrand': 'Saya menyetujui <<LINK_TERMS_USE>>Syarat dan Ketentuan<</LINK_TERMS_USE>> dari OLX',

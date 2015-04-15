@@ -25,6 +25,15 @@ module.exports = Base.extend({
         'click .did-you-mean': 'fillEmail',
         'validate': 'onValidate'
     },
+    getTemplateData: function() {
+        var data = Base.prototype.getTemplateData.call(this);
+        var locationUrl = this.app.session.get('location').url;
+        var isPhoneMandatory = config.getForMarket(locationUrl, ['validator', 'phone', 'enabled'], false);
+
+        return _.extend({}, data, {
+            isPhoneMandatory: isPhoneMandatory
+        });
+    },
     postRender: function() {
         var $field = this.$('[name="email"]');
 
@@ -49,8 +58,23 @@ module.exports = Base.extend({
         event.stopImmediatePropagation();
 
         this.validate(this.$('[name="email"]'), function onComplete(isValidEmail) {
-            done(isValid && isValidEmail);
-        });
+            done(isValid && isValidEmail && isValidatePhone.call(this));
+        }.bind(this));
+
+        function isValidatePhone() {
+            var locationUrl = this.app.session.get('location').url;
+            var isPhoneMandatory = config.getForMarket(locationUrl, ['validator', 'phone', 'enabled'], false);
+            var isValidPhone = true;
+            var $field = this.$('[name="phone"]');
+
+            if (isPhoneMandatory && $field.val() === '') {
+                isValidPhone = false;
+                $field.closest('.field-wrapper').addClass('error').removeClass('success');
+                $field.parent().find('.error.message').remove();
+                $field.parent().append('<small class="error message">' + this.dictionary['postingerror.PleaseCompleteThisField'] + '</small>');
+            }
+            return isValidPhone;
+        }
     },
     onPhoneChange: function(event) {
         var $phone = $(event.target);

@@ -65,6 +65,7 @@ module.exports = {
     'itemslisting.Previous': 'Prethodno',
     'itemslisting.RefineYourSearch': 'Preuredite svoju pretragu',
     'itemslisting.SelectAll': 'Izaberi sve',
+    'itemslisting.Sold': 'Prodano',
     'loginbox.CreateYourAccount': 'Kreirajte svoj nalog besplatno:',
     'loginbox.ForgotYourPassword': 'Zaboravili ste lozinku?',
     'loginbox.IAgreeToTheTermsAndConditionsOfBrand': 'Sla\u017Eem se s <<LINK_TERMS_USE>>Uslovima i odredbama<</LINK_TERMS_USE>> za OLX',
