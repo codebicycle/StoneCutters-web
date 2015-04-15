@@ -43,6 +43,18 @@ module.exports = {
             TEST2: 'test2'
         }
     },
+    growthCategorySuggestion: {
+        enabled: true,
+        platforms: ['desktop'],
+        markets: ['ar'],
+        name: 'growth-category-suggestion',
+        fraction: 0.3,
+        alternatives: {
+            CONTROL: 'control',
+            SUGGESTED: 'suggested',
+            SINGLE: 'single'
+        }
+    },
     desktopDGD23ShowSimplifiedReplyForm: {
         enabled: false,
         platforms: ['desktop'],

@@ -31,6 +31,10 @@ module.exports = {
             maxPageSize: 26
         }
     },
+    categorySuggestion: {
+        api: 'http://categorysuggestiontool-612498389.us-east-1.elb.amazonaws.com/rest/suggest/',
+        timeout: 1500
+    },
     mario: {
         protocol: 'http',
         host: 'mario-LB-69977862.us-east-1.elb.amazonaws.com',
