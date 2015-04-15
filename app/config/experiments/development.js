@@ -45,11 +45,11 @@ module.exports = {
             TEST2: 'test2'
         }
     },
-    categorySuggestion: {
+    growthCategorySuggestion: {
         enabled: true,
         platforms: ['desktop'],
         markets: ['ar'],
-        name: 'category-suggestion',
+        name: 'growth-category-suggestion',
         fraction: 0.3,
         alternatives: {
             CONTROL: 'control',

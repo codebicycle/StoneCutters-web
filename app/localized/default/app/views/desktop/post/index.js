@@ -37,9 +37,9 @@ module.exports = Base.extend({
             ip: this.app.session.get('ip'),
             userAgent: this.app.session.get('userAgent')
         });
-        this.sixpack.currentAlternative = this.sixpack.experiments.categorySuggestion ? this.sixpack.experiments.categorySuggestion.alternative : '';
+        this.sixpack.currentAlternative = this.sixpack.experiments.growthCategorySuggestion ? this.sixpack.experiments.growthCategorySuggestion.alternative : '';
 
-        var sixpackClass = this.sixpack.className(this.sixpack.experiments.categorySuggestion);
+        var sixpackClass = this.sixpack.className(this.sixpack.experiments.growthCategorySuggestion);
 
         return 'posting-view' + (this.getItem().has('id') ? ' edition' : '') + (sixpackClass ? ' ' : '') + sixpackClass;
     },
@@ -79,7 +79,7 @@ module.exports = Base.extend({
             ip: this.app.session.get('ip'),
             userAgent: this.app.session.get('userAgent')
         });
-        var currentAlternative = sixpack.experiments.categorySuggestion ? sixpack.experiments.categorySuggestion.alternative : '';
+        var currentAlternative = sixpack.experiments.growthCategorySuggestion ? sixpack.experiments.growthCategorySuggestion.alternative : '';
 
         return _.extend({}, data, {
             item: this.getItem(data.item),
@@ -466,7 +466,7 @@ module.exports = Base.extend({
                 custom: [category, this.item.get('category').parentId || '-', this.item.get('category').id || '-', action, this.item.get('id')].join('::')
             });
 
-            this.sixpack.convert(this.sixpack.experiments.categorySuggestion);
+            this.sixpack.convert(this.sixpack.experiments.growthCategorySuggestion);
             this.categorySuggestionMetric(this.categorySuggestionFunnel);
 
             helpers.common.redirect.call(this.app.router, successPage + this.item.get('id') + '?sk=' + this.item.get('securityKey'), null, {
@@ -528,7 +528,7 @@ module.exports = Base.extend({
         });
     },
     categorySuggestion: function(value) {
-        if (!this.sixpack.experiments.categorySuggestion || this.sixpack.currentAlternative === 'control' || this.editing) {
+        if (!this.sixpack.experiments.growthCategorySuggestion || this.sixpack.currentAlternative === 'control' || this.editing) {
             return;
         }
         var $catSelector = $('#posting-categories-view .posting-category-suggestion');
@@ -609,7 +609,7 @@ module.exports = Base.extend({
         this.categorySuggestionBuildIU(response);
     },
     categorySuggestionBuildIU: function(response) {
-        if (!this.sixpack.experiments.categorySuggestion || this.sixpack.currentAlternative === 'control' || this.editing) {
+        if (!this.sixpack.experiments.growthCategorySuggestion || this.sixpack.currentAlternative === 'control' || this.editing) {
             return;
         }
 
@@ -695,7 +695,7 @@ module.exports = Base.extend({
         this.categorySuggestionFunnel.push(crumb);
     },
     categorySuggestionMetric: function(keys) {
-        if (!this.sixpack.experiments.categorySuggestion || this.editing || !keys) {
+        if (!this.sixpack.experiments.growthCategorySuggestion || this.editing || !keys) {
             return;
         }
         this.metric.increment(['growth', 'posting', ['category-suggestion', 'alternative-' + this.sixpack.currentAlternative, keys.join(',')]]);
