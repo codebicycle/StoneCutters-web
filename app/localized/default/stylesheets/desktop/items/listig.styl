@@ -83,9 +83,19 @@
                 font-size: $xs;
             }
         }
-        .items-date {
+        .items-date,
+        .items-optional {
             color: $greyStrong;
             font-size: $xs;
+        }
+        .items-optional {
+            display: inline-block;
+
+            &.mileage {
+                &::before {
+                    content: " - ";
+                }
+            }
         }
         p.featuredad {
             position: absolute;
@@ -116,6 +126,5 @@
                 text-align: center;
             }
         }
-
     }
 }

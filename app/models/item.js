@@ -131,6 +131,9 @@ function parse(item, options) {
     if (item.priceC && this.app.session.get('location').url === 'www.olx.ir') {
         item.priceC = helpers.numbers.toLatin(item.priceC);
     }
+    if (item.optionals && item.optionals.length) {
+        item.optionals = _.sortBy(item.optionals, 'name').reverse();
+    }
     return Base.prototype.parse.apply(this, arguments);
 }
 

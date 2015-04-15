@@ -4,7 +4,6 @@ var _ = require('underscore');
 var helpers = require('../helpers');
 var config = require('../../shared/config');
 var utils = require('../../shared/utils');
-var Sixpack = require('../../shared/sixpack');
 var enabled = config.get(['interstitial', 'enabled'], false);
 var ignoreLocation = config.get(['interstitial', 'ignoreLocation'], []);
 
@@ -77,13 +76,9 @@ module.exports = function(params, next) {
             var protocol = this.app.session.get('protocol');
             var host = this.app.session.get('host');
             var time = config.get(['interstitial', 'time'], 60000);
-            var sixpack = new Sixpack({
-                platform: platform,
-                market: this.app.session.get('location').abbreviation,
-                experiments: this.app.session.get('experiments')
-            });
+            var experiment = this.app.sixpack.experiments.html5Interstitial;
 
-            if (platform === 'html5' && sixpack.experiments.html5Interstitial && sixpack.experiments.html5Interstitial.alternative && sixpack.experiments.html5Interstitial.alternative === 'off') {
+            if (platform === 'html5' && experiment && experiment.alternative && experiment.alternative === 'off') {
                 return next();
             }
             this.app.session.clear('clicks');

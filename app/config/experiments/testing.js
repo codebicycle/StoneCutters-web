@@ -33,14 +33,14 @@ module.exports = {
         },
         firstClick: true
     },
-    desktopTest: {
+    desktopDGD23ShowSimplifiedReplyForm: {
         enabled: true,
         platforms: ['desktop'],
-        markets: ['co'],
-        name: 'test',
+        markets: ['ar', 'co'],
+        name: 'desktop-dgd23-show-simplified-reply-form',
         alternatives: {
-            TEST1: 'test1',
-            TEST2: 'test2'
+            CONTROL: 'control',
+            SHOW_SIMPLIFIED_REPLY_FORM: 'show-simplified-reply-form'
         }
     },
     growthCategorySuggestion: {
@@ -55,14 +55,14 @@ module.exports = {
             SINGLE: 'single'
         }
     },
-    desktopDGD23ShowSimplifiedReplyForm: {
+    dgdCategoryCars: {
         enabled: true,
         platforms: ['desktop'],
-        markets: ['ar', 'pe', 'co', 've', 'uy', 'ni', 'gt', 'za', 'ke', 'ng', 'ug', 'py', 'ec', 'bo', 'sn', 'es', 'cm', 'tz', 'hn', 'cr', 'pa', 'gh', 'sv'],
-        name: 'desktop-dgd23-show-simplified-reply-form',
+        markets: ['ar'],
+        name: 'dgd-category-cars',
         alternatives: {
             CONTROL: 'control',
-            SHOW_SIMPLIFIED_REPLY_FORM: 'show-simplified-reply-form'
+            GALLERY: 'gallery'
         }
-     }
+    }
 };
