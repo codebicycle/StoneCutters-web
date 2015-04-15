@@ -65,6 +65,7 @@ module.exports = {
     'itemslisting.Previous': 'Nakaraan',
     'itemslisting.RefineYourSearch': 'Pakinisin ang paghahanap',
     'itemslisting.SelectAll': 'Piliin Lahat',
+    'itemslisting.Sold': 'Nabenta na',
     'loginbox.CreateYourAccount': 'Gumawa ng iyong account nang libre:',
     'loginbox.ForgotYourPassword': 'Nakalimutan ang iyong password?',
     'loginbox.IAgreeToTheTermsAndConditionsOfBrand': 'Sumasang-ayon ako sa <<LINK_TERMS_USE>>Mga Alituntunin at mga Kondisyon<</LINK_TERMS_USE>> ng OLX',

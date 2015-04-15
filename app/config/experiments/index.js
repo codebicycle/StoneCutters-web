@@ -58,7 +58,7 @@ module.exports = {
     dgdCategoryCars: {
         enabled: true,
         platforms: ['desktop'],
-        markets: ['ar'],
+        markets: ['ar', 'co'],
         name: 'dgd-category-cars',
         alternatives: {
             CONTROL: 'control',

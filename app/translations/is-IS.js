@@ -65,6 +65,7 @@ module.exports = {
     'itemslisting.Previous': 'S\xED\xF0asta',
     'itemslisting.RefineYourSearch': 'N\xE1kv\xE6mari leit',
     'itemslisting.SelectAll': 'Velja allt',
+    'itemslisting.Sold': 'Selt',
     'loginbox.CreateYourAccount': 'Stofna\xF0u reikning \xFE\xE9r a\xF0 kostna\xF0arlausu:',
     'loginbox.ForgotYourPassword': 'Gleymdir\xF0u a\xF0gangsor\xF0inu?',
     'loginbox.IAgreeToTheTermsAndConditionsOfBrand': '\xC9g sam\xFEykki <<LINK_TERMS_USE>>skilm\xE1la<</LINK_TERMS_USE>> OLX',

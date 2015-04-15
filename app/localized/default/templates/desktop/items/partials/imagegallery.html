@@ -10,6 +10,13 @@
     {% set classesFigure = 'image-viewer image-wrapper' %}
 {% endif %}
 
+{% if item.isSold %}
+    <p class="soldad">
+        <i class="icons icon-check-round"></i>
+        <em>{{ dictionary["itemslisting.Sold"] }}</em>
+    </p>
+{% endif %}
+
 <figure id="image-viewer" class="{{ classesFigure }} {{ 'open-modal' if item.images.length > 0 }}" data-modal="image-gallery-modal" >
     {% if item.images.length > 0 %}
         <img src="{{ item.images[0].url }}" alt="{{ item.title }}" class="item-image" data-gallery-image />
