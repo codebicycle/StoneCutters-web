@@ -65,6 +65,7 @@ module.exports = {
     'itemslisting.Previous': 'P\u0159edchoz\xED',
     'itemslisting.RefineYourSearch': 'Up\u0159esnit vyhled\xE1v\xE1n\xED',
     'itemslisting.SelectAll': 'Vybrat v\u0161e',
+    'itemslisting.Sold': 'Prod\xE1no',
     'loginbox.CreateYourAccount': 'Vytvo\u0159it zdarma \xFA\u010Det:',
     'loginbox.ForgotYourPassword': 'Zapomn\u011Bli jste heslo?',
     'loginbox.IAgreeToTheTermsAndConditionsOfBrand': 'Souhlas\xEDm s <<LINK_TERMS_USE>>Podm\xEDnkami pou\u017Eit\xED<</LINK_TERMS_USE>> OLX',
