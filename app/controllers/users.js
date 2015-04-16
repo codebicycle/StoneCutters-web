@@ -157,8 +157,14 @@ function createpassword(params, callback) {
         if (platform === 'wap') {
             return helpers.common.redirect.call(this, '/');
         }
-        
-        callback(null, {});
+
+        callback(null, {
+            include: ['profile'],
+            profile: _.extend({
+                country: this.app.session.get('location').abbreviation,
+                location: this.app.session.get('location').url
+            }, this.app.session.get('user'))
+        });
     }
 }
 
@@ -208,8 +214,10 @@ function autologin(params, callback) {
             }
 
             if (this.app.session.get('user')) {
+                var target = params.t ? '/' + params.t : '/';
+
                 done.abort();
-                return helpers.common.redirect.call(this, '/', null, {
+                return helpers.common.redirect.call(this, target, null, {
                     status: 302
                 });
             }
@@ -224,7 +232,6 @@ function autologin(params, callback) {
 
         function autoLogin(done) {
             user = new User({
-                country: this.app.session.get('location').abbreviation,
                 hash: params.h,
                 challenge: params.c,
                 platform: platform,
@@ -307,6 +314,7 @@ function myads(params, callback) {
         var user = this.app.session.get('user');
         var page = params.page;
         var deleted = params.deleted;
+        var createPassword = params.createPassword;
 
         delete params.deleted;
         asynquence().or(fail.bind(this))
@@ -412,6 +420,7 @@ function myads(params, callback) {
                 include: ['items'],
                 items: items,
                 deleted: deleted,
+                createPassword: createPassword,
                 paginator: items.paginator,
                 isRenewEnabled: isRenewEnabled,
                 isRebumpEnabled: isRebumpEnabled

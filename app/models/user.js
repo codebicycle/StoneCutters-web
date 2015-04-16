@@ -107,14 +107,12 @@ function autologin(done) {
     function submit(done, res) {
         dataAdapter.get(this.app.req, '/users/login', {
             query: {
-                c: this.challenge,
-                h: this.hash,
-                platform: this.get('platform')
-            }
+                c: this.get('challenge'),
+                h: this.get('hash')            }
         }, done.errfcb);
     }
 
-    function success(done, res, user) {
+    function success(res, user) {
         this.set(user);
         this.app.session.persist({
             user: user
