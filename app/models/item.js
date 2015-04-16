@@ -5,6 +5,7 @@ var asynquence = require('asynquence');
 var Base = require('../bases/model');
 var helpers = require('../helpers');
 var statsd = require('../../shared/statsd')();
+var utils = require('../../shared/utils');
 
 module.exports = Base.extend({
     idAttribute: 'id',
@@ -239,6 +240,14 @@ function postFields(done) {
         if (!err && item) {
             this.set(item);
         }
+        if (!user && item.email) {
+            this.app.session.persist({
+                hash: item.email
+            }, {
+                maxAge: utils.DAY
+            });
+        }
+
         this.logPost(type, response.statusCode, err);
         this.errfcb(done)(err, response, item);
     }
