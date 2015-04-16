@@ -13,6 +13,7 @@ module.exports = Base.extend({
     parse: parse,
     getUsernameOrEmail: getUsernameOrEmail,
     login: login,
+    autologin: autologin,
     lostpassword: lostpassword,
     register: register,
     registerConfirm: registerConfirm,
@@ -94,6 +95,36 @@ function login(done) {
         if (!this.has('new')) {
             statsd.increment([this.get('country'), 'login', 'error', err.statusCode, this.get('platform')]);
         }
+        this.fail(done)(err);
+    }
+}
+
+function autologin(done) {
+    asynquence().or(fail.bind(this))
+        .then(submit.bind(this))
+        .val(success.bind(this));
+
+    function submit(done, res) {
+        dataAdapter.get(this.app.req, '/users/login', {
+            query: {
+                c: this.challenge,
+                h: this.hash,
+                platform: this.get('platform')
+            }
+        }, done.errfcb);
+    }
+
+    function success(done, res, user) {
+        this.set(user);
+        this.app.session.persist({
+            user: user
+        });
+        statsd.increment([this.get('country'), 'autologin', 'success', this.get('platform')]);
+        this.callback(done)();
+    }
+
+    function fail(err) {
+        statsd.increment([this.get('country'), 'autologin', 'error', err.statusCode, this.get('platform')]);
         this.fail(done)(err);
     }
 }

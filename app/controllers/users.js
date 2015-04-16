@@ -14,6 +14,7 @@ module.exports = {
     register: middlewares(register),
     registersuccess: middlewares(registersuccess),
     login: middlewares(login),
+    autologin: middlewares(autologin),
     lostpassword: middlewares(lostpassword),
     createpassword: middlewares(createpassword),
     logout: middlewares(logout),
@@ -69,7 +70,7 @@ function register(params, callback) {
             }
             user = new User({
                 languageId: this.app.session.get('languageId'),
-                country: this.app.session.get('location').name,
+                country: this.app.session.get('location').abbreviation,
                 username: params.username,
                 hash: params.hash,
                 platform: platform,
@@ -184,6 +185,70 @@ function login(params, callback) {
             redirect: params.redirect,
             sent: params.sent
         });
+    }
+}
+
+function autologin(params, callback) {
+    helpers.controllers.control.call(this, params, controller);
+
+    function controller() {
+        var platform = this.app.session.get('platform');
+        var user;
+
+        asynquence().or(fail.bind(this))
+            .then(redirect.bind(this))
+            .then(autoLogin.bind(this))
+            .val(success.bind(this));
+
+        function redirect(done) {
+
+            if (platform === 'wap') {
+                done.abort();
+                return helpers.common.redirect.call(this, '/');
+            }
+
+            if (this.app.session.get('user')) {
+                done.abort();
+                return helpers.common.redirect.call(this, '/', null, {
+                    status: 302
+                });
+            }
+            if (!params.h || !params.c) {
+                done.abort();
+                return helpers.common.redirect.call(this, '/', null, {
+                    status: 302
+                });
+            }
+            done();
+        }
+
+        function autoLogin(done) {
+            user = new User({
+                country: this.app.session.get('location').abbreviation,
+                hash: params.h,
+                challenge: params.c,
+                platform: platform,
+            }, {
+                app: this.app
+            });
+            
+            user.autologin(done);
+        }
+
+        function success() {
+            if (user && params.t) {
+                return helpers.common.redirect.call(this, '/' + params.t, null, {
+                    status: 302
+                });
+            }
+            callback(null, {
+                autologin: true
+            });
+        }
+
+        function fail(err, res) {
+            return helpers.common.error.call(this, err, res, callback);
+        }
     }
 }
 
