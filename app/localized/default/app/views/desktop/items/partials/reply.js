@@ -26,6 +26,31 @@ module.exports = Base.extend({
 
         return 'item-contact-form' + (sixpackClass ? (' ' + sixpackClass) : '');
     },
+    getTemplateData: function() {
+        var data = Base.prototype.getTemplateData.call(this);
+
+        var sixpack = new Sixpack({
+            clientId: this.app.session.get('clientId'),
+            ip: this.app.session.get('ip'),
+            userAgent: this.app.session.get('userAgent'),
+            platform: this.app.session.get('platform'),
+            market: this.app.session.get('location').abbreviation,
+            experiments: this.app.session.get('experiments')
+        });
+
+        console.log('sixpack.experiments', sixpack.experiments);
+
+        var hiddenPhone = false;
+        if (sixpack.experiments.hidePhoneNumber.alternative === 'hide-phone-number') {
+            if (data.item.phone) {
+                hiddenPhone = data.item.phone.replace(data.item.phone.slice(-4), '****');
+            }
+        }
+
+        return _.extend({}, data, {
+            hiddenPhone: hiddenPhone
+        });
+    },
     postRender: function() {
         this.dictionary = translations.get(this.app.session.get('selectedLanguage'));
         this.user = new User(_.extend({

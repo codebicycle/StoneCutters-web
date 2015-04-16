@@ -19,7 +19,11 @@
     {% endif %}
     {#<span class="user-status">User Status</span>#}
     {% if item.phone %}
-    <p class="icons icon-phone user-phone">{{ item.phone }}</p>
+        {% if hiddenPhone %}
+            <p class="icons icon-phone user-phone">{{ hiddenPhone }}<small><a href="#">Ver numero completo</a></small></p>
+        {% else %}
+            <p class="icons icon-phone user-phone">{{ item.phone }}</p>
+        {% endif %}
         <span>{{ dictionary["misc.SayOLX"] }}</span>
     {% endif %}
 </div>

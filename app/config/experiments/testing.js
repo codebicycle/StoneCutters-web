@@ -67,5 +67,15 @@ module.exports = {
             CONTROL: 'control',
             SHOW_SIMPLIFIED_REPLY_FORM: 'show-simplified-reply-form'
         }
-     }
+    },
+    hidePhoneNumber: {
+        enabled: true,
+        platforms: ['dektop'],
+        markets: ['ar', 'co', 'pa', 'pe', 'uy'],
+        name: 'hide-phone-number-exp',
+        alternatives: {
+            CONTROL: 'control-ate',
+            HIDE_PHONE_NUMBER: 'hide-phone-number'
+        }
+    }
 };
