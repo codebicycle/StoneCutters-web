@@ -14,6 +14,6 @@ module.exports = {
         ]
     },
     'landings#available': {
-        url: 'available'
+        url: 'available/{{itemId}}'
     }
 };

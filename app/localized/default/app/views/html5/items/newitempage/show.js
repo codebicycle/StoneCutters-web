@@ -3,13 +3,13 @@
 var _ = require('underscore');
 var asynquence = require('asynquence');
 var Base = require('../../../../../../common/app/bases/view').requireView('items/show');
+var helpers = require('../../../../../../../helpers');
 var Categories = require('../../../../../../../collections/categories');
 var Item = require('../../../../../../../models/item');
-var helpers = require('../../../../../../../helpers');
-var translations = require('../../../../../../../../shared/translations');
 var User = require('../../../../../../../models/user');
 var Metric = require('../../../../../../../modules/metric');
 var config = require('../../../../../../../../shared/config');
+var translations = require('../../../../../../../../shared/translations');
 
 module.exports = Base.extend({
     className: 'items_show_view',
@@ -42,7 +42,6 @@ module.exports = Base.extend({
 
         this.galery = '';
         this.mySwiperGal = '';
-        this.dictionary = translations.get(this.app.session.get('selectedLanguage'));
         this.messages = {
             'msgSend': this.dictionary['comments.YourMessageHasBeenSent'].replace(/<br \/>/g,''),
             'addedFav': this.dictionary['itemheader.AddedFavorites'],
@@ -55,6 +54,14 @@ module.exports = Base.extend({
         $('.footer_footer_view').css('margin-bottom', marginActions + 'px');
         this.$(window).on('resize', this.resize).trigger('resize');
         this.paginationSize();
+        this.attachTrackMe(function(category, action) {
+            var item = this.getItem();
+
+            return {
+                action: action,
+                custom: [category, item.get('category').parentId, item.get('category').id, action, item.get('id')].join('::')
+            };
+        }.bind(this));
     },
     events: {
         'click section#itemPage section.onePicture .slide div' : 'showOnePicture',
