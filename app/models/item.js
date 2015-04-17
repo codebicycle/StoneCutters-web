@@ -5,6 +5,7 @@ var asynquence = require('asynquence');
 var Base = require('../bases/model');
 var helpers = require('../helpers');
 var statsd = require('../../shared/statsd')();
+var utils = require('../../shared/utils');
 
 module.exports = Base.extend({
     idAttribute: 'id',
@@ -25,7 +26,8 @@ module.exports = Base.extend({
     logPostImages: logPostImages,
     toData: toData,
     remove: remove,
-    rebump: rebump
+    rebump: rebump,
+    stillAvailable: stillAvailable
 });
 
 module.exports.id = 'Item';
@@ -238,6 +240,14 @@ function postFields(done) {
         if (!err && item) {
             this.set(item);
         }
+        if (!user && item.email) {
+            this.app.session.persist({
+                hash: item.email
+            }, {
+                maxAge: utils.DAY
+            });
+        }
+
         this.logPost(type, response.statusCode, err);
         this.errfcb(done)(err, response, item);
     }
@@ -378,6 +388,18 @@ function rebump(done) {
             postingSession: this.get('postingSession'),
             platform: this.app.session.get('platform')
         },
+        data: {
+            location: this.app.session.get('location').url
+        }
+    }, callback.bind(this));
+
+    function callback(err, response) {
+        this.errfcb(done)(err);
+    }
+}
+
+function stillAvailable(done) {
+    helpers.dataAdapter.post(this.app.req, '/mtd/items/' + this.get('id') + '/stillAvailable', {
         data: {
             location: this.app.session.get('location').url
         }

@@ -14,6 +14,7 @@ module.exports = {
         ]
     },
     'landings#available': {
+<<<<<<< HEAD
         url: 'available'
     },
     'landings#asyncseller': {
@@ -21,6 +22,9 @@ module.exports = {
     },
     'landings#asyncbuyer': {
         url: 'asyncbuyer'
+=======
+        url: 'available/{{itemId}}'
+>>>>>>> develop
     }
 };
 
