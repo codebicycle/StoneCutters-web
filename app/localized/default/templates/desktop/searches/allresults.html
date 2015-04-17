@@ -3,6 +3,9 @@
     <aside class="listing-side">
         <nav id="listing-nav">
             {% include (template + '/items/parentcategories.html') %}
+            {% if items.length > 0 %}
+                {% view 'items/partials/filters' %}
+            {% endif %}
         </nav>
         {% view 'partials/adserving', 'listing_side' %}
     </aside>
