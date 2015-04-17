@@ -65,7 +65,7 @@ module.exports = {
             GALLERY: 'gallery'
         }
     },
-    hidePhoneNumber: {
+    dgdHidePhoneNumber: {
         enabled: true,
         platforms: ['desktop'],
         markets: ['ar', 'co', 'pa', 'pe', 'uy'],

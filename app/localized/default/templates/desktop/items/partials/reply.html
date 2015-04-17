@@ -20,11 +20,11 @@
     {#<span class="user-status">User Status</span>#}
     {% if item.phone %}
         {% if hiddenPhone %}
-            <p class="icons icon-phone user-phone">{{ hiddenPhone }}<small><a href="#">Ver numero completo</a></small></p>
+            <p class="icons icon-phone user-phone dgd-hide-phone-number">{{ hiddenPhone }}<small class="action-container"><a href="#" class="action-button">Ver numero completo</a></small></p>
         {% else %}
             <p class="icons icon-phone user-phone">{{ item.phone }}</p>
         {% endif %}
-        <span>{{ dictionary["misc.SayOLX"] }}</span>
+        <p class="hint">{{ dictionary["misc.SayOLX"] }}</p>
     {% endif %}
 </div>
 
