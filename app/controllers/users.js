@@ -207,12 +207,10 @@ function autologin(params, callback) {
             .val(success.bind(this));
 
         function redirect(done) {
-
             if (platform === 'wap') {
                 done.abort();
                 return helpers.common.redirect.call(this, '/');
             }
-
             if (this.app.session.get('user')) {
                 var target = params.t ? '/' + params.t : '/';
 
@@ -248,9 +246,7 @@ function autologin(params, callback) {
                     status: 302
                 });
             }
-            callback(null, {
-                autologin: true
-            });
+            callback(null, {});
         }
 
         function fail(err, res) {

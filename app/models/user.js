@@ -406,7 +406,7 @@ function changePassword(done) {
     function submit(done) {
         dataAdapter.post(this.app.req, '/users/' + this.get('userId') + '/edit', {
             query: {
-                platform: this.get('platform'),
+                platform: this.app.session.get('platform'),
                 token: this.get('token')
             },
             data: this.toData()

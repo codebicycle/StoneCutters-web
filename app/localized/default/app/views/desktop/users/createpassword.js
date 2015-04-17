@@ -10,6 +10,7 @@ module.exports = Base.extend({
     className: 'users_createpassword_view short-page',
     events: {
         'click .passwordToggle': 'onPasswordToggle',
+        'change': 'onChange',
         'submit': 'onSubmit'
     },
     onPasswordToggle: function (event) {
@@ -28,6 +29,15 @@ module.exports = Base.extend({
             field.attr('type', 'password');
             link.html('show');
         }        
+    },
+    onChange: function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+
+        var $field = $(event.target);
+
+        this.getProfile().set($field.attr('name'), $field.val());
     },
     getProfile: function(profile) {
         this.profile = this.profile || (this.options.profile && this.options.profile.toJSON ? this.options.profile : new User(profile || this.options.profile || {}, {
@@ -57,11 +67,8 @@ module.exports = Base.extend({
         }
 
         function fail(errors) {
-            console.log(errors);
             _.each(errors, function each(error) {
                 var $field = this.$('[name=' + error.selector + ']');
-
-            console.log(error);
 
                 $field.siblings('small').remove();
                 $field.after('<small class="error message">' + error.message + '</small>')

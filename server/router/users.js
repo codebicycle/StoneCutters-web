@@ -74,6 +74,62 @@ module.exports = function userRouter(app) {
         return handler;
     }
 
+    function createpassword() {
+        app.post('/createpassword', handler);
+
+        function handler(req, res, next) {
+            var user;
+
+            function parse(done) {
+                formidable.parse(req, done.errfcb);
+            }
+
+            function prepare(done, data) {
+                user = new User(_.extend(data, {
+                    location: req.rendrApp.session.get('siteLocation'),
+                    country: req.rendrApp.session.get('location').abbreviation,
+                    languageId: req.rendrApp.session.get('languageId'),
+                    platform: req.rendrApp.session.get('platform')
+                }), {
+                    app: req.rendrApp
+                });
+                done();
+            }
+
+            function submit(done) {
+                user.changepassword(done);
+            }
+
+            function success() {
+                var redirect = 'myolx/myadslisting?createPassword=true';
+
+                res.redirect(utils.link(redirect, req.rendrApp));
+                end();
+            }
+
+            function error(err) {
+                formidable.error(req, '/createpassword', err, user.toJSON(), function redirect(url) {
+                    res.redirect(utils.link(url, req.rendrApp));
+                    end(err);
+                });
+            }
+
+            function end(err) {
+                if (next && next.errfcb) {
+                    next.errfcb(err);
+                }
+            }
+
+            asynquence().or(error)
+                .then(parse)
+                .then(prepare)
+                .then(submit)
+                .val(success);
+        }
+
+        return handler;
+    }
+
     function lostpassword() {
         app.post('/lostpassword', handler);
 
