@@ -23,10 +23,9 @@ module.exports = Base.extend({
         var search = this.$('form').find('[name=search]').val();
         var url = search ? ('/nf/search/' + search) : '/nf/all-results';
 
-        if (!this.metric) {
-            this.metric = new Metric({}, this);
-        }
-        this.metric.increment(['dgd', 'home', ['search', (search ? 'with' : 'without') + '_term']]);
+        Metric.increment.call(this, ['dgd', 'home', ['search', (search ? 'with' : 'without') + '_term']], {
+            include: 'currentRoute:categories#list'
+        });
 
         helpers.common.redirect.call(this.app.router, url, null, {
             status: 200
