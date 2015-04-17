@@ -26,10 +26,10 @@ module.exports = Base.extend({
 
             adapter.request(this.app.req, {
                 method: 'POST',
-                url: 'http://localhost:4000/async-pickup/transaction/create',
+                url: 'http://mario.apps.olx.com/async-pickup/transaction/create',
                 data: JSON.stringify(data)
             }, {
-                timeout: 5000
+                timeout: 2000
             }, callback.bind(this));
         }
 
@@ -41,6 +41,11 @@ module.exports = Base.extend({
             this.parentView.$('.steps').addClass('hide');
             if (res.status) {
                 this.parentView.$('.success').removeClass('hide');
+                if (this.parentView.fields.contactedBySeller) {
+                    this.parentView.$('.buyer-link').removeClass('hide');
+                    this.parentView.$('.success input.link').val('http://www.olx.com.ar/asyncbuyer?transactionId=' + res.extra.transactionId);
+                    this.parentView.$('.success input.link').select();
+                }
             }
             else {
                 this.parentView.$('.error-page .msg-error').html(res.error[0].message);

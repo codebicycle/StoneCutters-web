@@ -3,21 +3,21 @@
         <h3 class="title">{{ dictionary["misc.NeedHelp"] }}</h3>
         <ul>
             <li {{ 'class="selected"' if tab == 'new-olx' }} >
-                <a class="help-toggle-content icons icon-user" data-help-content="new-olx" data-toggle-content href="#">{{ dictionary["help.NewToBrand"] }}</a>
+                <a class="help-toggle-content icons icon-user" data-help-content="new-olx" data-toggle-content href="#" data-increment="true" data-increment-category="zendesk" data-increment-action="help" data-increment-value="section.new_in_olx">{{ dictionary["help.NewToBrand"] }}</a>
             </li>
             <li>
-                <a class="help-toggle-content icons icon-list" data-help-content="ads" data-toggle-content href="#">{{ dictionary["itemslisting.Classifieds"] }}</a>
+                <a class="help-toggle-content icons icon-list" data-help-content="ads" data-toggle-content href="#" data-increment="true" data-increment-category="zendesk" data-increment-action="help" data-increment-value="section.about_ads">{{ dictionary["itemslisting.Classifieds"] }}</a>
             </li>
             <li {{ 'class="selected"' if tab == 'faq' }} >
-                <a class="help-toggle-content icons icon-question" data-help-content="faqs" data-toggle-content href="#">{{ dictionary["misc.FrequentQuestions"] }}</a>
+                <a class="help-toggle-content icons icon-question" data-help-content="faqs" data-toggle-content href="#" data-increment="true" data-increment-category="zendesk" data-increment-action="help" data-increment-value="section.faqs">{{ dictionary["misc.FrequentQuestions"] }}</a>
             </li>
             {% if isContactEnabled %}
                 <li {{ 'class="selected"' if tab == 'contact' }}>
-                    <a class="help-toggle-content icons icon-chat" data-help-content="contact" data-toggle-content href="#">{{ dictionary["contact_us.ContactBrand"] | replace('<<BRAND>>','OLX') }}</a>
+                    <a class="help-toggle-content icons icon-chat" data-help-content="contact" data-toggle-content href="#" data-increment="true" data-increment-category="zendesk" data-increment-action="help" data-increment-value="section.contact">{{ dictionary["contact_us.ContactBrand"] | replace('<<BRAND>>','OLX') }}</a>
                 </li>
             {% endif %}
             <li>
-                <a class="help-toggle-content icons icon-more" data-help-content="more-suggestions" data-toggle-content href="#">{{ dictionary["help.MoreGuidelines"] }}</a>
+                <a class="help-toggle-content icons icon-more" data-help-content="more-suggestions" data-toggle-content href="#" data-increment="true" data-increment-category="zendesk" data-increment-action="help" data-increment-value="section.more_tips">{{ dictionary["help.MoreGuidelines"] }}</a>
             </li>
         </ul>
     </div>
@@ -25,17 +25,17 @@
         <h3 class="title">{{ dictionary["about.Company"] }}</h3>
         <ul>
             <li {{ 'class="selected"' if active == 'about' }}>
-                <a class="help-toggle-content icons icon-olx" href="#" data-help-content="about-us" data-toggle-content>{{ dictionary["about.AboutBrand"] | replace("<<BRAND>>","OLX") }}</a>
+                <a class="help-toggle-content icons icon-olx" href="#" data-help-content="about-us" data-toggle-content data-increment="true" data-increment-category="zendesk" data-increment-action="help" data-increment-value="section.about_olx">{{ dictionary["about.AboutBrand"] | replace("<<BRAND>>","OLX") }}</a>
             </li>
             <li>
-                <a class="help-toggle-content icons icon-help-round" href="#" data-help-content="why" data-toggle-content >{{ dictionary["about.Why"] }}</a>
+                <a class="help-toggle-content icons icon-help-round" href="#" data-help-content="why" data-toggle-content data-increment="true" data-increment-category="zendesk" data-increment-action="help" data-increment-value="section.why">{{ dictionary["about.Why"] }}</a>
             </li>
             <li>
-                <a class="help-toggle-content icons icon-press" href="#" data-help-content="press" data-toggle-content>{{ dictionary["about.Press"] }}</a>
+                <a class="help-toggle-content icons icon-press" href="#" data-help-content="press" data-toggle-content data-increment="true" data-increment-category="zendesk" data-increment-action="help" data-increment-value="section.press">{{ dictionary["about.Press"] }}</a>
             </li>
             {% if linkblog %}
             <li>
-                <a class="help-toggle-content icons icon-chat" href="{{ linkblog.href }}" target="{{ linkblog.target }}">{{ dictionary["about.Blog"] }}</a>
+                <a class="help-toggle-content icons icon-chat" href="{{ linkblog.href }}" target="{{ linkblog.target }}" data-increment="true" data-increment-category="zendesk" data-increment-action="help" data-increment-value="section.blog">{{ dictionary["about.Blog"] }}</a>
             </li>
             {% endif %}
         </ul>

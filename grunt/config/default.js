@@ -6,8 +6,8 @@ module.exports = {
     stylus: {
         testing: {
             urls: {
-                static: 'http://static-testing.olx-st.com/mobile-webapp',
-                image: 'http://static-testing.olx-st.com/mobile-webapp'
+                static: 'http://static01.olx-st.com/mobile-webapp',
+                image: 'http://static01.olx-st.com/mobile-webapp'
             },
             'www.olx.ir': {
                 urls: {
@@ -18,14 +18,26 @@ module.exports = {
         },
         staging: {
             urls: {
-                static: 'http://static-staging.olx-st.com/mobile-webapp',
-                image: 'http://static-staging.olx-st.com/mobile-webapp'
+                static: 'http://static01.olx-st.com/mobile-webapp',
+                image: 'http://static01.olx-st.com/mobile-webapp'
+            },
+            'www.olx.ir': {
+                urls: {
+                    static: 'http://static01.olx-st.ir/mobile-webapp',
+                    image: 'http://static01.olx-st.ir/mobile-webapp'
+                }
             }
         },
         production: {
             urls: {
                 static: 'http://static01.olx-st.com/mobile-webapp',
                 image: 'http://static01.olx-st.com/mobile-webapp'
+            },
+            'www.olx.ir': {
+                urls: {
+                    static: 'http://static01.olx-st.ir/mobile-webapp',
+                    image: 'http://static01.olx-st.ir/mobile-webapp'
+                }
             }
         }
     }

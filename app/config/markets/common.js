@@ -187,6 +187,10 @@ module.exports = {
             adroll: {
                 enabled: false,
                 platforms: ['desktop']
+            },
+            floodlight: {
+                enabled: false,
+                platforms: ['desktop']
             }
         }
     },
@@ -249,5 +253,21 @@ module.exports = {
             href: 'http://blog.olx.com',
             target: '_blank'
         }
+    },
+    abundance: {
+        enabled: false
+    },
+    validator: {
+        email: {
+            enabled: false,
+            platforms: ['html5', 'desktop'],
+            key: 'pubkey-6f6d5eea08926fa815f65250086dfbbb'
+        },
+        phone: {
+            enabled: false
+        }
+    },
+    flagItem: {
+        enabled: false
     }
 };

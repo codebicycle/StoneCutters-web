@@ -27,7 +27,7 @@ module.exports = Base.extend({
             price: data.price,
             locker: {
                 dimensionsId: data.dimensionsId,
-                kioscoId: 1
+                kioscoId: 2
             },
             seller: {
                 email: data.seller_email,

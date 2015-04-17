@@ -3,7 +3,6 @@
 var _ = require('underscore');
 var Base = require('../../../../../common/app/bases/view').requireView('header/index');
 var Metric = require('../../../../../../modules/metric');
-var Sixpack = require('../../../../../../../shared/sixpack');
 
 module.exports = Base.extend({
     tagName: 'header',
@@ -18,15 +17,11 @@ module.exports = Base.extend({
         this.app.router.appView.on('posting:end', this.onPostingEnd.bind(this));
     },
     onPostClick: function() {
-        var sixpack = new Sixpack({
-            clientId: this.app.session.get('clientId'),
-            ip: this.app.session.get('ip'),
-            userAgent: this.app.session.get('userAgent'),
-            platform: this.app.session.get('platform'),
-            market: this.app.session.get('location').abbreviation
-        });
+        var currentRoute = this.app.session.get('currentRoute');
 
-        sixpack.convert(sixpack.experiments.desktopTest);
+        if (currentRoute.controller === 'items' && currentRoute.action === 'show') {
+            this.app.sixpack.convert(this.app.sixpack.experiments.desktopDGD23ShowSimplifiedReplyForm, 'publish');
+        }
     },
     onPostingStart: function() {
         $('.posting, .search-form').addClass('disabled');

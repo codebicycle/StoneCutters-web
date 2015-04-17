@@ -27,7 +27,7 @@
 {% set phoneField = {
 	isOptional: false,
 	name: "phone",
-	mandatory: false,
+	mandatory: isPhoneMandatory,
 	label: dictionary["posting_footerlist.phoneNumber"],
 	fieldType: "text",
 	dataType: "string",

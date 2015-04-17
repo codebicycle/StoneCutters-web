@@ -12,9 +12,6 @@ module.exports = Base.extend({
         'progressBar': 'onProgressBar',
         'updateData': 'onUpdateData'
     },
-    fields: {},
-    enableButton: true,
-    dimensions: '',
     errors: {
         'INVALID_JSON': '',
         'INVALID_BUYER_FORMAT': '',
@@ -29,7 +26,13 @@ module.exports = Base.extend({
         'NON_NUMERIC_PRICE': 'price',
         'NEGATIVE_PRICE': 'price',
         'PRICE_TOO_HIGH': 'price',
-        'LOCKER_UNAVAILABLE': 'dimensionsId'
+        'LOCKER_UNAVAILABLE': 'dimensionsId',
+        'ITEM_HAS_ACTIVE_TRANSACTIONS': 'dimensionsId'
+    },
+    initialize: function(){
+        this.fields = {};
+        this.enableButton = true;
+        this.dimensions = '';
     },
     postRender: function() {
         this.app.router.once('action:end', this.onStart);
@@ -62,13 +65,12 @@ module.exports = Base.extend({
         event.stopImmediatePropagation();
 
         var adapter = new Adapter({});
-
         adapter.request(this.app.req, {
             method: 'POST',
-            url: 'http://localhost:4000/async-pickup/validate',
+            url: 'http://mario.apps.olx.com/async-pickup/validate',
             data: JSON.stringify(data)
         }, {
-            timeout: 5000
+            timeout: 2000
         }, callback.bind(this));
 
         function callback(err, res, body) {
@@ -107,7 +109,14 @@ module.exports = Base.extend({
 
         this.$('[data-price]').html('$' + this.fields.price);
         this.$('[data-dimensions]').html(this.dimensions);
-        this.$('[data-buyer]').html(this.fields.buyer.name + ' (' + this.fields.buyer.email + ')');
+
+        if (!this.fields.contactedBySeller) {
+            this.$('.buyer-data').removeClass('hide');
+            this.$('[data-buyer]').html(this.fields.buyer.name + ' (' + this.fields.buyer.email + ')');
+        }
+        else {
+            this.$('.buyer-data').addClass('hide');
+        }
         if (this.fields.seller.phone) {
             this.$('[data-seller]').html('o llamandote a <b>' + this.fields.seller.phone + '</b>');
         }

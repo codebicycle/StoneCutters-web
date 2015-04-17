@@ -70,6 +70,7 @@ function desktopizeUrl(url, options, params) {
     }
     return url;
 }
+
 module.exports = _.extend(Seo, {
     isEnabled: isEnabled,
     isCategoryRedirected: isCategoryRedirected,

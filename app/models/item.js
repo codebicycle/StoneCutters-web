@@ -131,6 +131,9 @@ function parse(item, options) {
     if (item.priceC && this.app.session.get('location').url === 'www.olx.ir') {
         item.priceC = helpers.numbers.toLatin(item.priceC);
     }
+    if (item.optionals && item.optionals.length) {
+        item.optionals = _.sortBy(item.optionals, 'name').reverse();
+    }
     return Base.prototype.parse.apply(this, arguments);
 }
 
@@ -196,13 +199,16 @@ function postImages(done) {
 
 function postFields(done) {
     var id = this.get('id');
+    var type = !id ? 'posting' : 'editing';
     var user = this.app.session.get('user');
     var renew =  this.get('renew') || false;
+    var platform = this.app.session.get('platform');
+    var locale = this.app.session.get('location').abbreviation;
     var action = 'edit';
     var query = {
         postingSession: this.get('postingSession'),
         languageId: this.app.session.get('languageId'),
-        platform: this.app.session.get('platform')
+        platform: platform
     };
     var data;
 
@@ -220,7 +226,9 @@ function postFields(done) {
     }
 
     data = this.toData(true);
-
+    if (data.priceC && !data.currency_type) {
+        statsd.increment([locale, type, 'error', 'currency', 'post', platform]);
+    }
     helpers.dataAdapter.post(this.app.req, '/items' + (!id ? '' : ['', id, action].join('/')), {
         data: data,
         query: query
@@ -230,7 +238,7 @@ function postFields(done) {
         if (!err && item) {
             this.set(item);
         }
-        this.logPost(!id ? 'posting' : 'editing', response.statusCode, err);
+        this.logPost(type, response.statusCode, err);
         this.errfcb(done)(err, response, item);
     }
 }

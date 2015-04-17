@@ -1,4 +1,5 @@
 .landings_asyncseller_view {
+    line-height: 1.4rem;
     box(#fff, #ccc, 3px, 20px 0, solid, 1px);
     overflow: hidden;
     .bold,
@@ -13,7 +14,7 @@
         font-size: $xl;
     }
     small.error {
-        font-size: $xs;
+        font-size: $s;
     }
     .progress-bar {
         position: relative;
@@ -126,7 +127,6 @@
                         font-weight: initial;
                         cursor: pointer;
                         text-decoration: underline;
-                        padding-left: 5px;
                     }
                 }
                 .desc {
@@ -137,19 +137,18 @@
                     margin: 20px 0 10px 0;
                 }
                 .bold {
-                    height: 30px;
+                    height: 50px;
                     margin-bottom: 20px;
                 }
                 img {
                     width: 150px;
                     height: 150px;
                 }
-                font-size: $xs;
+                font-size: $s;
                 box-sizing: border-box;
                 padding: 0 10px;
                 display: inline-block;
                 width: 33.3%;
-                text-align: justify;
                 vertical-align: top;
             }
         }
@@ -159,17 +158,17 @@
         float: left;
         box-sizing: border-box;
         padding: 10px 20px;
-        font-size: $xs;
     }
     .async-form {
         width: 60%;
-        font-size: $xs;
+        font-size: $s;
         &.border {
             box(#fff, #ccc, 0, 20px, solid, 1px);
             box-sizing: border-box;
         }
     }
     .kiosco-location {
+        font-size: $xs;
         width: 40%;
         .left {
             float: left;
@@ -197,11 +196,39 @@
             display: block;
             box-sizing: border-box;
         }
+        input[type="radio"] {
+            width: auto;
+            display: inline-block;
+            margin: 0;
+            position: relative;
+            top: 1px;
+        }
         fieldset {
             border: 0;
             padding: 0;
             margin: 0;
             margin-bottom: 15px;
+        }
+        .fork-form {
+            margin-bottom: 20px;
+            .fork {
+                box-sizing: border-box;
+                padding: 0 10px;
+                border: 1px solid $red;
+                display: block;
+                margin-bottom: 5px;
+            }
+            label {
+                margin: 20px 0;
+            }
+            .error-alert {
+                color: $red;
+                margin-top: 10px;
+                font-size: $s;
+            }
+        }
+        .buyer-form {
+            margin-top: 40px;
         }
         .type-select {
             background: $white;
@@ -220,6 +247,7 @@
         }
         .restrictions {
             color: $greyStrong;
+            font-size: $xs;
             ul {
                 ul-reset();
             }
@@ -240,7 +268,7 @@
         }
         .bottom {
             text-align: center;
-            font-size: $xs;
+            font-size: $s;
             padding: 20px;
             .title {
                 font-size: $m;
@@ -325,7 +353,7 @@
                 }
             }
             .edit {
-                font-size: $xs;
+                font-size: $s;
                 color: $blue;
                 cursor: pointer;
                 display: inline;
@@ -367,10 +395,7 @@
             width: 50%;
             p {
                 font-size: $m;
-                margin: 0;
-                &:first-child {
-                    margin-bottom: 20px;
-                }
+                margin: 0 0 20px 0;
             }
             &.border {
                 border-color: $green;
@@ -380,6 +405,31 @@
         .kiosco-location {
             width: 50%;
             margin-top: 10px;
+        }
+    }
+    .success {
+        fieldset {
+            border: 0;
+            padding: 0;
+            margin: 0;
+        }
+        .buyer-link {
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid $greyBorders;
+            label {
+                display: inline-block;
+                margin-bottom: 5px;
+            }
+            input[type="text"] {
+                width: 95%;
+            }
+            span {
+                display: inline-block;
+                margin-top: 5px;
+                color: $greyStrong;
+                font-size: $xs;
+            }
         }
     }
     .error-page {
@@ -393,6 +443,14 @@
         .async-form {
             &.border {
                 border-color: $red;
+            }
+        }
+    }
+    .success,
+    .error-page {
+        .kiosco-location {
+            .left {
+                padding-left: 85px;
             }
         }
     }

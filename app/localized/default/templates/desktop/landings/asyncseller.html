@@ -1,27 +1,38 @@
-<div class="steps">
+<div class="steps {{ 'hide' if key }}">
 {% view 'landings/asyncpickup/step-1' %}
 {% view 'landings/asyncpickup/step-2' %}
 {% view 'landings/asyncpickup/step-3' %}
 {% view 'landings/asyncpickup/step-4' %}
 </div>
+
 <div class="success hide">
     <div class="top">
         <p class="title icons icon-check">Todo listo!</p>
         <p>Gracias por confiar en nosotros.</p>
     </div>
     <div class="async-form border">
+        <div class="buyer-link hide">
+            <form>
+                <fieldset class="field-wrapper">
+                    <label class="bold">Enviale este link al comprador</label>
+                    <input type="text" class="text-field link" value="http://www.olx.com.ar/asyncbuyer?">
+                    <span>Copiá este link y pegalo en un mensaje OLX para tu comprador, teniendo el el podrá usar el Punto de Entrea OLX con vos.</span>
+                </fieldset>
+            </form>
+        </div>
         <p>Te enviaremos el <b>código de intercambio</b> por email cuando tu comprador nos confirme.</p>
         <p><b>Deberás presenta el código recibido y tu dni en el punto de intercambio OLX</b> para dejar tu producto y para retirar tu dinero.</p>
     </div>
     {% include (template + '/landings/asyncpickup/kiosco-location.html') %}
 </div>
-<div class="error-page hide">
+
+<div class="error-page {{ 'hide' if not key }}">
     <div class="top">
         <p class="title icons icon-close">Lo sentimos, algo salió mal.</p>
         <p></p>
     </div>
     <div class="async-form border">
-        <p class="msg-error"></p>
+        <p class="msg-error">{{ message }}</p>
     </div>
     {% include (template + '/landings/asyncpickup/kiosco-location.html') %}
 </div>

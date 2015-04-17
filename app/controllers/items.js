@@ -9,6 +9,7 @@ var Item = require('../models/item');
 var config = require('../../shared/config');
 var statsd = require('../../shared/statsd')();
 var Shops = require('../modules/shops');
+var Metric = require('../modules/metric');
 
 module.exports = {
     show: middlewares(show),
@@ -17,6 +18,7 @@ module.exports = {
     reply: middlewares(reply),
     success: middlewares(success),
     favorite: middlewares(favorite),
+    flag: middlewares(flag),
     'delete': middlewares(deleteitem),
     filter: middlewares(filter),
     sort: middlewares(sort),
@@ -32,6 +34,7 @@ function show(params, callback) {
         var itemId = params.itemId;
         var slugUrl = params.title;
         var favorite = params.favorite;
+        var flagged = params.flagged;
         var siteLocation = this.app.session.get('siteLocation');
         var languages = this.app.session.get('languages');
         var platform = this.app.session.get('platform');
@@ -178,6 +181,9 @@ function show(params, callback) {
                 if (favorite) {
                     slug = helpers.common.params(slug, 'favorite', favorite);
                 }
+                if (flagged) {
+                    slug = helpers.common.params(slug, 'flagged', flagged);
+                }
                 done.abort();
                 return helpers.common.redirect.call(this, slug);
             }
@@ -254,6 +260,21 @@ function show(params, callback) {
                 url = helpers.common.removeParams(this.app.session.get('url'), 'location');
                 this.app.seo.addMetatag('canonical', helpers.common.fullizeUrl(url, this.app));
             }
+
+            this.app.seo.addMetatag('og:title', item.title);
+            this.app.seo.addMetatag('og:description', item.description);
+            this.app.seo.addMetatag('og:type', 'article');
+            this.app.seo.addMetatag('og:site_name', 'olx');
+            this.app.seo.addMetatag('og:url', item.slug);
+            if (item.images.length) {
+                this.app.seo.addMetatag('og:image', item.images[0].url);
+                this.app.seo.addMetatag('og:image:type', 'image/jpeg');
+            }
+            else {
+                this.app.seo.addMetatag('og:image', 'http://static01.olx-st.com/mobile-webapp/images/desktop/logo.png');
+                this.app.seo.addMetatag('og:image:type', 'image/png');
+            }
+
             this.app.tracking.set('item', item);
             this.app.tracking.set('category', category);
             this.app.tracking.set('subcategory', subcategory);
@@ -284,6 +305,7 @@ function show(params, callback) {
                 subcategory: subcategory,
                 category: category,
                 favorite: favorite,
+                flagged: flagged,
                 sent: params.sent,
                 categories: this.dependencies.categories.toJSON(),
                 isSafetyTipsEnabled: isSafetyTipsEnabled
@@ -903,6 +925,53 @@ function favorite(params, callback) {
     asynquence().or(error)
         .then(prepare)
         .then(add)
+        .val(success);
+}
+
+function flag(params, callback) {
+
+    var redirect = function(done) {
+        var platform = this.app.session.get('platform');
+
+        if (platform === 'wap') {
+            done.abort();
+            return helpers.common.redirect.call(this, '/');
+        }
+
+        done();
+    }.bind(this);
+
+    var flagger = function(done) {
+        var user = !!this.app.session.get('user');
+        var metric = new Metric({}, this);
+        var metricValue = [user ? 'auth' : 'anon', !params.flagged ? 'flagging' : 'reflagging'];
+        
+        metric.increment(['africa', 'item', metricValue]);
+
+        done();
+    }.bind(this);
+
+    
+    var success = function() {
+        var url = (params.redirect || '/des-iid-' + params.itemId);
+        var query = {
+            flagged: true
+        };
+
+        helpers.common.redirect.call(this, url, query, {
+            status: 302
+        });
+    }.bind(this);
+
+    var error = function() {
+        helpers.common.redirect.call(this, params.redirect || '/des-iid-' + params.itemId, null, {
+            status: 302
+        });
+    }.bind(this);
+
+    asynquence().or(error)
+        .then(redirect)
+        .then(flagger)
         .val(success);
 }
 

@@ -15,15 +15,33 @@
                         {{ item.price.displayPrice if item.price and item.price.amount > 0 }}
                         {{ ('<span>' + item.priceTypeData.displayPriceType + '</span>') if not(item.priceTypeData.type == 'FIXED') }}
                     </p>
-                    <p class="items-date">
-                        {{ item.date.since.day if item.date.since.day }} {{ dictionary[item.date.since.dictionary] }}{{ (', ' + item.date.since.hour) if item.date.since.hour }}
-                    </p>
-                    {% if item.isFeatured %}
+
+                    {% if item.sold %}
+                        <p class="soldad">
+                            <i class="icons icon-check-round"></i>
+                            <em>{{ dictionary["itemslisting.Sold"] }}</em>
+                        </p>
+                    {% elif item.isFeatured %}
                         <p class="featuredad">
                             <i class="icons icon-star-circle"></i>
                             <em>{{ dictionary["misc.FeaturedAd _BR"] }}</em>
                         </p>
                     {% endif %}
+
+                    {% if not isItemAlternativeInfoEnabled %}
+                        <p class="items-date">
+                            {{ item.date.since.day if item.date.since.day }} {{ dictionary[item.date.since.dictionary] }}{{ (', ' + item.date.since.hour) if item.date.since.hour }}
+                        </p>
+                    {% elif item.optionals and item.optionals.length > 0 %}
+                        {% for optional in item.optionals %}
+                            {% if optional.name == 'year' or optional.name == 'mileage' %}
+                                <p class="items-optional {{ optional.name }}">
+                                    {{ optional.value }}{{ (' ' + optional.options.unit) if (optional.options and optional.options.unit) }}
+                                </p>
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+
                 </a>
             </li>
         {% endfor %}
@@ -44,15 +62,32 @@
                             {{ item.price.displayPrice if item.price and item.price.amount > 0 }}
                             {{ ('<span>' + item.priceTypeData.displayPriceType + '</span>') if not(item.priceTypeData.type == 'FIXED') }}
                         </p>
-                        <p class="items-date">
-                            {{ item.date.since.day if item.date.since.day }} {{ dictionary[item.date.since.dictionary] }}{{ (', ' + item.date.since.hour) if item.date.since.hour }}
-                        </p>
-                        {% if item.isFeatured %}
+                        {% if item.sold %}
+                            <p class="soldad">
+                                <i class="icons icon-check-round"></i>
+                                <em>{{ dictionary["itemslisting.Sold"] }}</em>
+                            </p>
+                        {% elif item.isFeatured %}
                             <p class="featuredad">
                                 <i class="icons icon-star-circle"></i>
                                 <em>{{ dictionary["misc.FeaturedAd _BR"] }}</em>
                             </p>
                         {% endif %}
+                        {% if not isItemAlternativeInfoEnabled %}
+                            <p class="items-date">
+                                {{ item.date.since.day if item.date.since.day }} {{ dictionary[item.date.since.dictionary] }}{{ (', ' + item.date.since.hour) if item.date.since.hour }}
+                            </p>
+                        {% elif item.optionals and item.optionals.length > 0 %}
+                            {% for optional in item.optionals %}
+                                {% if optional.name == 'year' or optional.name == 'mileage' %}
+                                    <p class="items-optional">
+                                        {{ optional.value }}{{ (' ' + optional.options.unit) if (optional.options and optional.options.unit) }}
+                                    </p>
+                                {% endif %}
+                            {% endfor %}
+                        {% endif %}
+
+
                     </a>
                 </li>
             {% endfor %}

@@ -83,17 +83,46 @@
                 font-size: $xs;
             }
         }
-        .items-date {
+        .items-date,
+        .items-optional {
             color: $greyStrong;
             font-size: $xs;
         }
+        .items-optional {
+            display: inline-block;
+
+            &.mileage {
+                &::before {
+                    content: " - ";
+                }
+            }
+        }
+
+        p.soldad {
+            .icon-check-round {
+                color: $yellowSold;
+            }
+
+            em {
+                ribbon($yellowSold, $white);
+            }
+        }
         p.featuredad {
+            .icon-star-circle {
+                color: $featureStarBg;
+            }
+
+            em {
+                ribbon($green, $white);
+            }
+        }
+        p.featuredad, p.soldad {
             position: absolute;
             left: 0;
             top: 13px;
             height: 20px;
-            .icon-star-circle {
-                color: $featureStarBg;
+
+            i {
                 font-size: 26px;
                 position: absolute;
                 z-index: 10;
@@ -107,7 +136,6 @@
             }
 
             em {
-                ribbon($green, $white);
                 top: 0;
                 left: 24px;
                 padding-left: 22px;
@@ -116,6 +144,5 @@
                 text-align: center;
             }
         }
-
     }
 }

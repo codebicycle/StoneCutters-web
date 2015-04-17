@@ -28,6 +28,8 @@ module.exports = {
                     data.direct = common.static.call({
                         app: app
                     }, '/apps/OLX.Iran.1.1.apk');
+
+                    data.link = 'market://details?id=com.olx.iris';
                 }
                 data.forOsKey = 'misc.BrandFor_Mob';
                 data.forOs = ' Android';
@@ -38,7 +40,11 @@ module.exports = {
                 data.browserName = browserName;
             break;
             case 'iOS':
-                data.link = 'http://itunes.apple.com/es/app/olx-classifieds/id382059698';
+                if(location.url === 'www.olx.ir' && config.get(['iris', 'direct', 'enabled'], false)) {
+                    data.link = 'https://itunes.apple.com/us/app/olx-iran/id964574990';
+                } else {
+                    data.link = 'http://itunes.apple.com/es/app/olx-classifieds/id382059698';
+                }
                 data.forOsKey = 'misc.BrandFor_Mob';
                 data.forOs = 'iPhone';
                 data.freeInKey = 'misc.FreeIn_Mob';

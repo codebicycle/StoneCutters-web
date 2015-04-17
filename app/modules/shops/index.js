@@ -5,14 +5,15 @@ var Sixpack = require('../../../shared/sixpack');
 var config = require('../../../shared/config');
 var Adapter = require('../../../shared/adapters/base');
 var utils = require('../../../shared/utils');
-var shopHost = config.get(['mario', 'host'], 'mario.apps.olx.com');
 var isServer = utils.isServer;
 
 function Shops(options) {
     this.app = options.app;
     this.shopSessionId = this.app.session.get('shopSessionId');
-    this.sixpack = new Sixpack({
+    this.sixpack = options.app.sixpack || new Sixpack({
         clientId: this.app.session.get('clientId'),
+        ip: this.app.session.get('ip'),
+        userAgent: this.app.session.get('userAgent'),
         platform: this.app.session.get('platform'),
         market: this.app.session.get('location').abbreviation,
         experiments: this.app.session.get('experiments')
@@ -54,8 +55,7 @@ Shops.prototype.start = function(from, itemsCount, shopsCount) {
         shops_experiment_from: from,
         itemId: itemsCount,
         shopId: shopsCount
-    }
-    );
+    });
 };
 
 Shops.prototype.evaluate = function(params) {

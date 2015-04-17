@@ -10,6 +10,7 @@ var tagmanager = require('./tagmanager');
 var allpages = require('./allpages');
 var ninja = require('./ninja');
 var adroll = require('./adroll');
+var floodlight = require('./floodlight');
 var esi = require('../../esi');
 var config = require('../../../../shared/config');
 var utils = require('../../../../shared/utils');
@@ -20,7 +21,8 @@ var trackers = {
     hydra: hydra,
     tagmanager: tagmanager,
     allpages: allpages,
-    adroll: adroll
+    adroll: adroll,
+    floodlight: floodlight
 };
 
 _.each(trackers, function each(tracker, name) {
