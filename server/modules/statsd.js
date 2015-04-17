@@ -85,8 +85,5 @@ function stringify(metric, value) {
     if (config.enabled || config.debug) {
         logger.log(metric + ': ' + (value || 1));
     }
-    if (~metric.indexOf('dgd') || ~metric.indexOf('africa') || ~metric.indexOf('posting') || ~metric.indexOf('growth') || ~metric.indexOf('mtd')) {
-        console.log(metric);
-    }
     return metric;
 }
