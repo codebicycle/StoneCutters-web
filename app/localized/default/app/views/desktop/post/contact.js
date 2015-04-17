@@ -34,11 +34,11 @@ module.exports = Base.extend({
         var data = Base.prototype.getTemplateData.call(this);
         var locationUrl = this.app.session.get('location').url;
         var isPhoneMandatory = config.getForMarket(locationUrl, ['validator', 'phone', 'enabled'], false);
-        var isEmailDisabled = config.getForMarket(locationUrl, ['posting', 'loginRequired'],false);
+        var isEmailReadOnly = config.getForMarket(locationUrl, ['posting', 'loginRequired'],false);
 
         return _.extend({}, data, {
             isPhoneMandatory: isPhoneMandatory,
-            isEmailDisabled: isEmailDisabled
+            isEmailReadOnly: isEmailReadOnly
         });
     },
     postRender: function() {

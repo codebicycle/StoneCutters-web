@@ -58,8 +58,8 @@
             {% if field.fieldType == 'text' %}
                 {% if field.name != 'streetAddress' %}
                     {% set autocomplete = 'on' if (field.name == 'contactName' or field.name == 'email' or field.name == 'phone') else 'off' %}
-                    {% set disabled = 'true' if (field.name == 'email' and isEmailDisabled) else 'false' %}
-                    {{ FieldText(field.label, field.name, field.mandatory, form,  user, autocomplete, disabled) }}
+                    {% set readonly = 'true' if (field.name == 'email' and isEmailReadOnly) else 'false' %}
+                    {{ FieldText(field.label, field.name, field.mandatory, form,  user, autocomplete, readonly) }}
                 {% endif %}
             {% elif field.fieldType == 'combobox' %}
                 {{ FieldCombobox(field.label, field.name , form, field.value) }}

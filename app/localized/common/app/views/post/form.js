@@ -13,11 +13,11 @@ module.exports = Base.extend({
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
         var locationUrl = this.app.session.get('location').url;
-        var isEmailDisabled = config.getForMarket(locationUrl, ['posting', 'loginRequired'],false);
+        var isEmailReadOnly = config.getForMarket(locationUrl, ['posting', 'loginRequired'],false);
 
         return _.extend({}, data, {
             breadcrumb: breadcrumb.get.call(this, data),
-            isEmailDisabled: isEmailDisabled.toString()
+            isEmailReadOnly: isEmailReadOnly.toString()
         });
     }
 });
