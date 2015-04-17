@@ -52,7 +52,7 @@ Metric.getValues = function getValues(values) {
     if (_.isArray(values)) {
         values = _.object(['category', 'action', 'value'], values);
     }
-    return values;
+    return values || {};
 };
 
 function check(options) {
@@ -74,10 +74,17 @@ function check(options) {
 
 function checkRule(rule) {
     var checker;
+    var val;
 
     rule = rule.split(':');
     checker = checkers[rule.shift()] || utils.noop;
-    return checker.call(this, JSON.parse(rule.shift()));
+    val = rule.shift();
+    try {
+        val = JSON.parse(val);
+    } catch(e) {
+        // Ignore
+    }
+    return checker.call(this, val);
 }
 
 function checkCurrentRoute(value) {
