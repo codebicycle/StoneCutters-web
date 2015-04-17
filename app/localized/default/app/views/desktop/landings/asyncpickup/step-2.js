@@ -1,7 +1,7 @@
 'use strict';
 
-var Base = require('../../../../../../common/app/bases/view');
 var _ = require('underscore');
+var Base = require('../../../../../../common/app/bases/view');
 var helpers = require('../../../../../../../helpers');
 
 module.exports = Base.extend({
@@ -27,7 +27,7 @@ module.exports = Base.extend({
             price: data.price,
             locker: {
                 dimensionsId: data.dimensionsId,
-                kioscoId: 2
+                kioscoId: 1
             },
             seller: {
                 email: data.seller_email,

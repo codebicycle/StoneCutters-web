@@ -183,7 +183,7 @@ function asyncseller(params, callback) {
         function fetchTransaction(done, data) {
             adapter.request(this.app.req, {
                 method: 'POST',
-                url: 'http://mario.apps.olx.com/async-pickup/validate',
+                url: [config.get(['mario', 'protocol']), '://', config.get(['mario', 'host']), '/async-pickup/validate'].join(''),
                 data: JSON.stringify(data)
             }, {
                 timeout: 2000

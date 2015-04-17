@@ -1,7 +1,8 @@
 'use strict';
 
-var Base = require('../../../../../common/app/bases/view').requireView('landings/asyncseller');
 var _ = require('underscore');
+var Base = require('../../../../../common/app/bases/view').requireView('landings/asyncseller');
+var config = require('../../../../../../../shared/config');
 var Adapter = require('../../../../../../../shared/adapters/base');
 
 module.exports = Base.extend({
@@ -67,7 +68,7 @@ module.exports = Base.extend({
         var adapter = new Adapter({});
         adapter.request(this.app.req, {
             method: 'POST',
-            url: 'http://mario.apps.olx.com/async-pickup/validate',
+            url: [config.get(['mario', 'protocol']), '://', config.get(['mario', 'host']), '/async-pickup/validate'].join(''),
             data: JSON.stringify(data)
         }, {
             timeout: 2000

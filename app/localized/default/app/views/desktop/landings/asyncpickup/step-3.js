@@ -1,7 +1,7 @@
 'use strict';
 
-var Base = require('../../../../../../common/app/bases/view');
 var _ = require('underscore');
+var Base = require('../../../../../../common/app/bases/view');
 var helpers = require('../../../../../../../helpers');
 
 module.exports = Base.extend({
