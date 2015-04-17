@@ -38,6 +38,7 @@ module.exports = Base.extend({
         var $field = $(event.target);
 
         this.getProfile().set($field.attr('name'), $field.val());
+        this.getProfile().set('platform', this.app.sessio.get('platform'));
     },
     getProfile: function(profile) {
         this.profile = this.profile || (this.options.profile && this.options.profile.toJSON ? this.options.profile : new User(profile || this.options.profile || {}, {
