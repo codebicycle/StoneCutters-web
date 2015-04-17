@@ -69,10 +69,6 @@ module.exports = {
                 '264': 822,
                 '374': 822
             }
-        },
-        testing: {
-        },
-        staging: {
         }
     },
     countryMapStyle: 'special',
