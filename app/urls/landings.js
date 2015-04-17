@@ -15,5 +15,11 @@ module.exports = {
     },
     'landings#available': {
         url: 'available/{{itemId}}'
+    },
+    'landings#asyncseller': {
+        url: 'asyncseller'
+    },
+    'landings#asyncbuyer': {
+        url: 'asyncbuyer'
     }
 };
