@@ -65,6 +65,7 @@ module.exports = {
     'itemslisting.Previous': 'El\u0151z\u0151',
     'itemslisting.RefineYourSearch': 'Finom\xEDtsa a keres\xE9st',
     'itemslisting.SelectAll': '\xD6sszes kiv\xE1laszt\xE1sa',
+    'itemslisting.Sold': 'Eladva',
     'loginbox.CreateYourAccount': 'Hozzon l\xE9tre ingyenes felhaszn\xE1l\xF3i fi\xF3kot:',
     'loginbox.ForgotYourPassword': 'Elfelejtette a jelszav\xE1t?',
     'loginbox.IAgreeToTheTermsAndConditionsOfBrand': 'Elfogadom a OLX <<LINK_TERMS_USE>>Szerz\u0151d\xE9si felt\xE9teleit<</LINK_TERMS_USE>>.',

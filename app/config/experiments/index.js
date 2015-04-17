@@ -28,44 +28,41 @@ module.exports = {
         name: 'show-shops',
         alternatives: {
             ITEMS: 'items',
-            AD_LIKE_STORE: 'adlikestore',
             CALL_TO_ACTION: 'calltoactions',
-            AD_LIKE_STORE_MAP: 'adlikestore_map',
             CALL_TO_ACTION_MAP: 'calltoactions_map'
         },
         firstClick: true
     },
-    desktopTest: {
-        enabled: true,
-        platforms: ['desktop'],
-        markets: ['co'],
-        name: 'test',
-        alternatives: {
-            TEST1: 'test1',
-            TEST2: 'test2'
-        }
-    },
-    fractionKPIsTest: {
-        enabled: true,
-        platforms: ['desktop'],
-        markets: ['pe'],
-        name: 'fraction-kpi-test',
-        fraction: 0.5,
-        alternatives: {
-            TEST1: 'test1',
-            TEST2: 'test2',
-            TEST3: 'test3',
-            TEST4: 'test4'
-        }
-    },
     desktopDGD23ShowSimplifiedReplyForm: {
-        enabled: false,
+        enabled: true,
         platforms: ['desktop'],
         markets: ['ar', 'co'],
         name: 'desktop-dgd23-show-simplified-reply-form',
         alternatives: {
             CONTROL: 'control',
             SHOW_SIMPLIFIED_REPLY_FORM: 'show-simplified-reply-form'
+        }
+    },
+    growthCategorySuggestion: {
+        enabled: true,
+        platforms: ['desktop'],
+        markets: ['ar'],
+        name: 'growth-category-suggestion',
+        fraction: 0.3,
+        alternatives: {
+            CONTROL: 'control',
+            SUGGESTED: 'suggested',
+            SINGLE: 'single'
+        }
+    },
+    dgdCategoryCars: {
+        enabled: true,
+        platforms: ['desktop'],
+        markets: ['ar', 'co'],
+        name: 'dgd-category-cars',
+        alternatives: {
+            CONTROL: 'control',
+            GALLERY: 'gallery'
         }
     },
     hidePhoneNumber: {

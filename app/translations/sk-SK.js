@@ -65,6 +65,7 @@ module.exports = {
     'itemslisting.Previous': 'Predch\xE1dzaj\xFAce',
     'itemslisting.RefineYourSearch': 'Upresni\u0165 h\u013Eadanie',
     'itemslisting.SelectAll': 'Vybra\u0165 v\u0161etky',
+    'itemslisting.Sold': 'Predan\xE9',
     'loginbox.CreateYourAccount': 'Vytvorte va\u0161e bezplatn\xE9 konto:',
     'loginbox.ForgotYourPassword': 'Zabudli ste heslo?',
     'loginbox.IAgreeToTheTermsAndConditionsOfBrand': 'S\xFAhlas\xEDm so <<LINK_TERMS_USE>>Zmluvn\xFDmi podmienkami<</LINK_TERMS_USE>> OLX',

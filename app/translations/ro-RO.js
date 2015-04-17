@@ -65,6 +65,7 @@ module.exports = {
     'itemslisting.Previous': 'Anterior',
     'itemslisting.RefineYourSearch': 'Revizui\u0163i c\u0103utarea dumneavoastr\u0103',
     'itemslisting.SelectAll': 'Selecteaz\u0103 tot',
+    'itemslisting.Sold': 'V\xE2ndut',
     'loginbox.CreateYourAccount': 'Crea\u0163i contul dvs. gratis:',
     'loginbox.ForgotYourPassword': 'A\u0163i uitat parola?',
     'loginbox.IAgreeToTheTermsAndConditionsOfBrand': 'Sunt de acord cu <<LINK_TERMS_USE>>Termenii \u015Fi condi\u0163iile<</LINK_TERMS_USE>> OLX',

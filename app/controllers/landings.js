@@ -148,11 +148,44 @@ function available(params, callback) {
 
     function controller() {
         var platform = this.app.session.get('platform');
+        var item;
 
-        if (platform === 'wap') {
-            return helpers.common.redirect.call(this, '/');
+        asynquence().or(fail.bind(this))
+            .then(redirect.bind(this))
+            .then(prepare.bind(this))
+            .then(stillAvailable.bind(this))
+            .val(success.bind(this));
+
+        function redirect(done) {
+            if (platform === 'wap') {
+                done.abort();
+                return helpers.common.redirect.call(this, '/');
+            }
+            done();
         }
-        callback(null, {});
+
+        function prepare(done) {
+            item = new Item({
+                id: params.itemId
+            }, {
+                app: this.app
+            });
+            done();
+        }
+
+        function stillAvailable(done) {
+            item.stillAvailable(done);
+        }
+
+        function success(res, body) {
+            callback(null, {});
+        }
+
+        function fail(err, res) {
+            return helpers.common.error.call(this, err, res, callback);
+        }
+
+
     }
 }
 

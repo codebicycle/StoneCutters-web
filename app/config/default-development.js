@@ -33,9 +33,13 @@ module.exports = {
             maxPageSize: 27
         }
     },
+    categorySuggestion: {
+        api: 'http://categorysuggestiontool-612498389.us-east-1.elb.amazonaws.com/rest/suggest/',
+        timeout: 1500
+    },
     mario: {
         protocol: 'http',
-        host: 'mario-LB-69977862.us-east-1.elb.amazonaws.com',
+        host: 'mario-LB-69977862.us-east-1.elb.amazonaws.com'
     },
     staticAccept: ['css', 'js', 'apk', 'zip'],
     imageAccept: ['jpg', 'jpeg', 'png', 'gif', 'ico'],
@@ -156,7 +160,7 @@ module.exports = {
             },
             safetyTips: {
                 worldwide: false,
-                countries: ['www.olx.co.za', 'www.olx.com.ng']
+                countries: ['www.olx.co.za', 'www.olx.com.ng', 'www.olx.co.ke']
             }
         },
         desktop: {

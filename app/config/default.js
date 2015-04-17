@@ -31,10 +31,14 @@ module.exports = {
             maxPageSize: 26
         }
     },
+    categorySuggestion: {
+        api: 'http://categorysuggestiontool-612498389.us-east-1.elb.amazonaws.com/rest/suggest/',
+        timeout: 1500
+    },
     mario: {
         protocol: 'http',
         host: 'mario-LB-69977862.us-east-1.elb.amazonaws.com',
-    },    
+    },
     staticAccept: ['css', 'js', 'apk', 'zip'],
     imageAccept: ['jpg', 'jpeg', 'png', 'gif', 'ico'],
     environment: {
@@ -120,7 +124,7 @@ module.exports = {
             },
             interstitialByADX: {
                 worldwide: true,
-                countries: []
+                countries: ['www.olx.ir']
             },
             autoLocation: {
                 worldwide: true,
@@ -150,7 +154,7 @@ module.exports = {
         html4: {
             interstitialByADX: {
                 worldwide: true,
-                countries: []
+                countries: ['www.olx.ir']
             },
             hermes: {
                 worldwide: true,
@@ -158,7 +162,7 @@ module.exports = {
             },
             safetyTips: {
                 worldwide: false,
-                countries: ['www.olx.co.za', 'www.olx.com.ng']
+                countries: ['www.olx.co.za', 'www.olx.com.ng', 'www.olx.co.ke']
             }
         },
         desktop: {
