@@ -9,6 +9,7 @@ module.exports = Base.extend({
     id: 'posting-description-view',
     tagName: 'section',
     className: 'posting-description-view',
+    rDescription: /[^]{10,}/g,
     events: {
         'blur #field-description': 'onBlur',
         'validate': 'onValidate'
@@ -25,20 +26,20 @@ module.exports = Base.extend({
             rules: [{
                 id: 'length',
                 message: this.dictionary['misc.DescriptionCharacters_Mob'].replace('<<NUMBER>>', ' ' + 10 + ' '),
-                fn: function validate(val) {
-                    return val.length < 10;
-                }
+                fn: this.rDescription
             }]
         }, true);
     },
     onBlur: function(event) {
-        var $field = $(event.target);
+        var $field = $(event.currentTarget);
         var value = this.stripValue($field);
 
         if ($field.data('value') !== value) {
-            if (this.validate($field)) {
-                this.parentView.$el.trigger('fieldSubmit', [$field]);
-            }
+            this.parentView.$el.trigger('fieldValidate', [$field, function onComplete(isValidDescription) {
+                if (isValidDescription) {
+                    this.parentView.$el.trigger('fieldSubmit', [$field]);
+                }
+            }.bind(this)]);
             $field.data('value', value);
         }
     },
@@ -47,23 +48,11 @@ module.exports = Base.extend({
         event.stopPropagation();
         event.stopImmediatePropagation();
 
-        this.validate(this.$('#field-description'), function onComplete(isValidDescription) {
+        var $field = this.$('#field-description');
+
+        this.parentView.$el.trigger('fieldValidate', [$field, function onComplete(isValidDescription) {
             done(isValid && isValidDescription);
-        });
-    },
-    validate: function(field, callback) {
-        var $field = $(field);
-        var valid = this.parentView.validator.validate($field);
-        var details = this.parentView.validator.details($field);
-        
-        this.parentView.$el.trigger('hideError', [$field]);
-        if (!valid && details && details.length) {
-            this.parentView.$el.trigger('showError', [$field, {
-                message: details.pop()
-            });
-        }
-        (callback || $.noop)(valid);
-        return valid;
+        }]);
     },
     stripValue: function(field) {
         var value = field.val();

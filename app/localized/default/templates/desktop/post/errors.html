@@ -17,8 +17,7 @@
 		{% endfor %}
 	</ul>
 {% endif %}
-<div class="hide">
-	<script type="text/template" id="error-template">
-	    <small class="error message">[[= message ]]</small>
-	</script>
-</div>
+
+<template id="error-template">
+    <small class="error message">{ message }</small>
+</template>

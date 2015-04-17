@@ -15,9 +15,9 @@ module.exports = Base.extend({
         'click .close': 'onCloseClick'
     },
     templateSettings = {
-        interpolate: /\[\[\=(.+?)\]\]/g,
-        evaluate: /\[\[(.+?)\]\]/g,
-        escape: /\[\[\-(.+?)\]\]/g
+        interpolate: /\{(.+?)\}/g,
+        evaluate: /\{\=(.+?)\}/g,
+        escape: /\{\-(.+?)\}/g
     },
     subfix: '-error-messsage',
     initialize: function() {

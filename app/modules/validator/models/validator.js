@@ -1,6 +1,7 @@
 'use strict';
 
 var _ = require('underscore');
+var asynquence = require('asynquence');
 var Backbone = require('backbone');
 var Validation = require('./validation');
 var utils = require('../../../../shared/utils');
@@ -76,7 +77,7 @@ function unregister(field, unregisterRules) {
 
 function validate(fields, options, callback) {
     var validations = this.getValidations();
-    var failed;
+    var promise;
 
     if (_.isFuntion(fields)) {
         callback = fields;
@@ -95,34 +96,47 @@ function validate(fields, options, callback) {
     
     this.unset('details');
     if (!validations.length) {
-        return true;
+        return callback(null, true);
     }
-    validations.find(function each(validation) {
+
+    promise = asynquence(true).or(fail.bind(this));
+    validations.each(function each(validation) {
         if (fields.length && !_.contains(fields, validation.get('id'))) {
             return true;
         }
-        failed = this.run(validation, options);
-        if (options.stopOnFail && failed) {
-            return true;
-        }
-        return false;
+        promise.then(function validateRule(next, isValid) {
+            this.run(validation, options, function runRule(isValidField) {
+                if (options.stopOnFail && !isValidField) {
+                    next.abort();
+                    return callback(null, false);
+                }
+                next(isValid && isValidField);
+            });
+        }.bind(this));
     }, this);
-    (callback || utils.noop)(!failed);
-    return !failed;
+    promise.val(success.bind(this));
+
+    function success(isValid) {
+        callback(null, isValid);
+    }
+
+    function fail(err) {
+        callback(err);
+    }
 }
 
-function run(validation, options) {
+function run(validation, options, done) {
     var $field = validation.get('field');
     var val = validation.val();
     var required;
-    var failed;
 
     validation.trigger('start');
     if (validation.has('required')) {
         required = validation.get('required');
         if (!val || (required.value && required.value === val)) {
+            validation.trigger('end', false);
             this.pushDetail(validation.get('id'), required.message);
-            return false;
+            return callback(false);
         }
     }
     validation.getRules().each(function each(rule) {
@@ -132,13 +146,14 @@ function run(validation, options) {
         if (options.includeRules && !_.contains(options.includeRules, rule.get('id'))) {
             return;
         }
-        failed = !rule.exec(val, $field, validation, options);
-        if (failed) {
-            this.pushDetail(validation.get('id'), rule.get('message'));
-        }
+        rule.exec(val, validation, options, function callback(isValid) {
+            validation.trigger('end', isValid);
+            if (!isValid) {
+                this.pushDetail(validation.get('id'), rule.get('message'));
+            }
+            callback(isValid);
+        }.bind(this));
     }, this);
-    validation.trigger('end', !failed);
-    return !failed;
 }
 
 function getDetails() {

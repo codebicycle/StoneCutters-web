@@ -2,14 +2,13 @@
 
 var _ = require('underscore');
 var Base = require('../../../../../common/app/bases/view');
-var Categories = require('../../../../../../collections/categories');
 var translations = require('../../../../../../../shared/translations');
-var statsd = require('../../../../../../../shared/statsd')();
 
 module.exports = Base.extend({
     id: 'posting-title-view',
     tagName: 'section',
     className: 'posting-title-view',
+    rTitle: /[^]{10,}/g,
     events: {
         'blur #field-title': 'onBlur',
         'keyup #field-title': 'onKeyup',
@@ -27,27 +26,27 @@ module.exports = Base.extend({
             rules: [{
                 id: 'length',
                 message: this.dictionary['misc.TitleCharacters_Mob'].replace('<<NUMBER>>', ' ' + 10 + ' '),
-                fn: function validate(val) {
-                    return val.length < 10;
-                }
+                pattern: this.rTitle
             }]
         }, true);
     },
     onBlur: function(event) {
-        var $field = $(event.target);
+        var $field = this.$(event.currentTarget);
         var value = this.trimValue($field);
 
         if ($field.data('value') !== value) {
-            if (this.validate($field)) {
-                this.parentView.$el.trigger('fieldSubmit', [$field]);
-                this.parentView.categorySuggestion(value); //AB test : category-suggestion
-            }
+            this.parentView.$el.trigger('fieldValidate', [$field, function onComplete(isValidTitle) {
+                if (isValidTitle) {
+                    this.parentView.$el.trigger('fieldSubmit', [$field]);
+                    this.parentView.categorySuggestion(value); //AB test : category-suggestion
+                }
+            }.bind(this)]);
             $field.data('value', value);
             $field.trigger('keyup');
         }
     },
     onKeyup: function (event) {
-        var $input = $(event.currentTarget);
+        var $input = this.$(event.currentTarget);
         var $msg = $input.next('small');
         var count = $msg.text().split(' ');
 
@@ -59,23 +58,11 @@ module.exports = Base.extend({
         event.stopPropagation();
         event.stopImmediatePropagation();
 
-        this.validate(this.$('#field-title'), function onComplete(isValidTitle) {
+        var $field = this.$('#field-title');
+
+        this.parentView.$el.trigger('fieldValidate', [$field, function onComplete(isValidTitle) {
             done(isValid && isValidTitle);
-        });
-    },
-    validate: function(field, callback) {
-        var $field = $(field);
-        var valid = this.parentView.validator.validate($field);
-        var details = this.parentView.validator.details($field);
-        
-        this.parentView.$el.trigger('hideError', [$field]);
-        if (!valid && details && details.length) {
-            this.parentView.$el.trigger('showError', [$field, {
-                message: details.pop()
-            });
-        }
-        (callback || $.noop)(valid);
-        return valid;
+        }]);
     },
     trimValue: function(field) {
         var value = field.val();

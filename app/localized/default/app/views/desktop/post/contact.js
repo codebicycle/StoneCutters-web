@@ -50,9 +50,11 @@ module.exports = Base.extend({
             rules: [{
                 id: 'mailgun',
                 message: this.dictionary['misc.DescriptionCharacters_Mob'].replace('<<NUMBER>>', ' ' + 10 + ' '),
-                fn: function validate(val) {
-                    return val.length < 10;
-                }
+                mailgun: new Mailgun({
+                    element: $field
+                }, {
+                    app: this.app
+                })
             }]
         }, true);
     },
@@ -137,27 +139,6 @@ module.exports = Base.extend({
                 $field.data('value', value);
             }
         }
-    },
-    validate: function(field, callback) {
-        var $field = $(field);
-        var valid = this.parentView.validator.validate($field, {
-            mailgun: {
-                progress: this.inProgressValidation.bind(this),
-                always: this.alwaysValidation.bind(this),
-                success: success.bind(this),
-                error: error.bind(this)
-            }
-        });
-        var details = this.parentView.validator.details($field);
-        
-        this.parentView.$el.trigger('hideError', [$field]);
-        if (!valid && details && details.length) {
-            this.parentView.$el.trigger('showError', [$field, {
-                message: details.pop()
-            });
-        }
-        (callback || $.noop)(valid);
-        return valid;
     },
     validate: function(done, $field) {
         var currentPage = this.editing ? 'editing' : 'posting';

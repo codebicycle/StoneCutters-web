@@ -2,6 +2,7 @@
 
 var _ = require('underscore');
 var Backbone = require('backbone');
+var utils = require('../../../shared/utils');
 var Base;
 
 Backbone.noConflict();
@@ -17,17 +18,37 @@ function initialize(attrs, options) {
     }
 }
 
-function exec(val, $field, validation, options) {
+function exec(val, validation, options, callback) {
+    var mailgun;
+    var success;
+    var error;
+
     if (this.has('pattern')) {
-        return this.get('pattern').test(val);
+        return callback(this.get('pattern').test(val));
     }
     else if (this.has('fn')) {
-        return this.get('fn')(val, $field, validation);
+        return callback(this.get('fn')(val, validation));
     }
     else if (this.has('mailgun') && this.get('mailgun').isEnabled()) {
-        return this.resolveFailed(this.get('mailgun').run(options.mailgun || {}));
+        options.mailgun = options.mailgun || {};
+        mailgun = this.get('mailgun');
+        success = mailgun.get('success') || options.mailgun.success || utils.noop;
+        error = mailgun.get('error') || options.mailgun.error || utils.noop;
+
+        return mailgun.run(_.extend({}, options.mailgun, {
+            success: function success(data) {
+                callback(data.is_valid);
+                this.resolveFailed(data);
+                success(data);
+            }.bind(this),
+            error: function error() {
+                callback(true);
+                this.resolveFailed();
+                error();
+            }.bind(this)
+        }));
     }
-    return true;
+    callback(true);
 }
 
 function resolveFailed(failed) {

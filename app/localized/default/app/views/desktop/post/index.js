@@ -41,12 +41,13 @@ module.exports = Base.extend({
         'blur .text-field': 'fieldFocus',
         'subcategorySubmit': 'onSubcategorySubmit',
         'locationSubmit': 'onLocationSubmit',
-        'fieldSubmit': 'onFieldSubmit',
         'imagesLoadStart': 'onImagesLoadStart',
         'imagesLoadEnd': 'onImagesLoadEnd',
         'submit': 'onSubmit',
+        'fieldValidate': 'onFieldValidate',
         'fieldValidationStart': 'onFieldValidationStart',
         'fieldValidationEnd': 'onFieldValidationEnd',
+        'fieldSubmit': 'onFieldSubmit',
         'errorsUpdate': 'onErrorsUpdate',
         'error': 'onError',
         'errorClean': 'onErrorClean',
@@ -187,6 +188,26 @@ module.exports = Base.extend({
         }
         if (!this.edited) {
             this.handleBack();
+        }
+    },
+    onFieldValidate: function(field, done) {
+        var $field = $(field);
+        
+        this.validator.validate($field, callback.bind(this));
+
+        function callback(err, isValid) {
+            if (err) {
+                return done(false);
+            }
+            var details = this.validator.details($field);
+            
+            this.$el.trigger('hideError', [$field]);
+            if (!isValid && details && details.length) {
+                this.$el.trigger('showError', [$field, {
+                    message: details.pop()
+                });
+            }
+            done(isValid);
         }
     },
     onFieldSubmit: function(event, field, options) {
@@ -406,7 +427,7 @@ module.exports = Base.extend({
         var $field = $(field);
         var id = $field.attr('name') || $field.attr('id');
 
-        this.$('#posting-errors-view').trigger('showError', Array.prototype.slice.call(arguments, 0));
+        this.$('#posting-errors-view').trigger('showError', Array.prototype.slice.call(arguments, 1));
         statsd.increment([this.app.session.get('locations').abbreviation, 'posting', 'invalid', this.app.session.get('platform'), id]);
     },
     onHideError: function(event, fields, context) {
@@ -414,7 +435,7 @@ module.exports = Base.extend({
         event.stopPropagation();
         event.stopImmediatePropagation();
 
-        this.$('#posting-errors-view').trigger('hideError', Array.prototype.slice.call(arguments, 0));
+        this.$('#posting-errors-view').trigger('hideError', Array.prototype.slice.call(arguments, 1));
     },
     onSubmit: function(event) {
         event.preventDefault();
