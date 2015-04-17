@@ -36,13 +36,16 @@ module.exports = Base.extend({
         var isPhoneMandatory = config.getForMarket(locationUrl, ['validator', 'phone', 'enabled'], false);
         var hintEmailInfo = config.getForMarket(locationUrl, ['hints','html5','email'], false);
         var hint;
+        var emailIcon;
 
         if(hintEmailInfo.enabled) {
             hint = hintEmailInfo.hint;
+            emailIcon = (hintEmailInfo.icon)? hintEmailInfo.icon: 'icon-exclamation';
         }
         return _.extend({}, data, {
             fields: this.fields || [],
             hint: hint,
+            emailIcon: emailIcon,
             form: item ? {
                 values: _.object(_.map(this.fields || [], function each(field) {
                     return field.name;

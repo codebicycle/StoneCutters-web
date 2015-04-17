@@ -32,10 +32,11 @@ module.exports = Base.extend({
         var isPhoneMandatory = config.getForMarket(locationUrl, ['validator', 'phone', 'enabled'], false);
         var hintEmailInfo = config.getForMarket(locationUrl, ['hints','desktop','email'], false);
         var hint;
-        var emailIcon = (hintEmailInfo.icon)? hintEmailInfo.icon: '';
+        var emailIcon;
 
-        if(hintEmailInfo.enabled ) {
+        if(hintEmailInfo.enabled) {
             hint = hintEmailInfo.hint;
+            emailIcon = (hintEmailInfo.icon)? hintEmailInfo.icon: '';
         }
         return _.extend({}, data, {
             hintEmail: hint,

@@ -59,7 +59,7 @@
                 {% if field.name != 'streetAddress' %}
                     {% set autocomplete = 'on' if (field.name == 'contactName' or field.name == 'email' or field.name == 'phone') else 'off' %}
 
-                    {{ FieldText(field.label, field.name, field.mandatory, form,  user, autocomplete, hint) }}
+                    {{ FieldText(field.label, field.name, field.mandatory, form,  user, autocomplete, hint, emailIcon) }}
                 {% endif %}
             {% elif field.fieldType == 'combobox' %}
                 {{ FieldCombobox(field.label, field.name , form, field.value) }}

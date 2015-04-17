@@ -11,14 +11,17 @@ module.exports = Base.extend({
         var data = Base.prototype.getTemplateData.call(this);
         var location = this.app.session.get('location');
         var hintEmailInfo = config.getForMarket(location.url, ['hints','html4','email'], false);
-        var hint = '';
+        var hint;
+        var emailIcon;
 
-        if(hintEmailInfo.enabled === true && hintEmailInfo.hint !== '') {
+        if(hintEmailInfo.enabled) {
             hint = hintEmailInfo.hint;
+            emailIcon = (hintEmailInfo.icon)? hintEmailInfo.icon: 'icon-exclamation';
         }
 
         return _.extend({}, data, {
-            hint: hint
+            hint: hint,
+            emailIcon: emailIcon
         });
     }
 });
