@@ -1,0 +1,50 @@
+<div class="top">
+    <p class="title">Puntos de entrega OLX</p>
+    <p>
+        Ya no hace falta que te encuentres con el comprador para vender tus articulos!<br>
+        Usando los <b>puntos de entrega OLX</b> podés ir en <i>cualquier momento</i> a dejar tu<br>
+        artículo en un lugar de seguro y <i>volver más tarde</i> a recoger tu dinero, así de simple!
+    </p>
+</div>
+<div class="description">
+    <ul>
+        <li>
+            <img src="{{ '/images/desktop/async_pickup/drop.jpg' | static }}" alt="Dejás el articulo">
+            <p class="title">Dejás el artículo</p>
+            <p class="bold">No más esperas, horarios puntuales ni reagendar encuentros cancelados!<br><span data-viewmore>Leer más</span></p>
+            <p class="desc">
+                <b>OLX</b> te proveé un punto de intercambio <b>seguro y cerca tuyo</b> donde <b>podés acercarte en cualquier momento del día</b>. En estos puntos una persona guardará tu artículo en un loker exclusivo y cerrado para vos. Te dará un código que solamente vos y tu comprador deben conocer.
+            </p>
+        </li><!--
+        --><li>
+            <img src="{{ '/images/desktop/async_pickup/pickup.jpg' | static }}" alt="El comprador lo recoje y lo paga">
+            <p class="title">El comprador lo recoje y lo paga</p>
+            <p class="bold">Sin tener que coincidir con vos, pasa cuando quiere a buscar el producto.<br><span data-viewmore>Leer más</span></p>
+            <p class="desc">
+                Presentando sus datos y el mismo código que te dieron a vos, retira el producto y deposita el dinero. Una persona controla el dinero antes de guardarlo seguro por vos. Te avisamos en el momento que ya podés buscar tu dinero!
+            </p>
+        </li><!--
+        --><li>
+            <img src="{{ '/images/desktop/async_pickup/collect.jpg' | static }}" alt="Retirás tu dinero">
+            <p class="title">Retirás tu dinero</p>
+            <p class="bold">En el momento que puedas.<br><span data-viewmore>Leer más</span></p>
+            <p class="desc">
+                Presentando tu código nuevamente en el punto de intercambio, tu dinero te es entregado. Fué super sencillo! no?
+            </p>
+        </li>
+    </ul>
+    <span data-hide class="icons icon-arrow arrow-hide"></span>
+</div>
+<div class="bottom">
+    <p class="title">Tenés que entregar tu {{ item.title }} al comprador?</p>
+    <span data-step="1" class="posting">Usá un punto de Entrega OLX</span>
+</div>
+<div class="restrictions async-form">
+    <span class="bold">Restricciones sobre el artículo para usar un punto de entrega.</span>
+    <ul>
+        <li>Tener un valor inferior a $2000</li>
+        <li>No puede ser un ser vivo.</li>
+        <li>Cumplir con los <a href="/terms">términos y condiciones</a> del sitio web.</li>
+    </ul>
+</div>
+{% include (template + '/landings/asyncpickup/kiosco-location.html') %}
