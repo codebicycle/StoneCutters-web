@@ -114,9 +114,17 @@ function flow(params, callback) {
         }
 
         function prepare(done) {
+            var redirect;
+            
+            if(config.getForMarket(location.url, ['posting', 'loginRequired'],false) && ! user && platform !== 'wap') {
+                redirect = '/login?redirect=/posting';
+            }
             if ((!isPostingFlow && !isDesktop) && (!siteLocation || siteLocation.indexOf('www.') === 0)) {
+                redirect = '/location?target=' + (itemId ? 'myolx/edititem/' + itemId : 'posting');
+            }
+            if (redirect) {
                 done.abort();
-                return helpers.common.redirect.call(this, '/location?target=' + (itemId ? 'myolx/edititem/' + itemId : 'posting'), null, {
+                return helpers.common.redirect.call(this, redirect, null, {
                     status: 302
                 });
             }
@@ -358,6 +366,7 @@ function subcategories(params, callback) {
     helpers.controllers.control.call(this, params, controller);
 
     function controller() {
+        var user = this.app.session.get('user');
         var siteLocation = this.app.session.get('siteLocation');
         var location = this.app.session.get('location');
         var isPostingFlow = helpers.features.isEnabled.call(this, 'postingFlow');
@@ -373,7 +382,11 @@ function subcategories(params, callback) {
             else if (!siteLocation || siteLocation.indexOf('www.') === 0) {
                 redirect = '/location?target=posting';
             }
+            else if(config.getForMarket(location.url, ['posting', 'loginRequired'],false) && ! user && platform !== 'wap') {
+                redirect = '/login?redirect=/posting';
+            }
             if (redirect) {
+                done.abort();
                 return helpers.common.redirect.call(this, redirect, null, {
                     status: 302
                 });
@@ -410,6 +423,7 @@ function form(params, callback) {
     }, controller);
 
     function controller() {
+        var user = this.app.session.get('user');
         var siteLocation = this.app.session.get('siteLocation');
         var location = this.app.session.get('location');
         var isPostingFlow = helpers.features.isEnabled.call(this, 'postingFlow');
@@ -427,6 +441,9 @@ function form(params, callback) {
             }
             else if (!siteLocation || siteLocation.indexOf('www.') === 0) {
                 redirect = '/location?target=posting';
+            }
+            else if(config.getForMarket(location.url, ['posting', 'loginRequired'],false) && ! user && platform !== 'wap') {
+                redirect = '/login?redirect=/posting';
             }
             if (redirect) {
                 done.abort();

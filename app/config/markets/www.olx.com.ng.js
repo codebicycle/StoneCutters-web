@@ -272,5 +272,11 @@ module.exports = {
     },
     flagItem: {
         enabled: true
-    }
+    },
+    posting: {
+        loginRequired: true
+    },
+    socials: {
+        facebookLogin: false
+    },
 };

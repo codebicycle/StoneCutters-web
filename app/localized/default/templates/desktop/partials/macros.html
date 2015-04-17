@@ -8,7 +8,7 @@
                 {{ Textarea(name = field.name, required = field.mandatory, value = field.value) }}
             {% elif field.fieldType == 'text' or field.fieldType == 'password' %}
                 {% set type = field.fieldType or 'text' %}
-                {{ TextInput(type = type, name = field.name, required = field.mandatory, value = field.value, autocomplete = field.autocomplete) }}
+                {{ TextInput(type = type, name = field.name, required = field.mandatory, value = field.value, autocomplete = field.autocomplete, disabled = field.disabled) }}
             {% elif field.fieldType == 'combobox' %}
                 {% set selected = field.value.key or field.selected %}
                 {{ Select(name = field.name, required = field.mandatory, options = field.values, selected = selected, related = field.related) }}
@@ -25,7 +25,7 @@
     </fieldset>
 {% endmacro %}
 
-{% macro TextInput(type = 'text', name = '', placeholder = false, required = false, validate = true, value = false, autocomplete = false) %}
+{% macro TextInput(type = 'text', name = '', placeholder = false, required = false, validate = true, value = false, autocomplete = false, disabled = false) %}
     <input
         type="{{ type }}"
         id ="field-{{ name }}"
@@ -45,6 +45,9 @@
         {% endif %}
         {% if value %}
             value="{{ value.value if value.value else value }}"
+        {% endif %}
+        {% if name == 'email' and disabled %}
+            disabled="disabled"
         {% endif %}
     />
 {% endmacro %}
