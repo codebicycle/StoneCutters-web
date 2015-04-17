@@ -1,0 +1,459 @@
+.landings_asyncseller_view {
+    line-height: 1.4rem;
+    box(#fff, #ccc, 3px, 20px 0, solid, 1px);
+    overflow: hidden;
+    .bold,
+    .title {
+        font-weight: bold;
+        margin: 0;
+    }
+    .italic {
+        font-style: italic;
+    }
+    .title {
+        font-size: $xl;
+    }
+    small.error {
+        font-size: $s;
+    }
+    .progress-bar {
+        position: relative;
+        height: 5px;
+        margin: 10px 20px 75px 20px;
+        background: $green;
+        font-size: $xs;
+        &.first {
+            background-image: -moz-linear-gradient(left center, $green 50%, $violet 50%, $violet 100%);
+            background-image: -ms-linear-gradient(left center, $green 50%, $violet 50%, $violet 100%);
+            background-image: linear-gradient(to left, $green 50%, $violet 50%, $violet 100%);
+        }
+        &.complete {
+            background: $violet;
+        }
+        .step {
+            position: absolute;
+            bottom: -7px;
+            border-radius: 15px;
+            text-align: center;
+            font-size: $xs;
+            color: $white;
+            font-weight: bold;
+            background: $green;
+            border: 2px solid $white;
+            box-shadow: 0px 0px 0px 2px $green;
+            width: 20px;
+            height: 20px;
+            line-height: 16px;
+            &.active {
+                background: $violet;
+                box-shadow: 0px 0px 0px 2px $violet;
+                &.big {
+                    font-size: $s;
+                    bottom: -13px;
+                    width: 30px;
+                    height: 30px;
+                    line-height: 26px;
+                }
+            }
+            &.point-1 {
+                left: 0;
+            }
+            &.point-2 {
+                left: 50%;
+            }
+            &.point-3 {
+                right: 0;
+            }
+        }
+        ul {
+            ul-reset();
+            position: absolute;
+            bottom: -35px;
+            width: 100%;
+            li {
+                position: relative;
+                display: inline-block;
+                &:first-child {
+                    left: -15px;
+                }
+                &:last-child {
+                    left: 280px;
+                }
+                &:not(:first-child):not(:last-child) {
+                    left: 150px;
+                }
+                &.active {
+                    font-weight: bold;
+                }
+            }
+            .step.active > li {
+                font-weight: bold
+            }
+        }
+    }
+    .description {
+        border: 1px solid $greyBorders;
+        border-left: 0;
+        border-right: 0;
+        padding: 20px 10px 0 10px;
+        background: $yellowPosting;
+        position: relative;
+        .arrow-hide {
+            display: none;
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            border-radius: 15px;
+            border: 1px solid $greyBorders;
+            background: $white;
+            left: 48%;
+            bottom: -15px;
+            cursor: pointer;
+            &::before {
+                padding: 6px 7px;
+                color: $greyStrong;
+                transform(rotate(270deg));
+            }
+        }
+        ul {
+            ul-reset();
+            width: 100%;
+            li {
+                p {
+                    margin: 0 0 20px 0;
+                    span {
+                        display: inline;
+                        color: $blue;
+                        font-weight: initial;
+                        cursor: pointer;
+                        text-decoration: underline;
+                    }
+                }
+                .desc {
+                    display: none;
+                }
+                .title {
+                    font-size: $m;
+                    margin: 20px 0 10px 0;
+                }
+                .bold {
+                    height: 50px;
+                    margin-bottom: 20px;
+                }
+                img {
+                    width: 150px;
+                    height: 150px;
+                    border: 3px #ff7a3a solid;
+                    box-shadow(0 0 2px 2px rgba(0, 0, 0, .2));
+                }
+                font-size: $s;
+                box-sizing: border-box;
+                padding: 0 10px;
+                display: inline-block;
+                width: 33.3%;
+                vertical-align: top;
+            }
+        }
+    }
+    .async-form,
+    .kiosco-location {
+        float: left;
+        box-sizing: border-box;
+        padding: 10px 20px;
+    }
+    .async-form {
+        width: 60%;
+        font-size: $s;
+        &.border {
+            box(#fff, #ccc, 0, 20px, solid, 1px);
+            box-sizing: border-box;
+        }
+    }
+    .kiosco-location {
+        font-size: $xs;
+        width: 40%;
+        .left {
+            float: left;
+        }
+        ul {
+            margin-top: 20px;
+            ul-reset();
+        }
+        a,
+        img {
+            float: right;
+        }
+        a {
+            clear: both;
+            text-decoration: underline;
+            width: 150px;
+            padding-top: 10px;
+        }
+    }
+    .steps {
+        input,
+        select,
+        span,
+        .bold {
+            display: block;
+            box-sizing: border-box;
+        }
+        input[type="radio"] {
+            width: auto;
+            display: inline-block;
+            margin: 0;
+            position: relative;
+            top: 1px;
+        }
+        fieldset {
+            border: 0;
+            padding: 0;
+            margin: 0;
+            margin-bottom: 15px;
+        }
+        .fork-form {
+            margin-bottom: 20px;
+            .fork {
+                box-sizing: border-box;
+                padding: 0 10px;
+                border: 1px solid $red;
+                display: block;
+                margin-bottom: 5px;
+            }
+            label {
+                margin: 20px 0;
+            }
+            .error-alert {
+                color: $red;
+                margin-top: 10px;
+                font-size: $s;
+            }
+        }
+        .buyer-form {
+            margin-top: 40px;
+        }
+        .type-select {
+            background: $white;
+        }
+        .posting {
+            width: 250px;
+            font-size: $m;
+            padding: 20px;
+            box-sizing: border-box;
+            cursor: pointer;
+            &.disable {
+                color: $disableText
+                background: $greyBoxBg;
+                cursor: default;
+            }
+        }
+        .restrictions {
+            color: $greyStrong;
+            font-size: $xs;
+            ul {
+                ul-reset();
+            }
+        }
+        .error {
+            color: $red;
+            padding-top: 5px;
+            float: left;
+            clear: both;
+        }
+    }
+    .step-1 {
+        .top {
+            padding: 0 20px 20px 20px;
+            p:not(:first-child){
+                margin: 10px 0 0 0;
+            }
+        }
+        .bottom {
+            text-align: center;
+            font-size: $s;
+            padding: 20px;
+            .title {
+                font-size: $m;
+                margin-top: 20px;
+            }
+            .posting {
+                width: 270px;
+                margin: 30px auto 10px auto;
+            }
+        }
+        input {
+            margin-top: 15px;
+        }
+        .restrictions {
+            text-align: center;
+        }
+    }
+    .step-2 {
+        .currency {
+            float: left;
+            height: 38px;
+            line-height: 38px;
+            margin-top: 10px;
+            font-size: 14px;
+            margin-right: 10px;
+        }
+        .price {
+            float: left;
+            width: 100px;
+        }
+        input,
+        .dimensions {
+            width: 250px;
+        }
+        .restrictions {
+            margin-bottom: 20px;
+        }
+    }
+    .step-2,
+    .step-3,
+    .step-4 {
+        box-sizing: border-box;
+        padding-left: 20px;
+        input,
+        select {
+            margin-top: 10px;
+        }
+        .kiosco-location {
+            margin-top: 90px;
+        }
+    }
+    .step-3 {
+        .async-form {
+            .title {
+                font-size: $s;
+                margin-bottom: 20px;
+            }
+        }
+        input {
+            width: 250px;
+            &.phone {
+                width: 200px;
+            }
+        }
+    }
+    .step-4 {
+        .async-form {
+            font-size: $s;
+        }
+        .title {
+            margin-bottom: 20px;
+        }
+        .edit-box {
+            margin-bottom: 20px;
+            position: relative;
+            p {
+                margin: 0;
+                padding: 0;
+                line-height: $ll;
+                span {
+                    display: inline;
+                }
+            }
+            .edit {
+                font-size: $s;
+                color: $blue;
+                cursor: pointer;
+                display: inline;
+                background: #ecf2f5;
+                padding: 4px 6px 5px;
+                border-radius: 3px;
+                margin-left: 10px;
+                &:hover {
+                    text-decoration: underline;
+                }
+                &::before {
+                    padding-right: 5px;
+                }
+            }
+        }
+        .posting {
+            margin-top: 40px;
+        }
+    }
+    .success,
+    .error-page {
+        padding-left: 20px;
+        box-sizing: border-box;
+        .title {
+            &::before {
+                background: $green;
+                border-radius: 20px;
+                color: $white;
+                font-size: $m;
+                width: 40px;
+                height: 40px;
+                line-height: 40px;
+                margin-right: 10px;
+                text-align: center;
+            }
+        }
+        .async-form {
+            min-height: 220px;
+            width: 50%;
+            p {
+                font-size: $m;
+                margin: 0 0 20px 0;
+            }
+            &.border {
+                border-color: $green;
+                border-width: 2px;
+            }
+        }
+        .kiosco-location {
+            width: 50%;
+            margin-top: 10px;
+        }
+    }
+    .success {
+        fieldset {
+            border: 0;
+            padding: 0;
+            margin: 0;
+        }
+        .buyer-link {
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid $greyBorders;
+            label {
+                display: inline-block;
+                margin-bottom: 5px;
+            }
+            input[type="text"] {
+                width: 95%;
+            }
+            span {
+                display: inline-block;
+                margin-top: 5px;
+                color: $greyStrong;
+                font-size: $xs;
+            }
+        }
+    }
+    .error-page {
+        .title {
+            &::before {
+                background: $white;
+                font-size: $xxxl;
+                color: $red;
+            }
+        }
+        .async-form {
+            &.border {
+                border-color: $red;
+            }
+        }
+    }
+    .success,
+    .error-page {
+        .kiosco-location {
+            .left {
+                padding-left: 85px;
+            }
+        }
+    }
+}

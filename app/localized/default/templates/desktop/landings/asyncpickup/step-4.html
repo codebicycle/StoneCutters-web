@@ -1,0 +1,23 @@
+<div class="top">
+    <p class="title">Confirmá la utilización del Punto de entrega OLX</p>
+</div>
+<div class="async-form border">
+    {% include (template + '/landings/asyncpickup/progressbar.html') %}
+    <div class="edit-box">
+        <p>Venderás tu <b>{{ item.title }}</b> por <b data-price>$2000</b></p>
+        <p>Las dimensiones de este artículo son: <b data-dimensions>40cm x 40cm 45cm</b><span class="edit icons icon-edit" data-step="2">editar</span></p>
+
+    </div>
+
+    <div class="edit-box buyer-data">
+        <p>Lo comprará <b data-buyer>Juan Carlos (juan.carlos@gmail.com)</b><span class="edit icons icon-edit" data-step="3">editar</span></p>
+    </div>
+
+    <div class="edit-box">
+        <p>Nos comunicamos con vos escribiendote a <b>{{ sellerEmail }}</b> <span data-seller></span><span class="edit icons icon-edit" data-step="2">editar</span></p>
+
+    </div>
+
+    <span data-step="3" class="posting">Confirmar</span>
+</div>
+{% include (template + '/landings/asyncpickup/kiosco-location.html') %}
