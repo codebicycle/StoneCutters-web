@@ -14,17 +14,12 @@ module.exports = {
         ]
     },
     'landings#available': {
-<<<<<<< HEAD
-        url: 'available'
+        url: 'available/{{itemId}}'
     },
     'landings#asyncseller': {
         url: 'asyncseller'
     },
     'landings#asyncbuyer': {
         url: 'asyncbuyer'
-=======
-        url: 'available/{{itemId}}'
->>>>>>> develop
     }
 };
-
