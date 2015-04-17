@@ -54,7 +54,7 @@
             value="{{ form.values[name] if form.values[name] else user.username }}"
         {% endif %}>
         {% if hint and name == 'email' %}
-            <small class="{{ 'icons icon-lock ' if field.name == 'email' }}hint message">{{ hint }}</small>
+            <small class="{{ 'icons icon-exclamation ' if name == 'email' }}hint message">{{ hint }}</small>
         {% endif %}
     </div>
 {% endmacro %}
