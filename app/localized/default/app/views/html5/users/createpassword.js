@@ -9,8 +9,19 @@ var User = require('../../../../../../models/user');
 module.exports = Base.extend({
     className: 'users_createpassword_view short-page',
     events: {
+        'change': 'onChange',
         'click .passwordToggle': 'onPasswordToggle',
         'submit': 'onSubmit'
+    },
+    onChange: function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+
+        var $field = $(event.target);
+
+        this.getProfile().set($field.attr('name'), $field.val());
+        this.getProfile().set('platform', this.app.session.get('platform'));
     },
     onPasswordToggle: function (event) {
         event.preventDefault();

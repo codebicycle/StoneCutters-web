@@ -403,6 +403,7 @@ module.exports = function userRouter(app) {
         login: login(),
         register: register(),
         lostpassword: lostpassword(),
+        createpassword: createpassword(),
         registerwithConfirmation: registerwithConfirmation(),
         reply: reply()
     };
