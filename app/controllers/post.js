@@ -283,17 +283,22 @@ function flow(params, callback) {
                 });
             }
 
-            callback(null, 'post/index', {
-                postingSession: postingSession.get('postingSession'),
-                cities: cities,
-                currentLocation: currentLocation,
-                include: ['item'],
-                item: item || new Item({}, {
-                    app: this.app
-                }),
-                fields: fields,
-                marketing: params.marketing
-            }, false);
+            this.app.sixpack.participate(this.app.sixpack.experiments.growthCategorySuggestion, function success(err) {
+                this.app.session.update({
+                    experiments: this.app.sixpack.experiments
+                });
+                callback(null, 'post/index', {
+                    postingSession: postingSession.get('postingSession'),
+                    cities: cities,
+                    currentLocation: currentLocation,
+                    include: ['item'],
+                    item: item || new Item({}, {
+                        app: this.app
+                    }),
+                    fields: fields,
+                    marketing: params.marketing
+                }, false);
+            }.bind(this));
         }
 
         function postingFlowController(postingSession, item, fields) {

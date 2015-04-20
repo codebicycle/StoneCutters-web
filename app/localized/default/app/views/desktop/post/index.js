@@ -65,8 +65,6 @@ module.exports = Base.extend({
         var customerContact = config.getForMarket(location.url, ['post_customer_contact'], '');
         var sixpackCurrentAlternative = this.app.sixpack.experiments.growthCategorySuggestion ? this.app.sixpack.experiments.growthCategorySuggestion.alternative : '';
 
-        this.app.sixpack.participate(this.app.sixpack.experiments.growthCategorySuggestion);
-
         return _.extend({}, data, {
             item: this.getItem(data.item),
             customerContact: customerContact,
