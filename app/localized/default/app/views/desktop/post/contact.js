@@ -34,8 +34,17 @@ module.exports = Base.extend({
         var data = Base.prototype.getTemplateData.call(this);
         var locationUrl = this.app.session.get('location').url;
         var isPhoneMandatory = config.getForMarket(locationUrl, ['validator', 'phone', 'enabled'], false);
+        var hintEmailInfo = config.getForMarket(locationUrl, ['hints','desktop','email'], false);
+        var hint;
+        var emailIcon;
 
+        if(hintEmailInfo.enabled) {
+            hint = hintEmailInfo.hint;
+            emailIcon = (hintEmailInfo.icon)? hintEmailInfo.icon: '';
+        }
         return _.extend({}, data, {
+            hintEmail: hint,
+            emailIcon: emailIcon,
             isPhoneMandatory: isPhoneMandatory
         });
     },
@@ -82,7 +91,7 @@ module.exports = Base.extend({
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();
-        
+
         var $field = $(event.target);
         var locationUrl = this.app.session.get('location').url;
         var isMailgunEnabled = config.getForMarket(locationUrl, ['validator', 'email', 'enabled'], false);
@@ -131,8 +140,8 @@ module.exports = Base.extend({
         var locationUrl = this.app.session.get('location').url;
         var $field = this.$('[name="email"]');
         var value = $field.val();
-        
-        if ($field.data('value') !== value) {   
+
+        if ($field.data('value') !== value) {
             if (config.getForMarket(locationUrl, ['validator', 'email', 'enabled'], false)) {
                 var currentPage = this.editing ? 'editing' : 'posting';
 
@@ -201,7 +210,7 @@ module.exports = Base.extend({
             skipValidation: true
         };
         var isError = '';
-        
+        this.dictionary = translations.get(this.app.session.get('selectedLanguage'));
         this.$('.did-you-mean').remove();
 
         if (!data.is_valid) {
@@ -249,7 +258,7 @@ module.exports = Base.extend({
         var options = {
             pendingValidation: (category.id === undefined || category.parentId === undefined)
         };
-        
+
         if ($('small.message.exclude')) {
             $field.parent().find('small.message.exclude').remove();
         }
