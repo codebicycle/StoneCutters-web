@@ -10,7 +10,7 @@ module.exports = Base.extend({
     className: 'users_createpassword_view short-page',
     events: {
         'change': 'onChange',
-        'click .passwordToggle': 'onPasswordToggle',
+        'click .password-toggle': 'onPasswordToggle',
         'submit': 'onSubmit'
     },
     onChange: function(event) {

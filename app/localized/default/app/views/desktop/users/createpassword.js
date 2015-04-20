@@ -9,7 +9,7 @@ var User = require('../../../../../../models/user');
 module.exports = Base.extend({
     className: 'users_createpassword_view short-page',
     events: {
-        'click .passwordToggle': 'onPasswordToggle',
+        'click .password-toggle': 'onPasswordToggle',
         'change': 'onChange',
         'submit': 'onSubmit'
     },
