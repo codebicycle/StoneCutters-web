@@ -247,22 +247,52 @@ function asyncbuyer(params, callback) {
     helpers.controllers.control.call(this, params, controller);
 
     function controller() {
+        var adapter = new Adapter({});
+
         asynquence().or(error.bind(this))
             .then(redirect.bind(this))
+            .then(fetchTransaction.bind(this))
+            .then(checkTransaction.bind(this))
             .val(success.bind(this));
 
         function redirect(done) {
             var platform = this.app.session.get('platform');
 
-            if (platform === 'wap') {
+            if (platform === 'wap' || !params.transactionId || !params.itemId) {
                 done.abort();
                 return helpers.common.redirect.call(this, '/');
             }
             done();
         }
 
-        function success() {
-            callback(null, {});
+        function fetchTransaction(done) {
+            adapter.request(this.app.req, {
+                method: 'GET',
+                url: [config.get(['mario', 'protocol']), '://', config.get(['mario', 'host']), '/async-pickup/transaction/id/', params.transactionId ].join(''),
+            }, {
+                timeout: 2000
+            }, done.errfcb);
+        }
+
+        function checkTransaction(done, response, body) {
+            body = JSON.parse(body);
+            console.log(body);
+            if (!body.status && body.error.length) {
+                done.abort();
+                return helpers.common.redirect.call(this, '/', null, {
+                    status: 302
+                });
+            }
+            done(body.extra.transaction.hasBuyerData, body.extra.transaction.seller);
+        }
+
+        function success(hasBuyerData, sellerName) {
+            callback(null, {
+                hasBuyerData: hasBuyerData,
+                transactionId: params.transactionId,
+                itemId: params.itemId,
+                sellerName: sellerName,
+            });
         }
 
         function error(err, res) {
