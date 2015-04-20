@@ -1,25 +1,31 @@
 .posting-contact-view {
-	box($white, $greyBorders , 3px, 0, solid, 1px);
+    box($white, $greyBorders , 3px, 0, solid, 1px);
 
-	.icon-lock::before {
-		font-size: $s;
-		margin-bottom: 3px;
-		padding-right: 5px;
-	}
+    .icon-lock::before {
+        font-size: $s;
+        margin-bottom: 3px;
+        padding-right: 5px;
+    }
 
-	.seller-post {
-		clear-fix();
-		margin: 0;
-		padding: 10px 10px 20px 192px;
-		border: none;
+    .seller-post {
+        clear-fix();
+        margin: 0;
+        padding: 10px 10px 20px 192px;
+        border: none;
 
-		.posting {
-			display: block;
+        .posting {
+            display: block;
 
-			&[disabled],
-			&[disabled]:hover {
-				background: $greyBorders;
-			}
-		}
-	}
+            &[disabled],
+            &[disabled]:hover {
+                background: $greyBorders;
+            }
+        }
+    }
+
+    .icon-exclamation::before {
+        font-size: 1rem;
+        margin-bottom: 3px;
+        padding-right: 5px;
+    }
 }
