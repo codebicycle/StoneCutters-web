@@ -40,12 +40,6 @@ module.exports = Base.extend({
         this.getProfile().set($field.attr('name'), $field.val());
         this.getProfile().set('platform', this.app.session.get('platform'));
     },
-    getProfile: function(profile) {
-        this.profile = this.profile || (this.options.profile && this.options.profile.toJSON ? this.options.profile : new User(profile || this.options.profile || {}, {
-            app: this.app
-        }));
-        return this.profile;
-    },
     onSubmit: function(event) {
         event.preventDefault();
         event.stopPropagation();

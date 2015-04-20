@@ -3,6 +3,7 @@
 var _ = require('underscore');
 var Base = require('../../bases/view');
 var breadcrumb = require('../../../../../modules/breadcrumb');
+var User = require('../../../../../models/user');
 
 module.exports = Base.extend({
     className: 'users_createpassword_view',
@@ -17,6 +18,12 @@ module.exports = Base.extend({
             params: params,
             breadcrumb: breadcrumb.get.call(this, data)
         });
+    },
+    getProfile: function(profile) {
+        this.profile = this.profile || (this.options.profile && this.options.profile.toJSON ? this.options.profile : new User(profile || this.options.profile || {}, {
+            app: this.app
+        }));
+        return this.profile;
     }
 });
 
