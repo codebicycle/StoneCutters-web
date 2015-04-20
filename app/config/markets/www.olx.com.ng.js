@@ -265,11 +265,6 @@ module.exports = {
             enabled: true
         }
     },
-    validator: {
-        phone: {
-            enabled: true
-        }
-    },
     flagItem: {
         enabled: true
     },
@@ -278,6 +273,36 @@ module.exports = {
         'items#show' : {
             enabled: true,
             platforms: ['html5', 'desktop']
+        }
+    },
+    hints: {
+        desktop: {
+            email: {
+                enabled: true,
+                hint: 'You need a valid email address to sell on OLX',
+                icon: 'icon-exclamation'
+            }
+        },
+        html5: {
+            email: {
+                enabled: true,
+                hint: 'You need a valid email address to sell on OLX',
+                icon: 'icon-exclamation'
+            }
+        },
+        html4: {
+            email: {
+                enabled: true,
+                hint: 'You need a valid email address to sell on OLX',
+                icon: 'icon-exclamation'
+            }
+        },
+        wap: {
+            email: {
+                enabled: false,
+                hint: 'You need a valid email address to sell on OLX',
+                icon: 'icon-exclamation'
+            }
         }
     }
 };
