@@ -131,7 +131,7 @@ module.exports = Base.extend({
         var $current = $btn.closest('.content-confirm');
         var transactionId = $btn.data('transactionid');
         var itemId = $btn.data('itemid');
-        console.log(itemId);
+
         if (this.enableButton) {
             this.enableButton = false;
             adapter.request(this.app.req, {
