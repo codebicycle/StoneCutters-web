@@ -65,6 +65,7 @@ module.exports = {
     'itemslisting.Previous': 'Pr\xE9c\xE9dente',
     'itemslisting.RefineYourSearch': 'Affinez votre recherche',
     'itemslisting.SelectAll': 'Tout S\xE9lectionner',
+    'itemslisting.Sold': 'Vendu',
     'loginbox.CreateYourAccount': 'Cr\xE9ez vous un compte gratuitement.',
     'loginbox.ForgotYourPassword': 'Mot de passe oubli\xE9 ?',
     'loginbox.IAgreeToTheTermsAndConditionsOfBrand': 'J\'accepte les <<LINK_TERMS_USE>>Conditions d\'Utilisation<</LINK_TERMS_USE>> de OLX',

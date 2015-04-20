@@ -65,6 +65,7 @@ module.exports = {
     'itemslisting.Previous': 'Awali',
     'itemslisting.RefineYourSearch': 'Boresha utafutaji wako',
     'itemslisting.SelectAll': 'Chagua Zote',
+    'itemslisting.Sold': 'Imeuzwa',
     'loginbox.CreateYourAccount': 'Unda akaunti yako bure.',
     'loginbox.ForgotYourPassword': 'Umesahau nenosiri yako?',
     'loginbox.IAgreeToTheTermsAndConditionsOfBrand': 'Nakubaliana na<<LINK_TERMS_USE>>Sheria na Masharti <</LINK_TERMS_USE>> ya OLX',

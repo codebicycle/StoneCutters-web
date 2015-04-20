@@ -65,6 +65,7 @@ module.exports = {
     'itemslisting.Previous': 'Eelmine',
     'itemslisting.RefineYourSearch': 'T\xE4psustage otsingut',
     'itemslisting.SelectAll': 'Vali k\xF5ik',
+    'itemslisting.Sold': 'M\xFC\xFCdud',
     'loginbox.CreateYourAccount': 'Looge tasuta konto:',
     'loginbox.ForgotYourPassword': 'Unustasite salas\xF5na?',
     'loginbox.IAgreeToTheTermsAndConditionsOfBrand': 'N\xF5ustun <<LINK_TERMS_USE>>kasutustingimustega<</LINK_TERMS_USE>> of OLX',

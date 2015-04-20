@@ -65,6 +65,7 @@ module.exports = {
     'itemslisting.Previous': '\xD6nceki',
     'itemslisting.RefineYourSearch': 'Aramay\u0131 daralt\u0131n',
     'itemslisting.SelectAll': 'T\xFCm\xFCn\xFC Se\xE7',
+    'itemslisting.Sold': 'Sat\u0131ld\u0131',
     'loginbox.CreateYourAccount': '\xDCcretsiz \xFCye olun:',
     'loginbox.ForgotYourPassword': 'Parolan\u0131z\u0131 m\u0131 unuttunuz?',
     'loginbox.IAgreeToTheTermsAndConditionsOfBrand': 'OLX <<LINK_TERMS_USE>>Kullan\u0131m \u015Eartlar\u0131<</LINK_TERMS_USE>>\'n\u0131 kabul ediyorum.',

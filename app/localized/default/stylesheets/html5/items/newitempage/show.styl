@@ -169,30 +169,33 @@
             border-top: 2px solid #E3E3E3;
             overflow: hidden;
             padding: 15px 10px 10px 10px;
+            text-align: center;
             .btnshare {
                 background: #FFF;
                 border-radius: 3px;
                 border: 1px solid #e2e2e2;
                 box-shadow: 0 1px 0 rgba(96,96,96,.2);
                 color: #333;
-                display: block;
-                float: left;
+                display: inline-block;
                 font-size: 14px;
                 padding: 6px 10px 6px 25px;
                 width: 36%;
+                margin-right: 10px;
+                margin-bottom: 10px;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                overflow: hidden;
+                background: no-repeat 5px center;
+                max-width: 180px;
+                min-width: 100px;
                 &.fav{
-                    background: url(imageUrl/images/html5/favorite_itempage.png) no-repeat 5px center;
-                    margin-right: 10px;
-                    text-overflow: ellipsis;
-                    white-space: nowrap;
-                    overflow: hidden;
+                    background-image: url(imageUrl/images/html5/favorite_itempage.png);
                 }
                 &.share {
-                    background: url(imageUrl/images/html5/share_itempage.png) no-repeat 5px center;
-                    float: right;
-                    text-overflow: ellipsis;
-                    white-space: nowrap;
-                    overflow: hidden;
+                    background-image: url(imageUrl/images/html5/share_itempage.png);
+                }
+                &.flag {
+                    background-image: url(imageUrl/images/html5/flag_itempage.png);
                 }
                 &.remove {
 
@@ -715,20 +718,18 @@
     }
 
 }
-@media (max-width : 319px) {
+@media (max-width : 373px) {
     .contentshare {
         .btnshare {
-            width: 84% !important;
             display: block !important;
-            float: left !important;
-            &.fav {
-                margin-right: 0 !important;
-            }
-            &.share {
-                margin-top: 5px;
-            }
+            width: auto !important;
+            max-width: 300px !important;
+            margin-right: 0 !important;
+
         }
     }
+}
+@media (max-width : 319px) {
     .nav {
         margin-top: 15px !important;
     }

@@ -65,6 +65,7 @@ module.exports = {
     'itemslisting.Previous': '\u092E\u093E\u0917\u0940\u0932',
     'itemslisting.RefineYourSearch': 'Refine your search',
     'itemslisting.SelectAll': '\u0938\u0930\u094D\u0935 \u0928\u093F\u0935\u0921\u093E',
+    'itemslisting.Sold': '\u0935\u093F\u0915\u0932\u0947 \u0917\u0947\u0932\u0947',
     'loginbox.CreateYourAccount': '\u0935\u093F\u0928\u093E\u092E\u0942\u0932\u094D\u092F \u0916\u093E\u0924\u0947 \u0909\u0918\u0921\u093E',
     'loginbox.ForgotYourPassword': '\u0906\u092A\u0923 \u092A\u0930\u0935\u0932\u0940\u091A\u093E \u0936\u092C\u094D\u0926 \u0935\u093F\u0938\u0930\u0932\u093E \u0906\u0939\u093E\u0924 \u0915\u093E?',
     'loginbox.IAgreeToTheTermsAndConditionsOfBrand': 'OLX\u091A\u094D\u092F\u093E <<LINK_TERMS_USE>>\u0928\u093F\u092F\u092E \u0935 \u0905\u091F\u0940<</LINK_TERMS_USE>> \u092E\u0932\u093E \u092E\u093E\u0928\u094D\u092F \u0906\u0939\u0947\u0924.',

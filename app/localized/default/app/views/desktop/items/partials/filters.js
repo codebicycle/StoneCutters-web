@@ -22,13 +22,15 @@ module.exports = Base.extend({
         'click .filter-subcategory li a': 'subcategoryFilter',
         'keydown .range input': 'onlyNumbers'
     },
+    getTemplateData: function() {
+        var data = Base.prototype.getTemplateData.call(this);
+
+        return _.extend({}, data, {
+            isABTCategoryCarsEnabled: this.isABTCategoryCarsEnabled()
+        });
+    },
     postRender: function() {
-        if (!this.filters) {
-            this.filters = new Filters(null, {
-                app: this.app,
-                path: this.app.session.get('path')
-            });
-        }
+        this.checkFilters();
     },
     toogleFilter: function(event) {
         event.preventDefault();
@@ -256,6 +258,32 @@ module.exports = Base.extend({
             this.metric = new Metric({}, this);
         }
         this.metric.increment(['dgd', 'filters', [this.metric.getListingType(), name]]);
+    },
+    checkFilters: function() {
+        if (!this.filters) {
+            this.filters = new Filters(null, {
+                app: this.app,
+                path: this.app.session.get('path')
+            });
+        }
+    },
+    isABTCategoryCarsEnabled: function() {
+        var path = this.app.session.get('path');
+        var experiment = this.app.sixpack.experiments.dgdCategoryCars;
+        var isAlternativeGallery = (experiment && experiment.alternative && experiment.alternative === 'gallery' && this.isCategoryCars(path));
+        var isCarbrandSelected = true;
+
+        this.checkFilters();
+        if (!this.filters.has('carbrand') || !this.filters.get('carbrand').has('current')) {
+            isCarbrandSelected = false;
+        }
+        if (this.filters.has('carbrand') && this.filters.get('carbrand').get('current').length > 1) {
+            isCarbrandSelected = false;
+        }
+        return isAlternativeGallery && isCarbrandSelected;
+    },
+    isCategoryCars: function(url) {
+        return _.contains([378], Number((url.match(/.+-cat-(\d+).*/) || [])[1] || 0));
     },
     getCategories: function() {
         this.categories = this.categories || (this.options.categories && this.options.categories.toJSON ? this.options.categories : new Categories(this.options.categories || {}, {

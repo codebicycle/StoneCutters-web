@@ -5,6 +5,7 @@ var _ = require('underscore');
 var helpers = require('../../../../../../../helpers');
 var asynquence = require('asynquence');
 var User = require('../../../../../../../models/user');
+var Metric = require('../../../../../../../modules/metric');
 
 module.exports = Base.extend({
     className: 'item-actions',
@@ -15,7 +16,9 @@ module.exports = Base.extend({
         'click [data-facebook-login]': 'facebookLogin',
         'click [data-modal-close]': 'onCloseModal',
         'click .open-modal[data-user=false]': 'onOpenModal',
-        'click [data-modal-shadow]': 'onCloseModal'
+        'click [data-modal-shadow]': 'onCloseModal',
+        'click [data-increment]': Metric.incrementEventHandler,
+        'click [data-flag]': 'onFlagAsSpamOrScam'
     },
     postRender: function() {
         this.listenTo(this.app, 'loginSuccess', this.loginSuccess);
@@ -66,6 +69,21 @@ module.exports = Base.extend({
             });
         }
     },
+    onFlagAsSpamOrScam: function (e) {
+        e.preventDefault();
+
+        var $this = $(e.currentTarget);
+        var dataUser = $this.data('user');
+        var textDo = $this.data('text-do');
+        var textDone = $this.data('text-done');
+
+        if ($this.data('current') === 'do') {
+            $this.data('current', 'done');
+            $this.data('increment-value', [dataUser ? 'auth' : 'anon', 'reflagging']);
+            $this.text(textDone);
+        }
+
+    },
     login: function (event) {
         event.preventDefault();
         event.stopPropagation();
@@ -80,7 +98,7 @@ module.exports = Base.extend({
         function prepare(done) {
             user = new User(_.extend(data, {
                 location: this.app.session.get('siteLocation'),
-                country: this.app.session.get('location').name,
+                country: this.app.session.get('location').abbreviation,
                 languageId: this.app.session.get('languages')._byId[this.app.session.get('selectedLanguage')].id,
                 platform: this.app.session.get('platform')
             }), {
