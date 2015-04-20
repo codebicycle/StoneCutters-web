@@ -458,5 +458,12 @@ module.exports = {
     },
     flagItem: {
         enabled: true
+    },
+    userzoom: {
+        enabled: true,
+        'items#show' : {
+            enabled: true,
+            platforms: ['html5', 'desktop']
+        }
     }
 };
