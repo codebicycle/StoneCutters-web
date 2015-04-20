@@ -276,7 +276,7 @@ function asyncbuyer(params, callback) {
 
         function checkTransaction(done, response, body) {
             body = JSON.parse(body);
-            console.log(body);
+
             if (!body.status && body.error.length) {
                 done.abort();
                 return helpers.common.redirect.call(this, '/', null, {
