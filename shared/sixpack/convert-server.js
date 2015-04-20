@@ -1,6 +1,5 @@
 'use strict';
 
-var utils = require('../utils');
 var statsd = require('../statsd')();
 
 module.exports = function convert(experiment, kpi, done) {

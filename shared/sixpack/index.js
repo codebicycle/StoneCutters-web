@@ -42,36 +42,19 @@ Sixpack.prototype.experiments = function() {
 
 Sixpack.prototype.participateAll = function(done) {
     asynquence().or(this.fail(done))
-        .gate.apply(null, _.map(_.values(this.experiments), this.participateOne, this))
+        .gate.apply(null, _.map(_.filter(_.values(this.experiments), this.autoParticipate, this), this.participateOne, this))
         .val(this.callback(done));
+};
+
+Sixpack.prototype.autoParticipate = function(experiment) {
+    return !!experiment.autoParticipate;
 };
 
 Sixpack.prototype.participateOne = function(experiment) {
     return this.participate.bind(this, experiment);
 };
 
-Sixpack.prototype.participate = function(experiment, done) {
-    var fraction = experiment.fraction !== undefined ? experiment.fraction : 1;
-
-    if (!experiment.force) {
-        this.session.participate(this.name(experiment), _.values(experiment.alternatives), fraction, callback.bind(this));
-    }
-    else {
-        this.session.participate(this.name(experiment), _.values(experiment.alternatives), fraction, experiment.force, callback.bind(this));
-    }
-
-    function callback(err, res) {
-        if (err || res.status !== 'ok') {
-            statsd.increment([this.market, 'sixpack', 'participate', experiment.name, 'error', err ? 'err' : res.status, this.platform]);
-            delete this.experiments[experiment.key];
-            return this.callback(done)();
-        }
-        statsd.increment([this.market, 'sixpack', 'participate', experiment.name, 'success', this.platform]);
-        delete this.experiments[experiment.key].alternatives;
-        this.experiments[experiment.key].alternative = res.alternative.name;
-        this.callback(done)();
-    }
-};
+Sixpack.prototype.participate = utils.isServer ? require('./participate' + '-server') : require('./participate');
 
 Sixpack.prototype.convert = utils.isServer ? require('./convert' + '-server') : require('./convert');
 
