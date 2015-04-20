@@ -1,10 +1,11 @@
 'use strict';
 
+var _ = require('underscore');
 var Base = require('../../../../../common/app/bases/view').requireView('header/usernav');
 var helpers = require('../../../../../../helpers');
 var asynquence = require('asynquence');
-var _ = require('underscore');
 var Metric = require('../../../../../../modules/metric');
+var Notifications = require('../../../../../../modules/notifications');
 
 module.exports = Base.extend({
 	tagName: 'aside',
@@ -39,7 +40,15 @@ module.exports = Base.extend({
         var messages = this.app.session.get('messages');
 
         if (user && user.unreadConversationsCount) {
+            var currentNumber = parseInt(this.$('.count').text());
             this.$('.count').text(user.unreadConversationsCount).removeClass('display-none');
+
+            if (user.unreadConversationsCount > currentNumber) {
+                if(!this.notifications) {
+                    this.notifications = new Notifications({}, this);
+                }
+                this.notifications.showNotification('Titulo', user, '/myolx/conversations');
+            }
         }
         else if (messages && messages > 0) {
             this.$('.count').text(messages).removeClass('display-none');

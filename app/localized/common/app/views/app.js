@@ -2,6 +2,7 @@
 
 var Base = require('rendr/client/app_view');
 var URLParser = require('url');
+var Notifications = require('../../../../modules/notifications');
 
 module.exports = Base.extend({
     className: 'app_view',
@@ -15,6 +16,13 @@ module.exports = Base.extend({
         this.adserving = [];
         this.on('adserving:CSA', this.onAdservingCSA);
         this.app.router.on('action:end', this.onEnd.bind(this));
+
+        if(!this.notifications) {
+            this.notifications = new Notifications({}, this);
+        }
+        if(this.notifications.checkNotifications()) {
+            this.notifications.requestPermission();
+        }
     },
     loading: function($progressBar, app, isLoading) {
         if (isLoading){
