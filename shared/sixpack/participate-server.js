@@ -1,5 +1,6 @@
 'use strict';
 
+var _ = require('underscore');
 var statsd = require('../statsd')();
 
 module.exports = function participate(experiment, done) {
