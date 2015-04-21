@@ -24,7 +24,6 @@ function initialize(attrs, options) {
 function isEnabled() {
     var locationUrl = this.app.session.get('location').url;
     var platform = this.app.session.get('platform');
-    var enabled = config.getForMarket(locationUrl, ['notifications', platform, 'enabled'], false);
 
     return config.getForMarket(locationUrl, ['notifications', platform, 'enabled'], false);
 }
