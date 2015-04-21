@@ -42,6 +42,7 @@ function show(params, callback) {
         var anonymousItem;
         var location = this.app.session.get('location');
         var isSafetyTipsEnabled = helpers.features.isEnabled.call(this, 'safetyTips', platform, location.url);
+        var isSafetyTipsOnEmailEnabled = helpers.features.isEnabled.call(this, 'safetyTipsOnEmail', platform, location.url);
 
         new Shops(this).evaluate(params);
 
@@ -308,7 +309,8 @@ function show(params, callback) {
                 flagged: flagged,
                 sent: params.sent,
                 categories: this.dependencies.categories.toJSON(),
-                isSafetyTipsEnabled: isSafetyTipsEnabled
+                isSafetyTipsEnabled: isSafetyTipsEnabled,
+                isSafetyTipsOnEmailEnabled: isSafetyTipsOnEmailEnabled
             });
         }
 
@@ -945,13 +947,13 @@ function flag(params, callback) {
         var user = !!this.app.session.get('user');
         var metric = new Metric({}, this);
         var metricValue = [user ? 'auth' : 'anon', !params.flagged ? 'flagging' : 'reflagging'];
-        
+
         metric.increment(['africa', 'item', metricValue]);
 
         done();
     }.bind(this);
 
-    
+
     var success = function() {
         var url = (params.redirect || '/des-iid-' + params.itemId);
         var query = {

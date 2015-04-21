@@ -61,7 +61,7 @@
                     {% endif %}
             {% endif %}
             {% if item.email %}
-                {% if isSafetyTipsEnabled %}
+                {% if isSafetyTipsEnabled and isSafetyTipsOnEmailEnabled %}
                     <a href="{{ ['/iid-', item.id, '/email'] | join('') | link }}" class="btns orange" data-qa="reply-button" >{{ dictionary["register_mail.Email"] }}</a>
                 {% else %}
                     <a href="{{ ['/iid-', item.id, '/reply'] | join('') | link }}" class="btns orange" data-qa="reply-button" >{{ dictionary["register_mail.Email"] }}</a>
@@ -107,7 +107,7 @@
             <a href="{{ relatedAdsLink | link }}" class="btns grey">{{ dictionary["itemgeneraldetails.OtherRelatedListings"] | replace(':','')}}</a>
         {% endif %}
     </div>
-    
+
 </div>
 {{ BreadcrumbHome(dictionary, link, ('/' | link)) }}
 
