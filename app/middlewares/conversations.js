@@ -18,7 +18,12 @@ module.exports = function(params, next) {
             location: this.app.session.get('location').url,
             platform: this.app.session.get('platform')
         };
+        var isHermesEnabled = helpers.features.isEnabled.call(this, 'hermes');
 
+        if (!isHermesEnabled) {
+            done.abort();
+            return next();
+        }
         if (!user && !hash) {
             done.abort();
             this.app.session.clear('messages');
