@@ -305,7 +305,7 @@ module.exports = {
             enabled: false
         },
         html5: {
-            enabled: true
+            enabled: false
         }
     }
 };
