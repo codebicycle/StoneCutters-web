@@ -9,7 +9,7 @@ module.exports = function convert(experiment, kpi, done) {
         return this.callback(done)();
     }
     $.ajax({
-        url: '/tracking/sixpack/convert.gif?experiment=' + experiment.key + (kpi ? '&kpi=' + kpi : ''),
+        url: '/tracking/sixpack/convert.gif?experiment=' + experiment.key + '&platform=' + this.platform + '&market=' + this.market + (kpi ? '&kpi=' + kpi : ''),
         cache: false
     })
     .always(always.bind(this));

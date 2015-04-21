@@ -11,7 +11,7 @@ module.exports = Base.extend({
 	id: 'user-nav-bar',
     className: 'header-usernav-view',
     events: {
-        'click [data-increment]': Metric.incrementEventHandler
+        'click [data-increment-metric]': Metric.incrementEventHandler
     },
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);

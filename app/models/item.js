@@ -1,5 +1,6 @@
 'use strict';
 
+var S = require('string');
 var _ = require('underscore');
 var asynquence = require('asynquence');
 var Base = require('../bases/model');
@@ -135,6 +136,9 @@ function parse(item, options) {
     }
     if (item.optionals && item.optionals.length) {
         item.optionals = _.sortBy(item.optionals, 'name').reverse();
+    }
+    if (item.description) {
+        item.description = S(item.description).stripTags().s;
     }
     return Base.prototype.parse.apply(this, arguments);
 }

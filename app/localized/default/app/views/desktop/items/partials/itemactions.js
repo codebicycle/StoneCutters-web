@@ -1,9 +1,9 @@
 'use strict';
 
-var Base = require('../../../../../../common/app/bases/view');
 var _ = require('underscore');
-var helpers = require('../../../../../../../helpers');
 var asynquence = require('asynquence');
+var Base = require('../../../../../../common/app/bases/view');
+var helpers = require('../../../../../../../helpers');
 var User = require('../../../../../../../models/user');
 var Metric = require('../../../../../../../modules/metric');
 
@@ -17,7 +17,7 @@ module.exports = Base.extend({
         'click [data-modal-close]': 'onCloseModal',
         'click .open-modal[data-user=false]': 'onOpenModal',
         'click [data-modal-shadow]': 'onCloseModal',
-        'click [data-increment]': Metric.incrementEventHandler,
+        'click [data-increment-metric]': Metric.incrementEventHandler,
         'click [data-flag]': 'onFlagAsSpamOrScam'
     },
     postRender: function() {
@@ -69,20 +69,23 @@ module.exports = Base.extend({
             });
         }
     },
-    onFlagAsSpamOrScam: function (e) {
-        e.preventDefault();
+    onFlagAsSpamOrScam: function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
 
-        var $this = $(e.currentTarget);
-        var dataUser = $this.data('user');
-        var textDo = $this.data('text-do');
-        var textDone = $this.data('text-done');
+        var $field = $(event.currentTarget);
+        var dataUser = $field.data('user');
+        var textDo = $field.data('text-do');
+        var textDone = $field.data('text-done');
+        var values = Metric.getValues($field.data('increment-metric'));
 
-        if ($this.data('current') === 'do') {
-            $this.data('current', 'done');
-            $this.data('increment-value', [dataUser ? 'auth' : 'anon', 'reflagging']);
-            $this.text(textDone);
+        if ($field.data('current') === 'do') {
+            $field.data('current', 'done');
+            values.value = [dataUser ? 'auth' : 'anon', 'reflagging'];
+            $field.data('increment-metric', _.values(values).join('.'));
+            $field.text(textDone);
         }
-
     },
     login: function (event) {
         event.preventDefault();
@@ -98,7 +101,7 @@ module.exports = Base.extend({
         function prepare(done) {
             user = new User(_.extend(data, {
                 location: this.app.session.get('siteLocation'),
-                country: this.app.session.get('location').name,
+                country: this.app.session.get('location').abbreviation,
                 languageId: this.app.session.get('languages')._byId[this.app.session.get('selectedLanguage')].id,
                 platform: this.app.session.get('platform')
             }), {

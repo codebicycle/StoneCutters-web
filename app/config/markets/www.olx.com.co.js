@@ -271,11 +271,17 @@ module.exports = {
             enabled: true
         }
     },
+
     notifications: {
         desktop: {
             enabled: true
         },
         html5: {
+            enabled: true
+        }
+    },
+    validator: {
+        email: {
             enabled: true
         }
     }
