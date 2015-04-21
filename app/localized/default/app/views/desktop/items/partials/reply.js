@@ -121,6 +121,7 @@ module.exports = Base.extend({
             if (_.contains([378], item.get('category').id)) {
                 this.app.sixpack.convert(this.app.sixpack.experiments.dgdCategoryCars);
             }
+            this.app.sixpack.convert(this.app.sixpack.experiments.dgdHidePhoneNumber, 'reply-by-mail');
         }
 
         function fail(err) {
@@ -200,7 +201,7 @@ module.exports = Base.extend({
         event.stopImmediatePropagation();
 
         this.$('.user-phone').text(this.parentView.getItem().get('phone'));
-        //this.app.sixpack.convert(this.app.sixpack.experiments.dgdHidePhoneNumber);
+        this.app.sixpack.convert(this.app.sixpack.experiments.dgdHidePhoneNumber);
     },
     transformPhone: function(phone, digits, symbol) {
         var count = 0;

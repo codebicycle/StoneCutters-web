@@ -58,6 +58,6 @@ module.exports = {
             CONTROL: 'control',
             HIDE_PHONE_NUMBER: 'hide-phone-number'
         },
-        autoParticipate: true
+        autoParticipate: false
     }
 };

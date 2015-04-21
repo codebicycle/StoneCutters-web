@@ -6,6 +6,9 @@ var statsd = require('../statsd')();
 module.exports = function participate(experiment, done) {
     var fraction = experiment.fraction !== undefined ? experiment.fraction : 1;
 
+    if (!experiment || !experiment.name) {
+        return this.callback(done)();
+    }
     if (!experiment.force) {
         this.session.participate(this.name(experiment), _.values(experiment.alternatives), fraction, callback.bind(this));
     }
