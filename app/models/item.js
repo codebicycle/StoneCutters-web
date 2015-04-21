@@ -6,6 +6,7 @@ var Base = require('../bases/model');
 var helpers = require('../helpers');
 var statsd = require('../../shared/statsd')();
 var utils = require('../../shared/utils');
+var S = require('string');
 
 module.exports = Base.extend({
     idAttribute: 'id',
@@ -135,6 +136,9 @@ function parse(item, options) {
     }
     if (item.optionals && item.optionals.length) {
         item.optionals = _.sortBy(item.optionals, 'name').reverse();
+    }
+    if (item.description) {
+        item.description = S(item.description).stripTags().s;
     }
     return Base.prototype.parse.apply(this, arguments);
 }
