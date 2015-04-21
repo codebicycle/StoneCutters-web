@@ -1,12 +1,12 @@
 'use strict';
 
+var S = require('string');
 var _ = require('underscore');
 var asynquence = require('asynquence');
 var Base = require('../bases/model');
 var helpers = require('../helpers');
 var statsd = require('../../shared/statsd')();
 var utils = require('../../shared/utils');
-var S = require('string');
 
 module.exports = Base.extend({
     idAttribute: 'id',
