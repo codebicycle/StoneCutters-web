@@ -5,7 +5,7 @@ module.exports = function convert(experiment, done) {
         return this.callback(done)();
     }
     $.ajax({
-        url: '/tracking/sixpack/participate.gif?experiment=' + experiment.key,
+        url: '/tracking/sixpack/participate.gif?experiment=' + experiment.key + '&platform=' + this.platform + '&market=' + this.market,
         cache: false
     })
     .always(always.bind(this));
