@@ -65,8 +65,6 @@ module.exports = Base.extend({
         var customerContact = config.getForMarket(location.url, ['post_customer_contact'], '');
         var sixpackCurrentAlternative = this.app.sixpack.experiments.growthCategorySuggestion ? this.app.sixpack.experiments.growthCategorySuggestion.alternative : '';
 
-        this.app.sixpack.convert(this.app.sixpack.experiments.growthCategorySuggestion, 'starters');
-
         return _.extend({}, data, {
             item: this.getItem(data.item),
             customerContact: customerContact,
@@ -583,9 +581,7 @@ module.exports = Base.extend({
                         parentCategory: cat.category.id,
                         subCategory: cat.subcategory.id
                     }]);
-                    this.categorySuggestionTracker(['on', 'autoselect']);
-
-                    return;
+                    return this.categorySuggestionTracker(['on', 'autoselect']);
                 }
             }
         }

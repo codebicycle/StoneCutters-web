@@ -2,6 +2,7 @@
 
 var Base = require('rendr/client/app_view');
 var URLParser = require('url');
+var Notifications = require('../../../../modules/notifications');
 
 module.exports = Base.extend({
     className: 'app_view',
@@ -93,9 +94,16 @@ module.exports = Base.extend({
         this.adserving.push(settings.params);
     },
     onEnd: function() {
+        if (!this.notifications) {
+            this.notifications = new Notifications({}, this);
+        }
+        if (this.notifications.isEnabled() && this.notifications.checkNotifications()) {
+            this.notifications.requestPermission();
+        }
         if (!this.adserving.length) {
             return;
         }
+
         window._googCsa.apply(window._googCsa, this.adserving);
         this.adserving = [];
     }

@@ -270,5 +270,19 @@ module.exports = {
         html5: {
             enabled: true
         }
+    },
+
+    notifications: {
+        desktop: {
+            enabled: true
+        },
+        html5: {
+            enabled: true
+        }
+    },
+    validator: {
+        email: {
+            enabled: true
+        }
     }
 };
