@@ -87,16 +87,12 @@ module.exports = {
     marketing: {
         videos: [
             {
-                title: 'OLX Panama - Bicicleta - Vender es fácil',
-                id: 'rXfzHDejpRs'
+                title: 'OLX Panama - Patrón Bermudez - Vender es fácil',
+                id: 'OmT4uHxaw00'
             },
             {
-                title: 'OLX Panama - Anteojos - Vender es fácil',
-                id: 'eEyfckF_Xgs'
-            },
-            {
-                title: 'OLX Panamá - Poker - Vender es fácil',
-                id: 'm0sDSvsBEf0'
+                title: 'OLX Panamá - Patrón Bermudez - Carro Bebe',
+                id: '8D5Sj6ubvYU'
             }
         ]
     },
