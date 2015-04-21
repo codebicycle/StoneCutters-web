@@ -31,5 +31,5 @@ module.exports = {
             }
         }
     },
-    "default_locale": "en",
+    "default_locale": "en"
 };
