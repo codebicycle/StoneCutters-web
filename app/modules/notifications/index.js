@@ -10,6 +10,7 @@ Backbone.noConflict();
 
 module.exports = Backbone.Model.extend({
     initialize: initialize,
+    isEnabled: isEnabled,
     checkNotifications: checkNotifications,
     requestPermission: requestPermission,
     showNotification: showNotification
@@ -20,17 +21,28 @@ function initialize(attrs, options) {
     this.metric = new Metric({}, options);
 }
 
+function isEnabled() {
+    var locationUrl = this.app.session.get('location').url;
+    var platform = this.app.session.get('platform');
+    var enabled = config.getForMarket(locationUrl, ['notifications', platform, 'enabled'], false);
+
+    if (enabled) {
+        return true;
+    }
+    return false;
+}
+
 function checkNotifications() {
     if (window.Notification) {
         return true;
-    } else {
-        return false;
     }
+    return false;
+
 }
 
 function requestPermission() {
     window.Notification.requestPermission(function (status) {
-        if(window.Notification.permission !== status) {
+        if (window.Notification.permission !== status) {
             window.Notification.permission = status;
         }
         this.metric.increment(['conversations', 'notifications', status]);
@@ -41,7 +53,7 @@ function showNotification(title, user, path) {
     var options = {
         body: user.unreadConversationsCount,
         icon: 'http://www.olx.com.ar:3030/images/desktop/logo.png'
-    }
+    };
     var n = new window.Notification(title, options);
     n.onshow = function () {
         setTimeout(n.close.bind(n), 5000);
@@ -51,7 +63,3 @@ function showNotification(title, user, path) {
         this.app.router.redirectTo(path);
     }.bind(this);
 }
-
-
-
-

@@ -16,13 +16,6 @@ module.exports = Base.extend({
         this.adserving = [];
         this.on('adserving:CSA', this.onAdservingCSA);
         this.app.router.on('action:end', this.onEnd.bind(this));
-
-        if(!this.notifications) {
-            this.notifications = new Notifications({}, this);
-        }
-        if(this.notifications.checkNotifications()) {
-            this.notifications.requestPermission();
-        }
     },
     loading: function($progressBar, app, isLoading) {
         if (isLoading){
@@ -101,9 +94,16 @@ module.exports = Base.extend({
         this.adserving.push(settings.params);
     },
     onEnd: function() {
+        if (!this.notifications) {
+            this.notifications = new Notifications({}, this);
+        }
+        if (this.notifications.isEnabled() && this.notifications.checkNotifications()) {
+            this.notifications.requestPermission();
+        }
         if (!this.adserving.length) {
             return;
         }
+
         window._googCsa.apply(window._googCsa, this.adserving);
         this.adserving = [];
     }

@@ -40,15 +40,7 @@ module.exports = Base.extend({
         var messages = this.app.session.get('messages');
 
         if (user && user.unreadConversationsCount) {
-            var currentNumber = parseInt(this.$('.count').text());
             this.$('.count').text(user.unreadConversationsCount).removeClass('display-none');
-
-            if (user.unreadConversationsCount > currentNumber) {
-                if(!this.notifications) {
-                    this.notifications = new Notifications({}, this);
-                }
-                this.notifications.showNotification('Titulo', user, '/myolx/conversations');
-            }
         }
         else if (messages && messages > 0) {
             this.$('.count').text(messages).removeClass('display-none');
