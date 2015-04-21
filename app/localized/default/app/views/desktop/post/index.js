@@ -581,9 +581,7 @@ module.exports = Base.extend({
                         parentCategory: cat.category.id,
                         subCategory: cat.subcategory.id
                     }]);
-                    this.categorySuggestionTracker(['on', 'autoselect']);
-
-                    return;
+                    return this.categorySuggestionTracker(['on', 'autoselect']);
                 }
             }
         }

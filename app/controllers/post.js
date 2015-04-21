@@ -99,7 +99,8 @@ function flow(params, callback) {
         if (isPostingFlow || isDesktop || itemId) {
             promise
                 .then(fetch.bind(this))
-                .then(parse.bind(this));
+                .then(parse.bind(this))
+                .then(participate.bind(this));
         }
         promise.val(success.bind(this));
 
@@ -205,6 +206,17 @@ function flow(params, callback) {
             done(res);
         }
 
+        function participate(done, res) {
+            this.app.sixpack.participate(this.app.sixpack.experiments.growthCategorySuggestion, complete.bind(this));
+
+            function complete() {
+                this.app.session.update({
+                    experiments: this.app.sixpack.experiments
+                });
+                done(res);
+            }
+        }
+
         function success(res) {
             this.app.seo.addMetatag('robots', 'noindex, nofollow');
             this.app.seo.addMetatag('googlebot', 'noindex, nofollow');
@@ -283,22 +295,17 @@ function flow(params, callback) {
                 });
             }
 
-            this.app.sixpack.participate(this.app.sixpack.experiments.growthCategorySuggestion, function success(err) {
-                this.app.session.update({
-                    experiments: this.app.sixpack.experiments
-                });
-                callback(null, 'post/index', {
-                    postingSession: postingSession.get('postingSession'),
-                    cities: cities,
-                    currentLocation: currentLocation,
-                    include: ['item'],
-                    item: item || new Item({}, {
-                        app: this.app
-                    }),
-                    fields: fields,
-                    marketing: params.marketing
-                }, false);
-            }.bind(this));
+            callback(null, 'post/index', {
+                postingSession: postingSession.get('postingSession'),
+                cities: cities,
+                currentLocation: currentLocation,
+                include: ['item'],
+                item: item || new Item({}, {
+                    app: this.app
+                }),
+                fields: fields,
+                marketing: params.marketing
+            }, false);
         }
 
         function postingFlowController(postingSession, item, fields) {
