@@ -32,9 +32,4 @@ module.exports = {
         }
     },
     "default_locale": "en",
-    "permissions": {
-        "desktop-notification": {
-            "description": "Needed for creating system notifications."
-        }
-    }
 };
