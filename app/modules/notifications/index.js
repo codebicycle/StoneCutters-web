@@ -26,18 +26,11 @@ function isEnabled() {
     var platform = this.app.session.get('platform');
     var enabled = config.getForMarket(locationUrl, ['notifications', platform, 'enabled'], false);
 
-    if (enabled) {
-        return true;
-    }
-    return false;
+    return config.getForMarket(locationUrl, ['notifications', platform, 'enabled'], false);
 }
 
 function checkNotifications() {
-    if (window.Notification) {
-        return true;
-    }
-    return false;
-
+    return !!window.Notification;
 }
 
 function requestPermission() {
