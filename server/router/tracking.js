@@ -373,8 +373,10 @@ module.exports = function trackingRouter(app, dataAdapter) {
         function handler(req, res) {
             res.on('finish', function onResponseFinish() {
                 var experiment = req.param('experiment');
+                var platform = req.param('platform');
+                var market = req.param('market');
 
-                if (!experiment) {
+                if (!experiment || !platform || !market) {
                     return;
                 }
 
@@ -382,8 +384,8 @@ module.exports = function trackingRouter(app, dataAdapter) {
                     clientId: req.rendrApp.session.get('clientId'),
                     ip: req.rendrApp.session.get('ip'),
                     userAgent: utils.getUserAgent(req),
-                    platform: req.rendrApp.session.get('platform'),
-                    market: req.rendrApp.session.get('location').abbreviation
+                    platform: platform,
+                    market: market
                 });
 
                 sixpack.convert(sixpack.experiments[experiment], req.param('kpi'));
@@ -402,8 +404,10 @@ module.exports = function trackingRouter(app, dataAdapter) {
         function handler(req, res) {
             res.on('finish', function onResponseFinish() {
                 var experiment = req.param('experiment');
+                var platform = req.param('platform');
+                var market = req.param('market');
 
-                if (!experiment) {
+                if (!experiment || !platform || !market) {
                     return;
                 }
 
@@ -411,8 +415,8 @@ module.exports = function trackingRouter(app, dataAdapter) {
                     clientId: req.rendrApp.session.get('clientId'),
                     ip: req.rendrApp.session.get('ip'),
                     userAgent: utils.getUserAgent(req),
-                    platform: req.rendrApp.session.get('platform'),
-                    market: req.rendrApp.session.get('location').abbreviation
+                    platform: platform,
+                    market: market
                 });
 
                 sixpack.participate(sixpack.experiments[experiment]);
