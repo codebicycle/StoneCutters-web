@@ -20,6 +20,7 @@ module.exports = Base.extend({
         var btn = $(event.target);
         var adapter = new Adapter({});
         var data = this.parentView.fields;
+        var itemId = btn.data('itemid');
 
         btn.addClass('disable');
         if (this.parentView.enableButton) {
@@ -44,7 +45,7 @@ module.exports = Base.extend({
                 this.parentView.$('.success').removeClass('hide');
                 if (this.parentView.fields.contactedBySeller) {
                     this.parentView.$('.buyer-link').removeClass('hide');
-                    this.parentView.$('.success input.link').val('http://www.olx.com.ar/asyncbuyer?transactionId=' + res.extra.transactionId);
+                    this.parentView.$('.success input.link').val('http://www.olx.com.ar/asyncbuyer?transactionId=' + res.extra.transactionId + '&itemId=' + itemId);
                     this.parentView.$('.success input.link').select();
                 }
             }

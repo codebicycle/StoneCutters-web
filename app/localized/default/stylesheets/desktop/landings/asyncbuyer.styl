@@ -1,0 +1,114 @@
+.landings_asyncbuyer_view {
+    padding: 0;
+    .invite-buyer {
+        padding: 20px 150px;
+        background: $yellowPosting;
+        border-bottom: 1px solid $greyBorders;
+        .title {
+            line-height: 1.9rem;
+        }
+        .buttons {
+            overflow: hidden;
+            ul-reset();
+            li {
+                width: 48%;
+                box-sizing: border-box;
+                cursor: pointer;
+                font-weight: bold;
+                font-size: $m;
+                &:first-child {
+                    float: left;
+                    action-button($orange, $white, 3px, 15px 10px);
+                }
+                &:last-child {
+                    float: right;
+                    action-button($greyStrong, $white, 3px, 15px 10px);
+                }
+            }
+        }
+        .desc {
+            margin: 30px 0 0 0;
+            text-align: center;
+        }
+    }
+    .kiosco-location-large {
+        margin: 30px 0;
+        font-size: $xs;
+        overflow: hidden;
+        .right {
+            float: right;
+        }
+        ul {
+            margin-top: 20px;
+            ul-reset();
+        }
+        a,
+        img {
+            float: left;
+        }
+    }
+    .information-buyer {
+        padding: 40px 150px 20px 150px;
+        text-align: center;
+        p {
+            margin: 0;
+            &:first-child,
+            &:last-child {
+                margin-bottom: 20px;
+            }
+            &:first-child {
+                font-size: $l;
+            }
+            &:last-child {
+                margin-top: 20px;
+            }
+        }
+    }
+    .buyer-data {
+        overflow: hidden;
+        padding-top: 20px;
+        padding-bottom: 20px;
+        .kiosco-location {
+            margin-top: 65px;
+        }
+        .posting {
+            margin-top: 100px;
+        }
+    }
+    .error-confirmed,
+    .transaction-rejected,
+    .success {
+        padding: 20px 0 0;
+        .top {
+            text-align: center;
+        }
+        .async-form {
+            width: 80%;
+            min-height: 120px;
+            float: none;
+            margin: 20px auto 0;
+        }
+        .kiosco-location-large {
+            width: 70%;
+            margin: 25px auto;
+        }
+    }
+    .error-confirmed {
+        .title {
+            text-align: left;
+            padding: 0 20px;
+        }
+        .async-form {
+            width: 96%;
+            margin-bottom: 20px;
+            min-height: 130px;
+        }
+    }
+    .transaction-rejected {
+        .async-form {
+            text-align: center;
+            padding: 30px;
+            margin-bottom: 150px;
+        }
+    }
+}
