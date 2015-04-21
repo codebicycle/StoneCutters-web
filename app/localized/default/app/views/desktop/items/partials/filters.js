@@ -11,7 +11,7 @@ module.exports = Base.extend({
     className: 'listing-filters',
     id: 'listing-filters',
     events: {
-        'click [data-increment]': Metric.incrementEventHandler,
+        'click [data-increment-metric]': Metric.incrementEventHandler,
         'click [data-increment-filter]': 'onClickFilter',
         'click .filter-title': 'toogleFilter',
         'click .clean-filters': 'cleanFilters',
