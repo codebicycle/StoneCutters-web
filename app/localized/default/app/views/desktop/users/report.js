@@ -12,7 +12,7 @@ module.exports = Base.extend({
     id: 'users-report',
     className: 'users-report',
     events: {
-        'click [data-increment]': Metric.incrementEventHandler,
+        'click [data-increment-metric]': Metric.incrementEventHandler,
         'click [data-action-report]': 'report'
     },
     report: function(event) {

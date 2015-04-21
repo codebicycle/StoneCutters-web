@@ -1,26 +1,6 @@
 'use strict';
 
 module.exports = {
-    html5HeaderPostButton: {
-        enabled: false,
-        platforms: ['html5'],
-        markets: ['ar'],
-        name: 'header-post-button',
-        alternatives: {
-            TEXT: 'text',
-            ICON: 'icon'
-        }
-    },
-    html5Interstitial: {
-        enabled: false,
-        platforms: ['html5'],
-        markets: ['br'],
-        name: 'interstitial',
-        alternatives: {
-            ON: 'on',
-            OFF: 'off'
-        }
-    },
     html4ShowShops: {
         enabled: true,
         platforms: ['html4'],
@@ -31,7 +11,8 @@ module.exports = {
             CALL_TO_ACTION: 'calltoactions',
             CALL_TO_ACTION_MAP: 'calltoactions_map'
         },
-        firstClick: true
+        firstClick: true,
+        autoParticipate: true
     },
     desktopDGD23ShowSimplifiedReplyForm: {
         enabled: true,
@@ -41,7 +22,8 @@ module.exports = {
         alternatives: {
             CONTROL: 'control',
             SHOW_SIMPLIFIED_REPLY_FORM: 'show-simplified-reply-form'
-        }
+        },
+        autoParticipate: true
     },
     growthCategorySuggestion: {
         enabled: true,
@@ -53,7 +35,8 @@ module.exports = {
             CONTROL: 'control',
             SUGGESTED: 'suggested',
             SINGLE: 'single'
-        }
+        },
+        autoParticipate: true
     },
     dgdCategoryCars: {
         enabled: true,
@@ -63,16 +46,18 @@ module.exports = {
         alternatives: {
             CONTROL: 'control',
             GALLERY: 'gallery'
-        }
+        },
+        autoParticipate: true
     },
     dgdHidePhoneNumber: {
         enabled: true,
-        platforms: ['dektop'],
+        platforms: ['desktop'],
         markets: ['ar', 'co', 'pa', 'pe', 'uy'],
-        name: 'hide-phone-number-exp',
+        name: 'hide-phone-number',
         alternatives: {
-            CONTROL: 'control-ate',
+            CONTROL: 'control',
             HIDE_PHONE_NUMBER: 'hide-phone-number'
-        }
+        },
+        autoParticipate: true
     }
 };

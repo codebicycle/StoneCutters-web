@@ -15,7 +15,7 @@ module.exports = Base.extend({
     events: {
         'click .open-modal': 'onOpenModal',
         'click [data-modal-shadow], [data-modal-close]': 'onCloseModal',
-        'click [data-increment]': Metric.incrementEventHandler,
+        'click [data-increment-metric]': Metric.incrementEventHandler,
         'click li.category li a': 'onCategoryClick'
     },
     getTemplateData: function() {

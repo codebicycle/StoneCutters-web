@@ -12,7 +12,7 @@ module.exports = Base.extend({
     tagName: 'nav',
     events: {
         'change #order-by-select': 'sortFilter',
-        'click [data-increment]': Metric.incrementEventHandler
+        'click [data-increment-metric]': Metric.incrementEventHandler
     },
     postRender: function() {
         if (!this.filters) {
