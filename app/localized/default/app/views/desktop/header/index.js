@@ -10,7 +10,7 @@ module.exports = Base.extend({
     className: 'header-view',
     events: {
         'click .posting': 'onPostClick',
-        'click [data-increment]': Metric.incrementEventHandler
+        'click [data-increment-metric]': Metric.incrementEventHandler
     },
     postRender: function() {
         this.app.router.appView.on('posting:start', this.onPostingStart.bind(this));

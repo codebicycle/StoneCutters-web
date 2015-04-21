@@ -16,7 +16,7 @@ module.exports = Base.extend({
     regexpReplaceCategory: /([a-zA-Z0-9-]+-cat-[0-9]+)/,
     regexpFindNeighborhood: /-neighborhood_[0-9_]+/,
     events: {
-        'click [data-increment]': 'onClickIncrement'
+        'click [data-increment-metric]': 'onClickIncrement'
     },
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
@@ -55,12 +55,13 @@ module.exports = Base.extend({
     },
     onClickIncrement: function(event) {
         var $elem = $(event.currentTarget);
+        var values = Metric.getValues($elem.data('increment-metric'));
 
         this.app.session.persist({
             origin: {
                 type: 'search',
                 isGallery: this.id !== 'searches-search-view',
-                isAbundance: !!~($elem.data('increment-value') || '').indexOf('abundance')
+                isAbundance: !!~(values.value || '').indexOf('abundance')
             }
         });
         Metric.incrementEventHandler.call(this, event);

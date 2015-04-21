@@ -9,4 +9,4 @@
     value: user.email,
     autocomplete: true
 } %}
-{{ Field(hint = dictionary["posting_fields_1.YourEmailAddressWontBeShared"], emailField) }}
+{{ Field(hint = hint if hint else dictionary["posting_fields_1.YourEmailAddressWontBeShared"], hintIcon = icon if icon else 'icon-lock', emailField) }}

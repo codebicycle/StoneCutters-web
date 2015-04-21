@@ -4,6 +4,7 @@ var _ = require('underscore');
 var Base = require('../../../../../common/app/bases/view');
 var Mailgun = require('../../../../../../modules/validator/models/mailgun');
 var Metric = require('../../../../../../modules/metric');
+var config = require('../../../../../../../shared/config');
 var translations = require('../../../../../../../shared/translations');
 
 module.exports = Base.extend({
@@ -19,12 +20,29 @@ module.exports = Base.extend({
         'click .did-you-mean': onClickDidYouMean
     },
     initialize: initialize,
+    getTemplateData: getTemplateData,
     postRender: postRender
 });
 
 function initialize() {
     Base.prototype.initialize.call(this);
     this.dictionary = translations.get(this.app.session.get('selectedLanguage'));
+}
+
+function getTemplateData() {
+    var data = Base.prototype.getTemplateData.call(this);
+    var hintInfo = config.getForMarket(this.app.session.get('location').url, ['hints', 'desktop', 'email']);
+    var hint;
+    var icon;
+
+    if(hintInfo && hintInfo.enabled) {
+        hint = hintInfo.hint;
+        icon = hintInfo.icon || '';
+    }
+    return _.extend({}, data, {
+        hintEmail: hint,
+        icon: icon
+    });
 }
 
 function postRender() {
