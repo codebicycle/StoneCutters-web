@@ -35,8 +35,7 @@ module.exports = {
             CONTROL: 'control',
             SUGGESTED: 'suggested',
             SINGLE: 'single'
-        },
-        autoParticipate: true
+        }
     },
     dgdCategoryCars: {
         enabled: true,
