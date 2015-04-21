@@ -25,9 +25,14 @@
                 .script("{{ [jsDir, 'common', ((['config-', environment, '.js'] | join('')) if (environment != 'production') else 'config.js')] | join('/') | static }}")
                 .script("{{ [jsDir, directory, 'templates', 'desktop', 'templates.js'] | join('/') | static }}").wait()
                 .script("{{ [jsDir, directory, 'app.js'] | join('/') | static }}").wait(function wait() {
+                    try {
+
                     var App = window.App = new (require('app/app'))({% json appData %});
                     App.bootstrapData({% json bootstrappedData %});
                     App.start();
+                } catch(e) {
+                    console.log(e.stack);
+                }
                 });
         }</script>
         <script src="{{ '/js/polyfills.js' | static }}" ></script>

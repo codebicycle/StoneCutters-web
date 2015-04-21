@@ -274,9 +274,9 @@ function flow(params, callback) {
                         break;
                 }
             }
-            if (item) {
-                item.set({
-                    _location: item.get('location')
+            if (res.item) {
+                res.item.set({
+                    _location: res.item.get('location')
                 });
             }
 

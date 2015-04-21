@@ -45,6 +45,7 @@ module.exports = Base.extend({
         'imagesLoadEnd': 'onImagesLoadEnd',
         'submit': 'onSubmit',
         'fieldValidate': 'onFieldValidate',
+        'fieldValidationRegister': 'onFieldValidationRegister',
         'fieldValidationStart': 'onFieldValidationStart',
         'fieldValidationEnd': 'onFieldValidationEnd',
         'fieldSubmit': 'onFieldSubmit',
@@ -190,7 +191,7 @@ module.exports = Base.extend({
             this.handleBack();
         }
     },
-    onFieldValidate: function(field, done) {
+    onFieldValidate: function(event, field, done) {
         var $field = $(field);
         
         this.validator.validate($field, callback.bind(this));
@@ -205,10 +206,17 @@ module.exports = Base.extend({
             if (!isValid && details && details.length) {
                 this.$el.trigger('showError', [$field, {
                     message: details.pop()
-                });
+                }]);
             }
             done(isValid);
         }
+    },
+    onFieldValidationRegister: function(event, field, options, unregister) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+
+        this.validator.register(field, options, unregister);
     },
     onFieldSubmit: function(event, field, options) {
         event.preventDefault();
@@ -428,7 +436,7 @@ module.exports = Base.extend({
         var id = $field.attr('name') || $field.attr('id');
 
         this.$('#posting-errors-view').trigger('showError', Array.prototype.slice.call(arguments, 1));
-        statsd.increment([this.app.session.get('locations').abbreviation, 'posting', 'invalid', this.app.session.get('platform'), id]);
+        statsd.increment([this.app.session.get('location').abbreviation, 'posting', 'invalid', this.app.session.get('platform'), id]);
     },
     onHideError: function(event, fields, context) {
         event.preventDefault();

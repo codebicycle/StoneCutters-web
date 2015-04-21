@@ -2,7 +2,12 @@
 
 var _ = require('underscore');
 var Backbone = require('backbone');
-var utils = require('../../../shared/utils');
+var utils = require('../../../../shared/utils');
+var templateSettings = {
+    interpolate: /\{(.+?)\}/g,
+    evaluate: /\{\=(.+?)\}/g,
+    escape: /\{\-(.+?)\}/g
+};
 var Base;
 
 Backbone.noConflict();
@@ -15,6 +20,9 @@ function initialize(attrs, options) {
         _.each(this.options.events, function each(event, name) {
             this.on(name, event, this);
         }, this);
+    }
+    if (attrs.mailgun) {
+        this.set('messageError', attrs.message);
     }
 }
 
@@ -29,7 +37,7 @@ function exec(val, validation, options, callback) {
     else if (this.has('fn')) {
         return callback(this.get('fn')(val, validation));
     }
-    else if (this.has('mailgun') && this.get('mailgun').isEnabled()) {
+    else if (this.has('mailgun')) {
         options.mailgun = options.mailgun || {};
         mailgun = this.get('mailgun');
         success = mailgun.get('success') || options.mailgun.success || utils.noop;
@@ -38,12 +46,12 @@ function exec(val, validation, options, callback) {
         return mailgun.run(_.extend({}, options.mailgun, {
             success: function success(data) {
                 callback(data.is_valid);
-                this.resolveFailed(data);
+                this.resolveMessage(data);
                 success(data);
             }.bind(this),
             error: function error() {
                 callback(true);
-                this.resolveFailed();
+                this.resolveMessage();
                 error();
             }.bind(this)
         }));
@@ -51,22 +59,20 @@ function exec(val, validation, options, callback) {
     callback(true);
 }
 
-function resolveFailed(failed) {
+function resolveMessage(data) {
     var mailgun = this.get('mailgun');
-    var data;
+    var message = this.get('messageError');
 
-    if (mailgun && mailgun.isEnabled()) {
-        data = mailgun.get('data');
-        this.set({
-            message: data.did_you_mean ? this.get('messageDidYouMean') : this.get('message')
-        });
-        return !data.is_valid;
+    if (data && data.did_you_mean) {
+        message = this.get('messageDidYouMean');
+        message = _.template(message, data, templateSettings);
     }
-    return failed;
+    this.set({
+        message: message
+    });
 }
 
 module.exports = Base.extend({
     initialize: initialize,
-    exec: exec,
-    resolveFailed: resolveFailed
+    exec: exec
 });

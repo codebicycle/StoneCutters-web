@@ -4,6 +4,8 @@ var _ = require('underscore');
 var asynquence = require('asynquence');
 var Backbone = require('backbone');
 var Validation = require('./validation');
+var Validations = require('../collections/validations');
+var helpers = require('../../../helpers');
 var utils = require('../../../../shared/utils');
 var Base;
 
@@ -15,7 +17,7 @@ function initialize(attrs, options) {
     this.app = this.options.app;
     if (attrs && !(attrs.validations instanceof Backbone.Collection)) {
         this.set({
-            validations: new Collection(attrs.validations || [], options)
+            validations: new Validations(attrs.validations || [], options)
         });
     }
 }
@@ -23,7 +25,7 @@ function initialize(attrs, options) {
 function getValidations() {
     if (!this.has('validations')) {
         this.set({
-            validations: new Collection([], this.options)
+            validations: new Validations([], this.options)
         });
     }
     return this.get('validations');
@@ -51,10 +53,9 @@ function register(field, options, reset) {
         });
         validations.push(validation);
     }
+    validation.set(_.omit(options, 'rules'));
     rules = _.isArray(options.rules) ? options.rules : [options.rules];
-    validation.set(_.extend({}, _.omit(options, 'rules'), {
-        rules: rules
-    });
+    validation.pushRule(rules);
 }
 
 function unregister(field, unregisterRules) {
@@ -79,12 +80,12 @@ function validate(fields, options, callback) {
     var validations = this.getValidations();
     var promise;
 
-    if (_.isFuntion(fields)) {
+    if (_.isFunction(fields)) {
         callback = fields;
         fields = [];
         options = {};
     }
-    if (_.isFuntion(options)) {
+    if (_.isFunction(options)) {
         callback = options;
         options = {};
     }
@@ -92,7 +93,9 @@ function validate(fields, options, callback) {
         fields = [];
     }
     options = options || {};
-    fields = _.isArray(fields) ? fields : [fields];
+    fields = _.map(_.isArray(fields) ? fields : [fields], function eachFields(field) {
+        return _.isString(field) ? field : (field.attr('name') || field.attr('id'));
+    });
     
     this.unset('details');
     if (!validations.length) {
@@ -128,6 +131,7 @@ function validate(fields, options, callback) {
 function run(validation, options, done) {
     var $field = validation.get('field');
     var val = validation.val();
+    var isDone = false;
     var required;
 
     validation.trigger('start');
@@ -136,7 +140,7 @@ function run(validation, options, done) {
         if (!val || (required.value && required.value === val)) {
             validation.trigger('end', false);
             this.pushDetail(validation.get('id'), required.message);
-            return callback(false);
+            return done(false);
         }
     }
     validation.getRules().each(function each(rule) {
@@ -149,11 +153,18 @@ function run(validation, options, done) {
         rule.exec(val, validation, options, function callback(isValid) {
             validation.trigger('end', isValid);
             if (!isValid) {
+                console.log(validation.toJSON());
+                console.log(rule.toJSON());
                 this.pushDetail(validation.get('id'), rule.get('message'));
             }
-            callback(isValid);
+            isDone = true;
+            done(isValid);
         }.bind(this));
     }, this);
+
+    if (!isDone) {
+        done(true);
+    }
 }
 
 function getDetails() {
@@ -168,14 +179,14 @@ function getDetails() {
 function details(field) {
     var $field = $(field);
 
-    return this.getDetails()[$field.attr('name') || $field.attr('id')]
+    return this.getDetails()[$field.attr('name') || $field.attr('id')];
 }
 
-function pushDetail(id, detail) {
+function pushDetail(id, message) {
     var details = this.getDetails();
     var detail = details[id] || [];
 
-    detail.push(detail);
+    detail.push(message);
     details[id] = detail;
 }
 

@@ -3,6 +3,7 @@
 var _ = require('underscore');
 var Backbone = require('backbone');
 var Rule = require('./rule');
+var Rules = require('../collections/rules');
 var Base;
 
 Backbone.noConflict();
@@ -13,7 +14,7 @@ function initialize(attrs, options) {
     this.app = this.options.app;
     if (attrs && !(attrs.rules instanceof Backbone.Collection)) {
         this.set({
-            rules: new Collection([], options)
+            rules: new Rules([], this.options)
         });
         this.pushRule(attrs.rules);
     }
@@ -27,7 +28,7 @@ function initialize(attrs, options) {
 function getRules() {
     if (!this.has('rules')) {
         this.set({
-            rules: new Collection([], this.options)
+            rules: new Rules([], this.options)
         });
     }
     return this.get('rules');
@@ -52,5 +53,6 @@ function pushRule(rule) {
 module.exports = Base.extend({
     initialize: initialize,
     val: val,
+    getRules: getRules,
     pushRule: pushRule
 });

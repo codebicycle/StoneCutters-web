@@ -2,8 +2,8 @@
 
 var _ = require('underscore');
 var Backbone = require('backbone');
-var config = require('../../../shared/config');
-var utils = require('../../../shared/utils');
+var config = require('../../../../shared/config');
+var utils = require('../../../../shared/utils');
 var Base;
 var Mailgun;
 

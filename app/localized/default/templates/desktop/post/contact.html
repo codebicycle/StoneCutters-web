@@ -13,28 +13,6 @@
 	autocomplete: true
 } %}
 
-{% set emailField = {
-	isOptional: false,
-	name: "email",
-	mandatory: true,
-	label: dictionary["seccion-35.559"],
-	fieldType: "text",
-	dataType: "string",
-	value: user.email,
-	autocomplete: true
-} %}
-
-{% set phoneField = {
-	isOptional: false,
-	name: "phone",
-	mandatory: isPhoneMandatory,
-	label: dictionary["posting_footerlist.phoneNumber"],
-	fieldType: "text",
-	dataType: "string",
-	value: item.get('phone'),
-	autocomplete: true
-} %}
-
 {% set adressField = {
 	isOptional: true,
 	name: "streetAddress",
@@ -46,9 +24,9 @@
 } %}
 
 {{ Field(contactNameField) }}
-{{ Field(hint = dictionary["posting_fields_1.YourEmailAddressWontBeShared"], emailField) }}
-{{ Field(phoneField) }}
 
+{% view 'post/email' %}
+{% view 'post/phone' %}
 {% view 'post/locations' %}
 
 {{ Field(adressField) }}
