@@ -270,5 +270,10 @@ module.exports = {
         html5: {
             enabled: true
         }
+    },
+    validator: {
+        email: {
+            enabled: true
+        }
     }
 };
