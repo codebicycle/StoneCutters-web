@@ -33,7 +33,7 @@ function checkNotifications() {
 }
 
 function requestPermission() {
-    if (this.app.session.get('siteLocation') === this.app.session.get('locationUrl')) {
+    if (this.app.session.get('siteLocation') === this.app.session.get('location').url) {
         window.Notification.requestPermission(function (status) {
             if (window.Notification.permission !== status) {
                 window.Notification.permission = status;
