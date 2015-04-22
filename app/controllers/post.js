@@ -99,7 +99,8 @@ function flow(params, callback) {
         if (isPostingFlow || isDesktop || itemId) {
             promise
                 .then(fetch.bind(this))
-                .then(parse.bind(this));
+                .then(parse.bind(this))
+                .then(participate.bind(this));
         }
         promise.val(success.bind(this));
 
@@ -203,6 +204,17 @@ function flow(params, callback) {
                 res.item.set('securityKey', res.fields.get('securityKey'));
             }
             done(res);
+        }
+
+        function participate(done, res) {
+            this.app.sixpack.participate(this.app.sixpack.experiments.growthCategorySuggestion, complete.bind(this));
+
+            function complete() {
+                this.app.session.update({
+                    experiments: this.app.sixpack.experiments
+                });
+                done(res);
+            }
         }
 
         function success(res) {

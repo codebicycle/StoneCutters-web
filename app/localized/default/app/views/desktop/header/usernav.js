@@ -1,10 +1,11 @@
 'use strict';
 
+var _ = require('underscore');
 var Base = require('../../../../../common/app/bases/view').requireView('header/usernav');
 var helpers = require('../../../../../../helpers');
 var asynquence = require('asynquence');
-var _ = require('underscore');
 var Metric = require('../../../../../../modules/metric');
+var Notifications = require('../../../../../../modules/notifications');
 
 module.exports = Base.extend({
 	tagName: 'aside',
@@ -24,6 +25,12 @@ module.exports = Base.extend({
     postRender: function () {
         this.listenTo(this.app, 'login', this.render);
         $('body').on('update:notifications', this.showNotification.bind(this));
+        if (!this.notifications) {
+            this.notifications = new Notifications({}, this);
+        }
+        if (this.notifications.isEnabled() && this.notifications.checkNotifications()) {
+            this.notifications.requestPermission();
+        }
     },
     showNotification: function() {
         var user = this.app.session.get('user');
