@@ -51,7 +51,7 @@ module.exports = {
     dgdPostingBtn: {
         enabled: true,
         platforms: ['desktop'],
-        markets: ['ar'],
+        markets: ['bo'],
         name: 'dgd-home-posting-btn',
         alternatives: {
             CONTROL: 'control',
