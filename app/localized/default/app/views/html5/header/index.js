@@ -7,6 +7,7 @@ var helpers = require('../../../../../../helpers');
 var breadcrumb = require('../../../../../../modules/breadcrumb');
 var utils = require('../../../../../../../shared/utils');
 var config = require('../../../../../../../shared/config');
+var Notifications = require('../../../../../../modules/notifications');
 
 module.exports = Base.extend({
     urlreferer: '',
@@ -57,6 +58,12 @@ module.exports = Base.extend({
                     layer: true
                 });
             }
+        }
+        if (!this.notifications) {
+            this.notifications = new Notifications({}, this);
+        }
+        if (this.notifications.isEnabled() && this.notifications.checkNotifications()) {
+            this.notifications.requestPermission();
         }
     },
     showNotification: function() {
