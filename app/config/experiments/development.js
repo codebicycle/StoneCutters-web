@@ -47,5 +47,17 @@ module.exports = {
             GALLERY: 'gallery'
         },
         autoParticipate: true
+    },
+    dgdPostingBtn: {
+        enabled: true,
+        platforms: ['desktop'],
+        markets: ['ar'],
+        name: 'dgd-home-posting-btn',
+        alternatives: {
+            CONTROL: 'control',
+            SINGLE: 'btn-small-green'
+        },
+        autoParticipate: true,
+        fraction: 0.1
     }
 };
