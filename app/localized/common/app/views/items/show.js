@@ -35,7 +35,7 @@ module.exports = Base.extend({
             breadcrumb: breadcrumb.get.call(this, data),
             flagItem: flagItem,
             isUserzoomEnabled: this.userzoom.isEnabled(),
-            userzoom: this.userzoom.getParams(),
+            userzoom: this.userzoom.getParams()
         });
     }
 });
