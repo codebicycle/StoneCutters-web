@@ -231,9 +231,11 @@ function show(params, callback) {
 
         function participate(done, _item, relatedItems) {
             if (_item.has('phone')) {
-                return this.app.sixpack.participate(this.app.sixpack.experiments.dgdHidePhoneNumber, complete.bind(this));
+                this.app.sixpack.participate(this.app.sixpack.experiments.dgdHidePhoneNumber, complete.bind(this));
             }
-            done(_item, relatedItems);
+            else {
+                done(_item, relatedItems);
+            }
 
             function complete() {
                 this.app.session.update({
