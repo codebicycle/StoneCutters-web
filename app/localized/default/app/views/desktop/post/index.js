@@ -7,6 +7,7 @@ var helpers = require('../../../../../../helpers');
 var Item = require('../../../../../../models/item');
 var Chat = require('../../../../../../modules/chat');
 var Metric = require('../../../../../../modules/metric');
+var logger = require('../../../../../../modules/logger');
 var Validator = require('../../../../../../modules/validator');
 var utils = require('../../../../../../../shared/utils');
 var config = require('../../../../../../../shared/config');
@@ -192,11 +193,16 @@ module.exports = Base.extend({
         }
     },
     onFieldValidate: function(event, field, done) {
-        var $field = $(field);
-        
+        var $field;
+
+        if (!this.validator.isEnabled()) {
+            return done(true);
+        }
+        $field = $(field);
         this.validator.validate($field, callback.bind(this));
 
         function callback(err, isValid) {
+            console.log(new Error().stack);
             if (err) {
                 return done(false);
             }
@@ -204,9 +210,7 @@ module.exports = Base.extend({
             
             this.$el.trigger('hideError', [$field]);
             if (!isValid && details && details.length) {
-                this.$el.trigger('showError', [$field, {
-                    message: details.pop()
-                }]);
+                this.$el.trigger('showError', [$field, details.pop()]);
             }
             done(isValid);
         }
@@ -216,7 +220,9 @@ module.exports = Base.extend({
         event.stopPropagation();
         event.stopImmediatePropagation();
 
-        this.validator.register(field, options, unregister);
+        if (this.validator.isEnabled()) {
+            this.validator.register(field, options, unregister);
+        }
     },
     onFieldSubmit: function(event, field, options) {
         event.preventDefault();
@@ -465,6 +471,7 @@ module.exports = Base.extend({
         function check(done) {
             var errors = $('small.error.message:not(.exclude)');
 
+            this.validator.unset('isSubmit');
             if (errors.length) {
                 done.abort();
                 this.$('#posting-contact-view').trigger('enablePost');
@@ -476,6 +483,7 @@ module.exports = Base.extend({
         function validate(done) {
             var promise = asynquence(true).or(done.fail);
 
+            this.validator.set('isSubmit', true);
             validation.call(this, '#posting-description-view');
             validation.call(this, '#posting-title-view');
             validation.call(this, '#posting-contact-view');

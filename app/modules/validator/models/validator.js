@@ -7,6 +7,7 @@ var Validation = require('./validation');
 var Validations = require('../collections/validations');
 var helpers = require('../../../helpers');
 var utils = require('../../../../shared/utils');
+var config = require('../../../../shared/config');
 var Base;
 
 Backbone.noConflict();
@@ -92,7 +93,9 @@ function validate(fields, options, callback) {
     if (!fields) {
         fields = [];
     }
-    options = options || {};
+    options = _.defaults({}, options || {}, {
+        isSubmit: this.get('isSubmit')
+    });
     fields = _.map(_.isArray(fields) ? fields : [fields], function eachFields(field) {
         return _.isString(field) ? field : (field.attr('name') || field.attr('id'));
     });
@@ -131,8 +134,8 @@ function validate(fields, options, callback) {
 function run(validation, options, done) {
     var $field = validation.get('field');
     var val = validation.val();
-    var isDone = false;
     var required;
+    var promise;
 
     validation.trigger('start');
     if (validation.has('required')) {
@@ -143,6 +146,8 @@ function run(validation, options, done) {
             return done(false);
         }
     }
+
+    promise = asynquence(true).or(fail.bind(this));
     validation.getRules().each(function each(rule) {
         if (options.excludeRules && _.contains(options.excludeRules, rule.get('id'))) {
             return;
@@ -150,19 +155,24 @@ function run(validation, options, done) {
         if (options.includeRules && !_.contains(options.includeRules, rule.get('id'))) {
             return;
         }
-        rule.exec(val, validation, options, function callback(isValid) {
-            validation.trigger('end', isValid);
-            if (!isValid) {
-                console.log(validation.toJSON());
-                console.log(rule.toJSON());
-                this.pushDetail(validation.get('id'), rule.get('message'));
-            }
-            isDone = true;
-            done(isValid);
+        promise.then(function execRule(next, isValid) {
+            rule.exec(val, validation, options, function callback(isValidRule) {
+                if (!isValidRule) {
+                    this.pushDetail(validation.get('id'), rule.get('message'), rule.get('className'));
+                }
+                next(isValidRule);
+            }.bind(this));
         }.bind(this));
     }, this);
+    promise.val(success.bind(this));
 
-    if (!isDone) {
+    function success(isValid) {
+        validation.trigger('end', isValid);
+        done(isValid);
+    }
+
+    function fail(err) {
+        validation.trigger('fail', err);
         done(true);
     }
 }
@@ -182,16 +192,19 @@ function details(field) {
     return this.getDetails()[$field.attr('name') || $field.attr('id')];
 }
 
-function pushDetail(id, message) {
+function pushDetail(id, message, className) {
     var details = this.getDetails();
     var detail = details[id] || [];
 
-    detail.push(message);
+    detail.push({
+        message: message,
+        className: className
+    });
     details[id] = detail;
 }
 
 function isEnabled(options) {
-    return helpers.features.isEnabled.call(this, 'validator');
+    return config.getForMarket(this.app.session.get('location').url, ['validator', 'enabled'], true);
 }
 
 module.exports = Base.extend({

@@ -28,8 +28,8 @@ function initialize(attrs, options) {
 
 function exec(val, validation, options, callback) {
     var mailgun;
-    var success;
-    var error;
+    var succeeded;
+    var failed;
 
     if (this.has('pattern')) {
         return callback(this.get('pattern').test(val));
@@ -40,19 +40,19 @@ function exec(val, validation, options, callback) {
     else if (this.has('mailgun')) {
         options.mailgun = options.mailgun || {};
         mailgun = this.get('mailgun');
-        success = mailgun.get('success') || options.mailgun.success || utils.noop;
-        error = mailgun.get('error') || options.mailgun.error || utils.noop;
+        succeeded = mailgun.get('success') || options.mailgun.success || utils.noop;
+        failed = mailgun.get('error') || options.mailgun.error || utils.noop;
 
         return mailgun.run(_.extend({}, options.mailgun, {
             success: function success(data) {
-                callback(data.is_valid);
-                this.resolveMessage(data);
-                success(data);
+                resolveMessage.call(this, data, options);
+                callback(options.isSubmit ? data.is_valid : data.is_valid && !data.did_you_mean);
+                succeeded(data);
             }.bind(this),
             error: function error() {
+                resolveMessage.call(this);
                 callback(true);
-                this.resolveMessage();
-                error();
+                failed();
             }.bind(this)
         }));
     }
@@ -62,13 +62,16 @@ function exec(val, validation, options, callback) {
 function resolveMessage(data) {
     var mailgun = this.get('mailgun');
     var message = this.get('messageError');
+    var className = 'error message';
 
     if (data && data.did_you_mean) {
         message = this.get('messageDidYouMean');
         message = _.template(message, data, templateSettings);
+        className = (!data.is_valid ? 'error ' : '') + 'message did_you_mean';
     }
     this.set({
-        message: message
+        message: message,
+        className: className
     });
 }
 

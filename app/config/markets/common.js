@@ -258,6 +258,7 @@ module.exports = {
         enabled: false
     },
     validator: {
+        enabled: true,
         email: {
             enabled: false,
             platforms: ['html5', 'desktop'],

@@ -147,8 +147,8 @@ function onClickDidYouMean(event) {
     if (this.$('small.message.exclude').length) {
         $field.parent().find('small.message.exclude').remove();
     }
-
-    $field.val($didYouMean.data('content'));
+console.log($didYouMean.find('a').text());
+    $field.val($didYouMean.find('a').text());
     $field.trigger('blur');
     this.metric.increment(['growth', 'posting', ['mailgun', 'didyoumean']]);
 }
@@ -173,10 +173,7 @@ function onValidateSuccess(data) {
     }
     else {
         this.parentView.$el.trigger('fieldSubmit', [$field, options]);
-    }/*
-    if (data.did_you_mean) {
-        $field.parent().append('<small class="' + isError + ' message did-you-mean" data-content="' + data.did_you_mean + '">¿Has querido decir <a href="#">' + data.did_you_mean + '</a>?</small>');
-    }*/
+    }
     this.metric.increment(['growth', 'posting', ['validation', 'mailgun', data.is_valid ? 'success' : 'error']]);
 }
 
