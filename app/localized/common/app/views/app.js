@@ -96,6 +96,7 @@ module.exports = Base.extend({
         if (!this.adserving.length) {
             return;
         }
+
         window._googCsa.apply(window._googCsa, this.adserving);
         this.adserving = [];
     }

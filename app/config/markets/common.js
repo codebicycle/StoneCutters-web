@@ -300,5 +300,13 @@ module.exports = {
                 icon: ''
             }
         }
+    },
+    notifications: {
+        desktop: {
+            enabled: false
+        },
+        html5: {
+            enabled: false
+        }
     }
 };
