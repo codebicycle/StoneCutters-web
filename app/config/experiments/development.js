@@ -58,6 +58,6 @@ module.exports = {
             SINGLE: 'btn-small-green'
         },
         autoParticipate: true,
-        fraction: 0.1
+        fraction: 1
     }
 };
