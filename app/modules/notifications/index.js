@@ -33,12 +33,14 @@ function checkNotifications() {
 }
 
 function requestPermission() {
-    window.Notification.requestPermission(function (status) {
-        if (window.Notification.permission !== status) {
-            window.Notification.permission = status;
-        }
-        this.metric.increment(['conversations', 'notifications', status]);
-    }.bind(this));
+    if (this.app.session.get('siteLocation') === this.app.session.get('location').url) {
+        window.Notification.requestPermission(function (status) {
+            if (window.Notification.permission !== status) {
+                window.Notification.permission = status;
+            }
+            this.metric.increment(['conversations', 'notifications', status]);
+        }.bind(this));
+    }
 }
 
 function showNotification(title, user, path) {
