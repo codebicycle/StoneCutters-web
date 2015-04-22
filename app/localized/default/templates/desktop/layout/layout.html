@@ -7,7 +7,11 @@
         <div id="wrapper" class="wrapper-main">
             {% view 'header/keywords' %}
             {% view 'header/usernav' %}
-            {% view 'header/index' %}
+            {% if experiments and experiments.dgdPostingBtn and experiments.dgdPostingBtn.alternative == 'btn-small-green' %}
+                {% view 'header/index-btn-small-green' %}
+            {% else %}
+                {% view 'header/index' %}
+            {% endif %}
             <div id="content">
                 {{ body }}
             </div>
