@@ -10,7 +10,7 @@ module.exports = Base.extend({
     className: 'header-view',
     events: {
         'click .posting': 'onPostClick',
-        'click [data-increment]': Metric.incrementEventHandler
+        'click [data-increment-metric]': Metric.incrementEventHandler
     },
     postRender: function() {
         this.app.router.appView.on('posting:start', this.onPostingStart.bind(this));
@@ -18,6 +18,8 @@ module.exports = Base.extend({
     },
     onPostClick: function() {
         var currentRoute = this.app.session.get('currentRoute');
+
+        this.app.sixpack.convert(this.app.sixpack.experiments.dgdPostingBtn);
 
         if (currentRoute.controller === 'items' && currentRoute.action === 'show') {
             this.app.sixpack.convert(this.app.sixpack.experiments.desktopDGD23ShowSimplifiedReplyForm, 'publish');

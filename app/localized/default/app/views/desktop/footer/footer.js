@@ -17,7 +17,7 @@ module.exports = Base.extend({
         'click [data-footer-tab]': 'slideFooter',
         'click [data-footer-content] ul li': 'cleanClases',
         'click [data-modal-shadow], [data-modal-close]': 'onCloseModal',
-        'click [data-increment]': Metric.incrementEventHandler
+        'click [data-increment-metric]': Metric.incrementEventHandler
     },
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);

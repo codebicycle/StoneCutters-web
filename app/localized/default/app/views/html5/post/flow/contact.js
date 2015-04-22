@@ -271,6 +271,7 @@ module.exports = Base.extend({
         }
 
         function validateEmail(done, isValid) {
+            var locationUrl = this.app.session.get('location').url;
             var $email = this.$('input[name=email]').removeClass('error');
 
             if (!rEmail.test($email.val())) {
@@ -278,7 +279,7 @@ module.exports = Base.extend({
                 $email.addClass('error').after('<small class="error">' + translations.get(this.app.session.get('selectedLanguage'))['postingerror.InvalidEmail'] + '</small>');
                 statsd.increment([location, 'posting', 'invalid', this.app.session.get('platform'), 'email']);
             }
-            else {
+            else if (config.getForMarket(locationUrl, ['validator', 'email', 'enabled'], false)){
                 return this.validateEmail({
                     success: function success(data) {
                         done(isValid && data.is_valid);

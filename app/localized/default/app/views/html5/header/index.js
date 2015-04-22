@@ -7,15 +7,10 @@ var helpers = require('../../../../../../helpers');
 var breadcrumb = require('../../../../../../modules/breadcrumb');
 var utils = require('../../../../../../../shared/utils');
 var config = require('../../../../../../../shared/config');
+var Notifications = require('../../../../../../modules/notifications');
 
 module.exports = Base.extend({
     urlreferer: '',
-    className: function() {
-        var className = _.result(Base.prototype, 'className') || '';
-        var sixpackClass = this.app.sixpack.className(this.app.sixpack.experiments.html5HeaderPostButton);
-
-        return className + (sixpackClass ? ' ' : '') + sixpackClass;
-    },
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
         var currentRoute = this.app.session.get('currentRoute');
@@ -64,6 +59,12 @@ module.exports = Base.extend({
                 });
             }
         }
+        if (!this.notifications) {
+            this.notifications = new Notifications({}, this);
+        }
+        if (this.notifications.isEnabled() && this.notifications.checkNotifications()) {
+            this.notifications.requestPermission();
+        }
     },
     showNotification: function() {
         var user = this.app.session.get('user');
@@ -93,10 +94,6 @@ module.exports = Base.extend({
     events: {
         'click .logIn span': 'onLoginClick',
         'click .topBarFilters .filter-btns': 'onCancelFilter',
-        'click .postBtn': 'onPostClick'
-    },
-    onPostClick: function() {
-        this.app.sixpack.convert(this.app.sixpack.experiments.html5HeaderPostButton);
     },
     isMenuOpen: false,
     onLoginClick: function(event) {

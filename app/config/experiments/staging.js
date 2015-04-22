@@ -1,28 +1,8 @@
 'use strict';
 
 module.exports = {
-    html5HeaderPostButton: {
-        enabled: false,
-        platforms: ['html5'],
-        markets: ['ar'],
-        name: 'header-post-button',
-        alternatives: {
-            TEXT: 'text',
-            ICON: 'icon'
-        }
-    },
-    html5Interstitial: {
-        enabled: false,
-        platforms: ['html5'],
-        markets: ['br'],
-        name: 'interstitial',
-        alternatives: {
-            ON: 'on',
-            OFF: 'off'
-        }
-    },
     html4ShowShops: {
-        enabled: true,
+        enabled: false,
         platforms: ['html4'],
         markets: ['ke'],
         name: 'show-shops',
@@ -31,7 +11,8 @@ module.exports = {
             CALL_TO_ACTION: 'calltoactions',
             CALL_TO_ACTION_MAP: 'calltoactions_map'
         },
-        firstClick: true
+        firstClick: true,
+        autoParticipate: true
     },
     desktopDGD23ShowSimplifiedReplyForm: {
         enabled: true,
@@ -41,7 +22,8 @@ module.exports = {
         alternatives: {
             CONTROL: 'control',
             SHOW_SIMPLIFIED_REPLY_FORM: 'show-simplified-reply-form'
-        }
+        },
+        autoParticipate: true
     },
     growthCategorySuggestion: {
         enabled: true,
@@ -63,6 +45,19 @@ module.exports = {
         alternatives: {
             CONTROL: 'control',
             GALLERY: 'gallery'
-        }
+        },
+        autoParticipate: true
+    },
+    dgdPostingBtn: {
+        enabled: true,
+        platforms: ['desktop'],
+        markets: ['bo'],
+        name: 'dgd-home-posting-btn',
+        alternatives: {
+            CONTROL: 'control',
+            SINGLE: 'btn-small-green'
+        },
+        autoParticipate: true,
+        fraction: 1
     }
 };
