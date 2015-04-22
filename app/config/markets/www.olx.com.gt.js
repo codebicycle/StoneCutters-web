@@ -24,24 +24,20 @@ module.exports = {
     marketing: {
         videos: [
             {
-                title: 'OLX Guatemala - Celular - Vender es fácil',
-                id: 'dnV4aZ-VNbk'
+                title: 'OLX Guatemala - Spot - Descarga la App',
+                id: 'aN8tfzrGQVU'
             },
             {
-                title: 'OLX Guatemala - Bicicleta - Vender es fácil',
-                id: 'CR_qESz3amY'
+                title: 'Como publicar un anuncio gratis',
+                id: '_ZPwM5Uz3bE'
             },
             {
-                title: 'OLX Guatemala - Lentes - Vender es fácil',
-                id: 'N-ubaP5z_mY'
+                title: 'En OLX todos pueden vender',
+                id: 'TlYx6lDOi6w'
             },
             {
-                title: 'OLX Guatemala - Colita Celular - Vender es fácil',
-                id: 'iwDNQzqXuHU'
-            },
-            {
-                title: 'OLX Guatemala - Colita Lentes - Vender es fácil',
-                id: 'am6_9EzmX8o'
+                title: 'OLX Guatemala - Tutorial - Descarga la App',
+                id: 'sPuAF6XgSQA'
             }
         ]
     },
