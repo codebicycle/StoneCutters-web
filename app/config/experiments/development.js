@@ -60,11 +60,11 @@ module.exports = {
         autoParticipate: true,
         fraction: 1
     },
-    desktopDGD41OpenItemInNewTab: {
+    dgdOpenItemInNewTab: {
         enabled: true,
         platforms: ['desktop'],
         markets: ['uy'],
-        name: 'desktop-dgd41-open-item-in-new-tab',
+        name: 'dgd-open-item-in-new-tab',
         alternatives: {
             CONTROL: 'control',
             OPEN_ITEM_IN_NEW_TAB: 'open-item-in-new-tab'
