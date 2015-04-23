@@ -4,14 +4,14 @@
             {% if nav.galeryAct == 'active' %}
                 <span class="icons {{ nav.galeryAct }} icon-gallery">{{ dictionary["listingpageitemslisting.Gallery"] }}</span>
             {% else %}
-                <a href="{{ (nav.linkig) | linkig }}" class="icons {{ nav.galeryAct }} icon-gallery" rel="nofollow">{{ dictionary["listingpageitemslisting.Gallery"] }}</a>
+                <a href="{{ (nav.linkig) | linkig }}" class="icons {{ nav.galeryAct }} icon-gallery" rel="nofollow" data-increment-metric="dgd.{{ 'search' if (currentRoute.controller == 'searches' and ('contains' | _(['filter', 'filterig', 'search', 'searchig'], currentRoute.action))) else 'browse' }}.gallery">{{ dictionary["listingpageitemslisting.Gallery"] }}</a>
             {% endif %}
         </li>
         <li>
             {% if nav.listAct == 'active' %}
                 <span class="icons {{ nav.listAct }} icon-list">{{ dictionary["listingpageitemslisting.List"] }}</span>
             {% else %}
-                <a href="{{ nav.link | link }}" class="icons {{ nav.listAct }} icon-list" rel="nofollow">{{ dictionary["listingpageitemslisting.List"] }}</a>
+                <a href="{{ nav.link | link }}" class="icons {{ nav.listAct }} icon-list" rel="nofollow" data-increment-metric="dgd.{{ 'search' if (currentRoute.controller == 'searches' and ('contains' | _(['filter', 'filterig', 'search', 'searchig'], currentRoute.action))) else 'browse' }}.listing">{{ dictionary["listingpageitemslisting.List"] }}</a>
             {% endif %}
         </li>
     </ul>

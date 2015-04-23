@@ -30,6 +30,14 @@ module.exports = {
             maxPageSize: 26
         }
     },
+    categorySuggestion: {
+        api: 'http://categorysuggestiontool-612498389.us-east-1.elb.amazonaws.com/rest/suggest/',
+        timeout: 1500
+    },
+    mario: {
+        protocol: 'http',
+        host: 'mario-LB-69977862.us-east-1.elb.amazonaws.com',
+    },
     staticAccept: ['css', 'js', 'apk', 'zip'],
     imageAccept: ['jpg', 'jpeg', 'png', 'gif', 'ico'],
     environment: {
@@ -115,7 +123,7 @@ module.exports = {
             },
             interstitialByADX: {
                 worldwide: true,
-                countries: []
+                countries: ['www.olx.ir']
             },
             autoLocation: {
                 worldwide: true,
@@ -145,11 +153,15 @@ module.exports = {
         html4: {
             interstitialByADX: {
                 worldwide: true,
-                countries: []
+                countries: ['www.olx.ir']
             },
             hermes: {
+                worldwide: true,
+                countries: ['www.olx.es', 'www.olx.ae', 'www.olx.it', 'www.olx.com', 'www.olx.fr', 'www.olx.ir']
+            },
+            safetyTips: {
                 worldwide: false,
-                countries: ['www.olx.com.uy']
+                countries: ['www.olx.co.za', 'www.olx.com.ng', 'www.olx.co.ke']
             }
         },
         desktop: {
@@ -159,7 +171,7 @@ module.exports = {
             },
             contactForm: {
                 worldwide: false,
-                countries: ['www.olx.co.cr', 'www.olx.com.uy', 'www.olx.com.pa', 'www.olx.co.ug', 'www.olx.co.tz', 'www.olx.com.pe', 'www.olx.com.sv', 'www.olx.com.ec', 'www.olx.com.ve', 'www.olx.com.uy', 'www.olx.com.ar', 'www.olx.com.co', 'www.olx.com.gt', 'www.olx.sn', 'www.olx.cm', 'www.olx.com.gh', 'www.olx.it', 'www.olx.ae', 'www.olx.fr', 'www.olx.es', 'www.olx.com', 'www.olx.com.bo', 'www.olx.com.py', 'www.olx.com.ni', 'www.olx.hn', 'www.olx.co.za', 'www.olx.co.ke']
+                countries: ['www.olx.co.cr', 'www.olx.com.uy', 'www.olx.com.pa', 'www.olx.co.ug', 'www.olx.co.tz', 'www.olx.com.pe', 'www.olx.com.sv', 'www.olx.com.ec', 'www.olx.com.ve', 'www.olx.com.uy', 'www.olx.com.ar', 'www.olx.com.co', 'www.olx.com.gt', 'www.olx.sn', 'www.olx.cm', 'www.olx.com.gh', 'www.olx.it', 'www.olx.ae', 'www.olx.fr', 'www.olx.es', 'www.olx.com', 'www.olx.com.bo', 'www.olx.com.py', 'www.olx.com.ni', 'www.olx.hn', 'www.olx.co.za', 'www.olx.co.ke', 'www.olx.com.ng']
             },
             optimizely: {
                 worldwide: false,
@@ -168,6 +180,10 @@ module.exports = {
             landingThanks: {
                 worldwide: false,
                 countries: ['www.olx.com.ar', 'www.olx.com.co','www.olx.co.za']
+            },
+            userSurvey: {
+                worldwide: false,
+                countries: ['www.olx.com.ar']
             }
         }
     },
@@ -441,5 +457,6 @@ module.exports = {
         direct: {
             enabled: true
         }
-    }
+    },
+    schibsted: require('./schibsted')
 };

@@ -5,8 +5,8 @@ var async = require('async');
 var asynquence = require('asynquence');
 var Base = require('../../../../../common/app/bases/view').requireView('users/conversation');
 var Conversation = require('../../../../../../models/conversation');
+var translations = require('../../../../../../../shared/translations');
 var helpers = require('../../../../../../helpers');
-var statsd = require('../../../../../../../shared/statsd')();
 
 module.exports = Base.extend({
     className: 'users_conversation_view',
@@ -17,22 +17,12 @@ module.exports = Base.extend({
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
 
-        data.thread = this.getThread();
+        data.thread = this.getConversation();
         return data;
     },
     postRender: function() {
+        this.dictionary = translations.get(this.app.session.get('selectedLanguage'));
         this.checkPosition();
-        if (!this.rendered) {
-            this.conversation = new Conversation({
-                country: this.app.session.get('location').abbreviation,
-                platform: this.app.session.get('platform'),
-                user: this.app.session.get('user'),
-                threadId: this.getThread().get('threadId')
-            }, {
-                app: this.app
-            });
-        }
-        this.rendered = true;
         this.app.router.once('action:end', this.onStart);
         this.app.router.once('action:start', this.onEnd.bind(this));
     },
@@ -44,7 +34,7 @@ module.exports = Base.extend({
         var field = $(event.target);
 
         if (this.validate(field)) {
-            this.conversation.set(field.attr('name'), field.val());
+            this.getConversation().set(field.attr('name'), field.val());
         }
     },
     onSubmit: function(event) {
@@ -52,14 +42,15 @@ module.exports = Base.extend({
         event.stopPropagation();
         event.stopImmediatePropagation();
 
+        var params = {};
+
         asynquence().or(fail.bind(this))
             .then(validate.bind(this))
             .then(submit.bind(this))
-            .then(success.bind(this))
-            .val(change.bind(this));
+            .then(prepare.bind(this))
+            .val(success.bind(this));
 
         function validate(done) {
-
             if (!this.validate(this.$('[data-messageText]'))) {
                 return done.abort();
             }
@@ -67,33 +58,52 @@ module.exports = Base.extend({
         }
 
         function submit(done) {
-            this.$('.spinner, .reply-send').toggle();
-            this.conversation.reply(done);
+            this.$('.reply-send').addClass('hide');
+            this.$('.spinner').removeClass('hide');
+            this.getConversation().reply(done);
+        }
+
+        function prepare(done) {
+            params.pageSize = 300;
+            params.conversation_type = this.getConversation().get('conversation_type');
+
+            if (this.getConversation().get('conversation_type') === 'login') {
+                params.token = this.getConversation().get('user').token;
+                params.userId = this.getConversation().get('user').userId;
+                params.threadId = this.getConversation().get('threadId');
+            }
+            else {
+                params.hash = this.getConversation().get('hash');
+            }
+            done();
         }
 
         function success(done) {
-            this.app.fetch({
-                    thread: {
-                    model: 'Conversation',
-                    params: {
-                        token: this.conversation.get('user').token,
-                        userId: this.conversation.get('user').userId,
-                        threadId: this.conversation.get('threadId'),
-                        pageSize: 300
-                    }
-                }
-            }, {
-                readFromCache: false
-            }, done.errfcb);
-        }
+            var $conversation = this.$('ul.conversation');
+            var date = new Date();
+            var newMessage;
 
-        function change(res) {
-            this.thread = res.thread;
-            this.render();
+            date = {
+                year: date.getFullYear(),
+                month: date.getMonth() + 1,
+                day: date.getDate(),
+                hour: date.getHours(),
+                minute: date.getMinutes(),
+                second: date.getSeconds()
+            };
+            date = helpers.timeAgo(date);
+            date = this.dictionary[date.dictionary] + ' ' + date.hour;
+            newMessage = '<li class="message is-mine"><span class="name">' + this.dictionary["myolx.You"] + '</span><p class="text">' + this.getConversation().get('message') + '</p><span class="date"><time> ' + date + ' </time></span></li>';
+            $conversation.append(newMessage);
+            this.checkPosition();
+            this.$('.spinner').addClass('hide');
+            this.$('.reply-send').removeClass('hide');
+            this.$('[data-messageText]').val('');
         }
 
         function fail(err) {
-            this.$('.spinner, .reply-send').toggle();
+            this.$('.spinner').addClass('hide');
+            this.$('.reply-send').removeClass('hide');
             this.$('[data-messageText]').addClass('error');
         }
     },
@@ -118,11 +128,11 @@ module.exports = Base.extend({
             }, 200);
         }, 100);
     },
-    getThread: function() {
-        this.thread = this.thread || (this.options.thread && this.options.thread.toJSON ? this.options.thread : new Conversation(this.options.thread || {}, {
+    getConversation: function() {
+        this.conversation = this.conversation || (this.options.thread && this.options.thread.toJSON ? this.options.thread : new Conversation(this.options.thread || {}, {
             app: this.app
         }));
-        return this.thread;
+        return this.conversation;
     },
     validate: function(field) {
         if (!field.val()) {

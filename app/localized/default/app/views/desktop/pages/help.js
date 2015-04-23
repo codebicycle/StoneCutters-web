@@ -1,8 +1,9 @@
 'use strict';
 
+var _ = require('underscore');
 var Base = require('../../../../../common/app/bases/view').requireView('pages/help');
 var config = require('../../../../../../../shared/config');
-var _ = require('underscore');
+var Metric = require('../../../../../../modules/metric');
 
 module.exports = Base.extend({
     tagName: 'main',
@@ -11,9 +12,9 @@ module.exports = Base.extend({
     events: {
         'click [data-toggle-content]': 'helpToggleContent',
         'click .question .icons': 'helpToggleQuestion',
-        'click [data-navigate]': 'navigate'
+        'click [data-navigate]': 'navigate',
+        'click [data-increment-metric]': Metric.incrementEventHandler
     },
-
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
         var location = this.app.session.get('location');
@@ -28,8 +29,7 @@ module.exports = Base.extend({
         return _.extend({}, data, {
             mails: {
                 support: support,
-                legal: legal,
-
+                legal: legal
             },
             selectedLanguage: selectedLanguage,
             linkblog: linkblog
@@ -53,7 +53,8 @@ module.exports = Base.extend({
             $('.faq-open').
                 toggleClass('faq-open').
                 find('.question-content').slideToggle();
-        } else {
+        }
+        else {
             element_current.find('.icon-arrow-right').toggleClass('icon-arrow-down icon-arrow-right');
             $('.faq-open').
                 toggleClass('faq-open').
@@ -92,6 +93,5 @@ module.exports = Base.extend({
         $slideWrapper.animate({
             'left': pxToMove + 'px'
         }, 100);
-
     }
 });

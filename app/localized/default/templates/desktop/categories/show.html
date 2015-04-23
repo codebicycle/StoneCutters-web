@@ -22,4 +22,8 @@
     {% include (template + '/partials/seobox.html') %}
 {% endif %}
 
+{% if isUserSurveyEnabled %}
+    {% include (template + "/partials/user-survey.html") %}
+{% endif %}
+
 {% view 'partials/tracking' %}

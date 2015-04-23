@@ -6,12 +6,11 @@ var config = require('../../shared/config');
 
 module.exports = Base.extend({
     fetch: function(options) {
-        var currentRoute = this.app.session.get('currentRoute');
-        var section = [currentRoute.controller, currentRoute.action].join('#');
+        var section = _.values(this.app.session.get('currentRoute')).join('#');
         var location = this.app.session.get('location');
         var paramsDefault = config.getForMarket(location.url, ['featured', 'params'], {});
-        var params = config.getForMarket(location.url, ['featured', 'section', section, 'params'], {});
-        var pageSize = config.getForMarket(location.url, ['featured', 'section', section, 'quantity', 'total']);
+        var params = config.getForMarket(location.url, ['featured', 'sections', section, 'params'], {});
+        var pageSize = config.getForMarket(location.url, ['featured', 'sections', section, 'quantity', 'total']);
 
         options = options || {};
 
@@ -32,10 +31,9 @@ module.exports = Base.extend({
         }
     },
     addFeatures: function(items, position, method) {
-        var currentRoute = this.app.session.get('currentRoute');
-        var section = [currentRoute.controller, currentRoute.action].join('#');
+        var section = _.values(this.app.session.get('currentRoute')).join('#');
         var location = this.app.session.get('location');
-        var max = config.getForMarket(location.url, ['featured', 'section', section, 'quantity', position]);
+        var max = config.getForMarket(location.url, ['featured', 'sections', section, 'quantity', position]);
         var item;
         var i;
 

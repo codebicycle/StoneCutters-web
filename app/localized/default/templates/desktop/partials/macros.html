@@ -1,4 +1,4 @@
-{% macro Field(hint = false, field) %}
+{% macro Field(hint = false, hintIcon = '', field) %}
     <fieldset class="field-wrapper{{ ' hide' if field.hide }} {{ ' checkbox' if field.fieldType == 'checkbox' }}">
         {% if field.label and field.fieldType != 'checkbox' %}
             <label for="field-{{ field.name }}" class="field-label">{% if field.mandatory == true or field.mandatory == 'true' or field.name == 'neighborhood' %}* {% endif %}{{ field.label }}</label>
@@ -8,7 +8,7 @@
                 {{ Textarea(name = field.name, required = field.mandatory, value = field.value) }}
             {% elif field.fieldType == 'text' or field.fieldType == 'password' %}
                 {% set type = field.fieldType or 'text' %}
-                {{ TextInput(type = type, name = field.name, required = field.mandatory, value = field.value) }}
+                {{ TextInput(type = type, name = field.name, required = field.mandatory, value = field.value, autocomplete = field.autocomplete) }}
             {% elif field.fieldType == 'combobox' %}
                 {% set selected = field.value.key or field.selected %}
                 {{ Select(name = field.name, required = field.mandatory, options = field.values, selected = selected, related = field.related) }}
@@ -19,18 +19,21 @@
                 {{ Checkbox(type = field.fieldType, name = field.name, required = field.mandatory, value = field.value, label = field.label) }}
             {% endif %}
             {% if hint %}
-                <small class="{{ 'icons icon-lock ' if field.name == 'email' }}hint message">{{ hint }}</small>
+                <small class="icons {{ hintIcon }} hint message">{{ hint }}</small>
             {% endif %}
         </div>
     </fieldset>
 {% endmacro %}
 
-{% macro TextInput(type = 'text', name = '', placeholder = false, required = false, validate = true, value = false) %}
+{% macro TextInput(type = 'text', name = '', placeholder = false, required = false, validate = true, value = false, autocomplete = false) %}
     <input
         type="{{ type }}"
         id ="field-{{ name }}"
         name="{{ name }}"
         class="text-field type-text"
+        {% if autocomplete %}
+            autocomplete="on"
+        {% endif %}
         {% if placeholder %}
             placeholder="{{ placeholder }}"
         {% endif %}
@@ -96,7 +99,19 @@
                 {% if field.fieldType == 'text' %}
                     {{ TextInput(name = field.name, required = field.mandatory, value = field.value.value ) }}
                 {% elif field.fieldType == 'combobox' %}
-                    {{ Select(name = field.name, required = field.mandatory, options = field.values, selected = field.value.key) }}
+                    {% if field.name == 'priceType' and field.values.length > 2 %}
+                        {% set selected = false %}
+                        {% if field.value and field.value.key ==  'NEGOTIABLE' %}
+                            {% set selected = true %}
+                        {% endif %}
+                        {% for value in field.values %}
+                            {% if value.key ==  'NEGOTIABLE' %}
+                                <label class="price-negotiable text-field">{{ value.value }} <input id="field-{{ field.name }}" class="negotiable" type="checkbox" value="{{ value.key }}" {{ 'checked' if selected }} name="{{ field.name }}"></label>
+                            {% endif %}
+                        {% endfor %}
+                    {% else %}
+                        {{ Select(name = field.name, required = field.mandatory, options = field.values, selected = field.value.key) }}
+                    {% endif %}
                 {% endif %}
             {% endfor %}
             {% if hint %}

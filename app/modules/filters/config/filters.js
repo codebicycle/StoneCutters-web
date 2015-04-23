@@ -28,10 +28,10 @@ module.exports = {
     carbrand: {
         type: 'SELECT'
     },
-    optionals: {
+    carmodel: {
         type: 'SELECT'
     },
-    carmodel: {
+    optionals: {
         type: 'SELECT'
     },
     furnished: {

@@ -28,13 +28,16 @@ module.exports = {
     'pages#interstitial': {
         url: 'interstitial'
     },
-    'pages#didyousell': {
-        url: 'clm/did-you-sell'
-    },
-    'pages#mobilepromo': {
-        url: 'mobilepromopage'
+    'pages#comingsoon': {
+        url: 'comingsoon'
     },
     'pages#thanks': {
         url: 'thanks'
+    },
+    'pages#shops': {
+        url: 'shops'
+    },
+    'pages#shop': {
+        url: 'shop/:shopId/:shopName'
     }
 };

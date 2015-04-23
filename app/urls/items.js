@@ -25,5 +25,11 @@ module.exports = {
     },
     'items#favorite': {
         url: 'items/{{itemId}}/favorite/?:intent?'
+    },
+    'items#flag': {
+        url: 'items/{{itemId}}/flag'
+    },
+    'items#safetytips': {
+        url: 'iid-{{itemId}}/?:intent?'
     }
 };

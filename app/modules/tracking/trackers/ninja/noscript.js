@@ -2,6 +2,7 @@
 
 var _ = require('underscore');
 var configTracking = require('../../config');
+var config = require('../../../../../shared/config');
 var utils = require('../../../../../shared/utils');
 var Adapter = require('../../../../../shared/adapters/base');
 var statsd = require('../../../../../shared/statsd')();
@@ -11,6 +12,25 @@ function extractTrackPage(params) {
     return params.trackPage;
 }
 
+function isPlatformEnabled(platforms) {
+    var enabled = true;
+
+    if (platforms && !_.contains(platforms, this.app.session.get('platform'))) {
+        enabled = false;
+    }
+    return enabled;
+}
+
+function isEnabled(type) {
+    var location = this.app.session.get('location');
+    var enabled = config.getForMarket(location.url, ['tracking', 'trackers', 'ninja', 'trackers', type, 'enabled'], true);
+
+    if (enabled) {
+        enabled = isPlatformEnabled.call(this, config.getForMarket(location.url, ['tracking', 'trackers', 'ninja', 'trackers', type, 'platforms']));
+    }
+    return enabled;
+}
+
 function prepare(done, ctx, ninja) {
     var url;
 
@@ -18,13 +38,22 @@ function prepare(done, ctx, ninja) {
         urls: []
     };
 
-    try {
-        url = getIframeUrl.call(this, ninja);
-        requestIframeUrl.call(this, url, onResponse.bind(this));
-    } catch(e) {
-        log(e, 'ninja all');
-        done();
+    if (isEnabled.call(this, 'hydra')) {
+        try {
+            ctx.params.ninja.noscript.urls.push(getHydraUrl.call(this, ninja));
+        } catch(e) {
+            log(e, 'ninja HYDRA');
+        }
     }
+    if (isEnabled.call(this, 'others')) {
+        try {
+            url = getIframeUrl.call(this, ninja);
+            return requestIframeUrl.call(this, url, onResponse.bind(this));
+        } catch(e) {
+            log(e, 'ninja all');
+        }
+    }
+    done();
 
     function onResponse(err, res, body) {
         try {
@@ -38,32 +67,35 @@ function prepare(done, ctx, ninja) {
         } catch(e) {
             log(e, 'ninja GA and ATI');
         }
-        try {
-            ctx.params.ninja.noscript.urls.push(getHydraUrl.call(this, ninja));
-        } catch(e) {
-            log(e, 'ninja HYDRA');
-        }
         done();
     }
 }
 
 function requestIframeUrl(url, callback) {
-    var referer = this.app.session.get('url');
     var adapter = new Adapter({});
+    var options = getRequestOptions.call(this, url);
 
-    adapter.request(this.app.req, {
-        method: 'GET',
-        url: url,
-        headers: {
-            Referer: utils.fullizeUrl(referer, this.app)
-        }
-    }, {
+    adapter.request(this.app.req, options, {
         timeout: 100,
         onTimeout: function onTimeout() {
             statsd.increment([this.app.session.get('location').abbreviation, 'tracking', 'ninja', 'error', 'timeout', this.app.session.get('platform')]);
             callback(true);
         }.bind(this)
     }, callback);
+}
+
+function getRequestOptions(url) {
+    var options = {
+        method: 'GET',
+        url: url
+    };
+
+    if (utils.isServer) {
+        options.headers = {
+            Referer: utils.fullizeUrl(this.app.session.get('url'), this.app)
+        };
+    }
+    return options;
 }
 
 function getIframeUrl(ninja) {

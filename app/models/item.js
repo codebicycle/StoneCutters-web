@@ -1,10 +1,12 @@
 'use strict';
 
+var S = require('string');
 var _ = require('underscore');
 var asynquence = require('asynquence');
 var Base = require('../bases/model');
 var helpers = require('../helpers');
 var statsd = require('../../shared/statsd')();
+var utils = require('../../shared/utils');
 
 module.exports = Base.extend({
     idAttribute: 'id',
@@ -25,7 +27,8 @@ module.exports = Base.extend({
     logPostImages: logPostImages,
     toData: toData,
     remove: remove,
-    rebump: rebump
+    rebump: rebump,
+    stillAvailable: stillAvailable
 });
 
 module.exports.id = 'Item';
@@ -131,6 +134,12 @@ function parse(item, options) {
     if (item.priceC && this.app.session.get('location').url === 'www.olx.ir') {
         item.priceC = helpers.numbers.toLatin(item.priceC);
     }
+    if (item.optionals && item.optionals.length) {
+        item.optionals = _.sortBy(item.optionals, 'name').reverse();
+    }
+    if (item.description) {
+        item.description = S(item.description).stripTags().s;
+    }
     return Base.prototype.parse.apply(this, arguments);
 }
 
@@ -196,13 +205,16 @@ function postImages(done) {
 
 function postFields(done) {
     var id = this.get('id');
+    var type = !id ? 'posting' : 'editing';
     var user = this.app.session.get('user');
     var renew =  this.get('renew') || false;
+    var platform = this.app.session.get('platform');
+    var locale = this.app.session.get('location').abbreviation;
     var action = 'edit';
     var query = {
         postingSession: this.get('postingSession'),
         languageId: this.app.session.get('languageId'),
-        platform: this.app.session.get('platform')
+        platform: platform
     };
     var data;
 
@@ -220,7 +232,9 @@ function postFields(done) {
     }
 
     data = this.toData(true);
-
+    if (data.priceC && !data.currency_type) {
+        statsd.increment([locale, type, 'error', 'currency', 'post', platform]);
+    }
     helpers.dataAdapter.post(this.app.req, '/items' + (!id ? '' : ['', id, action].join('/')), {
         data: data,
         query: query
@@ -230,7 +244,15 @@ function postFields(done) {
         if (!err && item) {
             this.set(item);
         }
-        this.logPost(!id ? 'posting' : 'editing', response.statusCode, err);
+        if (!user && item.email) {
+            this.app.session.persist({
+                hash: item.email
+            }, {
+                maxAge: utils.DAY
+            });
+        }
+
+        this.logPost(type, response.statusCode, err);
         this.errfcb(done)(err, response, item);
     }
 }
@@ -299,7 +321,11 @@ function toData(includeImages) {
     if (_.isObject(data.priceC)) {
         data.priceC = data.priceC.amount;
     }
-    if (data.priceC) {
+    if (data.priceC && !data.priceType) {
+        data.priceC = parseFloat(data.priceC);
+        data.priceType = 'FIXED';
+    }
+    else if (data.priceC) {
         data.priceC = parseFloat(data.priceC);
     }
     else if (data.priceType) {
@@ -366,6 +392,18 @@ function rebump(done) {
             postingSession: this.get('postingSession'),
             platform: this.app.session.get('platform')
         },
+        data: {
+            location: this.app.session.get('location').url
+        }
+    }, callback.bind(this));
+
+    function callback(err, response) {
+        this.errfcb(done)(err);
+    }
+}
+
+function stillAvailable(done) {
+    helpers.dataAdapter.post(this.app.req, '/mtd/items/' + this.get('id') + '/stillAvailable', {
         data: {
             location: this.app.session.get('location').url
         }

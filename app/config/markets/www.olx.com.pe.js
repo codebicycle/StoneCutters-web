@@ -62,20 +62,6 @@ module.exports = {
             }
         ]
     },
-    tracking: {
-        trackers: {
-            ati: {
-                enabled: false
-            },
-            analytics: {
-                enabled: false
-            },
-            ninja: {
-                enabled: true,
-                platforms: ['desktop', 'html5', 'html4', 'wap']
-            }
-        },
-    },
     adserving: {
         slots: {
             listing: {
@@ -308,22 +294,40 @@ module.exports = {
             top: 2,
             bottom: 2
         },
-        section: {
-            'categories#list': {
-                enabled: false
+        sections: {
+            all: false,
+            'categories#show': {
+                enabled: true
             },
-            'users#myads': {
-                enabled: false
+            'categories#showig': {
+                enabled: true
             },
-            'post#flow': {
-                enabled: false
+            'searches#statics': {
+                enabled: true
             },
-            'post#success': {
-                enabled: false
+            'searches#allresultsig': {
+                enabled: true
             },
-            'post#flowMarketing': {
-                enabled: false
+            'searches#allresults': {
+                enabled: true
+            },
+            'searches#searchig': {
+                enabled: true
+            },
+            'searches#search': {
+                enabled: true
+            },
+            'searches#filterig': {
+                enabled: true
+            },
+            'searches#filter': {
+                enabled: true
             }
+        }
+    },
+    validator: {
+        email: {
+            enabled: true
         }
     }
 };

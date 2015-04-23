@@ -5,20 +5,6 @@ module.exports = {
             columns: [3, 2, 2]
         }
     },
-    tracking: {
-        trackers: {
-            ati: {
-                enabled: false
-            },
-            analytics: {
-                enabled: false
-            },
-            ninja: {
-                enabled: true,
-                platforms: ['desktop', 'html5', 'html4', 'wap']
-            }
-        },
-    },
     adserving: {
         enabled: false
     },

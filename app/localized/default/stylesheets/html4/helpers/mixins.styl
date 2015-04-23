@@ -1,0 +1,313 @@
+action-button(bgcolor = #ccc, fontcolor = #fff, radius = 3px, padding = 10px, textShadow = true)
+    background: bgcolor;
+    background-image: -moz-linear-gradient(center top, rgba(255, 255, 255, .25), rgba(255, 255, 255, 0));
+    background-image: -ms-linear-gradient(center top, rgba(255, 255, 255, .25), rgba(255, 255, 255, 0));
+    background-image: linear-gradient(to bottom, rgba(255, 255, 255, .25), rgba(255, 255, 255, 0));
+    border-color: rgba(0, 0, 0, .1) rgba(0, 0, 0, .1) rgba(0, 0, 0, .25);
+    border-radius(radius);
+    border-style: solid;
+    border-width: 1px;
+    color: fontcolor;
+    padding: padding;
+    text-align: center;
+    &:hover
+        background-image: -moz-linear-gradient(center top, rgba(255, 255, 255, .5), rgba(255, 255, 255, 0));
+        background-image: -ms-linear-gradient(center top, rgba(255, 255, 255, .5), rgba(255, 255, 255, 0));
+        background-image: linear-gradient(to bottom, rgba(255, 255, 255, .5), rgba(255, 255, 255, 0));
+        color: fontcolor;
+        text-decoration: none;
+    if textShadow == true
+        text-shadow: 0 -1px 0 rgba(0, 0, 0, .25);
+
+arrow(bgColor, borderW)
+    position: absolute
+    display: inline-block
+    border-color: bgColor
+    border-image: none
+    border-style: solid
+    border-width: borderW
+    content: ""
+
+border-styles(color = #ccc, radius = 3px, style = solid, width = 1px)
+    border-color: color;
+    border-radius(radius);
+    border-style: style;
+    border-width: width;
+
+border-radius(n = 3px)
+    -webkit-border-radius arguments
+    -moz-border-radius arguments
+    border-radius arguments
+
+box(bgcolor = #fff, bordercolor = #ccc, radius = 3px, padding = 10px, style = solid, width = 1px)
+    background: bgcolor;
+    border-styles(bordercolor, radius, style, width);
+    padding: padding;
+
+box-sizing(value)
+    -webkit-box-sizing: value;
+    -moz-box-sizing: value;
+    box-sizing: value;
+
+box-shadow()
+   -webkit-box-shadow arguments
+   -moz-box-shadow arguments
+   box-shadow arguments
+
+circle(size)
+    border-radius(50%);
+    square(size)
+
+square(size)
+    height: size
+    width: size
+
+column-count(args)
+   -webkit-column-count args
+   -moz-column-count args
+   column-count args
+
+column-gap(g = 10px)
+   -webkit-column-gap g
+   -moz-column-gap g
+   column-gap g
+
+clear-fix()
+    &:after
+        content: " ";
+        clear: both;
+        display: block;
+
+lines(bgColor, width, height1, pos1, sep1, height2, pos2, sep2, position)
+    &:after, &:before
+        background: bgColor;
+        content: "";
+        position: absolute;
+        if position == top or position == bottom
+            height: width;
+            &:before
+                width: height1;
+            &:after
+                width: height2;
+        else
+            width: width;
+            &:before
+                height: height1;
+            &:after
+                height: height2;
+    if position == top or position == bottom
+        &:before
+            width: height1;
+            left: pos1;
+        &:after
+            width: height2;
+            left: pos2;
+    else
+        &:before
+            height: height1;
+            top: pos1;
+        &:after
+            height: height2;
+            top: pos2
+    if position == top
+        &:before
+            top: sep1;
+            left: pos1;
+        &:after
+            top: sep2;
+            left: pos2;
+    else if position == bottom
+        &:before
+            bottom: sep1;
+        &:after
+            bottom: sep2;
+    else if position == right
+        &:before
+            right: sep1;
+        &:after
+            right: sep2;
+    else if position == left
+        &:before
+            left: sep1;
+        &:after
+            left: sep2;
+
+
+
+tab-arrow(position, bgColor, borderColor, borderWidth, size, zIndex)
+    &:after, &:before
+        border: solid transparent;
+        content: " ";
+        height: 0;
+        width: 0;
+        position: absolute;
+        pointer-events: none;
+        z-index: zIndex;
+        if position == top
+            bottom: 100%;
+            left: 50%;
+        else if position == right
+            left: 100%;
+            top: 50%;
+        else if position == bottom
+            top: 100%;
+            left: 50%;
+        else if position == left
+            right: 100%;
+            top: 50%;
+    &:after
+        border-color: alpha(bgColor, 0);
+        border-width: size;
+        if position == top
+            margin-left: - size;
+            border-bottom-color: bgColor;
+        else if position == right
+            margin-top: - size;
+            border-left-color: bgColor;
+        else if position == bottom
+            margin-left: - size;
+            border-top-color: bgColor;
+        else if position == left
+            margin-top: - size;
+            border-right-color: bgColor;
+    &:before
+        border-color: alpha(borderColor, 0);
+        border-width: borderWidth + size;
+        if position == top
+            margin-left: - (borderWidth + size);
+            border-bottom-color: borderColor;
+        else if position == right
+            margin-top: - (borderWidth + size);
+            border-left-color: borderColor;
+        else if position == bottom
+            margin-left: - (borderWidth + size);
+            border-top-color: borderColor;
+        else if position == left
+            margin-top: - (borderWidth + size);
+            border-right-color: borderColor;
+
+btn-close(color, hovercolor)
+    color: color;
+    font-size: remify(8px);
+    position: absolute;
+    &:hover
+        &::before
+            color: hovercolor;
+
+transition(t)
+    vendor('transition', t)
+
+transform(t)
+    vendor('transform', t)
+
+preloader(firstColor, preloaderSize, animationSpeed)
+    position:relative;
+    width: preloaderSize;
+    height: preloaderSize;
+    .circles
+        position:absolute;
+        background-color: firstColor;
+        width: round(preloaderSize*15/66);
+        height: round(preloaderSize*15/66);
+        vendor('border-radius', round(preloaderSize*10/66));
+        vendor('animation-duration', round(animationSpeed*8/10, 2));
+
+        -webkit-animation-name:bounce_circles;
+        -moz-animation-name:bounce_circles;
+        -ms-animation-name:bounce_circles;
+        -o-animation-name:bounce_circles;
+        animation-name:bounce_circles;
+
+        -moz-animation-iteration-count:infinite;
+        -webkit-animation-iteration-count:infinite;
+        -ms-animation-iteration-count:infinite;
+        -o-animation-iteration-count:infinite;
+        animation-iteration-count:infinite;
+
+        -moz-animation-direction:linear;
+        -webkit-animation-direction:linear;
+        -ms-animation-direction:linear;
+        -o-animation-direction:linear;
+        animation-direction:linear;
+
+        &.circle1
+            left: 0;
+            top: round(preloaderSize*26/66);
+            vendor('animation-delay', round(animationSpeed*3/10, 2))
+        &.circle2
+            left: round(preloaderSize*7/66);
+            top: round(preloaderSize*7/66);
+            vendor('animation-delay', round(animationSpeed*4/10, 2))
+        &.circle3
+            top: 0;
+            left: round(preloaderSize*26/66);
+            vendor('animation-delay', round(animationSpeed*5/10, 2))
+        &.circle4
+            right: round(preloaderSize*7/66);
+            top: round(preloaderSize*7/66);
+            vendor('animation-delay', round(animationSpeed*6/10, 2))
+        &.circle5
+            right: 0;
+            top: round(preloaderSize*26/66);
+            vendor('animation-delay', round(animationSpeed*7/10, 2))
+        &.circle6
+            right: round(preloaderSize*7/66);
+            bottom: round(preloaderSize*7/66);
+            vendor('animation-delay', round(animationSpeed*8/10, 2))
+        &.circle7
+            left: round(preloaderSize*26/66);
+            bottom: 0;
+            vendor('animation-delay', round(animationSpeed*9/10, 2))
+        &.circle8
+            left: round(preloaderSize*7/66);
+            bottom: round(preloaderSize*7/66);
+            vendor('animation-delay', round(animationSpeed*10/10, 2))
+
+
+ul-reset()
+    margin: 0
+    padding: 0
+    list-style-type: none
+
+vendor(name, args)
+    -webkit-{name} args
+    -moz-{name} args
+    -ms-{name} args
+    -o-{name} args
+    {name} args
+
+text-wrap()
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    white-space: -webkit-pre-wrap;
+    white-space: normal;
+
+cursive(color, size)
+    font-family: 'Kalam', cursive;
+    font-size: size
+    color: color
+
+ribbon(bgcolor, color, height = 20px, fontSize = 10px, padding = 0 20px 0 30px)
+    background: bgcolor;
+    color: color;
+    font-size: fontSize;
+    font-weight: bold;
+    left: 0;
+    padding: padding;
+    position: absolute;
+    height: height;
+    line-height: height;
+    text-transform: uppercase;
+    font-style: normal;
+
+    &:after {
+        border-color: $green transparent $green $green;
+        border-style: solid;
+        border-width: (height / 2);
+        bottom: 0;
+        content: " ";
+        height: 0;
+        position: absolute;
+        right: - (height / 2);
+        width: 0;
+    }

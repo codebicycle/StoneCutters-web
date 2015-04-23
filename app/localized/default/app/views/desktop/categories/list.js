@@ -1,19 +1,22 @@
 'use strict';
 
-var Base = require('../../../../../common/app/bases/view').requireView('categories/list');
 var _ = require('underscore');
+var URLParser = require('url');
+var Base = require('../../../../../common/app/bases/view').requireView('categories/list');
 var helpers = require('../../../../../../helpers');
-var config = require('../../../../../../../shared/config');
 var Chat = require('../../../../../../modules/chat');
+var Metric = require('../../../../../../modules/metric');
+var config = require('../../../../../../../shared/config');
 
 module.exports = Base.extend({
     tagName: 'main',
     id: 'categories-list-view',
     className: 'categories-list-view',
     events: {
-        'click [data-modal-close]': 'onCloseModal',
         'click .open-modal': 'onOpenModal',
-        'click [data-modal-shadow]': 'onCloseModal'
+        'click [data-modal-shadow], [data-modal-close]': 'onCloseModal',
+        'click [data-increment-metric]': Metric.incrementEventHandler,
+        'click li.category li a': 'onCategoryClick'
     },
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
@@ -66,5 +69,22 @@ module.exports = Base.extend({
         event.stopPropagation();
         event.stopImmediatePropagation();
         $('#location-modal').trigger('hide');
+    },
+    onCategoryClick: function(event) {
+        var path = $(event.currentTarget).attr('href');
+        var experiment = this.app.sixpack.experiments.dgdCategoryCars;
+
+        this.app.sixpack.convert(experiment);
+        if (experiment && experiment.alternative && experiment.alternative === 'gallery' && this.isCategoryCars(path)) {
+            event.preventDefault();
+            event.stopPropagation();
+            event.stopImmediatePropagation();
+
+            path = URLParser.parse(path).path;
+            this.app.router.redirectTo(helpers.common.linkig.call(this, path, null, 'showig'));
+        }
+    },
+    isCategoryCars: function(url) {
+        return _.contains([378], Number((url.match(/.+-cat-(\d+).*/) || [])[1] || 0));
     }
 });

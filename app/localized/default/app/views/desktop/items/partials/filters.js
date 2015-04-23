@@ -1,29 +1,36 @@
 'use strict';
 
-var Base = require('../../../../../../common/app/bases/view');
 var _ = require('underscore');
+var Base = require('../../../../../../common/app/bases/view');
 var helpers = require('../../../../../../../helpers');
+var Categories = require('../../../../../../../collections/categories');
 var Filters = require('../../../../../../../modules/filters');
+var Metric = require('../../../../../../../modules/metric');
 
 module.exports = Base.extend({
     className: 'listing-filters',
     id: 'listing-filters',
     events: {
+        'click [data-increment-metric]': Metric.incrementEventHandler,
+        'click [data-increment-filter]': 'onClickFilter',
         'click .filter-title': 'toogleFilter',
         'click .clean-filters': 'cleanFilters',
         'click .check-box input': 'selectFilter',
         'click .range-submit': 'rangeFilterInputs',
         'click .link-range': 'rangeFilterLinks',
-        'click .sub-categories li a': 'categoryFilter',
+        'click .filter-category li a': 'categoryFilter',
+        'click .filter-subcategory li a': 'subcategoryFilter',
         'keydown .range input': 'onlyNumbers'
     },
+    getTemplateData: function() {
+        var data = Base.prototype.getTemplateData.call(this);
+
+        return _.extend({}, data, {
+            isABTCategoryCarsEnabled: this.isABTCategoryCarsEnabled()
+        });
+    },
     postRender: function() {
-        if (!this.filters) {
-            this.filters = new Filters(null, {
-                app: this.app,
-                path: this.app.session.get('path')
-            });
-        }
+        this.checkFilters();
     },
     toogleFilter: function(event) {
         event.preventDefault();
@@ -176,6 +183,38 @@ module.exports = Base.extend({
         path = this.refactorPath(path);
         this.app.router.redirectTo(path);
     },
+    subcategoryFilter: function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+
+        var $target = $(event.currentTarget);
+        var filterSlug = $target.data('filter-slug');
+        var currentSlug;
+        var categories;
+        var category;
+        var filterId;
+        var path;
+
+        if (!filterSlug) {
+            filterId = $target.data('filter-id');
+            categories = this.getCategories();
+
+            category = categories.search(filterId);
+            if (!category) {
+                category = categories.get(filterId);
+                if (!category) {
+                    return;
+                }
+            }
+            filterSlug = helpers.common.slugToUrl(category.toJSON());
+            currentSlug = this.app.session.get('path').split('/').slice(2).shift();
+        }
+
+        path = this.replacePath(filterSlug, currentSlug);
+        path = this.refactorPath(path);
+        this.app.router.redirectTo(path);
+    },
     onlyNumbers: function(event) {
         if ($.inArray(event.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 || (event.keyCode == 65 && event.ctrlKey === true) || (event.keyCode >= 35 && event.keyCode <= 39)) {
             return;
@@ -184,7 +223,7 @@ module.exports = Base.extend({
             event.preventDefault();
         }
     },
-    replacePath: function(replace) {
+    replacePath: function(replace, currentPath) {
         var path = this.app.session.get('path');
         var currentRoute = this.app.session.get('currentRoute');
         var url;
@@ -194,7 +233,7 @@ module.exports = Base.extend({
             url.push(path.replace('/q/', '').split('/').shift());
             return url.join('');
         }
-        return path.replace('/search/', replace);
+        return path.replace(currentPath || '/search/', replace);
     },
     getPath: function() {
         var path = this.app.session.get('path');
@@ -210,6 +249,47 @@ module.exports = Base.extend({
             }
         }
         return path;
+    },
+    onClickFilter: function(event) {
+        var $filter = $(event.currentTarget);
+        var name = $filter.data('increment-filter');
+
+        if (!this.metric) {
+            this.metric = new Metric({}, this);
+        }
+        this.metric.increment(['dgd', 'filters', [this.metric.getListingType(), name]]);
+    },
+    checkFilters: function() {
+        if (!this.filters) {
+            this.filters = new Filters(null, {
+                app: this.app,
+                path: this.app.session.get('path')
+            });
+        }
+    },
+    isABTCategoryCarsEnabled: function() {
+        var path = this.app.session.get('path');
+        var experiment = this.app.sixpack.experiments.dgdCategoryCars;
+        var isAlternativeGallery = (experiment && experiment.alternative && experiment.alternative === 'gallery' && this.isCategoryCars(path));
+        var isCarbrandSelected = true;
+
+        this.checkFilters();
+        if (!this.filters.has('carbrand') || !this.filters.get('carbrand').has('current')) {
+            isCarbrandSelected = false;
+        }
+        if (this.filters.has('carbrand') && this.filters.get('carbrand').get('current').length > 1) {
+            isCarbrandSelected = false;
+        }
+        return isAlternativeGallery && isCarbrandSelected;
+    },
+    isCategoryCars: function(url) {
+        return _.contains([378], Number((url.match(/.+-cat-(\d+).*/) || [])[1] || 0));
+    },
+    getCategories: function() {
+        this.categories = this.categories || (this.options.categories && this.options.categories.toJSON ? this.options.categories : new Categories(this.options.categories || {}, {
+            app: this.app
+        }));
+        return this.categories;
     }
 });
 

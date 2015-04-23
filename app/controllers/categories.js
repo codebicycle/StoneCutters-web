@@ -10,6 +10,8 @@ var Seo = require('../modules/seo');
 var FeatureAd = require('../models/feature_ad');
 var config = require('../../shared/config');
 var utils = require('../../shared/utils');
+var Shops = require('../modules/shops');
+var Abundance = require('../modules/abundance');
 
 module.exports = {
     list: middlewares(list),
@@ -82,20 +84,38 @@ function show(params, callback, gallery) {
     }, controller);
 
     function controller() {
+        var promise = asynquence().or(fail.bind(this))
+            .then(redirect.bind(this))
+            .then(router.bind(this));
 
-        var redirect = function(done){
+        function redirect(done) {
             var categoryId = Seo.isCategoryRedirected(this.app.session.get('location').url, params.catId);
+            var categories = this.dependencies.categories;
+            var category;
+            var subcategory;
+            var slug;
 
             gallery = gallery || '';
-
-            if (categoryId) {
-                done.abort();
-                return helpers.common.redirect.call(this, ['/cat-', categoryId, gallery].join(''));
+            if (!categoryId) {
+                return done();
             }
-            done();
-        }.bind(this);
+            done.abort();
+            category = categories.search(categoryId);
+            if (!category) {
+                category = categories.get(categoryId);
+                if (!category) {
+                    return helpers.common.redirect.call(this, '/');
+                }
+            }
+            if (category.has('parentId')) {
+                subcategory = category;
+                category = categories.get(subcategory.get('parentId'));
+            }
+            slug = helpers.common.slugToUrl((subcategory || category).toJSON());
+            return helpers.common.redirect.call(this, [slug, gallery].join(''));
+        }
 
-        var router = function(done) {
+        function router(done) {
             var category = this.dependencies.categories.get(params.catId);
             var platform = this.app.session.get('platform');
             var subcategory;
@@ -117,21 +137,17 @@ function show(params, callback, gallery) {
             else {
                 handleShow.call(this, params, promise);
             }
-            promise.val(success);
+            promise.val(success.bind(this));
             done(category, subcategory);
-        }.bind(this);
+        }
 
-        var success = function(_result) {
+        function success(_result) {
             callback(null, _result);
-        }.bind(this);
+        }
 
-        var error = function(err, res) {
+        function fail(err, res) {
             return helpers.common.error.call(this, err, res, callback);
-        }.bind(this);
-
-        var promise = asynquence().or(error)
-            .then(redirect)
-            .then(router);
+        }
     }
 }
 
@@ -144,6 +160,8 @@ function handleItems(params, promise, gallery) {
     var subcategory;
     var query;
     var url;
+    var shopsModule = new Shops(this);
+    var abundance = new Abundance({}, this);
 
     var configure = function(done, _category, _subcategory) {
         var currentRouter = ['categories', 'items'];
@@ -155,7 +173,7 @@ function handleItems(params, promise, gallery) {
             page: currentRouter
         });
         helpers.controllers.changeHeaders.call(this, {}, currentRouter);
-        done();
+        helpers.controllers.schibsted.call(this, params, done);
     }.bind(this);
 
     var redirect = function(done) {
@@ -215,15 +233,24 @@ function handleItems(params, promise, gallery) {
     }.bind(this);
 
     var fetch = function(done, res) {
-        this.app.fetch({
+        var collections = {
             items: {
                 collection: 'Items',
                 params: params
             }
-        }, {
+        };
+        if (shopsModule.shouldGetShops()) {
+            collections.shops = {
+                collection: 'Shops',
+                params: _.clone(params),
+            };
+            collections.shops.params.pageSize = 3;
+            collections.shops.params.offset = 3 * (params.offset / params.pageSize);
+        }
+        this.app.fetch(collections, {
             readFromCache: false
         }, function afterFetch(err, response) {
-            if (err) {
+            if (err || !response.items) {
                 return done.fail(err);
             }
             if (response && res && res.featureads) {
@@ -233,14 +260,19 @@ function handleItems(params, promise, gallery) {
         });
     }.bind(this);
 
+    var fetchAbundance = function(done, res) {
+        if (abundance.isEnabled() && res.items.meta.abundance) {
+            abundance.set('params', params);
+            return abundance.fetch(done, res);
+        }
+        done(res);
+    }.bind(this);
+
     var filters = function(done, res) {
         var url = this.app.session.get('url');
         var filter;
         var _filters;
 
-        if (!res.items) {
-            return done.fail(null, {});
-        }
         filter = query.filters;
         if (!filter || filter === 'undefined') {
             return done(res);
@@ -269,10 +301,10 @@ function handleItems(params, promise, gallery) {
             done.abort();
             return helpers.common.redirect.call(this, [url, '-p-', realPage, gallery].join(''));
         }
-        done(res.items);
+        done(res.items, res.shops);
     }.bind(this);
 
-    var success = function(done, items) {
+    var success = function(done, items, shops) {
         var meta = items.meta;
         var dataPage = {
             category: category.get('id')
@@ -300,6 +332,10 @@ function handleItems(params, promise, gallery) {
         this.app.tracking.set('filters', items.filters);
         this.app.tracking.set('paginator', items.paginator);
 
+        if (shopsModule.enabled()) {
+            shopsModule.start("fetch-categories", items.length, shops !== undefined ? shops.length : 0);
+        }
+
         done({
             type: 'items',
             category: category.toJSON(),
@@ -308,6 +344,7 @@ function handleItems(params, promise, gallery) {
             relatedAds: query.relatedAds,
             meta: meta,
             items: items.toJSON(),
+            shops: shops !== undefined ? shops.toJSON() : [],
             filters: items.filters,
             paginator: items.paginator,
             hasItemsWithImages: items.hasImages()
@@ -319,6 +356,7 @@ function handleItems(params, promise, gallery) {
     promise.then(prepare);
     promise.then(fetchFeatured);
     promise.then(fetch);
+    promise.then(fetchAbundance);
     promise.then(filters);
     promise.then(paginate);
     promise.then(success);
@@ -336,7 +374,7 @@ function handleShow(params, promise) {
             page: currentRouter
         });
         helpers.controllers.changeHeaders.call(this, {}, currentRouter);
-        done();
+        helpers.controllers.schibsted.call(this, params, done);
     }.bind(this);
 
     var redirect = function(done) {

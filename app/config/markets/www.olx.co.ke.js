@@ -256,5 +256,13 @@ module.exports = {
         html5: {
             enabled: true
         }
+    },
+    validator: {
+        phone: {
+            enabled: true
+        }
+    },
+    flagItem: {
+        enabled: true
     }
 };

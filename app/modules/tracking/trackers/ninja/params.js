@@ -2,7 +2,6 @@
 
 var _ = require('underscore');
 var configTracking = require('../../config');
-var logger = require('../../../logger');
 var config = require('../../../../../shared/config');
 var utils = require('../../../../../shared/utils');
 var sorts = {
@@ -22,6 +21,20 @@ function getCurrentPath(path) {
         path = 'home';
     }
     return path;
+}
+
+function getDefaults(options, page) {
+    var params = utils.get(configTracking, ['ninja', 'params', page]);
+    var pageName;
+
+    if (!params) {
+        pageName = page.split('#');
+        if (pageName.length > 2) {
+            pageName.pop();
+            params = utils.get(configTracking, ['ninja', 'params', pageName.join('#')]);
+        }
+    }
+    return params || {};
 }
 
 function setDefaults(params, options, page) {
@@ -60,7 +73,6 @@ function setDefaults(params, options, page) {
         params.clientId = this.app.session.get('clientId');
     }
     if (!params.trackPage) {
-        logger.log('[OLX_DEBUG]', 'Tracking | Ninja not contains trackPage in', page, '|', platform);
         params.trackPage = getCurrentPath(this.app.session.get('path'));
     }
 }
@@ -98,7 +110,7 @@ function setExtras(params, options) {
 }
 
 function get(page, options) {
-    var params = utils.get(configTracking, ['ninja', 'params', page], {});
+    var params = getDefaults.call(this, options, page);
 
     setDefaults.call(this, params, options, page);
     setCustoms.call(this, params, options);

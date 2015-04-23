@@ -10,6 +10,7 @@ var featured = require('./featured');
 var users = require('./users');
 var post = require('./post');
 var categories = require('./categories');
+var landings = require('./landings');
 var urls = {};
 
 _.extend(urls, redirections);
@@ -22,6 +23,7 @@ _.extend(urls, {
 });
 
 _.extend(urls, pages);
+_.extend(urls, landings);
 _.extend(urls, featured);
 _.extend(urls, users);
 _.extend(urls, post);

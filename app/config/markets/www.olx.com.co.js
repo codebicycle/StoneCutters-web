@@ -1,11 +1,7 @@
 module.exports = {
     categoryTree: {
-        production: {
-            order: [830, 16, 811, 806, 362, 815, 859, 800, 821],
-            columns: [3, 2, 2]
-        },
         'default': {
-            order: [806, 1028, 1007, 1040, 830, 1016, 1022, 815, 800, 859, 811, 1046, 362, 16, 1013, 821],
+            order: [806, 830, 800, 362, 1028, 1016, 859, 1013, 1007, 1022, 811, 16, 1040, 815, 1046, 821],
             columns: [4, 4, 4],
             redirections: {
                 '803': 1016,
@@ -16,7 +12,8 @@ module.exports = {
                 '866': 1040,
                 '802': 1022,
                 '864': 1007,
-                '812': 1059
+                '812': 1059,
+                '816': 1054
             }
         }
     },
@@ -271,6 +268,20 @@ module.exports = {
             enabled: true
         },
         html5: {
+            enabled: true
+        }
+    },
+
+    notifications: {
+        desktop: {
+            enabled: false
+        },
+        html5: {
+            enabled: false
+        }
+    },
+    validator: {
+        email: {
             enabled: true
         }
     }

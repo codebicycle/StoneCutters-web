@@ -170,12 +170,25 @@ module.exports = {
             },
             ninja: {
                 enabled: true,
-                platforms: ['desktop'],
+                platforms: ['wap', 'html4', 'html5', 'desktop'],
                 noscript: {
                     platforms: ['wap', 'html4', 'html5', 'desktop']
+                },
+                trackers: {
+                    others: {
+                        enabled: true,
+                        platforms: ['desktop']
+                    },
+                    hydra: {
+                        enabled: true
+                    }
                 }
             },
             adroll: {
+                enabled: false,
+                platforms: ['desktop']
+            },
+            floodlight: {
                 enabled: false,
                 platforms: ['desktop']
             }
@@ -194,7 +207,8 @@ module.exports = {
             featuredAds: true,
             offset: 0
         },
-        section: {
+        sections: {
+            all: false,
             'categories#list': {
                 quantity: {
                     total: 6
@@ -238,6 +252,60 @@ module.exports = {
         linkblog: {
             href: 'http://blog.olx.com',
             target: '_blank'
+        }
+    },
+    abundance: {
+        enabled: false
+    },
+    validator: {
+        email: {
+            enabled: false,
+            platforms: ['html5', 'desktop'],
+            key: 'pubkey-6f6d5eea08926fa815f65250086dfbbb'
+        },
+        phone: {
+            enabled: false
+        }
+    },
+    flagItem: {
+        enabled: false
+    },
+    hints: {
+        desktop: {
+            email: {
+                enabled: false,
+                hint: '',
+                icon: ''
+            }
+        },
+        html5: {
+            email: {
+                enabled: false,
+                hint: '',
+                icon: ''
+            }
+        },
+        html4: {
+            email: {
+                enabled: false,
+                hint: '',
+                icon: ''
+            }
+        },
+        wap: {
+            email: {
+                enabled: false,
+                hint: '',
+                icon: ''
+            }
+        }
+    },
+    notifications: {
+        desktop: {
+            enabled: false
+        },
+        html5: {
+            enabled: false
         }
     }
 };

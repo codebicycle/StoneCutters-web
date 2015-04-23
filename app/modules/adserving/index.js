@@ -55,10 +55,14 @@ function getSettings() {
             seo: this.config.seo || 0
         });
 
-        if (settings.options.pubId && ~settings.options.pubId.indexOf('olx-za')) {
-            if (settings.options.channel && !_.contains(settings.options.channel.split(','), 'OLX_ZA')) {
-                logger.log('[OLX_DEBUG] :: ZA Revenues :: url:', utils.fullizeUrl(this.app.session.get('url'), this.app));
+        try {
+            if (settings.options.pubId && ~settings.options.pubId.toLowerCase().indexOf('olx-za')) {
+                if (settings.options.channel && !_.contains(settings.options.channel.toUpperCase().split(','), 'OLX_ZA')) {
+                    logger.log('[OLX_DEBUG] :: ZA Revenues :: url:', utils.fullizeUrl(this.app.session.get('url'), this.app));
+                }
             }
+        } catch (e) {
+            // Ignore
         }
     }
     this.set('settings', settings);
@@ -141,12 +145,13 @@ function getClientId(service) {
 function getNumberPerCategory(service) {
     var number = this.config.params.number;
     var cat = getCategoryId.call(this);
+    var action = this.app.session.get('currentRoute').action;
 
     if (service === 'ADX') {
         return typeof number === 'undefined' ? 1 : number;
     }
-    if (!cat) {
-        cat = this.app.session.get('currentRoute').action;
+    if (!cat || action === 'statics') {
+        cat = action;
     }
 
     return utils.get(this.config, ['numberPerCategoryCSA', cat], number);

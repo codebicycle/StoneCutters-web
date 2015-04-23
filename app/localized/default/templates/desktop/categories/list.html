@@ -1,7 +1,7 @@
 <section id="marketing-top">
 
     {% if marketing.home_banner %}
-        {% include (template + '/marketing/home/' + marketing.home_banner.template + '.html') %}
+    {% view 'marketing/home/' + marketing.home_banner.template %}
     {% else %}
         {% view 'categories/partials/country-area' %}
         {% if marketing.videos %}

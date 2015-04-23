@@ -60,6 +60,15 @@ module.exports = {
     'items#reply': {
         trackPage: 'replyForm'
     },
+    'items#safetytips#email': {
+        trackPage: 'tapEmail'
+    },
+    'items#safetytips#call': {
+        trackPage: 'tapCall'
+    },
+    'items#safetytips#sms': {
+        trackPage: 'tapSms'
+    },
     'items#show': {
         trackPage: 'item',
         sellerType: 'private'
@@ -95,6 +104,30 @@ module.exports = {
         trackPage: 'postingFormStep2'
     },
     'post#flow#categories': {
+        trackPage: 'postingFormStep2'
+    },
+    'post#flowMarketing': {
+        trackPage: 'postingFormStep1'
+    },
+    'post#flowMarketing#desktop_step1': {
+        trackPage: 'postingFormStep1'
+    },
+    'post#flowMarketing#desktop_step2': {
+        trackPage: 'postingFormStep2'
+    },
+    'post#flowMarketing#categories': {
+        trackPage: 'postingFormStep2'
+    },
+    'post#renew': {
+        trackPage: 'postingFormStep1'
+    },
+    'post#renew#desktop_step1': {
+        trackPage: 'postingFormStep1'
+    },
+    'post#renew#desktop_step2': {
+        trackPage: 'postingFormStep2'
+    },
+    'post#renew#categories': {
         trackPage: 'postingFormStep2'
     },
     'post#subcategories': {
@@ -143,6 +176,9 @@ module.exports = {
         trackPage: 'myAccount'
     },
     'users#conversations': {
+        trackPage: 'myAccount'
+    },
+    'users#conversationmail': {
         trackPage: 'myAccount'
     },
     'users#report': {

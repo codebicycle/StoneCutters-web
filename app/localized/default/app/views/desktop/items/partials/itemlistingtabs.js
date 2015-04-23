@@ -1,9 +1,10 @@
 'use strict';
 
-var Base = require('../../../../../../common/app/bases/view');
 var _ = require('underscore');
+var Base = require('../../../../../../common/app/bases/view');
 var helpers = require('../../../../../../../helpers');
 var Filters = require('../../../../../../../modules/filters');
+var Metric = require('../../../../../../../modules/metric');
 
 module.exports = Base.extend({
     className: 'listing-tabs',
@@ -11,6 +12,7 @@ module.exports = Base.extend({
     tagName: 'nav',
     events: {
         'change #order-by-select': 'sortFilter',
+        'click [data-increment-metric]': Metric.incrementEventHandler
     },
     postRender: function() {
         if (!this.filters) {
@@ -38,6 +40,7 @@ module.exports = Base.extend({
         path = [path.split('/-').shift(), '/', this.filters.format()].join('');
         path = this.refactorPath(path);
         path = helpers.common.link(path, this.app);
+        this.metricSort(filter.value);
         this.app.router.redirectTo(path);
     },
     refactorPath: function(path) {
@@ -60,6 +63,12 @@ module.exports = Base.extend({
             }
         }
         return path;
+    },
+    metricSort: function(name) {
+        if (!this.metric) {
+            this.metric = new Metric({}, this);
+        }
+        this.metric.increment(['dgd', 'sort', [this.metric.getListingType(), name]]);
     }
 });
 

@@ -4,7 +4,7 @@
 
 {% set item = thread.get('item') %}
 
-{% if item.user.id != thread.get('userId') %}
+{% if thread.has('userId') and item.user.id != thread.get('userId') %}
     {% set phone = item.phone %}
     {% set senderName = item.user.username %}
 {% elif thread.get('senders')[1] and thread.get('senders')[1].isMine %}
@@ -50,10 +50,13 @@
         </li>
     {% endfor %}
 </ul>
-
-<form action="{{ ('/myolx/conversation/' + thread.get('threadId')) | link }}" method="POST" enctype="multipart/form-data">
+{% if thread.has('threadId')  %}
+    {% set action = '/myolx/conversation/' + thread.get('threadId') %}
+{% elif thread.has('hash') %}
+    {% set action = '/myolx/conversation/mail?hash=' + thread.get('hash') | urlencode %}
+{% endif %}
+<form action="{{ action | link }}" method="POST" enctype="multipart/form-data">
     <div class="formField">
-        <a href="" name="message"></a>
         <input type="text" value="{{ form.values.message if form.values.message }}" data-messageText name="message" {{ 'class="error"' if form and form.errors }} />
     </div>
     <div class="formActions">
@@ -66,3 +69,5 @@
 {% endif %}
 
 {{ BreadcrumbHome(dictionary, link, ('/' | link)) }}
+
+{% view 'partials/tracking' %}

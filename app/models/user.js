@@ -199,8 +199,10 @@ function reply(done, data) {
     asynquence().or(fail.bind(this))
         .then(prepare.bind(this))
         .then(submit.bind(this))
+        .then(hashEmail.bind(this))
         .then(check.bind(this))
-        .val(success.bind(this));
+        .val(success.bind(this))
+        .val(origin.bind(this));
 
     function prepare(done) {
         var query = {
@@ -219,6 +221,7 @@ function reply(done, data) {
         done(query);
     }
 
+
     function submit(done, query) {
         dataAdapter.post(this.app.req, '/items/' + data.id + '/messages', {
             data: data,
@@ -226,17 +229,57 @@ function reply(done, data) {
         }, done.errfcb);
     }
 
-    function check(done, response, body) {
-        if (body.id || body.threadId) {
-            return done(body);
+    function hashEmail(done, response, reply) {
+        if (!data.userId) {
+            dataAdapter.get(this.app.req, '/users/' + data.email + '/encryptEmail', callback);
+            return;
         }
-        body.statusCode = response.statusCode;
-        return done.fail(body);
+        function callback(err, res, body){
+            if (err) {
+                if (res) {
+                    err.statusCode = res.statusCode;
+                }
+                return done.fail(err);
+            }
+            reply.hash = body.hash;
+            return done(reply);
+        }
+        return done(reply);
+    }
+    function check(done, response, body) {
+        if (response.id || response.threadId) {
+            if (response.hash) {
+                this.app.session.persist({
+                    hash: response.hash
+                }, {
+                    maxAge: utils.DAY
+                });
+            }
+            return done(response);
+        }
+
+        response.statusCode = response.statusCode;
+        return done.fail(response);
     }
 
     function success(reply) {
         statsd.increment([this.get('country'), 'reply', 'success', this.get('platform')]);
         this.callback(done)(reply);
+    }
+
+    function origin() {
+        var originData = this.app.session.get('origin');
+        var type = 'unknown';
+        var name = 'unknown';
+        var abundance = 'traditional_item.reply';
+
+        if (originData) {
+            type = originData.type;
+            name = originData.isGallery ? 'gallery' : 'listing';
+            abundance = originData.isAbundance ? 'abundance_item.reply' : abundance;
+        }
+        statsd.increment([this.app.session.get('location').abbreviation, 'dgd', 'reply', type, name, this.app.session.get('platform')]);
+        statsd.increment([this.app.session.get('location').abbreviation, 'dgd', 'abundance', type, abundance, this.app.session.get('platform')]);
     }
 
     function fail(err) {

@@ -3,12 +3,13 @@
 var _ = require('underscore');
 var asynquence = require('asynquence');
 var Base = require('../../../../../../common/app/bases/view').requireView('items/show');
+var helpers = require('../../../../../../../helpers');
 var Categories = require('../../../../../../../collections/categories');
 var Item = require('../../../../../../../models/item');
-var helpers = require('../../../../../../../helpers');
-var statsd = require('../../../../../../../../shared/statsd')();
-var translations = require('../../../../../../../../shared/translations');
 var User = require('../../../../../../../models/user');
+var Metric = require('../../../../../../../modules/metric');
+var config = require('../../../../../../../../shared/config');
+var translations = require('../../../../../../../../shared/translations');
 
 module.exports = Base.extend({
     className: 'items_show_view',
@@ -23,13 +24,17 @@ module.exports = Base.extend({
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
         var showContact = true;
-
+        var location = this.app.session.get('location');
+        var flagItem = config.getForMarket(location.url, ['flagItem']);
+        
         if (data.item.user !== null && this.app.session.get('user') && this.app.session.get('user').userId === parseInt(data.item.user.id)) {
             showContact = false;
         }
+
         return _.extend({}, data, {
             newItemPage: helpers.features.isEnabled.call(this, 'newItemPage'),
-            showContact:  showContact
+            showContact:  showContact,
+            flagItem: flagItem
         });
     },
     postRender: function() {
@@ -37,7 +42,6 @@ module.exports = Base.extend({
 
         this.galery = '';
         this.mySwiperGal = '';
-        this.dictionary = translations.get(this.app.session.get('selectedLanguage'));
         this.messages = {
             'msgSend': this.dictionary['comments.YourMessageHasBeenSent'].replace(/<br \/>/g,''),
             'addedFav': this.dictionary['itemheader.AddedFavorites'],
@@ -58,6 +62,14 @@ module.exports = Base.extend({
                 this.$el.trigger('localstorageReady');
             }.bind(this));
         }
+        this.attachTrackMe(function(category, action) {
+            var item = this.getItem();
+
+            return {
+                action: action,
+                custom: [category, item.get('category').parentId, item.get('category').id, action, item.get('id')].join('::')
+            };
+        }.bind(this));
     },
     events: {
         'click section#itemPage section.onePicture .slide div' : 'showOnePicture',
@@ -67,8 +79,10 @@ module.exports = Base.extend({
         'click .galActions .prev': 'previouImage',
         'click .galActions .pause': 'pause',
         'click #galCont .swiper-wrapper , #galContOne': 'hideTitleActions',
+        'click [data-increment-metric]': Metric.incrementEventHandler,
         'click .fav': 'favorites',
         'click .share': 'share',
+        'click .flag': 'flag',
         'click .popup-close': 'popupClose',
         'onpopstate window': 'onPopState',
         'localstorageReady': 'onLocalstorageReady'
@@ -222,6 +236,17 @@ module.exports = Base.extend({
         $('body').addClass('noscroll');
         history.pushState(null, "", window.location.pathname);
         $('#share').addClass('visible');
+    },
+    flag: function(event) {
+        event.preventDefault();
+
+        var $elem = $(event.target);
+        var values = Metric.getValues($elem.data('increment-metric'));
+        var user = !!this.app.session.get('user');
+
+        $elem.text($elem.data('text-done'));
+        values.value = [user ? 'auth' : 'anon', 'reflagging'];
+        $elem.data('increment-metric', _.values(values).join('.'));
     },
     popupClose: function(e) {
         e.preventDefault();

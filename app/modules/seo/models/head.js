@@ -26,8 +26,8 @@ function cutString(title, n) {
     var pattern = /(\sP\-\d+)$/;
     var pageMatch;
     var page = '';
-    
-    if (title.length <= n) { 
+
+    if (title.length <= n) {
         return title;
     }
     pageMatch = title.match(pattern);
@@ -107,7 +107,7 @@ function description(metas, value) {
         if (!~value.indexOf(suffix)) {
             value += ' - ';
             value += suffix;
-        }        
+        }
         metas.description = cutString(value,descriptionLength);
     }
     return metas;
@@ -170,7 +170,7 @@ Head = Backbone.Model.extend({
         }
         var handler = metasHandler[key.toLowerCase()];
         var metas = _.clone(this.get('metatags') || {});
-        
+
         if (handler) {
             metas = handler.call(this, metas, value);
         }
@@ -223,7 +223,7 @@ Head = Backbone.Model.extend({
     toJSON: function() {
         var head = Base.prototype.toJSON.apply(this, arguments);
         var clone = _.clone(head);
-        
+
         if (clone.metatags) {
             clone.metatags = _.clone(clone.metatags);
             clone.metatags = Object.keys(clone.metatags).filter(function each(metatag) {
@@ -254,12 +254,12 @@ Head = Backbone.Model.extend({
     onReset: function(head, options) {
         var currentRoute = this.app.session.get('currentRoute');
         var metatags;
-        
+
         if (!options.page && !currentRoute) {
             return;
         }
         metatags = utils.get(configSeo, ['metatags'].concat(options.page || [currentRoute.controller, currentRoute.action]), {});
-        this.setAll(_.extend({}, metatags, metasDefaults));
+        this.setAll(_.defaults({}, metatags, metasDefaults));
     }
 });
 

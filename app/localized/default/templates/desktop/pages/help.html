@@ -3,21 +3,21 @@
         <h3 class="title">{{ dictionary["misc.NeedHelp"] }}</h3>
         <ul>
             <li {{ 'class="selected"' if tab == 'new-olx' }} >
-                <a class="help-toggle-content icons icon-user" data-help-content="new-olx" data-toggle-content href="#">{{ dictionary["help.NewToBrand"] }}</a>
+                <a class="help-toggle-content icons icon-user" data-help-content="new-olx" data-toggle-content href="#" data-increment-metric="zendesk.help.section.new_in_olx">{{ dictionary["help.NewToBrand"] }}</a>
             </li>
             <li>
-                <a class="help-toggle-content icons icon-list" data-help-content="ads" data-toggle-content href="#">{{ dictionary["itemslisting.Classifieds"] }}</a>
+                <a class="help-toggle-content icons icon-list" data-help-content="ads" data-toggle-content href="#" data-increment-metric="zendesk.help.section.about_ads">{{ dictionary["itemslisting.Classifieds"] }}</a>
             </li>
             <li {{ 'class="selected"' if tab == 'faq' }} >
-                <a class="help-toggle-content icons icon-question" data-help-content="faqs" data-toggle-content href="#">{{ dictionary["misc.FrequentQuestions"] }}</a>
+                <a class="help-toggle-content icons icon-question" data-help-content="faqs" data-toggle-content href="#" data-increment-metric="zendesk.help.section.faqs">{{ dictionary["misc.FrequentQuestions"] }}</a>
             </li>
             {% if isContactEnabled %}
                 <li {{ 'class="selected"' if tab == 'contact' }}>
-                    <a class="help-toggle-content icons icon-chat" data-help-content="contact" data-toggle-content href="#">{{ dictionary["contact_us.ContactBrand"] | replace('<<BRAND>>','OLX') }}</a>
+                    <a class="help-toggle-content icons icon-chat" data-help-content="contact" data-toggle-content href="#" data-increment-metric="zendesk.help.section.contact">{{ dictionary["contact_us.ContactBrand"] | replace('<<BRAND>>','OLX') }}</a>
                 </li>
             {% endif %}
             <li>
-                <a class="help-toggle-content icons icon-more" data-help-content="more-suggestions" data-toggle-content href="#">{{ dictionary["help.MoreGuidelines"] }}</a>
+                <a class="help-toggle-content icons icon-more" data-help-content="more-suggestions" data-toggle-content href="#" data-increment-metric="zendesk.help.section.more_tips">{{ dictionary["help.MoreGuidelines"] }}</a>
             </li>
         </ul>
     </div>
@@ -25,17 +25,17 @@
         <h3 class="title">{{ dictionary["about.Company"] }}</h3>
         <ul>
             <li {{ 'class="selected"' if active == 'about' }}>
-                <a class="help-toggle-content icons icon-olx" href="#" data-help-content="about-us" data-toggle-content>{{ dictionary["about.AboutBrand"] | replace("<<BRAND>>","OLX") }}</a>
+                <a class="help-toggle-content icons icon-olx" href="#" data-help-content="about-us" data-toggle-content data-increment-metric="zendesk.help.section.about_olx">{{ dictionary["about.AboutBrand"] | replace("<<BRAND>>","OLX") }}</a>
             </li>
             <li>
-                <a class="help-toggle-content icons icon-help-round" href="#" data-help-content="why" data-toggle-content >{{ dictionary["about.Why"] }}</a>
+                <a class="help-toggle-content icons icon-help-round" href="#" data-help-content="why" data-toggle-content data-increment-metric="zendesk.help.section.why">{{ dictionary["about.Why"] }}</a>
             </li>
             <li>
-                <a class="help-toggle-content icons icon-press" href="#" data-help-content="press" data-toggle-content>{{ dictionary["about.Press"] }}</a>
+                <a class="help-toggle-content icons icon-press" href="#" data-help-content="press" data-toggle-content data-increment-metric="zendesk.help.section.press">{{ dictionary["about.Press"] }}</a>
             </li>
             {% if linkblog %}
             <li>
-                <a class="help-toggle-content icons icon-chat" href="{{ linkblog.href }}" target="{{ linkblog.target }}">{{ dictionary["about.Blog"] }}</a>
+                <a class="help-toggle-content icons icon-chat" href="{{ linkblog.href }}" target="{{ linkblog.target }}" data-increment-metric="zendesk.help.section.blog">{{ dictionary["about.Blog"] }}</a>
             </li>
             {% endif %}
         </ul>
@@ -47,7 +47,7 @@
         <h3 class="title">{{ dictionary["help.NewToBrand"] }}</h3>
         <div class="faqs">
             <div class="question">
-                <h4 class="icons icon-arrow-right">{{ dictionary["help.WhatIsBrand"] }}</h4>
+                <h4 class="icons icon-arrow-right" data-increment-metric="zendesk.help.question_1_1">{{ dictionary["help.WhatIsBrand"] }}</h4>
                 <div class="question-content">
                     <p>
                         {{ dictionary["help.WhatIsBrand_content"] }}
@@ -55,13 +55,13 @@
                 </div>
             </div>
             <div class="question">
-                <h4 class="icons icon-arrow-right">{{ dictionary["help.IsBrandFree"] }} </h4>
+                <h4 class="icons icon-arrow-right" data-increment-metric="zendesk.help.question_1_2">{{ dictionary["help.IsBrandFree"] }} </h4>
                 <div class="question-content">
                     <p>{{ dictionary["help.IsBrandFree_content"] }} </p>
                 </div>
             </div>
             <div class="question">
-                <h4 class="icons icon-arrow-right">{{ dictionary["help.DoIHaveToRegisterToUseBrand"] }} </h4>
+                <h4 class="icons icon-arrow-right" data-increment-metric="zendesk.help.question_1_3">{{ dictionary["help.DoIHaveToRegisterToUseBrand"] }} </h4>
                 <div class="question-content">
                     <p>
                         {{ dictionary["help.DoIHaveToRegisterToUseBrand_content"] | replace('<<MY_CLASSIFIEDS>>', dictionary["biderrorheader.My OLX"]) }}
@@ -69,7 +69,7 @@
                 </div>
             </div>
             <div class="question">
-                <h4 class="icons icon-arrow-right">{{ dictionary["help.HowDoIFindAnItemAtBrand"] }} </h4>
+                <h4 class="icons icon-arrow-right" data-increment-metric="zendesk.help.question_1_4">{{ dictionary["help.HowDoIFindAnItemAtBrand"] }} </h4>
                 <div class="question-content">
                 <p>
                     {{ dictionary["help.HowDoIFindAnItemAtBrand_content"] }}
@@ -77,7 +77,7 @@
                 </div>
             </div>
             <div class="question">
-                <h4 class="icons icon-arrow-right">{{ dictionary["help.WhatIsMyClassifieds"] | replace('<<MY_CLASSIFIEDS>>', dictionary["biderrorheader.My OLX"]) }} </h4>
+                <h4 class="icons icon-arrow-right" data-increment-metric="zendesk.help.question_1_5">{{ dictionary["help.WhatIsMyClassifieds"] | replace('<<MY_CLASSIFIEDS>>', dictionary["biderrorheader.My OLX"]) }} </h4>
                 <div class="question-content">
                     <p>{{ dictionary["help.WhatIsMyClassifieds_content"] | replace('<<MY_CLASSIFIEDS>>', dictionary["biderrorheader.My OLX"]) }}  </p>
                 </div>
@@ -88,7 +88,7 @@
     <div id="ads" class="help-content-display">
         <h3 class="title">{{ dictionary["itemslisting.Classifieds"] }} </h3>
         <div class="question">
-            <h4 class="icons icon-arrow-right">{{ dictionary["help.HowDoIPostAnItemAtBrand"] }}</h4>
+            <h4 class="icons icon-arrow-right" data-increment-metric="zendesk.help.question_2_1">{{ dictionary["help.HowDoIPostAnItemAtBrand"] }}</h4>
             <div class="question-content">
                 <p>
                     {{ dictionary["help.HowDoIPostAnItemAtBrand_content"] }}
@@ -96,7 +96,7 @@
             </div>
         </div>
         <div class="question">
-            <h4 class="icons icon-arrow-right">{{ dictionary["help.HowDoIUploadAPicture"] }} </h4>
+            <h4 class="icons icon-arrow-right" data-increment-metric="zendesk.help.question_2_2">{{ dictionary["help.HowDoIUploadAPicture"] }} </h4>
             <div class="question-content">
                 <p>
                     {{ dictionary["help.HowDoIUploadAPicture_content"] | replace('<<NUMBER>>','8') | replace('<<NUMBER_IN_WORDS>>','ocho') | replace('<<WEIGHT>>', '20480') }}
@@ -104,7 +104,7 @@
             </div>
         </div>
         <div class="question">
-            <h4 class="icons icon-arrow-right">{{ dictionary["help.HowDoIEditAPosting"] }}</h4>
+            <h4 class="icons icon-arrow-right" data-increment-metric="zendesk.help.question_2_3">{{ dictionary["help.HowDoIEditAPosting"] }}</h4>
             <div class="question-content">
                 <p>
                    {{ dictionary["help.HowDoIEditAPosting_contentNew"] }}
@@ -112,7 +112,7 @@
             </div>
         </div>
         <div class="question">
-            <h4 class="icons icon-arrow-right">{{ dictionary["help.HowDoIChangeAPicture"] }}</h4>
+            <h4 class="icons icon-arrow-right" data-increment-metric="zendesk.help.question_2_4">{{ dictionary["help.HowDoIChangeAPicture"] }}</h4>
             <div class="question-content">
                 <p>
                     {{ dictionary["help.HowDoIChangeAPicture_content"] }}
@@ -120,7 +120,7 @@
             </div>
         </div>
         <div class="question">
-            <h4 class="icons icon-arrow-right">{{ dictionary["help.HowLongWillMyPostingAppearOnBrand"] }}</h4>
+            <h4 class="icons icon-arrow-right" data-increment-metric="zendesk.help.question_2_5">{{ dictionary["help.HowLongWillMyPostingAppearOnBrand"] }}</h4>
             <div class="question-content">
                 <p>
                     {{ dictionary["help.HowLongWillMyPostingAppearOnBrand_contentNew"] | replace('<<NUMBER>>','180') }}
@@ -128,7 +128,7 @@
             </div>
         </div>
         <div class="question">
-            <h4 class="icons icon-arrow-right">{{ dictionary["help.HowDoIRemoveMyPosting"] }} </h4>
+            <h4 class="icons icon-arrow-right" data-increment-metric="zendesk.help.question_2_6">{{ dictionary["help.HowDoIRemoveMyPosting"] }} </h4>
             <div class="question-content">
                 <p>
                     {{ dictionary["help.HowDoIRemoveMyPosting_content"] | replace('<<MY_CLASSIFIEDS>>', dictionary["biderrorheader.My OLX"]) }}
@@ -136,7 +136,7 @@
             </div>
         </div>
         <div class="question">
-            <h4 class="icons icon-arrow-right">{{ dictionary["help.HowDoISaveAPostingToRecallItLater"] }} </h4>
+            <h4 class="icons icon-arrow-right" data-increment-metric="zendesk.help.question_2_7">{{ dictionary["help.HowDoISaveAPostingToRecallItLater"] }} </h4>
             <div class="question-content">
                 <p>
                     {{ dictionary["help.HowDoISaveAPostingToRecallItLater_content"] }}
@@ -144,7 +144,7 @@
             </div>
         </div>
         <div class="question">
-            <h4 class="icons icon-arrow-right">{{ dictionary["help.HowDoIShareAnAdOnFacebookTwitterEtc"] }}</h4>
+            <h4 class="icons icon-arrow-right" data-increment-metric="zendesk.help.question_2_8">{{ dictionary["help.HowDoIShareAnAdOnFacebookTwitterEtc"] }}</h4>
             <div class="question-content">
                 <p>
                     {{ dictionary["help.HowDoIShareAnAdOnFacebookTwitterEtc_content"] }}
@@ -152,7 +152,7 @@
             </div>
         </div>
         <div class="question">
-            <h4 class="icons icon-arrow-right">{{ dictionary["help.CanIIncludePersonalContactInformationInMyPostings"] }}</h4>
+            <h4 class="icons icon-arrow-right" data-increment-metric="zendesk.help.question_2_9">{{ dictionary["help.CanIIncludePersonalContactInformationInMyPostings"] }}</h4>
             <div class="question-content">
                 <p>
                     {{ dictionary["help.CanIIncludePersonalContactInformationInMyPostings_content"] }}
@@ -165,7 +165,7 @@
         <h3 class="title">{{ dictionary["misc.FrequentQuestions"] }}</h3>
         <div class="faqs">
             <div class="question">
-                <h4 class="icons icon-arrow-right">{{ dictionary["help.WhatAreClassifieds"] }}</h4>
+                <h4 class="icons icon-arrow-right" data-increment-metric="zendesk.help.question_3_1">{{ dictionary["help.WhatAreClassifieds"] }}</h4>
                 <div class="question-content">
                     <p>
                         {{ dictionary["help.WhatAreClassifieds_content"] }}
@@ -173,7 +173,7 @@
                 </div>
             </div>
             <div class="question">
-                <h4 class="icons icon-arrow-right">{{ dictionary["help.HowDoIChangeMyRegistrationDetails"] }}</h4>
+                <h4 class="icons icon-arrow-right" data-increment-metric="zendesk.help.question_3_2">{{ dictionary["help.HowDoIChangeMyRegistrationDetails"] }}</h4>
                 <div class="question-content">
                     <p>
                         {{ dictionary["help.HowDoIChangeMyRegistrationDetails_content"] | replace('<<MY_CLASSIFIEDS>>', dictionary["biderrorheader.My OLX"]) }}
@@ -181,7 +181,7 @@
                 </div>
             </div>
             <div class="question">
-                <h4 class="icons icon-arrow-right">{{ dictionary["help.HowDoICheckMyMessages"] }}</h4>
+                <h4 class="icons icon-arrow-right" data-increment-metric="zendesk.help.question_3_3">{{ dictionary["help.HowDoICheckMyMessages"] }}</h4>
                 <div class="question-content">
                     <p>
                         {{ dictionary["help.HowDoICheckMyMessages_content"] | replace('<<MY_CLASSIFIEDS>>', dictionary["biderrorheader.My OLX"]) }}
@@ -189,7 +189,7 @@
                 </div>
             </div>
             <div class="question">
-                <h4 class="icons icon-arrow-right">{{ dictionary["help.HowDoIAnswerAMessageSentToMyAd"] }}</h4>
+                <h4 class="icons icon-arrow-right" data-increment-metric="zendesk.help.question_3_4">{{ dictionary["help.HowDoIAnswerAMessageSentToMyAd"] }}</h4>
                 <div class="question-content">
                     <p>
                         {{ dictionary["help.HowDoIAnswerAMessageSentToMyAd_content"] | replace('<<MY_CLASSIFIEDS>>', dictionary["biderrorheader.My OLX"]) }}
@@ -197,7 +197,7 @@
                 </div>
             </div>
             <div class="question">
-                <h4 class="icons icon-arrow-right">{{ dictionary["help.AsABuyerHowDoIContactASeller"] }}</h4>
+                <h4 class="icons icon-arrow-right" data-increment-metric="zendesk.help.question_3_5">{{ dictionary["help.AsABuyerHowDoIContactASeller"] }}</h4>
                 <div class="question-content">
                     <p>
                         {{ dictionary["help.AsABuyerHowDoIContactASeller_content"] }}
@@ -205,7 +205,7 @@
                 </div>
             </div>
             <div class="question">
-                <h4 class="icons icon-arrow-right">{{ dictionary["help.HowCanICreateAPartnershipWithBrand"] }}</h4>
+                <h4 class="icons icon-arrow-right" data-increment-metric="zendesk.help.question_3_6">{{ dictionary["help.HowCanICreateAPartnershipWithBrand"] }}</h4>
                 <div class="question-content">
                     <p>
                         {{ dictionary["partnership.IfYouHaveLotsOfListingsToSubmitUseAFeed"] }}
@@ -213,7 +213,7 @@
                 </div>
             </div>
             <div class="question  {{ "faq-open" if active == 'faq' }}">
-                <h4 class="icons {{ "icon-arrow-down" if active == 'faq' else "icon-arrow-right" }}" >{{ dictionary["misc.HowToContact"] }}</h4>
+                <h4 class="icons {{ "icon-arrow-down" if active == 'faq' else "icon-arrow-right" }}" data-increment-metric="zendesk.help.question_3_7">{{ dictionary["misc.HowToContact"] }}</h4>
                 <div class="question-content" {{ 'style="display:block"' if active == 'faq' }}>
                     <p>{{ dictionary["misc.TechQuestions"] }} <a href="mailTo:{{ mails.support }}">{{ dictionary["misc.ClickHere"] }}</a></p>
                     <p>{{ dictionary["misc.LegalQuestions"] }} <a href="mailTo:{{ mails.legal }}">{{ dictionary["misc.ClickHere"] }}</a></p>
@@ -229,13 +229,13 @@
         <h3 class="title">{{ dictionary["help.MoreGuidelines"] }}</h3>
         <div class="faqs">
             <div class="question">
-                <h4 class="icons icon-arrow-right">{{ dictionary["help.WhatAreThingsThatPotentiallyFraudulentSellersDo"] }}</h4>
+                <h4 class="icons icon-arrow-right" data-increment-metric="zendesk.help.question_5_1">{{ dictionary["help.WhatAreThingsThatPotentiallyFraudulentSellersDo"] }}</h4>
                 <div class="question-content">
                     {{ dictionary["help.WhatAreThingsThatPotentiallyFraudulentSellersDo_content"] }}
                 </div>
             </div>
             <div class="question">
-                <h4 class="icons icon-arrow-right">{{ dictionary["help.WhatShouldIDoIfISuspectAFraudulentSeller"] }}</h4>
+                <h4 class="icons icon-arrow-right" data-increment-metric="zendesk.help.question_5_2">{{ dictionary["help.WhatShouldIDoIfISuspectAFraudulentSeller"] }}</h4>
                 <div class="question-content">
                     <p>
                         {{ dictionary["help.WhatShouldIDoIfISuspectAFraudulentSeller_content"] | replace('<<CONTACTLINK>>','<a href="mailto:support@olx.com">') | replace('<</CONTACTLINK>>','</a>') }}
@@ -243,19 +243,19 @@
                 </div>
             </div>
             <div class="question">
-                <h4 class="icons icon-arrow-right">{{ dictionary["help.HowCanIAvoidAFraud"] }}</h4>
+                <h4 class="icons icon-arrow-right" data-increment-metric="zendesk.help.question_5_3">{{ dictionary["help.HowCanIAvoidAFraud"] }}</h4>
                 <div class="question-content">
                         {{ dictionary["help.HowCanIAvoidAFraud_content"] | replace('<<CONTACTLINK>>','<a href="mailto:support@olx.com">') | replace('<</CONTACTLINK>>','</a>') }}
                 </div>
             </div>
             <div class="question">
-                <h4 class="icons icon-arrow-right">{{ dictionary["help.WhatAreThingsThatPotentiallyFraudulentBuyersDo"] }}</h4>
+                <h4 class="icons icon-arrow-right" data-increment-metric="zendesk.help.question_5_4">{{ dictionary["help.WhatAreThingsThatPotentiallyFraudulentBuyersDo"] }}</h4>
                 <div class="question-content">
                    {{ dictionary["help.WhatAreThingsThatPotentiallyFraudulentBuyersDo_content"] }}
                 </div>
             </div>
             <div class="question">
-                <h4 class="icons icon-arrow-right">{{ dictionary["help.WhatShouldIDoIfISuspectAFraudulentBuyer"] }}</h4>
+                <h4 class="icons icon-arrow-right" data-increment-metric="zendesk.help.question_5_5">{{ dictionary["help.WhatShouldIDoIfISuspectAFraudulentBuyer"] }}</h4>
                 <div class="question-content">
                     <p>
                         {{ dictionary["help.WhatShouldIDoIfISuspectAFraudulentBuyer_content"] | replace('<<CONTACTLINK>>','<a href="mailto:support@olx.com">') | replace('<</CONTACTLINK>>','</a>') }}
@@ -263,7 +263,7 @@
                 </div>
             </div>
             <div class="question">
-                <h4 class="icons icon-arrow-right">{{ dictionary["help.WhatKindOfPostingsAreForbiddenNotAllowedOnBrand"] }}</h4>
+                <h4 class="icons icon-arrow-right" data-increment-metric="zendesk.help.question_5_6">{{ dictionary["help.WhatKindOfPostingsAreForbiddenNotAllowedOnBrand"] }}</h4>
                 <div class="question-content">
                     {{ dictionary["help.WhatKindOfPostingsAreForbiddenNotAllowedOnBrand_content"] }}
                 </div>
@@ -328,38 +328,52 @@
         <section class="leadership-container">
             <h4 class="subtitle">{{ dictionary["about.Leadership"] }}</h4>
             <div class="box box-left">
-                <img src="{{ ('/images/desktop/about_us/alec-oxenford.gif') | static }}" >
-                <div>
-                    <p class="box-title">Alec Oxenford</p>
-                    <p class="box-position">Co-Founder and CEO Americas{#{ trans('about.CoFounderCeoAmericas') }#}</p>
-                </div>
-            </div>
-            <div class="box box-right">
-                <img src="{{ ('/images/desktop/about_us/amarjit-batra.gif') | static }}" >
-                <div>
-                    <p class="box-title">Amarjit Batra</p>
-                    <p class="box-position">CEO Greater India{#{ trans('about.CeoGIndia') }#}</p>
-                </div>
-            </div>
-            <div class="box box-left">
-                <img src="{{ ('/images/desktop/about_us/brad-porteus.gif') | static }}" >
-                <div>
-                    <p class="box-title">Brad Porteus</p>
-                    <p class="box-position">CEO South East Asia{#{ trans('about.CeoSEAsia') }#}</p>
-                </div>
-            </div>
-            <div class="box box-right">
                 <img src="{{ ('/images/desktop/about_us/martin-sheepbouwer.gif') | static }}" >
                 <div>
                     <p class="box-title">Martin Scheepbouwer</p>
                     <p class="box-position">CEO Classifieds{#{ trans('about.CeoClassifieds') }#}</p>
                 </div>
             </div>
+            <div class="box box-right">
+                <img src="{{ ('/images/desktop/about_us/alec-oxenford.gif') | static }}" >
+                <div>
+                    <p class="box-title">Alec Oxenford</p>
+                    <p class="box-position">Co-founder and Brand Champion</p>
+                </div>
+            </div>
+            <div class="box box-left">
+                <img src="{{ ('/images/desktop/about_us/amarjit-batra.gif') | static }}" >
+                <div>
+                    <p class="box-title">Amarjit Batra</p>
+                    <p class="box-position">CEO Greater India{#{ trans('about.CeoGIndia') }#}</p>
+                </div>
+            </div>
+            <div class="box box-right">
+                <img src="{{ ('/images/desktop/about_us/brad-porteus.gif') | static }}" >
+                <div>
+                    <p class="box-title">Brad Porteus</p>
+                    <p class="box-position">CEO South East Asia{#{ trans('about.CeoSEAsia') }#}</p>
+                </div>
+            </div>
             <div class="box box-left">
                 <img src="{{ ('/images/desktop/about_us/tim-hilpert.gif') | static }}" >
                 <div>
                     <p class="box-title">Tim Hilpert</p>
-                    <p class="box-position">CEO Europe Middle East</p>
+                    <p class="box-position">CEO Europe & Middle East</p>
+                </div>
+            </div>
+            <div class="box box-right">
+                <img src="{{ ('/images/desktop/about_us/leonardo-rubinstein.jpg') | static }}" >
+                <div>
+                    <p class="box-title">Leonardo Rubinstein</p>
+                    <p class="box-position">CEO Americas</p>
+                </div>
+            </div>
+            <div class="box box-left">
+                <img src="{{ ('/images/desktop/about_us/daan-sanders.jpg') | static }}" >
+                <div>
+                    <p class="box-title">Daan Sanders</p>
+                    <p class="box-position">CEO Africa</p>
                 </div>
             </div>
         </section>

@@ -3,7 +3,6 @@
 var S = require('string');
 var _ = require('underscore');
 var Base = require('../../../../../common/app/bases/view');
-var helpers = require('../../../../../../helpers');
 var translations = require('../../../../../../../shared/translations');
 var statsd = require('../../../../../../../shared/statsd')();
 
@@ -12,57 +11,40 @@ module.exports = Base.extend({
     id: 'posting-description-view',
     className: 'posting-description-view',
     events: {
-        'change [name=description]': 'onDescriptionChange',
-        'change': 'onChange',
-        'keyup [name=title]': 'characterCount',
+        'blur #field-description': 'onBlur',
         'validate': 'onValidate'
     },
     validations: {
-        title: {
-            message: 'misc.TitleCharacters_Mob',
-            minLength: 10
-        },
         description: {
             message: 'misc.DescriptionCharacters_Mob',
             minLength: 10
         }
     },
     postRender: function() {
-        this.onDescriptionChange();
-    },
-    onChange: function(event) {
-        event.preventDefault();
-        event.stopPropagation();
-        event.stopImmediatePropagation();
+        var $field = this.$('#field-description');
 
+        this.stripValue($field);
+    },
+    onBlur: function(event) {
         var $field = $(event.target);
+        var value = this.stripValue($field);
 
-        if (this.validate($field)) {
-            this.parentView.$el.trigger('fieldSubmit', [$field]);
+        if ($field.data('value') !== value) {
+            if (this.validate($field)) {
+                this.parentView.$el.trigger('fieldSubmit', [$field]);
+            }
+
+            $field.data('value', value);
         }
-    },
-    onDescriptionChange: function() {
-        var $description = this.$('[name=description]');
-
-        $description.val(S($description.val()).stripTags().s);
     },
     onValidate: function(event, done, isValid) {
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();
 
-        var isValidTitle = this.validate(this.$('#field-title'));
         var isValidDescription = this.validate(this.$('#field-description'));
 
-        done(isValid && isValidTitle && isValidDescription);
-    },
-    characterCount: function (event) {
-        var $input = $(event.currentTarget);
-        var $msg = $input.next('small');
-        var count = $msg.text().split(' ');
-
-        count[0] = $input.val().length;
-        $msg.text(count.join(' '));
+        done(isValid && isValidDescription);
     },
     validate: function(field) {
         var $field = this.$(field);
@@ -84,6 +66,15 @@ module.exports = Base.extend({
             statsd.increment([location, 'posting', 'invalid', this.app.session.get('platform'), name]);
         }
         return valid;
+    },
+    stripValue: function(field) {
+        var value = field.val();
+
+        value = S(value).stripTags().s;
+        value = $.trim(value);
+        field.val(value);
+
+        return value;
     }
 });
 

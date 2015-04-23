@@ -1,5 +1,6 @@
 'use strict';
 
+var _ = require('underscore');
 var config = require('../config').get('statsD', {
     client: {
         host: 'graphite-server',
@@ -24,11 +25,14 @@ var rDot = /\./g;
 var Client = function(options) {
     var statsD = new StatsD(config.client);
 
-    function increment(metric, value) {
+    function increment(metric, value, options) {
         if (!(metric = stringify(metric))) {
             return;
         }
-        statsD.increment(metric, value);
+        if (_.isObject(value)) {
+            value = undefined;
+        }
+        statsD.increment(metric, value, undefined, log.bind(null, metric));
     }
 
     function gauge(metric, value) {
@@ -36,6 +40,16 @@ var Client = function(options) {
             return;
         }
         statsD.gauge(metric, value);
+    }
+
+    function log(metric, err) {
+        if (err) {
+            try {
+                console.log('[OLX_DEBUG]', 'Graphite not found |', metric, err instanceof Error ? JSON.stringify(err.stack) : err);
+            } catch (e) {
+                // Ignore
+            }
+        }
     }
 
     return {

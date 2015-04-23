@@ -2,6 +2,7 @@
 
 var Base = require('../../../../../common/app/bases/view').requireView('partials/search');
 var helpers = require('../../../../../../helpers');
+var Metric = require('../../../../../../modules/metric');
 
 module.exports = Base.extend({
     postRender: function() {
@@ -21,6 +22,10 @@ module.exports = Base.extend({
 
         var search = this.$('form').find('[name=search]').val();
         var url = search ? ('/nf/search/' + search) : '/nf/all-results';
+
+        Metric.increment.call(this, ['dgd', 'home', ['search', (search ? 'with' : 'without') + '_term']], {
+            include: 'currentRoute:categories#list'
+        });
 
         helpers.common.redirect.call(this.app.router, url, null, {
             status: 200

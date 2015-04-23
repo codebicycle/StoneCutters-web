@@ -22,7 +22,7 @@ Details of the latest version can be found on the Project's Github Wiki.
 
 1. Download and install the last version of NodeJS from http://nodejs.org/ (follow the instructions inside the Readme file.)
 
-2. Clone ARWEN's repo using the following URL: [git@github.com:olx-inc/arwen.git](git@github.com:olx-inc/arwen.git)
+2. Clone ARWEN's repo using the following URL: [git@github.com:olx-inc/mobile-webapp.git](git@github.com:olx-inc/mobile-webapp.git)
 
 3. Go into the ARWEN folder and run the following command to install Grunt.
 
@@ -32,13 +32,30 @@ Details of the latest version can be found on the Project's Github Wiki.
 
     `sudo npm install -g nodemon`
 
-5. Download and install the node modules running:
+5. Download and install "n":
+
+    `sudo npm install -g n`
+
+6. Install Node 0.10.38:
+
+    `sudo n 0.10.38` 
+
+7. Download and install the node modules running:
 
     `sudo npm install`
 
-6. Run ARWEN and enjoy it magic running:
+8. Install memcache:
 
-    `sudo grunt start`
+    * Mac users: https://glassonionblog.wordpress.com/2012/02/18/installing-memcached-on-mac-os-x-snow-leopard/
+    * Ubuntu users: run on the command line `sudo apt-get install memcached`	
+
+9. Run memcache as a deamon:
+
+   `memcached -d`
+
+10. Run ARWEN and enjoy her magic running:
+
+    `grunt start`
 
 
 ##  Documentation

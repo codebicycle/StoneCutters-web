@@ -1,10 +1,12 @@
 <ul class="list-without-styles">
     {% if not user %}
         <li><a href="{{ '/login' | link }}" rel="nofollow" data-qa="my-olx-loggedOut" >{{ dictionary["loginbox.Login"] }}</a> o<a href="{{ '/register' | link }}" rel="nofollow" data-qa="register-link" >{{ dictionary["postbox.RegisterNow"] }}</a></li>
+        <li class="notificationsLogout display-none"><a href="{{ '/login' | link }}">{{ dictionary["myolx.Messages"] }} <span class="count"></span></a></li>
     {% else %}
         <li><a href="{{ '/myolx/myadslisting' | link }}" rel="nofollow">{{ dictionary["myolx.MyAds"] }}</a></li><!--
         --><li><a href="{{ '/myolx/favoritelisting' | link }}" rel="nofollow">{{ dictionary["myolx.MyFavorites"] }}</a></li><!--
-        --><li><a href="{{ '/myolx/conversations' if isHermesEnabled else '/myolx/myolxmessages' | link }}">{{ dictionary["myolx.Messages"] }} <span class="count"></span></a></li><!--
+        --><li><a href="{{ '/myolx/conversations' if isHermesEnabled else '/myolx/myolxmessages' | link }}">{{ dictionary["myolx.Messages"] }} <span class="count display-none"></span></a></li><!--
         --><li><a href="{{ '/logout' | link }}" data-qa="logout-link" >{{ dictionary["myolx.SignOut"] }}</a></li>
     {% endif %}
+        <li><a href="{{ '/help' | link }}" title="{{ dictionary["biderrorheader.Help"] }}" class="icons icon-help-round" data-increment-metric="zendesk.topbar.icon"></a></li>
 </ul>

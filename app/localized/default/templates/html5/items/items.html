@@ -16,7 +16,13 @@
 {% endfor %}
 
 {% if meta.abundance %}
-    <li class="abundace">{{ dictionary["misc.MoreResultsIn"] }} {{ location.name if meta.abundance.locationType == 'country' else location.children[0].name }}</li>
+    <li class="abundace">
+        {% if meta.abundance.around %}
+            Mas resultados cerca de {{ location.current.name }}
+        {% else %}
+            {{ dictionary["misc.MoreResultsIn"] }} {{ location.name if meta.abundance.locationType == 'country' else location.children[0].name }}
+        {% endif %}
+    </li>
     {% for item in meta.abundance.data %}
         <li class="{{ nav.current }}">
             <a href="{{ item | slugToUrl | link }}" class="item-list" data-qa="list-item">

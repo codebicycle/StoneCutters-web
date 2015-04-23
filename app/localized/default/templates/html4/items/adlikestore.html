@@ -1,0 +1,18 @@
+<li class="adLikeStore">
+    {% set nameSlug = shop.name | convertToSlug %}
+    <a href="{{ ['/shop/', shop.id, '/', nameSlug ] | join | link({shops_experiment_from: 'listing-shop-from-page'}) | link({shopId: shop.id})}}">
+        <div class="flag" style="background-image: url({{ ('/images/html4/stores/storeFlag.png' | static) }});"></div>
+        <div class="imageCont" style="background-image: url({{ (shop.image | static) if shop.image else ('/images/html4/noPhoto.png' | static) }});"></div>
+        <div class="itemInfo">
+            <div class="centerCont">
+                <h2>{{ shop.name }}</h2>
+                <span style='color: #761c84' >{{ 'Open today from 9am to 8pm' }}</span>
+            </div>
+            {% if shop.description %}
+                <span>{{ shop.description | truncate(80, True, "...") }}</span>
+            {% else %}
+                <span>{{ shop.address }}</span>
+            {% endif %}
+        </div>
+    </a>
+</li>
