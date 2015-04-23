@@ -7,7 +7,9 @@
         {% endif %} 
         {%- if shouldOpenInNewTab %}
             target="_blank" 
-            data-increment-metric="dgd.{{ 'search' if (currentRoute.controller == 'searches' and ('contains' | _(['filter', 'filterig', 'search', 'searchig'], currentRoute.action))) else 'browse' }}.open_new_tab.view"
+            data-increment-metric="dgd.sixpack.ABTestOpenNewTab.itemInNewTab"
+        {% else %}
+            data-increment-metric="dgd.sixpack.ABTestOpenNewTab.itemInCurrentTab"
         {% endif -%}
         >
             <figure class="items-image {{ 'lines' if item.imagesCount > 1 }} {{ 'icons icon-photo' if not item.thumbnail }}">
@@ -62,9 +64,11 @@
     {% for item in meta.abundance.data %}
         <li class="item {{ ' featuredad' if item.isFeatured }}{{ ' soldad' if item.sold }}" >
             <a href="{{ item.slug.replace(domain, fullDomain) if item.slug else (['iid-', item.id] | join('') | link) }}" data-qa="list-item" data-increment-metric="dgd.abundance.{{ 'search' if (currentRoute.controller == 'searches' and ('contains' | _(['filter', 'filterig', 'search', 'searchig'], currentRoute.action))) else 'browse' }}.abundance_item.view"
-            {%- if shouldOpenInNewTab %}
+            {{%- if shouldOpenInNewTab %}
                 target="_blank" 
-                data-increment-metric="dgd.{{ 'search' if (currentRoute.controller == 'searches' and ('contains' | _(['filter', 'filterig', 'search', 'searchig'], currentRoute.action))) else 'browse' }}.open_new_tab.view"
+                data-increment-metric="dgd.sixpack.ABTestOpenNewTab.itemInNewTab"
+            {% else %}
+                data-increment-metric="dgd.sixpack.ABTestOpenNewTab.itemInCurrentTab"
             {% endif -%}
             >
                 <figure class="items-image {{ 'lines' if item.imagesCount > 1 }} {{ 'icons icon-photo' if not item.thumbnail }}">
