@@ -51,7 +51,7 @@ module.exports = {
     dgdHidePhoneNumber: {
         enabled: true,
         platforms: ['desktop'],
-        markets: ['ar', 'co', 'pa', 'pe', 'uy'],
+        markets: ['uy'],
         name: 'hide-phone-number',
         alternatives: {
             CONTROL: 'control',
