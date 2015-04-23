@@ -190,17 +190,20 @@ module.exports = Base.extend({
             this.handleBack();
         }
     },
-    onFieldValidate: function(event, field, done) {
+    onFieldValidate: function(event, field, options, done) {
         var $field;
 
         if (!this.validator.isEnabled()) {
             return done(true);
         }
+        if (_.isFunction(options)) {
+            done = options;
+            options = {};
+        }
         $field = $(field);
-        this.validator.validate($field, callback.bind(this));
+        this.validator.validate($field, options, callback.bind(this));
 
         function callback(err, isValid) {
-            console.log(new Error().stack);
             if (err) {
                 return done(false);
             }

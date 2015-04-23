@@ -17,7 +17,7 @@ module.exports = Base.extend({
         'validate': onValidate,
         'formRendered': onFormRendered,
         'blur [name="email"]': onBlur,
-        'click .did-you-mean': onClickDidYouMean
+        'click .did-you-mean a': onClickDidYouMean
     },
     initialize: initialize,
     getTemplateData: getTemplateData,
@@ -126,12 +126,14 @@ function onBlur(event) {
         if (!value) {
             return this.parentView.$el.trigger('fieldSubmit', [$field, options]);
         }
-        this.parentView.$el.trigger('fieldValidate', [$field, $.noop, {
-            progress: onValidateProgress.bind(this),
-            success: onValidateSuccess.bind(this),
-            error: onValidateError.bind(this),
-            always: onValidateAlways.bind(this)
-        }]);
+        this.parentView.$el.trigger('fieldValidate', [$field, {
+            mailgun: {
+                progress: onValidateProgress.bind(this),
+                success: onValidateSuccess.bind(this),
+                error: onValidateError.bind(this),
+                always: onValidateAlways.bind(this)
+            }
+        }, $.noop]);
         $field.data('value', value);
     }
 }
@@ -147,8 +149,7 @@ function onClickDidYouMean(event) {
     if (this.$('small.message.exclude').length) {
         $field.parent().find('small.message.exclude').remove();
     }
-console.log($didYouMean.find('a').text());
-    $field.val($didYouMean.find('a').text());
+    $field.val($didYouMean.text());
     $field.trigger('blur');
     this.metric.increment(['growth', 'posting', ['mailgun', 'didyoumean']]);
 }
@@ -170,8 +171,13 @@ function onValidateSuccess(data) {
     this.$('.did-you-mean').remove();
     if (!data.is_valid) {
         $field.trigger('fieldValidationEnd', []);
+        $field.closest('.field-wrapper').addClass('error').removeClass('success');
+        if (!data.did_you_mean) {
+            $field.parent().find('.error.message').remove();
+        }
     }
     else {
+        $field.closest('.field-wrapper').addClass('success').removeClass('error');
         this.parentView.$el.trigger('fieldSubmit', [$field, options]);
     }
     this.metric.increment(['growth', 'posting', ['validation', 'mailgun', data.is_valid ? 'success' : 'error']]);

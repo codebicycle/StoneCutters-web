@@ -32,7 +32,7 @@ function exec(val, validation, options, callback) {
     var failed;
 
     if (this.has('pattern')) {
-        return callback(this.get('pattern').test(val));
+        return callback(!!(val || '').match(this.get('pattern')));
     }
     else if (this.has('fn')) {
         return callback(this.get('fn')(val, validation));
@@ -40,8 +40,8 @@ function exec(val, validation, options, callback) {
     else if (this.has('mailgun')) {
         options.mailgun = options.mailgun || {};
         mailgun = this.get('mailgun');
-        succeeded = mailgun.get('success') || options.mailgun.success || utils.noop;
-        failed = mailgun.get('error') || options.mailgun.error || utils.noop;
+        succeeded = options.mailgun.success || mailgun.get('success') || utils.noop;
+        failed = options.mailgun.error || mailgun.get('error') || utils.noop;
 
         return mailgun.run(_.extend({}, options.mailgun, {
             success: function success(data) {
@@ -67,7 +67,7 @@ function resolveMessage(data) {
     if (data && data.did_you_mean) {
         message = this.get('messageDidYouMean');
         message = _.template(message, data, templateSettings);
-        className = (!data.is_valid ? 'error ' : '') + 'message did_you_mean';
+        className = (!data.is_valid ? 'error ' : '') + 'message did-you-mean';
     }
     this.set({
         message: message,
