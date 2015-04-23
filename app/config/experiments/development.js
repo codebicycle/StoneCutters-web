@@ -48,14 +48,14 @@ module.exports = {
         },
         autoParticipate: true
     },
-    dgdPostingBtn: {
+    dgdPostingBtnGray: {
         enabled: true,
         platforms: ['desktop'],
         markets: ['bo'],
-        name: 'dgd-home-posting-btn',
+        name: 'dgd-home-posting-btn-gray',
         alternatives: {
             CONTROL: 'control',
-            SINGLE: 'btn-small-green'
+            SINGLE: 'btn-small-gray'
         },
         autoParticipate: true,
         fraction: 1
