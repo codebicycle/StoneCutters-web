@@ -406,9 +406,9 @@ module.exports = function trackingRouter(app, dataAdapter) {
             var platform = req.param('platform');
             var market = req.param('market');
             var sixpack;
-
+            
             if (!experiment || !platform || !market) {
-                return;
+                return response({});
             }
             sixpack = new Sixpack({
                 clientId: req.rendrApp.session.get('clientId'),
@@ -418,9 +418,13 @@ module.exports = function trackingRouter(app, dataAdapter) {
                 market: market
             });
             sixpack.participate(sixpack.experiments[experiment], function onComplete() {
-                res.set('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
-                res.json(sixpack.experiments[experiment]);
+                response(sixpack.experiments[experiment] || {});
             });
+
+            function response(data) {
+                res.set('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
+                res.json(data);
+            }
         }
     })();
 
