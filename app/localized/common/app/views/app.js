@@ -38,6 +38,9 @@ module.exports = Base.extend({
         var href = $(e.currentTarget).attr('href');
         var url = URLParser.parse(href);
 
+        if ($(e.currentTarget).prop('target') === '_blank') {
+            return true;
+        }
         if (url.host === window.location.host) {
             href = [url.pathname, (url.search || ''), (url.hash || '')].join('');
         }

@@ -20,7 +20,8 @@ module.exports = Base.extend({
                 linkig: link,
                 galeryAct: 'active',
                 current: 'searchig'
-            }
+            },
+            shouldOpenInNewTab: this.app.sixpack.experiments.desktopDGD41OpenItemInNewTab && this.app.sixpack.experiments.desktopDGD41OpenItemInNewTab.alternative === 'open-item-in-new-tab'
         });
     },
     cleanPage: function(path) {

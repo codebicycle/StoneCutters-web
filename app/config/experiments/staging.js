@@ -59,5 +59,17 @@ module.exports = {
         },
         autoParticipate: true,
         fraction: 1
+    },
+    desktopDGD41OpenItemInNewTab: {
+        enabled: false,
+        platforms: ['desktop'],
+        markets: ['uy'],
+        name: 'desktop-dgd41-open-item-in-new-tab',
+        alternatives: {
+            CONTROL: 'control',
+            OPEN_ITEM_IN_NEW_TAB: 'open-item-in-new-tab'
+        },
+        autoParticipate: true,
+        fraction: 0.5
     }
 };

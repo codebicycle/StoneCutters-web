@@ -24,7 +24,8 @@ module.exports = Base.extend({
         return _.extend({}, data, {
             nav: {
                 link: link
-            }
+            },
+            shouldOpenInNewTab: this.app.sixpack.experiments.desktopDGD41OpenItemInNewTab && this.app.sixpack.experiments.desktopDGD41OpenItemInNewTab.alternative === 'open-item-in-new-tab'
         });
     },
     cleanPage: function(path) {
