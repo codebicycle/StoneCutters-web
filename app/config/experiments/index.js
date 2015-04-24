@@ -30,8 +30,14 @@ module.exports = {
         platforms: ['desktop'],
         markets: ['ar'],
         name: 'growth-category-suggestion',
-        fraction: 0.3,
         alternatives: {
+            CONTROL_1: 'control1',
+            CONTROL_2: 'control2',
+            CONTROL_3: 'control3',
+            CONTROL_4: 'control4',
+            CONTROL_5: 'control5',
+            CONTROL_6: 'control6',
+            CONTROL_7: 'control7',
             CONTROL: 'control',
             SUGGESTED: 'suggested',
             SINGLE: 'single'
