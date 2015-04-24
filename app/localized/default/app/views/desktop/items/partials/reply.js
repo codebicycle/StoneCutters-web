@@ -24,7 +24,7 @@ module.exports = Base.extend({
         var hiddenPhone;
 
         if (phone && dgdHidePhoneNumber && dgdHidePhoneNumber.alternative === 'hide-phone-number') {
-            hiddenPhone = this.transformPhone(phone, 4, '&#9899;');
+            hiddenPhone = this.transformPhone(phone, 4, '*');
         }
 
         return _.extend({}, data, {
