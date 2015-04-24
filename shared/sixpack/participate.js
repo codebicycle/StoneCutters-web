@@ -1,6 +1,7 @@
 'use strict';
 
 var _ = require('underscore');
+var statsd = require('../statsd')();
 
 module.exports = function participate(experiment, done) {
     if (!experiment || !experiment.name) {
@@ -21,7 +22,7 @@ module.exports = function participate(experiment, done) {
         }
     })
     .fail(function(){
-        console.log('error');
+        statsd.increment([this.market, 'sixpack', 'participate', experiment.name, 'timeout', this.platform]);
     })
     .always(always.bind(this));
 
