@@ -3,14 +3,14 @@
 module.exports = {
     'www.olx.co.ke': {
         'items#show': {
-            file: 'QzMyOFQxMSAg',
+            file: 'QzMyOFQxOCAg',
             t: 'uz_til'
         }
     },
     'www.olx.co.za': {
         'items#show': {
-            file: 'QzMyOFQx',
-            t: 'uz_feed'
+            file: 'QzMyOFQxMSAg',
+            t: 'uz_til'
         }
     },
     'www.olx.com.ng': {
