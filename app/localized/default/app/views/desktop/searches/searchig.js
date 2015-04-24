@@ -21,7 +21,8 @@ module.exports = Base.extend({
                 galeryAct: 'active',
                 current: 'searchig'
             },
-            shouldOpenInNewTab: this.app.sixpack.experiments.dgdOpenItemInNewTab && this.app.sixpack.experiments.dgdOpenItemInNewTab.alternative === 'open-item-in-new-tab'
+            isABTestOpenNewTabEnabled: this.app.sixpack.experiments.dgdOpenItemInNewTab,
+            shouldOpenInNewTab: this.app.sixpack.experiments.dgdOpenItemInNewTab.alternative === 'open-item-in-new-tab'
         });
     },
     cleanPage: function(path) {
