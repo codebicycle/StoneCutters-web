@@ -19,6 +19,8 @@ module.exports = Base.extend({
     onPostClick: function() {
         var currentRoute = this.app.session.get('currentRoute');
 
+        this.app.sixpack.convert(this.app.sixpack.experiments.dgdPostingABC);
+
         if (currentRoute.controller === 'items' && currentRoute.action === 'show') {
             this.app.sixpack.convert(this.app.sixpack.experiments.desktopDGD23ShowSimplifiedReplyForm, 'publish');
         }
