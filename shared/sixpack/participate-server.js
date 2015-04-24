@@ -9,7 +9,6 @@ module.exports = function participate(experiment, done) {
     if (!experiment || !experiment.name) {
         return this.callback(done)();
     }
-    
     fraction = experiment.fraction !== undefined ? experiment.fraction : 1;
     if (!experiment.force) {
         this.session.participate(this.name(experiment), _.values(experiment.alternatives), fraction, callback.bind(this));
