@@ -52,7 +52,7 @@ module.exports = {
         enabled: true,
         platforms: ['desktop'],
         markets: ['bo'],
-        name: 'dgd-home-posting-btn-gray',
+        name: 'dgd-home-posting-abc',
         alternatives: {
             CONTROL: 'control',
             OPTIONB: 'btn-small-gray',
