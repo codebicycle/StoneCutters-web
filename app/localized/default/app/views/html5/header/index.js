@@ -5,23 +5,12 @@ var asynquence = require('asynquence');
 var Base = require('../../../../../common/app/bases/view').requireView('header/index');
 var helpers = require('../../../../../../helpers');
 var breadcrumb = require('../../../../../../modules/breadcrumb');
-var Sixpack = require('../../../../../../../shared/sixpack');
 var utils = require('../../../../../../../shared/utils');
 var config = require('../../../../../../../shared/config');
+var Notifications = require('../../../../../../modules/notifications');
 
 module.exports = Base.extend({
     urlreferer: '',
-    className: function() {
-        var className = _.result(Base.prototype, 'className') || '';
-        var sixpack = new Sixpack({
-            platform: this.app.session.get('platform'),
-            market: this.app.session.get('location').abbreviation,
-            experiments: this.app.session.get('experiments')
-        });
-        var sixpackClass = sixpack.className(sixpack.experiments.html5HeaderPostButton);
-
-        return className + (sixpackClass ? ' ' : '') + sixpackClass;
-    },
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
         var currentRoute = this.app.session.get('currentRoute');
@@ -70,12 +59,19 @@ module.exports = Base.extend({
                 });
             }
         }
+        if (!this.notifications) {
+            this.notifications = new Notifications({}, this);
+        }
+        if (this.notifications.isEnabled() && this.notifications.checkNotifications()) {
+            this.notifications.requestPermission();
+        }
     },
     showNotification: function() {
         var user = this.app.session.get('user');
+        var messages = this.app.session.get('messages');
         var isHermesEnabled = helpers.features.isEnabled.call(this, 'hermes');
 
-        if (user && isHermesEnabled) {
+        if ((user || messages >= 0) && isHermesEnabled) {
             this.unreadConversations();
         }
 
@@ -98,16 +94,6 @@ module.exports = Base.extend({
     events: {
         'click .logIn span': 'onLoginClick',
         'click .topBarFilters .filter-btns': 'onCancelFilter',
-        'click .postBtn': 'onPostClick'
-    },
-    onPostClick: function() {
-        var sixpack = new Sixpack({
-            platform: this.app.session.get('platform'),
-            market: this.app.session.get('location').abbreviation,
-            experiments: this.app.session.get('experiments')
-        });
-
-        sixpack.convert(sixpack.experiments.html5HeaderPostButton);
     },
     isMenuOpen: false,
     onLoginClick: function(event) {
@@ -239,14 +225,19 @@ module.exports = Base.extend({
     },
     unreadConversations: function() {
         var user = this.app.session.get('user');
+        var messages = this.app.session.get('messages');
 
-        if (user.unreadConversationsCount) {
+        if (user && user.unreadConversationsCount) {
             this.notifications = true;
-            return this.$('.notification').css('display', 'block');
+            this.$('.notification').css('display', 'block');
+        }
+        else if (messages && messages > 0) {
+            this.notifications = true;
+            this.$('.notification').css('display', 'block');
         }
         else {
             this.notifications = false;
-            return this.$('.notification').css('display', 'none');
+            this.$('.notification').css('display', 'none');
         }
 
     }

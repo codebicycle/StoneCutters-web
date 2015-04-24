@@ -1,61 +1,64 @@
 'use strict';
 
 module.exports = {
-    html5HeaderPostButton: {
-        enabled: false,
-        platforms: ['html5'],
-        markets: ['ar'],
-        name: 'header-post-button',
-        alternatives: {
-            TEXT: 'text',
-            ICON: 'icon'
-        }
-    },
-    html5Interstitial: {
-        enabled: false,
-        platforms: ['html5'],
-        markets: ['br'],
-        name: 'interstitial',
-        alternatives: {
-            ON: 'on',
-            OFF: 'off'
-        }
-    },
     html4ShowShops: {
-        enabled: true,
+        enabled: false,
         platforms: ['html4'],
         markets: ['ke'],
         name: 'show-shops',
         alternatives: {
             ITEMS: 'items',
-            AD_LIKE_STORE: 'adlikestore',
             CALL_TO_ACTION: 'calltoactions',
-            AD_LIKE_STORE_MAP: 'adlikestore_map',
             CALL_TO_ACTION_MAP: 'calltoactions_map'
         },
-        firstClick: true
+        firstClick: true,
+        autoParticipate: true
     },
-    desktopTest: {
+    desktopDGD23ShowSimplifiedReplyForm: {
         enabled: true,
         platforms: ['desktop'],
-        markets: ['co'],
-        name: 'test',
+        markets: ['ar', 'co'],
+        name: 'desktop-dgd23-show-simplified-reply-form',
         alternatives: {
-            TEST1: 'test1',
-            TEST2: 'test2'
-        }
+            CONTROL: 'control',
+            SHOW_SIMPLIFIED_REPLY_FORM: 'show-simplified-reply-form'
+        },
+        autoParticipate: true
     },
-    fractionKPIsTest: {
+    growthCategorySuggestion: {
         enabled: true,
         platforms: ['desktop'],
-        markets: ['pe'],
-        name: 'fraction-kpi-test',
-        fraction: 0.5,
+        markets: ['ar'],
+        name: 'growth-category-suggestion',
+        fraction: 0.3,
         alternatives: {
-            TEST1: 'test1',
-            TEST2: 'test2',
-            TEST3: 'test3',
-            TEST4: 'test4'
+            CONTROL: 'control',
+            SUGGESTED: 'suggested',
+            SINGLE: 'single'
         }
+    },
+    dgdCategoryCars: {
+        enabled: true,
+        platforms: ['desktop'],
+        markets: ['ar', 'co'],
+        name: 'dgd-category-cars',
+        alternatives: {
+            CONTROL: 'control',
+            GALLERY: 'gallery'
+        },
+        autoParticipate: true
+    },
+    dgdPostingABC: {
+        enabled: true,
+        platforms: ['desktop'],
+        markets: ['bo'],
+        name: 'dgd-home-posting-abc',
+        alternatives: {
+            CONTROL: 'control',
+            OPTIONB: 'btn-small-gray',
+            OPTIONC: 'btn-none'
+        },
+        autoParticipate: true,
+        fraction: 1
     }
 };

@@ -4,8 +4,8 @@ var _ = require('underscore');
 var Base = require('../../../../../common/app/bases/view');
 var config = require('../../../../../../../shared/config');
 var EmailValidator = require('../../../../../../modules/emailValidator');
+var Metric = require('../../../../../../modules/metric');
 var helpers = require('../../../../../../helpers');
-var statsd = require('../../../../../../../shared/statsd')();
 var translations = require('../../../../../../../shared/translations');
 
 module.exports = Base.extend({
@@ -26,15 +26,60 @@ module.exports = Base.extend({
         'click .did-you-mean': 'fillEmail',
         'validate': 'onValidate'
     },
+    initialize: function() {
+        Base.prototype.initialize.call(this);
+        this.dictionary = translations.get(this.app.session.get('selectedLanguage'));
+    },
+    getTemplateData: function() {
+        var data = Base.prototype.getTemplateData.call(this);
+        var locationUrl = this.app.session.get('location').url;
+        var isPhoneMandatory = config.getForMarket(locationUrl, ['validator', 'phone', 'enabled'], false);
+        var hintEmailInfo = config.getForMarket(locationUrl, ['hints','desktop','email'], false);
+        var hint;
+        var emailIcon;
+
+        if(hintEmailInfo.enabled) {
+            hint = hintEmailInfo.hint;
+            emailIcon = (hintEmailInfo.icon)? hintEmailInfo.icon: '';
+        }
+        return _.extend({}, data, {
+            hintEmail: hint,
+            emailIcon: emailIcon,
+            isPhoneMandatory: isPhoneMandatory
+        });
+    },
+    postRender: function() {
+        if (!this.metric) {
+            this.metric = new Metric({}, {
+                app: this.app
+            });
+        }
+    },
     onValidate: function(event, done, isValid) {
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();
 
-        this.validate(success, this.$('[name="email"]'));
+        this.validate(success.bind(this), this.$('[name="email"]'));
 
         function success(isValidEmail) {
-            done(isValid && isValidEmail);
+            var isValidPhone = validatePhone.call(this);
+            done(isValid && isValidEmail && isValidPhone);
+        }
+
+        function validatePhone() {
+            var locationUrl = this.app.session.get('location').url;
+            var isPhoneMandatory = config.getForMarket(locationUrl, ['validator', 'phone', 'enabled'], false);
+            var isValidPhone = true;
+            var $field = this.$('[name="phone"]');
+
+            if (isPhoneMandatory && $field.val() === '') {
+                isValidPhone = false;
+                $field.closest('.field-wrapper').addClass('error').removeClass('success');
+                $field.parent().find('.error.message').remove();
+                $field.parent().append('<small class="error message">' + this.dictionary['postingerror.PleaseCompleteThisField'] + '</small>');
+            }
+            return isValidPhone;
         }
     },
     onPhoneChange: function(event) {
@@ -46,7 +91,7 @@ module.exports = Base.extend({
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();
-        
+
         var $field = $(event.target);
         var locationUrl = this.app.session.get('location').url;
         var isMailgunEnabled = config.getForMarket(locationUrl, ['validator', 'email', 'enabled'], false);
@@ -95,8 +140,8 @@ module.exports = Base.extend({
         var locationUrl = this.app.session.get('location').url;
         var $field = this.$('[name="email"]');
         var value = $field.val();
-        
-        if ($field.data('value') !== value) {   
+
+        if ($field.data('value') !== value) {
             if (config.getForMarket(locationUrl, ['validator', 'email', 'enabled'], false)) {
                 var currentPage = this.editing ? 'editing' : 'posting';
 
@@ -165,9 +210,7 @@ module.exports = Base.extend({
             skipValidation: true
         };
         var isError = '';
-
         this.dictionary = translations.get(this.app.session.get('selectedLanguage'));
-        
         this.$('.did-you-mean').remove();
 
         if (!data.is_valid) {
@@ -189,7 +232,7 @@ module.exports = Base.extend({
             $field.parent().append('<small class="' + isError + ' message did-you-mean" data-content="' + data.did_you_mean + '">¿Has querido decir <a href="#">' + data.did_you_mean + '</a>?</small>');
         }
 
-        statsd.increment([this.app.session.get('location').abbreviation, this.emailValid.get('currentPage'), data.is_valid ? 'success' : 'error', 'email', 'success', this.app.session.get('platform')]);
+        this.metric.increment(['growth', 'posting', ['validation', 'mailgun', data.is_valid ? 'success' : 'error']]);
 
         $field.removeClass('validating');
     },
@@ -203,7 +246,7 @@ module.exports = Base.extend({
 
         $field.removeClass('validating');
         this.parentView.$el.trigger('fieldSubmit', [$field, options]);
-        statsd.increment([this.app.session.get('location').abbreviation, this.emailValid.get('currentPage'), 'error', 'email', 'error', this.app.session.get('platform')]);
+        this.metric.increment(['growth', 'posting', ['mailgun', 'apierror']]);
     },
     fillEmail: function(event) {
         event.preventDefault();
@@ -215,12 +258,12 @@ module.exports = Base.extend({
         var options = {
             pendingValidation: (category.id === undefined || category.parentId === undefined)
         };
-        
+
         if ($('small.message.exclude')) {
             $field.parent().find('small.message.exclude').remove();
         }
 
-        statsd.increment([this.app.session.get('location').abbreviation, this.emailValid.get('currentPage'), 'success', 'email', 'click', this.app.session.get('platform')]);
+        this.metric.increment(['growth', 'posting', ['mailgun', 'didyoumean']]);
 
         $field.val($(event.currentTarget).data('content'));
         this.onBlurEmail();

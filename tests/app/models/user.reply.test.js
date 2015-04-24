@@ -154,6 +154,15 @@ function mock(data) {
         statusCode: 200
     }, data);
 
+    dataAdapter.get = sinon.stub();
+    dataAdapter.get.callsArgWith(2, null, {
+        statusCode: 200
+    }, {
+        hash: 'hjkskhjgasjdgfjhasjfhash2y348912351o34bt234bkgyj45'
+    });
+
+    options.app.session.persist = sinon.stub();
+
     statsd.increment = sinon.stub();
 }
 

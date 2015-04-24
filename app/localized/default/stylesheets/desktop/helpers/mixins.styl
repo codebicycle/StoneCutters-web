@@ -194,75 +194,11 @@ btn-close(color, hovercolor)
         &::before
             color: hovercolor;
 
-transition(t)
-    vendor('transition', t)
+transition()
+    vendor('transition', arguments)
 
-transform(t)
-    vendor('transform', t)
-
-preloader(firstColor, preloaderSize, animationSpeed)
-    position:relative;
-    width: preloaderSize;
-    height: preloaderSize;
-    .circles
-        position:absolute;
-        background-color: firstColor;
-        width: round(preloaderSize*15/66);
-        height: round(preloaderSize*15/66);
-        vendor('border-radius', round(preloaderSize*10/66));
-        vendor('animation-duration', round(animationSpeed*8/10, 2));
-
-        -webkit-animation-name:bounce_circles;
-        -moz-animation-name:bounce_circles;
-        -ms-animation-name:bounce_circles;
-        -o-animation-name:bounce_circles;
-        animation-name:bounce_circles;
-
-        -moz-animation-iteration-count:infinite;
-        -webkit-animation-iteration-count:infinite;
-        -ms-animation-iteration-count:infinite;
-        -o-animation-iteration-count:infinite;
-        animation-iteration-count:infinite;
-
-        -moz-animation-direction:linear;
-        -webkit-animation-direction:linear;
-        -ms-animation-direction:linear;
-        -o-animation-direction:linear;
-        animation-direction:linear;
-
-        &.circle1
-            left: 0;
-            top: round(preloaderSize*26/66);
-            vendor('animation-delay', round(animationSpeed*3/10, 2))
-        &.circle2
-            left: round(preloaderSize*7/66);
-            top: round(preloaderSize*7/66);
-            vendor('animation-delay', round(animationSpeed*4/10, 2))
-        &.circle3
-            top: 0;
-            left: round(preloaderSize*26/66);
-            vendor('animation-delay', round(animationSpeed*5/10, 2))
-        &.circle4
-            right: round(preloaderSize*7/66);
-            top: round(preloaderSize*7/66);
-            vendor('animation-delay', round(animationSpeed*6/10, 2))
-        &.circle5
-            right: 0;
-            top: round(preloaderSize*26/66);
-            vendor('animation-delay', round(animationSpeed*7/10, 2))
-        &.circle6
-            right: round(preloaderSize*7/66);
-            bottom: round(preloaderSize*7/66);
-            vendor('animation-delay', round(animationSpeed*8/10, 2))
-        &.circle7
-            left: round(preloaderSize*26/66);
-            bottom: 0;
-            vendor('animation-delay', round(animationSpeed*9/10, 2))
-        &.circle8
-            left: round(preloaderSize*7/66);
-            bottom: round(preloaderSize*7/66);
-            vendor('animation-delay', round(animationSpeed*10/10, 2))
-
+transform()
+    vendor('transform', arguments)
 
 ul-reset()
     margin: 0
@@ -301,7 +237,7 @@ ribbon(bgcolor, color, height = 20px, fontSize = 10px, padding = 0 20px 0 30px)
     font-style: normal;
 
     &:after {
-        border-color: $green transparent $green $green;
+        border-color: bgcolor transparent bgcolor bgcolor;
         border-style: solid;
         border-width: (height / 2);
         bottom: 0;

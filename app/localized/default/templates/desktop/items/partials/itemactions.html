@@ -19,12 +19,19 @@
 {% if not item.status.onReview %}
     {% set dataUser = true if user else false %}
     {% set favText = dictionary["item.RemoveFromFavorites"] %}
+    {% set flagText = dictionary["item.FlagAsSpamOrScam"] or 'Report item' %}
+    {% set flagTextDone = dictionary["item.FlagAsSpamOrScamDone"] or 'Item reported' %}
     {% set current =  'remove' %}
     {% if not item.isFavorite %}
         {% set current =  'add' %}
         {% set favText = dictionary["itemgeneraldetails.addFavorites"] %}
     {% endif %}
     <a class="{{ 'open-modal' if not dataUser }}" data-modal="favorites-modal" data-current="{{ current }}" data-user="{{ dataUser }}" data-fav="addToFavorites" data-itemId="{{ item.id }}" data-remove="{{ dictionary["item.RemoveFromFavorites"] }}" data-add="{{ dictionary["itemgeneraldetails.addFavorites"] }}" href="#" rel="nofollow" title="{{ favText }}">{{ favText }}</a>
+
+    {% if flagItem.enabled %}
+        <a data-current="do" href="#" data-user="{{ dataUser }}" data-increment-metric="africa.item.{{ 'auth' if dataUser else 'anon'}}.flagging" data-flag="flagAsSpamOrScam" data-text-do="{{ flagText }}" data-text-done="{{ flagTextDone }}" href="#" rel="nofollow" title="{{ flagText }}" >{{ flagText }}</a>
+    {% endif %}
+
 {% endif %}
 </div>
 

@@ -38,7 +38,7 @@ header#topBar > ul > li > span, header#topBar > ul > li > a{
 	font-weight: bold;
 	line-height: 1.4;
 }
-header#topBar > ul > li.logOut a, header#topBar > ul > li.logIn span, header#topBar > ul > li.logInMsg span {
+header#topBar > ul > li.logOut a, header#topBar > ul > li.logIn > span, header#topBar > ul > li.logInMsg span {
 	width: 10px;
 }
 header#topBar > ul > li.logOut a {
@@ -90,20 +90,18 @@ header#topBar .topBarFilters {
 }
 
 header#topBar {
-	.logIn {
-		.logged {
-			position: relative;
-			.notification {
-				background: #ffdf2c;
-				border-radius: 7px;
-				box-shadow: 0 0 1px 1px rgba(0, 0, 0, .3);
-				display: none;
-				height: 15px;
-				position: absolute;
-				right: -5px;
-				top: -5px;
-				width: 15px;
-			}
-		}
+	.logged, .header-link {
+		position: relative;
+	}
+	.notification {
+		background: #ffdf2c;
+		border-radius: 7px;
+		box-shadow: 0 0 1px 1px rgba(0, 0, 0, .3);
+		display: none;
+		height: 15px;
+		position: absolute;
+		right: -5px;
+		top: -5px;
+		width: 15px;
 	}
 }

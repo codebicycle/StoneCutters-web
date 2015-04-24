@@ -1,10 +1,11 @@
 'use strict';
 
-var Base = require('../../../../../../common/app/bases/view');
 var _ = require('underscore');
-var helpers = require('../../../../../../../helpers');
 var asynquence = require('asynquence');
+var Base = require('../../../../../../common/app/bases/view');
+var helpers = require('../../../../../../../helpers');
 var User = require('../../../../../../../models/user');
+var Metric = require('../../../../../../../modules/metric');
 
 module.exports = Base.extend({
     className: 'item-actions',
@@ -15,7 +16,9 @@ module.exports = Base.extend({
         'click [data-facebook-login]': 'facebookLogin',
         'click [data-modal-close]': 'onCloseModal',
         'click .open-modal[data-user=false]': 'onOpenModal',
-        'click [data-modal-shadow]': 'onCloseModal'
+        'click [data-modal-shadow]': 'onCloseModal',
+        'click [data-increment-metric]': Metric.incrementEventHandler,
+        'click [data-flag]': 'onFlagAsSpamOrScam'
     },
     postRender: function() {
         this.listenTo(this.app, 'loginSuccess', this.loginSuccess);
@@ -66,6 +69,24 @@ module.exports = Base.extend({
             });
         }
     },
+    onFlagAsSpamOrScam: function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+
+        var $field = $(event.currentTarget);
+        var dataUser = $field.data('user');
+        var textDo = $field.data('text-do');
+        var textDone = $field.data('text-done');
+        var values = Metric.getValues($field.data('increment-metric'));
+
+        if ($field.data('current') === 'do') {
+            $field.data('current', 'done');
+            values.value = [dataUser ? 'auth' : 'anon', 'reflagging'];
+            $field.data('increment-metric', _.values(values).join('.'));
+            $field.text(textDone);
+        }
+    },
     login: function (event) {
         event.preventDefault();
         event.stopPropagation();
@@ -80,7 +101,7 @@ module.exports = Base.extend({
         function prepare(done) {
             user = new User(_.extend(data, {
                 location: this.app.session.get('siteLocation'),
-                country: this.app.session.get('location').name,
+                country: this.app.session.get('location').abbreviation,
                 languageId: this.app.session.get('languages')._byId[this.app.session.get('selectedLanguage')].id,
                 platform: this.app.session.get('platform')
             }), {

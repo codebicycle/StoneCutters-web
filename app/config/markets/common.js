@@ -266,6 +266,50 @@ module.exports = {
             enabled: false,
             platforms: ['html5', 'desktop'],
             key: 'pubkey-6f6d5eea08926fa815f65250086dfbbb'
+        },
+        phone: {
+            enabled: false
+        }
+    },
+    flagItem: {
+        enabled: false
+    },
+    hints: {
+        desktop: {
+            email: {
+                enabled: false,
+                hint: '',
+                icon: ''
+            }
+        },
+        html5: {
+            email: {
+                enabled: false,
+                hint: '',
+                icon: ''
+            }
+        },
+        html4: {
+            email: {
+                enabled: false,
+                hint: '',
+                icon: ''
+            }
+        },
+        wap: {
+            email: {
+                enabled: false,
+                hint: '',
+                icon: ''
+            }
+        }
+    },
+    notifications: {
+        desktop: {
+            enabled: false
+        },
+        html5: {
+            enabled: false
         }
     }
 };

@@ -16,8 +16,8 @@ module.exports = Base.extend({
         'click .posting-categories-list a.category': 'onCategoryClick',
         'click .child-categories-list a': 'onSubCategoryClick',
         'editCategory': 'onEditCategory',
-        'getQueryCategory': 'onGetQueryCategory'
-
+        'getQueryCategory': 'onGetQueryCategory',
+        'click #posting-category-suggestion-button': 'showCategoryList'
     },
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
@@ -25,6 +25,10 @@ module.exports = Base.extend({
         return _.extend({}, data, {
             categories: data.categories.toJSON()
         });
+    },
+    showCategoryList: function(event) {
+        this.$('.posting-categories-list').fadeIn();
+        this.$('#posting-category-suggestion-button').hide();
     },
     onEditCategory: function(event, category) {
         this.$('.posting-categories-list a[data-id=' + category.parentId + ']').trigger('click', ['edit']);
@@ -56,6 +60,8 @@ module.exports = Base.extend({
         if (params.intent === 'post') {
             params.location = this.app.session.get('siteLocation');
             params.categoryId = subcategoryId;
+
+            this.parentView.categorySuggestionBuildIU([params]); //AB test : category-suggestion
         }
         else {
             params.itemId = this.parentView.getItem().get('id');
@@ -74,9 +80,7 @@ module.exports = Base.extend({
         $('.child-categories-list').removeClass('select');
         $('.child-categories-list[data-id="' + categoryId + '"]').addClass('select');
         if (!this.parentView.editing && utils.getUrlParam('subcat') === undefined) {
-            $('html, body').animate({
-                scrollTop: this.parentView.$('#posting-images-view').offset().top
-            }, 750);
+            this.parentView.scrollSlideTo('#posting-images-view');
         }
 
         var fetch = function(done) {

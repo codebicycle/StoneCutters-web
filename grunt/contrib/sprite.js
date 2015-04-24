@@ -3,18 +3,21 @@
 module.exports = function(grunt) {
     var _ = require('underscore');
     var util = require('util');
+    var crypto = require('crypto');
     var config = require('../config');
     var utils = require('../utils');
     var environments = utils.getEnvironments(grunt);
     var sprites = {};
 
     (function spriteIcons() {
+        var version = crypto.createHash('md5').update(_.now().toString()).digest('hex').substr(24, 32);
+        var filename = 'icons-' + version + '.png';
         var platforms = ['html5'];
         var defaultsSrc = 'app/localized/default/icons/PLATFORM';
         var defaultsSrcLocalized = 'app/localized/LOCALIZATION/icons/PLATFORM';
-        var defaultsDestImg = 'public/images/PLATFORM/icons/LOCALIZATION/icons.png';
+        var defaultsDestImg = 'public/images/PLATFORM/icons/LOCALIZATION/' + filename;
         var defaultsDestCSS = 'public/css/LOCALIZATION/PLATFORM/icons.css';
-        var defaultsImgPath = 'imageUrl/images/PLATFORM/icons/LOCALIZATION/icons.png';
+        var defaultsImgPath = 'imageUrl/images/PLATFORM/icons/LOCALIZATION/' + filename;
         var repLocation = 'LOCALIZATION';
         var repPlatform = 'PLATFORM';
         var defaults = {
@@ -51,6 +54,7 @@ module.exports = function(grunt) {
                     functions: true,
                     defaults: {
                         country: location,
+                        version: version,
                         width: '32px',
                         height: '32px'
                     }

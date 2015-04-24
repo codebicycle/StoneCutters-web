@@ -3,16 +3,20 @@
 var _ = require('underscore');
 var asynquence = require('asynquence');
 var Base = require('../../../../../../common/app/bases/view');
+var helpers = require('../../../../../../../helpers');
 var User = require('../../../../../../../models/user');
 var Tracking = require('../../../../../../../modules/tracking');
-var helpers = require('../../../../../../../helpers');
 var translations = require('../../../../../../../../shared/translations');
 var rEmail = /^[_a-zA-Z0-9-]+(\.[_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*(\.[a-zA-Z]{2,6})$/;
 
 module.exports = Base.extend({
-    className: 'item-contact-form',
     id: 'item-contact-form',
     tagName: 'section',
+    className: function() {
+        var sixpackClass = this.app.sixpack.className(this.app.sixpack.experiments.desktopDGD23ShowSimplifiedReplyForm);
+
+        return 'item-contact-form' + (sixpackClass ? (' ' + sixpackClass) : '');
+    },
     postRender: function() {
         this.dictionary = translations.get(this.app.session.get('selectedLanguage'));
         this.user = new User(_.extend({
@@ -30,10 +34,18 @@ module.exports = Base.extend({
         this.$fields = this.$('textarea, input:not([type=submit], [type=hidden])');
     },
     events: {
+        'focus textarea': 'onFocus',
         'blur textarea, input:not([type=submit], [type=hidden])': 'onBlur',
         'submit': 'onSubmit',
         'reset': 'onReset',
         'click .replySuccess': 'onReplySuccessClick'
+    },
+    onFocus: function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+
+        this.$('fieldset.name, fieldset.email, fieldset.phone').slideDown();
     },
     onBlur: function(event) {
         event.preventDefault();
@@ -79,10 +91,21 @@ module.exports = Base.extend({
         }
 
         function success(reply) {
+            var item = this.parentView.getItem();
+
             event.target.reset();
+
+            if (reply.phone) {
+                this.app.sixpack.convert(this.app.sixpack.experiments.desktopDGD23ShowSimplifiedReplyForm, 'phone-filled');
+            }
             this.$spinner.addClass('hide');
             this.$success.removeClass('hide');
             this.trackSuccess(reply);
+            this.app.sixpack.convert(this.app.sixpack.experiments.desktopDGD23ShowSimplifiedReplyForm);
+
+            if (_.contains([378], item.get('category').id)) {
+                this.app.sixpack.convert(this.app.sixpack.experiments.dgdCategoryCars);
+            }
         }
 
         function fail(err) {

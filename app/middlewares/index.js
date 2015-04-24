@@ -7,12 +7,12 @@ var middlewares = {
     redirections: require('./redirections'),
     location: require('./location'),
     languages: require('./languages'),
+    sixpack: require('./sixpack'),
     interstitial: require('./interstitial'),
     dependencies: require('./dependencies'),
     search: require('./search'),
     metrics: require('./metrics'),
-    conversations: require('./conversations'),
-    origin: require('./origin')
+    conversations: require('./conversations')
 };
 
 module.exports = function(controller, exclude) {

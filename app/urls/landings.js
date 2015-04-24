@@ -8,6 +8,18 @@ module.exports = {
         url: 'mobilepromopage'
     },
     'landings#republish': {
-        url: 'landings/republish'
+        urls: [
+            'landings/republish/{{itemId}}',
+            'landings/republish'
+        ]
+    },
+    'landings#available': {
+        url: 'available/{{itemId}}'
+    },
+    'landings#asyncseller': {
+        url: 'asyncseller'
+    },
+    'landings#asyncbuyer': {
+        url: 'asyncbuyer'
     }
 };

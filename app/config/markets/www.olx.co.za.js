@@ -450,5 +450,13 @@ module.exports = {
                 enabled: true
             }
         }
+    },
+    validator: {
+        phone: {
+            enabled: true
+        }
+    },
+    flagItem: {
+        enabled: true
     }
 };
