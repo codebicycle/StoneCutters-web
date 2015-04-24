@@ -62,6 +62,8 @@ middleware:
       - /tracking/event.gif
       - /tracking/statsd.gif
       - /tracking/sixpack.gif
+      - /tracking/sixpack/convert.gif
+      - /tracking/sixpack/participate
       - /tracking/log.gif
       - /force
       - /force/wap

@@ -48,6 +48,17 @@ module.exports = {
         },
         autoParticipate: true
     },
+    dgdHidePhoneNumber: {
+        enabled: true,
+        platforms: ['desktop'],
+        markets: ['uy'],
+        name: 'hide-phone-number',
+        alternatives: {
+            CONTROL: 'control',
+            HIDE_PHONE_NUMBER: 'hide-phone-number'
+        },
+        autoParticipate: false
+    },
     dgdPostingABC: {
         enabled: true,
         platforms: ['desktop'],
