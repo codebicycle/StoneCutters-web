@@ -281,21 +281,21 @@ module.exports = {
     hints: {
         desktop: {
             email: {
-                enabled: false,
+                enabled: true,
                 hint: 'You need a valid email address to sell on OLX',
                 icon: 'icon-exclamation'
             }
         },
         html5: {
             email: {
-                enabled: false,
+                enabled: true,
                 hint: 'You need a valid email address to sell on OLX',
                 icon: 'icon-exclamation'
             }
         },
         html4: {
             email: {
-                enabled: false,
+                enabled: true,
                 hint: 'You need a valid email address to sell on OLX',
                 icon: 'icon-exclamation'
             }
