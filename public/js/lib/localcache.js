@@ -155,6 +155,17 @@ window.LocalCache = {
         });
         return deferred.promise();
     },
+    test: function(test) {
+        console.log('testpopopo');
+        console.log(test);
+        var deferred = jQuery.Deferred();
+
+        this.remoteStorage.makeRequest({action:'checkPermission'}, function(response) {
+            console.log('adentro');
+            deferred.resolve(response);
+        });
+        return deferred.promise();
+    },
     get: function(keyPrefix, key) {
         var deferred = jQuery.Deferred();
         

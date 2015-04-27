@@ -4,6 +4,7 @@
 <script type="text/javascript">
     //<![CDATA[
 
+
         (function(){
             var whitelist = ['olx.com.ar', 'olx.com.uy']; 
 
@@ -22,6 +23,7 @@
             }
 
             function handleRequest(event){
+                console.log('esta linea');
                 if (isSafe(event.origin)) {
                     var eventData  = JSON.parse(event.data);
                     var response = null;
@@ -57,6 +59,10 @@
                             break;
                         case "getAll":
                             response = store.getAll();
+                            break;
+                        case "checkPermission":
+                            console.log('switch');
+                            response = store.checkPermission();
                             break;
                     }
                     event.source.postMessage(JSON.stringify({id: eventData.id, response: response}), event.origin);
@@ -105,6 +111,7 @@
                 store.set(key, val);
             };
             store.getAll = function() {};
+            store.checkPermission = function() {};
             store.serialize = function(value) {
                 return JSON.stringify(value);
             };
@@ -160,6 +167,10 @@
                         ret[key] = store.get(key);
                     }
                     return ret;
+                }
+                store.checkPermission = function() {
+                    console.log('imposible');
+                    window.Notification.permission;
                 }
             }
             else if (isGlobalStorageNameSupported()) {
