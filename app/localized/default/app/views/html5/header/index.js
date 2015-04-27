@@ -59,12 +59,6 @@ module.exports = Base.extend({
                 });
             }
         }
-        if (!this.notifications) {
-            this.notifications = new Notifications({}, this);
-        }
-        if (this.notifications.isEnabled() && this.notifications.checkNotifications()) {
-            this.notifications.requestPermission();
-        }
     },
     showNotification: function() {
         var user = this.app.session.get('user');
