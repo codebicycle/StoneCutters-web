@@ -228,22 +228,6 @@ function show(params, callback) {
             }.bind(this));
         }
 
-        function participate(done, _item, relatedItems) {
-            if (_item.has('phone')) {
-                this.app.sixpack.participate(this.app.sixpack.experiments.dgdHidePhoneNumber, complete.bind(this));
-            }
-            else {
-                done(_item, relatedItems);
-            }
-
-            function complete() {
-                this.app.session.update({
-                    experiments: this.app.sixpack.experiments
-                });
-                done(_item, relatedItems);
-            }
-        }
-
         function success(_item, relatedItems) {
             var item = _item.toJSON();
             var subcategory = this.dependencies.categories.search(_item.get('category').id);
