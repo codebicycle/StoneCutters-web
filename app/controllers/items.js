@@ -54,7 +54,6 @@ function show(params, callback) {
             promise.then(fetchRelateds.bind(this));
         }
         promise
-            .then(participate.bind(this))
             .val(success.bind(this))
             .val(origin.bind(this));
 
