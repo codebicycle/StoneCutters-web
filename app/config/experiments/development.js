@@ -2,14 +2,13 @@
 
 module.exports = {
     html4ShowShops: {
-        enabled: false,
+        enabled: true,
         platforms: ['html4'],
         markets: ['ke'],
         name: 'show-shops',
         alternatives: {
             ITEMS: 'items',
-            CALL_TO_ACTION: 'calltoactions',
-            CALL_TO_ACTION_MAP: 'calltoactions_map'
+            CALL_TO_ACTION: 'calltoactions'
         },
         firstClick: true,
         autoParticipate: true
