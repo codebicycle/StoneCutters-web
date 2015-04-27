@@ -65,15 +65,7 @@ module.exports = {
         markets: ['gt'],
         name: 'dgd-open-item-in-new-tab',
         alternatives: {
-            CONTROL1: 'control',
-            CONTROL2: 'control',
-            CONTROL3: 'control',
-            CONTROL4: 'control',
-            CONTROL5: 'control',
-            CONTROL6: 'control',
-            CONTROL7: 'control',
-            CONTROL8: 'control',
-            CONTROL9: 'control',
+            CONTROL: 'control',
             OPEN_ITEM_IN_NEW_TAB: 'open-item-in-new-tab'
         },
         autoParticipate: true,
