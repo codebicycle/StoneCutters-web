@@ -5,6 +5,7 @@ var asynquence = require('asynquence');
 var middlewares = require('../middlewares');
 var helpers = require('../helpers');
 var Item = require('../models/item');
+var LocationModel = require('../models/location');
 var FeatureAd = require('../models/feature_ad');
 var config = require('../../shared/config');
 
@@ -100,7 +101,8 @@ function flow(params, callback) {
             promise
                 .then(fetch.bind(this))
                 .then(parse.bind(this))
-                .then(participate.bind(this));
+                .then(participate.bind(this))
+                .then(configure.bind(this));
         }
         promise.val(success.bind(this));
 
@@ -122,7 +124,6 @@ function flow(params, callback) {
 
         function prepare(done) {
             var spec = {};
-            var locationUrl;
 
             spec.postingSession = {
                 model: 'PostingSession',
@@ -130,21 +131,25 @@ function flow(params, callback) {
             };
 
             if (isDesktop && location.current) {
-                if (location.current.type === 'state') {
-                    locationUrl = location.url;
-                }
-                else if (location.current.type === 'city') {
-                    locationUrl = location.children[0].url;
-                }
                 spec.cities = {
                     collection: 'Cities',
                     params: {
                         level: 'states',
                         type: 'cities',
-                        location: locationUrl,
+                        location: location.url,
                         languageId: languageId
                     }
                 };
+                if (location.current.type === 'city') {
+                    spec.cities.params.location = location.children[0].url;
+                    spec.neighborhoods = {
+                        collection: 'Neighborhoods',
+                        params: {
+                            location: location.current.url,
+                            languageId: languageId
+                        }
+                    };
+                }
             }
             if (itemId) {
                 spec.item = {
@@ -216,6 +221,16 @@ function flow(params, callback) {
             }
         }
 
+        function configure(done, res) {
+            var location = this.app.session.get('location');
+
+            if (res.item)  {
+                location = res.item.get('location');
+            }
+            res.currentLocation = LocationModel.parseToType(location);
+            done(res);
+        }
+
         function success(res) {
             this.app.seo.addMetatag('robots', 'noindex, nofollow');
             this.app.seo.addMetatag('googlebot', 'noindex, nofollow');
@@ -270,22 +285,7 @@ function flow(params, callback) {
         }
 
         function postingController(res) {
-            var currentLocation = {};
-
             this.app.tracking.setPage('desktop_step1');
-            if (location.current) {
-                switch (location.current.type) {
-                    case 'state':
-                        currentLocation.state = location.current.url;
-                        break;
-                    case 'city':
-                        currentLocation.state = location.children[0].url;
-                        currentLocation.city = location.current.url;
-                        break;
-                    default:
-                        break;
-                }
-            }
             if (res.item) {
                 res.item.set({
                     _location: res.item.get('location')
@@ -298,9 +298,10 @@ function flow(params, callback) {
                     app: this.app
                 }),
                 postingSession: res.postingSession.get('postingSession'),
-                cities: res.cities,
                 fields: res.fields,
-                currentLocation: currentLocation,
+                cities: res.cities,
+                neighborhoods: res.neighborhoods,
+                currentLocation: res.currentLocation,
                 marketing: params.marketing
             }, false);
         }

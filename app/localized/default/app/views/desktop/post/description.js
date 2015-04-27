@@ -54,8 +54,8 @@ function onValidate(event, done, isValid) {
 
     var $field = this.$(this.selector);
 
-    this.parentView.$el.trigger('fieldValidate', [$field, function onComplete(isValidDescription) {
-        done(isValid && isValidDescription);
+    this.parentView.$el.trigger('fieldValidate', [$field, function onComplete(isValidField) {
+        done(isValid && isValidField);
     }]);
 }
 
@@ -64,11 +64,11 @@ function onBlur(event) {
     var value = this.val($field);
 
     if ($field.data('value') !== value) {
-        this.parentView.$el.trigger('fieldValidate', [$field, function onComplete(isValidDescription) {
-            if (isValidDescription) {
+        this.$el.trigger('validate', [function onComplete(isValidField) {
+            if (isValidField) {
                 this.parentView.$el.trigger('fieldSubmit', [$field]);
             }
-        }.bind(this)]);
+        }.bind(this), true]);
         $field.data('value', value);
     }
 }

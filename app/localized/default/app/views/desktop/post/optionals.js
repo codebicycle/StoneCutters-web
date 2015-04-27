@@ -35,8 +35,8 @@ function getTemplateData() {
 }
 
 function postRender() {
-    var $field;
     var $fields = this.$('.text-field');
+    var $field;
 
     $fields.each(function() {
         $field = $(this);

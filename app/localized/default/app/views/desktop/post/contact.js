@@ -8,13 +8,20 @@ module.exports = Base.extend({
     id: 'posting-contact-view',
     tagName: 'section',
     className: 'posting-contact-view',
+    selectors: {
+        contactName: '#posting-contact-name-view',
+        email: '#posting-contact-email-view',
+        phone: '#posting-contact-phone-view',
+        address: '#posting-contact-address-view',
+        locations: '#posting-locations-view',
+        modalTerm: '#modal-terms-view'
+    },
     events: {
-        'change': onChange,
         'validate': onValidate,
         'enablePost': onEnablePost,
         'disablePost': onDisablePost,
         'formRendered': onFormRendered,
-        'fieldsChange': onFieldsChange,
+        'changeEmail': onChangeEmail,
         'click .open-modal': onOpenModal,
         'click [data-modal-close]': onCloseModal,
         'click [data-modal-shadow]': onCloseModal
@@ -22,14 +29,8 @@ module.exports = Base.extend({
     getItem: getItem
 });
 
-function onChange(event, options) {
-    event.preventDefault();
-    event.stopPropagation();
-    event.stopImmediatePropagation();
-    
-    var $field = $(event.currentTarget);
-
-    this.parentView.$el.trigger('fieldSubmit', [$field, options]);
+function getItem() {
+    return this.parentView.getItem();
 }
 
 function onValidate(event, done, isValid) {
@@ -39,8 +40,11 @@ function onValidate(event, done, isValid) {
 
     var promise = asynquence(isValid).or(done.fail);
 
-    validation.call(this, '#posting-contact-email-view');
-    validation.call(this, '#posting-contact-phone-view');
+    validation.call(this, this.selectors.contactName);
+    validation.call(this, this.selectors.email);
+    validation.call(this, this.selectors.phone);
+    validation.call(this, this.selectors.address);
+    validation.call(this, this.selectors.locations);
     promise.val(done);
 
     function validation(view) {
@@ -51,27 +55,36 @@ function onValidate(event, done, isValid) {
 }
 
 function onEnablePost(event) {
+    event.preventDefault();
+    event.stopPropagation();
+    event.stopImmediatePropagation();
+
     this.$('.posting').removeAttr('disabled');
 }
 
 function onDisablePost(event) {
+    event.preventDefault();
+    event.stopPropagation();
+    event.stopImmediatePropagation();
+
     this.$('.posting').attr('disabled', 'disabled');
 }
 
-function onFormRendered(event) {
+function onFormRendered(event, editing) {
     event.preventDefault();
     event.stopPropagation();
     event.stopImmediatePropagation();
 
-    this.$('#posting-contact-email-view').trigger('formRendered');
+    this.$(this.selectors.email).trigger('formRendered');
+    this.$(this.selectors.locations).trigger('formRendered', [editing]);
 }
 
-function onFieldsChange(event, email) {
+function onChangeEmail(event, email) {
     event.preventDefault();
     event.stopPropagation();
     event.stopImmediatePropagation();
 
-    this.$('#posting-contact-email-view').trigger('change', [email]);
+    this.$(this.selectors.email).trigger('change', [email]);
 }
 
 function onOpenModal(event) {
@@ -79,7 +92,7 @@ function onOpenModal(event) {
     event.stopPropagation();
     event.stopImmediatePropagation();
 
-    $('#modal-terms-view').trigger('show');
+    $(this.selectors.modalTerm).trigger('show');
 }
 
 function onCloseModal(event) {
@@ -87,11 +100,7 @@ function onCloseModal(event) {
     event.stopPropagation();
     event.stopImmediatePropagation();
 
-    $('#modal-terms-view').trigger('hide');
-}
-
-function getItem() {
-    return this.parentView.getItem();
+    $(this.selectors.modalTerm).trigger('hide');
 }
 
 module.exports.id = 'post/contact';

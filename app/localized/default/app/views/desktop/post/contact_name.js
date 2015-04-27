@@ -5,16 +5,14 @@ var Base = require('../../../../../common/app/bases/view');
 var config = require('../../../../../../../shared/config');
 
 module.exports = Base.extend({
-    id: 'posting-contact-phone-view',
+    id: 'posting-contact-name-view',
     tagName: 'section',
-    className: 'posting-contact-phone-view',
-    selector: '#field-phone',
-    rPhone: /[^\d]/gi,
+    className: 'posting-contact-name-view',
+    selector: '#field-contactName',
     events: {
         'change': onChange,
         'validate': onValidate,
-        'blur #field-phone': onBlur,
-        'change #field-phone': onChangePhone
+        'blur #field-contactName': onBlur
     },
     getTemplateData: getTemplateData,
     postRender: postRender,
@@ -42,7 +40,7 @@ function postRender() {
 }
 
 function isMandatory() {
-    return config.getForMarket(this.app.session.get('location').url, ['validator', 'phone', 'enabled'], false);
+    return config.getForMarket(this.app.session.get('location').url, ['validator', 'contactName', 'enabled'], true);
 }
 
 function onChange(event, options) {
@@ -84,10 +82,4 @@ function onBlur(event) {
     }
 }
 
-function onChangePhone(event) {
-    var $field = $(event.currentTarget);
-
-    $field.val($field.val().replace(this.rPhone, ''));
-}
-
-module.exports.id = 'post/phone';
+module.exports.id = 'post/contact_name';

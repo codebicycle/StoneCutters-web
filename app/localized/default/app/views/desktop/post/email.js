@@ -75,7 +75,7 @@ function onChange(event, options) {
     event.stopPropagation();
     event.stopImmediatePropagation();
     
-    var $field = $(event.currentTarget);
+    var $field = $(event.target);
 
     if (_.isString(options)) {
         $field.val(options);
@@ -86,16 +86,17 @@ function onChange(event, options) {
     }
 }
 
-function onValidate(event, done, isValid) {
+function onValidate(event, done, isValid, options) {
     event.preventDefault();
     event.stopPropagation();
     event.stopImmediatePropagation();
 
-    var $field = this.$(this.selector);
-
-    this.parentView.$el.trigger('fieldValidate', [$field, function onComplete(isValidEmail) {
-        done(isValid && isValidEmail);
-    }]);
+    if (Mailgun.isEnabled(this.app)) {
+        return this.parentView.$el.trigger('fieldValidate', [this.$(this.selector), options || {}, function onComplete(isValidField) {
+            done(isValid && isValidField);
+        }]);
+    }
+    done(isValid);
 }
 
 function onFormRendered(event) {
@@ -126,14 +127,14 @@ function onBlur(event) {
         if (!value) {
             return this.parentView.$el.trigger('fieldSubmit', [$field, options]);
         }
-        this.parentView.$el.trigger('fieldValidate', [$field, {
+        this.$el.trigger('validate', [$.noop, true, {
             mailgun: {
                 progress: onValidateProgress.bind(this),
                 success: onValidateSuccess.bind(this),
                 error: onValidateError.bind(this),
                 always: onValidateAlways.bind(this)
             }
-        }, $.noop]);
+        }]);
         $field.data('value', value);
     }
 }
@@ -146,8 +147,8 @@ function onClickDidYouMean(event) {
     var $field = this.$(this.selector);
     var $didYouMean = $(event.currentTarget);
     
-    if (this.$('small.message.exclude').length) {
-        $field.parent().find('small.message.exclude').remove();
+    if (this.$('small.message.did-you-mean').length) {
+        $field.parent().find('small.message.did-you-mean').remove();
     }
     $field.val($didYouMean.text());
     $field.trigger('blur');
@@ -173,7 +174,7 @@ function onValidateSuccess(data) {
         $field.trigger('fieldValidationEnd', []);
         $field.closest('.field-wrapper').addClass('error').removeClass('success');
         if (!data.did_you_mean) {
-            $field.parent().find('.error.message').remove();
+            $field.parent().find('small.detail-message').remove();
         }
     }
     else {

@@ -45,8 +45,8 @@ function exec(val, validation, options, callback) {
 
         return mailgun.run(_.extend({}, options.mailgun, {
             success: function success(data) {
-                resolveMessage.call(this, data, options);
-                callback(options.isSubmit ? data.is_valid : data.is_valid && !data.did_you_mean);
+                resolveMessage.call(this, data);
+                callback(data.is_valid, !!data.did_you_mean);
                 succeeded(data);
             }.bind(this),
             error: function error() {
@@ -67,7 +67,7 @@ function resolveMessage(data) {
     if (data && data.did_you_mean) {
         message = this.get('messageDidYouMean');
         message = _.template(message, data, templateSettings);
-        className = (!data.is_valid ? 'error ' : '') + 'message did-you-mean';
+        className = (!data.is_valid ? 'error ' : 'exclude ') + 'message did-you-mean';
     }
     this.set({
         message: message,

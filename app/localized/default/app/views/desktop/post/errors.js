@@ -69,7 +69,7 @@ function onUpdate(event) {
     this.render();
 }
 
-function onShowError(event, field, options) {
+function onShowError(event, field, options, isValid) {
     event.preventDefault();
     event.stopPropagation();
     event.stopImmediatePropagation();
@@ -82,13 +82,15 @@ function onShowError(event, field, options) {
     if (options.message) {
         options.message = this.dictionary[options.message] || options.message;
     }
-    template = _.template(template.html(), options, this.templateSettings);
-    template = $($.trim(template));
-    template.attr('id', id + this.subfix);
+    template = _.template(template.html(), _.defaults({}, options, {
+        className: ''
+    }), this.templateSettings);
 
-    $field.closest('.field-wrapper').addClass('error').removeClass('success');
-    $field.parent().find('.error.message').remove();
-    $field.parent().append(template);
+    if (!isValid) {
+        $field.closest('.field-wrapper').addClass('error').removeClass('success');
+    }
+    $field.parent().find('small.detail-message').remove();
+    $field.parent().append($.trim(template));
 }
 
 function onHideError(event, fields, context) {
@@ -97,13 +99,13 @@ function onHideError(event, fields, context) {
     event.stopImmediatePropagation();
 
     context = context || document;
-    fields = _.isArray(fields) ? fields : (fields ? [fields] : $('small.error.message:not(.exclude)', context));
+    fields = _.isArray(fields) ? fields : (fields ? [fields] : $('small.detail-message:not(.exclude)', context));
 
     _.each(fields, function each(field) {
         var $field = $(field, context);
 
         $field.closest('.field-wrapper').removeClass('error success');
-        $field.parent().find('small.error.message').remove();
+        $field.parent().find('small.detail-message').remove();
     });
 }
 

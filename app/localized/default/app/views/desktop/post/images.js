@@ -41,7 +41,7 @@ function showImage(file, index, callback) {
             'background-image': 'url(' + this.src + ')'
         });
         $container.addClass('loaded');
-        if (callback) {
+        if (_.isFunction(callback)) {
             callback();
         }
     };

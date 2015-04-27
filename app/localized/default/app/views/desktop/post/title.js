@@ -53,8 +53,8 @@ function onValidate(event, done, isValid) {
 
     var $field = this.$(this.selector);
 
-    this.parentView.$el.trigger('fieldValidate', [$field, function onComplete(isValidTitle) {
-        done(isValid && isValidTitle);
+    this.parentView.$el.trigger('fieldValidate', [$field, function onComplete(isValidField) {
+        done(isValid && isValidField);
     }]);
 }
 
@@ -63,12 +63,12 @@ function onBlur(event) {
     var value = this.val($field);
 
     if ($field.data('value') !== value) {
-        this.parentView.$el.trigger('fieldValidate', [$field, function onComplete(isValidTitle) {
-            if (isValidTitle) {
+        this.$el.trigger('validate', [function onComplete(isValidField) {
+            if (isValidField) {
                 this.parentView.$el.trigger('fieldSubmit', [$field]);
                 this.parentView.categorySuggestion(value); //AB test : category-suggestion
             }
-        }.bind(this)]);
+        }.bind(this), true]);
         $field.data('value', value);
         $field.trigger('keyup');
     }

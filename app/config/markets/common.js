@@ -266,6 +266,21 @@ module.exports = {
         },
         phone: {
             enabled: false
+        },
+        contactName: {
+            enabled: true
+        },
+        address: {
+            enabled: false
+        },
+        state: {
+            enabled: true
+        },
+        city: {
+            enabled: true
+        },
+        neighborhoods: {
+            enabled: true
         }
     },
     flagItem: {

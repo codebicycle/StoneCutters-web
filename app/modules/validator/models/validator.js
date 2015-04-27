@@ -55,7 +55,7 @@ function register(field, options, reset) {
         validations.push(validation);
     }
     validation.set(_.omit(options, 'rules'));
-    rules = _.isArray(options.rules) ? options.rules : [options.rules];
+    rules = _.isArray(options.rules) ? options.rules : (options.rules ? [options.rules] : []);
     validation.pushRule(rules);
 }
 
@@ -93,9 +93,7 @@ function validate(fields, options, callback) {
     if (!fields) {
         fields = [];
     }
-    options = _.defaults({}, options || {}, {
-        isSubmit: this.get('isSubmit')
-    });
+    options = _.defaults({}, options || {});
     fields = _.map(_.isArray(fields) ? fields : [fields], function eachFields(field) {
         return _.isString(field) ? field : (field.attr('name') || field.attr('id'));
     });
@@ -156,8 +154,8 @@ function run(validation, options, done) {
             return;
         }
         promise.then(function execRule(next, isValid) {
-            rule.exec(val, validation, options, function callback(isValidRule) {
-                if (!isValidRule) {
+            rule.exec(val, validation, options, function callback(isValidRule, forceMessage) {
+                if (!isValidRule || forceMessage) {
                     this.pushDetail(validation.get('id'), rule.get('message'), rule.get('className'));
                 }
                 next(isValidRule);

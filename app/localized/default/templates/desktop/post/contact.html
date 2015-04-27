@@ -1,37 +1,10 @@
-{% from macros import Field %}
-
 <h2 class="section-title">{{ dictionary["posting_step4.ContactInformation"] }}</h2>
 
-{% set contactNameField = {
-	isOptional: false,
-	name: "contactName",
-	mandatory: true,
-	label: dictionary["itemslisting.NewContactName"],
-	fieldType: "text",
-	dataType: "string",
-	value: item.get('contactName'),
-	autocomplete: true
-} %}
-
-{% set adressField = {
-	isOptional: true,
-	name: "streetAddress",
-	mandatory: false,
-	label: dictionary["itemdescription.streetaddress"],
-	fieldType: "text",
-	dataType: "string",
-	value: item.get('streetAddress')
-} %}
-
-
-{{ Field(contactNameField) }}
-
+{% view 'post/contact_name' %}
 {% view 'post/email' %}
 {% view 'post/phone' %}
 {% view 'post/locations' %}
-
-{{ Field(adressField) }}
-
+{% view 'post/address' %}
 
 <fieldset class="seller-post">
     <input type="submit" value="{{ dictionary["wap_posting_step5.Post"] }}" class="posting" data-qa="submit-button" />

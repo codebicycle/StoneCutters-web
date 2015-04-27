@@ -1,5 +1,5 @@
 {% macro Field(hint = false, hintIcon = '', field) %}
-    <fieldset class="field-wrapper{{ ' hide' if field.hide }} {{ ' checkbox' if field.fieldType == 'checkbox' }}">
+    <fieldset class="field-wrapper{{ ' hide' if field.hide and field.hide != 'false' }} {{ ' checkbox' if field.fieldType == 'checkbox' }}">
         {% if field.label and field.fieldType != 'checkbox' %}
             <label for="field-{{ field.name }}" class="field-label">{% if field.mandatory == true or field.mandatory == 'true' or field.name == 'neighborhood' %}* {% endif %}{{ field.label }}</label>
         {% endif %}
@@ -19,7 +19,7 @@
                 {{ Checkbox(type = field.fieldType, name = field.name, required = field.mandatory, value = field.value, label = field.label) }}
             {% endif %}
             {% if hint %}
-                <small class="icons {{ hintIcon }} hint message">{{ hint }}</small>
+                <small class="icons {{ hintIcon }} hint message exclude">{{ hint }}</small>
             {% endif %}
         </div>
     </fieldset>
