@@ -48,20 +48,20 @@
     {% if item.status.contactable %}
         <div id="centerBtns">
             {% if item.phone %}
-                    {% if isSafetyTipsEnabled %}
+                    {% if safetyTips.call.enabled %}
                         <a href="{{ ['/iid-', item.id, '/call'] | join('') | link }}" class="btns orange">{{ dictionary["misc.Call"] }}</a>
+                    {% elif device.uriSchemeTel %}
+                        <a href="tel:{{ item.phone }}" class="btns orange">{{ dictionary["misc.Call"] }}</a>
+                    {% endif %}
+
+                    {% if safetyTips.sms.enabled %}
                         <a href="{{ ['/iid-', item.id, '/sms'] | join('') | link }}" class="btns orange">{{ dictionary["itempagepostcomment.Sms"] }}</a>
-                    {% else %}
-                        {% if device.uriSchemeTel %}
-                            <a href="tel:{{ item.phone }}" class="btns orange">{{ dictionary["misc.Call"] }}</a>
-                        {% endif %}
-                        {% if device.uriSchemeSms %}
-                            <a href="sms:{{ item.phone }}" class="btns orange">{{ dictionary["itempagepostcomment.Sms"] }}</a>
-                        {% endif %}
+                    {% elif device.uriSchemeSms %}
+                        <a href="sms:{{ item.phone }}" class="btns orange">{{ dictionary["itempagepostcomment.Sms"] }}</a>
                     {% endif %}
             {% endif %}
             {% if item.email %}
-                {% if isSafetyTipsEnabled and isSafetyTipsOnEmailEnabled %}
+                {% if safetyTips.email.enabled %}
                     <a href="{{ ['/iid-', item.id, '/email'] | join('') | link }}" class="btns orange" data-qa="reply-button" >{{ dictionary["register_mail.Email"] }}</a>
                 {% else %}
                     <a href="{{ ['/iid-', item.id, '/reply'] | join('') | link }}" class="btns orange" data-qa="reply-button" >{{ dictionary["register_mail.Email"] }}</a>

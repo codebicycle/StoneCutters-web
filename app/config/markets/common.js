@@ -299,5 +299,18 @@ module.exports = {
                 icon: ''
             }
         }
+    },
+    safetyTips: {
+        html4: {
+            call: {
+                enabled: false
+            },
+            sms: {
+                enabled: false
+            },
+            email: {
+                enabled: false
+            }
+        }
     }
 };

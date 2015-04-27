@@ -458,5 +458,18 @@ module.exports = {
     },
     flagItem: {
         enabled: true
+    },
+    safetyTips: {
+        html4: {
+            call: {
+                enabled: true
+            },
+            sms: {
+                enabled: true
+            },
+            email: {
+                enabled: false
+            }
+        }
     }
 };
