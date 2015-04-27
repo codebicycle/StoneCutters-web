@@ -64,5 +64,17 @@ module.exports = {
             HIDE_PHONE_NUMBER: 'hide-phone-number'
         },
         autoParticipate: false
+    },
+    dgdOpenItemInNewTab: {
+        enabled: true,
+        platforms: ['desktop'],
+        markets: ['gt'],
+        name: 'dgd-open-item-in-new-tab',
+        alternatives: {
+            CONTROL: 'control',
+            OPEN_ITEM_IN_NEW_TAB: 'open-item-in-new-tab'
+        },
+        autoParticipate: true,
+        fraction: 1
     }
 };

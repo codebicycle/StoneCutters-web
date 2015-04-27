@@ -268,24 +268,34 @@ module.exports = {
     flagItem: {
         enabled: true
     },
+    userzoom: {
+        enabled: true,
+        sections: {
+            'items#show' : {
+                platforms: ['html5', 'desktop'],
+                file: 'QzMyOFQxMiAg',
+                t: 'uz_til'
+            }
+        }
+    },
     hints: {
         desktop: {
             email: {
-                enabled: false,
+                enabled: true,
                 hint: 'You need a valid email address to sell on OLX',
                 icon: 'icon-exclamation'
             }
         },
         html5: {
             email: {
-                enabled: false,
+                enabled: true,
                 hint: 'You need a valid email address to sell on OLX',
                 icon: 'icon-exclamation'
             }
         },
         html4: {
             email: {
-                enabled: false,
+                enabled: true,
                 hint: 'You need a valid email address to sell on OLX',
                 icon: 'icon-exclamation'
             }
@@ -296,7 +306,6 @@ module.exports = {
                 hint: 'You need a valid email address to sell on OLX',
                 icon: 'icon-exclamation'
             }
-        },
-
+        }
     }
 };
