@@ -24,7 +24,7 @@ function isEnabled() {
         platforms = config.getForMarket(loactionUrl, ['userzoom', 'sections', section, 'platforms'], []);
         enabled = config.getForMarket(loactionUrl, ['userzoom', 'sections', section], false) && _.contains(platforms, this.app.session.get('platform'));
     }
-console.log(enabled);
+
     return enabled;
 }
 
