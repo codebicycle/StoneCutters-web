@@ -461,11 +461,12 @@ module.exports = {
     },
     userzoom: {
         enabled: true,
-        'items#show' : {
-            enabled: true,
-            platforms: ['html5', 'desktop'],
-            file: 'QzMyOFQxMSAg',
-            t: 'uz_til'
+        sections: {
+            'items#show' : {
+                platforms: ['html5', 'desktop'],
+                file: 'QzMyOFQxMSAg',
+                t: 'uz_til'
+            }
         }
     }
 };

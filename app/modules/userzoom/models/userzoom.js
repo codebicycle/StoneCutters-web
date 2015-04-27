@@ -21,10 +21,10 @@ function isEnabled() {
 
     if (enabled) {
         section = _.values(this.app.session.get('currentRoute')).join('#');
-        platforms = config.getForMarket(loactionUrl, ['userzoom', section, 'platforms'], []);
-        enabled = config.getForMarket(loactionUrl, ['userzoom', section, 'enabled'], false) && _.contains(platforms, this.app.session.get('platform'));
+        platforms = config.getForMarket(loactionUrl, ['userzoom', 'sections', section, 'platforms'], []);
+        enabled = config.getForMarket(loactionUrl, ['userzoom', 'sections', section], false) && _.contains(platforms, this.app.session.get('platform'));
     }
-
+console.log(enabled);
     return enabled;
 }
 
@@ -33,8 +33,8 @@ function getParams() {
     var section = _.values(this.app.session.get('currentRoute')).join('#');
     var loactionUrl = this.app.session.get('location').url;
 
-    params.file = config.getForMarket(loactionUrl, ['userzoom', section, 'file'], '')
-    params.t = config.getForMarket(loactionUrl, ['userzoom', section, 't'], '')
+    params.file = config.getForMarket(loactionUrl, ['userzoom', 'sections', section, 'file'], '');
+    params.t = config.getForMarket(loactionUrl, ['userzoom', 'sections', section, 't'], '');
 
     return params;
 }
