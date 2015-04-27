@@ -3,7 +3,6 @@
 var _ = require('underscore');
 var Backbone = require('backbone');
 var config = require('../../../../shared/config');
-var configUserzoom = require('../config');
 var utils = require('../../../../shared/utils');
 var Base;
 
@@ -34,8 +33,8 @@ function getParams() {
     var section = _.values(this.app.session.get('currentRoute')).join('#');
     var loactionUrl = this.app.session.get('location').url;
 
-    params.file = utils.get(configUserzoom, [loactionUrl, section, 'file']);
-    params.t = utils.get(configUserzoom, [loactionUrl, section, 't']);
+    params.file = config.getForMarket(loactionUrl, ['userzoom', section, 'file'], '')
+    params.t = config.getForMarket(loactionUrl, ['userzoom', section, 't'], '')
 
     return params;
 }

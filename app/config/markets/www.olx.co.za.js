@@ -463,7 +463,9 @@ module.exports = {
         enabled: true,
         'items#show' : {
             enabled: true,
-            platforms: ['html5', 'desktop']
+            platforms: ['html5', 'desktop'],
+            file: 'QzMyOFQxMSAg',
+            t: 'uz_til'
         }
     }
 };
