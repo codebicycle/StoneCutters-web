@@ -712,11 +712,10 @@ function safetytips(params, callback) {
         }
 
         function featureValidation(done, _item) {
-            var safetyTips = config.getForMarket(location.url, ['safetyTips', platform]);
-            var isValidAction = _.contains(['sms', 'call', 'email'], params.intent);
+            var safetyTips = _.contains(['sms', 'call', 'email'], params.intent) && config.getForMarket(location.url, ['safetyTips', platform, params.intent, 'enabled'], false);
             var slug = helpers.common.slugToUrl(_item.toJSON());
 
-            if (!(isValidAction && safetyTips[params.intent].enabled) || (_item.get('phone') === '' && params.intent !== 'email' )) {
+            if (!safetyTips || (_item.get('phone') === '' && params.intent !== 'email' )) {
                 done.abort();
                 return helpers.common.redirect.call(this, ('/' + slug));
             }
