@@ -7,7 +7,6 @@ var helpers = require('../../../../../../helpers');
 var breadcrumb = require('../../../../../../modules/breadcrumb');
 var utils = require('../../../../../../../shared/utils');
 var config = require('../../../../../../../shared/config');
-var Notifications = require('../../../../../../modules/notifications');
 
 module.exports = Base.extend({
     urlreferer: '',
