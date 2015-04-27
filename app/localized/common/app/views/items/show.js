@@ -4,6 +4,7 @@ var Base = require('../../bases/view');
 var _ = require('underscore');
 var breadcrumb = require('../../../../../modules/breadcrumb');
 var config = require('../../../../../../shared/config');
+var userzoom = require('../../../../../modules/userzoom');
 
 module.exports = Base.extend({
     className: 'items_show_view',
@@ -18,6 +19,9 @@ module.exports = Base.extend({
         var safetyTips = config.getForMarket(location.url, ['safetyTips', platform]);
 
         data.category_name = this.options.category_name;
+        this.userzoom = new userzoom({}, {
+            app: this.app
+        });
 
         if (!data.item.purged) {
             data.item.location.stateName = data.item.location.children[0].name;
@@ -32,7 +36,9 @@ module.exports = Base.extend({
         return _.extend({}, data, {
             breadcrumb: breadcrumb.get.call(this, data),
             flagItem: flagItem,
-            safetyTips: safetyTips
+            isUserzoomEnabled: this.userzoom.isEnabled(),
+            userzoom: this.userzoom.getParams(),
+            safetyTips: safetyTips,
         });
     }
 });

@@ -459,6 +459,16 @@ module.exports = {
     flagItem: {
         enabled: true
     },
+    userzoom: {
+        enabled: true,
+        sections: {
+            'items#show' : {
+                platforms: ['html5', 'desktop'],
+                file: 'QzMyOFQxMSAg',
+                t: 'uz_til'
+            }
+        }
+    },
     safetyTips: {
         html4: {
             call: {

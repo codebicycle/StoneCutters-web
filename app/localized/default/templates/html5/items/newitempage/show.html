@@ -280,4 +280,9 @@
         <div class="msg-bg"></div>
     </div>
 </div>
+
+{% if isUserzoomEnabled %}
+    {% include (template + "/partials/userzoom.html") %}
+{% endif %}
+
 {% view 'partials/tracking' %}
