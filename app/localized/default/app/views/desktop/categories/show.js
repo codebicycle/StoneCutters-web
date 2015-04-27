@@ -34,7 +34,9 @@ module.exports = Base.extend({
                 link: link,
                 linkig: helpers.common.linkig.call(this, link, null, 'showig'),
                 listAct: 'active'
-            }
+            },
+            isABTestOpenNewTabEnabled: this.app.sixpack.experiments.dgdOpenItemInNewTab,
+            shouldOpenInNewTab: this.app.sixpack.experiments.dgdOpenItemInNewTab.alternative === 'open-item-in-new-tab'
         });
     },
     cleanPage: function(path) {
