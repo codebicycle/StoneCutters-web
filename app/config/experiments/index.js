@@ -58,12 +58,12 @@ module.exports = {
         enabled: true,
         platforms: ['desktop'],
         markets: ['uy'],
-        name: 'hide-phone-number',
+        name: 'hide-phone-number-fixed',
         alternatives: {
             CONTROL: 'control',
             HIDE_PHONE_NUMBER: 'hide-phone-number'
         },
-        autoParticipate: false
+        autoParticipate: true
     },
     dgdOpenItemInNewTab: {
         enabled: true,
