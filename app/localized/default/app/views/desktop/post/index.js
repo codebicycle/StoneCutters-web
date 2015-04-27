@@ -598,20 +598,18 @@ module.exports = Base.extend({
         }
 
         var strHtml = '';
-        var options = {};
         var responseLength = response.length;
+        var options = {
+            classname: 'selected',
+            buttontext: 'Cambiar categoría',
+            action: 'change'
+        };
 
         if (this.sixpackCurrentAlternative === 'suggested' && initial) {
             options = {
                 classname: 'suggest',
                 buttontext: 'Elegir esta categoría',
                 action: 'select'
-            };
-        } else {
-            options = {
-                classname: 'selected',
-                buttontext: 'Cambiar categoría',
-                action: 'change'
             };
         }
 

@@ -29,7 +29,7 @@ module.exports = {
         enabled: true,
         platforms: ['desktop'],
         markets: ['ar'],
-        name: 'growth-category-suggestion',
+        name: 'growth-categories-suggestion',
         alternatives: {
             CONTROL_1: 'control1',
             CONTROL_2: 'control2',
