@@ -29,6 +29,7 @@ module.exports = {
         popularSearches: true,
         topSearches: true,
         relatedListings: true,
+        title: true,
         topTitle: true,
         references: true,
         wikititles: true,
