@@ -4,7 +4,8 @@ var _ = require('underscore');
 var statsd = require('../../shared/statsd')();
 
 module.exports = function(params, next) {
-    statsd.increment([this.app.session.get('location').abbreviation, 'controllers', this.currentRoute.controller, this.currentRoute.action, this.app.session.get('platform')]);
+    var session = (this.app.session.get('user')) ? 'logged':'anonymous';
+    statsd.increment([this.app.session.get('location').abbreviation, 'controllers', this.currentRoute.controller, this.currentRoute.action, session, this.app.session.get('platform')]);
     searchRefine.call(this, params);
     setOrigin.call(this, params);
     next();
