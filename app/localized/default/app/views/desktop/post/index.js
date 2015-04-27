@@ -58,7 +58,6 @@ module.exports = Base.extend({
     categorySuggestionGetCategory: categorySuggestionGetCategory,
     categorySuggestionDecideIU: categorySuggestionDecideIU,
     categorySuggestionBuildIU: categorySuggestionBuildIU,
-    categorySuggestionTracker: categorySuggestionTracker,
     categorySuggestionMetric: categorySuggestionMetric
 });
 
@@ -68,10 +67,10 @@ function initialize() {
     this.pendingValidations = [];
     this.formErrors = [];
     this.errors = {};
+    this.categorySuggestionConfig = config.get(['categorySuggestion'], {});
     this.validator = new Validator({}, {
         app: this.app
     });
-    this.categorySuggestionConfig = config.get(['categorySuggestion'], {});
 }
 
 function className() {
@@ -90,7 +89,7 @@ function getTemplateData() {
         item: this.getItem(data.item),
         customerContact: customerContact,
         chatEnabled: Chat.isEnabled.call(this),
-        experiments: this.getItem().has('id') || growthCategorySuggestion === 'control' ? {} : this.app.sixpack.experiments
+        experiments: this.getItem().has('id') || growthCategorySuggestion.indexOf('control') != -1 ? {} : this.app.sixpack.experiments
     });
 }
 
@@ -452,7 +451,7 @@ function onSubmit(event) {
         });
 
         this.app.sixpack.convert(this.app.sixpack.experiments.growthCategorySuggestion);
-        this.categorySuggestionMetric(this.categorySuggestionFunnel);
+        this.categorySuggestionMetric(['post']);
 
         helpers.common.redirect.call(this.app.router, successPage + this.item.get('id') + '?sk=' + this.item.get('securityKey'), null, {
             status: 200
@@ -478,9 +477,6 @@ function onSubmit(event) {
                         this.errors[error.selector] = error.message;
                     }
                 }.bind(this));
-            }
-            else {
-                this.formErrors.push('Unkown error'); // Translate this
             }
             if (this.errors && _.size(this.errors)) {
                 this.formErrors.length = 0;
@@ -582,7 +578,7 @@ function renderTemplate(tpl, data) {
 }
 
 function categorySuggestion(value) {
-    if (!this.app.sixpack.experiments.growthCategorySuggestion || this.sixpackCurrentAlternative === 'control' || this.editing) {
+    if (!this.app.sixpack.experiments.growthCategorySuggestion || this.sixpackCurrentAlternative.indexOf('control') != -1 || this.editing) {
         return;
     }
     var $catSelector = $(this.selectors.categories + ' .posting-category-suggestion');
@@ -609,7 +605,10 @@ function categorySuggestion(value) {
     }
 
     function success(data) {
-        this.categorySuggestionDecideIU(data.response.suggestions);
+        var response = data.response.suggestions;
+
+        this.categorySuggestionDecideIU(response);
+        this.categorySuggestionMetric(['api', 'success', response.length]);
     }
 
     function complete() {
@@ -660,18 +659,18 @@ function categorySuggestionDecideIU(response) {
                     parentCategory: cat.category.id,
                     subCategory: cat.subcategory.id
                 }]);
-                return this.categorySuggestionTracker(['on', 'autoselect']);
+                return this.categorySuggestionMetric(['on', 'autoselect']);
             }
         }
     }
     else {
-        this.categorySuggestionTracker(['off']);
+        this.categorySuggestionMetric(['off']);
     }
     this.categorySuggestionBuildIU(response, true);
 }
 
 function categorySuggestionBuildIU(response, initial) {
-    if (!this.app.sixpack.experiments.growthCategorySuggestion || this.sixpackCurrentAlternative === 'control' || this.editing) {
+    if (!this.app.sixpack.experiments.growthCategorySuggestion || this.sixpackCurrentAlternative.indexOf('control') != -1 || this.editing) {
         return;
     }
 
@@ -739,15 +738,11 @@ function categorySuggestionBuildIU(response, initial) {
                 value = value.split('-')[0];
             }
         }
-        $this.categorySuggestionTracker(['on', 'user' + action, value]);
+        $this.categorySuggestionMetric(['on', 'user' + action, value]);
     });
 
     $('#posting-category-suggestion-button').toggle(!strHtml);
     $('.posting-categories-list').hide();
-}
-
-function categorySuggestionTracker(crumbs) {
-    this.categorySuggestionFunnel = crumbs;
 }
 
 function categorySuggestionMetric(keys) {

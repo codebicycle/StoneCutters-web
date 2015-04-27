@@ -18,13 +18,16 @@ module.exports = Base.extend({
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
         var link = 'nf/all-results';
+        var dgdOpenItemInNewTab = this.app.sixpack.experiments.dgdOpenItemInNewTab;
 
         return _.extend({}, data, {
             nav: {
                 link: link,
                 linkig: helpers.common.linkig.call(this, link, null, 'allresultsig'),
                 listAct: 'active'
-            }
+            },
+            isABTestOpenNewTabEnabled: dgdOpenItemInNewTab,
+            shouldOpenInNewTab: dgdOpenItemInNewTab && dgdOpenItemInNewTab.alternative === 'open-item-in-new-tab'
         });
     },
     onClickIncrement: function(event) {

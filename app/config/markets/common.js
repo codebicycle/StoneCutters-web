@@ -286,6 +286,9 @@ module.exports = {
     flagItem: {
         enabled: false
     },
+    userzoom: {
+        enabled: false
+    },
     hints: {
         desktop: {
             email: {

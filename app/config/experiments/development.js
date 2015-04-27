@@ -29,9 +29,15 @@ module.exports = {
         enabled: true,
         platforms: ['desktop'],
         markets: ['ar'],
-        name: 'growth-category-suggestion',
-        fraction: 0.3,
+        name: 'growth-categories-suggestion',
         alternatives: {
+            CONTROL_1: 'control1',
+            CONTROL_2: 'control2',
+            CONTROL_3: 'control3',
+            CONTROL_4: 'control4',
+            CONTROL_5: 'control5',
+            CONTROL_6: 'control6',
+            CONTROL_7: 'control7',
             CONTROL: 'control',
             SUGGESTED: 'suggested',
             SINGLE: 'single'
@@ -47,5 +53,28 @@ module.exports = {
             GALLERY: 'gallery'
         },
         autoParticipate: true
+    },
+    dgdHidePhoneNumber: {
+        enabled: true,
+        platforms: ['desktop'],
+        markets: ['uy'],
+        name: 'hide-phone-number',
+        alternatives: {
+            CONTROL: 'control',
+            HIDE_PHONE_NUMBER: 'hide-phone-number'
+        },
+        autoParticipate: false
+    },
+    dgdOpenItemInNewTab: {
+        enabled: true,
+        platforms: ['desktop'],
+        markets: ['gt'],
+        name: 'dgd-open-item-in-new-tab',
+        alternatives: {
+            CONTROL: 'control',
+            OPEN_ITEM_IN_NEW_TAB: 'open-item-in-new-tab'
+        },
+        autoParticipate: true,
+        fraction: 1
     }
 };

@@ -4,7 +4,6 @@ var _ = require('underscore');
 var Base = require('../../../../../common/app/bases/view').requireView('searches/search');
 var helpers = require('../../../../../../helpers');
 var Metric = require('../../../../../../modules/metric');
-var UserSurvey = require('../../../../../../modules/usersurvey');
 
 module.exports = Base.extend({
     id: 'searches-search-view',
@@ -21,22 +20,21 @@ module.exports = Base.extend({
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
         var link = this.refactorPath(this.app.session.get('path'));
+        var dgdOpenItemInNewTab = this.app.sixpack.experiments.dgdOpenItemInNewTab;
 
-        this.userSurvey = new UserSurvey({}, {
-            app: this.app
-        });
         this.filters = data.filters;
         this.filters.order = this.order;
         data.meta.showTotal = this.getCategoryCount(data.filters, data.meta.total);
 
         return _.extend({}, data, {
             items: data.items,
-            isUserSurveyEnabled: this.userSurvey.isEnabled(),
             nav: {
                 link: link,
                 linkig: helpers.common.linkig.call(this, link, null, 'searchig'),
                 listAct: 'active',
-            }
+            },
+            isABTestOpenNewTabEnabled: dgdOpenItemInNewTab,
+            shouldOpenInNewTab: dgdOpenItemInNewTab && dgdOpenItemInNewTab.alternative === 'open-item-in-new-tab'
         });
     },
     cleanPage: function(path) {
