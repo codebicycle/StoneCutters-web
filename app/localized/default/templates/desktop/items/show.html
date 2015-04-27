@@ -25,4 +25,10 @@
         {% view 'partials/adserving', 'item_side' %}
     </aside>
 </section>
+
+{% if isUserzoomEnabled %}
+    {% include (template + "/partials/userzoom.html") %}
+{% endif %}
+
 {% view 'partials/tracking' %}
+
