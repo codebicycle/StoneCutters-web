@@ -20,7 +20,9 @@ module.exports = Base.extend({
                 linkig: link,
                 galeryAct: 'active',
                 current: 'searchig'
-            }
+            },
+            isABTestOpenNewTabEnabled: this.app.sixpack.experiments.dgdOpenItemInNewTab,
+            shouldOpenInNewTab: this.app.sixpack.experiments.dgdOpenItemInNewTab.alternative === 'open-item-in-new-tab'
         });
     },
     cleanPage: function(path) {

@@ -53,6 +53,7 @@ function show(params, callback) {
             promise.then(fetchRelateds.bind(this));
         }
         promise
+            .then(participate.bind(this))
             .val(success.bind(this))
             .val(origin.bind(this));
 
@@ -225,6 +226,22 @@ function show(params, callback) {
                 }
                 done(item, response.relatedItems);
             }.bind(this));
+        }
+
+        function participate(done, _item, relatedItems) {
+            if (_item.has('phone')) {
+                this.app.sixpack.participate(this.app.sixpack.experiments.dgdHidePhoneNumber, complete.bind(this));
+            }
+            else {
+                done(_item, relatedItems);
+            }
+
+            function complete() {
+                this.app.session.update({
+                    experiments: this.app.sixpack.experiments
+                });
+                done(_item, relatedItems);
+            }
         }
 
         function success(_item, relatedItems) {

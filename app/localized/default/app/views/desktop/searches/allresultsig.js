@@ -17,7 +17,9 @@ module.exports = Base.extend({
                 linkig: link,
                 galeryAct: 'active',
                 current: 'allresultsig'
-            }
+            },
+            isABTestOpenNewTabEnabled: this.app.sixpack.experiments.dgdOpenItemInNewTab,
+            shouldOpenInNewTab: this.app.sixpack.experiments.dgdOpenItemInNewTab.alternative === 'open-item-in-new-tab'
         });
     }
 });

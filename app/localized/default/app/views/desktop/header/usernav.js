@@ -1,9 +1,9 @@
 'use strict';
 
+var _ = require('underscore');
 var Base = require('../../../../../common/app/bases/view').requireView('header/usernav');
 var helpers = require('../../../../../../helpers');
 var asynquence = require('asynquence');
-var _ = require('underscore');
 var Metric = require('../../../../../../modules/metric');
 
 module.exports = Base.extend({
