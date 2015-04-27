@@ -17,6 +17,20 @@ module.exports = Base.extend({
 
         return 'item-contact-form' + (sixpackClass ? (' ' + sixpackClass) : '');
     },
+    getTemplateData: function() {
+        var data = Base.prototype.getTemplateData.call(this);
+        var phone = data.item.phone;
+        var dgdHidePhoneNumber = this.app.sixpack.experiments.dgdHidePhoneNumber;
+        var hiddenPhone;
+
+        if (phone && dgdHidePhoneNumber && dgdHidePhoneNumber.alternative === 'hide-phone-number') {
+            hiddenPhone = this.transformPhone(phone, 4, '*');
+        }
+
+        return _.extend({}, data, {
+            hiddenPhone: hiddenPhone
+        });
+    },
     postRender: function() {
         this.dictionary = translations.get(this.app.session.get('selectedLanguage'));
         this.user = new User(_.extend({
@@ -38,7 +52,8 @@ module.exports = Base.extend({
         'blur textarea, input:not([type=submit], [type=hidden])': 'onBlur',
         'submit': 'onSubmit',
         'reset': 'onReset',
-        'click .replySuccess': 'onReplySuccessClick'
+        'click .replySuccess': 'onReplySuccessClick',
+        'click .dgd-hide-phone-number .action-button': 'onShowPhoneNumberClick'
     },
     onFocus: function(event) {
         event.preventDefault();
@@ -102,10 +117,12 @@ module.exports = Base.extend({
             this.$success.removeClass('hide');
             this.trackSuccess(reply);
             this.app.sixpack.convert(this.app.sixpack.experiments.desktopDGD23ShowSimplifiedReplyForm);
+            this.app.sixpack.convert(this.app.sixpack.experiments.dgdOpenItemInNewTab);
 
             if (_.contains([378], item.get('category').id)) {
                 this.app.sixpack.convert(this.app.sixpack.experiments.dgdCategoryCars);
             }
+            this.app.sixpack.convert(this.app.sixpack.experiments.dgdHidePhoneNumber, 'reply-by-mail');
         }
 
         function fail(err) {
@@ -178,6 +195,28 @@ module.exports = Base.extend({
         this.$('fieldset.' + name).toggleClass('error', !isValid);
         this.$('fieldset.' + name + ' span.icons').toggleClass('icon-attention', !isValid);
         return isValid;
+    },
+    onShowPhoneNumberClick: function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+
+        this.$('.user-phone').text(this.parentView.getItem().get('phone'));
+        this.app.sixpack.convert(this.app.sixpack.experiments.dgdHidePhoneNumber);
+    },
+    transformPhone: function(phone, digits, symbol) {
+        var count = 0;
+        var position = 0;
+
+        phone = phone.split('').reverse();
+        while (count < digits) {
+            if (~parseInt(phone[position])) {
+                phone[position] = symbol;
+                count++;
+            }
+            position++;
+        }
+        return phone.reverse().join('');
     }
 });
 

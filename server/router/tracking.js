@@ -399,33 +399,32 @@ module.exports = function trackingRouter(app, dataAdapter) {
     })();
 
     (function sixpackParticipate() {
-        app.get('/tracking/sixpack/participate.gif', handler);
+        app.get('/tracking/sixpack/participate', handler);
 
         function handler(req, res) {
-            res.on('finish', function onResponseFinish() {
-                var experiment = req.param('experiment');
-                var platform = req.param('platform');
-                var market = req.param('market');
-
-                if (!experiment || !platform || !market) {
-                    return;
-                }
-
-                var sixpack = new Sixpack({
-                    clientId: req.rendrApp.session.get('clientId'),
-                    ip: req.rendrApp.session.get('ip'),
-                    userAgent: utils.getUserAgent(req),
-                    platform: platform,
-                    market: market
-                });
-
-                sixpack.participate(sixpack.experiments[experiment]);
+            var experiment = req.param('experiment');
+            var platform = req.param('platform');
+            var market = req.param('market');
+            var sixpack;
+            
+            if (!experiment || !platform || !market) {
+                return response({});
+            }
+            sixpack = new Sixpack({
+                clientId: req.rendrApp.session.get('clientId'),
+                ip: req.rendrApp.session.get('ip'),
+                userAgent: utils.getUserAgent(req),
+                platform: platform,
+                market: market
+            });
+            sixpack.participate(sixpack.experiments[experiment], function onComplete() {
+                response(sixpack.experiments[experiment] || {});
             });
 
-            res.set('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-age=0, max-stale=0, post-check=0, pre-check=0');
-            res.set('Content-Type', 'image/gif');
-            res.set('Content-Length', gif.length);
-            res.end(gif);
+            function response(data) {
+                res.set('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
+                res.json(data);
+            }
         }
     })();
 

@@ -29,6 +29,7 @@ module.exports = {
         popularSearches: true,
         topSearches: true,
         relatedListings: true,
+        title: true,
         topTitle: true,
         references: true,
         wikititles: true,
@@ -298,6 +299,14 @@ module.exports = {
                 hint: '',
                 icon: ''
             }
+        }
+    },
+    notifications: {
+        desktop: {
+            enabled: false
+        },
+        html5: {
+            enabled: false
         }
     },
     safetyTips: {
