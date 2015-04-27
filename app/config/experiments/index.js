@@ -60,7 +60,7 @@ module.exports = {
         autoParticipate: false
     },
     dgdOpenItemInNewTab: {
-        enabled: false,
+        enabled: true,
         platforms: ['desktop'],
         markets: ['gt'],
         name: 'dgd-open-item-in-new-tab',
