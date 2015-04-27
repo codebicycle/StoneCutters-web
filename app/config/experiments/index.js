@@ -48,17 +48,16 @@ module.exports = {
         },
         autoParticipate: true
     },
-    dgdPostingBtnGray: {
+    dgdHidePhoneNumber: {
         enabled: true,
         platforms: ['desktop'],
-        markets: ['bo'],
-        name: 'dgd-home-posting-btn-gray',
+        markets: ['uy'],
+        name: 'hide-phone-number',
         alternatives: {
             CONTROL: 'control',
-            SINGLE: 'btn-small-gray'
+            HIDE_PHONE_NUMBER: 'hide-phone-number'
         },
-        autoParticipate: true,
-        fraction: 1
+        autoParticipate: false
     },
     dgdOpenItemInNewTab: {
         enabled: false,
