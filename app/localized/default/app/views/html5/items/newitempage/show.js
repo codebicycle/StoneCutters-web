@@ -54,14 +54,6 @@ module.exports = Base.extend({
         $('.footer_footer_view').css('margin-bottom', marginActions + 'px');
         this.$(window).on('resize', this.resize).trigger('resize');
         this.paginationSize();
-        if (this.app.localstorage.ready) {
-            this.$el.trigger('localstorageReady');
-        }
-        else {
-            this.listenTo(this.app.localstorage, 'ready', function visitedItems() {
-                this.$el.trigger('localstorageReady');
-            }.bind(this));
-        }
         this.attachTrackMe(function(category, action) {
             var item = this.getItem();
 
@@ -84,8 +76,7 @@ module.exports = Base.extend({
         'click .share': 'share',
         'click .flag': 'flag',
         'click .popup-close': 'popupClose',
-        'onpopstate window': 'onPopState',
-        'localstorageReady': 'onLocalstorageReady'
+        'onpopstate window': 'onPopState'
     },
     showMessage: function() {
         var $msg = this.$('.msg-resulted');
@@ -307,18 +298,6 @@ module.exports = Base.extend({
             app: this.app
         }));
         return this.categories;
-    },
-    onLocalstorageReady: function() {
-        if (helpers.features.isEnabled.call(this, 'visitedItems')) {
-            var id = this.getItem().get('id');
-            var list = this.app.localstorage.get('visited') || [];
-
-            if (!_.contains(list, id)) {
-                this.app.localstorage.unset('visited', {silent: true});
-                list.unshift(id);
-                this.app.localstorage.set('visited', list.slice(0, 10));
-            }
-        }
     }
 });
 
