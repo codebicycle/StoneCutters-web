@@ -20,7 +20,15 @@
         </fieldset>
         <fieldset class="field-wrapper">
             <span class="bold">El artículo que venderás es:</span>
-            <span class="titleAd">{{ item.title }}</span>
+            <div class="item-content">
+                {% if item.images and item.images[0].thumbnail %}
+                    <figure>
+                        <img src="{{ item.images[0].thumbnail }}">
+                    </figure>
+                {% endif %}
+                <span class="titleAd">{{ item.title }}</span>
+                <span>{{ item.price.displayPrice }}</span>
+            </div>
         </fieldset>
         <fieldset class="field-wrapper">
             <label class="bold">¿Qué precio acordaste con tu comprador?</label>
