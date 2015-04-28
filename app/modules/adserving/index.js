@@ -99,8 +99,7 @@ function createChannels(service) {
     if (currentPlatform !== 'desktop') {
         channels.push(prefix);
         channels.push(prefixMobile);
-
-        return channels.join(',');
+        return normalizeChannels(channels.join(','));
     }
 
     configChannel = utils.get(configAdServing, ['channels', 'page', [currentRoute.controller, currentRouteAction].join('#')], {});
@@ -114,7 +113,11 @@ function createChannels(service) {
     channels.push('[navigator]');
     channels.push([prefix, configChannel.name, this.config.location, 'Organic'].join('_'));
 
-    return channels.join(',');
+    return normalizeChannels(channels.join(','));
+}
+
+function normalizeChannels(channels) {
+    return channels.replace(/&/g, '');
 }
 
 function getClientId(service) {
