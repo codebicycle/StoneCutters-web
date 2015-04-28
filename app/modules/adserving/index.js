@@ -56,10 +56,8 @@ function getSettings() {
         });
 
         try {
-            if (settings.options.pubId && ~settings.options.pubId.toLowerCase().indexOf('olx-za')) {
-                if (settings.options.channel && !_.contains(settings.options.channel.toUpperCase().split(','), 'OLX_ZA')) {
-                    logger.log('[OLX_DEBUG] :: ZA Revenues :: url:', utils.fullizeUrl(this.app.session.get('url'), this.app));
-                }
+            if (settings.options.pubId && ~settings.options.pubId.toLowerCase().indexOf('olx-za') && !settings.options.channel) {
+                logger.log('[OLX_DEBUG] :: ZA Revenues :: url:', utils.fullizeUrl(this.app.session.get('url'), this.app));
             }
         } catch (e) {
             // Ignore
@@ -101,8 +99,7 @@ function createChannels(service) {
     if (currentPlatform !== 'desktop') {
         channels.push(prefix);
         channels.push(prefixMobile);
-
-        return channels.join(',');
+        return normalizeChannels(channels.join(','));
     }
 
     configChannel = utils.get(configAdServing, ['channels', 'page', [currentRoute.controller, currentRouteAction].join('#')], {});
@@ -116,7 +113,11 @@ function createChannels(service) {
     channels.push('[navigator]');
     channels.push([prefix, configChannel.name, this.config.location, 'Organic'].join('_'));
 
-    return channels.join(',');
+    return normalizeChannels(channels.join(','));
+}
+
+function normalizeChannels(channels) {
+    return channels.replace(/&/g, '');
 }
 
 function getClientId(service) {
