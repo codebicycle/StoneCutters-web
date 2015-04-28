@@ -64,5 +64,16 @@ module.exports = {
             HIDE_PHONE_NUMBER: 'hide-phone-number'
         },
         autoParticipate: false
+    },
+    dgdMarkVisitedItems: {
+        enabled: false,
+        platforms: ['desktop'],
+        markets: ['ar'],
+        name: 'dgd-mark-visited-items',
+        alternatives: {
+            CONTROL: 'control',
+            MARK_VISITED_ITEMS: 'mark-visited-items'
+        },
+        autoParticipate: true
     }
 };

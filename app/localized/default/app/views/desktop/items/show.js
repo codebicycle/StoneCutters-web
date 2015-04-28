@@ -43,7 +43,7 @@ module.exports = Base.extend({
             if (!_.contains(list, id)) {
                 this.app.localstorage.unset('visited', {silent: true});
                 list.unshift(id);
-                this.app.localstorage.set('visited', list.slice(0, 10));
+                this.app.localstorage.set('visited', list.slice(0, 25));
             }
         }
     }

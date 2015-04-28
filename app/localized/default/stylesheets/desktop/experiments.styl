@@ -143,3 +143,50 @@
     }
 
 }
+
+.experiment-dgd-mark-visited-items {
+
+    &.alternative-mark-visited-items {
+
+        &.visited {
+
+            &:before {
+
+                content: 'Visto';
+                display: block;
+                position: absolute;
+                top: 18px;
+                left: 18px;
+                text-transform: uppercase;
+                color: #FFF;
+                font-size: $xs;
+                background-color: rgba(0, 0, 0, .5);
+                padding: .25em .5em;
+                text-shadow: 1px 1px 1px rgba(0, 0, 0, .75);
+                z-index: 1;
+
+            }
+
+            a {
+
+                color: #95B;
+
+            }
+
+            a:hover {
+
+                color: #628;
+
+            }
+
+            img {
+
+                opacity: .75;
+
+            }
+
+        }
+
+    }
+
+}
