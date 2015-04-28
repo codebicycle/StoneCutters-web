@@ -23,7 +23,6 @@
             }
 
             function handleRequest(event){
-                console.log('esta linea');
                 if (isSafe(event.origin)) {
                     var eventData  = JSON.parse(event.data);
                     var response = null;
@@ -61,7 +60,6 @@
                             response = store.getAll();
                             break;
                         case "checkPermission":
-                            console.log('switch');
                             response = store.checkPermission();
                             break;
                     }
@@ -169,8 +167,7 @@
                     return ret;
                 }
                 store.checkPermission = function() {
-                    console.log('imposible');
-                    window.Notification.permission;
+                    return window.Notification.permission;
                 }
             }
             else if (isGlobalStorageNameSupported()) {

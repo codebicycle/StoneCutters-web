@@ -5,6 +5,7 @@ var Backbone = require('backbone');
 var helpers = require('../../helpers');
 var Metric = require('../../modules/metric');
 var config = require('../../../shared/config');
+var Localstorage;
 
 Backbone.noConflict();
 
@@ -12,6 +13,7 @@ module.exports = Backbone.Model.extend({
     initialize: initialize,
     isEnabled: isEnabled,
     checkNotifications: checkNotifications,
+    checkPermission: checkPermission,
     requestPermission: requestPermission,
     showNotification: showNotification
 });
@@ -32,19 +34,23 @@ function checkNotifications() {
     return !!window.Notification;
 }
 
-function checkPermission() {
-    return window.Notification.permission;
+function checkPermission(done) {
+    if (this.app.session.get('siteLocation') === this.app.session.get('location').url) {
+        return done(window.Notification.permission);
+    }
+    window.LocalCache.checkPermission().done(done);
 }
 
 function requestPermission() {
-    if (this.app.session.get('siteLocation') === this.app.session.get('location').url) {
-        window.Notification.requestPermission(function (status) {
-            if (window.Notification.permission !== status) {
-                window.Notification.permission = status;
-            }
-            this.metric.increment(['conversations', 'notifications', status]);
-        }.bind(this));
-    }
+    console.log('scasdgadhfzd');
+    // if (this.app.session.get('siteLocation') === this.app.session.get('location').url) {
+    //     window.Notification.requestPermission(function callback(status) {
+    //         if (window.Notification.permission !== status) {
+    //             window.Notification.permission = status;
+    //         }
+    //         //this.metric.increment(['conversations', 'notifications', status]);
+    //     }.bind(this));
+    // }
 }
 
 function showNotification(title, user, path) {

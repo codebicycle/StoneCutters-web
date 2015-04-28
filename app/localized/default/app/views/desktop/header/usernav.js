@@ -5,6 +5,7 @@ var Base = require('../../../../../common/app/bases/view').requireView('header/u
 var helpers = require('../../../../../../helpers');
 var asynquence = require('asynquence');
 var Metric = require('../../../../../../modules/metric');
+var Notifications = require('../../../../../../modules/notifications');
 
 module.exports = Base.extend({
 	tagName: 'aside',
@@ -24,6 +25,18 @@ module.exports = Base.extend({
     postRender: function () {
         this.listenTo(this.app, 'login', this.render);
         $('body').on('update:notifications', this.showNotification.bind(this));
+
+        if (!this.notifications) {
+            this.notifications = new Notifications({}, this);
+        }
+        if (this.notifications.isEnabled() && this.notifications.checkNotifications()) {
+            this.notifications.checkPermission(function callback(status) {
+                console.log(status);
+                if (status === 'default') {
+                    this.notifications.requestPermission();
+                }
+            }.bind(this));
+        }
     },
     showNotification: function() {
         var user = this.app.session.get('user');
@@ -51,3 +64,4 @@ module.exports = Base.extend({
         }
     }
 });
+
