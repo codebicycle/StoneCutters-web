@@ -45,6 +45,7 @@ module.exports = Base.extend({
                 list.unshift(id);
                 this.app.localstorage.set('visited', list.slice(0, 25));
             }
+            this.app.sixpack.convert(this.app.sixpack.experiments.dgdMarkVisitedItems, 'item-view');
         }
     }
 });
