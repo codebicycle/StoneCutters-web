@@ -183,10 +183,6 @@ module.exports = {
             visitedItems: {
                 worldwide: false,
                 countries: ['www.olx.com.ar']
-            },
-            userSurvey: {
-                worldwide: false,
-                countries: ['www.olx.com.ar']
             }
         }
     },

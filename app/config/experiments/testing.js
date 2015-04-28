@@ -2,14 +2,13 @@
 
 module.exports = {
     html4ShowShops: {
-        enabled: false,
+        enabled: true,
         platforms: ['html4'],
         markets: ['ke'],
         name: 'show-shops',
         alternatives: {
             ITEMS: 'items',
-            CALL_TO_ACTION: 'calltoactions',
-            CALL_TO_ACTION_MAP: 'calltoactions_map'
+            CALL_TO_ACTION: 'calltoactions'
         },
         firstClick: true,
         autoParticipate: true
@@ -58,12 +57,12 @@ module.exports = {
         enabled: true,
         platforms: ['desktop'],
         markets: ['uy'],
-        name: 'hide-phone-number',
+        name: 'hide-phone-number-fixed',
         alternatives: {
             CONTROL: 'control',
             HIDE_PHONE_NUMBER: 'hide-phone-number'
         },
-        autoParticipate: false
+        autoParticipate: true
     },
     dgdMarkVisitedItems: {
         enabled: true,
@@ -75,5 +74,17 @@ module.exports = {
             MARK_VISITED_ITEMS: 'mark-visited-items'
         },
         autoParticipate: true
+    },
+    dgdOpenItemInNewTab: {
+        enabled: true,
+        platforms: ['desktop'],
+        markets: ['gt'],
+        name: 'dgd-open-item-in-new-tab',
+        alternatives: {
+            CONTROL: 'control',
+            OPEN_ITEM_IN_NEW_TAB: 'open-item-in-new-tab'
+        },
+        autoParticipate: true,
+        fraction: 1
     }
 };

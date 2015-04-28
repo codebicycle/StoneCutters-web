@@ -22,6 +22,7 @@ module.exports = function participate(experiment, done) {
         }
     })
     .fail(function(){
+        delete this.experiments[experiment.key];
         statsd.increment([this.market, 'sixpack', 'participate', experiment.name, 'timeout', this.platform]);
     })
     .always(always.bind(this));

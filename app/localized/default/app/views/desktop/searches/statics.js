@@ -16,6 +16,7 @@ module.exports = Base.extend({
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
         var link = this.refactorPath(this.app.session.get('path'));
+        var dgdOpenItemInNewTab = this.app.sixpack.experiments.dgdOpenItemInNewTab;
 
         this.filters = data.filters;
         this.filters.order = this.order;
@@ -24,7 +25,9 @@ module.exports = Base.extend({
         return _.extend({}, data, {
             nav: {
                 link: link
-            }
+            },
+            isABTestOpenNewTabEnabled: dgdOpenItemInNewTab,
+            shouldOpenInNewTab: dgdOpenItemInNewTab && dgdOpenItemInNewTab.alternative === 'open-item-in-new-tab'
         });
     },
     cleanPage: function(path) {

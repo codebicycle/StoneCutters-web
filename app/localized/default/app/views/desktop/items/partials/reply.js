@@ -117,6 +117,7 @@ module.exports = Base.extend({
             this.$success.removeClass('hide');
             this.trackSuccess(reply);
             this.app.sixpack.convert(this.app.sixpack.experiments.desktopDGD23ShowSimplifiedReplyForm);
+            this.app.sixpack.convert(this.app.sixpack.experiments.dgdOpenItemInNewTab);
 
             if (_.contains([378], item.get('category').id)) {
                 this.app.sixpack.convert(this.app.sixpack.experiments.dgdCategoryCars);
