@@ -142,11 +142,12 @@ function error(params, callback) {
     function controller() {
         var err = this.app.session.get('error');
         var location = this.app.session.get('location') || {};
+        var platform = this.app.session.get('platform') || 'all';
 
         if (this.app.session.get('isServer')) {
             this.app.req.res.status(404);
         }
-        statsd.increment([location.abbreviation || 'all', 'errors', this.app.session.get('path') !== '/500' ? 404 : 500]);
+        statsd.increment([location.abbreviation || 'all', 'errors', this.app.session.get('path') !== '/500' ? 404 : 500, platform]);
         if (err) {
             this.app.session.clear('error');
         }
