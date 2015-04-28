@@ -5,6 +5,7 @@ var asynquence = require('asynquence');
 var Base = require('../../../../../common/app/bases/view').requireView('users/createpassword');
 var helpers = require('../../../../../../helpers');
 var User = require('../../../../../../models/user');
+var translations = require('../../../../../../../shared/translations');
 
 module.exports = Base.extend({
     className: 'users_createpassword_view short-page',
@@ -13,6 +14,9 @@ module.exports = Base.extend({
         'change': 'onChange',
         'submit': 'onSubmit'
     },
+    postRender: function () {
+        this.dictionary = translations.get(this.app.session.get('selectedLanguage'));
+    },
     onPasswordToggle: function (event) {
         event.preventDefault();
         event.stopPropagation();
@@ -20,14 +24,16 @@ module.exports = Base.extend({
 
         var field = this.$('.password-field');
         var link = $(event.target);
+        var msgShow = this.dictionary['misc.Show'];
+        var msgHide = this.dictionary['misc.Hide'];
 
         if (field.attr('type') === 'password') {
             field.attr('type', 'text');
-            link.html('hide');
+            link.html(msgHide);
         }
         else {
             field.attr('type', 'password');
-            link.html('show');
+            link.html(msgShow);
         }        
     },
     onChange: function(event) {
