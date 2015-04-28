@@ -36,21 +36,31 @@ function checkNotifications() {
 
 function checkPermission(done) {
     if (this.app.session.get('siteLocation') === this.app.session.get('location').url) {
-        return done(window.Notification.permission);
+        return callback(window.Notification.permission);
     }
-    window.LocalCache.checkPermission().done(done);
+    window.LocalCache.checkPermission().done(callback);
+
+    function callback(status) {
+        console.log('metrica', status);
+        done(status);
+    }
 }
 
-function requestPermission() {
-    console.log('scasdgadhfzd');
-    // if (this.app.session.get('siteLocation') === this.app.session.get('location').url) {
-    //     window.Notification.requestPermission(function callback(status) {
-    //         if (window.Notification.permission !== status) {
-    //             window.Notification.permission = status;
-    //         }
-    //         //this.metric.increment(['conversations', 'notifications', status]);
-    //     }.bind(this));
-    // }
+function requestPermission(done) {
+    if (this.app.session.get('siteLocation') === this.app.session.get('location').url) {
+        return window.Notification.requestPermission(function (status) {
+            if (window.Notification.permission !== status) {
+                window.Notification.permission = status;
+            }
+            callback(status);
+        });
+    }
+    window.LocalCache.requestPermission().done(callback);
+
+    function callback(status) {
+        console.log('metrica ask', status);
+    }
+    
 }
 
 function showNotification(title, user, path) {

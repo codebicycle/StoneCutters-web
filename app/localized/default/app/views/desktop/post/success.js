@@ -1,6 +1,7 @@
 'use strict';
 
 var Base = require('../../../../../common/app/bases/view').requireView('post/success');
+var Notifications = require('../../../../../../modules/notifications');
 
 module.exports = Base.extend({
     className: 'posting-success-view',
@@ -15,5 +16,17 @@ module.exports = Base.extend({
             data.item.location.neighborhoodName = data.item.location.children[0].children[0].children[0].name;
         }
         return data;
+    },
+    postRender: function () {
+        if (!this.notifications) {
+                this.notifications = new Notifications({}, this);
+            }
+        if (this.notifications.isEnabled() && this.notifications.checkNotifications()) {
+            this.notifications.checkPermission(function callback(status) {
+                if (status === 'default') {
+                    this.notifications.requestPermission();
+                }
+            }.bind(this));
+        }
     }
 });

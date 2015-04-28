@@ -155,10 +155,18 @@ window.LocalCache = {
         });
         return deferred.promise();
     },
-    checkPermission: function(test) {
+    checkPermission: function() {
         var deferred = jQuery.Deferred();
 
         this.remoteStorage.makeRequest({action:'checkPermission'}, function(response) {
+            deferred.resolve(response);
+        });
+        return deferred.promise();
+    },
+    requestPermission: function() {
+        var deferred = jQuery.Deferred();
+
+        this.remoteStorage.makeRequest({action:'requestPermission'}, function(response) {
             deferred.resolve(response);
         });
         return deferred.promise();
