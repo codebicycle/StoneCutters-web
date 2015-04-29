@@ -279,4 +279,44 @@ module.exports = {
     socials: {
         facebookLogin: false
     },
+    userzoom: {
+        enabled: false,
+        sections: {
+            'items#show' : {
+                platforms: ['html5', 'desktop'],
+                file: 'QzMyOFQxMiAg',
+                t: 'uz_til'
+            }
+        }
+    },
+    hints: {
+        desktop: {
+            email: {
+                enabled: true,
+                hint: 'You need a valid email address to sell on OLX',
+                icon: 'icon-exclamation'
+            }
+        },
+        html5: {
+            email: {
+                enabled: true,
+                hint: 'You need a valid email address to sell on OLX',
+                icon: 'icon-exclamation'
+            }
+        },
+        html4: {
+            email: {
+                enabled: true,
+                hint: 'You need a valid email address to sell on OLX',
+                icon: 'icon-exclamation'
+            }
+        },
+        wap: {
+            email: {
+                enabled: false,
+                hint: 'You need a valid email address to sell on OLX',
+                icon: 'icon-exclamation'
+            }
+        }
+    }
 };

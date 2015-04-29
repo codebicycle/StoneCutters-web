@@ -6,11 +6,14 @@ var middlewares = require('../middlewares');
 var helpers = require('../helpers');
 var config = require('../../shared/config');
 var Item = require('../models/item');
+var Adapter = require('../../shared/adapters/base');
 
 module.exports = {
     didyousell: middlewares(didyousell),
     mobilepromo: middlewares(mobilepromo),
     republish: middlewares(republish),
+    asyncseller: middlewares(asyncseller),
+    asyncbuyer: middlewares(asyncbuyer),
     available: middlewares(available)
 };
 
@@ -140,6 +143,161 @@ function republish(params, callback) {
 
     function controller() {
         callback(null, {});
+    }
+}
+
+function asyncseller(params, callback) {
+    helpers.controllers.control.call(this, params, controller);
+
+    function controller() {
+        var adapter = new Adapter({});
+        var languages = this.app.session.get('languages');
+
+        asynquence().or(error.bind(this))
+            .then(redirect.bind(this))
+            .then(prepare.bind(this))
+            .then(fetchTransaction.bind(this))
+            .then(checkTransaction.bind(this))
+            .then(fetch.bind(this))
+            .then(check.bind(this))
+            .val(success.bind(this));
+
+        function redirect(done) {
+            var platform = this.app.session.get('platform');
+
+            if (platform === 'wap' || !params.itemId || !params.email) {
+                done.abort();
+                return helpers.common.redirect.call(this, '/');
+            }
+            done();
+        }
+
+        function prepare(done) {
+            params.id = params.itemId;
+            delete params.itemId;
+            done({
+                itemId: params.id
+            });
+        }
+
+        function fetchTransaction(done, data) {
+            adapter.request(this.app.req, {
+                method: 'POST',
+                url: [config.get(['mario', 'protocol']), '://', config.get(['mario', 'host']), '/async-pickup/validate'].join(''),
+                data: JSON.stringify(data)
+            }, {
+                timeout: 2000
+            }, done.errfcb);
+        }
+
+        function checkTransaction(done, response, body) {
+            body = JSON.parse(body);
+            if (!body.status && body.error.length) {
+                return done(body.error[0].key, body.error[0].message);
+            }
+            done();
+        }
+
+        function fetch(done, key, message) {
+            this.app.fetch({
+                item: {
+                    model: 'Item',
+                    params: params
+                }
+            }, {
+                readFromCache: false
+            }, function afterFetch(err, res) {
+                if (!res) {
+                    res = {};
+                }
+                if (err || !res.item.get('status').open) {
+                    done.abort();
+                    return helpers.common.redirect.call(this, '/');
+                }
+                done(res, key, message);
+            }.bind(this));
+        }
+
+        function check(done, response, key, message) {
+            if (!response.item) {
+                done.abort();
+                return helpers.common.redirect.call(this, '/');
+            }
+            done(response.item, key, message);
+        }
+
+        function success(_item, key, message) {
+            var item = _item.toJSON();
+
+            callback(null, {
+                sellerEmail: params.email,
+                item: item,
+                key: key,
+                message: message
+            });
+        }
+
+        function error(err, res) {
+            return helpers.common.redirect.call(this, '/');
+        }
+    }
+}
+
+function asyncbuyer(params, callback) {
+    helpers.controllers.control.call(this, params, controller);
+
+    function controller() {
+        var adapter = new Adapter({});
+
+        asynquence().or(error.bind(this))
+            .then(redirect.bind(this))
+            .then(fetchTransaction.bind(this))
+            .then(checkTransaction.bind(this))
+            .val(success.bind(this));
+
+        function redirect(done) {
+            var platform = this.app.session.get('platform');
+
+            if (platform === 'wap' || !params.transactionId || !params.itemId) {
+                done.abort();
+                return helpers.common.redirect.call(this, '/');
+            }
+            done();
+        }
+
+        function fetchTransaction(done) {
+            adapter.request(this.app.req, {
+                method: 'GET',
+                url: [config.get(['mario', 'protocol']), '://', config.get(['mario', 'host']), '/async-pickup/transaction/id/', params.transactionId ].join(''),
+            }, {
+                timeout: 2000
+            }, done.errfcb);
+        }
+
+        function checkTransaction(done, response, body) {
+            body = JSON.parse(body);
+
+            if (!body.status && body.error.length) {
+                done.abort();
+                return helpers.common.redirect.call(this, '/', null, {
+                    status: 302
+                });
+            }
+            done(body.extra.transaction.hasBuyerData, body.extra.transaction.seller);
+        }
+
+        function success(hasBuyerData, sellerName) {
+            callback(null, {
+                hasBuyerData: hasBuyerData,
+                transactionId: params.transactionId,
+                itemId: params.itemId,
+                sellerName: sellerName,
+            });
+        }
+
+        function error(err, res) {
+            return helpers.common.redirect.call(this, '/');
+        }
     }
 }
 

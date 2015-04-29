@@ -1,26 +1,6 @@
 'use strict';
 
 module.exports = {
-    html5HeaderPostButton: {
-        enabled: false,
-        platforms: ['html5'],
-        markets: ['ar'],
-        name: 'header-post-button',
-        alternatives: {
-            TEXT: 'text',
-            ICON: 'icon'
-        }
-    },
-    html5Interstitial: {
-        enabled: false,
-        platforms: ['html5'],
-        markets: ['br'],
-        name: 'interstitial',
-        alternatives: {
-            ON: 'on',
-            OFF: 'off'
-        }
-    },
     html4ShowShops: {
         enabled: true,
         platforms: ['html4'],
@@ -28,10 +8,10 @@ module.exports = {
         name: 'show-shops',
         alternatives: {
             ITEMS: 'items',
-            CALL_TO_ACTION: 'calltoactions',
-            CALL_TO_ACTION_MAP: 'calltoactions_map'
+            CALL_TO_ACTION: 'calltoactions'
         },
-        firstClick: true
+        firstClick: true,
+        autoParticipate: true
     },
     desktopDGD23ShowSimplifiedReplyForm: {
         enabled: true,
@@ -41,15 +21,22 @@ module.exports = {
         alternatives: {
             CONTROL: 'control',
             SHOW_SIMPLIFIED_REPLY_FORM: 'show-simplified-reply-form'
-        }
+        },
+        autoParticipate: true
     },
     growthCategorySuggestion: {
         enabled: true,
         platforms: ['desktop'],
         markets: ['ar'],
-        name: 'growth-category-suggestion',
-        fraction: 0.3,
+        name: 'growth-categories-suggestion',
         alternatives: {
+            CONTROL_1: 'control1',
+            CONTROL_2: 'control2',
+            CONTROL_3: 'control3',
+            CONTROL_4: 'control4',
+            CONTROL_5: 'control5',
+            CONTROL_6: 'control6',
+            CONTROL_7: 'control7',
             CONTROL: 'control',
             SUGGESTED: 'suggested',
             SINGLE: 'single'
@@ -63,6 +50,30 @@ module.exports = {
         alternatives: {
             CONTROL: 'control',
             GALLERY: 'gallery'
-        }
+        },
+        autoParticipate: true
+    },
+    dgdHidePhoneNumber: {
+        enabled: true,
+        platforms: ['desktop'],
+        markets: ['uy'],
+        name: 'hide-phone-number-fixed',
+        alternatives: {
+            CONTROL: 'control',
+            HIDE_PHONE_NUMBER: 'hide-phone-number'
+        },
+        autoParticipate: true
+    },
+    dgdOpenItemInNewTab: {
+        enabled: true,
+        platforms: ['desktop'],
+        markets: ['gt'],
+        name: 'dgd-open-item-in-new-tab',
+        alternatives: {
+            CONTROL: 'control',
+            OPEN_ITEM_IN_NEW_TAB: 'open-item-in-new-tab'
+        },
+        autoParticipate: true,
+        fraction: 1
     }
 };

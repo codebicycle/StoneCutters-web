@@ -13,28 +13,32 @@ module.exports = Base.extend({
     regexpFindPage: /-p-[0-9]+/,
     regexpReplacePage: /(-p-[0-9]+)/,
     events: {
-        'click [data-increment]': 'onClickIncrement'
+        'click [data-increment-metric]': 'onClickIncrement'
     },
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
         var link = 'nf/all-results';
+        var dgdOpenItemInNewTab = this.app.sixpack.experiments.dgdOpenItemInNewTab;
 
         return _.extend({}, data, {
             nav: {
                 link: link,
                 linkig: helpers.common.linkig.call(this, link, null, 'allresultsig'),
                 listAct: 'active'
-            }
+            },
+            isABTestOpenNewTabEnabled: dgdOpenItemInNewTab,
+            shouldOpenInNewTab: dgdOpenItemInNewTab && dgdOpenItemInNewTab.alternative === 'open-item-in-new-tab'
         });
     },
     onClickIncrement: function(event) {
         var $elem = $(event.currentTarget);
+        var values = Metric.getValues($elem.data('increment-metric'));
 
         this.app.session.persist({
             origin: {
                 type: 'browse',
                 isGallery: this.id !== 'searches-allresults-view',
-                isAbundance: !!~($elem.data('increment-value') || '').indexOf('abundance')
+                isAbundance: !!~(values.value || '').indexOf('abundance')
             }
         });
         Metric.incrementEventHandler.call(this, event);

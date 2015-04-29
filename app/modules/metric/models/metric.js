@@ -22,6 +22,9 @@ function incrementGraphite(values, options) {
     }
     values = values || {};
 
+    if (_.isEmpty(values)) {
+        return;
+    }
     if (values.category) {
         metric.push(values.category);
     }

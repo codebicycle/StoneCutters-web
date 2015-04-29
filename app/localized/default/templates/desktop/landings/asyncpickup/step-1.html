@@ -1,0 +1,49 @@
+<div class="top">
+    <p class="title">Puntos de entrega OLX</p>
+    <p>
+        Ya no hace falta que te encuentres con el comprador para vender tus articulos!<br>
+        Usando los <b>puntos de entrega OLX</b> podés ir en <i>cualquier momento</i> a dejar tu<br>
+        artículo en un lugar de seguro y <i>volver más tarde</i> a recoger tu dinero, así de simple!
+    </p>
+</div>
+<div class="description">
+    <ul>
+        <li>
+            <img src="{{ '/images/desktop/async_pickup/drop.jpg' | static }}" alt="Dejás el articulo">
+            <p class="title">Prensentando un código, dejás tu artículo y te vas</p>
+            <p class="desc">
+                Te enviaremos un código por email. Con éste y dentro de las 48hrs de recibido, podrás dejar tu artículo.<br>
+                En el Punto de Entrega <b>reciben tu artículo</b>, donde permanecerá hasta que el comprador lo retire.
+            </p>
+        </li><!--
+        --><li>
+            <img src="{{ '/images/desktop/async_pickup/pickup.jpg' | static }}" alt="El comprador lo recoje y lo paga">
+            <p class="title">El comprador lo recoge y paga el precio que acordaron.</p>
+            <p class="desc">
+                El comprador tiene 48hrs para retirar el producto y pagarlo.<br>
+                El Punto de Entrega controla el dinero antes de entregar tu producto. <b>En el acto te llegará un email para que pases a buscar tu dinero!</b>
+            </p>
+        </li><!--
+        --><li>
+            <img src="{{ '/images/desktop/async_pickup/collect.jpg' | static }}" alt="Retirás tu dinero">
+            <p class="title">Retirás tu dinero</p>
+            <p class="desc">
+                Con tu código y DNI, en el momento que puedas.<br>
+                Tenés hasta 30 días para retirar tu dinero del Punto de Entrega OLX. Es super sencillo! no?
+            </p>
+        </li>
+    </ul>
+</div>
+<div class="bottom">
+    <p class="title">Tenés que entregar tu <b>{{ item.title }}</b> al comprador?</p>
+    {% include (template + '/landings/asyncpickup/kiosco-location.html') %}
+    <span data-step="1" class="posting">Usá gratis este Punto de Entrega OLX</span>
+</div>
+<div class="restrictions">
+    <span class="bold">Restricciones sobre el artículo para usar un punto de entrega.</span>
+    <ul>
+        <li>Tener un valor inferior a $2000</li>
+        <li>No puede ser un ser vivo.</li>
+        <li>Cumplir con los <a href="/terms">términos y condiciones</a> del sitio web.</li>
+    </ul>
+</div>

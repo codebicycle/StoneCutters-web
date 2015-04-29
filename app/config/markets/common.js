@@ -272,5 +272,46 @@ module.exports = {
     },
     posting: {
         loginRequired: false
+    },
+    userzoom: {
+        enabled: false
+    },
+    hints: {
+        desktop: {
+            email: {
+                enabled: false,
+                hint: '',
+                icon: ''
+            }
+        },
+        html5: {
+            email: {
+                enabled: false,
+                hint: '',
+                icon: ''
+            }
+        },
+        html4: {
+            email: {
+                enabled: false,
+                hint: '',
+                icon: ''
+            }
+        },
+        wap: {
+            email: {
+                enabled: false,
+                hint: '',
+                icon: ''
+            }
+        }
+    },
+    notifications: {
+        desktop: {
+            enabled: false
+        },
+        html5: {
+            enabled: false
+        }
     }
 };

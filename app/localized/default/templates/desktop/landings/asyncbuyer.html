@@ -1,0 +1,73 @@
+<div class="buyer-confirm content-confirm">
+    <div class="invite-buyer">
+        <p class="title">{{ sellerName if sellerName }} te invitó a usar Puntos de Entrega OLX para retirar tu compra, ¿que decís?</p>
+        {% include (template + '/landings/asyncpickup/kiosco-location-large.html') %}
+        <ul class="buttons">
+            <li {{ 'class="submit"' if hasBuyerData else 'data-next-step="buyer-data"' }} data-transactionId="{{ transactionId }}" data-hasBuyerData="{{ hasBuyerData }}" data-itemId="{{ itemId }}">Claro que si!</li>
+            <li class="reject rejectTransaction" data-transactionId="{{ transactionId }}" data-itemId="{{ itemId }}">Esta vez no, gracias</li>
+        </ul>
+        <p class="desc">Te enviaremos toda la información que necesites para el usar el Punto de Entrega por email.</p>
+    </div>
+    <div class="information-buyer">
+        <p>Comprá sin encontrarte con tu vendedor</p>
+        <p class="title">¿Qué es un Punto de Entrega OLX?</p>
+        <p>Con Puntos de Entrega OLX ya no hace falta que conincidas con el vendedor para recibir tus artículos!<br> Usando los <b>puntos gratuitos de entrega OLX</b> podés ir en cualquier <i>momento</i> a buscar tu compra en un lugar seguro y <i>pagar ahi mismo</i>, así de simple!</p>
+    </div>
+</div>
+
+<div class="buyer-data content-confirm hide">
+    <div class="top">
+        <p class="title">Usar un Punto de entrega OLX</p>
+        <p>Ingresá tus datos y te avisaremos cuando tu compra esté lista para retirarla.</p>
+    </div>
+    <div class="async-form border">
+        <p class="title">Ingresá tus datos:</p>
+        <form>
+            <fieldset class="field-wrapper">
+                <label class="bold">Nombre</label>
+                <input type="text" name="buyer_name" class="text-field">
+            </fieldset>
+            <fieldset class="field-wrapper">
+                <label class="bold">Email</label>
+                <input type="text" name="buyer_email" class="text-field">
+            </fieldset>
+            <fieldset class="field-wrapper">
+                <label class="bold">Telefóno</label>
+                <input type="text" name="buyer_phone" class="text-field phone">
+            </fieldset>
+            <span class="posting submit" data-transactionId="{{ transactionId }}" data-hasBuyerData="{{ hasBuyerData }}" data-itemId="{{ itemId }}">Continuar</span>
+        </form>
+    </div>
+    {% include (template + '/landings/asyncpickup/kiosco-location.html') %}
+</div>
+
+<div class="success hide">
+    <div class="top">
+        <p class="title icons icon-check">Gracias! Te avisaremos cuando tu compra esté lista.</p>
+        <p></p>
+    </div>
+    <div class="async-form border">
+        <p>Te avisaremos por mail cuando esté lista tu compra para retirarla con la dirección y los horarios del Punto de Entrega OLX.</p>
+    </div>
+    {% include (template + '/landings/asyncpickup/kiosco-location-large.html') %}
+</div>
+
+<div class="error-confirmed hide">
+    <div class="top">
+        <p class="title icons icon-check">Ya teníamos tu confirmación!</p>
+        <p></p>
+    </div>
+    <div class="async-form border">
+        <p class="error-message"></p>
+    </div>
+</div>
+
+<div class="transaction-rejected hide">
+    <div class="top">
+        <p class="title">Será la próxima!</p>
+        <p></p>
+    </div>
+    <div class="async-form border">
+        <p>Si ya arreglaste la entrega esta vez o el punto de entrega sugerido no te conviene, podés usar Puntos de Entrega OLX en tu próxima compra o venta.</p>
+    </div>
+</div>

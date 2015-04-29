@@ -46,8 +46,9 @@
 	value: item.get('streetAddress')
 } %}
 
+
 {{ Field(contactNameField) }}
-{{ Field(hint = dictionary["posting_fields_1.YourEmailAddressWontBeShared"], emailField) }}
+{{ Field(hint = hintEmail if hintEmail else dictionary["posting_fields_1.YourEmailAddressWontBeShared"], hintIcon = emailIcon if emailIcon else 'icon-lock', emailField) }}
 {{ Field(phoneField) }}
 
 {% view 'post/locations' %}
