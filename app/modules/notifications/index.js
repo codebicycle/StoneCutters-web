@@ -41,7 +41,6 @@ function checkPermission(done) {
     window.LocalCache.checkPermission().done(callback);
 
     function callback(status) {
-        console.log('metrica', status);
         done(status);
     }
 }
@@ -63,20 +62,29 @@ function requestPermission(done) {
     
 }
 
-function showNotification(title, user, path) {
-    console.log(title);
-    console.log(user);
-    console.log(path);
-    var options = {
-        body: user.unreadConversationsCount,
-        icon: 'http://www.olx.com.ar:3030/images/desktop/logo.png'
-    };
-    var n = new window.Notification(title, options);
-    n.onshow = function () {
-        setTimeout(n.close.bind(n), 5000);
-    };
-    n.onclick = function () {
-        path = helpers.common.link(path, this.app);
-        this.app.router.redirectTo(path);
-    }.bind(this);
+function showNotification(title, body, path, icon) {
+    if (this.app.session.get('siteLocation') === this.app.session.get('location').url) {
+        var options = {
+            body: body,
+            icon: icon
+        };
+        var n = new window.Notification(title, options);
+        n.onshow = function () {
+            setTimeout(n.close.bind(n), 5000);
+        };
+        n.onclick = callback.bind(this);
+        n.onclose = callback.bind(this);
+    }
+    else {
+        window.LocalCache.showNotification(title, body, icon).done(callback.bind(this));
+    }
+
+    
+
+    function callback(event) {
+        if (event.type === 'click') {
+            path = helpers.common.link(path, this.app);
+            this.app.router.redirectTo(path);
+        }
+    }
 }

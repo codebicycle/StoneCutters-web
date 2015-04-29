@@ -71,6 +71,10 @@
                             async = true;
                             store.requestPermission(callback);
                             break;
+                        case "showNotification":
+                            async = true;
+                            store.showNotification(callback, eventData.data);
+                            break;
                     }
                     if (!async) {
                         callback(response);
@@ -122,6 +126,7 @@
             store.getAll = function() {};
             store.checkPermission = function() {};
             store.requestPermission = function() {};
+            store.showNotification = function() {};
             store.serialize = function(value) {
                 return JSON.stringify(value);
             };
@@ -188,6 +193,22 @@
                         }
                         done(status);
                     });
+                };
+                store.showNotification = function(done, data) {
+                    var options = {
+                        body: data.body,
+                        icon: data.icon
+                    };
+                    var n = new window.Notification(data.title, options);
+                    n.onshow = function () {
+                        setTimeout(n.close.bind(n), 5000);
+                    };
+                    n.onclick = function (event) {
+                        done(event);
+                    };
+                    n.onclose = function (event) {
+                        done(event);
+                    };
                 };
             }
             else if (isGlobalStorageNameSupported()) {
