@@ -70,10 +70,8 @@ function showNotification(title, body, path, icon) {
             icon: icon
         };
         var n = new window.Notification(title, options);
-        // n.onshow = function () {
-        //     setTimeout(n.close.bind(n), 5000);
-        // };
-        n.onshow = callback.bind(this);
+
+        // n.onshow = callback.bind(this);
         n.onclick = callback.bind(this);
         n.onclose = callback.bind(this);
     }
@@ -85,7 +83,7 @@ function showNotification(title, body, path, icon) {
 
     function callback(event) {
         var action = event.type;
-        //console.log(action);
+
         this.metric.increment(['conversations', 'notifications', action]);
         if (action === 'click') {
             path = helpers.common.link(path, this.app);
