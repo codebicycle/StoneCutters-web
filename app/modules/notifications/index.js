@@ -64,6 +64,9 @@ function requestPermission(done) {
 }
 
 function showNotification(title, user, path) {
+    console.log(title);
+    console.log(user);
+    console.log(path);
     var options = {
         body: user.unreadConversationsCount,
         icon: 'http://www.olx.com.ar:3030/images/desktop/logo.png'

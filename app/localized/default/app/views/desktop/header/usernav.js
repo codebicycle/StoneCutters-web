@@ -5,6 +5,7 @@ var Base = require('../../../../../common/app/bases/view').requireView('header/u
 var helpers = require('../../../../../../helpers');
 var asynquence = require('asynquence');
 var Metric = require('../../../../../../modules/metric');
+var Notifications = require('../../../../../../modules/notifications');
 
 module.exports = Base.extend({
 	tagName: 'aside',
@@ -39,7 +40,17 @@ module.exports = Base.extend({
         var messages = this.app.session.get('messages');
 
         if (user && user.unreadConversationsCount) {
+            var currentMsgCount = parseInt(this.$('.count').text());
+
             this.$('.count').text(user.unreadConversationsCount).removeClass('display-none');
+            if (!this.notifications) {
+                this.notifications = new Notifications({}, this);
+            }
+            if (currentMsgCount < user.unreadConversationsCount) {
+                console.log('aqiiii');
+                this.notifications.showNotification('titulo', user, '/myolx/conversations');
+                
+            }
         }
         else if (messages && messages > 0) {
             this.$('.count').text(messages).removeClass('display-none');

@@ -28,6 +28,10 @@
                     var response = null;
                     var async;
 
+                    function callback(response) {
+                        event.source.postMessage(JSON.stringify({id: eventData.id, response: response}), event.origin);
+                    }
+
                     switch (eventData.data.action) {
                         case "set":
                             store.set(eventData.data.key, eventData.data.value);
@@ -70,10 +74,6 @@
                     }
                     if (!async) {
                         callback(response);
-                    }
-
-                    function callback(response) {
-                        event.source.postMessage(JSON.stringify({id: eventData.id, response: response}), event.origin);
                     }
                 }
                 else {
