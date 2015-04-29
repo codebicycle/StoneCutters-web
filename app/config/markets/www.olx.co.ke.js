@@ -271,7 +271,8 @@ module.exports = {
             'items#show' : {
                 platforms: ['html5', 'desktop'],
                 file: 'QzMyOFQxOCAg',
-                t: 'uz_til'
+                t: 'uz_til',
+                delay: 30000
             }
         }
     }
