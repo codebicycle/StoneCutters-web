@@ -54,24 +54,26 @@ function requestPermission(done) {
             callback(status);
         });
     }
-    window.LocalCache.requestPermission().done(callback);
+    window.LocalCache.requestPermission().done(callback.bind(this));
 
     function callback(status) {
-        console.log('metrica ask', status);
+        this.metric.increment(['conversations', 'notifications', status]);
     }
     
 }
 
 function showNotification(title, body, path, icon) {
+    this.metric.increment(['conversations', 'notifications', 'show']);
     if (this.app.session.get('siteLocation') === this.app.session.get('location').url) {
         var options = {
             body: body,
             icon: icon
         };
         var n = new window.Notification(title, options);
-        n.onshow = function () {
-            setTimeout(n.close.bind(n), 5000);
-        };
+        // n.onshow = function () {
+        //     setTimeout(n.close.bind(n), 5000);
+        // };
+        n.onshow = callback.bind(this);
         n.onclick = callback.bind(this);
         n.onclose = callback.bind(this);
     }
@@ -82,7 +84,10 @@ function showNotification(title, body, path, icon) {
     
 
     function callback(event) {
-        if (event.type === 'click') {
+        var action = event.type;
+        //console.log(action);
+        this.metric.increment(['conversations', 'notifications', action]);
+        if (action === 'click') {
             path = helpers.common.link(path, this.app);
             this.app.router.redirectTo(path);
         }
