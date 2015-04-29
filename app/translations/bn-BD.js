@@ -552,6 +552,7 @@ module.exports = {
     'misc.GetTheFreeApp': '\u09AC\u09BF\u09A8\u09BE\u09AE\u09C2\u09B2\u09CD\u09AF\u09C7 APP (\u0985\u09CD\u09AF\u09BE\u09AA)-\u099F\u09BF \u09A8\u09BF\u09A8',
     'misc.GladYouSold': 'Cool! We\xB4re glad that you sold your item!',
     'misc.HelpSell': 'We want to help you sell!',
+    'misc.Hide': 'Hide',
     'misc.HowToContact': '\u0986\u09AE\u09BF OLX \u098F\u09B0 \u09B8\u0999\u09CD\u0997\u09C7 \u0995\u09C0\u09AD\u09BE\u09AC\u09C7 \u09AF\u09CB\u0997\u09BE\u09AF\u09CB\u0997 \u0995\u09B0\u09AC?',
     'misc.ImproveYourDescription': 'Improve your description',
     'misc.IncludeMoreDetails': 'Include more details in your ad description. This will help you sell faster.',

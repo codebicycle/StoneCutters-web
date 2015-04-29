@@ -552,6 +552,7 @@ module.exports = {
     'misc.GetTheFreeApp': 'PATA PROG YA BURE',
     'misc.GladYouSold': 'Vyema! Tuna furaha kwamba umeuza bidhaa yako!',
     'misc.HelpSell': 'Tunataka kukusaidia kuuza!',
+    'misc.Hide': 'Hide',
     'misc.HowToContact': 'Je, ni vipi naweza kuwasiliana na OLX?',
     'misc.ImproveYourDescription': 'Boresha maelezo yako',
     'misc.IncludeMoreDetails': 'Jumuisha maelezo zaidi katika maelezo ya tangazo lako. Hii itakusaidia kuuza kwa haraka zaidi.',

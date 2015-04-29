@@ -552,6 +552,7 @@ module.exports = {
     'misc.GetTheFreeApp': 'BAIXAR APLICATIVO GR\xC1TIS',
     'misc.GladYouSold': 'Cool! We\xB4re glad that you sold your item!',
     'misc.HelpSell': 'We want to help you sell!',
+    'misc.Hide': 'Hide',
     'misc.HowToContact': 'How can I contact OLX?',
     'misc.ImproveYourDescription': 'Improve your description',
     'misc.IncludeMoreDetails': 'Include more details in your ad description. This will help you sell faster.',

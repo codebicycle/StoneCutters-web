@@ -24,8 +24,8 @@ module.exports = Base.extend({
 
         var field = this.$('.password-field');
         var link = $(event.target);
-        var msgShow = this.dictionary['misc.Show'];
-        var msgHide = this.dictionary['misc.Hide'];
+        var msgShow = this.dictionary["misc.Show"];
+        var msgHide = this.dictionary["misc.Hide"];
 
         if (field.attr('type') === 'password') {
             field.attr('type', 'text');

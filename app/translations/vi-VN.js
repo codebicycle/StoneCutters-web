@@ -552,6 +552,7 @@ module.exports = {
     'misc.GetTheFreeApp': 'T\u1EA2I \u1EE8NG D\u1EE4NG MI\u1EC4N PH\xCD',
     'misc.GladYouSold': 'Tuy\u1EC7t! Ch\xFAng t\xF4i r\u1EA5t vui khi b\u1EA1n \u0111\xE3 b\xE1n \u0111\u01B0\u1EE3c m\xF3n h\xE0ng c\u1EE7a m\xECnh!',
     'misc.HelpSell': 'Ch\xFAng t\xF4i mu\u1ED1n gi\xFAp b\u1EA1n b\xE1n h\xE0ng!',
+    'misc.Hide': '\u1EA8n',
     'misc.HowToContact': 'T\xF4i c\xF3 th\u1EC3 li\xEAn h\u1EC7 v\u1EDBi OLX b\u1EB1ng c\xE1ch n\xE0o?',
     'misc.ImproveYourDescription': 'H\xE3y c\u1EA3i thi\u1EC7n m\xF4 t\u1EA3 c\u1EE7a b\u1EA1n',
     'misc.IncludeMoreDetails': '\u0110\u01B0a v\xE0o nh\u1EEFng chi ti\u1EBFt trong ph\u1EA7n m\xF4 t\u1EA3 rao v\u1EB7t c\u1EE7a b\u1EA1n. \u0110i\u1EC1u n\xE0y gi\xFAp b\u1EA1n b\xE1n nhanh h\u01A1n.',

@@ -552,6 +552,7 @@ module.exports = {
     'misc.GetTheFreeApp': 'GAUKITE NEMOKAM\u0104 PROGRAM\u0116L\u0118',
     'misc.GladYouSold': 'Cool! We\xB4re glad that you sold your item!',
     'misc.HelpSell': 'We want to help you sell!',
+    'misc.Hide': 'Hide',
     'misc.HowToContact': 'How can I contact OLX?',
     'misc.ImproveYourDescription': 'Improve your description',
     'misc.IncludeMoreDetails': 'Include more details in your ad description. This will help you sell faster.',
