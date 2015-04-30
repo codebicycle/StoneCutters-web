@@ -42,6 +42,23 @@ module.exports = {
             SINGLE: 'single'
         }
     },
+    growthPostingButtonWording: {
+        enabled: true,
+        platforms: ['desktop'],
+        markets: ['ar'],
+        name: 'growth-posting-button-wording',
+        alternatives: {
+            CONTROL: 'control',
+            CONTROL_A: 'control-a',
+            SELL_YOUR_ITEM: 'sell-your-item',
+            SELL_YOUR_ITEM_NC: 'sell-your-item-nc',
+            I_WANT_TO_SELL: 'i-want-to-sell',
+            PUBLISH: 'publish',
+            SELL: 'sell'
+        },
+        autoParticipate: true,
+        fraction: 0.5
+    },
     dgdCategoryCars: {
         enabled: true,
         platforms: ['desktop'],
