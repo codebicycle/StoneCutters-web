@@ -57,7 +57,7 @@ module.exports = {
             SELL: 'sell'
         },
         autoParticipate: true,
-        fraction: 0.9
+        fraction: 0.5
     },
     dgdCategoryCars: {
         enabled: true,
