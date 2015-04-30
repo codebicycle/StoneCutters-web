@@ -19,8 +19,7 @@ module.exports = {
     },
     smaug: {
         protocol: 'http',
-        host: 'api-v2.olx.com',
-        hostIris: 'api-v2.olx.ir',
+        host: 'api-v2.olx.com'
         wap: {
             maxPageSize: 25
         },
