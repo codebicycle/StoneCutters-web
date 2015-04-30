@@ -67,7 +67,7 @@ module.exports = {
     dgdMarkVisitedItems: {
         enabled: true,
         platforms: ['desktop'],
-        markets: ['ar'],
+        markets: ['ec', 'sv', 'gt', 'pa', 'pe'],
         name: 'dgd-mark-visited-items',
         alternatives: {
             CONTROL: 'control',
