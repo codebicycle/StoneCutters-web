@@ -180,6 +180,10 @@ module.exports = {
             landingThanks: {
                 worldwide: false,
                 countries: ['www.olx.com.ar', 'www.olx.com.co','www.olx.co.za']
+            },
+            visitedItems: {
+                worldwide: false,
+                countries: ['www.olx.com.ec', 'www.olx.com.sv', 'www.olx.com.gt', 'www.olx.com.pa', 'www.olx.com.pe']
             }
         }
     },
