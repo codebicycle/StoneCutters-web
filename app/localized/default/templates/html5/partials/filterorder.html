@@ -1,4 +1,4 @@
-<div class="filter_order {{direction}}">
+<div class="filter_order {{layoutOptions.direction}}">
     <div class="count_ads"><span>{{ meta.total | countFormat }} </span><span> {{ dictionary["itemcategorypath.Ads"] }}</span></div>
     {% if filtersEnabled %}
         <a href="{{ [path, 'sort'] | join('/') | link }}" class="btnfilter btnsort">{{ dictionary["misc.Sort_Mob"] }}</a>
