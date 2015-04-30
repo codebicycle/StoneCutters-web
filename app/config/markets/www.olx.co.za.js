@@ -465,7 +465,8 @@ module.exports = {
             'items#show' : {
                 platforms: ['html5', 'desktop'],
                 file: 'QzMyOFQxMSAg',
-                t: 'uz_til'
+                t: 'uz_til',
+                delay: 30000
             }
         }
     }
