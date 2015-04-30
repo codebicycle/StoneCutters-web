@@ -123,6 +123,7 @@ module.exports = Base.extend({
                 this.app.sixpack.convert(this.app.sixpack.experiments.dgdCategoryCars);
             }
             this.app.sixpack.convert(this.app.sixpack.experiments.dgdHidePhoneNumber, 'reply-by-mail');
+            this.app.sixpack.convert(this.app.sixpack.experiments.dgdMarkVisitedItems, 'item-reply');
         }
 
         function fail(err) {

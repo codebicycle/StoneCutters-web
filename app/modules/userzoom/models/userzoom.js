@@ -35,6 +35,7 @@ function getParams() {
 
     params.file = config.getForMarket(loactionUrl, ['userzoom', 'sections', section, 'file'], '');
     params.t = config.getForMarket(loactionUrl, ['userzoom', 'sections', section, 't'], '');
+    params.delay = config.getForMarket(loactionUrl, ['userzoom', 'sections', section, 'delay'], 0);
 
     return params;
 }
