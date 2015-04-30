@@ -4,7 +4,6 @@ var _ = require('underscore');
 var Base = require('../../../../../common/app/bases/view').requireView('categories/show');
 var helpers = require('../../../../../../helpers');
 var Metric = require('../../../../../../modules/metric');
-var UserSurvey = require('../../../../../../modules/usersurvey');
 
 module.exports = Base.extend({
     id: 'categories-show-view',
@@ -20,21 +19,20 @@ module.exports = Base.extend({
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
         var link = this.refactorPath(this.app.session.get('path'));
+        var dgdOpenItemInNewTab = this.app.sixpack.experiments.dgdOpenItemInNewTab;
 
-        this.userSurvey = new UserSurvey({}, {
-            app: this.app
-        });
         this.filters = data.filters;
         this.filters.order = this.order;
 
         return _.extend({}, data, {
             items: data.items,
-            isUserSurveyEnabled: this.userSurvey.isEnabled(),
             nav: {
                 link: link,
                 linkig: helpers.common.linkig.call(this, link, null, 'showig'),
                 listAct: 'active'
-            }
+            },
+            isABTestOpenNewTabEnabled: dgdOpenItemInNewTab,
+            shouldOpenInNewTab: dgdOpenItemInNewTab && dgdOpenItemInNewTab.alternative === 'open-item-in-new-tab'
         });
     },
     cleanPage: function(path) {

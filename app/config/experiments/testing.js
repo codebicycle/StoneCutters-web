@@ -2,14 +2,13 @@
 
 module.exports = {
     html4ShowShops: {
-        enabled: false,
+        enabled: true,
         platforms: ['html4'],
         markets: ['ke'],
         name: 'show-shops',
         alternatives: {
             ITEMS: 'items',
-            CALL_TO_ACTION: 'calltoactions',
-            CALL_TO_ACTION_MAP: 'calltoactions_map'
+            CALL_TO_ACTION: 'calltoactions'
         },
         firstClick: true,
         autoParticipate: true
@@ -29,13 +28,36 @@ module.exports = {
         enabled: true,
         platforms: ['desktop'],
         markets: ['ar'],
-        name: 'growth-category-suggestion',
-        fraction: 0.3,
+        name: 'growth-categories-suggestion',
         alternatives: {
+            CONTROL_1: 'control1',
+            CONTROL_2: 'control2',
+            CONTROL_3: 'control3',
+            CONTROL_4: 'control4',
+            CONTROL_5: 'control5',
+            CONTROL_6: 'control6',
+            CONTROL_7: 'control7',
             CONTROL: 'control',
             SUGGESTED: 'suggested',
             SINGLE: 'single'
         }
+    },
+    growthPostingButtonWording: {
+        enabled: true,
+        platforms: ['desktop'],
+        markets: ['ar'],
+        name: 'growth-posting-button-wording',
+        alternatives: {
+            CONTROL: 'control',
+            CONTROL_A: 'control-a',
+            SELL_YOUR_ITEM: 'sell-your-item',
+            SELL_YOUR_ITEM_NC: 'sell-your-item-nc',
+            I_WANT_TO_SELL: 'i-want-to-sell',
+            PUBLISH: 'publish',
+            SELL: 'sell'
+        },
+        autoParticipate: true,
+        fraction: 0.5
     },
     dgdCategoryCars: {
         enabled: true,
@@ -48,15 +70,25 @@ module.exports = {
         },
         autoParticipate: true
     },
-    dgdPostingABC: {
+    dgdHidePhoneNumber: {
         enabled: true,
         platforms: ['desktop'],
-        markets: ['bo'],
-        name: 'dgd-home-posting-abc',
+        markets: ['uy'],
+        name: 'hide-phone-number-fixed',
         alternatives: {
             CONTROL: 'control',
-            OPTIONB: 'btn-small-gray',
-            OPTIONC: 'btn-none'
+            HIDE_PHONE_NUMBER: 'hide-phone-number'
+        },
+        autoParticipate: true
+    },
+    dgdOpenItemInNewTab: {
+        enabled: true,
+        platforms: ['desktop'],
+        markets: ['gt'],
+        name: 'dgd-open-item-in-new-tab',
+        alternatives: {
+            CONTROL: 'control',
+            OPEN_ITEM_IN_NEW_TAB: 'open-item-in-new-tab'
         },
         autoParticipate: true,
         fraction: 1
