@@ -143,7 +143,7 @@ function onClickSubCategory(event, intent) {
         if(this.$el.attr('data-cat-error')) {
             var $fieldsToValidate = $('input, select, textarea');
             $fieldsToValidate.each(function(index) {
-                if(!$(this).hasClass('image-input-file') && $(this).attr('required') && $(this).attr('id') !== 'field-location' ) {
+                if(!$(this).hasClass('image-input-file') && $(this).attr('required') && $(this).attr('id') !== 'field-city' ) {
                     $(this).change();
                 }
             });

@@ -12,14 +12,14 @@ module.exports = Base.extend({
     className: 'posting-locations-view',
     selectors: {
         state: '#field-state',
-        city: '#field-location',
+        city: '#field-city',
         neighborhood: '#field-neighborhood'
     },
     events: {
         'validate': onValidate,
         'formRendered': onFormRendered,
         'change #field-state': onChangeState,
-        'change #field-location': onChangeCity,
+        'change #field-city': onChangeCity,
         'change #field-neighborhood': onChangeNeighborhood
     },
     initialize: initialize,
@@ -71,7 +71,9 @@ function getTemplateData() {
         states: states,
         cities: cities,
         neighborhoods: neighborhoods,
-        location: location
+        location: _.object(_.keys(location), _.map(location, function each(location) {
+            return location.url || location.id;
+        }))
     });
 }
 
@@ -117,7 +119,7 @@ function isMandatory(type) {
 }
 
 function findCities(state, options, cityId) {
-    var $cities = this.$(this.selectors.city);
+    var $city = this.$(this.selectors.city);
     var promise = this.findLocation('Cities', {
         level: 'states',
         type: 'cities',
@@ -131,20 +133,20 @@ function findCities(state, options, cityId) {
     function success(cities) {
         var selected = false;
 
-        $cities.removeAttr('disabled').empty();
+        $city.removeAttr('disabled').empty();
         _.each(cities, function each(city) {
             if(city.key == cityId) {
                 selected = true;
             }
-            $cities.append('<option value="' + city.key + '"' + (city.key == cityId ? 'selected="selected"' : '') + '>' + city.value + '</option>');
+            $city.append('<option value="' + city.key + '"' + (city.key == cityId ? 'selected="selected"' : '') + '>' + city.value + '</option>');
         }.bind(this));
         options.skipValidation = !selected;
-        this.parentView.$el.trigger('fieldSubmit', [$cities, options]);
+        this.parentView.$el.trigger('fieldSubmit', [$city, options]);
     }
 }
 
 function findNeighborhoods(city, options) {
-    var $neighborhoods = this.$(this.selectors.neighborhood);
+    var $neighborhood = this.$(this.selectors.neighborhood);
     var promise = this.findLocation('Neighborhoods', {
         location: city
     }, {
@@ -162,12 +164,10 @@ function findNeighborhoods(city, options) {
 
         this.resetNeighborhoods(!!neighborhoods.length);
         if (neighborhoods.length) {
-            $neighborhoods.removeAttr('disabled').attr('required', true).empty();
-            $neighborhoods.parents('.field-wrapper').removeClass('hide');
             _.each(neighborhoods, function each(neighborhood) {
-                $neighborhoods.append('<option value="' + neighborhood.key + '">' + neighborhood.value + '</option>');
+                $neighborhood.append('<option value="' + neighborhood.key + '">' + neighborhood.value + '</option>');
             }.bind(this));
-            this.parentView.$el.trigger('fieldSubmit', [$neighborhoods, options]);
+            this.parentView.$el.trigger('fieldSubmit', [$neighborhood, options]);
         }
         done(neighborhoods);
     }
@@ -178,9 +178,9 @@ function findNeighborhoods(city, options) {
         if (neighborhoods.length) {
             neighborhood = this.getNeighborhood();
             if (neighborhood) {
-                neighborhood = $neighborhoods.find('option[value=' + neighborhood.id + ']').attr('selected', true);
+                neighborhood = $neighborhood.find('option[value=' + neighborhood.id + ']').attr('selected', true);
                 if (neighborhood.length) {
-                    $neighborhoods.trigger('change');
+                    $neighborhood.trigger('change');
                 }
             }
         }
@@ -228,7 +228,7 @@ function findLocation(collection, params, options, emptyKey) {
 }
 
 function getNeighborhood() {
-    var location = this.getItem().get('_location');
+    var location = this.getItem().get('location');
     var neighborhood;
 
     if (!location) {
@@ -247,14 +247,19 @@ function getNeighborhood() {
 }
 
 function resetNeighborhoods(containsNeighborhoods) {
-    var $neighborhoods = this.$(this.selectors.neighborhood);
+    var $neighborhood = this.$(this.selectors.neighborhood);
+    var $wrapper = $neighborhood.closest('.field-wrapper');
 
-    this.parentView.$el.trigger('hideError', [$neighborhoods]);
-    $neighborhoods.empty();
+    this.parentView.$el.trigger('hideError', [$neighborhood]);
+    $neighborhood.empty();
     if (containsNeighborhoods) {
+        $neighborhood.removeAttr('disabled');
+        $wrapper.removeClass('hide');
         this.parentView.parentView.errors.neighborhood = (this.app.session.get('location').abbreviation !== 'ZA') ? 'item.SelectA_Neighborhood' : 'misc.SelectSuburb';
         return;
     }
+    $neighborhood.attr('disabled', true);
+    $wrapper.addClass('hide');
     delete this.parentView.parentView.errors.neighborhood;
 }
 
@@ -301,51 +306,54 @@ function validateLocation(type, done, isValid) {
 }
 
 function onFormRendered(event, editing) {
-    var $states = $(this.selectors.state);
-    var $cities = $(this.selectors.city);
-    var $neighborhoods = $(this.selectors.neighborhood);
+    event.preventDefault();
+    event.stopPropagation();
+    event.stopImmediatePropagation();
+
+    var $state = $(this.selectors.state);
+    var $city = $(this.selectors.city);
+    var $neighborhood = $(this.selectors.neighborhood);
     var category = this.getItem().get('category');
     var options = {
         pendingValidation: (category.id === undefined || category.parentId === undefined)
     };
 
-    if (!editing) {        
-        if ($states.val()) {
-            $states.trigger('change', [options]);
-        }
-        if ($cities.val()) {
-            $cities.trigger('change', [options]);
-        }
+    if ($state.val()) {
+        $state.trigger('change', [options, editing]);
     }
-    else {
-        this.parentView.$el.trigger('fieldSubmit', [$states]);
-        this.parentView.$el.trigger('fieldSubmit', [$cities]);
+    if ($city.val()) {
+        $city.trigger('change', [options, editing]);
     }
-    if ($neighborhoods.val()) {
-        $neighborhoods.trigger('change', [options]);
+    if ($neighborhood.val()) {
+        $neighborhood.trigger('change', [_.extend({}, options, {
+            pendingValidation: false,
+            skipValidation: options.pendingValidation
+        })]);
     }
 }
 
-function onChangeState(event, options) {
+function onChangeState(event, options, editing) {
     event.preventDefault();
     event.stopPropagation();
     event.stopImmediatePropagation();
 
     var $field = $(event.currentTarget);
     var $firstOption = $field.find('option').first();
-    var $cities = $(this.selectors.city);
+    var $city = $(this.selectors.city);
 
     options = options || {};
 
     if ($firstOption.val() === '') {
         $firstOption.remove();
     }
-    this.resetNeighborhoods(false);
-    this.findCities($field.val(), options, ($cities.val() ? [$cities.val()] : undefined));
+    if (!editing) {
+        this.resetNeighborhoods(false);
+        this.findCities($field.val(), options, ($city.val() ? [$city.val()] : undefined));
+    }
     this.parentView.$el.trigger('fieldSubmit', [$field, options]);
 }
 
-function onChangeCity(event, options) {
+function onChangeCity(event, options, editing) {
     event.preventDefault();
     event.stopPropagation();
     event.stopImmediatePropagation();
@@ -358,8 +366,9 @@ function onChangeCity(event, options) {
     if ($firstOption.val() === '') {
         $firstOption.remove();
     }
-
-    this.findNeighborhoods($field.val(), options);
+    if (!editing) {
+        this.findNeighborhoods($field.val(), options);
+    }
     this.parentView.$el.trigger('fieldSubmit', [$field, options]);
 }
 
@@ -377,7 +386,6 @@ function onChangeNeighborhood(event, options) {
     if ($firstOption.val() === '') {
         $firstOption.remove();
     }
-
     item.unset('neighborhood');
     item.set('neighborhood.id', $field.val());
     item.set('neighborhood.name', $field.find('option:selected').text());

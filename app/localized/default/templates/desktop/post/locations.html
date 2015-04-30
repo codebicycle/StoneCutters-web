@@ -13,7 +13,7 @@
 {{ Field(statesField) }}
 
 {% set citiesField = {
-    name: "location",
+    name: "city",
     mandatory: "true",
     label: dictionary["messages_item_page.City"],
     values: cities,
@@ -23,7 +23,7 @@
 } %}
 
 {{ Field(citiesField) }}
-{{location.neighborhood|log}}
+
 {% set neighborhoodsField = {
     name: "neighborhood",
     mandatory: "true",

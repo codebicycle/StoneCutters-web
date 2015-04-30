@@ -99,6 +99,7 @@ function flow(params, callback) {
 
         if (isPostingFlow || isDesktop || itemId) {
             promise
+                .then(fetchNeighborhoods.bind(this))
                 .then(fetch.bind(this))
                 .then(parse.bind(this))
                 .then(participate.bind(this))
@@ -177,10 +178,31 @@ function flow(params, callback) {
             done(spec);
         }
 
-        function fetch(done, spec) {
-            this.app.fetch(spec, {
+        function fetchNeighborhoods(done, spec) {
+            if (spec.neighborhoods) {
+                return this.app.fetch(_.pick(spec, 'neighborhoods'), {
+                    readFromCache: false
+                }, function afterFetch(err, res, body) {
+                    if (err) {
+                        return done.fail(err);
+                    }
+                    done(spec, (res || {}).neighborhoods);
+                }.bind(this));
+            }
+            done(spec);
+        }
+
+        function fetch(done, spec, neighborhoods) {
+            this.app.fetch(_.omit(spec, 'neighborhoods'), {
                 readFromCache: !this.app.session.get('isServer')
-            }, done.errfcb);
+            }, function afterFetch(err, res, body) {
+                if (err) {
+                    return done.fail(err);
+                }
+                res = res || {};
+                res.neighborhoods = neighborhoods;
+                done(res, body);
+            }.bind(this));
         }
 
         function parse(done, res) {
@@ -286,11 +308,6 @@ function flow(params, callback) {
 
         function postingController(res) {
             this.app.tracking.setPage('desktop_step1');
-            if (res.item) {
-                res.item.set({
-                    _location: res.item.get('location')
-                });
-            }
 
             callback(null, 'post/index', {
                 include: ['item'],

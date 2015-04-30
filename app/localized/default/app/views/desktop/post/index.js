@@ -83,13 +83,13 @@ function className() {
 function getTemplateData() {
     var data = Base.prototype.getTemplateData.call(this);
     var customerContact = config.getForMarket(this.app.session.get('location').url, ['post_customer_contact'], '');
-    var growthCategorySuggestion = this.app.sixpack.experiments.growthCategorySuggestion ? this.app.sixpack.experiments.growthCategorySuggestion.alternative : '';
+    var sixpackCurrentAlternative = this.app.sixpack.experiments.growthCategorySuggestion ? this.app.sixpack.experiments.growthCategorySuggestion.alternative : '';
 
     return _.extend({}, data, {
         item: this.getItem(data.item),
         customerContact: customerContact,
         chatEnabled: Chat.isEnabled.call(this),
-        experiments: this.getItem().has('id') || growthCategorySuggestion.indexOf('control') != -1 ? {} : this.app.sixpack.experiments
+        experiments: this.getItem().has('id') || sixpackCurrentAlternative.indexOf('control') != -1 ? {} : this.app.sixpack.experiments
     });
 }
 
@@ -138,7 +138,7 @@ function postRender() {
             this.errors['category.parentId'] = this.dictionary['postingerror.PleaseSelectCategory'];
             this.errors['category.id'] = this.dictionary['postingerror.PleaseSelectSubcategory'];
             this.errors.state = this.dictionary['countryoptions.Home_SelectState'];
-            this.errors.location = this.dictionary['countryoptions.Home_SelectCity'];
+            this.errors.city = this.dictionary['countryoptions.Home_SelectCity'];
             this.errors.neighborhood = this.dictionary[(this.app.session.get('location').abbreviation !== 'ZA') ? 'item.SelectA_Neighborhood' : 'misc.SelectSuburb'];
             this.$el.trigger('updateErrors');
             this.$(this.selectors.contact).trigger('formRendered');
@@ -287,7 +287,7 @@ function onFieldSubmit(event, field, options) {
     if (field instanceof window.jQuery) {
         $field = field;
         shouldValidateField = !!$field.data('validate');
-        validate = ($field.attr('name') === 'state' || $field.attr('name') === 'location' || $field.attr('name') === 'neighborhood');
+        validate = ($field.attr('name') === 'state' || $field.attr('name') === 'city' || $field.attr('name') === 'neighborhood');
         field.name = $field.attr('name');
         field.value = this.val($field);
     }
@@ -351,7 +351,7 @@ function validateField($field) {
         });
         $field.trigger('fieldValidationEnd', [_errors]);
     }
-    else if ($field.attr('name') === 'state' || $field.attr('name') === 'location' || $field.attr('name') === 'neighborhood') {
+    else if ($field.attr('name') === 'state' || $field.attr('name') === 'city' || $field.attr('name') === 'neighborhood') {
         $field.trigger('fieldValidationEnd');
     }
     else {
