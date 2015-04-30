@@ -12,7 +12,7 @@
             {% set isStaticSearch = true %}
             {% set itemListingClass = 'staticsearch' %}
             {% view 'items/partials/locations' %}
-            {% include (template + '/items/list.html') %}
+            {% view 'items/list' %}
             {% if paginator and paginator.isEnabled() %}
                 {% include (template + '/items/pagination.html') %}
             {% endif %}
