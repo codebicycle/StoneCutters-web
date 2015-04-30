@@ -249,9 +249,13 @@ function getNeighborhood() {
 function resetNeighborhoods(containsNeighborhoods) {
     var $neighborhood = this.$(this.selectors.neighborhood);
     var $wrapper = $neighborhood.closest('.field-wrapper');
+    var item = this.getItem();
 
     this.parentView.$el.trigger('hideError', [$neighborhood]);
     $neighborhood.empty();
+    item.unset('neighborhood');
+    item.unset('neighborhood.id');
+    item.unset('neighborhood.name');
     if (containsNeighborhoods) {
         $neighborhood.removeAttr('disabled');
         $wrapper.removeClass('hide');
