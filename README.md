@@ -42,6 +42,7 @@ Details of the latest version can be found on the Project's Github Wiki.
 
 7. Download and install the node modules running:
 
+    * Ubuntu users: run before `sudo apt-get install build-essential`
     `sudo npm install`
 
 8. Install memcache:

@@ -10,36 +10,36 @@
     <ul>
         <li>
             <img src="{{ '/images/desktop/async_pickup/drop.jpg' | static }}" alt="Dejás el articulo">
-            <p class="title">Dejás el artículo</p>
-            <p class="bold">No más esperas, horarios puntuales ni reagendar encuentros cancelados!<br><span data-viewmore>Leer más</span></p>
+            <p class="title">Prensentando un código, dejás tu artículo y te vas</p>
             <p class="desc">
-                <b>OLX</b> te proveé un punto de intercambio <b>seguro y cerca tuyo</b> donde <b>podés acercarte en cualquier momento del día</b>. En estos puntos una persona guardará tu artículo en un loker exclusivo y cerrado para vos. Te dará un código que solamente vos y tu comprador deben conocer.
+                Te enviaremos un código por email. Con éste y dentro de las 48hrs de recibido, podrás dejar tu artículo.<br>
+                En el Punto de Entrega <b>reciben tu artículo</b>, donde permanecerá hasta que el comprador lo retire.
             </p>
         </li><!--
         --><li>
             <img src="{{ '/images/desktop/async_pickup/pickup.jpg' | static }}" alt="El comprador lo recoje y lo paga">
-            <p class="title">El comprador lo recoje y lo paga</p>
-            <p class="bold">Sin tener que coincidir con vos, pasa cuando quiere a buscar el producto.<br><span data-viewmore>Leer más</span></p>
+            <p class="title">El comprador lo recoge y paga el precio que acordaron.</p>
             <p class="desc">
-                Presentando sus datos y el mismo código que te dieron a vos, retira el producto y deposita el dinero. Una persona controla el dinero antes de guardarlo seguro por vos. Te avisamos en el momento que ya podés buscar tu dinero!
+                El comprador tiene 48hrs para retirar el producto y pagarlo.<br>
+                El Punto de Entrega controla el dinero antes de entregar tu producto. <b>En el acto te llegará un email para que pases a buscar tu dinero!</b>
             </p>
         </li><!--
         --><li>
             <img src="{{ '/images/desktop/async_pickup/collect.jpg' | static }}" alt="Retirás tu dinero">
             <p class="title">Retirás tu dinero</p>
-            <p class="bold">En el momento que puedas.<br><span data-viewmore>Leer más</span></p>
             <p class="desc">
-                Presentando tu código nuevamente en el punto de intercambio, tu dinero te es entregado. Fué super sencillo! no?
+                Con tu código y DNI, en el momento que puedas.<br>
+                Tenés hasta 30 días para retirar tu dinero del Punto de Entrega OLX. Es super sencillo! no?
             </p>
         </li>
     </ul>
-    <span data-hide class="icons icon-arrow arrow-hide"></span>
 </div>
 <div class="bottom">
-    <p class="title">Tenés que entregar tu {{ item.title }} al comprador?</p>
-    <span data-step="1" class="posting">Usá un punto de Entrega OLX</span>
+    <p class="title">Tenés que entregar tu <b>{{ item.title }}</b> al comprador?</p>
+    {% include (template + '/landings/asyncpickup/kiosco-location.html') %}
+    <span data-step="1" class="posting">Usá gratis este Punto de Entrega OLX</span>
 </div>
-<div class="restrictions async-form">
+<div class="restrictions">
     <span class="bold">Restricciones sobre el artículo para usar un punto de entrega.</span>
     <ul>
         <li>Tener un valor inferior a $2000</li>
@@ -47,4 +47,3 @@
         <li>Cumplir con los <a href="/terms">términos y condiciones</a> del sitio web.</li>
     </ul>
 </div>
-{% include (template + '/landings/asyncpickup/kiosco-location.html') %}
