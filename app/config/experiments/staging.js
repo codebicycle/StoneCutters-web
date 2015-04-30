@@ -81,6 +81,17 @@ module.exports = {
         },
         autoParticipate: true
     },
+    dgdMarkVisitedItems: {
+        enabled: true,
+        platforms: ['desktop'],
+        markets: ['ec', 'sv', 'gt', 'pa', 'pe'],
+        name: 'dgd-mark-visited-items',
+        alternatives: {
+            CONTROL: 'control',
+            MARK_VISITED_ITEMS: 'mark-visited-items'
+        },
+        autoParticipate: true
+    },
     dgdOpenItemInNewTab: {
         enabled: true,
         platforms: ['desktop'],
