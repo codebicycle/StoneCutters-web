@@ -21,13 +21,21 @@ module.exports = Base.extend({
         'publish': 'Publicar',
         'sell': 'Vender'
     },
-    postRender: function() {
-        this.app.router.appView.on('posting:start', this.onPostingStart.bind(this));
-        this.app.router.appView.on('posting:end', this.onPostingEnd.bind(this));
+    getTemplateData: function() {
+        var data = Base.prototype.getTemplateData.call(this);
+        var wordingButton;
 
         if (this.app.sixpack.experiments.growthPostingButtonWording){
-            this.$el.find('.posting').html(this.wordingAlternatives[this.app.sixpack.experiments.growthPostingButtonWording.alternative]);
+            wordingButton = this.wordingAlternatives[this.app.sixpack.experiments.growthPostingButtonWording.alternative];
         }
+
+        return _.extend({}, data, {
+            wordingButton: wordingButton
+        });
+    },
+    postRender: function() {
+        this.app.router.appView.on('posting:start', this.onPostingStart.bind(this));
+        this.app.router.appView.on('posting:end', this.onPostingEnd.bind(this));        
     },
     onPostClick: function() {
         var currentRoute = this.app.session.get('currentRoute');
