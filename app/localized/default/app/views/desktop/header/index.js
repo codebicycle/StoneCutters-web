@@ -12,9 +12,22 @@ module.exports = Base.extend({
         'click .posting': 'onPostClick',
         'click [data-increment-metric]': Metric.incrementEventHandler
     },
+    wordingAlternatives: {
+        'control': 'Publicá un aviso gratis',
+        'control-a': 'Publicá un aviso gratis',
+        'sell-your-item': 'Vendé tu artículo!',
+        'sell-your-item-nc': 'Vendé tu artículo! (sin comisión)',
+        'i-want-to-sell': 'Quiero vender!',
+        'publish': 'Publicar',
+        'sell': 'Vender'
+    },
     postRender: function() {
         this.app.router.appView.on('posting:start', this.onPostingStart.bind(this));
         this.app.router.appView.on('posting:end', this.onPostingEnd.bind(this));
+
+        if (this.app.sixpack.experiments.growthPostingButtonWording){
+            this.$el.find('.posting').html(this.wordingAlternatives[this.app.sixpack.experiments.growthPostingButtonWording.alternative]);
+        }
     },
     onPostClick: function() {
         var currentRoute = this.app.session.get('currentRoute');
@@ -22,13 +35,17 @@ module.exports = Base.extend({
         if (currentRoute.controller === 'items' && currentRoute.action === 'show') {
             this.app.sixpack.convert(this.app.sixpack.experiments.desktopDGD23ShowSimplifiedReplyForm, 'publish');
         }
+
+        this.app.sixpack.convert(this.app.sixpack.experiments.growthPostingButtonWording);
     },
     onPostingStart: function() {
-        $('.posting, .search-form').addClass('disabled');
-        $('.posting-title').removeClass('disabled');
+        this.toggleElements(false);
     },
     onPostingEnd: function() {
-        $('.posting, .search-form').removeClass('disabled');
-        $('.posting-title').addClass('disabled');
+        this.toggleElements(true);
+    },
+    toggleElements: function(flag) {
+        this.$el.find('.posting, .search-form').toggleClass('disabled', !flag);
+        this.$el.find('.posting-title').toggleClass('disabled', flag);
     }
 });
