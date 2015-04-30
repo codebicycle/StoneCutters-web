@@ -51,6 +51,7 @@ module.exports = Base.extend({
         var user = this.app.session.get('user');
         var context = data.context ? data.context.ctx || {} : {};
         var location = this.app.session.get('location');
+        var direction = config.getForMarket(this.app.session.get('location').url, ['layoutOptions', 'direction'], {});
 
         return _.extend(context, data, {
             user: user,
@@ -75,7 +76,8 @@ module.exports = Base.extend({
             shortHost: this.app.session.get('shortHost'),
             domain: this.app.session.get('domain'),
             fullDomain: this.app.session.get('fullDomain'),
-            layoutOptions: config.getForMarket(location.url, ['layoutOptions'], {})
+            layoutOptions: config.getForMarket(location.url, ['layoutOptions'], {}),
+            direction: direction
         });
     },
     track: function(data, callback, options) {

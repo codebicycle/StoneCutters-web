@@ -1,8 +1,8 @@
-<div class="filter_order">
-	<div class="count_ads"><span>{{ meta.total }}</span><span> {{ dictionary["itemcategorypath.Ads"] }}</span></div>
-	{% if filtersEnabled %}
+<div class="filter_order {{direction}}">
+    <div class="count_ads"><span>{{ meta.total | countFormat }} </span><span> {{ dictionary["itemcategorypath.Ads"] }}</span></div>
+    {% if filtersEnabled %}
         <a href="{{ [path, 'sort'] | join('/') | link }}" class="btnfilter btnsort">{{ dictionary["misc.Sort_Mob"] }}</a>
         <a href="{{ [path, 'filter'] | join('/') | link }}" class="btnfilter btnfil">{{ dictionary["mobilepromo.Filters"] }}</a>
         <a href="{{ nav.linkig | link}}" class="btnfilter withouttext {{ nav.current }}"></a>
-	{% endif %}
+    {% endif %}
 </div>

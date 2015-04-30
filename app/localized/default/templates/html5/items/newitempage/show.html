@@ -1,13 +1,13 @@
 <section id="itemPage" data-qa="item">
     <section class="title">
         <span class="date">
-            {{ item.date.since.day if item.date.since.day }}
+            {{ item.date.since.day | countFormat if item.date.since.day }}
             {{ dictionary[item.date.since.dictionary] }}
-            {{ (', ' + item.date.since.hour) if item.date.since.hour }}
+            {{ (', ' + item.date.since.hour) | countFormat if item.date.since.hour }}
             {{ (', '+item.location.cityName) if item.location.cityName }}
         </span>
         <h1>{{ item.title }}</h1>
-        <div class="price">{{ item.price.displayPrice if item.price.displayPrice else "" }}</div>
+        <div class="price">{{ item.price.displayPrice | countFormat if item.price.displayPrice else "" }}</div>
         <div class="clear"></div>
     </section>
 
@@ -55,7 +55,7 @@
             <ul>
                 {% for optional in item.optionals %}
                     {% if optional.label and optional.value %}
-                        <li>{{ optional.label }}: <strong>{{ optional.value }}</strong></li>
+                        <li>{{ optional.label }}: <strong>{{ optional.value  | countFormat }}</strong></li>
                     {% endif %}
                 {% endfor %}
             </ul>
@@ -74,7 +74,7 @@
         <div class="profile" {{ 'style="background-image: url('+ map +')"' if item.coordinates.latitude }}>
         {% if item.phone and item.contactName %}
             <strong>{{ item.contactName }}</strong>
-            <span>{{ item.phone }}</span>
+            <span>{{ item.phone  | countFormat }}</span>
         {% elif item.phone or item.contactName %}
             <strong>{{ item.contactName if item.contactName }}</strong>
             <span> {{ item.phone if item.phone }}</span>
@@ -103,12 +103,11 @@
             {% if not user %}
                 {% set favLink = (['/login?redirect=/items/', item.id, '/favorite'] | join('') | link) %}
             {% endif %}
-        {% endif %} 
+        {% endif %}
         <a data-itemId="{{ item.id }}" class="btnshare fav {{ favClass }}" href="{{ favLink }}" data-qa="{{ favClass }}-favorite" >{{ favText }}</a>
 
         <a href="#share" class="btnshare share trackMe" data-tracking="ItemPage-ClickShare">{{ dictionary["item.ShareAd"] }}</a>
-        
-        {% if flagItem.enabled %}        
+        {% if flagItem.enabled %}
             <a href="#" class="btnshare flag" data-text-done="{{ flagTextDone }}" data-increment-metric="africa.item.{{ 'auth' if user else 'anon' }}.flagging" data-flag="flagAsSpamOrScam">{{ flagText }}</a>
         {% endif %}
 

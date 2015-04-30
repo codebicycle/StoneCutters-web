@@ -3,6 +3,7 @@
 var S = require('string');
 var _ = require('underscore');
 var asynquence = require('asynquence');
+var config = require('../../shared/config');
 var Base = require('../bases/model');
 var helpers = require('../helpers');
 var statsd = require('../../shared/statsd')();
@@ -128,6 +129,8 @@ function indexOfOptional(name) {
 }
 
 function parse(item, options) {
+    var digits = config.getForMarket(this.app.session.get('location').url, ['layoutOptions', 'digits'], {});
+
     if (item && item.date) {
         item.date.since = helpers.timeAgo(item.date);
     }
@@ -140,7 +143,11 @@ function parse(item, options) {
     if (item.description) {
         item.description = S(item.description).stripTags().s;
     }
+    if (item.price && item.price.displayPrice) {
+        item.price.displayPrice = (digits !== 'western-arabic') ? helpers.numbers.translate(item.price.displayPrice, {to: digits}) : item.price.displayPrice;
+    }
     return Base.prototype.parse.apply(this, arguments);
+
 }
 
 function post(done) {

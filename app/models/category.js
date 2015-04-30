@@ -10,7 +10,7 @@ module.exports = Base.extend({
     parse: function(result) {
         var digits = config.getForMarket(this.app.session.get('location').url, ['layoutOptions', 'digits'], {});
         var Collection = require('../collections/categories');
-        
+
         result.children = new Collection(result.children, {parse: true, app: this.app});
         result.localized = {
             'counter': (digits !== 'western-arabic') ? helpers.numbers.translate(result.counter, {to: digits}) : result.counter

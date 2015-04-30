@@ -20,6 +20,7 @@ module.exports = {
     smaug: {
         protocol: 'http',
         host: 'api-v2.olx.com',
+        hostIris: 'api-v2.olx.ir',
         wap: {
             maxPageSize: 25
         },
@@ -138,7 +139,7 @@ module.exports = {
             },
             newItemPage: {
                 worldwide: true,
-                countries: ['www.olx.ir']
+                countries: []
             },
             optimizely: {
                 worldwide: false,
