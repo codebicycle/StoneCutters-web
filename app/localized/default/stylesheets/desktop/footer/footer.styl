@@ -16,7 +16,6 @@
     .column {
 
         display: table-cell;
-        padding: 0 20px;
         margin: 0;
         
     }
@@ -24,7 +23,7 @@
     .column-title {
 
         margin: 0;
-        padding-bottom: 30px;
+        padding: 0 20px 30px;
         font-size: 16px;
         font-weight: bold;
 
@@ -40,9 +39,17 @@
     
     .column-item {
 
-        padding-top: 10px;
+        position: relative;
+        padding: 10px 20px 0;
         
-        &:first-child {
+        &.wide {
+
+            padding: 10px 0 0;
+
+        }
+
+        &:first-child,
+        &.wide:first-child {
 
             padding-top: 0;
 
@@ -61,14 +68,17 @@
 
         display: block;
         padding: .5em;
+        margin: 0 20px;
         border: solid 1px #CCC;
         border-radius: .5em;
         position: relative;
+        transition(background-color .2s ease);
         
         &:before {
 
             content: "\63";
             transform(rotate(270deg));
+            transition(transform .25s ease .1s);
             position: absolute;
             right: 1em;
             top: 50%;
@@ -93,6 +103,53 @@
             text-decoration: none;
 
         }
+
+        &.active {
+
+            z-index: 52;
+            background-color: #CCC;
+            color: #FFF;
+
+            &:before {
+
+                transform(rotate(90deg));
+                color: #FFF;
+
+            }
+
+            &:hover {
+
+                background-color: #CCC;
+
+            }
+
+        }
+
+    }
+
+    .modal-container {
+
+        display: none;
+
+        height: 300px;
+
+        position: absolute;
+        left: -1px;
+        bottom: 100%;
+        width: 980px;
+        z-index: 51;
+        overflow: hidden;
+
+        margin: 0 0 -4px -200%;
+
+        background-color: #FFF;
+        
+        border: solid thin #CCC;
+        border-bottom-width: 4px;
+
+        box-sizing(border-box);
+        
+        box-shadow: 1px 5px 3px -4px rgba(0, 0, 0, .75);
 
     }
     

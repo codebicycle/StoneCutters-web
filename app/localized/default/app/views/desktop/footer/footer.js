@@ -17,6 +17,7 @@ module.exports = Base.extend({
         'click [data-footer-tab]': 'slideFooter',
         'click [data-footer-content] ul li': 'cleanClases',
         'click [data-modal-shadow], [data-modal-close]': 'onCloseModal',
+        'click .modal-link': 'onModalLinkClick',
         'click [data-increment-metric]': Metric.incrementEventHandler
     },
     getTemplateData: function() {
@@ -122,5 +123,16 @@ module.exports = Base.extend({
         event.stopPropagation();
         event.stopImmediatePropagation();
         $('#migrations-modal').trigger('hide');
+    },
+    onModalLinkClick: function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+
+        var $source = this.$(event.target);
+        var $target = $source.next('.modal-container');
+
+        $source.toggleClass('active');
+        $target.slideToggle('slow');
     }
 });
