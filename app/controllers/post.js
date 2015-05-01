@@ -260,7 +260,7 @@ function flow(params, callback) {
                 if (check.call(this, res.item)) {
                     return;
                 }
-                postingFlowController.call(this, res.postingSession, res.item, res.fields);
+                postingFlowController.call(this, res);
             }
             else if (isDesktop) {
                 if (check.call(this, res.item)) {
@@ -275,7 +275,7 @@ function flow(params, callback) {
                 if (check.call(this, res.item)) {
                     return;
                 }
-                postingFormController.call(this, res.postingSession, res.item, res.fields);
+                postingFormController.call(this, res);
             }
             else {
                 postingCategoriesController.call(this);
