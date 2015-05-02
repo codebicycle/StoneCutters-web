@@ -1,0 +1,10 @@
+{% from macros import Breadcrumb, BreadcrumbHome %}
+{% set link = (breadcrumb | link) %}
+{{ Breadcrumb(dictionary, link, dictionary['item.FlagAsSpamOrScam'] or 'Report Item') }}
+<div id="itemPage" data-qa="flag-reason-sent" >
+        <h1>{{ dictionary["item.ThankYouForFlagItem"] or 'Thank you for your time on reporting this item' }}</h1>
+        {{ dictionary["item.weWillCheckItem"] or 'We will check wether the item violates our publishing rules' }}
+</div>
+{{ BreadcrumbHome(dictionary, link, ('/' | link)) }}
+
+{% view 'partials/tracking' %}

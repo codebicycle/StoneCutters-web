@@ -1,0 +1,29 @@
+{% from macros import Breadcrumb, BreadcrumbHome, Errors %}
+{% set link = (breadcrumb | link) %}
+{{ Breadcrumb(dictionary, link, dictionary['item.FlagAsSpamOrScam'] or 'Report Item') }}
+{% if form and form.errors %}{{ Errors(form.errors) }}{% endif %}
+<div id="flagitem">
+    <form action="{{ ['/items/', item.id, '/flag'] | join('') | link }}" method="POST" enctype="multipart/form-data">
+        <div class="formField">
+            <input type="radio" name="reason" value="badContent" {{ 'checked' if form.values.reason == 'badContent' or not form.values.reason }}>
+            {{ dictionary["flagitem.badContent"] or "Bad Content" }}
+            <input type="radio" name="reason" value="duplicated" {{ 'checked' if form.values.reason == 'duplicated' }}>
+            {{ dictionary["flagitem.duplicated"] or "Duplicated item" }}
+            <input type="radio" name="reason" value="fraud" {{ 'checked' if form.values.reason == 'fraud' }}>
+            {{ dictionary["flagitem.fraud"] or "Fraud" }}
+            <input type="radio" name="reason" value="alreadySold" {{ 'checked' if form.values.reason == 'alreadySold' }}>
+            {{ dictionary["flagitem.alreadySold"] or "Item is already Sold" }}
+            <input type="radio" name="reason" value="other" {{ 'checked' if form.values.reason == 'other' }}>
+            {{ dictionary["flagitem.other"] or "Other Reasons" }}
+        </div>
+        <div class="formField">
+            <label>{{ dictionary["flagitem.Description"] or "Please tell us why do your report this item" }}:</label>
+            <textarea id="text-description" name="description" class="textarea">{{ form.values.description if form.values.description }}</textarea>
+        </div>
+        <div class="formActions">
+            <input type="submit" value="{{ dictionary['item.FlagAsSpamOrScam'] or 'Report' }}" name="submit" class="btns orange" data-qa="flagitem-send-button" >
+        </div>
+        <br>
+    </form>
+</div>
+{{ BreadcrumbHome(dictionary, link, ('/' | link)) }}

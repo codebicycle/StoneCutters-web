@@ -1,4 +1,4 @@
-'use strict';
+ 'use strict';
 
 module.exports = function(app, dataAdapter) {
     var _ = require('underscore');
@@ -416,6 +416,67 @@ module.exports = function(app, dataAdapter) {
                 .then(parse)
                 .then(prepare)
                 .then(remove)
+                .val(success);
+        }
+    })();
+
+    (function flagItem() {
+        app.post('/items/:itemId/flag', handler);
+
+        function handler(req, res, next) {
+            var itemId = req.param('itemId', null);
+            var reason;
+
+            function parse(done) {
+                formidable.parse(req, done.errfcb);
+            }
+
+            function prepare(done, data) {
+                reason = data;
+                done();
+            }
+
+            function submit(done) {
+                console.log('ITEM ID:', itemId);
+                console.log(reason);
+                /*
+                    ITEM ID: 649744840
+                    {
+                    reason: 'badContent',
+                        description: 'Descripionnnnnnnnnnnn',
+                        submit: 'Report'
+                    }
+                */
+                //Llamar a Zendesk
+                done();
+            }
+
+            function success() {
+                var url = '/iid-' + itemId + '/flag/flagsuccess';
+
+                res.redirect(utils.link(url, req.rendrApp));
+                end();
+            }
+
+            function error(err) {
+                var url = req.headers.referer || '/items/' + itemId + '/flag';
+
+                formidable.error(req, url.split('?').shift(), err, reason, function redirect(url) {
+                    res.redirect(utils.link(url, req.rendrApp));
+                    end(err);
+                });
+            }
+
+            function end(err) {
+                if (next && next.errfcb) {
+                    next.errfcb(err);
+                }
+            }
+
+            asynquence().or(error)
+                .then(parse)
+                .then(prepare)
+                .then(submit)
                 .val(success);
         }
     })();
