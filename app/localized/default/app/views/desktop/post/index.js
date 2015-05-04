@@ -694,7 +694,7 @@ function categorySuggestionBuildIU(response, initial) {
         };
     }
 
-    _.each(response, function(suggest, index){
+    _.each(response, function each(suggest, index){
         var category = this.categorySuggestionGetCategory(suggest.categoryId);
 
         strHtml += this.renderTemplate('#template-category', {
@@ -715,12 +715,14 @@ function categorySuggestionBuildIU(response, initial) {
         });
     }
 
-    $('#posting-categories-view .posting-categories-suggested').hide().html(strHtml).fadeIn().find('li a').on('click', { context: this }, function(event) {
+    $('#posting-categories-view .posting-categories-suggested').hide().html(strHtml).fadeIn().find('li a').on('click', {
+        context: this
+    }, function onClick(event) {
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();
 
-        var $this = event.data.context;
+        var ctx = event.data.context;
         var $element = $(event.currentTarget);
         var action = $element.data('increment-action');
         var value = $element.data('increment-value');
@@ -728,7 +730,7 @@ function categorySuggestionBuildIU(response, initial) {
 
         if (action === 'select') {
             cat = $element.data('category').split(',');
-            $(this.selectors.categories).trigger('getQueryCategory', [{
+            $(ctx.selectors.categories).trigger('getQueryCategory', [{
                 parentCategory: cat[0],
                 subCategory: cat[1]
             }]);
@@ -741,7 +743,7 @@ function categorySuggestionBuildIU(response, initial) {
                 value = value.split('-')[0];
             }
         }
-        $this.categorySuggestionMetric(['on', 'user' + action, value]);
+        ctx.categorySuggestionMetric(['on', 'user' + action, value]);
     });
 
     $('#posting-category-suggestion-button').toggle(!strHtml);

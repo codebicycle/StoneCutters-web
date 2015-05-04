@@ -3,7 +3,6 @@
 var _ = require('underscore');
 var Base = require('../../../../../common/app/bases/view');
 var translations = require('../../../../../../../shared/translations');
-var logger = require('../../../../../../modules/logger');
 
 module.exports = Base.extend({
     id: 'posting-title-view',
@@ -66,12 +65,8 @@ function onBlur(event) {
     if ($field.data('value') !== value) {
         this.$el.trigger('validate', [function onComplete(isValidField) {
             if (isValidField) {
-                try {
                 this.parentView.$el.trigger('fieldSubmit', [$field]);
                 this.parentView.categorySuggestion(value); //AB test : category-suggestion
-                } catch(e) {
-                    logger.log('Error', e, e.stack);
-                }
             }
         }.bind(this), true]);
         $field.data('value', value);
