@@ -180,10 +180,12 @@
                 // n.onshow = function () {
                 //     done(event);
                 // };
-                n.onclick = function () {
-                    done(event);
+                n.onclick = function (event) {
+                    done({
+                        type: event.type
+                    });
                 };
-                n.onclose = function () {
+                n.onclose = function (event) {
                     done(event);
                 };
             };

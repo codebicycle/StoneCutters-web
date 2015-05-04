@@ -25,16 +25,6 @@ module.exports = Base.extend({
     postRender: function () {
         this.listenTo(this.app, 'login', this.render);
         $('body').on('update:notifications', this.showNotification.bind(this));
-
-        if (!this.notifications) {
-            this.notifications = new Notifications({}, this);
-        }
-        this.notifications.checkPermission(function callback(status) {
-            if (status === 'granted') {
-                var icon = helpers.common.static.call(this, '/images/desktop/logo.png');
-                this.notifications.showNotification('titulo', 'body', '/myolx/conversations', helpers.common.static.call(this, '/images/desktop/logo.png'));
-            }
-        }.bind(this));
     },
     showNotification: function() {
         var user = this.app.session.get('user');
@@ -48,21 +38,45 @@ module.exports = Base.extend({
     unreadConversations: function() {
         var user = this.app.session.get('user');
         var messages = this.app.session.get('messages');
+        var showNotification = this.app.session.get('showNotification');
+
+        console.log(showNotification);
 
         if (user && user.unreadConversationsCount) {
-            var currentMsgCount = parseInt(this.$('.count').text());
-
             this.$('.count').text(user.unreadConversationsCount).removeClass('display-none');
-            // if (!this.notifications) {
-            //     this.notifications = new Notifications({}, this);
-            // }
-            // if (currentMsgCount < user.unreadConversationsCount) {
-            //     this.notifications.showNotification('titulo', user.unreadConversationsCount, '/myolx/conversations', 'http://www.olx.com.ar:3030/images/desktop/logo.png');
-            // }
+
+            if (showNotification) {
+                if (!this.notifications) {
+                    this.notifications = new Notifications({}, this);
+                }
+                this.notifications.checkPermission(function callback(status) {
+                    if (status === 'granted') {
+                        var icon = helpers.common.static.call(this, '/images/desktop/logo.png');
+                        var body = 'Tenes ' + showNotification + ' mensajes sin leer.';
+
+                        this.notifications.showNotification('OLX', body, '/myolx/conversations', helpers.common.static.call(this, '/images/desktop/logo.png'));
+                    }
+                }.bind(this));
+            }
+            
         }
         else if (messages && messages > 0) {
             this.$('.count').text(messages).removeClass('display-none');
             this.$('.notificationsLogout').removeClass('display-none');
+
+            if (showNotification) {
+                if (!this.notifications) {
+                    this.notifications = new Notifications({}, this);
+                }
+                this.notifications.checkPermission(function callback(status) {
+                    if (status === 'granted') {
+                        var icon = helpers.common.static.call(this, '/images/desktop/logo.png');
+                        var body = 'Tenes ' + showNotification + ' mensajes sin leer.';
+
+                        this.notifications.showNotification('OLX', body, '/login', helpers.common.static.call(this, '/images/desktop/logo.png'));
+                    }
+                }.bind(this));
+            }
         }
         else {
             this.$('.count').addClass('display-none').empty();
