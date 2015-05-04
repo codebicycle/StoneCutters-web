@@ -43,6 +43,8 @@
         {% endif %}
     </div>
 
+    {% view 'items/sellerprofile' %}
+
     <div class="highlight">{{ dictionary["itemgeneraldetails.User"] }}: {{ item.contactName if item.contactName else dictionary["messages_item_page.57"] }}</div>
 
     {% if item.status.contactable %}
@@ -107,7 +109,7 @@
             <a href="{{ relatedAdsLink | link }}" class="btns grey">{{ dictionary["itemgeneraldetails.OtherRelatedListings"] | replace(':','')}}</a>
         {% endif %}
     </div>
-    
+
 </div>
 {{ BreadcrumbHome(dictionary, link, ('/' | link)) }}
 
