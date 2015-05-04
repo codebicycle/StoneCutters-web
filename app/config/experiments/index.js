@@ -82,9 +82,9 @@ module.exports = {
         autoParticipate: true
     },
     dgdMarkVisitedItems: {
-        enabled: true,
+        enabled: false,
         platforms: ['desktop'],
-        markets: ['ec', 'sv', 'gt', 'pa', 'pe'],
+        markets: ['sv', 'gt', 'pa'],
         name: 'dgd-mark-visited-items',
         alternatives: {
             CONTROL: 'control',
