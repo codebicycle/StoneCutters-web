@@ -123,7 +123,9 @@ module.exports = Base.extend({
             if (_.contains([378], item.get('category').id)) {
                 this.app.sixpack.convert(this.app.sixpack.experiments.dgdCategoryCars);
             }
+            
             this.app.sixpack.convert(this.app.sixpack.experiments.dgdHidePhoneNumber, 'reply-by-mail');
+            this.app.sixpack.convert(this.app.sixpack.experiments.dgdMarkVisitedItems, 'item-reply');
 
             if (!this.notifications) {
                 this.notifications = new Notifications({}, this);
