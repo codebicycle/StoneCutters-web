@@ -1,6 +1,17 @@
 {% if sellerProfileEnabled %}
-    <h4>Godstime</h4>
-    <p>Registered OLX user since September 2014</p>
+
+    {% if item.contactName %}
+        <h4>{{ item.contactName }}</h4>
+    {% elif item.user.username %}
+        <h4>{{ item.user.username }}</h4>
+    {% endif %}
+
+    {% if(item.user) %}
+        <p>
+            Registered OLX user since <time>{{ dictionary[item.date.since.dictionary] }} {{ item.date.since.day if item.date.year }}</time>
+        </p>
+    {% endif %}
     <p>Posted 15 ads</p>
-    <p>Ibadan Central, Nigeria</p>
+
+    <p>{{ (item.location.neighborhoodName + ', ') if item.location.neighborhoodName  }}{{ item.location.cityName }}, {{ item.location.stateName }}</p>
 {% endif %}
