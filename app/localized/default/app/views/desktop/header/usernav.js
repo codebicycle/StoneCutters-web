@@ -43,18 +43,14 @@ module.exports = Base.extend({
         if (user && user.unreadConversationsCount) {
             this.$('.count').text(user.unreadConversationsCount).removeClass('display-none');
 
-            if (showNotification) {
-                this.sendNotification('/myolx/conversations', showNotification);
-            }
+            this.sendNotification('/myolx/conversations', showNotification);
             
         }
         else if (messages && messages > 0) {
             this.$('.count').text(messages).removeClass('display-none');
             this.$('.notificationsLogout').removeClass('display-none');
 
-            if (showNotification) {
-                this.sendNotification('/login', showNotification);
-            }
+            this.sendNotification('/login', showNotification);
         }
         else {
             this.$('.count').addClass('display-none').empty();
@@ -62,6 +58,10 @@ module.exports = Base.extend({
         }
     },
     sendNotification: function(url, showNotification) {
+        if (!this.app.session.get('showNotification')) {
+            return;
+        }
+        
         var icon;
         var body;
 
