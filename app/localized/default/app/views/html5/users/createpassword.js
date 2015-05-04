@@ -52,8 +52,19 @@ module.exports = Base.extend({
         event.stopImmediatePropagation();
 
         asynquence().or(fail.bind(this))
+            .then(prepare.bind(this))
             .then(submit.bind(this))
             .val(success.bind(this));
+        
+        function prepare (done) {
+            this.getProfile().set({
+                email: this.app.session.get('user').email,
+                location: this.app.session.get('location').url,
+                newPassword: this.$('.password-field').val()
+            });
+
+            done();
+        }
 
         function submit(done) {
             this.getProfile().changePassword(done);

@@ -160,6 +160,7 @@ function createpassword(params, callback) {
 
         callback(null, {
             include: ['profile'],
+            form: this.form,
             profile: _.extend({
                 country: this.app.session.get('location').abbreviation,
                 location: this.app.session.get('location').url

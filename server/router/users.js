@@ -4,6 +4,7 @@ module.exports = function userRouter(app) {
     var _ = require('underscore');
     var asynquence = require('asynquence');
     var utils = require('../../shared/utils');
+    var translations = require('../../shared/translations');
     var formidable = require('../modules/formidable');
     var statsd  = require('../modules/statsd')();
     var User = require('../../app/models/user');
@@ -78,6 +79,7 @@ module.exports = function userRouter(app) {
         app.post('/createpassword', handler);
 
         function handler(req, res, next) {
+            var dictionary = translations.get(req.rendrApp.session.get('selectedLanguage'));
             var user;
 
             function parse(done) {
@@ -85,7 +87,10 @@ module.exports = function userRouter(app) {
             }
 
             function prepare(done, data) {
-                user = new User(_.extend(data, {
+                data.newPassword = data.password;
+                delete data.password;
+
+                user = new User(_.extend(data, req.rendrApp.session.get('user'), {
                     location: req.rendrApp.session.get('siteLocation'),
                     country: req.rendrApp.session.get('location').abbreviation,
                     languageId: req.rendrApp.session.get('languageId'),
@@ -96,8 +101,18 @@ module.exports = function userRouter(app) {
                 done();
             }
 
+            function validate(done) {
+                if (user.get('newPassword') !== user.get('confirmPassword')) {
+                    return done.fail([{
+                        selector: 'main',
+                        message: dictionary['register_confirmation.776']
+                    }]);
+                }
+                done();
+            }
+
             function submit(done) {
-                user.changepassword(done);
+                user.updatePassword(done);
             }
 
             function success() {
@@ -123,6 +138,7 @@ module.exports = function userRouter(app) {
             asynquence().or(error)
                 .then(parse)
                 .then(prepare)
+                .then(validate)
                 .then(submit)
                 .val(success);
         }
