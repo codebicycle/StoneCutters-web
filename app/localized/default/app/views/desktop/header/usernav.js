@@ -38,32 +38,32 @@ module.exports = Base.extend({
     unreadConversations: function() {
         var user = this.app.session.get('user');
         var messages = this.app.session.get('messages');
-        var showNotification = this.app.session.get('showNotification');
 
         if (user && user.unreadConversationsCount) {
             this.$('.count').text(user.unreadConversationsCount).removeClass('display-none');
 
-            this.sendNotification('/myolx/conversations', showNotification);
+            this.sendNotification('/myolx/conversations');
             
         }
         else if (messages && messages > 0) {
             this.$('.count').text(messages).removeClass('display-none');
             this.$('.notificationsLogout').removeClass('display-none');
 
-            this.sendNotification('/login', showNotification);
+            this.sendNotification('/login');
         }
         else {
             this.$('.count').addClass('display-none').empty();
             this.$('.notificationsLogout').addClass('display-none');
         }
     },
-    sendNotification: function(url, showNotification) {
-        if (!this.app.session.get('showNotification')) {
-            return;
-        }
-        
+    sendNotification: function(url) {
+        var showNotification = this.app.session.get('showNotification');
         var icon;
         var body;
+
+        if (!showNotification) {
+            return;
+        }
 
         if (!this.notifications) {
             this.notifications = new Notifications({}, this);
