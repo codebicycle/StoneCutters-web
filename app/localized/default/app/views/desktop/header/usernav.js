@@ -68,20 +68,22 @@ module.exports = Base.extend({
         if (!this.notifications) {
             this.notifications = new Notifications({}, this);
         }
-        this.notifications.checkPermission(function callback(status) {
-            if (status === 'granted') {
-                icon = helpers.common.static.call(this, '/images/common/logo_notification.png');
+        if(this.notifications.isEnabled() && this.notifications.checkNotifications()) {
+            this.notifications.checkPermission(function callback(status) {
+                if (status === 'granted') {
+                    icon = helpers.common.static.call(this, '/images/common/logo_notification.png');
 
-                if (showNotification > 1) {
-                    body = 'Tenes ' + showNotification + ' mensajes sin leer.';
-                }
-                else {
-                    body = 'Tenes ' + showNotification + ' mensaje sin leer.';
-                }
+                    if (showNotification > 1) {
+                        body = 'Tenes ' + showNotification + ' mensajes sin leer.';
+                    }
+                    else {
+                        body = 'Tenes ' + showNotification + ' mensaje sin leer.';
+                    }
 
-                this.notifications.showNotification('OLX', body, url, icon);
-            }
-        }.bind(this));
+                    this.notifications.showNotification('OLX', body, url, icon);
+                }
+            }.bind(this));
+        }
     }
 });
 
