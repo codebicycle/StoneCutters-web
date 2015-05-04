@@ -1,9 +1,9 @@
 'use strict';
 
+var _ = require('underscore');
 var Base = require('../../../../../common/app/bases/view').requireView('header/usernav');
 var helpers = require('../../../../../../helpers');
 var asynquence = require('asynquence');
-var _ = require('underscore');
 var Metric = require('../../../../../../modules/metric');
 
 module.exports = Base.extend({
@@ -11,7 +11,7 @@ module.exports = Base.extend({
 	id: 'user-nav-bar',
     className: 'header-usernav-view',
     events: {
-        'click [data-increment]': Metric.incrementEventHandler
+        'click [data-increment-metric]': Metric.incrementEventHandler
     },
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);

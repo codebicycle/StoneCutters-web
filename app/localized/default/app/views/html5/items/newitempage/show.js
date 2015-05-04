@@ -71,7 +71,7 @@ module.exports = Base.extend({
         'click .galActions .prev': 'previouImage',
         'click .galActions .pause': 'pause',
         'click #galCont .swiper-wrapper , #galContOne': 'hideTitleActions',
-        'click [data-increment]': Metric.incrementEventHandler,
+        'click [data-increment-metric]': Metric.incrementEventHandler,
         'click .fav': 'favorites',
         'click .share': 'share',
         'click .flag': 'flag',
@@ -228,15 +228,16 @@ module.exports = Base.extend({
         history.pushState(null, "", window.location.pathname);
         $('#share').addClass('visible');
     },
-    flag: function(e) {
-        e.preventDefault();
+    flag: function(event) {
+        event.preventDefault();
 
-        var $el = $(e.target);
+        var $elem = $(event.target);
+        var values = Metric.getValues($elem.data('increment-metric'));
         var user = !!this.app.session.get('user');
 
-        $el.text($el.data('text-done'));
-        $el.data('increment-value', [user ? 'auth' : 'anon', 'reflagging']);
-
+        $elem.text($elem.data('text-done'));
+        values.value = [user ? 'auth' : 'anon', 'reflagging'];
+        $elem.data('increment-metric', _.values(values).join('.'));
     },
     popupClose: function(e) {
         e.preventDefault();

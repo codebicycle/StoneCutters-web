@@ -264,5 +264,15 @@ module.exports = {
     },
     flagItem: {
         enabled: true
+    },
+    userzoom: {
+        enabled: false,
+        sections: {
+            'items#show' : {
+                platforms: ['html5', 'desktop'],
+                file: 'QzMyOFQxOCAg',
+                t: 'uz_til'
+            }
+        }
     }
 };

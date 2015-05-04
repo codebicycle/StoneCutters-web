@@ -270,6 +270,9 @@ module.exports = {
     flagItem: {
         enabled: false
     },
+    userzoom: {
+        enabled: false
+    },
     hints: {
         desktop: {
             email: {
@@ -298,6 +301,14 @@ module.exports = {
                 hint: '',
                 icon: ''
             }
+        }
+    },
+    notifications: {
+        desktop: {
+            enabled: false
+        },
+        html5: {
+            enabled: false
         }
     }
 };

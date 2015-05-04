@@ -458,5 +458,15 @@ module.exports = {
     },
     flagItem: {
         enabled: true
+    },
+    userzoom: {
+        enabled: false,
+        sections: {
+            'items#show' : {
+                platforms: ['html5', 'desktop'],
+                file: 'QzMyOFQxMSAg',
+                t: 'uz_til'
+            }
+        }
     }
 };

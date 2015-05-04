@@ -109,7 +109,7 @@
         <a href="#share" class="btnshare share trackMe" data-tracking="ItemPage-ClickShare">{{ dictionary["item.ShareAd"] }}</a>
         
         {% if flagItem.enabled %}        
-            <a href="#" class="btnshare flag" data-text-done="{{ flagTextDone }}" data-increment="true" data-increment-category="africa" data-increment-action="item" data-flag="flagAsSpamOrScam" data-increment-value="{{ 'auth' if user else 'anon' }}.flagging" >{{ flagText }}</a>
+            <a href="#" class="btnshare flag" data-text-done="{{ flagTextDone }}" data-increment-metric="africa.item.{{ 'auth' if user else 'anon' }}.flagging" data-flag="flagAsSpamOrScam">{{ flagText }}</a>
         {% endif %}
 
     </section>
@@ -280,4 +280,9 @@
         <div class="msg-bg"></div>
     </div>
 </div>
+
+{% if isUserzoomEnabled %}
+    {% include (template + "/partials/userzoom.html") %}
+{% endif %}
+
 {% view 'partials/tracking' %}

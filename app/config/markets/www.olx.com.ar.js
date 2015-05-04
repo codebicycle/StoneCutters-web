@@ -294,5 +294,13 @@ module.exports = {
     abundance: {
         enabled: true,
         quantity: 25
+    },
+    notifications: {
+        desktop: {
+            enabled: false
+        },
+        html5: {
+            enabled: false
+        }
     }
 };

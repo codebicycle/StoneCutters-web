@@ -24,16 +24,20 @@ module.exports = {
     marketing: {
         videos: [
             {
-                title: 'OLX El Salvador - Bicicleta - Vender es fácil',
-                id: 'Z3jhkKNOLFI'
+                title: 'En OLX todos pueden vender',
+                id: 'JfShvYNL3P0'
             },
             {
-                title: 'OLX El Salvador - Anteojos - Vender es fácil',
-                id: 'KhrU7vBfs2A'
+                title: 'Como publicar un anuncio gratis',
+                id: 'ChMDayraDi8'
             },
             {
-                title: 'OLX El Salvador - Poker - Vender es fácil',
-                id: 'H73aGTFe9D4'
+                title: 'OLX El Salvador - Spot - Descarga la App',
+                id: 'thJEBkcvz7Q'
+            },
+            {
+                title: 'OLX El Salvador - Tutorial - Descarga la App',
+                id: 'yhBNGMkuJTU'
             }
         ]
     },
