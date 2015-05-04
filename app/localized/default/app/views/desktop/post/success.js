@@ -19,8 +19,8 @@ module.exports = Base.extend({
     },
     postRender: function () {
         if (!this.notifications) {
-                this.notifications = new Notifications({}, this);
-            }
+            this.notifications = new Notifications({}, this);
+        }
         if (this.notifications.isEnabled() && this.notifications.checkNotifications()) {
             this.notifications.checkPermission(function callback(status) {
                 if (status === 'default') {
