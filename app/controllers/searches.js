@@ -27,12 +27,13 @@ module.exports = {
 
 function filterig(params, callback) {
     var platform = this.app.session.get('platform');
-
-    if (platform !== 'desktop') {
-        return helpers.common.error.call(this, null, {}, callback);
+    var gallery = '';
+    
+    if(platform === 'desktop' || platform === 'html5') {
+        gallery = '-ig';
     }
     params['f.hasimage'] = true;
-    filter.call(this, params, callback, '-ig');
+    filter.call(this, params, callback, gallery);
 }
 
 function filter(params, callback, gallery) {
@@ -42,12 +43,13 @@ function filter(params, callback, gallery) {
 
 function searchig(params, callback) {
     var platform = this.app.session.get('platform');
-
-    if (platform !== 'desktop' && platform !== 'html5') {
-        return helpers.common.error.call(this, null, {}, callback);
+    var gallery = '';
+    
+    if(platform === 'desktop' || platform === 'html5') {
+        gallery = '-ig';
     }
     params['f.hasimage'] = true;
-    search.call(this, params, callback, '-ig');
+    search.call(this, params, callback, gallery);
 }
 
 function search(params, callback, gallery) {
@@ -610,8 +612,14 @@ function statics(params, callback) {
 }
 
 function allresultsig(params, callback) {
+    var platform = this.app.session.get('platform');
+    var gallery = '';
+    
+    if(platform === 'desktop' || platform === 'html5') {
+        gallery = '-ig';
+    } 
     params['f.hasimage'] = true;
-    allresults.call(this, params, callback, '-ig');
+    allresults.call(this, params, callback, gallery);
 }
 
 function allresults(params, callback, gallery) {
