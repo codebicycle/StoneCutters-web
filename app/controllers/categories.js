@@ -69,7 +69,7 @@ function list(params, callback) {
 
 function showig(params, callback) {
     var platform = this.app.session.get('platform');
-    var gallery = '';
+    var gallery;
     
     if(platform === 'desktop' || platform === 'html5') {
         gallery = '-ig';

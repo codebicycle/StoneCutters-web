@@ -27,7 +27,7 @@ module.exports = {
 
 function filterig(params, callback) {
     var platform = this.app.session.get('platform');
-    var gallery = '';
+    var gallery;
     
     if(platform === 'desktop' || platform === 'html5') {
         gallery = '-ig';
@@ -43,7 +43,7 @@ function filter(params, callback, gallery) {
 
 function searchig(params, callback) {
     var platform = this.app.session.get('platform');
-    var gallery = '';
+    var gallery;
     
     if(platform === 'desktop' || platform === 'html5') {
         gallery = '-ig';
@@ -613,7 +613,7 @@ function statics(params, callback) {
 
 function allresultsig(params, callback) {
     var platform = this.app.session.get('platform');
-    var gallery = '';
+    var gallery;
     
     if(platform === 'desktop' || platform === 'html5') {
         gallery = '-ig';
