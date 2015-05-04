@@ -71,15 +71,12 @@ function showNotification(title, body, path, icon) {
         };
         var n = new window.Notification(title, options);
 
-        // n.onshow = callback.bind(this);
         n.onclick = callback.bind(this);
         n.onclose = callback.bind(this);
     }
     else {
         window.LocalCache.showNotification(title, body, icon).done(callback.bind(this));
     }
-
-    
 
     function callback(event) {
         var action = event.type;
