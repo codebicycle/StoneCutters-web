@@ -17,7 +17,7 @@ module.exports = Base.extend({
     },
     initialize: initialize,
     postRender: postRender,
-    val: val
+    getVal: getVal
 });
 
 function initialize() {
@@ -28,7 +28,7 @@ function initialize() {
 function postRender() {
     var $field = this.$(this.selector);
 
-    this.val($field);
+    this.getVal($field);
     this.parentView.$el.trigger('fieldValidationRegister', [$field, {
         rules: [{
             id: 'length',
@@ -38,7 +38,7 @@ function postRender() {
     }, true]);
 }
 
-function val(field) {
+function getVal(field) {
     var value = field.val();
 
     value = S(value).stripTags().s;
@@ -61,7 +61,7 @@ function onValidate(event, done, isValid) {
 
 function onBlur(event) {
     var $field = $(event.currentTarget);
-    var value = this.val($field);
+    var value = this.getVal($field);
 
     if ($field.data('value') !== value) {
         this.$el.trigger('validate', [function onComplete(isValidField) {

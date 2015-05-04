@@ -17,6 +17,7 @@ var translations = require('../../../../../../../shared/translations');
 module.exports = Base.extend({
     id: 'posting-view',
     tagName: 'main',
+    locationFields: ['state', 'city', 'neighborhood'],
     selectors: {
         categories: '#posting-categories-view',
         title: '#posting-title-view',
@@ -51,7 +52,7 @@ module.exports = Base.extend({
     validateField: validateField,
     scrollSlideTo: scrollSlideTo,
     handleBack: handleBack,
-    val: val,
+    getVal: getVal,
     getItem: getItem,
     renderTemplate: renderTemplate,
     categorySuggestion: categorySuggestion,
@@ -168,7 +169,7 @@ function handleBack() {
     }, onPopState);
 }
 
-function val(field) {
+function getVal(field) {
     var $field = $(field);
 
     if ($field.attr('type') === 'checkbox') {
@@ -287,9 +288,9 @@ function onFieldSubmit(event, field, options) {
     if (field instanceof window.jQuery) {
         $field = field;
         shouldValidateField = !!$field.data('validate');
-        validate = ($field.attr('name') === 'state' || $field.attr('name') === 'city' || $field.attr('name') === 'neighborhood');
+        validate = _.contains(this.locationFields, $field.attr('name'));
         field.name = $field.attr('name');
-        field.value = this.val($field);
+        field.value = this.getVal($field);
     }
     if (shouldValidateField) {
         validate = this.item.has('category');
@@ -328,7 +329,7 @@ function onFieldValidationStart(event) {
 }
 
 function validateField($field) {
-    var value = this.val($field);
+    var value = this.getVal($field);
     var _errors = [];
     var $category;
     var messages;
@@ -339,7 +340,9 @@ function validateField($field) {
         messages = [this.dictionary["postingerror.PleaseSelectCategory"],this.dictionary["postingerror.PleaseSelectSubcategory"]];
 
         if (!$category.closest('.field-wrapper').hasClass('error')) {
-            this.$el.trigger('showError', [$category, messages[!$('.child-categories-list').is(':visible') ? 0 : 1]]);
+            this.$el.trigger('showError', [$category, {
+                message: messages[!$('.child-categories-list').is(':visible') ? 0 : 1]
+            }]);
         }
         $field.removeClass('validating');
         this.scrollSlideTo(this.$el);
@@ -351,7 +354,7 @@ function validateField($field) {
         });
         $field.trigger('fieldValidationEnd', [_errors]);
     }
-    else if ($field.attr('name') === 'state' || $field.attr('name') === 'city' || $field.attr('name') === 'neighborhood') {
+    else if (_.contains(this.locationFields, $field.attr('name'))) {
         $field.trigger('fieldValidationEnd');
     }
     else {

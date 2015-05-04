@@ -246,16 +246,6 @@ function postFields(done) {
         data: data,
         query: query
     }, callback.bind(this));
-/*
-console.log(data);
-
-callback.call(this, null, {
-    statusCode: 200
-}, _.extend({}, data, {
-    id: id || 799208566,
-    securityKey: 'amsdfgasdhfvhajsdfvjhewbqrbwhbfhqweb',
-    sk: 'amsdfgasdhfvhajsdfvjhewbqrbwhbfhqweb'
-}));*/
 
     function callback(err, response, item) {
         if (!err && item) {

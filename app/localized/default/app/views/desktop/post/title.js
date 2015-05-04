@@ -3,6 +3,7 @@
 var _ = require('underscore');
 var Base = require('../../../../../common/app/bases/view');
 var translations = require('../../../../../../../shared/translations');
+var logger = require('../../../../../../modules/logger');
 
 module.exports = Base.extend({
     id: 'posting-title-view',
@@ -17,7 +18,7 @@ module.exports = Base.extend({
     },
     initialize: initialize,
     postRender: postRender,
-    val: val
+    getVal: getVal
 });
 
 function initialize() {
@@ -38,7 +39,7 @@ function postRender() {
     }, true]);
 }
 
-function val(field) {
+function getVal(field) {
     var value = field.val();
 
     value = $.trim(value);
@@ -60,13 +61,17 @@ function onValidate(event, done, isValid) {
 
 function onBlur(event) {
     var $field = this.$(event.currentTarget);
-    var value = this.val($field);
+    var value = this.getVal($field);
 
     if ($field.data('value') !== value) {
         this.$el.trigger('validate', [function onComplete(isValidField) {
             if (isValidField) {
+                try {
                 this.parentView.$el.trigger('fieldSubmit', [$field]);
                 this.parentView.categorySuggestion(value); //AB test : category-suggestion
+                } catch(e) {
+                    logger.log('Error', e, e.stack);
+                }
             }
         }.bind(this), true]);
         $field.data('value', value);
