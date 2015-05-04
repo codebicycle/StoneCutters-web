@@ -15,7 +15,7 @@
         {% if items.length > 0 %}
             {% view 'items/partials/locations' %}
         {% endif %}
-        {% include (template + '/items/list.html') %}
+        {% view 'items/list' %}
         {% if paginator and paginator.isEnabled() %}
             {% include (template + '/items/pagination.html') %}
         {% endif %}
@@ -25,10 +25,6 @@
 {% if seo %}
     {% set seoFrom = "search" %}
     {% include (template + "/partials/seobox.html") %}
-{% endif %}
-
-{% if isUserSurveyEnabled %}
-    {% include (template + "/partials/user-survey.html") %}
 {% endif %}
 
 {% view 'partials/tracking' %}

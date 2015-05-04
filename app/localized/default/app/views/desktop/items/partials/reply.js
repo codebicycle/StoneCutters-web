@@ -3,10 +3,9 @@
 var _ = require('underscore');
 var asynquence = require('asynquence');
 var Base = require('../../../../../../common/app/bases/view');
-var Sixpack = require('../../../../../../../../shared/sixpack');
+var helpers = require('../../../../../../../helpers');
 var User = require('../../../../../../../models/user');
 var Tracking = require('../../../../../../../modules/tracking');
-var helpers = require('../../../../../../../helpers');
 var translations = require('../../../../../../../../shared/translations');
 var rEmail = /^[_a-zA-Z0-9-]+(\.[_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*(\.[a-zA-Z]{2,6})$/;
 
@@ -14,17 +13,23 @@ module.exports = Base.extend({
     id: 'item-contact-form',
     tagName: 'section',
     className: function() {
-        var sixpack = new Sixpack({
-            clientId: this.app.session.get('clientId'),
-            ip: this.app.session.get('ip'),
-            userAgent: this.app.session.get('userAgent'),
-            platform: this.app.session.get('platform'),
-            market: this.app.session.get('location').abbreviation,
-            experiments: this.app.session.get('experiments')
-        });
-        var sixpackClass = sixpack.className(sixpack.experiments.desktopDGD23ShowSimplifiedReplyForm);
+        var sixpackClass = this.app.sixpack.className(this.app.sixpack.experiments.desktopDGD23ShowSimplifiedReplyForm);
 
         return 'item-contact-form' + (sixpackClass ? (' ' + sixpackClass) : '');
+    },
+    getTemplateData: function() {
+        var data = Base.prototype.getTemplateData.call(this);
+        var phone = data.item.phone;
+        var dgdHidePhoneNumber = this.app.sixpack.experiments.dgdHidePhoneNumber;
+        var hiddenPhone;
+
+        if (phone && dgdHidePhoneNumber && dgdHidePhoneNumber.alternative === 'hide-phone-number') {
+            hiddenPhone = this.transformPhone(phone, 4, '*');
+        }
+
+        return _.extend({}, data, {
+            hiddenPhone: hiddenPhone
+        });
     },
     postRender: function() {
         this.dictionary = translations.get(this.app.session.get('selectedLanguage'));
@@ -47,7 +52,8 @@ module.exports = Base.extend({
         'blur textarea, input:not([type=submit], [type=hidden])': 'onBlur',
         'submit': 'onSubmit',
         'reset': 'onReset',
-        'click .replySuccess': 'onReplySuccessClick'
+        'click .replySuccess': 'onReplySuccessClick',
+        'click .dgd-hide-phone-number .action-button': 'onShowPhoneNumberClick'
     },
     onFocus: function(event) {
         event.preventDefault();
@@ -68,15 +74,6 @@ module.exports = Base.extend({
         }
     },
     onSubmit: function(event) {
-        var sixpack = new Sixpack({
-            clientId: this.app.session.get('clientId'),
-            ip: this.app.session.get('ip'),
-            userAgent: this.app.session.get('userAgent'),
-            platform: this.app.session.get('platform'),
-            market: this.app.session.get('location').abbreviation,
-            experiments: this.app.session.get('experiments')
-        });
-
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();
@@ -109,15 +106,24 @@ module.exports = Base.extend({
         }
 
         function success(reply) {
+            var item = this.parentView.getItem();
+
             event.target.reset();
 
             if (reply.phone) {
-                sixpack.convert(sixpack.experiments.desktopDGD23ShowSimplifiedReplyForm, 'phone-filled');
+                this.app.sixpack.convert(this.app.sixpack.experiments.desktopDGD23ShowSimplifiedReplyForm, 'phone-filled');
             }
             this.$spinner.addClass('hide');
             this.$success.removeClass('hide');
             this.trackSuccess(reply);
-            sixpack.convert(sixpack.experiments.desktopDGD23ShowSimplifiedReplyForm);
+            this.app.sixpack.convert(this.app.sixpack.experiments.desktopDGD23ShowSimplifiedReplyForm);
+            this.app.sixpack.convert(this.app.sixpack.experiments.dgdOpenItemInNewTab);
+
+            if (_.contains([378], item.get('category').id)) {
+                this.app.sixpack.convert(this.app.sixpack.experiments.dgdCategoryCars);
+            }
+            this.app.sixpack.convert(this.app.sixpack.experiments.dgdHidePhoneNumber, 'reply-by-mail');
+            this.app.sixpack.convert(this.app.sixpack.experiments.dgdMarkVisitedItems, 'item-reply');
         }
 
         function fail(err) {
@@ -190,6 +196,28 @@ module.exports = Base.extend({
         this.$('fieldset.' + name).toggleClass('error', !isValid);
         this.$('fieldset.' + name + ' span.icons').toggleClass('icon-attention', !isValid);
         return isValid;
+    },
+    onShowPhoneNumberClick: function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+
+        this.$('.user-phone').text(this.parentView.getItem().get('phone'));
+        this.app.sixpack.convert(this.app.sixpack.experiments.dgdHidePhoneNumber);
+    },
+    transformPhone: function(phone, digits, symbol) {
+        var count = 0;
+        var position = 0;
+
+        phone = phone.split('').reverse();
+        while (count < digits) {
+            if (~parseInt(phone[position])) {
+                phone[position] = symbol;
+                count++;
+            }
+            position++;
+        }
+        return phone.reverse().join('');
     }
 });
 

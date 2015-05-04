@@ -4,6 +4,7 @@ var _ = require('underscore');
 var Base = require('../../../../../common/app/bases/view');
 var translations = require('../../../../../../../shared/translations');
 var statsd = require('../../../../../../../shared/statsd')();
+var Categories = require('../../../../../../collections/categories');
 
 module.exports = Base.extend({
     tagName: 'section',
@@ -27,12 +28,13 @@ module.exports = Base.extend({
         var $field = $(event.target);
         var value = this.trimValue($field);
 
-        if ($field.data('data-value') !== value) {
+        if ($field.data('value') !== value) {
             if (this.validate($field)) {
                 this.parentView.$el.trigger('fieldSubmit', [$field]);
+                this.parentView.categorySuggestion(value); //AB test : category-suggestion
             }
 
-            $field.data('data-value', value);
+            $field.data('value', value);
 
             this.$('#field-title').trigger('keyup');
         }

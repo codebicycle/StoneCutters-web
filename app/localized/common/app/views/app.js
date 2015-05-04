@@ -35,9 +35,13 @@ module.exports = Base.extend({
         }
     },
     _interceptClick: function(e) {
-        var href = $(e.currentTarget).attr('href');
+        var currentTarget = $(e.currentTarget);
+        var href = currentTarget.attr('href');
         var url = URLParser.parse(href);
 
+        if (currentTarget.attr('target') === '_blank') {
+            return true;
+        }
         if (url.host === window.location.host) {
             href = [url.pathname, (url.search || ''), (url.hash || '')].join('');
         }
@@ -96,6 +100,7 @@ module.exports = Base.extend({
         if (!this.adserving.length) {
             return;
         }
+
         window._googCsa.apply(window._googCsa, this.adserving);
         this.adserving = [];
     }

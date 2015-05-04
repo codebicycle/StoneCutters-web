@@ -3,6 +3,8 @@
 var Base = require('../../bases/view');
 var _ = require('underscore');
 var breadcrumb = require('../../../../../modules/breadcrumb');
+var config = require('../../../../../../shared/config');
+var userzoom = require('../../../../../modules/userzoom');
 
 module.exports = Base.extend({
     className: 'items_show_view',
@@ -12,6 +14,9 @@ module.exports = Base.extend({
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
         data.category_name = this.options.category_name;
+        this.userzoom = new userzoom({}, {
+            app: this.app
+        });
 
         if (!data.item.purged) {
             data.item.location.stateName = data.item.location.children[0].name;
@@ -23,8 +28,14 @@ module.exports = Base.extend({
             data.item.descriptionReplace = data.item.description.replace(/(<([^>]+)>)/ig,'');
         }
 
+        var location = this.app.session.get('location');
+        var flagItem = config.getForMarket(location.url, ['flagItem']);
+
         return _.extend({}, data, {
-            breadcrumb: breadcrumb.get.call(this, data)
+            breadcrumb: breadcrumb.get.call(this, data),
+            flagItem: flagItem,
+            isUserzoomEnabled: this.userzoom.isEnabled(),
+            userzoom: this.userzoom.getParams()
         });
     }
 });

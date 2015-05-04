@@ -4,8 +4,11 @@ var _ = require('underscore');
 var statsd = require('../../shared/statsd')();
 
 module.exports = function(params, next) {
-    statsd.increment([this.app.session.get('location').abbreviation, 'controllers', this.currentRoute.controller, this.currentRoute.action, this.app.session.get('platform')]);
+    var session = (this.app.session.get('user')) ? 'logged' : 'anonymous';
+    
+    statsd.increment([this.app.session.get('location').abbreviation, 'controllers', this.currentRoute.controller, this.currentRoute.action, session, this.app.session.get('platform')]);
     searchRefine.call(this, params);
+    setOrigin.call(this, params);
     next();
 };
 
@@ -28,4 +31,22 @@ function searchRefine(params) {
     if (clear) {
         this.app.session.clear('currentSearch');
     }
+}
+
+function setOrigin() {
+    if (this.currentRoute.controller === 'searches' || (this.currentRoute.controller === 'categories' && this.currentRoute.action !== 'list')) {
+        this.app.session.persist({
+            origin: {
+                type: getType.call(this),
+                isGallery: ~this.app.session.get('path').indexOf('-ig')
+            }
+        });
+    }
+}
+
+function getType() {
+    if (this.currentRoute.controller === 'searches' && _.contains(['filter', 'filterig', 'search', 'searchig'], this.currentRoute.action)) {
+        return 'search';
+    }
+    return 'browse';
 }

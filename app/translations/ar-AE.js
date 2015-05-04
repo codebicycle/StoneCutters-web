@@ -64,6 +64,7 @@ module.exports = {
     'itemslisting.Previous': '\u0642\u0628\u0644',
     'itemslisting.RefineYourSearch': 'Refine your search',
     'itemslisting.SelectAll': 'Select All',
+    'itemslisting.Sold': '\u062A\u0646\u0632\u064A\u0644\u0627\u062A \u0646\u0647\u0627\u0626\u064A\u0629 ',
     'loginbox.CreateYourAccount': '\u0644\u0625\u0646\u0634\u0627\u0621 \u062D\u0633\u0627\u0628\u0643 \u062D\u0631\u0629 :',
     'loginbox.ForgotYourPassword': '\xBF\u0646\u0633\u064A\u062A \u0633\u0631\u064B\u0643?',
     'loginbox.IAgreeToTheTermsAndConditionsOfBrand': 'I agree to the <<LINK_TERMS_USE>>Terms and Conditions<</LINK_TERMS_USE>> of OLX',

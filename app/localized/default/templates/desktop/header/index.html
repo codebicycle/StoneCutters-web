@@ -1,4 +1,5 @@
-<div class="brand"><a href="{{ '/' | link }}" data-increment="true" data-increment-category="dgd" data-increment-action="home" data-increment-value="home"><img src="{{ '/images/desktop/logo.png' | static }}" alt="OLX Logo" /></a></div>
+
+<div class="brand"><a href="{{ '/' | link }}" data-increment-metric="dgd.home.home" data-increment-include="currentRoute:categories#list"><img src="{{ '/images/desktop/logo.png' | static }}" alt="OLX Logo" /></a></div>
 {% view 'partials/search' %}
 <h6 class="posting-title {{ 'disabled' if currentRoute.controller != 'post' and currentRoute.action != 'flow' }}">{{ dictionary["itemslisting.FreeClassifieds"] }}<span>{{ dictionary["defaultheader.WhereBuyersMeetSellers"] }}</span></h6>
-<a href="{{ '/posting' | link }}" rel="nofollow" class="posting {{ 'disabled' if currentRoute.controller == 'post' and currentRoute.action == 'flow' }}" role="button" data-qa="post-button" data-increment="true" data-increment-category="dgd" data-increment-action="home" data-increment-value="posting">{{ dictionary["misc.PostButton"] }}</a>
+<a href="{{ '/posting' | link }}" rel="nofollow" class="posting {{ 'disabled' if currentRoute.controller == 'post' and currentRoute.action == 'flow' }}" role="button" data-qa="post-button" data-increment-metric="dgd.home.posting" data-increment-include="currentRoute:categories#list">{{ wordingButton if wordingButton else dictionary["misc.PostButton"] }}</a>

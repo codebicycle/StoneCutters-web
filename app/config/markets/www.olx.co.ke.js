@@ -256,5 +256,24 @@ module.exports = {
         html5: {
             enabled: true
         }
+    },
+    validator: {
+        phone: {
+            enabled: true
+        }
+    },
+    flagItem: {
+        enabled: true
+    },
+    userzoom: {
+        enabled: false,
+        sections: {
+            'items#show' : {
+                platforms: ['html5', 'desktop'],
+                file: 'QzMyOFQxOCAg',
+                t: 'uz_til',
+                delay: 30000
+            }
+        }
     }
 };

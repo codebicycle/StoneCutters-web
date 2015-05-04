@@ -13,7 +13,7 @@ module.exports = Base.extend({
         'click [data-toggle-content]': 'helpToggleContent',
         'click .question .icons': 'helpToggleQuestion',
         'click [data-navigate]': 'navigate',
-        'click [data-increment]': Metric.incrementEventHandler
+        'click [data-increment-metric]': Metric.incrementEventHandler
     },
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);

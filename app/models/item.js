@@ -1,10 +1,12 @@
 'use strict';
 
+var S = require('string');
 var _ = require('underscore');
 var asynquence = require('asynquence');
 var Base = require('../bases/model');
 var helpers = require('../helpers');
 var statsd = require('../../shared/statsd')();
+var utils = require('../../shared/utils');
 
 module.exports = Base.extend({
     idAttribute: 'id',
@@ -25,7 +27,8 @@ module.exports = Base.extend({
     logPostImages: logPostImages,
     toData: toData,
     remove: remove,
-    rebump: rebump
+    rebump: rebump,
+    stillAvailable: stillAvailable
 });
 
 module.exports.id = 'Item';
@@ -131,6 +134,18 @@ function parse(item, options) {
     if (item.priceC && this.app.session.get('location').url === 'www.olx.ir') {
         item.priceC = helpers.numbers.toLatin(item.priceC);
     }
+    if (item.optionals && item.optionals.length) {
+        item.optionals = _.sortBy(item.optionals, 'name').reverse();
+    }
+    if (item.description) {
+        item.description = S(item.description).stripTags().s;
+    }
+    if (this.app.localstorage && this.app.localstorage.ready && helpers.features.isEnabled.call(this, 'visitedItems') && this.app.sixpack.experiments.dgdMarkVisitedItems) {
+        var className = this.app.sixpack.className(this.app.sixpack.experiments.dgdMarkVisitedItems);
+        var status = (_.contains(this.app.localstorage.get('visited'), item.id)) ? 'visited' : 'not-visited';
+        
+        item.visited = className + ' ' + status;
+    }
     return Base.prototype.parse.apply(this, arguments);
 }
 
@@ -235,6 +250,14 @@ function postFields(done) {
         if (!err && item) {
             this.set(item);
         }
+        if (!user && item.email) {
+            this.app.session.persist({
+                hash: item.email
+            }, {
+                maxAge: utils.DAY
+            });
+        }
+
         this.logPost(type, response.statusCode, err);
         this.errfcb(done)(err, response, item);
     }
@@ -375,6 +398,18 @@ function rebump(done) {
             postingSession: this.get('postingSession'),
             platform: this.app.session.get('platform')
         },
+        data: {
+            location: this.app.session.get('location').url
+        }
+    }, callback.bind(this));
+
+    function callback(err, response) {
+        this.errfcb(done)(err);
+    }
+}
+
+function stillAvailable(done) {
+    helpers.dataAdapter.post(this.app.req, '/mtd/items/' + this.get('id') + '/stillAvailable', {
         data: {
             location: this.app.session.get('location').url
         }

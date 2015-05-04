@@ -8,7 +8,7 @@
                 {% else %}
                     {% set month = "messages_date_format.9" %}
                 {% endif %}
-                {{ dictionary["usersprofile.OnBrandSince"] | replace(':', '') }} 
+                {{ dictionary["usersprofile.OnBrandSince"] | replace(':', '') }}
                 {{ dictionary[month + item.user.firstActivityDate.month] + ' ' + item.user.firstActivityDate.year }}
             </span>
         {% endif %}
@@ -19,8 +19,12 @@
     {% endif %}
     {#<span class="user-status">User Status</span>#}
     {% if item.phone %}
-    <p class="icons icon-phone user-phone">{{ item.phone }}</p>
-        <span>{{ dictionary["misc.SayOLX"] }}</span>
+        {% if hiddenPhone %}
+            <p class="icons icon-phone user-phone dgd-hide-phone-number">{{ hiddenPhone }}<small class="action-container"><a href="#" class="action-button">Ver numero completo</a></small></p>
+        {% else %}
+            <p class="icons icon-phone user-phone">{{ item.phone }}</p>
+        {% endif %}
+        <p class="hint">{{ dictionary["misc.SayOLX"] }}</p>
     {% endif %}
 </div>
 
@@ -52,7 +56,7 @@
     <span class="spinner hide"></span>
     <fieldset class="submit">
         <label for="submit">
-            <input type="submit" value="{{ dictionary["misc.SendEmail"] }} " id="submit" class="olx-ui-button orange" data-qa="reply-send-button" >
+            <input type="submit" value="{{ dictionary["replymessage.SendMessage"] }} " id="submit" class="olx-ui-button orange" data-qa="reply-send-button" {{ 'disabled' if item.isSold }} >
         </label>
     </fieldset>
     <p class="replySuccess icons icon-check hide" data-qa="reply-message-sent">

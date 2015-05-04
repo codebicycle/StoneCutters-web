@@ -29,12 +29,12 @@ module.exports = Base.extend({
         var $field = $(event.target);
         var value = this.stripValue($field);
 
-        if ($field.data('data-value') !== value) {
+        if ($field.data('value') !== value) {
             if (this.validate($field)) {
                 this.parentView.$el.trigger('fieldSubmit', [$field]);
             }
 
-            $field.data('data-value', value);
+            $field.data('value', value);
         }
     },
     onValidate: function(event, done, isValid) {

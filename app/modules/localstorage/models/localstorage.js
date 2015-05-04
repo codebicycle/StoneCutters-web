@@ -8,7 +8,7 @@ Backbone.noConflict();
 
 Localstorage = Backbone.Model.extend({
     initialize: function(attrs, options) {
-        this.isReady = false;
+        this.ready = false;
         this.on('change', this.onChange, this);
         this.on('ready', this.onReady, this);
         window.LocalCache.getAll().done(function parse(localStorage) {
@@ -24,7 +24,7 @@ Localstorage = Backbone.Model.extend({
         });
     },
     onReady: function() {
-        this.isReady = true;
+        this.ready = true;
     }
 });
 

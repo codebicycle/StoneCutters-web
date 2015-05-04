@@ -3,7 +3,6 @@
 var _ = require('underscore');
 var Base = require('../../../../../common/app/bases/view').requireView('header/index');
 var Metric = require('../../../../../../modules/metric');
-var Sixpack = require('../../../../../../../shared/sixpack');
 
 module.exports = Base.extend({
     tagName: 'header',
@@ -11,60 +10,50 @@ module.exports = Base.extend({
     className: 'header-view',
     events: {
         'click .posting': 'onPostClick',
-        'click .brand': 'onLogoClick',
-        'blur .search-form': 'onSearchBlur',
-        'click [data-increment]': Metric.incrementEventHandler
+        'click [data-increment-metric]': Metric.incrementEventHandler
+    },
+    wordingAlternatives: {
+        'control': 'Publicá un aviso gratis',
+        'control-a': 'Publicá un aviso gratis',
+        'sell-your-item': 'Vendé tu artículo!',
+        'sell-your-item-nc': 'Vendé tu artículo! (sin comisión)',
+        'i-want-to-sell': 'Quiero vender!',
+        'publish': 'Publicar',
+        'sell': 'Vender'
+    },
+    getTemplateData: function() {
+        var data = Base.prototype.getTemplateData.call(this);
+        var wordingButton;
+
+        if (this.app.sixpack.experiments.growthPostingButtonWording){
+            wordingButton = this.wordingAlternatives[this.app.sixpack.experiments.growthPostingButtonWording.alternative];
+        }
+
+        return _.extend({}, data, {
+            wordingButton: wordingButton
+        });
     },
     postRender: function() {
         this.app.router.appView.on('posting:start', this.onPostingStart.bind(this));
-        this.app.router.appView.on('posting:end', this.onPostingEnd.bind(this));
+        this.app.router.appView.on('posting:end', this.onPostingEnd.bind(this));        
     },
     onPostClick: function() {
         var currentRoute = this.app.session.get('currentRoute');
-        
-        var sixpack = new Sixpack({
-            clientId: this.app.session.get('clientId'),
-            ip: this.app.session.get('ip'),
-            userAgent: this.app.session.get('userAgent'),
-            platform: this.app.session.get('platform'),
-            market: this.app.session.get('location').abbreviation
-        });
 
-        sixpack.convert(sixpack.experiments.desktopTest);
-        sixpack.convert(sixpack.experiments.fractionKPIsTest);
-        
         if (currentRoute.controller === 'items' && currentRoute.action === 'show') {
-            sixpack.convert(sixpack.experiments.desktopDGD23ShowSimplifiedReplyForm, 'publish');
+            this.app.sixpack.convert(this.app.sixpack.experiments.desktopDGD23ShowSimplifiedReplyForm, 'publish');
         }
-    },
-    onLogoClick: function() {
-        var sixpack = new Sixpack({
-            clientId: this.app.session.get('clientId'),
-            ip: this.app.session.get('ip'),
-            userAgent: this.app.session.get('userAgent'),
-            platform: this.app.session.get('platform'),
-            market: this.app.session.get('location').abbreviation
-        });
 
-        sixpack.convert(sixpack.experiments.fractionKPIsTest, 'logo');
-    },
-    onSearchBlur: function() {
-        var sixpack = new Sixpack({
-            clientId: this.app.session.get('clientId'),
-            ip: this.app.session.get('ip'),
-            userAgent: this.app.session.get('userAgent'),
-            platform: this.app.session.get('platform'),
-            market: this.app.session.get('location').abbreviation
-        });
-
-        sixpack.convert(sixpack.experiments.fractionKPIsTest, 'search');
+        this.app.sixpack.convert(this.app.sixpack.experiments.growthPostingButtonWording);
     },
     onPostingStart: function() {
-        $('.posting, .search-form').addClass('disabled');
-        $('.posting-title').removeClass('disabled');
+        this.toggleElements(false);
     },
     onPostingEnd: function() {
-        $('.posting, .search-form').removeClass('disabled');
-        $('.posting-title').addClass('disabled');
+        this.toggleElements(true);
+    },
+    toggleElements: function(flag) {
+        this.$el.find('.posting, .search-form').toggleClass('disabled', !flag);
+        this.$el.find('.posting-title').toggleClass('disabled', flag);
     }
 });

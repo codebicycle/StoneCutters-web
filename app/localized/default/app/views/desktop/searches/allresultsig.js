@@ -9,6 +9,7 @@ module.exports = Base.extend({
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
         var link = 'nf/all-results-ig';
+        var dgdOpenItemInNewTab = this.app.sixpack.experiments.dgdOpenItemInNewTab;
 
         delete data.nav.listAct;
         return _.extend({}, data, {
@@ -17,7 +18,9 @@ module.exports = Base.extend({
                 linkig: link,
                 galeryAct: 'active',
                 current: 'allresultsig'
-            }
+            },
+            isABTestOpenNewTabEnabled: dgdOpenItemInNewTab,
+            shouldOpenInNewTab: dgdOpenItemInNewTab && dgdOpenItemInNewTab.alternative === 'open-item-in-new-tab'
         });
     }
 });

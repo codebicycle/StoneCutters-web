@@ -10,7 +10,7 @@
 
     <section id="listing-items">
         {% view 'items/partials/locations' %}
-        {% include (template + '/items/list.html') %}
+        {% view 'items/list' %}
         {% if paginator and paginator.isEnabled() %}
             {% include (template + '/items/pagination.html') %}
         {% endif %}
@@ -20,10 +20,6 @@
 {% if seo %}
     {% set seoFrom = "listing" %}
     {% include (template + '/partials/seobox.html') %}
-{% endif %}
-
-{% if isUserSurveyEnabled %}
-    {% include (template + "/partials/user-survey.html") %}
 {% endif %}
 
 {% view 'partials/tracking' %}

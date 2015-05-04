@@ -285,7 +285,7 @@ function event(params, options) {
         clic: 'A',
         type: 'click',
         idclient: params.clientId,
-        url: params.url,
+        url: env === 'production' ? 'http://static01.olx-st.com/mobile-webapp/images/common/gif1x1.gif' : params.url,
         na: Math.round(Math.random() * 1000000),
         x20: this.app.session.get('platform')
     });

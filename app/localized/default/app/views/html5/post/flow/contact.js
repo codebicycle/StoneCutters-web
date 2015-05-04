@@ -32,9 +32,20 @@ module.exports = Base.extend({
         var item = this.parentView.getItem ? this.parentView.getItem() : undefined;
         var current = this.app.session.get('location').current || {};
         var user = this.app.session.get('user');
+        var locationUrl = this.app.session.get('location').url;
+        var isPhoneMandatory = config.getForMarket(locationUrl, ['validator', 'phone', 'enabled'], false);
+        var hintEmailInfo = config.getForMarket(locationUrl, ['hints','html5','email'], false);
+        var hint;
+        var emailIcon;
 
+        if(hintEmailInfo.enabled) {
+            hint = hintEmailInfo.hint;
+            emailIcon = (hintEmailInfo.icon)? hintEmailInfo.icon: 'icon-exclamation';
+        }
         return _.extend({}, data, {
             fields: this.fields || [],
+            hint: hint,
+            emailIcon: emailIcon,
             form: item ? {
                 values: _.object(_.map(this.fields || [], function each(field) {
                     return field.name;
@@ -47,7 +58,8 @@ module.exports = Base.extend({
                     return value;
                 }, this))
             } : {},
-            location: item ? item.getLocation() || current : current
+            location: item ? item.getLocation() || current : current,
+            isPhoneMandatory: isPhoneMandatory.toString()
         });
     },
     postRender: function() {
@@ -156,7 +168,7 @@ module.exports = Base.extend({
         var $field = $(event.target);
 
         $field.val(this.cleanValue($field.val()));
-        this.parentView.getItem().set($field.attr('name'), $field.val());        
+        this.parentView.getItem().set($field.attr('name'), $field.val());
     },
     onLocationClick: function(event) {
         event.preventDefault();
@@ -207,7 +219,7 @@ module.exports = Base.extend({
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();
-       
+
         this.$el.trigger('validate', [{
             success: success.bind(this)
         }]);
@@ -237,7 +249,7 @@ module.exports = Base.extend({
 
         function validateContactName(done, isValid) {
             var $contactName = this.$('input[name=contactName]').removeClass('error');
-            
+
             if (!$contactName.val().length) {
                 isValid = false;
                 $contactName.addClass('error').after('<small class="error">' + translations.get(this.app.session.get('selectedLanguage'))['misc.EnterNameForBuyers_Mob'] + '</small>');
@@ -247,9 +259,11 @@ module.exports = Base.extend({
         }
 
         function validatePhone(done, isValid) {
+            var locationUrl = this.app.session.get('location').url;
+            var isPhoneMandatory = config.getForMarket(locationUrl, ['validator', 'phone', 'enabled'], false);
             var $phone = this.$('input[name=phone]').removeClass('error');
-            
-            if ($phone.val() !== '' && !rPhone.test($phone.val())) {
+
+            if ((isPhoneMandatory && $phone.val() === '') || ($phone.val() !== '' && !rPhone.test($phone.val()))) {
                 isValid = false;
                 $phone.addClass('error').after('<small class="error">' + translations.get(this.app.session.get('selectedLanguage'))['misc.PhoneNumberNotValid'] + '</small>');
             }
@@ -257,14 +271,15 @@ module.exports = Base.extend({
         }
 
         function validateEmail(done, isValid) {
+            var locationUrl = this.app.session.get('location').url;
             var $email = this.$('input[name=email]').removeClass('error');
-            
+
             if (!rEmail.test($email.val())) {
                 isValid = false;
                 $email.addClass('error').after('<small class="error">' + translations.get(this.app.session.get('selectedLanguage'))['postingerror.InvalidEmail'] + '</small>');
                 statsd.increment([location, 'posting', 'invalid', this.app.session.get('platform'), 'email']);
             }
-            else {
+            else if (config.getForMarket(locationUrl, ['validator', 'email', 'enabled'], false)){
                 return this.validateEmail({
                     success: function success(data) {
                         done(isValid && data.is_valid);
@@ -347,7 +362,7 @@ module.exports = Base.extend({
         var isError = '';
 
         this.dictionary = translations.get(this.app.session.get('selectedLanguage'));
-        
+
         $('small.did-you-mean').remove();
 
         if (!data.is_valid) {
@@ -386,7 +401,7 @@ module.exports = Base.extend({
         if ($('small.did-you-mean')) {
             $field.parent().find('small.did-you-mean').remove();
         }
-        
+
         this.metric.increment(['growth', 'posting', ['mailgun', 'didyoumean']]);
         $field.val($(event.currentTarget).data('content'));
         this.parentView.getItem().set($field.attr('name'), $field.val());

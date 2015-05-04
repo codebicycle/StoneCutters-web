@@ -32,12 +32,12 @@
                 <h3 class="title">{{ dictionary["biderrorheader.Help"] }}</h3>
             </div>
             <ul class="footer-help-slide">
-                <li><a rel="nofollow" href="{{ '/help' | link }}" data-increment="true" data-increment-category="zendesk" data-increment-action="footer" data-increment-value="help">{{ dictionary["misc.ConactHelp"] }}</a></li>
+                <li><a rel="nofollow" href="{{ '/help' | link }}" data-increment-metric="zendesk.footer.help">{{ dictionary["misc.ConactHelp"] }}</a></li>
                 {% if isFeaturedCountry %}
-                    <li><a rel="nofollow" href="{{ '/featured_listings' | link }}" data-increment="true" data-increment-category="zendesk" data-increment-action="footer" data-increment-value="how_to_feature">{{ dictionary["featured_listings.HowDoIFeatureMyAd"] }}</a></li>
+                    <li><a rel="nofollow" href="{{ '/featured_listings' | link }}" data-increment-metric="zendesk.footer.how_to_feature">{{ dictionary["featured_listings.HowDoIFeatureMyAd"] }}</a></li>
                 {% endif %}
-                <li><a rel="nofollow" href="{{ '/terms' | link }}" data-increment="true" data-increment-category="zendesk" data-increment-action="footer" data-increment-value="terms">{{ dictionary["register_form.termsAgreeB"] }}</a></li>
-                <li><a rel="nofollow" href="{{ '/help/about' | link }}" data-increment="true" data-increment-category="zendesk" data-increment-action="footer" data-increment-value="about">{{ dictionary["defaultfooter.About OLX"] }} </a></li>
+                <li><a rel="nofollow" href="{{ '/terms' | link }}" data-increment-metric="zendesk.footer.terms">{{ dictionary["register_form.termsAgreeB"] }}</a></li>
+                <li><a rel="nofollow" href="{{ '/help/about' | link }}" data-increment-metric="zendesk.footer.about">{{ dictionary["defaultfooter.About OLX"] }} </a></li>
             </ul>
         </div>
     </div>

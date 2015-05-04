@@ -1,26 +1,6 @@
 'use strict';
 
 module.exports = {
-    html5HeaderPostButton: {
-        enabled: false,
-        platforms: ['html5'],
-        markets: ['ar'],
-        name: 'header-post-button',
-        alternatives: {
-            TEXT: 'text',
-            ICON: 'icon'
-        }
-    },
-    html5Interstitial: {
-        enabled: false,
-        platforms: ['html5'],
-        markets: ['br'],
-        name: 'interstitial',
-        alternatives: {
-            ON: 'on',
-            OFF: 'off'
-        }
-    },
     html4ShowShops: {
         enabled: true,
         platforms: ['html4'],
@@ -28,44 +8,100 @@ module.exports = {
         name: 'show-shops',
         alternatives: {
             ITEMS: 'items',
-            AD_LIKE_STORE: 'adlikestore',
-            CALL_TO_ACTION: 'calltoactions',
-            AD_LIKE_STORE_MAP: 'adlikestore_map',
-            CALL_TO_ACTION_MAP: 'calltoactions_map'
+            CALL_TO_ACTION: 'calltoactions'
         },
-        firstClick: true
-    },
-    desktopTest: {
-        enabled: true,
-        platforms: ['desktop'],
-        markets: ['co'],
-        name: 'test',
-        alternatives: {
-            TEST1: 'test1',
-            TEST2: 'test2'
-        }
-    },
-    fractionKPIsTest: {
-        enabled: true,
-        platforms: ['desktop'],
-        markets: ['pe'],
-        name: 'fraction-kpi-test',
-        fraction: 0.5,
-        alternatives: {
-            TEST1: 'test1',
-            TEST2: 'test2',
-            TEST3: 'test3',
-            TEST4: 'test4'
-        }
+        firstClick: true,
+        autoParticipate: true
     },
     desktopDGD23ShowSimplifiedReplyForm: {
         enabled: true,
         platforms: ['desktop'],
-        markets: ['ar', 'pe', 'co', 've', 'uy', 'ni', 'gt', 'za', 'ke', 'ng', 'ug', 'py', 'ec', 'bo', 'sn', 'es', 'cm', 'tz', 'hn', 'cr', 'pa', 'gh', 'sv'],
+        markets: ['ar', 'co'],
         name: 'desktop-dgd23-show-simplified-reply-form',
         alternatives: {
             CONTROL: 'control',
             SHOW_SIMPLIFIED_REPLY_FORM: 'show-simplified-reply-form'
+        },
+        autoParticipate: true
+    },
+    growthCategorySuggestion: {
+        enabled: true,
+        platforms: ['desktop'],
+        markets: ['ar'],
+        name: 'growth-categories-suggestion',
+        alternatives: {
+            CONTROL_1: 'control1',
+            CONTROL_2: 'control2',
+            CONTROL_3: 'control3',
+            CONTROL_4: 'control4',
+            CONTROL_5: 'control5',
+            CONTROL_6: 'control6',
+            CONTROL_7: 'control7',
+            CONTROL: 'control',
+            SUGGESTED: 'suggested',
+            SINGLE: 'single'
         }
+    },
+    growthPostingButtonWording: {
+        enabled: true,
+        platforms: ['desktop'],
+        markets: ['ar'],
+        name: 'growth-posting-button-wording',
+        alternatives: {
+            CONTROL: 'control',
+            CONTROL_A: 'control-a',
+            SELL_YOUR_ITEM: 'sell-your-item',
+            SELL_YOUR_ITEM_NC: 'sell-your-item-nc',
+            I_WANT_TO_SELL: 'i-want-to-sell',
+            PUBLISH: 'publish',
+            SELL: 'sell'
+        },
+        autoParticipate: true,
+        fraction: 0.5
+    },
+    dgdCategoryCars: {
+        enabled: true,
+        platforms: ['desktop'],
+        markets: ['ar', 'co'],
+        name: 'dgd-category-cars',
+        alternatives: {
+            CONTROL: 'control',
+            GALLERY: 'gallery'
+        },
+        autoParticipate: true
+    },
+    dgdHidePhoneNumber: {
+        enabled: true,
+        platforms: ['desktop'],
+        markets: ['uy'],
+        name: 'hide-phone-number-fixed',
+        alternatives: {
+            CONTROL: 'control',
+            HIDE_PHONE_NUMBER: 'hide-phone-number'
+        },
+        autoParticipate: true
+    },
+    dgdMarkVisitedItems: {
+        enabled: false,
+        platforms: ['desktop'],
+        markets: ['sv', 'gt', 'pa'],
+        name: 'dgd-mark-visited-items',
+        alternatives: {
+            CONTROL: 'control',
+            MARK_VISITED_ITEMS: 'mark-visited-items'
+        },
+        autoParticipate: true
+    },
+    dgdOpenItemInNewTab: {
+        enabled: true,
+        platforms: ['desktop'],
+        markets: ['gt'],
+        name: 'dgd-open-item-in-new-tab',
+        alternatives: {
+            CONTROL: 'control',
+            OPEN_ITEM_IN_NEW_TAB: 'open-item-in-new-tab'
+        },
+        autoParticipate: true,
+        fraction: 1
     }
 };

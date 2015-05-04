@@ -4,6 +4,7 @@ var _ = require('underscore');
 var Base = require('rendr/shared/app');
 var Session = require('../shared/session');
 var utils = require('../shared/utils');
+var Sixpack = require('../shared/sixpack');
 var Fetcher = require('./bases/fetcher');
 var ModelStore = require('./bases/modelStore');
 var CollectionStore = require('./bases/collectionStore');
@@ -29,7 +30,17 @@ module.exports = Base.extend({
     },
     start: function() {
         if (!utils.isServer) {
-            this.localstorage = new Localstorage();
+            this.localstorage = new Localstorage({}, {
+                app: this
+            });
+            this.sixpack = this.sixpack || new Sixpack({
+                clientId: this.session.get('clientId'),
+                ip: this.session.get('ip'),
+                userAgent: this.session.get('userAgent'),
+                platform: this.session.get('platform'),
+                market: this.session.get('location').abbreviation,
+                experiments: this.session.get('experiments')
+            });
         }
         this.router.on('action:start', function onStart() {
             this.set({
