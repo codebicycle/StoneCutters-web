@@ -27,6 +27,7 @@ module.exports = function(params, next) {
         if (!user && !hash) {
             done.abort();
             this.app.session.clear('messages');
+            this.app.session.clear('showNotification');
             return next();
         }
         else if (user) {
@@ -54,12 +55,29 @@ module.exports = function(params, next) {
     function success(response, body) {
         if (body && body.count !== undefined) {
             if (user) {
+                if (user.unreadConversationsCount < body.count) {
+                    this.app.session.persist({
+                        showNotification: body.count
+                    });
+                }
+                else {
+                    this.app.session.clear('showNotification');
+                }
                 user.unreadConversationsCount = body.count;
                 this.app.session.persist({
                     user: user
                 });
             }
             else {
+                var messages = this.app.session.get('messages');
+                if (messages < body.count) {
+                    this.app.session.persist({
+                        showNotification: body.count
+                    });
+                }
+                else {
+                    this.app.session.clear('showNotification');
+                }
                 this.app.session.persist({
                     messages: body.count
                 });

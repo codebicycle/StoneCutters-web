@@ -297,7 +297,7 @@ module.exports = {
     },
     notifications: {
         desktop: {
-            enabled: false
+            enabled: true
         },
         html5: {
             enabled: false
