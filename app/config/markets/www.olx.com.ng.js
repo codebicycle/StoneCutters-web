@@ -279,7 +279,8 @@ module.exports = {
             'items#show' : {
                 platforms: ['html5', 'desktop'],
                 file: 'QzMyOFQxMiAg',
-                t: 'uz_til'
+                t: 'uz_til',
+                delay: 30000
             }
         }
     },
@@ -310,6 +311,19 @@ module.exports = {
                 enabled: false,
                 hint: 'You need a valid email address to sell on OLX',
                 icon: 'icon-exclamation'
+            }
+        },
+    },
+    safetyTips: {
+        html4: {
+            call: {
+                enabled: true
+            },
+            sms: {
+                enabled: true
+            },
+            email: {
+                enabled: false
             }
         }
     }

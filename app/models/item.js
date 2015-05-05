@@ -140,6 +140,12 @@ function parse(item, options) {
     if (item.description) {
         item.description = S(item.description).stripTags().s;
     }
+    if (this.app.localstorage && this.app.localstorage.ready && helpers.features.isEnabled.call(this, 'visitedItems') && this.app.sixpack.experiments.dgdMarkVisitedItems) {
+        var className = this.app.sixpack.className(this.app.sixpack.experiments.dgdMarkVisitedItems);
+        var status = (_.contains(this.app.localstorage.get('visited'), item.id)) ? 'visited' : 'not-visited';
+        
+        item.visited = className + ' ' + status;
+    }
     return Base.prototype.parse.apply(this, arguments);
 }
 

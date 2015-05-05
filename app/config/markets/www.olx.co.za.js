@@ -465,7 +465,21 @@ module.exports = {
             'items#show' : {
                 platforms: ['html5', 'desktop'],
                 file: 'QzMyOFQxMSAg',
-                t: 'uz_til'
+                t: 'uz_til',
+                delay: 30000
+            }
+        }
+    },
+    safetyTips: {
+        html4: {
+            call: {
+                enabled: true
+            },
+            sms: {
+                enabled: true
+            },
+            email: {
+                enabled: false
             }
         }
     }

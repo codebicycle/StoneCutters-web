@@ -78,10 +78,10 @@
                     left: -15px;
                 }
                 &:last-child {
-                    left: 280px;
+                    left: 260px;
                 }
                 &:not(:first-child):not(:last-child) {
-                    left: 150px;
+                    left: 135px;
                 }
                 &.active {
                     font-weight: bold;
@@ -122,20 +122,12 @@
             li {
                 p {
                     margin: 0 0 20px 0;
-                    span {
-                        display: inline;
-                        color: $blue;
-                        font-weight: initial;
-                        cursor: pointer;
-                        text-decoration: underline;
-                    }
-                }
-                .desc {
-                    display: none;
+                    font-size: remify(13px);
                 }
                 .title {
                     font-size: $m;
                     margin: 20px 0 10px 0;
+                    height: 35px;
                 }
                 .bold {
                     height: 50px;
@@ -163,7 +155,7 @@
         padding: 10px 20px;
     }
     .async-form {
-        width: 60%;
+        width: 58%;
         font-size: $s;
         &.border {
             box(#fff, #ccc, 0, 20px, solid, 1px);
@@ -172,7 +164,7 @@
     }
     .kiosco-location {
         font-size: $xs;
-        width: 40%;
+        width: 42%;
         .left {
             float: left;
         }
@@ -277,9 +269,10 @@
             .title {
                 font-size: $m;
                 margin-top: 20px;
+                font-weight: normal;
             }
             .posting {
-                width: 270px;
+                width: 390px;
                 margin: 30px auto 10px auto;
             }
         }
@@ -288,6 +281,24 @@
         }
         .restrictions {
             text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid $greyBorders;
+            width: 700px;
+            margin: 10px auto 10px;
+        }
+        .kiosco-location {
+            width: 46%;
+            float: none;
+            margin: 20px auto 0;
+            overflow: hidden;
+            font-size: $s;
+            .left {
+                text-align: right;
+            }
+            a {
+                width: auto;
+                font-size: $xs;
+            }
         }
     }
     .step-2 {
@@ -310,6 +321,35 @@
         .restrictions {
             margin-bottom: 20px;
         }
+        .item-content {
+            overflow: hidden;
+            margin: 20px 0;
+            figure {
+                border: 1px solid $greyBorders;
+                height: 110px;
+                line-height: 95px;
+                margin: 0 10px 0 0;
+                padding: 0;
+                position: relative;
+                text-align: center;
+                width: 140px;
+                float: left;
+                img {
+                    bottom: 0;
+                    left: 0;
+                    margin: auto;
+                    max-height: 100%;
+                    max-width: 100%;
+                    position: absolute;
+                    right: 0;
+                    top: 0;
+                }
+            }
+            .titleAd {
+                margin-bottom: 5px;
+            }
+        }
+
     }
     .buyer-data,
     .step-2,
