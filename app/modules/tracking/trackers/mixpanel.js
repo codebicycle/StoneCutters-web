@@ -21,7 +21,6 @@ function isEnabled() {
 
 function getParams() {
     var environment = config.get(['environment', 'type']);
-    console.log(environment);
     return utils.get(configTracking, ['mixpanel', 'enviroment', environment], []);
 }
 
