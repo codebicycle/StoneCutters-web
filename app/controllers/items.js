@@ -974,19 +974,24 @@ function flag(params, callback) {
         }
 
         function flagger(done, _item) {
-            var metric = new Metric({}, this);
-            var metricValue = [!!user ? 'auth' : 'anon', !params.flagged ? 'flagging' : 'reflagging'];
+            var errors = this.form && this.form.errors;
 
-            metric.increment(['africa', 'item', metricValue]);
+            if (!errors) {
+                var metric = new Metric({}, this);
+                var metricValue = [!!user ? 'auth' : 'anon', !params.flagged ? 'flagging' : 'reflagging'];
+
+                metric.increment(['africa', 'item', metricValue]);
+            }
+
             done(_item);
         }
 
         function success(_item) {
-            var item = _item.toJSON();
-
+            //var item = _item.toJSON();
+console.log(this.form && this.form.errors);
             if (withReason) {
                 callback(null, {
-                    item: item,
+                    //item: item,
                     form: this.form
                 });
             }
@@ -1009,9 +1014,9 @@ function flag(params, callback) {
         asynquence().or(error.bind(this))
             .then(redirect.bind(this))
             .then(prepare.bind(this))
-            .then(findItem.bind(this))
-            .then(checkItem.bind(this))
-            .then(flagger.bind(this))
+            //.then(findItem.bind(this))
+            //.then(checkItem.bind(this))
+            //.then(flagger.bind(this))
             .val(success.bind(this));
     }
 }
@@ -1047,10 +1052,10 @@ function flagsuccess(params, callback) {
         }.bind(this);
 
         var success = function(_item) {
-            var item = _item.toJSON();
+            //var item = _item.toJSON();
 
             callback(null, {
-                item: item
+                //item: item
             });
         }.bind(this);
 
@@ -1060,8 +1065,8 @@ function flagsuccess(params, callback) {
 
         asynquence().or(error)
             .then(prepare)
-            .then(findItem)
-            .then(checkItem)
+           // .then(findItem)
+            //.then(checkItem)
             .val(success);
     }
 }

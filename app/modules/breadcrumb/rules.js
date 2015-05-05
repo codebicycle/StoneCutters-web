@@ -140,7 +140,10 @@ var rules = {
         },
         success: function() {
             return '/' + helpers.common.slugToUrl(this.item);
-        }
+        },
+/*        flagsuccess: function() {
+            return '/' + helpers.common.slugToUrl(this.item);
+        }*/
     },
     searches: {
         allresults: function() {

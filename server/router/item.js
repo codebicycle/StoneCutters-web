@@ -425,7 +425,7 @@ module.exports = function(app, dataAdapter) {
 
         function handler(req, res, next) {
             var itemId = req.param('itemId', null);
-            var reason;
+            var reason = null;
 
             function parse(done) {
                 formidable.parse(req, done.errfcb);
@@ -433,29 +433,50 @@ module.exports = function(app, dataAdapter) {
 
             function prepare(done, data) {
                 reason = data;
-                done();
+
+                var ticket = {
+                    requester: {
+                        name: data.name,
+                        email: data.email
+                    },
+                    subject: '[' + data.area + '] ' + data.subject,
+                    comment: {
+                        public: true,
+                        body: data.message
+                    }
+                };
+
+                var zendesk;
+                if (zendesk.brand_id) {
+                    ticket.brand_id = zendesk.brand_id;
+                }
+                done(zendesk, ticket);
             }
 
-            function submit(done) {
-                console.log('ITEM ID:', itemId);
-                console.log(reason);
-                /*
-                    ITEM ID: 649744840
-                    {
-                    reason: 'badContent',
-                        description: 'Descripionnnnnnnnnnnn',
-                        submit: 'Report'
-                    }
-                */
-                //Llamar a Zendesk
-                done();
+            function submit(done, reason) {
+                var e = new Error('Mi error');
+                e.selector = 'description';
+                return done.fail([e]);
+
+                /*restler.post('https://' + zendesk.subdomain + '.zendesk.com/api/v2/tickets.json', {
+                    data: {
+                        ticket: ticket
+                    },
+                    username: zendesk.email,
+                    password: zendesk.password
+                })
+                .on('success', function onSuccess(data, response) {
+                    done(data);
+                })
+                .on('fail', function onFail(err, response) {
+                    done.fail(err);
+                });*/
             }
 
             function success() {
-                var url = '/iid-' + itemId + '/flag/flagsuccess';
+                var url = 'items/' + itemId + '/flag/success';
 
                 res.redirect(utils.link(url, req.rendrApp));
-                end();
             }
 
             function error(err) {
@@ -463,14 +484,7 @@ module.exports = function(app, dataAdapter) {
 
                 formidable.error(req, url.split('?').shift(), err, reason, function redirect(url) {
                     res.redirect(utils.link(url, req.rendrApp));
-                    end(err);
                 });
-            }
-
-            function end(err) {
-                if (next && next.errfcb) {
-                    next.errfcb(err);
-                }
             }
 
             asynquence().or(error)

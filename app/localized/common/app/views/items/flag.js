@@ -5,7 +5,7 @@ var Base = require('../../bases/view');
 var breadcrumb = require('../../../../../modules/breadcrumb');
 
 module.exports = Base.extend({
-    className: 'items_flag_view',
+    className: 'items-flag-view',
     wapAttributes: {
         cellpadding: 0
     },
