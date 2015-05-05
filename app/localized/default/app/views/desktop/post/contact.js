@@ -12,7 +12,7 @@ module.exports = Base.extend({
         contactName: '#posting-contact-name-view',
         email: '#posting-contact-email-view',
         phone: '#posting-contact-phone-view',
-        address: '#posting-contact-address-view',
+        streetAddress: '#posting-contact-address-view',
         locations: '#posting-locations-view',
         modalTerm: '#modal-terms-view'
     },
@@ -21,7 +21,7 @@ module.exports = Base.extend({
         'enablePost': onEnablePost,
         'disablePost': onDisablePost,
         'formRendered': onFormRendered,
-        'changeEmail': onChangeEmail,
+        'fieldsChange': onFieldsChange,
         'click .open-modal': onOpenModal,
         'click [data-modal-close]': onCloseModal,
         'click [data-modal-shadow]': onCloseModal
@@ -43,7 +43,7 @@ function onValidate(event, done, isValid) {
     validation.call(this, this.selectors.contactName);
     validation.call(this, this.selectors.email);
     validation.call(this, this.selectors.phone);
-    validation.call(this, this.selectors.address);
+    validation.call(this, this.selectors.streetAddress);
     validation.call(this, this.selectors.locations);
     promise.val(done);
 
@@ -79,12 +79,27 @@ function onFormRendered(event, editing) {
     this.$(this.selectors.locations).trigger('formRendered', [editing]);
 }
 
-function onChangeEmail(event, email) {
+function onFieldsChange(event, fields) {
     event.preventDefault();
     event.stopPropagation();
     event.stopImmediatePropagation();
 
-    this.$(this.selectors.email).trigger('change', [email]);
+    if (!fields || !fields.length) {
+        return;
+    }
+    _.each(fields, function each(field) {
+        var selector;
+
+        if (!field.value || !field.value.value) {
+            return;
+        }
+        selector = this.selectors[field.name];
+        if (selector) {
+            if (field.value.value) {
+                this.$(selector).trigger('change', [field.value.value]);
+            }
+        }
+    }, this);
 }
 
 function onOpenModal(event) {

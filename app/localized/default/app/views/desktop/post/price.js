@@ -13,13 +13,19 @@ module.exports = Base.extend({
     fieldLabel: '',
     fieldName: '',
     fieldMandatory: '',
+    selectors: {
+        currency_type: '#field-currency_type',
+        priceC: '#field-priceC',
+        priceType: '#field-priceType'
+    },
     events: {
         'change': onChange,
         'fieldsChange': onFieldsChange,
         'change #field-priceType': onChangePriceType
     },
     initialize: initialize,
-    getTemplateData: getTemplateData
+    getTemplateData: getTemplateData,
+    filterAndSortFields: filterAndSortFields
 });
 
 function initialize() {
@@ -41,73 +47,78 @@ function getTemplateData() {
     });
 }
 
+function filterAndSortFields(fields) {
+    var priceFields = [];
+
+    _.each(this.selectors, function each(selector, name) {
+        var field = _.find(fields, function find(field) {
+            return field.name === name;
+        });
+
+        if (field) {
+            priceFields.push(field);
+        }
+    }, this);
+    return priceFields;
+}
+
 function onChange(event) {
     event.preventDefault();
     event.stopPropagation();
     event.stopImmediatePropagation();
 
-    var $field = $(event.currentTarget);
+    var $field = $(event.target);
     var options = {};
 
     if ($field.attr('name') === 'priceC') {
         $field.val($field.val().replace(this.rPrice, ''));
-        options.skipValidation = $field.val() === '' && _.contains(['NEGOTIABLE', 'FREE'], ($('#field-priceType').val() || '').toUpperCase());
+        options.skipValidation = $field.val() === '' && _.contains(['NEGOTIABLE', 'FREE'], ($(this.selectors.priceType).val() || '').toUpperCase());
         this.$('select').trigger('change');
     }
-
     this.parentView.$el.trigger('fieldSubmit', [$field, options]);
 }
 
-function onFieldsChange(event, options) {
+function onFieldsChange(event, fields) {
     event.preventDefault();
     event.stopPropagation();
     event.stopImmediatePropagation();
 
-    var fields = [];
-    var hasPriceButNotCurrency = false;
+    var priceFields;
+    var hasPriceButNotCurrency;
 
-    if (options.length) {
-        _.each(['currency_type', 'priceC', 'priceType'], function find(name) {
-            var length = fields.length;
-            var field = _.find(options, function search(field) {
-                if (field.name === 'priceC') {
-                    this.fieldLabel = field.label;
-                    this.fieldName = field.name;
-                    this.fieldMandatory = field.mandatory;
-                }
-                return field.name === name;
-            }.bind(this));
+    fields = this.filterAndSortFields(fields);
 
-            if (field) {
-                fields.push(field);
-            }
-            if (name === 'currency_type' && length === fields.length) {
-                hasPriceButNotCurrency = true;
-            }
-            else if (name === 'priceC' && hasPriceButNotCurrency) {
-                hasPriceButNotCurrency = length !== fields.length;
-            }
-        }, this);
-        if (!_.isEqual(fields, this.fields)) {
-            this.fields = fields;
-            if (hasPriceButNotCurrency) {
-                statsd.increment([this.app.session.get('location').abbreviation, this.parentView.editing ? 'editing' : 'posting', 'error', 'currency', 'fetch', this.app.session.get('platform')]);
-            }
-            this.parentView.$el.trigger('priceReset');
-            this.render();
-        }
-    }
-    else {
+    if (!fields || !fields.length) {
         this.fields = false;
+        this.parentView.$el.trigger('priceReset');
+        this.render();
+        return;
+    }
+
+    priceFields = {};
+    _.each(fields, function each(field) {
+        if (field.name === 'priceC') {
+            this.fieldLabel = field.label;
+            this.fieldName = field.name;
+            this.fieldMandatory = field.mandatory;
+        }
+        priceFields[field.name] = field;
+    }, this);
+
+    if (!_.isEqual(fields, this.fields)) {
+        this.fields = fields;
+        if (!priceFields.currency_type && priceFields.priceC) {
+            statsd.increment([this.app.session.get('location').abbreviation, this.parentView.editing ? 'editing' : 'posting', 'error', 'currency', 'fetch', this.app.session.get('platform')]);
+        }
         this.parentView.$el.trigger('priceReset');
         this.render();
     }
 }
 
 function onChangePriceType(event) {
-    var $field = $(event.currentTarget);
-    var $price = this.$('#field-priceC');
-    var $currency = this.$('#field-currency_type');
+    var $field = $(event.target);
+    var $price = this.$(this.selectors.priceC);
+    var $currency = this.$(this.selectors.currency_type);
 
     if ($field.val() === 'FREE') {
         $price.attr('disabled', true).val('');

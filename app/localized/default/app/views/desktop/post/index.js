@@ -190,9 +190,6 @@ function onSubcategorySubmit(event, subcategory) {
     event.stopPropagation();
     event.stopImmediatePropagation();
 
-    var field;
-    var email;
-
     if (!subcategory.fields) {
         subcategory.fields = {
             categoryAttributes: [],
@@ -200,10 +197,6 @@ function onSubcategorySubmit(event, subcategory) {
             contactInformation: []
         };
     }
-    field = _.find(subcategory.fields.contactInformation, function each(field) {
-        return field.name === 'email';
-    }) || {};
-    email = field.value ? field.value.value : '';
 
     this.item.get('category').parentId = subcategory.parentId;
     this.item.get('category').id = subcategory.id;
@@ -217,14 +210,8 @@ function onSubcategorySubmit(event, subcategory) {
     this.pendingValidations = [];
     this.$el.trigger('updateErrors');
     this.$(this.selectors.optionals).trigger('fieldsChange', [subcategory.fields.categoryAttributes]);
-    this.$(this.selectors.price).trigger('fieldsChange', [
-        _.filter(subcategory.fields.productDescription, function each(field) {
-            return !(field.name === 'title' || field.name === 'description');
-        })
-    ]);
-    if (email) {
-        this.$(this.selectors.contact).trigger('changeEmail', [email]);
-    }
+    this.$(this.selectors.price).trigger('fieldsChange', [subcategory.fields.productDescription]);
+    this.$(this.selectors.contact).trigger('fieldsChange', [subcategory.fields.contactInformation]);
     if (!this.edited) {
         this.handleBack();
     }

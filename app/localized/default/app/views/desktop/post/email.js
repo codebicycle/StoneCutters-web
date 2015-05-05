@@ -16,7 +16,7 @@ module.exports = Base.extend({
         'change': onChange,
         'validate': onValidate,
         'formRendered': onFormRendered,
-        'blur [name="email"]': onBlur,
+        'blur #field-email': onBlur,
         'click .did-you-mean a': onClickDidYouMean
     },
     initialize: initialize,
@@ -74,8 +74,8 @@ function onChange(event, options) {
     event.preventDefault();
     event.stopPropagation();
     event.stopImmediatePropagation();
-    
-    var $field = $(event.target);
+
+    var $field = this.$(this.selector);
 
     if (_.isString(options)) {
         $field.val(options);

@@ -47,9 +47,13 @@ function onChange(event, options) {
     event.preventDefault();
     event.stopPropagation();
     event.stopImmediatePropagation();
-    
-    var $field = $(event.currentTarget);
 
+    var $field = this.$(this.selector);
+
+    if (_.isString(options)) {
+        $field.val(options);
+        options = undefined;
+    }
     this.parentView.$el.trigger('fieldSubmit', [$field, options]);
 }
 
