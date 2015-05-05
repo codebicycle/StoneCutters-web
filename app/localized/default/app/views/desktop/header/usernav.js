@@ -9,7 +9,7 @@ var Metric = require('../../../../../../modules/metric');
 module.exports = Base.extend({
 	tagName: 'aside',
 	id: 'user-nav-bar',
-    className: 'header-usernav-view',
+    className: 'header-usernav-view wrapper',
     events: {
         'click [data-increment-metric]': Metric.incrementEventHandler
     },

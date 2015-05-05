@@ -7,7 +7,7 @@ var Metric = require('../../../../../../modules/metric');
 module.exports = Base.extend({
     tagName: 'header',
     id: 'header-view',
-    className: 'header-view',
+    className: 'header-view wrapper',
     events: {
         'click .posting': 'onPostClick',
         'click [data-increment-metric]': Metric.incrementEventHandler

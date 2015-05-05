@@ -14,12 +14,35 @@ var Shops = require('../modules/shops');
 var Abundance = require('../modules/abundance');
 
 module.exports = {
+    home: middlewares(home),
     list: middlewares(list),
     show: middlewares(show),
     showig: middlewares(showig)
 };
 
+function home(params, callback) {
+    helpers.controllers.control.call(this, params, controller);
+
+    function controller() {
+
+        var success = function(res) {
+            callback(null, 'home/index', {});
+        }.bind(this);
+
+        var error = function(err, res) {
+            return helpers.common.error.call(this, err, res, callback);
+        }.bind(this);
+
+        asynquence().or(error)
+            .val(success);
+    }
+}
+
 function list(params, callback) {
+    // Ask about home experiment
+    if (this.app.session.get('location').url === 'www.olx.com.ar') {
+        return home.call(this, params, callback);
+    }
     helpers.controllers.control.call(this, params, controller);
 
     function controller() {

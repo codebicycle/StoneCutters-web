@@ -4,15 +4,13 @@
     <body>
         <div id="progressBar"></div>
         {% include (template + '/layout/bar.html') %}
-        <div id="wrapper" class="wrapper-main">
-            {% view 'header/keywords' %}
-            {% view 'header/usernav' %}
-            {% view 'header/index' %}
-            <div id="content">
-                {{ body }}
-            </div>
-            {% view 'footer/footer' %}
+        {% view 'header/keywords' %}
+        {% view 'header/usernav' %}
+        {% view 'header/index' %}
+        <div id="content">
+            {{ body }}
         </div>
+        {% view 'footer/footer' %}
         <script>function init() {
             $LAB
                 .script("{{ [jsDir, 'common', 'libs.js'] | join('/') | static }}")

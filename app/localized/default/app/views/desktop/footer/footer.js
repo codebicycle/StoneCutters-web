@@ -10,7 +10,7 @@ var Metric = require('../../../../../../modules/metric');
 module.exports = Base.extend({
     tagName: 'footer',
     id: 'footer-view',
-    className: 'footer-view',
+    className: 'footer-view wrapper',
     firstRender: true,
     events: {
         'click [data-footer-slidedown]': 'slideDownContent',
