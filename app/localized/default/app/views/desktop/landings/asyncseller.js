@@ -11,7 +11,9 @@ module.exports = Base.extend({
         'validateFields': 'onValidateFields',
         'errorsUpdate': 'onErrorsUpdate',
         'progressBar': 'onProgressBar',
-        'updateData': 'onUpdateData'
+        'updateData': 'onUpdateData',
+        'change [name=dimensionsId]': 'onChangeDimensions',
+        'track': 'onTrack',
     },
     errors: {
         'INVALID_JSON': '',
@@ -35,7 +37,17 @@ module.exports = Base.extend({
         this.enableButton = true;
         this.dimensions = '';
     },
+    onExit: function(event) {
+        var timeDiff = _.now() - this.startTime;
+
+        return Math.floor((timeDiff / 1000));
+    },
     postRender: function() {
+        $(window).on('unload', {
+            async: false
+        }, this.onExit.bind(this));
+        this.startTime = _.now();
+        this.startStepTime = _.now();
         this.app.router.once('action:end', this.onStart);
         this.app.router.once('action:start', this.onEnd);
     },
@@ -53,12 +65,20 @@ module.exports = Base.extend({
         var current = step;
         step = pos === 'next' ? (step + 1) : pos;
 
+        console.log('Tiempo en el paso ' + current + ': ' + this.setTimeDiff());
+        this.startStepTime = _.now();
+
         this.$('.step-' + current).addClass('hide');
         if (step === 4) {
             this.$el.trigger('updateData');
         }
         this.$('.step-' + step).removeClass('hide');
         this.$el.trigger('progressBar', [step]);
+    },
+    setTimeDiff: function(currentStep) {
+        var timeDiff = _.now() - this.startStepTime;
+        
+        return Math.floor((timeDiff / 1000));
     },
     onValidateFields: function(event, data, step) {
         event.preventDefault();
@@ -149,6 +169,36 @@ module.exports = Base.extend({
         this.$('.step.point-' + current).addClass('active');
         this.$('.step.point-' + current).addClass('big');
         this.$('.point-' + current).addClass('active');
+    },
+    onChangeDimensions: function() {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+
+        var value = $(event.target).find('option:selected').text();
+
+        this.$el.trigger('track', [{
+            dimensions: value
+        }]);
+    },
+    onTrack: function(event, query, options) {
+        var adapter = new Adapter({});
+
+        query = _.defaults({
+            clientId: this.app.session.get('clientId'),
+            landing: 'asyncpickup',
+            t: _.now()
+        }, query || {});
+
+        options = _.defaults({
+            timeout: 2000
+        }, options || {});
+
+        adapter.request(this.app.req, {
+            method: 'GET',
+            url: 'http://tracking.olx-st.com/h/minv/',
+            query: query
+        }, options, $.noop);
     }
 });
 

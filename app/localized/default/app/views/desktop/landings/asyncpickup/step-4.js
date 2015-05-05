@@ -24,6 +24,9 @@ module.exports = Base.extend({
 
         btn.addClass('disable');
         if (this.parentView.enableButton) {
+            this.$el.trigger('track', [{
+                event: 'click-step-' + 4
+            }]);
             this.parentView.enableButton = false;
 
             adapter.request(this.app.req, {
@@ -42,6 +45,8 @@ module.exports = Base.extend({
 
             this.parentView.$('.steps').addClass('hide');
             if (res.status) {
+                console.log('Tiempo en el paso 4: ' + this.parentView.setTimeDiff());
+
                 this.parentView.$('.success').removeClass('hide');
                 if (this.parentView.fields.contactedBySeller) {
                     this.parentView.$('.buyer-link').removeClass('hide');

@@ -20,6 +20,9 @@ module.exports = Base.extend({
         var step = $(event.target).data('step');
         var fieldsValidate = {};
 
+        this.$el.trigger('track', [{
+            event: 'click-step-' + step
+        }]);
         this.parentView.dimensions = this.$('[name=dimensionsId] option:selected').text();
 
         _.extend(fieldsValidate, {
