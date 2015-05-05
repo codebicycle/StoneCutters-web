@@ -109,8 +109,9 @@ function autologin(done) {
         dataAdapter.get(this.app.req, '/users/login', {
             query: {
                 c: this.get('challenge'),
-                h: this.get('hash')            }
-        }, done.errfcb);
+                h: this.get('hash')            
+            }
+        }, this.errfcb(done));
     }
 
     function success(res, user) {

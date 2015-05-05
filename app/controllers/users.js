@@ -205,6 +205,7 @@ function autologin(params, callback) {
         asynquence().or(fail.bind(this))
             .then(redirect.bind(this))
             .then(autoLogin.bind(this))
+            .then(check.bind(this))
             .val(success.bind(this));
 
         function redirect(done) {
@@ -241,6 +242,10 @@ function autologin(params, callback) {
             user.autologin(done);
         }
 
+        function check(done, res, body) {
+            console.log(res, body);
+        }
+
         function success() {
             if (user && params.t) {
                 return helpers.common.redirect.call(this, '/' + params.t, null, {
@@ -250,8 +255,15 @@ function autologin(params, callback) {
             callback(null, {});
         }
 
-        function fail(err, res) {
-            return helpers.common.error.call(this, err, res, callback);
+        function fail(err) {
+            if (_.isArray(err)) {
+                if (err.statusCode === 401 && params.t === 'createpassword') {
+                    return helpers.common.redirect.call(this, '/lostpassword', null, {
+                        status: 302
+                    });        
+                }
+            }
+            return helpers.common.error.call(this, err, null, callback);
         }
     }
 }
