@@ -5,6 +5,7 @@ var asynquence = require('asynquence');
 var Base = require('../../../../../common/app/bases/view').requireView('users/createpassword');
 var helpers = require('../../../../../../helpers');
 var User = require('../../../../../../models/user');
+var translations = require('../../../../../../../shared/translations');
 
 module.exports = Base.extend({
     className: 'users_createpassword_view short-page',
@@ -12,6 +13,9 @@ module.exports = Base.extend({
         'change': 'onChange',
         'click .password-toggle': 'onPasswordToggle',
         'submit': 'onSubmit'
+    },
+    postRender: function () {
+        this.dictionary = translations.get(this.app.session.get('selectedLanguage'));
     },
     onChange: function(event) {
         event.preventDefault();
@@ -30,14 +34,16 @@ module.exports = Base.extend({
 
         var field = this.$('.password-field');
         var link = $(event.target);
+        var msgShow = this.dictionary['misc.Show'];
+        var msgHide = this.dictionary['misc.Hide'];
 
         if (field.attr('type') === 'password') {
             field.attr('type', 'text');
-            link.html('hide');
+            link.html(msgHide);
         }
         else {
             field.attr('type', 'password');
-            link.html('show');
+            link.html(msgShow);
         }        
     },
     getProfile: function(profile) {
@@ -67,7 +73,7 @@ module.exports = Base.extend({
         }
 
         function submit(done) {
-            this.getProfile().changePassword(done);
+            this.getProfile().updatePassword(done);
         }
 
         function success() {
@@ -80,7 +86,8 @@ module.exports = Base.extend({
 
         function fail(errors) {
             _.each(errors, function each(error) {
-                var $field = this.$('[name=' + error.selector + ']');
+                var selector = error.selector === 'newPassword' ? '.fake-input' : '[name=' + error.selector + ']';
+                var $field = this.$(selector);
 
                 $field.siblings('small').remove();
                 $field.after('<small class="error message">' + error.message + '</small>')

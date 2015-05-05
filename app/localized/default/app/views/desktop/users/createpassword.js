@@ -24,8 +24,8 @@ module.exports = Base.extend({
 
         var field = this.$('.password-field');
         var link = $(event.target);
-        var msgShow = this.dictionary["misc.Show"];
-        var msgHide = this.dictionary["misc.Hide"];
+        var msgShow = this.dictionary['misc.Show'];
+        var msgHide = this.dictionary['misc.Hide'];
 
         if (field.attr('type') === 'password') {
             field.attr('type', 'text');
@@ -80,7 +80,8 @@ module.exports = Base.extend({
 
         function fail(errors) {
             _.each(errors, function each(error) {
-                var $field = this.$('[name=' + error.selector + ']');
+                var selector = error.selector === 'newPassword' ? '.wrapper-inputs' : '[name=' + error.selector + ']';
+                var $field = this.$(selector);
 
                 $field.siblings('small').remove();
                 $field.after('<small class="error message">' + error.message + '</small>')

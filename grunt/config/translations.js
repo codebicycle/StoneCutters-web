@@ -98,6 +98,8 @@ module.exports = {
         'posting_photosprogress.wait',
         'item.SelectA_Neighborhood',
         'misc.SelectSuburb',
-        'register_confirmation.776'
+        'register_confirmation.776',
+        'misc.Show',
+        'misc.Hide'
     ]
 };

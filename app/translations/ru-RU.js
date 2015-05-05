@@ -554,6 +554,7 @@ module.exports = {
     'misc.GetTheFreeApp': '\u041F\u041E\u041B\u0423\u0427\u0418\u0422\u042C \u0411\u0415\u0421\u041F\u041B\u0410\u0422\u041D\u041E\u0415 \u041F\u0420\u0418\u041B\u041E\u0416\u0415\u041D\u0418\u0415',
     'misc.GladYouSold': 'Cool! We\xB4re glad that you sold your item!',
     'misc.HelpSell': 'We want to help you sell!',
+    'misc.Hide': 'Hide',
     'misc.HowToContact': 'How can I contact OLX?',
     'misc.ImproveYourDescription': 'Improve your description',
     'misc.IncludeMoreDetails': 'Include more details in your ad description. This will help you sell faster.',

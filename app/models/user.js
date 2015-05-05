@@ -448,8 +448,11 @@ function updatePassword(done) {
 
         function callback(err, response, body) {
             if (err) {
-                body.statusCode = response.statusCode;
-                return done.fail(body);
+                if (body) {
+                    body.statusCode = response.statusCode;
+                    return done.fail(body);
+                }
+                return done.fail(err);
             }
             done(response, body);
         }

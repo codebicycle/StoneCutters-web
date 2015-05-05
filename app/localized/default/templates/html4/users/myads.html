@@ -9,8 +9,8 @@
 {% if createPassword %}
     <div id="notification-message" class="notification-message icons icon-check">
         <img src="{{ '/images/html4/icon-check.png' | static }}" alt="">
-        <h4>¡Muy bien! Ya tenés contraseña para poder usar tu cuenta de OLX</h4>
-        <p>Recordá que tu contraseña es confidencial y no la estaremos enviando por e-mail</p>
+        <h4>{{ dictionary["misc. PasswordNow"] }}</h4>
+        <p>{{ dictionary["misc.ConfidentialPassword"] }}</p>
     </div>
 {% endif %}
 
