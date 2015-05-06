@@ -9,3 +9,4 @@ module.exports = Base.extend({
 });
 
 module.exports.id = 'Neighborhoods';
+module.exports.cache = true;
