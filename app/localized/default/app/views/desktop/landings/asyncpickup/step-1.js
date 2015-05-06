@@ -16,9 +16,6 @@ module.exports = Base.extend({
 
         var step = $(event.target).data('step');
 
-        this.$el.trigger('track', [{
-            event: 'click-step-' + step
-        }]);
         this.$el.trigger('changeView', [step, 'next']);
     }
 });

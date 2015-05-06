@@ -25,7 +25,8 @@ module.exports = Base.extend({
         btn.addClass('disable');
         if (this.parentView.enableButton) {
             this.$el.trigger('track', [{
-                event: 'click-step-' + 4
+                track_page: 'step-4',
+                event: 'click-step-4'
             }]);
             this.parentView.enableButton = false;
 
@@ -45,7 +46,12 @@ module.exports = Base.extend({
 
             this.parentView.$('.steps').addClass('hide');
             if (res.status) {
-                console.log('Tiempo en el paso 4: ' + this.parentView.setTimeDiff());
+                this.parentView.currentStep = 'success-page';
+                this.$el.trigger('track', [{
+                    track_page: 'step-4',
+                    spend_time: this.parentView.setTimeDiff(),
+                    transactionId: res.extra.transactionId
+                }]);
 
                 this.parentView.$('.success').removeClass('hide');
                 if (this.parentView.fields.contactedBySeller) {
@@ -55,6 +61,12 @@ module.exports = Base.extend({
                 }
             }
             else {
+                this.parentView.currentStep = 'error-page';
+                this.$el.trigger('track', [{
+                    track_page: 'step-4',
+                    spend_time: this.parentView.setTimeDiff(),
+                    error_key: res.error[0].message
+                }]);
                 this.parentView.$('.error-page .msg-error').html(res.error[0].message);
                 this.parentView.$('.error-page').removeClass('hide');
             }
@@ -66,6 +78,12 @@ module.exports = Base.extend({
         event.stopImmediatePropagation();
 
         var step = $(event.target).data('step');
+        var editInfo = $(event.target).data('edit');
+
+        this.$el.trigger('track', [{
+            track_page: 'step-4',
+            edit_step: step + '-' + editInfo
+        }]);
 
         this.parentView.$el.trigger('changeView', [4, step]);
     }

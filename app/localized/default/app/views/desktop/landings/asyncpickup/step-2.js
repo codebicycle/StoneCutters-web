@@ -20,10 +20,14 @@ module.exports = Base.extend({
         var step = $(event.target).data('step');
         var fieldsValidate = {};
 
-        this.$el.trigger('track', [{
-            event: 'click-step-' + step
-        }]);
         this.parentView.dimensions = this.$('[name=dimensionsId] option:selected').text();
+
+        this.$el.trigger('track', [{
+            track_page: 'step-' + step,
+            event: 'click-step-' + step,
+            dimensions: this.parentView.dimensions,
+            price: data.price
+        }]);
 
         _.extend(fieldsValidate, {
             itemId: data.itemId,
