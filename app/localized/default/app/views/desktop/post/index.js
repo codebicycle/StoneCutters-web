@@ -75,16 +75,16 @@ function initialize() {
 }
 
 function className() {
-    var sixpackClass = this.app.sixpack.className(this.app.sixpack.experiments.growthCategoriesSuggestion);
+    var sixpackClass = this.app.sixpack.className(this.app.sixpack.experiments.growthCategorySuggestion);
 
-    this.sixpackCurrentAlternative = this.app.sixpack.experiments.growthCategoriesSuggestion ? this.app.sixpack.experiments.growthCategoriesSuggestion.alternative : '';
+    this.sixpackCurrentAlternative = this.app.sixpack.experiments.growthCategorySuggestion ? this.app.sixpack.experiments.growthCategorySuggestion.alternative : '';
     return 'posting-view' + (this.getItem().has('id') ? ' edition' : '') + (sixpackClass ? ' ' : '') + sixpackClass;
 }
 
 function getTemplateData() {
     var data = Base.prototype.getTemplateData.call(this);
     var customerContact = config.getForMarket(this.app.session.get('location').url, ['post_customer_contact'], '');
-    var sixpackCurrentAlternative = this.app.sixpack.experiments.growthCategoriesSuggestion ? this.app.sixpack.experiments.growthCategoriesSuggestion.alternative : '';
+    var sixpackCurrentAlternative = this.app.sixpack.experiments.growthCategorySuggestion ? this.app.sixpack.experiments.growthCategorySuggestion.alternative : '';
 
     return _.extend({}, data, {
         item: this.getItem(data.item),
@@ -440,7 +440,7 @@ function onSubmit(event) {
             custom: [category, this.item.get('category').parentId || '-', this.item.get('category').id || '-', action, this.item.get('id')].join('::')
         });
 
-        this.app.sixpack.convert(this.app.sixpack.experiments.growthCategoriesSuggestion);
+        this.app.sixpack.convert(this.app.sixpack.experiments.growthCategorySuggestion);
         this.categorySuggestionMetric(['post']);
 
         helpers.common.redirect.call(this.app.router, successPage + this.item.get('id') + '?sk=' + this.item.get('securityKey'), null, {
@@ -568,7 +568,7 @@ function renderTemplate(tpl, data) {
 }
 
 function categorySuggestion(value) {
-    if (!this.app.sixpack.experiments.growthCategoriesSuggestion || this.sixpackCurrentAlternative.indexOf('control') != -1 || this.editing) {
+    if (!this.app.sixpack.experiments.growthCategorySuggestion || this.sixpackCurrentAlternative.indexOf('control') != -1 || this.editing) {
         return;
     }
     var $catSelector = $(this.selectors.categories + ' .posting-category-suggestion');
@@ -660,7 +660,7 @@ function categorySuggestionDecideIU(response) {
 }
 
 function categorySuggestionBuildIU(response, initial) {
-    if (!this.app.sixpack.experiments.growthCategoriesSuggestion || this.sixpackCurrentAlternative.indexOf('control') != -1 || this.editing) {
+    if (!this.app.sixpack.experiments.growthCategorySuggestion || this.sixpackCurrentAlternative.indexOf('control') != -1 || this.editing) {
         return;
     }
 
@@ -738,7 +738,7 @@ function categorySuggestionBuildIU(response, initial) {
 }
 
 function categorySuggestionMetric(keys) {
-    if (!this.app.sixpack.experiments.growthCategoriesSuggestion || this.editing || !keys) {
+    if (!this.app.sixpack.experiments.growthCategorySuggestion || this.editing || !keys) {
         return;
     }
     this.metric.increment(['growth', 'posting', ['abtest', 'category-suggestion', 'alternative-' + this.sixpackCurrentAlternative].concat(keys)]);
