@@ -5,6 +5,7 @@ var asynquence = require('asynquence');
 var middlewares = require('../middlewares');
 var helpers = require('../helpers');
 var Item = require('../models/item');
+var LocationModel = require('../models/location');
 var FeatureAd = require('../models/feature_ad');
 var config = require('../../shared/config');
 
@@ -93,28 +94,26 @@ function flow(params, callback) {
         var isDesktop = platform === 'desktop';
         var itemId = params.itemId;
         var promise = asynquence().or(error.bind(this))
-            .then(check.bind(this))
+            .then(redirect.bind(this))
             .then(prepare.bind(this));
 
         if (isPostingFlow || isDesktop || itemId) {
             promise
+                .then(fetchNeighborhoods.bind(this))
                 .then(fetch.bind(this))
                 .then(parse.bind(this))
-                .then(participate.bind(this));
+                .then(participate.bind(this))
+                .then(configure.bind(this));
         }
         promise.val(success.bind(this));
 
-        function check(done) {
+        function redirect(done) {
             if(params.renew) {
                 if(!config.getForMarket(location.url, ['ads', 'renew', 'enabled'],false)) {
                     params.renew = false;
                     return done.fail({});
                 }
             }
-            done();
-        }
-
-        function prepare(done) {
             if ((!isPostingFlow && !isDesktop) && (!siteLocation || siteLocation.indexOf('www.') === 0)) {
                 done.abort();
                 return helpers.common.redirect.call(this, '/location?target=' + (itemId ? 'myolx/edititem/' + itemId : 'posting'), null, {
@@ -124,41 +123,44 @@ function flow(params, callback) {
             done();
         }
 
-        function fetch(done) {
-            var data = {};
-            var locationUrl;
+        function prepare(done) {
+            var spec = {};
 
-            data.postingSession = {
+            spec.postingSession = {
                 model: 'PostingSession',
                 params: {}
             };
 
             if (isDesktop && location.current) {
-                if (location.current.type === 'state') {
-                    locationUrl = location.url;
-                }
-                else if (location.current.type === 'city') {
-                    locationUrl = location.children[0].url;
-                }
-                data.cities = {
+                spec.cities = {
                     collection: 'Cities',
                     params: {
                         level: 'states',
                         type: 'cities',
-                        location: locationUrl,
+                        location: location.url,
                         languageId: languageId
                     }
                 };
+                if (location.current.type === 'city') {
+                    spec.cities.params.location = location.children[0].url;
+                    spec.neighborhoods = {
+                        collection: 'Neighborhoods',
+                        params: {
+                            location: location.current.url,
+                            languageId: languageId
+                        }
+                    };
+                }
             }
             if (itemId) {
-                data.item = {
+                spec.item = {
                     model: 'Item',
                     params: {
                         id: itemId,
                         languageId: languageId
                     }
                 };
-                data.fields = {
+                spec.fields = {
                     model: 'Field',
                     params: {
                         intent: 'edit',
@@ -167,16 +169,40 @@ function flow(params, callback) {
                     }
                 };
                 if (user) {
-                    data.fields.params.token = user.token;
+                    spec.fields.params.token = user.token;
                 }
                 else if (params.sk) {
-                    data.fields.params.securityKey = params.sk;
+                    spec.fields.params.securityKey = params.sk;
                 }
             }
+            done(spec);
+        }
 
-            this.app.fetch(data, {
+        function fetchNeighborhoods(done, spec) {
+            if (spec.neighborhoods) {
+                return this.app.fetch(_.pick(spec, 'neighborhoods'), {
+                    readFromCache: false
+                }, function afterFetch(err, res, body) {
+                    if (err) {
+                        return done.fail(err);
+                    }
+                    done(spec, (res || {}).neighborhoods);
+                }.bind(this));
+            }
+            done(spec);
+        }
+
+        function fetch(done, spec, neighborhoods) {
+            this.app.fetch(_.omit(spec, 'neighborhoods'), {
                 readFromCache: !this.app.session.get('isServer')
-            }, done.errfcb);
+            }, function afterFetch(err, res, body) {
+                if (err) {
+                    return done.fail(err);
+                }
+                res = res || {};
+                res.neighborhoods = neighborhoods;
+                done(res, body);
+            }.bind(this));
         }
 
         function parse(done, res) {
@@ -207,7 +233,7 @@ function flow(params, callback) {
         }
 
         function participate(done, res) {
-            this.app.sixpack.participate(this.app.sixpack.experiments.growthCategorySuggestion, complete.bind(this));
+            this.app.sixpack.participate(this.app.sixpack.experiments.growthCategoriesSuggestion, complete.bind(this));
 
             function complete() {
                 this.app.session.update({
@@ -217,36 +243,46 @@ function flow(params, callback) {
             }
         }
 
+        function configure(done, res) {
+            var location = this.app.session.get('location');
+
+            if (res.item)  {
+                location = res.item.get('location');
+            }
+            res.currentLocation = LocationModel.parseToType(location);
+            done(res);
+        }
+
         function success(res) {
             this.app.seo.addMetatag('robots', 'noindex, nofollow');
             this.app.seo.addMetatag('googlebot', 'noindex, nofollow');
             if (isPostingFlow) {
-                if (redirect.call(this, res.item)) {
+                if (check.call(this, res.item)) {
                     return;
                 }
-                postingFlowController.call(this, res.postingSession, res.item, res.fields);
+                postingFlowController.call(this, res);
             }
             else if (isDesktop) {
-                if (redirect.call(this, res.item)) {
+                if (check.call(this, res.item)) {
                     return;
                 }
                 if (res.item && params.renew)  {
                     res.item.set('renew', true);
                 }
-                postingController.call(this, res.postingSession, res.cities, res.item, res.fields);
+                postingController.call(this, res);
             }
             else if (itemId) {
-                if (redirect.call(this, res.item)) {
+                if (check.call(this, res.item)) {
                     return;
                 }
-                postingFormController.call(this, res.postingSession, res.item, res.fields);
+                postingFormController.call(this, res);
             }
             else {
                 postingCategoriesController.call(this);
             }
         }
 
-        function redirect(item) {
+        function check(item) {
             var protocol = this.app.session.get('protocol');
             var host = this.app.session.get('host');
             var shortHost = this.app.session.get('shortHost');
@@ -270,56 +306,37 @@ function flow(params, callback) {
             }
         }
 
-        function postingController(postingSession, cities, item, fields) {
-            var currentLocation = {};
-
+        function postingController(res) {
             this.app.tracking.setPage('desktop_step1');
-            if (location.current) {
-                switch (location.current.type) {
-                    case 'state':
-                        currentLocation.state = location.current.url;
-                        break;
-                    case 'city':
-                        currentLocation.state = location.children[0].url;
-                        currentLocation.city = location.current.url;
-                        break;
-                    default:
-                        break;
-                }
-            }
-            if (item) {
-                item.set({
-                    _location: item.get('location')
-                }, {
-                    unset: false
-                });
-            }
 
             callback(null, 'post/index', {
-                postingSession: postingSession.get('postingSession'),
-                cities: cities,
-                currentLocation: currentLocation,
                 include: ['item'],
-                item: item || new Item({}, {
+                item: res.item || new Item({}, {
                     app: this.app
                 }),
-                fields: fields,
+                postingSession: res.postingSession.get('postingSession'),
+                fields: res.fields,
+                cities: res.cities,
+                neighborhoods: res.neighborhoods,
+                currentLocation: res.currentLocation,
                 marketing: params.marketing
             }, false);
         }
 
-        function postingFlowController(postingSession, item, fields) {
+        function postingFlowController(res) {
             callback(null, 'post/flow/index', {
-                postingSession: postingSession.get('postingSession'),
                 include: ['item', 'fields'],
-                item: item || new Item({}, {
+                item: res.item || new Item({}, {
                     app: this.app
                 }),
-                fields: fields
+                postingSession: res.postingSession.get('postingSession'),
+                fields: res.fields
             }, false);
         }
 
-        function postingFormController(postingSession, item, fields) {
+        function postingFormController(res) {
+            var item = res.item;
+
             item.set(_.object(_.map(item.get('optionals'), function each(optional) {
                 return optional.name;
             }), _.map(item.get('optionals'), function each(optional) {
@@ -333,12 +350,12 @@ function flow(params, callback) {
             }
             callback(null, 'post/form', {
                 item: item,
-                postingSession: postingSession.get('postingSession'),
+                postingSession: res.postingSession.get('postingSession'),
                 form: {
                     values: item.toJSON(),
                     errors: (this.app.session.get('form') || {}).errors
                 },
-                fields: fields.get('fields'),
+                fields: res.fields.get('fields'),
                 category: {
                     id: item.get('category').parentId
                 },

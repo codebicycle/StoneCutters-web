@@ -24,7 +24,7 @@ module.exports = {
         },
         autoParticipate: true
     },
-    growthCategorySuggestion: {
+    growthCategoriesSuggestion: {
         enabled: true,
         platforms: ['desktop'],
         markets: ['ar'],

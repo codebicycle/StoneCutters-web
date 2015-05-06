@@ -182,7 +182,7 @@ module.exports = Base.extend({
         event.stopPropagation();
         event.stopImmediatePropagation();
 
-        this.$('#contact').trigger('locationChange', [error]);
+        this.$('#contact').trigger('locationChange', [error, this.neighborhoodSelected]);
     },
     onSubmit: function(event) {
         event.preventDefault();
