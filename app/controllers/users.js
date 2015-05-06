@@ -205,7 +205,6 @@ function autologin(params, callback) {
         asynquence().or(fail.bind(this))
             .then(redirect.bind(this))
             .then(autoLogin.bind(this))
-            .then(check.bind(this))
             .val(success.bind(this));
 
         function redirect(done) {
@@ -240,10 +239,6 @@ function autologin(params, callback) {
             });
             
             user.autologin(done);
-        }
-
-        function check(done, res, body) {
-            console.log(res, body);
         }
 
         function success() {
