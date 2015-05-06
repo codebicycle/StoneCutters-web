@@ -233,7 +233,7 @@ function flow(params, callback) {
         }
 
         function participate(done, res) {
-            this.app.sixpack.participate(this.app.sixpack.experiments.growthCategoriesSuggestion, complete.bind(this));
+            this.app.sixpack.participate(this.app.sixpack.experiments.growthCategorySuggestion, complete.bind(this));
 
             function complete() {
                 this.app.session.update({
