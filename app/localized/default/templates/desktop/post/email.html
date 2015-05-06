@@ -1,0 +1,11 @@
+{% from macros import Field %}
+{% set emailField = {
+    name: "email",
+    mandatory: true,
+    label: dictionary["seccion-35.559"],
+    fieldType: "text",
+    dataType: "string",
+    value: user.email,
+    autocomplete: true
+} %}
+{{ Field(hint = hint if hint else dictionary["posting_fields_1.YourEmailAddressWontBeShared"], hintIcon = icon if icon else 'icon-lock', emailField) }}

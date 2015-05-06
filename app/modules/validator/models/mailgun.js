@@ -2,9 +2,10 @@
 
 var _ = require('underscore');
 var Backbone = require('backbone');
-var config = require('../../../shared/config');
-var utils = require('../../../shared/utils');
+var config = require('../../../../shared/config');
+var utils = require('../../../../shared/utils');
 var Base;
+var Mailgun;
 
 Backbone.noConflict();
 Base = Backbone.Model;
@@ -52,8 +53,16 @@ function run(options) {
     });
 }
 
-module.exports = Base.extend({
+Mailgun = Base.extend({
     initialize: initialize,
     isEnabled: isEnabled,
     run: run
 });
+
+Mailgun.isEnabled = function(app) {
+    return isEnabled.call({
+        app: app
+    });
+};
+
+module.exports = Mailgun;

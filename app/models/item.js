@@ -241,6 +241,7 @@ function postFields(done) {
     if (data.priceC && !data.currency_type) {
         statsd.increment([locale, type, 'error', 'currency', 'post', platform]);
     }
+
     helpers.dataAdapter.post(this.app.req, '/items' + (!id ? '' : ['', id, action].join('/')), {
         data: data,
         query: query
@@ -314,11 +315,16 @@ function toData(includeImages) {
     data['category.parentId'] = data['category.parentId'] || (this.get('category') || {}).parentId;
     data['category.id'] = data['category.id'] || (this.get('category') || {}).id;
     if (typeof data.location !== 'string') {
-        try {
-            data.location = this.getLocation().url;
+        if (data.city) {
+            data.location = data.city;
         }
-        catch(err) {
-            delete data.location;
+        else {
+            try {
+                data.location = this.getLocation().url;
+            }
+            catch(err) {
+                delete data.location;
+            }
         }
     }
     if (data.price && !data.priceC) {
@@ -363,7 +369,7 @@ function toData(includeImages) {
     delete data.slug;
     delete data.priceTypeData;
     delete data.additionalLocation;
-    delete data._location;
+    delete data.city;
     _.each(Object.keys(data), function each(key) {
         if (data[key] === undefined || data[key] === null || (typeof data[key] === 'string' && !data[key])) {
             delete data[key];
