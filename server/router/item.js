@@ -432,7 +432,8 @@ module.exports = function(app, dataAdapter) {
             }
 
             function prepare(done, data) {
-                reason = data;
+                done();
+                /*reason = data;
 
                 var ticket = {
                     requester: {
@@ -450,13 +451,11 @@ module.exports = function(app, dataAdapter) {
                 if (zendesk.brand_id) {
                     ticket.brand_id = zendesk.brand_id;
                 }
-                done(zendesk, ticket);
+                done(zendesk, ticket);*/
             }
 
             function submit(done, reason) {
-                var e = new Error('Mi error');
-                e.selector = 'description';
-                return done.fail([e]);
+                done();
 
                 /*restler.post('https://' + zendesk.subdomain + '.zendesk.com/api/v2/tickets.json', {
                     data: {
