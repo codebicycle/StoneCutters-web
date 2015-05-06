@@ -80,9 +80,9 @@ module.exports = Base.extend({
 
         function fail(errors) {
             _.each(errors, function each(error) {
-                var selector = error.selector === 'newPassword' ? '.wrapper-inputs' : '[name=' + error.selector + ']';
-                var $field = this.$(selector);
+                var $field = this.$('.wrapper-inputs');
 
+                $field.parent().addClass('error');
                 $field.siblings('small').remove();
                 $field.after('<small class="error message">' + error.message + '</small>')
                     .parents('fieldset')
