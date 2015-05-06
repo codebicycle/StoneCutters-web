@@ -326,5 +326,18 @@ module.exports = {
         html5: {
             enabled: false
         }
+    },
+    safetyTips: {
+        html4: {
+            call: {
+                enabled: false
+            },
+            sms: {
+                enabled: false
+            },
+            email: {
+                enabled: false
+            }
+        }
     }
 };

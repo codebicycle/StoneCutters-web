@@ -2,7 +2,7 @@
 
 module.exports = {
     html4ShowShops: {
-        enabled: true,
+        enabled: false,
         platforms: ['html4'],
         markets: ['ke'],
         name: 'show-shops',
