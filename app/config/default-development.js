@@ -380,6 +380,10 @@ module.exports = {
             },
             'www.olx.co.za': {
                 subdomain: 'olxsa'
+            },
+            'www.olx.com.ng': {
+                subdomain: 'olxng',
+                brand_id: 480141
             }
         }
     },
