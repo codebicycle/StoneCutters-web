@@ -4,12 +4,10 @@
     {% elif item.user.username %}
         <h4>{{ item.user.username }}</h4>
     {% endif %}
-
     {% if(item.user) %}
         <p>
             Registered OLX user since <time>{{ dictionary[formatMonth] }} {{ item.user.firstActivityDate.year }}</time>
         </p>
     {% endif %}
-
     <p>{{ (item.location.neighborhoodName + ', ') if item.location.neighborhoodName  }}{{ item.location.cityName }}, {{ item.location.stateName }}</p>
 </div>

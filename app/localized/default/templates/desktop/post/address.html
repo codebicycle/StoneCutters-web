@@ -1,0 +1,10 @@
+{% from macros import Field %}
+{% set adressField = {
+    name: "streetAddress",
+    mandatory: isMandatory,
+    label: dictionary["itemdescription.streetaddress"],
+    fieldType: "text",
+    dataType: "string",
+    value: item.get('streetAddress')
+} %}
+{{ Field(adressField) }}

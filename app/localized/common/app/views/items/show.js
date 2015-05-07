@@ -16,6 +16,10 @@ module.exports = Base.extend({
         var data = Base.prototype.getTemplateData.call(this);
         var sellerProfileEnabled =  helpers.features.isEnabled.call(this, 'sellerProfile');
         var formatMonth;
+        var location = this.app.session.get('location');
+        var platform = this.app.session.get('platform');
+        var flagItem = config.getForMarket(location.url, ['flagItem']);
+        var safetyTips = config.getForMarket(location.url, ['safetyTips', platform]);
         data.category_name = this.options.category_name;
 
         if(sellerProfileEnabled && data.item.user) {
@@ -41,15 +45,13 @@ module.exports = Base.extend({
             data.item.descriptionReplace = data.item.description.replace(/(<([^>]+)>)/ig,'');
         }
 
-        var location = this.app.session.get('location');
-        var flagItem = config.getForMarket(location.url, ['flagItem']);
-
         return _.extend({}, data, {
             breadcrumb: breadcrumb.get.call(this, data),
             flagItem: flagItem,
             isUserzoomEnabled: this.userzoom.isEnabled(),
             userzoom: this.userzoom.getParams(),
-            sellerProfileEnabled:  helpers.features.isEnabled.call(this, 'sellerProfile'),
+            sellerProfileEnabled: sellerProfileEnabled,
+            safetyTips: safetyTips,
             formatMonth: formatMonth
         });
     }

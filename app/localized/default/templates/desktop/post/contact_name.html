@@ -1,0 +1,11 @@
+{% from macros import Field %}
+{% set contactNameField = {
+	name: "contactName",
+	mandatory: isMandatory,
+	label: dictionary["itemslisting.NewContactName"],
+	fieldType: "text",
+	dataType: "string",
+	value: item.get('contactName'),
+	autocomplete: true
+} %}
+{{ Field(contactNameField) }}

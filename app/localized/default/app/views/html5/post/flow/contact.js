@@ -5,7 +5,7 @@ var asynquence = require('asynquence');
 var Base = require('../../../../../../common/app/bases/view');
 var config = require('../../../../../../../../shared/config');
 var translations = require('../../../../../../../../shared/translations');
-var EmailValidator = require('../../../../../../../modules/emailValidator');
+var Mailgun = require('../../../../../../../modules/validator/models/mailgun');
 var Metric = require('../../../../../../../modules/metric');
 var statsd = require('../../../../../../../../shared/statsd')();
 var rEmail = /[-0-9a-zA-Z.+_]+@[-0-9a-zA-Z.+_]+\.[a-zA-Z]{2,4}/;
@@ -26,6 +26,10 @@ module.exports = Base.extend({
         'blur [name="email"]': 'onEmailValidate',
         'click .did-you-mean': 'fillEmail',
         'validate': 'onValidate'
+    },
+    initialize: function() {
+        Base.prototype.initialize.apply(this, arguments);
+        this.dictionary = translations.get(this.app.session.get('selectedLanguage'));
     },
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
@@ -86,9 +90,14 @@ module.exports = Base.extend({
         }
     },
     onNeighborhood: function() {
-        var fetch = function(done) {
+        asynquence().or(fail.bind(this))
+            .then(prepare.bind(this))
+            .then(fetch.bind(this))
+            .val(success.bind(this));
+
+        function prepare(done) {
             $('body > .loading').show();
-            this.app.fetch({
+            done({
                 neighborhoods: {
                     collection: 'Neighborhoods',
                     params: {
@@ -98,16 +107,16 @@ module.exports = Base.extend({
                         languageId: this.app.session.get('languages')._byId[this.app.session.get('selectedLanguage')].id
                     }
                 }
-            }, {
+            });
+        }
+
+        function fetch(done, spec) {
+            this.app.fetch(spec, {
                 readFromCache: false
             }, done.errfcb);
-        }.bind(this);
+        }
 
-        var error = function(err) {
-            console.log(err); // TODO: HANDLE ERRORS
-        }.bind(this);
-
-        var success = function(res) {
+        function success(res) {
             $('body > .loading').hide();
             if (res.neighborhoods && res.neighborhoods.length) {
                 this.neighborhoods = res.neighborhoods;
@@ -118,18 +127,18 @@ module.exports = Base.extend({
                 this.existNeighborhoods = false;
                 this.neighborhoodSelected = true;
             }
-        }.bind(this);
+        }
 
-        asynquence().or(error)
-            .then(fetch)
-            .val(success);
+        function fail(err) {
+            console.log(err); // TODO: HANDLE ERRORS
+        }
     },
     onShow: function(event, categoryId) {
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();
 
-        this.parentView.$el.trigger('headerChange', [translations.get(this.app.session.get('selectedLanguage'))['misc.ContactDetails_Mob'], this.id]);
+        this.parentView.$el.trigger('headerChange', [this.dictionary['misc.ContactDetails_Mob'], this.id]);
         this.$el.removeClass('disabled');
     },
     onHide: function(event) {
@@ -150,7 +159,7 @@ module.exports = Base.extend({
             }
         }, this);
         this.$el.addClass('disabled');
-        this.parentView.$el.trigger('contactSubmit', [errors, translations.get(this.app.session.get('selectedLanguage'))['postingerror.InvalidLocation']]);
+        this.parentView.$el.trigger('contactSubmit', [errors, this.dictionary['postingerror.InvalidLocation']]);
     },
     onFieldsChange: function(event) {
         event.preventDefault();
@@ -177,14 +186,14 @@ module.exports = Base.extend({
 
         this.parentView.$el.trigger('flow', [this.id, 'location']);
     },
-    onLocationChange: function(event, error) {
+    onLocationChange: function(event, error, neighborhoodSelected) {
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();
 
         var show = !this.$el.hasClass('disabled');
 
-        this.neighborhoodSelected = true;
+        this.neighborhoodSelected = neighborhoodSelected;
         this.render();
         if (show) {
             this.$el.trigger('show');
@@ -252,7 +261,7 @@ module.exports = Base.extend({
 
             if (!$contactName.val().length) {
                 isValid = false;
-                $contactName.addClass('error').after('<small class="error">' + translations.get(this.app.session.get('selectedLanguage'))['misc.EnterNameForBuyers_Mob'] + '</small>');
+                $contactName.addClass('error').after('<small class="error">' + this.dictionary['misc.EnterNameForBuyers_Mob'] + '</small>');
                 statsd.increment([location, 'posting', 'invalid', this.app.session.get('platform'), 'contactName']);
             }
             done(isValid);
@@ -265,7 +274,7 @@ module.exports = Base.extend({
 
             if ((isPhoneMandatory && $phone.val() === '') || ($phone.val() !== '' && !rPhone.test($phone.val()))) {
                 isValid = false;
-                $phone.addClass('error').after('<small class="error">' + translations.get(this.app.session.get('selectedLanguage'))['misc.PhoneNumberNotValid'] + '</small>');
+                $phone.addClass('error').after('<small class="error">' + this.dictionary['misc.PhoneNumberNotValid'] + '</small>');
             }
             done(isValid);
         }
@@ -276,10 +285,10 @@ module.exports = Base.extend({
 
             if (!rEmail.test($email.val())) {
                 isValid = false;
-                $email.addClass('error').after('<small class="error">' + translations.get(this.app.session.get('selectedLanguage'))['postingerror.InvalidEmail'] + '</small>');
+                $email.addClass('error').after('<small class="error">' + this.dictionary['postingerror.InvalidEmail'] + '</small>');
                 statsd.increment([location, 'posting', 'invalid', this.app.session.get('platform'), 'email']);
             }
-            else if (config.getForMarket(locationUrl, ['validator', 'email', 'enabled'], false)){
+            else if (Mailgun.isEnabled(this.app)){
                 return this.validateEmail({
                     success: function success(data) {
                         done(isValid && data.is_valid);
@@ -297,16 +306,16 @@ module.exports = Base.extend({
         function validateLocation(done, isValid) {
             var $location = this.$('.location').removeClass('error');
 
-            /*if (this.existNeighborhoods) {
+            if (this.existNeighborhoods) {
                 if (!this.neighborhoodSelected) {
                     isValid = false;
-                    $location.addClass('error').after('<small class="error">' + translations.get(this.app.session.get('selectedLanguage'))['countryoptions.SelectANeighborhood'] + '</small>');
+                    $location.addClass('error').after('<small class="error">' + this.dictionary['countryoptions.SelectANeighborhood'] + '</small>');
                     statsd.increment([location, 'posting', 'invalid', this.app.session.get('platform'), 'city']);
                 }
             }
-            else */if (!this.parentView.getItem().getLocation()) {
+            else if (!this.parentView.getItem().getLocation()) {
                 isValid = false;
-                $location.addClass('error').after('<small class="error">' + translations.get(this.app.session.get('selectedLanguage'))['misc.AdNeedsLocation_Mob'] + '</small>');
+                $location.addClass('error').after('<small class="error">' + this.dictionary['misc.AdNeedsLocation_Mob'] + '</small>');
                 statsd.increment([location, 'posting', 'invalid', this.app.session.get('platform'), 'city']);
             }
 
@@ -322,7 +331,7 @@ module.exports = Base.extend({
         if (this.emailValid) {
             this.emailValid = null;
         }
-        this.emailValid = new EmailValidator({
+        this.emailValid = new Mailgun({
             element: $field,
             currentPage: currentPage
 
@@ -360,8 +369,6 @@ module.exports = Base.extend({
             pendingValidation: (category.id === undefined || category.parentId === undefined)
         };
         var isError = '';
-
-        this.dictionary = translations.get(this.app.session.get('selectedLanguage'));
 
         $('small.did-you-mean').remove();
 
