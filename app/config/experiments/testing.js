@@ -2,7 +2,7 @@
 
 module.exports = {
     html4ShowShops: {
-        enabled: true,
+        enabled: false,
         platforms: ['html4'],
         markets: ['ke'],
         name: 'show-shops',
@@ -78,6 +78,17 @@ module.exports = {
         alternatives: {
             CONTROL: 'control',
             HIDE_PHONE_NUMBER: 'hide-phone-number'
+        },
+        autoParticipate: true
+    },
+    dgdMarkVisitedItems: {
+        enabled: false,
+        platforms: ['desktop'],
+        markets: ['sv', 'gt', 'pa'],
+        name: 'dgd-mark-visited-items',
+        alternatives: {
+            CONTROL: 'control',
+            MARK_VISITED_ITEMS: 'mark-visited-items'
         },
         autoParticipate: true
     },

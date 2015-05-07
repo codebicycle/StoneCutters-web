@@ -262,6 +262,7 @@ module.exports = {
         enabled: false
     },
     validator: {
+        enabled: true,
         email: {
             enabled: false,
             platforms: ['html5', 'desktop'],
@@ -269,6 +270,21 @@ module.exports = {
         },
         phone: {
             enabled: false
+        },
+        contactName: {
+            enabled: true
+        },
+        address: {
+            enabled: false
+        },
+        state: {
+            enabled: true
+        },
+        city: {
+            enabled: true
+        },
+        neighborhoods: {
+            enabled: true
         }
     },
     flagItem: {
@@ -313,6 +329,19 @@ module.exports = {
         },
         html5: {
             enabled: false
+        }
+    },
+    safetyTips: {
+        html4: {
+            call: {
+                enabled: false
+            },
+            sms: {
+                enabled: false
+            },
+            email: {
+                enabled: false
+            }
         }
     }
 };

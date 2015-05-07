@@ -16,7 +16,8 @@ module.exports = function(grunt) {
         },
         node: {
             files: ['*.js', 'app/**/*.js', 'server/**/*.js', 'shared/**/*.js', 'grunt/**/*.js', '!translations/**/*', '!app/translations/**/*', '!public/**/*'],
-            tasks: ['jshint:node']
+            tasks: ['jshint:node'],
+            ignore: ['node_modules/**/*']
         },
         utests: {
             files: ['test/unit/**/*.js'],

@@ -159,10 +159,6 @@ module.exports = {
             hermes: {
                 worldwide: true,
                 countries: ['www.olx.es', 'www.olx.ae', 'www.olx.it', 'www.olx.com', 'www.olx.fr', 'www.olx.ir']
-            },
-            safetyTips: {
-                worldwide: false,
-                countries: ['www.olx.co.za', 'www.olx.com.ng', 'www.olx.co.ke']
             }
         },
         desktop: {
@@ -181,6 +177,10 @@ module.exports = {
             landingThanks: {
                 worldwide: false,
                 countries: ['www.olx.com.ar', 'www.olx.com.co','www.olx.co.za']
+            },
+            visitedItems: {
+                worldwide: false,
+                countries: ['www.olx.com.ec', 'www.olx.com.sv', 'www.olx.com.gt', 'www.olx.com.pa', 'www.olx.com.pe']
             }
         }
     },
