@@ -1,98 +1,64 @@
 <ul class="columns">
     <li class="column">
-        <h3 class="column-title">Informacion util</h3>
+        <h3 class="column-title">{{ dictionary["defaultheader.UsefulInformation"] }}</h3>
         <ul class="column-links">
-            <li class="column-item"><a href="" class="text-link">Ayuda y contacto</a></li>
-            <li class="column-item"><a href="" class="text-link">Terminos y condiciones</a></li>
-            <li class="column-item"><a href="" class="text-link">Acerca de OLX</a></li>
+            <li class="column-item"><a rel="nofollow" href="{{ '/help' | link }}" class="text-link" data-increment-metric="zendesk.footer.help">{{ dictionary["misc.ConactHelp"] }}</a></li>
+            {% if isFeaturedCountry %}
+                <li class="column-item"><a rel="nofollow" href="{{ '/featured_listings' | link }}" class="text-link" data-increment-metric="zendesk.footer.how_to_feature">{{ dictionary["featured_listings.HowDoIFeatureMyAd"] }}</a></li>
+            {% endif %}
+            <li class="column-item"><a rel="nofollow" href="{{ '/terms' | link }}" class="text-link" data-increment-metric="zendesk.footer.terms">{{ dictionary["register_form.termsAgreeB"] }}</a></li>
+            <li class="column-item"><a rel="nofollow" href="{{ '/help/about' | link }}" class="text-link" data-increment-metric="zendesk.footer.about">{{ dictionary["defaultfooter.About OLX"] }}</a></li>
         </ul>
     </li>
     <li class="column">
-        <h3 class="column-title">Servicios de OLX</h3>
+        <h3 class="column-title">{{ dictionary["misc.OLXServices"] }}</h3>
         <ul class="column-links">
-            <li class="column-item"><a href="" class="text-link">Publica un aviso gratis</a></li>
-            <li class="column-item"><a href="" class="text-link">Mis avisos</a></li>
-            <li class="column-item"><a href="" class="text-link">Registrarse</a></li>
+            <li class="column-item"><a rel="nofollow" href="{{ '/posting' | link }}" class="text-link" data-increment-metric="zendesk.footer.post">{{ dictionary["misc.PostForFree"] | replace(".", "") }}</a></li>
+            <li class="column-item"><a rel="nofollow" href="{{ '/myads' | link }}" class="text-link" data-increment-metric="zendesk.footer.myads">{{ dictionary["misc.MyAds"] }}</a></li>
+            <li class="column-item"><a rel="nofollow" href="{{ '/register' | link }}" class="text-link" data-increment-metric="zendesk.footer.register">{{ dictionary["loginbox.Register"] }}</a></li>
         </ul>
     </li>
     <li class="column">
-        <h3 class="column-title">OLX cerca tuyo</h3>
+        <h3 class="column-title">{{ dictionary["defaultheader.CloseToYou"] | replace('<<BRAND>>','OLX') }}</h3>
         <ul class="column-links">
             <li class="column-item wide">
-                <a href="#" class="modal-link">Argentina</a>
-                <div class="modal-container">Countries</div>
+                <a href="#" class="modal-link">{{ location.name }}</a>
+                <div class="modal-container">
+                    <header class="modal-header">
+                        <h3 class="modal-title">{{ dictionary["defaultheader.CloseToYou"] | replace('<<BRAND>>','OLX') }}</h3>
+                        <a href="#" class="modal-close icons icon-close" title='{{ dictionary["contactseller_form.Close"] }}'></a>
+                    </header>
+                    {% view 'footer/countries' %}
+                </div>
             </li>
             <li class="column-item wide">
-                <a href="#" class="modal-link">Popular en OLX</a>
-                <div class="modal-container">Popular en OLX</div>
+                <a href="#" class="modal-link">{{ dictionary["popularsearchesbody.PopularOn"] | replace('<<OLX_DOMAIN>>', 'OLX') }}</a>
+                <div class="modal-container">
+                    <header class="modal-header">
+                        <h3 class="modal-title">{{ dictionary["popularsearchesbody.PopularOn"] | replace('<<OLX_DOMAIN>>', 'OLX') }}</h3>
+                        <a href="#" class="modal-close icons icon-close" title='{{ dictionary["contactseller_form.Close"] }}'></a>
+                    </header>
+                    {% view 'footer/popular' %}
+                </div>
             </li>
         </ul>
     </li>
-    <li class="column">
+    <li class="column apps {{ selectedLanguage }}">
         <ul class="column-links">
-            <li class="column-item"><a href="" class="icon-link app-store">Disponible en App Store</a></li>
-            <li class="column-item"><a href="" class="icon-link google-play">Disponible en Google Play</a></li>
+            <li class="column-item"><a class="icon-link app-store {{ selectedLanguage }}" target="_blank" href="https://itunes.apple.com/app/olx-classifieds/id382059698" title='{{ dictionary["mobilepromo.DownloadOlxMobileApp"] | replace("<<BRAND>>", "OLX") | replace("<<MOBILE>>", "IOS") }}' rel="nofollow">{{ dictionary["mobilepromo.DownloadOlxMobileApp"] | replace("<<BRAND>>", "OLX") | replace("<<MOBILE>>", "IOS") }}</a></li>
+            <li class="column-item"><a class="icon-link google-play {{ selectedLanguage }}" target="_blank" href="https://play.google.com/store/apps/details?id=com.olx.olx" title='{{ dictionary["mobilepromo.DownloadOlxMobileApp"] | replace("<<BRAND>>", "OLX") | replace("<<MOBILE>>", "Android") }}' rel="nofollow">{{ dictionary["mobilepromo.DownloadOlxMobileApp"] | replace("<<BRAND>>", "OLX") | replace("<<MOBILE>>", "Android") }}</a></li>
         </ul>
     </li>
 </ul>
 <p class="copyright">{{ dictionary["defaulthtmlhead.FreeClassifiedsInArea"] | replace('<AREA>', '<strong>' + location.name + '</strong>') }} - Copyright &copy; 2006-2015 OLX{{ ', Inc.' if showInc }}</p>
 
-<div class="footer-menu">
-    <div class="footer-navigation">
-        <p class="footer-tab" data-footer-tab >
-            {{ dictionary["popularsearchesbody.PopularOn"] | replace('<<OLX_DOMAIN>>','OLX') }}
-            <span class="icons icon-arrow"></span>
-        </p>
-        <div class="footer-slide-content" data-footer-content >
-            <a title="close" data-footer-slidedown class="icons icon-close" href="#"></a>
-            {% view 'footer/popular' %}
-        </div>
-    </div>
-
-    <div class="footer-navigation">
-        <p class="footer-tab" data-footer-tab >
-            {{ dictionary["defaultheader.CloseToYou"] | replace('<<BRAND>>','OLX') }}
-            <span class="icons icon-arrow"></span>
-        </p>
-        <div class="footer-slide-content" data-footer-content >
-            <a title="close" data-footer-slidedown class="icons icon-close" href="#"></a>
-            {% view 'footer/countries' %}
-        </div>
-    </div>
-
-    <div class="footer-navigation">
-        <p class="footer-tab" data-footer-tab >
-            {{ dictionary["biderrorheader.Help"] }}
-            <span class="icons icon-arrow"></span>
-        </p>
-        <div class="footer-slide-content" data-footer-content >
-            <a title="close" data-footer-slidedown class="icons icon-close" href="#"></a>
-            <div class="title-bar">
-                <h3 class="title">{{ dictionary["biderrorheader.Help"] }}</h3>
-            </div>
-            <ul class="footer-help-slide">
-                <li><a rel="nofollow" href="{{ '/help' | link }}" data-increment-metric="zendesk.footer.help">{{ dictionary["misc.ConactHelp"] }}</a></li>
-                {% if isFeaturedCountry %}
-                    <li><a rel="nofollow" href="{{ '/featured_listings' | link }}" data-increment-metric="zendesk.footer.how_to_feature">{{ dictionary["featured_listings.HowDoIFeatureMyAd"] }}</a></li>
-                {% endif %}
-                <li><a rel="nofollow" href="{{ '/terms' | link }}" data-increment-metric="zendesk.footer.terms">{{ dictionary["register_form.termsAgreeB"] }}</a></li>
-                <li><a rel="nofollow" href="{{ '/help/about' | link }}" data-increment-metric="zendesk.footer.about">{{ dictionary["defaultfooter.About OLX"] }} </a></li>
-            </ul>
-        </div>
-    </div>
-
-    {% include (template + '/marketing/appStores.html') %}
-</div>
-<div class="container">
-    <p class="text">{{ dictionary["defaulthtmlhead.FreeClassifiedsInArea"] | replace('<AREA>',location.name) }}  - Copyright &copy; 2006-2015 OLX{{', Inc' if showInc}}</p>
-    {% if socials %}
-        <ul class="social">
-        {% for social in socials %}
-                <li><a class="icons icon-{{ social.name }}" title="{{ social.name }}" href="{{ social.link }}" rel="nofollow"></a></li>
-        {% endfor %}
-        </ul>
-    {% endif %}
-</div>
+{% if socials %}
+    <ul class="social" style="display: none;">
+    {% for social in socials %}
+        <li><a class="icons icon-{{ social.name }}" title="{{ social.name }}" href="{{ social.link }}" rel="nofollow"></a></li>
+    {% endfor %}
+    </ul>
+{% endif %}
 
 {% if migrationModal %}
     {% view 'modals/migrations' %}

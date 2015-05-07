@@ -13,11 +13,9 @@ module.exports = Base.extend({
     className: 'footer-view',
     firstRender: true,
     events: {
-        'click [data-footer-slidedown]': 'slideDownContent',
-        'click [data-footer-tab]': 'slideFooter',
-        'click [data-footer-content] ul li': 'cleanClases',
         'click [data-modal-shadow], [data-modal-close]': 'onCloseModal',
         'click .modal-link': 'onModalLinkClick',
+        'click .modal-close': 'onModalCloseClick',
         'click [data-increment-metric]': Metric.incrementEventHandler
     },
     getTemplateData: function() {
@@ -58,65 +56,15 @@ module.exports = Base.extend({
         }
         if (this.firstRender) {
             $('body').on('click', function(event){
-                var $slide = this.$('[data-footer-content]');
+                var $openedLink = this.$('.modal-link.active');
+                var $openedModal = $openedLink.next('.modal-container.active');
 
-                if (!$slide.hasClass('open')) {
-                    return;
-                }
-                else if (!$(event.target).closest($slide).length) {
-                    this.slideDownContent(event);
+                if ($openedLink.length && !$(event.target).closest($openedLink.next('.modal-container.active')).length) {
+                    $openedLink.click();
                 }
             }.bind(this));
             this.firstRender = false;
        }
-    },
-    cleanClases: function() {
-        this.$('[data-footer-tab]').removeClass('active');
-        this.$('[data-footer-content].open').removeClass('open').hide();
-    },
-    slideDownContent: function(event) {
-        event.preventDefault();
-        event.stopPropagation();
-        event.stopImmediatePropagation();
-
-        var $slideOpen = this.$('[data-footer-content].open');
-        var $tabs = this.$('[data-footer-tab]');
-
-        $tabs.removeClass('active');
-        $slideOpen.removeClass('open');
-        $slideOpen.slideUp('slow');
-    },
-    slideFooter: function(event) {
-        var $currentTab = $(event.currentTarget);
-        var $currentSlide = $currentTab.siblings('[data-footer-content]');
-        var $tabs = this.$('[data-footer-tab]');
-        var $slides = this.$('[data-footer-content]');
-        var isActive = $currentSlide.hasClass('open');
-
-        $slides.stop(true, true);
-
-        if ($slides.hasClass('open') && !$currentSlide.hasClass('open')) {
-            $slides.filter('.open').slideToggle('slow', function() {
-                $slides.find('.open').toggleClass('open');
-                $tabs.find('.active').removeClass('active');
-                $currentTab.addClass('active');
-                $currentSlide.slideToggle('slow', function() {
-                    $currentSlide.toggleClass('open');
-                });
-            });
-        }
-        else {
-            $currentSlide.slideToggle('slow', function() {
-                if (isActive) {
-                    $currentTab.removeClass('active');
-                    $currentSlide.removeClass('open');
-                }
-                else {
-                    $currentTab.addClass('active');
-                    $currentSlide.addClass('open');
-                }
-            });
-        }
     },
     onCloseModal: function(event) {
         event.preventDefault();
@@ -129,10 +77,29 @@ module.exports = Base.extend({
         event.stopPropagation();
         event.stopImmediatePropagation();
 
+        var $currentSource = this.$('.modal-link.active');
+        var $currentTarget = this.$('.modal-container.active');
         var $source = this.$(event.target);
         var $target = $source.next('.modal-container');
 
+        if (!$source.hasClass('active')) {
+            $currentSource.removeClass('active');
+            $currentTarget.removeClass('active').hide();
+        }
+
         $source.toggleClass('active');
-        $target.slideToggle('slow');
+        $target.toggleClass('active').toggle();
+    },
+    onModalCloseClick: function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+
+        var $origin = this.$(event.target);
+        var $target = $origin.parents('.modal-container');
+        var $source = $target.prev('.modal-link');
+
+        $source.toggleClass('active');
+        $target.toggleClass('active').toggle();
     }
 });
