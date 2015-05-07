@@ -307,14 +307,18 @@ function flow(params, callback) {
         }
 
         function postingController(res) {
+            var postingSession = res.postingSession.get('postingSession');
+            var item = res.item || new Item({}, {
+                app: this.app
+            });
+
+            item.set('postingSession', postingSession);
             this.app.tracking.setPage('desktop_step1');
 
             callback(null, 'post/index', {
                 include: ['item'],
-                item: res.item || new Item({}, {
-                    app: this.app
-                }),
-                postingSession: res.postingSession.get('postingSession'),
+                item: item,
+                postingSession: postingSession,
                 fields: res.fields,
                 cities: res.cities,
                 neighborhoods: res.neighborhoods,
@@ -324,19 +328,25 @@ function flow(params, callback) {
         }
 
         function postingFlowController(res) {
+            var postingSession = res.postingSession.get('postingSession');
+            var item = res.item || new Item({}, {
+                app: this.app
+            });
+
+            item.set('postingSession', postingSession);
             callback(null, 'post/flow/index', {
                 include: ['item', 'fields'],
-                item: res.item || new Item({}, {
-                    app: this.app
-                }),
-                postingSession: res.postingSession.get('postingSession'),
+                item: item,
+                postingSession: postingSession,
                 fields: res.fields
             }, false);
         }
 
         function postingFormController(res) {
+            var postingSession = res.postingSession.get('postingSession');
             var item = res.item;
 
+            item.set('postingSession', postingSession);
             item.set(_.object(_.map(item.get('optionals'), function each(optional) {
                 return optional.name;
             }), _.map(item.get('optionals'), function each(optional) {
@@ -348,9 +358,10 @@ function flow(params, callback) {
             if (item.has('price')) {
                 item.set('priceC', item.get('price').amount);
             }
+
             callback(null, 'post/form', {
                 item: item,
-                postingSession: res.postingSession.get('postingSession'),
+                postingSession: postingSession,
                 form: {
                     values: item.toJSON(),
                     errors: (this.app.session.get('form') || {}).errors
@@ -763,11 +774,12 @@ function edit(params, callback) {
         }.bind(this);
 
         var success = function(_postingSession, _field) {
-            var item = _item.toJSON();
-            var subcategory = this.dependencies.categories.search(item.category.id);
+            var subcategory = this.dependencies.categories.search(_item.get('category').id);
+            var postingSession = _postingSession.get('postingSession');
             var category;
             var parentId;
             var _form;
+            var item;
 
             if (!subcategory) {
                 return error();
@@ -775,6 +787,8 @@ function edit(params, callback) {
             parentId = subcategory.get('parentId');
             category = parentId ? this.dependencies.categories.get(parentId) : subcategory;
 
+            _item.set('postingSession', postingSession);
+            item = _item.toJSON();
             if (!form || !form.values) {
                 _form = {
                     values: item
@@ -790,7 +804,7 @@ function edit(params, callback) {
             callback(null, {
                 item: item,
                 user: user,
-                postingSession: _postingSession.get('postingSession'),
+                postingSession: postingSession,
                 intent: 'edit',
                 fields: _field.attributes.fields,
                 category: category.toJSON(),
