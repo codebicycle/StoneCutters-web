@@ -13,6 +13,7 @@ module.exports = Base.extend({
     parse: parse,
     getUsernameOrEmail: getUsernameOrEmail,
     login: login,
+    autologin: autologin,
     lostpassword: lostpassword,
     register: register,
     registerConfirm: registerConfirm,
@@ -21,6 +22,7 @@ module.exports = Base.extend({
     authenticateWithFacebook: authenticateWithFacebook,
     edit: edit,
     changePassword: changePassword,
+    updatePassword: updatePassword,
     toData: toData
 });
 
@@ -94,6 +96,35 @@ function login(done) {
         if (!this.has('new')) {
             statsd.increment([this.get('country'), 'login', 'error', err.statusCode, this.get('platform')]);
         }
+        this.fail(done)(err);
+    }
+}
+
+function autologin(done) {
+    asynquence().or(fail.bind(this))
+        .then(submit.bind(this))
+        .val(success.bind(this));
+
+    function submit(done, res) {
+        dataAdapter.get(this.app.req, '/users/login', {
+            query: {
+                c: this.get('challenge'),
+                h: this.get('hash')            
+            }
+        }, this.errfcb(done));
+    }
+
+    function success(res, user) {
+        this.set(user);
+        this.app.session.persist({
+            user: user
+        });
+        statsd.increment([this.get('country'), 'autologin', 'success', this.get('platform')]);
+        this.callback(done)();
+    }
+
+    function fail(err) {
+        statsd.increment([this.get('country'), 'autologin', 'error', err.statusCode, this.get('platform')]);
         this.fail(done)(err);
     }
 }
@@ -377,7 +408,7 @@ function changePassword(done) {
     function submit(done) {
         dataAdapter.post(this.app.req, '/users/' + this.get('userId') + '/edit', {
             query: {
-                platform: this.get('platform'),
+                platform: this.app.session.get('platform'),
                 token: this.get('token')
             },
             data: this.toData()
@@ -387,6 +418,42 @@ function changePassword(done) {
             if (err) {
                 body.statusCode = response.statusCode;
                 return done.fail(body);
+            }
+            done(response, body);
+        }
+    }
+
+    function success(response, profile) {
+        statsd.increment([this.get('country'), 'profile', 'password', 'success', this.get('platform')]);
+        this.callback(done)();
+    }
+
+    function fail(err) {
+        statsd.increment([this.get('country'), 'profile', 'password', 'error', err.statusCode, this.get('platform')]);
+        this.fail(done)(err);
+    }
+}
+
+function updatePassword(done) {
+    asynquence().or(fail.bind(this))
+        .then(submit.bind(this))
+        .val(success.bind(this));
+
+    function submit(done) {
+        dataAdapter.post(this.app.req, '/users/' + this.get('userId') + '/updatepassword', {
+            query: {
+                token: this.get('token')
+            },
+            data: this.toData()
+        }, callback);
+
+        function callback(err, response, body) {
+            if (err) {
+                if (body) {
+                    body.statusCode = response.statusCode;
+                    return done.fail(body);
+                }
+                return done.fail(err);
             }
             done(response, body);
         }
