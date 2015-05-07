@@ -4,6 +4,7 @@ module.exports = function userRouter(app) {
     var _ = require('underscore');
     var asynquence = require('asynquence');
     var utils = require('../../shared/utils');
+    var translations = require('../../shared/translations');
     var formidable = require('../modules/formidable');
     var statsd  = require('../modules/statsd')();
     var User = require('../../app/models/user');
@@ -67,6 +68,77 @@ module.exports = function userRouter(app) {
             asynquence().or(error)
                 .then(parse)
                 .then(prepare)
+                .then(submit)
+                .val(success);
+        }
+
+        return handler;
+    }
+
+    function createpassword() {
+        app.post('/createpassword', handler);
+
+        function handler(req, res, next) {
+            var dictionary = translations.get(req.rendrApp.session.get('selectedLanguage'));
+            var user;
+
+            function parse(done) {
+                formidable.parse(req, done.errfcb);
+            }
+
+            function prepare(done, data) {
+                data.newPassword = data.password;
+                delete data.password;
+
+                user = new User(_.extend(data, req.rendrApp.session.get('user'), {
+                    location: req.rendrApp.session.get('siteLocation'),
+                    country: req.rendrApp.session.get('location').abbreviation,
+                    languageId: req.rendrApp.session.get('languageId'),
+                    platform: req.rendrApp.session.get('platform')
+                }), {
+                    app: req.rendrApp
+                });
+                done();
+            }
+
+            function validate(done) {
+                if (user.get('newPassword') !== user.get('confirmPassword')) {
+                    return done.fail([{
+                        selector: 'main',
+                        message: dictionary['register_confirmation.776']
+                    }]);
+                }
+                done();
+            }
+
+            function submit(done) {
+                user.updatePassword(done);
+            }
+
+            function success() {
+                var redirect = 'myolx/myadslisting?createPassword=true';
+
+                res.redirect(utils.link(redirect, req.rendrApp));
+                end();
+            }
+
+            function error(err) {
+                formidable.error(req, '/createpassword', err, user.toJSON(), function redirect(url) {
+                    res.redirect(utils.link(url, req.rendrApp));
+                    end(err);
+                });
+            }
+
+            function end(err) {
+                if (next && next.errfcb) {
+                    next.errfcb(err);
+                }
+            }
+
+            asynquence().or(error)
+                .then(parse)
+                .then(prepare)
+                .then(validate)
                 .then(submit)
                 .val(success);
         }
@@ -347,6 +419,7 @@ module.exports = function userRouter(app) {
         login: login(),
         register: register(),
         lostpassword: lostpassword(),
+        createpassword: createpassword(),
         registerwithConfirmation: registerwithConfirmation(),
         reply: reply()
     };
