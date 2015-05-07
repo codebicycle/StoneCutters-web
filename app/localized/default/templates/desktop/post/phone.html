@@ -1,0 +1,11 @@
+{% from macros import Field %}
+{% set phoneField = {
+    name: "phone",
+    mandatory: isMandatory,
+    label: dictionary["posting_footerlist.phoneNumber"],
+    fieldType: "text",
+    dataType: "string",
+    value: item.get('phone'),
+    autocomplete: true
+} %}
+{{ Field(phoneField) }}
