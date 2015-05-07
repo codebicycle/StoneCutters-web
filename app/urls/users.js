@@ -13,6 +13,12 @@ module.exports = {
     'users#lostpassword': {
         url: 'lostpassword'
     },
+    'users#createpassword': {
+        url: 'createpassword'
+    },
+    'users#autologin': {
+        url: 'myolx/autologin'
+    },
     'users#lostpasswordsuccess': {
         url: 'lostpasswordsuccess'
     },
