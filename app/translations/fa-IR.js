@@ -466,5 +466,9 @@ module.exports = {
     'about.Employees': '\u06A9\u0627\u0631\u06A9\u0646\u0627\u0646',
     'about.Company': '\u0634\u0631\u06A9\u062A',
     'about.Press': '\u0645\u0637\u0628\u0648\u0639\u0627\u062A',
-    'about.Blog': '\u0628\u0644\u0627\u06AF'
+    'about.Blog': '\u0628\u0644\u0627\u06AF',
+    'listingpageitemslisting.Of': '\u0627\u0632',
+    'item.ShareAd': '\u0627\u0634\u062A\u0631\u0627\u06A9 \u06AF\u0630\u0627\u0631\u06CC \u0622\u06AF\u0647\u06CC',
+    'misc.Sort_Mob': '\u0645\u0631\u062A\u0628 \u06A9\u0631\u062F\u0646 ',
+    'mobilepromo.Filters': '\u0641\u06CC\u0644\u062A\u0631\u0647\u0627'
 };
