@@ -50,15 +50,18 @@
         </ul>
     </li>
 </ul>
-<p class="copyright">{{ dictionary["defaulthtmlhead.FreeClassifiedsInArea"] | replace('<AREA>', '<strong>' + location.name + '</strong>') }} - Copyright &copy; 2006-2015 OLX{{ ', Inc.' if showInc }}</p>
-
-{% if socials %}
-    <ul class="social" style="display: none;">
-    {% for social in socials %}
-        <li><a class="icons icon-{{ social.name }}" title="{{ social.name }}" href="{{ social.link }}" rel="nofollow"></a></li>
-    {% endfor %}
+<div class="extra">
+    <p class="copyright">{{ dictionary["defaulthtmlhead.FreeClassifiedsInArea"] | replace('<AREA>', '<strong>' + location.name + '</strong>') }} - Copyright &copy; 2006-2015 OLX{{ ', Inc.' if showInc }}</p>
+    <ul class="social-networks">
+    {% if socials.links %}
+        
+        {% for social in socials.links %}
+            <li class="social-networks-item"><a class="social-network-link icons icon-{{ social.name }}" title="{{ social.name }}" href="{{ social.link }}" rel="nofollow"></a></li>
+        {% endfor %}
+        
+    {% endif %}
     </ul>
-{% endif %}
+</div>
 
 {% if migrationModal %}
     {% view 'modals/migrations' %}
