@@ -41,7 +41,6 @@ function show(params, callback) {
         var newItemPage = helpers.features.isEnabled.call(this, 'newItemPage');
         var anonymousItem;
         var location = this.app.session.get('location');
-        var isSafetyTipsEnabled = helpers.features.isEnabled.call(this, 'safetyTips', platform, location.url);
 
         new Shops(this).evaluate(params);
 
@@ -307,8 +306,7 @@ function show(params, callback) {
                 favorite: favorite,
                 flagged: flagged,
                 sent: params.sent,
-                categories: this.dependencies.categories.toJSON(),
-                isSafetyTipsEnabled: isSafetyTipsEnabled
+                categories: this.dependencies.categories.toJSON()
             });
         }
 
@@ -697,11 +695,10 @@ function safetytips(params, callback) {
         }
 
         function featureValidation(done, _item) {
-            var isEnabled = helpers.features.isEnabled.call(this, 'safetyTips', platform, location.url);
-            var isValidAction = _.contains(['sms', 'call', 'email'], params.intent);
+            var safetyTips = _.contains(['sms', 'call', 'email'], params.intent) && config.getForMarket(location.url, ['safetyTips', platform, params.intent, 'enabled'], false);
             var slug = helpers.common.slugToUrl(_item.toJSON());
 
-            if (!(isEnabled && isValidAction) || (_item.get('phone') === '' && params.intent !== 'email' )) {
+            if (!safetyTips || (_item.get('phone') === '' && params.intent !== 'email' )) {
                 done.abort();
                 return helpers.common.redirect.call(this, ('/' + slug));
             }
@@ -945,13 +942,13 @@ function flag(params, callback) {
         var user = !!this.app.session.get('user');
         var metric = new Metric({}, this);
         var metricValue = [user ? 'auth' : 'anon', !params.flagged ? 'flagging' : 'reflagging'];
-        
+
         metric.increment(['africa', 'item', metricValue]);
 
         done();
     }.bind(this);
 
-    
+
     var success = function() {
         var url = (params.redirect || '/des-iid-' + params.itemId);
         var query = {

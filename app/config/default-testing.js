@@ -158,10 +158,6 @@ module.exports = {
             hermes: {
                 worldwide: true,
                 countries: ['www.olx.es', 'www.olx.ae', 'www.olx.it', 'www.olx.com', 'www.olx.fr', 'www.olx.ir']
-            },
-            safetyTips: {
-                worldwide: false,
-                countries: ['www.olx.co.za', 'www.olx.com.ng', 'www.olx.co.ke']
             }
         },
         desktop: {

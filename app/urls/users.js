@@ -19,6 +19,9 @@ module.exports = {
     'users#autologin': {
         url: 'myolx/autologin'
     },
+    'users#lostpasswordsuccess': {
+        url: 'lostpasswordsuccess'
+    },
     'users#logout': {
         url: 'logout'
     },

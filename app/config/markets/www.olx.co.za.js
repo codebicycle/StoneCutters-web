@@ -469,5 +469,18 @@ module.exports = {
                 delay: 30000
             }
         }
+    },
+    safetyTips: {
+        html4: {
+            call: {
+                enabled: true
+            },
+            sms: {
+                enabled: true
+            },
+            email: {
+                enabled: false
+            }
+        }
     }
 };
