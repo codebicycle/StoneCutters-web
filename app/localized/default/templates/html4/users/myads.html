@@ -6,6 +6,14 @@
         <div class="messages feedback">{{ dictionary["myolx.TheAdHasBeenDeleted"] }}</div>
     </div>
 {% endif %}
+{% if createPassword %}
+    <div id="notification-message" class="notification-message icons icon-check">
+        <img src="{{ '/images/html4/icon-check.png' | static }}" alt="">
+        <h4>{{ dictionary["misc.PasswordNow"] }}</h4>
+        <p>{{ dictionary["misc.ConfidentialPassword"] }}</p>
+    </div>
+{% endif %}
+
 <div id="myads">
     {% if items.length %}
         <ul class="itemListing">

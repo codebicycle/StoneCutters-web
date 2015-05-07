@@ -1,21 +1,21 @@
 'use strict';
 
-var Base = require('../../../../../common/app/bases/view');
 var _ = require('underscore');
+var Base = require('../../../../../common/app/bases/view');
 var config = require('../../../../../../../shared/config');
 
 module.exports = Base.extend({
     className: 'keep-posting',
-
-    getTemplateData: function() {
-        var data = Base.prototype.getTemplateData.call(this);
-        var location = this.app.session.get('location');
-        var categories = config.getForMarket(location.url, ['successPage', 'keepPosting'], '');
-
-        return _.extend({}, data, {
-            keepPostingCat: categories
-        });
-    }
+    getTemplateData: getTemplateData
 });
+
+function getTemplateData() {
+    var data = Base.prototype.getTemplateData.call(this);
+    var keepPostingCat = config.getForMarket(this.app.session.get('location').url, ['successPage', 'keepPosting'], '');
+
+    return _.extend({}, data, {
+        keepPostingCat: keepPostingCat
+    });
+}
 
 module.exports.id = 'post/keepposting';

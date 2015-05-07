@@ -50,7 +50,7 @@ module.exports = {
         wap: ['www.olx.co.za', 'www.olx.ir', 'www.olx.hn'],
         html4: ['www.olx.co.za', 'www.olx.ir', 'www.olx.hn', 'www.olx.co.ke'],
         html5: ['www.olx.ir', 'www.olx.hn'],
-        desktop: ['www.olx.co.za', 'www.olx.com.bo']
+        desktop: ['www.olx.co.za', 'www.olx.com.bo', 'www.olx.com.ar']
     },
     icons: {
         wap: ['www.olx.com.ar', 'www.olx.com.bd', 'www.olx.cm', 'www.olx.com.co', 'www.olx.com.ec', 'www.olx.com.sv', 'www.olx.com.gh', 'www.olx.com.gt', 'www.olx.in', 'www.olx.co.ke', 'www.olx.com.ng', 'www.olx.com.pe', 'www.olx.sn', 'www.olx.co.za', 'www.olx.com.ve', 'www.olx.com.pk', 'www.olx.co.ug', 'www.olx.com.uy', 'www.olx.ir', 'www.olx.com.pa'],
@@ -157,10 +157,6 @@ module.exports = {
             hermes: {
                 worldwide: true,
                 countries: ['www.olx.es', 'www.olx.ae', 'www.olx.it', 'www.olx.com', 'www.olx.fr', 'www.olx.ir']
-            },
-            safetyTips: {
-                worldwide: false,
-                countries: ['www.olx.co.za', 'www.olx.com.ng', 'www.olx.co.ke']
             }
         },
         desktop: {

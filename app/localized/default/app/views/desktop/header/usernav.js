@@ -5,6 +5,7 @@ var Base = require('../../../../../common/app/bases/view').requireView('header/u
 var helpers = require('../../../../../../helpers');
 var asynquence = require('asynquence');
 var Metric = require('../../../../../../modules/metric');
+var Notifications = require('../../../../../../modules/notifications');
 
 module.exports = Base.extend({
 	tagName: 'aside',
@@ -40,14 +41,49 @@ module.exports = Base.extend({
 
         if (user && user.unreadConversationsCount) {
             this.$('.count').text(user.unreadConversationsCount).removeClass('display-none');
+
+            this.sendNotification('/myolx/conversations');
+            
         }
         else if (messages && messages > 0) {
             this.$('.count').text(messages).removeClass('display-none');
             this.$('.notificationsLogout').removeClass('display-none');
+
+            this.sendNotification('/login');
         }
         else {
             this.$('.count').addClass('display-none').empty();
             this.$('.notificationsLogout').addClass('display-none');
         }
+    },
+    sendNotification: function(url) {
+        var showNotification = this.app.session.get('showNotification');
+        var icon;
+        var body;
+
+        if (!showNotification) {
+            return;
+        }
+
+        if (!this.notifications) {
+            this.notifications = new Notifications({}, this);
+        }
+        if(this.notifications.isEnabled() && this.notifications.checkNotifications()) {
+            this.notifications.checkPermission(function callback(status) {
+                if (status === 'granted') {
+                    icon = helpers.common.static.call(this, '/images/common/logo_notification.png');
+
+                    if (showNotification > 1) {
+                        body = 'Tenes ' + showNotification + ' mensajes sin leer.';
+                    }
+                    else {
+                        body = 'Tenes ' + showNotification + ' mensaje sin leer.';
+                    }
+
+                    this.notifications.showNotification('OLX', body, url, icon);
+                }
+            }.bind(this));
+        }
     }
 });
+

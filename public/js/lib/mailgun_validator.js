@@ -42,11 +42,16 @@ function run_validator(address, options) {
         options: options || {},
         success: false
     };
+    var deferred;
 
     if (!check(ctx)) {
         return;
     }
-    $.ajax(prepare(ctx));
+    deferred = $.ajax(prepare(ctx));
+
+    if (ctx.options.always) {
+        deferred.always(ctx.options.always);
+    }
 }
 
 function check(ctx) {
@@ -75,7 +80,7 @@ function check(ctx) {
 }
 
 function prepare(ctx) {
-    var options = _.defaults({}, ctx.options, {
+    var options = _.defaults({}, _.omit(ctx.options, 'always'), {
         type: 'GET',
         url: 'https://api.mailgun.net/v2/address/validate?callback=?',
         data: {
