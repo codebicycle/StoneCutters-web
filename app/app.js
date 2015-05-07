@@ -30,7 +30,9 @@ module.exports = Base.extend({
     },
     start: function() {
         if (!utils.isServer) {
-            this.localstorage = new Localstorage();
+            this.localstorage = new Localstorage({}, {
+                app: this
+            });
             this.sixpack = this.sixpack || new Sixpack({
                 clientId: this.session.get('clientId'),
                 ip: this.session.get('ip'),

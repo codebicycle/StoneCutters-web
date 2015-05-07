@@ -14,7 +14,10 @@ module.exports = {
     register: middlewares(register),
     registersuccess: middlewares(registersuccess),
     login: middlewares(login),
+    autologin: middlewares(autologin),
     lostpassword: middlewares(lostpassword),
+    createpassword: middlewares(createpassword),
+    lostpasswordsuccess: middlewares(lostpasswordsuccess),
     logout: middlewares(logout),
     myolx: middlewares(myolx),
     myads: middlewares(myads),
@@ -124,23 +127,52 @@ function lostpassword(params, callback) {
     function controller() {
         var platform = this.app.session.get('platform');
 
-        if (platform !== 'desktop' && platform !== 'html5') {
+        if (platform === 'wap') {
             return helpers.common.redirect.call(this, '/', null, {
                status: 302
            });
         }
-        if (platform === 'html5' && params.success) {
-            return helpers.common.redirect.call(this, '/login', {
-                sent: true
-            }, {
-                status: 302
-            });
+        else if (params.success) {
+            return helpers.common.redirect.call(this, '/lostpasswordsuccess', null, {
+               status: 302
+           });
         }
 
         callback(null, {
             form: this.form,
             success: params.success
         });
+    }
+}
+
+function createpassword(params, callback) {
+    helpers.controllers.control.call(this, params, {
+        isForm: true
+    }, controller);
+
+    function controller() {
+        var platform = this.app.session.get('platform');
+
+        if (platform === 'wap') {
+            return helpers.common.redirect.call(this, '/');
+        }
+
+        callback(null, {
+            include: ['profile'],
+            form: this.form,
+            profile: _.extend({
+                country: this.app.session.get('location').abbreviation,
+                location: this.app.session.get('location').url
+            }, this.app.session.get('user'))
+        });
+    }
+}
+
+function lostpasswordsuccess(params, callback) {
+    helpers.controllers.control.call(this, params, controller);
+
+    function controller() {
+        callback(null, 'users/lostpasswordsuccess', {});
     }
 }
 
@@ -167,6 +199,74 @@ function login(params, callback) {
             redirect: params.redirect,
             sent: params.sent
         });
+    }
+}
+
+function autologin(params, callback) {
+    helpers.controllers.control.call(this, params, controller);
+
+    function controller() {
+        var platform = this.app.session.get('platform');
+        var user;
+
+        asynquence().or(fail.bind(this))
+            .then(redirect.bind(this))
+            .then(autoLogin.bind(this))
+            .val(success.bind(this));
+
+        function redirect(done) {
+            if (platform === 'wap') {
+                done.abort();
+                return helpers.common.redirect.call(this, '/');
+            }
+            if (this.app.session.get('user')) {
+                var target = params.t ? '/' + params.t : '/';
+
+                done.abort();
+                return helpers.common.redirect.call(this, target, null, {
+                    status: 302
+                });
+            }
+            if (!params.h || !params.c) {
+                done.abort();
+                return helpers.common.redirect.call(this, '/', null, {
+                    status: 302
+                });
+            }
+            done();
+        }
+
+        function autoLogin(done) {
+            user = new User({
+                hash: params.h,
+                challenge: params.c,
+                platform: platform,
+            }, {
+                app: this.app
+            });
+            
+            user.autologin(done);
+        }
+
+        function success() {
+            if (user && params.t) {
+                return helpers.common.redirect.call(this, '/' + params.t, null, {
+                    status: 302
+                });
+            }
+            callback(null, {});
+        }
+
+        function fail(err) {
+            if (_.isArray(err)) {
+                if (err.statusCode === 401 && params.t === 'createpassword') {
+                    return helpers.common.redirect.call(this, '/lostpassword', null, {
+                        status: 302
+                    });        
+                }
+            }
+            return helpers.common.error.call(this, err, null, callback);
+        }
     }
 }
 
@@ -225,6 +325,7 @@ function myads(params, callback) {
         var user = this.app.session.get('user');
         var page = params.page;
         var deleted = params.deleted;
+        var createPassword = params.createPassword;
 
         delete params.deleted;
         asynquence().or(fail.bind(this))
@@ -330,6 +431,7 @@ function myads(params, callback) {
                 include: ['items'],
                 items: items,
                 deleted: deleted,
+                createPassword: createPassword,
                 paginator: items.paginator,
                 isRenewEnabled: isRenewEnabled,
                 isRebumpEnabled: isRebumpEnabled

@@ -1,4 +1,30 @@
 .users_myolx_view {
+    .notification-message {
+        box($greenLight, $greenBorder, 3px, 32px 20px 32px 100px, solid, 1px);
+        clear-fix();
+        margin-bottom: 20px;
+        position: relative;
+        min-height: 50px;
+
+        &.icon-check::before {
+            color: $green;
+            font-size: remify(60px);
+            left: 20px;
+            position: absolute;
+            top: 24px;
+        }
+
+        
+        h4,
+        p {
+            line-height: 1.4;
+            margin: 0;
+        }
+
+        h4 {
+            font-size: $l;
+        }
+    }
     .myolxmenu {
         display: inline-block;
         margin-bottom: 0;

@@ -1,7 +1,6 @@
 {% from macros import Field %}
 
 {% set statesField = {
-    isOptional: "false",
     name: "state",
     mandatory: "true",
     label: dictionary["defaultheader.State"],
@@ -14,8 +13,7 @@
 {{ Field(statesField) }}
 
 {% set citiesField = {
-    isOptional: "false",
-    name: "location",
+    name: "city",
     mandatory: "true",
     label: dictionary["messages_item_page.City"],
     values: cities,
@@ -27,15 +25,14 @@
 {{ Field(citiesField) }}
 
 {% set neighborhoodsField = {
-    isOptional: "false",
     name: "neighborhood",
-    mandatory: "false",
+    mandatory: "true",
     label: dictionary["misc.Neighborhood-1"],
     values: neighborhoods,
     fieldType: "combobox",
     dataType: "select",
-    hide: true,
-    force: true
+    selected: location.neighborhood,
+    hide: "false" if neighborhoods.length > 1 else "true"
 } %}
 
 {{ Field(neighborhoodsField) }}

@@ -44,6 +44,15 @@
 <header class="breadcrumb">
     {{ dictionary["myolx.MyAds"] }}
 </header>
+
+{% if createPassword %}
+    <div id="notification-message" class="notification-message">
+        <span class="icons icon-check"></span>
+        <h4>{{ dictionary["misc.PasswordNow"] }}</h4>
+        <p>{{ dictionary["misc.ConfidentialPassword"] }}</p>
+    </div>
+{% endif %}
+
 <div id="messages" class="hide">
     <span>{{ dictionary["myolx.TheAdHasBeenDeleted"] }}</span>
 </div>

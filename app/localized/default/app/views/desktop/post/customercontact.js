@@ -1,32 +1,34 @@
 
 'use strict';
 
-var Base = require('../../../../../common/app/bases/view').requireView('post/customercontact');
-var helpers = require('../../../../../../helpers');
-var config = require('../../../../../../../shared/config');
 var _ = require('underscore');
+var Base = require('../../../../../common/app/bases/view').requireView('post/customercontact');
+var config = require('../../../../../../../shared/config');
 
 module.exports = Base.extend({
     events: {
-        'click .customer-help-tab': 'onSlideClick'
+        'click .customer-help-tab': onClickSlide
     },
-    getTemplateData: function() {
-        var data = Base.prototype.getTemplateData.call(this);
-        var location = this.app.session.get('location');
-        var customerContact = config.getForMarket(location.url, ['post_customer_contact'], '');
-
-        return _.extend({}, data, {
-            customerContact: customerContact
-        });
-    },
-    onSlideClick: function(event) {
-        event.preventDefault();
-        event.stopPropagation();
-        event.stopImmediatePropagation();
-
-        var $currentTab = $(event.currentTarget);
-        var $slide = $currentTab.parent('.customer-contact-service');
-        $slide.toggleClass('active');
-        $slide.children('icon-arrow').toggleClass('icon-arrow-left icon-arrow');
-    }
+    getTemplateData: getTemplateData
 });
+
+function getTemplateData() {
+    var data = Base.prototype.getTemplateData.call(this);
+    var customerContact = config.getForMarket(this.app.session.get('location').url, ['post_customer_contact'], '');
+
+    return _.extend({}, data, {
+        customerContact: customerContact
+    });
+}
+
+function onClickSlide(event) {
+    event.preventDefault();
+    event.stopPropagation();
+    event.stopImmediatePropagation();
+
+    var $tab = $(event.currentTarget);
+    var $slide = $tab.parent('.customer-contact-service');
+
+    $slide.toggleClass('active');
+    $slide.children('icon-arrow').toggleClass('icon-arrow-left icon-arrow');
+}
