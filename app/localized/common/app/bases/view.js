@@ -3,7 +3,8 @@
 var _ = require('underscore');
 var async = require('async');
 var Base = require('rendr/shared/base/view');
-var localization = require('../../../../../shared/config').get('localization', {});
+var config = require('../../../../../shared/config');
+var localization = config.get('localization', {});
 var translations = require('../../../../../shared/translations');
 var utils = require('../../../../../shared/utils');
 var helpers = require('../../../../helpers');
@@ -49,6 +50,7 @@ module.exports = Base.extend({
         var template = this.app.session.get('template');
         var user = this.app.session.get('user');
         var context = data.context ? data.context.ctx || {} : {};
+        var location = this.app.session.get('location');
 
         return _.extend(context, data, {
             user: user,
@@ -56,7 +58,7 @@ module.exports = Base.extend({
             platform: this.app.session.get('platform'),
             template: template,
             siteLocation: this.app.session.get('siteLocation'),
-            location: this.app.session.get('location'),
+            location: location,
             dictionary: translations.get(this.app.session.get('selectedLanguage')),
             referer: this.app.session.get('referer'),
             url: this.app.session.get('url'),
@@ -72,7 +74,8 @@ module.exports = Base.extend({
             host: this.app.session.get('host'),
             shortHost: this.app.session.get('shortHost'),
             domain: this.app.session.get('domain'),
-            fullDomain: this.app.session.get('fullDomain')
+            fullDomain: this.app.session.get('fullDomain'),
+            layoutOptions: config.getForMarket(location.url, ['layoutOptions'], {})
         });
     },
     track: function(data, callback, options) {

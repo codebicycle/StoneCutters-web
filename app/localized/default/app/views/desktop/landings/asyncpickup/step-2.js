@@ -22,6 +22,13 @@ module.exports = Base.extend({
 
         this.parentView.dimensions = this.$('[name=dimensionsId] option:selected').text();
 
+        this.$el.trigger('track', [{
+            track_page: 'step-' + step,
+            event: 'click-step-' + step,
+            dimensions: this.parentView.dimensions,
+            price: data.price
+        }]);
+
         _.extend(fieldsValidate, {
             itemId: data.itemId,
             price: data.price,
