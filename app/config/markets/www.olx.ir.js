@@ -1,4 +1,8 @@
 module.exports = {
+    layoutOptions: {
+        direction: 'rtl',
+        digits: 'persian'
+    },
     ads: {
         quantity: {
             listing: 27,

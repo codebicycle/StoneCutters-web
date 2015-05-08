@@ -33,10 +33,20 @@ module.exports = Base.extend({
 
         if (this.parentView.enableButton && data.hasinfo === 'form') {
             btn.addClass('disable');
+            this.$el.trigger('track', [{
+                track_page: 'step-' + step,
+                event: 'click-step-' + step,
+                has_buyer: true
+            }]);
             this.parentView.enableButton = false;
             this.parentView.$el.trigger('validateFields', [fieldsValidate, step]);
         }
         else {
+            this.$el.trigger('track', [{
+                track_page: 'step-' + step,
+                event: 'click-step-' + step,
+                has_buyer: false
+            }]);
             _.extend(this.parentView.fields, {
                 contactedBySeller: contactedBySeller
             });
