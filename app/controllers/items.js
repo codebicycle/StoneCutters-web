@@ -993,12 +993,11 @@ function flag(params, callback) {
                 });
             }
             else {
-                helpers.common.redirect.call(
-                    this,
-                    params.redirect || '/des-iid-' + params.id,
-                    { flagged: true },
-                    { status: 302 }
-                );
+                helpers.common.redirect.call(this, params.redirect || '/des-iid-' + params.id, {
+                    flagged: true
+                }, {
+                    status: 302
+                });
             }
         }
 
