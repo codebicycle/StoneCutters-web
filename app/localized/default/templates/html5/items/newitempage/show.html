@@ -3,7 +3,7 @@
         <span class="date">
             {{ item.date.since.day | countFormat if item.date.since.day }}
             {{ dictionary[item.date.since.dictionary] }}
-            {{ (', ' + item.date.since.hour) | countFormat if item.date.since.hour }}
+            {{ (', ' + (item.date.since.hour | countFormat)) if item.date.since.hour }}
             {{ (', '+item.location.cityName) if item.location.cityName }}
         </span>
         <h1>{{ item.title }}</h1>

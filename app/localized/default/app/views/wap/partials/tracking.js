@@ -5,5 +5,5 @@ var Base = require('../../../../../common/app/bases/view').requireView('partials
 
 module.exports = Base.extend({
     tagName: 'tr',
-    attributes: _.extend(this.attributes || {}, {style: 'display: none;'})
+    attributes: _.extend(Base.prototype.attributes || {}, {style: 'display: none;'})
 });
