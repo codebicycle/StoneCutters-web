@@ -6,6 +6,7 @@
 
 		width:980px;
 		margin: auto;
+		padding: 5em 0;
 
 		.search-title {
 
@@ -20,29 +21,84 @@
 
 		.search-form {
 
+			display: table;
 			width: 80%;
 			margin: auto;
-			padding: 3px;
-			border: solid thin #AB0;
+			border: solid 2px $green;
 			border-radius: 3px;
+			background-color: $white;
+
+		}
+
+		.search-cell,
+		.location-cell,
+		.submit-cell {
+
+			display: table-cell;
+
+		}
+
+		.search-cell {
+
+			width: 100%;
 
 		}
 
 		.search-term {
 
+			display: inline-block;
+			height: 30px;
+			padding: 3px 1em;
+			border: none;
+			color: #999;
+			line-height: 30px;
+			vertical-align: middle;
+			border-radius: 3px;
 
+			&:focus {
+				
+				box-shadow(0 0 1px 1px rgba(0, 0, 0, .1));
+			
+			}
 
 		}
 
 		.search-location {
 
+			display: inline-block;
+			height: 26px;
+			padding: 0 36px 0 10px;
+			border-left: solid thin $green;
+			white-space: nowrap;
+			color: #999;
+			line-height: 26px;
+			vertical-align: middle;
 
+			&:before {
+
+				float: left;
+				width: 26px;
+				height: 26px;
+				line-height: 26px;
+				text-align: center;
+				font-size: 1.2em;
+
+			}
 
 		}
 
 		.search-button {
 
+			display: inline-block;
+			vertical-align: middle;
 
+			action-button($green, $white, 0 3px 3px 0, 0);
+			border: none;
+			font-size: $m;
+			height: 38px;
+			line-height: 1;
+			width: 40px;
+			margin: -2px -2px -2px 0;
 
 		}
 
@@ -51,7 +107,7 @@
 	.categories {
 
 		padding: 2em 0;
-		background-color: #CCC;
+		background-color: #DDD;
 
 		.categories-title {
 
@@ -69,7 +125,7 @@
 
 			width: 600px;
 			margin: auto;
-			padding: 1em 0 0;
+			padding: 0;
 			list-style: none;
 
 		}
@@ -79,13 +135,45 @@
 			display: inline-block;
 			width: 50%;
 			box-sizing: border-box;
-			padding: 1em 1em 0 0;
+			padding: 2em 1em 0 0;
 
 		}
 
 		.category-link {
 
+			display: inline-block;
+			overflow: hidden;
+			text-overflow: ellipsis;
 			color: #999;
+			line-height: 2em;
+
+			&:before {
+
+				float: left;
+				margin-right: .25em;
+				font-size: 2em;
+			
+			}
+
+		}
+
+		.category-link-bubble {
+
+			display: inline-block;
+			color: #999;
+			line-height: 3em;
+
+			&:before {
+
+				float: left;
+				margin-right: .25em;
+				padding: .25em;
+				font-size: 2em;
+				border-radius: 100%;
+				color: #CCC;
+				background-color: #999;
+
+			}
 
 		}
 
