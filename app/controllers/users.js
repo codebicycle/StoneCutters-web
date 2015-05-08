@@ -165,6 +165,8 @@ function createpassword(params, callback) {
                 location: this.app.session.get('location').url
             }, this.app.session.get('user'))
         });
+    }
+}
 
 function lostpasswordsuccess(params, callback) {
     helpers.controllers.control.call(this, params, controller);
