@@ -5,9 +5,9 @@
     <div class="pages">
         {% for page in paginator.pages(5) %}
             {% if page.isCurrent %}
-                <strong {{ 'class="last"' if paginator.isLast(page.page) }}>{{ page.page }}</strong>
+                <strong {{ 'class="last"' if paginator.isLast(page.page) }}>{{ page.page | countFormat }}</strong>
             {% else %}
-                <a href="{{ page.url | link }}" {{ ' class="last"' if paginator.isLast(page.page) }}>{{ page.page }}</a>
+                <a href="{{ page.url | link }}" {{ ' class="last"' if paginator.isLast(page.page) }}>{{ page.page | countFormat }}</a>
             {% endif %}
         {% endfor %}
     </div>
