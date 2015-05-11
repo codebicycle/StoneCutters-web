@@ -22,7 +22,8 @@ module.exports = Base.extend({
         var safetyTips = config.getForMarket(location.url, ['safetyTips', platform]);
         data.category_name = this.options.category_name;
 
-        if(sellerProfileEnabled && data.item.user) {
+        if(sellerProfileEnabled && data.item.user && data.item.user.firstActivityDate ) {
+
             if (data.item.user.firstActivityDate.month < 10) {
                 formatMonth = 'messages_date_format.90' + data.item.user.firstActivityDate.month;
             } else {

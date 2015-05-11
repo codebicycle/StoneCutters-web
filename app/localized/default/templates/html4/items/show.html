@@ -42,7 +42,7 @@
             </div>
         {% endif %}
     </div>
-    {% if sellerProfileEnabled and formatMonth %}
+    {% if sellerProfileEnabled %}
         {% include (template + '/items/sellerprofile.html') %}
     {% else %}
         <div class="highlight">{{ dictionary["itemgeneraldetails.User"] }}: {{ item.contactName if item.contactName else dictionary["messages_item_page.57"] }}</div>

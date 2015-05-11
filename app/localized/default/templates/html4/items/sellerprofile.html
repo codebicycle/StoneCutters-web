@@ -4,7 +4,7 @@
     {% elif item.user.username %}
         <h4>{{ item.user.username }}</h4>
     {% endif %}
-    {% if(item.user) %}
+    {% if item.user and formatMonth %}
         <p>
             Registered OLX user since <time>{{ dictionary[formatMonth] }} {{ item.user.firstActivityDate.year }}</time>
         </p>
