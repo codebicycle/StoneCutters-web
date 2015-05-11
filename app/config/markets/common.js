@@ -1,4 +1,8 @@
 module.exports = {
+    layoutOptions: {
+        direction: 'ltr',
+        digits: 'western-arabic'
+    },
     ads: {
         quantity: {
             listing: 27,
@@ -284,7 +288,10 @@ module.exports = {
         }
     },
     flagItem: {
-        enabled: false
+        enabled: false,
+        withReason: {
+            enabled: false
+        }
     },
     userzoom: {
         enabled: false

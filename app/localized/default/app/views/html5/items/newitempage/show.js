@@ -12,7 +12,6 @@ var config = require('../../../../../../../../shared/config');
 var translations = require('../../../../../../../../shared/translations');
 
 module.exports = Base.extend({
-    className: 'items_show_view',
     wapAttributes: {
         cellpadding: 0
     },
@@ -26,7 +25,7 @@ module.exports = Base.extend({
         var showContact = true;
         var location = this.app.session.get('location');
         var flagItem = config.getForMarket(location.url, ['flagItem']);
-        
+
         if (data.item.user !== null && this.app.session.get('user') && this.app.session.get('user').userId === parseInt(data.item.user.id)) {
             showContact = false;
         }
@@ -77,6 +76,10 @@ module.exports = Base.extend({
         'click .flag': 'flag',
         'click .popup-close': 'popupClose',
         'onpopstate window': 'onPopState'
+    },
+    className: function() {
+        var direction = config.getForMarket(this.app.session.get('location').url, ['layoutOptions', 'direction'], {});
+        return 'items_show_view items_show_view_'  + direction ;
     },
     showMessage: function() {
         var $msg = this.$('.msg-resulted');

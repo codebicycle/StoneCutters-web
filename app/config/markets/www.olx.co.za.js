@@ -457,7 +457,10 @@ module.exports = {
         }
     },
     flagItem: {
-        enabled: true
+        enabled: true,
+        withReason: {
+            enabled: false
+        }
     },
     userzoom: {
         enabled: false,

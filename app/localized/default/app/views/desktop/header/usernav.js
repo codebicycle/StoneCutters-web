@@ -58,6 +58,7 @@ module.exports = Base.extend({
     },
     sendNotification: function(url) {
         var showNotification = this.app.session.get('showNotification');
+        var current = this.app.session.get('currentRoute');
         var icon;
         var body;
 
@@ -68,7 +69,7 @@ module.exports = Base.extend({
         if (!this.notifications) {
             this.notifications = new Notifications({}, this);
         }
-        if(this.notifications.isEnabled() && this.notifications.checkNotifications()) {
+        if(this.notifications.isEnabled() && this.notifications.checkNotifications() && current.controller !== 'users' && current.action !== 'conversation') {
             this.notifications.checkPermission(function callback(status) {
                 if (status === 'granted') {
                     icon = helpers.common.static.call(this, '/images/common/logo_notification.png');

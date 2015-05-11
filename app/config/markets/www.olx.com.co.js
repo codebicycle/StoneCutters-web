@@ -41,7 +41,7 @@ module.exports = {
             image: 'home-colombia'
         },
         post_banner: {
-            image: 'post-colombia-woman'
+            image: 'post-colombia-phone'
         },
         videos: [
             {

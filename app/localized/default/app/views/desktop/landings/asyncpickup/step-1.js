@@ -7,9 +7,7 @@ var helpers = require('../../../../../../../helpers');
 module.exports = Base.extend({
     className: 'step-1',
     events: {
-        'click .posting': 'onSubmit',
-        'click [data-viewmore]': 'showDescription',
-        'click .arrow-hide': 'showDescription'
+        'click .posting': 'onSubmit'
     },
     onSubmit: function(event){
         event.preventDefault();
@@ -19,15 +17,6 @@ module.exports = Base.extend({
         var step = $(event.target).data('step');
 
         this.$el.trigger('changeView', [step, 'next']);
-    },
-    showDescription: function(event) {
-        event.preventDefault();
-        event.stopPropagation();
-        event.stopImmediatePropagation();
-
-        this.$('.arrow-hide').fadeToggle();
-        this.$('[data-viewmore]').fadeToggle();
-        this.$('.desc').slideToggle();
     }
 });
 
