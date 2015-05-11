@@ -14,8 +14,11 @@
         <h3 class="column-title">{{ dictionary["misc.OLXServices"] }}</h3>
         <ul class="column-links">
             <li class="column-item"><a rel="nofollow" href="{{ '/posting' | link }}" class="text-link" data-increment-metric="zendesk.footer.post">{{ dictionary["misc.PostForFree"] | replace(".", "") }}</a></li>
-            <li class="column-item"><a rel="nofollow" href="{{ '/myads' | link }}" class="text-link" data-increment-metric="zendesk.footer.myads">{{ dictionary["misc.MyAds"] }}</a></li>
-            <li class="column-item"><a rel="nofollow" href="{{ '/register' | link }}" class="text-link" data-increment-metric="zendesk.footer.register">{{ dictionary["loginbox.Register"] }}</a></li>
+            {% if user %}
+                <li class="column-item"><a rel="nofollow" href="{{ '/myolx/myadslisting' | link }}" class="text-link" data-increment-metric="zendesk.footer.myads">{{ dictionary["misc.MyAds"] }}</a></li>
+            {% else %}
+                <li class="column-item"><a rel="nofollow" href="{{ '/register' | link }}" class="text-link" data-increment-metric="zendesk.footer.register">{{ dictionary["loginbox.Register"] }}</a></li>
+            {% endif %}
         </ul>
     </li>
     <li class="column">
