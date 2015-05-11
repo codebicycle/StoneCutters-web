@@ -138,7 +138,7 @@ module.exports = {
             },
             newItemPage: {
                 worldwide: true,
-                countries: ['www.olx.ir']
+                countries: []
             },
             optimizely: {
                 worldwide: false,
@@ -157,6 +157,10 @@ module.exports = {
             hermes: {
                 worldwide: true,
                 countries: ['www.olx.es', 'www.olx.ae', 'www.olx.it', 'www.olx.com', 'www.olx.fr', 'www.olx.ir']
+            },
+            safetyTips: {
+                worldwide: false,
+                countries: ['www.olx.co.za', 'www.olx.com.ng', 'www.olx.co.ke']
             }
         },
         desktop: {
@@ -179,6 +183,10 @@ module.exports = {
             visitedItems: {
                 worldwide: false,
                 countries: ['www.olx.com.ec', 'www.olx.com.sv', 'www.olx.com.gt', 'www.olx.com.pa', 'www.olx.com.pe']
+            },
+            safetyTipsLanding: {
+                worldwide: false,
+                countries: ['www.olx.com.co']
             }
         }
     },
@@ -380,6 +388,10 @@ module.exports = {
             },
             'www.olx.co.za': {
                 subdomain: 'olxsa'
+            },
+            'www.olx.com.ng': {
+                subdomain: 'olxng',
+                brand_id: 480141
             }
         }
     },

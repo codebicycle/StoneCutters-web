@@ -327,6 +327,9 @@ function onFormRendered(event, editing) {
     }
     if ($city.val()) {
         $city.trigger('change', [options, editing]);
+        if (editing) {
+            $city.removeAttr('disabled');
+        }
     }
     if ($neighborhood.val()) {
         $neighborhood.trigger('change', [_.extend({}, options, {

@@ -65,7 +65,6 @@
             }
             .price {
                 color: #ff7700;
-                float: left;
                 font-size: 22px;
                 font-weight: 700;
                 line-height: 1;
@@ -149,18 +148,15 @@
                 color: #fff;
                 display: inline-block;
                 width: 100%;
+                padding: 10px;
                 span {
                     display: block;
                     font-size: 12px;
-                    margin: 0 0 2px 10px;
-                    &:last-child {
-                        margin: 0 10px 10px 10px;
-                    }
+                    margin-top: 3px;
                 }
                 strong {
                     display: block;
                     font-size: 14px;
-                    margin: 10px 10px 3px 10px;
                 }
             }
         }
@@ -442,13 +438,14 @@
 
 
     /*----Slide comon css----*/
-    .swiper-container{
+    .swiper-container {
         -moz-backface-visibility:hidden;
         -ms-backface-visibility:hidden;
         -o-backface-visibility:hidden;
         -webkit-backface-visibility:hidden;
         /* Fix of Webkit flickering */
         backface-visibility:hidden;
+        direction: ltr;
         margin:0 auto;
         overflow:hidden;
         position:relative;
@@ -508,7 +505,10 @@
     .galCont {position: fixed; top: 0; right: 0; bottom: 0; left: 0; z-index: 100; display: none; width: 100%; height: 100%; background: #000;}
 
     /*----Visible----*/
-    .galCont.visible {display: block;}
+    .galCont.visible {
+        display: block;
+        direction: ltr;
+    }
     .swiper-container-gal, .swiper-container-gal .swiper-slide {width: 100%; height: 100%;}
     .galCont .title{
         -moz-box-sizing: border-box;
@@ -717,6 +717,55 @@
         display: block;
     }
 
+}
+.items_show_view_rtl {
+    section {
+        &.nav {
+            .links {
+                a {
+                    &.first {
+                        background: transparent url("/images/html5/flecha_home.png") no-repeat right center;
+                    }
+                    &.second {
+                        background: transparent url("/images/html5/flecha_home_left.png") no-repeat left center;
+                        display: block;
+                        float: left;
+                    }
+                }
+
+                &.twice {
+                    a:first-child {
+                        border-left: 1px solid #178cc8;
+                        border-right: none;
+                        display: block;
+                        float: right;
+                    }
+                }
+
+            }
+        }
+        &.optionals {
+            ul {
+                float: right;
+            }
+        }
+        &.actions {
+            .action {
+                float: right;
+
+                .separator {
+                    right: inherit;
+                    float: right;
+                    left: 1px;
+                }
+                &.call {
+                    .separator {
+                        left: 0;
+                    }
+                }
+            }
+        }
+    }
 }
 @media (max-width : 373px) {
     .contentshare {
