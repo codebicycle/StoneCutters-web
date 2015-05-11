@@ -183,6 +183,10 @@ module.exports = {
             visitedItems: {
                 worldwide: false,
                 countries: ['www.olx.com.ec', 'www.olx.com.sv', 'www.olx.com.gt', 'www.olx.com.pa', 'www.olx.com.pe']
+            },
+            safetyTipsLanding: {
+                worldwide: false,
+                countries: ['www.olx.com.co']
             }
         }
     },
