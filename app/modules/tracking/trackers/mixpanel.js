@@ -11,7 +11,7 @@ function isPlatformEnabled(platforms) {
 
 function isEnabled() {
     var location = this.app.session.get('location');
-    var enabled = config.getForMarket(location.url, ['tracking', 'trackers', 'mixpanel', 'enabled'], true);
+    var enabled = config.getForMarket(location.url, ['tracking', 'trackers', 'mixpanel', 'enabled'], false);
 
     if (enabled) {
         enabled = isPlatformEnabled.call(this, config.getForMarket(location.url, ['tracking', 'trackers', 'mixpanel', 'platforms']));
@@ -20,11 +20,26 @@ function isEnabled() {
 }
 
 function getParams() {
-    var environment = config.get(['environment', 'type']);
-    return utils.get(configTracking, ['mixpanel', 'enviroment', environment], []);
+    return utils.get(configTracking, ['mixpanel', 'enviroment', config.get(['environment', 'type'])], []);
+}
+
+function track(eventName, properties) {
+    if (utils.isServer || !window.mixpanel || !eventName) {
+        return;
+    }
+    var location = this.app.session.get('location');
+    var userStatus = !!this.app.session.get('user');
+
+    _.extend(properties, {
+        '$city': 'Lanus',
+        'Logged in' : +userStatus
+    });
+    console.log(properties, this.app.session.get('shortHost'));
+    //window.mixpanel.track(eventName, properties || {});
 }
 
 module.exports = {
     isEnabled: isEnabled,
-    getParams: getParams
+    getParams: getParams,
+    track: track
 };
