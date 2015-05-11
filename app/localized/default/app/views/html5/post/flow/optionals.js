@@ -159,8 +159,30 @@ module.exports = Base.extend({
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();
+        
+        if (this.validate()) {
+            this.parentView.$el.trigger('flow', [this.id, '']);
+        }
+    },
+    validate: function() {
+        var validationResults = true;
+        
+        this.$el.removeClass('error').find('small').remove();
+        
+        _.each(this.parentView.getFields().categoryAttributes, function each(field, i) {
+           var $field = this.$('[name="'+field.name+'"]');
+            if (field.mandatory === 'true') {
+                this.$el.trigger('hideError', [$field]);            
+                if (!$field.val()) {
+                    validationResults = false;
+                    this.$el.addClass('error');
+                    $field.addClass('error').after('<small class="error">' + translations.get(this.app.session.get('selectedLanguage'))['postingerror.PleaseCompleteThisField'] + '</small>');
+                }
+            }
+        }, this);
+        console.log(validationResults);
 
-        this.parentView.$el.trigger('flow', [this.id, '']);
+        return validationResults;
     }
 });
 
