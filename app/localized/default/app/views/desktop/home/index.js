@@ -12,6 +12,18 @@ module.exports = Base.extend({
 	events: {
         'submit .search-form': 'onSearchSubmit'
     },
+    postRender: function() {
+        this.app.router.once('action:end', this.onStart);
+        this.app.router.once('action:start', this.onEnd);
+    },
+    onStart: function(event) {
+        this.appView.trigger('header:hide');
+        this.appView.trigger('footer:hide');
+    },
+    onEnd: function(event) {
+        this.appView.trigger('header:show');
+        this.appView.trigger('footer:show');
+    },
     onSearchSubmit: function(event) {
         event.preventDefault();
         event.stopPropagation();

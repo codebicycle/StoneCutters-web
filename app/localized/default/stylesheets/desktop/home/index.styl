@@ -14,7 +14,7 @@
 			margin: auto;
 			padding-bottom: .25em;
 			font-weight: normal;
-			font-size: $xl;
+			font-size: $l;
 			color: #999;
 
 		}
@@ -23,10 +23,10 @@
 
 			display: table;
 			width: 80%;
+			height: 34px;
 			margin: auto;
 			border: solid 2px $green;
-			border-radius: 3px;
-			background-color: $white;
+			border-radius: 4px;
 
 		}
 
@@ -44,42 +44,44 @@
 
 		}
 
+		.location-cell {
+
+			position: relative;
+
+		}
+
 		.search-term {
 
-			display: inline-block;
-			height: 30px;
-			padding: 3px 1em;
+			box-sizing: border-box;
+			width: 100%;
+			height: 34px;
+			padding: 5px 10px;
 			border: none;
 			color: #999;
-			line-height: 30px;
+			line-height: 34px;
 			vertical-align: middle;
-			border-radius: 3px;
-
-			&:focus {
-				
-				box-shadow(0 0 1px 1px rgba(0, 0, 0, .1));
-			
-			}
+			border-radius: 4px;
+			background-color: transparent;
 
 		}
 
 		.search-location {
 
 			display: inline-block;
-			height: 26px;
-			padding: 0 36px 0 10px;
+			height: 24px;
+			padding: 0 34px 0 2px;
 			border-left: solid thin $green;
 			white-space: nowrap;
 			color: #999;
-			line-height: 26px;
+			line-height: 24px;
 			vertical-align: middle;
 
 			&:before {
 
 				float: left;
-				width: 26px;
-				height: 26px;
-				line-height: 26px;
+				width: 24px;
+				height: 24px;
+				line-height: 24px;
 				text-align: center;
 				font-size: 1.2em;
 
@@ -92,7 +94,7 @@
 			display: inline-block;
 			vertical-align: middle;
 
-			action-button($green, $white, 0 3px 3px 0, 0);
+			action-button($green, $white, 0 4px 4px 0, 0);
 			border: none;
 			font-size: $m;
 			height: 38px;

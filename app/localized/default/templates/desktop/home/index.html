@@ -6,14 +6,17 @@
 		</div>
 		<div class="location-cell">
 			<a href="#" class="search-location icons icon-pin">{{ (location.current.name + ', ') if location.current }}{{ location.name }}</a>
+
+			<ul class="states-list" style="display: none;">
+			{% for state in states %}
+				<li>{{ state.name }}</li>
+			{% endfor %}
+			</ul>
+
 		</div>
 		<div class="submit-cell">
 			<button type="submit" class="search-button icons icon-search" />
 		</div>
-
-		<!--<input type="text" name="search" class="search-term" placeholder='{{ dictionary["defaultheader.WhatAreYouLookingFor"] }}' value="{{ search }}" />
-		<a href="#" class="search-location icons icon-pin">{{ (location.current.name + ', ') if location.current }}{{ location.name }}</a>
-        <button type="submit" class="search-button icons icon-search" />-->
 	</form>
 </section>
 <section class="categories">

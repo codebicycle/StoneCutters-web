@@ -35,7 +35,9 @@ module.exports = Base.extend({
     },
     postRender: function() {
         this.app.router.appView.on('posting:start', this.onPostingStart.bind(this));
-        this.app.router.appView.on('posting:end', this.onPostingEnd.bind(this));        
+        this.app.router.appView.on('posting:end', this.onPostingEnd.bind(this));
+        this.app.router.appView.on('header:hide', this.onHeaderHide.bind(this));
+        this.app.router.appView.on('header:show', this.onHeaderShow.bind(this));
     },
     onPostClick: function() {
         var currentRoute = this.app.session.get('currentRoute');
@@ -55,5 +57,11 @@ module.exports = Base.extend({
     toggleElements: function(flag) {
         this.$el.find('.posting, .search-form').toggleClass('disabled', !flag);
         this.$el.find('.posting-title').toggleClass('disabled', flag);
+    },
+    onHeaderHide: function() {
+        this.$el.hide();
+    },
+    onHeaderShow: function() {
+        this.$el.show();
     }
 });

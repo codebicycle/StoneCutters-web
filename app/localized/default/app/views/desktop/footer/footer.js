@@ -67,7 +67,9 @@ module.exports = Base.extend({
                 }
             }.bind(this));
             this.firstRender = false;
-       }
+        }
+        this.app.router.appView.on('footer:hide', this.onFooterHide.bind(this));
+        this.app.router.appView.on('footer:show', this.onFooterShow.bind(this));
     },
     cleanClases: function() {
         this.$('[data-footer-tab]').removeClass('active');
@@ -122,5 +124,11 @@ module.exports = Base.extend({
         event.stopPropagation();
         event.stopImmediatePropagation();
         $('#migrations-modal').trigger('hide');
+    },
+    onFooterHide: function() {
+        this.$el.hide();
+    },
+    onFooterShow: function() {
+        this.$el.show();
     }
 });
