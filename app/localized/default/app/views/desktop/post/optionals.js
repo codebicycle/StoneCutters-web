@@ -12,6 +12,7 @@ module.exports = Base.extend({
     className: 'posting-optionals-view',
     events: {
         'change': onChange,
+        'validate': onValidate,
         'fieldsChange': onFieldsChange
     },
     initialize: initialize,
@@ -56,8 +57,8 @@ function onChange(event) {
     event.stopImmediatePropagation();
 
     var $field = $(event.target);
+    this.$el.trigger('hideError', [$field]);
     var $firstOption = $field.find('option').first();
-
     if ($field.data('related')) {
         this.getRelatedFieldValues($field.data('related'), $field.val());
     }
@@ -65,6 +66,30 @@ function onChange(event) {
         $firstOption.remove();
     }
     this.parentView.$el.trigger('fieldSubmit', [$field]);
+}
+
+function onValidate(event, done, isValid) {
+    event.preventDefault();
+    event.stopPropagation();
+    event.stopImmediatePropagation();
+    
+    var validationsResults = true;
+
+    _.each(this.fields || [], function each(field) {
+        
+        var $field = this.$('[name="'+field.name+'"]');
+        
+        if (field.mandatory === 'true') {
+            this.$el.trigger('hideError', [$field]);            
+            if (!$field.val()) {
+                validationsResults = false;
+                this.$el.trigger('showError', [$field, {
+                    message: 'postingerror.PleaseCompleteThisField'
+                }]);
+            }
+        }
+    }, this);
+    done(isValid && validationsResults);
 }
 
 function onFieldsChange(event, fields) {
