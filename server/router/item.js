@@ -1,4 +1,4 @@
-'use strict';
+ 'use strict';
 
 module.exports = function(app, dataAdapter) {
     var _ = require('underscore');
@@ -12,6 +12,9 @@ module.exports = function(app, dataAdapter) {
     var User = require('../../app/models/user');
     var Item = require('../../app/models/item');
     var translations = require('../../shared/translations');
+    var config = require('../config');
+    var configClient = require('../../shared/config');
+    var util = require('util');
 
     (function reply() {
         app.post('/items/:itemId/reply', handler);
@@ -416,6 +419,96 @@ module.exports = function(app, dataAdapter) {
                 .then(parse)
                 .then(prepare)
                 .then(remove)
+                .val(success);
+        }
+    })();
+
+    (function flagItem() {
+        app.post('/items/:itemId/flag', handler);
+
+        function handler(req, res, next) {
+            var location = req.rendrApp.session.get('location').location;
+            var dictionary = translations.get(req.rendrApp.session.get('selectedLanguage'));
+            var itemId = req.param('itemId', null);
+            var report = null;
+
+            function parse(done) {
+                formidable.parse(req, done.errfcb);
+            }
+
+            function configure(done, data) {
+                var zendesk;
+
+                zendesk = _.defaults({}, config.get(['emails', 'zendesk', location], {}), config.get(['emails', 'zendesk', 'default']));
+                zendesk = _.defaults({}, configClient.get(['mails', 'zendesk', location], {}), zendesk);
+
+                report = data;
+
+                done(zendesk);
+            }
+
+            function prepare(done, zendesk) {
+                var from = 'Reported Item';
+                var email = 'reporteditem@olx.com';
+                var subject = util.format("[Reported item] Reason: %s - Item id: %s", report.reason, itemId);
+                var body = util.format("Item id: %s\nReason: %s\nDescription: %s\n", itemId, report.reason, report.description);
+
+                var ticket = {
+                    requester: {
+                        name: from,
+                        email: email
+                    },
+                    subject:subject,
+                    comment: {
+                        public: true,
+                        body: body
+                    }
+                };
+
+                if (zendesk.brand_id) {
+                    ticket.brand_id = zendesk.brand_id;
+                }
+                done(zendesk, ticket);
+            }
+
+            function submit(done, zendesk, ticket) {
+                restler.post('https://' + zendesk.subdomain + '.zendesk.com/api/v2/tickets.json', {
+                    data: {
+                        ticket: ticket
+                    },
+                    username: zendesk.email,
+                    password: zendesk.password
+                })
+                .on('success', function onSuccess(data) {
+                    done();
+                })
+                .on('fail', function onFail(err, resp) {
+                    done.fail([{
+                        selector: 'reason',
+                        message: dictionary['postingerror.ThereWasAnErrorTryingToFulfillYourRequest']
+                    }]);
+                });
+            }
+
+            function success() {
+                var url = 'items/' + itemId + '/flag/success';
+
+                res.redirect(utils.link(url, req.rendrApp));
+            }
+
+            function error(err) {
+                var url = req.headers.referer || '/items/' + itemId + '/flag';
+
+                formidable.error(req, url.split('?').shift(), err, report, function redirect(url) {
+                    res.redirect(utils.link(url, req.rendrApp));
+                });
+            }
+
+            asynquence().or(error)
+                .then(parse)
+                .then(configure)
+                .then(prepare)
+                .then(submit)
                 .val(success);
         }
     })();
