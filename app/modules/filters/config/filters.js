@@ -29,7 +29,10 @@ module.exports = {
         type: 'SELECT'
     },
     carmodel: {
-        type: 'SELECT'
+        type: 'SELECT',
+        options: {
+            separator: ' OR '
+        }
     },
     optionals: {
         type: 'SELECT'
