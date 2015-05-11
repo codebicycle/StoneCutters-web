@@ -29,6 +29,9 @@ module.exports = {
     'items#flag': {
         url: 'items/{{itemId}}/flag'
     },
+    'items#flagsuccess': {
+        url: 'items/{{itemId}}/flag/success'
+    },
     'items#safetytips': {
         url: 'iid-{{itemId}}/?:intent?'
     }
