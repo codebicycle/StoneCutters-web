@@ -90,6 +90,7 @@ function getTemplateData() {
         item: this.getItem(data.item),
         customerContact: customerContact,
         chatEnabled: Chat.isEnabled.call(this),
+        chatDepartment: Chat.getDepartment.call(this),
         experiments: this.getItem().has('id') || sixpackCurrentAlternative.indexOf('control') != -1 ? {} : this.app.sixpack.experiments
     });
 }
