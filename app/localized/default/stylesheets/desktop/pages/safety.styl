@@ -1,0 +1,211 @@
+.pages_safety_view {
+
+    overflow: hidden;
+
+    .left {
+        float: left;
+    }
+
+    .right {
+        float: right;
+    }
+
+    .safety-tips {
+        width: 980px;
+        margin: 0 auto;
+        background: #e4e4e4;
+    }
+
+    .safety-tips a {
+        display: block;
+        text-decoration: none;
+    }
+
+    .banner-safety-tips {
+        width: 980px;
+        height: 380px;
+        margin: 0 auto;
+        background-image: url(imageUrl/images/desktop/safety/co/slider-4.jpg);
+    }
+
+    .banner-safety-tips h3 {
+        font-family: 'HelveticaRoundedLTStd-Bd';
+        font-size: 44px;
+        padding: 130px 0 0 0;   
+        text-align: center;
+        color: #fff;
+        text-shadow: 3px 3px 5px #000;
+        margin: 0;
+    }
+
+    .banner-safety-tips p {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 28px;
+        padding: 24px 0 0 0;    
+        text-align: center;
+        color: #fff;
+        text-shadow: 3px 3px 5px #000;
+        margin: 0;
+        line-height: 28px;
+    }
+
+    .st-panel-heading {
+        height: 70px;
+    }
+
+    .st-title-ico {
+        position: relative;
+        float: left;
+    }
+
+    .st-title-ico-box-1 {
+        background: #00bec4;
+    }
+
+    .st-title-1 {
+        background: #009b97; 
+    }
+        
+    .st-title-ico-box-2 {
+        background: #ba2581;
+    }
+
+    .st-title-2 {
+        background: #692a7d; 
+    }
+        
+    .st-title-ico-box-3 {
+        background: #00b305;
+    }
+
+    .st-title-3 {
+        background: #2e9425; 
+    }
+        
+    .st-title-ico-box-4 {
+        background: #ffb438;
+    }
+
+    .st-title-4 {
+        background: #ff7827; 
+    }
+        
+    .st-title-ico-box-5 {
+        background: #0092d3;
+    }
+
+    .st-title-5 {
+        background: #0066b2; 
+    }
+
+    .st-title {
+        width: 100%;
+        height: 70px;
+        color: #fff;
+    }
+
+    .st-title h4 {
+        font-family: 'HelveticaRoundedLTStd-Bd';
+        font-size: 18px;
+        padding: 28px 0 0 100px;
+        color: #fff;
+        margin: 0;
+    }
+
+    .st-panel-group {
+        padding: 40px 0 40px 0;
+        margin: 0 0 0 110px;
+        float: left;
+    }
+
+    .st-panel {
+        width: 760px;
+        float: left;
+    }
+
+    .st-panel-body {
+        background: #fff;
+        padding: 40px 0 0 0;
+
+        &.off {
+            display: none;
+        }
+    }
+
+    .st-panel-body ul {
+        background: #fff;
+        margin: 0;
+        float: left;
+        width: 100%;
+        box-sizing: border-box
+    }
+
+    .st-panel-body li {
+        padding: 20px 0 0 0;
+        list-style: none;
+        -webkit-transform-style: preserve-3d;
+        -moz-transform-style: preserve-3d;
+        transform-style: preserve-3d;
+        width: 100%;
+        float: left;
+    }
+
+    .st-panel-body img {
+        position: relative;
+        top: 50%;
+        transform: translateY(-50%);
+        float: left;
+        margin-right: 40px;
+    }
+
+    .st-panel-body p {
+        position: relative;
+        top: 50%;
+        transform: translateY(-50%);
+        max-width: 660px;
+        text-align: justify;
+    }
+
+    .safety-tips-collapse-group {
+        float: left;
+        background: #e4e4e4;
+    }
+
+    .st-title-ico img {
+        display: block;
+        width: 70px;
+        height: 70px;
+    }
+
+    /* Arrow */
+
+    .st-title h4 {
+        position: relative;
+    }
+
+    a .st-title h4:after {
+        display: block;
+        content: '';
+        background: url(imageUrl/images/desktop/safety/co/arrow-up.png) no-repeat center;
+        position: absolute;
+        width: 20px;
+        height: 15px;
+        right: 30px;
+        top: 28px;
+        -webkit-transform: rotateX(0);
+        -ms-transform: rotateX(0);
+        -o-transform: rotateX(0);
+        transform: rotateX(0);
+        -webkit-transition: .5s ease all;
+        -o-transition: .5s ease all;
+        transition: .5s ease all;
+    }
+
+    a.collapsed .st-title h4:after {
+        -webkit-transform: rotateX(180deg);
+        -ms-transform: rotateX(180deg);
+        -o-transform: rotateX(180deg);
+        transform: rotateX(180deg);
+    }
+
+}
