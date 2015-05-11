@@ -95,8 +95,9 @@ function getTemplateData() {
 }
 
 function postRender() {
-    var category;
-    var subcategory;
+    var categoryId;
+    var subcategoryId;
+    var parentCategory;
 
     $(window).on('beforeunload', onBeforeUnload);
     this.app.router.once('action:end', onStart);
@@ -118,18 +119,21 @@ function postRender() {
         this.$(this.selectors.contact).trigger('formRendered', [this.editing]);
     }
     else {
-        category = utils.getUrlParam('cat');
-        subcategory = utils.getUrlParam('subcat');
-        if (category || subcategory) {
-            if (!category) {
-                subcategory = this.app.dependencies.categories.search(subcategory);
-                category = subcategory.get('parentId');
-                subcategory = subcategory.get('id');
+        categoryId = utils.getUrlParam('cat');
+        subcategoryId = utils.getUrlParam('subcat');
+        if (categoryId || subcategoryId) {
+            if (!categoryId) {
+                parentCategory = this.app.dependencies.categories.search(subcategoryId);
+                if (parentCategory) {
+                    categoryId = parentCategory.get('parentId');
+                }
             }
-            this.$(this.selectors.categories).trigger('getQueryCategory', {
-                parentCategory: category,
-                subCategory: subcategory
-            });
+            if (categoryId) {
+                this.$(this.selectors.categories).trigger('getQueryCategory', {
+                    parentCategory: categoryId,
+                    subCategory: subcategoryId
+                });
+            }
         }
 
         if (this.isValid === undefined || this.isValid === null) {
