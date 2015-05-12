@@ -180,7 +180,6 @@ module.exports = Base.extend({
                 }
             }
         }, this);
-        console.log(validationResults);
 
         return validationResults;
     }
