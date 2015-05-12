@@ -239,6 +239,7 @@ module.exports = {
     },
     chat: {
         enabled: true,
+        department: 80801,
         sections: {
             'post#flow': {
                 enabled: true

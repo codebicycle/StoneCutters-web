@@ -13,6 +13,13 @@ function isEnabled() {
     return enabled;
 }
 
+function getDepartment() {
+    var location = this.app.session.get('location');
+
+    return config.getForMarket(location.url, ['chat', 'department'], false);
+}
+
 module.exports = {
-    isEnabled: isEnabled
+    isEnabled: isEnabled,
+    getDepartment: getDepartment
 };
