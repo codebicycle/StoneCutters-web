@@ -158,9 +158,9 @@ module.exports = {
                 worldwide: true,
                 countries: ['www.olx.es', 'www.olx.ae', 'www.olx.it', 'www.olx.com', 'www.olx.fr', 'www.olx.ir']
             },
-            safetyTips: {
+            sellerProfile: {
                 worldwide: false,
-                countries: ['www.olx.co.za', 'www.olx.com.ng', 'www.olx.co.ke']
+                countries: ['www.olx.com.ng']
             }
         },
         desktop: {

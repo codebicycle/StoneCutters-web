@@ -254,6 +254,7 @@ module.exports = {
     },
     chat: {
         enabled: true,
+        department: 81143,
         sections: {
             'categories#list': {
                 enabled: true
