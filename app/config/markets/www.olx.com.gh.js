@@ -42,9 +42,6 @@ module.exports = {
             },
             sms: {
                 enabled: true
-            },
-            email: {
-                enabled: false
             }
         }
     }
