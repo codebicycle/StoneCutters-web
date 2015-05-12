@@ -1,7 +1,7 @@
 window.BrowserDetect = {
     init: function () {
         this.browser = this.searchString(this.dataBrowser) || '';
-        this.version = this.searchVersion(navigator.userAgent) || this.searchVersion(navigator.appVersion) || '';
+        this.version = this.searchVersion(navigator.userAgent) || this.searchVersion(navigator.appVersion || '') || '';
         this.browsername = this.browser + this.version;
     },
     searchString: function(data) {
