@@ -52,6 +52,7 @@ module.exports = Base.extend({
             selectedLanguage: selectedLanguage,
             marketing: marketing,
             chatEnabled: Chat.isEnabled.call(this),
+            chatDepartment: Chat.getDepartment.call(this),
             currentState: {
                 hostname: currentState.hostname,
                 name: currentState.name
