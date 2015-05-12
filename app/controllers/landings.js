@@ -173,7 +173,7 @@ function asyncseller(params, callback) {
                     track_page: 'seller-landing',
                     platform: platform,
                     itemId: params.itemId,
-                    email: params.email,
+                    user_email: params.email,
                     t: Math.ceil((_.now() / 1000))
                 }
             }, {
