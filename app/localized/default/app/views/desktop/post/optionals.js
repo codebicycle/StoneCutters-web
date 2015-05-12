@@ -57,8 +57,9 @@ function onChange(event) {
     event.stopImmediatePropagation();
 
     var $field = $(event.target);
-    this.$el.trigger('hideError', [$field]);
     var $firstOption = $field.find('option').first();
+    
+    this.$el.trigger('hideError', [$field]);
     if ($field.data('related')) {
         this.getRelatedFieldValues($field.data('related'), $field.val());
     }
