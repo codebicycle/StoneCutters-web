@@ -1,13 +1,14 @@
-<div class="title-bar">
-    <h3 class="title">{{ dictionary["defaultheader.CloseToYou"] | replace('<<BRAND>>','OLX') }}</h3>
+<div class="modal-section">
+    <div class="modal-columns">
+		{% set columns = ((countries.length / 6) | round(0, 'ceil')) %}
+		{% for country in countries %}
+			{% if loop.first or loop.index % columns == 1 %}
+				<ul class="modal-column">
+			{% endif %}
+					<li class="modal-column-item"><a href="{{ ('http://' + country.url) }}" class="modal-column-link" title="{{ country.name }}">{{ country.name }}</a></li>
+			{% if loop.last or loop.index % columns == 0 %}
+				</ul>
+			{% endif %}
+		{% endfor %}        
+    </div>
 </div>
-{% set itemsPerColumn = ( (countries.length / 6 ) | round(0, 'ceil') ) %}
-<ul class="countries-list countries-list-first">
-    {% for country in countries %}
-        <li><a href="{{ ('http://' + country.url) }}" title="{{ country.name }}">{{ country.name }}</a></li>
-        {% if loop.index%itemsPerColumn == 0 %}
-            </ul>
-            <ul class="countries-list">
-        {% endif%}
-    {% endfor %}
-</ul>

@@ -174,7 +174,7 @@ function onValidateSuccess(data) {
         $field.trigger('fieldValidationEnd', []);
         $field.closest('.field-wrapper').addClass('error').removeClass('success');
         if (!data.did_you_mean) {
-            $field.parent().find('small.detail-message').remove();
+            this.parentView.$el.trigger('hideError', [$field]);
         }
     }
     else {

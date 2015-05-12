@@ -10,6 +10,8 @@ var Metric = require('../../../../../../../modules/metric');
 module.exports = Base.extend({
     className: 'listing-filters',
     id: 'listing-filters',
+    regexpFindPage: /-p-[0-9]+/,
+    regexpReplacePage: /(-p-[0-9]+)/,
     events: {
         'click [data-increment-metric]': Metric.incrementEventHandler,
         'click [data-increment-filter]': 'onClickFilter',
@@ -98,6 +100,7 @@ module.exports = Base.extend({
             this.filters.remove(filter);
         }
 
+        path = this.cleanPage(path);
         path = [path.split('/-').shift(), '/', this.filters.format()].join('');
         path = this.refactorPath(path);
         path = helpers.common.link(path, this.app);
@@ -139,6 +142,7 @@ module.exports = Base.extend({
         };
 
         this.filters.add(filter);
+        path = this.cleanPage(path);
         path = [path.split('/-').shift(), '/', this.filters.format()].join('');
         path = this.refactorPath(path);
         path = helpers.common.link(path, this.app);
@@ -161,6 +165,7 @@ module.exports = Base.extend({
         };
 
         this.filters.add(filter);
+        path = this.cleanPage(path);
         path = [path.split('/-').shift(), '/', this.filters.format()].join('');
         path = this.refactorPath(path);
         path = helpers.common.link(path, this.app);
