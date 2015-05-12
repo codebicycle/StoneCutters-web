@@ -119,7 +119,7 @@ function postRender() {
     if (this.editing) {
         this.$(this.selectors.categories).trigger('editCategory', [this.item.get('category')]);
         this.$(this.selectors.contact).trigger('formRendered', [this.editing]);
-        this.rebump = !!utils.getUrlParam('rebump');
+        this.rebump = !!utils.getUrlParam('rb');
     }
     else {
         categoryId = utils.getUrlParam('cat');
