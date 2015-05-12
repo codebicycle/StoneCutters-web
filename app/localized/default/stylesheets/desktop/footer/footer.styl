@@ -182,98 +182,102 @@
 
     }
 
-    .modal-container {
+    .column {
 
-        display: none;
-        position: absolute;
-        left: -1px;
-        bottom: 100%;
-        width: 980px;
-        z-index: 51;
-        overflow: hidden;
-        margin: 0 0 -4px -200%;
-        background-color: #FFF;
-        border: solid thin #CCC;
-        border-bottom-width: 4px;
-        box-sizing: border-box;
-        box-shadow: 1px 5px 3px -4px rgba(0, 0, 0, .75);
+        .modal-container {
 
-    }
-
-    .modal-header {
-
-        position: relative;
-        padding: 15px 40px 15px 20px;
-        border-bottom: solid thin #CCC;
-
-    }
-
-    .modal-title {
-
-        margin: 0;
-        font-size: $l;
-
-    }
-
-    .modal-close {
-
-        position: absolute;
-        top: 13px;
-        right: 13px;
-        font-size: $l;
-        color: #666;
-
-        &:hover {
-
-            color: $black;
+            display: none;
+            position: absolute;
+            left: -1px;
+            bottom: 100%;
+            width: 980px;
+            z-index: 51;
+            overflow: hidden;
+            margin: 0 0 -4px -200%;
+            background-color: #FFF;
+            border: solid thin #CCC;
+            border-bottom-width: 4px;
+            box-sizing: border-box;
+            box-shadow: 1px 5px 3px -4px rgba(0, 0, 0, .75);
 
         }
 
-    }
+        .modal-header {
 
-    .modal-content {
+            position: relative;
+            padding: 15px 40px 15px 20px;
+            border-bottom: solid thin #CCC;
 
-        display: table;
-        table-layout: fixed;
-        
-    }
+        }
 
-    .modal-section {
+        .modal-title {
 
-        display: table-cell;
+            margin: 0;
+            font-size: $l;
 
-    }
+        }
 
-    .modal-section-title {
+        .modal-close {
 
-        margin: 0;
-        padding: 20px 20px 0;
-        font-weight: normal;
-        font-size: $m;
+            position: absolute;
+            top: 13px;
+            right: 13px;
+            font-size: $l;
+            color: #666;
 
-    }
+            &:hover {
 
-    .modal-columns {
+                color: $black;
 
-        display: table;
-        table-layout: fixed;
-        width: 100%;
-        padding: 10px;
-        box-sizing: border-box;
+            }
 
-    }
+        }
 
-    .modal-column {
+        .modal-content {
 
-        display: table-cell;
-        padding: 0 10px 10px;
-        list-style: none;
+            display: table;
+            table-layout: fixed;
+            
+        }
 
-    }
+        .modal-section {
 
-    .modal-column-item {
+            display: table-cell;
 
-        padding-top: 10px;
+        }
+
+        .modal-section-title {
+
+            margin: 0;
+            padding: 20px 20px 0;
+            font-weight: normal;
+            font-size: $m;
+
+        }
+
+        .modal-columns {
+
+            display: table;
+            table-layout: fixed;
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+
+        }
+
+        .modal-column {
+
+            display: table-cell;
+            padding: 0 10px 10px;
+            list-style: none;
+
+        }
+
+        .modal-column-item {
+
+            padding-top: 10px;
+
+        }
 
     }
     
