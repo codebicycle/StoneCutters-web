@@ -7,7 +7,7 @@
         <div class="formField">
             <label>
                 <input type="radio" name="reason" value="badContent" {{ 'checked' if form.values.reason == 'badContent' or not form.values.reason }}>
-                {{ dictionary["flagitem.badContent"] or "Bad Content" }}
+                {{ dictionary["flagitem.badContent"] or "Bad content" }}
             </label>
             <label>
                 <input type="radio" name="reason" value="duplicated" {{ 'checked' if form.values.reason == 'duplicated' }}>
@@ -23,7 +23,7 @@
             </label>
             <label>
                 <input type="radio" name="reason" value="other" {{ 'checked' if form.values.reason == 'other' }}>
-                {{ dictionary["flagitem.other"] or "Other Reasons" }}
+                {{ dictionary["flagitem.other"] or "Other reasons" }}
             </label>
         </div>
         <div class="formField">
