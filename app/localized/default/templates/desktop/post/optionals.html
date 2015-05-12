@@ -8,6 +8,7 @@
         dataType: "select" if field.fieldType == "combobox" else "string",
         values: field.values if field.values else [],
         related: field.related,
+        value: field.value,
         autocomplete: true
     } %}
        {{ Field(validField) }}
