@@ -85,8 +85,11 @@ function onShowError(event, field, options, isValid) {
     template = _.template(template.html(), _.defaults({}, options, {
         className: ''
     }), this.templateSettings);
-    template = $($.trim(template)).removeClass('exclude');
+    template = $($.trim(template));
 
+    if (!options.className || !~options.className.indexOf('exclude')) {
+        template.removeClass('exclude');
+    }
     if (!isValid) {
         $field.closest('.field-wrapper').addClass('error').removeClass('success');
     }
