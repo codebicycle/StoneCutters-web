@@ -115,9 +115,11 @@ function postRender() {
     }
 
     this.editing = !!this.getItem().has('id');
+    this.rebump = false;
     if (this.editing) {
         this.$(this.selectors.categories).trigger('editCategory', [this.item.get('category')]);
         this.$(this.selectors.contact).trigger('formRendered', [this.editing]);
+        this.rebump = !!utils.getUrlParam('rb');
     }
     else {
         categoryId = utils.getUrlParam('cat');
@@ -385,11 +387,14 @@ function onSubmit(event) {
     event.stopPropagation();
     event.stopImmediatePropagation();
 
-    asynquence().or(fail.bind(this))
+    var promise = asynquence().or(fail.bind(this))
         .then(prepare.bind(this))
         .then(check.bind(this))
-        .then(validate.bind(this))
-        .then(post.bind(this))
+        .then(validate.bind(this));
+        if (this.rebump) {
+            promise.then(rebump.bind(this));
+        }
+        promise.then(post.bind(this))
         .val(success.bind(this));
 
     function prepare(done) {
@@ -426,6 +431,10 @@ function onSubmit(event) {
                 this.$(view).trigger('validate', [next, result]);
             }.bind(this));
         }
+    }
+
+    function rebump(done) {
+        this.item.rebump(done);
     }
 
     function post(done) {
