@@ -242,15 +242,6 @@ module.exports = {
             enabled: true
         }
     },
-
-    notifications: {
-        desktop: {
-            enabled: false
-        },
-        html5: {
-            enabled: false
-        }
-    },
     validator: {
         email: {
             enabled: true
