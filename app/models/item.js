@@ -416,8 +416,8 @@ function rebump(done) {
         }
     }, callback.bind(this));
 
-    function callback(err, response) {
-        this.errfcb(done)(err);
+    function callback() {
+        this.callback(done)();
     }
 }
 
