@@ -171,6 +171,7 @@ module.exports = Base.extend({
         
         _.each(this.parentView.getFields().categoryAttributes, function each(field, i) {
            var $field = this.$('[name="'+field.name+'"]');
+            $field.removeClass('error');
             if (field.mandatory === 'true') {
                 this.$el.trigger('hideError', [$field]);            
                 if (!$field.val()) {
