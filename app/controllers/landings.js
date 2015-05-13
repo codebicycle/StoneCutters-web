@@ -152,6 +152,7 @@ function asyncseller(params, callback) {
     function controller() {
         var adapter = new Adapter({});
         var languages = this.app.session.get('languages');
+        var platform = this.app.session.get('platform');
 
         asynquence().or(error.bind(this))
             .then(redirect.bind(this))
@@ -163,7 +164,21 @@ function asyncseller(params, callback) {
             .val(success.bind(this));
 
         function redirect(done) {
-            var platform = this.app.session.get('platform');
+            adapter.request(this.app.req, {
+                method: 'GET',
+                url: 'http://tracking.olx-st.com/h/minv/',
+                query: {
+                    clientId: this.app.session.get('clientId'),
+                    project: 'asyncpickup',
+                    track_page: 'seller-landing',
+                    platform: platform,
+                    itemId: params.itemId,
+                    user_email: params.email,
+                    t: Math.ceil((_.now() / 1000))
+                }
+            }, {
+                timeout: 4000
+            }, function() { /* ignore callback */} );
 
             if (platform === 'wap' || !params.itemId || !params.email) {
                 done.abort();
@@ -248,6 +263,7 @@ function asyncbuyer(params, callback) {
 
     function controller() {
         var adapter = new Adapter({});
+        var platform = this.app.session.get('platform');
 
         asynquence().or(error.bind(this))
             .then(redirect.bind(this))
@@ -256,7 +272,21 @@ function asyncbuyer(params, callback) {
             .val(success.bind(this));
 
         function redirect(done) {
-            var platform = this.app.session.get('platform');
+            adapter.request(this.app.req, {
+                method: 'GET',
+                url: 'http://tracking.olx-st.com/h/minv/',
+                query: {
+                    clientId: this.app.session.get('clientId'),
+                    project: 'asyncpickup',
+                    track_page: 'buyer-landing',
+                    platform: platform,
+                    itemId: params.itemId,
+                    transactionId: params.transactionId,
+                    t: Math.ceil((_.now() / 1000))
+                }
+            }, {
+                timeout: 4000
+            }, function() { /* ignore callback */} );
 
             if (platform === 'wap' || !params.transactionId || !params.itemId) {
                 done.abort();

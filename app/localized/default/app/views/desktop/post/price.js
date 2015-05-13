@@ -1,116 +1,133 @@
 'use strict';
 
-var Base = require('../../../../../common/app/bases/view');
-var helpers = require('../../../../../../helpers');
-var statsd = require('../../../../../../../shared/statsd')();
 var _ = require('underscore');
-var rPrice = /[^0-9]/gi;
+var Base = require('../../../../../common/app/bases/view');
+var statsd = require('../../../../../../../shared/statsd')();
 
 module.exports = Base.extend({
-    tagName: 'section',
     id: 'posting-price-view',
+    tagName: 'section',
     className: 'posting-price-view',
+    rPrice: /[^0-9]/gi,
     fields: false,
     fieldLabel: '',
     fieldName: '',
     fieldMandatory: '',
-    initialize: function() {
-        Base.prototype.initialize.call(this);
-        this.fields = false;
-        this.fieldLabel = '';
-        this.fieldName = '';
-        this.fieldMandatory = '';
-    },
-    getTemplateData: function() {
-        var data = Base.prototype.getTemplateData.call(this);
-
-        return _.extend({}, data, {
-            fields: this.fields,
-            label: this.fieldLabel || '',
-            name: this.fieldName || '',
-            mandatory: this.fieldMandatory || ''
-        });
+    selectors: {
+        currency_type: '#field-currency_type',
+        priceC: '#field-priceC',
+        priceType: '#field-priceType'
     },
     events: {
-        'fieldsChange': 'onFieldsChange',
-        'change': 'onChange',
-        'change #field-priceType': 'onPriceTypeChange'
+        'change': onChange,
+        'fieldsChange': onFieldsChange,
+        'change #field-priceType': onChangePriceType
     },
-    onFieldsChange: function(event, options) {
-        event.preventDefault();
-        event.stopPropagation();
-        event.stopImmediatePropagation();
-
-        var fields = [];
-        var hasPriceButNotCurrency = false;
-
-        if (options.length) {
-            _.each(['currency_type', 'priceC', 'priceType'], function find(name) {
-                var length = fields.length;
-                var field = _.find(options, function search(field) {
-                    if (field.name === 'priceC') {
-                        this.fieldLabel = field.label;
-                        this.fieldName = field.name;
-                        this.fieldMandatory = field.mandatory;
-                    }
-                    return field.name === name;
-                }.bind(this));
-
-                if (field) {
-                    fields.push(field);
-                }
-                if (name === 'currency_type' && length === fields.length) {
-                    hasPriceButNotCurrency = true;
-                }
-                else if (name === 'priceC' && hasPriceButNotCurrency) {
-                    hasPriceButNotCurrency = length !== fields.length;
-                }
-            }.bind(this));
-            if (!_.isEqual(fields, this.fields)) {
-                this.fields = fields;
-                if (hasPriceButNotCurrency) {
-                    statsd.increment([this.app.session.get('location').abbreviation, this.parentView.editing ? 'editing' : 'posting', 'error', 'currency', 'fetch', this.app.session.get('platform')]);
-                }
-                this.parentView.$el.trigger('priceReset');
-                this.render();
-            }
-        }
-        else {
-            this.fields = false;
-            this.parentView.$el.trigger('priceReset');
-            this.render();
-        }
-    },
-    onChange: function(event) {
-        event.preventDefault();
-        event.stopPropagation();
-        event.stopImmediatePropagation();
-
-        var $field = $(event.target);
-        var options = {};
-
-        if ($field.attr('name') === 'priceC') {
-            $field.val($field.val().replace(rPrice, ''));
-            options.skipValidation = $field.val() === '' && _.contains(['NEGOTIABLE', 'FREE'], ($('#field-priceType').val() || '').toUpperCase());
-            this.$('select').trigger('change');
-        }
-
-        this.parentView.$el.trigger('fieldSubmit', [$field, options]);
-    },
-    onPriceTypeChange: function(event) {
-        var $field = $(event.target);
-        var $price = this.$('#field-priceC');
-        var $currency = this.$('#field-currency_type');
-
-        if ($field.val() === 'FREE') {
-            $price.attr('disabled', true).val('');
-            $currency.attr('disabled', true);
-        }
-        else {
-            $price.removeAttr('disabled');
-            $currency.removeAttr('disabled');
-        }
-    }
+    initialize: initialize,
+    getTemplateData: getTemplateData,
+    filterAndSortFields: filterAndSortFields
 });
+
+function initialize() {
+    Base.prototype.initialize.call(this);
+    this.fields = false;
+    this.fieldLabel = '';
+    this.fieldName = '';
+    this.fieldMandatory = '';
+}
+
+function getTemplateData() {
+    var data = Base.prototype.getTemplateData.call(this);
+
+    return _.extend({}, data, {
+        fields: this.fields,
+        label: this.fieldLabel || '',
+        name: this.fieldName || '',
+        mandatory: this.fieldMandatory || ''
+    });
+}
+
+function filterAndSortFields(fields) {
+    var priceFields = [];
+
+    _.each(this.selectors, function each(selector, name) {
+        var field = _.find(fields, function find(field) {
+            return field.name === name;
+        });
+
+        if (field) {
+            priceFields.push(field);
+        }
+    }, this);
+    return priceFields;
+}
+
+function onChange(event) {
+    event.preventDefault();
+    event.stopPropagation();
+    event.stopImmediatePropagation();
+
+    var $field = $(event.target);
+    var options = {};
+
+    if ($field.attr('name') === 'priceC') {
+        $field.val($field.val().replace(this.rPrice, ''));
+        options.skipValidation = $field.val() === '' && _.contains(['NEGOTIABLE', 'FREE'], ($(this.selectors.priceType).val() || '').toUpperCase());
+        this.$('select').trigger('change');
+    }
+    this.parentView.$el.trigger('fieldSubmit', [$field, options]);
+}
+
+function onFieldsChange(event, fields) {
+    event.preventDefault();
+    event.stopPropagation();
+    event.stopImmediatePropagation();
+
+    var priceFields;
+    var hasPriceButNotCurrency;
+
+    fields = this.filterAndSortFields(fields);
+
+    if (!fields || !fields.length) {
+        this.fields = false;
+        this.parentView.$el.trigger('priceReset');
+        this.render();
+        return;
+    }
+
+    priceFields = {};
+    _.each(fields, function each(field) {
+        if (field.name === 'priceC') {
+            this.fieldLabel = field.label;
+            this.fieldName = field.name;
+            this.fieldMandatory = field.mandatory;
+        }
+        priceFields[field.name] = field;
+    }, this);
+
+    if (!_.isEqual(fields, this.fields)) {
+        this.fields = fields;
+        if (!priceFields.currency_type && priceFields.priceC) {
+            statsd.increment([this.app.session.get('location').abbreviation, this.parentView.editing ? 'editing' : 'posting', 'error', 'currency', 'fetch', this.app.session.get('platform')]);
+        }
+        this.parentView.$el.trigger('priceReset');
+        this.render();
+    }
+}
+
+function onChangePriceType(event) {
+    var $field = $(event.target);
+    var $price = this.$(this.selectors.priceC);
+    var $currency = this.$(this.selectors.currency_type);
+
+    if ($field.val() === 'FREE') {
+        $price.attr('disabled', true).val('');
+        $currency.attr('disabled', true);
+    }
+    else {
+        $price.removeAttr('disabled');
+        $currency.removeAttr('disabled');
+    }
+}
 
 module.exports.id = 'post/price';

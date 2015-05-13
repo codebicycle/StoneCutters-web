@@ -155,6 +155,30 @@ window.LocalCache = {
         });
         return deferred.promise();
     },
+    checkPermission: function() {
+        var deferred = jQuery.Deferred();
+
+        this.remoteStorage.makeRequest({action:'checkPermission'}, function(response) {
+            deferred.resolve(response);
+        });
+        return deferred.promise();
+    },
+    requestPermission: function() {
+        var deferred = jQuery.Deferred();
+
+        this.remoteStorage.makeRequest({action:'requestPermission'}, function(response) {
+            deferred.resolve(response);
+        });
+        return deferred.promise();
+    },
+    showNotification: function(title, body, icon) {
+        var deferred = jQuery.Deferred();
+
+        this.remoteStorage.makeRequest({action:'showNotification', title:title, body:body, icon:icon}, function(response) {
+            deferred.resolve(response);
+        });
+        return deferred.promise();
+    },
     get: function(keyPrefix, key) {
         var deferred = jQuery.Deferred();
         

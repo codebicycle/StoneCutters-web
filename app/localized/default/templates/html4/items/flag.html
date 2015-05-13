@@ -1,0 +1,39 @@
+{% from macros import Breadcrumb, BreadcrumbHome, Errors %}
+{% set link = (breadcrumb | link) %}
+{{ Breadcrumb(dictionary, link, dictionary['item.FlagAsSpamOrScam'] or 'Report Item') }}
+{% if form and form.errors %}{{ Errors(form.errors) }}{% endif %}
+<div class="flag-item-form">
+    <form action="{{ ['/items/', item.id, '/flag'] | join('') | link }}" method="POST" enctype="multipart/form-data">
+        <div class="formField">
+            <label>
+                <input type="radio" name="reason" value="badContent" {{ 'checked' if form.values.reason == 'badContent' or not form.values.reason }}>
+                {{ dictionary["flagitem.badContent"] or "Bad content" }}
+            </label>
+            <label>
+                <input type="radio" name="reason" value="duplicated" {{ 'checked' if form.values.reason == 'duplicated' }}>
+                {{ dictionary["flagitem.duplicated"] or "Duplicated item" }}
+            </label>
+            <label>
+                <input type="radio" name="reason" value="fraud" {{ 'checked' if form.values.reason == 'fraud' }}>
+                {{ dictionary["flagitem.fraud"] or "Fraud" }}
+            </label>
+            <label>
+                <input type="radio" name="reason" value="alreadySold" {{ 'checked' if form.values.reason == 'alreadySold' }}>
+                {{ dictionary["flagitem.alreadySold"] or "Item is already Sold" }}
+            </label>
+            <label>
+                <input type="radio" name="reason" value="other" {{ 'checked' if form.values.reason == 'other' }}>
+                {{ dictionary["flagitem.other"] or "Other reasons" }}
+            </label>
+        </div>
+        <div class="formField">
+            <label>{{ dictionary["flagitem.Description"] or "Please describe the reason of your report" }}:</label>
+            <textarea id="text-description" name="description" class="textarea">{{ form.values.description if form.values.description }}</textarea>
+        </div>
+        <div class="formActions">
+            <input type="submit" value="{{ dictionary['item.FlagAsSpamOrScam'] or 'Report' }}" name="submit" class="btns orange" data-qa="flagitem-send-button" >
+        </div>
+        <br>
+    </form>
+</div>
+{{ BreadcrumbHome(dictionary, link, ('/' | link)) }}

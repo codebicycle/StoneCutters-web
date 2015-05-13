@@ -19,12 +19,13 @@
 	height: 100%
 	position: relative;
 	ul-reset();
-	width: 220px;
 
 	a {
 		display: block;
-		padding: 7px 30px 7px 10px;
+		padding: 6px 15px 6px 35px;
 		transition: background-color 0.5s, color 0.5s;
+		white-space: nowrap;
+		line-height: 1.4;
 
 		&:focus {
 			background-color: $lightBlueHover;
@@ -37,48 +38,42 @@
 				color: $white;
 			}
 		}
-		&:hover, &.active {
+		&:hover {
 			background-color: $blue;
 		}
-		&.select {
-			background-color: $greyStrong;
-			&.subcategory.icon-check::before {
-				position: absolute;
-				right: 0;
-			}
+		&.select, &.active {
+			background-color: $green;
+			box-shadow: 0 0 3px 0 $greyBorders;
 		}
-		&.category {
-			padding-left: 35px;
+		&.select {
+			&.subcategory::before {
+				right: 8px;
+				font-size: $m;
+			}
 		}
 	}
 
 	.child-categories-list {
 		background: $white;
-		border-left: 3px solid $blue;
-		height: 100%;
+		border-left: 3px solid $green;
+		bottom: 0;
 		left: 100%;
 		overflow-y: auto;
 		position: absolute;
 		top: 0;
 		transition: background-color 0.5s;
 		ul-reset();
-		width: 217px;
 		z-index: 9999;
-		.subcategory {
-			border-top: 1px solid $white;
-			padding-top: 8px;
-			&:first-child {
-				border-top: none;
-			}
-		}
-		&.select {
-			border-color: $greyStrong;
+		
+		a {
+			padding-left: 15px;
+			padding-right: 45px;
 		}
 	}
 
 	.icons::before {
-		margin-left: -26px;
-		font-size: $m;
-		padding: 0 10px 0 0;
+		position:absolute;
+		font-size: $l;
+		margin-left: $l*-1.3;
 	}
 }

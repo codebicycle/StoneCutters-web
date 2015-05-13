@@ -4,8 +4,9 @@
 <script type="text/javascript">
     //<![CDATA[
 
+
         (function(){
-            var whitelist = ['olx.com.ec', 'olx.com.sv', 'olx.com.gt', 'olx.com.pe', 'olx.com.pa']; 
+            var whitelist = ['olx.com.ar', 'olx.com.ec', 'olx.com.sv', 'olx.com.gt', 'olx.com.pe', 'olx.com.pa']; 
 
             function isSafe(origin, log) {
                 var parser = document.createElement('a');
@@ -25,6 +26,11 @@
                 if (isSafe(event.origin)) {
                     var eventData  = JSON.parse(event.data);
                     var response = null;
+                    var async;
+
+                    function callback(response) {
+                        event.source.postMessage(JSON.stringify({id: eventData.id, response: response}), event.origin);
+                    }
 
                     switch (eventData.data.action) {
                         case "set":
@@ -39,7 +45,7 @@
                         case "multiget":
                             response = {};
                             for (var key in eventData.data.keys) {
-                                var value = store.get( eventData.data.keys[key] );
+                                var value = store.get(eventData.data.keys[key]);
                                 if (value != undefined) {
                                     response[key] = value;
                                 }
@@ -52,14 +58,27 @@
                             break;
                         case "multiremove":
                             for (var key in eventData.data.keys) {
-                                store.remove( eventData.data.keys[key] );
+                                store.remove(eventData.data.keys[key]);
                             }
                             break;
                         case "getAll":
                             response = store.getAll();
                             break;
+                        case "checkPermission":
+                            response = store.checkPermission();
+                            break;
+                        case "requestPermission":
+                            async = true;
+                            store.requestPermission(callback);
+                            break;
+                        case "showNotification":
+                            async = true;
+                            store.showNotification(callback, eventData.data);
+                            break;
                     }
-                    event.source.postMessage(JSON.stringify({id: eventData.id, response: response}), event.origin);
+                    if (!async) {
+                        callback(response);
+                    }
                 }
                 else {
                     console.log('Local cache not available for this domain ->', isSafe(event.origin, true));
@@ -105,6 +124,9 @@
                 store.set(key, val);
             };
             store.getAll = function() {};
+            store.checkPermission = function() {};
+            store.requestPermission = function() {};
+            store.showNotification = function() {};
             store.serialize = function(value) {
                 return JSON.stringify(value);
             };
@@ -136,6 +158,37 @@
                 }
             }
 
+            //Notifications functions
+            store.checkPermission = function() {
+                return window.Notification.permission;
+            };
+            store.requestPermission = function(done) {
+                window.Notification.requestPermission(function callback(status) {
+                    if (window.Notification.permission !== status) {
+                        window.Notification.permission = status;
+                    }
+                    done(status);
+                });
+            };
+            store.showNotification = function(done, data) {
+                var options = {
+                    body: data.body,
+                    icon: data.icon
+                };
+                var n = new window.Notification(data.title, options);
+
+                n.onclick = function (event) {
+                    done({
+                        type: event.type
+                    });
+                };
+                n.onclose = function (event) {
+                    done(event);
+                };
+            };
+
+
+
             if (isLocalStorageNameSupported()) {
                 storage = win[localStorageName];
                 store.set = function(key, val) {
@@ -160,7 +213,7 @@
                         ret[key] = store.get(key);
                     }
                     return ret;
-                }
+                };
             }
             else if (isGlobalStorageNameSupported()) {
                 storage = win[globalStorageName][win.location.hostname];

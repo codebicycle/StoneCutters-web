@@ -1,0 +1,708 @@
+<div class="help-navigation">
+    <div class="help-box">
+        <h3 class="title">{{ dictionary["misc.NeedHelp"] }}</h3>
+        <ul>
+            <li {{ 'class="selected"' if tab == 'new-olx' }} >
+                <a class="help-toggle-content icons icon-user" data-help-content="new-olx" data-toggle-content href="#" data-increment-metric="zendesk.help.section.new_in_olx">{{ dictionary["help.NewToBrand"] }}</a>
+            </li>
+            <li>
+                <a class="help-toggle-content icons icon-list" data-help-content="ads" data-toggle-content href="#" data-increment-metric="zendesk.help.section.about_ads">{{ dictionary["itemslisting.Classifieds"] }}</a>
+            </li>
+            <li {{ 'class="selected"' if tab == 'faq' }} >
+                <a class="help-toggle-content icons icon-question" data-help-content="faqs" data-toggle-content href="#" data-increment-metric="zendesk.help.section.faqs">{{ dictionary["misc.FrequentQuestions"] }}</a>
+            </li>
+            {% if isContactEnabled %}
+                <li {{ 'class="selected"' if tab == 'contact' }}>
+                    <a class="help-toggle-content icons icon-chat" data-help-content="contact" data-toggle-content href="#" data-increment-metric="zendesk.help.section.contact">{{ dictionary["contact_us.ContactBrand"] | replace('<<BRAND>>','OLX') }}</a>
+                </li>
+            {% endif %}
+            <li>
+                <a class="help-toggle-content icons icon-more" data-help-content="more-suggestions" data-toggle-content href="#" data-increment-metric="zendesk.help.section.more_tips">{{ dictionary["help.MoreGuidelines"] }}</a>
+            </li>
+        </ul>
+    </div>
+    <div class="about-box">
+        <h3 class="title">{{ dictionary["about.Company"] }}</h3>
+        <ul>
+            <li {{ 'class="selected"' if active == 'about' }}>
+                <a class="help-toggle-content icons icon-olx" href="#" data-help-content="about-us" data-toggle-content data-increment-metric="zendesk.help.section.about_olx">{{ dictionary["about.AboutBrand"] | replace("<<BRAND>>","OLX") }}</a>
+            </li>
+            <li>
+                <a class="help-toggle-content icons icon-help-round" href="#" data-help-content="why" data-toggle-content data-increment-metric="zendesk.help.section.why">{{ dictionary["about.Why"] }}</a>
+            </li>
+            <li>
+                <a class="help-toggle-content icons icon-press" href="#" data-help-content="press" data-toggle-content data-increment-metric="zendesk.help.section.press">{{ dictionary["about.Press"] }}</a>
+            </li>
+            {% if linkblog %}
+            <li>
+                <a class="help-toggle-content icons icon-chat" href="{{ linkblog.href }}" target="{{ linkblog.target }}" data-increment-metric="zendesk.help.section.blog">{{ dictionary["about.Blog"] }}</a>
+            </li>
+            {% endif %}
+        </ul>
+    </div>
+</div>
+
+<div class="help-about-content">
+    <div id="new-olx" class="help-content-display" {{ 'style="display:block"' if tab == 'new-olx' }}>
+        <h3 class="title">{{ dictionary["help.NewToBrand"] }}</h3>
+        <div class="faqs">
+            <div class="question">
+                <h4 class="icons icon-arrow-right" data-increment-metric="zendesk.help.question_1_1">{{ dictionary["help.WhatIsBrand"] }}</h4>
+                <div class="question-content">
+                    <p>
+                        {{ dictionary["help.WhatIsBrand_content"] }}
+                    </p>
+                </div>
+            </div>
+            <div class="question">
+                <h4 class="icons icon-arrow-right" data-increment-metric="zendesk.help.question_1_2">{{ dictionary["help.IsBrandFree"] }} </h4>
+                <div class="question-content">
+                    <p>{{ dictionary["help.IsBrandFree_content"] }} </p>
+                </div>
+            </div>
+            <div class="question">
+                <h4 class="icons icon-arrow-right" data-increment-metric="zendesk.help.question_1_3">¿Necesito registrarme para usar OLX?</h4>
+                <div class="question-content">
+                    <p>
+                        No es necesario que te registres para navegar y publicar avisos.<br/>
+                        En caso que quieras gestionar tus publicaciones, te recomendamos que te registres en el sitio. De esa forma vas a poder editar y eliminar tus avisos de una forma mucho m&aacute;s simple.<br/>
+                        <br/>
+                        Si ya publicaste avisos y no est&aacute;s registrado, ingres&aacute; a <a rel="nofollow" href="{{ '/register' | link }}">{{ dictionary["postbox.RegisterNow"] }}</a>, y complet&aacute; la informaci&oacute;n b&aacute;sica para crear tu cuenta. Record&aacute; utilizar el mismo email que usaste para publicar anteriormente!<br/>
+                        Al finalizar te enviaremos un email con un link para confirmar tu registro.<br/>
+                        <br/>
+                        Una vez que tu cuenta est&eacute; activa, ingres&aacute; a OLX y hace clic en <a rel="nofollow" href="{{ '/login' | link }}">{{ dictionary["loginbox.Login"] }}</a>. All&iacute; vas a encontrar tus avisos y las conversaciones que hayas comenzado con compradores y vendedores.<br/>
+                        <br/>
+                        Record&aacute; que registrarte en OLX es gratis!
+                    </p>
+                </div>
+            </div>
+            <div class="question">
+                <h4 class="icons icon-arrow-right" data-increment-metric="zendesk.help.question_1_4">¿Cómo busco avisos en OLX?</h4>
+                <div class="question-content">
+                    <p>
+                        Es muy f&aacute;cil!<br/>
+                        <br/>
+                        Desde la p&aacute;gina principal de OLX, ingres&aacute; en el campo de b&uacute;squeda las palabras clave que describen el producto que buscas. La p&aacute;gina de resultados va a mostrarte avisos activos que contengan las palabras que utilizaste. Recorr&eacute; esos resultados y si te interesa alguno, hac&eacute; clic en su t&iacute;tulo.<br/>
+                        Tambi&eacute;n pod&eacute;s navegar por el sitio seleccionando tu ubicaci&oacute;n o las categor&iacute;as que te interesan. En caso que te interese alg&uacute;n aviso, pod&eacute;s abrirlo solo haciendo clic en el t&iacute;tulo.<br/>
+                        <br/>
+                        Record&aacute; que si sos un usuario registrado, dentro tu cuenta vas a poder ver las conversaciones que est&eacute;s teniendo con los vendedores y tambien guardar tus avisos favoritos para revisarlos en otro momento.<br/>
+                        <br/>
+                        En el caso que no encuentres tu aviso, te recomendamos que ingreses a tu cuenta para verificar su estado. En el caso que se encuentre eliminado, vas a poder editarlo, o republicarlo, siempre que cumpla con nuestras normas de publicaci&oacute;n.
+                    </p>
+                </div>
+            </div>
+            <div class="question">
+                <h4 class="icons icon-arrow-right" data-increment-metric="zendesk.help.question_5_6">Avisos prohibidos/no permitidos en OLX</h4>
+                <div class="question-content">
+                    <p>
+                        OLX no permite la publicaci&oacute;n de productos ilegales, de acuerdo a cualquier ley, estatuto, ordenanza o reglamento local, estatal, provincial, nacional o internacional.<br/>
+                        <br/>
+                        Los siguientes avisos se encuentran prohibidos en el OLX:<br/>
+                        <br/>
+                        - Avisos duplicados (referidos al mismo servicio/producto en la misma o diferente categor&iacute;a/ubicaci&oacute;n desde el mismo/diferente email)<br/>
+                        - Cuentas duplicadas (avisos publicados desde diferentes direcciones de email con el mismo contenido/objetivo)<br/>
+                        - Venta al por mayor de art&iacute;culos de marca<br/>
+                        - Tarjetas SIM al por mayor<br/>
+                        - L&iacute;neas telef&oacute;nicas<br/>
+                        - Lectores, codificadores o clones de tarjetas de d&eacute;bito/cr&eacute;dito o cheques<br/>
+                        - Bloqueadores de se&ntilde;al<br/>
+                        - Millas, puntos o upgrades de compa&ntilde;ias a&eacute;reas<br/>
+                        - Denuncias, reclamos y/o quejas<br/>
+                        - Lentes de contacto y/o anteojos con graduaci&oacute;n<br/>
+                        - Redes Sociales (comentarios, cuentas, seguidores y afines)<br/>
+                        - Anuncios sin sentido, oraciones, opiniones<br/>
+                        - Todo tipo de material ofensivo<br/>
+                        - Medicamentos, anticonceptivos y recetas m&eacute;dicas<br/>
+                        - Suplementos alimenticios<br/>
+                        - Objetos robados y herramientas destinadas a robos<br/>
+                        - Tabaco y productos que se utilicen para fumar<br/>
+                        - Armas y elementos relacionados a las armas<br/>
+                        - Veneno<br/>
+                        - Mercurio<br/>
+                        - Fuegos artificiales<br/>
+                        - B&uacute;squeda de pareja o compa&ntilde;&iacute;a<br/>
+                        - Productos o servicios er&oacute;ticos<br/>
+                        - Material obsceno y todo tipo de pornograf&iacute;a<br/>
+                        - Fotos o im&aacute;genes que contengan desnudez<br/>
+                        - Anuncios publicados por menores de 13 a&ntilde;os<br/>
+                        - Ropa interior usada<br/>
+                        - Material cadav&eacute;rico<br/>
+                        - Billetes de loter&iacute;a, tickets de sorteos, cupones de juegos<br/>
+                        - Acciones, bonos y otros derivados del mercado de valores<br/>
+                        - Propiedades sin escritura<br/>
+                        - Notas de cr&eacute;dito<br/>
+                        - Facturas<br/>
+                        - Prestamos personales<br/>
+                        - Ofertas de trabajo multinivel<br/>
+                        - Ofertas o b&uacute;squedas de trabajo ilegal<br/>
+                        - Servicio de elaboraci&oacute;n de trabajos acad&eacute;micos<br/>
+                        - Ex&aacute;menes acad&eacute;micos resueltos<br/>
+                        - Servicio que ofrezcan realizar compras online<br/>
+                        - Servicios que ofrezcan modificaci&oacute;n de cuenta kil&oacute;metros<br/>
+                        - Transporte de encomienda por particulares
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="ads" class="help-content-display">
+        <h3 class="title">{{ dictionary["itemslisting.Classifieds"] }} </h3>
+        <div class="question">
+            <h4 class="icons icon-arrow-right" data-increment-metric="zendesk.help.question_2_1">{{ dictionary["help.HowDoIPostAnItemAtBrand"] }}</h4>
+            <div class="question-content">
+                <p>
+                    {{ dictionary["help.HowDoIPostAnItemAtBrand_content"] }}
+                </p>
+            </div>
+        </div>
+        <div class="question">
+            <h4 class="icons icon-arrow-right" data-increment-metric="zendesk.help.question_2_2">{{ dictionary["help.HowDoIUploadAPicture"] }} </h4>
+            <div class="question-content">
+                <p>
+                    {{ dictionary["help.HowDoIUploadAPicture_content"] | replace('<<NUMBER>>','8') | replace('<<NUMBER_IN_WORDS>>','ocho') | replace('<<WEIGHT>>', '20480') }}
+                </p>
+            </div>
+        </div>
+        <div class="question">
+            <h4 class="icons icon-arrow-right" data-increment-metric="zendesk.help.question_2_3">¿Cómo edito mis avisos?</h4>
+            <div class="question-content">
+                <p>
+                    Para editar tus avisos necesit&aacute;s ser un usuario registrado.<br/>
+                    <br/>
+                    Si ya ten&eacute;s cuenta, ingres&aacute; a OLX y hac&eacute; clic en <a rel="nofollow" href="{{ '/login' | link }}">{{ dictionary["loginbox.Login"] }}</a>. Dentro de la opci&oacute;n <a rel="nofollow" href="{{ '/myolx/myadslisting' | link }}">{{ dictionary["myolx.MyAds"] }}</a> vas a encontrar un listado con tus publicaciones. Para editar un aviso, simplemente hac&eacute; clic en el bot&oacute;n &ldquo;Editar&rdquo;.<br/>
+                    <br/>
+                    En caso que no recuerdes tu contrase&ntilde;a, recuperala desde la opci&oacute;n <a rel="nofollow" href="{{ '/lostpassword' | link }}">&iquest;Olvidaste tu contrase&ntilde;a?</a>. Te enviaremos un email con una nueva contrase&ntilde;a.<br/>
+                    <br/>
+                    Si no ten&eacute;s una cuenta, ingres&aacute; a <a rel="nofollow" href="{{ '/register' | link }}">{{ dictionary["postbox.RegisterNow"] }}</a>, y complet&aacute; la informaci&oacute;n b&aacute;sica para crear tu cuenta. Te enviaremos un email con un link para confirmar tu registro.<br/>
+                    Record&aacute; utilizar el mismo email que usaste para publicar!
+                </p>
+            </div>
+        </div>
+        <div class="question">
+            <h4 class="icons icon-arrow-right" data-increment-metric="zendesk.help.question_2_4">{{ dictionary["help.HowDoIChangeAPicture"] }}</h4>
+            <div class="question-content">
+                <p>
+                    {{ dictionary["help.HowDoIChangeAPicture_content"] }}
+                </p>
+            </div>
+        </div>
+        <div class="question">
+            <h4 class="icons icon-arrow-right" data-increment-metric="zendesk.help.question_2_5">{{ dictionary["help.HowLongWillMyPostingAppearOnBrand"] }}</h4>
+            <div class="question-content">
+                <p>
+                    {{ dictionary["help.HowLongWillMyPostingAppearOnBrand_contentNew"] | replace('<<NUMBER>>','180') }}
+                </p>
+            </div>
+        </div>
+        <div class="question">
+            <h4 class="icons icon-arrow-right" data-increment-metric="zendesk.help.question_2_6">¿Cómo elimino mis avisos?</h4>
+            <div class="question-content">
+                <p>
+                    Para eliminar tus avisos, necesit&aacute;s ser un usuario registrado.<br/>
+                    <br/>
+                    Si ya ten&eacute;s cuenta, ingres&aacute; a OLX y hac&eacute; clic en <a rel="nofollow" href="{{ '/login' | link }}">{{ dictionary["loginbox.Login"] }}</a>. Dentro de la opci&oacute;n <a rel="nofollow" href="{{ '/myolx/myadslisting' | link }}">{{ dictionary["myolx.MyAds"] }}</a> vas a encontrar un listado con tus publicaciones. Para eliminar un aviso, simplemente hac&eacute; clic en el bot&oacute;n &ldquo;Eliminar&rdquo;.<br/>
+                    <br/>
+                    En caso que no recuerdes tu contrase&ntilde;a, recuperala desde la opci&oacute;n <a rel="nofollow" href="{{ '/lostpassword' | link }}">&iquest;Olvidaste tu contrase&ntilde;a?</a>. Te enviaremos un email con una nueva contrase&ntilde;a.<br/>
+                    Record&aacute; utilizar el mismo email que usaste para publicar!<br/>
+                    <br/>
+                    Si no ten&eacute;s cuenta, ingres&aacute; a <a rel="nofollow" href="{{ '/register' | link }}">{{ dictionary["postbox.RegisterNow"] }}</a>, y complet&aacute; la informaci&oacute;n b&aacute;sica para crear tu cuenta.<br/>
+                    Te enviaremos un email con un link para confirmar tu registro.
+                </p>
+            </div>
+        </div>
+        <div class="question">
+            <h4 class="icons icon-arrow-right" data-increment-metric="zendesk.help.question_2_7">{{ dictionary["help.HowDoISaveAPostingToRecallItLater"] }} </h4>
+            <div class="question-content">
+                <p>
+                    {{ dictionary["help.HowDoISaveAPostingToRecallItLater_content"] }}
+                </p>
+            </div>
+        </div>
+        <div class="question">
+            <h4 class="icons icon-arrow-right" data-increment-metric="zendesk.help.question_2_8">{{ dictionary["help.HowDoIShareAnAdOnFacebookTwitterEtc"] }}</h4>
+            <div class="question-content">
+                <p>
+                    {{ dictionary["help.HowDoIShareAnAdOnFacebookTwitterEtc_content"] }}
+                </p>
+            </div>
+        </div>
+        <div class="question">
+            <h4 class="icons icon-arrow-right" data-increment-metric="zendesk.help.question_2_9">{{ dictionary["help.CanIIncludePersonalContactInformationInMyPostings"] }}</h4>
+            <div class="question-content">
+                <p>
+                    {{ dictionary["help.CanIIncludePersonalContactInformationInMyPostings_content"] }}
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div id="faqs" class="help-content-display" {{ 'style="display:block"' if tab == 'faq' }}>
+        <h3 class="title">{{ dictionary["misc.FrequentQuestions"] }}</h3>
+        <div class="faqs">
+            <div class="question">
+                <h4 class="icons icon-arrow-right" data-increment-metric="zendesk.help.question_3_1">{{ dictionary["help.WhatAreClassifieds"] }}</h4>
+                <div class="question-content">
+                    <p>
+                        {{ dictionary["help.WhatAreClassifieds_content"] }}
+                    </p>
+                </div>
+            </div>
+            <div class="question">
+                <h4 class="icons icon-arrow-right" data-increment-metric="zendesk.help.question_3_2">¿Cómo cambio la contraseña de mi cuenta?</h4>
+                <div class="question-content">
+                    <p>
+                        Si sos un usuario registrado, ingres&aacute; a OLX y hac&eacute; clic en <a rel="nofollow" href="{{ '/login' | link }}">{{ dictionary["loginbox.Login"] }}</a>. Complet&aacute; tu email y la contrase&ntilde;a que elegiste.<br/>
+                        Dentro de la opci&oacute;n <a rel="nofollow" href="{{ '/myolx/configuration' | link }}">Configuraci&oacute;n</a> vas a vas a poder modificar la contrase&ntilde;a de tu cuenta.<br/>
+                        <br/>
+                        En caso que no recuerdes tu contrase&ntilde;a, recuperala desde la opci&oacute;n <a rel="nofollow" href="{{ '/lostpassword' | link }}">&iquest;Olvidaste tu contrase&ntilde;a?</a>. Te enviaremos un email con una nueva contrase&ntilde;a.<br/>
+                        Record&aacute; utilizar el mismo email que usaste para publicar!
+                    </p>
+                </div>
+            </div>
+            <div class="question">
+                <h4 class="icons icon-arrow-right" data-increment-metric="zendesk.help.question_3_3">{{ dictionary["help.HowDoICheckMyMessages"] }}</h4>
+                <div class="question-content">
+                    <p>
+                        {{ dictionary["help.HowDoICheckMyMessages_content"] | replace('<<MY_CLASSIFIEDS>>', dictionary["biderrorheader.My OLX"]) }}
+                    </p>
+                </div>
+            </div>
+            <div class="question">
+                <h4 class="icons icon-arrow-right" data-increment-metric="zendesk.help.question_3_4">{{ dictionary["help.HowDoIAnswerAMessageSentToMyAd"] }}</h4>
+                <div class="question-content">
+                    <p>
+                        {{ dictionary["help.HowDoIAnswerAMessageSentToMyAd_content"] | replace('<<MY_CLASSIFIEDS>>', dictionary["biderrorheader.My OLX"]) }}
+                    </p>
+                </div>
+            </div>
+            <div class="question">
+                <h4 class="icons icon-arrow-right" data-increment-metric="zendesk.help.question_3_5">{{ dictionary["help.AsABuyerHowDoIContactASeller"] }}</h4>
+                <div class="question-content">
+                    <p>
+                        {{ dictionary["help.AsABuyerHowDoIContactASeller_content"] }}
+                    </p>
+                </div>
+            </div>
+            <div class="question">
+                <h4 class="icons icon-arrow-right" data-increment-metric="zendesk.help.question_3_6">{{ dictionary["help.HowCanICreateAPartnershipWithBrand"] }}</h4>
+                <div class="question-content">
+                    <p>
+                        {{ dictionary["partnership.IfYouHaveLotsOfListingsToSubmitUseAFeed"] }}
+                    </p>
+                </div>
+            </div>
+            <div class="question  {{ "faq-open" if active == 'faq' }}">
+                <h4 class="icons {{ "icon-arrow-down" if active == 'faq' else "icon-arrow-right" }}" data-increment-metric="zendesk.help.question_3_7">{{ dictionary["misc.HowToContact"] }}</h4>
+                <div class="question-content" {{ 'style="display:block"' if active == 'faq' }}>
+                    <p>{{ dictionary["misc.TechQuestions"] }} <a href="mailTo:{{ mails.support }}">{{ dictionary["misc.ClickHere"] }}</a></p>
+                    <p>{{ dictionary["misc.LegalQuestions"] }} <a href="mailTo:{{ mails.legal }}">{{ dictionary["misc.ClickHere"] }}</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% if isContactEnabled %}
+        {% view 'pages/contactform' %}
+    {% endif %}
+
+    <div id="more-suggestions" class="help-content-display">
+        <h3 class="title">{{ dictionary["help.MoreGuidelines"] }}</h3>
+        <div class="faqs">
+            <div class="question">
+                <h4 class="icons icon-arrow-right" data-increment-metric="zendesk.help.question_5_1">{{ dictionary["help.WhatAreThingsThatPotentiallyFraudulentSellersDo"] }}</h4>
+                <div class="question-content">
+                    {{ dictionary["help.WhatAreThingsThatPotentiallyFraudulentSellersDo_content"] }}
+                </div>
+            </div>
+            <div class="question">
+                <h4 class="icons icon-arrow-right" data-increment-metric="zendesk.help.question_5_2">{{ dictionary["help.WhatShouldIDoIfISuspectAFraudulentSeller"] }}</h4>
+                <div class="question-content">
+                    <p>
+                        {{ dictionary["help.WhatShouldIDoIfISuspectAFraudulentSeller_content"] | replace('<<CONTACTLINK>>','<a href="mailto:support@olx.com">') | replace('<</CONTACTLINK>>','</a>') }}
+                    </p>
+                </div>
+            </div>
+            <div class="question">
+                <h4 class="icons icon-arrow-right" data-increment-metric="zendesk.help.question_5_3">{{ dictionary["help.HowCanIAvoidAFraud"] }}</h4>
+                <div class="question-content">
+                        {{ dictionary["help.HowCanIAvoidAFraud_content"] | replace('<<CONTACTLINK>>','<a href="mailto:support@olx.com">') | replace('<</CONTACTLINK>>','</a>') }}
+                </div>
+            </div>
+            <div class="question">
+                <h4 class="icons icon-arrow-right" data-increment-metric="zendesk.help.question_5_4">{{ dictionary["help.WhatAreThingsThatPotentiallyFraudulentBuyersDo"] }}</h4>
+                <div class="question-content">
+                   {{ dictionary["help.WhatAreThingsThatPotentiallyFraudulentBuyersDo_content"] }}
+                </div>
+            </div>
+            <div class="question">
+                <h4 class="icons icon-arrow-right" data-increment-metric="zendesk.help.question_5_5">{{ dictionary["help.WhatShouldIDoIfISuspectAFraudulentBuyer"] }}</h4>
+                <div class="question-content">
+                    <p>
+                        {{ dictionary["help.WhatShouldIDoIfISuspectAFraudulentBuyer_content"] | replace('<<CONTACTLINK>>','<a href="mailto:support@olx.com">') | replace('<</CONTACTLINK>>','</a>') }}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="about-us" class="about-content about help-content-display" {{ 'style="display:block"' if active == 'about' }}>
+
+        <section class="title-section">
+            <h3 class="title">{{ dictionary["about.AboutBrand"] | replace("<<BRAND>>","OLX") }}</h3>
+            <p>{{ dictionary["about.AboutText1"] | replace("<<BRAND>>","OLX") }}.</p>
+            <p>{{ dictionary["about.AboutText2"] | replace("<<BRAND>>","OLX") }}.</p>
+        </section>
+
+        <section class="mission-container">
+            <h4 class="subtitle">{{ dictionary["about.Mission"] }}</h4>
+            <img src="{{ ('/images/desktop/about_us/mission.jpg') | static }}" >
+            <p>{{ dictionary["about.MissionText1"] }}.</p>
+        </section>
+
+        <section class="presence-container">
+            <h4 class="subtitle">{{ dictionary["about.Presence"] }}</h4>
+            <img src="{{ ('/images/desktop/about_us/presence.jpg') | static }}" >
+        </section>
+
+        <section class="history-container">
+            <h4 class="subtitle">{{ dictionary["about.History"] }}</h4>
+            <img src="{{ ('/images/desktop/about_us/timeline-' + selectedLanguage + '.jpg') | static }}" >
+        </section>
+
+        <section class="stats-container">
+            <h4 class="subtitle">{{ dictionary["about.Stats"] }}</h4>
+            <div class="container-box">
+                <div class="box box-left">
+                    <p class="box-title">{{ dictionary["about.Countries"] }}</p>
+                    <p class="box-numbers">{{ dictionary["about.More40"] }}</p>
+                </div>
+                <div class="box box-right">
+                    <p class="box-title">{{ dictionary["about.Languages"] }}</p>
+                    <p class="box-numbers">{{ dictionary["about.More50"] }}</p>
+                </div>
+                <div class="box box-left">
+                    <p class="box-title">{{ dictionary["about.MonthlyActiveUsers"] }}</p>
+                    <p class="box-numbers">{{ dictionary["about.More200"] }}</p>
+                </div>
+                <div class="box box-right">
+                    <p class="box-title">{{ dictionary["about.Employees"] }}</p>
+                    <p class="box-numbers">{{ dictionary["about.More1200"] }}</p>
+                </div>
+                <div class="box box-left border-none">
+                    <p class="box-title">{{ dictionary["about.NewMonthlyListings"] }}</p>
+                    <p class="box-numbers">{{ dictionary["about.More24800"] }}</p>
+                </div>
+                <div class="box box-right border-none">
+                    <p class="box-title">{{ dictionary["about.MonthlyTransactions"] }}</p>
+                    <p class="box-numbers">{{ dictionary["about.More8300"] }}</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="leadership-container">
+            <h4 class="subtitle">{{ dictionary["about.Leadership"] }}</h4>
+            <div class="box box-left">
+                <img src="{{ ('/images/desktop/about_us/martin-sheepbouwer.gif') | static }}" >
+                <div>
+                    <p class="box-title">Martin Scheepbouwer</p>
+                    <p class="box-position">CEO Classifieds{#{ trans('about.CeoClassifieds') }#}</p>
+                </div>
+            </div>
+            <div class="box box-right">
+                <img src="{{ ('/images/desktop/about_us/alec-oxenford.gif') | static }}" >
+                <div>
+                    <p class="box-title">Alec Oxenford</p>
+                    <p class="box-position">Co-founder and Brand Champion</p>
+                </div>
+            </div>
+            <div class="box box-left">
+                <img src="{{ ('/images/desktop/about_us/amarjit-batra.gif') | static }}" >
+                <div>
+                    <p class="box-title">Amarjit Batra</p>
+                    <p class="box-position">CEO Greater India{#{ trans('about.CeoGIndia') }#}</p>
+                </div>
+            </div>
+            <div class="box box-right">
+                <img src="{{ ('/images/desktop/about_us/brad-porteus.gif') | static }}" >
+                <div>
+                    <p class="box-title">Brad Porteus</p>
+                    <p class="box-position">CEO South East Asia{#{ trans('about.CeoSEAsia') }#}</p>
+                </div>
+            </div>
+            <div class="box box-left">
+                <img src="{{ ('/images/desktop/about_us/tim-hilpert.gif') | static }}" >
+                <div>
+                    <p class="box-title">Tim Hilpert</p>
+                    <p class="box-position">CEO Europe & Middle East</p>
+                </div>
+            </div>
+            <div class="box box-right">
+                <img src="{{ ('/images/desktop/about_us/leonardo-rubinstein.jpg') | static }}" >
+                <div>
+                    <p class="box-title">Leonardo Rubinstein</p>
+                    <p class="box-position">CEO Americas</p>
+                </div>
+            </div>
+            <div class="box box-left">
+                <img src="{{ ('/images/desktop/about_us/daan-sanders.jpg') | static }}" >
+                <div>
+                    <p class="box-title">Daan Sanders</p>
+                    <p class="box-position">CEO Africa</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div id="why" class="about-content why help-content-display">
+
+        <section class="title-section">
+            <h3 class="title">{{ dictionary["about.Why"] }}</h3>
+        </section>
+
+        <section>
+            <ul>
+                <li class="icons icon-piggy-bank">
+                    <p class="title-list">{{ dictionary["about.FreeNoCommission"] }}</p>
+                    <p>{{ dictionary["about.CompletelyFree"] }}.</p>
+                </li>
+                <li class="icons icon-like">
+                    <p class="title-list">{{ dictionary["about.ItsSimple"] }}</p>
+                    <p>{{ dictionary["about.ItsEasy"] }}.</p>
+                </li>
+                <li class="icons icon-clock">
+                    <p class="title-list">{{ dictionary["about.ItsFast"] }}</p>
+                    <p>{{ dictionary["about.ItsFast-Reason"] }}.</p>
+                </li>
+                <li class="icons icon-tag">
+                    <p class="title-list">{{ dictionary["about.UniqueDeals"] }}</p>
+                    <p>{{ dictionary["about.SaveMoney"] }}.</p>
+                </li>
+                <li class="icons icon-search">
+                    <p class="title-list">{{ dictionary["about.FindEverything"] }}</p>
+                    <p>{{ dictionary["about.FindEverything1"] }}.</p>
+                </li>
+                <li class="icons icon-lock">
+                    <p class="title-list">{{ dictionary["about.BeControl"] }}</p>
+                    <p>{{ dictionary["about.ControlSteps"] }}.</p>
+                </li>
+                <li class="icons icon-money-round">
+                    <p class="title-list">{{ dictionary["about.MakeMoney"] }}</p>
+                    <p>{{ dictionary["about.MakeMoneyText"] }}.</p>
+                </li>
+                <li class="icons icon-mobile">
+                    <p class="title-list">{{ dictionary["about.AccessAnytime"] }}</p>
+                    <p>{{ dictionary["about.CuttingEdgeApps"] }}.</p>
+                </li>
+                <li class="icons icon-community2">
+                    <p class="title-list">{{ dictionary["about.SupportLocalCommunity"] }}</p>
+                    <p>{{ dictionary["about.SupportLocalCommunity1"] }}.</p>
+                </li>
+                <li class="icons icon-earth">
+                    <p class="title-list">{{ dictionary["about.EcoFriendly"] }}</p>
+                    <p>{{ dictionary["about.EcoFriendlyText"] }}.</p>
+                </li>
+            </ul>
+        </section>
+
+    </div>
+
+    <div id="press" class="about-content press help-content-display">
+
+        <section class="title-section">
+            <h3 class="title">{{ dictionary["about.Press"] }}</h3>
+        </section>
+
+        <section class="user-ads news">
+            <h4 class="subtitle">{{ dictionary["about.InTheNews"] }}</h4>
+            <span class="icons icon-arrow-left arrows" data-navigate="left" data-section="news"></span>
+            <span class="icons icon-arrow-right arrows" data-navigate="right" data-section="news"></span>
+            <div class="slide">
+                <ul class="" data-items-slide>
+                    <li>
+                        <a href="http://www.forbes.com/sites/allenadamson/2014/11/25/what-top-three-factors-lead-to-a-new-brands-success-ask-olx/" target="_BLANK">
+                            <figure class="items-image">
+                                <img src="{{ ('/images/desktop/about_us/press-forbes.jpg') | static }}" alt="" />
+                            </figure>
+                            <h3>What Top Three Factors Lead to a New Brand's Success? Ask OLX</h3>
+                            <p>
+                                New York
+                            </p>
+                            <p class="date">
+                                November 25, 2014, 3:19 PM EDT
+                            </p>
+                        </a>
+                    </li><!--
+                    --><li>
+                        <a href="http://fortune.com/2014/10/29/olx-emerging-markets/" title="" target="_BLANK">
+                            <figure class="items-image">
+                                <img src="{{ ('/images/desktop/about_us/press-fortune.jpg') | static }}" alt="" />
+                            </figure>
+                            <h3>Meet OLX, the biggest Web company you've never heard of</h3>
+                            <p>
+                                New York
+                            </p>
+                            <p class="date">
+                                October 29, 2014, 2:35 PM EDT
+                            </p>
+                        </a>
+                    </li><!--
+                    --><li>
+                        <a href="http://video.foxbusiness.com/v/3799388101001/the-craigslist-of-emerging-markets/" title="" target="_BLANK">
+                            <figure class="items-image">
+                                <img src="{{ ('/images/desktop/about_us/press-fox.jpg') | static }}" alt="" />
+                            </figure>
+                            <h3>The Craigslist of emerging markets</h3>
+                            <p>
+                                New York
+                            </p>
+                            <p class="date">
+                                September 22, 2014
+                            </p>
+                        </a>
+                    </li><!--
+                    --><li>
+                        <a href="https://www.youtube.com/watch?v=egMtJzAF86c" title="" target="_BLANK">
+                            <figure class="items-image">
+                                <img src="{{ ('/images/desktop/about_us/press-cnn.jpg') | static }}" alt="" />
+                            </figure>
+                            <h3>CNN - OLX. Alec Oxenford y su emprendimiento tecnológico</h3>
+                            <p>
+                                Buenos Aires, Argentina
+                            </p>
+                            <p class="date">
+                                Agosto 19, 2014
+                            </p>
+                        </a>
+                    </li><!--
+                    --><li>
+                        <a href="folha.uol.com.br/mercado/2014/11/1548165-olx-e-bomnegociocom-fecham-acordo-para-fortalecer-classificados-on-line.shtml" title="" target="_BLANK">
+                            <figure class="items-image">
+                                <img src="{{ ('/images/desktop/about_us/press-folha.jpg') | static }}" alt="" />
+                            </figure>
+                            <h3>OLX e bomnegócio.com fecham acordo para fortalecer classificados on-line</h3>
+                            <p>
+                                São Paulo, Brazil
+                            </p>
+                            <p class="date">
+                                November 14, 2014
+                            </p>
+                        </a>
+                    </li><!--
+                    --><li>
+                        <a href="http://yourstory.com/2013/08/naspers-backed-olx-claims-to-have-60-market-share-in-indian-online-classifieds/" title="" target="_BLANK">
+                            <figure class="items-image">
+                                <img src="{{ ('/images/desktop/about_us/press-yourstory.jpg') | static }}" alt="" />
+                            </figure>
+                            <h3>A sharp focus on C2C commerce helps OLX India achieve</h3>
+                            <p>
+                                India
+                            </p>
+                            <p class="date">
+                                August 28, 2013
+                            </p>
+                        </a>
+                    </li><!--
+                    --><li>
+                        <a href="http://businesstoday.co.ke/news/news/1416837689/valuable-lesson-bred-olx-kenya-success" title="" target="_BLANK">
+                            <figure class="items-image">
+                                <img src="{{ ('/images/desktop/about_us/press-businesstoday.jpg') | static }}" alt="" />
+                            </figure>
+                            <h3>Valuable lessons that bred OLX's huge success</h3>
+                            <p>
+                                Kenya
+                            </p>
+                            <p class="date">
+                                November 24, 2014
+                            </p>
+                        </a>
+                    </li><!--
+                    --><li>
+                        <a href="http://ain.ua/2014/11/19/551039" title="" target="_BLANK">
+                            <figure class="items-image">
+                                <img src="{{ ('/images/desktop/about_us/press-ain.jpg') | static }}" alt="" />
+                            </figure>
+                            <h3>Sergey Gapochenko: How OLX.ua (ex-Slando) in crisis</h3>
+                            <p>
+                                Ukraine
+                            </p>
+                            <p class="date">
+                                November 19, 2014
+                            </p>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </section>
+        <section class="user-ads press">
+            <h4 class="subtitle">{{ dictionary["about.PressReleases"] }}</h4>
+            <span class="icons icon-arrow-left arrows" data-navigate="left" data-section="press"></span>
+            <span class="icons icon-arrow-right arrows" data-navigate="right" data-section="press"></span>
+            <div class="slide">
+                <ul class="" data-items-slide>
+                    <li>
+                        <a href="http://www.businesswire.com/news/home/20141222005051/en/OLX-Celebrates-Successful-2014-Release-Year-End-Metrics#.VLAbZorF8gB" title="" target="_BLANK">
+                            <h3>OLX Celebrates Successful 2014 with Release of New, Year-End Metrics</h3>
+                            <p class="items-price">
+                                December 22, 2014
+                            </p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="http://www.businesswire.com/news/home/20141209006439/en/OLX-Partners-Facebook-Offer-Free-Access-Online#.VLAf_YrF8gB" title="" target="_BLANK">
+                            <h3>OLX Partners with Facebook to Offer Free Access to Online Classifieds in Emerging Markets via Internet.org</h3>
+                            <p class="items-price">
+                                December 09, 2014
+                            </p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="http://www.businesswire.com/news/home/20140916005335/en/OLX-Announces-Expansion-Eleven-International-Markets#.VLRHomSG_9t" title="" target="_BLANK">
+                            <h3>OLX Surpasses 200 Million Active Monthly Users Worldwide.</h3>
+                            <p class="items-price">
+                                October 29, 2014
+                            </p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="http://www.businesswire.com/news/home/20140916005335/en/OLX-Announces-Expansion-Eleven-International-Markets#.VGIMr76nDjI" title="" target="_BLANK">
+                            <h3>OLX Announces Expansion in Eleven International Markets.</h3>
+                            <p class="items-price">
+                                September 16, 2014
+                            </p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="http://www.businesswire.com/news/home/20140815005044/en/OLX-Releases-Updated-Android-App-Optimized-Wireless#.VLAiQ4rF8gB" title="" target="_BLANK">
+                            <h3>OLX Releases Updated Android App Optimized for All Wireless Connection Speeds</h3>
+                            <p class="items-price">
+                                August 15, 2014
+                            </p>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+        </section>
+        <section class="user-ads sources">
+            <h4 class="subtitle">{{ dictionary["about.MediaResources"] }}</h4>
+            <div class="slide">
+                <ul class="" data-items-slide>
+                    <li>
+                        <a href="{{ '/images/mkt/olx-logo.zip' | static }}" title="{{ dictionary["about.AboutBrand"] | replace("<<BRAND>>","OLX") }}" target="_BLANK">
+                            <figure class="items-image">
+                                <img src="{{ '/images/desktop/about_us/logo.jpg' | static }}" alt="{{ dictionary["about.AboutBrand"] | replace("<<BRAND>>","OLX") }}" />
+                            </figure>
+                            <h3>Logotype</h3>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+        </section>
+
+
+
+    </div>
+
+</div>
+
+{% view 'partials/tracking' %}

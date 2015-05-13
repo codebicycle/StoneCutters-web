@@ -41,7 +41,7 @@ module.exports = {
             image: 'home-colombia'
         },
         post_banner: {
-            image: 'post-colombia-woman'
+            image: 'post-colombia-phone'
         },
         videos: [
             {
@@ -254,6 +254,7 @@ module.exports = {
     },
     chat: {
         enabled: true,
+        department: 81143,
         sections: {
             'categories#list': {
                 enabled: true

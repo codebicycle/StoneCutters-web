@@ -239,6 +239,7 @@ module.exports = {
     },
     chat: {
         enabled: true,
+        department: 80801,
         sections: {
             'post#flow': {
                 enabled: true
@@ -297,7 +298,7 @@ module.exports = {
     },
     notifications: {
         desktop: {
-            enabled: false
+            enabled: true
         },
         html5: {
             enabled: false

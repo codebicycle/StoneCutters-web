@@ -1,48 +1,50 @@
+{% set sections = 0 %}
 {% if location.metadata.seo.topLocations.firstLevel.entities %}
-    {% set firstLevel = location.metadata.seo.topLocations.firstLevel.entities %}
+    {% set cities = location.metadata.seo.topLocations.firstLevel.entities %}
+    {% set sections = sections + 1 %}
 {% endif %}
 {% if location.metadata.seo.topLocations.secondLevel.entities %}
-    {% set secondLevel = location.metadata.seo.topLocations.secondLevel.entities %}
+    {% set states = location.metadata.seo.topLocations.secondLevel.entities %}
+    {% set sections = sections + 1 %}
 {% endif %}
-
-{% set totalColumns = 2 %}
-<div class="title-bar">
-    <h3 class="title">{{ dictionary["selectregion.SelectCityStateIn"] | replace('<<COUNTRY>>',location.name)}}</h3>
-</div>
-{% if firstLevel %}
-    {% set itemsPerColumn = ( ( (firstLevel.length + 1) / totalColumns ) | round(0, 'ceil') ) %}
-    <div class="popular-topcities">
-        <h3 class="popular-title">{{ dictionary["popularsearchesbody.PopularCities"] }}</h3>
-        <ul class="popular-list popular-list-first">
-            {% for city in firstLevel %}
-                <li><a href="{{ '/' | link({location: city.url}) }}">{{ city.anchor }}</a></li>
-            {% if loop.index%itemsPerColumn == 0 %}
-                </ul>
-                <ul class="popular-list">
-            {% endif%}
-            {% endfor %}
-            <li>
-                <a href="{{ (('all-states/' + currentState.hostname) | link({location: location.url})) if currentState.hostname else ('all-states/' | link({location: location.url})) }}">
-                    {{ dictionary["countryoptions.OtherCities"] }}
-                </a>
-            </li>
-        </ul>
-    </div>
-{% endif %}
-
-{% if secondLevel %}
-    {% set itemsPerColumn = ( ( (secondLevel.length + 1 ) / totalColumns ) | round(0, 'ceil') ) %}
-    <div class="popular-states">
-        <h3 class="popular-title">{{ dictionary["misc.States"] if location.metadata.seo.topLocations.secondLevel.name == 'state' else ('Otras Ciudades en ' + currentState.name) }}</h3>
-        <ul class="popular-list popular-list-first">
-            {% for state in secondLevel %}
-                <li><a href="{{ '/' | link({location: state.url}) }}">{{ state.anchor }}</a></li>
-                {% if loop.index%itemsPerColumn == 0 %}
+{% if cities %}
+    {% set columns = ((cities.length / (4 / sections)) | round(0, 'ceil')) %}
+    <div class="modal-section">
+        <h4 class="modal-section-title">{{ dictionary["popularsearchesbody.PopularCities"] }}</h4>
+        <div class="modal-columns">
+            {% for city in cities %}
+                {% if loop.first or loop.index % columns == 1 %}
+                    <ul class="modal-column">
+                {% endif %}
+                        <li class="modal-column-item"><a href="{{ '/' | link({location: city.url}) }}" class="modal-column-link" title="{{ city.anchor }}">{{ city.anchor }}</a></li>
+                {% if loop.last or loop.index % columns == 0 %}
+                    {% if loop.last %}
+                        <li class="modal-column-item"><a href="{{ (('all-states/' + currentState.hostname) | link({location: location.url})) if currentState.hostname else ('all-states/' | link({location: location.url})) }}" class="modal-column-link" title='{{ dictionary["countryoptions.OtherCities"] }}'>{{ dictionary["countryoptions.OtherCities"] }}</a></li>
+                    {% endif %}
                     </ul>
-                    <ul class="popular-list">
-                {% endif%}
+                {% endif %}
             {% endfor %}
-            <li><a href="{{ '/all-states' | link }}">{{ dictionary["countryoptions.AllDepartaments"] }}</a></li>
-        </ul>
+        </div>
     </div>
 {% endif %}
+{% if states %}
+    {% set columns = ((states.length / (4 / sections)) | round(0, 'ceil')) %}
+    <div class="modal-section">
+        <h4 class="modal-section-title">{{ dictionary["misc.States"] if location.metadata.seo.topLocations.secondLevel.name == 'state' else dictionary["countryoptions.OtherCitiesInRegion"] | replace("<<REGION>>", currentState.name) }}</h4>
+        <div class="modal-columns">
+            {% for state in states %}
+                {% if loop.first or loop.index % columns == 1 %}
+                    <ul class="modal-column">
+                {% endif %}
+                        <li class="modal-column-item"><a href="{{ '/' | link({location: state.url}) }}" class="modal-column-link" title="{{ state.anchor }}">{{ state.anchor }}</a></li>
+                {% if loop.last or loop.index % columns == 0 %}
+                    {% if loop.last %}
+                        <li class="modal-column-item"><a href="{{ '/all-states' | link }}" class="modal-column-link" title='{{ dictionary["countryoptions.AllDepartaments"] }}'>{{ dictionary["countryoptions.AllDepartaments"] }}</a></li>
+                    {% endif %}
+                    </ul>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+{% endif %}
+

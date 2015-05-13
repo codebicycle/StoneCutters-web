@@ -19,7 +19,8 @@ module.exports = {
     sitemapByDate: middlewares(sitemapByDate),
     thanks: middlewares(thanks),
     shops: middlewares(shops),
-    shop: middlewares(shop)
+    shop: middlewares(shop),
+    safety: middlewares(safety)
 };
 
 function terms(params, callback) {
@@ -350,6 +351,22 @@ function shop(params, callback) {
         var platform = this.app.session.get('platform');
 
         if (platform !== 'html4') {
+            return helpers.common.redirect.call(this, '/');
+        }
+        callback(null, {});
+    }
+}
+
+function safety(params, callback) {
+    helpers.controllers.control.call(this, params, controller);
+
+    function controller() {
+        var platform = this.app.session.get('platform');
+        var location = this.app.session.get('location');
+
+        var isEnabledSafetyTipsLanding = helpers.features.isEnabled.call(this, 'safetyTipsLanding', platform, location.url);
+
+        if (!isEnabledSafetyTipsLanding) {
             return helpers.common.redirect.call(this, '/');
         }
         callback(null, {});

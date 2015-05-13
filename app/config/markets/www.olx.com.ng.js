@@ -271,7 +271,10 @@ module.exports = {
         }
     },
     flagItem: {
-        enabled: true
+        enabled: true,
+        withReason: {
+            enabled: true
+        }
     },
     userzoom: {
         enabled: false,
@@ -311,6 +314,16 @@ module.exports = {
                 enabled: false,
                 hint: 'You need a valid email address to sell on OLX',
                 icon: 'icon-exclamation'
+            }
+        },
+    },
+    safetyTips: {
+        html4: {
+            call: {
+                enabled: true
+            },
+            sms: {
+                enabled: true
             }
         }
     }

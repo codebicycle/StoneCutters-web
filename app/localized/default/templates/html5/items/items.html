@@ -4,7 +4,7 @@
             <div {% if item.thumbnail %} style="background-image:url({{ item.thumbnail if nav.current == 'show' else item.fullImage }});" {% endif %} data-fullimg="{{ item.fullImage }}" class="image{{ ' filled' if item.thumbnail }} {{ 'showig' if nav.current == 'showig' }}">
             </div>
             <p class="datetime">
-                {{ item.date.since.day if item.date.since.day }} {{ dictionary[item.date.since.dictionary] }}{{ (', ' + item.date.since.hour) if item.date.since.hour }}
+                {{ item.date.since.day | countFormat if item.date.since.day }} {{ dictionary[item.date.since.dictionary] }}{{ (', ' + item.date.since.hour) | countFormat if item.date.since.hour }}
                 {% if item.displayLocation %}
                     {{ dictionary["crm_new_version.RenameCategory_3"] }} {{ item.neighborhood if item.neighborhood else item.displayLocation }}
                 {% endif %}
@@ -34,7 +34,7 @@
                     {% endif %}
                 </p>
                 <h2 class="title">{{ item.title }}</h2>
-                <div class="price">{{ item.price.displayPrice }}</div>
+                <div class="price">{{ item.price.displayPrice | countFormat }}</div>
             </a>
         </li>
     {% endfor %}

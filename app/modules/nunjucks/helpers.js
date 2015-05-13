@@ -3,6 +3,7 @@
 var _ = require('underscore');
 var dateformat = require('dateformat');
 var helpers = require('../../helpers');
+var config = require('../../../shared/config');
 
 module.exports = function(nunjucks) {
 
@@ -38,12 +39,14 @@ module.exports = function(nunjucks) {
         return dateformat(_date, 'dd/mm/yyyy');
     }
 
-    function dateDiff(start, end, format) { 
+    function dateDiff(start, end, format) {
       return helpers.common.dateDiff.call(this.ctx, start, end, format);
     }
 
     function countFormat(count) {
-        return count.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+        var counter =  count.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+        var digits = config.getForMarket(this.ctx.app.session.get('location').url, ['layoutOptions', 'digits'], {});
+        return digits ? helpers.numbers.translate(counter, {to: digits}) : counter;
     }
 
     function editSlug(slug, itemId) {
@@ -67,7 +70,7 @@ module.exports = function(nunjucks) {
     function statics() {
         return helpers.common.static.apply(this.ctx, arguments);
     }
-    
+
     function rangeToArray(start, end, options) {
         var array = [];
         var i;
@@ -115,7 +118,7 @@ module.exports = function(nunjucks) {
                             index: i,
                             type: 'shop'
                         });
-                        shopIndex += 1; 
+                        shopIndex += 1;
                     }
                     else {
                         shuffle.push({
@@ -127,14 +130,14 @@ module.exports = function(nunjucks) {
                 }
             }
         }
-        
+
         for (i = itemIndex; i < items.length; i++) {
             shuffle.push({
                 index: i,
                 type: 'item'
             });
         }
- 
+
         return shuffle;
     }
 
@@ -149,7 +152,7 @@ module.exports = function(nunjucks) {
                     location = shops[i].location;
                     locations = locations + location.lat + ',' + location.lon + '|';
                 }
-            }            
+            }
         }
         return locations;
     }

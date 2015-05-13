@@ -5,16 +5,16 @@
     {% include (template + '/landings/asyncpickup/progressbar.html') %}
     <div class="edit-box">
         <p>Venderás tu <b>{{ item.title }}</b> por <b data-price>$2000</b></p>
-        <p>Las dimensiones de este artículo son: <b data-dimensions>40cm x 40cm 45cm</b><span class="edit icons icon-edit" data-step="2">editar</span></p>
+        <p>Las dimensiones de este artículo son: <b data-dimensions>40cm x 40cm 45cm</b><span class="edit icons icon-edit" data-step="2" data-edit="item-info">editar</span></p>
 
     </div>
 
     <div class="edit-box buyer-data">
-        <p>Lo comprará <b data-buyer>Juan Carlos (juan.carlos@gmail.com)</b><span class="edit icons icon-edit" data-step="3">editar</span></p>
+        <p>Lo comprará <b data-buyer></b><span class="edit icons icon-edit" data-step="3" data-edit="buyer-info">editar</span></p>
     </div>
 
     <div class="edit-box">
-        <p>Nos comunicamos con vos escribiendote a <b>{{ sellerEmail }}</b> <span data-seller></span><span class="edit icons icon-edit" data-step="2">editar</span></p>
+        <p>Nos comunicamos con vos escribiendote a <b>{{ sellerEmail }}</b> <span data-seller></span><span class="edit icons icon-edit" data-step="2" data-edit="seller-info">editar</span></p>
 
     </div>
 

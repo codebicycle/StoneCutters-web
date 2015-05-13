@@ -457,7 +457,10 @@ module.exports = {
         }
     },
     flagItem: {
-        enabled: true
+        enabled: true,
+        withReason: {
+            enabled: false
+        }
     },
     userzoom: {
         enabled: false,
@@ -467,6 +470,16 @@ module.exports = {
                 file: 'QzMyOFQxMSAg',
                 t: 'uz_til',
                 delay: 30000
+            }
+        }
+    },
+    safetyTips: {
+        html4: {
+            call: {
+                enabled: true
+            },
+            sms: {
+                enabled: true
             }
         }
     }
