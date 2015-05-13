@@ -6,7 +6,9 @@ var middlewares = require('../middlewares');
 var helpers = require('../helpers');
 var config = require('../../shared/config');
 var Item = require('../models/item');
+var Conversation = require('../models/conversation');
 var Adapter = require('../../shared/adapters/base');
+var translations = require('../../shared/translations');
 
 module.exports = {
     didyousell: middlewares(didyousell),
@@ -26,22 +28,36 @@ function didyousell(params, callback) {
         var itemId = params.itemid;
         var languages = this.app.session.get('languages');
         var platform = this.app.session.get('platform');
+        var location = this.app.session.get('location').url;
         var newItemPage = helpers.features.isEnabled.call(this, 'newItemPage');
         var itemDelete = params.answer;
+        var hash = params.hash;
+        var promise = asynquence().or(error.bind(this))
+            .then(redirect.bind(this));
         var anonymousItem;
+        var conversation;
 
-        var redirect = function(done) {
+        if (itemDelete === 'yes') {
+            promise.then(deleteItem.bind(this));
+        }
+        
+        if (hash && itemDelete === 'yes') {
+            promise.then(sendMsg.bind(this));
+        }
+        
+        promise.then(prepare.bind(this))
+            .then(fetch.bind(this))
+            .val(success.bind(this));
+
+        function redirect(done) {
             if (platform === 'wap') {
                 done.abort();
                 return helpers.common.redirect.call(this, '/');
             }
             done();
-        }.bind(this);
+        }
 
-        var deleteItem = function(done) {
-            if (itemDelete !== 'yes') {
-                return done();
-            }
+        function deleteItem(done) {
             helpers.dataAdapter.post(this.app.req, '/items/' + itemId + '/delete', {
                 query: {
                     securityKey: securityKey,
@@ -49,9 +65,24 @@ function didyousell(params, callback) {
                 },
                 cache: false
             }, done.errfcb);
-        }.bind(this);
+        }
 
-        var prepare = function(done) {
+        function sendMsg(done) {
+            var dictionary = translations.get(this.app.session.get('selectedLanguage'));
+            conversation = new Conversation({
+                hash: params.hash.replace(/ /g,'+'),
+                platform: platform,
+                location: location,
+                conversation_type: 'hash',
+                message: dictionary['misc.BeenSold']
+            }, {
+                app: this.app
+            });
+            conversation.reply(conversation);
+            done();
+        }
+
+        function prepare(done) {
             if (user) {
                 params.token = user.token;
             }
@@ -73,9 +104,9 @@ function didyousell(params, callback) {
             delete params.title;
             delete params.sk;
             done();
-        }.bind(this);
+        }
 
-        var fetch = function(done) {
+        function fetch(done) {
             this.app.fetch({
                 item: {
                     model: 'Item',
@@ -84,9 +115,9 @@ function didyousell(params, callback) {
             }, {
                 readFromCache: false
             }, done.errfcb);
-        }.bind(this);
+        }
 
-        var success = function(res, body) {
+        function success(res, body) {
             var item = res.item;
 
             callback(null, {
@@ -96,18 +127,12 @@ function didyousell(params, callback) {
                 answer: params.answer,
                 sent: params.sent,
             });
-        }.bind(this);
+        }
 
-        var error = function(err, res) {
+        function error(err, res) {
             return helpers.common.error.call(this, err, res, callback);
-        }.bind(this);
+        }
 
-        asynquence().or(error)
-            .then(redirect)
-            .then(deleteItem)
-            .then(prepare)
-            .then(fetch)
-            .val(success);
     }
 }
 

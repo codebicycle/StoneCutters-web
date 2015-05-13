@@ -502,6 +502,7 @@ module.exports = {
     'misc.AllSet_Mob': '\u092A\u0942\u0930\u094D\u0923 \u0924\u092F\u093E\u0930 \u0906\u0939\u0947!',
     'misc.AlreadyAccount': '\u091C\u0930 \u0924\u0941\u092E\u094D\u0939\u0940 \u0905\u0917\u094B\u0926\u0930\u091A \u0916\u093E\u0924\u0947 \u0909\u0918\u0921\u0932\u0947\u0932\u0947 \u0905\u0938\u0947\u0932 \u0924\u0930, <<LINK>>  \u0932\u0949\u0917 \u0907\u0928 \u0915\u0930\u0923\u094D\u092F\u093E\u0938\u093E\u0920\u0940 \u0907\u0925\u0947 \u091F\u093F\u091A\u0915\u0940 \u092E\u093E\u0930\u093E<</LINK>>',
     'misc.BackToStart_Mob': '\u092A\u094D\u0930\u093E\u0930\u0902\u092D\u093E\u0915\u0921\u0947 \u092A\u0930\u0924',
+    'misc.BeenSold': 'It has been sold',
     'misc.BestSupport': 'We want to make sure we are giving you the best support',
     'misc.BigHug-ZA': 'Your friend enjoyed a big hug from the OLX team, by selling his unused items on OLX',
     'misc.Brand': '\u092C\u094D\u0930\u0945\u0902\u0921',

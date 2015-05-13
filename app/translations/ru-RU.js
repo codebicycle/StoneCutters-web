@@ -502,6 +502,7 @@ module.exports = {
     'misc.AllSet_Mob': '\u0412\u0441\u0435 \u0433\u043E\u0442\u043E\u0432\u043E!',
     'misc.AlreadyAccount': 'If you already have an account, <<LINK>>  click here to log in<</LINK>>',
     'misc.BackToStart_Mob': '\u041A \u043D\u0430\u0447\u0430\u043B\u0443',
+    'misc.BeenSold': 'It has been sold',
     'misc.BestSupport': 'We want to make sure we are giving you the best support',
     'misc.BigHug-ZA': 'Your friend enjoyed a big hug from the OLX team, by selling his unused items on OLX',
     'misc.Brand': '\u041C\u0430\u0440\u043A\u0430',

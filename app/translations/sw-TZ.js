@@ -502,6 +502,7 @@ module.exports = {
     'misc.AllSet_Mob': 'Zote ziko sawa!',
     'misc.AlreadyAccount': 'Kama tayari una akaunti, <<LINK>>  bonyeza hapa ili kuingia<</LINK>>',
     'misc.BackToStart_Mob': 'Rejea mpaka mwanzo',
+    'misc.BeenSold': 'It has been sold',
     'misc.BestSupport': 'Tunataka kuhakikisha sisi hukupa msaada bora',
     'misc.BigHug-ZA': 'Rafiki yako alifurahia ukumbatio kubwa kutoka kwa timu ya OLX, kwa kuuza vitu wake asivyotumia kwenye OLX',
     'misc.Brand': 'Chapa',
