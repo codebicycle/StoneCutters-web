@@ -63,7 +63,18 @@ module.exports = Base.extend({
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();
+        var errors = {};
+        
+        if (!this.validate()) {
+            this.fields.forEach(function each(field) {
+                var $field = this.$('[name="' + field.name + '"]');
 
+                if ($field.hasClass('error')) {
+                    errors[field.name] = field.label; // Check for translation since we are just passing the field label as error
+                }
+            }.bind(this));
+        }
+        this.parentView.$el.trigger('optionalsSubmit', [errors]);
         this.$el.addClass('disabled');
     },
     onChangeCategoryClick: function(event) {
@@ -159,7 +170,6 @@ module.exports = Base.extend({
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();
-        
         if (this.validate()) {
             this.parentView.$el.trigger('flow', [this.id, '']);
         }
