@@ -198,7 +198,7 @@ module.exports = Base.extend({
             type: 'GET',
             url: 'http://tracking.olx-st.com/h/minv/',
             dataType: 'json',
-            timeout: 2000,
+            timeout: 4000,
             cache: false,
             data: query
         }, options || {});
