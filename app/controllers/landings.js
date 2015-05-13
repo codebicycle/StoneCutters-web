@@ -221,7 +221,7 @@ function asyncseller(params, callback) {
                     t: Math.ceil((_.now() / 1000))
                 }
             }, {
-                timeout: 2000
+                timeout: 4000
             }, function() { /* ignore callback */} );
 
             if (platform === 'wap' || !params.itemId || !params.email) {
@@ -329,7 +329,7 @@ function asyncbuyer(params, callback) {
                     t: Math.ceil((_.now() / 1000))
                 }
             }, {
-                timeout: 2000
+                timeout: 4000
             }, function() { /* ignore callback */} );
 
             if (platform === 'wap' || !params.transactionId || !params.itemId) {
