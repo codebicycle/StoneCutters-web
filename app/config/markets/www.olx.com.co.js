@@ -43,36 +43,6 @@ module.exports = {
         post_banner: {
             image: 'post-colombia-phone'
         },
-        videos: [
-            {
-                title: 'OLX Colombia - Patrón Bermúdez - Celular',
-                id: 'vOlDNW5BdGU'
-            },
-            {
-                title: 'OLX Colombia - Gafas - Vender es fácil',
-                id: 'LenRRiECAvw'
-            },
-            {
-                title: 'En OLX todos pueden vender',
-                id: '77hkuVlT_78'
-            },
-            {
-                title: 'OLX Colombia - Bicicleta - Vender es fácil',
-                id: 'Ljii4NbsHKA'
-            },
-            {
-                title: 'OLX Colombia - Celular - Vender es fácil',
-                id: 'y6YlZcHh7Ew'
-            },
-            {
-                title: 'OLX Colombia - Jorge "Patrón" Bermúdez - Vender es fácil',
-                id: 'H-pLeNmxMWs'
-            },
-            {
-                title: 'OLX Colombia - Poker - Vender es fácil',
-                id: 'KuwFa8fSuiM'
-            }
-        ],
         thanksPage: {
             videoUrl: 'thank-you-video-es'
         }
@@ -270,15 +240,6 @@ module.exports = {
         },
         html5: {
             enabled: true
-        }
-    },
-
-    notifications: {
-        desktop: {
-            enabled: false
-        },
-        html5: {
-            enabled: false
         }
     },
     validator: {
