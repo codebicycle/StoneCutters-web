@@ -326,5 +326,13 @@ module.exports = {
                 enabled: true
             }
         }
+    },
+    registerWithConfirmation: {
+        html5: {
+            enabled: true
+        },
+        html4: {
+            enabled: true
+        }
     }
 };

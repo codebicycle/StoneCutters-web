@@ -346,5 +346,19 @@ module.exports = {
                 enabled: false
             }
         }
+    },
+    registerWithConfirmation: {
+        desktop: {
+            enabled: true
+        },
+        html5: {
+            enabled: false
+        },
+        html4: {
+            enabled: false
+        },
+        wap: {
+            enabled: false
+        }
     }
 };
