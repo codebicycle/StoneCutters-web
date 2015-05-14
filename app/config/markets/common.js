@@ -346,5 +346,19 @@ module.exports = {
                 enabled: false
             }
         }
+    },
+    showBetterDeal: {
+        desktop: {
+            enabled: false
+        },
+        html4: {
+            enabled: false
+        },
+        html5: {
+            enabled: false
+        },
+        wap: {
+            enabled: false
+        }
     }
 };

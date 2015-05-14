@@ -329,5 +329,11 @@ module.exports = {
                 enabled: false
             }
         }
+    },
+    showBetterDeal: {
+        html4: {
+            enabled: true,
+            categories: [800, 830]
+        }
     }
 };

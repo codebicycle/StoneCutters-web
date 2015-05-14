@@ -35,12 +35,21 @@
 }
 #itemPage #itemPhotos {
 	margin: 16px 0 0 0;
+	position: relative;
 }
 #itemPage #itemPhotos span {
 	display: block;
 	text-align: left;
 	font-size: 11.2px;
 }
+
+#itemPage #itemPhotos img.betterDealImg {
+	position: absolute;
+	z-index: 100;
+	top: 0;
+ 	left: 0;
+}
+
 #itemPage #itemPhotos, #itemPage #itemPhotos a {
 	position: relative;
 	text-align: center;
@@ -68,16 +77,16 @@
 	float: left;
 }
 #galeryPagination a.arrow.leftA {
-	background: url(imageUrl/images/html4/leftA.png) no-repeat;   
+	background: url(imageUrl/images/html4/leftA.png) no-repeat;
 }
 #galeryPagination a.arrow.leftD {
-	background: url(imageUrl/images/html4/leftD.png) no-repeat;   
+	background: url(imageUrl/images/html4/leftD.png) no-repeat;
 }
 #galeryPagination a.arrow.rightA {
-	background: url(imageUrl/images/html4/rightA.png) no-repeat;   
+	background: url(imageUrl/images/html4/rightA.png) no-repeat;
 }
 #galeryPagination a.arrow.rightD {
-	background: url(imageUrl/images/html4/rightD.png) no-repeat;   
+	background: url(imageUrl/images/html4/rightD.png) no-repeat;
 }
 #galeryPagination .center {
 	width: 66px;
@@ -102,7 +111,7 @@
 }
 #itemPage #centerBtns a {
 	display: inline-block;
-	font-size: 13px; 
+	font-size: 13px;
 }
 #itemPage #centerBtns a.flag-item {
 	margin-top: 10px;

@@ -20,7 +20,13 @@ module.exports = Base.extend({
         var platform = this.app.session.get('platform');
         var flagItem = config.getForMarket(location.url, ['flagItem']);
         var safetyTips = config.getForMarket(location.url, ['safetyTips', platform]);
+        var showBetterDealOptions = config.getForMarket(location.url, ['showBetterDeal', platform]);
         data.category_name = this.options.category_name;
+        var showBetterDeal = false;
+
+        if(showBetterDealOptions.enabled && _.contains(showBetterDealOptions.categories, data.item.category.parentId)) {
+            showBetterDeal = true;
+        }
 
         if(sellerProfileEnabled && data.item.user && data.item.user.firstActivityDate ) {
 
@@ -30,7 +36,6 @@ module.exports = Base.extend({
                 formatMonth = 'messages_date_format.9' + data.item.user.firstActivityDate.month;
             }
         }
-
 
         this.userzoom = new userzoom({}, {
             app: this.app
@@ -46,6 +51,7 @@ module.exports = Base.extend({
             data.item.descriptionReplace = data.item.description.replace(/(<([^>]+)>)/ig,'');
         }
 
+
         return _.extend({}, data, {
             breadcrumb: breadcrumb.get.call(this, data),
             flagItem: flagItem,
@@ -53,7 +59,8 @@ module.exports = Base.extend({
             userzoom: this.userzoom.getParams(),
             sellerProfileEnabled: sellerProfileEnabled,
             safetyTips: safetyTips,
-            formatMonth: formatMonth
+            formatMonth: formatMonth,
+            showBetterDeal: showBetterDeal
         });
     }
 });
