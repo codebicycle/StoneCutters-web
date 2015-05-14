@@ -40,27 +40,14 @@ module.exports = Base.extend({
     },
     onPostClick: function() {
         var currentRoute = this.app.session.get('currentRoute');
-        var controller = currentRoute.controller;
-        var action = currentRoute.action;
-        var pageName;
 
-        if (controller === 'items' && action === 'show') {
+        if (currentRoute.controller === 'items' && currentRoute.action === 'show') {
             this.app.sixpack.convert(this.app.sixpack.experiments.desktopDGD23ShowSimplifiedReplyForm, 'publish');
         }
 
         this.app.sixpack.convert(this.app.sixpack.experiments.growthPostingButtonWording);
 
-        if (controller === 'categories' && action === 'list') {
-            pageName = 'Home';
-        }
-        else if (controller === 'users' && action === 'myads') {
-            pageName = 'MyAds';
-        }
-        if (pageName) {
-            Mixpanel.track.call(this, 'Post Started', {
-                'From' : pageName
-            });
-        }
+        Mixpanel.track.call(this, 'Post Started');
     },
     onPostingStart: function() {
         this.toggleElements(false);

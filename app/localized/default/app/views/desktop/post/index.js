@@ -13,6 +13,7 @@ var config = require('../../../../../../../shared/config');
 var statsd = require('../../../../../../../shared/statsd')();
 var Sixpack = require('../../../../../../../shared/sixpack');
 var translations = require('../../../../../../../shared/translations');
+var Mixpanel = require('../../../../../../modules/tracking/trackers/mixpanel');
 
 module.exports = Base.extend({
     id: 'posting-view',
@@ -59,7 +60,8 @@ module.exports = Base.extend({
     categorySuggestionGetCategory: categorySuggestionGetCategory,
     categorySuggestionDecideIU: categorySuggestionDecideIU,
     categorySuggestionBuildIU: categorySuggestionBuildIU,
-    categorySuggestionMetric: categorySuggestionMetric
+    categorySuggestionMetric: categorySuggestionMetric,
+    MixpanelTrack: MixpanelTrack
 });
 
 function initialize() {
@@ -221,6 +223,12 @@ function onSubcategorySubmit(event, subcategory) {
     this.$(this.selectors.contact).trigger('fieldsChange', [subcategory.fields.contactInformation]);
     if (!this.edited) {
         this.handleBack();
+    }
+    if (!this.editing) {
+        Mixpanel.track.call(this, 'Choose a Category', {
+            'Category Id': this.item.get('category').id,
+            'Category Name': this.categorySuggestionGetCategory(this.item.get('category').id).subcategory.name
+        });
     }
 }
 
@@ -387,6 +395,8 @@ function onSubmit(event) {
     event.stopPropagation();
     event.stopImmediatePropagation();
 
+    this.MixpanelTrack('Post Submitted');
+
     var promise = asynquence().or(fail.bind(this))
         .then(prepare.bind(this))
         .then(check.bind(this))
@@ -456,6 +466,10 @@ function onSubmit(event) {
 
         this.app.sixpack.convert(this.app.sixpack.experiments.growthCategorySuggestion);
         this.categorySuggestionMetric(['post']);
+
+        this.MixpanelTrack('Post Complete', {
+            'Item id': this.item.get('id')
+        });
 
         helpers.common.redirect.call(this.app.router, successPage + this.item.get('id') + '?sk=' + this.item.get('securityKey'), null, {
             status: 200
@@ -638,11 +652,13 @@ function categorySuggestionGetCategory(id) {
         if (subcat && cat) {
             category = {
                 id: subcat.attributes.parentId,
-                name: cat.get('trName')
+                trName: cat.get('trName'),
+                name: cat.get('name')
             };
             subcategory = {
                 id: id,
-                name: subcat.get('trName')
+                trName: subcat.get('trName'),
+                name: subcat.get('name')
             };
         }
     }
@@ -701,9 +717,9 @@ function categorySuggestionBuildIU(response, initial) {
         strHtml += this.renderTemplate('#template-category', {
             classname: options.classname,
             categoryid: category.category.id,
-            categoryname: category.category.name,
+            categoryname: category.category.trName,
             categorydata: category.category.id + ',' + category.subcategory.id,
-            subcategoryname: category.subcategory.name,
+            subcategoryname: category.subcategory.trName,
             buttontext: options.buttontext,
             action: options.action,
             index: ++index + '/' + responseLength
@@ -783,6 +799,27 @@ function onPopState(event) {
         return;
     }
     history.pushState(null, '', window.location.pathname + window.location.search);
+}
+
+function MixpanelTrack(prop, val) {
+    if (this.editing) {
+        return;
+    }
+
+    var values = {
+        'Price': this.$('#field-priceC').val() || '',
+        'Number of Photos': this.item.get('images').length,
+        'Category Id': this.item.get('category').id || 0,
+        'Category Name': this.categorySuggestionGetCategory(this.item.get('category').id).subcategory.name || '',
+        'Neighborhood': this.$('#field-neighborhood :selected[value!=""]').text() || '',
+        'Tipo': this.$('#posting-optionals-view .field-wrapper:first-child select :selected[value!=""]').text() || '',
+        'Location': this.$('#field-city :selected[value!=""]').text() || ''
+    };
+    if (val) {
+        values = _.defaults(val, values);
+    }
+
+    Mixpanel.track.call(this, prop, values);
 }
 
 module.exports.id = 'post/index';
