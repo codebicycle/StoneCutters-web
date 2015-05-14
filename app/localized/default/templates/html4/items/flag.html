@@ -4,25 +4,27 @@
 {% if form and form.errors %}{{ Errors(form.errors) }}{% endif %}
 <div class="flag-item-form">
     <form action="{{ ['/items/', item.id, '/flag'] | join('') | link }}" method="POST" enctype="multipart/form-data">
+        <input type="hidden" name="categoryid" value="{{ item.category.id or '' }}">
+        <input type="hidden" name="categoryname" value="{{ item.category.name or '' }}">
         <div class="formField">
             <label>* {{ dictionary["flagitem.Reason"] or "Reason" }}:</label>
-            <label>
+            <label class="radio">
                 <input type="radio" name="reason" value="badContent" {{ 'checked' if form.values.reason == 'badContent' }}>
                 {{ dictionary["flagitem.badContent"] or "Bad content" }}
             </label>
-            <label>
+            <label class="radio">
                 <input type="radio" name="reason" value="duplicated" {{ 'checked' if form.values.reason == 'duplicated' }}>
                 {{ dictionary["flagitem.duplicated"] or "Duplicated item" }}
             </label>
-            <label>
+            <label class="radio">
                 <input type="radio" name="reason" value="fraud" {{ 'checked' if form.values.reason == 'fraud' }}>
                 {{ dictionary["flagitem.fraud"] or "Fraud" }}
             </label>
-            <label>
+            <label class="radio">
                 <input type="radio" name="reason" value="alreadySold" {{ 'checked' if form.values.reason == 'alreadySold' }}>
                 {{ dictionary["flagitem.alreadySold"] or "Item is already Sold" }}
             </label>
-            <label>
+            <label class="radio">
                 <input type="radio" name="reason" value="other" {{ 'checked' if form.values.reason == 'other' }}>
                 {{ dictionary["flagitem.other"] or "Other reasons" }}
             </label>
@@ -32,7 +34,7 @@
             <textarea id="text-description" name="description" class="textarea">{{ form.values.description if form.values.description }}</textarea>
         </div>
         <div class="formField">
-            <label>{{ dictionary["flagitem.EmailOrPhone"] or "Email or phone" }}:</label>
+            <label>{{ dictionary["flagitem.EmailOrPhone"] or "Email address or phone number" }}:</label>
             <input id="text-emailorphone" name="emailorphone" value="{{ form.values.emailorphone if form.values.emailorphone  }}">
         </div>
         <div class="formField">

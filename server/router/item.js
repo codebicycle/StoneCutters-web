@@ -431,60 +431,85 @@ module.exports = function(app, dataAdapter) {
             var dictionary = translations.get(req.rendrApp.session.get('selectedLanguage'));
             var itemId = req.param('itemId', null);
             var report = null;
+            var zendesk = null;
 
             function parse(done) {
                 formidable.parse(req, done.errfcb);
             }
 
-            function validate(done, data) {
+            function validateInput(done, data) {
+                var errors = [];
+
                 report = data;
 
+                function validateEmail(email) {
+                    return /^[_a-zA-Z0-9-]+(\.[_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*(\.[a-zA-Z]{2,6})$/.test(email);
+
+                }
+
                 if (!report.reason) {
-                    return done.fail([{
+                    errors.push({
                         selector: 'reason',
                         message: dictionary['misc.ChooseMostApplicable']
-                    }]);
+                    });
                 }
+                report.description = report.description || '';
+                report.emailorphone = report.emailorphone || '';
+                report.categoryid = report.categoryid || '';
+                report.categoryname = report.categoryname || '';
+                report.phone = '';
+                report.email = '';
+
+                if (report.emailorphone.indexOf('@') !== -1) {
+                    if (validateEmail(report.emailorphone)) {
+                        report.email = report.emailorphone;
+                    }
+                    else {
+                        errors.push({
+                            selector: 'emailorphone',
+                            message: dictionary['flagitem.emalOrPhoneError'] || 'only enter an email address or a phone number'
+                        });
+                    }
+                } else {
+                    report.phone = report.emailorphone;
+                }
+
+                if (errors.length > 0) {
+                    return done.fail(errors);
+                }
+
                 done();
             }
 
             function configure(done) {
-                var zendesk;
 
                 zendesk = _.defaults({}, config.get(['emails', 'zendesk', location], {}), config.get(['emails', 'zendesk', 'default']));
                 zendesk = _.defaults({}, configClient.get(['mails', 'zendesk', location], {}), zendesk);
 
-                done(zendesk);
+                done();
             }
 
-            function prepare(done, zendesk) {
-                var fromName = 'User';
-                var fromEmail = 'reporteditem@olx.com';
-                var phone = 'None';
-                var emailSent;
+            function prepare(done) {
                 var subject;
                 var body;
                 var ticket;
 
-                emailSent = report.emailorphone.indexOf('@') !== -1;
-
-                fromEmail = emailSent ? report.emailorphone : fromEmail;
-                phone = !emailSent ? report.emailorphone : phone;
-
                 subject = util.format("[Reported item] Reason: %s - Item id: %s", report.reason, itemId);
 
                 body = util.format(
-                    "Item id: %s\nReason: %s\nDescription: %s\nPhone: %s",
+                    "Item id: %s\nReason: %s\nDescription: %s\nPhone: %s\nCategory: %s (%s)",
                     itemId,
                     report.reason,
                     report.description,
-                    phone
+                    report.phone,
+                    report.categoryname,
+                    report.categoryid
                 );
 
                 ticket = {
                     requester: {
-                        name: fromName,
-                        email: fromEmail
+                        name: report.email && 'User' || 'Empty',
+                        email: report.email || 'no-reply@olx.com'
                     },
                     subject:subject,
                     comment: {
@@ -534,7 +559,7 @@ module.exports = function(app, dataAdapter) {
 
             asynquence().or(error)
                 .then(parse)
-                .then(validate)
+                .then(validateInput)
                 .then(configure)
                 .then(prepare)
                 .then(submit)
