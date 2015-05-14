@@ -51,8 +51,8 @@ function requestPermission(done) {
             if (window.Notification.permission !== status) {
                 window.Notification.permission = status;
             }
-            callback(status);
-        });
+            callback.call(this, status);
+        }.bind(this));
     }
     window.LocalCache.requestPermission().done(callback.bind(this));
 
