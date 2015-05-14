@@ -19,9 +19,6 @@ module.exports = {
         home_block_banner_image: {
             image: 'marketing-box-image'
         },
-        thanksPage: {
-            videoUrl: 'thank-you-video-es'
-        },
         migrationModal: {
             image: 'migrations-ar.jpg'
         }

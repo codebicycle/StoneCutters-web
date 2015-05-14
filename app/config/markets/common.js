@@ -346,5 +346,10 @@ module.exports = {
                 enabled: false
             }
         }
-    }
+    },
+    marketing: {
+        thanksPage: {
+            videoUrl: 'thank-you-video-es'
+        }
+    },
 };

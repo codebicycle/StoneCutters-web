@@ -43,9 +43,6 @@ module.exports = {
         post_banner: {
             image: 'post-colombia-phone'
         },
-        thanksPage: {
-            videoUrl: 'thank-you-video-es'
-        }
     },
     successPage: {
         keepPosting: [
