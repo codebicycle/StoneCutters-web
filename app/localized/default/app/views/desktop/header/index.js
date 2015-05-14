@@ -7,7 +7,15 @@ var Metric = require('../../../../../../modules/metric');
 module.exports = Base.extend({
     tagName: 'header',
     id: 'header-view',
-    className: 'header-view wrapper',
+    className: function() {
+        var classes = ['header-view', 'wrapper'];
+        var currentRoute = this.app.session.get('currentRoute');
+
+        if (currentRoute.controller === 'categories' && currentRoute.action === 'home') {
+            classes.push('hidden');
+        }
+        return classes.join(' ');
+    },
     events: {
         'click .posting': 'onPostClick',
         'click [data-increment-metric]': Metric.incrementEventHandler
@@ -36,8 +44,9 @@ module.exports = Base.extend({
     postRender: function() {
         this.app.router.appView.on('posting:start', this.onPostingStart.bind(this));
         this.app.router.appView.on('posting:end', this.onPostingEnd.bind(this));
-        this.app.router.appView.on('header:hide', this.onHeaderHide.bind(this));
-        this.app.router.appView.on('header:show', this.onHeaderShow.bind(this));
+
+        this.app.on('header:hide', this.hide, this);
+        this.app.on('header:show', this.show, this);
     },
     onPostClick: function() {
         var currentRoute = this.app.session.get('currentRoute');
@@ -58,10 +67,10 @@ module.exports = Base.extend({
         this.$el.find('.posting, .search-form').toggleClass('disabled', !flag);
         this.$el.find('.posting-title').toggleClass('disabled', flag);
     },
-    onHeaderHide: function() {
-        this.$el.hide();
+    hide: function() {
+        this.$el.addClass('hidden');
     },
-    onHeaderShow: function() {
-        this.$el.show();
+    show: function() {
+        this.$el.removeClass('hidden');
     }
 });

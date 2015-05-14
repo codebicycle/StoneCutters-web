@@ -10,7 +10,15 @@ var Metric = require('../../../../../../modules/metric');
 module.exports = Base.extend({
     tagName: 'footer',
     id: 'footer-view',
-    className: 'footer-view wrapper',
+    className: function() {
+        var classes = ['footer-view', 'wrapper'];
+        var currentRoute = this.app.session.get('currentRoute');
+
+        if (currentRoute.controller === 'categories' && currentRoute.action === 'home') {
+            classes.push('hidden');
+        }
+        return classes.join(' ');
+    },
     firstRender: true,
     events: {
         'click [data-modal-shadow], [data-modal-close]': 'onCloseModal',
@@ -65,8 +73,9 @@ module.exports = Base.extend({
             }.bind(this));
             this.firstRender = false;
         }
-        this.app.router.appView.on('footer:hide', this.onFooterHide.bind(this));
-        this.app.router.appView.on('footer:show', this.onFooterShow.bind(this));
+
+        this.app.on('footer:hide', this.hide, this);
+        this.app.on('footer:show', this.show, this);
     },
     onCloseModal: function(event) {
         event.preventDefault();
@@ -98,5 +107,11 @@ module.exports = Base.extend({
         event.stopImmediatePropagation();
 
         $('#migrations-modal').trigger('hide');
-    }    }
+    },
+    hide: function() {
+        this.$el.addClass('hidden');
+    },
+    show: function() {
+        this.$el.removeClass('hidden');
+    }
 });

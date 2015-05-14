@@ -41,6 +41,10 @@ function home(params, callback) {
 function list(params, callback) {
     // Ask about home experiment
     if (this.app.session.get('location').url === 'www.olx.com.ar') {
+        this.currentRoute = {
+            controller: 'categories',
+            action: 'home'
+        };
         return home.call(this, params, callback);
     }
     helpers.controllers.control.call(this, params, controller);

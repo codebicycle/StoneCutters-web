@@ -4,6 +4,7 @@ var _ = require('underscore');
 var Base = require('../../../../../common/app/bases/view').requireView('home/index');
 var helpers = require('../../../../../../helpers');
 var Metric = require('../../../../../../modules/metric');
+var utils = require('../../../../../../../shared/utils');
 
 module.exports = Base.extend({
     tagName: 'main',
@@ -12,17 +13,19 @@ module.exports = Base.extend({
 	events: {
         'submit .search-form': 'onSearchSubmit'
     },
+    preRender: function() {
+        if (!utils.isServer) {
+            this.app.trigger('header:hide');
+            this.app.trigger('footer:hide');
+        }
+    },
     postRender: function() {
-        this.app.router.once('action:end', this.onStart);
-        this.app.router.once('action:start', this.onEnd);
+        this.on('remove', this.onRemove, this);
     },
-    onStart: function(event) {
-        this.appView.trigger('header:hide');
-        this.appView.trigger('footer:hide');
-    },
-    onEnd: function(event) {
-        this.appView.trigger('header:show');
-        this.appView.trigger('footer:show');
+    onRemove: function(event) {
+        this.off('remove');
+        this.app.trigger('header:show');
+        this.app.trigger('footer:show');
     },
     onSearchSubmit: function(event) {
         event.preventDefault();
