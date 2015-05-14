@@ -15,7 +15,8 @@ module.exports = Base.extend({
 
         return _.extend({}, data, {
             params: params,
-            breadcrumb: breadcrumb.get.call(this, data)
+            breadcrumb: breadcrumb.get.call(this, data),
+            toPosting: this.options.toPosting
         });
     }
 });

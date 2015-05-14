@@ -7,6 +7,9 @@
     </div>
 {% endif %}
 <section id="login">
+    {% if toPosting %}
+        <h2>{{ dictionary["loginRequired.CreateAccountToStartSelling"] or "Create an account to start selling on OLX. Don't worry it's free!" }}</h2>
+    {% endif %}
     <form action="{{ '/register' | link }}" method="POST" enctype="multipart/form-data">
         <label>{{ dictionary["register_mail.Username"] }}</label>
         <input type="text" name="username" data-qa="username-field" >

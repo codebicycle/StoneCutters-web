@@ -12,10 +12,12 @@ module.exports = Base.extend({
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
         var params = this.options.params || {};
+        var toPosting = this.options.redirect == '/posting';
 
         return _.extend({}, data, {
             params: params,
-            breadcrumb: breadcrumb.get.call(this, data)
+            breadcrumb: breadcrumb.get.call(this, data),
+            toPosting: toPosting
         });
     }
 });

@@ -4,6 +4,9 @@
     </div>
 {% endif %}
 <section id="login">
+    {% if toPosting %}
+        <h2>{{ dictionary["loginRequired.LoginToStartSelling"] or "Please login to start selling on OLX." }}</h2>
+    {% endif %}
     <form action="{{ '/login' | link }}" method="POST" enctype="multipart/form-data">
         <label>{{ dictionary["loginbox.Username"] }}</label>
         <input type="text" name="usernameOrEmail" data-qa="login-username-field">
@@ -12,7 +15,7 @@
         <small><a href="{{ '/lostpassword' | link }}" class="forgot">{{ dictionary["landingbody.ForgotPassword"] }}</a></small>
         <input type="hidden" name="redirect" value="{{ redirect if redirect else link }}">
         <div class="content-btns">
-            <a class="back" data-qa="register-link" href="{{ '/register' | link }}">{{ dictionary["postbox.RegisterNow"] }}</a>
+            <a class="back" data-qa="register-link" href="{{ '/register?toPosting=true' if toPosting else '/register' | link }}">{{ dictionary["postbox.RegisterNow"] }}</a>
             <input type="submit" value="{{ dictionary["loginbox.Login"] }}" class="accept" data-qa="login-button" >
         </div>
     </form>
