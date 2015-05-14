@@ -328,7 +328,7 @@ module.exports = {
     },
     notifications: {
         desktop: {
-            enabled: false
+            enabled: true
         },
         html5: {
             enabled: false
@@ -345,6 +345,11 @@ module.exports = {
             email: {
                 enabled: false
             }
+        }
+    },
+    marketing: {
+        thanksPage: {
+            videoUrl: 'thank-you-video-es'
         }
     },
     registerWithConfirmation: {
