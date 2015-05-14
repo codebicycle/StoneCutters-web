@@ -6,6 +6,7 @@ var helpers = require('../../../../../../helpers');
 var asynquence = require('asynquence');
 var Metric = require('../../../../../../modules/metric');
 var Notifications = require('../../../../../../modules/notifications');
+var translations = require('../../../../../../../shared/translations');
 
 module.exports = Base.extend({
 	tagName: 'aside',
@@ -24,6 +25,7 @@ module.exports = Base.extend({
     },
     postRender: function () {
         this.listenTo(this.app, 'login', this.render);
+        this.dictionary = translations.get(this.app.session.get('selectedLanguage'));
         $('body').on('update:notifications', this.showNotification.bind(this));
         this.app.router.appView.on('header:hide', this.onHeaderHide.bind(this));
         this.app.router.appView.on('header:show', this.onHeaderShow.bind(this));
@@ -77,10 +79,10 @@ module.exports = Base.extend({
                     icon = helpers.common.static.call(this, '/images/common/logo_notification.png');
 
                     if (showNotification > 1) {
-                        body = 'Tenes ' + showNotification + ' mensajes sin leer.';
+                        body = this.dictionary['misc.UnreadMessages'].replace('<<NUMBER>>', showNotification);
                     }
                     else {
-                        body = 'Tenes ' + showNotification + ' mensaje sin leer.';
+                        body = this.dictionary['misc.1UnreadMessage'];
                     }
 
                     this.notifications.showNotification('OLX', body, url, icon);

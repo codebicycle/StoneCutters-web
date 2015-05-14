@@ -1,0 +1,7 @@
+<div id="success-box" data-qa="flag-register-success">
+    <img src="{{ '/images/html4/icon-envelope.png' | static }}" alt="">
+    <h1>{{ dictionary["lostform.WeSentYouAnEmailToConfirmRegistration"] }}</h1>
+    <p>{{ dictionary["lostform.ClickTheLinkInTheEmailToConfirmRegistration"] }} {{ dictionary["lostform.IfYouDontReceiveEmailCheckSpamMailbox"] }}</p>
+</div>
+
+{% view 'partials/tracking' %}

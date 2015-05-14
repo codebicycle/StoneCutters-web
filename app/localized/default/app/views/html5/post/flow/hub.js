@@ -25,6 +25,7 @@ module.exports = Base.extend({
         'click .step:not(".opaque")': 'onStepClick',
         'categoryChange': 'onCategoryChange',
         'descriptionChange': 'onDescriptionChange',
+        'optionalsChange': 'onOptionalsChange',
         'contactChange': 'onContactChange',
         'change': 'onChange',
         'click #post:not(".opaque")': 'onSubmit',
@@ -114,6 +115,44 @@ module.exports = Base.extend({
         }
         this.$el.trigger('change');
     },
+    onOptionalsChange: function(event, id, subId, errors) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+        
+        var $step = this.$('#step-categories, #step-optionals').removeClass('success error');
+        var $subcategorySummary = this.$('#subcategorySummary').removeClass('success error');
+        var failed = false;
+        var subcategoryName;
+        
+        if (id && subId) {
+            var category = this.parentView.getCategories().get(id);            
+            var subcategories = category.get('children');
+
+            if (subcategories.toJSON) {
+                subcategories = subcategories.toJSON();
+            }
+            subcategoryName = _.find(subcategories, function each(subcategory) {
+                return subcategory.id === subId;
+            }).trName;
+        }
+        _.each(this.parentView.getFields().categoryAttributes, function each(field) {
+            if (errors[field.name]) {
+                failed = true;
+                $subcategorySummary.addClass('error').text(errors[field.name] || field.label); // Check for translation since we are just passing the field label as error                 
+            }
+        }, this);
+        
+        if (failed) {
+            $step.addClass('error');
+        }
+        else {
+            $subcategorySummary.addClass('success').text(subcategoryName);
+            $step.addClass('success');
+            $step.siblings().removeClass('opaque');
+        }
+        this.$el.trigger('change');
+    },
     onDescriptionChange: function(event, errors) {
         event.preventDefault();
         event.stopPropagation();
@@ -123,7 +162,7 @@ module.exports = Base.extend({
         var $titleSummary = this.$('#titleSummary').removeClass('success error');
         var $descriptionSummary = this.$('#descriptionSummary').removeClass('success error');
         var failed = false;
-
+        
         _.each(this.parentView.getFields().productDescription, function each(field) {
             var value = this.parentView.getItem().get(field.name);
 

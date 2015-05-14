@@ -100,6 +100,9 @@ module.exports = {
         'misc.SelectSuburb',
         'register_confirmation.776',
         'misc.Show',
-        'misc.Hide'
+        'misc.Hide',
+        'misc.BeenSold',
+        'misc.1UnreadMessage',
+        'misc.UnreadMessages'
     ]
 };

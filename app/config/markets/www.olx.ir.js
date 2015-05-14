@@ -50,5 +50,13 @@ module.exports = {
                 enabled: false
             }
         }
+    },
+    notifications: {
+        desktop: {
+            enabled: false
+        },
+        html5: {
+            enabled: false
+        }
     }
 };
