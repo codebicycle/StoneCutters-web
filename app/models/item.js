@@ -423,9 +423,10 @@ function rebump(done) {
 }
 
 function republish(done) {
-      helpers.dataAdapter.post(this.app.req, '/item/' + this.get('id') + '/republish', {
+      helpers.dataAdapter.post(this.app.req, '/items/' + this.get('id') + '/republish', {
         query: {
             securityKey: this.get('sk'),
+            postingSession: this.get('postingSession'),
             platform: this.app.session.get('platform')
         },
         data: {
