@@ -63,7 +63,18 @@ module.exports = Base.extend({
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();
+        var errors = {};
+        
+        if (!this.validate()) {
+            this.fields.forEach(function each(field) {
+                var $field = this.$('[name="' + field.name + '"]');
 
+                if ($field.hasClass('error')) {
+                    errors[field.name] = field.label; // Check for translation since we are just passing the field label as error
+                }
+            }.bind(this));
+        }
+        this.parentView.$el.trigger('optionalsSubmit', [errors]);
         this.$el.addClass('disabled');
     },
     onChangeCategoryClick: function(event) {
@@ -159,8 +170,31 @@ module.exports = Base.extend({
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();
+        
+        if (this.validate()) {
+            this.parentView.$el.trigger('flow', [this.id, '']);
+        }
+    },
+    validate: function() {
+        var validationResults = true;
+        
+        this.$el.removeClass('error').find('small').remove();
+        
+        _.each(this.parentView.getFields().categoryAttributes, function each(field, i) {
+            var $field = this.$('[name="' + field.name + '"]');
+            
+            $field.removeClass('error');
+            if (field.mandatory === 'true') {
+                this.$el.trigger('hideError', [$field]);            
+                if (!$field.val()) {
+                    validationResults = false;
+                    this.$el.addClass('error');
+                    $field.addClass('error').after('<small class="error">' + translations.get(this.app.session.get('selectedLanguage'))['postingerror.PleaseCompleteThisField'] + '</small>');
+                }
+            }
+        }, this);
 
-        this.parentView.$el.trigger('flow', [this.id, '']);
+        return validationResults;
     }
 });
 

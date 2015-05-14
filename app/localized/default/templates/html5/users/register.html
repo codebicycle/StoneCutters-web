@@ -7,7 +7,8 @@
     </div>
 {% endif %}
 <section id="login">
-    <form action="{{ '/register' | link }}" method="POST" enctype="multipart/form-data">
+    {% set registerUrl = '/register-withconf' if registerWithConfirmation else '/register' %}
+    <form action="{{ registerUrl | link }}" method="POST" enctype="multipart/form-data">
         <label>{{ dictionary["register_mail.Username"] }}</label>
         <input type="text" name="username" data-qa="username-field" >
         <label class="top">{{ dictionary["landingbody.EmailAddress"] }}</label>
