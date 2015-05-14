@@ -69,6 +69,7 @@ function didyousell(params, callback) {
 
         function sendMsg(done) {
             var dictionary = translations.get(this.app.session.get('selectedLanguage'));
+            
             conversation = new Conversation({
                 hash: params.hash.replace(/ /g,'+'),
                 platform: platform,
