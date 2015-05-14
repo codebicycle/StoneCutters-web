@@ -352,4 +352,18 @@ module.exports = {
             videoUrl: 'thank-you-video-es'
         }
     },
+    registerWithConfirmation: {
+        desktop: {
+            enabled: true
+        },
+        html5: {
+            enabled: false
+        },
+        html4: {
+            enabled: false
+        },
+        wap: {
+            enabled: false
+        }
+    }
 };
