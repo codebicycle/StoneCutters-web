@@ -168,7 +168,51 @@ function republish(params, callback) {
     helpers.controllers.control.call(this, params, controller);
 
     function controller() {
-        callback(null, {});
+        var platform = this.app.session.get('platform');
+        var itemId = params.itemId;
+        var sk = params.sk;
+        var promise = asynquence().or(fail.bind(this))
+            .then(redirect.bind(this));
+        var item;
+            
+
+        if (itemId && sk) {
+            promise.then(prepare.bind(this))
+            .then(republishItem.bind(this));
+        }
+
+        promise.val(success.bind(this));
+
+        function redirect(done) {
+            if (platform === 'wap') {
+                done.abort();
+                return helpers.common.redirect.call(this, '/');
+            }
+            done();
+        }
+
+        function prepare(done) {
+            item = new Item({
+                id: itemId,
+                sk: sk,
+                platform: platform
+            }, {
+                app: this.app
+            });
+            done();
+        }
+
+        function republishItem(done) {
+            item.republish(done);
+        }
+
+        function success(res, body) {
+            callback(null, {});
+        }
+
+        function fail(err, res) {
+            return helpers.common.error.call(this, err, res, callback);
+        }
     }
 }
 
