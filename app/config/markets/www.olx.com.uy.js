@@ -212,9 +212,16 @@ module.exports = {
         }
     },
     marketing: {
-        home_block_banner_image: {
-            image: 'marketing-box-image'
-        }
+        videos: [
+            {
+                title: 'OLX Uruguay - Capitán',
+                id: 'hFUam2D4atk'
+            },
+            {
+                title: 'OLX Uruguay - Bicicleta',
+                id: 'NsB5XIF-3x0'
+            }
+        ]
     },
     successPage: {
         keepPosting: [

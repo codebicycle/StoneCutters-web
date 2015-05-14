@@ -5,7 +5,7 @@ var utils = require('../../shared/utils');
 module.exports = {
     sixpack: {
         enabled: true,
-        host: 'http://sixpack.olx.com',
+        host: 'http://sixpack-load-balancer-2102867057.us-east-1.elb.amazonaws.com',
         timeout: utils.SECOND,
         experiments: require('./experiments')
     },
