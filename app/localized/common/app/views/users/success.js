@@ -5,7 +5,7 @@ var _ = require('underscore');
 var breadcrumb = require('../../../../../modules/breadcrumb');
 
 module.exports = Base.extend({
-    className: 'pages_success_view',
+    className: 'users_success_view',
     wapAttributes: {
         cellpadding: 0
     },
