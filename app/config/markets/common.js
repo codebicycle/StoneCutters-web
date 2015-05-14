@@ -198,7 +198,7 @@ module.exports = {
             },
             mixpanel: {
                 enabled: true,
-                platforms: ['desktop', 'html5']
+                platforms: ['desktop']
             }            
         }
     },
