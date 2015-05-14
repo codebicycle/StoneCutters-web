@@ -390,8 +390,8 @@ module.exports = {
                 subdomain: 'olxsa'
             },
             'www.olx.com.ng': {
-                subdomain: 'olxaf1419003239',
-                //brand_id: 480141
+                subdomain: 'olxng',
+                brand_id: 480141
             }
         }
     },
