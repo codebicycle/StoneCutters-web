@@ -5,8 +5,9 @@
 <div class="flag-item-form">
     <form action="{{ ['/items/', item.id, '/flag'] | join('') | link }}" method="POST" enctype="multipart/form-data">
         <div class="formField">
+            <label>* {{ dictionary["flagitem.Reason"] or "Reason" }}:</label>
             <label>
-                <input type="radio" name="reason" value="badContent" {{ 'checked' if form.values.reason == 'badContent' or not form.values.reason }}>
+                <input type="radio" name="reason" value="badContent" {{ 'checked' if form.values.reason == 'badContent' }}>
                 {{ dictionary["flagitem.badContent"] or "Bad content" }}
             </label>
             <label>
@@ -29,6 +30,13 @@
         <div class="formField">
             <label>{{ dictionary["flagitem.Description"] or "Please describe the reason of your report" }}:</label>
             <textarea id="text-description" name="description" class="textarea">{{ form.values.description if form.values.description }}</textarea>
+        </div>
+        <div class="formField">
+            <label>{{ dictionary["flagitem.EmailOrPhone"] or "Email or phone" }}:</label>
+            <input id="text-emailorphone" name="emailorphone" value="{{ form.values.emailorphone if form.values.emailorphone  }}">
+        </div>
+        <div class="formField">
+            <small class="mandatory">* {{ dictionary["wap_posting_step4.mandatoryField"] }}</small>
         </div>
         <div class="formActions">
             <input type="submit" value="{{ dictionary['item.FlagAsSpamOrScam'] or 'Report' }}" name="submit" class="btns orange" data-qa="flagitem-send-button" >

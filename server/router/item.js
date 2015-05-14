@@ -436,27 +436,55 @@ module.exports = function(app, dataAdapter) {
                 formidable.parse(req, done.errfcb);
             }
 
-            function configure(done, data) {
+            function validate(done, data) {
+                report = data;
+
+                if (!report.reason) {
+                    return done.fail([{
+                        selector: 'reason',
+                        message: dictionary['misc.ChooseMostApplicable']
+                    }]);
+                }
+                done();
+            }
+
+            function configure(done) {
                 var zendesk;
 
                 zendesk = _.defaults({}, config.get(['emails', 'zendesk', location], {}), config.get(['emails', 'zendesk', 'default']));
                 zendesk = _.defaults({}, configClient.get(['mails', 'zendesk', location], {}), zendesk);
 
-                report = data;
-
                 done(zendesk);
             }
 
             function prepare(done, zendesk) {
-                var from = 'Reported Item';
-                var email = 'reporteditem@olx.com';
-                var subject = util.format("[Reported item] Reason: %s - Item id: %s", report.reason, itemId);
-                var body = util.format("Item id: %s\nReason: %s\nDescription: %s\n", itemId, report.reason, report.description);
+                var fromName = 'User';
+                var fromEmail = 'reporteditem@olx.com';
+                var phone = 'None';
+                var emailSent;
+                var subject;
+                var body;
+                var ticket;
 
-                var ticket = {
+                emailSent = report.emailorphone.indexOf('@') !== -1;
+
+                fromEmail = emailSent ? report.emailorphone : fromEmail;
+                phone = !emailSent ? report.emailorphone : phone;
+
+                subject = util.format("[Reported item] Reason: %s - Item id: %s", report.reason, itemId);
+
+                body = util.format(
+                    "Item id: %s\nReason: %s\nDescription: %s\nPhone: %s",
+                    itemId,
+                    report.reason,
+                    report.description,
+                    phone
+                );
+
+                ticket = {
                     requester: {
-                        name: from,
-                        email: email
+                        name: fromName,
+                        email: fromEmail
                     },
                     subject:subject,
                     comment: {
@@ -506,6 +534,7 @@ module.exports = function(app, dataAdapter) {
 
             asynquence().or(error)
                 .then(parse)
+                .then(validate)
                 .then(configure)
                 .then(prepare)
                 .then(submit)
