@@ -503,6 +503,7 @@ module.exports = {
     'misc.AllSet_Mob': '\xA1Todo listo!',
     'misc.AlreadyAccount': 'Si ya tienes una cuenta, <<LINK>> ingresa aqu\xED <</LINK>>',
     'misc.BackToStart_Mob': 'Regresar al inicio',
+    'misc.BeenSold': 'Ya se ha vendido',
     'misc.BestSupport': 'Queremos asegurarnos de que te estamos ofreciendo la mejor asistencia.',
     'misc.BigHug-ZA': 'Tu amigo disfrut\xF3 de un gran abrazo de parte del equipo de OLX por la venta de sus art\xEDculos en desuso en OLX.',
     'misc.Brand': 'Marca',
