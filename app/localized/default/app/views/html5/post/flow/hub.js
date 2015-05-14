@@ -135,7 +135,6 @@ module.exports = Base.extend({
             subcategoryName = _.find(subcategories, function each(subcategory) {
                 return subcategory.id === subId;
             }).trName;
-            
         }
         _.each(this.parentView.getFields().categoryAttributes, function each(field) {
             if (errors[field.name]) {

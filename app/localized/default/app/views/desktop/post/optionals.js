@@ -78,7 +78,7 @@ function onValidate(event, done, isValid) {
 
     _.each(this.fields || [], function each(field) {
         
-        var $field = this.$('[name="'+field.name+'"]');
+        var $field = this.$('[name="' + field.name + '"]');
         
         if (field.mandatory === 'true') {
             this.$el.trigger('hideError', [$field]);            

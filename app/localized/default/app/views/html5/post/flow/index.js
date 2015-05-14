@@ -164,7 +164,6 @@ module.exports = Base.extend({
         event.stopImmediatePropagation();
 
         this.$('#hub').trigger('optionalsChange', [this.item.get('category').parentId, this.item.get('category').id, errors]);
-        
     },
     onDescriptionSubmit: function(event, errors, notTrack) {
         event.preventDefault();

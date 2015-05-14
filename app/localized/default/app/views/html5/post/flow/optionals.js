@@ -170,6 +170,7 @@ module.exports = Base.extend({
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();
+        
         if (this.validate()) {
             this.parentView.$el.trigger('flow', [this.id, '']);
         }
@@ -180,7 +181,8 @@ module.exports = Base.extend({
         this.$el.removeClass('error').find('small').remove();
         
         _.each(this.parentView.getFields().categoryAttributes, function each(field, i) {
-           var $field = this.$('[name="'+field.name+'"]');
+            var $field = this.$('[name="' + field.name + '"]');
+            
             $field.removeClass('error');
             if (field.mandatory === 'true') {
                 this.$el.trigger('hideError', [$field]);            
