@@ -244,7 +244,7 @@ module.exports = {
     },
     validator: {
         email: {
-            enabled: true
+            enabled: false
         }
     }
 };

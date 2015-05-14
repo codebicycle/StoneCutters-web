@@ -277,7 +277,7 @@ module.exports = {
         }
     },
     userzoom: {
-        enabled: false,
+        enabled: true,
         sections: {
             'items#show' : {
                 platforms: ['html5', 'desktop'],
