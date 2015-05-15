@@ -1,7 +1,7 @@
 'use strict';
 
-var Base = require('../../bases/view');
 var _ = require('underscore');
+var Base = require('../../bases/view');
 var breadcrumb = require('../../../../../modules/breadcrumb');
 var config = require('../../../../../../shared/config');
 var userzoom = require('../../../../../modules/userzoom');
@@ -20,16 +20,17 @@ module.exports = Base.extend({
         var platform = this.app.session.get('platform');
         var flagItem = config.getForMarket(location.url, ['flagItem']);
         var safetyTips = config.getForMarket(location.url, ['safetyTips', platform]);
-        var showBetterDealOptions = config.getForMarket(location.url, ['showBetterDeal', platform]);
-        data.category_name = this.options.category_name;
-        var showBetterDeal = false;
+        var showBetterDeal;
 
-        if(showBetterDealOptions.enabled && _.contains(showBetterDealOptions.categories, data.item.category.parentId)) {
-            showBetterDeal = true;
+        data.category_name = this.options.category_name;
+
+        if (config.getForMarket(location.url, ['showBetterDeal', platform, 'enabled'], false)) {
+            if (_.contains(config.getForMarket(location.url, ['showBetterDeal', platform, 'categories'], []), data.item.category.parentId)) {
+                showBetterDeal = !!data.item.used;
+            }
         }
 
-        if(sellerProfileEnabled && data.item.user && data.item.user.firstActivityDate ) {
-
+        if (sellerProfileEnabled && data.item.user && data.item.user.firstActivityDate ) {
             if (data.item.user.firstActivityDate.month < 10) {
                 formatMonth = 'messages_date_format.90' + data.item.user.firstActivityDate.month;
             } else {

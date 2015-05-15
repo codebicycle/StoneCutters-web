@@ -27,7 +27,7 @@
             <span>({{ dictionary["itemgeneraldetails.NoPicture"] }})</span>
         {% elif item.images.length == 1 %}
             {% if showBetterDeal %}
-                <img class="betterDealImg" alt="" src="{{ "/images/common/betterdeal_Itempage.png" | static }}">
+                <img class="betterDealImg" alt="" src="{{ '/images/common/betterdeal_Itempage.png' | static }}">
             {% endif %}
                 <a href="{{ [item | slugToUrl, '/gallery'] | join('') | link }}">
                     <div class="arrow"></div>
