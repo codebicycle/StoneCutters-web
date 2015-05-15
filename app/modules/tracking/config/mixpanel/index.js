@@ -14,5 +14,44 @@ module.exports = {
         production: {
             token: 'de524b4f1ff25309a6a0f6d3456cfc6f'
         }
+    },
+    routes: {
+        categories: {
+            list: {
+                pagename: 'Home'
+            }
+        },
+        searches: {
+            allresults: {
+                pagename: 'Listing'
+            },
+            allresultsig: {
+                pagename: 'Listing gallery'
+            },
+            statics: {
+                pagename: 'Listing /q'
+            }
+        },
+        items: {
+            show: {
+                pagename: 'Item'
+            }
+        },
+        pages: {
+            'default': {
+                pagename: 'Statics'
+            },
+            help: {
+                pagename: 'Help'
+            },
+            terms: {
+                pagename: 'Terms'
+            }
+        },
+        users: {
+            'default': {
+                pagename: 'MyOLX'
+            }
+        }
     }
 };

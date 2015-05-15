@@ -24,41 +24,9 @@ function getParams() {
 }
 
 function getPageName(currentRoute) {
-    var controller = currentRoute.controller;
-    var action = currentRoute.action;
-    var pageName;
+    var configRouteDefault = utils.get(configTracking, ['mixpanel', 'routes', currentRoute.controller, 'default', 'pagename']);
 
-    if (controller === 'categories' && action === 'list') {
-        pageName = 'Home';
-    }
-    else if ((controller === 'searches' && action === 'allresults') || (controller === 'searches' && action === 'search') || (controller === 'categories' && action === 'show')) {
-        pageName = 'Listing';
-    }
-    else if ((controller === 'searches' && action === 'allresultsig') || (controller === 'categories' && action === 'showig')) {
-        pageName = 'Listing gallery';
-    }
-    else if (controller === 'searches' && action === 'statics') {
-        pageName = 'Listing /q';
-    }
-    else if (controller === 'items' && action === 'show') {
-        pageName = 'Item';
-    }
-    else if (controller === 'pages') {
-        if (action === 'help') {
-            pageName = 'Help';
-        }
-        else if (action === 'terms') {
-            pageName = 'Terms';
-        }
-        else {
-            pageName = 'Statics';
-        }
-    }
-    else if (controller === 'users') {
-        pageName = 'MyAds';
-    }
-
-    return pageName;
+    return utils.get(configTracking, ['mixpanel', 'routes', currentRoute.controller, currentRoute.action, 'pagename'], configRouteDefault);
 }
 
 function track(eventName, props) {
