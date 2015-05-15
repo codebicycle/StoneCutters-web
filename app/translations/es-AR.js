@@ -281,6 +281,7 @@ module.exports = {
     'register_form.termsAgreeB': 'Terminos y Condiciones',
     'itempagepostcomment.CommentPosted': 'Su comentario ha sido publicado con \xE9xito.',
     'itempagepostcomment.Sms': 'SMS',
+    'misc.FreeClassifieds-SEO':'Avisos clasificados gratis en <<AREA>>',
     'myolx.ApprovalPending': 'Pendiente de aprobaci\xF3n',
     'myolx.AreYouSureYouWantToCloseSelectedListings': '\xBFEst\xE1s seguro que deseas eliminar los avisos seleccionados?',
     'myolx.BackToMyAds': 'Volver a mis avisos',
