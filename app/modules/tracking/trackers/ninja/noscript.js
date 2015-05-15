@@ -109,7 +109,6 @@ function getHydraUrl(ninja) {
     var url = ['http://', (ninja.config.environment ? 'tracking-dev.onap.io/h/' : 'tracking.olx-st.com/h/v2/'), 'ns?'].join('');
 
     var sessionParams;
-        console.log(this.app.session.get('platform'));
 
     if (_.contains(['wap', 'html4'], this.app.session.get('platform'))) {
         sessionParams = generateSessionParams.call(this);
@@ -174,7 +173,6 @@ function generateSessionParams() {
     if (null !== sessionExtra) {
         cookieValue = cookieValue + "-" + sessionExtra;
     }
-    console.log(sessionValues, sessionLong, sessionCountLong, session, sessionCount, sessionExtra);
     cookieValue = cookieValue.replace(/[^\w\-\=]/g, '');
     this.app.session.persist({
         onap: cookieValue
