@@ -34,5 +34,15 @@ module.exports = {
                 name: 'Phones'
             }
         ]
+    },
+    safetyTips: {
+        html4: {
+            call: {
+                enabled: true
+            },
+            sms: {
+                enabled: true
+            },
+        }
     }
 };

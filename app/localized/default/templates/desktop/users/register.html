@@ -6,8 +6,8 @@
 <h4 class="title">{{ dictionary["loginbox.Register"] }}</h4>
 
 {% view 'users/facebooklogin' %}
-
-<form action="{{ '/register-withconf' | link }}" method="POST" enctype="multipart/form-data">
+{% set registerUrl = '/register-withconf' if registerWithConfirmation else '/register' %}
+<form action="{{ registerUrl | link }}" method="POST" enctype="multipart/form-data">
     <div class="wrapper {{ 'error' if form.errors.main else '' }}">
         <small class="advice main">{{ form.errors.main if form.errors.main else '' }}</small>
     </div>

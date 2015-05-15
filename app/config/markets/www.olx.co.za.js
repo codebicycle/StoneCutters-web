@@ -463,7 +463,7 @@ module.exports = {
         }
     },
     userzoom: {
-        enabled: false,
+        enabled: true,
         sections: {
             'items#show' : {
                 platforms: ['html5', 'desktop'],
@@ -480,9 +480,6 @@ module.exports = {
             },
             sms: {
                 enabled: true
-            },
-            email: {
-                enabled: false
             }
         }
     },

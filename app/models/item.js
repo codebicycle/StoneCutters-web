@@ -29,6 +29,7 @@ module.exports = Base.extend({
     toData: toData,
     remove: remove,
     rebump: rebump,
+    republish: republish,
     stillAvailable: stillAvailable
 });
 
@@ -417,6 +418,23 @@ function rebump(done) {
       helpers.dataAdapter.post(this.app.req, '/items/' + this.get('id') + '/rebump', {
         query: {
             token: (this.app.session.get('user') || {}).token,
+            postingSession: this.get('postingSession'),
+            platform: this.app.session.get('platform')
+        },
+        data: {
+            location: this.app.session.get('location').url
+        }
+    }, callback.bind(this));
+
+    function callback() {
+        this.callback(done)();
+    }
+}
+
+function republish(done) {
+      helpers.dataAdapter.post(this.app.req, '/items/' + this.get('id') + '/republish', {
+        query: {
+            securityKey: this.get('sk'),
             postingSession: this.get('postingSession'),
             platform: this.app.session.get('platform')
         },

@@ -5,7 +5,7 @@ var utils = require('../../shared/utils');
 module.exports = {
     sixpack: {
         enabled: true,
-        host: 'http://sixpack.olx.com',
+        host: 'http://sixpack-load-balancer-2102867057.us-east-1.elb.amazonaws.com',
         timeout: utils.SECOND,
         experiments: require('./experiments')
     },
@@ -148,7 +148,7 @@ module.exports = {
             },
             landingThanks: {
                 worldwide: false,
-                countries: ['www.olx.com.ar', 'www.olx.com.co','www.olx.co.za']
+                countries: ['www.olx.com.ar', 'www.olx.com.co', 'www.olx.co.za', 'www.olx.com.pe', 'www.olx.com.ec', 'www.olx.com.ve', 'www.olx.com.gt', 'www.olx.com.ni', 'www.olx.com.sv', 'www.olx.com.pa', 'www.olx.com.uy']
             }
         },
         html4: {
@@ -180,7 +180,7 @@ module.exports = {
             },
             landingThanks: {
                 worldwide: false,
-                countries: ['www.olx.com.ar', 'www.olx.com.co','www.olx.co.za']
+                countries: ['www.olx.com.ar', 'www.olx.com.co', 'www.olx.co.za', 'www.olx.com.pe', 'www.olx.com.ec', 'www.olx.com.ve', 'www.olx.com.gt', 'www.olx.com.ni', 'www.olx.com.sv', 'www.olx.com.pa', 'www.olx.com.uy']
             },
             visitedItems: {
                 worldwide: false,
