@@ -107,15 +107,91 @@ function getIframeUrl(ninja) {
 
 function getHydraUrl(ninja) {
     var url = ['http://', (ninja.config.environment ? 'tracking-dev.onap.io/h/' : 'tracking.olx-st.com/h/v2/'), 'ns?'].join('');
-    var query = getQuery(ninja.params, ninja.config);
-    var iv = utils.params(this.app.session.get('url') || '', 'invite');
 
+    var sessionParams;
+        console.log(this.app.session.get('platform'));
+
+    if (_.contains(['wap', 'html4'], this.app.session.get('platform'))) {
+        sessionParams = generateSessionParams.call(this);
+    } else {
+        sessionParams = [];
+    }
+
+    var query = getQuery(sessionParams, ninja.params, ninja.config);
+    var iv = utils.params(this.app.session.get('url') || '', 'invite');
     if (iv) {
         query.iv = iv.trim();
     }
     query.gp = (_.contains(trackPages, ninja.params.trackPage) ? ninja.params.trackPage : 'other').toLowerCase();
 
     return utils.params(url, query);
+}
+
+function generateSessionParams() {
+    var sessionLong,
+        sessionCountLong,
+        session,
+        sessionCount,
+        sessionExpired,
+        sessionExtra;
+
+    var date = new Date();
+    var now = (Math.round(date.getTime() / 1000));
+    var sessionValues = this.app.session.get('onap');
+    if (sessionValues) {
+        var match = sessionValues.match(/([a-z0-9]+)-([0-9]+)-([a-z0-9]+)-([0-9]+)-([0-9]+)-?(.*)?/);
+        if (match.length >= 4) {
+            sessionLong = match[1];
+            sessionCountLong = parseInt(match[2], 10);
+            session = match[3];
+            sessionCount = parseInt(match[4], 10);
+            sessionExpired = match[5];
+            sessionExtra = match[6] || null;
+
+            if ((sessionExpired - now) > 0) {
+                sessionCount = sessionCount + 1;
+            } else {
+                sessionCountLong = sessionCountLong + 1;
+                session = generateSession();
+                sessionCount = 1;
+            }
+        } else {
+            sessionLong = generateSession();
+            sessionCountLong = 1;
+            session = sessionLong;
+            sessionCount = 1;
+            sessionExtra = null;
+        }
+    } else {
+        sessionLong = generateSession();
+        sessionCountLong = 1;
+        session = sessionLong;
+        sessionCount = 1;
+        sessionExtra = null;
+    }
+    sessionExpired = (now + 1800);
+    var cookieValue = sessionLong + "-" + sessionCountLong + "-" + session + "-" + sessionCount  + "-" + sessionExpired;
+    if (null !== sessionExtra) {
+        cookieValue = cookieValue + "-" + sessionExtra;
+    }
+    console.log(sessionValues, sessionLong, sessionCountLong, session, sessionCount, sessionExtra);
+    cookieValue = cookieValue.replace(/[^\w\-\=]/g, '');
+    this.app.session.persist({
+        onap: cookieValue
+    }, {
+        maxAge: utils.YEAR
+    });
+
+    return {
+        sl: sessionLong,
+        s: session,
+        cl: sessionCountLong,
+        c: sessionCount
+    };
+}
+
+function generateSession() {
+    return Number(new Date().getTime()).toString(16) + 'x' + Number(Math.floor((Math.random() * 2147483647) + 1)).toString(16);
 }
 
 function getQuery(params, config) {
