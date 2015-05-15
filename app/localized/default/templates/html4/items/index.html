@@ -68,9 +68,6 @@
                 {% for item in items %}
                     <li>
                         <a href="{{ item | slugToUrl | link }}">
-                            {% if item.category.parentId == 830 %}>
-                                <img class="better-deal" alt="" src="{{ '/images/common/betterdeal_listing.png' | static }}">
-                            {% endif %}
                             <div class="imageCont" style="background-image: url({{ item.thumbnail if item.thumbnail else ('/images/html4/noPhoto.png' | static) }});"></div>
                         </a>
                         <div class="itemInfo">
