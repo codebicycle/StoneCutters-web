@@ -432,27 +432,15 @@ module.exports = function(app, dataAdapter) {
             var itemId = req.param('itemId', null);
             var report = null;
             var zendesk = null;
+            var emailRegex = /^[_a-zA-Z0-9-]+(\.[_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*(\.[a-zA-Z]{2,6})$/;
 
             function parse(done) {
                 formidable.parse(req, done.errfcb);
             }
 
-            function validateInput(done, data) {
-                var errors = [];
-
+            function initialize(done, data) {
                 report = data;
 
-                function validateEmail(email) {
-                    return /^[_a-zA-Z0-9-]+(\.[_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*(\.[a-zA-Z]{2,6})$/.test(email);
-
-                }
-
-                if (!report.reason) {
-                    errors.push({
-                        selector: 'reason',
-                        message: dictionary['misc.ChooseMostApplicable']
-                    });
-                }
                 report.description = report.description || '';
                 report.emailorphone = report.emailorphone || '';
                 report.categoryid = report.categoryid || '';
@@ -461,17 +449,29 @@ module.exports = function(app, dataAdapter) {
                 report.email = '';
 
                 if (report.emailorphone.indexOf('@') !== -1) {
-                    if (validateEmail(report.emailorphone)) {
-                        report.email = report.emailorphone;
-                    }
-                    else {
-                        errors.push({
-                            selector: 'emailorphone',
-                            message: dictionary['flagitem.emalOrPhoneError'] || 'only enter an email address or a phone number'
-                        });
-                    }
+                    report.email = report.emailorphone;
                 } else {
                     report.phone = report.emailorphone;
+                }
+
+                done();
+            }
+
+            function validate(done) {
+                var errors = [];
+
+                if (!report.reason) {
+                    errors.push({
+                        selector: 'reason',
+                        message: dictionary['misc.ChooseMostApplicable']
+                    });
+                }
+
+                if (report.email && !emailRegex.test(report.email)) {
+                    errors.push({
+                        selector: 'emailorphone',
+                        message: dictionary['flagitem.emailOrPhoneError'] || 'only enter an email address or a phone number'
+                    });
                 }
 
                 if (errors.length > 0) {
@@ -511,7 +511,7 @@ module.exports = function(app, dataAdapter) {
                         name: report.email && 'User' || 'Empty',
                         email: report.email || 'no-reply@olx.com'
                     },
-                    subject:subject,
+                    subject: subject,
                     comment: {
                         public: true,
                         body: body
@@ -559,7 +559,8 @@ module.exports = function(app, dataAdapter) {
 
             asynquence().or(error)
                 .then(parse)
-                .then(validateInput)
+                .then(initialize)
+                .then(validate)
                 .then(configure)
                 .then(prepare)
                 .then(submit)
