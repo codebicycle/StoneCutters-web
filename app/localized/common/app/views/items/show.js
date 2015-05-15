@@ -29,7 +29,6 @@ module.exports = Base.extend({
                 showBetterDeal = !!data.item.used;
             }
         }
-
         if (sellerProfileEnabled && data.item.user && data.item.user.firstActivityDate ) {
             if (data.item.user.firstActivityDate.month < 10) {
                 formatMonth = 'messages_date_format.90' + data.item.user.firstActivityDate.month;
@@ -37,11 +36,9 @@ module.exports = Base.extend({
                 formatMonth = 'messages_date_format.9' + data.item.user.firstActivityDate.month;
             }
         }
-
         this.userzoom = new userzoom({}, {
             app: this.app
         });
-
         if (!data.item.purged) {
             data.item.location.stateName = data.item.location.children[0].name;
             data.item.location.cityName = data.item.location.children[0].children[0].name;
@@ -51,8 +48,6 @@ module.exports = Base.extend({
             }
             data.item.descriptionReplace = data.item.description.replace(/(<([^>]+)>)/ig,'');
         }
-
-
         return _.extend({}, data, {
             breadcrumb: breadcrumb.get.call(this, data),
             flagItem: flagItem,

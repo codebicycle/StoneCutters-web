@@ -333,7 +333,7 @@ module.exports = {
     showBetterDeal: {
         html4: {
             enabled: true,
-            categories: [362, 800, 830]
+            categories: [800, 830]
         }
     }
 };
