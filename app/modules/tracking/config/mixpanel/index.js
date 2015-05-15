@@ -52,6 +52,16 @@ module.exports = {
             'default': {
                 pagename: 'MyOLX'
             }
+        },
+        landings: {
+            'default': {
+                pagename: 'Landing'
+            }
+        },
+        post: {
+            'default': {
+                pagename: 'Post'
+            }
         }
     }
 };
