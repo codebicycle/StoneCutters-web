@@ -4,10 +4,12 @@
 {% endif %}
 
 <section class="login_view">
-    <h4 class="title">{{ dictionary["loginbox.Login"] }}</h4>
+    <h4 class="title">{{ dictionary["loginbox.Login"] }}
     {% if toPosting %}
-        <h2>{{ dictionary["loginRequired.LoginToStartSelling"] or "Please login to start selling on OLX." }}</h2>
+        <span>{{ dictionary["loginRequired.LoginToStartSelling"] or "Please login to start selling on OLX." }}</span>
     {% endif %}
+    </h4>
+
 
     {% view 'users/facebooklogin' %}
 

@@ -5,7 +5,7 @@
 {% endif %}
 <section id="login">
     {% if toPosting %}
-        <h2>{{ dictionary["loginRequired.LoginToStartSelling"] or "Please login to start selling on OLX." }}</h2>
+        <p class="subtitle">{{ dictionary["loginRequired.LoginToStartSelling"] or "Please login to start selling on OLX" }}</p>
     {% endif %}
     <form action="{{ '/login' | link }}" method="POST" enctype="multipart/form-data">
         <label>{{ dictionary["loginbox.Username"] }}</label>

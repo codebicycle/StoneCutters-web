@@ -10,7 +10,8 @@
 {% endif %}
 <div id="register">
     {% if toPosting %}
-        <h2>{{ dictionary["loginRequired.CreateAccountToStartSelling"] or "Create an account to start selling on OLX. Don't worry it's free!" }}</h2>
+        <h4>{{ dictionary["loginRequired.CreateAccount"] or "Create an account to start selling on OLX" }}</h4>
+        <p class="subtitle"><small>{{ dictionary["loginRequired.ItsFree"] or "Don't worry it's free!" }}</small></p>
     {% endif %}
     <form action="{{ '/register' | link }}" method="POST" enctype="multipart/form-data">
         <div class="formField">

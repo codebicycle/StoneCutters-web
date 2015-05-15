@@ -3,10 +3,12 @@
     {% set terms = true %}
 {% endif %}
 
-<h4 class="title">{{ dictionary["loginbox.Register"] }}</h4>
-{% if toPosting %}
-    <h2>{{ dictionary["loginRequired.CreateAccountToStartSelling"] or "Create an account to start selling on OLX. Don't worry it's free!" }}</h2>
-{% endif %}
+<h4 class="title">
+    {{ dictionary["loginbox.Register"] }}
+    {% if toPosting %}
+        <span>{{ dictionary["loginRequired.CreateAccountToStartSelling"] or "Create an account to start selling on OLX. Don't worry it's free!" }}</span>
+    {% endif %}
+</h4>
 
 {% view 'users/facebooklogin' %}
 
