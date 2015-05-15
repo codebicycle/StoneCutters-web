@@ -431,34 +431,87 @@ module.exports = function(app, dataAdapter) {
             var dictionary = translations.get(req.rendrApp.session.get('selectedLanguage'));
             var itemId = req.param('itemId', null);
             var report = null;
+            var zendesk = null;
+            var emailRegex = /^[_a-zA-Z0-9-]+(\.[_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*(\.[a-zA-Z]{2,6})$/;
 
             function parse(done) {
                 formidable.parse(req, done.errfcb);
             }
 
-            function configure(done, data) {
-                var zendesk;
+            function initialize(done, data) {
+                report = data;
+
+                report.description = report.description || '';
+                report.emailorphone = report.emailorphone || '';
+                report.categoryid = report.categoryid || '';
+                report.categoryname = report.categoryname || '';
+                report.phone = '';
+                report.email = '';
+
+                if (report.emailorphone.indexOf('@') !== -1) {
+                    report.email = report.emailorphone;
+                } else {
+                    report.phone = report.emailorphone;
+                }
+
+                done();
+            }
+
+            function validate(done) {
+                var errors = [];
+
+                if (!report.reason) {
+                    errors.push({
+                        selector: 'reason',
+                        message: dictionary['misc.ChooseMostApplicable']
+                    });
+                }
+
+                if (report.email && !emailRegex.test(report.email)) {
+                    errors.push({
+                        selector: 'emailorphone',
+                        message: dictionary['flagitem.emailOrPhoneError'] || 'only enter an email address or a phone number'
+                    });
+                }
+
+                if (errors.length > 0) {
+                    return done.fail(errors);
+                }
+
+                done();
+            }
+
+            function configure(done) {
 
                 zendesk = _.defaults({}, config.get(['emails', 'zendesk', location], {}), config.get(['emails', 'zendesk', 'default']));
                 zendesk = _.defaults({}, configClient.get(['mails', 'zendesk', location], {}), zendesk);
 
-                report = data;
-
-                done(zendesk);
+                done();
             }
 
-            function prepare(done, zendesk) {
-                var from = 'Reported Item';
-                var email = 'reporteditem@olx.com';
-                var subject = util.format("[Reported item] Reason: %s - Item id: %s", report.reason, itemId);
-                var body = util.format("Item id: %s\nReason: %s\nDescription: %s\n", itemId, report.reason, report.description);
+            function prepare(done) {
+                var subject;
+                var body;
+                var ticket;
 
-                var ticket = {
+                subject = util.format("[Reported item] Reason: %s - Item id: %s", report.reason, itemId);
+
+                body = util.format(
+                    "Item id: %s\nReason: %s\nDescription: %s\nPhone: %s\nCategory: %s (%s)",
+                    itemId,
+                    report.reason,
+                    report.description,
+                    report.phone,
+                    report.categoryname,
+                    report.categoryid
+                );
+
+                ticket = {
                     requester: {
-                        name: from,
-                        email: email
+                        name: report.email && 'User' || 'Empty',
+                        email: report.email || 'no-reply@olx.com'
                     },
-                    subject:subject,
+                    subject: subject,
                     comment: {
                         public: true,
                         body: body
@@ -506,6 +559,8 @@ module.exports = function(app, dataAdapter) {
 
             asynquence().or(error)
                 .then(parse)
+                .then(initialize)
+                .then(validate)
                 .then(configure)
                 .then(prepare)
                 .then(submit)
