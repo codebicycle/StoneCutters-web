@@ -24,13 +24,13 @@ function getParams() {
 }
 
 function getPageName(currentRoute) {
-    var configRoute = utils.get(configTracking, ['mixpanel', 'routes', currentRoute.controller, currentRoute.action, 'pagename']);
+    var pageName = utils.get(configTracking, ['mixpanel', 'routes', currentRoute.controller, currentRoute.action, 'pagename']);
     
-    if (!configRoute) {
-        configRoute = utils.get(configTracking, ['mixpanel', 'routes', currentRoute.controller, 'default', 'pagename'], {});
+    if (!pageName) {
+        pageName = utils.get(configTracking, ['mixpanel', 'routes', currentRoute.controller, 'default', 'pagename']);
     }
 
-    return configRoute;
+    return pageName;
 }
 
 function parseObject(keys, values) {
