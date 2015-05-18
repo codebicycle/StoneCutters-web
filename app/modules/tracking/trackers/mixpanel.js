@@ -45,7 +45,6 @@ function track(eventName, props) {
     var currentRoute = this.app.session.get('currentRoute');
     var location = this.app.session.get('location').current || {};
     var currentLocation = location.name;
-    var userStatus = !!this.app.session.get('user');
     var pageName;
     var events = utils.get(configTracking, ['mixpanel', 'keywords', 'events'], {});
     
@@ -57,7 +56,7 @@ function track(eventName, props) {
     }
 
     _.extend(props, {
-        loggedIn: +userStatus
+        loggedIn: +!!this.app.session.get('user')
     });
 
     if (pageName) {
