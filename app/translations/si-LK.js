@@ -503,6 +503,7 @@ module.exports = {
     'misc.AllSet_Mob': '\u0DC3\u0DD2\u0DBA\u0DBD\u0DCA\u0DBD \u0DC3\u0D9A\u0DC3\u0DB1 \u0DBD\u0DAF\u0DD2!',
     'misc.AlreadyAccount': 'If you already have an account, <<LINK>>  click here to log in<</LINK>>',
     'misc.BackToStart_Mob': '\u0D86\u0DB4\u0DC3\u0DD4 \u0D86\u0DBB\u0DB8\u0DCA\u0DB7\u0DBA \u0DC0\u0DD9\u0DAD',
+    'misc.BeenSold': 'It has been sold',
     'misc.BestSupport': 'We want to make sure we are giving you the best support',
     'misc.BigHug-ZA': 'Your friend enjoyed a big hug from the OLX team, by selling his unused items on OLX',
     'misc.Brand': '\u0DC3\u0DB1\u0DCA\u0DB1\u0DCF\u0DB8\u0DBA',

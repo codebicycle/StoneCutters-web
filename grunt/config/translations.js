@@ -101,6 +101,7 @@ module.exports = {
         'register_confirmation.776',
         'misc.Show',
         'misc.Hide',
+        'misc.BeenSold',
         'misc.1UnreadMessage',
         'misc.UnreadMessages',
         'misc.FreeClassifieds-SEO'

@@ -422,6 +422,7 @@ function onSubmit(event) {
 
         validation.call(this, this.selectors.title);
         validation.call(this, this.selectors.description);
+        validation.call(this, this.selectors.optionals);
         validation.call(this, this.selectors.contact);
         promise.then(check.bind(this));
         promise.val(done);

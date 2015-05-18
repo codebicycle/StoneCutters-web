@@ -503,6 +503,7 @@ module.exports = {
     'misc.AllSet_Mob': 'T\u1EA5t c\u1EA3 \u0111\xE3 xong!',
     'misc.AlreadyAccount': 'N\u1EBFu b\u1EA1n \u0111\xE3 c\xF3 t\xE0u kho\u1EA3n, h\xE3y <<LINK>>nh\u1EA5p v\xE0o \u0111\xE2y \u0111\u1EC3 \u0111\u0103ng nh\u1EADp<</LINK>>',
     'misc.BackToStart_Mob': 'Quay l\u1EA1i \u0111\u1EC3 b\u1EAFt \u0111\u1EA7u',
+    'misc.BeenSold': 'It has been sold',
     'misc.BestSupport': 'Ch\xFAng t\xF4i mu\u1ED1n \u0111\u1EA3m b\u1EA3o r\u1EB1ng ch\xFAng t\xF4i \u0111ang h\u1ED7 tr\u1EE3 b\u1EA1n h\u1EBFt m\xECnh.',
     'misc.BigHug-ZA': 'B\u1EA1n c\u1EE7a b\u1EA1n \u0111\xE3 nh\u1EADn \u0111\u01B0\u1EE3c m\u1ED9t c\xE1i \xF4m th\u1EAFm thi\u1EBFt t\u1EEB \u0111\u1ED9i ng\u0169 OLX b\u1EB1ng c\xE1ch b\xE1n m\xF3n h\xE0ng kh\xF4ng s\u1EED d\u1EE5ng',
     'misc.Brand': 'Nh\xE3n hi\u1EC7u',

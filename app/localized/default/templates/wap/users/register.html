@@ -29,7 +29,8 @@
                 </tr>
                 <tr>
                     <td style="padding: 0 .5em .5em;">
-                        <form action="{{ '/register' | link }}" method="POST" enctype="multipart/form-data">
+                        {% set registerUrl = '/register-withconf' if registerWithConfirmation else '/register' %}
+                        <form action="{{ registerUrl | link }}" method="POST" enctype="multipart/form-data">
                             <label style="display: block;">
                                 <small>{{ dictionary["register_mail.Username"] }}</small><br>
                                 <input type="text" value="" name="username">
