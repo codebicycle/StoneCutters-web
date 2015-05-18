@@ -28,5 +28,10 @@
         <input type="hidden" value="true"  class="registerSuccess">
     {% endif %}
 </section>
+
+{% if isUserzoomEnabled %}
+    {% include (template + "/partials/userzoom.html") %}
+{% endif %}
+
 {% view 'partials/tracking' %}
 {% view 'pages/interstitial' %}

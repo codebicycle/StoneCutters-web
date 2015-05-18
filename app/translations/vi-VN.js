@@ -550,6 +550,7 @@ module.exports = {
     'misc.FindLookFor': 'T\xECm th\u1EA5y nh\u1EEFng g\xEC b\u1EA1n \u0111ang t\xECm ki\u1EBFm',
     'misc.FollowToIncrease': 'B\u1EB1ng nh\u1EEFng m\u1EB9o n\xE0y, b\u1EA1n c\xF3 th\u1EC3 t\u0103ng c\u01A1 h\u1ED9i b\xE1n h\xE0ng c\u1EE7a m\xECnh',
     'misc.Free-NoCommission': 'N\xF3 mi\u1EC5n ph\xED v\xE0 <strong> kh\xF4ng m\u1EA5t hoa h\u1ED3ng </strong>',
+    'misc.FreeClassifieds-SEO': 'Rao v\u1EB7t mi\u1EC5n ph\xED t\u1EA1i <<AREA>>',
     'misc.FreeDownload': 'T\u1EA3i xu\u1ED1ng mi\u1EC5n ph\xED',
     'misc.FreeEasyFast': 'Mi\u1EC5n ph\xED, d\u1EC5 d\xE0ng v\xE0 nhanh ch\xF3ng!',
     'misc.FreeIn_Mob': 'Mi\u1EC5n ph\xED t\u1EA1i',
