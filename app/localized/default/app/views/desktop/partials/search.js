@@ -3,6 +3,7 @@
 var Base = require('../../../../../common/app/bases/view').requireView('partials/search');
 var helpers = require('../../../../../../helpers');
 var Metric = require('../../../../../../modules/metric');
+var Mixpanel = require('../../../../../../modules/tracking/trackers/mixpanel');
 
 module.exports = Base.extend({
     postRender: function() {
@@ -25,6 +26,10 @@ module.exports = Base.extend({
 
         Metric.increment.call(this, ['dgd', 'home', ['search', (search ? 'with' : 'without') + '_term']], {
             include: 'currentRoute:categories#list'
+        });
+
+        Mixpanel.track.call(this, 'search', {
+            keyword: search.toLowerCase()
         });
 
         helpers.common.redirect.call(this.app.router, url, null, {
