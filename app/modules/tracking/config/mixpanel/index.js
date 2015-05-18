@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = {
-    enviroment: {        
+    environment: {
         development: {
             token: '559e3633de8bb99c26a5a7dd10a9797e'
         },

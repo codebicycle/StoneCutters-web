@@ -225,7 +225,7 @@ function onSubcategorySubmit(event, subcategory) {
         this.handleBack();
     }
     if (!this.editing) {
-        Mixpanel.track.call(this, 'replyIntention', {
+        Mixpanel.track.call(this, 'chooseCategory', {
             categoryId: this.item.get('category').id,
             categoryName: this.categorySuggestionGetCategory(this.item.get('category').id).subcategory.name
         });

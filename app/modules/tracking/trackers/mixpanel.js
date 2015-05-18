@@ -20,13 +20,17 @@ function isEnabled() {
 }
 
 function getParams() {
-    return utils.get(configTracking, ['mixpanel', 'enviroment', config.get(['environment', 'type'])], []);
+    return utils.get(configTracking, ['mixpanel', 'environment', config.get(['environment', 'type'])], []);
 }
 
 function getPageName(currentRoute) {
-    var configRouteDefault = utils.get(configTracking, ['mixpanel', 'routes', currentRoute.controller, 'default', 'pagename']);
+    var configRoute = utils.get(configTracking, ['mixpanel', 'routes', currentRoute.controller, currentRoute.action, 'pagename']);
+    
+    if (!configRoute) {
+        configRoute = utils.get(configTracking, ['mixpanel', 'routes', currentRoute.controller, 'default', 'pagename'], {});
+    }
 
-    return utils.get(configTracking, ['mixpanel', 'routes', currentRoute.controller, currentRoute.action, 'pagename'], configRouteDefault);
+    return configRoute;
 }
 
 function parseObject(keys, values) {
@@ -44,9 +48,8 @@ function track(eventName, props) {
 
     var currentRoute = this.app.session.get('currentRoute');
     var location = this.app.session.get('location').current || {};
-    var currentLocation = location.name;
-    var pageName;
     var events = utils.get(configTracking, ['mixpanel', 'keywords', 'events'], {});
+    var pageName;
     
     props = props || {};
     eventName = utils.get(events, [eventName]);
@@ -55,20 +58,14 @@ function track(eventName, props) {
         pageName = getPageName(currentRoute);
     }
 
-    _.extend(props, {
-        loggedIn: +!!this.app.session.get('user')
-    });
+    props.loggedIn = +!!this.app.session.get('user');
 
     if (pageName) {
-        _.extend(props, {
-            from: pageName
-        });
+        props.from = pageName;
     }
 
-    if (currentLocation) {
-        _.extend(props, {
-            defaultCity: currentLocation
-        });
+    if (location.name) {
+        props.defaultCity = location.name;
     }
 
     props = parseObject(props, utils.get(configTracking, ['mixpanel', 'keywords', 'properties'], {}));
