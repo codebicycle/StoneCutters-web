@@ -23,7 +23,7 @@
                 <div class="phone-number">
                     <img alt="" src="{{ "/images/html4/phone.png" | static }}" /><span>{{ item.phone }}</span>
                 </div>
-            {% if isSafetyTipsEnabled and device.uriSchemeTel %}
+            {% if device.uriSchemeTel %}
 
                 <a href="tel:{{ item.phone }}" class="btns orange">{{ dictionary["misc.Call"] }}</a>
             {% endif %}
@@ -40,11 +40,11 @@
     </div>
 
     <div class="tips">
-        <p><strong>Safety Tips for buyers</strong></p>
+        <p><strong>Because OLX values your safety:</strong></p>
         <ul>
-            <li>Try to meeting in a safe place and public.</li>
-            <li>Review the product before you buy it.</li>
-            <li>Pay only after receiving the product.</li>
+            <li><strong>Do not pay</strong> before seeing and inspecting the item.</li>
+            <li><strong>Do not Send</strong> money or airtime for fuel, delivery or commitment.</li>
+            <li>Try to meet in a safe and public place.</li>
         </ul>
     </div>
 

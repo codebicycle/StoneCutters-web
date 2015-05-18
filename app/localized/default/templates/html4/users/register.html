@@ -13,7 +13,8 @@
         <h4>{{ dictionary["loginRequired.CreateAccount"] or "Create an account to start selling on OLX" }}</h4>
         <p class="subtitle"><small>{{ dictionary["loginRequired.ItsFree"] or "Don't worry it's free!" }}</small></p>
     {% endif %}
-    <form action="{{ '/register' | link }}" method="POST" enctype="multipart/form-data">
+    {% set registerUrl = '/register-withconf' if registerWithConfirmation else '/register' %}
+    <form action="{{ registerUrl | link }}" method="POST" enctype="multipart/form-data">
         <div class="formField">
             <label>{{ dictionary["lostform.Username"] }}</label>
             <input type="text" name="username" data-qa="username-field">

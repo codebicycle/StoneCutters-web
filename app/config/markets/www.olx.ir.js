@@ -1,4 +1,8 @@
 module.exports = {
+    layoutOptions: {
+        direction: 'rtl',
+        digits: 'persian'
+    },
     ads: {
         quantity: {
             listing: 27,
@@ -45,6 +49,14 @@ module.exports = {
             ninja: {
                 enabled: false
             }
+        }
+    },
+    notifications: {
+        desktop: {
+            enabled: false
+        },
+        html5: {
+            enabled: false
         }
     }
 };

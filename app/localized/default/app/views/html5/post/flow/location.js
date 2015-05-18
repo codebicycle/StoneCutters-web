@@ -14,6 +14,7 @@ module.exports = Base.extend({
     city: {},
     initialize: function() {
         Base.prototype.initialize.call(this);
+        this.dictionary = translations.get(this.app.session.get('selectedLanguage'));
         this.firstRender = true;
         this.secondRender = true;
     },
@@ -39,14 +40,15 @@ module.exports = Base.extend({
         'click .state': 'onClickState',
         'click .neighborhood': 'onClickNeighborhoods',
         'submit': 'onSubmit',
-        'click .changecity': 'onClickBack'
+        'click .changecity': 'onClickBack',
+        'click .btn-cancel': 'onClickCancel'
     },
     onShow: function(event) {
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();
 
-        this.parentView.$el.trigger('headerChange', [translations.get(this.app.session.get('selectedLanguage'))['countryoptions.Home_SelectCity'], this.id, 'contact']);
+        this.parentView.$el.trigger('headerChange', [this.dictionary['countryoptions.Home_SelectCity'], this.id, 'contact']);
         this.$el.removeClass('disabled');
     },
     onHide: function(event) {
@@ -58,7 +60,13 @@ module.exports = Base.extend({
         this.secondRender = true;
         this.neighborhoods = [];
         this.render();
-        this.parentView.$el.trigger('locationSubmit', [translations.get(this.app.session.get('selectedLanguage'))['postingerror.InvalidLocation']]);
+        this.parentView.$el.trigger('locationSubmit', [this.dictionary['postingerror.InvalidLocation']]);
+    },
+    onClickCancel: function(event) {
+        if (this.neighborhoods.length && !this.parentView.getItem().has('neighborhood.id')) {
+            this.parentView.neighborhoodSelected = false;
+        }
+        return true;
     },
     onClickBack: function(event) {
         event.preventDefault();
@@ -79,9 +87,14 @@ module.exports = Base.extend({
 
         var $state = $(event.currentTarget);
 
-        var fetch = function(done) {
+        asynquence().or(fail.bind(this))
+            .then(prepare.bind(this))
+            .then(fetch.bind(this))
+            .val(success.bind(this));
+
+        function prepare(done) {
             $('body > .loading').show();
-            this.app.fetch({
+            done({
                 cities: {
                     collection: 'Cities',
                     params: {
@@ -91,27 +104,27 @@ module.exports = Base.extend({
                         languageId: this.app.session.get('languages')._byId[this.app.session.get('selectedLanguage')].id
                     }
                 }
-            }, {
+            });
+        }
+
+        function fetch(done, spec) {
+            this.app.fetch(spec, {
                 readFromCache: false
             }, done.errfcb);
-        }.bind(this);
+        }
 
-        var error = function(err) {
-            $('body > .loading').hide();
-            console.log(err); // TODO: HANDLE ERRORS
-        }.bind(this);
-
-        var success = function(res) {
+        function success(res) {
             $('body > .loading').hide();
             this.cities = res.cities;
             this.firstRender = false;
             this.render();
             this.$el.trigger('show');
-        }.bind(this);
+        }
 
-        asynquence().or(error)
-            .then(fetch)
-            .val(success);
+        function fail(err) {
+            $('body > .loading').hide();
+            console.log(err); // TODO: HANDLE ERRORS
+        }
     },
     onClickCity: function(event) {
         event.preventDefault();
@@ -119,9 +132,15 @@ module.exports = Base.extend({
         event.stopImmediatePropagation();
 
         var $city = $(event.currentTarget);
-        var fetch = function(done) {
+
+        asynquence().or(fail.bind(this))
+            .then(prepare.bind(this))
+            .then(fetch.bind(this))
+            .val(success.bind(this));
+
+        function prepare(done) {
             $('body > .loading').show();
-            this.app.fetch({
+            done({
                 neighborhoods: {
                     collection: 'Neighborhoods',
                     params: {
@@ -131,51 +150,52 @@ module.exports = Base.extend({
                         languageId: this.app.session.get('languages')._byId[this.app.session.get('selectedLanguage')].id
                     }
                 }
-            }, {
+            });
+        }
+
+        function fetch(done, spec) {
+            this.app.fetch(spec, {
                 readFromCache: false
             }, done.errfcb);
-        }.bind(this);
+        }
 
-        var error = function(err) {
-            $('body > .loading').hide();
-            console.log(err); // TODO: HANDLE ERRORS
-        }.bind(this);
-
-        var success = function(res) {
-            var options = res.neighborhoods;
-            var aux = res.neighborhoods.toJSON();
+        function success(res) {
+            var item = this.parentView.getItem();
 
             $('body > .loading').hide();
-            if(aux.length) {
-                this.neighborhoods = options;
+            item.unset('neighborhood.id');
+            item.unset('neighborhood.name');
+            if(res.neighborhoods.length) {
+                this.neighborhoods = res.neighborhoods;
                 this.secondRender = false;
                 this.firstRender = false;
                 this.render();
                 this.$el.trigger('show');
-            } else {
-                this.parentView.getItem().set('location', this.cities.get($city.data('url')).toJSON());
-                this.parentView.getItem().unset('neighborhood.id');
-                this.parentView.getItem().unset('neighborhood.name');
+            }
+            else {
+                this.neighborhoods = [];
+                item.set('location', this.cities.get($city.data('url')).toJSON());
                 this.parentView.$el.trigger('flow', [this.id, 'contact']);
             }
             this.city = this.cities.get($city.data('url')).toJSON();
-        }.bind(this);
+        }
 
-        asynquence().or(error)
-            .then(fetch)
-            .val(success);
+        function fail(err) {
+            $('body > .loading').hide();
+            console.log(err); // TODO: HANDLE ERRORS
+        }
     },
     onClickNeighborhoods: function(event) {
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();
 
-        var $nb = $(event.currentTarget);
+        var $neighborhood = $(event.currentTarget);
 
-        this.city.name = $nb.data('name');
+        this.city.name = $neighborhood.data('name');
         this.parentView.getItem().set('location', this.city);
-        this.parentView.getItem().set('neighborhood.id', $nb.data('id'));
-        this.parentView.getItem().set('neighborhood.name', $nb.data('name'));
+        this.parentView.getItem().set('neighborhood.id', $neighborhood.data('id'));
+        this.parentView.getItem().set('neighborhood.name', $neighborhood.data('name'));
         this.parentView.neighborhoodSelected = true;
         this.parentView.$el.trigger('flow', [this.id, 'contact']);
     },
@@ -183,6 +203,7 @@ module.exports = Base.extend({
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();
+
         this.parentView.$el.trigger('flow', [this.id, 'contact']);
     }
 });

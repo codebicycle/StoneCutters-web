@@ -214,16 +214,12 @@ module.exports = {
     marketing: {
         videos: [
             {
-                title: 'OLX Uruguay - Celular - Vender es fácil',
-                id: '29QoFeoJldU'
+                title: 'OLX Uruguay - Capitán',
+                id: 'hFUam2D4atk'
             },
             {
-                title: 'OLX Uruguay - Bicicleta - Vender es fácil',
-                id: 'Z3wwfLdLgj8'
-            },
-            {
-                title: 'OLX Uruguay - Auto - Vender es fácil',
-                id: 'rhJVT5fDkWU'
+                title: 'OLX Uruguay - Bicicleta',
+                id: 'NsB5XIF-3x0'
             }
         ]
     },

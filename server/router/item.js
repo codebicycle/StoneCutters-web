@@ -1,4 +1,4 @@
-'use strict';
+ 'use strict';
 
 module.exports = function(app, dataAdapter) {
     var _ = require('underscore');
@@ -12,6 +12,9 @@ module.exports = function(app, dataAdapter) {
     var User = require('../../app/models/user');
     var Item = require('../../app/models/item');
     var translations = require('../../shared/translations');
+    var config = require('../config');
+    var configClient = require('../../shared/config');
+    var util = require('util');
 
     (function reply() {
         app.post('/items/:itemId/reply', handler);
@@ -416,6 +419,151 @@ module.exports = function(app, dataAdapter) {
                 .then(parse)
                 .then(prepare)
                 .then(remove)
+                .val(success);
+        }
+    })();
+
+    (function flagItem() {
+        app.post('/items/:itemId/flag', handler);
+
+        function handler(req, res, next) {
+            var location = req.rendrApp.session.get('location').location;
+            var dictionary = translations.get(req.rendrApp.session.get('selectedLanguage'));
+            var itemId = req.param('itemId', null);
+            var report = null;
+            var zendesk = null;
+            var emailRegex = /^[_a-zA-Z0-9-]+(\.[_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*(\.[a-zA-Z]{2,6})$/;
+
+            function parse(done) {
+                formidable.parse(req, done.errfcb);
+            }
+
+            function initialize(done, data) {
+                report = data;
+
+                report.description = report.description || '';
+                report.emailorphone = report.emailorphone || '';
+                report.categoryid = report.categoryid || '';
+                report.categoryname = report.categoryname || '';
+                report.phone = '';
+                report.email = '';
+
+                if (report.emailorphone.indexOf('@') !== -1) {
+                    report.email = report.emailorphone;
+                } else {
+                    report.phone = report.emailorphone;
+                }
+
+                done();
+            }
+
+            function validate(done) {
+                var errors = [];
+
+                if (!report.reason) {
+                    errors.push({
+                        selector: 'reason',
+                        message: dictionary['misc.ChooseMostApplicable']
+                    });
+                }
+
+                if (report.email && !emailRegex.test(report.email)) {
+                    errors.push({
+                        selector: 'emailorphone',
+                        message: dictionary['flagitem.emailOrPhoneError'] || 'only enter an email address or a phone number'
+                    });
+                }
+
+                if (errors.length > 0) {
+                    return done.fail(errors);
+                }
+
+                done();
+            }
+
+            function configure(done) {
+
+                zendesk = _.defaults({}, config.get(['emails', 'zendesk', location], {}), config.get(['emails', 'zendesk', 'default']));
+                zendesk = _.defaults({}, configClient.get(['mails', 'zendesk', location], {}), zendesk);
+
+                done();
+            }
+
+            function prepare(done) {
+                var subject;
+                var body;
+                var ticket;
+
+                subject = util.format("[Reported item] Reason: %s - Item id: %s", report.reason, itemId);
+
+                body = util.format(
+                    "Item id: %s\nReason: %s\nDescription: %s\nPhone: %s\nCategory: %s (%s)",
+                    itemId,
+                    report.reason,
+                    report.description,
+                    report.phone,
+                    report.categoryname,
+                    report.categoryid
+                );
+
+                ticket = {
+                    requester: {
+                        name: report.email && 'User' || 'Empty',
+                        email: report.email || 'no-reply@olx.com'
+                    },
+                    subject: subject,
+                    comment: {
+                        public: true,
+                        body: body
+                    }
+                };
+
+                if (zendesk.brand_id) {
+                    ticket.brand_id = zendesk.brand_id;
+                }
+                done(zendesk, ticket);
+            }
+
+            function submit(done, zendesk, ticket) {
+                restler.post('https://' + zendesk.subdomain + '.zendesk.com/api/v2/tickets.json', {
+                    data: {
+                        ticket: ticket
+                    },
+                    username: zendesk.email,
+                    password: zendesk.password
+                })
+                .on('success', function onSuccess(data) {
+                    done();
+                })
+                .on('fail', function onFail(err, resp) {
+                    done.fail([{
+                        selector: 'reason',
+                        message: dictionary['postingerror.ThereWasAnErrorTryingToFulfillYourRequest']
+                    }]);
+                });
+            }
+
+            function success() {
+                var url = 'items/' + itemId + '/flag/success';
+
+                res.redirect(utils.link(url, req.rendrApp));
+            }
+
+            function error(err) {
+                var url = req.headers.referer || '/items/' + itemId + '/flag';
+
+                formidable.error(req, url.split('?').shift(), err, report, function redirect(url) {
+                    res.redirect(utils.link(url, req.rendrApp));
+                });
+            }
+
+            asynquence().or(error)
+                .then(parse)
+                .then(initialize)
+                .then(validate)
+                .then(configure)
+                .then(prepare)
+                .then(submit)
                 .val(success);
         }
     })();

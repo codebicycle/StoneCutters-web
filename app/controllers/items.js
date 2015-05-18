@@ -19,6 +19,7 @@ module.exports = {
     success: middlewares(success),
     favorite: middlewares(favorite),
     flag: middlewares(flag),
+    flagsuccess: middlewares(flagsuccess),
     'delete': middlewares(deleteitem),
     filter: middlewares(filter),
     sort: middlewares(sort),
@@ -41,7 +42,6 @@ function show(params, callback) {
         var newItemPage = helpers.features.isEnabled.call(this, 'newItemPage');
         var anonymousItem;
         var location = this.app.session.get('location');
-        var isSafetyTipsEnabled = helpers.features.isEnabled.call(this, 'safetyTips', platform, location.url);
 
         new Shops(this).evaluate(params);
 
@@ -307,8 +307,7 @@ function show(params, callback) {
                 favorite: favorite,
                 flagged: flagged,
                 sent: params.sent,
-                categories: this.dependencies.categories.toJSON(),
-                isSafetyTipsEnabled: isSafetyTipsEnabled
+                categories: this.dependencies.categories.toJSON()
             });
         }
 
@@ -697,11 +696,10 @@ function safetytips(params, callback) {
         }
 
         function featureValidation(done, _item) {
-            var isEnabled = helpers.features.isEnabled.call(this, 'safetyTips', platform, location.url);
-            var isValidAction = _.contains(['sms', 'call', 'email'], params.intent);
+            var safetyTips = _.contains(['sms', 'call', 'email'], params.intent) && config.getForMarket(location.url, ['safetyTips', platform, params.intent, 'enabled'], false);
             var slug = helpers.common.slugToUrl(_item.toJSON());
 
-            if (!(isEnabled && isValidAction) || (_item.get('phone') === '' && params.intent !== 'email' )) {
+            if (!safetyTips || (_item.get('phone') === '' && params.intent !== 'email' )) {
                 done.abort();
                 return helpers.common.redirect.call(this, ('/' + slug));
             }
@@ -929,50 +927,144 @@ function favorite(params, callback) {
 }
 
 function flag(params, callback) {
+    helpers.controllers.control.call(this, params, {
+        isForm: true
+    }, controller);
 
-    var redirect = function(done) {
+    function controller() {
+        var itemId = params.itemId;
+        var user = this.app.session.get('user');
         var platform = this.app.session.get('platform');
+        var location = this.app.session.get('location');
+        var withReason = config.getForMarket(location.url, ['flagItem', 'withReason', 'enabled'], false);
 
-        if (platform === 'wap') {
-            done.abort();
-            return helpers.common.redirect.call(this, '/');
+        function redirect(done) {
+            if (platform === 'wap') {
+                done.abort();
+                return helpers.common.redirect.call(this, '/');
+            }
+            done();
         }
 
-        done();
-    }.bind(this);
+        function prepare(done) {
+            params.id = params.itemId;
+            delete params.itemId;
+            done();
+        }
 
-    var flagger = function(done) {
-        var user = !!this.app.session.get('user');
-        var metric = new Metric({}, this);
-        var metricValue = [user ? 'auth' : 'anon', !params.flagged ? 'flagging' : 'reflagging'];
-        
-        metric.increment(['africa', 'item', metricValue]);
+        function findItem(done) {
+            this.app.fetch({
+                item: {
+                    model: 'Item',
+                    params: params
+                }
+            }, {
+                readFromCache: false
+            }, done.errfcb);
+        }
 
-        done();
-    }.bind(this);
+        function checkItem(done, resItem) {
+            if (!resItem.item) {
+                return done.fail(null, {});
+            }
+            done(resItem.item);
+        }
 
-    
-    var success = function() {
-        var url = (params.redirect || '/des-iid-' + params.itemId);
-        var query = {
-            flagged: true
-        };
+        function flagger(done, _item) {
+            var errors = this.form && this.form.errors;
 
-        helpers.common.redirect.call(this, url, query, {
-            status: 302
-        });
-    }.bind(this);
+            if (!errors) {
+                var metric = new Metric({}, this);
+                var metricValue = [!!user ? 'auth' : 'anon', !params.flagged ? 'flagging' : 'reflagging'];
 
-    var error = function() {
-        helpers.common.redirect.call(this, params.redirect || '/des-iid-' + params.itemId, null, {
-            status: 302
-        });
-    }.bind(this);
+                metric.increment(['africa', 'item', metricValue]);
+            }
 
-    asynquence().or(error)
-        .then(redirect)
-        .then(flagger)
-        .val(success);
+            done(_item);
+        }
+
+        function success(_item) {
+            var item = _item.toJSON();
+
+            if (withReason) {
+                callback(null, {
+                    item: item,
+                    form: this.form
+                });
+            }
+            else {
+                helpers.common.redirect.call(this, params.redirect || '/des-iid-' + params.id, {
+                    flagged: true
+                }, {
+                    status: 302
+                });
+            }
+        }
+
+        function error() {
+            helpers.common.redirect.call(this, params.redirect || '/des-iid-' + itemId, null, {
+                status: 302
+            });
+        }
+
+        asynquence().or(error.bind(this))
+            .then(redirect.bind(this))
+            .then(prepare.bind(this))
+            .then(findItem.bind(this))
+            .then(checkItem.bind(this))
+            .then(flagger.bind(this))
+            .val(success.bind(this));
+    }
+}
+
+function flagsuccess(params, callback) {
+    helpers.controllers.control.call(this, params, controller);
+
+    function controller() {
+        var itemId = params.itemId;
+
+        var prepare = function(done) {
+            params.id = params.itemId;
+            delete params.itemId;
+            done();
+        }.bind(this);
+
+        var findItem = function(done) {
+            this.app.fetch({
+                item: {
+                    model: 'Item',
+                    params: params
+                }
+            }, {
+                readFromCache: false
+            }, done.errfcb);
+        }.bind(this);
+
+        var checkItem = function(done, resItem) {
+            if (!resItem.item) {
+                return done.fail(null, {});
+            }
+            done(resItem.item);
+        }.bind(this);
+
+        var success = function(_item) {
+            var item = _item.toJSON();
+
+            callback(null, {
+                item: item
+            });
+        }.bind(this);
+
+        var error = function(err, res) {
+            return helpers.common.error.call(this, err, res, callback);
+        }.bind(this);
+
+        asynquence().or(error)
+            .then(prepare)
+            .then(findItem)
+            .then(checkItem)
+            .val(success);
+    }
 }
 
 function deleteitem(params, callback) {

@@ -97,6 +97,13 @@ module.exports = {
         'posting_fields_1.addAnotherPhoto',
         'posting_photosprogress.wait',
         'item.SelectA_Neighborhood',
-        'misc.SelectSuburb'
+        'misc.SelectSuburb',
+        'register_confirmation.776',
+        'misc.Show',
+        'misc.Hide',
+        'misc.BeenSold',
+        'misc.1UnreadMessage',
+        'misc.UnreadMessages',
+        'misc.FreeClassifieds-SEO'
     ]
 };

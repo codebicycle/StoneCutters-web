@@ -6,6 +6,14 @@
 {% if viewname == 'emailsnotification' or viewname == 'editpersonalinfo' or viewname == 'edituserprofile' or viewname == 'userprofile' or viewname == 'configuration' %}
     {% set configClass = 'active' %}
 {% endif %}
+
+{% if createPassword %}
+    <div id="notification-message" class="notification-message icons icon-check">
+        <h4>{{ dictionary["misc.PasswordNow"] }}</h4>
+        <p>{{ dictionary["misc.ConfidentialPassword"] }}</p>
+    </div>
+{% endif %}
+
 <ul class="myolxmenu">
     {% if frommail and not user %}
         <li class="{{ messagesClass }}{{ ' messages' if not isHermesEnabled }}">

@@ -39,5 +39,11 @@ module.exports = {
     },
     'pages#shop': {
         url: 'shop/:shopId/:shopName'
+    },
+    'pages#safety': {
+        urls: [
+            'safety',
+            'seguridad'
+        ]
     }
 };

@@ -5,6 +5,8 @@ var Base = require('../../../../../common/app/bases/view').requireView('header/u
 var helpers = require('../../../../../../helpers');
 var asynquence = require('asynquence');
 var Metric = require('../../../../../../modules/metric');
+var Notifications = require('../../../../../../modules/notifications');
+var translations = require('../../../../../../../shared/translations');
 
 module.exports = Base.extend({
 	tagName: 'aside',
@@ -23,6 +25,7 @@ module.exports = Base.extend({
     },
     postRender: function () {
         this.listenTo(this.app, 'login', this.render);
+        this.dictionary = translations.get(this.app.session.get('selectedLanguage'));
         $('body').on('update:notifications', this.showNotification.bind(this));
     },
     showNotification: function() {
@@ -40,14 +43,50 @@ module.exports = Base.extend({
 
         if (user && user.unreadConversationsCount) {
             this.$('.count').text(user.unreadConversationsCount).removeClass('display-none');
+
+            this.sendNotification('/myolx/conversations');
+            
         }
         else if (messages && messages > 0) {
             this.$('.count').text(messages).removeClass('display-none');
             this.$('.notificationsLogout').removeClass('display-none');
+
+            this.sendNotification('/login');
         }
         else {
             this.$('.count').addClass('display-none').empty();
             this.$('.notificationsLogout').addClass('display-none');
         }
+    },
+    sendNotification: function(url) {
+        var showNotification = this.app.session.get('showNotification');
+        var current = this.app.session.get('currentRoute');
+        var icon;
+        var body;
+
+        if (!showNotification) {
+            return;
+        }
+
+        if (!this.notifications) {
+            this.notifications = new Notifications({}, this);
+        }
+        if(this.notifications.isEnabled() && this.notifications.checkNotifications() && current.controller !== 'users' && current.action !== 'conversation') {
+            this.notifications.checkPermission(function callback(status) {
+                if (status === 'granted') {
+                    icon = helpers.common.static.call(this, '/images/common/logo_notification.png');
+
+                    if (showNotification > 1) {
+                        body = this.dictionary['misc.UnreadMessages'].replace('<<NUMBER>>', showNotification);
+                    }
+                    else {
+                        body = this.dictionary['misc.1UnreadMessage'];
+                    }
+
+                    this.notifications.showNotification('OLX', body, url, icon);
+                }
+            }.bind(this));
+        }
     }
 });
+

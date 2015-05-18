@@ -1,60 +1,10 @@
-{% from macros import Field %}
-
 <h2 class="section-title">{{ dictionary["posting_step4.ContactInformation"] }}</h2>
 
-{% set contactNameField = {
-	isOptional: false,
-	name: "contactName",
-	mandatory: true,
-	label: dictionary["itemslisting.NewContactName"],
-	fieldType: "text",
-	dataType: "string",
-	value: item.get('contactName'),
-	autocomplete: true
-} %}
-
-{% set emailField = {
-	isOptional: false,
-	name: "email",
-	mandatory: true,
-	label: dictionary["seccion-35.559"],
-	fieldType: "text",
-	dataType: "string",
-	value: user.email,
-	autocomplete: true,
-	readonly: isEmailReadOnly
-} %}
-
-{% set phoneField = {
-	isOptional: false,
-	name: "phone",
-	mandatory: isPhoneMandatory,
-	label: dictionary["posting_footerlist.phoneNumber"],
-	fieldType: "text",
-	dataType: "string",
-	value: item.get('phone'),
-	autocomplete: true
-} %}
-
-{% set adressField = {
-	isOptional: true,
-	name: "streetAddress",
-	mandatory: false,
-	label: dictionary["itemdescription.streetaddress"],
-	fieldType: "text",
-	dataType: "string",
-	value: item.get('streetAddress')
-} %}
-
-
-{{ Field(contactNameField) }}
-{{ Field(hint = hintEmail if hintEmail else dictionary["posting_fields_1.YourEmailAddressWontBeShared"], hintIcon = emailIcon if emailIcon else 'icon-lock', emailField) }}
-{{ Field(phoneField) }}
-
+{% view 'post/contact_name' %}
+{% view 'post/email' %}
+{% view 'post/phone' %}
 {% view 'post/locations' %}
-
-{{ Field(adressField) }}
-
+{% view 'post/address' %}
 
 <fieldset class="seller-post">
     <input type="submit" value="{{ dictionary["wap_posting_step5.Post"] }}" class="posting" data-qa="submit-button" />

@@ -6,8 +6,10 @@ var Base = require('../../../../../../common/app/bases/view');
 var helpers = require('../../../../../../../helpers');
 var User = require('../../../../../../../models/user');
 var Tracking = require('../../../../../../../modules/tracking');
+var Notifications = require('../../../../../../../modules/notifications');
 var translations = require('../../../../../../../../shared/translations');
 var rEmail = /^[_a-zA-Z0-9-]+(\.[_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*(\.[a-zA-Z]{2,6})$/;
+var Mixpanel = require('../../../../../../../modules/tracking/trackers/mixpanel');
 
 module.exports = Base.extend({
     id: 'item-contact-form',
@@ -82,6 +84,13 @@ module.exports = Base.extend({
         this.$submit.addClass('hide');
         this.$success.addClass('hide');
 
+        Mixpanel.track.call(this, 'replyIntention', {
+            type: 'Message',
+            itemId: this.parentView.getItem().get('id') || 0,
+            categoryId: this.parentView.getItem().get('category').id || 0,
+            categoryName: this.parentView.getItem().get('category').originalName || ''
+        });
+
         asynquence().or(fail.bind(this))
             .then(validate.bind(this))
             .then(submit.bind(this))
@@ -122,7 +131,20 @@ module.exports = Base.extend({
             if (_.contains([378], item.get('category').id)) {
                 this.app.sixpack.convert(this.app.sixpack.experiments.dgdCategoryCars);
             }
+            
             this.app.sixpack.convert(this.app.sixpack.experiments.dgdHidePhoneNumber, 'reply-by-mail');
+            this.app.sixpack.convert(this.app.sixpack.experiments.dgdMarkVisitedItems, 'item-reply');
+
+            if (!this.notifications) {
+                this.notifications = new Notifications({}, this);
+            }
+            if (this.notifications.isEnabled() && this.notifications.checkNotifications()) {
+                this.notifications.checkPermission(function callback(status) {
+                    if (status === 'default') {
+                        this.notifications.requestPermission();
+                    }
+                }.bind(this));
+            }
         }
 
         function fail(err) {

@@ -271,7 +271,10 @@ module.exports = {
         }
     },
     flagItem: {
-        enabled: true
+        enabled: true,
+        withReason: {
+            enabled: true
+        }
     },
     posting: {
         loginRequired: true
@@ -280,12 +283,13 @@ module.exports = {
         facebookLogin: false
     },
     userzoom: {
-        enabled: false,
+        enabled: true,
         sections: {
             'items#show' : {
                 platforms: ['html5', 'desktop'],
                 file: 'QzMyOFQxMiAg',
-                t: 'uz_til'
+                t: 'uz_til',
+                delay: 30000
             }
         }
     },
@@ -317,6 +321,24 @@ module.exports = {
                 hint: 'You need a valid email address to sell on OLX',
                 icon: 'icon-exclamation'
             }
+        },
+    },
+    safetyTips: {
+        html4: {
+            call: {
+                enabled: true
+            },
+            sms: {
+                enabled: true
+            }
+        }
+    },
+    registerWithConfirmation: {
+        html5: {
+            enabled: true
+        },
+        html4: {
+            enabled: true
         }
     }
 };

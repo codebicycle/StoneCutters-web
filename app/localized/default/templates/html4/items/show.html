@@ -42,26 +42,29 @@
             </div>
         {% endif %}
     </div>
-
-    <div class="highlight">{{ dictionary["itemgeneraldetails.User"] }}: {{ item.contactName if item.contactName else dictionary["messages_item_page.57"] }}</div>
+    {% if sellerProfileEnabled %}
+        {% include (template + '/items/sellerprofile.html') %}
+    {% else %}
+        <div class="highlight">{{ dictionary["itemgeneraldetails.User"] }}: {{ item.contactName if item.contactName else dictionary["messages_item_page.57"] }}</div>
+    {% endif %}
 
     {% if item.status.contactable %}
         <div id="centerBtns">
             {% if item.phone %}
-                    {% if isSafetyTipsEnabled %}
+                    {% if safetyTips.call.enabled %}
                         <a href="{{ ['/iid-', item.id, '/call'] | join('') | link }}" class="btns orange">{{ dictionary["misc.Call"] }}</a>
+                    {% elif device.uriSchemeTel %}
+                        <a href="tel:{{ item.phone }}" class="btns orange">{{ dictionary["misc.Call"] }}</a>
+                    {% endif %}
+
+                    {% if safetyTips.sms.enabled %}
                         <a href="{{ ['/iid-', item.id, '/sms'] | join('') | link }}" class="btns orange">{{ dictionary["itempagepostcomment.Sms"] }}</a>
-                    {% else %}
-                        {% if device.uriSchemeTel %}
-                            <a href="tel:{{ item.phone }}" class="btns orange">{{ dictionary["misc.Call"] }}</a>
-                        {% endif %}
-                        {% if device.uriSchemeSms %}
-                            <a href="sms:{{ item.phone }}" class="btns orange">{{ dictionary["itempagepostcomment.Sms"] }}</a>
-                        {% endif %}
+                    {% elif device.uriSchemeSms %}
+                        <a href="sms:{{ item.phone }}" class="btns orange">{{ dictionary["itempagepostcomment.Sms"] }}</a>
                     {% endif %}
             {% endif %}
             {% if item.email %}
-                {% if isSafetyTipsEnabled %}
+                {% if safetyTips.email.enabled %}
                     <a href="{{ ['/iid-', item.id, '/email'] | join('') | link }}" class="btns orange" data-qa="reply-button" >{{ dictionary["register_mail.Email"] }}</a>
                 {% else %}
                     <a href="{{ ['/iid-', item.id, '/reply'] | join('') | link }}" class="btns orange" data-qa="reply-button" >{{ dictionary["register_mail.Email"] }}</a>
@@ -107,7 +110,7 @@
             <a href="{{ relatedAdsLink | link }}" class="btns grey">{{ dictionary["itemgeneraldetails.OtherRelatedListings"] | replace(':','')}}</a>
         {% endif %}
     </div>
-    
+
 </div>
 {{ BreadcrumbHome(dictionary, link, ('/' | link)) }}
 

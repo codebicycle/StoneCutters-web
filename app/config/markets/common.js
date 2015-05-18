@@ -1,4 +1,8 @@
 module.exports = {
+    layoutOptions: {
+        direction: 'ltr',
+        digits: 'western-arabic'
+    },
     ads: {
         quantity: {
             listing: 27,
@@ -191,7 +195,11 @@ module.exports = {
             floodlight: {
                 enabled: false,
                 platforms: ['desktop']
-            }
+            },
+            mixpanel: {
+                enabled: true,
+                platforms: ['desktop']
+            }            
         }
     },
     featured: {
@@ -258,6 +266,7 @@ module.exports = {
         enabled: false
     },
     validator: {
+        enabled: true,
         email: {
             enabled: false,
             platforms: ['html5', 'desktop'],
@@ -265,10 +274,28 @@ module.exports = {
         },
         phone: {
             enabled: false
+        },
+        contactName: {
+            enabled: true
+        },
+        address: {
+            enabled: false
+        },
+        state: {
+            enabled: true
+        },
+        city: {
+            enabled: true
+        },
+        neighborhoods: {
+            enabled: true
         }
     },
     flagItem: {
-        enabled: false
+        enabled: false,
+        withReason: {
+            enabled: false
+        }
     },
     posting: {
         loginRequired: false
@@ -308,9 +335,41 @@ module.exports = {
     },
     notifications: {
         desktop: {
-            enabled: false
+            enabled: true
         },
         html5: {
+            enabled: false
+        }
+    },
+    safetyTips: {
+        html4: {
+            call: {
+                enabled: false
+            },
+            sms: {
+                enabled: false
+            },
+            email: {
+                enabled: false
+            }
+        }
+    },
+    marketing: {
+        thanksPage: {
+            videoUrl: 'thank-you-video-es'
+        }
+    },
+    registerWithConfirmation: {
+        desktop: {
+            enabled: true
+        },
+        html5: {
+            enabled: false
+        },
+        html4: {
+            enabled: false
+        },
+        wap: {
             enabled: false
         }
     }

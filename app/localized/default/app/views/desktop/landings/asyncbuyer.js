@@ -12,7 +12,8 @@ module.exports = Base.extend({
         'click .rejectTransaction': 'rejectTransaction',
         'click .submit': 'onSubmit',
         'errorsUpdate': 'onErrorsUpdate',
-        'changeView': 'toogleView'
+        'changeView': 'toogleView',
+        'track': 'onTrack'
     },
     errors: {
         'EMPTY_BUYER_NAME': 'buyer_name',
@@ -26,6 +27,10 @@ module.exports = Base.extend({
         this.enableButton = true;
     },
     postRender: function() {
+        this.$el.trigger('track', [{
+            track_page: 'buyer_landing',
+            step: 'landing'
+        }]);
         this.app.router.once('action:end', this.onStart);
         this.app.router.once('action:start', this.onEnd);
     },
@@ -43,6 +48,11 @@ module.exports = Base.extend({
         var $btn = $(event.target);
         var $current = $btn.closest('.content-confirm');
         var nextStep = $btn.data('next-step');
+
+        this.$el.trigger('track', [{
+            track_page: 'buyer_landing',
+            step: 'buyer_info'
+        }]);
 
         this.$el.trigger('changeView', [$current, nextStep]);
     },
@@ -99,8 +109,8 @@ module.exports = Base.extend({
 
         function callback(err, res, body) {
             res = JSON.parse(res.responseText);
-            var status = body.status;
-            var errors = body.error;
+            var status = res.status;
+            var errors = res.error;
             this.enableButton = true;
 
             this.$('small.error').remove();
@@ -155,6 +165,11 @@ module.exports = Base.extend({
                 nextStep = 'transaction-rejected';
                 this.$el.trigger('changeView', [$current, nextStep]);
             }
+            else {
+                $current.addClass('hide');
+                this.$('.error-confirmed .error-message').html(errors[0].message);
+                this.$('.error-confirmed').removeClass('hide');
+            }
         }
     },
     onErrorsUpdate: function(event, errors) {
@@ -168,6 +183,27 @@ module.exports = Base.extend({
             $field = this.$('[name="' + this.errors[obj.key] + '"]');
             $field.closest('.field-wrapper').append('<small class="error">' + obj.message + '</small>');
         }.bind(this));
+    },
+    onTrack: function(event, query, options) {
+
+        query = _.defaults({
+            clientId: this.app.session.get('clientId'),
+            project: 'asyncpickup',
+            t: Math.ceil((_.now() / 1000)),
+            transactionId: this.$('.posting.submit').data('transactionid'),
+            itemId: this.$('.posting.submit').data('itemid')
+        }, query || {});
+
+        options = _.defaults({
+            type: 'GET',
+            url: 'http://tracking.olx-st.com/h/minv/',
+            dataType: 'json',
+            timeout: 4000,
+            cache: false,
+            data: query
+        }, options || {});
+
+        $.ajax(options, $.noop);
     }
 });
 

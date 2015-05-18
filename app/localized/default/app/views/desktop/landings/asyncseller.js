@@ -11,7 +11,8 @@ module.exports = Base.extend({
         'validateFields': 'onValidateFields',
         'errorsUpdate': 'onErrorsUpdate',
         'progressBar': 'onProgressBar',
-        'updateData': 'onUpdateData'
+        'updateData': 'onUpdateData',
+        'track': 'onTrack'
     },
     errors: {
         'INVALID_JSON': '',
@@ -33,9 +34,25 @@ module.exports = Base.extend({
     initialize: function(){
         this.fields = {};
         this.enableButton = true;
+        this.currentStep = 'step-1';
         this.dimensions = '';
     },
+    onExit: function(event) {
+        var timeDiff = _.now() - this.startTime;
+
+        this.$el.trigger('track', [{
+            track_page: this.currentStep,
+            bounce_time: Math.ceil((timeDiff / 1000))
+        }, {
+            async: false
+        }]);
+    },
     postRender: function() {
+        $(window).on('unload', {
+            async: false
+        }, this.onExit.bind(this));
+        this.startTime = _.now();
+        this.startStepTime = _.now();
         this.app.router.once('action:end', this.onStart);
         this.app.router.once('action:start', this.onEnd);
     },
@@ -53,12 +70,24 @@ module.exports = Base.extend({
         var current = step;
         step = pos === 'next' ? (step + 1) : pos;
 
+        this.$el.trigger('track', [{
+            track_page: this.currentStep,
+            spend_time: this.setTimeDiff()
+        }]);
+        this.currentStep = 'step-' + step;
+        this.startStepTime = _.now();
+
         this.$('.step-' + current).addClass('hide');
         if (step === 4) {
             this.$el.trigger('updateData');
         }
         this.$('.step-' + step).removeClass('hide');
         this.$el.trigger('progressBar', [step]);
+    },
+    setTimeDiff: function() {
+        var timeDiff = _.now() - this.startStepTime;
+        
+        return Math.ceil((timeDiff / 1000));
     },
     onValidateFields: function(event, data, step) {
         event.preventDefault();
@@ -149,6 +178,26 @@ module.exports = Base.extend({
         this.$('.step.point-' + current).addClass('active');
         this.$('.step.point-' + current).addClass('big');
         this.$('.point-' + current).addClass('active');
+    },
+    onTrack: function(event, query, options) {
+        query = _.defaults({
+            clientId: this.app.session.get('clientId'),
+            project: 'asyncpickup',
+            t: Math.ceil((_.now() / 1000)),
+            user_email: $('[name=seller_email]').val(),
+            itemId: $('[name=itemId]').val()
+        }, query || {});
+
+        options = _.defaults({
+            type: 'GET',
+            url: 'http://tracking.olx-st.com/h/minv/',
+            dataType: 'json',
+            timeout: 4000,
+            cache: false,
+            data: query
+        }, options || {});
+
+        $.ajax(options, $.noop);
     }
 });
 

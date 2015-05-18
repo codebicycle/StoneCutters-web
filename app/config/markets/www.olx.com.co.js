@@ -15,6 +15,23 @@ module.exports = {
                 '812': 1059,
                 '816': 1054
             }
+        },
+        testing: {
+            order: [362, 1022, 1040, 821, 830, 806, 815, 16, 800, 1028, 859, 1013, 1016, 1007, 811, 1046],
+            columns: [4, 4, 4],
+            redirections: {
+                '803': 1016,
+                '824': 1046,
+                '808': 1028,
+                '388': 363,
+                '876': 1047,
+                '866': 1040,
+                '802': 1022,
+                '864': 1007,
+                '812': 1059,
+                '1015': 813,
+                '1030': 816
+            }
         }
     },
     socials: {
@@ -41,41 +58,8 @@ module.exports = {
             image: 'home-colombia'
         },
         post_banner: {
-            image: 'post-colombia-woman'
+            image: 'post-colombia-phone'
         },
-        videos: [
-            {
-                title: 'OLX Colombia - Patrón Bermúdez - Celular',
-                id: 'vOlDNW5BdGU'
-            },
-            {
-                title: 'OLX Colombia - Gafas - Vender es fácil',
-                id: 'LenRRiECAvw'
-            },
-            {
-                title: 'En OLX todos pueden vender',
-                id: '77hkuVlT_78'
-            },
-            {
-                title: 'OLX Colombia - Bicicleta - Vender es fácil',
-                id: 'Ljii4NbsHKA'
-            },
-            {
-                title: 'OLX Colombia - Celular - Vender es fácil',
-                id: 'y6YlZcHh7Ew'
-            },
-            {
-                title: 'OLX Colombia - Jorge "Patrón" Bermúdez - Vender es fácil',
-                id: 'H-pLeNmxMWs'
-            },
-            {
-                title: 'OLX Colombia - Poker - Vender es fácil',
-                id: 'KuwFa8fSuiM'
-            }
-        ],
-        thanksPage: {
-            videoUrl: 'thank-you-video-es'
-        }
     },
     successPage: {
         keepPosting: [
@@ -254,6 +238,7 @@ module.exports = {
     },
     chat: {
         enabled: true,
+        department: 81143,
         sections: {
             'categories#list': {
                 enabled: true
@@ -271,18 +256,9 @@ module.exports = {
             enabled: true
         }
     },
-
-    notifications: {
-        desktop: {
-            enabled: false
-        },
-        html5: {
-            enabled: false
-        }
-    },
     validator: {
         email: {
-            enabled: true
+            enabled: false
         }
     }
 };

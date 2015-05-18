@@ -76,6 +76,7 @@ module.exports = Base.extend({
         'headerChange': 'onHeaderChange',
         'categorySubmit': 'onCategorySubmit',
         'subcategorySubmit': 'onSubcategorySubmit',
+        'optionalsSubmit': 'onOptionalsSubmit',
         'descriptionSubmit': 'onDescriptionSubmit',
         'contactSubmit': 'onContactSubmit',
         'locationSubmit': 'onLocationSubmit',
@@ -157,6 +158,13 @@ module.exports = Base.extend({
         this.$('#description').trigger('fieldsChange');
         this.$('#contact').trigger('fieldsChange');
     },
+    onOptionalsSubmit: function(event, errors) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+
+        this.$('#hub').trigger('optionalsChange', [this.item.get('category').parentId, this.item.get('category').id, errors]);
+    },
     onDescriptionSubmit: function(event, errors, notTrack) {
         event.preventDefault();
         event.stopPropagation();
@@ -182,7 +190,7 @@ module.exports = Base.extend({
         event.stopPropagation();
         event.stopImmediatePropagation();
 
-        this.$('#contact').trigger('locationChange', [error]);
+        this.$('#contact').trigger('locationChange', [error, this.neighborhoodSelected]);
     },
     onSubmit: function(event) {
         event.preventDefault();

@@ -1,0 +1,13 @@
+<div class="seller-profile-view">
+    {% if item.contactName %}
+        <h4>{{ item.contactName }}</h4>
+    {% elif item.user.username %}
+        <h4>{{ item.user.username }}</h4>
+    {% endif %}
+    {% if item.user and formatMonth %}
+        <p>
+            Registered OLX user since <time>{{ dictionary[formatMonth] }} {{ item.user.firstActivityDate.year }}</time>
+        </p>
+    {% endif %}
+    <p>{{ (item.location.neighborhoodName + ', ') if item.location.neighborhoodName  }}{{ item.location.cityName }}, {{ item.location.stateName }}</p>
+</div>

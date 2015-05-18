@@ -1,0 +1,5 @@
+{% include (template + '/pages/safety/' + (location.abbreviation | lower) + '.html') %}
+
+{% if requireTracking %}
+    {% view 'partials/tracking' %}
+{% endif %}

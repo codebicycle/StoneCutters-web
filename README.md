@@ -36,12 +36,13 @@ Details of the latest version can be found on the Project's Github Wiki.
 
     `sudo npm install -g n`
 
-6. Install Node 0.10.38:
+6. Install Node 0.10.28:
 
-    `sudo n 0.10.38` 
+    `sudo n 0.10.28` 
 
 7. Download and install the node modules running:
 
+    * Ubuntu users: run before `sudo apt-get install build-essential`
     `sudo npm install`
 
 8. Install memcache:
