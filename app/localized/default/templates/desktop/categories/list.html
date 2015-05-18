@@ -27,6 +27,10 @@
     {% include (template + '/partials/categorytree.html') %}
 </section>
 
+{% if isUserzoomEnabled %}
+    {% include (template + "/partials/userzoom.html") %}
+{% endif %}
+
 {% if testimonials %}
     {% include (template + '/partials/testimonials.html') %}
 {% endif %}
