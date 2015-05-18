@@ -19,6 +19,13 @@ module.exports = Base.extend({
         }
         return classes.join(' ');
     },
+    initialize: function() {
+        Base.prototype.initialize.call(this);
+        this._name = this.name;
+        this._className = this.className();
+        this.app.on('footer:hide', this.onHide, this);
+        this.app.on('footer:show', this.onShow, this);
+    },
     firstRender: true,
     events: {
         'click [data-modal-shadow], [data-modal-close]': 'onCloseModal',
@@ -73,9 +80,6 @@ module.exports = Base.extend({
             }.bind(this));
             this.firstRender = false;
         }
-
-        this.app.on('footer:hide', this.hide, this);
-        this.app.on('footer:show', this.show, this);
     },
     onCloseModal: function(event) {
         event.preventDefault();
@@ -108,10 +112,10 @@ module.exports = Base.extend({
 
         $('#migrations-modal').trigger('hide');
     },
-    hide: function() {
+    onHide: function() {
         this.$el.addClass('hidden');
     },
-    show: function() {
+    onShow: function() {
         this.$el.removeClass('hidden');
     }
 });

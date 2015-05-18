@@ -15,16 +15,19 @@ module.exports = Base.extend({
     },
     preRender: function() {
         if (!utils.isServer) {
-            this.app.trigger('header:hide');
+            this.app.trigger('header:customize', {
+                //template: 'header/alternative-a',
+                className: 'alternative-a wrapper',
+                search: false
+            });
             this.app.trigger('footer:hide');
         }
     },
     postRender: function() {
-        this.on('remove', this.onRemove, this);
+        this.once('remove', this.onRemove, this);
     },
     onRemove: function(event) {
-        this.off('remove');
-        this.app.trigger('header:show');
+        this.app.trigger('header:restore');
         this.app.trigger('footer:show');
     },
     onSearchSubmit: function(event) {
