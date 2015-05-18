@@ -29,38 +29,52 @@ function getPageName(currentRoute) {
     return utils.get(configTracking, ['mixpanel', 'routes', currentRoute.controller, currentRoute.action, 'pagename'], configRouteDefault);
 }
 
+function parseObject(keys, values) {
+    return _.reduce(keys, function(result, value, key) {
+        key = values[key] || key;
+        result[key] = value;
+        return result;
+    }, {});
+}
+
 function track(eventName, props) {
     if (utils.isServer || !window.mixpanel || !eventName) {
         return;
     }
+
+    var currentRoute = this.app.session.get('currentRoute');
     var location = this.app.session.get('location').current || {};
     var currentLocation = location.name;
     var userStatus = !!this.app.session.get('user');
-    var currentRoute = this.app.session.get('currentRoute');
     var pageName;
-    var properties = props || {};
+    var events = utils.get(configTracking, ['mixpanel', 'keywords', 'events'], {});
+    
+    props = props || {};
+    eventName = utils.get(events, [eventName]);
 
-    if (eventName === 'Search' || eventName === 'Post Started') {
+    if (_.contains([events.search, events.postStarted], eventName)) {
         pageName = getPageName(currentRoute);
     }
 
-    _.extend(properties, {
-        'Logged in' : +userStatus
+    _.extend(props, {
+        loggedIn: +userStatus
     });
 
     if (pageName) {
-        _.extend(properties, {
-            'From' : pageName
+        _.extend(props, {
+            from: pageName
         });
     }
 
     if (currentLocation) {
-        _.extend(properties, {
-            '$city' : currentLocation || ''
+        _.extend(props, {
+            defaultCity: currentLocation
         });
     }
 
-    window.mixpanel.track(eventName, properties || {});
+    props = parseObject(props, utils.get(configTracking, ['mixpanel', 'keywords', 'properties'], {}));
+
+    window.mixpanel.track(eventName, props || {});
 }
 
 module.exports = {

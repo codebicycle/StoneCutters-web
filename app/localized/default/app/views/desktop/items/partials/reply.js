@@ -84,11 +84,11 @@ module.exports = Base.extend({
         this.$submit.addClass('hide');
         this.$success.addClass('hide');
 
-        Mixpanel.track.call(this, 'Reply intention', {
-            'Type': 'Message',
-            'Item id': this.parentView.getItem().get('id') || 0,
-            'Category Id': this.parentView.getItem().get('category').id || 0,
-            'Category Name': this.parentView.getItem().get('category').originalName || ''
+        Mixpanel.track.call(this, 'replyIntention', {
+            type: 'Message',
+            itemId: this.parentView.getItem().get('id') || 0,
+            categoryId: this.parentView.getItem().get('category').id || 0,
+            categoryName: this.parentView.getItem().get('category').originalName || ''
         });
 
         asynquence().or(fail.bind(this))

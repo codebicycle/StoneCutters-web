@@ -47,7 +47,7 @@ module.exports = Base.extend({
 
         this.app.sixpack.convert(this.app.sixpack.experiments.growthPostingButtonWording);
 
-        Mixpanel.track.call(this, 'Post Started');
+        Mixpanel.track.call(this, 'postStarted');
     },
     onPostingStart: function() {
         this.toggleElements(false);

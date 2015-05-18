@@ -28,8 +28,8 @@ module.exports = Base.extend({
             include: 'currentRoute:categories#list'
         });
 
-        Mixpanel.track.call(this, 'Search', {
-            'Keyword': JSON.stringify(search.toLowerCase())
+        Mixpanel.track.call(this, 'search', {
+            keyword: search.toLowerCase()
         });
 
         helpers.common.redirect.call(this.app.router, url, null, {

@@ -61,7 +61,7 @@ module.exports = Base.extend({
     categorySuggestionDecideIU: categorySuggestionDecideIU,
     categorySuggestionBuildIU: categorySuggestionBuildIU,
     categorySuggestionMetric: categorySuggestionMetric,
-    MixpanelTrack: MixpanelTrack
+    mixpanelTrack: mixpanelTrack
 });
 
 function initialize() {
@@ -225,9 +225,9 @@ function onSubcategorySubmit(event, subcategory) {
         this.handleBack();
     }
     if (!this.editing) {
-        Mixpanel.track.call(this, 'Choose a Category', {
-            'Category Id': this.item.get('category').id,
-            'Category Name': this.categorySuggestionGetCategory(this.item.get('category').id).subcategory.name
+        Mixpanel.track.call(this, 'replyIntention', {
+            categoryId: this.item.get('category').id,
+            categoryName: this.categorySuggestionGetCategory(this.item.get('category').id).subcategory.name
         });
     }
 }
@@ -395,7 +395,7 @@ function onSubmit(event) {
     event.stopPropagation();
     event.stopImmediatePropagation();
 
-    this.MixpanelTrack('Post Submitted');
+    this.mixpanelTrack('postSubmitted');
 
     var promise = asynquence().or(fail.bind(this))
         .then(prepare.bind(this))
@@ -467,8 +467,8 @@ function onSubmit(event) {
         this.app.sixpack.convert(this.app.sixpack.experiments.growthCategorySuggestion);
         this.categorySuggestionMetric(['post']);
 
-        this.MixpanelTrack('Post Complete', {
-            'Item id': this.item.get('id')
+        this.mixpanelTrack('postComplete', {
+            itemId: this.item.get('id')
         });
 
         helpers.common.redirect.call(this.app.router, successPage + this.item.get('id') + '?sk=' + this.item.get('securityKey'), null, {
@@ -801,19 +801,19 @@ function onPopState(event) {
     history.pushState(null, '', window.location.pathname + window.location.search);
 }
 
-function MixpanelTrack(prop, val) {
+function mixpanelTrack(prop, val) {
     if (this.editing) {
         return;
     }
 
     var values = {
-        'Price': this.$('#field-priceC').val() || '',
-        'Number of Photos': this.item.get('images').length,
-        'Category Id': this.item.get('category').id || 0,
-        'Category Name': this.categorySuggestionGetCategory(this.item.get('category').id).subcategory.name || '',
-        'Neighborhood': this.$('#field-neighborhood :selected[value!=""]').text() || '',
-        'Tipo': this.$('#posting-optionals-view .field-wrapper:first-child select :selected[value!=""]').text() || '',
-        'Location': this.$('#field-city :selected[value!=""]').text() || ''
+        price: this.$('#field-priceC').val() || '',
+        numberOfPhotos: this.item.get('images').length,
+        categoryId: this.item.get('category').id || 0,
+        categoryName: this.categorySuggestionGetCategory(this.item.get('category').id).subcategory.name || '',
+        neighborhood: this.$('#field-neighborhood :selected[value!=""]').text() || '',
+        tipo: this.$('#posting-optionals-view .field-wrapper:first-child select :selected[value!=""]').text() || '',
+        location: this.$('#field-city :selected[value!=""]').text() || ''
     };
     if (val) {
         values = _.defaults(val, values);
