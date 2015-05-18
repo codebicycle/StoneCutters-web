@@ -334,5 +334,11 @@ module.exports = {
         html4: {
             enabled: true
         }
-    }
+    },
+    zendeskHelpLink: {
+        desktop: "http://help.olx.com.ng/hc/"
+    },
+    zendeskHelpTarget: {
+        desktop: "_blank"
+    }        
 };
