@@ -549,6 +549,7 @@ module.exports = {
     'misc.FindLookFor': 'Tafuta kile unachotafuta',
     'misc.FollowToIncrease': 'Kwa kufuata vidokezo hivi, unaweza kuongeza fursa zako za kuuza.',
     'misc.Free-NoCommission': 'Ni bure na <strong> haina asilimia ya faida </strong>',
+    'misc.FreeClassifieds-SEO': 'Matangazo ya bure katika <<AREA>>',
     'misc.FreeDownload': 'Pakua bure',
     'misc.FreeEasyFast': 'Bure, rahisi na kwa haraka!',
     'misc.FreeIn_Mob': 'Bure katika',

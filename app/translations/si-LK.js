@@ -549,6 +549,7 @@ module.exports = {
     'misc.FindLookFor': 'Find what you are looking for',
     'misc.FollowToIncrease': 'By following these tips you can increase your selling chances',
     'misc.Free-NoCommission': 'It\xB4s free and with no commission',
+    'misc.FreeClassifieds-SEO': 'Free classifieds in <<AREA>>',
     'misc.FreeDownload': 'Download for free',
     'misc.FreeEasyFast': 'Free, easy and fast!',
     'misc.FreeIn_Mob': '(fill the word \u0DAD\u0DD4\u0DC5 \u0D9C\u0DCF\u0DC3\u0DCA\u0DAD\u0DD4 \u0D85\u0DBA \u0DB1\u0DDC\u0D9A\u0DD9\u0DBB\u0DDA',

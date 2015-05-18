@@ -102,6 +102,7 @@ module.exports = {
         'misc.Show',
         'misc.Hide',
         'misc.1UnreadMessage',
-        'misc.UnreadMessages'
+        'misc.UnreadMessages',
+        'misc.FreeClassifieds-SEO'
     ]
 };

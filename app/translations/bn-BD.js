@@ -549,6 +549,7 @@ module.exports = {
     'misc.FindLookFor': '\u0986\u09AA\u09A8\u09BF \u09AF\u09BE \u0996\u09C1\u0981\u099C\u099B\u09C7\u09A8 \u09A4\u09BE \u09AC\u09C7\u09B0 \u0995\u09B0\u09C1\u09A8',
     'misc.FollowToIncrease': 'By following these tips you can increase your selling chances',
     'misc.Free-NoCommission': '\u098F\u099F\u09BE \u09AB\u09CD\u09B0\u09BF \u0993 <strong> \u0995\u09AE\u09BF\u09B6\u09A8 \u09AC\u09BF\u09B9\u09C0\u09A8 </strong>',
+    'misc.FreeClassifieds-SEO': 'Free classifieds in <<AREA>>',
     'misc.FreeDownload': '\u09AB\u09CD\u09B0\u09BF \u09A1\u09BE\u0989\u09A8\u09B2\u09CB\u09A1 \u0995\u09B0\u09C1\u09A8',
     'misc.FreeEasyFast': '\u09AB\u09CD\u09B0\u09BF, \u09B8\u09B9\u099C \u0993 \u09A6\u09CD\u09B0\u09C1\u09A4!',
     'misc.FreeIn_Mob': '\u09AF\u09C7\u0996\u09BE\u09A8\u09C7 \u09AB\u09CD\u09B0\u09BF:',
