@@ -103,5 +103,18 @@ module.exports = {
         },
         autoParticipate: true,
         fraction: 1
+    },
+    dgdHomePage: {
+        enabled: true,
+        platforms: ['desktop'],
+        markets: ['ar'],
+        name: 'dgd-home-page',
+        alternatives: {
+            CONTROL: 'control',
+            SEARCH_FOCUSED: 'focus-on-search',
+            BROWSE_FOCUSED: 'focus-on-browse'
+        },
+        autoParticipate: true,
+        force: 'focus-on-browse'
     }
 };

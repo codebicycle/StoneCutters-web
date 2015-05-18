@@ -11,4 +11,4 @@ module.exports = Base.extend({
     }
 });
 
-module.exports.id = 'home/index';
+module.exports.id = 'home/focus_on_search';

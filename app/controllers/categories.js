@@ -24,9 +24,10 @@ function home(params, callback) {
     helpers.controllers.control.call(this, params, controller);
 
     function controller() {
+        var alternative = utils.underscorize(this.app.sixpack.experiments.dgdHomePage.alternative);
 
         var success = function(res) {
-            callback(null, 'home/index', {});
+            callback(null, 'home/' + alternative, {});
         }.bind(this);
 
         var error = function(err, res) {
@@ -39,14 +40,16 @@ function home(params, callback) {
 }
 
 function list(params, callback) {
-    // Ask about home experiment
-    if (this.app.session.get('location').url === 'www.olx.com.ar') {
+    var homePageExperiment = this.app.sixpack.experiments.dgdHomePage;
+
+    if (homePageExperiment && homePageExperiment.alternative !== 'control') {
         this.currentRoute = {
             controller: 'categories',
             action: 'home'
         };
         return home.call(this, params, callback);
     }
+
     helpers.controllers.control.call(this, params, controller);
 
     function controller() {

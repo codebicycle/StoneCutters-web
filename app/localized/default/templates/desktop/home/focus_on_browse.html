@@ -1,0 +1,31 @@
+Browse
+<!--
+<section class="search">
+	<h4 class="search-title">Encontrá ahora buenos anuncios!</h4>
+	<form action="{{ 'nf/search/redirect' | link }}" method="post" role="search" class="search-form">
+		<div class="search-cell">
+			<input type="text" name="search" class="search-term" placeholder='{{ dictionary["defaultheader.WhatAreYouLookingFor"] }}' value="{{ search }}" />
+		</div>
+		<div class="location-cell">
+			<a href="#" class="search-location icons icon-pin">{{ (location.current.name + ', ') if location.current }}{{ location.name }}</a>
+
+			<ul class="states-list" style="display: none;">
+			{% for state in states %}
+				<li>{{ state.name }}</li>
+			{% endfor %}
+			</ul>
+
+		</div>
+		<div class="submit-cell">
+			<button type="submit" class="search-button icons icon-search" />
+		</div>
+	</form>
+</section>
+<section class="categories">
+	<h4 class="categories-title">{{ dictionary["popularsearchesbody.CATEGORIES_BOX"] }}</h4>
+	<ul class="categories-list">
+		{% for category in categories -%} 
+			<li class="category-item"><a class="category-link icons icon-cat-{{ category.id }}" href="{{ category | slugToUrl | link }}" title=""{{ category.trName }}>{{ category.trName }}</a></li>
+		{%- endfor %}
+	</ul>
+</section>-->
