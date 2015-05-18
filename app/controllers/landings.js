@@ -25,7 +25,7 @@ function didyousell(params, callback) {
     function controller() {
         var user = this.app.session.get('user');
         var securityKey = params.sk;
-        var itemId = params.itemid;
+        var itemId = params.itemid || params.itemId;
         var languages = this.app.session.get('languages');
         var platform = this.app.session.get('platform');
         var location = this.app.session.get('location').url;
