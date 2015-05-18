@@ -3,6 +3,7 @@
 var _ = require('underscore');
 var Base = require('../../../../../common/app/bases/view').requireView('header/index');
 var Metric = require('../../../../../../modules/metric');
+var Mixpanel = require('../../../../../../modules/tracking/trackers/mixpanel');
 
 module.exports = Base.extend({
     tagName: 'header',
@@ -59,6 +60,8 @@ module.exports = Base.extend({
         }
 
         this.app.sixpack.convert(this.app.sixpack.experiments.growthPostingButtonWording);
+
+        Mixpanel.track.call(this, 'postStarted');
     },
     onPostingStart: function() {
         this.toggleElements(false);

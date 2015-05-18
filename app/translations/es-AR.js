@@ -550,6 +550,7 @@ module.exports = {
     'misc.FindLookFor': 'Encontr\xE1 lo que est\xE1s buscando',
     'misc.FollowToIncrease': 'Si segu\xEDs estos consejos pod\xE9s aumentar tus posibilidades de venta',
     'misc.Free-NoCommission': 'Es gratis y <strong>sin comisi\xF3n</strong>',
+    'misc.FreeClassifieds-SEO': 'Avisos clasificados gratis en <<AREA>>',
     'misc.FreeDownload': 'Descargar gratis',
     'misc.FreeEasyFast': '\xA1Gratis, f\xE1cil y r\xE1pido!',
     'misc.FreeIn_Mob': 'Gratis en',

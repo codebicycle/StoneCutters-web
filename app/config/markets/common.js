@@ -195,7 +195,11 @@ module.exports = {
             floodlight: {
                 enabled: false,
                 platforms: ['desktop']
-            }
+            },
+            mixpanel: {
+                enabled: true,
+                platforms: ['desktop']
+            }            
         }
     },
     featured: {

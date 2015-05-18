@@ -18,6 +18,7 @@ var metasHandler = {
 };
 var Base;
 var Head;
+var translations = require('../../../../shared/translations');
 
 Backbone.noConflict();
 Base = Backbone.Model;
@@ -246,10 +247,19 @@ Head = Backbone.Model.extend({
         return '';
     },
     onChangeTopTitle: function (head, value) {
+        var location = this.app.session.get('location');
+        var currentRoute = this.app.session.get('currentRoute');
+        var headerTitle = value;
+        
+        this.dictionary = translations.get(this.app.session.get('selectedLanguage'));
+        
+        if(location.url === 'www.olx.com.ar' && currentRoute.controller === 'categories' && currentRoute.action === 'list'){   
+            headerTitle = this.dictionary['misc.FreeClassifieds-SEO'].replace('<<AREA>>', (location.current || location).name);
+        }
         if (utils.isServer) {
             return;
         }
-        $('#header_keywords').text(value);
+        $('#header_keywords').text(headerTitle);
     },
     onReset: function(head, options) {
         var currentRoute = this.app.session.get('currentRoute');
