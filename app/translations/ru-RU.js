@@ -617,6 +617,8 @@ module.exports = {
     'misc.Settings': '\u041D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0438',
     'misc.ShareAd': '\u041F\u043E\u0434\u0435\u043B\u0438\u0442\u044C\u0441\u044F \u043E\u0431\u044A\u044F\u0432\u043B\u0435\u043D\u0438\u0435\u043C',
     'misc.Show': 'Show',
+    'misc.Sold': 'I sold it',
+    'misc.SoldIt': 'Have you sold this ad?',
     'misc.Sort_Mob': 'Sort',
     'misc.SpecificFields_title': '\u041F\u043E\u043B\u044F \u043F\u043E \u043A\u0430\u0442\u0435\u0433\u043E\u0440\u0438\u044F (\u043E\u043F\u0446\u0438\u043E\u043D\u0430\u043B\u044C\u043D\u044B\u0435)',
     'misc.States': '\u0428\u0442\u0430\u0442\u044B',

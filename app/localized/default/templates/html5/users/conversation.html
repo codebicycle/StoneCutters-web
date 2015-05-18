@@ -21,6 +21,12 @@
         </div>
     </a>
 </div>
+{% if not thread.get('messages')[0].isMine %}
+    <div class="sold">
+    <span class="haveSold">{{ dictionary["misc.SoldIt"] }}</span>
+    <a href="" data-action="sold" data-id="{{ item.id }}" class="btnfilter">{{ dictionary["misc.Sold"] }}</a>
+    </div>
+{% endif %}
 <ul class="conversation">
     {% for message in thread.get('messages') %}
         <li class="message {{ 'is-mine' if message.isMine }}">

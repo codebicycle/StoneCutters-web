@@ -12,7 +12,8 @@ module.exports = Base.extend({
     className: 'users_conversation_view',
     events: {
         'change textarea, input:not([type=submit], [type=hidden])': 'onChange',
-        'submit': 'onSubmit'
+        'submit': 'onSubmit',
+        'click [data-action=sold]': 'soldItem'
     },
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
@@ -151,6 +152,44 @@ module.exports = Base.extend({
     },
     onEnd: function(event) {
         this.app.router.appView.trigger('conversation:end');
+    },
+    soldItem: function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+
+        var $target = $(event.target);
+        var itemId = $target.data('id');
+        
+
+        asynquence().or(fail.bind(this))
+            .then(remove.bind(this))
+            .then(submit.bind(this))
+            //.then(prepare.bind(this))
+            .val(success.bind(this));
+
+        function remove(done) {
+            this.getConversation().set('message', 'Se vendio amigo');
+            helpers.dataAdapter.post(this.app.req, '/items/' + itemId + '/delete', {
+                query: {
+                    token: (this.app.session.get('user') || {}).token,
+                    reason: 2
+                },
+                cache: false
+            }, done.errfcb);
+        }
+
+        function submit(done) {
+            this.getConversation().reply(done);
+        }
+
+        function success(done) {
+            //this.getConversation().reply(done);
+        }
+
+        function fail() {
+
+        }
     }
 });
 

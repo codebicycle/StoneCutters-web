@@ -617,6 +617,8 @@ module.exports = {
     'misc.Settings': 'Inst\xE4llningar',
     'misc.ShareAd': 'Dela din annons',
     'misc.Show': 'Show',
+    'misc.Sold': 'I sold it',
+    'misc.SoldIt': 'Have you sold this ad?',
     'misc.Sort_Mob': 'Sort',
     'misc.SpecificFields_title': 'Kategorispecifikka f\xE4lt (tillval)',
     'misc.States': 'Stater',

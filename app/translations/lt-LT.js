@@ -617,6 +617,8 @@ module.exports = {
     'misc.Settings': 'Nustatymai',
     'misc.ShareAd': 'Bendrinti savo skelbim\u0105',
     'misc.Show': 'Show',
+    'misc.Sold': 'I sold it',
+    'misc.SoldIt': 'Have you sold this ad?',
     'misc.Sort_Mob': 'Sort',
     'misc.SpecificFields_title': 'Special\u016Bs kategorij\u0173 laukai (papildomi)',
     'misc.States': 'Rajonai',

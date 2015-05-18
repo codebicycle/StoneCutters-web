@@ -617,6 +617,8 @@ module.exports = {
     'misc.Settings': 'Ayarlar',
     'misc.ShareAd': '\u0130lan\u0131 payla\u015F',
     'misc.Show': 'Show',
+    'misc.Sold': 'I sold it',
+    'misc.SoldIt': 'Have you sold this ad?',
     'misc.Sort_Mob': 'Sort',
     'misc.SpecificFields_title': 'Kategoriye \xD6zel Alanlar (Tercihe Ba\u011Fl\u0131)',
     'misc.States': 'Eyaletler',

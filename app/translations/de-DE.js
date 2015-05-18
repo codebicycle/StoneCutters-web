@@ -617,6 +617,8 @@ module.exports = {
     'misc.Settings': 'Einstellungen',
     'misc.ShareAd': 'Anzeige teilen',
     'misc.Show': 'Show',
+    'misc.Sold': 'I sold it',
+    'misc.SoldIt': 'Have you sold this ad?',
     'misc.Sort_Mob': 'Sort',
     'misc.SpecificFields_title': 'Kategoriespezifische Felder (Kann-Eingaben)',
     'misc.States': 'Bundesl\xE4nder',

@@ -617,6 +617,8 @@ module.exports = {
     'misc.Settings': 'Mipangilio',
     'misc.ShareAd': 'Shiriki tangazo lako',
     'misc.Show': 'Onyesha',
+    'misc.Sold': 'Niliiuza',
+    'misc.SoldIt': 'Je, umeuza tangazo hili?',
     'misc.Sort_Mob': 'Panga',
     'misc.SpecificFields_title': 'Uga ya Kundi Maalum (Hiari)',
     'misc.States': 'Nchi',

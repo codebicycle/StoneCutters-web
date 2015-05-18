@@ -617,6 +617,8 @@ module.exports = {
     'misc.Settings': 'Tetapan',
     'misc.ShareAd': 'Kongsi iklan anda',
     'misc.Show': 'Show',
+    'misc.Sold': 'I sold it',
+    'misc.SoldIt': 'Have you sold this ad?',
     'misc.Sort_Mob': 'Sort',
     'misc.SpecificFields_title': 'Medan Spesifik Kategori (Opsyenal)',
     'misc.States': 'Negeri',

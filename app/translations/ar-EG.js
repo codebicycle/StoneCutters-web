@@ -617,6 +617,8 @@ module.exports = {
     'misc.Settings': 'Settings',
     'misc.ShareAd': 'Share your ad',
     'misc.Show': 'Show',
+    'misc.Sold': 'I sold it',
+    'misc.SoldIt': 'Have you sold this ad?',
     'misc.Sort_Mob': 'Sort',
     'misc.SpecificFields_title': 'Category Specific Fields (Optionals)',
     'misc.States': 'States',
