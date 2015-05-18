@@ -15,5 +15,7 @@
 
     {% include (template + '/partials/tracking/hydra.html') %}
 
+    {% include (template + '/partials/tracking/mixpanel.html') %}
+
     <div id="tracking-data" class="hide">{{ tracking.params | json('ninja') }}</div>
 {% endif %}
