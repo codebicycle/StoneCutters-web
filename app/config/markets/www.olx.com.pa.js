@@ -103,7 +103,7 @@ module.exports = {
                 platforms: ['html5', 'desktop'],
                 file: 'QzMyOFQxOSAg',
                 t: 'uz_til',
-                delay: 30000
+                delay: 100
             }
         }
     },
