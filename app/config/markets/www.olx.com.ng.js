@@ -330,6 +330,7 @@ module.exports = {
         linkHelpCenter: {
             href: 'http://help.olx.com.ng/hc/',
             target: '_blank'
-        }
+        },
+        isHelpBoxRemoved: true
     },     
 };
