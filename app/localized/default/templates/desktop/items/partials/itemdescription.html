@@ -1,3 +1,6 @@
+{% if accepExchange and accepExchange.enabled %}
+    <span class="exchange">{{ accepExchange.text }}</span>
+{% endif %}
 <h3 class="description-title">{{ dictionary["misc.AdDetails"] }}</h3>
 {% if item.optionals and item.optionals.length > 1 %}
     <div class="text with-optionals">

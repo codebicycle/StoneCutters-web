@@ -387,5 +387,10 @@ module.exports = {
         wap: {
             enabled: false
         }
+    },
+    accepExchange: {
+        desktop: {
+            enabled: false
+        }
     }
 };

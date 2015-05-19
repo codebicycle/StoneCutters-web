@@ -20,7 +20,12 @@ module.exports = Base.extend({
         var platform = this.app.session.get('platform');
         var flagItem = config.getForMarket(location.url, ['flagItem']);
         var safetyTips = config.getForMarket(location.url, ['safetyTips', platform]);
+        var accepExchange = config.getForMarket(location.url, ['accepExchange', platform]);
         var showBetterDeal;
+
+        if(accepExchange.enabled && !_.contains(config.getForMarket(location.url, ['accepExchange', platform, 'categories'], []), data.item.category.id)) {
+            accepExchange.enabled = false;
+        }
 
         data.category_name = this.options.category_name;
 
@@ -56,7 +61,8 @@ module.exports = Base.extend({
             sellerProfileEnabled: sellerProfileEnabled,
             safetyTips: safetyTips,
             formatMonth: formatMonth,
-            showBetterDeal: showBetterDeal
+            showBetterDeal: showBetterDeal,
+            accepExchange: accepExchange
         });
     }
 });
