@@ -260,6 +260,10 @@ module.exports = {
         linkblog: {
             href: 'http://blog.olx.com',
             target: '_blank'
+        },
+        linkHelpCenter: {
+            href: '/help',
+            target: '_self'
         }
     },
     abundance: {
