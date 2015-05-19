@@ -312,6 +312,12 @@ module.exports = {
             }
         }
     },
+    showBetterDeal: {
+        html4: {
+            enabled: true,
+            categories: [800, 830]
+        }
+    },
     registerWithConfirmation: {
         html5: {
             enabled: true
@@ -319,5 +325,12 @@ module.exports = {
         html4: {
             enabled: true
         }
-    }
+    },
+    help: {
+        linkHelpCenter: {
+            href: 'http://help.olx.com.ng/hc/',
+            target: '_blank'
+        },
+        isHelpBoxRemoved: true
+    },     
 };

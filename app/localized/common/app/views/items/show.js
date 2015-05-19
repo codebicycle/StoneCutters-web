@@ -1,7 +1,7 @@
 'use strict';
 
-var Base = require('../../bases/view');
 var _ = require('underscore');
+var Base = require('../../bases/view');
 var breadcrumb = require('../../../../../modules/breadcrumb');
 var config = require('../../../../../../shared/config');
 var userzoom = require('../../../../../modules/userzoom');
@@ -20,22 +20,25 @@ module.exports = Base.extend({
         var platform = this.app.session.get('platform');
         var flagItem = config.getForMarket(location.url, ['flagItem']);
         var safetyTips = config.getForMarket(location.url, ['safetyTips', platform]);
+        var showBetterDeal;
+
         data.category_name = this.options.category_name;
 
-        if(sellerProfileEnabled && data.item.user && data.item.user.firstActivityDate ) {
-
+        if (config.getForMarket(location.url, ['showBetterDeal', platform, 'enabled'], false)) {
+            if (_.contains(config.getForMarket(location.url, ['showBetterDeal', platform, 'categories'], []), data.item.category.parentId)) {
+                showBetterDeal = !!data.item.used;
+            }
+        }
+        if (sellerProfileEnabled && data.item.user && data.item.user.firstActivityDate ) {
             if (data.item.user.firstActivityDate.month < 10) {
                 formatMonth = 'messages_date_format.90' + data.item.user.firstActivityDate.month;
             } else {
                 formatMonth = 'messages_date_format.9' + data.item.user.firstActivityDate.month;
             }
         }
-
-
         this.userzoom = new userzoom({}, {
             app: this.app
         });
-
         if (!data.item.purged) {
             data.item.location.stateName = data.item.location.children[0].name;
             data.item.location.cityName = data.item.location.children[0].children[0].name;
@@ -45,7 +48,6 @@ module.exports = Base.extend({
             }
             data.item.descriptionReplace = data.item.description.replace(/(<([^>]+)>)/ig,'');
         }
-
         return _.extend({}, data, {
             breadcrumb: breadcrumb.get.call(this, data),
             flagItem: flagItem,
@@ -53,7 +55,8 @@ module.exports = Base.extend({
             userzoom: this.userzoom.getParams(),
             sellerProfileEnabled: sellerProfileEnabled,
             safetyTips: safetyTips,
-            formatMonth: formatMonth
+            formatMonth: formatMonth,
+            showBetterDeal: showBetterDeal
         });
     }
 });
