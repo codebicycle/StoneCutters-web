@@ -373,7 +373,9 @@ module.exports = function userRouter(app) {
             function prepareSoldItem(done) {
                 item = new Item({
                     token: user.token,
-                    id: itemId
+                    id: itemId,
+                    country: req.rendrApp.session.get('location').abbreviation,
+                    platform: req.rendrApp.session.get('platform')
                 }, {
                     app: req.rendrApp
                 });

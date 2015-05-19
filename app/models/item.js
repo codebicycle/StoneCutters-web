@@ -428,6 +428,7 @@ function sold(done) {
     }, callback.bind(this));
 
     function callback() {
+        statsd.increment([this.get('country'), 'conversations', 'chat', 'sold', this.get('platform')]);
         this.callback(done)();
     }
 }
