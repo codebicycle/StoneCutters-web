@@ -140,7 +140,7 @@ function generateSessionParams() {
 
     if (sessionValues) {
         match = sessionValues.match(rSession);
-        if (match.length >= 4) {
+        if (match && match.length >= 4) {
             sessionLong = match[1];
             sessionCountLong = Number(match[2]);
             session = match[3];
