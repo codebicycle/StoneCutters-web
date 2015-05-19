@@ -335,10 +335,10 @@ module.exports = {
             enabled: true
         }
     },
-    zendeskHelpLink: {
-        desktop: "http://help.olx.com.ng/hc/"
-    },
-    zendeskHelpTarget: {
-        desktop: "_blank"
-    }        
+    help: {
+        linkHelpCenter: {
+            href: 'http://help.olx.com.ng/hc/',
+            target: '_blank'
+        }
+    },     
 };

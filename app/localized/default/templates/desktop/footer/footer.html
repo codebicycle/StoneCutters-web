@@ -2,7 +2,15 @@
     <li class="column">
         <h3 class="column-title">{{ dictionary["defaultheader.UsefulInformation"] }}</h3>
         <ul class="column-links">
-            <li class="column-item"><a rel="nofollow" href="{{ '/help' | link }}" class="text-link" data-increment-metric="zendesk.footer.help">{{ dictionary["misc.ConactHelp"] }}</a></li>
+
+            <li class="column-item">
+            {% if linkHelpCenter %}
+                <a target="{{ linkHelpCenter.target }}" rel="nofollow" href="{{ linkHelpCenter.href | link }}" class="text-link" data-increment-metric="zendesk.footer.help">
+            {% else %}
+                <a rel="nofollow" href="{{ '/help' | link }}" class="text-link" data-increment-metric="zendesk.footer.help">
+            {% endif %}
+                {{ dictionary["misc.ConactHelp"] }}</a>
+            </li>
             {% if isFeaturedCountry %}
                 <li class="column-item"><a rel="nofollow" href="{{ '/featured_listings' | link }}" class="text-link" data-increment-metric="zendesk.footer.how_to_feature">{{ dictionary["featured_listings.HowDoIFeatureMyAd"] }}</a></li>
             {% endif %}

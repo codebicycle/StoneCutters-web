@@ -27,8 +27,7 @@ module.exports = Base.extend({
         var currentState = {};
         var selectedLanguage = this.app.session.get('selectedLanguage').split('-')[0];
         var isFeaturedCountry = FeatureAd.isEnabled(this.app, 'footer#footer');
-        var helpLink = config.getForMarket(location.url,['zendeskHelpLink','desktop'],'/help');
-        var helpTarget = config.getForMarket(location.url,['zendeskHelpTarget','desktop'],'');
+        var linkHelpCenter = config.getForMarket(location.url,['help','linkHelpCenter'],false);
 
         if(location.children.length) {
             _.each(states, function each(state, i){
@@ -41,8 +40,7 @@ module.exports = Base.extend({
             selectedLanguage: selectedLanguage,
             socials: socials,
             isFeaturedCountry: isFeaturedCountry,
-            helpLink: helpLink,
-            helpTarget: helpTarget,
+            linkHelpCenter: linkHelpCenter,
             migrationModal: marketing.migrationModal,
             currentState: {
                 hostname: currentState.hostname,
