@@ -7,12 +7,15 @@ var Base = require('../../../../../common/app/bases/view').requireView('users/co
 var Conversation = require('../../../../../../models/conversation');
 var translations = require('../../../../../../../shared/translations');
 var helpers = require('../../../../../../helpers');
+var Metric = require('../../../../../../modules/metric');
 
 module.exports = Base.extend({
     className: 'users_conversation_view',
     events: {
         'change textarea, input:not([type=submit], [type=hidden])': 'onChange',
-        'submit': 'onSubmit'
+        'submit': 'onSubmit',
+        'click [data-increment-metric]': Metric.incrementEventHandler,
+        'click [data-action=sold]': 'soldItem'
     },
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
@@ -59,7 +62,7 @@ module.exports = Base.extend({
 
         function submit(done) {
             this.$('.reply-send').addClass('hide');
-            this.$('.spinner').removeClass('hide');
+            this.$('.conversation-input .spinner').removeClass('hide');
             this.getConversation().reply(done);
         }
 
@@ -79,30 +82,14 @@ module.exports = Base.extend({
         }
 
         function success(done) {
-            var $conversation = this.$('ul.conversation');
-            var date = new Date();
-            var newMessage;
-
-            date = {
-                year: date.getFullYear(),
-                month: date.getMonth() + 1,
-                day: date.getDate(),
-                hour: date.getHours(),
-                minute: date.getMinutes(),
-                second: date.getSeconds()
-            };
-            date = helpers.timeAgo(date);
-            date = this.dictionary[date.dictionary] + ' ' + date.hour;
-            newMessage = '<li class="message is-mine"><span class="name">' + this.dictionary["myolx.You"] + '</span><p class="text">' + this.getConversation().get('message') + '</p><span class="date"><time> ' + date + ' </time></span></li>';
-            $conversation.append(newMessage);
-            this.checkPosition();
-            this.$('.spinner').addClass('hide');
+            this.attachMsg();
+            this.$('.conversation-input .spinner').addClass('hide');
             this.$('.reply-send').removeClass('hide');
             this.$('[data-messageText]').val('');
         }
 
         function fail(err) {
-            this.$('.spinner').addClass('hide');
+            this.$('.conversation-input .spinner').addClass('hide');
             this.$('.reply-send').removeClass('hide');
             this.$('[data-messageText]').addClass('error');
         }
@@ -151,6 +138,65 @@ module.exports = Base.extend({
     },
     onEnd: function(event) {
         this.app.router.appView.trigger('conversation:end');
+    },
+    soldItem: function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+
+        var $target = $(event.target);
+        var itemId = $target.data('id');
+        this.$('.sold .spinner').removeClass('hide');
+        this.$('.sold .btnfilter').addClass('display-none');
+        
+        asynquence().or(fail.bind(this))
+            .then(remove.bind(this))
+            .then(submit.bind(this))
+            .val(success.bind(this));
+
+        function remove(done) {
+            this.getConversation().set('message', this.dictionary['misc.BeenSold']);
+            helpers.dataAdapter.post(this.app.req, '/items/' + itemId + '/delete', {
+                query: {
+                    token: (this.app.session.get('user') || {}).token,
+                    reason: 2
+                },
+                cache: false
+            }, done.errfcb);
+        }
+
+        function submit(done) {
+            this.getConversation().reply(done);
+        }
+
+        function success(done) {
+            this.$('.sold').remove();
+            this.attachMsg();
+        }
+
+        function fail() {
+            this.$('.sold .spinner').addClass('hide');
+            this.$('.sold .btnfilter').removeClass('display-none');
+        }
+    },
+    attachMsg: function() {
+        var $conversation = this.$('ul.conversation');
+        var date = new Date();
+        var newMessage;
+
+        date = {
+            year: date.getFullYear(),
+            month: date.getMonth() + 1,
+            day: date.getDate(),
+            hour: date.getHours(),
+            minute: date.getMinutes(),
+            second: date.getSeconds()
+        };
+        date = helpers.timeAgo(date);
+        date = this.dictionary[date.dictionary] + ' ' + date.hour;
+        newMessage = '<li class="message is-mine"><span class="name">' + this.dictionary["myolx.You"] + '</span><p class="text">' + this.getConversation().get('message') + '</p><span class="date"><time> ' + date + ' </time></span></li>';
+        $conversation.append(newMessage);
+        this.checkPosition();
     }
 });
 

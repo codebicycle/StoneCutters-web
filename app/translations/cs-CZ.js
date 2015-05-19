@@ -618,6 +618,8 @@ module.exports = {
     'misc.Settings': 'Nastaven\xED',
     'misc.ShareAd': 'Sd\xEDlet inzer\xE1t',
     'misc.Show': 'Show',
+    'misc.Sold': 'I sold it',
+    'misc.SoldIt': 'Have you sold this ad?',
     'misc.Sort_Mob': 'Sort',
     'misc.SpecificFields_title': 'Specifick\xE1 pole kategori\xED (Voliteln\xE9)',
     'misc.States': 'St\xE1ty',
