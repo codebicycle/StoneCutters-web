@@ -269,6 +269,12 @@ module.exports = {
                 file: 'QzMyOFQxMiAg',
                 t: 'uz_til',
                 delay: 30000
+            },
+            'categories#list' : {
+                platforms: ['html5', 'desktop'],
+                file: 'QzMyOFQyMyAg',
+                t: 'uz_til',
+                delay: 0
             }
         }
     },
