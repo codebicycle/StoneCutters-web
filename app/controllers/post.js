@@ -108,27 +108,23 @@ function flow(params, callback) {
         promise.val(success.bind(this));
 
         function redirect(done) {
+            var urlRedirect;
+
             if(params.renew) {
                 if(!config.getForMarket(location.url, ['ads', 'renew', 'enabled'],false)) {
                     params.renew = false;
                     return done.fail({});
                 }
             }
-            done();
-        }
-
-        function prepare(done) {
-            var redirect;
-            
             if(config.getForMarket(location.url, ['posting', 'loginRequired'],false) && ! user && platform !== 'wap') {
-                redirect = '/login?redirect=/posting';
+                urlRedirect = '/login?redirect=/posting';
             }
-            if ((!isPostingFlow && !isDesktop) && (!siteLocation || siteLocation.indexOf('www.') === 0)) {
-                redirect = '/location?target=' + (itemId ? 'myolx/edititem/' + itemId : 'posting');
+            else  if ((!isPostingFlow && !isDesktop) && (!siteLocation || siteLocation.indexOf('www.') === 0)) {
+                urlRedirect = '/location?target=' + (itemId ? 'myolx/edititem/' + itemId : 'posting');
             }
-            if (redirect) {
+            if (urlRedirect) {
                 done.abort();
-                return helpers.common.redirect.call(this, redirect, null, {
+                return helpers.common.redirect.call(this, urlRedirect, null, {
                     status: 302
                 });
             }
