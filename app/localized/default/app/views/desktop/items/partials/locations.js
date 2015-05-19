@@ -16,7 +16,8 @@ module.exports = Base.extend({
         'click [data-action=see]': 'toggleNeighborhoods',
         'click [data-action=removeNeighborhood]': 'removeNeighborhood',
         'click [data-action=selectAll]': 'selectAll',
-        'click [data-action=cancel]': 'cancel'
+        'click [data-action=cancel]': 'cancel',
+        'click a[data-location]': 'onClickLocation'
     },
     postRender: function() {
         if (!this.filters) {
@@ -198,6 +199,11 @@ module.exports = Base.extend({
             path = path.replace(this.regexpReplacePage, '');
         }
         return path.replace(/\/\//g, '/');
+    },
+    onClickLocation: function(event) {
+        this.app.session.persist({
+            siteLocation: $(event.currentTarget).data('location')
+        });
     }
 });
 

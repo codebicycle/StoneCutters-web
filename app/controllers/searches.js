@@ -629,7 +629,6 @@ function allresults(params, callback, gallery) {
         var page = params ? params.page : undefined;
         var platform = this.app.session.get('platform');
         var location = this.app.session.get('location').url;
-        var siteLocation = this.app.session.get('siteLocation');
         var languages = this.app.session.get('languages');
         var url = ['/nf/all-results', gallery || ''].join('');
         var query;

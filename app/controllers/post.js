@@ -574,7 +574,6 @@ function success(params, callback) {
     function controller() {
         var user = this.app.session.get('user');
         var itemId = params.itemId;
-        var siteLocation = this.app.session.get('siteLocation');
         var languageId = this.app.session.get('languageId');
         var securityKey = params.sk;
 
@@ -850,7 +849,6 @@ function editsuccess(params, callback) {
         var user = this.app.session.get('user');
         var securityKey = params.sk;
         var itemId = params.itemId;
-        var siteLocation = this.app.session.get('siteLocation');
         var languages = this.app.session.get('languages');
         var anonymousItem;
 

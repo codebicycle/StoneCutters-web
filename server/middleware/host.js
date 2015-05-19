@@ -108,6 +108,9 @@ module.exports = function(dataAdapter, excludedUrls) {
                 fullDomain: fullDomain
             });
             if (!hasM || isTesting || isStaging) {
+                if (req.cookies && req.cookies.siteLocation) {
+                    siteLocation = req.cookies.siteLocation;
+                }
                 req.rendrApp.get('session').siteLocation = siteLocation;
             }
             next();
