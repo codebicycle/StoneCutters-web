@@ -618,6 +618,8 @@ module.exports = {
     'misc.Settings': 'Stillingar',
     'misc.ShareAd': 'Deila augl\xFDsingu',
     'misc.Show': 'Show',
+    'misc.Sold': 'I sold it',
+    'misc.SoldIt': 'Have you sold this ad?',
     'misc.Sort_Mob': 'Sort',
     'misc.SpecificFields_title': 'Reitir fyrir tiltekna flokka (valfrj\xE1lst)',
     'misc.States': 'R\xEDki',

@@ -3,7 +3,7 @@
 module.exports = {
     enabled: true,
     'default': {
-        queryCategories: [16, 185, 190, 821],
+        queryCategories: [16, 185, 190, 821, 362, 800, 806],
         seo: 1,
         options: {
             pubId: 'olx',
