@@ -14,7 +14,7 @@ module.exports = {
             myMsgs: 15,
             myConvs: 15,
             myConv: 300,
-            myConvHtml4: 10
+            myConvHtml4: 50
         },
         renew: {
             enabled: true,
