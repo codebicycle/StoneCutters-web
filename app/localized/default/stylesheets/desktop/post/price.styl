@@ -11,10 +11,25 @@
 			border-radius: 0;
 		}
 
-		#field-currency_type {
+		#field-currency_type, .price-currency-one {
 			width: 17%;
 			border-right-width: 0;
 			border-radius: 3px 0 0 3px;
+		}
+		
+		.price-currency-one {
+			background-color: #fff;
+			border-radius: 0 3px 3px 0;
+			border: 1px solid $greyBorders;
+			border-right: 0;
+			box-sizing: border-box;
+			color: $black;
+			display: inline-block;
+			float: left;
+			height: 36px;
+			line-height: @height;
+			padding-left: 14px;
+			vertical-align: middle;
 		}
 
 		#field-priceType {
@@ -31,7 +46,7 @@
 
 		.price-negotiable {
 			background-color: #fff;
-			border-radius(0 3px 3px 0 );
+			border-radius: 0 3px 3px 0;
 			border: 1px solid $greyBorders;
 			border-left: 0;
 			box-sizing: border-box;
