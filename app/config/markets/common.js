@@ -351,6 +351,20 @@ module.exports = {
             }
         }
     },
+    showBetterDeal: {
+        desktop: {
+            enabled: false
+        },
+        html4: {
+            enabled: false
+        },
+        html5: {
+            enabled: false
+        },
+        wap: {
+            enabled: false
+        }
+    },
     marketing: {
         thanksPage: {
             videoUrl: 'thank-you-video-es'

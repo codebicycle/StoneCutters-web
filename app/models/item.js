@@ -130,7 +130,9 @@ function indexOfOptional(name) {
 }
 
 function parse(item, options) {
-    var digits = config.getForMarket(this.app.session.get('location').url, ['layoutOptions', 'digits'], {});
+    var location = this.app.session.get('location');
+    var digits = config.getForMarket(location.url, ['layoutOptions', 'digits'], {});
+    var platform = this.app.session.get('platform');
 
     if (item && item.date) {
         item.date.since = helpers.timeAgo(item.date);
@@ -139,7 +141,13 @@ function parse(item, options) {
         item.priceC = helpers.numbers.toLatin(item.priceC);
     }
     if (item.optionals && item.optionals.length) {
+
         item.optionals = _.sortBy(item.optionals, 'name').reverse();
+        _.each(item.optionals, function eachOptionals(optional) {
+            if(optional.name === 'condition' && optional.id === '2') {
+                item.used = true;
+            }
+        });
     }
     if (item.description) {
         item.description = S(item.description).stripTags().s;
