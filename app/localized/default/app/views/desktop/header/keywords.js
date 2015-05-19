@@ -24,15 +24,5 @@ module.exports = Base.extend({
             seo: this.app.seo,
             headerTitle: headerTitle
         });
-    },
-    postRender: function() {
-        this.app.router.appView.on('header:hide', this.onHeaderHide.bind(this));
-        this.app.router.appView.on('header:show', this.onHeaderShow.bind(this));
-    },
-    onHeaderHide: function() {
-        this.$el.hide();
-    },
-    onHeaderShow: function() {
-        this.$el.show();
     }
 });

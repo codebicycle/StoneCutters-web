@@ -27,8 +27,6 @@ module.exports = Base.extend({
         this.listenTo(this.app, 'login', this.render);
         this.dictionary = translations.get(this.app.session.get('selectedLanguage'));
         $('body').on('update:notifications', this.showNotification.bind(this));
-        this.app.router.appView.on('header:hide', this.onHeaderHide.bind(this));
-        this.app.router.appView.on('header:show', this.onHeaderShow.bind(this));
     },
     showNotification: function() {
         var user = this.app.session.get('user');
@@ -89,12 +87,6 @@ module.exports = Base.extend({
                 }
             }.bind(this));
         }
-    },
-    onHeaderHide: function() {
-        this.$el.hide();
-    },
-    onHeaderShow: function() {
-        this.$el.show();
     }
 });
 
