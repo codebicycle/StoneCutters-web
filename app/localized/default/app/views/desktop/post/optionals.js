@@ -82,9 +82,8 @@ function onValidate(event, done, isValid) {
     
         if (field.mandatory === 'true') {
             this.$el.trigger('hideError', [$field]);            
-            if (!$field.val() ) {
-                if (field.fieldType != 'combobox' || field.values.length > 0) {
-                    console.log('entre para ', field);
+            if (!$field.val()) {
+                if (field.fieldType != 'combobox' || (field.values && field.values.length > 0)) {
                     validationsResults = false;
                     this.$el.trigger('showError', [$field, {
                         message: 'postingerror.PleaseCompleteThisField'
