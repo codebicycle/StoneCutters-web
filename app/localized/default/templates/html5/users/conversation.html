@@ -21,7 +21,7 @@
         </div>
     </a>
 </div>
-{% if not thread.get('messages')[0].isMine %}
+{% if not thread.get('messages')[0].isMine and currentRoute.action != 'conversationmail' %}
     <div class="sold">
         <span class="haveSold">{{ dictionary["misc.SoldIt"] }}</span>
         <img class="spinner hide" src="{{ '/images/desktop/spinner-bgWhite.gif' | static }}" alt="">
