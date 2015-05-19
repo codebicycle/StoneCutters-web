@@ -133,7 +133,6 @@ function parse(item, options) {
     var location = this.app.session.get('location');
     var digits = config.getForMarket(location.url, ['layoutOptions', 'digits'], {});
     var platform = this.app.session.get('platform');
-    var showBetterDealOptions = config.getForMarket(location.url, ['showBetterDeal', platform]);
 
     if (item && item.date) {
         item.date.since = helpers.timeAgo(item.date);

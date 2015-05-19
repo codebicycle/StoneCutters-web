@@ -30,12 +30,12 @@
                 <img class="betterDealImg" alt="" src="{{ '/images/common/betterdeal_Itempage.png' | static }}">
             {% endif %}
                 <a href="{{ [item | slugToUrl, '/gallery'] | join('') | link }}">
-                    <div class="arrow"></div>
+                    <span class="arrow"></span>
                     <img alt="" src="{{item.images[0].url }}">
                 </a>
         {% else %}
             <a href="{{ [item | slugToUrl, '/gallery?pos='+pos] | join('') | link }}">
-                <div class="arrow"></div>
+                <span class="arrow"></span>
                 <img alt="" src="{{item.images[pos].url }}">
             </a>
             <div id="galeryPagination">
