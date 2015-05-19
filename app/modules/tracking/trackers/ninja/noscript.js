@@ -7,6 +7,8 @@ var utils = require('../../../../../shared/utils');
 var Adapter = require('../../../../../shared/adapters/base');
 var statsd = require('../../../../../shared/statsd')();
 var trackPages = utils.get(configTracking, ['ninja', 'pages'], []);
+var rSession = /([a-z0-9]+)-([0-9]+)-([a-z0-9]+)-([0-9]+)-([0-9]+)-?(.*)?/;
+var rCookie = /[^\w\-\=]/g;
 
 function extractTrackPage(params) {
     return params.trackPage;
@@ -107,17 +109,15 @@ function getIframeUrl(ninja) {
 
 function getHydraUrl(ninja) {
     var url = ['http://', (ninja.config.environment ? 'tracking-dev.onap.io/h/' : 'tracking.olx-st.com/h/v2/'), 'ns?'].join('');
-
     var sessionParams;
+    var query;
+    var iv;
 
     if (_.contains(['wap', 'html4'], this.app.session.get('platform'))) {
         sessionParams = generateSessionParams.call(this);
-    } else {
-        sessionParams = [];
     }
-
-    var query = getQuery(sessionParams, ninja.params, ninja.config);
-    var iv = utils.params(this.app.session.get('url') || '', 'invite');
+    query = getQuery(sessionParams, ninja.params, ninja.config);
+    iv = utils.params(this.app.session.get('url') || '', 'invite');
     if (iv) {
         query.iv = iv.trim();
     }
@@ -127,55 +127,46 @@ function getHydraUrl(ninja) {
 }
 
 function generateSessionParams() {
-    var sessionLong,
-        sessionCountLong,
-        session,
-        sessionCount,
-        sessionExpired,
-        sessionExtra;
-
-    var date = new Date();
-    var now = (Math.round(date.getTime() / 1000));
+    var now = (Math.round(_.now() / 1000));
     var sessionValues = this.app.session.get('onap');
+    var sessionCountLong = 1;
+    var sessionCount = 1;
+    var sessionExpired;
+    var sessionExtra;
+    var sessionLong;
+    var session;
+    var cookieValue;
+    var match;
+
     if (sessionValues) {
-        var match = sessionValues.match(/([a-z0-9]+)-([0-9]+)-([a-z0-9]+)-([0-9]+)-([0-9]+)-?(.*)?/);
-        if (match.length >= 4) {
+        match = sessionValues.match(rSession);
+        if (match && match.length >= 4) {
             sessionLong = match[1];
-            sessionCountLong = parseInt(match[2], 10);
+            sessionCountLong = Number(match[2]);
             session = match[3];
-            sessionCount = parseInt(match[4], 10);
+            sessionCount = Number(match[4]);
             sessionExpired = match[5];
-            sessionExtra = match[6] || null;
+            sessionExtra = match[6];
 
             if ((sessionExpired - now) > 0) {
                 sessionCount = sessionCount + 1;
-            } else {
+            }
+            else {
                 sessionCountLong = sessionCountLong + 1;
                 session = generateSession();
                 sessionCount = 1;
             }
-        } else {
-            sessionLong = generateSession();
-            sessionCountLong = 1;
-            session = sessionLong;
-            sessionCount = 1;
-            sessionExtra = null;
         }
-    } else {
-        sessionLong = generateSession();
-        sessionCountLong = 1;
-        session = sessionLong;
-        sessionCount = 1;
-        sessionExtra = null;
     }
-    sessionExpired = (now + 1800);
-    var cookieValue = sessionLong + "-" + sessionCountLong + "-" + session + "-" + sessionCount  + "-" + sessionExpired;
-    if (null !== sessionExtra) {
-        cookieValue = cookieValue + "-" + sessionExtra;
+    sessionLong = sessionLong || generateSession();
+    session = session || sessionLong;
+
+    cookieValue = [sessionLong, sessionCountLong, session, sessionCount, (now + 1800)];
+    if (sessionExtra !== undefined) {
+        cookieValue.push(sessionExtra);
     }
-    cookieValue = cookieValue.replace(/[^\w\-\=]/g, '');
     this.app.session.persist({
-        onap: cookieValue
+        onap: cookieValue.join('-').replace(rCookie, '')
     }, {
         maxAge: utils.YEAR
     });
@@ -189,11 +180,11 @@ function generateSessionParams() {
 }
 
 function generateSession() {
-    return Number(new Date().getTime()).toString(16) + 'x' + Number(Math.floor((Math.random() * 2147483647) + 1)).toString(16);
+    return [Number(_.now()).toString(16), Number(Math.floor((Math.random() * 2147483647) + 1)).toString(16)].join('x');
 }
 
 function getQuery(params, config) {
-    var query = _.extend({}, params, config);
+    var query = _.extend({}, params || {}, config);
 
     if (query.extraPageName) {
         query.extraPageName = JSON.stringify(query.extraPageName);
