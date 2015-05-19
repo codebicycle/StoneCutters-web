@@ -399,7 +399,6 @@ function onSubmit(event) {
 
     var promise = asynquence().or(fail.bind(this))
         .then(prepare.bind(this))
-        .then(check.bind(this))
         .then(validate.bind(this));
         if (this.rebump) {
             promise.then(rebump.bind(this));
