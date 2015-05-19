@@ -123,6 +123,7 @@ function onFieldsChange(event, fields) {
 
 function getRelatedFieldValues(related, value) {
     var $field = this.$('[name="' + related + '"]');
+    var platform = this.app.session.get('platform');
 
     function fetch(done) {
         helpers.dataAdapter.get(this.app.req, '/items/fields/' + encodeURIComponent(related) + '/' + value + '/subfields', {
@@ -130,7 +131,8 @@ function getRelatedFieldValues(related, value) {
                 intent: 'post',
                 location: this.app.session.get('siteLocation'),
                 categoryId: this.parentView.item.get('category').id,
-                languageId: this.app.session.get('languages')._byId[this.app.session.get('selectedLanguage')].id
+                languageId: this.app.session.get('languages')._byId[this.app.session.get('selectedLanguage')].id,
+                platform: platform
             },
         }, done.errfcb);
     }
@@ -156,7 +158,6 @@ function getRelatedFieldValues(related, value) {
         _.each(field.values, function each(option) {
             $field.append('<option value="' + option.key + '"' + (value.key === option.key ? ' selected' : '') + '>' + option.value + '</option>');
         });
-        $field.parent().siblings('label').text(field.label);
         $field.attr('name', field.name);
         $wrapper.show();
     }

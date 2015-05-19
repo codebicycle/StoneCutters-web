@@ -96,6 +96,17 @@ module.exports = {
             }
         ]
     },
+    userzoom: {
+        enabled: true,
+        sections: {
+            'categories#list' : {
+                platforms: ['html5', 'desktop'],
+                file: 'QzMyOFQxOSAg',
+                t: 'uz_til',
+                delay: 100
+            }
+        }
+    },
     successPage: {
         keepPosting: [
             {

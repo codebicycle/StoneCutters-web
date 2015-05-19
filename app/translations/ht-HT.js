@@ -618,6 +618,8 @@ module.exports = {
     'misc.Settings': 'Konfigirasyon',
     'misc.ShareAd': 'Pataje anons ou a',
     'misc.Show': 'Show',
+    'misc.Sold': 'I sold it',
+    'misc.SoldIt': 'Have you sold this ad?',
     'misc.Sort_Mob': 'Sort',
     'misc.SpecificFields_title': 'Chan Espesifik Kategori (Opsyon\xE8l)',
     'misc.States': 'z\xF2n',
