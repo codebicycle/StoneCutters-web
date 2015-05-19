@@ -25,14 +25,15 @@ module.exports = Base.extend({
         var legal = config.get(['mails', 'legal', location.url], 'legal') + '@' + mailDomain;
         var selectedLanguage = this.app.session.get('selectedLanguage').split('-')[0];
         var linkblog = config.getForMarket(this.app.session.get('location').url, ['help','linkblog'], false);
-
+        var isHelpBoxRemoved = config.getForMarket(location.url, ['help', 'isHelpBoxRemoved'], false);
         return _.extend({}, data, {
             mails: {
                 support: support,
                 legal: legal
             },
             selectedLanguage: selectedLanguage,
-            linkblog: linkblog
+            linkblog: linkblog,
+            isHelpBoxRemoved: isHelpBoxRemoved
         });
     },
     helpToggleContent: function(event) {
