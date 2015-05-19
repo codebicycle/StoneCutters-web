@@ -325,13 +325,5 @@ module.exports = {
         html4: {
             enabled: true
         }
-    },
-    /* is turned off until help center nigeria is activated
-    help: {
-        linkHelpCenter: {
-            href: 'http://help.olx.com.ng/hc/',
-            target: '_blank'
-        },
-        isHelpBoxRemoved: true
-    },*/     
+    }     
 };
