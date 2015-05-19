@@ -325,5 +325,11 @@ module.exports = {
         html4: {
             enabled: true
         }
-    }
+    },
+    help: {
+        linkHelpCenter: {
+            href: 'http://help.olx.com.ng/hc/',
+            target: '_blank'
+        }
+    },     
 };
