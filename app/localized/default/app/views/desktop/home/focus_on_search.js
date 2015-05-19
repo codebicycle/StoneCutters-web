@@ -1,7 +1,7 @@
 'use strict';
 
 var _ = require('underscore');
-var Base = require('../../../../../common/app/bases/view').requireView('home/index');
+var Base = require('../../../../../common/app/bases/view').requireView('home/focus_on_search');
 var helpers = require('../../../../../../helpers');
 var Metric = require('../../../../../../modules/metric');
 var utils = require('../../../../../../../shared/utils');
