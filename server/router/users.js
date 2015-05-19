@@ -9,6 +9,7 @@ module.exports = function userRouter(app) {
     var statsd  = require('../modules/statsd')();
     var User = require('../../app/models/user');
     var Conversation = require('../../app/models/conversation');
+    var Item = require('../../app/models/item');
 
     function login() {
         app.post('/login', handler);
@@ -344,23 +345,50 @@ module.exports = function userRouter(app) {
     }
 
     function reply() {
+        app.post('/myolx/conversation/:threadId/:itemId', handler);
         app.post('/myolx/conversation/:threadId', handler);
         app.post('/myolx/conversation/mail', handler);
 
         function handler(req, res, next) {
             var threadId = req.param('threadId', null);
             var hash = req.param('hash', null);
+            var itemId = req.param('itemId', null);
+            var user = req.rendrApp.session.get('user');
+            var promise = asynquence().or(error);
             var conversation;
+            var item;
             var reply;
             var url;
+
+            if(itemId) {
+                promise.then(prepareSoldItem)
+                    .then(soldItem);
+            }
+
+            promise.then(parse)
+                .then(prepare)
+                .then(submit)
+                .val(success);
+
+            function prepareSoldItem(done) {
+                item = new Item({
+                    token: user.token,
+                    id: itemId
+                }, {
+                    app: req.rendrApp
+                });
+                done();
+            }
+
+            function soldItem(done) {
+                item.sold(done);
+            }
 
             function parse(done) {
                 formidable.parse(req, done.errfcb);
             }
 
             function prepare(done, data) {
-                var user = req.rendrApp.session.get('user');
-
                 reply = data;
                 conversation = new Conversation({
                     country: req.rendrApp.session.get('location').abbreviation,
@@ -376,6 +404,9 @@ module.exports = function userRouter(app) {
                     conversation.set('user', user);
                     conversation.set('threadId', threadId);
                     url = '/myolx/conversation/' + threadId;
+                    if (itemId) {
+                        url += '?sold=true';
+                    }
                 }
                 else if (hash) {
                     conversation.set('conversation_type', 'hash');
@@ -406,12 +437,6 @@ module.exports = function userRouter(app) {
                     next.errfcb(err);
                 }
             }
-
-            asynquence().or(error)
-                .then(parse)
-                .then(prepare)
-                .then(submit)
-                .val(success);
         }
     }
 
