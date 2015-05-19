@@ -263,7 +263,7 @@ module.exports = {
         },
         linkHelpCenter: {
             href: '/help',
-            target: ''
+            target: '_self'
         }
     },
     abundance: {

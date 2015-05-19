@@ -27,7 +27,7 @@ module.exports = Base.extend({
         var currentState = {};
         var selectedLanguage = this.app.session.get('selectedLanguage').split('-')[0];
         var isFeaturedCountry = FeatureAd.isEnabled(this.app, 'footer#footer');
-        var linkHelpCenter = config.getForMarket(location.url,['help','linkHelpCenter'],false);
+        var linkHelpCenter = config.getForMarket(location.url, ['help', 'linkHelpCenter'], false);
 
         if(location.children.length) {
             _.each(states, function each(state, i){
