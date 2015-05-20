@@ -68,15 +68,14 @@ function home(params, callback) {
         }
 
         function success(res) {
-            var data = {};
+            var data = {
+                topics: []
+            };
 
             if (res) {
-                if (res.items) {
-                    data.items = res.items;
-                }
-                if (res.popularsearches) {
-                    data.popularsearches = res.popularsearches;
-                }
+                _.each(res, function each(topic) {
+                    data.topics.push(topic);
+                });
             }
             callback(null, 'home/' + alternative, data);
         }
