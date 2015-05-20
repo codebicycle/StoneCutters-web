@@ -294,5 +294,12 @@ module.exports = {
         html5: {
             enabled: true
         }
+    },
+    accepExchange: {
+        desktop: {
+            enabled: true,
+            categories: [378, 831],
+            text: 'Este vendedor no acepta canjes'
+        }
     }
 };
