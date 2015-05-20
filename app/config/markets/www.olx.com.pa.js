@@ -302,7 +302,7 @@ module.exports = {
             text: 'Este vendedor no acepta canjes',
             questions: {
                 378: '¿Aceptas que otros usuarios te propongan</br> canjes por tu auto?',
-                831: '¿Aceptas que otros usuarios te propongas</br> canjes por tu teléfono?'
+                831: '¿Aceptas que otros usuarios te propongan</br> canjes por tu teléfono?'
             },
             accept: 'Acepto canjes',
             denied: 'No acepto canjes'
