@@ -3,12 +3,20 @@
 	/* Home */
 	.topics {
 		margin: 0;
-		padding: 0;
+		padding: 0 0 10px;
+		border-bottom: solid thin #CCC;
 		list-style: none;
 	}
-	.topic {}
+	.topic {
+		padding: 20px 0;
+		border-top: solid thin #CCC;
+		&:first-child {
+			border-top: none;
+		}
+	}
 	.topic-title {
 		margin: 0;
+		padding: 0 0 20px;
 		font-size: $l;
 		font-weight: normal;
 	}
@@ -22,13 +30,18 @@
 	.topic-list-handler {
 		position: absolute;
 		overflow: hidden;
-		top: 50%;
+		top: 60px;
 		width: 1.5em;
 		height: 3em;
 		margin-top: -1.5em;
 		line-height: 3em;
 		text-align: center;
 		background-color: rgba(255, 255, 255, .75);
+		color: #333;
+		&:hover {
+			background-color: #FFF;
+			color: #000;
+		}
 		&.left {
 			left: 0;
 			padding-right: .25em;
@@ -45,12 +58,15 @@
 	.topic-items-wrapper {
 		clear: both;
 		width: 100%;
+		overflow: hidden;
 	}
 	.topic-items-list {
+		width: 3290px;
 		margin: 0;
 		padding: 0;
 		list-style: none;
 		white-space: nowrap;
+		transition: margin-left .25s ease-in-out;
 	}
 	.topic-item {
 		display: inline-block;
@@ -68,13 +84,19 @@
 	.topic-item-link {
 		display: block;
 		&:hover {
-			text-decoration: none
+			text-decoration: none;
+			.topic-item-picture {
+				box-shadow: 0 10px 10px -10px rgba(0, 0, 0, .5);
+			}
+			.topic-item-title {
+				text-decoration: underline;
+			}
 		}
 	}
 	.topic-item-picture {
 		width: 100%;
 		margin: 0;
-		padding: 75% 0 0;
+		padding: 120px 0 0;
 		background-repeat: no-repeat;
 		background-position: center;
 		background-size: cover;
@@ -83,8 +105,11 @@
 		display: blo;
 	}
 	.topic-item-title {
+		overflow: hidden;
+		height: 2.4em;
 		margin: 0;
 		padding-top: 10px;
+		line-height: 1.2em;
 	}
 	.topic-item-price {
 		margin: 0;
