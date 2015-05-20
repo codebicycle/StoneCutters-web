@@ -271,7 +271,7 @@ module.exports = {
                 delay: 30000
             },
             'categories#list' : {
-                platforms: ['html5', 'desktop'],
+                platforms: ['desktop'],
                 file: 'QzMyOFQyMyAg',
                 t: 'uz_til',
                 delay: 0
