@@ -23,7 +23,7 @@ module.exports = Base.extend({
         var accepExchange = config.getForMarket(location.url, ['accepExchange', platform]);
         var showBetterDeal;
 
-        if(accepExchange.enabled && !_.contains(config.getForMarket(location.url, ['accepExchange', platform, 'categories'], []), data.item.category.id)) {
+        if(accepExchange.enabled && !_.contains(accepExchange.categories, data.item.category.id)) {
             accepExchange.enabled = false;
         }
 
