@@ -24,45 +24,66 @@ function home(params, callback) {
     helpers.controllers.control.call(this, params, controller);
 
     function controller() {
-        var promise = asynquence().or(error);
+        var promise = asynquence().or(fail.bind(this));
         var alternative = utils.underscorize(this.app.sixpack.experiments.dgdHomePage.alternative);
 
         if (alternative === 'focus_on_browse') {
-            promise.then(fetch);
+            promise
+                .then(prepare.bind(this))
+                .then(fetch.bind(this));
         }
-        promise.val(success);
+        promise.val(success.bind(this));
 
-        var fetch = function(done) {
-            this.app.fetch({
-                items: {
-                    collection: 'Items',
-                    params: {
-                        pageSize: 20,
-                        location: this.app.session.get('location').url,
-                        offset: 0,
-                        categoryId: 831,
-                        seo: false,
-                        languageId: this.app.session.get('languages')._byId[this.app.session.get('selectedLanguage')].id,
-                        'f.hasimage': true,
-                        'f.pricerange': 1
-                    }
-                }
-            }, {
+        function prepare(done) {
+            var params = {
+                seo: false,
+                offset: 0,
+                pageSize: 20,
+                'f.hasimage': true,
+                'f.pricerange': '1TO',
+                location: this.app.session.get('location').url,
+                languageId: this.app.session.get('languages')._byId[this.app.session.get('selectedLanguage')].id
+            };
+            var spec = {};
+
+            spec.items = {
+                collection: 'Items',
+                params: _.extend({}, params, {
+                    categoryId: 831
+                })
+            };
+            spec.popularsearches = {
+                collection: 'Items',
+                params: _.extend({}, params, {
+                    // item_type: 'popularsearches'
+                })
+            };
+            done(spec);
+        }
+
+        function fetch(done, spec) {
+            this.app.fetch(spec, {
                 readFromCache: true
             }, done.errfcb);
-        }.bind(this);
+        }
 
-        var success = function(res) {
-            callback(null, 'home/' + alternative, (res && res.items) ? { items: res.items.toJSON() } : {});
-        }.bind(this);
+        function success(res) {
+            var data = {};
 
-        var error = function(err, res) {
+            if (res) {
+                if (res.items) {
+                    data.items = res.items;
+                }
+                if (res.popularsearches) {
+                    data.popularsearches = res.popularsearches;
+                }
+            }
+            callback(null, 'home/' + alternative, data);
+        }
+
+        function fail(err, res) {
             return helpers.common.error.call(this, err, res, callback);
-        }.bind(this);
-
-        asynquence().or(error)
-            .then(fetch)
-            .val(success);
+        }
     }
 }
 

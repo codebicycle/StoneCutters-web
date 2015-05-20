@@ -1,22 +1,46 @@
 <ul class="topics">
-	<li class="topic">
-		<h3 class="topic-title">Últimos avisos en Mobile Phones <a href="" class="topic-title-show-more">Ver más</a></h3>
-		<div class="topic-items">
-			<a href="#" class="topic-list-handler icons icon-arrow-left left">Anteriores</a>
-			<div class="topic-items-wrapper">
-				<ul class="topic-items-list">
-					{% for item in items -%}
-						<li class="topic-item">
-							<a class="topic-item-link" href="{{ item.title }}">
-								<figure class="topic-item-picture" style="background-image: url({{ item.thumbnail }})"></figure>
-								<p class="topic-item-title">{{ item.title }}</p>
-								<p class="topic-item-price">{{ item.price.displayPrice }}</p>
-							</a>
-						</li>
-					{%- endfor %}
-				</ul>
-			</div>
-			<a href="#" class="topic-list-handler icons icon-arrow-right right">Siguientes</a>
-		</div>
-	</li>
+    {% if items and items.length %}
+        <li class="topic">
+            <h3 class="topic-title">Últimos avisos en Mobile Phones <a href="" class="topic-title-show-more">Ver más</a></h3>
+            <div class="topic-items">
+                <a href="#" class="topic-list-handler icons icon-arrow-left left">Anteriores</a>
+                <div class="topic-items-wrapper">
+                    <ul class="topic-items-list">
+                        {% for item in items.toJSON() -%}
+                            <li class="topic-item">
+                                <a class="topic-item-link" href="{{ item.title }}">
+                                    <figure class="topic-item-picture" style="background-image: url({{ item.thumbnail }})"></figure>
+                                    <p class="topic-item-title">{{ item.title }}</p>
+                                    <p class="topic-item-price">{{ item.price.displayPrice | countFormat if item.price }}</p>
+                                </a>
+                            </li>
+                        {%- endfor %}
+                    </ul>
+                </div>
+                <a href="#" class="topic-list-handler icons icon-arrow-right right">Siguientes</a>
+            </div>
+        </li>
+    {% endif %}
+    {% if popularsearches and popularsearches.length %}
+        <li class="topic">
+            <h3 class="topic-title">Busquedas populares <a href="" class="topic-title-show-more">Ver más</a></h3>
+            <div class="topic-items">
+                <a href="#" class="topic-list-handler icons icon-arrow-left left">Anteriores</a>
+                <div class="topic-items-wrapper">
+                    <ul class="topic-items-list">
+                        {% for item in popularsearches.toJSON() -%}
+                            <li class="topic-item">
+                                <a class="topic-item-link" href="{{ item.title }}">
+                                    <figure class="topic-item-picture" style="background-image: url({{ item.thumbnail }})"></figure>
+                                    <p class="topic-item-title">{{ item.title }}</p>
+                                    <p class="topic-item-price">{{ item.price.displayPrice | countFormat if item.price }}</p>
+                                </a>
+                            </li>
+                        {%- endfor %}
+                    </ul>
+                </div>
+                <a href="#" class="topic-list-handler icons icon-arrow-right right">Siguientes</a>
+            </div>
+        </li>
+    {% endif %}
 </ul>
