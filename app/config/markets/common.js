@@ -391,6 +391,15 @@ module.exports = {
     accepExchange: {
         desktop: {
             enabled: false
+        },
+        html5: {
+            enabled: false
+        },
+        html4: {
+            enabled: false
+        },
+        wap: {
+            enabled: false
         }
     }
 };
