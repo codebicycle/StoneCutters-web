@@ -5,11 +5,11 @@
 			<input type="text" name="search" class="search-term" placeholder='{{ dictionary["defaultheader.WhatAreYouLookingFor"] }}' value="{{ search }}" />
 		</div>
 		<div class="location-cell">
-			<a href="#" class="search-location icons icon-pin">{{ (location.current.name + ', ') if location.current }}{{ location.name }}</a>
+			<a href="#" class="search-location icons icon-pin" data-location="{{ location.current.url or location.url }}">{{ (location.current.name + ', ') if location.current }}{{ location.name }}</a>
 
 			<ul class="states-list" style="display: none;">
 			{% for state in states %}
-				<li>{{ state.name }}</li>
+				<li><a href="#" data-location="{{ state.url }}">{{ state.name }}</a></li>
 			{% endfor %}
 			</ul>
 
