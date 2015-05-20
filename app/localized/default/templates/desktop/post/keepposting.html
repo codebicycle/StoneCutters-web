@@ -1,5 +1,5 @@
 {% if keepPostingCat %}
-    <aside id="notification-keep-posting" class="notification-keep-posting">
+    <aside id="notification-keep-posting" class="notification-keep-posting{{ ' hide' if accepExchange.enabled }}">
         <h3 class="title">{{ dictionary["crm_new_version.KeepPosting"] }}</h3>
         <p class="message icons icon-arrow"><span class="highlight">{{ dictionary["crm_new_version.SomethingElseToPost"] }} </span>{{ dictionary["defaultheader.PostAFreeAd"] }}.</p>
         <div class="categories-best-selling">
