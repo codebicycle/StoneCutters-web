@@ -11,6 +11,7 @@ var allpages = require('./allpages');
 var ninja = require('./ninja');
 var adroll = require('./adroll');
 var floodlight = require('./floodlight');
+var mixpanel = require('./mixpanel');
 var esi = require('../../esi');
 var config = require('../../../../shared/config');
 var utils = require('../../../../shared/utils');
@@ -22,7 +23,8 @@ var trackers = {
     tagmanager: tagmanager,
     allpages: allpages,
     adroll: adroll,
-    floodlight: floodlight
+    floodlight: floodlight,
+    mixpanel: mixpanel
 };
 
 _.each(trackers, function each(tracker, name) {

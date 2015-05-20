@@ -618,6 +618,8 @@ module.exports = {
     'misc.Settings': 'Configuraci\xF3',
     'misc.ShareAd': 'Comparteix el teu anunci',
     'misc.Show': 'Show',
+    'misc.Sold': 'I sold it',
+    'misc.SoldIt': 'Have you sold this ad?',
     'misc.Sort_Mob': 'Sort',
     'misc.SpecificFields_title': 'Camps espec\xEDfics de categoria (opcionals)',
     'misc.States': 'Estats',

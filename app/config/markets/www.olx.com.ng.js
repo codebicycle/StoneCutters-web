@@ -15,24 +15,9 @@ module.exports = {
         }
     },
     marketing: {
-        videos: [
-            {
-                title: 'OLX Makes Sam Okpale Happy!!!',
-                id: 'bBRVITNlSSo'
-            },
-            {
-                title: 'Uba Dominic\'s Success Story',
-                id: 'dvmRBOEb18c'
-            },
-            {
-                title: 'OLX Sell IT show Season 1 -Episode 8',
-                id: 'W-Db15447es'
-            },
-            {
-                title: 'Download the OLX app on your phone Now!!!',
-                id: 'Hsco1LXyJcM'
-            }
-        ]
+        home_block_banner_image: {
+            image: 'marketing-box-image-ng'
+        }
     },
     successPage: {
         keepPosting: [
@@ -327,6 +312,12 @@ module.exports = {
             }
         }
     },
+    showBetterDeal: {
+        html4: {
+            enabled: true,
+            categories: [800, 830]
+        }
+    },
     registerWithConfirmation: {
         html5: {
             enabled: true
@@ -334,5 +325,5 @@ module.exports = {
         html4: {
             enabled: true
         }
-    }
+    }     
 };

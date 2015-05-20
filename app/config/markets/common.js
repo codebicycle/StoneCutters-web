@@ -14,7 +14,7 @@ module.exports = {
             myMsgs: 15,
             myConvs: 15,
             myConv: 300,
-            myConvHtml4: 10
+            myConvHtml4: 50
         },
         renew: {
             enabled: true,
@@ -195,7 +195,11 @@ module.exports = {
             floodlight: {
                 enabled: false,
                 platforms: ['desktop']
-            }
+            },
+            mixpanel: {
+                enabled: true,
+                platforms: ['desktop']
+            }            
         }
     },
     featured: {
@@ -256,6 +260,10 @@ module.exports = {
         linkblog: {
             href: 'http://blog.olx.com',
             target: '_blank'
+        },
+        linkHelpCenter: {
+            href: '/help',
+            target: '_self'
         }
     },
     abundance: {
@@ -345,6 +353,20 @@ module.exports = {
             email: {
                 enabled: false
             }
+        }
+    },
+    showBetterDeal: {
+        desktop: {
+            enabled: false
+        },
+        html4: {
+            enabled: false
+        },
+        html5: {
+            enabled: false
+        },
+        wap: {
+            enabled: false
         }
     },
     marketing: {
