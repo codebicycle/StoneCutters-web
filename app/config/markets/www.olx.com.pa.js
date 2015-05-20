@@ -299,7 +299,7 @@ module.exports = {
         desktop: {
             enabled: true,
             categories: [378, 831],
-            text: 'No acepta permutas'
+            text: 'Este vendedor no acepta canjes'
         }
     }
 };
