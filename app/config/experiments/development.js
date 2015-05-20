@@ -115,6 +115,6 @@ module.exports = {
             BROWSE_FOCUSED: 'focus-on-browse'
         },
         autoParticipate: true,
-        force: 'focus-on-browse'
+        force: 'focus-on-search'
     }
 };
