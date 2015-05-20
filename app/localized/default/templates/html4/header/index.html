@@ -43,5 +43,12 @@
     {% else %}
         {% set link = '/login' %}
     {% endif %}
-    <a href="{{ link | link }}">Tenes {{ showNotification }} sin leer</a>
+    {% if showNotification > 1 %}
+        {% set notification = dictionary["misc.UnreadMessages"] | replace('<<NUMBER>>', showNotification) %}
+    {% else %}
+        {% set notification = dictionary["misc.1UnreadMessage"] %}
+    {% endif %}
+    <div class="notification">
+        <a href="{{ link | link }}">{{ notification }}</a>
+    </div>
 {% endif %}
