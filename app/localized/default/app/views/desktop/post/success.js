@@ -51,7 +51,7 @@ module.exports = Base.extend({
             if (!this.metric) {
                 this.metric = new Metric({}, this);
             }
-            this.metric.increment(['conversations', 'exchange', category, 'show']);
+            this.metric.increment(['conversations', 'exchange', [category, 'show']]);
         }
     },
     showKeep: function (event) {
