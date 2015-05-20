@@ -1,22 +1,24 @@
 <ul class="topics">
-	<li class="topic">
-		<h3 class="topic-title">Últimos avisos en Mobile Phones <a href="{{ '/telefonos-tablets-cat-830' | link }}" class="topic-title-show-more">Ver más</a></h3>
-		<div class="topic-items">
-			<a href="#" class="topic-list-handler icons icon-arrow-left left">Anteriores</a>
-			<div class="topic-items-wrapper">
-				<ul class="topic-items-list" data-offset="0">
-					{% for item in items -%}
-						<li class="topic-item">
-							<a class="topic-item-link" href="{{ item.slug | link }}">
-								<figure class="topic-item-picture" style="background-image: url({{ item.thumbnail }})"></figure>
-								<p class="topic-item-title">{{ item.title }}</p>
-								<p class="topic-item-price">{{ item.price.displayPrice }}</p>
-							</a>
-						</li>
-					{%- endfor %}
-				</ul>
+	{% for topic in topics %}
+		<li class="topic">
+			<h3 class="topic-title">Últimos avisos en Mobile Phones <a href="{{ '/telefonos-tablets-cat-830' | link }}" class="topic-title-show-more">Ver más</a></h3>
+			<div class="topic-items">
+				<a href="#" class="topic-list-handler icons icon-arrow-left left">Anteriores</a>
+				<div class="topic-items-wrapper">
+					<ul class="topic-items-list" data-offset="0">
+						{% for item in topic.toJSON() -%}
+							<li class="topic-item">
+								<a class="topic-item-link" href="{{ item.slug | link }}">
+									<figure class="topic-item-picture" style="background-image: url({{ item.thumbnail }})"></figure>
+									<p class="topic-item-title">{{ item.title }}</p>
+									<p class="topic-item-price">{{ item.price.displayPrice }}</p>
+								</a>
+							</li>
+						{%- endfor %}
+					</ul>
+				</div>
+				<a href="#" class="topic-list-handler icons icon-arrow-right right" style="display: none;">Siguientes</a>
 			</div>
-			<a href="#" class="topic-list-handler icons icon-arrow-right right" style="display: none;">Siguientes</a>
-		</div>
-	</li>
+		</li>
+	{% endfor %}
 </ul>

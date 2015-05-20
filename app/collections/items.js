@@ -29,6 +29,9 @@ module.exports = Base.extend({
             case 'static':
                 url = '/items/static';
             break;
+            case 'popularsearches':
+                url = '/items/popularsearches';
+            break;
             default:
                 url = '/items';
                 if (this.params.relatedAds) {
