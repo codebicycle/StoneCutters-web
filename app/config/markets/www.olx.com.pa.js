@@ -299,7 +299,13 @@ module.exports = {
         desktop: {
             enabled: true,
             categories: [378, 831],
-            text: 'Este vendedor no acepta canjes'
+            text: 'Este vendedor no acepta canjes',
+            questions: {
+                378: '¿Aceptas canjear este auto por otro artículo?',
+                831: '¿Aceptas canjear este telefono por otro artículo?'
+            },
+            accept: 'Acepto canjes',
+            denied: 'No acepto canjes'
         }
     }
 };
