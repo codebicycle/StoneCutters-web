@@ -24,10 +24,36 @@ function home(params, callback) {
     helpers.controllers.control.call(this, params, controller);
 
     function controller() {
+        var promise = asynquence().or(error);
         var alternative = utils.underscorize(this.app.sixpack.experiments.dgdHomePage.alternative);
 
+        if (alternative === 'focus_on_browse') {
+            promise.then(fetch);
+        }
+        promise.val(success);
+
+        var fetch = function(done) {
+            this.app.fetch({
+                items: {
+                    collection: 'Items',
+                    params: {
+                        pageSize: 20,
+                        location: this.app.session.get('location').url,
+                        offset: 0,
+                        categoryId: 831,
+                        seo: false,
+                        languageId: this.app.session.get('languages')._byId[this.app.session.get('selectedLanguage')].id,
+                        'f.hasimage': true,
+                        'f.pricerange': 1
+                    }
+                }
+            }, {
+                readFromCache: true
+            }, done.errfcb);
+        }.bind(this);
+
         var success = function(res) {
-            callback(null, 'home/' + alternative, {});
+            callback(null, 'home/' + alternative, (res && res.items) ? { items: res.items.toJSON() } : {});
         }.bind(this);
 
         var error = function(err, res) {
@@ -35,6 +61,7 @@ function home(params, callback) {
         }.bind(this);
 
         asynquence().or(error)
+            .then(fetch)
             .val(success);
     }
 }

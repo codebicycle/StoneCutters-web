@@ -14,7 +14,7 @@ module.exports = Base.extend({
         var classes = ['footer-view', 'wrapper'];
         var currentRoute = this.app.session.get('currentRoute');
 
-        if (currentRoute.controller === 'categories' && currentRoute.action === 'home') {
+        if (this.app.sixpack.experiments.dgdHomePage && this.app.sixpack.experiments.dgdHomePage.alternative === 'focus-on-search') {
             classes.push('hidden');
         }
         return classes.join(' ');
