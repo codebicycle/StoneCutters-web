@@ -43,7 +43,7 @@ module.exports = function(params, next) {
 function findCity(params, _redirect, next) {
     var siteLocation = this.app.session.get('siteLocation');
 
-    var fetch = function(done) {
+    function fetch(done) {
         this.app.fetch({
             location: {
                 model: 'Location',
@@ -54,9 +54,9 @@ function findCity(params, _redirect, next) {
         }, {
             store: true
         }, done.errfcb);
-    }.bind(this);
+    }
 
-    var check = function(done, res) {
+    function check(done, res) {
         if (!res || !res.location) {
             return done.fail(new Error('Invalid location'));
         }
@@ -68,9 +68,9 @@ function findCity(params, _redirect, next) {
             return next.abort();
         }
         done(res.location);
-    }.bind(this);
+    }
 
-    var store = function(done, location) {
+    function store(done, location) {
         var current = location.get('current');
 
         this.app.session.persist({
@@ -80,9 +80,9 @@ function findCity(params, _redirect, next) {
             location: location.toJSON()
         });
         done();
-    }.bind(this);
+    }
 
-    var redirect = function(done) {
+    function redirect(done) {
         var url;
 
         if (_redirect) {
@@ -96,20 +96,20 @@ function findCity(params, _redirect, next) {
             return next.abort();
         }
         done();
-    }.bind(this);
+    }
 
-    var fail = function(err) {
+    function fail(err) {
         this.app.session.persist({
             error: err
         });
         next.abort();
         return helpers.common.redirect.call(this, '/500');
-    }.bind(this);
+    }
 
-    asynquence().or(fail)
-        .then(fetch)
-        .then(check)
-        .then(store)
-        .then(redirect)
+    asynquence().or(fail.bind(this))
+        .then(fetch.bind(this))
+        .then(check.bind(this))
+        .then(store.bind(this))
+        .then(redirect.bind(this))
         .val(next);
 }
