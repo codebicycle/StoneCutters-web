@@ -104,6 +104,16 @@ module.exports = {
                 file: 'QzMyOFQxOSAg',
                 t: 'uz_til',
                 delay: 100
+            },
+            'categories#show' : {
+                platforms: ['html5', 'desktop'],
+                categories: [362, 378],
+                t: 'uz_til',
+                delay: 100,
+                files: {
+                    '362': 'QzMyOFQyMCAg',
+                    '378': 'QzMyOFQyMSAg'
+                }
             }
         }
     },
