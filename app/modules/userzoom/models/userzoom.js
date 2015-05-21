@@ -40,7 +40,7 @@ function getParams(categoryId) {
     var loactionUrl = this.app.session.get('location').url;
 
     if(categoryId) {
-        params.file = config.getForMarket(loactionUrl, ['userzoom', 'sections', section, 'files'], '')[categoryId];
+        params.file = config.getForMarket(loactionUrl, ['userzoom', 'sections', section, 'files'], [])[categoryId] || '';
     }
     else {
         params.file = config.getForMarket(loactionUrl, ['userzoom', 'sections', section, 'file'], '');
