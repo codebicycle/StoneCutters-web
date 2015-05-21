@@ -9,7 +9,7 @@
 {% endif %}
 
 <div id="locationSelect" class="locationBreadcrumb">
-    <p><a href="{{ ['/', target or ''] | join | link({location: location.url}) }}">{{ location.name }}</a>{% if location.current and location.current.type != 'country' %} &#62; {{ location.current.name }}{% endif %}</p>
+    <p><a href="{{ ['/nf/location/redirect', ((['?target=', target] | join) if target else '')] | join | link({relocation: location.url}) }}">{{ location.name }}</a>{% if location.current and location.current.type != 'country' %} &#62; {{ location.current.name }}{% endif %}</p>
 </div>
 <div id="search">
     <form action="{{ '/location' | link }}">
@@ -27,7 +27,7 @@
         <ul class="normalList">
             {% for city in cities %}
                 <li class="{{ "last" if loop.last else "" }}">
-                    <a href="{{ ['/', target or ''] | join | link({location: city.url}) }}" class="city" style="color:black;" data-qa="city-name" >{{city.name}}</a>
+                    <a href="{{ ['/nf/location/redirect', ((['?target=', target] | join) if target else '')] | join | link({relocation: city.url}) }}" class="city" style="color:black;" data-qa="city-name" >{{city.name}}</a>
                 </li>
             {% endfor %}
         </ul>
