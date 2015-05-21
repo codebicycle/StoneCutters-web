@@ -45,9 +45,6 @@ module.exports = function(dataAdapter, excludedUrls) {
                     }));
                 }
                 else if (location && !siteLocation.indexOf('www.')) {
-                    /*req.rendrApp.session.persist({
-                        siteLocation: siteLocation
-                    });*/
                     return res.redirect(302, utils.removeParams(utils.link(req.protocol + '://' + host + req.originalUrl, req.rendrApp), 'location'));
                 }
             }
