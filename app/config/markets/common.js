@@ -301,6 +301,9 @@ module.exports = {
             enabled: false
         }
     },
+    posting: {
+        loginRequired: false
+    },
     userzoom: {
         enabled: false
     },

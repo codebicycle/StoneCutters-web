@@ -261,6 +261,12 @@ module.exports = {
             enabled: true
         }
     },
+    posting: {
+        loginRequired: true
+    },
+    socials: {
+        facebookLogin: false
+    },
     userzoom: {
         enabled: true,
         sections: {

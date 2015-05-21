@@ -38,6 +38,7 @@ module.exports = Base.extend({
         var user = this.app.session.get('user');
         var locationUrl = this.app.session.get('location').url;
         var isPhoneMandatory = config.getForMarket(locationUrl, ['validator', 'phone', 'enabled'], false);
+        var isEmailReadOnly = config.getForMarket(locationUrl, ['posting', 'loginRequired'],false);
         var hintEmailInfo = config.getForMarket(locationUrl, ['hints','html5','email'], false);
         var hint;
         var emailIcon;
@@ -63,7 +64,8 @@ module.exports = Base.extend({
                 }, this))
             } : {},
             location: item ? item.getLocation() || current : current,
-            isPhoneMandatory: isPhoneMandatory.toString()
+            isPhoneMandatory: isPhoneMandatory.toString(),
+            isEmailReadOnly: isEmailReadOnly.toString()
         });
     },
     postRender: function() {

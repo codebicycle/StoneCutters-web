@@ -4,10 +4,15 @@
 {% endif %}
 
 <section class="login_view">
-    <h4 class="title">{{ dictionary["loginbox.Login"] }}</h4>
+    <h4 class="title">{{ dictionary["loginbox.Login"] }}
+    {% if toPosting %}
+        <span>{{ dictionary["loginRequired.LoginToStartSelling"] or "Please login to start selling on OLX." }}</span>
+    {% endif %}
+    </h4>
+
 
     {% view 'users/facebooklogin' %}
-    
+
     <form action="{{ '/login' | link }}" method="POST" enctype="multipart/form-data">
         <fieldset class="wrapper {{ 'error' if error != '' }}">
             <label class="login-label">{{ dictionary["comments.CommentsFormEmail"] }}</label>
@@ -29,7 +34,7 @@
             <a href="{{ '/lostpassword' | link }}" class="forgot">{{ dictionary["landingbody.ForgotPassword"] }}</a>
         </fieldset>
     </form>
-    <p class="register">{{ dictionary["loginbox.IfYouDontHaveAccountOrNeverPostedOnBrand"] }} <a href="{{ '/register' | link }}" data-qa="register-link">{{ dictionary["loginbox.Register"] }}</a></p>
+    <p class="register">{{ dictionary["loginbox.IfYouDontHaveAccountOrNeverPostedOnBrand"] }} <a href="{{ '/register?toPosting=true' if toPosting else '/register' | link }}" data-qa="register-link">{{ dictionary["loginbox.Register"] }}</a></p>
 </section>
 
 {% if requireTracking %}
