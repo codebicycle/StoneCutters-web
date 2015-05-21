@@ -13,11 +13,12 @@ function initialize(attrs, options) {
     this.app = options.app;
 }
 
-function isEnabled() {
+function isEnabled(categoryId) {
     var loactionUrl = this.app.session.get('location').url;
     var enabled = config.getForMarket(loactionUrl, ['userzoom', 'enabled'], false);
     var section;
     var platforms;
+    var categories;
 
     if (enabled) {
         section = _.values(this.app.session.get('currentRoute')).join('#');
@@ -25,15 +26,26 @@ function isEnabled() {
         enabled = config.getForMarket(loactionUrl, ['userzoom', 'sections', section], false) && _.contains(platforms, this.app.session.get('platform'));
     }
 
+    if(categoryId) {
+        categories = config.getForMarket(loactionUrl, ['userzoom', 'sections', section, 'categories'], []);
+        enabled = _.contains(categories, categoryId);
+    }
+
     return enabled;
 }
 
-function getParams() {
+function getParams(categoryId) {
     var params = {};
     var section = _.values(this.app.session.get('currentRoute')).join('#');
     var loactionUrl = this.app.session.get('location').url;
 
-    params.file = config.getForMarket(loactionUrl, ['userzoom', 'sections', section, 'file'], '');
+    if(categoryId) {
+        params.file = config.getForMarket(loactionUrl, ['userzoom', 'sections', section, 'files'], '')[categoryId];
+    }
+    else {
+        params.file = config.getForMarket(loactionUrl, ['userzoom', 'sections', section, 'file'], '');
+    }
+    
     params.t = config.getForMarket(loactionUrl, ['userzoom', 'sections', section, 't'], '');
     params.delay = config.getForMarket(loactionUrl, ['userzoom', 'sections', section, 'delay'], 0);
 
