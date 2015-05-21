@@ -162,6 +162,13 @@ function parse(item, options) {
 
         item.visited = className + ' ' + status;
     }
+    if (config.getForMarket(location.url, ['showBetterDeal', platform, 'enabled'], false)) {
+        var betterDealCategories = config.getForMarket(location.url, ['showBetterDeal', platform, 'categories'], []);
+        if (item.condition && item.condition === 'used' && _.contains(betterDealCategories, item.category.parentId)) {
+            item.betterDeal = true;
+        }
+    }
+
     return Base.prototype.parse.apply(this, arguments);
 
 }
