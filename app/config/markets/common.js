@@ -301,6 +301,9 @@ module.exports = {
             enabled: false
         }
     },
+    posting: {
+        loginRequired: false
+    },
     userzoom: {
         enabled: false
     },
@@ -377,6 +380,20 @@ module.exports = {
     registerWithConfirmation: {
         desktop: {
             enabled: true
+        },
+        html5: {
+            enabled: false
+        },
+        html4: {
+            enabled: false
+        },
+        wap: {
+            enabled: false
+        }
+    },
+    accepExchange: {
+        desktop: {
+            enabled: false
         },
         html5: {
             enabled: false

@@ -6,7 +6,7 @@
     {% include (template + '/landings/asyncpickup/progressbar.html') %}
     <p class="title">Datos del comprador:</p>
     <form>
-        <div class="fork-form">
+<!--         <div class="fork-form">
             <fielset class="field-wrapper">
                 <label class="bold">
                     <input type="radio" name="hasinfo" value="form">
@@ -19,7 +19,9 @@
             </fielset>
             <small class="error-alert hide">Elegí una opcion para continuar.</small>
         </div>
-        <div class="buyer-form hide">
+        <div class="buyer-form hide"> -->
+        <input type="hidden" name="hasinfo" value="form">
+        <div class="buyer-form">
             <fieldset class="field-wrapper">
                 <label class="bold">Nombre del comprador:</label>
                 <input type="text" name="buyer_name" class="text-field">

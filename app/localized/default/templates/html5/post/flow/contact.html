@@ -4,7 +4,7 @@
         {% if  field.name == 'phone' %}
             {{ FieldText(field.label, field.name, isPhoneMandatory, form, user, 'number', 'phone') }} {# override phone mandatory property until smaug fix #}
         {% elif field.name == 'email' %}
-            {{ FieldText(field.label, field.name, field.mandatory, form, user, 'email', 'email', hint, emailIcon) }}
+            {{ FieldText(field.label, field.name, field.mandatory, form, user, 'email', 'email', hint, emailIcon, isEmailReadOnly) }}
         {% elif field.fieldType == 'text' %}
             {% set autocomplete = 'given-name' if (field.name == 'contactName') else 'off' %}
             {{ FieldText(field.label, field.name, field.mandatory, form,  user, 'text', autocomplete) }}

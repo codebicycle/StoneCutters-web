@@ -31,6 +31,8 @@ function initialize() {
 
 function getTemplateData() {
     var data = Base.prototype.getTemplateData.call(this);
+    var locationUrl = this.app.session.get('location').url;
+    var isReadOnly = config.getForMarket(locationUrl, ['posting', 'loginRequired'], false);
     var hintInfo = config.getForMarket(this.app.session.get('location').url, ['hints', 'desktop', 'email']);
     var hint;
     var icon;
@@ -41,7 +43,8 @@ function getTemplateData() {
     }
     return _.extend({}, data, {
         hintEmail: hint,
-        icon: icon
+        icon: icon,
+        isReadOnly: isReadOnly
     });
 }
 
