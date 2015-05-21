@@ -3,6 +3,7 @@
 	{% set validField = { 
         name: field.name,
         mandatory: field.mandatory,
+        optionalsmessage: optionalsmessage,
         label: field.label,
         fieldType: "combobox" if field.fieldType == "combobox" else "text",
         dataType: "select" if field.fieldType == "combobox" else "string",

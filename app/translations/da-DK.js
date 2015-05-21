@@ -123,6 +123,7 @@ module.exports = {
     'messages_item_page.CommentsFormEmail': 'E-mail:',
     'messages_site_class.30': 'Ok',
     'messages_site_class.ClickEdit': 'Klik for at REDIGERE in annonce (pris, beskrivelse...)',
+    'messages_site_class.Optional': 'Valgfri',
     'messages_user_management_current_ads.EditMyListing': 'Rediger min annonce',
     'topcities.SelectLocation': 'V\xE6lg placering',
     'adsense.SponsoredLinks': 'Sponsorede links',

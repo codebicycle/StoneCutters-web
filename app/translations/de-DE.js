@@ -123,6 +123,7 @@ module.exports = {
     'messages_item_page.CommentsFormEmail': 'E-Mail:',
     'messages_site_class.30': 'Ok',
     'messages_site_class.ClickEdit': 'Klicken Sie auf BEARBEITEN um den Preis oder die Beschreibung der Anzeige zu \xE4ndern',
+    'messages_site_class.Optional': 'Optional',
     'messages_user_management_current_ads.EditMyListing': 'Meine Kleinanzeige bearbeiten',
     'topcities.SelectLocation': 'W\xE4hlen Sie einen Standort',
     'adsense.SponsoredLinks': 'Gesponsorte Links',

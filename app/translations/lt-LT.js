@@ -123,6 +123,7 @@ module.exports = {
     'messages_item_page.CommentsFormEmail': 'El. pa\u0161tas:',
     'messages_site_class.30': 'Gerai',
     'messages_site_class.ClickEdit': 'Spustel\u0117kite, jei norite REDAGUOTI savo skelbim\u0105 (kain\u0105, apra\u0161ym\u0105...)',
+    'messages_site_class.Optional': 'pasirinktinai',
     'messages_user_management_current_ads.EditMyListing': 'Redaguoti mano skelbim\u0105',
     'topcities.SelectLocation': 'Pasirinkite vietov\u0119',
     'adsense.SponsoredLinks': 'R\u0117m\u0117j\u0173 finansuojamos s\u0105sajos',

@@ -123,6 +123,7 @@ module.exports = {
     'messages_item_page.CommentsFormEmail': 'T\xF6lvup\xF3stur:',
     'messages_site_class.30': '\xCD lagi',
     'messages_site_class.ClickEdit': 'Smelltu \xE1 \xFEetta til a\xF0 BREYTA augl\xFDsingunni \xFEinni (ver\xF0i, l\xFDsingu...)',
+    'messages_site_class.Optional': 'Valfrj\xE1lst',
     'messages_user_management_current_ads.EditMyListing': 'Breyta augl\xFDsingunni minni',
     'topcities.SelectLocation': 'Veldu sta\xF0',
     'adsense.SponsoredLinks': 'Kosta\xF0ir tenglar',

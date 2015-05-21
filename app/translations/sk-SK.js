@@ -123,6 +123,7 @@ module.exports = {
     'messages_item_page.CommentsFormEmail': 'E-mail:',
     'messages_site_class.30': 'OK',
     'messages_site_class.ClickEdit': 'Kliknite sem pre \xDAPRAVU va\u0161ej reklamy (cena, popis...)',
+    'messages_site_class.Optional': 'Volite\u013En\xE9',
     'messages_user_management_current_ads.EditMyListing': 'Upravi\u0165 moje ozn\xE1menie',
     'topcities.SelectLocation': 'Vyberte miesto',
     'adsense.SponsoredLinks': 'Sponzorovan\xE9 odkazy',

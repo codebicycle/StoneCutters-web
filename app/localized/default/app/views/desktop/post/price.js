@@ -3,6 +3,7 @@
 var _ = require('underscore');
 var Base = require('../../../../../common/app/bases/view');
 var statsd = require('../../../../../../../shared/statsd')();
+var translations = require('../../../../../../../shared/translations');
 
 module.exports = Base.extend({
     id: 'posting-price-view',
@@ -34,6 +35,7 @@ function initialize() {
     this.fieldLabel = '';
     this.fieldName = '';
     this.fieldMandatory = '';
+    this.dictionary = translations.get(this.app.session.get('selectedLanguage'));
 }
 
 function getTemplateData() {
@@ -43,7 +45,8 @@ function getTemplateData() {
         fields: this.fields,
         label: this.fieldLabel || '',
         name: this.fieldName || '',
-        mandatory: this.fieldMandatory || ''
+        mandatory: this.fieldMandatory || '',
+        optionalsmessage: this.dictionary['messages_site_class.Optional']
     });
 }
 

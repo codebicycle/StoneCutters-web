@@ -123,6 +123,7 @@ module.exports = {
     'messages_item_page.CommentsFormEmail': 'E-post:',
     'messages_site_class.30': 'Ok',
     'messages_site_class.ClickEdit': 'Klicka p\xE5 den f\xF6r att REDIGERA din annons (pris, beskrivning...)',
+    'messages_site_class.Optional': 'frivillig',
     'messages_user_management_current_ads.EditMyListing': 'Redigera min annons',
     'topcities.SelectLocation': 'V\xE4lj en plats',
     'adsense.SponsoredLinks': 'Sponsrade L\xE4nkar',

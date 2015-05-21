@@ -123,6 +123,7 @@ module.exports = {
     'messages_item_page.CommentsFormEmail': 'Email:',
     'messages_site_class.30': 'Ok',
     'messages_site_class.ClickEdit': 'Face\u0163i click pe el pentru a EDITA anun\u0163ul dvs. (pre\u0163ul, descrierea...)',
+    'messages_site_class.Optional': 'Op\u0163ional',
     'messages_user_management_current_ads.EditMyListing': 'Editarea anun\u0163ului meu',
     'topcities.SelectLocation': 'Selecteaz\u0103 o loca\u0163ie',
     'adsense.SponsoredLinks': 'Link-uri Sponsorizate',

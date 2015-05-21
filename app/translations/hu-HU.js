@@ -123,6 +123,7 @@ module.exports = {
     'messages_item_page.CommentsFormEmail': 'E-mail:',
     'messages_site_class.30': 'OK',
     'messages_site_class.ClickEdit': 'Kattintson r\xE1 a hirdet\xE9s SZERKESZT\xC9S\xE9hez (\xE1r, le\xEDr\xE1s...)',
+    'messages_site_class.Optional': 'Opcion\xE1lis',
     'messages_user_management_current_ads.EditMyListing': 'A hirdet\xE9sem szerkeszt\xE9se',
     'topcities.SelectLocation': 'Jel\xF6lj\xF6n meg egy helysz\xEDnt',
     'adsense.SponsoredLinks': 'Szponzor\xE1lt hivatkoz\xE1sok',

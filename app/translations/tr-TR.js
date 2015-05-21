@@ -123,6 +123,7 @@ module.exports = {
     'messages_item_page.CommentsFormEmail': 'E-Posta:',
     'messages_site_class.30': 'Tamam',
     'messages_site_class.ClickEdit': '\u0130lan\u0131n\u0131z\u0131 D\xDCZENLEMEK  i\xE7in \xFCzerine t\u0131klay\u0131n (fiyat, tan\u0131m...)',
+    'messages_site_class.Optional': '\u0130ste\u011Fe ba\u011Fl\u0131',
     'messages_user_management_current_ads.EditMyListing': '\u0130lanlar\u0131m\u0131 D\xFCzenle',
     'topcities.SelectLocation': 'Bir Konum Se\xE7in',
     'adsense.SponsoredLinks': 'Sponsor Destekli Ba\u011Flant\u0131lar',

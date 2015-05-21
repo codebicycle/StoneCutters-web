@@ -123,6 +123,7 @@ module.exports = {
     'messages_item_page.CommentsFormEmail': 'E-mail:',
     'messages_site_class.30': 'OK',
     'messages_site_class.ClickEdit': 'Chcete-li sv\u016Fj inzer\xE1t UPRAVIT (cena, popis apod.), klepn\u011Bte na toto tla\u010D\xEDtko.',
+    'messages_site_class.Optional': 'Voliteln\u011B',
     'messages_user_management_current_ads.EditMyListing': 'Upravit m\u016Fj z\xE1znam',
     'topcities.SelectLocation': 'Vyberte m\xEDsto',
     'adsense.SponsoredLinks': 'Sponzorovan\xE9 odkazy',

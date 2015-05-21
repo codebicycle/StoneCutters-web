@@ -123,6 +123,7 @@ module.exports = {
     'messages_item_page.CommentsFormEmail': 'E-pasts:',
     'messages_site_class.30': 'Labi',
     'messages_site_class.ClickEdit': 'Uzklik\u0161\u0137iniet \u0161eit, lai REDI\u0122\u0112TU savu sludin\u0101jumu (cenu, aprakstu...)',
+    'messages_site_class.Optional': 'Izv\u0113les iesp\u0113ja',
     'messages_user_management_current_ads.EditMyListing': 'Redi\u0123\u0113t manu sludin\u0101jumu',
     'topcities.SelectLocation': 'Atlasiet vietu',
     'adsense.SponsoredLinks': 'Sponsor\u0113tas saites',

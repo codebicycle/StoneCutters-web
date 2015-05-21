@@ -1,7 +1,7 @@
 {% macro Field(hint = false, hintIcon = '', field) %}
     <fieldset class="field-wrapper{{ ' hide' if field.hide and field.hide != 'false' }} {{ ' checkbox' if field.fieldType == 'checkbox' }}">
         {% if field.label and field.fieldType != 'checkbox' %}
-            <label for="field-{{ field.name }}" class="field-label">{% if field.mandatory == true or field.mandatory == 'true' or field.name == 'neighborhood' %}* {% endif %}{{ field.label }}</label>
+            <label for="field-{{ field.name }}" class="field-label">{{ field.label }}{% if field.optionalsmessage and not (field.mandatory == true or field.mandatory == 'true') %} <small>({{ field.optionalsmessage }})</small>{% endif %}</label>
         {% endif %}
         <div class="field-controls{{ ' radio' if field.fieldType == 'radio' }}">
             {% if field.fieldType == 'textarea' %}
@@ -91,9 +91,9 @@
     </select>
 {% endmacro %}
 
-{% macro PriceField(label = '', name = '', mandatory = '', hint = false, fields) %}
+{% macro PriceField(label = '', name = '', mandatory = '', optionalsmessage = '', hint = false, fields) %}
     <fieldset class="field-wrapper">
-        {% if label %}<label for="field-{{ name }}" class="field-label">{% if mandatory == true or mandatory == 'true' %}* {% endif %}{{ label }}</label>{% endif %}
+        {% if label %}<label for="field-{{ name }}" class="field-label">{{ label }}{% if optionalsmessage and not (mandatory == true or mandatory == 'true') %} <small>({{ optionalsmessage }})</small>{% endif %}</label>{% endif %}
         <div class="field-controls">
             {% for field in fields %}
                 {% if field.fieldType == 'text' %}

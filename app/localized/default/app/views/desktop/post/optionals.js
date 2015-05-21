@@ -31,7 +31,8 @@ function getTemplateData() {
 
     return _.extend({}, data, {
         fields: this.fields || [],
-        form: this.form
+        form: this.form,
+        optionalsmessage: this.dictionary['messages_site_class.Optional']
     });
 }
 

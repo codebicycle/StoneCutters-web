@@ -123,6 +123,7 @@ module.exports = {
     'messages_item_page.CommentsFormEmail': 'Correu electr\xF2nic:',
     'messages_site_class.30': 'Ok',
     'messages_site_class.ClickEdit': 'Feu-hi clic per EDITAR el vostre anunci (preu, descripci\xF3...)',
+    'messages_site_class.Optional': 'Opcional',
     'messages_user_management_current_ads.EditMyListing': 'Editar el meu anunci',
     'topcities.SelectLocation': 'Selecciona una ubicaci\xF3',
     'adsense.SponsoredLinks': 'Enlla\xE7os patrocinats',

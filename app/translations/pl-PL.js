@@ -123,6 +123,7 @@ module.exports = {
     'messages_item_page.CommentsFormEmail': 'E-mail:',
     'messages_site_class.30': 'Ok',
     'messages_site_class.ClickEdit': 'Kliknij, aby EDYTOWA\u0106 og\u0142oszenie (cena, opis...)',
+    'messages_site_class.Optional': 'Opcjonalnie',
     'messages_user_management_current_ads.EditMyListing': 'Edytuj moje og\u0142oszenie',
     'topcities.SelectLocation': 'Wybierz lokalizacj\u0119',
     'adsense.SponsoredLinks': 'Linki sponosorowane',

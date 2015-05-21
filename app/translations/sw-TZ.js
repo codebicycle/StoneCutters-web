@@ -123,6 +123,7 @@ module.exports = {
     'messages_item_page.CommentsFormEmail': 'Barua pepe:',
     'messages_site_class.30': 'Sawa',
     'messages_site_class.ClickEdit': 'Bonyeza kwayo ili KUHARIRI tangazo lako (bei, maelezo...)',
+    'messages_site_class.Optional': 'Hiari',
     'messages_user_management_current_ads.EditMyListing': 'Hariri Tangazo Langu',
     'topcities.SelectLocation': 'Chagua Mahali',
     'adsense.SponsoredLinks': 'Viungo Vilivyofadhiliwa',

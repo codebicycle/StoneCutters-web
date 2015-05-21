@@ -123,6 +123,7 @@ module.exports = {
     'messages_item_page.CommentsFormEmail': 'Email:',
     'messages_site_class.30': 'Ok',
     'messages_site_class.ClickEdit': 'Fa\xE7a clique aqui para EDITAR o seu an\xFAncio (pre\xE7o, descri\xE7\xE3o...)',
+    'messages_site_class.Optional': 'Opcional',
     'messages_user_management_current_ads.EditMyListing': 'Editar o meu An\xFAncio',
     'topcities.SelectLocation': 'Selecione um Local',
     'adsense.SponsoredLinks': 'Hiperliga\xE7\xF5es patrocinadas',

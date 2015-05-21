@@ -104,6 +104,7 @@ module.exports = {
         'misc.BeenSold',
         'misc.1UnreadMessage',
         'misc.UnreadMessages',
-        'misc.FreeClassifieds-SEO'
+        'misc.FreeClassifieds-SEO',
+        'messages_site_class.Optional'
     ]
 };

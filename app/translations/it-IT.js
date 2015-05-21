@@ -123,6 +123,7 @@ module.exports = {
     'messages_item_page.CommentsFormEmail': 'E-mail:',
     'messages_site_class.30': 'Ok',
     'messages_site_class.ClickEdit': 'Cliccare qui per MODIFICARE il tuo annincio (prezzo, descrizione...)',
+    'messages_site_class.Optional': 'Facoltativa',
     'messages_user_management_current_ads.EditMyListing': 'Modificare il mio annuncio',
     'topcities.SelectLocation': 'Scegli un Luogo',
     'adsense.SponsoredLinks': 'Link Sponsorizzati',

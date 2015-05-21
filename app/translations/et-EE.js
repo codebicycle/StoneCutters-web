@@ -123,6 +123,7 @@ module.exports = {
     'messages_item_page.CommentsFormEmail': 'E-post:',
     'messages_site_class.30': 'OK',
     'messages_site_class.ClickEdit': 'Vajutage siia, et oma kuulutust MUUTA (hind, kirjeldus...)',
+    'messages_site_class.Optional': 'Valikuline',
     'messages_user_management_current_ads.EditMyListing': 'Muutke "Minu kuulutust"',
     'topcities.SelectLocation': 'Valige asukoht',
     'adsense.SponsoredLinks': 'Tasulised lingid',

@@ -123,6 +123,7 @@ module.exports = {
     'messages_item_page.CommentsFormEmail': 'Im\xE8l:',
     'messages_site_class.30': 'Ok',
     'messages_site_class.ClickEdit': 'Klike isi pou CHANJE anons ou an (detay, pri...',
+    'messages_site_class.Optional': 'Si ou vle',
     'messages_user_management_current_ads.EditMyListing': 'Chanje Anons Mwen ',
     'topcities.SelectLocation': 'Chwazi yon kote',
     'adsense.SponsoredLinks': 'Lyen Spons\xF2rize',
