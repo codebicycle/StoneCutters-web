@@ -355,7 +355,7 @@ module.exports = Base.extend({
         value = value.replace(/\s{2,}/g, ' ');
         value = value.trim();
         if (value === value.toUpperCase()) {
-            value.toLowerCase();
+            value = value.toLowerCase();
         }
         return value;
     },
