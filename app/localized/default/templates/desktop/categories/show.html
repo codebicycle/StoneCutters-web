@@ -16,9 +16,11 @@
         {% endif %}
     </section>
 </div>
+
 {% if isUserzoomEnabled %}
     {% include (template + "/partials/userzoom.html") %}
 {% endif %}
+
 {% if seo %}
     {% set seoFrom = "listing" %}
     {% include (template + '/partials/seobox.html') %}
