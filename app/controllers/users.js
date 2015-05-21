@@ -97,7 +97,8 @@ function register(params, callback) {
             }
             callback(null, {
                 form: this.form,
-                agreeTerms: params.agreeTerms
+                agreeTerms: params.agreeTerms,
+                toPosting: params.toPosting
             });
         }
 

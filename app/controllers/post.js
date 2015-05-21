@@ -108,15 +108,23 @@ function flow(params, callback) {
         promise.val(success.bind(this));
 
         function redirect(done) {
+            var urlRedirect;
+
             if(params.renew) {
                 if(!config.getForMarket(location.url, ['ads', 'renew', 'enabled'],false)) {
                     params.renew = false;
                     return done.fail({});
                 }
             }
-            if ((!isPostingFlow && !isDesktop) && (!siteLocation || siteLocation.indexOf('www.') === 0)) {
+            if(config.getForMarket(location.url, ['posting', 'loginRequired'],false) && ! user && platform !== 'wap') {
+                urlRedirect = '/login?redirect=/posting';
+            }
+            else  if ((!isPostingFlow && !isDesktop) && (!siteLocation || siteLocation.indexOf('www.') === 0)) {
+                urlRedirect = '/location?target=' + (itemId ? 'myolx/edititem/' + itemId : 'posting');
+            }
+            if (urlRedirect) {
                 done.abort();
-                return helpers.common.redirect.call(this, '/location?target=' + (itemId ? 'myolx/edititem/' + itemId : 'posting'), null, {
+                return helpers.common.redirect.call(this, urlRedirect, null, {
                     status: 302
                 });
             }
@@ -398,6 +406,7 @@ function subcategories(params, callback) {
     helpers.controllers.control.call(this, params, controller);
 
     function controller() {
+        var user = this.app.session.get('user');
         var siteLocation = this.app.session.get('siteLocation');
         var location = this.app.session.get('location');
         var isPostingFlow = helpers.features.isEnabled.call(this, 'postingFlow');
@@ -413,7 +422,11 @@ function subcategories(params, callback) {
             else if (!siteLocation || siteLocation.indexOf('www.') === 0) {
                 redirect = '/location?target=posting';
             }
+            else if(config.getForMarket(location.url, ['posting', 'loginRequired'],false) && ! user && platform !== 'wap') {
+                redirect = '/login?redirect=/posting';
+            }
             if (redirect) {
+                done.abort();
                 return helpers.common.redirect.call(this, redirect, null, {
                     status: 302
                 });
@@ -450,6 +463,7 @@ function form(params, callback) {
     }, controller);
 
     function controller() {
+        var user = this.app.session.get('user');
         var siteLocation = this.app.session.get('siteLocation');
         var location = this.app.session.get('location');
         var isPostingFlow = helpers.features.isEnabled.call(this, 'postingFlow');
@@ -467,6 +481,9 @@ function form(params, callback) {
             }
             else if (!siteLocation || siteLocation.indexOf('www.') === 0) {
                 redirect = '/location?target=posting';
+            }
+            else if(config.getForMarket(location.url, ['posting', 'loginRequired'],false) && ! user && platform !== 'wap') {
+                redirect = '/login?redirect=/posting';
             }
             if (redirect) {
                 done.abort();

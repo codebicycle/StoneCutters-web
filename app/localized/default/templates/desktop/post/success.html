@@ -5,6 +5,14 @@
 
 {% view 'post/keepposting' %}
 
+{% if accepExchange.enabled %}
+    <aside id="accep-exchange" class="accep-exchange" data-id="{{ item.category.id }}">
+        <h3 class="title">{{ accepExchange.questions[item.category.id] }}</h3>
+        <a class="btn accept" href="" data-action="showKeep" data-increment-metric="conversations.exchange.{{ item.category.id }}.accept" >{{ accepExchange.accept }}</a>
+        <a class="btn denied" href="" data-action="showKeep" data-increment-metric="conversations.exchange.{{ item.category.id }}.denied" >{{ accepExchange.denied }}</a>
+    </aside>
+{% endif %}
+
 <section id="item-preview" class="item-preview" data-qa="item">
     <section class="item-preview-content">
         {% if item.status.editable %}
