@@ -353,7 +353,7 @@ module.exports = Base.extend({
     },
     cleanValue: function(value) {
         value = value.replace(/\s{2,}/g, ' ');
-        value.trim();
+        value = value.trim();
         if (value === value.toUpperCase()) {
             value.toLowerCase();
         }
