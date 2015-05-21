@@ -114,7 +114,11 @@
                             {% endif %}
                         {% endfor %}
                     {% else %}
-                        {{ Select(name = field.name, required = field.mandatory, options = field.values, selected = field.value.key) }}
+                        {% if field.values.length > 1 %}
+                            {{ Select(name = field.name, required = field.mandatory, options = field.values, selected = field.value.key) }}
+                        {% else %}
+                            {{ OneOption(name = field.name, options = field.values) }}
+                        {% endif %}
                     {% endif %}
                 {% endif %}
             {% endfor %}
@@ -134,4 +138,11 @@
 
 {% macro Checkbox(type = 'checkbox', name = '', required = false, validate = true, value = false, label = '') %}
     <input type="checkbox" {{ 'checked' if value }} value="1" name="{{ name }}">{{ label }}
+{% endmacro %}
+
+{% macro OneOption(name = '', options) %}
+    {% for option in options %}
+        <input type="hidden" id="field-{{ name }}" name="{{ name }}" value="{{ option.key }}">
+        <span class="price-currency-one">{{ option.value }}</span>
+    {% endfor %}
 {% endmacro %}
