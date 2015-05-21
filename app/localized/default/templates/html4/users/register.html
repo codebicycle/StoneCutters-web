@@ -9,6 +9,10 @@
     </div>
 {% endif %}
 <div id="register">
+    {% if toPosting %}
+        <h4>{{ dictionary["loginRequired.CreateAccount"] or "Create an account to start selling on OLX" }}</h4>
+        <p class="subtitle"><small>{{ dictionary["loginRequired.ItsFree"] or "Don't worry it's free!" }}</small></p>
+    {% endif %}
     {% set registerUrl = '/register-withconf' if registerWithConfirmation else '/register' %}
     <form action="{{ registerUrl | link }}" method="POST" enctype="multipart/form-data">
         <div class="formField">

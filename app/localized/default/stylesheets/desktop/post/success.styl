@@ -224,3 +224,29 @@
         font-size: $l;
     }
 }
+
+.accep-exchange {
+    box($yellow, $yellowBorders, 3px, 50px 0, solid, 1px);
+    clear-fix();
+    text-align: center;
+    margin-bottom: 20px;
+
+    .title {
+        font-size: remify(38px);
+        font-weight: normal;
+        margin: 0 0 30px;
+        display: block;
+    }
+    .accept {
+        action-button($orange, $white, 3px, 10px 30px);
+    }
+    .denied {
+        action-button($greyBoxBg, $black, 3px, 10px 30px);
+    }
+    .accept, .denied {
+        font-size: $ll;
+        margin: 0 10px;
+        display: inline-block;
+        text-shadow: none;
+    }
+}

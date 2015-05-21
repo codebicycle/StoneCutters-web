@@ -261,6 +261,12 @@ module.exports = {
             enabled: true
         }
     },
+    posting: {
+        loginRequired: true
+    },
+    socials: {
+        facebookLogin: false
+    },
     userzoom: {
         enabled: true,
         sections: {
@@ -269,6 +275,12 @@ module.exports = {
                 file: 'QzMyOFQxMiAg',
                 t: 'uz_til',
                 delay: 30000
+            },
+            'categories#list' : {
+                platforms: ['desktop'],
+                file: 'QzMyOFQyMyAg',
+                t: 'uz_til',
+                delay: 0
             }
         }
     },
@@ -325,11 +337,5 @@ module.exports = {
         html4: {
             enabled: true
         }
-    },
-    help: {
-        linkHelpCenter: {
-            href: 'http://help.olx.com.ng/hc/',
-            target: '_blank'
-        }
-    },     
+    }     
 };

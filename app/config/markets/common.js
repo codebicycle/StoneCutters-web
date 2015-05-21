@@ -14,7 +14,7 @@ module.exports = {
             myMsgs: 15,
             myConvs: 15,
             myConv: 300,
-            myConvHtml4: 10
+            myConvHtml4: 50
         },
         renew: {
             enabled: true,
@@ -301,6 +301,9 @@ module.exports = {
             enabled: false
         }
     },
+    posting: {
+        loginRequired: false
+    },
     userzoom: {
         enabled: false
     },
@@ -377,6 +380,20 @@ module.exports = {
     registerWithConfirmation: {
         desktop: {
             enabled: true
+        },
+        html5: {
+            enabled: false
+        },
+        html4: {
+            enabled: false
+        },
+        wap: {
+            enabled: false
+        }
+    },
+    accepExchange: {
+        desktop: {
+            enabled: false
         },
         html5: {
             enabled: false
