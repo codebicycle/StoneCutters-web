@@ -75,7 +75,7 @@
                             <span>{{ item.date.since.day if item.date.since.day }} {{ dictionary[item.date.since.dictionary] }}{{ (', ' + item.date.since.hour) if item.date.since.hour }}</span>
                             <div class="centerCont">
                                 <a href="{{ item | slugToUrl | link }}" data-qa="list-item">
-                                    <h2>{{ item.title }}</h2>
+                                    <h2>{{ item.title }} {{'betterDeal ' + item.betterDeal }} </h2>
                                 </a>
                             </div>
                             <span>{{ item.displayLocation }}</span>
