@@ -119,6 +119,7 @@ function onFieldsChange(event, fields) {
         this.parentView.$el.trigger('priceReset');
         this.render();
     }
+    this.formatValue();
 }
 
 function onChangePriceType(event) {
