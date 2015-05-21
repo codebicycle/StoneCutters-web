@@ -2,6 +2,7 @@
 
 var _ = require('underscore');
 var config = require('../../shared/config');
+var numbers = require('./numbers');
 var utils = require('../../shared/utils');
 if (typeof window === 'undefined') {
     var statsdModule = '../../server/modules/statsd';
@@ -330,6 +331,13 @@ module.exports = (function() {
         return dateDiffFormats[format || 'string'].call(this, days, hours, minutes);
     }
 
+    function countFormat(count, app) {
+        var counter =  count.toString().replace(/\B(?=(\d{3})+(?!\d))/g, app.session.get('location').flags.thousandSeparator);
+        var digits = config.getForMarket(app.session.get('location').url, ['layoutOptions', 'digits']);
+
+        return digits ? numbers.translate(counter, {to: digits}) : counter;
+    }
+
     return {
         slugToUrl: slugToUrl,
         link: utils.link,
@@ -342,6 +350,7 @@ module.exports = (function() {
         error: error,
         serializeFormJSON: serializeFormJSON,
         'static': statics,
-        dateDiff: dateDiff
+        dateDiff: dateDiff,
+        countFormat: countFormat
     };
 })();
