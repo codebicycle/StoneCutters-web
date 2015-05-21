@@ -100,7 +100,8 @@
         <div class="field-controls">
             {% for field in fields %}
                 {% if field.fieldType == 'text' %}
-                    {{ TextInput(name = field.name, required = field.mandatory, value = field.value.value ) }}
+                    {{ TextInput(name = 'priceW', required = field.mandatory, value = field.value.value ) }}
+                    {{ TextInput(type = 'hidden', name = field.name, value = field.value.value ) }}
                 {% elif field.fieldType == 'combobox' %}
                     {% if field.name == 'priceType' and field.values.length > 2 %}
                         {% set selected = false %}

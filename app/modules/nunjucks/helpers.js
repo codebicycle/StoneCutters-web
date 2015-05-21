@@ -44,9 +44,7 @@ module.exports = function(nunjucks) {
     }
 
     function countFormat(count) {
-        var counter =  count.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-        var digits = config.getForMarket(this.ctx.app.session.get('location').url, ['layoutOptions', 'digits'], {});
-        return digits ? helpers.numbers.translate(counter, {to: digits}) : counter;
+        return helpers.common.countFormat(count, this.ctx.app);
     }
 
     function editSlug(slug, itemId) {
