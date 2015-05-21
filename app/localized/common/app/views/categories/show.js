@@ -13,7 +13,7 @@ module.exports = Base.extend({
     },
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
-        
+
         return _.extend({}, data, {
             breadcrumb: breadcrumb.get.call(this, data),
             items: data.items,

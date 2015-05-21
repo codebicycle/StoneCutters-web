@@ -17,7 +17,7 @@ module.exports = Base.extend({
             breadcrumb: breadcrumb.get.call(this, data),
             filtersEnabled: helpers.features.isEnabled.call(this, 'listingFilters')
         });
-    }    
+    }
 });
 
 module.exports.id = 'searches/allresults';
