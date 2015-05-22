@@ -389,6 +389,8 @@ function handleShow(params, promise) {
     }.bind(this);
 
     var success = function(done) {
+        var currentCategory = category.toJSON();
+
         this.app.session.update({
             dataPage: {
                 category: category.get('id')
@@ -398,11 +400,12 @@ function handleShow(params, promise) {
         this.app.seo.addMetatag('title', category.get('trName'));
         this.app.seo.addMetatag('description', category.get('trName'));
 
-        this.app.tracking.set('category', category.toJSON());
+        this.app.tracking.set('category', currentCategory);
 
         done({
             type: 'categories',
-            category: category.toJSON()
+            category: currentCategory,
+            currentCategory: currentCategory
         });
     }.bind(this);
 
