@@ -20,6 +20,7 @@ module.exports = Base.extend({
     },
     postRender: function() {
         this.once('remove', this.onRemove, this);
+        this.app.sixpack.convert(this.app.sixpack.experiments.dgdHomePage);
     },
     onRemove: function(event) {
         this.app.trigger('header:restore');
