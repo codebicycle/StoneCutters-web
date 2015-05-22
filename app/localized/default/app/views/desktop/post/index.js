@@ -153,7 +153,7 @@ function postRender() {
             this.errors['category.id'] = this.dictionary['postingerror.PleaseSelectSubcategory'];
             this.errors.state = this.dictionary['posting_fields_1.location_select_level_2'] + ' ' + this.dictionary['posting_fields_1.location_level_2'];
             this.errors.city = this.dictionary['posting_fields_1.location_select_level_4'];
-            this.errors.neighborhood = this.dictionary[(this.app.session.get('location').abbreviation !== 'ZA') ? 'posting_fields_1.location_select_level_6' : 'misc.SelectSuburb'];
+            this.errors.neighborhood = this.dictionary[(this.app.session.get('location').abbreviation == 'ZA') ? 'misc.SelectSuburb' : 'posting_fields_1.location_select_level_6'];
             this.$el.trigger('updateErrors');
             this.$(this.selectors.contact).trigger('formRendered');
         }

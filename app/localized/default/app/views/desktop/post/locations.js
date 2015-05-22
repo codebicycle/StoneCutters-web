@@ -42,7 +42,7 @@ function initialize() {
     this.locationOptionKey = {
         state: this.dictionary['posting_fields_1.location_select_level_2'] + ' ' + this.dictionary['posting_fields_1.location_level_2'].toLowerCase(),
         city: 'posting_fields_1.location_select_level_4',
-        neighborhood: (this.app.session.get('location').abbreviation == 'ZA') ? 'misc.SelectSuburb' : 'posting_fields_1.location_select_level_6'
+        neighborhood: this.app.session.get('location').abbreviation == 'ZA' ? 'misc.SelectSuburb' : 'posting_fields_1.location_select_level_6'
     };
 }
 
