@@ -3,6 +3,6 @@
 		<img src="{{ '/images/desktop/logo.png' | static }}" alt="OLX Logo" />
 	</a>
 </div>
-{% view 'partials/search_focus_on_browse' %}
+{% view 'partials/search_amazon' %}
 <h6 class="posting-title {{ 'disabled' if currentRoute.controller != 'post' and currentRoute.action != 'flow' }}">{{ dictionary["itemslisting.FreeClassifieds"] }}<span>{{ dictionary["defaultheader.WhereBuyersMeetSellers"] }}</span></h6>
 <a href="{{ '/posting' | link }}" rel="nofollow" class="posting {{ 'disabled' if currentRoute.controller == 'post' and currentRoute.action == 'flow' }}" role="button" data-qa="post-button" data-increment-metric="dgd.home.posting" data-increment-include="currentRoute:categories#list">{{ wordingButton if wordingButton else dictionary["misc.PostButton"] }}</a>

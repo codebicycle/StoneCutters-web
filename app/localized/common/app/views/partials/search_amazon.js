@@ -18,4 +18,4 @@ module.exports = Base.extend({
     }
 });
 
-module.exports.id = 'partials/search_focus_on_browse';
+module.exports.id = 'partials/search_amazon';
