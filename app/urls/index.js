@@ -34,7 +34,7 @@ _.extend(urls, items);
 // Handler 404
 _.extend(urls, {
     'pages#error': {
-        url: /^(?!((\/health$)|(\/force($|\/))|(\/esi($|\/))|(\/stats($|\/))|(\/tracking($|\/))|(\/secure($|\/))|(\/nf\/location\/redirect($|\/)))).*/
+        url: /^(?!((\/health$)|(\/force($|\/))|(\/esi($|\/))|(\/stats($|\/))|(\/tracking($|\/))|(\/secure($|\/)))).*/
     }
 });
 

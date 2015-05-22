@@ -12,9 +12,9 @@
 <div class="list cities-links">
 	{% if location.children[0] %}
 		<ul class="country">
-			<li><a href="{{ ['/', target or ''] | join | link({location: location.url}) }}" class="city-link trackMe" data-location="{{ location.url }}" data-tracking="Location-ClickCity" data-qa="city-name" >{{ dictionary["misc.All-Location"]|replace("<<LOCATION>>", location.name) }}</a></li>
+			<li><a href="{{ ['/', target or ''] | join | link({location: location.url}) }}" class="city-link trackMe" data-tracking="Location-ClickCity" data-qa="city-name" >{{ dictionary["misc.All-Location"]|replace("<<LOCATION>>", location.name) }}</a></li>
 			{% if location.children[0].children[0] %}
-				<li><a href="{{ ['/', target or ''] | join | link({location: location.children[0].url}) }}" class="city-link trackMe" data-location="{{ location.children[0].url }}" data-tracking="Location-ClickCity" data-qa="city-name" >{{ dictionary["misc.All-Location"]|replace("<<LOCATION>>", location.children[0].name) }}</a></li>
+				<li><a href="{{ ['/', target or ''] | join | link({location: location.children[0].url}) }}" class="city-link trackMe" data-tracking="Location-ClickCity" data-qa="city-name" >{{ dictionary["misc.All-Location"]|replace("<<LOCATION>>", location.children[0].name) }}</a></li>
 			{% endif %}
 		</ul>
 	{% endif %}
@@ -22,7 +22,7 @@
 		<h3>{{ dictionary["listingpageitemslisting.AllResultsNew"] if search else dictionary["popularsearchesbody.PopularCities"] }}</h3>
 		<ul>
 			{% for city in cities %}
-				<li><a href="{{ ['/', target or ''] | join | link({location: city.url}) }}" class="city-link trackMe" data-location="{{ city.url }}" data-tracking="Location-ClickCity" data-qa="city-name" >{{ city.name }}{{ [' <span>(', city.stateAbbreviation, ')</span>'] | join('') if search and city.repeat}}</a></li>
+				<li><a href="{{ ['/', target or ''] | join | link({location: city.url}) }}" class="city-link trackMe" data-tracking="Location-ClickCity" data-qa="city-name" >{{ city.name }}{{ [' <span>(', city.stateAbbreviation, ')</span>'] | join('') if search and city.repeat}}</a></li>
 			{% endfor %}
 	{% else %}
 		<p>{{ dictionary["listingpageitemslisting.WeAreSorryNoResults"] }}</p>

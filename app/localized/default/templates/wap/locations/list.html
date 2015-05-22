@@ -15,7 +15,7 @@
                 <tr>
                     <td style="border-top: solid thin #808080; padding:1px 4px;">
                         <small>
-                            <a href="{{ ['/nf/location/redirect', ((['?target=', target] | join) if target else '')] | join | link({location: location.url}) }}">{{ location.name }}</a>
+                            <a href="{{ ['/', target or ''] | join | link({location: location.url}) }}">{{ location.name }}</a>
                             {% if location.current and location.current.type != 'country' %}
                                 <small>&#62; {{ location.current.name }}</small>
                             {% endif %}
@@ -54,7 +54,7 @@
                 {% for city in cities %}
                     <tr>
                         <td style="border-top: solid thin #808080;">
-                            <a style="display: block; padding: .25em .5em;" href="{{ ['/nf/location/redirect', ((['?target=', target] | join) if target else '')] | join | link({location: city.url}) }}" data-qa="city-name" >
+                            <a style="display: block; padding: .25em .5em;" href="{{ ['/', target or ''] | join | link({location: city.url}) }}" data-qa="city-name" >
                                 <small style="display: block;">{{ city.name }}</small>
                             </a>
                         </td>
