@@ -6,6 +6,9 @@
             <li class="column-item">
                 <a target="{{ linkHelpCenter.target }}" rel="nofollow" href="{{ linkHelpCenter.href | link }}" class="text-link" data-increment-metric="zendesk.footer.help">{{ dictionary["misc.ConactHelp"] }}</a>
             </li>
+            {% if isEnabledSafetyTipsLanding %}
+                <li class="column-item"><a target="{{ linkSafety.target }}" rel="nofollow" href="{{ linkSafety.href | link }}" class="text-link">{{ 'Consejos de seguridad' }}</a></li>
+            {% endif %}
             {% if isFeaturedCountry %}
                 <li class="column-item"><a rel="nofollow" href="{{ '/featured_listings' | link }}" class="text-link" data-increment-metric="zendesk.footer.how_to_feature">{{ dictionary["featured_listings.HowDoIFeatureMyAd"] }}</a></li>
             {% endif %}
