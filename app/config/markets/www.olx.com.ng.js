@@ -16,7 +16,7 @@ module.exports = {
     },
     marketing: {
         home_block_banner_image: {
-            image: 'marketing-box-image-ng'
+            image: 'marketing-box-contact-image-ng'
         }
     },
     successPage: {
@@ -337,5 +337,5 @@ module.exports = {
         html4: {
             enabled: true
         }
-    }     
+    }
 };
