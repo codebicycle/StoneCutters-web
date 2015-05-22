@@ -80,11 +80,11 @@ module.exports = Base.extend({
         this.$el.removeClass('hidden');
     },
     onCustomize: function(opts) {
-        if (opts.className) {
-            this.changeClassName(opts.className);
-        }
         if (opts.template) {
             this.changeTemplate(opts.template);
+        }
+        if (opts.className) {
+            this.changeClassName(opts.className);
         }
         if (opts.search === false) {
             this.disableSearch();

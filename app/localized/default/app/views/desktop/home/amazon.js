@@ -1,12 +1,29 @@
 'use strict';
 
 var Base = require('../../../../../common/app/bases/view').requireView('home/amazon');
+var utils = require('../../../../../../../shared/utils');
 
 module.exports = Base.extend({
     tagName: 'main',
     id: 'home_amazon',
     events: {
         'click .topic-list-handler': 'onTopicListHandlerClick'
+    },
+    preRender: function() {
+        if (!utils.isServer) {
+            this.app.trigger('header:customize', {
+                template: 'header/amazon',
+                className: 'header amazon wrapper'
+            });
+            this.app.trigger('footer:hide');
+        }
+    },
+    postRender: function() {
+        this.once('remove', this.onRemove, this);
+    },
+    onRemove: function(event) {
+        this.app.trigger('header:restore');
+        this.app.trigger('footer:show');
     },
     onTopicListHandlerClick: function(event) {
         event.preventDefault();
