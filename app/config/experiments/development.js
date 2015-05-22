@@ -103,5 +103,16 @@ module.exports = {
         },
         autoParticipate: true,
         fraction: 1
+    },
+    growthSuccesPagePushListers: {
+        enabled: true,
+        platforms: ['desktop'],
+        markets: ['ar'],
+        name: 'growth-success-page-push-listers',
+        alternatives: {
+            CONTROL: 'control',
+            SUCCESS_PAGE: 'success-page'
+        },
+        autoParticipate: true
     }
 };

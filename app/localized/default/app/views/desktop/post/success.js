@@ -5,6 +5,7 @@ var Base = require('../../../../../common/app/bases/view').requireView('post/suc
 var Notifications = require('../../../../../../modules/notifications');
 var config = require('../../../../../../../shared/config');
 var Metric = require('../../../../../../modules/metric');
+var Sixpack = require('../../../../../../../shared/sixpack');
 
 module.exports = Base.extend({
     className: 'posting-success-view',
@@ -23,14 +24,14 @@ module.exports = Base.extend({
         if(accepExchange.enabled && !_.contains(accepExchange.categories, data.item.category.id)) {
             accepExchange.enabled = false;
         }
-
         data.item.location.stateName = data.item.location.children[0].name;
         data.item.location.cityName = data.item.location.children[0].children[0].name;
         if (data.item.location.children[0].children[0].children[0]) {
             data.item.location.neighborhoodName = data.item.location.children[0].children[0].children[0].name;
         }
         return _.extend({}, data, {
-            accepExchange: accepExchange
+            accepExchange: accepExchange,
+            experiments: this.app.sixpack.experiments
         });
     },
     postRender: function () {
