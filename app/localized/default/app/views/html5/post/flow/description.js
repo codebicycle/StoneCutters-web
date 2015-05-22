@@ -1,7 +1,8 @@
 'use strict';
 
-var Base = require('../../../../../../common/app/bases/view');
 var _ = require('underscore');
+var Base = require('../../../../../../common/app/bases/view');
+var helpers = require('../../../../../../../helpers');
 var translations = require('../../../../../../../../shared/translations');
 var statsd = require('../../../../../../../../shared/statsd')();
 
@@ -47,7 +48,9 @@ module.exports = Base.extend({
         'fieldsChange': 'onFieldsChange',
         'change': 'onChange',
         'submit': 'onSubmit',
-        'priceTypeChange': 'onPriceTypeChange'
+        'priceTypeChange': 'onPriceTypeChange',
+        'keyup #text-priceW': 'onKeyUpPrice',
+        'blur #text-priceW': 'onBlurPrice'
     },
     onShow: function(event, categoryId) {
         event.preventDefault();
@@ -93,7 +96,7 @@ module.exports = Base.extend({
         var value = $field.val();
 
         if (name !== 'priceType') {
-            value = this.cleanValue($field.val());
+            value = this.cleanValue(value);
             $field.val(value);
         }
         this.parentView.getItem().set(name !== 'priceC' ? name : 'price', value);
@@ -145,7 +148,7 @@ module.exports = Base.extend({
         event.stopImmediatePropagation();
 
         var $currency = this.$('[name=currency_type]');
-        var $price = this.$('[name=priceC]');
+        var $price = this.$('[name=priceW]');
         var value = this.parentView.getItem().get('priceType') || this.$('[name=priceType]').val();
 
         if (value === 'FIXED' || value === 'NEGOTIABLE') {
@@ -160,11 +163,31 @@ module.exports = Base.extend({
     },
     cleanValue: function(value) {
         value = value.replace(/\s{2,}/g, ' ');
-        value.trim();
+        value = value.trim();
         if (value === value.toUpperCase()) {
-            value.toLowerCase();
+            value = value.toLowerCase();
         }
         return value;
+    },
+    onKeyUpPrice: function(event) {
+        this.formatValue();
+    },
+    onBlurPrice: function(event) {
+        var $field = this.$('#text-priceW');
+        var options = {};
+
+        this.formatValue();
+    },
+    formatValue: function() {
+        var $priceW = this.$('#text-priceW');
+        var $priceC = this.$('#text-priceC');
+        var val;
+
+        val = $priceW.val();
+        val = val.replace(/[^\d]/g, '');
+        $priceC.val(val).trigger('change');
+        val = helpers.common.countFormat(val, this.app);
+        $priceW.val(val);
     }
 });
 

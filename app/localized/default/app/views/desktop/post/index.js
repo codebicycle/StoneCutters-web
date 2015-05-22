@@ -1,6 +1,7 @@
 'use strict';
 
 var _ = require('underscore');
+var url = require('url');
 var asynquence = require('asynquence');
 var Base = require('../../../../../common/app/bases/view');
 var helpers = require('../../../../../../helpers');
@@ -102,7 +103,10 @@ function postRender() {
     var subcategoryId;
     var parentCategory;
 
-    $(window).on('beforeunload', onBeforeUnload);
+    if (!isLandingMO() || !isComingFromFacebook()) {
+        $(window).on('beforeunload', onBeforeUnload);
+    }
+
     this.app.router.once('action:end', onStart);
     this.app.router.once('action:start', onEnd);
 
@@ -170,12 +174,23 @@ function scrollSlideTo(element, value) {
     });
 }
 
+function isLandingMO() {
+    return window.location.pathname == '/posting/landing_mo';
+}
+
+function isComingFromFacebook() {
+    var queryObject = url.parse(window.location.href,true).query;
+    return queryObject.utm_source && queryObject.utm_source == 'facebook';
+}
+
 function handleBack() {
-    this.edited = true;
-    history.pushState(null, '', window.location.pathname + window.location.search);
-    $(window).on('popstate', {
-        message: this.dictionary['misc.WantToGoBack']
-    }, onPopState);
+    if (!isLandingMO() || !isComingFromFacebook()) {
+        this.edited = true;
+        history.pushState(null, '', window.location.pathname + window.location.search);
+        $(window).on('popstate', {
+            message: this.dictionary['misc.WantToGoBack']
+        }, onPopState);
+    }
 }
 
 function getVal(field) {
@@ -399,7 +414,6 @@ function onSubmit(event) {
 
     var promise = asynquence().or(fail.bind(this))
         .then(prepare.bind(this))
-        .then(check.bind(this))
         .then(validate.bind(this));
         if (this.rebump) {
             promise.then(rebump.bind(this));

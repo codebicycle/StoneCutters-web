@@ -4,7 +4,8 @@
 	    {% if  field.name == 'description' %}
 	        {{ FieldTextArea(field.label, field.name, field.mandatory, form, user) }}
 	    {% elif field.name == 'priceC' %}
-	    	{{ FieldText(field.label, field.name, field.mandatory, form, user, 'number') }}
+	    	{{ FieldText(field.label, 'priceW', form, user, 'number') }}
+	    	{{ FieldText('', field.name, field.mandatory, form, user, 'hidden') }}
 	    {% elif field.fieldType == 'text' %}
 	        {{ FieldText(field.label, field.name, field.mandatory, form, user) }}
 	    {% elif field.fieldType == 'combobox' %}

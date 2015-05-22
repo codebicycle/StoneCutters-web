@@ -104,6 +104,16 @@ module.exports = {
                 file: 'QzMyOFQxOSAg',
                 t: 'uz_til',
                 delay: 100
+            },
+            'categories#show' : {
+                platforms: ['html5', 'desktop'],
+                categories: [362, 378],
+                t: 'uz_til',
+                delay: 100,
+                files: {
+                    '362': 'QzMyOFQyMCAg',
+                    '378': 'QzMyOFQyMSAg'
+                }
             }
         }
     },
@@ -293,6 +303,19 @@ module.exports = {
         },
         html5: {
             enabled: true
+        }
+    },
+    accepExchange: {
+        desktop: {
+            enabled: true,
+            categories: [378, 831],
+            text: 'Este vendedor no acepta canjes',
+            questions: {
+                '378': '¿Aceptas que otros usuarios te propongan</br> canjes por tu auto?',
+                '831': '¿Aceptas que otros usuarios te propongan</br> canjes por tu teléfono?'
+            },
+            accept: 'Acepto canjes',
+            denied: 'No acepto canjes'
         }
     }
 };

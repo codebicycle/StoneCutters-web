@@ -80,14 +80,17 @@ function onValidate(event, done, isValid) {
     _.each(this.fields || [], function each(field) {
         
         var $field = this.$('[name="' + field.name + '"]');
-        
+    
         if (field.mandatory === 'true') {
             this.$el.trigger('hideError', [$field]);            
             if (!$field.val()) {
-                validationsResults = false;
-                this.$el.trigger('showError', [$field, {
-                    message: 'postingerror.PleaseCompleteThisField'
-                }]);
+                if (field.fieldType != 'combobox' || (field.values && field.values.length > 0)) {
+                    validationsResults = false;
+                    this.$el.trigger('showError', [$field, {
+                        message: 'postingerror.PleaseCompleteThisField'
+                    }]);     
+                } 
+               
             }
         }
     }, this);
