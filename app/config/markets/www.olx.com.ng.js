@@ -16,7 +16,8 @@ module.exports = {
     },
     marketing: {
         home_block_banner_image: {
-            image: 'marketing-box-contact-image-ng'
+            image: 'marketing-box-contact-image-ng',
+            link: '/help/contact'
         }
     },
     successPage: {

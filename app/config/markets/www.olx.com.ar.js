@@ -17,7 +17,8 @@ module.exports = {
             image: 'post-argentina-object'
         },
         home_block_banner_image: {
-            image: 'marketing-box-image'
+            image: 'marketing-box-image-ar',
+            link: '/posting?subcat=378'
         },
         migrationModal: {
             image: 'migrations-ar.jpg'
