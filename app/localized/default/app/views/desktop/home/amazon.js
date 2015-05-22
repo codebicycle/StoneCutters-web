@@ -1,12 +1,10 @@
 'use strict';
 
-var _ = require('underscore');
-var Base = require('../../../../../common/app/bases/view').requireView('home/focus_on_browse');
-var Metric = require('../../../../../../modules/metric');
+var Base = require('../../../../../common/app/bases/view').requireView('home/amazon');
 
 module.exports = Base.extend({
     tagName: 'main',
-    id: 'home_focus_on_browse',
+    id: 'home_amazon',
     events: {
         'click .topic-list-handler': 'onTopicListHandlerClick'
     },

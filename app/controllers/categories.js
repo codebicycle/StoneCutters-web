@@ -27,7 +27,7 @@ function home(params, callback) {
         var promise = asynquence().or(fail.bind(this));
         var alternative = utils.underscorize(this.app.sixpack.experiments.dgdHomePage.alternative);
 
-        if (alternative === 'focus_on_browse') {
+        if (alternative === 'amazon') {
             promise
                 .then(prepare.bind(this))
                 .then(fetch.bind(this));

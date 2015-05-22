@@ -1,13 +1,12 @@
 'use strict';
 
-var _ = require('underscore');
-var Base = require('../../../../../common/app/bases/view').requireView('home/focus_on_search');
+var Base = require('../../../../../common/app/bases/view').requireView('home/google');
 var helpers = require('../../../../../../helpers');
 var utils = require('../../../../../../../shared/utils');
 
 module.exports = Base.extend({
     tagName: 'main',
-    id: 'home_focus_on_search',
+    id: 'home_google',
     events: {
         'submit .search-form': 'onSearchSubmit',
         'click .search-location': 'onSearchLocationClick',
@@ -16,7 +15,7 @@ module.exports = Base.extend({
     preRender: function() {
         if (!utils.isServer) {
             this.app.trigger('header:customize', {
-                className: 'header focus_on_search wrapper',
+                className: 'header google wrapper',
                 search: false
             });
             this.app.trigger('footer:hide');
