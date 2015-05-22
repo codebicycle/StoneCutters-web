@@ -487,7 +487,6 @@ function onSubmit(event) {
         });
 
         if (utils.getUrlParam('g')) {
-            console.log('loquequieraspone');
             this.app.sixpack.convert(this.app.sixpack.experiments.growthSuccesPagePushListers);
         }
 
