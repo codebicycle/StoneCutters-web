@@ -6,6 +6,7 @@
     fieldType: "text",
     dataType: "string",
     value: user.email,
-    autocomplete: true
+    autocomplete: true,
+    readonly: isReadOnly
 } %}
 {{ Field(hint = hint if hint else dictionary["posting_fields_1.YourEmailAddressWontBeShared"], hintIcon = icon if icon else 'icon-lock', emailField) }}

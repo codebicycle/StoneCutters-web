@@ -38,11 +38,14 @@
     </div>
 {% endmacro %}
 
-{% macro FieldText(label, name, mandatory, form, user, type='text', autocomplete='off', hint = false, emailIcon = '') %}
+{% macro FieldText(label, name, mandatory, form, user, type='text', autocomplete='off', hint = false, emailIcon = '', readonly='false') %}
     <label>{{ '* ' if mandatory == 'true' }}{{ label }}</label>
     <input type="{{ type }}" name="{{ name }}" id="text-{{ name }}" autocomplete="{{ autocomplete }}"
     {% if name == 'email' %}
         value="{% if user and user.email %}{{ user.email }}{% elif form.values[name] %}{{ form.values[name] }}{% endif %}"
+        {% if readonly == 'true' %}
+            readonly="readonly"
+        {% endif %}
     {% elif (form and form.values and form.values[name]) or (name == 'name' and user)%}
         value="{{ form.values[name] if form.values[name] else user.username }}"
     {% endif %}>

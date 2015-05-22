@@ -624,6 +624,8 @@ module.exports = {
     'misc.Settings': 'Instellingen',
     'misc.ShareAd': 'Je advertentie delen',
     'misc.Show': 'Show',
+    'misc.Sold': 'I sold it',
+    'misc.SoldIt': 'Have you sold this ad?',
     'misc.Sort_Mob': 'Sort',
     'misc.SpecificFields_title': 'Rubriekspecifieke velden (optioneel)',
     'misc.States': 'Staten',

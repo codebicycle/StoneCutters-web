@@ -624,6 +624,8 @@ module.exports = {
     'misc.Settings': 'Ustawienia',
     'misc.ShareAd': 'Udost\u0119pnij og\u0142oszenie',
     'misc.Show': 'Show',
+    'misc.Sold': 'I sold it',
+    'misc.SoldIt': 'Have you sold this ad?',
     'misc.Sort_Mob': 'Sort',
     'misc.SpecificFields_title': 'Pola w danej kategorii (opcjonalne)',
     'misc.States': 'Stany',

@@ -624,6 +624,8 @@ module.exports = {
     'misc.Settings': 'R\xE9glages',
     'misc.ShareAd': 'Partager votre annonce',
     'misc.Show': 'Voir',
+    'misc.Sold': 'Je l\'ai vendu',
+    'misc.SoldIt': 'Avez-vous vendu l\'article annonc\xE9?',
     'misc.Sort_Mob': 'Trier',
     'misc.SpecificFields_title': 'Champs de Cat\xE9gorie Sp\xE9cifiques (Facultatif)',
     'misc.States': 'Etats',

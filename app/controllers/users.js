@@ -97,7 +97,8 @@ function register(params, callback) {
             }
             callback(null, {
                 form: this.form,
-                agreeTerms: params.agreeTerms
+                agreeTerms: params.agreeTerms,
+                toPosting: params.toPosting
             });
         }
 
@@ -913,7 +914,8 @@ function conversation(params, callback) {
                 include: ['thread'],
                 viewname: 'conversation',
                 paginator: conversation.paginator,
-                form: this.form
+                form: this.form,
+                sold: params.sold
             });
         }.bind(this);
 

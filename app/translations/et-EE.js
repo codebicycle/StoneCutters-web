@@ -624,6 +624,8 @@ module.exports = {
     'misc.Settings': 'Seadistused',
     'misc.ShareAd': 'Jaga kuulutust',
     'misc.Show': 'Show',
+    'misc.Sold': 'I sold it',
+    'misc.SoldIt': 'Have you sold this ad?',
     'misc.Sort_Mob': 'Sort',
     'misc.SpecificFields_title': 'Kategooriatele vastavad v\xE4ljad (valikulised)',
     'misc.States': 'Osariigid',

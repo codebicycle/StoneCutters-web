@@ -624,6 +624,8 @@ module.exports = {
     'misc.Settings': 'Be\xE1ll\xEDt\xE1sok',
     'misc.ShareAd': 'Hirdet\xE9s megoszt\xE1sa',
     'misc.Show': 'Show',
+    'misc.Sold': 'I sold it',
+    'misc.SoldIt': 'Have you sold this ad?',
     'misc.Sort_Mob': 'Sort',
     'misc.SpecificFields_title': 'Kateg\xF3riaf\xFCgg\u0151 mez\u0151k (V\xE1laszthat\xF3k)',
     'misc.States': '\xC1llamok',

@@ -624,6 +624,8 @@ module.exports = {
     'misc.Settings': 'C\xE0i \u0111\u1EB7t',
     'misc.ShareAd': 'Chia s\u1EBB rao v\u1EB7t',
     'misc.Show': 'Hi\u1EC3n th\u1ECB',
+    'misc.Sold': 'T\xF4i \u0111\xE3 b\xE1n n\xF3',
+    'misc.SoldIt': 'B\u1EA1n \u0111\xE3 b\xE1n \u0111\u01B0\u1EE3c rao v\u1EB7t n\xE0y ch\u01B0a?',
     'misc.Sort_Mob': 'S\u1EAFp x\u1EBFp',
     'misc.SpecificFields_title': 'C\xE1c tr\u01B0\u1EDDng c\u1EE5 th\u1EC3 c\u1EE7a Nh\xF3m h\xE0ng (c\xE1c t\xF9y ch\u1ECDn)',
     'misc.States': 'C\xE1c bang',

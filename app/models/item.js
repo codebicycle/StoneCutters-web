@@ -28,6 +28,7 @@ module.exports = Base.extend({
     logPostImages: logPostImages,
     toData: toData,
     remove: remove,
+    sold: sold,
     rebump: rebump,
     republish: republish,
     stillAvailable: stillAvailable
@@ -130,7 +131,10 @@ function indexOfOptional(name) {
 }
 
 function parse(item, options) {
-    var digits = config.getForMarket(this.app.session.get('location').url, ['layoutOptions', 'digits'], {});
+    var location = this.app.session.get('location');
+    var digits = config.getForMarket(location.url, ['layoutOptions', 'digits'], {});
+    var platform = this.app.session.get('platform');
+    var betterDealCategories = config.getForMarket(location.url, ['showBetterDeal', platform, 'categories'], []);
 
     if (item && item.date) {
         item.date.since = helpers.timeAgo(item.date);
@@ -139,7 +143,13 @@ function parse(item, options) {
         item.priceC = helpers.numbers.toLatin(item.priceC);
     }
     if (item.optionals && item.optionals.length) {
+
         item.optionals = _.sortBy(item.optionals, 'name').reverse();
+        _.each(item.optionals, function eachOptionals(optional) {
+            if(optional.name === 'condition' && optional.id === '2') {
+                item.used = true;
+            }
+        });
     }
     if (item.description) {
         item.description = S(item.description).stripTags().s;
@@ -153,6 +163,12 @@ function parse(item, options) {
 
         item.visited = className + ' ' + status;
     }
+    if (config.getForMarket(location.url, ['showBetterDeal', platform, 'enabled'], false)) {
+        if (item.condition && item.condition === 'used' && _.contains(betterDealCategories, item.category.parentId)) {
+            item.betterDeal = true;
+        }
+    }
+
     return Base.prototype.parse.apply(this, arguments);
 
 }
@@ -405,8 +421,27 @@ function remove(data, done) {
     }
 }
 
+function sold(done) {
+    helpers.dataAdapter.post(this.app.req, '/items/' + this.get('id') + '/delete', {
+        query: {
+            token: this.get('token'),
+            platform: this.app.session.get('platform'),
+            reason: 2
+        },
+        cache: false,
+        data: {
+            location: this.app.session.get('location').url
+        }
+    }, callback.bind(this));
+
+    function callback() {
+        statsd.increment([this.get('country'), 'conversations', 'chat', 'sold', this.get('platform')]);
+        this.callback(done)();
+    }
+}
+
 function rebump(done) {
-      helpers.dataAdapter.post(this.app.req, '/items/' + this.get('id') + '/rebump', {
+    helpers.dataAdapter.post(this.app.req, '/items/' + this.get('id') + '/rebump', {
         query: {
             token: (this.app.session.get('user') || {}).token,
             postingSession: this.get('postingSession'),
@@ -423,7 +458,7 @@ function rebump(done) {
 }
 
 function republish(done) {
-      helpers.dataAdapter.post(this.app.req, '/items/' + this.get('id') + '/republish', {
+    helpers.dataAdapter.post(this.app.req, '/items/' + this.get('id') + '/republish', {
         query: {
             securityKey: this.get('sk'),
             postingSession: this.get('postingSession'),

@@ -33,6 +33,16 @@
     </div>
 </div>
 
+{% if not thread.get('messages')[0].isMine and currentRoute.action != 'conversationmail' and not sold %}
+    <form action="{{ ('/myolx/conversation/' + thread.get('threadId') + '/' + item.id ) | link }}" method="POST" enctype="multipart/form-data">
+        <div class="sold">
+            <span class="haveSold">{{ dictionary["misc.SoldIt"] }}</span>
+            <input type="hidden" value="{{ dictionary["misc.BeenSold"] }}" name="message" {{ 'class="error"' if form and form.errors }} />
+            <input class="action edit" type="submit" value="{{ dictionary["misc.Sold"] }}">
+        </div>
+    </form>
+{% endif %}
+
 <ul class="conversation">
     {% for message in thread.get('messages') %}
         <li class="message{{ ' is-mine' if message.isMine }}">

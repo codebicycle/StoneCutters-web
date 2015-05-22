@@ -624,6 +624,8 @@ module.exports = {
     'misc.Settings': 'Impostazioni',
     'misc.ShareAd': 'Condividi il tuo annuncio',
     'misc.Show': 'Mostrare',
+    'misc.Sold': 'Lo vendei',
+    'misc.SoldIt': 'Hai venduto questo annuncio?',
     'misc.Sort_Mob': 'Ordina',
     'misc.SpecificFields_title': 'Categoria/Campi Specifici (Opzionali)',
     'misc.States': 'Stati',

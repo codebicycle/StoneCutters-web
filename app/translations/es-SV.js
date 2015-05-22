@@ -624,6 +624,8 @@ module.exports = {
     'misc.Settings': 'Configuraci\xF3n',
     'misc.ShareAd': 'Comparte tu anuncio',
     'misc.Show': 'Mostrar',
+    'misc.Sold': 'Lo vend\xED',
+    'misc.SoldIt': '\xBFHas vendido este art\xEDculo?',
     'misc.Sort_Mob': 'Ordenar',
     'misc.SpecificFields_title': 'Campos Espec\xEDficos de Categor\xEDa (Opcionales)',
     'misc.States': 'Departamentos',

@@ -624,6 +624,8 @@ module.exports = {
     'misc.Settings': 'Asetukset',
     'misc.ShareAd': 'Jaa ilmoituksesi',
     'misc.Show': 'Show',
+    'misc.Sold': 'I sold it',
+    'misc.SoldIt': 'Have you sold this ad?',
     'misc.Sort_Mob': 'Sort',
     'misc.SpecificFields_title': 'Luokkakohtaiset kent\xE4t (valinnaiset)',
     'misc.States': 'Osavaltiot',

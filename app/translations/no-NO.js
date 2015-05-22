@@ -624,6 +624,8 @@ module.exports = {
     'misc.Settings': 'Innstillinger',
     'misc.ShareAd': 'Del annonsen',
     'misc.Show': 'Show',
+    'misc.Sold': 'I sold it',
+    'misc.SoldIt': 'Have you sold this ad?',
     'misc.Sort_Mob': 'Sort',
     'misc.SpecificFields_title': 'Felter for spesifikk kategori (valgfritt)',
     'misc.States': 'Stater',

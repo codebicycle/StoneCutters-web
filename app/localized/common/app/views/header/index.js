@@ -17,6 +17,7 @@ module.exports = Base.extend({
         var languageAbbreviation = this.app.session.get('languages')._byId[this.app.session.get('selectedLanguage')].isocode.toLowerCase();
         var currentRoute = this.app.session.get('currentRoute');
         var messages = this.app.session.get('messages');
+        var showNotification = this.app.session.get('showNotification');
         var postLinkUrl = false;
 
         if (location.url === 'www.olx.com.mx') {
@@ -34,7 +35,8 @@ module.exports = Base.extend({
             languageAbbreviation: languageAbbreviation,
             isPostFlow: currentRoute.controller === 'post',
             postLinkUrl: postLinkUrl,
-            messages: messages
+            messages: messages,
+            showNotification: showNotification
         });
     },
     getPostLink: function() {

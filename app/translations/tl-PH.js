@@ -624,6 +624,8 @@ module.exports = {
     'misc.Settings': 'Mga Setting',
     'misc.ShareAd': 'Ibahagi ang inyong anunsyo',
     'misc.Show': 'Show',
+    'misc.Sold': 'I sold it',
+    'misc.SoldIt': 'Have you sold this ad?',
     'misc.Sort_Mob': 'Sort',
     'misc.SpecificFields_title': 'Mga Partikular na Field ng Kategorya (Mga Opsyonal)',
     'misc.States': 'Lokasyon',

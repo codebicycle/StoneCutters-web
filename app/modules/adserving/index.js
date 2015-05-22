@@ -233,7 +233,15 @@ function getCategoryAttribute(id, attr) {
 }
 
 function getCategoriesQuery() {
-    return _.reduce(this.config.queryCategories || [], function(memo, id) {
+    var section = _.values(this.app.session.get('currentRoute')).join('#');
+    var categories = _.filter(this.config.queryCategories || [], function each(id) {
+        return !!getCategoryName.call(this, id);
+    }, this);
+
+    if (categories.length && this.get('service') === 'CSA' && ~section.indexOf('searches#allresults')) {
+        categories = [categories[(new Date()).getHours() % categories.length]];
+    }
+    return _.reduce(categories, function(memo, id) {
         var category = getCategoryName.call(this, id);
 
         if (category) {

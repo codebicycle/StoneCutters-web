@@ -624,6 +624,8 @@ module.exports = {
     'misc.Settings': 'Postavke',
     'misc.ShareAd': 'Podijeli svoj oglas',
     'misc.Show': 'Show',
+    'misc.Sold': 'I sold it',
+    'misc.SoldIt': 'Have you sold this ad?',
     'misc.Sort_Mob': 'Sort',
     'misc.SpecificFields_title': 'Specifi\u010Dna polja kategorija (po izboru)',
     'misc.States': 'Savezne dr\u017Eave',

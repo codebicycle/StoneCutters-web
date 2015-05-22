@@ -14,7 +14,7 @@ module.exports = {
             myMsgs: 15,
             myConvs: 15,
             myConv: 300,
-            myConvHtml4: 10
+            myConvHtml4: 50
         },
         renew: {
             enabled: true,
@@ -260,6 +260,10 @@ module.exports = {
         linkblog: {
             href: 'http://blog.olx.com',
             target: '_blank'
+        },
+        linkHelpCenter: {
+            href: '/help',
+            target: '_self'
         }
     },
     abundance: {
@@ -296,6 +300,9 @@ module.exports = {
         withReason: {
             enabled: false
         }
+    },
+    posting: {
+        loginRequired: false
     },
     userzoom: {
         enabled: false
@@ -351,6 +358,20 @@ module.exports = {
             }
         }
     },
+    showBetterDeal: {
+        desktop: {
+            enabled: false
+        },
+        html4: {
+            enabled: false
+        },
+        html5: {
+            enabled: false
+        },
+        wap: {
+            enabled: false
+        }
+    },
     marketing: {
         thanksPage: {
             videoUrl: 'thank-you-video-es'
@@ -359,6 +380,20 @@ module.exports = {
     registerWithConfirmation: {
         desktop: {
             enabled: true
+        },
+        html5: {
+            enabled: false
+        },
+        html4: {
+            enabled: false
+        },
+        wap: {
+            enabled: false
+        }
+    },
+    accepExchange: {
+        desktop: {
+            enabled: false
         },
         html5: {
             enabled: false
