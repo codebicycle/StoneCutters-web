@@ -196,7 +196,7 @@ module.exports = {
     'itemgeneraldetails.BackResults': 'Volver a Resultados',
     'itemgeneraldetails.City': 'Ciudad',
     'itemgeneraldetails.DatePosted': 'Fecha de publicaci\xF3n',
-    'itemgeneraldetails.Description': 'Descripci&#243;n',
+    'itemgeneraldetails.Description': 'Descripci\xF3n',
     'itemgeneraldetails.NoPicture': 'No hay foto disponible',
     'itemgeneraldetails.OtherRelatedListings': 'Otros anuncios relacionados:',
     'itemgeneraldetails.PersonalInfo': 'Datos Personales',
