@@ -1,16 +1,18 @@
-nuevo search aca
-<form action="{{ 'nf/search/redirect' | link }}" method="post" role="search" class="search-form {{ 'disabled' if currentRoute.controller == 'post' and currentRoute.action == 'flow' }}" >
-    <fieldset>
-        <input class="text-field" name="search" type="text" placeholder="{{ dictionary["defaultheader.WhatAreYouLookingFor"] }}" tabindex="1" data-qa="search-input" value="{{ search }}" /><!--
-        --><button class="icons icon-search button" type="submit" data-qa="search-submit"></button>
-    </fieldset>
+<form class="search-form" action="{{ 'nf/search/redirect' | link }}" method="post" role="search">
+	<div class="category-cell">
+		<a href="#" class="search-category icons icon-arrow-down" data-category="">{{ dictionary["popularsearchesbody.CATEGORIES_BOX"] }}</a>
+		<ul class="categories-list">
+			{% for category in categories %}
+				<li class="category-container">
+					<a href="#" class="category-link" data-category="{{ category.id }}">{{ category.trName }}</a>
+				</li>
+		    {% endfor %}
+		</ul>
+	</div>
+	<div class="search-cell">
+		<input class="search-term" name="search-term" type="text" placeholder="{{ dictionary["defaultheader.WhatAreYouLookingFor"] }}" tabindex="1" data-qa="search-input" value="{{ search }}" />
+	</div>
+	<div class="submit-cell">
+		<button class="search-button icons icon-search" type="submit" data-qa="search-submit"></button>
+	</div>
 </form>
-
-<a href="#" class="search-category">{{ dictionary["popularsearchesbody.CATEGORIES_BOX"] }}</a>
-<ul class="categories-list">
-	{% for category in categories %}
-		<li class="category-container">
-			<a href="#" class="category-link" data-category="{{ category.id }}">{{ category.trName }}</a>
-		</li>
-    {% endfor %}
-</ul>

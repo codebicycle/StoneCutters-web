@@ -14,7 +14,8 @@ module.exports = Base.extend({
         this.$('[name=search]').val(this.app.session.get('search'));
     },
     events: {
-        'submit form': 'onSubmit'
+        'submit form': 'onSubmit',
+        'click .search-category': 'onSearchCategoryClick',
     },
     onSubmit: function(event) {
         event.preventDefault();
@@ -35,5 +36,28 @@ module.exports = Base.extend({
         helpers.common.redirect.call(this.app.router, url, null, {
             status: 200
         });
+    },
+    onSearchCategoryClick: function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+
+        var $source = this.$(event.target);
+        var $list = this.$('.categories-list');
+
+        if ($list.hasClass('active')) {
+            $list.removeClass('active');
+            $source.removeClass('active');
+            $('body').off('click.categoriesList');
+        }
+        else {
+            $list.addClass('active');
+            $source.addClass('active');
+            $('body').on('click.categoriesList', function() {
+                $list.removeClass('active');
+                $source.removeClass('active');
+                $('body').off('click.categoriesList');
+            });
+        }
     }
 });
