@@ -12,7 +12,7 @@
             </a>
 			<ul class="states-list">
     			<li class="state-container">
-                    <a href="#" class="country-link" data-location="{{ location.url }}"{% if not location.current %} style="display: none;"{% endif %}>{{ location.name }}</a>
+                    <a href="#" class="country-link" data-location="{{ location.url }}"{% if not location.current %} style="display: none;"{% endif %}>{{ dictionary["selectregion.SelectEntireCountry"] }}</a>
                 </li>
                 {% for state in states %}
     				<li class="state-container">

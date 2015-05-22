@@ -41,11 +41,12 @@ module.exports = Base.extend({
 
         if (location && location !== this.app.session.get('siteLocation')) {
             pushState = false;
+            url = utils.fullizeUrl(url, this.app);
             this.app.session.persist({
                 siteLocation: location
             });
         }
-        helpers.common.redirect.call(this.app.router, utils.fullizeUrl(url, this.app), null, {
+        helpers.common.redirect.call(this.app.router, url, null, {
             pushState: pushState,
             status: 200
         });
