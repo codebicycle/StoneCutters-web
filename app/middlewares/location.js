@@ -56,7 +56,7 @@ function findCity(params, _redirect, next) {
         }, done.errfcb);
     }.bind(this);
 
-    function check(done, res) {
+    var check = function(done, res) {
         if (!res || !res.location) {
             return done.fail(new Error('Invalid location'));
         }
