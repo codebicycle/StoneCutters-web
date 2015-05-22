@@ -7,21 +7,16 @@ var utils = require('../../../../../../../shared/utils');
 
 module.exports = Base.extend({
     tagName: 'main',
-    id: 'home_view',
-    className: 'home_view',
-	events: {
-        'showLocalize': 'onShowLocalize',
-        'hideLocalize': 'onHideLocalize',
+    id: 'home_focus_on_search',
+    events: {
         'submit .search-form': 'onSearchSubmit',
-        'click a[data-location]': 'onClickLocation',
-        'click .search-location': 'onShowLocalize',
-        'click .states-list li a': 'onClickState'
+        'click .search-location': 'onSearchLocationClick',
+        'click .country-link, .state-link': 'onStateLinkClick'
     },
     preRender: function() {
         if (!utils.isServer) {
             this.app.trigger('header:customize', {
-                //template: 'header/alternative-a',
-                className: 'alternative-a wrapper',
+                className: 'header focus_on_search wrapper',
                 search: false
             });
             this.app.trigger('footer:hide');
@@ -34,48 +29,61 @@ module.exports = Base.extend({
         this.app.trigger('header:restore');
         this.app.trigger('footer:show');
     },
-    onShowLocalize: function(event) {
-        event.preventDefault();
-        event.stopPropagation();
-        event.stopImmediatePropagation();
-
-        this.$('.states-list').fadeIn();
-    },
-    onHideLocalize: function(event) {
-        event.preventDefault();
-        event.stopPropagation();
-        event.stopImmediatePropagation();
-
-        this.$('.states-list').fadeOut();
-    },
     onSearchSubmit: function(event) {
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();
 
-        var search = this.$('.search-form').find('.search-term').val();
-        var url = search ? ('/nf/search/' + search) : '/nf/all-results';
-        
+        var value = this.$('.search-term').val();
+        var location = this.$('.search-location-value').val();
+        var url = value ? ('/nf/search/' + value) : '/nf/all-results';
+        var pushState = true;
+
+        if (location && location !== this.app.session.get('siteLocation')) {
+            pushState = false;
+            this.app.session.persist({
+                siteLocation: location
+            });
+        }
         helpers.common.redirect.call(this.app.router, utils.fullizeUrl(url, this.app), null, {
-            pushState: false,
+            pushState: pushState,
             status: 200
         });
     },
-    onClickLocation: function(event) {
-        this.app.session.persist({
-            siteLocation: $(event.currentTarget).data('location')
-        });
-    },
-    onClickState: function(event) {
+    onSearchLocationClick: function(event) {
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();
 
-        var $location = this.$('.search-location');
-        var $state = $(event.currentTarget);
+        var $list = this.$('.states-list');
 
-        $location.data('location', $state.data('location'));
-        $location.text($state.text());
-        this.$el.trigger('hideLocalize');
+        if ($list.hasClass('active')) {
+            $list.removeClass('active');
+            $('body').off('click.statesList');
+        }
+        else {
+            $list.addClass('active');
+            $('body').on('click.statesList', function() {
+                $list.removeClass('active');
+                $('body').off('click.statesList');
+            });
+        }
+    },
+    onStateLinkClick: function(event) {
+        event.preventDefault();
+
+        var $link = this.$(event.currentTarget);
+        var $input = this.$('.search-location-value');
+        var $display = this.$('.search-location-state');
+
+        $input.val($link.data('location'));
+        if ($link.hasClass('state-link')) {
+            this.$('.country-link').show();
+            $display.text($link.text() + ',');
+        }
+        else {
+            $link.hide();
+            $display.text('');
+        }
     }
 });

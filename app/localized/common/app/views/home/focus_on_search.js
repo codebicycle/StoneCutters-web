@@ -5,7 +5,7 @@ var _ = require('underscore');
 var breadcrumb = require('../../../../../modules/breadcrumb');
 
 module.exports = Base.extend({
-    className: 'home_view',
+    className: 'home focus_on_search',
     wapAttributes: {
         cellpadding: 0
     }

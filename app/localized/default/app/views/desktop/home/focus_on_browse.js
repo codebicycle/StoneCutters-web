@@ -6,7 +6,7 @@ var Metric = require('../../../../../../modules/metric');
 
 module.exports = Base.extend({
     tagName: 'main',
-    id: 'home_view',
+    id: 'home_focus_on_browse',
     events: {
         'click .topic-list-handler': 'onTopicListHandlerClick'
     },

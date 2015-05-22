@@ -1,20 +1,30 @@
 <section class="search">
-	<h4 class="search-title">Encontrá ahora buenos anuncios!</h4>
+	<h4 class="search-title">{{ dictionary["mobilepromo.FindWhatYouWantAnytimeFromAnywhere"] }}</h4>
 	<form action="{{ 'nf/search/redirect' | link }}" method="post" role="search" class="search-form">
 		<div class="search-cell">
-			<input type="text" name="search" class="search-term" placeholder='{{ dictionary["defaultheader.WhatAreYouLookingFor"] }}' value="{{ search }}" />
+			<input type="text" name="search-term" class="search-term" placeholder='{{ dictionary["defaultheader.WhatAreYouLookingFor"] }}' value="{{ search }}" />
 		</div>
 		<div class="location-cell">
-			<a href="#" class="search-location icons icon-pin" data-location="{{ location.current.url or location.url }}">{{ (location.current.name + ', ') if location.current }}{{ location.name }}</a>
-			<ul class="states-list" style="display: none;">
-			{% for state in states %}
-				<li><a href="#" data-location="{{ state.url }}">{{ state.name }}</a></li>
-			{% endfor %}
+			<a href="#" class="search-location icons icon-pin" data-location="{{ location.current.url or location.url }}">
+                {{ dictionary["crm_new_version.RenameCategory_3"] }}
+                <span class="search-location-state">{% if location.current %}{{ location.current.name if location.current.type == 'state' else location.children[0].name }},{% endif %}</span>
+                <span class="search-location-country">{{ location.name }}</span>
+            </a>
+			<ul class="states-list">
+    			<li class="state-container">
+                    <a href="#" class="country-link" data-location="{{ location.url }}"{% if not location.current %} style="display: none;"{% endif %}>{{ location.name }}</a>
+                </li>
+                {% for state in states %}
+    				<li class="state-container">
+                        <a href="#" class="state-link" data-location="{{ state.url }}">{{ state.name }}</a>
+                    </li>
+    			{% endfor %}
 			</ul>
         </div>
         <div class="submit-cell">
             <button type="submit" class="search-button icons icon-search" />
         </div>
+        <input type="hidden" name="search-location" class="search-location-value" />
     </form>
 </section>
 <section class="categories">

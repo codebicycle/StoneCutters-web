@@ -107,7 +107,7 @@ module.exports = {
     dgdHomePage: {
         enabled: true,
         platforms: ['desktop'],
-        markets: ['ar'],
+        markets: ['ar', 'co', 'za'],
         name: 'dgd-home-page',
         alternatives: {
             CONTROL: 'control',
@@ -115,6 +115,6 @@ module.exports = {
             BROWSE_FOCUSED: 'focus-on-browse'
         },
         autoParticipate: true,
-        force: 'focus-on-browse'
+        force: 'focus-on-search'
     }
 };
