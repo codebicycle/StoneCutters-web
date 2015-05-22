@@ -104,6 +104,12 @@ module.exports = {
         'misc.BeenSold',
         'misc.1UnreadMessage',
         'misc.UnreadMessages',
-        'misc.FreeClassifieds-SEO'
+        'misc.FreeClassifieds-SEO',
+        'posting_fields_1.location_level_2',
+        'posting_fields_1.location_select_level_2',
+        'posting_fields_1.location_level_4',
+        'posting_fields_1.location_select_level_4',
+        'posting_fields_1.location_level_6',
+        'posting_fields_1.location_select_level_6'
     ]
 };

@@ -39,6 +39,11 @@ module.exports = Base.extend({
 function initialize() {
     Base.prototype.initialize.call(this);
     this.dictionary = translations.get(this.app.session.get('selectedLanguage'));
+    this.locationOptionKey = {
+        state: this.dictionary['posting_fields_1.location_select_level_2'] + ' ' + this.dictionary['posting_fields_1.location_level_2'].toLowerCase(),
+        city: 'posting_fields_1.location_select_level_4',
+        neighborhood: this.app.session.get('location').abbreviation == 'ZA' ? 'misc.SelectSuburb' : 'posting_fields_1.location_select_level_6'
+    };
 }
 
 function getTemplateData() {
@@ -53,19 +58,19 @@ function getTemplateData() {
         states = _.map(_.sortBy(states, 'name'), eachLocation.bind(this, 'url'));
     }
     if (!location.state) {
-        this.addEmptyOption(states, 'countryoptions.Home_SelectState');
+        this.addEmptyOption(states, this.locationOptionKey.state);
     }
     if (cities && cities.length) {
         cities = _.map(_.sortBy(cities, 'name'), eachLocation.bind(this, 'url'));
     }
     if (!location.city) {
-        this.addEmptyOption(cities, 'countryoptions.Home_SelectCity');
+        this.addEmptyOption(cities, this.locationOptionKey.city);
     }
     if (neighborhoods && neighborhoods.length) {
         neighborhoods = _.map(_.sortBy(neighborhoods, 'name'), eachLocation.bind(this, 'id'));
     }
     if (!location.neighborhood) {
-        this.addEmptyOption(neighborhoods, (this.app.session.get('location').abbreviation !== 'ZA') ? 'item.SelectA_Neighborhood' : 'misc.SelectSuburb');
+        this.addEmptyOption(neighborhoods, this.locationOptionKey.neighborhood);
     }
     return _.extend({}, data, {
         states: states,
@@ -85,7 +90,7 @@ function postRender() {
     if (this.isMandatory('state')) {
         this.parentView.$el.trigger('fieldValidationRegister', [$state, {
             required: {
-                message: 'countryoptions.Home_SelectState'
+                message: this.locationOptionKey.state
             }
         }, true]);
     }
@@ -93,7 +98,7 @@ function postRender() {
     if (this.isMandatory('city')) {
         this.parentView.$el.trigger('fieldValidationRegister', [$city, {
             required: {
-                message: 'countryoptions.Home_SelectCity'
+                message: this.locationOptionKey.city
             }
         }, true]);
     }
@@ -102,7 +107,7 @@ function postRender() {
         this.parentView.$el.trigger('fieldValidationRegister', [$neighborhood, {
             rules: [{
                 id: 'required',
-                message: (this.app.session.get('location').abbreviation !== 'ZA') ? 'item.SelectA_Neighborhood' : 'misc.SelectSuburb',
+                message: this.locationOptionKey.neighborhood,
                 fn: function isRequired(val) {
                     if ($neighborhood.attr('required') && !$neighborhood.is(':disabled')) {
                         return !!val;
@@ -126,7 +131,7 @@ function findCities(state, options, cityId) {
         location: state
     }, {
         each: eachLocation.bind(this, 'url')
-    }, 'countryoptions.Home_SelectCity');
+    }, this.locationOptionKey.city);
 
     promise.val(success.bind(this));
 
@@ -154,7 +159,7 @@ function findNeighborhoods(city, options) {
         writeToCache: false,
         store: false,
         each: eachLocation.bind(this, 'id')
-    }, (this.app.session.get('location').abbreviation !== 'ZA') ? 'item.SelectA_Neighborhood' : 'misc.SelectSuburb');
+    }, this.locationOptionKey.neighborhood);
 
     promise.then(success.bind(this))
         .val(check.bind(this));
@@ -259,7 +264,7 @@ function resetNeighborhoods(containsNeighborhoods) {
     if (containsNeighborhoods) {
         $neighborhood.removeAttr('disabled');
         $wrapper.removeClass('hide');
-        this.parentView.parentView.errors.neighborhood = (this.app.session.get('location').abbreviation !== 'ZA') ? 'item.SelectA_Neighborhood' : 'misc.SelectSuburb';
+        this.parentView.parentView.errors.neighborhood = this.locationOptionKey.neighborhood;
         return;
     }
     $neighborhood.attr('disabled', true);
@@ -270,7 +275,7 @@ function resetNeighborhoods(containsNeighborhoods) {
 function addEmptyOption(list, text) {
     list.unshift({
         key: '',
-        value: this.dictionary[text]
+        value: this.dictionary[text] || text
     });
 }
 

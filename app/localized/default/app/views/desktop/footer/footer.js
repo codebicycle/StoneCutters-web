@@ -6,6 +6,7 @@ var utils = require('../../../../../../../shared/utils');
 var config = require('../../../../../../../shared/config');
 var FeatureAd = require('../../../../../../models/feature_ad');
 var Metric = require('../../../../../../modules/metric');
+var helpers = require('../../../../../../helpers');
 
 module.exports = Base.extend({
     tagName: 'footer',
@@ -37,6 +38,7 @@ module.exports = Base.extend({
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
         var location = this.app.session.get('location');
+        var platform = this.app.session.get('platform');
         var socials = config.getForMarket(location.url, ['socials'], '');
         var marketing = config.getForMarket(location.url, ['marketing'], '');
         var states = data.states;
@@ -44,6 +46,8 @@ module.exports = Base.extend({
         var selectedLanguage = this.app.session.get('selectedLanguage').split('-')[0];
         var isFeaturedCountry = FeatureAd.isEnabled(this.app, 'footer#footer');
         var linkHelpCenter = config.getForMarket(location.url, ['help', 'linkHelpCenter'], false);
+        var isEnabledSafetyTipsLanding = helpers.features.isEnabled.call(this, 'safetyTipsLanding', platform, location.url);
+        var linkSafety = config.getForMarket(location.url, ['help', 'linkSafety'], false);
 
         if(location.children.length) {
             _.each(states, function each(state, i){
@@ -61,7 +65,9 @@ module.exports = Base.extend({
             currentState: {
                 hostname: currentState.hostname,
                 name: currentState.name
-            }
+            },
+            isEnabledSafetyTipsLanding: isEnabledSafetyTipsLanding,
+            linkSafety: linkSafety
         });
     },
     postRender: function() {

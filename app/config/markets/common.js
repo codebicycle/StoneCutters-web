@@ -264,6 +264,10 @@ module.exports = {
         linkHelpCenter: {
             href: '/help',
             target: '_self'
+        },
+        linkSafety: {
+            href: '/seguridad',
+            target: '_self'
         }
     },
     abundance: {
