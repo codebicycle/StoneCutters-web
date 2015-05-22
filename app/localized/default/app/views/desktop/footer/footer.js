@@ -13,8 +13,9 @@ module.exports = Base.extend({
     className: function() {
         var classes = ['footer-view', 'wrapper'];
         var currentRoute = this.app.session.get('currentRoute');
+        var dgdHomePage = this.app.sixpack.experiments.dgdHomePage;
 
-        if (this.app.sixpack.experiments.dgdHomePage && this.app.sixpack.experiments.dgdHomePage.alternative === 'google') {
+        if (dgdHomePage && dgdHomePage.alternative !== 'control') {
             classes.push('hidden');
         }
         return classes.join(' ');

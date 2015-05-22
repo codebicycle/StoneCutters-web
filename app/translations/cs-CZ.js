@@ -618,6 +618,7 @@ module.exports = {
     'misc.Settings': 'Nastaven\xED',
     'misc.ShareAd': 'Sd\xEDlet inzer\xE1t',
     'misc.Show': 'Show',
+    'misc.ShowMore': 'Zobrazit v\xEDce',
     'misc.Sold': 'I sold it',
     'misc.SoldIt': 'Have you sold this ad?',
     'misc.Sort_Mob': 'Sort',

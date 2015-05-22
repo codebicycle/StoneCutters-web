@@ -618,6 +618,7 @@ module.exports = {
     'misc.Settings': 'Nustatymai',
     'misc.ShareAd': 'Bendrinti savo skelbim\u0105',
     'misc.Show': 'Show',
+    'misc.ShowMore': 'Rodyti daugiau',
     'misc.Sold': 'I sold it',
     'misc.SoldIt': 'Have you sold this ad?',
     'misc.Sort_Mob': 'Sort',

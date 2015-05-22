@@ -618,6 +618,7 @@ module.exports = {
     'misc.Settings': 'Konfigirasyon',
     'misc.ShareAd': 'Pataje anons ou a',
     'misc.Show': 'Show',
+    'misc.ShowMore': 'Montre Plis',
     'misc.Sold': 'I sold it',
     'misc.SoldIt': 'Have you sold this ad?',
     'misc.Sort_Mob': 'Sort',

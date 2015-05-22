@@ -618,6 +618,7 @@ module.exports = {
     'misc.Settings': 'Configuraciones',
     'misc.ShareAd': 'Comparte su anuncio',
     'misc.Show': 'Mostrar',
+    'misc.ShowMore': 'Ense\xF1ar Mas',
     'misc.Sold': 'Lo vend\xED',
     'misc.SoldIt': '\xBFHas vendido este art\xEDculo?',
     'misc.Sort_Mob': 'Ordenar',

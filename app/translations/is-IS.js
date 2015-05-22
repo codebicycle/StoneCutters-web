@@ -618,6 +618,7 @@ module.exports = {
     'misc.Settings': 'Stillingar',
     'misc.ShareAd': 'Deila augl\xFDsingu',
     'misc.Show': 'Show',
+    'misc.ShowMore': 'S\xFDna meira',
     'misc.Sold': 'I sold it',
     'misc.SoldIt': 'Have you sold this ad?',
     'misc.Sort_Mob': 'Sort',

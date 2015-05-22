@@ -107,7 +107,7 @@ module.exports = {
     dgdHomePage: {
         enabled: true,
         platforms: ['desktop'],
-        markets: ['ar', 'co', 'za'],
+        markets: ['co', 'za'],
         name: 'dgd-home-page',
         alternatives: {
             CONTROL: 'control',

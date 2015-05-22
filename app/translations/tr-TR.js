@@ -618,6 +618,7 @@ module.exports = {
     'misc.Settings': 'Ayarlar',
     'misc.ShareAd': '\u0130lan\u0131 payla\u015F',
     'misc.Show': 'Show',
+    'misc.ShowMore': 'Daha Fazlas\u0131n\u0131 G\xF6ster',
     'misc.Sold': 'I sold it',
     'misc.SoldIt': 'Have you sold this ad?',
     'misc.Sort_Mob': 'Sort',

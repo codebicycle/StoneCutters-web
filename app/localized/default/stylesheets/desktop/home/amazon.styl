@@ -1,18 +1,19 @@
 .amazon {
 	/* Header */
 	&.header {
+		height: 52px;
 		.brand {
 			float: left;
+			margin-top: -20px;
 			a,
 			img {
 				display: block;
 			}
 		}
 		.partials_search_view {
-			/**/
-
 			float: left;
-
+			width: 500px;
+			margin: 7px 20px;
 			.search-form {
 				display: table;
 				width: 100%;
@@ -30,7 +31,7 @@
 
 			.category-cell {
 				position: relative;
-				min-width: 200px;
+				min-width: 180px;
 				background-color: #EEE;
 				border-right: solid thin #CCC;
 			}
@@ -52,9 +53,10 @@
 					line-height: 24px;
 					text-align: center;
 					font-size: .75em;
+					transition(transform .25s ease .1s);
 				}
 				&.active:before {
-					color: red;
+					transform(rotate(270deg));
 				}
 			}
 			.categories-list {
@@ -116,40 +118,6 @@
 				width: 40px;
 				margin: -2px -2px -2px 0;
 			}
-			/*.states-list {
-				display: none;
-				position: absolute;
-				top: 100%;
-				left: 0;
-				right: -1px;
-				box-sizing: border-box;
-				margin: 2px 0 0;
-				padding: 0;
-				list-style: none;
-				background-color: #FFF;
-				border-style: solid;
-				border-color: $green;
-				border-width: 0 1px 1px;
-				box-shadow: 0 2px 2px -2px rgba(0, 0, 0, .75);
-				&.active {
-					display: block;
-				}
-			}
-			.state-container {
-				border-bottom: solid thin #CCC;
-				&:last-child {
-					border-bottom: none;
-				}
-			}
-			.country-link,
-			.state-link {
-				display: block;
-				padding: 4px 4px 4px 26px;
-				font-size: $xs;
-				color: #999;
-			}*/
-
-			/**/
 		}
 		.posting-title {
 			display: none;
@@ -160,10 +128,17 @@
 	}
 	/* Home */
 	&.home {
+		.location-title {
+			margin: 0;
+			padding: 60px 0 20px;
+			font-size: $xl;
+			font-weight: normal;
+			color: #AAA;
+		}
+		.location-link {}
 		.topics {
 			margin: 0;
 			padding: 0 0 10px;
-			border-bottom: solid thin #CCC;
 			list-style: none;
 		}
 		.topic {
@@ -178,6 +153,7 @@
 			padding: 0 0 20px;
 			font-size: $l;
 			font-weight: normal;
+			color: #666;
 		}
 		.topic-title-show-more {
 			font-size: $s;

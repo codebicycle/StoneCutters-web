@@ -2,12 +2,16 @@
 	<div class="category-cell">
 		<a href="#" class="search-category icons icon-arrow-down" data-category="">{{ dictionary["popularsearchesbody.CATEGORIES_BOX"] }}</a>
 		<ul class="categories-list">
+			<li class="category-container">
+				<a href="#" class="category-link all" title='{{ dictionary["listingpageitemslisting.AllCategories"] }}'>{{ dictionary["listingpageitemslisting.AllCategories"] }}</a>
+			</li>
 			{% for category in categories %}
 				<li class="category-container">
-					<a href="#" class="category-link" data-category="{{ category.id }}">{{ category.trName }}</a>
+					<a href="#" class="category-link" title="{{ category.trName }}" data-category="{{ category | slugToUrl }}">{{ category.trName }}</a>
 				</li>
 		    {% endfor %}
 		</ul>
+		<input type="hidden" name="search-category-value" class="search-category-value" />
 	</div>
 	<div class="search-cell">
 		<input class="search-term" name="search-term" type="text" placeholder="{{ dictionary["defaultheader.WhatAreYouLookingFor"] }}" tabindex="1" data-qa="search-input" value="{{ search }}" />

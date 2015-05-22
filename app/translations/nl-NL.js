@@ -618,6 +618,7 @@ module.exports = {
     'misc.Settings': 'Instellingen',
     'misc.ShareAd': 'Je advertentie delen',
     'misc.Show': 'Show',
+    'misc.ShowMore': 'Meer weergeven',
     'misc.Sold': 'I sold it',
     'misc.SoldIt': 'Have you sold this ad?',
     'misc.Sort_Mob': 'Sort',

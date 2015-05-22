@@ -618,6 +618,7 @@ module.exports = {
     'misc.Settings': 'Asetukset',
     'misc.ShareAd': 'Jaa ilmoituksesi',
     'misc.Show': 'Show',
+    'misc.ShowMore': 'N\xE4yt\xE4 lis\xE4\xE4',
     'misc.Sold': 'I sold it',
     'misc.SoldIt': 'Have you sold this ad?',
     'misc.Sort_Mob': 'Sort',

@@ -618,6 +618,7 @@ module.exports = {
     'misc.Settings': 'Mga Setting',
     'misc.ShareAd': 'Ibahagi ang inyong anunsyo',
     'misc.Show': 'Show',
+    'misc.ShowMore': 'Magpakita Pa',
     'misc.Sold': 'I sold it',
     'misc.SoldIt': 'Have you sold this ad?',
     'misc.Sort_Mob': 'Sort',

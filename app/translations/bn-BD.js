@@ -618,6 +618,7 @@ module.exports = {
     'misc.Settings': '\u09B8\u09C7\u099F\u09BF\u0982\u09B8',
     'misc.ShareAd': '\u0986\u09AA\u09A8\u09BE\u09B0 \u09AC\u09BF\u099C\u09CD\u099E\u09BE\u09AA\u09A8 \u09B6\u09C7\u09DF\u09BE\u09B0 \u0995\u09B0\u09C1\u09A8',
     'misc.Show': 'Show',
+    'misc.ShowMore': '\u0986\u09B0\u09CB \u09A6\u09C7\u0996\u09BE\u09A8',
     'misc.Sold': 'I sold it',
     'misc.SoldIt': 'Have you sold this ad?',
     'misc.Sort_Mob': '\u09AC\u09BE\u099B\u09BE\u0987 \u0995\u09B0\u09C1\u09A8',
