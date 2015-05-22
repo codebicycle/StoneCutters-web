@@ -35,6 +35,9 @@ module.exports = Base.extend({
             shouldOpenInNewTab: dgdOpenItemInNewTab && dgdOpenItemInNewTab.alternative === 'open-item-in-new-tab'
         });
     },
+    postRender: function() {
+        this.app.sixpack.convert(this.app.sixpack.experiments.dgdHomePage, 'funnel-browse-listing');
+    },
     cleanPage: function(path) {
         if (path.match(this.regexpFindPage)) {
             path = path.replace(this.regexpReplacePage, '');

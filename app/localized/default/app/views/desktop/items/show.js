@@ -14,6 +14,8 @@ module.exports = Base.extend({
         'localstorageReady': 'onLocalstorageReady'
     },
     postRender: function() {
+        var origin = this.app.session.get('origin');
+
         if (this.app.localstorage.ready) {
             this.$el.trigger('localstorageReady');
         }
@@ -21,6 +23,9 @@ module.exports = Base.extend({
             this.listenTo(this.app.localstorage, 'ready', function visitedItems() {
                 this.$el.trigger('localstorageReady');
             }.bind(this));
+        }
+        if (origin && origin.type) {
+            this.app.sixpack.convert(this.app.sixpack.experiments.dgdHomePage, ['funnel', origin.type, 'item'].join('-'));
         }
     },
     getItem: function() {
