@@ -111,10 +111,10 @@ module.exports = {
         name: 'dgd-home-page',
         alternatives: {
             CONTROL: 'control',
-            SEARCH_FOCUSED: 'focus-on-search',
-            BROWSE_FOCUSED: 'focus-on-browse'
+            GOOGLE: 'google',
+            AMAZON: 'amazon'
         },
         autoParticipate: true,
-        force: 'focus-on-search'
+        force: 'amazon'
     }
 };
