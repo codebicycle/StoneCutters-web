@@ -34,6 +34,9 @@
                     <img alt="" src="{{item.images[0].url }}">
                 </a>
         {% else %}
+            {% if showBetterDeal %}
+                <img class="betterDealImg" alt="" src="{{ '/images/common/betterdeal_Itempage.png' | static }}">
+            {% endif %}
             <a href="{{ [item | slugToUrl, '/gallery?pos='+pos] | join('') | link }}">
                 <span class="arrow"></span>
                 <img alt="" src="{{item.images[pos].url }}">
