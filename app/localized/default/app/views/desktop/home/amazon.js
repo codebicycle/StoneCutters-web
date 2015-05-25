@@ -7,6 +7,10 @@ module.exports = Base.extend({
     tagName: 'main',
     id: 'home_amazon',
     events: {
+        'click .location-link': 'openModal',
+        'click [data-modal-shadow], [data-modal-close]': 'closeModal',
+        'click .location-item-link': 'onLocationItemLinkClick',
+        'change .search-location-value': 'onSearchLocationValueChange',
         'click .topic-list-handler': 'onTopicListHandlerClick'
     },
     preRender: function() {
@@ -25,6 +29,37 @@ module.exports = Base.extend({
     onRemove: function(event) {
         this.app.trigger('header:restore');
         this.app.trigger('footer:show');
+    },
+    openModal: function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+
+        this.$('#location-modal').trigger('show');
+    },
+    closeModal: function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+
+        this.$('#location-modal').trigger('hide');
+    },
+    onLocationItemLinkClick: function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+
+        var $eventSource = this.$(event.target);
+        var displayText = ($eventSource.hasClass('all') ? this.app.session.get('location').name : $eventSource.text());
+
+        this.$('.search-location-value').val($eventSource.data('location')).trigger('change');
+        this.$('.location-link').text(displayText);
+        this.$('#location-modal').trigger('hide');
+    },
+    onSearchLocationValueChange: function(event) {
+        this.app.session.persist({
+            siteLocation: event.target.value
+        });
     },
     onTopicListHandlerClick: function(event) {
         event.preventDefault();

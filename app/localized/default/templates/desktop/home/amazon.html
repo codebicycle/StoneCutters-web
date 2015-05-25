@@ -1,13 +1,9 @@
 <h3 class="location-title">
 	{{ dictionary["misc.FreeClassifieds-SEO"] | replace('<<AREA>>', '') }}
-	<a href="#" class="location-link">
-	{% if location.current %}
-		<span class="location-state">{{ location.current.name if location.current.type == 'state' else location.children[0].name }},</span>
-	{% endif %}
-	<span class="location-country">{{ location.name }}</span>
-	</a>
+	<a href="#" class="location-link">{{ location.current.name if location.current else location.name }}</a>
 </h3>
-
+{% view 'modals/location_amazon' %}
+<input type="hidden" name="search-location" class="search-location-value" />
 <ul class="topics">
 	{% for topic in topics %}
 		<li class="topic">

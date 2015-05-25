@@ -49,7 +49,7 @@ function home(params, callback) {
             spec.items = {
                 collection: 'Items',
                 params: _.extend({}, params, {
-                    categoryId: 831
+                    categoryId: 378
                 })
             };
             spec.popularsearches = {
