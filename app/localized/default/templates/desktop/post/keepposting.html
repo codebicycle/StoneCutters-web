@@ -7,7 +7,7 @@
                 {% if category.category and category.subcategory %}
                     {% set postingLink = '/posting?g=1&cat='+category.category+'&subcat='+category.subcategory %}
                 {% else %}
-                    {% set postingLink = '/posting?g=1cat='+category.category %}
+                    {% set postingLink = '/posting?g=1&cat='+category.category %}
                 {% endif %}
                 <a href="{{ postingLink | link }}" class="module">
                     <article class="icons icon-cat-{{ category.icon }}">
