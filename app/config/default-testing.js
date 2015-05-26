@@ -429,7 +429,7 @@ module.exports = {
     schibsted: require('./schibsted'),
     amazonExperiment: {
         'www.olx.com.co': {
-            categories: [831, 1018]
+            categories: [16, 362]
         },
         'www.olx.co.za': {
             categories: [801, 802]
