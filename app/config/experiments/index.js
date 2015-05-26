@@ -103,5 +103,17 @@ module.exports = {
         },
         autoParticipate: true,
         fraction: 1
+    },
+    dgdHomePage: {
+        enabled: false,
+        platforms: ['desktop'],
+        markets: ['co', 'za'],
+        name: 'dgd-home-page',
+        alternatives: {
+            CONTROL: 'control',
+            GOOGLE: 'google',
+            AMAZON: 'amazon'
+        },
+        autoParticipate: true
     }
 };

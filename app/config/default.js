@@ -482,5 +482,13 @@ module.exports = {
             enabled: true
         }
     },
-    schibsted: require('./schibsted')
+    schibsted: require('./schibsted'),
+    amazonExperiment: {
+        'www.olx.com.co': {
+            categories: [831, 1018]
+        },
+        'www.olx.co.za': {
+            categories: [801, 802]
+        }
+    }
 };
