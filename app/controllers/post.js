@@ -321,7 +321,7 @@ function flow(params, callback) {
             });
 
             item.set('postingSession', postingSession);
-            this.app.tracking.setPage('desktop_step1');
+            this.app.tracking.setPage(['desktop_', item.has('id') ? 'edit_' : '' , 'step1'].join(''));
 
             callback(null, 'post/index', {
                 include: ['item'],
