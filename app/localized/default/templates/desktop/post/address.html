@@ -3,7 +3,7 @@
     name: "streetAddress",
     mandatory: isMandatory,
     optionalsmessage: optionalsmessage,
-    label: dictionary["itemdescription.streetaddress"],
+    label: dictionary["itemdescription.streetaddress"] | replace(' exacta', ''),
     fieldType: "text",
     dataType: "string",
     value: item.get('streetAddress')
