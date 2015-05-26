@@ -25,7 +25,7 @@ module.exports = {
         autoParticipate: true
     },
     growthCategorySuggestion: {
-        enabled: true,
+        enabled: false,
         platforms: ['desktop'],
         markets: ['ar'],
         name: 'growth-categories-suggestion',
@@ -43,7 +43,7 @@ module.exports = {
         }
     },
     growthPostingButtonWording: {
-        enabled: true,
+        enabled: false,
         platforms: ['desktop'],
         markets: ['ar'],
         name: 'growth-posting-button-wording',
