@@ -1,6 +1,7 @@
 'use strict';
 
 var Base = require('../../../../../common/app/bases/view').requireView('home/amazon');
+var helpers = require('../../../../../../helpers');
 var utils = require('../../../../../../../shared/utils');
 
 module.exports = Base.extend({
@@ -11,7 +12,8 @@ module.exports = Base.extend({
         'click [data-modal-shadow], [data-modal-close]': 'closeModal',
         'click .location-item-link': 'onLocationItemLinkClick',
         'change .search-location-value': 'onSearchLocationValueChange',
-        'click .topic-list-handler': 'onTopicListHandlerClick'
+        'click .topic-list-handler': 'onTopicListHandlerClick',
+        'click .topic-title a': 'onTopicTitleHandlerClick'
     },
     preRender: function() {
         if (!utils.isServer) {
@@ -92,5 +94,18 @@ module.exports = Base.extend({
             $list.attr('data-offset', offset);
             $list.css('margin-left', offset * -165);
         }
+    },
+    onTopicTitleHandlerClick: function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+
+        var $link = this.$(event.target);
+        var url = utils.fullizeUrl($link.attr('href'), this.app);
+
+        helpers.common.redirect.call(this.app.router, url, null, {
+            status: 200,
+            pushState: false
+        });
     }
 });
