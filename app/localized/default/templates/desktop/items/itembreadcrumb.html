@@ -6,16 +6,18 @@
     {% set nextItem = seo.get('nextItem') or false %}
 
     <nav id="breadcrumb" class="item-page">
-        <div class="back-to-results">
-            <a class="icons icon-arrow-left" href="{{ (fromOlx if olxReferer else data.childCategoryLevel.url) | linkig }}" rel="nofollow">{{ dictionary["itemgeneraldetails.BackResults"] }}</a>
-        </div>
+        {% if olxReferer or (data.childCategoryLevel and data.childCategoryLevel.url) %}
+            <div class="back-to-results">
+                <a class="icons icon-arrow-left" href="{{ (fromOlx if olxReferer else data.childCategoryLevel.url) | linkig }}" rel="nofollow">{{ dictionary["itemgeneraldetails.BackResults"] }}</a>
+            </div>
+        {% endif %}
         <div class="breadcrumb-navigation">
             <a href="{{ '/nf/all-results' | linkig }}" rel="nofollow" >{{ dictionary["listingpageitemslisting.AllCategories"] }}</a>
 
-            {% if data.categoryLevel %}
+            {% if data.categoryLevel and data.categoryLevel.url %}
                 <a href="{{ data.categoryLevel.url | linkig }}" class="icons icon-arrow" {{ 'rel="nofollow"' if data.categoryLevel.noFollow }} >{{ data.categoryLevel.anchor }}</a>
             {% endif %}
-            {% if data.childCategoryLevel %}
+            {% if data.childCategoryLevel and data.childCategoryLevel.url %}
                 <a href="{{ data.childCategoryLevel.url | linkig }}" class="icons icon-arrow" {{ 'rel="nofollow"' if data.childCategoryLevel.noFollow }} >{{ data.childCategoryLevel.anchor }}</a>
             {% endif %}
         </div>
