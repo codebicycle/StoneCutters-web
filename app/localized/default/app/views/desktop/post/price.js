@@ -147,9 +147,17 @@ function onKeyUpPrice(event) {
 function onBlurPrice(event) {
     var $field = this.$(this.selectors.priceC);
     var options = {};
+    var value;
 
     this.formatValue();
-    this.parentView.$el.trigger('fieldSubmit', [$field, options]);
+    value = $field.val();
+
+    if ($field.data('value') !== value) {
+        if (value) {
+            this.parentView.$el.trigger('fieldSubmit', [$field, options]);
+        }
+        $field.data('value', value);
+    }
 }
 
 function formatValue() {
