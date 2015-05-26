@@ -13,8 +13,6 @@
     {% endif %}
     {% set registerUrl = '/register-withconf' if registerWithConfirmation else '/register' %}
     <form action="{{ registerUrl | link }}" method="POST" enctype="multipart/form-data">
-        <label>{{ dictionary["register_mail.Username"] }}</label>
-        <input type="text" name="username" data-qa="username-field" >
         <label class="top">{{ dictionary["landingbody.EmailAddress"] }}</label>
         <input type="text" name="email" data-qa="email-field" >
         <small>{{ dictionary["posting_fields_1.Email_address_not_shared"] }}</small>
