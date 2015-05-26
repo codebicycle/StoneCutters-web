@@ -118,6 +118,9 @@ function onClickSubCategory(event, intent) {
     }
 
     function track(done, res) {
+        if (params.intent === 'edit') {
+            return done(res);
+        }
         var tracking = new Tracking({}, {
             app: this.app
         });
