@@ -169,7 +169,7 @@ function show(params, callback) {
             var itemLocation = response.item.getLocation().url || response.item.get('location').url;
             var url;
 
-            if (platform === 'desktop' && itemLocation && itemLocation !== this.app.session.get('siteLocation')) {
+            if (platform === 'desktop' && itemLocation && itemLocation !== shortHost) {
                 url = [protocol, '://', host.replace(shortHost, itemLocation), '/', slug].join('');
                 done.abort();
                 return helpers.common.redirect.call(this, url, null, {
@@ -337,7 +337,6 @@ function gallery(params, callback) {
         var itemId = params.itemId;
         var slugUrl = params.title;
         var pos = Number(params.pos) || 0;
-        var siteLocation = this.app.session.get('siteLocation');
 
         var redirect = function(done) {
             var platform = this.app.session.get('platform');
@@ -439,7 +438,6 @@ function map(params, callback) {
         var user = this.app.session.get('user');
         var itemId = params.itemId;
         var slugUrl = params.title;
-        var siteLocation = this.app.session.get('siteLocation');
 
         var redirect = function(done) {
             var platform = this.app.session.get('platform');
@@ -530,7 +528,6 @@ function reply(params, callback) {
 
     function controller() {
         var itemId = params.itemId;
-        var siteLocation = this.app.session.get('siteLocation');
         var location = this.app.session.get('location');
         var platform = this.app.session.get('platform');
         var newItemPage = helpers.features.isEnabled.call(this, 'newItemPage');
@@ -742,7 +739,6 @@ function success(params, callback) {
 
     function controller() {
         var itemId = params.itemId;
-        var siteLocation = this.app.session.get('siteLocation');
 
         var prepare = function(done) {
             params.id = params.itemId;
