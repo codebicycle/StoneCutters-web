@@ -251,6 +251,7 @@ module.exports = {
     'item.Clear': 'T\xFChjenda',
     'item.ClickAgreeTermsZA': 'Kl\xF5psates nupul "Saada e-kiri" n\xF5ustute meie <<LINK>> kasutustingimustega<</LINK>>.',
     'item.Ended_New': 'L\xF5ppenud',
+    'item.Number_RecentAdsIn': '<<NUMBER>> hiljutist kuulutust kategoorias <<CATEGORY>>',
     'item.Rejected': 'Tagasi l\xFCkatud',
     'item.RemoveFromFavorites': 'Eemalda lemmikutest',
     'item.SeeMoreAds': 'Vaadake veel kuulutusi kategoorias <<LINK_TO_CATEGORY>>',

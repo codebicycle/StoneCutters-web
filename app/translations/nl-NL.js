@@ -251,6 +251,7 @@ module.exports = {
     'item.Clear': 'Wis',
     'item.ClickAgreeTermsZA': 'Door op "E-mail verzenden" te klikken, verklaar je akkoord te gaan met onze <<LINK>>Gebruiksvoorwaarden<</LINK>>.',
     'item.Ended_New': 'Be\xEBindigd',
+    'item.Number_RecentAdsIn': '<<NUMBER>> recente advertenties in <<CATEGORY>>',
     'item.Rejected': 'Geweigerd',
     'item.RemoveFromFavorites': 'Uit favorieten verwijderen',
     'item.SeeMoreAds': 'Bekijk meer advertenties in <<LINK_TO_CATEGORY>>',

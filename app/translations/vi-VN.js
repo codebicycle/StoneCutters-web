@@ -251,6 +251,7 @@ module.exports = {
     'item.Clear': 'X\xF3a s\u1EA1ch',
     'item.ClickAgreeTermsZA': 'B\u1EB1ng c\xE1ch b\u1EA5m "G\u1EEDi m\u1ED9t e-mail" b\u1EA1n \u0111\u1ED3ng \xFD v\u1EDBi <<LINK>> C\xE1c \u0111i\u1EC1u kho\u1EA3n S\u1EED d\u1EE5ng<</LINK>> c\u1EE7a ch\xFAng t\xF4i.',
     'item.Ended_New': '\u0110\xE3 k\u1EBFt th\xFAc',
+    'item.Number_RecentAdsIn': '<<NUMBER>> rao v\u1EB7t g\u1EA7n \u0111\xE2y trong <<CATEGORY>>',
     'item.Rejected': 'B\u1ECB t\u1EEB ch\u1ED1i',
     'item.RemoveFromFavorites': 'G\u1EE1 b\u1ECF kh\u1ECFi m\u1EE5c \u0111\u01B0\u1EE3c \u01B0a th\xEDch',
     'item.SeeMoreAds': 'Xem th\xEAm c\xE1c rao v\u1EB7t trong <<LINK_TO_CATEGORY>>',

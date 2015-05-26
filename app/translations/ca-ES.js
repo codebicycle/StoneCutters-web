@@ -251,6 +251,7 @@ module.exports = {
     'item.Clear': 'Esborrar',
     'item.ClickAgreeTermsZA': 'Quan fas clic a "Enviar correu electr\xF2nic" est\xE0s d\'acord amb les nostres <<LINK>>Condicions d\'\xFAs<</LINK>>.',
     'item.Ended_New': 'Finalitzat',
+    'item.Number_RecentAdsIn': '<<NUMBER>> anuncis recents a <<CATEGORY>>',
     'item.Rejected': 'Rebutjat',
     'item.RemoveFromFavorites': 'Treure de favorits',
     'item.SeeMoreAds': 'Veure m\xE9s anuncis a <<LINK_TO_CATEGORY>>',

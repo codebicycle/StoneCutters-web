@@ -251,6 +251,7 @@ module.exports = {
     'item.Clear': 'Sil',
     'item.ClickAgreeTermsZA': '"E-posta g\xF6nder"e t\u0131klayarak <<LINK>>Kullan\u0131m Ko\u015Fullar\u0131<</LINK>>m\u0131z\u0131 kabul edersiniz.',
     'item.Ended_New': 'Sona erdi',
+    'item.Number_RecentAdsIn': '<<CATEGORY>> kategorisinde <<NUMBER>> yeni ilan',
     'item.Rejected': 'Reddedildi',
     'item.RemoveFromFavorites': 'Favorilerden kald\u0131r\u0131n',
     'item.SeeMoreAds': '<<LINK_TO_CATEGORY>> kategorisinden daha fazla ilan g\xF6r\xFCn',

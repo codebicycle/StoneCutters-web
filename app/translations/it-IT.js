@@ -251,6 +251,7 @@ module.exports = {
     'item.Clear': 'Cancella',
     'item.ClickAgreeTermsZA': 'Cliccando "Send e-mail" accetti i nostri <<LINK>> Termini d\'Utilizzo<</LINK>>.',
     'item.Ended_New': 'Finito',
+    'item.Number_RecentAdsIn': '<<NUMBER>> annunci recenti in <<CATEGORY>>',
     'item.Rejected': 'Rifiutato',
     'item.RemoveFromFavorites': 'Rimuovi dai Preferiti',
     'item.SeeMoreAds': 'Guarda altri annunci in <<LINK_TO_CATEGORY>>',

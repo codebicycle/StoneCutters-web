@@ -251,6 +251,7 @@ module.exports = {
     'item.Clear': 'Padam',
     'item.ClickAgreeTermsZA': 'Dengan mengklik "Hantar e-mel" anda bersetuju dengan <<LINK>> Terma Penggunaan <</LINK>> kami.',
     'item.Ended_New': 'Berakhir',
+    'item.Number_RecentAdsIn': '<<NUMBER>> iklan terkini dalam <<CATEGORY>>',
     'item.Rejected': 'Ditolak',
     'item.RemoveFromFavorites': 'Alih keluar daripada kegemaran',
     'item.SeeMoreAds': 'Lihat lebih banyak iklan dalam <<LINK_TO_CATEGORY>>',

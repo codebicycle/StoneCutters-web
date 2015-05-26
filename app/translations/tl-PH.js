@@ -251,6 +251,7 @@ module.exports = {
     'item.Clear': 'I-clear',
     'item.ClickAgreeTermsZA': 'Sa pamamagitan ng pag-click sa "Magpadala ng e-mail" sumasang-ayon ka sa aming <<LINK>>Mga Tuntunin sa Paggamit<</LINK>>.',
     'item.Ended_New': 'Nagtapos na',
+    'item.Number_RecentAdsIn': '<<NUMBER>> kamakailang anunsyo sa <<CATEGORY>>',
     'item.Rejected': 'Tinaggihan',
     'item.RemoveFromFavorites': 'Tanggalin mula sa mga paborito',
     'item.SeeMoreAds': 'Makakita ng higit pang mga anunsyo sa <<LINK_TO_CATEGORY>>',

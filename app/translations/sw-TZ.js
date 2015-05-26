@@ -251,6 +251,7 @@ module.exports = {
     'item.Clear': 'Futa',
     'item.ClickAgreeTermsZA': 'Kwa kubonyeza "Tuma barua pepe" wewe unakubaliana na Masharti yetu <<LINK>> ya Matumizi <</LINK>>.',
     'item.Ended_New': 'Kumalizika',
+    'item.Number_RecentAdsIn': 'Matangazo <<NUMBER>> ya hivikaribuni katika <<CATEGORY>>',
     'item.Rejected': 'Imekataliwa',
     'item.RemoveFromFavorites': 'Ondoa kutoka kwa vibwedo',
     'item.SeeMoreAds': 'Angalia matangazo zaidi katika <<LINK_TO_CATEGORY>>',

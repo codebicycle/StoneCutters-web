@@ -251,6 +251,7 @@ module.exports = {
     'item.Clear': 'Odstranit',
     'item.ClickAgreeTermsZA': 'Kliknut\xEDm na "Odeslat e-mail" souhlas\xEDte s na\u0161imi <<LINK>> Podm\xEDnkami pou\u017E\xEDv\xE1n\xED<</LINK>>.',
     'item.Ended_New': 'Ukon\u010Deno',
+    'item.Number_RecentAdsIn': '<<NUMBER>> aktu\xE1ln\xEDch inzer\xE1t\u016F v kategorii <<CATEGORY>>',
     'item.Rejected': 'Zam\xEDtnuto',
     'item.RemoveFromFavorites': 'Odstranit z obl\xEDben\xFDch',
     'item.SeeMoreAds': 'Prohl\xE9dnout v\xEDce inzer\xE1t\u016F v kategorii <<LINK_TO_CATEGORY>>',

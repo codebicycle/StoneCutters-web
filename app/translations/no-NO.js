@@ -251,6 +251,7 @@ module.exports = {
     'item.Clear': 'nullstill',
     'item.ClickAgreeTermsZA': 'Ved \xE5 klikke p\xE5 "Send e-post", godtar du v\xE5re <<LINK>> Bruksvilk\xE5r <</LINK>>.',
     'item.Ended_New': 'Avsluttet',
+    'item.Number_RecentAdsIn': '<<NUMBER>> nylige annonser i <<CATEGORY>>',
     'item.Rejected': 'Avvist',
     'item.RemoveFromFavorites': 'Fjern fra favoritter',
     'item.SeeMoreAds': 'Se flere annonser i <<LINK_TO_CATEGORY>>',

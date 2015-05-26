@@ -251,6 +251,7 @@ module.exports = {
     'item.Clear': 'Limpiar',
     'item.ClickAgreeTermsZA': 'Al hacer clic en "Enviar correo" aceptas nuestras<<LINK>> Condiciones de Uso<</LINK>>.',
     'item.Ended_New': 'Finalizado',
+    'item.Number_RecentAdsIn': '<<NUMBER>> anuncios recientes en <<CATEGORY>>',
     'item.Rejected': 'Rechazado',
     'item.RemoveFromFavorites': 'Eliminar de favoritos',
     'item.SeeMoreAds': 'Ver m\xE1s anuncios en <<LINK_TO_CATEGORY>>',

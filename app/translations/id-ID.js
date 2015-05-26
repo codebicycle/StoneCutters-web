@@ -251,6 +251,7 @@ module.exports = {
     'item.Clear': 'Hapus',
     'item.ClickAgreeTermsZA': 'Dengan mengklik "Kirim email" Anda menyetujui <<LINK>> Ketentuan Penggunaan<</LINK>> kami.',
     'item.Ended_New': 'Berakhir',
+    'item.Number_RecentAdsIn': '<<NUMBER>> iklan terbaru di <<CATEGORY>>',
     'item.Rejected': 'Ditolak',
     'item.RemoveFromFavorites': 'Hapus dari favorit',
     'item.SeeMoreAds': 'Lihat lebih banyak iklan di <<LINK_TO_CATEGORY>>',

@@ -251,6 +251,7 @@ module.exports = {
     'item.Clear': 'Po\u010Disti',
     'item.ClickAgreeTermsZA': 'S klikom na "Po\u0161lji e-po\u0161to" se strinjate z na\u0161imi <<LINK>> Pogoji uporabe<</LINK>>.',
     'item.Ended_New': 'Zakju\u010Den',
+    'item.Number_RecentAdsIn': '<<NUMBER>> nedavnih oglasov v <<CATEGORY>>',
     'item.Rejected': 'Rejected',
     'item.RemoveFromFavorites': 'Odstranite iz priljubljenih',
     'item.SeeMoreAds': 'Poglejte ve\u010D oglasov v <<LINK_TO_CATEGORY>>',

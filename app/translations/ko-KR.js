@@ -251,6 +251,7 @@ module.exports = {
     'item.Clear': '\uC9C0\uC6B0\uAE30',
     'item.ClickAgreeTermsZA': '"\uC774\uBA54\uC77C \uC804\uC1A1\'\uC5D0 \uD074\uB9AD\uD568\uC73C\uB85C\uC368 \uADC0\uD558\uAED8\uC11C\uB294 \uB2F9\uC0AC\uC758 <<LINK>> \uC774\uC6A9\uC57D\uAD00<</LINK>>\uC5D0 \uB3D9\uC758\uD558\uC2ED\uB2C8\uB2E4.',
     'item.Ended_New': '\uC885\uB8CC\uB428',
+    'item.Number_RecentAdsIn': '<<NUMBER>>\uAC1C\uC758 \uCD5C\uC2E0 \uAD11\uACE0\uAC00 <<CATEGORY>>\uC5D0 \uC788\uC74C',
     'item.Rejected': '\uAC70\uC808\uB428',
     'item.RemoveFromFavorites': '\uC990\uACA8\uCC3E\uAE30\uC5D0\uC11C \uC81C\uAC70',
     'item.SeeMoreAds': '<<LINK_TO_CATEGORY>>\uC5D0\uC11C \uB354 \uB9CE\uC740 \uAD11\uACE0\uB97C \uBCF4\uC2ED\uC2DC\uC624',

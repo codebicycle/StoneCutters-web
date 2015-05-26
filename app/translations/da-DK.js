@@ -251,6 +251,7 @@ module.exports = {
     'item.Clear': 'Ryd',
     'item.ClickAgreeTermsZA': 'Ved at klikke p\xE5 "Send e-mail" accepterer du vores <<LINK>> Vilk\xE5r for brug<</LINK>>.',
     'item.Ended_New': 'Afsluttet',
+    'item.Number_RecentAdsIn': '<<NUMBER>> seneste annoncer i <<CATEGORY>>',
     'item.Rejected': 'Afvist',
     'item.RemoveFromFavorites': 'Fjern fra favoritter',
     'item.SeeMoreAds': 'Se flere annoncer p\xE5 <<LINK_TO_CATEGORY>>',

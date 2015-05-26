@@ -251,6 +251,7 @@ module.exports = {
     'item.Clear': 'Efase',
     'item.ClickAgreeTermsZA': 'Depi w klike "Voye im\xE8l la, ou dak\xF2 ak <<LINK>> Kondisyon pou Itilize<</LINK>> nou yo.',
     'item.Ended_New': 'Fini',
+    'item.Number_RecentAdsIn': '<<NUMBER>> anons resan nan <<CATEGORY>>',
     'item.Rejected': 'Refize',
     'item.RemoveFromFavorites': 'Retire nan favorites',
     'item.SeeMoreAds': 'Gade plis anons nan <<LINK_TO_CATEGORY>>',

@@ -251,6 +251,7 @@ module.exports = {
     'item.Clear': 'T\xF6rl\xE9s',
     'item.ClickAgreeTermsZA': 'Az "E-mail k\xFCld\xE9se" gombra kattintva elfogadja a <<LINK>> Felhaszn\xE1l\xE1si felt\xE9telek<</LINK>>-et.',
     'item.Ended_New': 'V\xE9get \xE9rt',
+    'item.Number_RecentAdsIn': '<<NUMBER>> \xFAj hirdet\xE9s a(z) <<CATEGORY>> kateg\xF3ri\xE1ban',
     'item.Rejected': 'Elutas\xEDtva',
     'item.RemoveFromFavorites': 'T\xF6rl\xE9s a kedvencekb\u0151l',
     'item.SeeMoreAds': 'Tov\xE1bbi hirdet\xE9sek: <<LINK_TO_CATEGORY>>',

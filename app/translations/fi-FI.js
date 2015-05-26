@@ -251,6 +251,7 @@ module.exports = {
     'item.Clear': 'Tyhjenn\xE4',
     'item.ClickAgreeTermsZA': 'Napsauttamalla "L\xE4het\xE4 s\xE4hk\xF6postia" hyv\xE4ksyt k\xE4ytt\xF6ehtomme <<LINK>> Terms of Use<</LINK>>.',
     'item.Ended_New': 'P\xE4\xE4ttynyt',
+    'item.Number_RecentAdsIn': '<<NUMBER>> \xE4skett\xE4ist\xE4 ilmoitusta luokassa <<CATEGORY>>',
     'item.Rejected': 'Hyl\xE4tty',
     'item.RemoveFromFavorites': 'Poista suosikeista',
     'item.SeeMoreAds': 'Katso lis\xE4\xE4 ilmoituksia kohdassa <<LINK_TO_CATEGORY>>',

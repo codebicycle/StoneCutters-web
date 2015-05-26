@@ -251,6 +251,7 @@ module.exports = {
     'item.Clear': '\u6E05\u9664',
     'item.ClickAgreeTermsZA': '\u901A\u904E\u55AE\u64CA\u300C\u767C\u9001\u96FB\u5B50\u90F5\u4EF6\u300D\uFF0C\u60A8\u5C31\u8868\u793A\u540C\u610F\u6211\u5011\u7684 <<LINK>> Terms of Use<</LINK>>\u3002',
     'item.Ended_New': '\u5DF2\u7D50\u675F',
+    'item.Number_RecentAdsIn': '<<CATEGORY>>\u985E\u5225\u7684<<NUMBER>> \u6700\u65B0\u5EE3\u544A\u3002',
     'item.Rejected': '\u88AB\u62D2\u7D55',
     'item.RemoveFromFavorites': '\u5F9E\u6536\u85CF\u593E\u4E2D\u522A\u9664',
     'item.SeeMoreAds': '\u5728 <<LINK_TO_CATEGORY>>\u67E5\u770B\u66F4\u591A\u5EE3\u544A',

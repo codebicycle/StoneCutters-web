@@ -251,6 +251,7 @@ module.exports = {
     'item.Clear': 'Uklonite',
     'item.ClickAgreeTermsZA': 'Klikom na \u201EPo\u0161alji e-poruku\u201C prihvatate na\u0161e <<LINK>> Uslove kori\u0161\u0107enja<</LINK>>.',
     'item.Ended_New': 'Zavr\u0161eno',
+    'item.Number_RecentAdsIn': '<<NUMBER>> nedavn(a)ih oglasa u <<CATEGORY>>',
     'item.Rejected': 'Odbijeno',
     'item.RemoveFromFavorites': 'Ukloni iz omiljenih',
     'item.SeeMoreAds': 'Pogledajte jo\u0161 oglasa u <<LINK_TO_CATEGORY>>',

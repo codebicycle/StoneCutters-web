@@ -251,6 +251,7 @@ module.exports = {
     'item.Clear': 'Vymaza\u0165',
     'item.ClickAgreeTermsZA': 'Kliknut\xEDm na \u201EOdosla\u0165 email\u201C akceptujete na\u0161e <<LINK>> podmienky pou\u017E\xEDvania<</LINK>>.',
     'item.Ended_New': 'Skon\u010Den\xFD',
+    'item.Number_RecentAdsIn': '<<NUMBER>> nov\xFDch inzer\xE1tov v kateg\xF3rii <<CATEGORY>>',
     'item.Rejected': 'Zamietnut\xFD',
     'item.RemoveFromFavorites': 'Odobra\u0165 z ob\u013E\xFAben\xFDch',
     'item.SeeMoreAds': 'Pozrie\u0165 viac inzer\xE1tov v kateg\xF3rii <<LINK_TO_CATEGORY>>',

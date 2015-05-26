@@ -251,6 +251,7 @@ module.exports = {
     'item.Clear': 'Hreinsa',
     'item.ClickAgreeTermsZA': 'Me\xF0 \xFEv\xED a\xF0 smella \xE1 \u201ESenda t\xF6lvup\xF3st\u201C sam\xFEykkir \xFE\xFA  <<LINK>>notkunarskilm\xE1la okkar<</LINK>>.',
     'item.Ended_New': 'Loki\xF0',
+    'item.Number_RecentAdsIn': '<<NUMBER>> n\xFDlegar augl\xFDsingar \xED <<CATEGORY>>',
     'item.Rejected': 'Hafna\xF0',
     'item.RemoveFromFavorites': 'Fjarl\xE6gja \xFAr upp\xE1halds',
     'item.SeeMoreAds': 'Sj\xE1 fleiri augl\xFDsingar \xED <<LINK_TO_CATEGORY>>',
