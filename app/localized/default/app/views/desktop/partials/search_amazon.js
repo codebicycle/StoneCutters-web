@@ -5,6 +5,7 @@ var helpers = require('../../../../../../helpers');
 var Metric = require('../../../../../../modules/metric');
 var Mixpanel = require('../../../../../../modules/tracking/trackers/mixpanel');
 var translations = require('../../../../../../../shared/translations');
+var utils = require('../../../../../../../shared/utils');
 
 module.exports = Base.extend({
     postRender: function() {
@@ -40,8 +41,11 @@ module.exports = Base.extend({
             url = url.replace(/search|nf\/all-results/, category);
         }
 
+        url = utils.fullizeUrl(url, this.app);
+
         helpers.common.redirect.call(this.app.router, url, null, {
-            status: 200
+            status: 200,
+            pushState: false
         });
     },
     onSearchCategoryClick: function(event) {

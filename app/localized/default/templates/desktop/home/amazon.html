@@ -8,8 +8,12 @@
 	{% for topic in topics %}
 		<li class="topic">
 			<h3 class="topic-title">
-				{{ dictionary["item.Number_RecentAdsIn"] | replace('<<NUMBER>> ', '') | replace('<<CATEGORY>>', topic.name) }}
-				<a href="{{ 'lalala' | link }}" class="topic-title-show-more">{{ dictionary["misc.ShowMore"] }}</a>
+				{% if topic.name %}
+					{{ dictionary["item.Number_RecentAdsIn"] | replace('<<NUMBER>> ', '') | replace('<<CATEGORY>>', topic.name) }}
+					<a href="{{ topic.url | link }}" class="topic-title-show-more">{{ dictionary["misc.ShowMore"] }}</a>
+				{% else %}
+					{{ dictionary["defaultfooter.PopularSearches"] }}
+				{% endif %}
 			</h3>
 			<div class="topic-items">
 				<a href="#" class="topic-list-handler icons icon-arrow-left left">{{ dictionary["itemslisting.Next"] }}</a>

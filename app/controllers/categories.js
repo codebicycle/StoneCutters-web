@@ -45,19 +45,22 @@ function home(params, callback) {
                 languageId: this.app.session.get('languages')._byId[this.app.session.get('selectedLanguage')].id
             };
             var spec = {};
+            var categories = config.get(['amazonExperiment', this.app.session.get('location').url, 'categories'], []);
 
-            spec.items = {
-                collection: 'Items',
-                params: _.extend({}, params, {
-                    categoryId: 378
-                })
-            };
             spec.popularsearches = {
                 collection: 'Items',
                 params: _.extend({}, params, {
-                    // item_type: 'popularsearches'
+                    item_type: 'popularsearches'
                 })
             };
+            _.each(categories, function each(id) {
+                spec[id] = {
+                    collection: 'Items',
+                    params: _.extend({}, params, {
+                        categoryId: id
+                    })
+                };
+            });
             done(spec);
         }
 
@@ -73,9 +76,17 @@ function home(params, callback) {
             };
 
             if (res) {
-                _.each(res, function each(topic) {
-                    data.topics.push(topic);
-                });
+                _.each(res, function each(topic, id) {
+                    var category;
+
+                    if (!isNaN(id)) {
+                        category = this.dependencies.categories.search(id).toJSON();
+                        topic.name = category.trName;
+                        topic.url =  helpers.common.slugToUrl.call(this, category);
+                        return data.topics.push(topic);
+                    }
+                    data.topics.unshift(topic);
+                }, this);
             }
             callback(null, 'home/' + alternative, data);
         }
