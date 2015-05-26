@@ -3,18 +3,18 @@
     {% if location.children | length == 0 %}
         {{ location.name }}
     {% else %}
-        <a href="{{ nav.link | linkig({location: location.url}) }}" rel="nofollow">{{ location.name }}</a>
+        <a href="{{ nav.link | linkig({location: location.url}) }}" data-location="{{ location.url }}" rel="nofollow">{{ location.name }}</a>
     {% endif %}
     </li>{% if location.children | length == 1 %}<li>
             {% if location.children[0].children | length == 0 %}
                 {{ location.children[0].name }}
-                <a href="{{ nav.link | linkig({location: location.url}) }}" class="icons icon-close state" rel="nofollow"></a>
+                <a href="{{ nav.link | linkig({location: location.url}) }}" data-location="{{ location.url }}" class="icons icon-close state" rel="nofollow"></a>
             {% else %}
-                <a href="{{ nav.link | linkig({location: location.children[0].url}) }}" rel="nofollow">{{ location.children[0].name }}</a>
+                <a href="{{ nav.link | linkig({location: location.children[0].url}) }}" data-location="{{ location.children[0].url }}" rel="nofollow">{{ location.children[0].name }}</a>
             {% endif %}
         </li>{% if location.children[0].children | length == 1 %}<li>
                 {{ location.children[0].children[0].name }}
-                <a href="{{ nav.link | linkig({location: location.children[0].url}) }}" class="icons icon-close city" rel="nofollow"></a>
+                <a href="{{ nav.link | linkig({location: location.children[0].url}) }}" data-location="{{ location.children[0].url }}" class="icons icon-close city" rel="nofollow"></a>
             </li>
         {% endif %}
     {% endif %}
@@ -26,7 +26,7 @@
                 <ul class="visible-locations">
                     {% for value in filter.value %}
                         <li class="locations">
-                            <a href="{{ nav.link | linkig({location: value.id}) }}" rel="nofollow">{{ value.value }} <span>{{ value.count | countFormat }}</span></a>
+                            <a href="{{ nav.link | linkig({location: value.id}) }}" data-location="{{ value.id }}" rel="nofollow">{{ value.value }} <span>{{ value.count | countFormat }}</span></a>
                         </li>
                         {{ '</ul><ul class="hidden-locations">' if loop.index == 12 and filter.value.length > 16 }}
                     {% endfor %}

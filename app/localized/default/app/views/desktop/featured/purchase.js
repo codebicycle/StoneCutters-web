@@ -62,7 +62,6 @@ module.exports = Base.extend({
         }
 
         function error(err) {
-            console.error(err);
             this.app.router.redirectTo(helpers.common.link('/featured_ad', this.app, {
                 fa_status: 'error'
             }));
