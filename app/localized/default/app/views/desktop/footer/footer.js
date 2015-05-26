@@ -11,7 +11,23 @@ var helpers = require('../../../../../../helpers');
 module.exports = Base.extend({
     tagName: 'footer',
     id: 'footer-view',
-    className: 'footer-view',
+    className: function() {
+        var classes = ['footer-view', 'wrapper'];
+        var currentRoute = this.app.session.get('currentRoute');
+        var dgdHomePage = this.app.sixpack.experiments.dgdHomePage;
+
+        if (dgdHomePage && dgdHomePage.alternative !== 'control') {
+            classes.push('hidden');
+        }
+        return classes.join(' ');
+    },
+    initialize: function() {
+        Base.prototype.initialize.call(this);
+        this._name = this.name;
+        this._className = this.className();
+        this.app.on('footer:hide', this.onHide, this);
+        this.app.on('footer:show', this.onShow, this);
+    },
     firstRender: true,
     events: {
         'click [data-modal-shadow], [data-modal-close]': 'onCloseModal',
@@ -71,7 +87,7 @@ module.exports = Base.extend({
                 }
             }.bind(this));
             this.firstRender = false;
-       }
+        }
     },
     onCloseModal: function(event) {
         event.preventDefault();
@@ -102,11 +118,12 @@ module.exports = Base.extend({
         event.stopPropagation();
         event.stopImmediatePropagation();
 
-        var $origin = this.$(event.target);
-        var $target = $origin.parents('.modal-container');
-        var $source = $target.prev('.modal-link');
-
-        $source.toggleClass('active');
-        $target.toggleClass('active').toggle();
+        $('#migrations-modal').trigger('hide');
+    },
+    onHide: function() {
+        this.$el.addClass('hidden');
+    },
+    onShow: function() {
+        this.$el.removeClass('hidden');
     }
 });

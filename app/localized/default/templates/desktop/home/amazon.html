@@ -1,0 +1,37 @@
+<h3 class="location-title">
+	{{ dictionary["misc.FreeClassifieds-SEO"] | replace('<<AREA>>', '') }}
+	<a href="#" class="location-link">{{ location.current.name if location.current else location.name }}</a>
+</h3>
+{% view 'modals/location_amazon' %}
+<input type="hidden" name="search-location" class="search-location-value" />
+<ul class="topics">
+	{% for topic in topics %}
+		<li class="topic">
+			<h3 class="topic-title">
+				{% if topic.name %}
+					{{ dictionary["item.Number_RecentAdsIn"] | replace('<<NUMBER>> ', '') | replace('<<CATEGORY>>', topic.name) }}
+					<a href="{{ topic.url | link }}" class="topic-title-show-more">{{ dictionary["misc.ShowMore"] }}</a>
+				{% else %}
+					{{ dictionary["defaultfooter.PopularSearches"] }}
+				{% endif %}
+			</h3>
+			<div class="topic-items">
+				<a href="#" class="topic-list-handler icons icon-arrow-left left">{{ dictionary["itemslisting.Next"] }}</a>
+				<div class="topic-items-wrapper">
+					<ul class="topic-items-list" data-offset="0">
+						{% for item in topic.toJSON() -%}
+							<li class="topic-item">
+								<a class="topic-item-link" href="{{ item.slug.replace(domain, fullDomain) if item.slug else (['iid-', item.id] | join('') | link) }}">
+									<figure class="topic-item-picture" style="background-image: url({{ item.thumbnail }})"></figure>
+									<p class="topic-item-title">{{ item.title }}</p>
+									<p class="topic-item-price">{{ item.price.displayPrice }}</p>
+								</a>
+							</li>
+						{%- endfor %}
+					</ul>
+				</div>
+				<a href="#" class="topic-list-handler icons icon-arrow-right right" style="display: none;">{{ dictionary["itemslisting.Previous"] }}</a>
+			</div>
+		</li>
+	{% endfor %}
+</ul>

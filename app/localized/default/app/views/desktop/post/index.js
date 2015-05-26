@@ -158,6 +158,7 @@ function postRender() {
             this.$(this.selectors.contact).trigger('formRendered');
         }
     }
+    this.app.sixpack.convert(this.app.sixpack.experiments.dgdHomePage, 'funnel-posting-form');
 }
 
 function scrollSlideTo(element, value) {
@@ -479,6 +480,7 @@ function onSubmit(event) {
             custom: [category, this.item.get('category').parentId || '-', this.item.get('category').id || '-', action, this.item.get('id')].join('::')
         });
 
+        this.app.sixpack.convert(this.app.sixpack.experiments.dgdHomePage, 'funnel-posting-success');
         this.app.sixpack.convert(this.app.sixpack.experiments.growthCategorySuggestion);
         this.categorySuggestionMetric(['post']);
 

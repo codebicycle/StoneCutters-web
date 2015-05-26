@@ -14,12 +14,100 @@ var Shops = require('../modules/shops');
 var Abundance = require('../modules/abundance');
 
 module.exports = {
+    home: middlewares(home),
     list: middlewares(list),
     show: middlewares(show),
     showig: middlewares(showig)
 };
 
+function home(params, callback) {
+    helpers.controllers.control.call(this, params, controller);
+
+    function controller() {
+        var promise = asynquence().or(fail.bind(this));
+        var alternative = utils.underscorize(this.app.sixpack.experiments.dgdHomePage.alternative);
+
+        if (alternative === 'amazon') {
+            promise
+                .then(prepare.bind(this))
+                .then(fetch.bind(this));
+        }
+        promise.val(success.bind(this));
+
+        function prepare(done) {
+            var params = {
+                seo: false,
+                offset: 0,
+                pageSize: 20,
+                'f.hasimage': true,
+                'f.pricerange': '1TO',
+                location: this.app.session.get('location').url,
+                languageId: this.app.session.get('languages')._byId[this.app.session.get('selectedLanguage')].id
+            };
+            var spec = {};
+            var categories = config.get(['amazonExperiment', this.app.session.get('location').url, 'categories'], []);
+
+            spec.popularsearches = {
+                collection: 'Items',
+                params: _.extend({}, params, {
+                    item_type: 'popularsearches'
+                })
+            };
+            _.each(categories, function each(id) {
+                spec[id] = {
+                    collection: 'Items',
+                    params: _.extend({}, params, {
+                        categoryId: id
+                    })
+                };
+            });
+            done(spec);
+        }
+
+        function fetch(done, spec) {
+            this.app.fetch(spec, {
+                readFromCache: true
+            }, done.errfcb);
+        }
+
+        function success(res) {
+            var data = {
+                topics: []
+            };
+
+            if (res) {
+                _.each(res, function each(topic, id) {
+                    var category;
+
+                    if (!isNaN(id)) {
+                        category = this.dependencies.categories.search(id).toJSON();
+                        topic.name = category.trName;
+                        topic.url =  helpers.common.slugToUrl.call(this, category);
+                        return data.topics.push(topic);
+                    }
+                    data.topics.unshift(topic);
+                }, this);
+            }
+            callback(null, 'home/' + alternative, data);
+        }
+
+        function fail(err, res) {
+            return helpers.common.error.call(this, err, res, callback);
+        }
+    }
+}
+
 function list(params, callback) {
+    var homePageExperiment = this.app.sixpack.experiments.dgdHomePage;
+
+    if (homePageExperiment && homePageExperiment.alternative !== 'control') {
+        this.currentRoute = {
+            controller: 'categories',
+            action: 'home'
+        };
+        return home.call(this, params, callback);
+    }
+
     helpers.controllers.control.call(this, params, controller);
 
     function controller() {

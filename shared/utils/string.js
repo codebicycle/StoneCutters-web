@@ -24,7 +24,12 @@ function endsWith(str, ends) {
     return str.length >= ends.length && str.slice(str.length - ends.length) === ends;
 }
 
+function underscorize(str) {
+    return str.trim().replace(/([a-z\d])([A-Z]+)/g, '$1_$2').replace(/[-\s]+/g, '_').toLowerCase();
+}
+
 module.exports = {
     startsWith: startsWith,
-    endsWith: endsWith
+    endsWith: endsWith,
+    underscorize: underscorize
 };

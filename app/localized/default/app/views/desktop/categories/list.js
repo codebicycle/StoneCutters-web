@@ -59,6 +59,9 @@ module.exports = Base.extend({
             }
         });
     },
+    postRender: function() {
+        this.app.sixpack.convert(this.app.sixpack.experiments.dgdHomePage);
+    },
     onOpenModal: function(event) {
         event.preventDefault();
         event.stopPropagation();

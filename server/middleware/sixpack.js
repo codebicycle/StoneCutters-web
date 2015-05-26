@@ -21,7 +21,11 @@ module.exports = function(dataAdapter, excludedUrls) {
             });
 
             _.each(sixpack.experiments, function each(experiment) {
-                experiment.force = req.param('sixpack-force-' + experiment.name);
+                var force = req.param('sixpack-force-' + experiment.name);
+
+                if (force) {
+                    experiment.force = force;
+                }
             });
             sixpack.participateAll(callback);
 
