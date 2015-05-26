@@ -7,30 +7,32 @@
     <div class="success-pusher-listers">
         <h2>Estos son los productos más buscados por nuestros compradores</h2>
         <h3>Si tenés alguno y querés venderlo, esta es tu oportunidad</h3>
-        <section>
-            <a href="{{ '/posting?subcat=378&g=1' | link }}">
-                <img src="{{ '/images/desktop/autos.png' | static }}" alt="vende tu auto" />
-                <span class="posting ">Vendé tu auto</span>
-            </a>
-        </section>
-        <section>
-            <a href="{{ '/posting?subcat=831&g=1' | link }}">
-                <img src="{{ '/images/desktop/celulares.png' | static }}" alt="vende tu celular" />
-                <span class="posting ">Vendé tu celular</span>
-            </a>
-        </section>
-        <section>
-            <a href="{{ '/posting?subcat=807&g=1' | link }}">
-                <img src="{{ '/images/desktop/muebles.png' | static }}" alt="vende tu sofa" />
-                <span class="posting ">Vendé tu sofá</span>
-            </a>
-        </section>
-        <section>
-            <a href="{{ '/posting?subcat=802&g=1' | link }}">
-                <img src="{{ '/images/desktop/consola.png' | static }}" alt="vende tu consola" />
-                <span class="posting ">Vendé tu consóla</span>
-            </a>
-        </section>
+        <div>
+            <section>
+                <a href="{{ '/posting?subcat=378&g=1' | link }}">
+                    <img src="{{ '/images/desktop/autos.png' | static }}" alt="vende tu auto" />
+                    <span class="posting ">Vendé tu auto</span>
+                </a>
+            </section>
+            <section>
+                <a href="{{ '/posting?subcat=831&g=1' | link }}">
+                    <img src="{{ '/images/desktop/celulares.png' | static }}" alt="vende tu celular" />
+                    <span class="posting ">Vendé tu celular</span>
+                </a>
+            </section>
+            <section>
+                <a href="{{ '/posting?subcat=807&g=1' | link }}">
+                    <img src="{{ '/images/desktop/muebles.png' | static }}" alt="vende tu sofa" />
+                    <span class="posting ">Vendé tu sofá</span>
+                </a>
+            </section>
+            <section>
+                <a href="{{ '/posting?subcat=802&g=1' | link }}">
+                    <img src="{{ '/images/desktop/consola.png' | static }}" alt="vende tu consola" />
+                    <span class="posting ">Vendé tu consola</span>
+                </a>
+            </section>
+        </div>
     </div>
 {% else %}
     {% view 'post/keepposting' %}
