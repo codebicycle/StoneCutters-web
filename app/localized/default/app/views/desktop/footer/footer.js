@@ -6,11 +6,28 @@ var utils = require('../../../../../../../shared/utils');
 var config = require('../../../../../../../shared/config');
 var FeatureAd = require('../../../../../../models/feature_ad');
 var Metric = require('../../../../../../modules/metric');
+var helpers = require('../../../../../../helpers');
 
 module.exports = Base.extend({
     tagName: 'footer',
     id: 'footer-view',
-    className: 'footer-view',
+    className: function() {
+        var classes = ['footer-view', 'wrapper'];
+        var currentRoute = this.app.session.get('currentRoute');
+        var dgdHomePage = this.app.sixpack.experiments.dgdHomePage;
+
+        if (dgdHomePage && dgdHomePage.alternative !== 'control') {
+            classes.push('hidden');
+        }
+        return classes.join(' ');
+    },
+    initialize: function() {
+        Base.prototype.initialize.call(this);
+        this._name = this.name;
+        this._className = this.className();
+        this.app.on('footer:hide', this.onHide, this);
+        this.app.on('footer:show', this.onShow, this);
+    },
     firstRender: true,
     events: {
         'click [data-modal-shadow], [data-modal-close]': 'onCloseModal',
@@ -21,6 +38,7 @@ module.exports = Base.extend({
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
         var location = this.app.session.get('location');
+        var platform = this.app.session.get('platform');
         var socials = config.getForMarket(location.url, ['socials'], '');
         var marketing = config.getForMarket(location.url, ['marketing'], '');
         var states = data.states;
@@ -28,6 +46,8 @@ module.exports = Base.extend({
         var selectedLanguage = this.app.session.get('selectedLanguage').split('-')[0];
         var isFeaturedCountry = FeatureAd.isEnabled(this.app, 'footer#footer');
         var linkHelpCenter = config.getForMarket(location.url, ['help', 'linkHelpCenter'], false);
+        var isEnabledSafetyTipsLanding = helpers.features.isEnabled.call(this, 'safetyTipsLanding', platform, location.url);
+        var linkSafety = config.getForMarket(location.url, ['help', 'linkSafety'], false);
 
         if(location.children.length) {
             _.each(states, function each(state, i){
@@ -45,7 +65,9 @@ module.exports = Base.extend({
             currentState: {
                 hostname: currentState.hostname,
                 name: currentState.name
-            }
+            },
+            isEnabledSafetyTipsLanding: isEnabledSafetyTipsLanding,
+            linkSafety: linkSafety
         });
     },
     postRender: function() {
@@ -65,7 +87,7 @@ module.exports = Base.extend({
                 }
             }.bind(this));
             this.firstRender = false;
-       }
+        }
     },
     onCloseModal: function(event) {
         event.preventDefault();
@@ -96,11 +118,12 @@ module.exports = Base.extend({
         event.stopPropagation();
         event.stopImmediatePropagation();
 
-        var $origin = this.$(event.target);
-        var $target = $origin.parents('.modal-container');
-        var $source = $target.prev('.modal-link');
-
-        $source.toggleClass('active');
-        $target.toggleClass('active').toggle();
+        $('#migrations-modal').trigger('hide');
+    },
+    onHide: function() {
+        this.$el.addClass('hidden');
+    },
+    onShow: function() {
+        this.$el.removeClass('hidden');
     }
 });

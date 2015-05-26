@@ -1,7 +1,7 @@
 .posting-contact-view {
     box($white, $greyBorders , 3px, 0, solid, 1px);
 
-    .icon-lock::before {
+    .icon-lock::before, .icon-exclamation::before {
         font-size: $s;
         margin-bottom: 3px;
         padding-right: 5px;
@@ -21,11 +21,9 @@
                 background: $greyBorders;
             }
         }
-    }
 
-    .icon-exclamation::before {
-        font-size: 1rem;
-        margin-bottom: 3px;
-        padding-right: 5px;
+        .message {
+            margin-top: 10px;
+        }
     }
 }

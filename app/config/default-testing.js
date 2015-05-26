@@ -187,7 +187,7 @@ module.exports = {
             },
             safetyTipsLanding: {
                 worldwide: false,
-                countries: ['www.olx.com.co']
+                countries: ['www.olx.com.co', 'www.olx.com.uy', 'www.olx.com.py', 'www.olx.com.bo', 'www.olx.com.pe', 'www.olx.com.ec', 'www.olx.com.co', 'www.olx.com.ve', 'www.olx.com.pa', 'www.olx.hn', 'www.olx.com.cr', 'www.olx.com.ni', 'www.olx.com.sv', 'www.olx.com.gt', 'www.olx.com.ar']
             }
         }
     },
@@ -426,5 +426,13 @@ module.exports = {
             enabled: true
         }
     },
-    schibsted: require('./schibsted')
+    schibsted: require('./schibsted'),
+    amazonExperiment: {
+        'www.olx.com.co': {
+            categories: [16, 362]
+        },
+        'www.olx.co.za': {
+            categories: [801, 802]
+        }
+    }
 };

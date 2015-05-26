@@ -72,7 +72,7 @@ module.exports = {
         enabled: true,
         clicks: 0,
         time: 432000000,
-        ignorePath: ['/closed', '/login', '/interstitial', '/500', '/esi','/posting' ,'/posting/success' , /^\/health(\/.*)?$/, /^\/force(\/.*)?$/, /^\/stats(\/.*)?$/, /^\/tracking(\/.*)?$/, /^\/posting(\/\d+)?(\/\d+)?$/],
+        ignorePath: ['/closed', '/login', '/interstitial', '/500', '/esi','/posting' ,'/posting/success', /^\/health(\/.*)?$/, /^\/force(\/.*)?$/, /^\/stats(\/.*)?$/, /^\/tracking(\/.*)?$/, /^\/posting(\/\d+)?(\/\d+)?$/],
         ignorePlatform: ['wap', 'desktop'],
         ignoreLocation: ['www.olx.co.za', 'www.olx.ir', 'www.olx.com.bd', 'www.olx.com.mx', 'www.olx.cl']
     },
@@ -186,7 +186,7 @@ module.exports = {
             },
             safetyTipsLanding: {
                 worldwide: false,
-                countries: ['www.olx.com.co']
+                countries: ['www.olx.com.co', 'www.olx.com.uy', 'www.olx.com.py', 'www.olx.com.bo', 'www.olx.com.pe', 'www.olx.com.ec', 'www.olx.com.co', 'www.olx.com.ve', 'www.olx.com.pa', 'www.olx.hn', 'www.olx.com.cr', 'www.olx.com.ni', 'www.olx.com.sv', 'www.olx.com.gt', 'www.olx.com.ar']
             }
         }
     },
@@ -420,5 +420,13 @@ module.exports = {
             enabled: true
         }
     },
-    schibsted: require('./schibsted')
+    schibsted: require('./schibsted'),
+    amazonExperiment: {
+        'www.olx.com.co': {
+            categories: [831, 1018]
+        },
+        'www.olx.co.za': {
+            categories: [801, 802]
+        }
+    }
 };

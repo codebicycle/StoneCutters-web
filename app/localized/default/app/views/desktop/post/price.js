@@ -2,6 +2,7 @@
 
 var _ = require('underscore');
 var Base = require('../../../../../common/app/bases/view');
+var helpers = require('../../../../../../helpers');
 var statsd = require('../../../../../../../shared/statsd')();
 
 module.exports = Base.extend({
@@ -16,16 +17,20 @@ module.exports = Base.extend({
     selectors: {
         currency_type: '#field-currency_type',
         priceC: '#field-priceC',
+        priceW: '#field-priceW',
         priceType: '#field-priceType'
     },
     events: {
         'change': onChange,
         'fieldsChange': onFieldsChange,
-        'change #field-priceType': onChangePriceType
+        'change #field-priceType': onChangePriceType,
+        'keyup #field-priceW': onKeyUpPrice,
+        'blur #field-priceW': onBlurPrice
     },
     initialize: initialize,
     getTemplateData: getTemplateData,
-    filterAndSortFields: filterAndSortFields
+    filterAndSortFields: filterAndSortFields,
+    formatValue: formatValue
 });
 
 function initialize() {
@@ -75,6 +80,7 @@ function onChange(event) {
         options.skipValidation = $field.val() === '' && _.contains(['NEGOTIABLE', 'FREE'], ($(this.selectors.priceType).val() || '').toUpperCase());
         this.$('select').trigger('change');
     }
+
     this.parentView.$el.trigger('fieldSubmit', [$field, options]);
 }
 
@@ -113,6 +119,7 @@ function onFieldsChange(event, fields) {
         this.parentView.$el.trigger('priceReset');
         this.render();
     }
+    this.formatValue();
 }
 
 function onChangePriceType(event) {
@@ -128,6 +135,30 @@ function onChangePriceType(event) {
         $price.removeAttr('disabled');
         $currency.removeAttr('disabled');
     }
+}
+
+function onKeyUpPrice(event) {
+    this.formatValue();
+}
+
+function onBlurPrice(event) {
+    var $field = this.$(this.selectors.priceC);
+    var options = {};
+
+    this.formatValue();
+    this.parentView.$el.trigger('fieldSubmit', [$field, options]);
+}
+
+function formatValue() {
+    var $priceW = this.$(this.selectors.priceW);
+    var $priceC = this.$(this.selectors.priceC);
+    var val;
+
+    val = $priceW.val();
+    val = val.replace(/[^\d]/g, '');
+    $priceC.val(val);
+    val = helpers.common.countFormat(val, this.app);
+    $priceW.val(val);
 }
 
 module.exports.id = 'post/price';

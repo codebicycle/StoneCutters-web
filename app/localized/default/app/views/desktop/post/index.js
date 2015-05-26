@@ -151,13 +151,14 @@ function postRender() {
             }.bind(this));
             this.errors['category.parentId'] = this.dictionary['postingerror.PleaseSelectCategory'];
             this.errors['category.id'] = this.dictionary['postingerror.PleaseSelectSubcategory'];
-            this.errors.state = this.dictionary['countryoptions.Home_SelectState'];
-            this.errors.city = this.dictionary['countryoptions.Home_SelectCity'];
-            this.errors.neighborhood = this.dictionary[(this.app.session.get('location').abbreviation !== 'ZA') ? 'item.SelectA_Neighborhood' : 'misc.SelectSuburb'];
+            this.errors.state = this.dictionary['posting_fields_1.location_select_level_2'] + ' ' + this.dictionary['posting_fields_1.location_level_2'];
+            this.errors.city = this.dictionary['posting_fields_1.location_select_level_4'];
+            this.errors.neighborhood = this.dictionary[(this.app.session.get('location').abbreviation == 'ZA') ? 'misc.SelectSuburb' : 'posting_fields_1.location_select_level_6'];
             this.$el.trigger('updateErrors');
             this.$(this.selectors.contact).trigger('formRendered');
         }
     }
+    this.app.sixpack.convert(this.app.sixpack.experiments.dgdHomePage, 'funnel-posting-form');
 }
 
 function scrollSlideTo(element, value) {
@@ -479,6 +480,7 @@ function onSubmit(event) {
             custom: [category, this.item.get('category').parentId || '-', this.item.get('category').id || '-', action, this.item.get('id')].join('::')
         });
 
+        this.app.sixpack.convert(this.app.sixpack.experiments.dgdHomePage, 'funnel-posting-success');
         this.app.sixpack.convert(this.app.sixpack.experiments.growthCategorySuggestion);
         this.categorySuggestionMetric(['post']);
 

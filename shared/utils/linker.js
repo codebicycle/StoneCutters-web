@@ -92,6 +92,9 @@ function fullizeUrl(href, app) {
         host = app.session.get('host');
         href = [protocol, host, (href.indexOf('/') ? '/' : ''), href].join('');
     }
+    if (app.session.get('platform') === 'desktop') {
+        href = href.replace(app.session.get('shortHost'), app.session.get('siteLocation'));
+    }
     return checkHref(href);
 }
 

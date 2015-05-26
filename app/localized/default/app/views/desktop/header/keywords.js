@@ -7,8 +7,7 @@ var translations = require('../../../../../../../shared/translations');
 module.exports = Base.extend({
     tagName: 'header',
     id: 'keywords-view',
-    className: 'keywords-view',
-
+    className: 'keywords-view wrapper',
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
         var location = this.app.session.get('location');

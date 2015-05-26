@@ -114,5 +114,18 @@ module.exports = {
             SUCCESS_PAGE: 'success-page'
         },
         autoParticipate: true
+    },
+    dgdHomePage: {
+        enabled: true,
+        platforms: ['desktop'],
+        markets: ['co', 'za'],
+        name: 'dgd-home-page',
+        alternatives: {
+            CONTROL: 'control',
+            GOOGLE: 'google',
+            AMAZON: 'amazon'
+        },
+        autoParticipate: true,
+        fraction: 0.15
     }
 };

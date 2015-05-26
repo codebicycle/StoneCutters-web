@@ -4,6 +4,7 @@ var Base = require('../../bases/view');
 var _ = require('underscore');
 var helpers = require('../../../../../helpers');
 var breadcrumb = require('../../../../../modules/breadcrumb');
+var userzoom = require('../../../../../modules/userzoom');
 
 module.exports = Base.extend({
     className: 'categories_show_view',
@@ -14,10 +15,16 @@ module.exports = Base.extend({
     getTemplateData: function() {
         var data = Base.prototype.getTemplateData.call(this);
 
+        this.userzoom = new userzoom({}, {
+            app: this.app
+        });
+
         return _.extend({}, data, {
             breadcrumb: breadcrumb.get.call(this, data),
             items: data.items,
-            filtersEnabled: helpers.features.isEnabled.call(this, 'listingFilters')
+            filtersEnabled: helpers.features.isEnabled.call(this, 'listingFilters'),
+            isUserzoomEnabled: this.userzoom.isEnabled(data.currentCategory.id),
+            userzoom: this.userzoom.getParams(data.currentCategory.id)
         });
     },
     postRender: function() {

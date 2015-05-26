@@ -116,6 +116,7 @@ module.exports = Base.extend({
 
         function success(reply) {
             var item = this.parentView.getItem();
+            var origin = this.app.session.get('origin');
 
             event.target.reset();
 
@@ -128,6 +129,9 @@ module.exports = Base.extend({
             this.app.sixpack.convert(this.app.sixpack.experiments.desktopDGD23ShowSimplifiedReplyForm);
             this.app.sixpack.convert(this.app.sixpack.experiments.dgdOpenItemInNewTab);
 
+            if (origin && origin.type) {
+                this.app.sixpack.convert(this.app.sixpack.experiments.dgdHomePage, ['funnel', origin.type, 'reply'].join('-'));
+            }
             if (_.contains([378], item.get('category').id)) {
                 this.app.sixpack.convert(this.app.sixpack.experiments.dgdCategoryCars);
             }

@@ -103,6 +103,9 @@ module.exports = {
     'post#flow#desktop_step2': {
         trackPage: 'postingFormStep2'
     },
+    'post#flow#desktop_edit_step1': {
+        trackPage: 'editFormStep1'
+    },
     'post#flow#categories': {
         trackPage: 'postingFormStep2'
     },
@@ -115,6 +118,9 @@ module.exports = {
     'post#flowMarketing#desktop_step2': {
         trackPage: 'postingFormStep2'
     },
+    'post#flowMarketing#desktop_edit_step1': {
+        trackPage: 'editFormStep1'
+    },
     'post#flowMarketing#categories': {
         trackPage: 'postingFormStep2'
     },
@@ -126,6 +132,9 @@ module.exports = {
     },
     'post#renew#desktop_step2': {
         trackPage: 'postingFormStep2'
+    },
+    'post#renew#desktop_edit_step1': {
+        trackPage: 'editFormStep1'
     },
     'post#renew#categories': {
         trackPage: 'postingFormStep2'

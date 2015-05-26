@@ -4,6 +4,7 @@ var Base = require('../../../../../common/app/bases/view').requireView('partials
 var helpers = require('../../../../../../helpers');
 var Metric = require('../../../../../../modules/metric');
 var Mixpanel = require('../../../../../../modules/tracking/trackers/mixpanel');
+var utils = require('../../../../../../../shared/utils');
 
 module.exports = Base.extend({
     postRender: function() {
@@ -32,7 +33,8 @@ module.exports = Base.extend({
             keyword: search.toLowerCase()
         });
 
-        helpers.common.redirect.call(this.app.router, url, null, {
+        helpers.common.redirect.call(this.app.router, utils.fullizeUrl(url, this.app), null, {
+            pushState: false,
             status: 200
         });
     }

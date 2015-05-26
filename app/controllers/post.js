@@ -321,7 +321,7 @@ function flow(params, callback) {
             });
 
             item.set('postingSession', postingSession);
-            this.app.tracking.setPage('desktop_step1');
+            this.app.tracking.setPage(['desktop_', item.has('id') ? 'edit_' : '' , 'step1'].join(''));
 
             callback(null, 'post/index', {
                 include: ['item'],
@@ -591,7 +591,6 @@ function success(params, callback) {
     function controller() {
         var user = this.app.session.get('user');
         var itemId = params.itemId;
-        var siteLocation = this.app.session.get('siteLocation');
         var languageId = this.app.session.get('languageId');
         var securityKey = params.sk;
 
@@ -867,7 +866,6 @@ function editsuccess(params, callback) {
         var user = this.app.session.get('user');
         var securityKey = params.sk;
         var itemId = params.itemId;
-        var siteLocation = this.app.session.get('siteLocation');
         var languages = this.app.session.get('languages');
         var anonymousItem;
 

@@ -1,10 +1,10 @@
 'use strict';
 
+var _ = require('underscore');
+var asynquence = require('asynquence');
 var Base = require('../../../../../common/app/bases/view').requireView('locations/list');
 var helpers = require('../../../../../../helpers');
 var utils = require('../../../../../../../shared/utils');
-var asynquence = require('asynquence');
-var _ = require('underscore');
 
 module.exports = Base.extend({
     latitude: '',
@@ -66,6 +66,7 @@ module.exports = Base.extend({
     },
     events: {
         'submit': 'onSubmit',
+        'click a[data-location]': 'onClickLocation',
         'click #autolocation': 'onAutoLocation'
     },
     onStart: function(event) {
@@ -87,6 +88,11 @@ module.exports = Base.extend({
 
         helpers.common.redirect.call(this.app.router, url, null, {
             status: 200
+        });
+    },
+    onClickLocation: function(event) {
+        this.app.session.persist({
+            siteLocation: $(event.currentTarget).data('location')
         });
     },
     onAutoLocation: function(event) {
