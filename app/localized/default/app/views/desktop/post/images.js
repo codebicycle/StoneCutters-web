@@ -16,11 +16,22 @@ module.exports = Base.extend({
         'change input[type=file]': onChange,
         'click .image:not(.fill .image)': onClickImage,
         'click input[type=file]': onClickInput,
-        'click .remove': onClickRemove
+        'click .remove': onClickRemove,
+        'click .experiment-growth-load-image-from-mobile a': onClickLoadImageMobile
     },
+    getTemplateData: getTemplateData,
     postRender: postRender,
     showImage: showImage
 });
+
+function getTemplateData() {
+    var data = Base.prototype.getTemplateData.call(this);
+    var sixpackCurrentAlternative = this.app.sixpack.experiments.growthLoadImageFromMobile ? this.app.sixpack.experiments.growthLoadImageFromMobile.alternative : '';
+ 
+    return _.extend({}, data, {
+        experiments: sixpackCurrentAlternative === 'control' ? {} : this.app.sixpack.experiments
+    });
+}
 
 function postRender() {
     var images = this.parentView.getItem().get('images');
@@ -150,6 +161,20 @@ function onClickRemove(event) {
     var $input = this.$('#' + input).val('');
 
     this.parentView.getItem().get('images').splice(input.replace('file', ''), 1);
+}
+
+function onClickLoadImageMobile(event) {
+    event.preventDefault();
+    event.stopPropagation();
+    event.stopImmediatePropagation();
+
+    var $container = $(event.currentTarget).parent().addClass('loading');
+
+    window.setTimeout(function() {
+        $container.removeClass('loading').addClass('msj').delay(7000).fadeOut();
+    }, 1000);
+
+    this.app.sixpack.convert(this.app.sixpack.experiments.growthLoadImageFromMobile);
 }
 
 module.exports.id = 'post/images';
