@@ -1,8 +1,10 @@
 'use strict';
 
+var _ = require('underscore');
 var Base = require('../../../../../common/app/bases/view').requireView('home/google');
 var helpers = require('../../../../../../helpers');
 var utils = require('../../../../../../../shared/utils');
+var config = require('../../../../../../../shared/config');
 
 module.exports = Base.extend({
     tagName: 'main',
@@ -11,6 +13,25 @@ module.exports = Base.extend({
         'submit .search-form': 'onSearchSubmit',
         'click .search-location': 'onSearchLocationClick',
         'click .country-link, .state-link': 'onStateLinkClick'
+    },
+    getTemplateData: function() {
+        var data = Base.prototype.getTemplateData.call(this);
+        var locationUrl = this.app.session.get('location').url;
+        var customText;
+
+        switch (locationUrl) {
+            case 'www.olx.co.za':
+                customText = 'Find the best deals near you';
+                break;
+            case 'www.olx.com.co':
+                customText = 'Encuentra los mejores anuncios cerca tuyo';
+                break;
+        }
+
+        return _.extend({}, data, {
+            customText: customText,
+            orderedStates: utils.sortUsingList(data.states, config.get(['googleExperiment', locationUrl, 'statesOrder'], []), 'hostname')
+        });
     },
     preRender: function() {
         if (!utils.isServer) {

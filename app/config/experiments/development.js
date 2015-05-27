@@ -115,6 +115,7 @@ module.exports = {
             AMAZON: 'amazon'
         },
         autoParticipate: true,
-        fraction: 0.15
+        fraction: 1,
+        force: 'google'
     }
 };

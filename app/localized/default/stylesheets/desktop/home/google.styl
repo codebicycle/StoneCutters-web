@@ -115,18 +115,18 @@
 					display: block;
 				}
 			}
-			.state-container {
-				border-bottom: solid thin #CCC;
-				&:last-child {
-					border-bottom: none;
-				}
-			}
 			.country-link,
 			.state-link {
 				display: block;
 				padding: 4px 4px 4px 26px;
 				font-size: $xs;
 				color: #999;
+				border-bottom: solid thin #CCC;
+			}
+			.state-container {
+				&:last-child .state-link {
+					border-bottom: none;
+				}
 			}
 		}
 		.categories {

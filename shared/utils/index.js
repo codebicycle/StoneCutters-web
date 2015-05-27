@@ -6,6 +6,7 @@ var time = require('./time');
 var linker = require('./linker');
 var string = require('./string');
 var crypto = require('./crypto');
+var array = require('./array');
 var isServer = (typeof window === 'undefined');
 
 var defaults = {
@@ -117,4 +118,4 @@ module.exports = _.extend({
     keysToLowerCase: keysToLowerCase,
     getUrlParam: getUrlParam,
     noop: noop
-}, qs, time, linker, string, crypto);
+}, qs, time, linker, string, crypto, array);

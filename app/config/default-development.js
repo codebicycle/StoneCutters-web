@@ -428,5 +428,13 @@ module.exports = {
         'www.olx.co.za': {
             categories: [801, 802]
         }
+    },
+    googleExperiment: {
+        'www.olx.com.co': {
+            statesOrder: ['huila', 'bolivar', 'boyaca', 'choco']
+        },
+        'www.olx.co.za': {
+            statesOrder: ['northwest']
+        }
     }
 };
