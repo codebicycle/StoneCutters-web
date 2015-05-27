@@ -14,3 +14,11 @@
 	</ul>
 	<small class="hint message exclude">{{ dictionary["posting_photos.AcceptedFormats"] }} {{ dictionary["postingerror.MaximumAllowedSizeForUploadedFilesIsNumber"] | replace('<<NUMBER>>', '5') }} </small>
 </div>
+{% if experiments.growthLoadImageFromMobile %}
+<div class="experiment-growth-load-image-from-mobile">
+	<span>Ahora podés agregar fotos directamente desde tu celular.</span>
+	<a href="#">Agregar fotos</a>
+
+	<span>Lo sentimos, pero estamos trabajando en esta funcionalidad ahora mismo.</span>
+</div>
+{% endif %}

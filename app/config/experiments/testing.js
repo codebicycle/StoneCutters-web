@@ -59,6 +59,17 @@ module.exports = {
         autoParticipate: true,
         fraction: 0.5
     },
+    growthLoadImageFromMobile: {
+        enabled: true,
+        platforms: ['desktop'],
+        markets: ['co'],
+        name: 'growth-load-image-from-mobile',
+        alternatives: {
+            CONTROL: 'control',
+            INTENTION: 'intention'
+        },
+        fraction: 0.1
+    },
     dgdCategoryCars: {
         enabled: true,
         platforms: ['desktop'],
