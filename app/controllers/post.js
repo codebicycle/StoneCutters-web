@@ -296,6 +296,7 @@ function flow(params, callback) {
             var shortHost = this.app.session.get('shortHost');
             var url = this.app.session.get('url');
             var user = this.app.session.get('user');
+            var location = isDesktop ? shortHost : siteLocation;
 
             if (!item) {
                 return false;
@@ -304,7 +305,7 @@ function flow(params, callback) {
                 helpers.common.redirect.call(this, '/iid-' + itemId);
                 return true;
             }
-            if (item.getLocation().url && item.getLocation().url !== siteLocation) {
+            if (item.getLocation().url && item.getLocation().url !== location) {
                 helpers.common.redirect.call(this, url, {
                     location: item.getLocation().url
                 }, {
