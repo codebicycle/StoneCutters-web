@@ -5,7 +5,6 @@ var Base = require('../../../../../common/app/bases/view').requireView('post/suc
 var Notifications = require('../../../../../../modules/notifications');
 var config = require('../../../../../../../shared/config');
 var Metric = require('../../../../../../modules/metric');
-var Sixpack = require('../../../../../../../shared/sixpack');
 
 module.exports = Base.extend({
     className: 'posting-success-view',
@@ -20,6 +19,7 @@ module.exports = Base.extend({
         var platform = this.app.session.get('platform');
         var location = this.app.session.get('location');
         var accepExchange = config.getForMarket(location.url, ['accepExchange', platform]);
+        var sixpackCurrentAlternative = this.app.sixpack.experiments.growthSuccesPagePushListers ? this.app.sixpack.experiments.growthSuccesPagePushListers.alternative : '';
 
         if(accepExchange.enabled && !_.contains(accepExchange.categories, data.item.category.id)) {
             accepExchange.enabled = false;
@@ -31,7 +31,7 @@ module.exports = Base.extend({
         }
         return _.extend({}, data, {
             accepExchange: accepExchange,
-            experiments: this.app.sixpack.experiments
+            experiments: sixpackCurrentAlternative === 'control' ? {} : this.app.sixpack.experiments
         });
     },
     postRender: function () {
