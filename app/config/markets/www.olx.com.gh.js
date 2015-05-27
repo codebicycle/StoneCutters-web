@@ -44,5 +44,11 @@ module.exports = {
                 enabled: true
             }
         }
+    },
+    flagItem: {
+        enabled: true,
+        withReason: {
+            enabled: true
+        }
     }
 };
