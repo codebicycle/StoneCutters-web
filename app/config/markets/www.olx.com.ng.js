@@ -325,12 +325,6 @@ module.exports = {
             }
         }
     },
-    showBetterDeal: {
-        html4: {
-            enabled: true,
-            categories: [800, 830]
-        }
-    },
     registerWithConfirmation: {
         html5: {
             enabled: true
