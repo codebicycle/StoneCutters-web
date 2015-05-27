@@ -175,18 +175,20 @@ module.exports = {
                         '820': 1,
                         '898': 1,
                         '911': 1,
-                        '362': 2,
+                        '362': 0,
                         '376': 2,
-                        '377': 2,
-                        '378': 2,
-                        '379': 2,
-                        '380': 2,
+                        '377': 0,
+                        '378': 0,
+                        '379': 0,
+                        '380': 0,
                         '412': 2,
-                        '416': 2,
+                        '416': 0,
                         '417': 2,
                         '886': 2,
                         allresults: 2,
-                        allresultsig: 2
+                        allresultsig: 2,
+                        searchig: 0,
+                        search: 0,
                     }
                 },
                 top: {
@@ -222,18 +224,20 @@ module.exports = {
                         '820': 1,
                         '898': 1,
                         '911': 1,
-                        '362': 2,
+                        '362': 0,
                         '376': 2,
-                        '377': 2,
-                        '378': 2,
-                        '379': 2,
-                        '380': 2,
+                        '377': 0,
+                        '378': 0,
+                        '379': 0,
+                        '380': 0,
                         '412': 2,
-                        '416': 2,
+                        '416': 0,
                         '417': 2,
                         '886': 2,
                         allresults: 2,
-                        allresultsig: 2
+                        allresultsig: 2,
+                        searchig: 0,
+                        search: 0,
                     }
                 },
                 mobiletop: {
@@ -285,7 +289,22 @@ module.exports = {
                 },
                 side: {
                     service: 'none'
-                }
+                },
+                bottom: {
+                    service: 'CSA',
+                    format: 'custom',
+                    location: 'Bottom',
+                    numberPerCategoryCSA: {
+                        '362': 0,
+                        '377': 0,
+                        '378': 0,
+                        '379': 0,
+                        '380': 0,
+                        '416': 0,
+                        searchig: 0,
+                        search: 0
+                    }
+                },
             },
             item: {
                 top: {
