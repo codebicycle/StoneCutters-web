@@ -123,6 +123,7 @@ module.exports = {
     'messages_item_page.CommentsFormEmail': '\u7535\u5B50\u90AE\u7BB1\u5730\u5740:',
     'messages_site_class.30': 'OK',
     'messages_site_class.ClickEdit': '\u70B9\u51FB\u8FD9\u91CC\u7F16\u8F91\u60A8\u7684\u5E7F\u544A\uFF08\u4EF7\u683C\uFF0C\u7EC6\u8282\u3002\u3002\u3002\uFF09',
+    'messages_site_class.Optional': '\u53EF\u9009',
     'messages_user_management_current_ads.EditMyListing': '\u7F16\u8F91\u6211\u7684\u5E7F\u544A',
     'topcities.SelectLocation': '\u9009\u62E9\u5730\u70B9',
     'adsense.SponsoredLinks': '\u8D5E\u52A9\u5546\u94FE\u63A5',

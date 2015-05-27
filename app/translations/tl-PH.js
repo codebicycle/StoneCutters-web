@@ -123,6 +123,7 @@ module.exports = {
     'messages_item_page.CommentsFormEmail': 'Email:',
     'messages_site_class.30': 'Ok',
     'messages_site_class.ClickEdit': 'I-click para I-EDIT ang iyong patalastas (halaga, detalye...)',
+    'messages_site_class.Optional': 'Pwedeng Wala Nito',
     'messages_user_management_current_ads.EditMyListing': 'I-edit ang aking Patalastas',
     'topcities.SelectLocation': 'Pumili ng isang Lokasyon',
     'adsense.SponsoredLinks': 'Mga Sponsored Link',

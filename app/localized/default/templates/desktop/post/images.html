@@ -1,4 +1,4 @@
-<label for="images" class="field-label">{{ dictionary["photos.AddAndSellFaster"] }}</label>
+<label for="images" class="field-label">{{ dictionary["photos.AddAndSellFaster"] }} <small>({{ dictionary["messages_site_class.Optional"] }})</small></label>
 {%- for i in range(0, 7) -%}
 	<input type="file" name="images[{{ i }}]" id="file{{ i }}" class="image-input-file" accept="image/*" />
 {%- endfor -%}

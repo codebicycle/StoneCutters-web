@@ -123,6 +123,7 @@ module.exports = {
     'messages_item_page.CommentsFormEmail': 'E-po\u0161ta:',
     'messages_site_class.30': 'V redu',
     'messages_site_class.ClickEdit': 'Kliknite nanj, \u010De \u017Eelite svoj oglas UREJATI (ceno, opis ...).',
+    'messages_site_class.Optional': 'Izbirno',
     'messages_user_management_current_ads.EditMyListing': 'Uredi moj oglas',
     'topcities.SelectLocation': 'Izberite lokacijo',
     'adsense.SponsoredLinks': 'Sponzorirane povezave',

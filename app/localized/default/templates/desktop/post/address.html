@@ -2,7 +2,8 @@
 {% set adressField = {
     name: "streetAddress",
     mandatory: isMandatory,
-    label: dictionary["itemdescription.streetaddress"],
+    optionalsmessage: optionalsmessage,
+    label: dictionary["itemdescription.streetaddress"] | replace(' exacta', ''),
     fieldType: "text",
     dataType: "string",
     value: item.get('streetAddress')

@@ -12,7 +12,11 @@
         transition: background-color 1s, color 1s, border-color 1s;
 
         &.focus {
-            background-color: $yellowPosting;
+            background-color: #F4F9FC;
+            .text-field {
+                border-color: $blue;
+                box-shadow: 0 0 3px 0 $lightBlueBorder inset;
+            }
         }
 
         &.error {
@@ -34,11 +38,18 @@
 
     .field-label {
         float: left;
-        width: 170px;
+        width: 200px;
         padding: 10px 12px 10px 0;
         font-size: $s;
         line-height: $l;
         text-align: right;
+        
+        small {
+            color: #666;
+            font-size: $xs;
+            text-transform: lowercase;
+            line-height: 1;
+        }
     }
 
     .field-controls {
@@ -61,6 +72,9 @@
             background-repeat: no-repeat;
             background-position: 412px 10px;
         }
+        &:focus {
+            outline: none;
+        }
     }
 
     .type-select {
@@ -81,6 +95,20 @@
         }
         &.error {
             color: $red;
+            
+            &::before {
+                -moz-osx-font-smoothing: grayscale;
+                -webkit-font-smoothing: antialiased;
+                content: "\e60c";
+                display: inline-block;
+                font-family: 'olx-icon-font';
+                font-style: normal;
+                font-weight: normal;
+                line-height: 1;
+                margin-right: 7px;
+                speak: none;
+                vertical-align: text-top;
+            }
         }
     }
 

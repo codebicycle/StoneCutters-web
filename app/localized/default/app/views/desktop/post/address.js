@@ -3,6 +3,7 @@
 var _ = require('underscore');
 var Base = require('../../../../../common/app/bases/view');
 var config = require('../../../../../../../shared/config');
+var translations = require('../../../../../../../shared/translations');
 
 module.exports = Base.extend({
     id: 'posting-contact-address-view',
@@ -14,16 +15,23 @@ module.exports = Base.extend({
         'validate': onValidate,
         'blur #field-streetAddress': onBlur
     },
+    initialize: initialize,
     getTemplateData: getTemplateData,
     postRender: postRender,
     isMandatory: isMandatory
 });
 
+function initialize() {
+    Base.prototype.initialize.call(this);
+    this.dictionary = translations.get(this.app.session.get('selectedLanguage'));
+}
+
 function getTemplateData() {
     var data = Base.prototype.getTemplateData.call(this);
 
     return _.extend({}, data, {
-        isMandatory: this.isMandatory()
+        isMandatory: this.isMandatory(),
+        optionalsmessage: this.dictionary['messages_site_class.Optional']
     });
 }
 
