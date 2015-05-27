@@ -105,7 +105,7 @@ module.exports = {
         fraction: 1
     },
     dgdHomePage: {
-        enabled: false,
+        enabled: true,
         platforms: ['desktop'],
         markets: ['co', 'za'],
         name: 'dgd-home-page',
