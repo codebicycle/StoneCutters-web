@@ -429,10 +429,18 @@ module.exports = {
     schibsted: require('./schibsted'),
     amazonExperiment: {
         'www.olx.com.co': {
-            categories: [16, 362]
+            categories: [362, 830, 800, 1016, 1022]
         },
         'www.olx.co.za': {
-            categories: [801, 802]
+            categories: [806, 881, 16, 811, 815]
+        }
+    },
+    googleExperiment: {
+        'www.olx.com.co': {
+            statesOrder: ['bogota', 'antioquia', 'valledelcauca', 'atlantico', 'bolivar', 'nortedesantander', 'tolima', 'santander', 'cundinamarca', 'meta']
+        },
+        'www.olx.co.za': {
+            statesOrder: ['gauteng', 'westerncape', 'kwazulunatal', 'freestate', 'easterncape', 'northwest', 'mpumalanga', 'limpopo', 'northerncape']
         }
     }
 };

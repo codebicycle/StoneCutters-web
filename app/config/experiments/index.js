@@ -116,7 +116,7 @@ module.exports = {
         autoParticipate: true
     },
     dgdHomePage: {
-        enabled: false,
+        enabled: true,
         platforms: ['desktop'],
         markets: ['co', 'za'],
         name: 'dgd-home-page',

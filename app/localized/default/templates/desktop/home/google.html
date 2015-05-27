@@ -1,5 +1,5 @@
 <section class="search">
-	<h4 class="search-title">{{ dictionary["mobilepromo.FindWhatYouWantAnytimeFromAnywhere"] }}</h4>
+	<h4 class="search-title">{{ customText if customText else dictionary["mobilepromo.FindWhatYouWantAnytimeFromAnywhere"] }}</h4>
 	<form action="{{ 'nf/search/redirect' | link }}" method="post" role="search" class="search-form">
 		<div class="search-cell">
 			<input type="text" name="search-term" class="search-term" placeholder='{{ dictionary["defaultheader.WhatAreYouLookingFor"] }}' value="{{ search }}" />
@@ -14,7 +14,7 @@
     			<li class="state-container">
                     <a href="#" class="country-link" data-location="{{ location.url }}"{% if not location.current %} style="display: none;"{% endif %}>{{ dictionary["selectregion.SelectEntireCountry"] }}</a>
                 </li>
-                {% for state in states %}
+                {% for state in orderedStates %}
     				<li class="state-container">
                         <a href="#" class="state-link" data-location="{{ state.url }}">{{ state.name }}</a>
                     </li>
