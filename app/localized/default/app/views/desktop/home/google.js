@@ -30,7 +30,7 @@ module.exports = Base.extend({
 
         return _.extend({}, data, {
             customText: customText,
-            orderedStates: utils.sortUsingList(data.states, config.get(['googleExperiment', locationUrl, 'statesOrder'], []), 'hostname')
+            orderedStates: utils.sortUsingList(data.states, config.get(['googleExperiment', locationUrl, 'statesOrder'], []), 'hostname').slice(0, 10)
         });
     },
     preRender: function() {

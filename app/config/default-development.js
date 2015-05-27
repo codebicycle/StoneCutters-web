@@ -431,10 +431,10 @@ module.exports = {
     },
     googleExperiment: {
         'www.olx.com.co': {
-            statesOrder: ['huila', 'bolivar', 'boyaca', 'choco']
+            statesOrder: ['bogota', 'antioquia', 'valledelcauca', 'atlantico', 'bolivar', 'nortedesantander', 'tolima', 'santander', 'cundinamarca', 'meta']
         },
         'www.olx.co.za': {
-            statesOrder: ['northwest']
+            statesOrder: ['gauteng', 'westerncape', 'kwazulunatal', 'freestate', 'easterncape', 'northwest', 'mpumalanga', 'limpopo', 'northerncape']
         }
     }
 };
