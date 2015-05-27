@@ -231,7 +231,7 @@ module.exports = {
     'posting_fields_1.location_level_6': 'Colonia',
     'posting_fields_1.location_select_level_2': 'Por favor, selecciona tu',
     'posting_fields_1.location_select_level_4': 'Por favor selecciona tu ciudad',
-    'posting_fields_1.location_select_level_6': 'Por favor, selecciona tu barrio',
+    'posting_fields_1.location_select_level_6': 'Por favor, selecciona tu colonia',
     'posting_fields_1.phoneNumber': 'N\xFAmero de Tel\xE9fono',
     'posting_fields_1.photos': 'Fotos',
     'posting_fields_1.Please_Choose': 'Por favor seleccione:',

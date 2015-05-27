@@ -228,7 +228,7 @@ module.exports = {
     'posting_fields_1.IfAdApprovedYouWillReceiveEmailConfirmation': 'Si es publicado, recibir\xE1s un email de confirmaci\xF3n con el link a tu anuncio.',
     'posting_fields_1.location_level_2': 'Departamento',
     'posting_fields_1.location_level_4': 'Ciudad',
-    'posting_fields_1.location_level_6': 'Barrio',
+    'posting_fields_1.location_level_6': 'Localidad',
     'posting_fields_1.location_select_level_2': 'Por favor, selecciona tu',
     'posting_fields_1.location_select_level_4': 'Por favor escoge tu ciudad',
     'posting_fields_1.location_select_level_6': 'Por favor, selecciona tu localidad',

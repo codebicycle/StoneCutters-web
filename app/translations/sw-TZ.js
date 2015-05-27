@@ -231,7 +231,7 @@ module.exports = {
     'posting_fields_1.location_level_6': 'Mtaa',
     'posting_fields_1.location_select_level_2': 'Tafadhali chagua           lako',
     'posting_fields_1.location_select_level_4': 'Tafadhali chagua mji wako',
-    'posting_fields_1.location_select_level_6': 'Please select your neighbourhood',
+    'posting_fields_1.location_select_level_6': 'Tafadhali chagua mtaa wako',
     'posting_fields_1.phoneNumber': 'Namba ya simu',
     'posting_fields_1.photos': 'Picha',
     'posting_fields_1.Please_Choose': 'Tafadhali chagua:',

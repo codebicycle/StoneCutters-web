@@ -231,7 +231,7 @@ module.exports = {
     'posting_fields_1.location_level_6': '\u092A\u0921\u093C\u094B\u0938',
     'posting_fields_1.location_select_level_2': '\u091A\u0941\u0928\u0947\u0902 -',
     'posting_fields_1.location_select_level_4': '\u0905\u092A\u0928\u093E \u0936\u0939\u0930 \u091A\u0941\u0928\u0947\u0902',
-    'posting_fields_1.location_select_level_6': 'Please select your neighbourhood',
+    'posting_fields_1.location_select_level_6': '\u0915\u0943\u092A\u092F\u093E \u0905\u092A\u0928\u093E \u092E\u0941\u0939\u0932\u094D\u0932\u093E \u091A\u0941\u0928\u0947\u0902',
     'posting_fields_1.phoneNumber': '\u092B\u094B\u0928 \u0928\u0902\u092C\u0930',
     'posting_fields_1.photos': '\u092B\u094B\u091F\u094B',
     'posting_fields_1.Please_Choose': '\u0915\u0943\u092A\u092F\u093E \u091A\u0941\u0928\u093F\u090F:',
