@@ -166,7 +166,7 @@ function formatValue() {
     var val;
 
     val = $priceW.val();
-    val = val.replace(/[^\d]/g, '');
+    val = val.replace(/[^\d]/g, '').replace(/\b0+/g, '');
     $priceC.val(val);
     val = helpers.common.countFormat(val, this.app);
     $priceW.val(val);
