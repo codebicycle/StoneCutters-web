@@ -123,6 +123,7 @@ module.exports = {
     'messages_item_page.CommentsFormEmail': 'Email:',
     'messages_site_class.30': 'OK',
     'messages_site_class.ClickEdit': 'Klik untuk MENGUBAH iklan Anda (misalnya harga, uraian..)',
+    'messages_site_class.Optional': 'Opsional',
     'messages_user_management_current_ads.EditMyListing': 'Edit Iklan Saya',
     'topcities.SelectLocation': 'Pilih Lokasi',
     'adsense.SponsoredLinks': 'Tautan Bersponsor',

@@ -4,6 +4,7 @@ var _ = require('underscore');
 var Base = require('../../../../../common/app/bases/view');
 var helpers = require('../../../../../../helpers');
 var statsd = require('../../../../../../../shared/statsd')();
+var translations = require('../../../../../../../shared/translations');
 
 module.exports = Base.extend({
     id: 'posting-price-view',
@@ -39,6 +40,7 @@ function initialize() {
     this.fieldLabel = '';
     this.fieldName = '';
     this.fieldMandatory = '';
+    this.dictionary = translations.get(this.app.session.get('selectedLanguage'));
 }
 
 function getTemplateData() {
@@ -48,7 +50,8 @@ function getTemplateData() {
         fields: this.fields,
         label: this.fieldLabel || '',
         name: this.fieldName || '',
-        mandatory: this.fieldMandatory || ''
+        mandatory: this.fieldMandatory || '',
+        optionalsmessage: this.dictionary['messages_site_class.Optional']
     });
 }
 
@@ -144,9 +147,17 @@ function onKeyUpPrice(event) {
 function onBlurPrice(event) {
     var $field = this.$(this.selectors.priceC);
     var options = {};
+    var value;
 
     this.formatValue();
-    this.parentView.$el.trigger('fieldSubmit', [$field, options]);
+    value = $field.val();
+
+    if ($field.data('value') !== value) {
+        if (value) {
+            this.parentView.$el.trigger('fieldSubmit', [$field, options]);
+        }
+        $field.data('value', value);
+    }
 }
 
 function formatValue() {
@@ -155,7 +166,7 @@ function formatValue() {
     var val;
 
     val = $priceW.val();
-    val = val.replace(/[^\d]/g, '');
+    val = val.replace(/[^\d]/g, '').replace(/\b0+/g, '');
     $priceC.val(val);
     val = helpers.common.countFormat(val, this.app);
     $priceW.val(val);

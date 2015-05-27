@@ -123,6 +123,7 @@ module.exports = {
     'messages_item_page.CommentsFormEmail': 'Email:',
     'messages_site_class.30': 'Ok',
     'messages_site_class.ClickEdit': 'Haz click aqu\xED para EDITAR tu anuncio (precio, descripci\xF3n...)',
+    'messages_site_class.Optional': 'Opcional',
     'messages_user_management_current_ads.EditMyListing': 'Editar mi publicaci&#243;n',
     'topcities.SelectLocation': 'Selecciona una ubicaci\xF3n',
     'adsense.SponsoredLinks': 'Enlaces Patrocinados',

@@ -123,6 +123,7 @@ module.exports = {
     'messages_item_page.CommentsFormEmail': 'S\xE4hk\xF6posti:',
     'messages_site_class.30': 'Ok',
     'messages_site_class.ClickEdit': 'Napsauta sit\xE4 MUOKATAKSESI ilmoitustasi (hintaa, kuvausta...)',
+    'messages_site_class.Optional': 'vapaavalintainen',
     'messages_user_management_current_ads.EditMyListing': 'Muokkaa omaa ilmoitusta',
     'topcities.SelectLocation': 'Valitse Sijainti',
     'adsense.SponsoredLinks': 'Sponsoroidut linkit',

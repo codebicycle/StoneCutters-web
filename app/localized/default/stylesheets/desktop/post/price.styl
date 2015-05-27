@@ -54,6 +54,7 @@
 			height: 36px;
 			line-height: @height;
 			vertical-align: middle;
+			text-transform: capitalize;
 			width: 26%;
 			text-align: right;
 			padding-right: 10px;
@@ -78,8 +79,23 @@
 				}
 
 			}
-
+			
 		}
-
+		
+		&.success {
+			.price-currency-one {
+				border-color: $green !important;
+			}
+		}
+		&.error {
+			.price-currency-one {
+				border-color: $red !important;
+			}
+		}
+		&.focus {
+			.price-currency-one {
+				border-color: $blue;
+			}
+		}
 	}
 }

@@ -105,6 +105,7 @@ module.exports = {
         'misc.1UnreadMessage',
         'misc.UnreadMessages',
         'misc.FreeClassifieds-SEO',
+        'messages_site_class.Optional',
         'posting_fields_1.location_level_2',
         'posting_fields_1.location_select_level_2',
         'posting_fields_1.location_level_4',

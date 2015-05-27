@@ -123,6 +123,7 @@ module.exports = {
     'messages_item_page.CommentsFormEmail': 'E-mail:',
     'messages_site_class.30': 'Ok',
     'messages_site_class.ClickEdit': 'Klik hier om je advertentie te BEWERKEN (omschrijving, prijs...)',
+    'messages_site_class.Optional': 'Niet Verplicht',
     'messages_user_management_current_ads.EditMyListing': 'Mijn advertentie bewerken',
     'topcities.SelectLocation': 'Kies een locatie',
     'adsense.SponsoredLinks': 'Gesponsorde links',

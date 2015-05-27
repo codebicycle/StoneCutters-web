@@ -16,13 +16,6 @@
     <div class="wrapper {{ 'error' if form.errors.main else '' }}">
         <small class="advice main">{{ form.errors.main if form.errors.main else '' }}</small>
     </div>
-    <fieldset class="wrapper {{ 'error' if form.errors.username else '' }}">
-        <label class="login-label">{{ dictionary["messages_email_register.Username"] }}:</label>
-        <div class="wrapper-inputs">
-            <input class="text-field" type="text" name="username" data-qa="username-field" value="{{ form.values.username if form.values.username else '' }}">
-            <small class="advice username">{{ form.errors.username if form.errors.username else '' }}</small>
-        </div>
-    </fieldset>
 
     <fieldset class="wrapper {{ 'error' if form.errors.email else '' }}">
         <label class="login-label">{{ dictionary["comments.CommentsFormEmail"] }}</label>

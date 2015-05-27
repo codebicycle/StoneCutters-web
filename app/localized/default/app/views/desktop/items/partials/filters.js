@@ -113,6 +113,7 @@ module.exports = Base.extend({
 
         var path = this.getPath('path');
         var $target = $(event.currentTarget);
+
         var $from = $target.siblings('[data-filter-id=from]');
         var $to = $target.siblings('[data-filter-id=to]');
         var valueFrom = $from.val();
@@ -136,12 +137,16 @@ module.exports = Base.extend({
             name: $target.data('filter-name'),
             type: $target.data('filter-type'),
             value: {
-                from: valueFrom || $from.data('filter-value') || '',
-                to: valueTo || $to.data('filter-value') || ''
+                from: valueFrom || '',
+                to: valueTo || ''
             }
         };
 
-        this.filters.add(filter);
+        if (filter.value.from === '' && filter.value.to === '') {
+            this.filters.remove(filter);
+        } else {
+            this.filters.add(filter);
+        }
         path = this.cleanPage(path);
         path = [path.split('/-').shift(), '/', this.filters.format()].join('');
         path = this.refactorPath(path);

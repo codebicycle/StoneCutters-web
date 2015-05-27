@@ -115,6 +115,17 @@ module.exports = {
         autoParticipate: true,
         fraction: 1
     },
+    growthSuccesPagePushListers: {
+        enabled: true,
+        platforms: ['desktop'],
+        markets: ['ar'],
+        name: 'growth-success-page-push-listers',
+        alternatives: {
+            CONTROL: 'control',
+            SUCCESS_PAGE: 'success-page'
+        },
+        autoParticipate: true
+    },
     dgdHomePage: {
         enabled: true,
         platforms: ['desktop'],
@@ -126,6 +137,6 @@ module.exports = {
             AMAZON: 'amazon'
         },
         autoParticipate: true,
-        fraction: 0.15
+        fraction: 1
     }
 };
