@@ -19,18 +19,19 @@ module.exports = Base.extend({
         var platform = this.app.session.get('platform');
         var location = this.app.session.get('location');
         var accepExchange = config.getForMarket(location.url, ['accepExchange', platform]);
+        var sixpackCurrentAlternative = this.app.sixpack.experiments.growthSuccesPagePushListers ? this.app.sixpack.experiments.growthSuccesPagePushListers.alternative : '';
 
         if(accepExchange.enabled && !_.contains(accepExchange.categories, data.item.category.id)) {
             accepExchange.enabled = false;
         }
-
         data.item.location.stateName = data.item.location.children[0].name;
         data.item.location.cityName = data.item.location.children[0].children[0].name;
         if (data.item.location.children[0].children[0].children[0]) {
             data.item.location.neighborhoodName = data.item.location.children[0].children[0].children[0].name;
         }
         return _.extend({}, data, {
-            accepExchange: accepExchange
+            accepExchange: accepExchange,
+            experiments: sixpackCurrentAlternative === 'control' ? {} : this.app.sixpack.experiments
         });
     },
     postRender: function () {

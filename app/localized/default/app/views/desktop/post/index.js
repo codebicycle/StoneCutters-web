@@ -488,6 +488,10 @@ function onSubmit(event) {
             itemId: this.item.get('id')
         });
 
+        if (utils.getUrlParam('g')) {
+            this.app.sixpack.convert(this.app.sixpack.experiments.growthSuccesPagePushListers);
+        }
+
         helpers.common.redirect.call(this.app.router, successPage + this.item.get('id') + '?sk=' + this.item.get('securityKey'), null, {
             status: 200
         });

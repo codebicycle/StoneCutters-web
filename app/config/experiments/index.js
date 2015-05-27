@@ -25,7 +25,7 @@ module.exports = {
         autoParticipate: true
     },
     growthCategorySuggestion: {
-        enabled: true,
+        enabled: false,
         platforms: ['desktop'],
         markets: ['ar'],
         name: 'growth-categories-suggestion',
@@ -43,7 +43,7 @@ module.exports = {
         }
     },
     growthPostingButtonWording: {
-        enabled: true,
+        enabled: false,
         platforms: ['desktop'],
         markets: ['ar'],
         name: 'growth-posting-button-wording',
@@ -103,6 +103,17 @@ module.exports = {
         },
         autoParticipate: true,
         fraction: 1
+    },
+    growthSuccesPagePushListers: {
+        enabled: true,
+        platforms: ['desktop'],
+        markets: ['ar'],
+        name: 'growth-success-page-push-listers',
+        alternatives: {
+            CONTROL: 'control',
+            SUCCESS_PAGE: 'success-page'
+        },
+        autoParticipate: true
     },
     dgdHomePage: {
         enabled: false,
