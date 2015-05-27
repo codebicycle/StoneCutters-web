@@ -31,11 +31,6 @@
                     <td style="padding: 0 .5em .5em;">
                         {% set registerUrl = '/register-withconf' if registerWithConfirmation else '/register' %}
                         <form action="{{ registerUrl | link }}" method="POST" enctype="multipart/form-data">
-                            <label style="display: block;">
-                                <small>{{ dictionary["register_mail.Username"] }}</small><br>
-                                <input type="text" value="" name="username">
-                            </label>
-                            <br style="display: none;">
                             <label style="display: block; padding-top: .25em;">
                                 <small>{{ dictionary["landingbody.EmailAddress"] }} <small>{{ dictionary["posting_fields_1.Email_address_not_shared"] }}</small></small><br>
                                 <input type="text" value="" name="email">

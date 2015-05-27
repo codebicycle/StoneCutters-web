@@ -16,10 +16,6 @@
     {% set registerUrl = '/register-withconf' if registerWithConfirmation else '/register' %}
     <form action="{{ registerUrl | link }}" method="POST" enctype="multipart/form-data">
         <div class="formField">
-            <label>{{ dictionary["lostform.Username"] }}</label>
-            <input type="text" name="username" data-qa="username-field">
-        </div>
-        <div class="formField">
             <label>{{ dictionary["landingbody.EmailAddress"] }}</label>
             <input type="text" name="email" data-qa="email-field">
             <small>{{ dictionary["posting_fields_1.Email_address_not_shared"] }}</small>
