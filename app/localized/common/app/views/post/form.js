@@ -17,7 +17,7 @@ module.exports = Base.extend({
 
         return _.extend({}, data, {
             breadcrumb: breadcrumb.get.call(this, data),
-            isEmailReadOnly: isEmailReadOnly.toString()
+            isEmailReadOnly: isEmailReadOnly
         });
     }
 });
