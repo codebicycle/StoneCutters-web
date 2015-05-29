@@ -62,7 +62,8 @@ module.exports = Base.extend({
     categorySuggestionDecideIU: categorySuggestionDecideIU,
     categorySuggestionBuildIU: categorySuggestionBuildIU,
     categorySuggestionMetric: categorySuggestionMetric,
-    mixpanelTrack: mixpanelTrack
+    mixpanelTrack: mixpanelTrack,
+    QR: QR
 });
 
 function initialize() {
@@ -159,6 +160,8 @@ function postRender() {
         }
     }
     this.app.sixpack.convert(this.app.sixpack.experiments.dgdHomePage, 'funnel-posting-form');
+
+    this.QR();
 }
 
 function scrollSlideTo(element, value) {
@@ -841,6 +844,23 @@ function mixpanelTrack(prop, val) {
     }
 
     Mixpanel.track.call(this, prop, values);
+}
+
+function QR() {
+    var options;
+    var element;
+
+    options = {
+        size: 100,
+        text: 'http://www.olx.com.ar?ps=' + this.item.get('postingSession')
+    };
+
+    element = $('<div>').attr({
+        id: 'qr',
+        class: 'qr'
+    });
+
+    element.appendTo($('#posting-view')).empty().qrcode(options);
 }
 
 module.exports.id = 'post/index';
