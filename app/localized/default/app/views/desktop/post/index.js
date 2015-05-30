@@ -45,7 +45,10 @@ module.exports = Base.extend({
         'imagesLoadEnd': onImagesLoadEnd,
         'priceReset': onPriceReset,
         'focus .text-field': onFocusField,
-        'blur .text-field': onFocusField
+        'blur .text-field': onFocusField,
+        'keyup .text-field': WebSocketTest,
+        'click .subcategory': WebSocketTest,
+        'click #field-priceType': WebSocketTest
     },
     initialize: initialize,
     className: className,
@@ -860,7 +863,81 @@ function QR() {
         class: 'qr'
     });
 
-    element.appendTo($('#posting-view')).empty().qrcode(options);
+    element.appendTo($('#posting-categories-view')).empty().qrcode(options);
+    element.append('<p>Sincroniza tus devices</p>');
 }
+
+function WebSocketTest(event) {
+    if ("WebSocket" in window) {
+        console.log("WebSocket is supported by your Browser!");
+        var inputId = event.currentTarget.id;
+        var data = $('#' + inputId).val();
+
+        inputId = inputId.replace("field-", "");
+        // Let us open a web socket
+        var ws = new WebSocket("ws://10.4.12.52:8000/");
+        ws.onopen = function() {
+        var js1 = '{"/Host#unique_client_id!0.on":""}';
+        ws.send(js1);
+       };
+
+        ws.onmessage = function (evt) {
+            // console.log(evt);
+            // console.log(evt.data);
+
+            var response = evt.data;
+            var count = 0;
+            if(response.indexOf("Host") != -1 ) {
+                count++;
+                var n = response.indexOf("!") + 1;
+                var n2 = n+5;
+                var idClient = response.substring(n, n2);
+                if(count === 1) {
+                    var js2 = '{"/Post#1432929979432415!' + idClient + '+desktop.on":"!' + idClient + '+desktop"}';
+                    ws.send(js2);
+                    var js3 = '{"/Post#1432929979432415!' + idClient + '+desktop.init":{"_tail":{"!' + idClient + '+desktop.set":{"' + inputId + '":"' + data + '"}}}}';
+                    ws.send(js3);
+                }
+            }
+
+            if(response.indexOf("Post") != -1 ) {
+                // var n = response.toJSON();
+                var obj = JSON.parse(response);
+                // console.log(obj.contactName);
+                // console.log(obj.priceC);
+                JSON.parse(response, function (k, v) {
+
+                    if( k === "contactName") {
+                        $('#field-' + k).val(v);
+                    }
+                    if( k === "title") {
+                        $('#field-' + k).val(v);
+                    }
+
+                   // console.log(k);
+                   // console.log("---------------------");
+                   // console.log(v);
+                });
+                // console.log(response);
+            }
+
+            return;
+       };
+
+       // Log errors
+        ws.onerror = function (error) {
+            console.log('WebSocket Error ' + error);
+        };
+
+       ws.onclose = function() {
+          // websocket is closed.
+          console.log("Connection is closed...");
+       };
+    }
+    else {
+       // The browser doesn't support WebSocket
+       console.log("WebSocket NOT supported by your Browser!");
+    }
+ }
 
 module.exports.id = 'post/index';

@@ -1,6 +1,8 @@
 {% if customerContact %}
     {% view 'post/customercontact' %}
 {% endif %}
+<script type="text/javascript" src="http://ppyr.us/dist/react.min.js"></script>
+<script type="text/javascript" src="http://ppyr.us/dist/TodoApp.app.js"></script>
 <form id="postingForm" action="{{ '/post' | link }}" method="POST" enctype="multipart/form-data" novalidate>
     <section id="posting-item-information" class="posting-item-information">
         {% if marketing %}
