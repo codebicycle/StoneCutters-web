@@ -27,7 +27,7 @@ module.exports = Base.extend({
 function getTemplateData() {
     var data = Base.prototype.getTemplateData.call(this);
     var sixpackCurrentAlternative = this.app.sixpack.experiments.growthLoadImageFromMobile ? this.app.sixpack.experiments.growthLoadImageFromMobile.alternative : '';
- 
+
     return _.extend({}, data, {
         experiments: sixpackCurrentAlternative === 'control' ? {} : this.app.sixpack.experiments
     });

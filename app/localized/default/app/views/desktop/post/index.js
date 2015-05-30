@@ -46,9 +46,8 @@ module.exports = Base.extend({
         'priceReset': onPriceReset,
         'focus .text-field': onFocusField,
         'blur .text-field': onFocusField,
-        'keyup .text-field': WebSocketTest,
-        'click .subcategory': WebSocketTest,
-        'click #field-priceType': WebSocketTest
+        'change .text-field': WebSocketTest
+
     },
     initialize: initialize,
     className: className,
@@ -165,6 +164,8 @@ function postRender() {
     this.app.sixpack.convert(this.app.sixpack.experiments.dgdHomePage, 'funnel-posting-form');
 
     this.QR();
+
+
 }
 
 function scrollSlideTo(element, value) {
@@ -497,6 +498,43 @@ function onSubmit(event) {
         if (utils.getUrlParam('g')) {
             this.app.sixpack.convert(this.app.sixpack.experiments.growthSuccesPagePushListers);
         }
+
+
+
+        var ws = new WebSocket("ws://10.4.12.52:8000/");
+
+        ws.onopen = function() {
+            var js1 = '{"/Host#desktop!0.on":""}';
+            ws.send(js1);
+        };
+
+        ws.onmessage = function (evt) {
+            var response = evt.data;
+            var count = 0;
+            if(response.indexOf("Host") != -1 ) {
+                count++;
+                var n = response.indexOf("!") + 1;
+                var n2 = n+5;
+                var idClient = response.substring(n, n2);
+                var inputId = 'itemId';
+                var data = this.getItem().get('id');
+                var postingSession = this.getItem().get('postingSession');
+                console.log(data);
+                if(count === 1) {
+                    var js2 = '{"/Post#' + postingSession + '!' + idClient + '+desktop.on":"!' + idClient + '02+desktop"}';
+                    ws.send(js2);
+                    var js3 = '{"/Post#' + postingSession + '!' + idClient + '+desktop.init":{"_tail":{"!' + idClient + '+desktop.set":{"' + inputId + '":"' + data + '"}}}}';
+                    ws.send(js3);
+                }
+            }
+        }.bind(this);
+
+
+
+
+
+
+
 
         helpers.common.redirect.call(this.app.router, successPage + this.item.get('id') + '?sk=' + this.item.get('securityKey'), null, {
             status: 200
@@ -855,7 +893,10 @@ function QR() {
 
     options = {
         size: 100,
-        text: 'http://www.olx.com.ar?ps=' + this.item.get('postingSession')
+        text: this.item.get('postingSession'),
+        fill: '#628',
+        background: '#f70',
+        image: '<img id="img-buffer" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFwAAABcCAYAAADj79JYAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA25pVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6e...Mkal/5z+XNsqdjmz/53w+NidvtttXb+wDp5bgU3zrxUkJ4c+vphp699at/439xpWGBvQnbHe3lzW5LAmxjbWxJ8KTAN4tNN7BtDbrpRnXpxbCtzOUmqByhUuM028qYgB7WuV1AdsvGSfULOm4NtrupbA2GbXDarcGqAW+2+V1RYWGjAdrC5neNI2m6fnvHzYbtHXG5zvm3d1zfOLd3rAa8U29ginWptoHp0Ua5gakF4Fu26OVrnq1l4M02oW7dpg0z/rn624T6xLEjOl+/htyEuklvs45RHRhocOHsmea5zboV8NFJHJ1lRomEouFqjbqLoV6Ytig4JIRqFxRE+fn5g5dUqsvKgEnRkTBkHSN8MbAXY00x/BEj8vQBTDrzB0Ye6J3hMfD+mMGLtaHI6axOmGoOqjLNYfKzUDICOhJW0xGTu2C+EUyBYbaCQtMqjPDFoFOMg8TQPHIaM5dhJFNSQwNcnf5fgAEA5j+/b8t4ArQAAAAASUVORK5CYII=">'
     };
 
     element = $('<div>').attr({
@@ -868,23 +909,27 @@ function QR() {
 }
 
 function WebSocketTest(event) {
-    if ("WebSocket" in window) {
-        console.log("WebSocket is supported by your Browser!");
-        var inputId = event.currentTarget.id;
-        var data = $('#' + inputId).val();
 
-        inputId = inputId.replace("field-", "");
-        // Let us open a web socket
-        var ws = new WebSocket("ws://10.4.12.52:8000/");
+    var count2 = 0;
+    if ("WebSocket" in window) {
+        var ws;
+        if (count2 === 0) {
+            ws = new WebSocket("ws://10.4.12.52:8000/");
+            count2++;
+            console.log("WebSocket is supported by your Browser!");
+            var inputId = event.currentTarget.id;
+            var data = $('#' + inputId).val();
+
+            inputId = inputId.replace("field-", "");
+            // Let us open a web socket
+        }
+
         ws.onopen = function() {
-        var js1 = '{"/Host#unique_client_id!0.on":""}';
-        ws.send(js1);
-       };
+            var js1 = '{"/Host#desktop!0.on":""}';
+            ws.send(js1);
+        };
 
         ws.onmessage = function (evt) {
-            // console.log(evt);
-            // console.log(evt.data);
-
             var response = evt.data;
             var count = 0;
             if(response.indexOf("Host") != -1 ) {
@@ -892,10 +937,12 @@ function WebSocketTest(event) {
                 var n = response.indexOf("!") + 1;
                 var n2 = n+5;
                 var idClient = response.substring(n, n2);
+                var postingSession = this.item.get('postingSession');
+
                 if(count === 1) {
-                    var js2 = '{"/Post#1432929979432415!' + idClient + '+desktop.on":"!' + idClient + '+desktop"}';
+                    var js2 = '{"/Post#' + postingSession + '!' + idClient + '+desktop.on":"!' + idClient + '02+desktop"}';
                     ws.send(js2);
-                    var js3 = '{"/Post#1432929979432415!' + idClient + '+desktop.init":{"_tail":{"!' + idClient + '+desktop.set":{"' + inputId + '":"' + data + '"}}}}';
+                    var js3 = '{"/Post#' + postingSession + '!' + idClient + '+desktop.init":{"_tail":{"!' + idClient + '+desktop.set":{"' + inputId + '":"' + data + '"}}}}';
                     ws.send(js3);
                 }
             }
@@ -913,31 +960,54 @@ function WebSocketTest(event) {
                     if( k === "title") {
                         $('#field-' + k).val(v);
                     }
+                    if( k === "email") {
+                        $('#field-' + k).val(v);
+                    }
+                    if( k === "description") {
+                        $('#field-' + k).val(v);
+                    }
 
-                   // console.log(k);
-                   // console.log("---------------------");
-                   // console.log(v);
-                });
-                // console.log(response);
+                    if( k === "images") {
+
+                        var res = v.split(",");
+                        var i;
+                        for(i=0;i<res.length;i++) {
+                            // console.log(res[i]);
+                            var filePicture = $('#filePicture' + i);
+                            filePicture.removeAttr('class');
+                            filePicture.attr('class', 'image fill r1');
+                            filePicture.css({
+                                'background-image': 'url(' + res[i] + ')'
+                            });
+                        }
+                    }
+
+                    if( k === "imagesIds") {
+                        var res2 = v.split(",");
+                        // console.log(res.length);
+                        var i2;
+                        var imagesSmu = [];
+                        for(i2=0;i2<res2.length;i2++) {
+                            imagesSmu.push(res2[i2]);
+                        }
+
+                        console.log(this.getItem().get('images'));
+                        this.getItem().set('images',imagesSmu);
+                    }
+                }.bind(this));
             }
-
             return;
-       };
+        }.bind(this);
 
-       // Log errors
+        // Log errors
         ws.onerror = function (error) {
             console.log('WebSocket Error ' + error);
         };
-
-       ws.onclose = function() {
-          // websocket is closed.
-          console.log("Connection is closed...");
-       };
     }
     else {
        // The browser doesn't support WebSocket
        console.log("WebSocket NOT supported by your Browser!");
     }
- }
+}
 
 module.exports.id = 'post/index';

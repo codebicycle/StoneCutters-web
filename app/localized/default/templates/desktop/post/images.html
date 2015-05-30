@@ -6,7 +6,7 @@
 	<ul class="file-upload">
 		{%- for i in range(0, 7) -%}
 		    <li class="image-cont track-me{{ " first-img" if loop.first }}{{ " loaded" if item.get('images')[i] }}" data-tracking="Posting-ClickUploadPicture" data-input="file{{ i }}">
-		        <div class="image{{ " fill r1" if item.get('images')[i] else " icons icon-addpicture" }}" {{ ("style='background-image: url(" + item.get('images')[i].thumbnail + ");'") if item.get('images')[i] }}></div>
+		        <div id="filePicture{{ i }}" class="image{{ " fill r1" if item.get('images')[i] else " icons icon-addpicture" }}" {{ ("style='background-image: url(" + item.get('images')[i].thumbnail + ");'") if item.get('images')[i] }}></div>
 		        <div class="overlay-image"></div>
 		        <span class="remove icons icon-close"></span>
 		    </li>
