@@ -892,20 +892,16 @@ function QR() {
     var element;
 
     options = {
-        size: 100,
-        text: this.item.get('postingSession'),
-        fill: '#628',
-        background: '#f70',
-        image: '<img id="img-buffer" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFwAAABcCAYAAADj79JYAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA25pVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6e...Mkal/5z+XNsqdjmz/53w+NidvtttXb+wDp5bgU3zrxUkJ4c+vphp699at/439xpWGBvQnbHe3lzW5LAmxjbWxJ8KTAN4tNN7BtDbrpRnXpxbCtzOUmqByhUuM028qYgB7WuV1AdsvGSfULOm4NtrupbA2GbXDarcGqAW+2+V1RYWGjAdrC5neNI2m6fnvHzYbtHXG5zvm3d1zfOLd3rAa8U29ginWptoHp0Ua5gakF4Fu26OVrnq1l4M02oW7dpg0z/rn624T6xLEjOl+/htyEuklvs45RHRhocOHsmea5zboV8NFJHJ1lRomEouFqjbqLoV6Ytig4JIRqFxRE+fn5g5dUqsvKgEnRkTBkHSN8MbAXY00x/BEj8vQBTDrzB0Ye6J3hMfD+mMGLtaHI6axOmGoOqjLNYfKzUDICOhJW0xGTu2C+EUyBYbaCQtMqjPDFoFOMg8TQPHIaM5dhJFNSQwNcnf5fgAEA5j+/b8t4ArQAAAAASUVORK5CYII=">'
+        size: 110,
+        text: this.item.get('postingSession')
     };
 
     element = $('<div>').attr({
         id: 'qr',
         class: 'qr'
     });
-
-    element.appendTo($('#posting-categories-view')).empty().qrcode(options);
-    element.append('<p>Sincroniza tus devices</p>');
+    element.append('<p>Carga imagenes desde tu APP!</p>');
+   element.appendTo($('#posting-categories-view')).qrcode(options);
 }
 
 function WebSocketTest(event) {
@@ -974,6 +970,7 @@ function WebSocketTest(event) {
                         for(i=0;i<res.length;i++) {
                             // console.log(res[i]);
                             var filePicture = $('#filePicture' + i);
+                            filePicture.parent('li').addClass('loaded');
                             filePicture.removeAttr('class');
                             filePicture.attr('class', 'image fill r1');
                             filePicture.css({
